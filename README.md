@@ -1,4 +1,4 @@
-##MoonVulkan: Lua bindings for Vulkan
+## MoonVulkan: Lua bindings for Vulkan
 
 MoonVulkan is a Lua binding library for the [Khronos Vulkan&#8482; API](https://www.khronos.org/vulkan).
 
