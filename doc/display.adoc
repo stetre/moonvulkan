@@ -1,0 +1,53 @@
+
+[[display]]
+==== display
+
+The following functions require the 
+https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_display[VK_KHR_display] instance extension.
+
+[[get_physical_device_display_properties]]
+* {<<displayproperties, _displayproperties_>>} = *get_physical_device_display_properties*(<<physical_device, _physical_device_>>) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetPhysicalDeviceDisplayPropertiesKHR[vkGetPhysicalDeviceDisplayPropertiesKHR].#
+
+[[get_physicaldevice_display_plane_properties]]
+* {<<displayplaneproperties, _displayplaneproperties_>>} = *get_physical_device_display_plane_properties*(<<physical_device, _physical_device_>>) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetPhysicalDeviceDisplayPlanePropertiesKHR[vkGetPhysicalDeviceDisplayPlanePropertiesKHR].#
+
+[[get_display_plane_supported_displays]]
+* {_display_} = *get_display_plane_supported_displays*(<<physical_device, _physical_device_>>, _plane_index_) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetDisplayPlaneSupportedDisplaysKHR[vkGetDisplayPlaneSupportedDisplaysKHR].#
+
+[[display_mode]]
+==== display_mode
+
+The following functions require the 
+https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_display[VK_KHR_display] instance extension.
+
+[[create_display_mode]]
+* _display_mode_ = *create_display_mode*(<<display, _display_>>, _flags_, _parameters_ [, <<allocators, _allocatorLUD_>>]) +
+[small]#_flags_: <<displaymodecreateflags, displaymodecreateflags>> +
+_parameters_: <<displaymodeparameters, displaymodeparameters>> +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCreateDisplayModeKHR[vkCreateDisplayModeKHR].#
+
+[[get_display_mode_properties]]
+* {<<displaymodeproperties, _displaymodeproperties_>>} = *get_display_mode_properties*(<<display, _display_>>) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetDisplayModePropertiesKHR[vkGetDisplayModePropertiesKHR].#
+
+[[get_display_plane_capabilities]]
+* <<displayplanecapabilities,_displayplanecapabilities_>> = *get_display_plane_capabilities*(_display_mode_, _plane_index_) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetDisplayPlaneCapabilitiesKHR[vkGetDisplayPlaneCapabilitiesKHR].#
+
+
+////
+[[]]
+* <<,__>> = **(<<display, _display_>>) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkKHR[].#
+
+arg3 - __: integer +
+arg3 - __: <<, >> +
+arg3 - __: {<<, >>} +
+arg3 - __: <<, >> (opt.) +
+arg3 - __: {<<, >>} (opt.) +
+
+////
+

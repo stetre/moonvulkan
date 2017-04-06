@@ -1,0 +1,280 @@
+
+[[commands]]
+==== Commands
+
+The first argument (_cb_) of all the following functions is a <<command_buffer, command_buffer>>. 
+////
+The functions are also available as methods with the same name except for the trailing 'cmd_'. 
+For example, _cb_++++*:bind_pipeline*(_..._) is the same as *vk.cmd_bind_pipeline*(_cb_, _..._).
+////
+
+[[cmd_begin_query]]
+* *cmd_begin_query*(_cb_, <<query_pool, _query_pool_>>, _query_, <<querycontrolflags, _querycontrolflags_>>) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCmdBeginQuery[vkCmdBeginQuery].#
+
+[[cmd_begin_render_pass]]
+* *cmd_begin_render_pass*(_cb_, <<renderpassbegininfo, _renderpassbegininfo_>>, <<subpasscontents, _subpasscontents_>>) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCmdBeginRenderPass[vkCmdBeginRenderPass].#
+
+[[cmd_bind_descriptor_sets]]
+* *cmd_bind_descriptor_sets*(_cb_, _bind_point_, _..._) +
+[small]#arg2 - _bind_point_: <<pipelinebindpoint, pipelinebindpoint>> +
+arg3 - _layout_: <<pipeline_layout, pipeline_layout>> +
+arg4 - _first_set_: integer +
+arg5 - _descriptor_sets_ : {<<descriptor_set, descriptor_set>>} +
+arg6 - _dynamic_offsets_ : {integer} (opt.) +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCmdBindDescriptorSets[vkCmdBindDescriptorSets].#
+
+[[cmd_bind_index_buffer]]
+* *cmd_bind_index_buffer*(_cb_, <<buffer, _buffer_>>, _offset_, <<indextype, _indextype_>>) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCmdBindIndexBuffer[vkCmdBindIndexBuffer].#
+
+[[cmd_bind_pipeline]]
+* *cmd_bind_pipeline*(_cb_, <<pipelinebindpoint, _pipelinebindpoint_>>, <<pipeline, _pipeline_>>) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCmdBindPipeline[vkCmdBindPipeline].#
+
+[[cmd_bind_vertex_buffers]]
+* *cmd_bind_vertex_buffers*(_cb_, _first_binding_, {<<buffer, _buffer_>>}, {_offsets_}) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCmdBindVertexBuffers[vkCmdBindVertexBuffers].#
+
+[[cmd_blit_image]]
+* *cmd_blit_image*(_cb_, _src_imagelayout, _..._) +
+[small]#arg2 - _src_image_: <<image, image>> +
+arg3 - _src_imagelayout_: <<imagelayout, imagelayout>> +
+arg4 - _dst_image_: <<image, image>> +
+arg5 - _dst_imagelayout_: <<imagelayout, imagelayout>> +
+arg6 - _regions_ : {<<imageblit, imageblit>>} +
+arg7 - _filter_: <<filter, filter>> +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCmdBlitImage[vkCmdBlitImage].#
+
+[[cmd_clear_attachments]]
+* *cmd_clear_attachments*(_cb_, _attachments_, _rects_) +
+[small]#_attachments_: {<<clearattachment, clearattachment>>} +
+_rects_: {<<clearrect, clearrect>>} +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCmdClearAttachments[vkCmdClearAttachments].#
+
+[[cmd_clear_color_image]]
+* *cmd_clear_color_image*(_cb_, _image_, _imagelayout_, _color_, _ranges_) +
+[small]#_image_: <<image, image>> +
+_imagelayout_: <<imagelayout, imagelayout>> +
+_color_: <<clearcolorvalue, clearcolorvalue>> +
+_ranges_: {<<imagesubresourcerange, imagesubresourcerange>>} +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCmdClearColorImage[vkCmdClearColorImage].#
+
+[[cmd_clear_depth_stencil_image]]
+* *cmd_clear_depth_stencil_image*(_cb_, _image_, _imagelayout_, _depth_, _stencil_, _ranges_) +
+[small]#_image_: <<image, image>> +
+_imagelayout_: <<imagelayout, imagelayout>> +
+_depth_: _float_ +
+_stencil_: _integer_ +
+_ranges_: {<<imagesubresourcerange, imagesubresourcerange>>} +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCmdClearDepthStencilImage[vkCmdClearDepthStencilImage].#
+
+[[cmd_copy_buffer]]
+* *cmd_copy_buffer*(_cb_, _src_buffer_, _dst_buffer_, _regions_) +
+[small]#_src_buffer_: <<buffer, buffer>> +
+_dst_buffer_: <<buffer, buffer>> +
+_regions_: {<<buffercopy, buffercopy>>} +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCmdCopyBuffer[vkCmdCopyBuffer].#
+
+[[cmd_copy_buffer_to_image]]
+* *cmd_copy_buffer_to_image*(_cb_, _src_buffer_, _dst_image_, _dst_imagelayout_, _regions_) +
+[small]#_src_buffer_: <<buffer, buffer>> +
+_dst_image_: <<image, image>> +
+_dst_imagelayout_: <<imagelayout, imagelayout>> +
+_regions_: {<<bufferimagecopy, bufferimagecopy>>} +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCmdCopyBufferToImage[vkCmdCopyBufferToImage].#
+
+[[cmd_copy_image]]
+* *cmd_copy_image*(_cb_, _src_image_, _..._) +
+[small]#arg2 - _src_image_: <<image, image>> +
+arg3 - _src_imagelayout_: <<imagelayout, imagelayout>> +
+arg4 - _dst_image_: <<image, image>> +
+arg5 - _dst_imagelayout_: <<imagelayout, imagelayout>> +
+arg6 - _regions_ : {<<imagecopy, imagecopy>>} +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCmdCopyImage[vkCmdCopyImage].#
+
+[[cmd_copy_image_to_buffer]]
+* *cmd_copy_image_to_buffer*(_cb_, _src_image_, _..._) +
+[small]#arg2 - _src_image_: <<image, image>> +
+arg3 - _src_imagelayout_: <<imagelayout, imagelayout>> +
+arg4 - _dst_buffer_: <<buffer, buffer>> +
+arg5 - _regions_: {<<bufferimagecopy, bufferimagecopy>>} +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCmdCopyImageToBuffer[vkCmdCopyImageToBuffer].#
+
+[[cmd_copy_query_pool_results]]
+* *cmd_copy_query_pool_results*(_cb_, _query_pool_, _..._) +
+[small]#arg2 - _query_pool_: <<query_pool, query_pool>> +
+arg3 - _first_query_: integer +
+arg4 - _query_count_: integer +
+arg5 - _dst_buffer_: <<buffer, buffer>> +
+arg6 - _dst_offset_: integer +
+arg7 - _stride_: integer +
+arg8 - _flags_: <<queryresultflags, queryresultflags>> +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCmdCopyQueryPoolResults[vkCmdCopyQueryPoolResults].#
+
+[[cmd_dispatch]]
+* *cmd_dispatch*(_cb_, _x_, _y_, _z_) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCmdDispatch[vkCmdDispatch].#
+
+[[cmd_dispatch_indirect]]
+* *cmd_dispatch_indirect*(_cb_, <<buffer, _buffer_>>, _offset_) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCmdDispatchIndirect[vkCmdDispatchIndirect].#
+
+[[cmd_draw]]
+* *cmd_draw*(_cb_, _vertex_count_, _instance_count_, _first_vertex_, _first_instance_) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCmdDraw[vkCmdDraw].#
+
+[[cmd_draw_indexed]]
+* *cmd_draw_indexed*(_cb_, _index_count_, _instance_count_, _first_index_, _vertex_offset_, _first_instance_) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCmdDrawIndexed[vkCmdDrawIndexed].#
+
+[[cmd_draw_indexed_indirect]]
+* *cmd_draw_indexed_indirect*(_cb_, <<buffer, _buffer_>>, _offset_, _draw_count_, _stride_) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCmdDrawIndexedIndirect[vkCmdDrawIndexedIndirect].#
+
+[[cmd_draw_indirect]]
+* *cmd_draw_indirect*(_cb_, <<buffer, _buffer_>>, _offset_, _draw_count_, _stride_) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCmdDrawIndirect[vkCmdDrawIndirect].#
+
+[[cmd_end_query]]
+* *cmd_end_query*(_cb_, <<query_pool, _query_pool_>>, _query_) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCmdEndQuery[vkCmdEndQuery].#
+
+[[cmd_end_render_pass]]
+* *cmd_end_render_pass*(_cb_) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCmdEndRenderPass[vkCmdEndRenderPass].#
+
+[[cmd_execute_commands]]
+* *cmd_execute_commands*(_cb_, {<<command_buffer, _command_buffer_>>}) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCmdExecuteCommands[vkCmdExecuteCommands].#
+
+[[cmd_fill_buffer]]
+* *cmd_fill_buffer*(_cb_, _dst_buffer_, _dst_offset_, _size_, _data_) +
+[small]#_dst_buffer_: <<buffer, buffer>> +
+_dst_offset_: integer +
+_size_: integer (multiple of 4) or '_whole size_' +
+_data_: integer +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCmdFillBuffer[vkCmdFillBuffer].#
+
+[[cmd_next_subpass]]
+* *cmd_next_subpass*(_cb_, <<subpasscontents, _subpasscontents_>>) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCmdNextSubpass[vkCmdNextSubpass].#
+
+[[cmd_pipeline_barrier]]
+* *cmd_pipeline_barrier*(_cb_, _src_stage_mask_, _..._) +
+[small]#arg2 - _src_stage_mask_: <<pipelinestageflags, pipelinestageflags>> +
+arg3 - _dst_stage_mask_: <<pipelinestageflags, pipelinestageflags>> +
+arg4 - _dependency_flags_: <<dependencyflags, dependencyflags>> +
+arg5 - _memory_barriers_: {<<memorybarrier, memorybarrier>>} (opt.) +
+arg6 - _buffer_memory_barriers_: {<<buffermemorybarrier, buffermemorybarrier>>} (opt.) +
+arg7 - _image_memory_barriers_: {<<imagememorybarrier, imagememorybarrier>>} (opt.) +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCmdPipelineBarrier[vkCmdPipelineBarrier].#
+
+[[cmd_push_constants]]
+* *cmd_push_constants*(_cb_, _layout_, _flags_, _offset_, _values_) +
+[small]#_layout_: <<pipeline_layout, pipeline_layout>> +
+_flags_: <<shaderstageflags, shaderstageflags>> +
+_offset_: integer +
+_values_: binary string +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCmdPushConstants[vkCmdPushConstants].#
+
+[[cmd_reset_event]]
+* *cmd_reset_event*(_cb_, <<event, _event_>>, <<pipelinestageflags, _pipelinestageflags_>>) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCmdResetEvent[vkCmdResetEvent].#
+
+[[cmd_reset_query_pool]]
+* *cmd_reset_query_pool*(_cb_, <<query_pool, _query_pool_>>, _first_query_, _query_count_) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCmdResetQueryPool[vkCmdResetQueryPool].#
+
+[[cmd_resolve_image]]
+* *cmd_resolve_image*(_cb_, _src_image_, _..._) +
+[small]#arg2 - _src_image_: <<image, image>> +
+arg3 - _src_imagelayout_: <<imagelayout, imagelayout>> +
+arg4 - _dst_image_: <<image, image>> +
+arg5 - _dst_imagelayout_: <<imagelayout, imagelayout>> +
+arg6 - _regions_: {<<imageresolve, imageresolve>>} +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCmdResolveImage[vkCmdResolveImage].#
+
+[[cmd_set_blend_constants]]
+* *cmd_set_blend_constants*(_cb_, _constant0_, _.._, _constant3_) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCmdSetBlendConstants[vkCmdSetBlendConstants].#
+
+[[cmd_set_depth_bias]]
+* *cmd_set_depth_bias*(_cb_, _constantfactor_, _clamp_, _slopefactor_) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCmdSetDepthBias[vkCmdSetDepthBias].#
+
+[[cmd_set_depth_bounds]]
+* *cmd_set_depth_bounds*(_cb_, _min_, _max_) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCmdSetDepthBounds[vkCmdSetDepthBounds].#
+
+[[cmd_set_event]]
+* *cmd_set_event*(_cb_, <<event, _event_>>, <<pipelinestageflags, _pipelinestageflags_>>) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCmdSetEvent[vkCmdSetEvent].#
+
+[[cmd_set_scissor]]
+* *cmd_set_scissor*(_cb_, _first_, {<<rect2d, _rect2d_>>}) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCmdSetScissor[vkCmdSetScissor].#
+
+[[cmd_set_line_width]]
+* *cmd_set_line_width*(_cb_ [, _linewidth_ = 1.0]) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCmdSetLineWidth[vkCmdSetLineWidth].#
+
+[[cmd_set_stencil_compare_mask]]
+* *cmd_set_stencil_compare_mask*(_cb_, _face_mask_, _compare_mask_) +
+[small]#_face_mask_: <<stencilfaceflags, stencilfaceflags>> +
+_compare_mask_: integer +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCmdSetStencilCompareMask[vkCmdSetStencilCompareMask].#
+
+[[cmd_set_stencil_reference]]
+* *cmd_set_stencil_reference*(_cb_, _face_mask_, _reference_) +
+[small]#_face_mask_: <<stencilfaceflags, stencilfaceflags>> +
+_reference_: integer +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCmdSetStencilReference[vkCmdSetStencilReference].#
+
+[[cmd_set_stencil_write_mask]]
+* *cmd_set_stencil_write_mask*(_cb_, _face_mask_, _write_mask_) +
+[small]#_face_mask_: <<stencilfaceflags, stencilfaceflags>> +
+_write_mask_: integer +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCmdSetStencilWriteMask[vkCmdSetStencilWriteMask].#
+
+[[cmd_set_viewport]]
+* *cmd_set_viewport*(_cb_, _first_, {<<viewport, _viewport_>>}) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCmdSetViewport[vkCmdSetViewport].#
+
+[[cmd_update_buffer]]
+* *cmd_update_buffer*(_cb_, _dst_buffer_, _dst_offset_, _data_) +
+[small]#_dst_buffer_: <<buffer, buffer>> +
+_dst_offset_: integer +
+_data_: binary string (n x 4 bytes) +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCmdUpdateBuffer[vkCmdUpdateBuffer].#
+
+[[cmd_wait_events]]
+* *cmd_wait_events*(_cb_, _src_stage_mask_, _..._) +
+[small]#arg2 - _src_stage_mask_: <<pipelinestageflags, pipelinestageflags>> +
+arg3 - _dst_stage_mask_: <<pipelinestageflags, pipelinestageflags>> +
+arg4 - _events_: {<<event, event>>} +
+arg5 - _memory_barriers_: {<<memorybarrier, memorybarrier>>} (opt.) +
+arg6 - _buffer_memory_barriers_: {<<buffermemorybarrier, buffermemorybarrier>>} (opt.) +
+arg7 - _image_memory_barriers_: {<<imagememorybarrier, imagememorybarrier>>} (opt.) +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCmdWaitEvents[vkCmdWaitEvents].#
+
+[[cmd_write_timestamp]]
+* *cmd_write_timestamp*(_cb_, <<pipelinestageflags, _pipelinestageflags_>>, <<query_pool, _query_pool_>>, _query_) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCmdWriteTimestamp[vkCmdWriteTimestamp].#
+
+////
+[[]]
+* **(_cb_) +
+[small]#
+This function requires the https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#[] device extension. +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vk[].#
+
+arg3 - __: integer +
+arg3 - __: <<, >> +
+arg3 - __: {<<, >>} +
+arg3 - __: <<, >> (opt.) +
+arg3 - __: {<<, >>} (opt.) +
+
+////
+

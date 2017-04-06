@@ -1,0 +1,245 @@
+
+[[enums]]
+== Enums
+
+Vulkan enums are mapped in MoonVulkan to sets of string literals (as is customary in Lua).
+Admitted literals are available in the *vk* table (e.g. *vk.BLEND_OP_XXX* for VK_BLEND_OP_XXX),
+and can also be inferred from the corresponding C enum names. For example, given the 
+vk.BLEND_OP_XXX hint for the <<blendop, blendop>> enum type, the literals it admits
+are obtained by lowercasing the XXX part of the name and replacing any underscore with a space.
+
+The <<enums_snippet, example>> contained in the code snippets section should hopefully be clear enough.
+
+If needed, the following function can be used to obtain the list of literals admitted by 
+a particular enum type.
+
+[[vk.enum]]
+* {_literal_} = *vk.enum*(_enumtype_) +
+[small]#Returns a table listing the literals admitted by _enumtype_ (given as a string, e.g.
+'_blendop_', '_format_', etc).#
+
+Below is the list of the enum types, each with its hint, the list of string values it
+admits (if not too long), and a reference to the original Vulkan enum type where to look
+for semantic and usage information.
+
+[[result]]
+[small]#*result*: vk.XXX (results), vk.ERROR_XXX (errors) +
+Values: '_success_', '_not ready_', '_timeout_', '_event set_', '_event reset_', '_incomplete_', '_out of host memory_', '_out of device memory_', '_initialization failed_', '_device lost_', '_memory map failed_', '_layer not present_', '_extension not present_', '_feature not present_', '_incompatible driver_', '_too many objects_', '_format not supported_', '_fragmented pool_', '_surface lost_', '_native window in use_', '_suboptimal_', '_out of date_', '_incompatible display_', '_validation failed_', '_out of pool memory_'. +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkResult[VkResult].#
+
+[[subpasscontents]]
+[small]#*subpasscontents*: vk.SUBPASS_CONTENTS_XXX +
+Values: '_inline_', '_secondary command buffers_'. +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkSubpassContents[VkSubpassContents].#
+
+[[indextype]]
+[small]#*indextype*: vk.INDEX_TYPE_XXX +
+Values:
+'_uint16_', '_uint32_'. +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkIndexType[VkIndexType].#
+
+[[commandbufferlevel]]
+[small]#*commandbufferlevel*: vk.COMMAND_BUFFER_LEVEL_XXX +
+Values:
+'_primary_', '_secondary_'. +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkCommandBufferLevel[VkCommandBufferLevel].#
+
+[[pipelinebindpoint]]
+[small]#*pipelinebindpoint*: vk.PIPELINE_BIND_POINT_XXX +
+Values:
+'_graphics_' (default), '_compute_'. +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPipelineBindPoint[VkPipelineBindPoint].#
+
+[[attachmentstoreop]]
+[small]#*attachmentstoreop*: vk.ATTACHMENT_STORE_OP_XXX +
+Values:
+'_store_', '_dont care_' (default). +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkAttachmentStoreOp[VkAttachmentStoreOp].#
+
+[[attachmentloadop]]
+[small]#*attachmentloadop*: vk.ATTACHMENT_LOAD_OP_XXX +
+Values:
+'_load_', '_clear_', '_dont care_' (default). +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkAttachmentLoadOp[VkAttachmentLoadOp].#
+
+[[descriptortype]]
+[small]#*descriptortype*: vk.DESCRIPTOR_TYPE_XXX +
+Values:
+'_sampler_', '_combined image sampler_', '_sampled image_', '_storage image_', '_uniform texel buffer_', '_storage texel buffer_', '_uniform buffer_', '_storage buffer_', '_uniform buffer dynamic_', '_storage buffer dynamic_', '_input attachment_'. +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkDescriptorType[VkDescriptorType].#
+
+[[bordercolor]]
+[small]#*bordercolor*: vk.BORDER_COLOR_XXX +
+Values:
+'_float transparent black_' (default), '_int transparent black_', '_float opaque black_', '_int opaque black_', '_float opaque white_', '_int opaque white_'. +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkBorderColor[VkBorderColor].#
+
+[[sampleraddressmode]]
+[small]#*sampleraddressmode*: vk.SAMPLER_ADDRESS_MODE_XXX +
+Values:
+'_repeat_' (default), '_mirrored repeat_', '_clamp to edge_', '_clamp to border_', '_mirror clamp to edge_'. +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkSamplerAddressMode[VkSamplerAddressMode].#
+
+[[samplermipmapmode]]
+[small]#*samplermipmapmode*: vk.SAMPLER_MIPMAP_MODE_XXX +
+Values:
+'_nearest_' (default), '_linear_'. +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkSamplerMipmapMode[VkSamplerMipmapMode].#
+
+[[filter]]
+[small]#*filter*: vk.FILTER_XXX +
+Values:
+'_nearest_' (default), '_linear_', '_cubic img_'. +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkFilter[VkFilter].#
+
+[[dynamicstate]]
+[small]#*dynamicstate*: vk.DYNAMIC_STATE_XXX +
+Values:
+'_viewport_', '_scissor_', '_line width_', '_depth bias_', '_blend constants_', '_depth bounds_', '_stencil compare mask_', '_stencil write mask_', '_stencil reference_', '_discard rectangle_'. +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkDynamicState[VkDynamicState].#
+
+[[blendop]]
+[small]#*blendop*: vk.BLEND_OP_XXX +
+Values:
+'_add_' (default), '_subtract_', '_reverse subtract_', '_min_', '_max_'. +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkBlendOp[VkBlendOp].#
+
+[[blendfactor]]
+[small]#*blendfactor*: vk.BLEND_FACTOR_XXX +
+Values:
+'_zero_' (default), '_one_', '_src color_', '_one minus src color_', '_dst color_', '_one minus dst color_', '_src alpha_', '_one minus src alpha_', '_dst alpha_', '_one minus dst alpha_', '_constant color_', '_one minus constant color_', '_constant alpha_', '_one minus constant alpha_', '_src alpha saturate_', '_src1 color_', '_one minus src1 color_', '_src1 alpha_', '_one minus src1 alpha_'. +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkBlendFactor[VkBlendFactor].#
+
+[[logicop]]
+[small]#*logicop*: vk.LOGIC_OP_XXX +
+Values:
+'_clear_' (default), '_and_', '_and reverse_', '_copy_', '_and inverted_', '_no op_', '_xor_', '_or_', '_nor_', '_equivalent_', '_invert_', '_or reverse_', '_copy inverted_', '_or inverted_', '_nand_', '_set_'. +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkLogicOp[VkLogicOp].#
+
+[[stencilop]]
+[small]#*stencilop*: vk.STENCIL_OP_XXX +
+Values:
+'_keep_' (default), '_zero_', '_replace_', '_increment and clamp_', '_decrement and clamp_', '_invert_', '_increment and wrap_', '_decrement and wrap_'. +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkStencilOp[VkStencilOp].#
+
+[[compareop]]
+[small]#*compareop*: vk.COMPARE_OP_XXX +
+Values:
+'_never_' (default), '_less_', '_equal_', '_less or equal_', '_greater_', '_not equal_', '_greater or equal_', '_always_'. +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkCompareOp[VkCompareOp].#
+
+[[frontface]]
+[small]#*frontface*: vk.FRONT_FACE_XXX +
+Values:
+'_counter clockwise_' (default), '_clockwise_'. +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkFrontFace[VkFrontFace].#
+
+[[polygonmode]]
+[small]#*polygonmode*: vk.POLYGON_MODE_XXX +
+Values:
+'_fill_' (default), '_line_', '_point_'. +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPolygonMode[VkPolygonMode].#
+
+[[primitivetopology]]
+[small]#*primitivetopology*: vk.PRIMITIVE_TOPOLOGY_XXX +
+Values:
+'_point list_' (default), '_line list_', '_line strip_', '_triangle list_', '_triangle strip_', '_triangle fan_', '_line list with adjacency_', '_line strip with adjacency_', '_triangle list with adjacency_', '_triangle strip with adjacency_', '_patch list_'. +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPrimitiveTopology[VkPrimitiveTopology].#
+
+[[vertexinputrate]]
+[small]#*vertexinputrate*: vk.VERTEX_INPUT_RATE_XXX +
+Values:
+'_vertex_' (default), '_instance_'. +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkVertexInputRate[VkVertexInputRate].#
+
+[[componentswizzle]]
+[small]#*componentswizzle*: vk.COMPONENT_SWIZZLE_XXX +
+Values:
+'_identity_' (default), '_zero_', '_one_', '_r_', '_g_', '_b_', '_a_'. +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkComponentSwizzle[VkComponentSwizzle].#
+
+[[imageviewtype]]
+[small]#*imageviewtype*: vk.IMAGE_VIEW_TYPE_XXX +
+Values:
+'_1d_', '_2d_', '_3d_', '_cube_', '_1d array_', '_2d array_', '_cube array_'. +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkImageViewType[VkImageViewType].#
+
+[[imagelayout]]
+[small]#*imagelayout*: vk.IMAGE_LAYOUT_XXX +
+Values:
+'_undefined_' (default), '_general_', '_color attachment optimal_', '_depth stencil attachment optimal_', '_depth stencil read only optimal_', '_shader read only optimal_', '_transfer src optimal_', '_transfer dst optimal_', '_preinitialized_', '_present src_'. +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkImageLayout[VkImageLayout].#
+
+[[sharingmode]]
+[small]#*sharingmode*: vk.SHARING_MODE_XXX +
+Values:
+'_exclusive_' (default), '_concurrent_'. +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkSharingMode[VkSharingMode].#
+
+[[querytype]]
+[small]#*querytype*: vk.QUERY_TYPE_XXX +
+Values:
+'_occlusion_', '_pipeline statistics_', '_timestamp_'. +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkQueryType[VkQueryType].#
+
+[[physicaldevicetype]]
+[small]#*physicaldevicetype*: vk.PHYSICAL_DEVICE_TYPE_XXX +
+Values:
+'_other_', '_integrated gpu_', '_discrete gpu_', '_virtual gpu_', '_cpu_'. +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPhysicalDeviceType[VkPhysicalDeviceType].#
+
+[[imagetiling]]
+[small]#*imagetiling*: vk.IMAGE_TILING_XXX +
+Values:
+'_optimal_' (default), '_linear_'. +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkImageTiling[VkImageTiling].#
+
+[[imagetype]]
+[small]#*imagetype*: vk.IMAGE_TYPE_XXX +
+Values:
+'_1d_', '_2d_', '_3d_'. +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkImageType[VkImageType].#
+
+[[format]]
+[small]#*format*: vk.FORMAT_XXX +
+Values:
+'_undefined_' (default), '_r4g4 unorm pack8_', '_r4g4b4a4 unorm pack16_', etc. +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkFormat[VkFormat].#
+
+[[colorspace]]
+[small]#*colorspace*: vk.COLOR_SPACE_XXX_KHR +
+Values:
+'_srgb nonlinear_' (default). +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkColorSpaceKHR[VkColorSpaceKHR].#
+
+[[presentmode]]
+[small]#*presentmode*: vk.PRESENT_MODE_XXX_KHR +
+Values:
+'_immediate_', '_mailbox_', '_fifo_' (default), '_fifo relaxed_'. +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPresentModeKHR[VkPresentModeKHR].#
+
+[[debugreporterror]]
+[small]#*debugreporterror*: vk.DEBUG_REPORT_ERROR_XXX_EXT +
+Values: '_none_', '_callback ref_'. +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkDebugReportErrorEXT[VkDebugReportErrorEXT].#
+
+[[debugreportobjecttype]]
+[small]#*debugreportobjecttype*: vk.DEBUG_REPORT_OBJECT_TYPE_XXX_EXT +
+Values: '_unknown_', '_instance_', '_physical device_', '_device_', '_queue_', '_semaphore_', '_command buffer_', '_fence_', '_device memory_', '_buffer_', '_image_', '_event_', '_query pool_', '_buffer view_', '_image view_', '_shader module_', '_pipeline cache_', '_pipeline layout_', '_render pass_', '_pipeline_', '_descriptor set layout_', '_sampler_', '_descriptor pool_', '_descriptor set_', '_framebuffer_', '_command pool_', '_surface_', '_swapchain_', '_debug report_', '_display_', '_display mode_'. + 
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkDebugReportObjectTypeEXT[VkDebugReportObjectTypeEXT].#
+
+[[descriptorupdatetemplatetype]]
+[small]#*descriptorupdatetemplatetype*: vk.DESCRIPTOR_UPDATE_TEMPLATE_TYPE_ZZZ_KHR +
+Values: '_descriptor set_', '_push descriptors_'. +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkDescriptorUpdateTemplateTypeKHR[VkDescriptorUpdateTemplateTypeKHR].#
+
+
+////
+
+[[zzz]]
+[small]#*zzz*: vk. +
+Values:
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#[].#
+
+////
+

@@ -1,0 +1,17 @@
+
+[[descriptor_set]]
+==== descriptor_set
+
+[[allocate_descriptor_sets]]
+* {_descriptor_set_} = *allocate_descriptor_sets*(<<descriptor_pool, _descriptor_pool_>>, {<<descriptor_set_layout, _descriptor_set_layout_>>}) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkAllocateDescriptorSets[vkAllocateDescriptorSets].#
+
+[[free_descriptor_sets]]
+* *free_descriptor_sets*({_descriptor_set_}) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkFreeDescriptorSets[vkFreeDescriptorSets].#
+
+
+[[update_descriptor_sets]]
+* *update_descriptor_sets*(_device_, [{<<writedescriptorset, writedescriptorset>>}], [{<<copywritedescriptorset, copywritedescriptorset>>}]) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkUpdateDescriptorSets[vkUpdateDescriptorSets].#
+

@@ -1,0 +1,71 @@
+
+== Introduction
+
+MoonVulkan is an (almost) one-to-one Lua binding library to the Vulkan API.
+It provide means to implement scripted Vulkan applications using Lua instead
+of C or pass:[C++], with all its pros and cons and with the limitations listed in the 
+<<implementation_notes, 'Implementation notes'>> section. You can think of it as
+a 'working pseudocode', less efficient but easier to write and read and to work with.
+
+This section gives a brief overview, while the details of the bindings are given 
+in the sections that follow.
+
+As a general rule, Vulkan API *functions* are bound to by MoonVulkan functions whose names
+are https://en.wikipedia.org/wiki/Snake_case[snake_case] versions of the original ones
+(for example, _vkCreateInstance_(&nbsp;) is bound to by _vk.create_instance_(&nbsp;)).
+
+If not stated otherwise, *on error* all MoonVulkan functions raise a 
+http://www.lua.org/manual/5.3/manual.html#lua_error[Lua error]. 
+If needed, this behaviour can be overridden by wrapping function calls in the standard Lua 
+http://www.lua.org/manual/5.3/manual.html#pdf-pcall[pcall](&nbsp;).
+
+MoonVulkan avoids performing *validations* that can be delegated to
+https://github.com/KhronosGroup/Vulkan-LoaderAndValidationLayers[Vulkan layers], 
+and limits its error checks to the minimum needed to protect itself from script errors.
+
+MoonVulkan binds Vulkan *objects* (_instance_, _device_, etc.) to Lua userdata, which are 
+returned by the creating/allocating functions 
+(_vk.create_instance_(&nbsp;), _vk.create_device_(&nbsp;), etc) and are then used to 
+refer to objects in Lua in the same way as one would use Vulkan handles in C.
+
+In the rest of this manual we will refer to userdata bound to Vulkan objects as to just 'objects',
+or as 'MoonVulkan objects' (vs. 'Vulkan objects') when there is need for disambiguation.
+
+Occasionally, the actual Vulkan *handles* may be needed by the Lua code, mainly to interoperate
+in very dangerous ways with other libraries that access the Vulkan API directly. 
+Handles can be retrieved with the <<method_raw, raw>>(&nbsp;) method that every object has.
+
+Objects are *garbage collected at exit* (which includes on error), with automatic 
+destruction/free at the Vulkan level, so there is no need to explicitly invoke the bindings
+to _vkDestroy/FreeXxx_(&nbsp;) at exit for cleanup. 
+
+Apart from at exit, however, objects are not automatically garbage collected 
+footnote:[Objects are anchored to the Lua registry at their creation, so even if the script does not
+have references to an object, a reference always exists on the registry and this prevents the 
+GC to collect it.]
+and one must destroy/free them explicitly when needed, e.g. to release resources when the
+application is not exiting and some objects are no longer needed.
+
+Destroying/freeing an object causes the automatic (pre) destruction of all its children
+objects, and the invalidation of any reference to the object and to its children.
+footnote:[It is good practice to not leave invalid references to objects around, because
+they prevent the GC to collect the memory associated with the userdata.]
+
+Vulkan *structs* (and lists, and arrays) used to pass parameters and results across the Vulkan API 
+are mapped in MoonVulkan to tables, having more or less the same contents as their C counterparts
+but again with https://en.wikipedia.org/wiki/Snake_case[snake_case] named fields.
+*Enumerations* are mapped to/from sets of string literals, while *flags* bitmasks are represented
+as plain integers encoded in the same way as in C.
+More details are given in the respective sections of this document 
+(<<structs, structs>>, <<enums, enums>>, <<flags, flags>>).
+
+In addition to the bindings to the Vulkan API, which are described in the sections that follow, 
+MoonVulkan also provides a few other utilities and object 'methods' that do not correspond
+to Vulkan functions.
+These are described mainly in the <<miscellanea, 'Miscellanea'>> subsections.
+
+////
+@@TODO additional utilities (data handling, etc).
+@@ constructors and other utilities
+////
+

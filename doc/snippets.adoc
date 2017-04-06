@@ -1,0 +1,112 @@
+
+[[snippets]]
+== Code snippets
+
+[[clearvalue_snippet]]
+.Examples for clearcolorvalue and clearvalue
+[source, lua, indent=1]
+----
+clearvalue = { color = { 0.2, 0.5, 0.1, 1.0 } }  -- t defaults to 'float32'
+clearvalue = { color = { 0.2, 0.5, 0.1, 1.0, t='float32' } }
+clearvalue = { color = { 20, 112, 200, 1, t='uint32' } }
+clearvalue = { depth = 1.0, stencil = 0 }
+----
+
+[[enums_snippet]]
+.Dealing with enums
+[source,lua,indent=1]
+----
+-- Alternative and equivalent ways to assign values of the 'blendop' enum type
+-- (whose hint is vk.BLEND_OP_XXX):
+op1 = vk.BLEND_OP_ADD 
+op2 = 'add' -- XXX=ADD
+op3 = vk.BLEND_OP_REVERSE_SUBTRACT
+op4 = 'reverse subtract' -- XXX=REVERSE_SUBTRACT
+
+print(op1) --> 'add'
+print(op2) --> 'add'
+print(op3) --> 'reverse subtract'
+print(op4) --> 'reverse subtract'
+print(op1 == 'add') --> true
+print(op3 == op4) --> true
+
+-- List the literals admitted by the 'blendop' enum type:
+ops = vk.enum('blendop')
+print(table.concat(ops, ', ')) --> 'add', 'subtract', 'reverse subtract', 'min', 'max'
+----
+
+[[flags_snippet]]
+.Dealing with flags
+[source,lua,indent=1]
+----
+-- Two alternative equivalent ways to produce a 'stencilfaceflags' value:
+code1 = vk.STENCIL_FACE_FRONT_BIT | vk.STENCIL_FACE_BACK_BIT 
+code2 = vk.stencilfaceflags('front', 'back')
+
+assert(code1 == code2) -- true
+print(code1) --> 3
+print(vk.stencilfaceflags(code1)) --> front back
+print(vk.stencilfaceflags(code2)) --> ditto
+
+if (code1 & vk.STENCIL_FACE_FRONT_BIT) ~= 0 then -- NB: 0 is not false in Lua
+  print("'front' bit is set")
+else
+  print("'front' bit is not set")
+end
+----
+
+[[glfwsurface_snippet]]
+.Creating a surface with MoonGLFW 
+[source, lua, indent=1]
+----
+glfw = require("moonglfw")
+vk = require("moonvulkan")
+
+-- 1) Get the list of extensions required by GLFW to create surfaces:
+extension_names = glfw.get_required_instance_extensions()
+print("Required extensions: " .. table.concat(extension_names, ', '))
+
+-- 2) Create a Vulkan instance, enabling the required extensions:
+instance = vk.create_instance({ enabled_extension_names = extension_names })
+
+-- 3.1) Create a window, not tied to any particular API:
+glfw.window_hint('client api', 'no api')
+window = glfw.create_window(640, 480, "My first GLFW/Vulkan window")
+
+-- 3.2) Create a surface for the window:
+surfaceRAW = glfw.create_window_surface(window, instance:raw())
+
+-- 4) Finally, pass the surface to MoonVulkan:
+surface = vk.created_surface(instance, surfaceRAW)
+
+-- Event loop:
+while not glfw.window_should_close(window) do
+   glfw.poll_events()
+end
+
+----
+
+[[versions_snippet]]
+.Handling versions
+[source, lua, indent=1]
+----
+
+print("MoonVulkan version:", vk._VERSION)
+print("Header version (vulkan.h):", vk.HEADER_VERSION)
+print("Supported versions:", table.concat(vk.API_VERSIONS, ","))
+
+for _, s in ipairs(vk.API_VERSIONS) do
+    local ver = vk[s]
+    local major, minor, patch = vk.version_numbers(ver)
+    print(s .. ": " .. ver .. " (" ..  vk.version_string(ver) ..")" ..
+        " major="..major.." minor="..minor.." patch="..patch)
+end
+
+if not vk.API_VERSION_1_0 then print("API_VERSION_1_0 is not supported") end
+if not vk.API_VERSION_2_0 then print("API_VERSION_2_0 is not supported") end
+
+assert(vk.make_version(1, 0, 0) == vk.API_VERSION_1_0) --> true
+
+----
+
+

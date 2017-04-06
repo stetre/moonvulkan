@@ -1,0 +1,21 @@
+
+[[tracing]]
+=== Tracing utilities
+
+[[trace_objects]]
+* *trace_objects*(_boolean_) +
+[small]#Enable/disable tracing of objects creation and destruction (which by default
+is disabled). If enabled, a printf is generated whenever an object is created/allocated
+or destructed/freed, indicating the object type and the value of its raw Vulkan handle.#
+
+[[now]]
+* _t_ = *now*(&nbsp;) +
+[small]#Returns the current time in seconds (a Lua number). +
+This is implemented with monotonic _clock_gettime(3)_, if available, or 
+with _gettimeofday(3)_ otherwise.#
+
+[[since]]
+* _dt_ = *since*(_t_) +
+[small]#Returns the time in seconds (a Lua number) elapsed since the time _t_, 
+previously obtained with the <<now, now>>(&nbsp;) function.#
+

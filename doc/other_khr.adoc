@@ -1,0 +1,88 @@
+
+[[push_descriptor]]
+==== Push descriptor set
+
+The function that follows extends the list of <<commands, commands>> 
+and requires the 
+https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_push_descriptor[VK_KHR_push_descriptor] device extension.
+
+[[cmd_push_descriptor_set]]
+* *cmd_push_descriptor_set*(_cb_, _bind_point_, _..._) +
+[small]#arg2 - _bind_point_: <<pipelinebindpoint, pipelinebindpoint>> +
+arg3 - _pipeline_layout_: <<pipeline_layout, pipeline_layout>> +
+arg4 - _set_: integer +
+arg5 - _writes_: {<<writedescriptorset, writedescriptorset>>} +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCmdPushDescriptorSetKHR[vkCmdPushDescriptorSetKHR].#
+
+
+[[descriptor_update_template]]
+==== descriptor_update_template
+
+The following functions require the 
+https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_descriptor_update_template[VK_KHR_descriptor_update_template] device extension.
+
+[[create_descriptor_update_template]]
+* _descriptor_update_template_ = *create_descriptor_update_template*(_device_, _info_ [, <<allocators, _allocatorLUD_>>]) +
+[small]#_info_: <<descriptorupdatetemplatecreateinfo, _descriptorupdatetemplatecreateinfo_>> +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCreateDescriptorUpdateTemplateKHR[vkCreateDescriptorUpdateTemplateKHR].#
+
+[[destroy_descriptor_update_template]]
+* *destroy_descriptor_update_template*(_descriptor_update_template_) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkDestroyDescriptorUpdateTemplateKHR[vkDestroyDescriptorUpdateTemplateKHR].#
+
+[[update_descriptor_set_with_template]]
+* *update_descriptor_set_with_template*(<<descriptor_set, _descriptor_set_>>, _descriptor_update_template_, _data_) +
+[small]#_data_: binary string +
+The _data_ parameter can be constructed using the <<pack_descriptorimageinfo, pack_descriptorimageinfo>>(&nbsp;), <<pack_descriptorbufferinfo, pack_descriptorbufferinfo>>(&nbsp;), and <<pack_bufferview, pack_bufferview>>(&nbsp;) utilities. +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkUpdateDescriptorSetWithTemplateKHR[vkUpdateDescriptorSetWithTemplateKHR].#
+
+The function that follows extends the list of <<commands, commands>>.
+
+[[cmd_push_descriptor_set_with_template]]
+* *cmd_push_descriptor_set_with_template*(_cb_, _descriptor_update_template_, _layout_, _..._) +
+[small]#arg3: _layout_: <<pipeline_layout, pipeline_layout>> +
+arg4: _set_: integer +
+arg5: _data_: binary string +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCmdPushDescriptorSetWithTemplateKHR[vkCmdPushDescriptorSetWithTemplateKHR].#
+
+////
+[[debug_marker_set_object_tag]]
+* *debug_marker_set_object_tag*(_device_, _object_type_, _objectRAW_, _tag_name_, _object_tag_) +
+[small]#_object_type_: <<debugreportobjecttype, debugreportobjecttype>> +
+_objectRAW_: integer raw object handle (may be 0) +
+_tag_name_: integer +
+_object_tag_: binary string +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkDebugMarkerSetObjectTagEXT[vkDebugMarkerSetObjectTagEXT].#
+
+The functions that follow extend the list of <<commands, commands>>.
+
+[[cmd_debug_marker_begin]]
+* *cmd_debug_marker_begin*(_cb_, _marker_name_ [, _color_]) +
+[small]#_marker_name_: string +
+_color_: {float} (length = 4, opt.) +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCmdDebugMarkerBeginEXT[vkCmdDebugMarkerBeginEXT].#
+
+[[cmd_debug_marker_end]]
+* *cmd_debug_marker_end*(_cb_) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCmdDebugMarkerEndEXT[vkCmdDebugMarkerEndEXT].#
+
+[[cmd_debug_marker_insert]]
+* *cmd_debug_marker_insert*(_cb_, _marker_name_ [, _color_]) +
+[small]#_marker_name_: string +
+_color_: {float} (length = 4, opt.) +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCmdDebugMarkerInsertEXT[vkCmdDebugMarkerInsertEXT].#
+////
+
+////
+[[]]
+* <<,__>> = **(_xxx_) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vk[].#
+
+arg3 - __: integer +
+arg3 - __: <<, >> +
+arg3 - __: {<<, >>} +
+arg3 - __: <<, >> (opt.) +
+arg3 - __: {<<, >>} (opt.) +
+
+////
+

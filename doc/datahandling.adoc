@@ -1,0 +1,76 @@
+
+[[datahandling]]
+=== Data handling
+
+This section describes additional utilities that can be used to encode data from Lua 
+variables to binary strings and viceversa.
+
+[[datahandling_flatten]]
+* _val~1~_, _..._, _val~N~_ = *flatten*(_table_) +
+[small]#Flattens out the given _table_ and returns the terminal elements in the order they are found. +
+Similar to Lua's 
+http://www.lua.org/manual/5.3/manual.html#pdf-table.unpack[table.unpack](&nbsp;), but it also unpacks
+any nested table. Only the array part of the table is considered.#
+
+[[datahandling_sizeof]]
+* _size_ = *sizeof*(<<datatype, _datatype_>>) +
+[small]#Returns the size in bytes of the given _datatype_.#
+
+[[datahandling_pack]]
+* _data_ = *pack*(<<datatype, _datatype_>>, _val~1~_, _..._, _val~N~_) +
+_data_ = *pack*(<<datatype, _datatype_>>, _table_) +
+[small]#Packs the numbers _val~1~_, _..._, _val~N~_, encoding  them according to the given _datatype_, and returns the resulting binary string. +
+The values may also be passed in a possibly nested table (only the array part of the table is considered).#
+
+[[datahandling_unpack]]
+* _val~1~_, _..._, _val~N~_ = *unpack*(<<datatype, _datatype_>>, _data_) +
+[small]#Unpacks the binary string _data_, interpreting it as a sequence of values of the given _datatype_,
+and returns the extracted values. +
+The length of _data_ must be a multiple of <<datahandling_sizeof, sizeof>>(_datatype_).#
+
+[[datatype]]
+[small]#*datatype*: '_byte_', '_ubyte_', '_int8_', '_uint8_', 
+'_short_', '_ushort_', '_int16_', '_uint16_',
+'_int_', '_uint_', '_int32_', '_uint32_',
+'_long_', '_ulong_', '_int64_', '_uint64_',
+'_float_', '_double_'. +
+(_byte_, _short_, _int_ and _long_ are aliases for _int8_, _int16_, _int32_ and _int64_, respectively).#
+
+'''
+
+The following functions can be used to pack (serialize) data when 
+<<descriptor_update_template, updating descriptor sets with template>>.
+
+[[pack_descriptorimageinfo]]
+* _data_ = *pack_descriptorimageinfo*(<<sampler, _sampler_>>, <<image_view, _image_view_>>, <<imagelayout, _imagelayout_>>) +
+[small]#Constructs a https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkDescriptorImageInfo[VkDescriptorImageInfo] with the given parameters and returns it as a binary string.#
+
+[[pack_descriptorbufferinfo]]
+* _data_ = *pack_descriptorbufferinfo*(<<buffer, _buffer_>>, _offset_, _range_) +
+[small]#_offset_: integer +
+_range_: integer or '_whole size_' (defaults to '_whole size_') +
+Constructs a https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkDescriptorBufferInfo[VkDescriptorBufferInfo] with the given parameters and returns it as a binary string.#
+
+[[pack_bufferview]]
+* _data_ = *pack_bufferview*(<<buffer_view, _buffer_view_>>, _application_data_) +
+[small]#Returns a binary string obtained by serializing _buffer_view_ and
+concatenating it with _application_data_ (a binary string). +
+The _application_data_ binary string encodes application specific data and may be constructed
+using Lua's http://www.lua.org/manual/5.3/manual.html#pdf-string.pack[string.pack](&nbsp;).#
+
+////
+[[datahandling_]]
+* **(_xxx_) +
+[small]#.#
+
+* <<,__>> = **(_xxx_) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vk[].#
+
+arg3 - __: integer +
+arg3 - __: <<, >> +
+arg3 - __: {<<, >>} +
+arg3 - __: <<, >> (opt.) +
+arg3 - __: {<<, >>} (opt.) +
+
+////
+

@@ -1,0 +1,42 @@
+
+[[objects]]
+== Objects
+
+The following tree shows the MoonVulkan (_Vulkan_) objects and their parent-child relationships.
+
+[small]#<<instance, instance>> _(VkInstance)_ +
+{tH}<<physical_device, physical_device>> _(VkPhysicalDevice)_ +
+{tI}{tL}<<display, display>> _(VkDisplayKHR)_ +
+{tI}{tS}{tL}<<display_mode, display_mode>> _(VkDisplayModeKHR)_ +
+{tH}<<device, device>> _(VkDevice)_ +
+{tI}{tH}<<queue, queue>> _(VkQueue)_ +
+{tI}{tH}<<command_pool, command_pool>> _(VkCommandPool)_ +
+{tI}{tI}{tL}<<command_buffer, command_buffer>> _(VkCommandBuffer)_ +
+{tI}{tH}<<fence, fence>> _(VkFence)_ +
+{tI}{tH}<<semaphore, semaphore>> _(VkSemaphore)_ +
+{tI}{tH}<<event, event>> _(VkEvent)_ +
+{tI}{tH}<<render_pass, render_pass>> _(VkRenderPass)_ +
+{tI}{tH}<<framebuffer, framebuffer>> _(VkFramebuffer)_ +
+{tI}{tH}<<shader_module, shader_module >> _(VkShaderModule )_ +
+{tI}{tH}<<pipeline, pipeline>> _(VkPipeline)_ +
+{tI}{tH}<<pipeline_cache, pipeline_cache>> _(VkPipelineCache)_ +
+{tI}{tH}<<device_memory, device_memory>> _(VkDeviceMemory)_ +
+{tI}{tH}<<buffer, buffer>> _(VkBuffer)_ +
+{tI}{tI}{tL}<<buffer_view, buffer_view>> _(VkBufferView)_ +
+{tI}{tH}<<image, image>> _(VkImage)_ +
+{tI}{tI}{tL}<<image_view, image_view>> _(VkImageView)_ +
+{tI}{tH}<<sampler, sampler>> _(VkSampler)_ +
+{tI}{tH}<<descriptor_set_layout, descriptor_set_layout>> _(VkDescriptorSetLayout)_ +
+{tI}{tH}<<pipeline_layout, pipeline_layout>> _(VkPipelineLayout)_ +
+{tI}{tH}<<descriptor_pool, descriptor_pool>> _(VkDescriptorPool)_ +
+{tI}{tI}{tL}<<descriptor_set, descriptor_set>> _(VkDescriptorSet)_ +
+{tI}{tH}<<descriptor_update_template, descriptor_update_template>> _(VkDescriptorUpdateTemplateKHR)_ +
+{tI}{tH}<<query_pool, query_pool>> _(VkQueryPool)_ +
+{tI}{tL}<<swapchain, swapchain>> _(VkSwapchainKHR)_ +
+{tI}{tS}{tL}<<image, image>> _(VkImage, present)_ +
+{tH}<<surface, surface>> _(VkSurfaceKHR)_ +
+{tL}<<debug_report_callback, debug_report_callback>> _(VkDebugReportCallbackEXT)_#
+
+(Notice that the _image_ object is listed two times because it may be either created by
+the application or acquired from a _swapchain_).
+

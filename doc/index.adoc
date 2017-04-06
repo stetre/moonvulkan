@@ -1,0 +1,116 @@
+= MoonVulkan Reference Manual
+Stefano Trettel
+v0.1, 2017-01-25
+:toc: left
+:toclevels: 2
+:stylesdir: ./
+:stylesheet: colony.css
+:source-highlighter: pygments
+:pygments-style: autumn
+:source-language: lua
+:exampledir: ../examples
+
+image::powered-by-lua.gif[Lua logo, link=http://www.lua.org]
+
+// Macros for trees: {tS} = "   ", {tI} = "│  ", {tH} = "├─ ", {tL} = "└─ "
+:tS: &#8192;&#8192;&#8192;&#8192;
+:tI: &#9474;&#8192;&#8192;&#8192;
+:tH: &#9500;&#9472;&#8192;
+:tL: &#9492;&#9472;&#8192;
+
+include::preface.adoc[]
+include::introduction.adoc[]
+
+include::objects.adoc[]
+
+include::functions.adoc[]
+
+=== Initialization
+include::instance.adoc[]
+include::physical_device.adoc[]
+
+=== Devices and Queues
+include::device.adoc[]
+include::queue.adoc[]
+
+=== Command Buffers
+include::command_pool.adoc[]
+include::command_buffer.adoc[]
+include::cmd.adoc[]
+
+=== Synchronization
+include::fence.adoc[]
+include::semaphore.adoc[]
+include::event.adoc[]
+
+=== Render Pass
+include::render_pass.adoc[]
+include::framebuffer.adoc[]
+
+=== Shaders
+include::shader_module.adoc[]
+
+=== Pipelines
+include::pipeline.adoc[]
+include::pipeline_cache.adoc[]
+
+=== Memory Allocation
+include::device_memory.adoc[]
+
+=== Resource Creation
+include::buffer.adoc[]
+include::buffer_view.adoc[]
+include::image.adoc[]
+include::image_view.adoc[]
+
+=== Samplers
+include::sampler.adoc[]
+
+=== Resource Descriptors
+include::descriptor_set_layout.adoc[]
+include::pipeline_layout.adoc[]
+include::descriptor_pool.adoc[]
+include::descriptor_set.adoc[]
+
+=== Queries
+include::query_pool.adoc[]
+
+[[layers]]
+== Layers and extensions
+
+include::layers.adoc[]
+
+=== Surfaces (KHR)
+include::surface.adoc[]
+include::platform_surface.adoc[]
+
+=== Displays (KHR)
+include::display.adoc[]
+
+=== Swapchains (KHR)
+include::swapchain.adoc[]
+
+=== Other (KHR)
+include::other_khr.adoc[]
+
+=== Debug (EXT)
+include::debug.adoc[]
+
+include::structs.adoc[]
+include::constructors.adoc[]
+
+include::enums.adoc[]
+include::flags.adoc[]
+
+[[miscellanea]]
+== Miscellanea
+include::versions.adoc[]
+include::methods.adoc[]
+include::allocators.adoc[]
+include::creating_surfaces.adoc[]
+include::datahandling.adoc[]
+include::tracing.adoc[]
+
+include::snippets.adoc[]
+
+include::notes.adoc[]

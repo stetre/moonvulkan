@@ -1,0 +1,63 @@
+
+[[creating_surfaces]]
+=== Creating surfaces
+
+Surfaces in MoonVulkan can be created using the bindings to 
+<<platform_surfaces, platform-specific API>>, or they can be created by means other 
+than MoonVulkan itself - for example using
+https://github.com/stetre/moonglfw[MoonGLFW] or similar libraries that access the 
+Vulkan API directly to provide surface-creation services - and then passed to 
+MoonVulkan using the <<created_surface, created_surface>>(&nbsp;) function.
+
+The second method is more platform-agnostic, at least from the point of view of the
+Lua application, since most of the platform-specific details are handled by MoonGLFW
+(or by whatever is used in lieu of it).
+
+The two methods are described in the following subsections.
+
+[[creating_surfaces_platform]]
+==== Creating surfaces with the platform-specific API
+
+The procedure to create a surface using the <<platform_surfaces, platform-specific API>> is
+the following:
+
+1. Create a MoonVulkan <<create_instance, _instance_>>, enabling (at least) the extensions required 
+for the specific platform.
+2. Use the platform-native API to create a window (or connection or whatever) and/or to obtain 
+the window system specific handles and parameters.
+3. Pass the relevant handles and parameters to Lua (handles must be passed as 
+http://www.lua.org/manual/5.3/manual.html#lua_pushlightuserdata[light userdata]).
+4. Create a MoonVulkan _surface_ object using the platform-specific 
+<<platform_surfaces, create_xxx_surface>>(&nbsp;) function (where _xxx_ may be _xcb_, _xlib_, etc.), 
+passing it the handles and parameters obtained in the previous steps.
+
+Note that MoonVulkan itself does not provide Lua bindings to platform native API 
+(e.g. _xcb_connect_(&nbsp;) etc.), so steps 2 and 3 involve writing some C/C++ code or 
+relying on other Lua libraries.
+
+[[creating_surfaces_other_means]]
+==== Creating surfaces by other means
+
+The procedure to create a surface by other means is summarized in the steps listed below, where
+https://github.com/stetre/moonglfw[MoonGLFW] is used as example and prototype of 'other means':
+footnote:[Note that MoonGLFW is used here only as example, but MoonVulkan is not tied to it in any way.
+MoonGLFW can be replaced by ... whatever, as long as 'whatever' provides the needed functionalities
+and is able to exchange raw Vulkan handles in the form of Lua integers.]
+
+1. Get from MoonGLFW the list of extensions it needs in order to create a surface.
+2. Create a MoonVulkan <<create_instance, _instance_>>, enabling (at least) the extensions required by MoonGLFW.
+3. Use MoonGLFW to create (a window and) a surface for the instance. In order to do this, 
+we need the raw VkInstance handle which we can retrieve using the 
+_instance_++++<<method_raw, :raw>>(&nbsp;) method. 
+MoonGLFW will return the raw VkSurfaceKHR handle.
+4. Finally, pass the VkSurfaceKHR handle to MoonVulkan using <<created_surface, created_surface>>(&nbsp;).
+
+Once passed to <<created_surface, created_surface>>(&nbsp;), the surface handle 
+is to be considered as owned by MoonVulkan. 
+In particular, the surface MUST NOT be destroyed (vkDestroySurfaceKHR) by means other than those
+provided by MoonVulkan (that is, by automatic destruction at exit or by explictly calling 
+<<destroy_surface, destroy_surface>>(&nbsp;)).
+
+A working <<glfwsurface_snippet, example>> can be found in the code snippets section.
+
+

@@ -1,0 +1,27 @@
+
+[[instance]]
+==== instance
+
+[[create_instance]]
+* _instance_ = *create_instance*(<<instancecreateinfo, _instancecreateinfo_>> [, <<allocators, _allocatorLUD_>>]) +
+[small]#Returns the userdata bound to the newly created instance. +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCreateInstance[vkCreateInstance].#
+
+
+[[destroy_instance]]
+* *destroy_instance*(_instance_) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkDestroyInstance[vkDestroyInstance].#
+
+
+[[enumerate_physical_devices]]
+* {<<physical_device, _physical_device_>>} = *enumerate_physical_devices*(_instance_) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkEnumeratePhysicalDevices[vkEnumeratePhysicalDevices].#
+
+
+////
+
+_instance_++++*:destroy*( ) +
+{<<physical_device, physical_device>>} = _instance_++++*:enumerate_physical_devices*( ) +
+
+////
+

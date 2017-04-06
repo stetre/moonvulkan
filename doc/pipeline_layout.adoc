@@ -1,0 +1,15 @@
+
+[[pipeline_layout]]
+==== pipeline_layout
+
+[[create_pipeline_layout]]
+* _pipeline_layout_ = *create_pipeline_layout*(_device_, _flags_, _set_layouts_, _push_constant_ranges_ [, <<allocators, _allocatorLUD_>>]) +
+[small]#_flags_: <<pipelinelayoutcreateflags, pipelinelayoutcreateflags>> +
+_set_layouts_: {<<descriptor_set_layout, descriptor_set_layout>>} (opt.) +
+_push_constant_ranges_: {<<pushconstantrange, pushconstantrange>>} (opt.) +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCreatePipelineLayout[vkCreatePipelineLayout].#
+
+[[destroy_pipeline_layout]]
+* *destroy_pipeline_layout*(_pipeline_layout_) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkDestroyPipelineLayout[vkDestroyPipelineLayout].#
+

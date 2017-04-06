@@ -1,0 +1,28 @@
+
+[[allocators]]
+=== Custom allocators
+
+This section describes how to use custom memory allocators for Vulkan objects in MoonVulkan.
+
+Almost all MoonVulkan _vk.create/allocate_xxx_(&nbsp;) functions accept the optional 
+parameter *_allocatorLUD_*, that corresponds to the *_pAllocator_* parameter of the underlying
+_vkCreate/AllocateXxx_(&nbsp;) function of the Vulkan C API.
+
+If the _allocatorLUD_ parameter is not passed (or if it is _nil_), then the object(s) will be 
+created/allocated with _pAllocator_=_NULL_, so that the Vulkan implementation will use its 
+default.
+Otherwise, _allocatorLUD_ must be a Lua 
+http://www.lua.org/manual/5.3/manual.html#lua_pushlightuserdata[light userdata]
+encapsulating a valid pointer to the
+https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkAllocationCallbacks[VkAllocationCallbacks]
+to be used as _pAllocator_ parameter.
+
+How custom allocators are obtained/implemented is not a MoonVulkan concern (a working example 
+is however provided in the *examples/allocator* directory).
+
+Note that MoonVulkan has no means to check that the pointer encapsulated in a light userdata is
+actually what it is meant to be, so this functionality must be handled with care.
+
+Notice also that there is no need (and no way) to pass the _allocatorLUD_ at object destruction
+because MoonVulkan stores for this purpose the value it receives at object creation.
+

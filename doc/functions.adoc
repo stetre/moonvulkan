@@ -1,0 +1,14 @@
+
+[[functions]]
+== Core functions
+
+This section lists the MoonVulkan bindings to the core Vulkan API functions.
+
+Only the synopses are given. 
+The functionalities, usages, meanings of parameters and return values are 
+basically the same as for the underlying Vulkan API.
+
+The structure of this section purposedly reflects the structure of the 
+https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html[Vulkan Specification],
+from chapter 3 onward.
+

@@ -1,0 +1,53 @@
+
+[[surface]]
+==== surface
+
+The following functions require the 
+https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_surface[VK_KHR_surface] instance extension.
+
+[[created_surface]]
+* _surface_ = *created_surface*(<<instance, _instance_>>, _surfaceRAW_ [, <<allocators, _allocatorLUD_>>]) +
+[small]#_surfaceRAW_: a valid VkSurfaceKHR handle (integer) for the given _instance_. +
+Creates and returns a _surface_ userdata (MoonVulkan object) bound to the given handle. +
+(See <<creating_surfaces_other_means, 'Creating surfaces by other means'>> for details on how to use this function.)#
+
+[[create_display_plane_surface]]
+* _surface_ = *create_display_plane_surface*(<<display_mode, _display_mode_>>, <<displaysurfacecreateinfo, _displaysurfacecreateinfo_>> [, <<allocators, _allocatorLUD_>>]) +
+[small]#This function requires also the https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_display[VK_KHR_display] instance extension. +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCreateDisplayPlaneSurfaceKHR[vkCreateDisplayPlaneSurfaceKHR].#
+
+[[destroy_surface]]
+* *destroy_surface*(_surface_) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkDestroySurfaceKHR[vkDestroySurfaceKHR].#
+
+
+[[get_physical_device_surface_support]]
+* _boolean_ = *get_physical_device_surface_support*(<<physical_device, _physical_device_>>, _queue_family_index_, _surface_) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetPhysicalDeviceSurfaceSupportKHR[vkGetPhysicalDeviceSurfaceSupportKHR].#
+
+[[get_physical_device_surface_capabilities]]
+* <<surfacecapabilities, _surfacecapabilities_>> = *get_physical_device_surface_capabilities*(<<physical_device, _physical_device_>>, _surface_) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetPhysicalDeviceSurfaceCapabilitiesKHR[vkGetPhysicalDeviceSurfaceCapabilitiesKHR].#
+
+[[get_physical_device_surface_formats]]
+* {<<surfaceformat, _surfaceformat_>>} = *get_physical_device_surface_formats*(<<physical_device, _physical_device_>>, _surface_) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetPhysicalDeviceSurfaceFormatsKHR[vkGetPhysicalDeviceSurfaceFormatsKHR].#
+
+[[get_physical_device_surface_present_modes]]
+* {<<presentmode, _presentmode_>>} = *get_physical_device_surface_present_modes*(<<physical_device, _physical_device_>>, _surface_) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetPhysicalDeviceSurfacePresentModesKHR[vkGetPhysicalDeviceSurfacePresentModesKHR].#
+
+
+////
+[[]]
+* <<,__>> = **(_surface_) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkKHR[KHR].#
+
+arg3 - __: integer +
+arg3 - __: <<, >> +
+arg3 - __: {<<, >>} +
+arg3 - __: <<, >> (opt.) +
+arg3 - __: {<<, >>} (opt.) +
+
+////
+

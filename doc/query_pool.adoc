@@ -1,0 +1,29 @@
+
+[[query_pool]]
+==== query_pool
+
+
+[[create_query_pool]]
+* _query_pool_ = *create_query_pool*(_device_, _flags_, _..._) +
+[small]#arg2 - _flags_: <<querypoolcreateflags, querypoolcreateflags>> +
+arg3 - _query_type_: <<querytype, querytype>> +
+arg4 - _query_count_: integer +
+arg5 - _pipeline_statistics_: <<querypipelinestatisticflags, querypipelinestatisticflags>> +
+arg6 - _allocator_: <<allocators, _allocatorLUD_>> (opt.) +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCreateQueryPool[vkCreateQueryPool].#
+
+[[destroy_query_pool]]
+* _data_ = *destroy_query_pool*(_query_pool_, _first_query_, _..._) +
+[small]#arg2 - _first_query_: integer +
+arg3 - _query_count_: integer +
+arg4 - _data_size_: integer +
+arg5 - _size_: integer +
+arg6 - _flags_: <<queryresultflags, queryresultflags>> +
+Returns _data_ as a binary string. +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkDestroyQueryPool[vkDestroyQueryPool].#
+
+[[get_query_pool_results]]
+* *get_query_pool_results*(_query_pool_) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetQueryPoolResults[vkGetQueryPoolResults].#
+
+
