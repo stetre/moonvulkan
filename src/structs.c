@@ -368,7 +368,7 @@ do {                                                \
 #define GetClearColorValue(name, sname) GetStruct(name, sname, echeckclearcolorvalue)
 #define GetClearValue(name, sname) GetStruct(name, sname, echeckclearvalue)
 #define GetImageSubresource(name, sname) GetStruct(name, sname, echeckimagesubresource)
-#define GetStencilOpState(name, sname) GetStruct(name, sname, echeckstencilopstate)
+#define GetStencilOpStateOpt(name, sname) GetStructOpt(name, sname, echeckstencilopstate)
 #define GetPipelineShaderStageCreateInfo(name, sname) GetStruct(name, sname, echeckpipelineshaderstagecreateinfo)
 
 /* Objects -------------------------------------------------------------------*/
@@ -2879,8 +2879,8 @@ static int echeckpipelinedepthstencilstatecreateinfo(lua_State *L, int arg, VkPi
     GetCompareOp(depthCompareOp, "depth_compare_op");
     GetBoolean(depthBoundsTestEnable, "depth_bounds_test_enable");
     GetBoolean(stencilTestEnable, "stencil_test_enable");
-    GetStencilOpState(front, "front");
-    GetStencilOpState(back, "back");
+    GetStencilOpStateOpt(front, "front");
+    GetStencilOpStateOpt(back, "back");
     GetNumber(minDepthBounds, "min_depth_bounds");
     GetNumber(maxDepthBounds, "max_depth_bounds");
     return 0;
