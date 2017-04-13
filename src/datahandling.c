@@ -61,8 +61,8 @@ static int Sizeof(lua_State *L)
     return 1;
     }
 
-
-static int Flatten_(lua_State *L, int arg)
+#if 0
+static int TableSize_(lua_State *L, int arg)
     {
     int len, i, top, n=0;
 
@@ -82,86 +82,133 @@ static int Flatten_(lua_State *L, int arg)
         top = lua_gettop(L);
         if(lua_type(L, top) == LUA_TTABLE)
             {
-            n += Flatten_(L, top);
+            n += TableSize_(L, top);
             lua_remove(L, top);
             }
-        else n++;
+        else {
+            n++;
+            lua_remove(L, top);
+            }
         }
+    return n;
+    }
+
+static int TableSize(lua_State *L)
+    {
+    TableSize_(L, 1);
+    return 1;
+    }
+#endif
+
+static int Flatten1_(lua_State *L, int table_index, int cur_index, int arg)
+    {
+    int len, i, top, m, n=0;
+
+    if(lua_type(L, arg) != LUA_TTABLE)
+        return luaL_error(L, "table expected");
+
+    lua_len(L, arg);
+    len = lua_tointeger(L, -1);
+    lua_pop(L, 1);
+
+    if(len==0) return n;
+
+    for(i=1; i<=len; i++)
+        {
+        lua_geti(L, arg, i);
+        top = lua_gettop(L);
+        if(lua_type(L, top) == LUA_TTABLE)
+            {
+            m = Flatten1_(L, table_index, cur_index, top);
+            n += m;
+            cur_index += m;
+            lua_remove(L, top);
+            }
+        else
+            {
+            n++;
+            cur_index++;
+#if 0 /* no, we'll check this later */
+            if(!lua_isnumber(L, lua_gettop(L)))
+                return luaL_argerror(L, cur_index, "number expected");
+#endif
+            lua_rawseti(L, table_index, cur_index);
+            }
+        }
+    return n;
+    }
+
+static int Flatten_(lua_State *L, int arg)
+    {
+    int table_index, last_arg, i, n;
+    //DBG("top = %d\n", lua_gettop(L));
+    if(lua_type(L, arg) == LUA_TTABLE)
+        {
+        lua_newtable(L);
+        n = Flatten1_(L, lua_gettop(L), 0, arg);
+        }
+    else
+        {
+        /* create a table with all the arguments, and flatten it */
+        last_arg = lua_gettop(L);
+        lua_newtable(L);
+        table_index = lua_gettop(L);
+        for(i=arg; i <= last_arg; i++)
+            {
+            lua_pushvalue(L, i);
+            lua_rawseti(L, table_index, i-arg+1);
+            }
+        lua_newtable(L);
+        n = Flatten1_(L, lua_gettop(L), 0, table_index);
+        }
+    //DBG("top = %d n = %d\n", lua_gettop(L), n);
     return n;
     }
 
 static int Flatten(lua_State *L)
     {
-    return Flatten_(L, 1);
-    }
-
-static size_t CheckValues(lua_State *L, size_t first, int integral)
-#define CheckNumbers(L, arg) CheckValues((L), (arg), 0) 
-#define CheckIntegers(L, arg) CheckValues((L), (arg), 1) 
-    {
-    size_t n, arg;
-
-    if(lua_istable(L, first))
-        {
-        n = (size_t)Flatten_(L, first);
-        lua_remove(L, first); /* remove table */
-        if(n == 0)
-            return luaL_argerror(L, first, errstring(ERR_EMPTY));
-        }
-    else if(integral)
-        {
-        arg = first;
-        while(!lua_isnoneornil(L, arg))
-            luaL_checkinteger(L, arg++);
-        if(arg == first)
-            luaL_checkinteger(L, arg); /* raise an error */
-        n = arg - first;
-        }
-    else
-        {
-        arg = first;
-        while(!lua_isnoneornil(L, arg))
-            luaL_checknumber(L, arg++);
-        if(arg == first)
-            luaL_checknumber(L, arg); /* raise an error */
-        n = arg - first;
-        }
+    int n, i, table_index;
+    n = Flatten_(L, 1);
+    table_index = lua_gettop(L);
+    luaL_checkstack(L, n, "too many elements, cannot grow Lua stack");
+    for(i = 0; i < n; i++)
+        lua_rawgeti(L, table_index, i+1);
     return n;
     }
 
+static int FlattenTable(lua_State *L)
+    {
+    Flatten_(L, 1);
+    return 1;
+    }
 
-#define PACK_NUMBERS(T)                     \
+
+#define PACK(T, what) /* what= number or integer */ \
 static int Pack##T(lua_State *L)            \
     {                                       \
-    size_t n, i, arg, len;                  \
+    size_t n, i, len;                       \
     T *data;                                \
-    n = CheckNumbers(L, 2);                 \
+    n = Flatten_(L, 2);                     \
     len = n * sizeof(T);                    \
     data = (T*)Malloc(L, len);              \
-    arg = 2;                                \
     for(i = 0; i < n; i++)                  \
-        data[i] = lua_tonumber(L, arg++);   \
+        {                                   \
+        lua_rawgeti(L, -1, i+1);            \
+        if(!lua_is##what(L, -1))            \
+            {                               \
+            Free(L, data);                  \
+            return luaL_error(L, "element %d is not a "#what, i+1); \
+            }                               \
+        data[i] = lua_to##what(L, -1);      \
+        lua_pop(L, 1);                      \
+        }                                   \
     lua_pushlstring(L, (char*)data, len);   \
     Free(L, data);                          \
     return 1;                               \
     }
 
-#define PACK_INTEGERS(T)                    \
-static int Pack##T(lua_State *L)            \
-    {                                       \
-    size_t n, i, arg, len;                  \
-    T *data;                                \
-    n = CheckIntegers(L, 2);                \
-    len = n * sizeof(T);                    \
-    data = (T*)Malloc(L, len);              \
-    arg = 2;                                \
-    for(i = 0; i < n; i++)                  \
-        data[i] = lua_tointeger(L, arg++);  \
-    lua_pushlstring(L, (char*)data, len);   \
-    Free(L, data);                          \
-    return 1;                               \
-    }
-
+#define PACK_NUMBERS(T)     PACK(T, number)
+#define PACK_INTEGERS(T)    PACK(T, integer)
 
 PACK_NUMBERS(float)
 PACK_NUMBERS(double)
@@ -203,7 +250,7 @@ static int Pack(lua_State *L)
     return 0;
     }
 
-#define UNPACK_NUMBERS(T)                   \
+#define UNPACK(T, what) /* what= number or integer */ \
 static int Unpack##T(lua_State *L, const void* data, size_t len) \
     {                                       \
     size_t n;                               \
@@ -211,23 +258,17 @@ static int Unpack##T(lua_State *L, const void* data, size_t len) \
     if((len < sizeof(T)) || (len % sizeof(T)) != 0) \
         return luaL_argerror(L, 2, "invalid length");   \
     n = len / sizeof(T);                    \
+    lua_newtable(L);                        \
     for(i = 0; i < n; i++)                  \
-        lua_pushnumber(L, ((T*)data)[i]);   \
-    return n;                               \
+        {                                   \
+        lua_push##what(L, ((T*)data)[i]);   \
+        lua_rawseti(L, -2, i+1);            \
+        }                                   \
+    return 1;                               \
     }
 
-#define UNPACK_INTEGERS(T)                  \
-static int Unpack##T(lua_State *L, const void* data, size_t len)            \
-    {                                       \
-    size_t n;                               \
-    size_t i=0;                             \
-    if((len < sizeof(T)) || (len % sizeof(T)) != 0) \
-        return luaL_argerror(L, 2, "invalid length");   \
-    n = len / sizeof(T);                    \
-    for(i = 0; i < n; i++)                  \
-        lua_pushinteger(L, ((T*)data)[i]);   \
-    return n;                               \
-    }
+#define UNPACK_NUMBERS(T)   UNPACK(T, number)
+#define UNPACK_INTEGERS(T)  UNPACK(T, integer)
 
 
 UNPACK_NUMBERS(float)
@@ -310,7 +351,9 @@ static int PackBufferView(lua_State *L)
 static const struct luaL_Reg Functions[] = 
     {
         { "flatten", Flatten },
+        { "flatten_table", FlattenTable },
         { "sizeof", Sizeof },
+//      { "table_size", TableSize },
         { "pack", Pack },
         { "unpack", Unpack },
         { "pack_descriptorimageinfo", PackDescriptorImageInfo },
