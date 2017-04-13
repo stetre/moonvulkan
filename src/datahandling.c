@@ -186,6 +186,7 @@ static int FlattenTable(lua_State *L)
 #define PACK(T, what) /* what= number or integer */ \
 static int Pack##T(lua_State *L)            \
     {                                       \
+    int isnum;                              \
     size_t n, i, len;                       \
     T *data;                                \
     n = Flatten_(L, 2);                     \
@@ -194,12 +195,12 @@ static int Pack##T(lua_State *L)            \
     for(i = 0; i < n; i++)                  \
         {                                   \
         lua_rawgeti(L, -1, i+1);            \
-        if(!lua_is##what(L, -1))            \
+        data[i] = lua_to##what##x(L, -1, &isnum); \
+        if(!isnum)                          \
             {                               \
             Free(L, data);                  \
             return luaL_error(L, "element %d is not a "#what, i+1); \
             }                               \
-        data[i] = lua_to##what(L, -1);      \
         lua_pop(L, 1);                      \
         }                                   \
     lua_pushlstring(L, (char*)data, len);   \
