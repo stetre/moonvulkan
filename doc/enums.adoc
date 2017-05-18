@@ -229,7 +229,7 @@ Values: '_unknown_', '_instance_', '_physical device_', '_device_', '_queue_', '
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkDebugReportObjectTypeEXT[VkDebugReportObjectTypeEXT].#
 
 [[descriptorupdatetemplatetype]]
-[small]#*descriptorupdatetemplatetype*: vk.DESCRIPTOR_UPDATE_TEMPLATE_TYPE_ZZZ_KHR +
+[small]#*descriptorupdatetemplatetype*: vk.DESCRIPTOR_UPDATE_TEMPLATE_TYPE_XXX_KHR +
 Values: '_descriptor set_', '_push descriptors_'. +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkDescriptorUpdateTemplateTypeKHR[VkDescriptorUpdateTemplateTypeKHR].#
 
