@@ -66,7 +66,9 @@ typedef struct {
     F(DestroySurfaceKHR);
     F(GetPhysicalDeviceSurfaceSupportKHR);
     F(GetPhysicalDeviceSurfaceCapabilitiesKHR);
+    F(GetPhysicalDeviceSurfaceCapabilities2KHR);
     F(GetPhysicalDeviceSurfaceFormatsKHR);
+    F(GetPhysicalDeviceSurfaceFormats2KHR);
     F(GetPhysicalDeviceSurfacePresentModesKHR);
     F(GetPhysicalDeviceDisplayPropertiesKHR);
     F(GetPhysicalDeviceDisplayPlanePropertiesKHR);
@@ -190,6 +192,7 @@ typedef struct {
     F(CreateSwapchainKHR);
     F(DestroySwapchainKHR);
     F(GetSwapchainImagesKHR);
+    F(GetSwapchainStatusKHR);
     F(AcquireNextImageKHR);
     F(QueuePresentKHR);
     F(CreateSharedSwapchainsKHR);

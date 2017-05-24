@@ -2539,6 +2539,22 @@ int pushsurfacecapabilities(lua_State *L, VkSurfaceCapabilitiesKHR *p)
     return 1;
     }
 
+static int pushsharedpresentsurfacecapabilities(lua_State *L, VkSharedPresentSurfaceCapabilitiesKHR *p)
+    {
+    SetFlags(sharedPresentSupportedUsageFlags, "shared_present_supported_usage_flags");
+    //pushxxx(L, (VkXxxKHR*)p->pNext);  next extension in chain
+    return 1;
+    }
+
+int pushsurfacecapabilities2(lua_State *L, VkSurfaceCapabilities2KHR *p)
+    {
+    pushsurfacecapabilities(L, &p->surfaceCapabilities);
+    pushsharedpresentsurfacecapabilities(L, (VkSharedPresentSurfaceCapabilitiesKHR*)p->pNext);
+    return 1;
+    }
+
+/*-------------------------------------------------------------------------------------*/
+
 int pushsurfaceformat(lua_State *L, VkSurfaceFormatKHR *p)
     {
     lua_newtable(L);
@@ -2546,6 +2562,14 @@ int pushsurfaceformat(lua_State *L, VkSurfaceFormatKHR *p)
     SetEnum(colorSpace, "color_space", pushcolorspace);
     return 1;
     }
+
+int pushsurfaceformat2(lua_State *L, VkSurfaceFormat2KHR *p) //@@DOC
+    {
+    pushsurfaceformat(L, &p->surfaceFormat);
+    //pushxxx(L, (VkXxxKHR*)p->pNext);  next extension in chain
+    return 1;
+    }
+
 
 /*-------------------------------------------------------------------------------------*/
 

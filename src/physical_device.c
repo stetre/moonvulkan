@@ -60,7 +60,7 @@ int pushphysical_device(lua_State *L, VkPhysicalDevice physical_device, VkInstan
 
 /*-----------------------------------------------------------------------------*/
 
-#define Clear(x) memset(&x, 0, sizeof(x))
+#define Clear(x) memset(&(x), 0, sizeof(x))
 
 static int GetPhysicalDeviceProperties2
         (lua_State *L, VkPhysicalDevice physical_device, ud_t *ud)

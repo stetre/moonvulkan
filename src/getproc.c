@@ -124,7 +124,9 @@ instance_dt_t * getproc_instance(lua_State *L, VkInstance instance)
     GET(DestroySurfaceKHR);
     GET(GetPhysicalDeviceSurfaceSupportKHR);
     GET(GetPhysicalDeviceSurfaceCapabilitiesKHR);
+    GET(GetPhysicalDeviceSurfaceCapabilities2KHR);
     GET(GetPhysicalDeviceSurfaceFormatsKHR);
+    GET(GetPhysicalDeviceSurfaceFormats2KHR);
     GET(GetPhysicalDeviceSurfacePresentModesKHR);
     GET(GetPhysicalDeviceDisplayPropertiesKHR);
     GET(GetPhysicalDeviceDisplayPlanePropertiesKHR);
@@ -305,6 +307,7 @@ device_dt_t* getproc_device(lua_State *L, VkDevice device)
     GET(CreateSwapchainKHR);
     GET(DestroySwapchainKHR);
     GET(GetSwapchainImagesKHR);
+    GET(GetSwapchainStatusKHR);
     GET(AcquireNextImageKHR);
     GET(QueuePresentKHR);
     GET(CreateSharedSwapchainsKHR);

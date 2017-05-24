@@ -87,6 +87,7 @@ void enums_freelist(lua_State *L, uint32_t *list);
 #define DOMAIN_DISPLAY_POWER_STATE              40
 #define DOMAIN_DEVICE_EVENT_TYPE                41
 #define DOMAIN_DISPLAY_EVENT_TYPE               42
+#define DOMAIN_OBJECT_TYPE                      43
 /* NONVK additions */
 #define DOMAIN_NONVK_TYPE                       101
 
@@ -300,6 +301,13 @@ void enums_freelist(lua_State *L, uint32_t *list);
 #define checkdescriptorupdatetemplatetype(L, arg) (VkDescriptorUpdateTemplateTypeKHR)enums_check((L), DOMAIN_DESCRIPTOR_UPDATE_TEMPLATE_TYPE, (arg))
 #define pushdescriptorupdatetemplatetype(L, val) enums_push((L), DOMAIN_DESCRIPTOR_UPDATE_TEMPLATE_TYPE, (uint32_t)(val))
 #define valuesdescriptorupdatetemplatetype(L) enums_values((L), DOMAIN_DESCRIPTOR_UPDATE_TEMPLATE_TYPE)
+
+#define testobjecttype(L, arg, err) (VkObjectType)enums_test((L), DOMAIN_OBJECT_TYPE, (arg), (err))
+#define checkobjecttype(L, arg) (VkObjectType)enums_check((L), DOMAIN_OBJECT_TYPE, (arg))
+#define pushobjecttype(L, val) enums_push((L), DOMAIN_OBJECT_TYPE, (uint32_t)(val))
+#define valuesobjecttype(L) enums_values((L), DOMAIN_OBJECT_TYPE)
+#define checkobjecttypelist(L, arg, count, err) (VkObjectType*)enums_checklist((L), DOMAIN_OBJECT_TYPE, (arg), (count), (err))
+#define freeobjecttypelist(L, list) enums_freelist((L), (uint32_t*)(list))
 
 #if 0 /* scaffolding 7yy */
 #define testxxx(L, arg, err) (VkXxx)enums_test((L), DOMAIN_XXX, (arg), (err))

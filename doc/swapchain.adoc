@@ -43,6 +43,11 @@ Usage of the _display_present_info_ parameter requires the https://www.khronos.o
 Usage of the _regions_ parameter requires the https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_incremental_present[VK_KHR_incremental_present] device extension. +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkQueuePresentKHR[vkQueuePresentKHR].#
 
+[[get_swapchain_status]]
+* <<result, _result_>> = *get_swapchain_status*(_swapchain_) +
+[small]#This function requires the https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_shared_presentable_image[VK_KHR_shared_presentable_image] device extension. +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetSwapchainStatusKHR[vkGetSwapchainStatusKHR].#
+
 ////
 [[]]
 * <<,__>> = **(_swapchain_) +

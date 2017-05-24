@@ -762,8 +762,8 @@ p.tableblock.header { color: #6d6e71; }
 <h1>MoonVulkan Reference Manual</h1>
 <div class="details">
 <span id="author" class="author">Stefano Trettel</span><br>
-<span id="revnumber">version 0.2,</span>
-<span id="revdate">2017-04-13</span>
+<span id="revnumber">version 0.3,</span>
+<span id="revdate">2017-05-24</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -2496,7 +2496,8 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/
 <ul>
 <li>
 <p><a href="#surfacecapabilities"><em>surfacecapabilities</em></a> = <strong>get_physical_device_surface_capabilities</strong>(<a href="#physical_device"><em>physical_device</em></a>, <em>surface</em>)<br>
-<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetPhysicalDeviceSurfaceCapabilitiesKHR">vkGetPhysicalDeviceSurfaceCapabilitiesKHR</a>.</span></p>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetPhysicalDeviceSurfaceCapabilitiesKHR">vkGetPhysicalDeviceSurfaceCapabilitiesKHR</a> -
+<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetPhysicalDeviceSurfaceCapabilities2KHR">vkGetPhysicalDeviceSurfaceCapabilities2KHR</a>.</span></p>
 </li>
 </ul>
 </div>
@@ -2504,7 +2505,8 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/
 <ul>
 <li>
 <p>{<a href="#surfaceformat"><em>surfaceformat</em></a>} = <strong>get_physical_device_surface_formats</strong>(<a href="#physical_device"><em>physical_device</em></a>, <em>surface</em>)<br>
-<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetPhysicalDeviceSurfaceFormatsKHR">vkGetPhysicalDeviceSurfaceFormatsKHR</a>.</span></p>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetPhysicalDeviceSurfaceFormatsKHR">vkGetPhysicalDeviceSurfaceFormatsKHR</a> -
+<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetPhysicalDeviceSurfaceFormats2KHR">vkGetPhysicalDeviceSurfaceFormats2KHR</a>.</span></p>
 </li>
 </ul>
 </div>
@@ -2760,6 +2762,15 @@ The individual results table is returned only if <em>per_swapchain_results</em> 
 Usage of the <em>display_present_info</em> parameter requires the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_display_swapchain">VK_KHR_display_swapchain</a> device extension.<br>
 Usage of the <em>regions</em> parameter requires the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_incremental_present">VK_KHR_incremental_present</a> device extension.<br>
 Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkQueuePresentKHR">vkQueuePresentKHR</a>.</span></p>
+</li>
+</ul>
+</div>
+<div id="get_swapchain_status" class="ulist">
+<ul>
+<li>
+<p><a href="#result"><em>result</em></a> = <strong>get_swapchain_status</strong>(<em>swapchain</em>)<br>
+<span class="small">This function requires the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_shared_presentable_image">VK_KHR_shared_presentable_image</a> device extension.<br>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetSwapchainStatusKHR">vkGetSwapchainStatusKHR</a>.</span></p>
 </li>
 </ul>
 </div>
@@ -3967,7 +3978,7 @@ See also the <a href="#clearcolor_snippet">example</a> in the code snippets sect
 <span class="small"><strong>surfacecapabilities</strong> = {<br>
 <em>min_image_count</em>: integer,<br>
 <em>max_image_count</em>: integer,<br>
-<em>current_extent</em>: <a href="#extent2d">extent2d</a> (may be <em>nil</em>, see note below),<br>
+<em>current_extent</em>: <a href="#extent2d">extent2d</a> (may be <em>nil</em>, see Note1 below),<br>
 <em>min_image_extent</em>: <a href="#extent2d">extent2d</a>,<br>
 <em>max_image_extent</em>: <a href="#extent2d">extent2d</a>,<br>
 <em>max_image_array_layers</em>: integer,<br>
@@ -3975,8 +3986,10 @@ See also the <a href="#clearcolor_snippet">example</a> in the code snippets sect
 <em>current_transform</em>: <a href="#surfacetransformflags">surfacetransformflags</a>,<br>
 <em>supported_composite_alpha</em>: <a href="#compositealphaflags">compositealphaflags</a>,<br>
 <em>supported_usage_flags</em>: <a href="#imageusageflags">imageusageflags</a>,<br>
+<em>shared_present_supported_usage_flags</em>: <a href="#imageusageflags">imageusageflags</a> (see Note2 below),<br>
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkSurfaceCapabilitiesKHR">VkSurfaceCapabilitiesKHR</a>)<br>
-Note: The <em>current_extent</em> field is not set when <em>width</em> and <em>height</em> have the special value 0xFFFFFFFF, meaning that the current extent is undefined.</span></p>
+Note1: The <em>current_extent</em> field is not set when <em>width</em> and <em>height</em> have the special value 0xFFFFFFFF, meaning that the current extent is undefined.<br>
+Note2: This field is present only if the relevant extensions are enabled (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkSharedPresentSurfaceCapabilitiesKHR">VkSharedPresentSurfaceCapabilitiesKHR</a>).</span></p>
 </li>
 <li>
 <p><a id="surfaceformat"></a>
@@ -4436,7 +4449,7 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/
 <div id="imagelayout" class="paragraph">
 <p><span class="small"><strong>imagelayout</strong>: vk.IMAGE_LAYOUT_XXX<br>
 Values:
-'<em>undefined</em>' (default), '<em>general</em>', '<em>color attachment optimal</em>', '<em>depth stencil attachment optimal</em>', '<em>depth stencil read only optimal</em>', '<em>shader read only optimal</em>', '<em>transfer src optimal</em>', '<em>transfer dst optimal</em>', '<em>preinitialized</em>', '<em>present src</em>'.<br>
+'<em>undefined</em>' (default), '<em>general</em>', '<em>color attachment optimal</em>', '<em>depth stencil attachment optimal</em>', '<em>depth stencil read only optimal</em>', '<em>shader read only optimal</em>', '<em>transfer src optimal</em>', '<em>transfer dst optimal</em>', '<em>preinitialized</em>', '<em>present src</em>', '<em>shared present</em>'.<br>
 Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkImageLayout">VkImageLayout</a>.</span></p>
 </div>
 <div id="sharingmode" class="paragraph">
@@ -4484,7 +4497,7 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/
 <div id="presentmode" class="paragraph">
 <p><span class="small"><strong>presentmode</strong>: vk.PRESENT_MODE_XXX_KHR<br>
 Values:
-'<em>immediate</em>', '<em>mailbox</em>', '<em>fifo</em>' (default), '<em>fifo relaxed</em>'.<br>
+'<em>immediate</em>', '<em>mailbox</em>', '<em>fifo</em>' (default), '<em>fifo relaxed</em>', '<em>shared demand refresh</em>', '<em>shared continuous refresh</em>'.<br>
 Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPresentModeKHR">VkPresentModeKHR</a>.</span></p>
 </div>
 <div id="debugreporterror" class="paragraph">
@@ -4496,6 +4509,11 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/
 <p><span class="small"><strong>debugreportobjecttype</strong>: vk.DEBUG_REPORT_OBJECT_TYPE_XXX_EXT<br>
 Values: '<em>unknown</em>', '<em>instance</em>', '<em>physical device</em>', '<em>device</em>', '<em>queue</em>', '<em>semaphore</em>', '<em>command buffer</em>', '<em>fence</em>', '<em>device memory</em>', '<em>buffer</em>', '<em>image</em>', '<em>event</em>', '<em>query pool</em>', '<em>buffer view</em>', '<em>image view</em>', '<em>shader module</em>', '<em>pipeline cache</em>', '<em>pipeline layout</em>', '<em>render pass</em>', '<em>pipeline</em>', '<em>descriptor set layout</em>', '<em>sampler</em>', '<em>descriptor pool</em>', '<em>descriptor set</em>', '<em>framebuffer</em>', '<em>command pool</em>', '<em>surface</em>', '<em>swapchain</em>', '<em>debug report</em>', '<em>display</em>', '<em>display mode</em>'.<br>
 Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkDebugReportObjectTypeEXT">VkDebugReportObjectTypeEXT</a>.</span></p>
+</div>
+<div id="objecttype" class="paragraph">
+<p><span class="small"><strong>objecttype</strong>: vk.OBJECT_TYPE_XXX<br>
+Values: '<em>unknown</em>', '<em>instance</em>', '<em>physical device</em>', '<em>device</em>', '<em>queue</em>', '<em>semaphore</em>', '<em>command buffer</em>', '<em>fence</em>', '<em>device memory</em>', '<em>buffer</em>', '<em>image</em>', '<em>event</em>', '<em>query pool</em>', '<em>buffer view</em>', '<em>image view</em>', '<em>shader module</em>', '<em>pipeline cache</em>', '<em>pipeline layout</em>', '<em>render pass</em>', '<em>pipeline</em>', '<em>descriptor set layout</em>', '<em>sampler</em>', '<em>descriptor pool</em>', '<em>descriptor set</em>', '<em>framebuffer</em>', '<em>command pool</em>', '<em>surface</em>', '<em>swapchain</em>', '<em>display</em>', '<em>display mode</em>', '<em>debug report callback</em>', '<em>descriptor update template</em>'.<br>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkObjectType">VkObjectType</a>.</span></p>
 </div>
 <div id="descriptorupdatetemplatetype" class="paragraph">
 <p><span class="small"><strong>descriptorupdatetemplatetype</strong>: vk.DESCRIPTOR_UPDATE_TEMPLATE_TYPE_XXX_KHR<br>
@@ -5364,6 +5382,12 @@ previously obtained with the <a href="#now">now</a>(&nbsp;) function.</span></p>
 <li>
 <p>VK_KHR_incremental_present</p>
 </li>
+<li>
+<p>VK_KHR_shared_presentable_image</p>
+</li>
+<li>
+<p>VK_KHR_get_surface_capabilities2</p>
+</li>
 </ul>
 </div>
 <div class="paragraph">
@@ -5434,8 +5458,8 @@ binding library to a dynamic, garbage-collected language is not the way to go).<
 </div>
 <div id="footer">
 <div id="footer-text">
-Version 0.2<br>
-Last updated 2017-04-13 15:58:50 CEST
+Version 0.3<br>
+Last updated 2017-05-24 21:35:56 CEST
 </div>
 </div>
 </body>

@@ -122,7 +122,6 @@ static int GetSwapchainImages(lua_State *L)
     VkSwapchainKHR swapchain = checkswapchain(L, 1, &ud);
     VkDevice device = ud->device;
     CheckDevicePfn(L, ud, GetSwapchainImagesKHR);
-    CheckDevicePfn(L, ud, GetSwapchainImagesKHR);
     ec = ud->ddt->GetSwapchainImagesKHR(device, swapchain, &count, NULL);
     CheckError(L, ec);
     
@@ -147,6 +146,20 @@ static int GetSwapchainImages(lua_State *L)
     Free(L, images);
     return 1;
     }
+
+static int GetSwapchainStatus(lua_State *L)
+    {
+    VkResult ec;
+    ud_t *ud;
+    VkSwapchainKHR swapchain = checkswapchain(L, 1, &ud);
+    VkDevice device = ud->device;
+    CheckDevicePfn(L, ud, GetSwapchainStatusKHR);
+    ec = ud->ddt->GetSwapchainStatusKHR(device, swapchain);
+
+    pushresult(L, ec);
+    return 1;
+    }
+
 
 static int AcquireNextImage(lua_State *L)
     {
@@ -296,6 +309,7 @@ static const struct luaL_Reg Functions[] =
         { "get_swapchain_images", GetSwapchainImages },
         { "acquire_next_image", AcquireNextImage },
         { "queue_present", QueuePresent },
+        { "get_swapchain_status", GetSwapchainStatus },
         { NULL, NULL } /* sentinel */
     };
 

@@ -1,6 +1,6 @@
 = MoonVulkan Reference Manual
 Stefano Trettel
-v0.2, 2017-04-13
+v0.3, 2017-05-24
 :toc: left
 :toclevels: 2
 :stylesdir: ./

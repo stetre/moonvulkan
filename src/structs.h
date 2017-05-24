@@ -281,8 +281,13 @@ VkBindSparseInfo* echeckbindsparseinfolist(lua_State *L, int arg, uint32_t *coun
 
 #define pushsurfacecapabilities moonvulkan_pushsurfacecapabilities
 int pushsurfacecapabilities(lua_State *L, VkSurfaceCapabilitiesKHR *p);
+#define pushsurfacecapabilities2 moonvulkan_pushsurfacecapabilities2
+int pushsurfacecapabilities2(lua_State *L, VkSurfaceCapabilities2KHR *p);
+
 #define pushsurfaceformat moonvulkan_pushsurfaceformat
 int pushsurfaceformat(lua_State *L, VkSurfaceFormatKHR *p);
+#define pushsurfaceformat2 moonvulkan_pushsurfaceformat2
+int pushsurfaceformat2(lua_State *L, VkSurfaceFormat2KHR *p);
 
 #define freegraphicspipelinecreateinfolist moonvulkan_freegraphicspipelinecreateinfolist
 void freegraphicspipelinecreateinfolist(lua_State *L, void *list, uint32_t count);
