@@ -38,7 +38,7 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.ht
 [small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCmdBindVertexBuffers[vkCmdBindVertexBuffers].#
 
 [[cmd_blit_image]]
-* *cmd_blit_image*(_cb_, _src_imagelayout, _..._) +
+* *cmd_blit_image*(_cb_, _src_image_, _..._) +
 [small]#arg2 - _src_image_: <<image, image>> +
 arg3 - _src_imagelayout_: <<imagelayout, imagelayout>> +
 arg4 - _dst_image_: <<image, image>> +
