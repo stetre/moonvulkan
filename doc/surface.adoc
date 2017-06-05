@@ -22,21 +22,21 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.ht
 
 
 [[get_physical_device_surface_support]]
-* _boolean_ = *get_physical_device_surface_support*(<<physical_device, _physical_device_>>, _queue_family_index_, _surface_) +
+* _boolean_ = *get_physical_device_surface_support*(<<physical_device, _physdev_>>, _queue_family_index_, _surface_) +
 [small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetPhysicalDeviceSurfaceSupportKHR[vkGetPhysicalDeviceSurfaceSupportKHR].#
 
 [[get_physical_device_surface_capabilities]]
-* <<surfacecapabilities, _surfacecapabilities_>> = *get_physical_device_surface_capabilities*(<<physical_device, _physical_device_>>, _surface_) +
+* <<surfacecapabilities, _surfacecapabilities_>> = *get_physical_device_surface_capabilities*(<<physical_device, _physdev_>>, _surface_) +
 [small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetPhysicalDeviceSurfaceCapabilitiesKHR[vkGetPhysicalDeviceSurfaceCapabilitiesKHR] - 
 https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetPhysicalDeviceSurfaceCapabilities2KHR[vkGetPhysicalDeviceSurfaceCapabilities2KHR].#
 
 [[get_physical_device_surface_formats]]
-* {<<surfaceformat, _surfaceformat_>>} = *get_physical_device_surface_formats*(<<physical_device, _physical_device_>>, _surface_) +
+* {<<surfaceformat, _surfaceformat_>>} = *get_physical_device_surface_formats*(<<physical_device, _physdev_>>, _surface_) +
 [small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetPhysicalDeviceSurfaceFormatsKHR[vkGetPhysicalDeviceSurfaceFormatsKHR] - 
 https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetPhysicalDeviceSurfaceFormats2KHR[vkGetPhysicalDeviceSurfaceFormats2KHR].#
 
 [[get_physical_device_surface_present_modes]]
-* {<<presentmode, _presentmode_>>} = *get_physical_device_surface_present_modes*(<<physical_device, _physical_device_>>, _surface_) +
+* {<<presentmode, _presentmode_>>} = *get_physical_device_surface_present_modes*(<<physical_device, _physdev_>>, _surface_) +
 [small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetPhysicalDeviceSurfacePresentModesKHR[vkGetPhysicalDeviceSurfacePresentModesKHR].#
 
 

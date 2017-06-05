@@ -14,7 +14,7 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.ht
 
 
 [[enumerate_physical_devices]]
-* {<<physical_device, _physical_device_>>} = *enumerate_physical_devices*(_instance_) +
+* {<<physical_device, _physdev_>>} = *enumerate_physical_devices*(_instance_) +
 [small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkEnumeratePhysicalDevices[vkEnumeratePhysicalDevices].#
 
 

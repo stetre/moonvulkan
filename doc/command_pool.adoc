@@ -2,7 +2,6 @@
 [[command_pool]]
 ==== command_pool
 
-
 [[create_command_pool]]
 * _command_pool_ = *create_command_pool*(_device_, _flags_, _queue_family_index_ [, <<allocators, _allocatorLUD_>>]) +
 [small]#_flags_: <<commandpoolcreateflags, commandpoolcreateflags>> +

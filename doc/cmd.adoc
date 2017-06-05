@@ -1,6 +1,6 @@
 
 [[commands]]
-==== Commands
+=== Commands
 
 The first argument (_cb_) of all the following functions is a <<command_buffer, command_buffer>>. 
 ////

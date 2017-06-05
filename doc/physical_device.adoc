@@ -1,46 +1,49 @@
 
 [[physical_device]]
-==== physical_device
+==== physical_device (_physdev_)
+
+In this document, _physdev_ is an abbreviation for _physical_device_ when referring to a variable
+or a return value.
 
 If the 
 https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_get_physical_device_properties2[VK_KHR_get_physical_device_properties2] 
-instance extension is enabled for the affected _physical_device_,
+instance extension is enabled for the affected _physdev_,
 then the functions it provides are used by the bindings described in this section. 
 Otherwise the original functions are used.
 
 [[get_physical_device_properties]]
-* <<physicaldeviceproperties,_physicaldeviceproperties_>> = *get_physical_device_properties*(_physical_device_) +
+* <<physicaldeviceproperties,_physicaldeviceproperties_>> = *get_physical_device_properties*(_physdev_) +
 [small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetPhysicalDeviceProperties[vkGetPhysicalDeviceProperties] -
 https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetPhysicalDeviceProperties2KHR[vkGetPhysicalDeviceProperties2KHR].#
 
 [[get_physical_device_features]]
-* <<physicaldevicefeatures,_physicaldevicefeatures_>> = *get_physical_device_features*(_physical_device_) +
+* <<physicaldevicefeatures,_physicaldevicefeatures_>> = *get_physical_device_features*(_physdev_) +
 [small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetPhysicalDeviceFeatures[vkGetPhysicalDeviceFeatures] -
 https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetPhysicalDeviceFeatures2KHR[vkGetPhysicalDeviceFeatures2KHR].#
 
 [[get_physical_device_queue_family_properties]]
-* {<<queuefamilyproperties,_queuefamilyproperties_>>} = *get_physical_device_queue_family_properties*(_physical_device_) +
+* {<<queuefamilyproperties,_queuefamilyproperties_>>} = *get_physical_device_queue_family_properties*(_physdev_) +
 [small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetPhysicalDeviceQueueFamilyProperties[vkGetPhysicalDeviceQueueFamilyProperties] - 
 https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetPhysicalDeviceQueueFamilyProperties2KHR[vkGetPhysicalDeviceQueueFamilyProperties2KHR].#
 
 [[get_physical_device_memory_properties]]
-* <<physicaldevicememoryproperties,_physicaldevicememoryproperties_>> = *get_physical_device_memory_properties*(_physical_device_) +
+* <<physicaldevicememoryproperties,_physicaldevicememoryproperties_>> = *get_physical_device_memory_properties*(_physdev_) +
 [small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetPhysicalDeviceMemoryProperties[vkGetPhysicalDeviceMemoryProperties] - 
 https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetPhysicalDeviceMemoryProperties2KHR[vkGetPhysicalDeviceMemoryProperties2KHR].#
 
 [[get_physical_device_format_properties]]
-* <<formatproperties,_formatproperties_>> = *get_physical_device_format_properties*(_physical_device_, <<format,_format_>>) +
+* <<formatproperties,_formatproperties_>> = *get_physical_device_format_properties*(_physdev_, <<format,_format_>>) +
 [small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetPhysicalDeviceFormatProperties[vkGetPhysicalDeviceFormatProperties] - 
 https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetPhysicalDeviceFormatProperties2KHR[vkGetPhysicalDeviceFormatProperties2KHR].#
 
 [[get_physical_device_image_format_properties]]
-* <<imageformatproperties,_imageformatproperties_>> = *get_physical_device_image_format_properties*(_physical_device_, _info_) +
+* <<imageformatproperties,_imageformatproperties_>> = *get_physical_device_image_format_properties*(_physdev_, _info_) +
 [small]#_info_: <<physicaldeviceimageformatinfo, physicaldeviceimageformatinfo>>. +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetPhysicalDeviceImageFormatProperties[vkGetPhysicalDeviceImageFormatProperties] - 
 https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetPhysicalDeviceImageFormatProperties2KHR[vkGetPhysicalDeviceImageFormatProperties2KHR].#
 
 [[get_physical_device_sparse_image_format_properties]]
-* <<sparseimageformatproperties,_sparseimageformatproperties_>> = *get_physical_device_sparse_image_format_properties*(_physical_device_, _info_) +
+* <<sparseimageformatproperties,_sparseimageformatproperties_>> = *get_physical_device_sparse_image_format_properties*(_physdev_, _info_) +
 [small]#_info_: <<physicaldevicesparseimageformatinfo, physicaldevicesparseimageformatinfo>>. +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetPhysicalDeviceSparseImageFormatProperties[vkGetPhysicalDeviceSparseImageFormatProperties] - 
 https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetPhysicalDeviceSparseImageFormatProperties2KHR[vkGetPhysicalDeviceSparseImageFormatProperties2KHR].#
