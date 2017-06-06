@@ -16,8 +16,8 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.ht
 [small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkFreeCommandBuffers[vkFreeCommandBuffers].#
 
 [[begin_command_buffer]]
-* *begin_command_buffer*(_cb_, _flags_ [, _inheritance_info_]) +
-[small]#_flags_: <<commandbufferusageflags, commandbufferusageflags>> +
+* *begin_command_buffer*(_cb_ [, _flags_ [, _inheritance_info_]]) +
+[small]#_flags_: <<commandbufferusageflags, commandbufferusageflags>> (opt.) +
 _inheritance_info_: <<commandbufferinheritanceinfo, _commandbufferinheritanceinfo_>> (opt.) +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkBeginCommandBuffer[vkBeginCommandBuffer].#
 
@@ -26,7 +26,7 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.ht
 [small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkEndCommandBuffer[vkEndCommandBuffer].#
 
 [[reset_command_buffer]]
-* *reset_command_buffer*(_cb_, _flags_) +
-[small]#_flags_ : <<commandbufferresetflags, commandbufferresetflags>> +
+* *reset_command_buffer*(_cb_ [, _flags_]) +
+[small]#_flags_ : <<commandbufferresetflags, commandbufferresetflags>> (opt.) +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkResetCommandBuffer[vkResetCommandBuffer].#
 
