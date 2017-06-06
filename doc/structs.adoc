@@ -923,7 +923,7 @@ _image_sharing_mode_: <<sharingmode, sharingmode>>, +
 _queue_family_indices_: {integer}, +
 _pre_transform_: <<surfacetransformflags, surfacetransformflags>>, +
 _composite_alpha_: <<compositealphaflags, compositealphaflags>>, +
-_presentmode_: <<presentmode, presentmode>>, +
+_present_mode_: <<presentmode, presentmode>>, +
 _clipped_: boolean, +
 _old_swapchain_: <<swapchain, swapchain>>, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkSwapchainCreateInfoKHR[VkSwapchainCreateInfoKHR])#
