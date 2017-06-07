@@ -32,7 +32,7 @@ Returns one of the following combinations of _image_index_ and _message_: +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkAcquireNextImageKHR[vkAcquireNextImageKHR].#
 
 [[queue_present]]
-* <<result, _result_>>, {<<result, _result_>>} = *queue_present*(<<queue, _queue_>>, <<presentinfo, _presentinfo_>> [, _per_swapchain_results_ [, _..._]]) +
+* <<result, _result_>>, {<<result, _result_>>} = *queue_present*(<<queue, _queue_>>, <<presentinfo, _presentinfo_>> [, _per_swapchain_results_ , _..._]) +
 [small]#arg3: _per_swapchain_results_: boolean (opt.) +
 arg4: _display_present_info_: <<displaypresentinfo, displaypresentinfo>> (opt.) +
 arg5: _regions_: <<presentregions, presentregions>> (opt.) +

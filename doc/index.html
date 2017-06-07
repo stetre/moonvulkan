@@ -2761,7 +2761,7 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/
 <div id="queue_present" class="ulist">
 <ul>
 <li>
-<p><a href="#result"><em>result</em></a>, {<a href="#result"><em>result</em></a>} = <strong>queue_present</strong>(<a href="#queue"><em>queue</em></a>, <a href="#presentinfo"><em>presentinfo</em></a> [, <em>per_swapchain_results</em> [, <em>&#8230;&#8203;</em>]])<br>
+<p><a href="#result"><em>result</em></a>, {<a href="#result"><em>result</em></a>} = <strong>queue_present</strong>(<a href="#queue"><em>queue</em></a>, <a href="#presentinfo"><em>presentinfo</em></a> [, <em>per_swapchain_results</em> , <em>&#8230;&#8203;</em>])<br>
 <span class="small">arg3: <em>per_swapchain_results</em>: boolean (opt.)<br>
 arg4: <em>display_present_info</em>: <a href="#displaypresentinfo">displaypresentinfo</a> (opt.)<br>
 arg5: <em>regions</em>: <a href="#presentregions">presentregions</a> (opt.)<br>
@@ -3865,8 +3865,8 @@ with 1-based integer keys and no gaps, a.k.a. 'sequence' in Lua&#8217;s jargon).
 <span class="small"><strong>buffermemorybarrier</strong> = {<br>
 <em>src_access_mask</em>: <a href="#accessflags">accessflags</a>,<br>
 <em>dst_access_mask</em>: <a href="#accessflags">accessflags</a>,<br>
-<em>src_queue_family_index</em>: integer,<br>
-<em>dst_queue_family_index</em>: integer,<br>
+<em>src_queue_family_index</em>: integer (default: ignored),<br>
+<em>dst_queue_family_index</em>: integer (default: ignored),<br>
 <em>buffer</em>: <a href="#buffer">buffer</a> <strong>[R]</strong>,<br>
 <em>offset</em>: integer,<br>
 <em>size</em>: integer,<br>
@@ -3877,8 +3877,8 @@ with 1-based integer keys and no gaps, a.k.a. 'sequence' in Lua&#8217;s jargon).
 <span class="small"><strong>imagememorybarrier</strong> = {<br>
 <em>src_access_mask</em>: <a href="#accessflags">accessflags</a>,<br>
 <em>dst_access_mask</em>: <a href="#accessflags">accessflags</a>,<br>
-<em>src_queue_family_index</em>: integer,<br>
-<em>dst_queue_family_index</em>: integer,<br>
+<em>src_queue_family_index</em>: integer (default: ignored),<br>
+<em>dst_queue_family_index</em>: integer (default: ignored),<br>
 <em>old_layout</em>: <a href="#imagelayout">imagelayout</a>,<br>
 <em>new_layout</em>: <a href="#imagelayout">imagelayout</a>,<br>
 <em>image</em>: <a href="#image">image</a>,<br>

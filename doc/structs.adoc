@@ -781,8 +781,8 @@ _dst_access_mask_: <<accessflags, accessflags>>, +
 [small]#*buffermemorybarrier* = { +
 _src_access_mask_: <<accessflags, accessflags>>, +
 _dst_access_mask_: <<accessflags, accessflags>>, +
-_src_queue_family_index_: integer, +
-_dst_queue_family_index_: integer, +
+_src_queue_family_index_: integer (default: ignored), +
+_dst_queue_family_index_: integer (default: ignored), +
 _buffer_: <<buffer, buffer>> *[R]*, +
 _offset_: integer, +
 _size_: integer, +
@@ -792,8 +792,8 @@ _size_: integer, +
 [small]#*imagememorybarrier* = { +
 _src_access_mask_: <<accessflags, accessflags>>, +
 _dst_access_mask_: <<accessflags, accessflags>>, +
-_src_queue_family_index_: integer, +
-_dst_queue_family_index_: integer, +
+_src_queue_family_index_: integer (default: ignored), +
+_dst_queue_family_index_: integer (default: ignored), +
 _old_layout_: <<imagelayout, imagelayout>>, +
 _new_layout_: <<imagelayout, imagelayout>>, +
 _image_: <<image, image>>, +
