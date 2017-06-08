@@ -629,10 +629,10 @@ _patch_control_points_: integer, +
 * [[pipelineviewportstatecreateinfo]]
 [small]#*pipelineviewportstatecreateinfo* = { +
 _flags_: <<pipelineviewportstatecreateflags, pipelineviewportstatecreateflags>>, +
-_viewport_count_: integer, +
-_scissor_count_: integer, +
 _viewports_: {<<viewport, viewport>>}, +
 _scissors_: {<<rect2d, rect2d>>}, +
+_viewport_count_: integer (forced to #_viewports_, if given, or defaults to 1), +
+_scissor_count_: integer (forced to #_scissors_, if given, or defaults to 1), +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPipelineViewportStateCreateInfo[VkPipelineViewportStateCreateInfo])#
 
 

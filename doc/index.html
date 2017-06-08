@@ -3705,10 +3705,10 @@ with 1-based integer keys and no gaps, a.k.a. 'sequence' in Lua&#8217;s jargon).
 <p><a id="pipelineviewportstatecreateinfo"></a>
 <span class="small"><strong>pipelineviewportstatecreateinfo</strong> = {<br>
 <em>flags</em>: <a href="#pipelineviewportstatecreateflags">pipelineviewportstatecreateflags</a>,<br>
-<em>viewport_count</em>: integer,<br>
-<em>scissor_count</em>: integer,<br>
 <em>viewports</em>: {<a href="#viewport">viewport</a>},<br>
 <em>scissors</em>: {<a href="#rect2d">rect2d</a>},<br>
+<em>viewport_count</em>: integer (forced to #<em>viewports</em>, if given, or defaults to 1),<br>
+<em>scissor_count</em>: integer (forced to #<em>scissors</em>, if given, or defaults to 1),<br>
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPipelineViewportStateCreateInfo">VkPipelineViewportStateCreateInfo</a>)</span></p>
 </li>
 <li>

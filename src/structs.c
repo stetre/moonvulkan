@@ -2723,10 +2723,10 @@ static int echeckpipelineviewportstatecreateinfo(lua_State *L, int arg, VkPipeli
     p->sType = VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_STATE_CREATE_INFO;
     p->pNext = NULL;
     GetFlags(flags, "flags");
-    GetInteger(viewportCount, "viewport_count");
-    GetInteger(scissorCount, "scissor_count");
+    GetIntegerOpt(viewportCount, "viewport_count", 1);
+    GetIntegerOpt(scissorCount, "scissor_count", 1);
     /* scissorCount and viewportCount must be identical, and they may be > 0 
-     * even if scissors and/or viewports list are not given
+     * even if scissors and/or viewports lists are not given
      */
 #define F "viewports"
     PUSHFIELD(F);
@@ -2735,8 +2735,12 @@ static int echeckpipelineviewportstatecreateinfo(lua_State *L, int arg, VkPipeli
     if(err < 0) { freepipelineviewportstatecreateinfo(L, p); return efielderror(L, F); }
     if(err == ERR_NOTPRESENT)
         POPERROR();
+    else
+		p->viewportCount = count;
+/*
     else if(count != p->viewportCount)
         { freepipelineviewportstatecreateinfo(L, p); return fielderror(L, F, ERR_LENGTH); }
+*/
 #undef F
 #define F "scissors"
     PUSHFIELD(F);
@@ -2745,8 +2749,12 @@ static int echeckpipelineviewportstatecreateinfo(lua_State *L, int arg, VkPipeli
     if(err < 0) { freepipelineviewportstatecreateinfo(L, p); return efielderror(L, F); }
     if(err == ERR_NOTPRESENT)
         POPERROR();
+    else
+		p->scissorCount = count;
+/*
     else if(count != p->scissorCount)
         { freepipelineviewportstatecreateinfo(L, p); return fielderror(L, F, ERR_LENGTH); }
+*/
 #undef F
     return 0;
     }
