@@ -14,7 +14,7 @@ It is assumed that the reader is familiar with both Vulkan and the Lua programmi
 
 For convenience of reference, this document contains external (deep) links to the 
 http://www.lua.org/manual/5.3/manual.html[Lua Reference Manual] and the 
-https://www.khronos.org/registry/vulkan/#refpages[Vulkan Documentation].
+https://www.khronos.org/registry/vulkan/#refpages[Vulkan API Reference Pages].
 
 === Getting and installing
 

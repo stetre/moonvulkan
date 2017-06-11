@@ -7,7 +7,7 @@ https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK
 
 
 [[create_debug_report_callback]]
-* _debug_report_callback_ = *create_debug_report_callback*(_instance_, _flags_, _func_ [, <<allocators, _allocatorLUD_>>]) +
+* _debug_report_callback_ = *create_debug_report_callback*(_instance_, _flags_, _func_, [<<allocators, _allocator_>>]) +
 [small]#_flags_: <<debugreportflags, debugreportflags>> +
 The _func_ callback (a Lua function) will be executed as: +
 *func(instance, flags, object_type, objectRAW, location, message_code, layer_prefix, message)*, +
@@ -53,7 +53,7 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.ht
 The functions that follow extend the list of <<commands, commands>>.
 
 [[cmd_debug_marker_begin]]
-* *cmd_debug_marker_begin*(_cb_, _marker_name_ [, _color_]) +
+* *cmd_debug_marker_begin*(_cb_, _marker_name_, [_color_]) +
 [small]#_marker_name_: string +
 _color_: {float} (length = 4, opt.) +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCmdDebugMarkerBeginEXT[vkCmdDebugMarkerBeginEXT].#
@@ -63,7 +63,7 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.ht
 [small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCmdDebugMarkerEndEXT[vkCmdDebugMarkerEndEXT].#
 
 [[cmd_debug_marker_insert]]
-* *cmd_debug_marker_insert*(_cb_, _marker_name_ [, _color_]) +
+* *cmd_debug_marker_insert*(_cb_, _marker_name_, [_color_]) +
 [small]#_marker_name_: string +
 _color_: {float} (length = 4, opt.) +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCmdDebugMarkerInsertEXT[vkCmdDebugMarkerInsertEXT].#

@@ -21,8 +21,8 @@ For example, _cb_++++*:bind_pipeline*(_..._) is the same as *vk.cmd_bind_pipelin
 [small]#arg2 - _bind_point_: <<pipelinebindpoint, pipelinebindpoint>> +
 arg3 - _layout_: <<pipeline_layout, pipeline_layout>> +
 arg4 - _first_set_: integer +
-arg5 - _descriptor_sets_ : {<<descriptor_set, descriptor_set>>} +
-arg6 - _dynamic_offsets_ : {integer} (opt.) +
+arg5 - _descriptor_sets_: {<<descriptor_set, descriptor_set>>} +
+arg6 - [_dynamic_offsets_]: {integer} +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCmdBindDescriptorSets[vkCmdBindDescriptorSets].#
 
 [[cmd_bind_index_buffer]]
@@ -166,9 +166,9 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.ht
 [small]#arg2 - _src_stage_mask_: <<pipelinestageflags, pipelinestageflags>> +
 arg3 - _dst_stage_mask_: <<pipelinestageflags, pipelinestageflags>> +
 arg4 - _dependency_flags_: <<dependencyflags, dependencyflags>> +
-arg5 - _memory_barriers_: {<<memorybarrier, memorybarrier>>} (opt.) +
-arg6 - _buffer_memory_barriers_: {<<buffermemorybarrier, buffermemorybarrier>>} (opt.) +
-arg7 - _image_memory_barriers_: {<<imagememorybarrier, imagememorybarrier>>} (opt.) +
+arg5 - [_memory_barriers_]: {<<memorybarrier, memorybarrier>>} +
+arg6 - [_buffer_memory_barriers_]: {<<buffermemorybarrier, buffermemorybarrier>>} +
+arg7 - [_image_memory_barriers_]: {<<imagememorybarrier, imagememorybarrier>>} +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCmdPipelineBarrier[vkCmdPipelineBarrier].#
 
 [[cmd_push_constants]]
@@ -217,7 +217,7 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.ht
 [small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCmdSetScissor[vkCmdSetScissor].#
 
 [[cmd_set_line_width]]
-* *cmd_set_line_width*(_cb_ [, _linewidth_ = 1.0]) +
+* *cmd_set_line_width*(_cb_, [_linewidth_ = 1.0]) +
 [small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCmdSetLineWidth[vkCmdSetLineWidth].#
 
 [[cmd_set_stencil_compare_mask]]
@@ -254,9 +254,9 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.ht
 [small]#arg2 - _src_stage_mask_: <<pipelinestageflags, pipelinestageflags>> +
 arg3 - _dst_stage_mask_: <<pipelinestageflags, pipelinestageflags>> +
 arg4 - _events_: {<<event, event>>} +
-arg5 - _memory_barriers_: {<<memorybarrier, memorybarrier>>} (opt.) +
-arg6 - _buffer_memory_barriers_: {<<buffermemorybarrier, buffermemorybarrier>>} (opt.) +
-arg7 - _image_memory_barriers_: {<<imagememorybarrier, imagememorybarrier>>} (opt.) +
+arg5 - [_memory_barriers_]: {<<memorybarrier, memorybarrier>>} +
+arg6 - [_buffer_memory_barriers_]: {<<buffermemorybarrier, buffermemorybarrier>>} +
+arg7 - [_image_memory_barriers_]: {<<imagememorybarrier, imagememorybarrier>>} +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCmdWaitEvents[vkCmdWaitEvents].#
 
 [[cmd_write_timestamp]]
@@ -273,7 +273,7 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.ht
 arg3 - __: integer +
 arg3 - __: <<, >> +
 arg3 - __: {<<, >>} +
-arg3 - __: <<, >> (opt.) +
+arg3 - [__]: <<, >> +
 arg3 - __: {<<, >>} (opt.) +
 
 ////

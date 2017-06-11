@@ -3,9 +3,9 @@
 ==== pipeline_cache
 
 [[create_pipeline_cache]]
-* _pipeline_cache_ = *create_pipeline_cache*(_device_, [_flags_ [, _initial_data_ [, <<allocators, _allocatorLUD_>>]]]) +
-[small]#_flags_: <<pipelinecachecreateflags, pipelinecachecreateflags>> +
-_initial_data_: binary string (opt.) +
+* _pipeline_cache_ = *create_pipeline_cache*(_device_, [_flags_], [_initial_data_],  [<<allocators, _allocator_>>]) +
+[small]#[_flags_]: <<pipelinecachecreateflags, pipelinecachecreateflags>> +
+[_initial_data_]: binary string +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCreatePipelineCache[vkCreatePipelineCache].#
 
 [[destroy_pipeline_cache]]
@@ -22,17 +22,4 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.ht
 [small]#_destination_: _pipeline_cache_ +
 _sources_: {_pipeline_cache_} +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkMergePipelineCaches[vkMergePipelineCaches].#
-
-////
-[[]]
-* <<,__>> = **(_pipeline_cache_) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vk[].#
-
-arg3 - __: integer +
-arg3 - __: <<, >> +
-arg3 - __: {<<, >>} +
-arg3 - __: <<, >> (opt.) +
-arg3 - __: {<<, >>} (opt.) +
-
-////
 

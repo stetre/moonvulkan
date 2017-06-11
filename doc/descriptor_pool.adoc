@@ -3,7 +3,7 @@
 ==== descriptor_pool
 
 [[create_descriptor_pool]]
-* _descriptor_pool_ = *create_descriptor_pool*(_device_, _flags_, _max_sets_, _pool_sizes_ [, <<allocators, _allocatorLUD_>>]) +
+* _descriptor_pool_ = *create_descriptor_pool*(_device_, _flags_, _max_sets_, _pool_sizes_, [<<allocators, _allocator_>>]) +
 [small]#_flags_: <<descriptorpoolcreateflags, descriptorpoolcreateflags>> +
 _max_sets_: integer +
 _pool_sizes_: {<<descriptorpoolsize, descriptorpoolsize>>} +

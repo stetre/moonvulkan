@@ -22,7 +22,7 @@ The following functions require the
 https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_descriptor_update_template[VK_KHR_descriptor_update_template] device extension.
 
 [[create_descriptor_update_template]]
-* _descriptor_update_template_ = *create_descriptor_update_template*(_device_, _info_ [, <<allocators, _allocatorLUD_>>]) +
+* _descriptor_update_template_ = *create_descriptor_update_template*(_device_, _info_, [<<allocators, _allocator_>>]) +
 [small]#_info_: <<descriptorupdatetemplatecreateinfo, _descriptorupdatetemplatecreateinfo_>> +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCreateDescriptorUpdateTemplateKHR[vkCreateDescriptorUpdateTemplateKHR].#
 
@@ -57,7 +57,7 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.ht
 The functions that follow extend the list of <<commands, commands>>.
 
 [[cmd_debug_marker_begin]]
-* *cmd_debug_marker_begin*(_cb_, _marker_name_ [, _color_]) +
+* *cmd_debug_marker_begin*(_cb_, _marker_name_, [_color_]) +
 [small]#_marker_name_: string +
 _color_: {float} (length = 4, opt.) +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCmdDebugMarkerBeginEXT[vkCmdDebugMarkerBeginEXT].#
@@ -67,7 +67,7 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.ht
 [small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCmdDebugMarkerEndEXT[vkCmdDebugMarkerEndEXT].#
 
 [[cmd_debug_marker_insert]]
-* *cmd_debug_marker_insert*(_cb_, _marker_name_ [, _color_]) +
+* *cmd_debug_marker_insert*(_cb_, _marker_name_, [_color_]) +
 [small]#_marker_name_: string +
 _color_: {float} (length = 4, opt.) +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCmdDebugMarkerInsertEXT[vkCmdDebugMarkerInsertEXT].#

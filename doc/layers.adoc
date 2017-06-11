@@ -8,19 +8,19 @@
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkEnumerateInstanceLayerProperties[vkEnumerateInstanceLayerProperties].#
 
 [[enumerate_instance_extension_properties]]
-* {<<extensionproperties, extensionproperties>>} = *enumerate_instance_extension_properties*([_layer_ [, _byname_]]) +
-[small]#_layer_: layer name, a string (opt.) +
+* {<<extensionproperties, extensionproperties>>} = *enumerate_instance_extension_properties*([_layer_], [_byname_]) +
+[small]#[_layer_]: string +
 If _byname_=_true_ then the returned table is indexed by _extension_name_, otherwise it is returned as an integer indexed array. +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkEnumerateInstanceExtensionProperties[vkEnumerateInstanceExtensionProperties].#
 
 [[enumerate_device_layer_properties]]
-* {<<layerproperties, layerproperties>>} = *enumerate_device_layer_properties*(<<physical_device, _physdev_>> [, _byname_]) +
+* {<<layerproperties, layerproperties>>} = *enumerate_device_layer_properties*(<<physical_device, _physdev_>>, [_byname_]) +
 [small]#If _byname_=_true_ then the returned table is indexed by _layer_name_, otherwise it is returned as an integer indexed array. +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkEnumerateDeviceLayerProperties[vkEnumerateDeviceLayerProperties].#
 
 [[enumerate_device_extension_properties]]
-* {<<extensionproperties, extensionproperties>>} = *enumerate_device_extension_properties*(<<physical_device, _physdev_>> [, _layer_ [, _byname_]]) +
-[small]#_layer_: layer name, a string (opt.) +
+* {<<extensionproperties, extensionproperties>>} = *enumerate_device_extension_properties*(<<physical_device, _physdev_>>, [_layer_], [_byname_]) +
+[small]#[_layer_]: string +
 If _byname_=_true_ then the returned table is indexed by _extension_name_, otherwise it is returned as an integer indexed array. +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkEnumerateDeviceExtensionProperties[vkEnumerateDeviceExtensionProperties].#
 

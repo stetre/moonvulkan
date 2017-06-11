@@ -288,7 +288,7 @@ _pipeline_statistics_: <<querypipelinestatisticflags, querypipelinestatisticflag
 
 * [[renderpasscreateinfo]]
 [small]#*renderpasscreateinfo* = { +
-_flags_, <<renderpasscreateflags, renderpasscreateflags>>, +
+_flags_: <<renderpasscreateflags, renderpasscreateflags>>, +
 _subpasses_: {<<subpassdescription, subpassdescription>>} *[R]*, +
 _attachments_: {<<attachmentdescription, attachmentdescription>>}, +
 _dependencies_: {<<subpassdependency, subpassdependency>>}, +
@@ -400,15 +400,19 @@ _subresource_range_: <<imagesubresourcerange, imagesubresourcerange>>, +
 * [[samplercreateinfo]]
 [small]#*samplercreateinfo* = { +
 _flags_: <<samplercreateflags, samplercreateflags>>, +
-_mag_filter_, _min_filter_: <<filter, filter>>, +
+_mag_filter_: <<filter, filter>>, +
+_min_filter_: <<filter, filter>>, +
 _mipmap_mode_: <<samplermipmapmode, samplermipmapmode>>, +
-_address_mode_u/v/w_: <<sampleraddressmode, sampleraddressmode>>, +
+_address_mode_u_: <<sampleraddressmode, sampleraddressmode>>, +
+_address_mode_v_: <<sampleraddressmode, sampleraddressmode>>, +
+_address_mode_w_: <<sampleraddressmode, sampleraddressmode>>, +
 _mip_lod_bias_: float, +
 _anisotropy_enable_: boolean, +
 _max_anisotropy_: float, +
 _compare_enable_: boolean, +
 _compare_op_: <<compareop, compareop>>, +
-_min_lod_, _max_lod_: float, +
+_min_lod_: float, +
+_max_lod_: float, +
 _border_color_: <<bordercolor, bordercolor>>, +
 _unnormalized_coordinates_: boolean, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkSamplerCreateInfo[VkSamplerCreateInfo])#
@@ -804,9 +808,7 @@ _subresource_range_: <<imagesubresourcerange, imagesubresourcerange>>, +
 
 * [[viewport]]
 [small]#*viewport* = { +
-_x_, _y_: float, +
-_width_, _height_: float, +
-_min_depth_, _max_depth_: float, +
+_x_, _y_, _width_, _height_, _min_depth_, _max_depth_: float, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkViewport[VkViewport])#
 
 * [[offset2d]]
@@ -842,18 +844,18 @@ _r_, _g_, _b_, _a_: <<componentswizzle, componentswizzle>> +
 
 
 * [[clearcolorvalue]]
-[small]#*clearcolorvalue* = +
-{ _[1],[2],[3],[4]_: float } or +
-{ _[1],[2],[3],[4]_: float, _t_='_float32_' } or +
-{ _[1],[2],[3],[4]_: integer, _t_='_uint32_' } or +
-{ _[1],[2],[3],[4]_: integer, _t_='_int32_' } +
-(rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkClearColorValue[VkClearColorValue])#
+[small]#*clearcolorvalue* = { +
+_[1],[2],[3],[4]_: float *|* +
+_[1],[2],[3],[4]_: float, _t_='_float32_' *|* +
+_[1],[2],[3],[4]_: integer, _t_='_uint32_' *|* +
+_[1],[2],[3],[4]_: integer, _t_='_int32_' + 
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkClearColorValue[VkClearColorValue])#
 
 * [[clearvalue]]
-[small]#*clearvalue* = +
-{ _color_: <<clearcolorvalue, clearcolorvalue>> } or +
-{ _depth_: float, _stencil_: integer, } +
-(rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkClearValue[VkClearValue]). +
+[small]#*clearvalue* = { +
+_color_: <<clearcolorvalue, clearcolorvalue>> *|* +
+_depth_: float, _stencil_: integer, +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkClearValue[VkClearValue]). +
 See also the <<clearcolor_snippet, example>> in the code snippets section.#
 
 
@@ -933,7 +935,7 @@ _old_swapchain_: <<swapchain, swapchain>>, +
 [small]#*presentinfo* = { +
 _swapchains_: {<<swapchain, swapchain>>}, +
 _image_indices_: {integer} (same length as _swapchains_), +
-_wait_semaphores_: {<<semaphore, semaphore>>} (opt.), +
+_wait_semaphores_: {<<semaphore, semaphore>>}, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPresentInfoKHR[VkPresentInfoKHR])#
 
 * [[displaypresentinfo]]

@@ -3,11 +3,11 @@
 ==== queue
 
 [[queue_submit]]
-* *queue_submit*(_queue_, {<<submitinfo, _submitinfo_>>} [, <<fence, _fence_>>]) +
+* *queue_submit*(_queue_, {<<submitinfo, _submitinfo_>>}, [<<fence, _fence_>>]) +
 [small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkQueueSubmit[vkQueueSubmit].#
 
 [[queue_bind_sparse]]
-* *queue_bind_sparse*(_queue_, {<<bindsparseinfo, _bindsparseinfo_>>} [, <<fence, _fence_>>]) +
+* *queue_bind_sparse*(_queue_, {<<bindsparseinfo, _bindsparseinfo_>>}, [<<fence, _fence_>>]) +
 [small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkQueueBindSparse[vkQueueBindSparse].#
 
 [[queue_wait_idle]]

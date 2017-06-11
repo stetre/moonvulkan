@@ -3,7 +3,7 @@
 ==== semaphore
 
 [[create_semaphore]]
-* _semaphore_ = *create_semaphore*(_device_ [, _flags_ [, <<allocators, _allocatorLUD_>>]]) +
+* _semaphore_ = *create_semaphore*(_device_, [_flags_], [<<allocators, _allocator_>>]) +
 [small]#_flags_: <<semaphorecreateflags, _semaphorecreateflags_>> +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCreateSemaphore[vkCreateSemaphore].#
 

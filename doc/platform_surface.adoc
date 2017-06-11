@@ -3,12 +3,14 @@
 ===== Platform-specific surface API
 
 Platform-specific API are available only if MoonVulkan was compiled with support enabled for
-the desired platforms (NB: there is no need for this if surfaces are created via MoonGLFW or
-equivalent libraries).
+the desired platforms.
+
+NOTE: If surfaces are created using MoonGLFW or equivalent libraries that handle platform-specific
+details, then the functions described in this section are not needed and so there is no need to
+enable platform-specific support when compiling MoonVulkan (TL;DR: Use MoonGLFW and skip this section).
 
 To enable support for a platform, set the PLATFORM_XXX environment variable before compiling MoonVulkan
-(where XXX stands for XCB, XLIB, WAYLAND, etc.).
-For example:
+(XXX here stands for XCB, XLIB, WAYLAND, etc.). For example:
 
 [source,bash]
 ----
@@ -17,56 +19,67 @@ For example:
 [moonvulkan]$ make && sudo make install  # compile and install MoonVulkan
 ----
 
-(As a prerequisite, you'll need to make sure that the platform libraries are installed on the system and
-that the relevant header files are where _vulkan.h_ expects them to be).
+As a prerequisite, you'll need to make sure that the platform libraries are installed on the system and
+that the relevant header files are where _vulkan.h_ expects them to be.
 
 '''
 The following functions require the 
 https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_xlib_surface[VK_KHR_xlib_surface] instance extension.
 
 [[get_physical_device_xlib_presentation_support]]
-* _boolean_ = *get_physical_device_xlib_presentation_support*(_physdev_, _queue_family_index_, _displayLUD_, _visual_id_) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetPhysicalDeviceXlibPresentationSupportKHR[vkGetPhysicalDeviceXlibPresentationSupportKHR].#
+* _boolean_ = *get_physical_device_xlib_presentation_support*(_physdev_, _queue_family_index_, _display_, _visual_id_) +
+[small]#_display_: lightuserdata +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetPhysicalDeviceXlibPresentationSupportKHR[vkGetPhysicalDeviceXlibPresentationSupportKHR].#
 
 [[create_xlib_surface]]
-* _surface_ = *create_xlib_surface*(_instance_, _flags_, _displayLUD_, _windowLUD_ [, <<allocators, _allocatorLUD_>>]) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCreateXlibSurfaceKHR[vkCreateXlibSurfaceKHR].#
+* _surface_ = *create_xlib_surface*(_instance_, _flags_, _display_, _window_, [<<allocators, _allocator_>>]) +
+[small]#_display_: lightuserdata +
+_window_: lightuserdata +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCreateXlibSurfaceKHR[vkCreateXlibSurfaceKHR].#
 
 '''
 The following functions require the 
 https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_xcb_surface[VK_KHR_xcb_surface] instance extension.
 
 [[get_physical_device_xcb_presentation_support]]
-* _boolean_ = *get_physical_device_xcb_presentation_support*(_physdev_, _queue_family_index_, _connectionLUD_, _visual_id_) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetPhysicalDeviceXcbPresentationSupportKHR[vkGetPhysicalDeviceXcbPresentationSupportKHR].#
+* _boolean_ = *get_physical_device_xcb_presentation_support*(_physdev_, _queue_family_index_, _connection_, _visual_id_) +
+[small]#_connection_: lightuserdata +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetPhysicalDeviceXcbPresentationSupportKHR[vkGetPhysicalDeviceXcbPresentationSupportKHR].#
 
 [[create_xcb_surface]]
-* _surface_ = *create_xcb_surface*(_instance_, _flags_, _connectionLUD_, _window_ [, <<allocators, _allocatorLUD_>>]) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCreateXcbSurfaceKHR[vkCreateXcbSurfaceKHR].#
+* _surface_ = *create_xcb_surface*(_instance_, _flags_, _connection_, _window_, [<<allocators, _allocator_>>]) +
+[small]#_connection_: lightuserdata +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCreateXcbSurfaceKHR[vkCreateXcbSurfaceKHR].#
 
 '''
 The following functions require the 
 https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_wayland_surface[VK_KHR_wayland_surface] instance extension.
 
 [[get_physical_device_wayland_presentation_support]]
-* _boolean_ = *get_physical_device_wayland_presentation_support*(_physdev_, _queue_family_index_, _wldisplayLUD_) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetPhysicalDeviceWaylandPresentationSupportKHR[vkGetPhysicalDeviceWaylandPresentationSupportKHR].#
+* _boolean_ = *get_physical_device_wayland_presentation_support*(_physdev_, _queue_family_index_, _wldisplay_) +
+[small]#_wldisplay_: lightuserdata +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetPhysicalDeviceWaylandPresentationSupportKHR[vkGetPhysicalDeviceWaylandPresentationSupportKHR].#
 
 [[create_wayland_surface]]
-* _surface_ = *create_wayland_surface*(_instance_, _flags_, _wldisplayLUD_, _wlsurfaceLUD_ [, <<allocators, _allocatorLUD_>>]) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCreateWaylandSurfaceKHR[vkCreateWaylandSurfaceKHR].#
+* _surface_ = *create_wayland_surface*(_instance_, _flags_, _wldisplay_, _wlsurface_, [<<allocators, _allocator_>>]) +
+[small]#_wldisplay_: lightuserdata +
+_wlsurface_: lightuserdata +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCreateWaylandSurfaceKHR[vkCreateWaylandSurfaceKHR].#
 
 '''
 The following functions require the 
 https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_mir_surface[VK_KHR_mir_surface] instance extension.
 
 [[get_physical_device_mir_presentation_support]]
-* _boolean_ = *get_physical_device_mir_presentation_support*(_physdev_, _queue_family_index_, _mirconnectionLUD_) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetPhysicalDeviceMirPresentationSupportKHR[vkGetPhysicalDeviceMirPresentationSupportKHR].#
+* _boolean_ = *get_physical_device_mir_presentation_support*(_physdev_, _queue_family_index_, _mirconnection_) +
+[small]#_mirconnection_: lightuserdata +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetPhysicalDeviceMirPresentationSupportKHR[vkGetPhysicalDeviceMirPresentationSupportKHR].#
 
 [[create_mir_surface]]
-* _surface_ = *create_mir_surface*(_instance_, _flags_, _mirconnectionLUD_, _mirsurfaceLUD_ [, <<allocators, _allocatorLUD_>>]) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCreateMirSurfaceKHR[vkCreateMirSurfaceKHR].#
+* _surface_ = *create_mir_surface*(_instance_, _flags_, _mirconnection_, _mirsurface_, [<<allocators, _allocator_>>]) +
+[small]#_mirconnection_: lightuserdata +
+_mirsurface_: lightuserdata +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCreateMirSurfaceKHR[vkCreateMirSurfaceKHR].#
 
 
 ////
@@ -76,8 +89,9 @@ The following function requires the
 https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_android_surface[VK_KHR_android_surface] instance extension.
 
 [[create_android_surface]]
-* _surface_ = *create_android_surface*(_instance_, _flags_, _awindowLUD_ [, <<allocators, _allocatorLUD_>>]) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCreateAndroidSurfaceKHR[vkCreateAndroidSurfaceKHR].#
+* _surface_ = *create_android_surface*(_instance_, _flags_, _awindow_, [<<allocators, _allocator_>>]) +
+[small]#_awindow_: lightuserdata +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCreateAndroidSurfaceKHR[vkCreateAndroidSurfaceKHR].#
 
 '''
 The following functions require the 
@@ -88,8 +102,10 @@ https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK
 [small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetPhysicalDeviceWin32PresentationSupportKHR[vkGetPhysicalDeviceWin32PresentationSupportKHR].#
 
 [[create_win32_surface]]
-* _surface_ = *create_win32_surface*(_instance_, _flags_, _hinstanceLUD_, _hwndLUD_ [, <<allocators, _allocatorLUD_>>]) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCreateWin32SurfaceKHR[vkCreateWin32SurfaceKHR].#
+* _surface_ = *create_win32_surface*(_instance_, _flags_, _hinstance_, _hwnd_, [<<allocators, _allocator_>>]) +
+[small]#_hinstance_: lightuserdata +
+_hwnd: lightuserdata +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCreateWin32SurfaceKHR[vkCreateWin32SurfaceKHR].#
 
 ////
 
