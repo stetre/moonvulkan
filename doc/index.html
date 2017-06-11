@@ -1067,20 +1067,20 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/
 </li>
 </ul>
 </div>
-<div id="enumerate_physical_devices" class="ulist">
-<ul>
-<li>
-<p>{<a href="#physical_device"><em>physdev</em></a>} = <strong>enumerate_physical_devices</strong>(<em>instance</em>)<br>
-<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkEnumeratePhysicalDevices">vkEnumeratePhysicalDevices</a>.</span></p>
-</li>
-</ul>
-</div>
 </div>
 <div class="sect3">
 <h4 id="physical_device">physical_device (<em>physdev</em>)</h4>
 <div class="paragraph">
 <p>In this document, <em>physdev</em> is an abbreviation for <em>physical_device</em> when referring to a variable
 or a return value.</p>
+</div>
+<div id="enumerate_physical_devices" class="ulist">
+<ul>
+<li>
+<p>{<em>physdev</em>} = <strong>enumerate_physical_devices</strong>(<a href="#instance"><em>instance</em></a>)<br>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkEnumeratePhysicalDevices">vkEnumeratePhysicalDevices</a>.</span></p>
+</li>
+</ul>
 </div>
 <div class="paragraph">
 <p>If the
@@ -1163,7 +1163,7 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/
 <div id="create_device" class="ulist">
 <ul>
 <li>
-<p><em>device</em> = <strong>create_device</strong>(<em>physdev</em>, <a href="#devicecreateinfo"><em>devicecreateinfo</em></a>, [<a href="#allocators"><em>allocator</em></a>])<br>
+<p><em>device</em> = <strong>create_device</strong>(<a href="#physical_device"><em>physdev</em></a>, <a href="#devicecreateinfo"><em>devicecreateinfo</em></a>, [<a href="#allocators"><em>allocator</em></a>])<br>
 <span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCreateDevice">CreateDevice</a>.</span></p>
 </li>
 </ul>
@@ -1173,14 +1173,6 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/
 <li>
 <p><strong>destroy_device</strong>(<em>device</em>)<br>
 <span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkDestroyDevice">vkDestroyDevice</a>.</span></p>
-</li>
-</ul>
-</div>
-<div id="get_device_queue" class="ulist">
-<ul>
-<li>
-<p><a href="#queue"><em>queue</em></a> = <strong>get_device_queue</strong>(<em>device</em>, <em>familyindex</em>, <em>queueindex</em>)<br>
-<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetDeviceQueue">vkGetDeviceQueue</a>.</span></p>
 </li>
 </ul>
 </div>
@@ -1195,6 +1187,14 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/
 </div>
 <div class="sect3">
 <h4 id="queue">queue</h4>
+<div id="get_device_queue" class="ulist">
+<ul>
+<li>
+<p><em>queue</em> = <strong>get_device_queue</strong>(<a href="#device"><em>device</em></a>, <em>familyindex</em>, <em>queueindex</em>)<br>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetDeviceQueue">vkGetDeviceQueue</a>.</span></p>
+</li>
+</ul>
+</div>
 <div id="queue_submit" class="ulist">
 <ul>
 <li>
@@ -1228,9 +1228,9 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/
 <div id="create_command_pool" class="ulist">
 <ul>
 <li>
-<p><em>command_pool</em> = <strong>create_command_pool</strong>(<em>device</em>, <em>flags</em>, <em>queue_family_index</em>, [<a href="#allocators"><em>allocator</em></a>])<br>
+<p><em>command_pool</em> = <strong>create_command_pool</strong>(<em>device</em>, <em>flags</em>, <em>familyindex</em>, [<a href="#allocators"><em>allocator</em></a>])<br>
 <span class="small"><em>flags</em>: <a href="#commandpoolcreateflags">commandpoolcreateflags</a><br>
-<em>queue_family_index</em>: integer<br>
+<em>familyindex</em>: integer<br>
 Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCreateCommandPool">vkCreateCommandPool</a>.</span></p>
 </li>
 </ul>
@@ -1246,17 +1246,17 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/
 <div id="reset_command_pool" class="ulist">
 <ul>
 <li>
-<p><strong>reset_command_pool</strong>(<em>command_pool</em>, <em>flags</em>)<br>
-<span class="small"><em>flags</em>: <a href="#commandpoolresetflags">commandpoolresetflags</a><br>
-#Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkResetCommandPool">vkResetCommandPool</a>.</span></p>
+<p><strong>reset_command_pool</strong>(<em>command_pool</em>, [<em>flags</em>])<br>
+<span class="small">[<em>flags</em>]: <a href="#commandpoolresetflags">commandpoolresetflags</a><br>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkResetCommandPool">vkResetCommandPool</a>.</span></p>
 </li>
 </ul>
 </div>
 <div id="trim_command_pool" class="ulist">
 <ul>
 <li>
-<p><strong>trim_command_pool</strong>(<em>command_pool</em>, <em>flags</em>)<br>
-<span class="small"><em>flags</em>: <a href="#commandpooltrimflags">commandpooltrimflags</a><br>
+<p><strong>trim_command_pool</strong>(<em>command_pool</em>, [<em>flags</em>])<br>
+<span class="small">[<em>flags</em>]: <a href="#commandpooltrimflags">commandpooltrimflags</a><br>
 This function requires the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_maintenance1">VK_KHR_maintenance1</a> device extension.<br>
 Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkTrimCommandPoolKHR">vkTrimCommandPoolKHR</a>.</span></p>
 </li>
@@ -1272,7 +1272,7 @@ or a return value.</p>
 <div id="allocate_command_buffers" class="ulist">
 <ul>
 <li>
-<p>{<em>cb</em>} = <strong>allocate_command_buffers</strong>(<em>command_pool</em>, <em>level</em>, <em>count</em>)<br>
+<p>{<em>cb</em>} = <strong>allocate_command_buffers</strong>(<a href="#command_pool"><em>command_pool</em></a>, <em>level</em>, <em>count</em>)<br>
 <span class="small"><em>level</em>:  <a href="#commandbufferlevel">commandbufferlevel</a><br>
 <em>count</em>: integer<br>
 Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkAllocateCommandBuffers">vkAllocateCommandBuffers</a>.</span></p>
@@ -1290,9 +1290,9 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/
 <div id="begin_command_buffer" class="ulist">
 <ul>
 <li>
-<p><strong>begin_command_buffer</strong>(<em>cb</em>, [<em>flags</em>], [<em>inheritance_info</em>])<br>
+<p><strong>begin_command_buffer</strong>(<em>cb</em>, [<em>flags</em>], [<em>inheritinfo</em>])<br>
 <span class="small">[<em>flags</em>]: <a href="#commandbufferusageflags">commandbufferusageflags</a><br>
-[<em>inheritance_info</em>]: <a href="#commandbufferinheritanceinfo"><em>commandbufferinheritanceinfo</em></a><br>
+[<em>inheritinfo</em>]: <a href="#commandbufferinheritanceinfo">commandbufferinheritanceinfo</a><br>
 Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkBeginCommandBuffer">vkBeginCommandBuffer</a>.</span></p>
 </li>
 </ul>
@@ -1636,7 +1636,7 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/
 <div id="cmd_set_blend_constants" class="ulist">
 <ul>
 <li>
-<p><strong>cmd_set_blend_constants</strong>(<em>cb</em>, <em>constant0</em>, <em>..</em>, <em>constant3</em>)<br>
+<p><strong>cmd_set_blend_constants</strong>(<em>cb</em>, <em>constant<sub>0</sub></em>, <em>constant<sub>1</sub></em>, <em>constant<sub>2</sub></em>, <em>constant<sub>3</sub></em>)<br>
 <span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCmdSetBlendConstants">vkCmdSetBlendConstants</a>.</span></p>
 </li>
 </ul>
@@ -1761,7 +1761,7 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/
 <ul>
 <li>
 <p><em>fence</em> = <strong>create_fence</strong>(<em>device</em>, [<em>flags</em>], [<a href="#allocators"><em>allocator</em></a>])<br>
-<span class="small"><em>flags</em>: <a href="#fencecreateflags">fencecreateflags</a><br>
+<span class="small">[<em>flags</em>]: <a href="#fencecreateflags">fencecreateflags</a><br>
 Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCreateFence">vkCreateFence</a>.</span></p>
 </li>
 </ul>
@@ -1809,7 +1809,7 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/
 <ul>
 <li>
 <p><em>semaphore</em> = <strong>create_semaphore</strong>(<em>device</em>, [<em>flags</em>], [<a href="#allocators"><em>allocator</em></a>])<br>
-<span class="small"><em>flags</em>: <a href="#semaphorecreateflags"><em>semaphorecreateflags</em></a><br>
+<span class="small">[<em>flags</em>]: <a href="#semaphorecreateflags"><em>semaphorecreateflags</em></a><br>
 Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCreateSemaphore">vkCreateSemaphore</a>.</span></p>
 </li>
 </ul>
@@ -1828,8 +1828,8 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/
 <div id="create_event" class="ulist">
 <ul>
 <li>
-<p><em>event</em> = <strong>create_event</strong>(<em>device</em>, <em>flags</em>, [<a href="#allocators"><em>allocator</em></a>])<br>
-<span class="small"><em>flags</em>: <a href="#eventcreateflags"><em>eventcreateflags</em></a><br>
+<p><em>event</em> = <strong>create_event</strong>(<em>device</em>, [<em>flags</em>], [<a href="#allocators"><em>allocator</em></a>])<br>
+<span class="small">[<em>flags</em>]: <a href="#eventcreateflags"><em>eventcreateflags</em></a><br>
 Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCreateEvent">vkCreateEvent</a>.</span></p>
 </li>
 </ul>
@@ -1949,7 +1949,7 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/
 <div id="create_graphics_pipelines" class="ulist">
 <ul>
 <li>
-<p>{<em>pipeline</em>} = <strong>create_graphics_pipelines</strong>(<em>device</em>, <em>cache</em>, {<a href="#graphicspipelinecreateinfo"><em>graphicspipelinecreateinfo</em></a>}, [<a href="#allocators"><em>allocator</em></a>])<br>
+<p>{<em>pipeline</em>} = <strong>create_graphics_pipelines</strong>(<em>device</em>, [<em>cache</em>], {<a href="#graphicspipelinecreateinfo"><em>graphicspipelinecreateinfo</em></a>}, [<a href="#allocators"><em>allocator</em></a>])<br>
 <span class="small">[<em>cache</em>]: <a href="#pipeline_cache">pipeline_cache</a><br>
 Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCreateGraphicsPipelines">vkCreateGraphicsPipelines</a>.</span></p>
 </li>
@@ -1958,7 +1958,7 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/
 <div id="create_compute_pipelines" class="ulist">
 <ul>
 <li>
-<p>{<em>pipeline</em>} = <strong>create_compute_pipelines</strong>(<em>device</em>, <em>cache</em>, {<a href="#computepipelinecreateinfo"><em>computepipelinecreateinfo</em></a>}, [<a href="#allocators"><em>allocator</em></a>])<br>
+<p>{<em>pipeline</em>} = <strong>create_compute_pipelines</strong>(<em>device</em>, [<em>cache</em>], {<a href="#computepipelinecreateinfo"><em>computepipelinecreateinfo</em></a>}, [<a href="#allocators"><em>allocator</em></a>])<br>
 <span class="small">[<em>cache</em>]: <a href="#pipeline_cache">pipeline_cache</a><br>
 Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCreateComputePipelines">vkCreateComputePipelines</a>.</span></p>
 </li>
@@ -2260,8 +2260,8 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/
 <div id="create_descriptor_set_layout" class="ulist">
 <ul>
 <li>
-<p><em>descriptor_set_layout</em> = <strong>create_descriptor_set_layout</strong>(<em>device</em>, <em>flags</em>, [<em>bindings</em>], [<a href="#allocators"><em>allocator</em></a>])<br>
-<span class="small"><em>flags</em>: <a href="#descriptorsetlayoutcreateflags">descriptorsetlayoutcreateflags</a><br>
+<p><em>descriptor_set_layout</em> = <strong>create_descriptor_set_layout</strong>(<em>device</em>, [<em>flags</em>], [<em>bindings</em>], [<a href="#allocators"><em>allocator</em></a>])<br>
+<span class="small">[<em>flags</em>]: <a href="#descriptorsetlayoutcreateflags">descriptorsetlayoutcreateflags</a><br>
 [<em>bindings</em>]: {<a href="#descriptorsetlayoutbinding">descriptorsetlayoutbinding</a>}<br>
 Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCreateDescriptorSetLayout">vkCreateDescriptorSetLayout</a>.</span></p>
 </li>
@@ -2314,17 +2314,17 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/
 <div id="destroy_descriptor_pool" class="ulist">
 <ul>
 <li>
-<p><strong>destroy_descriptor_pool</strong>(<em>descriptor_pool</em>, <em>flags</em>)<br>
-<span class="small"><em>flags</em>: <a href="#descriptorpoolresetflags">descriptorpoolresetflags</a><br>
-Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkDestroyDescriptorPool">vkDestroyDescriptorPool</a>.</span></p>
+<p><strong>destroy_descriptor_pool</strong>(<em>descriptor_pool</em>)<br>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkDestroyDescriptorPool">vkDestroyDescriptorPool</a>.</span></p>
 </li>
 </ul>
 </div>
 <div id="reset_descriptor_pool" class="ulist">
 <ul>
 <li>
-<p><strong>reset_descriptor_pool</strong>(<em>descriptor_pool</em>)<br>
-<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkResetDescriptorPool">vkResetDescriptorPool</a>.</span></p>
+<p><strong>reset_descriptor_pool</strong>(<em>descriptor_pool</em>, [<em>flags</em>])<br>
+<span class="small">[<em>flags</em>]: <a href="#descriptorpoolresetflags">descriptorpoolresetflags</a><br>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkResetDescriptorPool">vkResetDescriptorPool</a>.</span></p>
 </li>
 </ul>
 </div>
@@ -2369,7 +2369,7 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/
 arg3 - <em>query_type</em>: <a href="#querytype">querytype</a><br>
 arg4 - <em>query_count</em>: integer<br>
 arg5 - <em>pipeline_statistics</em>: <a href="#querypipelinestatisticflags">querypipelinestatisticflags</a><br>
-arg6 - [<em>allocator</em>]: <a href="#allocators"><em>allocator</em></a><br>
+arg6 - [<em>allocator</em>]: <a href="#allocators">allocator</a><br>
 Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCreateQueryPool">vkCreateQueryPool</a>.</span></p>
 </li>
 </ul>
@@ -2498,7 +2498,7 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/
 <div id="get_physical_device_surface_support" class="ulist">
 <ul>
 <li>
-<p><em>boolean</em> = <strong>get_physical_device_surface_support</strong>(<a href="#physical_device"><em>physdev</em></a>, <em>queue_family_index</em>, <em>surface</em>)<br>
+<p><em>boolean</em> = <strong>get_physical_device_surface_support</strong>(<a href="#physical_device"><em>physdev</em></a>, <em>familyindex</em>, <em>surface</em>)<br>
 <span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetPhysicalDeviceSurfaceSupportKHR">vkGetPhysicalDeviceSurfaceSupportKHR</a>.</span></p>
 </li>
 </ul>
@@ -2572,7 +2572,7 @@ that the relevant header files are where <em>vulkan.h</em> expects them to be.</
 <div id="get_physical_device_xlib_presentation_support" class="ulist">
 <ul>
 <li>
-<p><em>boolean</em> = <strong>get_physical_device_xlib_presentation_support</strong>(<em>physdev</em>, <em>queue_family_index</em>, <em>display</em>, <em>visual_id</em>)<br>
+<p><em>boolean</em> = <strong>get_physical_device_xlib_presentation_support</strong>(<em>physdev</em>, <em>familyindex</em>, <em>display</em>, <em>visual_id</em>)<br>
 <span class="small"><em>display</em>: lightuserdata<br>
 Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetPhysicalDeviceXlibPresentationSupportKHR">vkGetPhysicalDeviceXlibPresentationSupportKHR</a>.</span></p>
 </li>
@@ -2596,7 +2596,7 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/
 <div id="get_physical_device_xcb_presentation_support" class="ulist">
 <ul>
 <li>
-<p><em>boolean</em> = <strong>get_physical_device_xcb_presentation_support</strong>(<em>physdev</em>, <em>queue_family_index</em>, <em>connection</em>, <em>visual_id</em>)<br>
+<p><em>boolean</em> = <strong>get_physical_device_xcb_presentation_support</strong>(<em>physdev</em>, <em>familyindex</em>, <em>connection</em>, <em>visual_id</em>)<br>
 <span class="small"><em>connection</em>: lightuserdata<br>
 Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetPhysicalDeviceXcbPresentationSupportKHR">vkGetPhysicalDeviceXcbPresentationSupportKHR</a>.</span></p>
 </li>
@@ -2619,7 +2619,7 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/
 <div id="get_physical_device_wayland_presentation_support" class="ulist">
 <ul>
 <li>
-<p><em>boolean</em> = <strong>get_physical_device_wayland_presentation_support</strong>(<em>physdev</em>, <em>queue_family_index</em>, <em>wldisplay</em>)<br>
+<p><em>boolean</em> = <strong>get_physical_device_wayland_presentation_support</strong>(<em>physdev</em>, <em>familyindex</em>, <em>wldisplay</em>)<br>
 <span class="small"><em>wldisplay</em>: lightuserdata<br>
 Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetPhysicalDeviceWaylandPresentationSupportKHR">vkGetPhysicalDeviceWaylandPresentationSupportKHR</a>.</span></p>
 </li>
@@ -2643,7 +2643,7 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/
 <div id="get_physical_device_mir_presentation_support" class="ulist">
 <ul>
 <li>
-<p><em>boolean</em> = <strong>get_physical_device_mir_presentation_support</strong>(<em>physdev</em>, <em>queue_family_index</em>, <em>mirconnection</em>)<br>
+<p><em>boolean</em> = <strong>get_physical_device_mir_presentation_support</strong>(<em>physdev</em>, <em>familyindex</em>, <em>mirconnection</em>)<br>
 <span class="small"><em>mirconnection</em>: lightuserdata<br>
 Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetPhysicalDeviceMirPresentationSupportKHR">vkGetPhysicalDeviceMirPresentationSupportKHR</a>.</span></p>
 </li>

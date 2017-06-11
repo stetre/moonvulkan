@@ -197,7 +197,7 @@ arg6 - _regions_: {<<imageresolve, imageresolve>>} +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCmdResolveImage[vkCmdResolveImage].#
 
 [[cmd_set_blend_constants]]
-* *cmd_set_blend_constants*(_cb_, _constant0_, _.._, _constant3_) +
+* *cmd_set_blend_constants*(_cb_, _constant~0~_, _constant~1~_, _constant~2~_, _constant~3~_) +
 [small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCmdSetBlendConstants[vkCmdSetBlendConstants].#
 
 [[cmd_set_depth_bias]]

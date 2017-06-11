@@ -5,6 +5,11 @@
 In this document, _physdev_ is an abbreviation for _physical_device_ when referring to a variable
 or a return value.
 
+[[enumerate_physical_devices]]
+* {_physdev_} = *enumerate_physical_devices*(<<instance, _instance_>>) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkEnumeratePhysicalDevices[vkEnumeratePhysicalDevices].#
+
+
 If the 
 https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_get_physical_device_properties2[VK_KHR_get_physical_device_properties2] 
 instance extension is enabled for the affected _physdev_,

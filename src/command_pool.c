@@ -72,7 +72,7 @@ static int ResetCommandPool(lua_State *L)
     ud_t *ud;
     VkCommandPool command_pool = checkcommand_pool(L, 1, &ud);
     VkDevice device = ud->device;
-    VkCommandPoolResetFlags flags = checkflags(L, 2);
+    VkCommandPoolResetFlags flags = optflags(L, 2, 0);
     ec = ud->ddt->ResetCommandPool(device, command_pool, flags);
     CheckError(L, ec);
     return 0;
@@ -85,7 +85,7 @@ static int TrimCommandPool(lua_State *L)
     ud_t *ud;
     VkCommandPool command_pool = checkcommand_pool(L, 1, &ud);
     VkDevice device = ud->device;
-    VkCommandPoolTrimFlagsKHR flags = checkflags(L, 2);
+    VkCommandPoolTrimFlagsKHR flags = optflags(L, 2, 0);
     CheckDevicePfn(L, ud, TrimCommandPoolKHR);
     ud->ddt->TrimCommandPoolKHR(device, command_pool, flags);
     return 0;

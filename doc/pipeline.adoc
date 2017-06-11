@@ -3,12 +3,12 @@
 ==== pipeline
 
 [[create_graphics_pipelines]]
-* {_pipeline_} = *create_graphics_pipelines*(_device_, _cache_, {<<graphicspipelinecreateinfo, _graphicspipelinecreateinfo_>>}, [<<allocators, _allocator_>>]) +
+* {_pipeline_} = *create_graphics_pipelines*(_device_, [_cache_], {<<graphicspipelinecreateinfo, _graphicspipelinecreateinfo_>>}, [<<allocators, _allocator_>>]) +
 [small]#[_cache_]: <<pipeline_cache, pipeline_cache>> +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCreateGraphicsPipelines[vkCreateGraphicsPipelines].#
 
 [[create_compute_pipelines]]
-* {_pipeline_} = *create_compute_pipelines*(_device_, _cache_, {<<computepipelinecreateinfo, _computepipelinecreateinfo_>>}, [<<allocators, _allocator_>>]) +
+* {_pipeline_} = *create_compute_pipelines*(_device_, [_cache_], {<<computepipelinecreateinfo, _computepipelinecreateinfo_>>}, [<<allocators, _allocator_>>]) +
 [small]#[_cache_]: <<pipeline_cache, pipeline_cache>> +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCreateComputePipelines[vkCreateComputePipelines].#
 

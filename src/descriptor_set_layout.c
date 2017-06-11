@@ -59,7 +59,7 @@ static int Create(lua_State *L)
     memset(&info, 0, sizeof(info));
     info.sType = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_CREATE_INFO;
     info.pNext = NULL;
-    info.flags = checkflags(L, 2);
+    info.flags = optflags(L, 2, 0);
 
     info.pBindings = echeckdescriptorsetlayoutbindinglist(L, 3, &info.bindingCount, &err);
     if(err < 0)

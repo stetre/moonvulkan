@@ -91,7 +91,7 @@ static int ResetDescriptorPool(lua_State *L)
     ud_t *ud;
     VkDescriptorPool descriptor_pool = checkdescriptor_pool(L, 1, &ud);
     VkDevice device = ud->device;
-    VkDescriptorPoolResetFlags flags = checkflags(L, 2);
+    VkDescriptorPoolResetFlags flags = optflags(L, 2, 0);
     VkResult ec = ud->ddt->ResetDescriptorPool(device, descriptor_pool, flags);
     CheckError(L, ec);
     return 0;

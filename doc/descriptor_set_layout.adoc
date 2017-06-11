@@ -3,8 +3,8 @@
 ==== descriptor_set_layout
 
 [[create_descriptor_set_layout]]
-* _descriptor_set_layout_ = *create_descriptor_set_layout*(_device_, _flags_, [_bindings_], [<<allocators, _allocator_>>]) +
-[small]#_flags_: <<descriptorsetlayoutcreateflags, descriptorsetlayoutcreateflags>> +
+* _descriptor_set_layout_ = *create_descriptor_set_layout*(_device_, [_flags_], [_bindings_], [<<allocators, _allocator_>>]) +
+[small]#[_flags_]: <<descriptorsetlayoutcreateflags, descriptorsetlayoutcreateflags>> +
 [_bindings_]: {<<descriptorsetlayoutbinding, descriptorsetlayoutbinding>>} +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCreateDescriptorSetLayout[vkCreateDescriptorSetLayout].#
 

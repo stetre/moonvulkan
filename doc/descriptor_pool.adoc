@@ -10,12 +10,12 @@ _pool_sizes_: {<<descriptorpoolsize, descriptorpoolsize>>} +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCreateDescriptorPool[vkCreateDescriptorPool].#
 
 [[destroy_descriptor_pool]]
-* *destroy_descriptor_pool*(_descriptor_pool_, _flags_) +
-[small]#_flags_: <<descriptorpoolresetflags, descriptorpoolresetflags>> +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkDestroyDescriptorPool[vkDestroyDescriptorPool].#
+* *destroy_descriptor_pool*(_descriptor_pool_) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkDestroyDescriptorPool[vkDestroyDescriptorPool].#
 
 [[reset_descriptor_pool]]
-* *reset_descriptor_pool*(_descriptor_pool_) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkResetDescriptorPool[vkResetDescriptorPool].#
+* *reset_descriptor_pool*(_descriptor_pool_, [_flags_]) +
+[small]#[_flags_]: <<descriptorpoolresetflags, descriptorpoolresetflags>> +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkResetDescriptorPool[vkResetDescriptorPool].#
 
 
