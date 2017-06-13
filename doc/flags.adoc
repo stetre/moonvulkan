@@ -73,7 +73,7 @@ Rfr. https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.ht
 [[accessflags]]
 [small]#*accessflags*: vk.ACCESS_XXX_BIT +
 Values: 
-'_indirect command read_', '_index read_', '_vertex attribute read_', '_uniform read_', '_input attachment read_', '_shader read_', '_shader write_', '_color attachment read_', '_color attachment write_', '_depth stencil attachment read_', '_depth stencil attachment write_', '_transfer read_', '_transfer write_', '_host read_', '_host write_', '_memory read_', '_memory write_', '_command process read bit_', '_command process write bit_'. +
+'_indirect command read_', '_index read_', '_vertex attribute read_', '_uniform read_', '_input attachment read_', '_shader read_', '_shader write_', '_color attachment read_', '_color attachment write_', '_depth stencil attachment read_', '_depth stencil attachment write_', '_transfer read_', '_transfer write_', '_host read_', '_host write_', '_memory read_', '_memory write_', '_command process read_', '_command process write_'. +
 Rfr. https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkAccessFlagBits[VkAccessFlagBits].#
 
 
@@ -149,7 +149,7 @@ Rfr. https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.ht
 [[querypipelinestatisticflags]]
 [small]#*querypipelinestatisticflags*: vk.QUERY_PIPELINE_STATISTIC_XXX_BIT +
 Values: 
-'_input assembly vertices bit_', '_input assembly primitives bit_', '_vertex shader invocations bit_', '_geometry shader invocations bit_', '_geometry shader primitives bit_', '_clipping invocations bit_', '_clipping primitives bit_', '_fragment shader invocations bit_', '_tessellation control shader patches bit_', '_tessellation evaluation shader invocations bit_', '_compute shader invocations bit_'. +
+'_input assembly vertices_', '_input assembly primitives_', '_vertex shader invocations_', '_geometry shader invocations_', '_geometry shader primitives_', '_clipping invocations_', '_clipping primitives_', '_fragment shader invocations_', '_tessellation control shader patches_', '_tessellation evaluation shader invocations_', '_compute shader invocations_'. +
 Rfr. https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkQueryPipelineStatisticFlagBits[VkQueryPipelineStatisticFlagBits].#
 
 
@@ -226,7 +226,7 @@ Rfr. https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.ht
 [[imageusageflags]]
 [small]#*imageusageflags*: vk.IMAGE_USAGE_XXX_BIT +
 Values: 
-'_transfer src_', '_transfer dst_', '_sampled_', '_storage bit_', '_color attachment_', '_depth stencil attachment_', '_transient attachment_', '_input attachment_'. +
+'_transfer src_', '_transfer dst_', '_sampled_', '_storage_', '_color attachment_', '_depth stencil attachment_', '_transient attachment_', '_input attachment_'. +
 Rfr. https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkImageUsageFlagBits[VkImageUsageFlagBits].#
 
 
