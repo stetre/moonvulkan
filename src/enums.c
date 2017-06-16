@@ -308,7 +308,7 @@ static int Enum(lua_State *L)
     CASE(presentmode);
     CASE(colorspace);
     CASE(debugreportobjecttype);
-    CASE(debugreporterror);
+//@@  CASE(debugreporterror);
     CASE(descriptorupdatetemplatetype);
     CASE(objecttype);
 #undef CASE
@@ -853,13 +853,15 @@ void moonvulkan_open_enums(lua_State *L)
     ADD(DEBUG_REPORT_OBJECT_TYPE_COMMAND_POOL_EXT, "command pool");
     ADD(DEBUG_REPORT_OBJECT_TYPE_SURFACE_KHR_EXT, "surface");
     ADD(DEBUG_REPORT_OBJECT_TYPE_SWAPCHAIN_KHR_EXT, "swapchain");
-    ADD(DEBUG_REPORT_OBJECT_TYPE_DEBUG_REPORT_EXT, "debug report");
+    ADD(DEBUG_REPORT_OBJECT_TYPE_DEBUG_REPORT_CALLBACK_EXT_EXT, "debug report callback");
     ADD(DEBUG_REPORT_OBJECT_TYPE_DISPLAY_KHR_EXT, "display");
     ADD(DEBUG_REPORT_OBJECT_TYPE_DISPLAY_MODE_KHR_EXT, "display mode");
 
+#if 0 /* @@ removed in 1.0.51 */
     domain = DOMAIN_DEBUG_REPORT_ERROR; /* VkDebugReportErrorEXT */
     ADD(DEBUG_REPORT_ERROR_NONE_EXT, "none");
     ADD(DEBUG_REPORT_ERROR_CALLBACK_REF_EXT, "callback ref");
+#endif
 
     domain = DOMAIN_DESCRIPTOR_UPDATE_TEMPLATE_TYPE; /* VkDescriptorUpdateTemplateTypeKHR  */
     ADD(DESCRIPTOR_UPDATE_TEMPLATE_TYPE_DESCRIPTOR_SET_KHR, "descriptor set");
