@@ -3451,8 +3451,8 @@ with 1-based integer keys and no gaps, a.k.a. 'sequence' in Lua&#8217;s jargon).
 <em>image_type</em>: <a href="#imagetype">imagetype</a>,<br>
 <em>format</em>: <a href="#format">format</a>,<br>
 <em>extent</em>: <a href="#extent3d">extent3d</a>,<br>
-<em>mip_levels</em>: integer or '<em>remaining</em>' (defaults to 1),<br>
-<em>array_layers</em>: integer or '<em>remaining</em>' (defaults to 1),<br>
+<em>mip_levels</em>: integer (defaults to 1),<br>
+<em>array_layers</em>: integer (defaults to 1),<br>
 <em>samples</em>: <a href="#samplecountflags">samplecountflags</a> (defaults to 1),<br>
 <em>tiling</em>: <a href="#imagetiling">imagetiling</a>,<br>
 <em>usage</em>: <a href="#imageusageflags">imageusageflags</a>,<br>
@@ -3551,9 +3551,9 @@ with 1-based integer keys and no gaps, a.k.a. 'sequence' in Lua&#8217;s jargon).
 <span class="small"><strong>imagesubresourcerange</strong> = {<br>
 <em>aspect_mask</em>: <a href="#imageaspectflags">imageaspectflags</a>,<br>
 <em>base_mip_level</em>: integer,<br>
-<em>level_count</em>: integer,<br>
+<em>level_count</em>: integer or '<em>remaining</em>' (defaults to 1),<br>
 <em>base_array_layer</em>: integer,<br>
-<em>layer_count</em>: integer,<br>
+<em>layer_count</em>: integer or '<em>remaining</em>' (defaults to 1),<br>
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkImageSubresourceRange">VkImageSubresourceRange</a>)</span></p>
 </li>
 <li>

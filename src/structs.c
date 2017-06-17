@@ -1154,8 +1154,8 @@ int echeckimagecreateinfo(lua_State *L, int arg, VkImageCreateInfo *p)
     GetImageType(imageType, "image_type");
     GetFormat(format, "format");
     GetExtent3dOpt(extent, "extent");
-    GetIntegerOrRemaining(mipLevels, "mip_levels", 1);
-    GetIntegerOrRemaining(arrayLayers, "array_layers", 1);
+    GetIntegerOpt(mipLevels, "mip_levels", 1);
+    GetIntegerOpt(arrayLayers, "array_layers", 1);
     GetSamples(samples, "samples");
     GetImageTiling(tiling, "tiling");
     GetFlags(usage, "usage");
@@ -1904,9 +1904,9 @@ int echeckimagesubresourcerange(lua_State *L, int arg, VkImageSubresourceRange *
     ECHECK_PREAMBLE
     GetFlags(aspectMask, "aspect_mask");
     GetInteger(baseMipLevel, "base_mip_level");
-    GetInteger(levelCount, "level_count");
+    GetIntegerOrRemaining(levelCount, "level_count", 1);
     GetInteger(baseArrayLayer, "base_array_layer");
-    GetInteger(layerCount, "layer_count");
+    GetIntegerOrRemaining(layerCount, "layer_count", 1);
     return 0;
     }
 

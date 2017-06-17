@@ -376,8 +376,8 @@ _flags_: <<imagecreateflags, imagecreateflags>>, +
 _image_type_: <<imagetype, imagetype>>, +
 _format_: <<format, format>>, +
 _extent_: <<extent3d, extent3d>>, +
-_mip_levels_: integer or '_remaining_' (defaults to 1), +
-_array_layers_: integer or '_remaining_' (defaults to 1), +
+_mip_levels_: integer (defaults to 1), +
+_array_layers_: integer (defaults to 1), +
 _samples_: <<samplecountflags, samplecountflags>> (defaults to 1), +
 _tiling_: <<imagetiling, imagetiling>>, +
 _usage_: <<imageusageflags, imageusageflags>>, +
@@ -464,9 +464,9 @@ _array_layer_: integer, +
 [small]#*imagesubresourcerange* = { +
 _aspect_mask_: <<imageaspectflags, imageaspectflags>>, +
 _base_mip_level_: integer, +
-_level_count_: integer, +
+_level_count_: integer or '_remaining_' (defaults to 1), +
 _base_array_layer_: integer, +
-_layer_count_: integer, +
+_layer_count_: integer or '_remaining_' (defaults to 1), +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkImageSubresourceRange[VkImageSubresourceRange])#
 
 
