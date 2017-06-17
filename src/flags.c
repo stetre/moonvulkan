@@ -1793,7 +1793,6 @@ static VkFlags checkformatfeatureflags(lua_State *L, int arg)
         CASE(VK_FORMAT_FEATURE_BLIT_SRC_BIT, "blit src");
         CASE(VK_FORMAT_FEATURE_BLIT_DST_BIT, "blit dst");
         CASE(VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT, "sampled image filter linear");
-        CASE(VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_IMG, "sampled image filter cubic img");
 #undef CASE
         return (VkFlags)luaL_argerror(L, --arg, badvalue(L,s));
         done: ;
@@ -1821,7 +1820,6 @@ static int pushformatfeatureflags(lua_State *L, VkFlags flags)
         CASE(VK_FORMAT_FEATURE_BLIT_SRC_BIT, "blit src");
         CASE(VK_FORMAT_FEATURE_BLIT_DST_BIT, "blit dst");
         CASE(VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT, "sampled image filter linear");
-        CASE(VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_IMG, "sampled image filter cubic img");
 #undef CASE
 
     return n;
@@ -1849,7 +1847,6 @@ static int FormatFeatureFlags(lua_State *L)
     ADD(FORMAT_FEATURE_BLIT_SRC_BIT);\
     ADD(FORMAT_FEATURE_BLIT_DST_BIT);\
     ADD(FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT);\
-    ADD(FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_IMG);\
 
 
 /*----------------------------------------------------------------------*

@@ -582,14 +582,6 @@ void moonvulkan_open_enums(lua_State *L)
     ADD(FORMAT_ASTC_12x10_SRGB_BLOCK, "astc 12x10 srgb block");
     ADD(FORMAT_ASTC_12x12_UNORM_BLOCK, "astc 12x12 unorm block");
     ADD(FORMAT_ASTC_12x12_SRGB_BLOCK, "astc 12x12 srgb block");
-    ADD(FORMAT_PVRTC1_2BPP_UNORM_BLOCK_IMG, "pvrtc1 2bpp unorm block img");
-    ADD(FORMAT_PVRTC1_4BPP_UNORM_BLOCK_IMG, "pvrtc1 4bpp unorm block img");
-    ADD(FORMAT_PVRTC2_2BPP_UNORM_BLOCK_IMG, "pvrtc2 2bpp unorm block img");
-    ADD(FORMAT_PVRTC2_4BPP_UNORM_BLOCK_IMG, "pvrtc2 4bpp unorm block img");
-    ADD(FORMAT_PVRTC1_2BPP_SRGB_BLOCK_IMG, "pvrtc1 2bpp srgb block img");
-    ADD(FORMAT_PVRTC1_4BPP_SRGB_BLOCK_IMG, "pvrtc1 4bpp srgb block img");
-    ADD(FORMAT_PVRTC2_2BPP_SRGB_BLOCK_IMG, "pvrtc2 2bpp srgb block img");
-    ADD(FORMAT_PVRTC2_4BPP_SRGB_BLOCK_IMG, "pvrtc2 4bpp srgb block img");
 
     domain = DOMAIN_IMAGE_TYPE; /* VkImageType */
     ADD(IMAGE_TYPE_1D, "1d");
@@ -754,7 +746,6 @@ void moonvulkan_open_enums(lua_State *L)
     domain = DOMAIN_FILTER; /* VkFilter */
     ADD(FILTER_NEAREST, "nearest");
     ADD(FILTER_LINEAR, "linear");
-    ADD(FILTER_CUBIC_IMG, "cubic img");
 
     domain = DOMAIN_SAMPLER_MIPMAP_MODE; /* VkSamplerMipmapMode */
     ADD(SAMPLER_MIPMAP_MODE_NEAREST, "nearest");
