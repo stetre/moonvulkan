@@ -484,7 +484,7 @@ static int GetPhysicalDeviceSurfacePresentModes(lua_State *L)
             {
             pushpresentmode(L, modes[i]);
             lua_pushboolean(L, 1);
-            lua_rawset(L, -2);
+            lua_rawset(L, -3);
             }
         }
     else
