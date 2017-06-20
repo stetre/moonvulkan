@@ -131,15 +131,17 @@ do {                                                \
 #define GetNumber(name, sname) GetNumberOpt(name, sname, 0) 
 
 #define GetIntegerOpt(name, sname, defval) do {     \
+    int isnum_;                                     \
     lua_pushstring(L, sname);                       \
     lua_rawget(L, arg);                             \
     err = 0;                                        \
-    if(lua_isinteger(L, -1))                        \
-        p->name = lua_tointeger(L, -1);             \
-    else if(lua_isnoneornil(L, -1))                 \
+    if(lua_isnoneornil(L, -1))                      \
         p->name = defval;                           \
     else                                            \
-        err = ERR_TYPE;                             \
+        {                                           \
+        p->name = lua_tointegerx(L, -1, &isnum_);   \
+        if(!isnum_) err = ERR_TYPE;                 \
+        }                                           \
     lua_pop(L, 1);                                  \
     if(err)                                         \
         return fielderror(L, sname, err);           \
@@ -2736,7 +2738,7 @@ static int echeckpipelineviewportstatecreateinfo(lua_State *L, int arg, VkPipeli
     if(err == ERR_NOTPRESENT)
         POPERROR();
     else
-		p->viewportCount = count;
+        p->viewportCount = count;
 /*
     else if(count != p->viewportCount)
         { freepipelineviewportstatecreateinfo(L, p); return fielderror(L, F, ERR_LENGTH); }
@@ -2750,7 +2752,7 @@ static int echeckpipelineviewportstatecreateinfo(lua_State *L, int arg, VkPipeli
     if(err == ERR_NOTPRESENT)
         POPERROR();
     else
-		p->scissorCount = count;
+        p->scissorCount = count;
 /*
     else if(count != p->scissorCount)
         { freepipelineviewportstatecreateinfo(L, p); return fielderror(L, F, ERR_LENGTH); }
