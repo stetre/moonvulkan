@@ -36,8 +36,10 @@ https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vk
 https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetPhysicalDeviceSurfaceFormats2KHR[vkGetPhysicalDeviceSurfaceFormats2KHR].#
 
 [[get_physical_device_surface_present_modes]]
-* {<<presentmode, _presentmode_>>} = *get_physical_device_surface_present_modes*(<<physical_device, _physdev_>>, _surface_) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetPhysicalDeviceSurfacePresentModesKHR[vkGetPhysicalDeviceSurfacePresentModesKHR].#
+* {<<presentmode, _presentmode_>>} = *get_physical_device_surface_present_modes*(<<physical_device, _physdev_>>, _surface_, [_byname_]) +
+[small]#If _byname_=_true_, then a table of booleans indexed by _presentmode_ is returned instead
+of the {_presentmode_} array. +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetPhysicalDeviceSurfacePresentModesKHR[vkGetPhysicalDeviceSurfacePresentModesKHR].#
 
 
 ////

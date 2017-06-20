@@ -459,6 +459,7 @@ static int GetPhysicalDeviceSurfacePresentModes(lua_State *L)
     ud_t *ud;
     VkPhysicalDevice physdev = checkphysical_device(L, 1, &ud);
     VkSurfaceKHR surface = checksurface(L, 2, NULL);
+    int byname = optboolean(L, 3, 0);
 
     CheckInstancePfn(L, ud, GetPhysicalDeviceSurfacePresentModesKHR);
     lua_newtable(L);
@@ -476,10 +477,23 @@ static int GetPhysicalDeviceSurfacePresentModes(lua_State *L)
         CheckError(L, ec);
         return 0;
         }
-    for(i = 0; i < count; i++)
+
+    if(byname)
         {
-        pushpresentmode(L, modes[i]);
-        lua_rawseti(L, -2, i+1);
+        for(i = 0; i < count; i++)
+            {
+            pushpresentmode(L, modes[i]);
+            lua_pushboolean(L, 1);
+            lua_rawset(L, -2);
+            }
+        }
+    else
+        {
+        for(i = 0; i < count; i++)
+            {
+            pushpresentmode(L, modes[i]);
+            lua_rawseti(L, -2, i+1);
+            }
         }
     Free(L, modes);
     return 1;

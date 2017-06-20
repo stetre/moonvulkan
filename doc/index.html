@@ -2524,8 +2524,10 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/
 <div id="get_physical_device_surface_present_modes" class="ulist">
 <ul>
 <li>
-<p>{<a href="#presentmode"><em>presentmode</em></a>} = <strong>get_physical_device_surface_present_modes</strong>(<a href="#physical_device"><em>physdev</em></a>, <em>surface</em>)<br>
-<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetPhysicalDeviceSurfacePresentModesKHR">vkGetPhysicalDeviceSurfacePresentModesKHR</a>.</span></p>
+<p>{<a href="#presentmode"><em>presentmode</em></a>} = <strong>get_physical_device_surface_present_modes</strong>(<a href="#physical_device"><em>physdev</em></a>, <em>surface</em>, [<em>byname</em>])<br>
+<span class="small">If <em>byname</em>=<em>true</em>, then a table of booleans indexed by <em>presentmode</em> is returned instead
+of the {<em>presentmode</em>} array.<br>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetPhysicalDeviceSurfacePresentModesKHR">vkGetPhysicalDeviceSurfacePresentModesKHR</a>.</span></p>
 </li>
 </ul>
 </div>
