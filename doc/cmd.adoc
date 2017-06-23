@@ -212,13 +212,13 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.ht
 * *cmd_set_event*(_cb_, <<event, _event_>>, <<pipelinestageflags, _pipelinestageflags_>>) +
 [small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCmdSetEvent[vkCmdSetEvent].#
 
-[[cmd_set_scissor]]
-* *cmd_set_scissor*(_cb_, _first_, {<<rect2d, _rect2d_>>}) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCmdSetScissor[vkCmdSetScissor].#
-
 [[cmd_set_line_width]]
 * *cmd_set_line_width*(_cb_, [_linewidth_ = 1.0]) +
 [small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCmdSetLineWidth[vkCmdSetLineWidth].#
+
+[[cmd_set_scissor]]
+* *cmd_set_scissor*(_cb_, _first_, {<<rect2d, _rect2d_>>}) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCmdSetScissor[vkCmdSetScissor].#
 
 [[cmd_set_stencil_compare_mask]]
 * *cmd_set_stencil_compare_mask*(_cb_, _face_mask_, _compare_mask_) +
