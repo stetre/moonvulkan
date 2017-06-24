@@ -31,9 +31,9 @@ static int freeinstance(lua_State *L, ud_t *ud)
     const VkAllocationCallbacks *allocator = ud->allocator;
     PFN_vkDestroyInstance DestroyInstance = ud->idt->DestroyInstance;
     freechildren(L, DEBUG_REPORT_CALLBACK_MT, ud);
-    freechildren(L, SURFACE_MT, ud);
     freechildren(L, DEVICE_MT, ud);
     freechildren(L, PHYSICAL_DEVICE_MT, ud);
+    freechildren(L, SURFACE_MT, ud);
     if(ud->idt) Free(L, ud->idt);
     if(!freeuserdata(L, ud))
         return 0; /* double call */
