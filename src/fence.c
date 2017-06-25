@@ -45,7 +45,7 @@ static int Create(lua_State *L)
     VkFenceCreateInfo info;
 
     VkDevice device = checkdevice(L, 1, &device_ud);
-    const VkAllocationCallbacks *allocator = optallocator(L, 2);
+    const VkAllocationCallbacks *allocator = optallocator(L, 3);
     info.sType = VK_STRUCTURE_TYPE_FENCE_CREATE_INFO;
     info.pNext = NULL;
     info.flags = optflags(L, 2, 0);
