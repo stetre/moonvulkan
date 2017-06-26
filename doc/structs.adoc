@@ -670,7 +670,7 @@ _sample_mask_: {integer}, +
 
 * [[pipelinedepthstencilstatecreateinfo]]
 [small]#*pipelinedepthstencilstatecreateinfo* = { +
-_flags_: <<pipelinecolorblendstatecreateflags, pipelinecolorblendstatecreateflags>>, +
+_flags_: <<pipelinedepthstencilstatecreateflags, pipelinedepthstencilstatecreateflags>>, +
 _depth_test_enable_: boolean, +
 _depth_write_enable_: boolean, +
 _depth_compare_op_: <<compareop, compareop>>, +
