@@ -97,7 +97,6 @@ include::other_khr.adoc[]
 include::debug.adoc[]
 
 include::structs.adoc[]
-include::constructors.adoc[]
 
 include::enums.adoc[]
 include::flags.adoc[]
@@ -106,6 +105,7 @@ include::flags.adoc[]
 == Miscellanea
 include::versions.adoc[]
 include::methods.adoc[]
+include::constructors.adoc[]
 include::allocators.adoc[]
 include::creating_surfaces.adoc[]
 include::datahandling.adoc[]

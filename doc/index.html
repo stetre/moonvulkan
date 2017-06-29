@@ -806,17 +806,14 @@ p.tableblock.header { color: #6d6e71; }
 <li><a href="#_debug_ext">Debug (EXT)</a></li>
 </ul>
 </li>
-<li><a href="#structs">Structs</a>
-<ul class="sectlevel2">
-<li><a href="#constructors">Constructors</a></li>
-</ul>
-</li>
+<li><a href="#structs">Structs</a></li>
 <li><a href="#enums">Enums</a></li>
 <li><a href="#flags">Flags</a></li>
 <li><a href="#miscellanea">Miscellanea</a>
 <ul class="sectlevel2">
 <li><a href="#versions">Version handling</a></li>
 <li><a href="#commonmethods">Common methods</a></li>
+<li><a href="#constructors">Constructors</a></li>
 <li><a href="#allocators">Custom allocators</a></li>
 <li><a href="#creating_surfaces">Creating surfaces</a></li>
 <li><a href="#datahandling">Data handling</a></li>
@@ -3545,7 +3542,8 @@ with 1-based integer keys and no gaps, a.k.a. 'sequence' in Lua&#8217;s jargon).
 <em>aspect_mask</em>: <a href="#imageaspectflags">imageaspectflags</a>,<br>
 <em>mip_level</em>: integer,<br>
 <em>array_layer</em>: integer,<br>
-} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkImageSubresource">VkImageSubresource</a>)</span></p>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkImageSubresource">VkImageSubresource</a>)<br>
+<a href="#constructors">Constructor</a>: <strong>imagesubresource</strong>(<em>aspect_mask</em>, <em>mip_level</em>, <em>array_layer</em>)</span></p>
 </li>
 <li>
 <p><a id="imagesubresourcerange"></a>
@@ -3555,7 +3553,8 @@ with 1-based integer keys and no gaps, a.k.a. 'sequence' in Lua&#8217;s jargon).
 <em>level_count</em>: integer or '<em>remaining</em>' (defaults to 1),<br>
 <em>base_array_layer</em>: integer,<br>
 <em>layer_count</em>: integer or '<em>remaining</em>' (defaults to 1),<br>
-} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkImageSubresourceRange">VkImageSubresourceRange</a>)</span></p>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkImageSubresourceRange">VkImageSubresourceRange</a>)<br>
+<a href="#constructors">Constructor</a>: <strong>imagesubresourcerange</strong>(<em>aspect_mask</em>, <em>base_mip_level</em>, <em>level_count</em>, <em>base_array_layer</em>, <em>layer_count</em>)</span></p>
 </li>
 <li>
 <p><a id="pushconstantrange"></a>
@@ -3563,7 +3562,8 @@ with 1-based integer keys and no gaps, a.k.a. 'sequence' in Lua&#8217;s jargon).
 <em>stage_flags</em>: <a href="#shaderstageflags">shaderstageflags</a>,<br>
 <em>offset</em>: integer,<br>
 <em>size</em>: integer,<br>
-} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPushConstantRange">VkPushConstantRange</a>)</span></p>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPushConstantRange">VkPushConstantRange</a>)<br>
+<a href="#constructors">Constructor</a>: <strong>pushconstantrange</strong>(<em>stage_flags</em>, <em>offset</em>, <em>size</em>)</span></p>
 </li>
 <li>
 <p><a id="descriptorpoolsize"></a>
@@ -3580,7 +3580,8 @@ with 1-based integer keys and no gaps, a.k.a. 'sequence' in Lua&#8217;s jargon).
 <em>descriptor_count</em>: integer,<br>
 <em>stage_flags</em>: <a href="#shaderstageflags">shaderstageflags</a>,<br>
 <em>immutable_samplers</em>: {<a href="#sampler">sampler</a>},<br>
-} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkDescriptorSetLayoutBinding">VkDescriptorSetLayoutBinding</a>)</span></p>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkDescriptorSetLayoutBinding">VkDescriptorSetLayoutBinding</a>)<br>
+<a href="#constructors">Constructor</a>: <strong>descriptorsetlayoutbinding</strong>(<em>binding</em>, <em>descriptor_type</em>, <em>descriptor_count</em>, <em>stage_flags</em>, {<em>immutable_samplers</em>})</span></p>
 </li>
 </ul>
 </div>
@@ -3857,7 +3858,8 @@ with 1-based integer keys and no gaps, a.k.a. 'sequence' in Lua&#8217;s jargon).
 <em>mip_level</em>: integer,<br>
 <em>base_array_layer</em>: integer,<br>
 <em>layer_count</em>: integer,<br>
-} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkImageSubresourceLayers">VkImageSubresourceLayers</a>)</span></p>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkImageSubresourceLayers">VkImageSubresourceLayers</a>)<br>
+<a href="#constructors">Constructor</a>: <strong>imagesubresourcelayers</strong>(<em>aspect_mask</em>, <em>mip_level</em>, <em>base_array_layer</em>, <em>layer_count</em>)</span></p>
 </li>
 <li>
 <p><a id="bufferimagecopy"></a>
@@ -3921,44 +3923,51 @@ with 1-based integer keys and no gaps, a.k.a. 'sequence' in Lua&#8217;s jargon).
 <p><a id="viewport"></a>
 <span class="small"><strong>viewport</strong> = {<br>
 <em>x</em>, <em>y</em>, <em>width</em>, <em>height</em>, <em>min_depth</em>, <em>max_depth</em>: float,<br>
-} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkViewport">VkViewport</a>)</span></p>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkViewport">VkViewport</a>)<br>
+<a href="#constructors">Constructor</a>: <strong>viewport</strong>(<em>x</em>, <em>y</em>, <em>width</em>, <em>height</em>, <em>min_depth</em>, <em>max_depth</em>)</span></p>
 </li>
 <li>
 <p><a id="offset2d"></a>
 <span class="small"><strong>offset2d</strong> = {<br>
 <em>x</em>, <em>y</em>: integer<br>
-} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkOffset2D">VkOffset2D</a>)</span></p>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkOffset2D">VkOffset2D</a>)<br>
+<a href="#constructors">Constructor</a>: <strong>offset2d</strong>(<em>x</em>, <em>y</em>)</span></p>
 </li>
 <li>
 <p><a id="offset3d"></a>
 <span class="small"><strong>offset3d</strong> = {<br>
 <em>x</em>, <em>y</em>, <em>z</em>: integer<br>
-} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkOffset3D">VkOffset3D</a>)</span></p>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkOffset3D">VkOffset3D</a>)<br>
+<a href="#constructors">Constructor</a>: <strong>offset3d</strong>(<em>x</em>, <em>y</em>, <em>z</em>)</span></p>
 </li>
 <li>
 <p><a id="extent2d"></a>
 <span class="small"><strong>extent2d</strong> = {<br>
 <em>width</em>, <em>height</em>: integer<br>
-} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkExtent2D">VkExtent2D</a>)</span></p>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkExtent2D">VkExtent2D</a>)<br>
+<a href="#constructors">Constructor</a>: <strong>extent2d</strong>(<em>width</em>, <em>height</em>)</span></p>
 </li>
 <li>
 <p><a id="extent3d"></a>
 <span class="small"><strong>extent3d</strong> = {<br>
 <em>width</em>, <em>height</em>, <em>depth</em>: integer<br>
-} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkExtent3D">VkExtent3D</a>)</span></p>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkExtent3D">VkExtent3D</a>)<br>
+<a href="#constructors">Constructor</a>: <strong>extent3d</strong>(<em>width</em>, <em>height</em>, <em>depth</em>)</span></p>
 </li>
 <li>
 <p><a id="rect2d"></a>
 <span class="small"><strong>rect2d</strong> = {<br>
 <em>offset</em>: <a href="#offset2d">offset2d</a>,<br>
 <em>extent</em>: <a href="#extent2d">extent2d</a><br>
-} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkRect2D">VkRect2D</a>)</span></p>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkRect2D">VkRect2D</a>)<br>
+<a href="#constructors">Constructor</a>: <strong>rect2d</strong>(<em>x</em>, <em>y</em>, <em>width</em>, <em>height</em>)</span></p>
 </li>
 <li>
 <p><a id="componentmapping"></a>
 <span class="small"><strong>componentmapping</strong> = {<br>
 <em>r</em>, <em>g</em>, <em>b</em>, <em>a</em>: <a href="#componentswizzle">componentswizzle</a><br>
-} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkComponentMapping">VkComponentMapping</a>)</span></p>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkComponentMapping">VkComponentMapping</a>)<br>
+<a href="#constructors">Constructor</a>: <strong>componentmapping</strong>(<em>r</em>, <em>g</em>, <em>b</em>, <em>a</em>)</span></p>
 </li>
 <li>
 <p><a id="clearcolorvalue"></a>
@@ -4186,124 +4195,6 @@ Note2: This field is present only if the relevant extensions are enabled (rfr: <
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkDescriptorUpdateTemplateEntryKHR">VkDescriptorUpdateTemplateEntryKHR</a>)</span></p>
 </li>
 </ul>
-</div>
-<div class="sect2">
-<h3 id="constructors">Constructors</h3>
-<div class="paragraph">
-<p>Instances of MoonVulkan <a href="#structs">structs</a> are usually created manually, by simply
-creating Lua tables with the specified fields.</p>
-</div>
-<div class="paragraph">
-<p>Alternatively, for a few struct types, the <strong>table constructors</strong> listed in this section
-can be used to save typing and reduce code verbosity.
-The following example illustrates this for the <a href="#extent2d">extent2d</a> struct type.</p>
-</div>
-<div class="listingblock">
-<div class="title">Example</div>
-<div class="content">
-<pre class="pygments highlight"><code data-lang="lua"> <span class="tok-c1">-- Two alternative ways to create an instance of the &#39;offset2d&#39; type:</span>
- <span class="tok-n">ext1</span> <span class="tok-o">=</span> <span class="tok-p">{</span> <span class="tok-n">width</span><span class="tok-o">=</span><span class="tok-mi">300</span><span class="tok-p">,</span> <span class="tok-n">height</span><span class="tok-o">=</span><span class="tok-mi">200</span> <span class="tok-p">}</span>   <span class="tok-c1">-- manually</span>
- <span class="tok-n">ext2</span> <span class="tok-o">=</span> <span class="tok-n">vk</span><span class="tok-p">.</span><span class="tok-n">extent2d</span><span class="tok-p">(</span><span class="tok-mi">300</span><span class="tok-p">,</span> <span class="tok-mi">200</span><span class="tok-p">)</span>       <span class="tok-c1">-- using the table constructor</span></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Whenever a table constructors accepts a <a href="#flags">flags</a> parameter, this can be
-passed either as an integer or as a table of admitted literals for that flags type.
-This is illustrated in the following example for the <em>aspect_mask</em> parameter of
-the <a href="#vk.imagesubresource">imagesubresource</a>(&nbsp;) table constructor.</p>
-</div>
-<div class="listingblock">
-<div class="title">Example</div>
-<div class="content">
-<pre class="pygments highlight"><code data-lang="lua"> <span class="tok-c1">-- Two alternative way of passing an &#39;imageaspectflags&#39; parameter:</span>
- <span class="tok-n">subres1</span> <span class="tok-o">=</span> <span class="tok-n">vk</span><span class="tok-p">.</span><span class="tok-n">imagesubresource</span><span class="tok-p">(</span><span class="tok-n">vk</span><span class="tok-p">.</span><span class="tok-n">IMAGE_ASPECT_COLOR_BIT</span><span class="tok-p">,</span> <span class="tok-mi">0</span><span class="tok-p">,</span> <span class="tok-mi">0</span><span class="tok-p">)</span>  <span class="tok-c1">-- as an integer</span>
- <span class="tok-n">subres2</span> <span class="tok-o">=</span> <span class="tok-n">vk</span><span class="tok-p">.</span><span class="tok-n">imagesubresource</span><span class="tok-p">({</span><span class="tok-s1">&#39;</span><span class="tok-s">color&#39;</span><span class="tok-p">},</span> <span class="tok-mi">0</span><span class="tok-p">,</span> <span class="tok-mi">0</span><span class="tok-p">)</span> <span class="tok-c1">-- as a table of admitted literals</span></code></pre>
-</div>
-</div>
-<div id="vk.offset2d" class="ulist">
-<ul>
-<li>
-<p><a href="#offset2d"><em>offset2d</em></a> = <strong>offset2d</strong>(<em>x</em>, <em>y</em>)</p>
-</li>
-</ul>
-</div>
-<div id="vk.offset3d" class="ulist">
-<ul>
-<li>
-<p><a href="#offset3d"><em>offset3d</em></a> = <strong>offset3d</strong>(<em>x</em>, <em>y</em>, <em>z</em>)</p>
-</li>
-</ul>
-</div>
-<div id="vk.extent2d" class="ulist">
-<ul>
-<li>
-<p><a href="#extent2d"><em>extent2d</em></a> = <strong>extent2d</strong>(<em>width</em>, <em>height</em>)</p>
-</li>
-</ul>
-</div>
-<div id="vk.extent3d" class="ulist">
-<ul>
-<li>
-<p><a href="#extent3d"><em>extent3d</em></a> = <strong>extent3d</strong>(<em>width</em>, <em>height</em>, <em>depth</em>)</p>
-</li>
-</ul>
-</div>
-<div id="vk.rect2d" class="ulist">
-<ul>
-<li>
-<p><a href="#rect2d"><em>rect2d</em></a> = <strong>rect2d</strong>(<em>x</em>, <em>y</em>, <em>width</em>, <em>height</em>)</p>
-</li>
-</ul>
-</div>
-<div id="vk.viewport" class="ulist">
-<ul>
-<li>
-<p><a href="#viewport"><em>viewport</em></a> = <strong>viewport</strong>(<em>x</em>, <em>y</em>, <em>width</em>, <em>height</em>, <em>min_depth</em>, <em>max_depth</em>)</p>
-</li>
-</ul>
-</div>
-<div id="vk.componentmapping" class="ulist">
-<ul>
-<li>
-<p><a href="#componentmapping"><em>componentmapping</em></a> = <strong>componentmapping</strong>(<em>r</em>, <em>g</em>, <em>b</em>, <em>a</em>)</p>
-</li>
-</ul>
-</div>
-<div id="vk.imagesubresource" class="ulist">
-<ul>
-<li>
-<p><a href="#imagesubresource"><em>imagesubresource</em></a> = <strong>imagesubresource</strong>(<em>aspect_mask</em>, <em>mip_level</em>, <em>array_layer</em>)</p>
-</li>
-</ul>
-</div>
-<div id="vk.imagesubresourcelayers" class="ulist">
-<ul>
-<li>
-<p><a href="#imagesubresourcelayers"><em>imagesubresourcelayers</em></a> = <strong>imagesubresourcelayers</strong>(<em>aspect_mask</em>, <em>mip_level</em>, <em>base_array_layer</em>, <em>layer_count</em>)</p>
-</li>
-</ul>
-</div>
-<div id="vk.imagesubresourcerange" class="ulist">
-<ul>
-<li>
-<p><a href="#imagesubresourcerange"><em>imagesubresourcerange</em></a> = <strong>imagesubresourcerange</strong>(<em>aspect_mask</em>, <em>base_mip_level</em>, <em>level_count</em>, <em>base_array_layer</em>, <em>layer_count</em>)</p>
-</li>
-</ul>
-</div>
-<div id="vk.pushconstantrange" class="ulist">
-<ul>
-<li>
-<p><a href="#pushconstantrange"><em>pushconstantrange</em></a> = <strong>pushconstantrange</strong>(<em>stage_flags</em>, <em>offset</em>, <em>size</em>)</p>
-</li>
-</ul>
-</div>
-<div id="vk.descriptorsetlayoutbinding" class="ulist">
-<ul>
-<li>
-<p><a href="#descriptorsetlayoutbinding"><em>descriptorsetlayoutbinding</em></a> = <strong>descriptorsetlayoutbinding</strong>(<em>binding</em>, <em>descriptor_type</em>, <em>descriptor_count</em>, <em>stage_flags</em>, {<em>immutable_samplers</em>})</p>
-</li>
-</ul>
-</div>
 </div>
 </div>
 </div>
@@ -5004,6 +4895,44 @@ The <strong>vk.type</strong>(&nbsp;) function returns <em>nil</em> if <em>object
 </div>
 </div>
 <div class="sect2">
+<h3 id="constructors">Constructors</h3>
+<div class="paragraph">
+<p>MoonVulkan <a href="#structs">structs</a> are plain Lua tables, and thus an instance of a struct is
+usually created manually by simply creating a new table with the specified fields.</p>
+</div>
+<div class="paragraph">
+<p>Alternatively, for a few struct types, a <strong>table constructor</strong> is provided and can be used
+to save typing and reduce code verbosity. The constructor for a struct type, if available,
+is a function of the <strong>vk</strong> table, having the same name of the struct type, and returning a
+table initialized with the passed values.</p>
+</div>
+<div class="paragraph">
+<p>Available constructors are listed just below the definitions of their respective types,
+see for example the <a href="#extent2d">extent2d</a> type (notice that, for the sake of brevity, the
+return value is not indicated).</p>
+</div>
+<div class="paragraph">
+<p>Note that whenever a table constructor accepts a <a href="#flags">flags</a> parameter, this can
+be passed either as integer code, or as a table of admitted literals for that flags type.</p>
+</div>
+<div class="paragraph">
+<p>The following examples illustrate the use of constructors for the <a href="#extent2d">extent2d</a>
+and  <a href="#vk.imagesubresource">imagesubresource</a> struct types:</p>
+</div>
+<div class="listingblock">
+<div class="title">Examples</div>
+<div class="content">
+<pre class="pygments highlight"><code data-lang="lua"> <span class="tok-c1">-- Two alternative ways to create an instance of the &#39;offset2d&#39; type:</span>
+ <span class="tok-n">ext1</span> <span class="tok-o">=</span> <span class="tok-p">{</span> <span class="tok-n">width</span><span class="tok-o">=</span><span class="tok-mi">300</span><span class="tok-p">,</span> <span class="tok-n">height</span><span class="tok-o">=</span><span class="tok-mi">200</span> <span class="tok-p">}</span>   <span class="tok-c1">-- manually</span>
+ <span class="tok-n">ext2</span> <span class="tok-o">=</span> <span class="tok-n">vk</span><span class="tok-p">.</span><span class="tok-n">extent2d</span><span class="tok-p">(</span><span class="tok-mi">300</span><span class="tok-p">,</span> <span class="tok-mi">200</span><span class="tok-p">)</span>       <span class="tok-c1">-- using the table constructor</span>
+
+ <span class="tok-c1">-- Two alternative way of passing an &#39;imageaspectflags&#39; parameter:</span>
+ <span class="tok-n">subres1</span> <span class="tok-o">=</span> <span class="tok-n">vk</span><span class="tok-p">.</span><span class="tok-n">imagesubresource</span><span class="tok-p">(</span><span class="tok-n">vk</span><span class="tok-p">.</span><span class="tok-n">IMAGE_ASPECT_COLOR_BIT</span><span class="tok-p">,</span> <span class="tok-mi">0</span><span class="tok-p">,</span> <span class="tok-mi">0</span><span class="tok-p">)</span>  <span class="tok-c1">-- as an integer</span>
+ <span class="tok-n">subres2</span> <span class="tok-o">=</span> <span class="tok-n">vk</span><span class="tok-p">.</span><span class="tok-n">imagesubresource</span><span class="tok-p">({</span><span class="tok-s1">&#39;</span><span class="tok-s">color&#39;</span><span class="tok-p">},</span> <span class="tok-mi">0</span><span class="tok-p">,</span> <span class="tok-mi">0</span><span class="tok-p">)</span> <span class="tok-c1">-- as a table of admitted literals</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
 <h3 id="allocators">Custom allocators</h3>
 <div class="paragraph">
 <p>This section describes how to use custom memory allocators for Vulkan objects in MoonVulkan.</p>
@@ -5492,7 +5421,7 @@ binding library to a dynamic, garbage-collected language is not the way to go).<
 <div id="footer">
 <div id="footer-text">
 Version 0.3<br>
-Last updated 2017-05-24 21:35:56 CEST
+Last updated 2017-06-29 18:04:41 CEST
 </div>
 </div>
 </body>

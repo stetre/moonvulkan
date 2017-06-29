@@ -2,78 +2,33 @@
 [[constructors]]
 === Constructors
 
-Instances of MoonVulkan <<structs, structs>> are usually created manually, by simply
-creating Lua tables with the specified fields.
+MoonVulkan <<structs, structs>> are plain Lua tables, and thus an instance of a struct is
+usually created manually by simply creating a new table with the specified fields.
 
-Alternatively, for a few struct types, the *table constructors* listed in this section 
-can be used to save typing and reduce code verbosity. 
-The following example illustrates this for the <<extent2d, extent2d>> struct type.
+Alternatively, for a few struct types, a *table constructor* is provided and can be used
+to save typing and reduce code verbosity. The constructor for a struct type, if available,
+is a function of the *vk* table, having the same name of the struct type, and returning a
+table initialized with the passed values.
 
-.Example
+Available constructors are listed just below the definitions of their respective types,
+see for example the <<extent2d, extent2d>> type (notice that, for the sake of brevity, the
+return value is not indicated).
+
+Note that whenever a table constructor accepts a <<flags, flags>> parameter, this can
+be passed either as integer code, or as a table of admitted literals for that flags type.
+
+The following examples illustrate the use of constructors for the <<extent2d, extent2d>>
+and  <<vk.imagesubresource, imagesubresource>> struct types:
+
+.Examples
 [source, lua, indent=1]
 ----
 -- Two alternative ways to create an instance of the 'offset2d' type:
 ext1 = { width=300, height=200 }   -- manually
 ext2 = vk.extent2d(300, 200)       -- using the table constructor
-----
 
-Whenever a table constructors accepts a <<flags, flags>> parameter, this can be 
-passed either as an integer or as a table of admitted literals for that flags type. 
-This is illustrated in the following example for the _aspect_mask_ parameter of 
-the <<vk.imagesubresource, imagesubresource>>(&nbsp;) table constructor.
-
-
-.Example
-[source, lua, indent=1]
-----
 -- Two alternative way of passing an 'imageaspectflags' parameter:
 subres1 = vk.imagesubresource(vk.IMAGE_ASPECT_COLOR_BIT, 0, 0)  -- as an integer
 subres2 = vk.imagesubresource({'color'}, 0, 0) -- as a table of admitted literals
 ----
-
-
-
-[[vk.offset2d]]
-* <<offset2d, _offset2d_>> = *offset2d*(_x_, _y_) 
-
-[[vk.offset3d]]
-* <<offset3d, _offset3d_>> = *offset3d*(_x_, _y_, _z_) 
-
-[[vk.extent2d]]
-* <<extent2d, _extent2d_>> = *extent2d*(_width_, _height_) 
-
-[[vk.extent3d]]
-* <<extent3d, _extent3d_>> = *extent3d*(_width_, _height_, _depth_) 
-
-[[vk.rect2d]]
-* <<rect2d, _rect2d_>> = *rect2d*(_x_, _y_, _width_, _height_) 
-
-[[vk.viewport]]
-* <<viewport, _viewport_>> = *viewport*(_x_, _y_, _width_, _height_, _min_depth_, _max_depth_) 
-
-[[vk.componentmapping]]
-* <<componentmapping, _componentmapping_>> = *componentmapping*(_r_, _g_, _b_, _a_)
-
-[[vk.imagesubresource]]
-* <<imagesubresource, _imagesubresource_>> = *imagesubresource*(_aspect_mask_, _mip_level_, _array_layer_)
- 
-
-[[vk.imagesubresourcelayers]]
-* <<imagesubresourcelayers, _imagesubresourcelayers_>> = *imagesubresourcelayers*(_aspect_mask_, _mip_level_, _base_array_layer_, _layer_count_)
-
-[[vk.imagesubresourcerange]]
-* <<imagesubresourcerange, _imagesubresourcerange_>> = *imagesubresourcerange*(_aspect_mask_, _base_mip_level_, _level_count_, _base_array_layer_, _layer_count_)
-
-[[vk.pushconstantrange]]
-* <<pushconstantrange, _pushconstantrange_>> = *pushconstantrange*(_stage_flags_, _offset_, _size_)
-
-[[vk.descriptorsetlayoutbinding]]
-* <<descriptorsetlayoutbinding, _descriptorsetlayoutbinding_>> = *descriptorsetlayoutbinding*(_binding_, _descriptor_type_, _descriptor_count_, _stage_flags_, {_immutable_samplers_})
-
-////
-
-[[vk.]]
-* <<, __>> = **(_x_, _y_) 
-
-////
 

@@ -458,7 +458,8 @@ _depth_pitch_: integer, +
 _aspect_mask_: <<imageaspectflags, imageaspectflags>>, +
 _mip_level_: integer, +
 _array_layer_: integer, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkImageSubresource[VkImageSubresource])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkImageSubresource[VkImageSubresource]) +
+<<constructors, Constructor>>: *imagesubresource*(_aspect_mask_, _mip_level_, _array_layer_)#
 
 * [[imagesubresourcerange]]
 [small]#*imagesubresourcerange* = { +
@@ -467,7 +468,8 @@ _base_mip_level_: integer, +
 _level_count_: integer or '_remaining_' (defaults to 1), +
 _base_array_layer_: integer, +
 _layer_count_: integer or '_remaining_' (defaults to 1), +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkImageSubresourceRange[VkImageSubresourceRange])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkImageSubresourceRange[VkImageSubresourceRange]) +
+<<constructors, Constructor>>: *imagesubresourcerange*(_aspect_mask_, _base_mip_level_, _level_count_, _base_array_layer_, _layer_count_)#
 
 
 * [[pushconstantrange]]
@@ -475,7 +477,8 @@ _layer_count_: integer or '_remaining_' (defaults to 1), +
 _stage_flags_: <<shaderstageflags, shaderstageflags>>, +
 _offset_: integer, +
 _size_: integer, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPushConstantRange[VkPushConstantRange])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPushConstantRange[VkPushConstantRange]) +
+<<constructors, Constructor>>: *pushconstantrange*(_stage_flags_, _offset_, _size_)#
 
 
 
@@ -493,7 +496,8 @@ _descriptor_type_: <<descriptortype, descriptortype>> *[R]*, +
 _descriptor_count_: integer, +
 _stage_flags_: <<shaderstageflags, shaderstageflags>>, +
 _immutable_samplers_: {<<sampler, sampler>>}, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkDescriptorSetLayoutBinding[VkDescriptorSetLayoutBinding])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkDescriptorSetLayoutBinding[VkDescriptorSetLayoutBinding]) +
+<<constructors, Constructor>>: *descriptorsetlayoutbinding*(_binding_, _descriptor_type_, _descriptor_count_, _stage_flags_, {_immutable_samplers_})#
 
 
 '''
@@ -754,7 +758,8 @@ _aspect_flags_: <<imageaspectflags, imageaspectflags>>, +
 _mip_level_: integer, +
 _base_array_layer_: integer, +
 _layer_count_: integer, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkImageSubresourceLayers[VkImageSubresourceLayers])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkImageSubresourceLayers[VkImageSubresourceLayers]) +
+<<constructors, Constructor>>: *imagesubresourcelayers*(_aspect_mask_, _mip_level_, _base_array_layer_, _layer_count_)#
 
 * [[bufferimagecopy]]
 [small]#*bufferimagecopy* = { +
@@ -809,38 +814,45 @@ _subresource_range_: <<imagesubresourcerange, imagesubresourcerange>>, +
 * [[viewport]]
 [small]#*viewport* = { +
 _x_, _y_, _width_, _height_, _min_depth_, _max_depth_: float, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkViewport[VkViewport])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkViewport[VkViewport]) +
+<<constructors, Constructor>>: *viewport*(_x_, _y_, _width_, _height_, _min_depth_, _max_depth_)#
 
 * [[offset2d]]
 [small]#*offset2d* = { +
 _x_, _y_: integer +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkOffset2D[VkOffset2D])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkOffset2D[VkOffset2D]) +
+<<constructors, Constructor>>: *offset2d*(_x_, _y_)#
 
 * [[offset3d]]
 [small]#*offset3d* = { +
 _x_, _y_, _z_: integer +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkOffset3D[VkOffset3D])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkOffset3D[VkOffset3D]) +
+<<constructors, Constructor>>: *offset3d*(_x_, _y_, _z_)#
 
 * [[extent2d]]
 [small]#*extent2d* = { +
 _width_, _height_: integer +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkExtent2D[VkExtent2D])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkExtent2D[VkExtent2D]) +
+<<constructors, Constructor>>: *extent2d*(_width_, _height_)#
 
 * [[extent3d]]
 [small]#*extent3d* = { +
 _width_, _height_, _depth_: integer +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkExtent3D[VkExtent3D])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkExtent3D[VkExtent3D]) +
+<<constructors, Constructor>>: *extent3d*(_width_, _height_, _depth_)#
 
 * [[rect2d]]
 [small]#*rect2d* = { +
 _offset_: <<offset2d, offset2d>>, +
 _extent_: <<extent2d, extent2d>> +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkRect2D[VkRect2D])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkRect2D[VkRect2D]) +
+<<constructors, Constructor>>: *rect2d*(_x_, _y_, _width_, _height_)#
 
 * [[componentmapping]]
 [small]#*componentmapping* = { +
 _r_, _g_, _b_, _a_: <<componentswizzle, componentswizzle>> +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkComponentMapping[VkComponentMapping])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkComponentMapping[VkComponentMapping]) +
+<<constructors, Constructor>>: *componentmapping*(_r_, _g_, _b_, _a_)#
 
 
 * [[clearcolorvalue]]
@@ -1054,5 +1066,6 @@ __: float, +
 __: integer, +
 __: <<, >>, +
 __: {<<, >>}, +
+
 ////
 
