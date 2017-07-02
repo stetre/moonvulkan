@@ -3347,31 +3347,49 @@ static int echeckwritedescriptorset(lua_State *L, int arg, VkWriteDescriptorSet 
     GetInteger(dstBinding, "dst_binding");
     GetInteger(dstArrayElement, "dst_array_element");
     GetDescriptorType(descriptorType, "descriptor_type");
-    /* image_info, buffer_info and texel_buffer_view are exclusive */
+    /* image_info, buffer_info and texel_buffer_view are exclusive and their
+     * presence depends on p->descriptorType: */
+    switch(p->descriptorType)
+        {
+        case VK_DESCRIPTOR_TYPE_SAMPLER:
+        case VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER:
+        case VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE:
+        case VK_DESCRIPTOR_TYPE_STORAGE_IMAGE:
+        case VK_DESCRIPTOR_TYPE_INPUT_ATTACHMENT:
 #define F "image_info"
-    PUSHFIELD(F);
-    p->pImageInfo = echeckdescriptorimageinfolist(L, arg1, &count, &err);
-    POPFIELD();
-    if(err < 0) { freewritedescriptorset(L, p); return efielderror(L, F); }
-    if(err == ERR_NOTPRESENT) POPERROR();
-    if(count > 0) { p->descriptorCount = count; return 0; }
+            PUSHFIELD(F);
+            p->pImageInfo = echeckdescriptorimageinfolist(L, arg1, &count, &err);
+            POPFIELD();
+            if(err) { freewritedescriptorset(L, p); return efielderror(L, F); }
+            p->descriptorCount = count;
+            return 0;
 #undef F
+        case VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER:
+        case VK_DESCRIPTOR_TYPE_STORAGE_BUFFER:
+        case VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC:
+        case VK_DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC:
 #define F "buffer_info"
-    PUSHFIELD(F);
-    p->pBufferInfo = echeckdescriptorbufferinfolist(L, arg1, &count, &err);
-    POPFIELD();
-    if(err < 0) { freewritedescriptorset(L, p); return efielderror(L, F); }
-    if(err == ERR_NOTPRESENT) POPERROR();
-    if(count > 0) { p->descriptorCount = count; return 0; }
+            PUSHFIELD(F);
+            p->pBufferInfo = echeckdescriptorbufferinfolist(L, arg1, &count, &err);
+            POPFIELD();
+            if(err) { freewritedescriptorset(L, p); return efielderror(L, F); }
+            p->descriptorCount = count;
+            return 0;
 #undef F
+        case VK_DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER:
+        case VK_DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER:
 #define F "texel_buffer_view"
-    PUSHFIELD(F);
-    p->pTexelBufferView = checkbuffer_viewlist(L, arg1, &count, &err, NULL);
-    POPFIELD();
-    if(err < 0) { freewritedescriptorset(L, p); return fielderror(L, F, err); }
-    if(err == ERR_NOTPRESENT) POPERROR();
-    p->descriptorCount = count;
+            PUSHFIELD(F);
+            p->pTexelBufferView = checkbuffer_viewlist(L, arg1, &count, &err, NULL);
+            POPFIELD();
+            if(err) { freewritedescriptorset(L, p); return fielderror(L, F, err); }
+            if(err == ERR_NOTPRESENT) POPERROR();
+            p->descriptorCount = count;
+            return 0;
 #undef F
+        default:
+            unexpected(L); /* unhandled descriptorType ? */
+        }
     return 0;
     }
 
