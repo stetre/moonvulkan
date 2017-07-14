@@ -147,6 +147,11 @@ int pushphysicaldeviceproperties(lua_State *L, VkPhysicalDeviceProperties *p);
 #define pushphysicaldeviceproperties2 moonvulkan_pushphysicaldeviceproperties2
 int pushphysicaldeviceproperties2(lua_State *L, VkPhysicalDeviceProperties2KHR *p);
 
+
+#define newphysicaldevicefeatures2 moonvulkan_newphysicaldevicefeatures2
+VkPhysicalDeviceFeatures2KHR* newphysicaldevicefeatures2(lua_State *L);
+#define freephysicaldevicefeatures2 moonvulkan_freephysicaldevicefeatures2
+void freephysicaldevicefeatures2(lua_State *L, VkPhysicalDeviceFeatures2KHR *p);
 #define pushphysicaldevicefeatures moonvulkan_pushphysicaldevicefeatures
 int pushphysicaldevicefeatures(lua_State *L, VkPhysicalDeviceFeatures *p);
 #define pushphysicaldevicefeatures2 moonvulkan_pushphysicaldevicefeatures2
@@ -197,11 +202,6 @@ int echeckimagesubresourcerange(lua_State *L, int arg, VkImageSubresourceRange *
 VkImageSubresourceRange* echeckimagesubresourcerangelist(lua_State *L, int arg, uint32_t *count, int *err);
 #define pushimagesubresourcerange moonvulkan_pushimagesubresourcerange
 int pushimagesubresourcerange(lua_State *L, VkImageSubresourceRange *p);
-
-#define echeckmemoryrequirements moonvulkan_echeckmemoryrequirements
-int echeckmemoryrequirements(lua_State *L, int arg, VkMemoryRequirements *p);
-#define pushmemoryrequirements moonvulkan_pushmemoryrequirements
-int pushmemoryrequirements(lua_State *L, VkMemoryRequirements *p);
 
 #define echeckrect2d moonvulkan_echeckrect2d
 int echeckrect2d(lua_State *L, int arg, VkRect2D *p);
@@ -263,8 +263,15 @@ VkImageMemoryBarrier* echeckimagememorybarrierlist(lua_State *L, int arg, uint32
 #define echeckmappedmemoryrangelist moonvulkan_echeckmappedmemoryrangelist
 VkMappedMemoryRange* echeckmappedmemoryrangelist(lua_State *L, int arg, uint32_t *count, int *err);
 
+#define pushmemoryrequirements moonvulkan_pushmemoryrequirements
+int pushmemoryrequirements(lua_State *L, VkMemoryRequirements *p);
+#define pushmemoryrequirements2 moonvulkan_pushmemoryrequirements2
+int pushmemoryrequirements2(lua_State *L, VkMemoryRequirements2KHR *p);
+
 #define pushsparseimagememoryrequirements moonvulkan_pushsparseimagememoryrequirements
 int pushsparseimagememoryrequirements(lua_State *L, VkSparseImageMemoryRequirements *p);
+#define pushsparseimagememoryrequirements2 moonvulkan_pushsparseimagememoryrequirements2
+int pushsparseimagememoryrequirements2(lua_State *L, VkSparseImageMemoryRequirements2KHR *p);
 
 #define pushsubresourcelayout moonvulkan_pushsubresourcelayout
 int pushsubresourcelayout(lua_State *L, VkSubresourceLayout *p);
@@ -355,5 +362,6 @@ int echeckpresentregions(lua_State *L, int arg, VkPresentRegionsKHR *p);
 void freedescriptorupdatetemplatecreateinfo(lua_State *L, VkDescriptorUpdateTemplateCreateInfoKHR *p);
 #define echeckdescriptorupdatetemplatecreateinfo moonvulkan_echeckdescriptorupdatetemplatecreateinfo
 int echeckdescriptorupdatetemplatecreateinfo(lua_State *L, int arg, VkDescriptorUpdateTemplateCreateInfoKHR *p);
+
 
 #endif /* structsDEFINED */

@@ -686,7 +686,7 @@ int echeckinstancecreateinfo(lua_State *L, int arg, VkInstanceCreateInfo *p)
     GetFlags(flags, "flags");
 
 #define F "application_info"
-    appinfo = (VkApplicationInfo*)Malloc(L, sizeof(VkApplicationInfo));
+    appinfo = MALLOC(L, VkApplicationInfo);
     if(!appinfo) return pusherror(L, ERR_MEMORY);
     PUSHFIELD(F);
     err = echeckapplicationinfo(L, arg1, appinfo);
@@ -752,98 +752,6 @@ static void freedevicequeuecreateinfolist(lua_State *L, void *list, uint32_t cou
 
 /* echeckdevicequeuecreateinfolist() */
 static ECHECKLISTFUNC(VkDeviceQueueCreateInfo, devicequeuecreateinfo, freedevicequeuecreateinfolist) 
-
-
-/* forward declarations */
-static int echeckphysicaldevicefeatures(lua_State *L, int arg, VkPhysicalDeviceFeatures *p);
-static int echeckphysicaldevicefeatures2(lua_State *L, int arg, VkPhysicalDeviceFeatures2KHR *p);
-static void freephysicaldevicefeatures2(lua_State *L, VkPhysicalDeviceFeatures2KHR *p);
-
-void freedevicecreateinfo(lua_State *L, VkDeviceCreateInfo *p)
-    {
-    if(!p) return;
-    if(p->pQueueCreateInfos) 
-        freedevicequeuecreateinfolist(L, (void*)p->pQueueCreateInfos,  p->queueCreateInfoCount);
-    if(p->ppEnabledLayerNames) 
-        freestringlist(L, (char**)p->ppEnabledLayerNames, p->enabledLayerCount);
-    if(p->ppEnabledExtensionNames) 
-        freestringlist(L,  (char**)p->ppEnabledExtensionNames, p->enabledExtensionCount);
-    if(p->pEnabledFeatures)
-        Free(L, (void*)p->pEnabledFeatures);
-    if(p->pNext)
-        freephysicaldevicefeatures2(L, (VkPhysicalDeviceFeatures2KHR*)p->pNext);
-    }
-
-int echeckdevicecreateinfo(lua_State *L, int arg, VkDeviceCreateInfo *p, ud_t *ud)
-    {
-    int arg1, err;
-    uint32_t count;
-    VkPhysicalDeviceFeatures *features;
-    VkPhysicalDeviceFeatures2KHR *features2;
-
-    ECHECK_PREAMBLE
-    p->sType = VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO;
-    p->pNext = NULL;
-
-    GetFlags(flags, "flags");
-
-#define F "queue_create_infos"
-    PUSHFIELD(F);
-    p->pQueueCreateInfos = echeckdevicequeuecreateinfolist(L, arg1, &count, &err);
-    p->queueCreateInfoCount = count;
-    POPFIELD();
-    if(err) return efielderror(L, F);
-#undef F
-#define F "enabled_layer_names" /* deprecated: aggiungere comunque */
-    PUSHFIELD(F);
-    p->ppEnabledLayerNames = (const char* const*)checkstringlist(L, arg1, &p->enabledLayerCount, &err);
-    POPFIELD();
-    if(err < 0 && err != ERR_EMPTY) 
-        { freedevicecreateinfo(L, p); return fielderror(L, F, err); }
-#undef F
-#define F "enabled_extension_names"
-    PUSHFIELD(F);
-    p->ppEnabledExtensionNames = (const char* const*)checkstringlist(L, arg1, &p->enabledExtensionCount, &err);
-    POPFIELD();
-    if(err < 0 && err != ERR_EMPTY) 
-        { freedevicecreateinfo(L, p); return fielderror(L, F, err); }
-#undef F
-
-    if(!ud->idt->GetPhysicalDeviceFeatures2KHR) 
-        {
-#define F "enabled_features"
-        features = (VkPhysicalDeviceFeatures*)Malloc(L, sizeof(VkPhysicalDeviceFeatures));
-        if(!features) { freedevicecreateinfo(L, p); return pusherror(L, ERR_MEMORY); }
-        PUSHFIELD(F);
-        err = echeckphysicaldevicefeatures(L, arg1, features);
-        POPFIELD();
-        if(err < 0) 
-            { freedevicecreateinfo(L, p); return efielderror(L, F); }
-        if(err == ERR_NOTPRESENT)
-            { POPERROR(); Free(L, features); }
-        else
-            p->pEnabledFeatures = features;
-#undef F
-        }
-    else
-        {
-#define F "enabled_features"
-        /* p->pEnabledFeatures = NULL; */
-        features2 = (VkPhysicalDeviceFeatures2KHR*)Malloc(L, sizeof(VkPhysicalDeviceFeatures2KHR));
-        if(!features2) { freedevicecreateinfo(L, p); return pusherror(L, ERR_MEMORY); }
-        PUSHFIELD(F);
-        err = echeckphysicaldevicefeatures2(L, arg1, features2);
-        POPFIELD();
-        if(err < 0) 
-            { freedevicecreateinfo(L, p); return efielderror(L, F); }
-        if(err == ERR_NOTPRESENT)
-            { POPERROR(); Free(L, features2); }
-        else
-            p->pNext = features2;
-#undef F
-        }
-    return 0;
-    }
 
     
 /*------------------------------------------------------------------------------*/
@@ -1006,7 +914,7 @@ static int echecksubpassdescription(lua_State *L, int arg, VkSubpassDescription 
     if(err == ERR_NOTPRESENT) POPERROR();
     else
         {
-        p->pDepthStencilAttachment = (VkAttachmentReference*)Malloc(L, sizeof(VkAttachmentReference));
+        p->pDepthStencilAttachment = MALLOC(L, VkAttachmentReference);
         memcpy((void*)p->pDepthStencilAttachment, &ref, sizeof(VkAttachmentReference));
         }
 #undef F
@@ -1272,7 +1180,6 @@ int echeckcommandbufferinheritanceinfo(lua_State *L, int arg, VkCommandBufferInh
 static int echeckphysicaldevicefeatures(lua_State *L, int arg, VkPhysicalDeviceFeatures *p)
     {
     int err;
-
     ECHECK_PREAMBLE
     GetBoolean(robustBufferAccess, "robust_buffer_access");
     GetBoolean(fullDrawIndexUint32, "full_draw_index_uint_32");
@@ -1329,25 +1236,69 @@ static int echeckphysicaldevicefeatures(lua_State *L, int arg, VkPhysicalDeviceF
     GetBoolean(sparseResidencyAliased, "sparse_residency_aliased");
     GetBoolean(variableMultisampleRate, "variable_multisample_rate");
     GetBoolean(inheritedQueries, "inherited_queries");
-
     return 0;
     }
  
-
-static void freephysicaldevicefeatures2(lua_State *L, VkPhysicalDeviceFeatures2KHR *p)
-    {
-    //@@ free all the chained p->pNext
-    Free(L, (void*)p);
-    }
-
-static int echeckphysicaldevicefeatures2(lua_State *L, int arg, VkPhysicalDeviceFeatures2KHR *p)
+static int echeckphysicaldevice16bitstoragefeatures(lua_State *L, int arg, VkPhysicalDevice16BitStorageFeaturesKHR *p)
     {
     int err;
     ECHECK_PREAMBLE
-    p->sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2_KHR;
-    err = echeckphysicaldevicefeatures(L, arg, &p->features);
+    GetBoolean(storageBuffer16BitAccess, "storage_buffer_16bit_access");
+    GetBoolean(uniformAndStorageBuffer16BitAccess, "uniform_and_storage_buffer_16bit_access");
+    GetBoolean(storagePushConstant16, "storage_push_constant_16");
+    GetBoolean(storageInputOutput16, "storage_input_output_16");
+    return 0;
+    }
+
+static int echeckphysicaldevicevariablepointerfeatures(lua_State *L, int arg, VkPhysicalDeviceVariablePointerFeaturesKHR *p)
+    {
+    int err;
+    ECHECK_PREAMBLE
+    GetBoolean(variablePointersStorageBuffer, "variable_pointers_storage_buffer");
+    GetBoolean(variablePointers, "variable_pointers");
+    return 0;
+    }
+
+typedef struct {
+    VkPhysicalDeviceFeatures2KHR p1;
+    VkPhysicalDevice16BitStorageFeaturesKHR p2;
+    VkPhysicalDeviceVariablePointerFeaturesKHR p3;
+} VkPhysicalDeviceFeatures2KHR_CHAIN;
+
+VkPhysicalDeviceFeatures2KHR* newphysicaldevicefeatures2(lua_State *L)
+    {
+    VkPhysicalDeviceFeatures2KHR_CHAIN *p = MALLOC_NOERR(L, VkPhysicalDeviceFeatures2KHR_CHAIN);
+    if(!p) return NULL;
+    p->p1.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2_KHR;
+    p->p2.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_16BIT_STORAGE_FEATURES_KHR;
+    p->p3.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VARIABLE_POINTER_FEATURES_KHR;
+    p->p1.pNext = &p->p2;
+    p->p2.pNext = &p->p3;
+    p->p3.pNext = NULL; // chain any other extension here
+    return (VkPhysicalDeviceFeatures2KHR*)p;
+    }
+
+void freephysicaldevicefeatures2(lua_State *L, VkPhysicalDeviceFeatures2KHR *p)
+    {
+    Free(L, (void*)p);
+    }
+
+static int echeckphysicaldevicefeatures2(lua_State *L, int arg, VkPhysicalDeviceFeatures2KHR *pp)
+    {
+    int err;
+    VkPhysicalDeviceFeatures2KHR_CHAIN *p = (VkPhysicalDeviceFeatures2KHR_CHAIN*)pp;
+    err = echeckphysicaldevicefeatures(L, arg, &p->p1.features);
     if(err) return err;
-    p->pNext = NULL; //@@ add next extensions in chain
+    err = echeckphysicaldevice16bitstoragefeatures(L, arg, &p->p2);
+    if(err) return err;
+    err = echeckphysicaldevicevariablepointerfeatures(L, arg, &p->p3);
+    if(err) return err;
+    p->p1.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2_KHR;
+    p->p2.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_16BIT_STORAGE_FEATURES_KHR;
+    p->p3.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VARIABLE_POINTER_FEATURES_KHR;
+    p->p1.pNext = &p->p2;
+    p->p2.pNext = &p->p3;
+    p->p3.pNext = NULL; // chain any other extension here
     return 0;
     }
 
@@ -1413,10 +1364,28 @@ int pushphysicaldevicefeatures(lua_State *L, VkPhysicalDeviceFeatures *p)
     return 1;
     } 
 
-int pushphysicaldevicefeatures2(lua_State *L, VkPhysicalDeviceFeatures2KHR *p)
+static int pushphysicaldevice16bitstoragefeatures(lua_State *L, VkPhysicalDevice16BitStorageFeaturesKHR *p)
     {
-    pushphysicaldevicefeatures(L, &p->features);
-    //pushxxx(L, (VkXxxKHR*)p->pNext);  next extension in chain
+    SetBoolean(storageBuffer16BitAccess, "storage_buffer_16bit_access");
+    SetBoolean(uniformAndStorageBuffer16BitAccess, "uniform_and_storage_buffer_16bit_access");
+    SetBoolean(storagePushConstant16, "storage_push_constant_16");
+    SetBoolean(storageInputOutput16, "storage_input_output_16");
+    return 1;
+    }
+
+static int pushphysicaldevicevariablepointerfeatures(lua_State *L, VkPhysicalDeviceVariablePointerFeaturesKHR *p)
+    {
+    SetBoolean(variablePointersStorageBuffer, "variable_pointers_storage_buffer");
+    SetBoolean(variablePointers, "variable_pointers");
+    return 1;
+    }
+
+int pushphysicaldevicefeatures2(lua_State *L, VkPhysicalDeviceFeatures2KHR *pp)
+    {
+    VkPhysicalDeviceFeatures2KHR_CHAIN *p = (VkPhysicalDeviceFeatures2KHR_CHAIN*)pp;
+    pushphysicaldevicefeatures(L, &p->p1.features);
+    pushphysicaldevice16bitstoragefeatures(L, &p->p2);
+    pushphysicaldevicevariablepointerfeatures(L, &p->p3);
     return 1;
     }
 
@@ -1930,27 +1899,6 @@ int pushimagesubresourcerange(lua_State *L, VkImageSubresourceRange *p)
 
 /*------------------------------------------------------------------------------*/
 
-int echeckmemoryrequirements(lua_State *L, int arg, VkMemoryRequirements *p)
-    {
-    int err;
-    ECHECK_PREAMBLE
-    GetInteger(size, "size");
-    GetInteger(alignment, "alignment");
-    GetInteger(memoryTypeBits, "memory_type_bits");
-    return 0;
-    }
-
-int pushmemoryrequirements(lua_State *L, VkMemoryRequirements *p)
-    {
-    lua_newtable(L);
-    SetInteger(size, "size");
-    SetInteger(alignment, "alignment");
-    SetInteger(memoryTypeBits, "memory_type_bits");
-    return 1;
-    }
-
-/*------------------------------------------------------------------------------*/
-
 int echeckclearcolorvalue(lua_State *L, int arg, VkClearColorValue *p)
     {
     int i, t;
@@ -2235,6 +2183,25 @@ static int echeckmappedmemoryrange(lua_State *L, int arg, VkMappedMemoryRange *p
 ECHECKLISTFUNC(VkMappedMemoryRange, mappedmemoryrange, NULL) 
 
 
+/*------------------------------------------------------------------------------*/
+
+int pushmemoryrequirements(lua_State *L, VkMemoryRequirements *p)
+    {
+    lua_newtable(L);
+    SetInteger(size, "size");
+    SetInteger(alignment, "alignment");
+    SetInteger(memoryTypeBits, "memory_type_bits");
+    return 1;
+    }
+
+
+int pushmemoryrequirements2(lua_State *L, VkMemoryRequirements2KHR *p) //@@DOC
+    {
+    pushmemoryrequirements(L, &p->memoryRequirements);
+    //pushxxx(L, (VkXxxKHR*)p->pNext);  next extension in chain
+    return 1;
+    }
+
 /*-------------------------------------------------------------------------------------*/
 int pushsparseimagememoryrequirements(lua_State *L, VkSparseImageMemoryRequirements *p)
     {
@@ -2247,6 +2214,12 @@ int pushsparseimagememoryrequirements(lua_State *L, VkSparseImageMemoryRequireme
     return 1;
     }
 
+int pushsparseimagememoryrequirements2(lua_State *L, VkSparseImageMemoryRequirements2KHR *p) //@@DOC
+    {
+    pushsparseimagememoryrequirements(L, &p->memoryRequirements);
+    //pushxxx(L, (VkXxxKHR*)p->pNext);  next extension in chain
+    return 1;
+    }
 
 /*-------------------------------------------------------------------------------------*/
 static int echecksparsememorybind(lua_State *L, int arg, VkSparseMemoryBind *p)
@@ -3541,6 +3514,7 @@ static int echeckrectlayer(lua_State *L, int arg, VkRectLayerKHR *p)
     GetInteger(layer, "layer");
     return 0;
     }
+
 /* echeckrectlayerlist() */
 static ECHECKLISTFUNC(VkRectLayerKHR, rectlayer, NULL) 
 
@@ -3650,6 +3624,96 @@ int echeckdescriptorupdatetemplatecreateinfo(lua_State *L, int arg, VkDescriptor
     return 0;
     }
 
+/*-------------------------------------------------------------------------------------*/
+
+void freedevicecreateinfo(lua_State *L, VkDeviceCreateInfo *p)
+    {
+    if(!p) return;
+    if(p->pQueueCreateInfos)
+        freedevicequeuecreateinfolist(L, (void*)p->pQueueCreateInfos,  p->queueCreateInfoCount);
+    if(p->ppEnabledLayerNames)
+        freestringlist(L, (char**)p->ppEnabledLayerNames, p->enabledLayerCount);
+    if(p->ppEnabledExtensionNames)
+        freestringlist(L,  (char**)p->ppEnabledExtensionNames, p->enabledExtensionCount);
+    if(p->pEnabledFeatures)
+        Free(L, (void*)p->pEnabledFeatures);
+    if(p->pNext)
+        freephysicaldevicefeatures2(L, (VkPhysicalDeviceFeatures2KHR*)p->pNext);
+    }
+
+
+
+int echeckdevicecreateinfo(lua_State *L, int arg, VkDeviceCreateInfo *p, ud_t *ud)
+    {
+    int arg1, err;
+    uint32_t count;
+    VkPhysicalDeviceFeatures *features;
+    VkPhysicalDeviceFeatures2KHR *features2;
+
+    ECHECK_PREAMBLE
+    p->sType = VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO;
+    p->pNext = NULL;
+
+    GetFlags(flags, "flags");
+
+#define F "queue_create_infos"
+    PUSHFIELD(F);
+    p->pQueueCreateInfos = echeckdevicequeuecreateinfolist(L, arg1, &count, &err);
+    p->queueCreateInfoCount = count;
+    POPFIELD();
+    if(err) return efielderror(L, F);
+#undef F
+#define F "enabled_layer_names" /* deprecated: aggiungere comunque */
+    PUSHFIELD(F);
+    p->ppEnabledLayerNames = (const char* const*)checkstringlist(L, arg1, &p->enabledLayerCount, &err);
+    POPFIELD();
+    if(err < 0 && err != ERR_EMPTY)
+        { freedevicecreateinfo(L, p); return fielderror(L, F, err); }
+#undef F
+#define F "enabled_extension_names"
+    PUSHFIELD(F);
+    p->ppEnabledExtensionNames = (const char* const*)checkstringlist(L, arg1, &p->enabledExtensionCount, &err);
+    POPFIELD();
+    if(err < 0 && err != ERR_EMPTY)
+        { freedevicecreateinfo(L, p); return fielderror(L, F, err); }
+#undef F
+
+    if(!ud->idt->GetPhysicalDeviceFeatures2KHR)
+        {
+#define F "enabled_features"
+        features = MALLOC_NOERR(L, VkPhysicalDeviceFeatures);
+        if(!features) { freedevicecreateinfo(L, p); return pusherror(L, ERR_MEMORY); }
+        PUSHFIELD(F);
+        err = echeckphysicaldevicefeatures(L, arg1, features);
+        POPFIELD();
+        if(err < 0) 
+            { freedevicecreateinfo(L, p); return efielderror(L, F); }
+        if(err == ERR_NOTPRESENT)
+            { POPERROR(); Free(L, features); }
+        else
+            p->pEnabledFeatures = features;
+#undef F
+        }
+    else
+        {
+#define F "enabled_features"
+//      p->pEnabledFeatures = NULL;
+        features2 = newphysicaldevicefeatures2(L);
+        if(!features2) { freedevicecreateinfo(L, p); return pusherror(L, ERR_MEMORY); }
+        PUSHFIELD(F);
+        err = echeckphysicaldevicefeatures2(L, arg1, features2);
+        POPFIELD();
+        if(err < 0)
+            { freedevicecreateinfo(L, p); return efielderror(L, F); }
+        if(err == ERR_NOTPRESENT)
+            { POPERROR(); Free(L, features2); }
+        else
+            p->pNext = features2;
+#undef F
+        }
+    return 0;
+    }
+
 
 /*-------------------------------------------------------------------------------------*/
 #if 0 // scaffolding
@@ -3679,7 +3743,6 @@ int push(lua_State *L, Vk *p) //@@
     Set(, "");
     return 1;
     }
-
 
 #endif
 

@@ -94,17 +94,14 @@ static int GetPhysicalDeviceProperties(lua_State *L)
 
 
 /*-----------------------------------------------------------------------------*/
-static int GetPhysicalDeviceFeatures2
-        (lua_State *L, VkPhysicalDevice physical_device, ud_t *ud)
+static int GetPhysicalDeviceFeatures2(lua_State *L, VkPhysicalDevice physical_device, ud_t *ud)
     {
-    VkPhysicalDeviceFeatures2KHR features2;
-
-    Clear(features2);
-    features2.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2_KHR; 
-    features2.pNext = NULL; // chain any other extension here
-
-    ud->idt->GetPhysicalDeviceFeatures2KHR(physical_device, &features2);
-    pushphysicaldevicefeatures2(L, &features2);
+    VkPhysicalDeviceFeatures2KHR *features2 = newphysicaldevicefeatures2(L);
+    if(!features2)
+        return luaL_error(L, errstring(ERR_MEMORY));
+    ud->idt->GetPhysicalDeviceFeatures2KHR(physical_device, features2);
+    pushphysicaldevicefeatures2(L, features2);
+    freephysicaldevicefeatures2(L, features2);
     return 1;
     }
 

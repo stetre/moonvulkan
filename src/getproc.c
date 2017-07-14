@@ -168,6 +168,9 @@ instance_dt_t * getproc_instance(lua_State *L, VkInstance instance)
     GET(GetPhysicalDeviceQueueFamilyProperties2KHR);
     GET(GetPhysicalDeviceMemoryProperties2KHR);
     GET(GetPhysicalDeviceSparseImageFormatProperties2KHR);
+    GET(GetPhysicalDeviceExternalBufferPropertiesKHR);
+    GET(GetPhysicalDeviceExternalSemaphorePropertiesKHR);
+    GET(GetPhysicalDeviceExternalFencePropertiesKHR);
 #undef GET
     return dt;
     }
@@ -327,8 +330,24 @@ device_dt_t* getproc_device(lua_State *L, VkDevice device)
     GET(DestroyDescriptorUpdateTemplateKHR);
     GET(UpdateDescriptorSetWithTemplateKHR);
     GET(CmdPushDescriptorSetWithTemplateKHR);
+    GET(GetMemoryFdKHR);
+    GET(GetMemoryFdPropertiesKHR);
+    GET(ImportSemaphoreFdKHR);
+    GET(GetSemaphoreFdKHR);
+    GET(ImportFenceFdKHR);
+    GET(GetFenceFdKHR);
+    GET(GetImageMemoryRequirements2KHR);
+    GET(GetBufferMemoryRequirements2KHR);
+    GET(GetImageSparseMemoryRequirements2KHR);
+#ifdef VK_USE_PLATFORM_WIN32_KHR
+    GET(GetMemoryWin32HandleKHR);
+    GET(GetMemoryWin32HandlePropertiesKHR);
+    GET(ImportSemaphoreWin32HandleKHR);
+    GET(GetSemaphoreWin32HandleKHR);
+    GET(ImportFenceWin32HandleKHR);
+    GET(GetFenceWin32HandleKHR);
+#endif
 #undef GET
-
     return dt;
     }
 

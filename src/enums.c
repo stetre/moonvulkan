@@ -382,6 +382,7 @@ void moonvulkan_open_enums(lua_State *L)
     ADD(ERROR_INCOMPATIBLE_DISPLAY_KHR, "incompatible display");
     ADD(ERROR_VALIDATION_FAILED_EXT, "validation failed");
     ADD(ERROR_OUT_OF_POOL_MEMORY_KHR, "out of pool memory");
+    ADD(ERROR_INVALID_EXTERNAL_HANDLE_KHR, "invalid external handle");
 
     domain = DOMAIN_PIPELINE_CACHE_HEADER_VERSION; /* VkPipelineCacheHeaderVersion */
     ADD(PIPELINE_CACHE_HEADER_VERSION_ONE, "one");
@@ -873,38 +874,38 @@ void moonvulkan_open_enums(lua_State *L)
     ADD(DISPLAY_EVENT_TYPE_FIRST_PIXEL_OUT_EXT, "first pixel out");
 
     domain = DOMAIN_OBJECT_TYPE; /* VkObjectType */
-	ADD(OBJECT_TYPE_UNKNOWN, "unknown");
-	ADD(OBJECT_TYPE_INSTANCE, "instance");
-	ADD(OBJECT_TYPE_PHYSICAL_DEVICE, "physical device");
-	ADD(OBJECT_TYPE_DEVICE, "device");
-	ADD(OBJECT_TYPE_QUEUE, "queue");
-	ADD(OBJECT_TYPE_SEMAPHORE, "semaphore");
-	ADD(OBJECT_TYPE_COMMAND_BUFFER, "command buffer");
-	ADD(OBJECT_TYPE_FENCE, "fence");
-	ADD(OBJECT_TYPE_DEVICE_MEMORY, "device memory");
-	ADD(OBJECT_TYPE_BUFFER, "buffer");
-	ADD(OBJECT_TYPE_IMAGE, "image");
-	ADD(OBJECT_TYPE_EVENT, "event");
-	ADD(OBJECT_TYPE_QUERY_POOL, "query pool");
-	ADD(OBJECT_TYPE_BUFFER_VIEW, "buffer view");
-	ADD(OBJECT_TYPE_IMAGE_VIEW, "image view");
-	ADD(OBJECT_TYPE_SHADER_MODULE, "shader module");
-	ADD(OBJECT_TYPE_PIPELINE_CACHE, "pipeline cache");
-	ADD(OBJECT_TYPE_PIPELINE_LAYOUT, "pipeline layout");
-	ADD(OBJECT_TYPE_RENDER_PASS, "render pass");
-	ADD(OBJECT_TYPE_PIPELINE, "pipeline");
-	ADD(OBJECT_TYPE_DESCRIPTOR_SET_LAYOUT, "descriptor set layout");
-	ADD(OBJECT_TYPE_SAMPLER, "sampler");
-	ADD(OBJECT_TYPE_DESCRIPTOR_POOL, "descriptor pool");
-	ADD(OBJECT_TYPE_DESCRIPTOR_SET, "descriptor set");
-	ADD(OBJECT_TYPE_FRAMEBUFFER, "framebuffer");
-	ADD(OBJECT_TYPE_COMMAND_POOL, "command pool");
-	ADD(OBJECT_TYPE_SURFACE_KHR, "surface");
-	ADD(OBJECT_TYPE_SWAPCHAIN_KHR, "swapchain");
-	ADD(OBJECT_TYPE_DISPLAY_KHR, "display");
-	ADD(OBJECT_TYPE_DISPLAY_MODE_KHR, "display mode");
-	ADD(OBJECT_TYPE_DEBUG_REPORT_CALLBACK_EXT, "debug report callback");
-	ADD(OBJECT_TYPE_DESCRIPTOR_UPDATE_TEMPLATE_KHR, "descriptor update template");
+    ADD(OBJECT_TYPE_UNKNOWN, "unknown");
+    ADD(OBJECT_TYPE_INSTANCE, "instance");
+    ADD(OBJECT_TYPE_PHYSICAL_DEVICE, "physical device");
+    ADD(OBJECT_TYPE_DEVICE, "device");
+    ADD(OBJECT_TYPE_QUEUE, "queue");
+    ADD(OBJECT_TYPE_SEMAPHORE, "semaphore");
+    ADD(OBJECT_TYPE_COMMAND_BUFFER, "command buffer");
+    ADD(OBJECT_TYPE_FENCE, "fence");
+    ADD(OBJECT_TYPE_DEVICE_MEMORY, "device memory");
+    ADD(OBJECT_TYPE_BUFFER, "buffer");
+    ADD(OBJECT_TYPE_IMAGE, "image");
+    ADD(OBJECT_TYPE_EVENT, "event");
+    ADD(OBJECT_TYPE_QUERY_POOL, "query pool");
+    ADD(OBJECT_TYPE_BUFFER_VIEW, "buffer view");
+    ADD(OBJECT_TYPE_IMAGE_VIEW, "image view");
+    ADD(OBJECT_TYPE_SHADER_MODULE, "shader module");
+    ADD(OBJECT_TYPE_PIPELINE_CACHE, "pipeline cache");
+    ADD(OBJECT_TYPE_PIPELINE_LAYOUT, "pipeline layout");
+    ADD(OBJECT_TYPE_RENDER_PASS, "render pass");
+    ADD(OBJECT_TYPE_PIPELINE, "pipeline");
+    ADD(OBJECT_TYPE_DESCRIPTOR_SET_LAYOUT, "descriptor set layout");
+    ADD(OBJECT_TYPE_SAMPLER, "sampler");
+    ADD(OBJECT_TYPE_DESCRIPTOR_POOL, "descriptor pool");
+    ADD(OBJECT_TYPE_DESCRIPTOR_SET, "descriptor set");
+    ADD(OBJECT_TYPE_FRAMEBUFFER, "framebuffer");
+    ADD(OBJECT_TYPE_COMMAND_POOL, "command pool");
+    ADD(OBJECT_TYPE_SURFACE_KHR, "surface");
+    ADD(OBJECT_TYPE_SWAPCHAIN_KHR, "swapchain");
+    ADD(OBJECT_TYPE_DISPLAY_KHR, "display");
+    ADD(OBJECT_TYPE_DISPLAY_MODE_KHR, "display mode");
+    ADD(OBJECT_TYPE_DEBUG_REPORT_CALLBACK_EXT, "debug report callback");
+    ADD(OBJECT_TYPE_DESCRIPTOR_UPDATE_TEMPLATE_KHR, "descriptor update template");
 #undef ADD
     }
 

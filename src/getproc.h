@@ -110,6 +110,9 @@ typedef struct {
     F(GetPhysicalDeviceQueueFamilyProperties2KHR);
     F(GetPhysicalDeviceMemoryProperties2KHR);
     F(GetPhysicalDeviceSparseImageFormatProperties2KHR);
+    F(GetPhysicalDeviceExternalBufferPropertiesKHR);
+    F(GetPhysicalDeviceExternalSemaphorePropertiesKHR);
+    F(GetPhysicalDeviceExternalFencePropertiesKHR);
 } instance_dt_t;
 
 
@@ -259,6 +262,23 @@ typedef struct {
     F(DestroyDescriptorUpdateTemplateKHR);
     F(UpdateDescriptorSetWithTemplateKHR);
     F(CmdPushDescriptorSetWithTemplateKHR);
+    F(GetMemoryFdKHR);
+    F(GetMemoryFdPropertiesKHR);
+    F(ImportSemaphoreFdKHR);
+    F(GetSemaphoreFdKHR);
+    F(ImportFenceFdKHR);
+    F(GetFenceFdKHR);
+    F(GetImageMemoryRequirements2KHR);
+    F(GetBufferMemoryRequirements2KHR);
+    F(GetImageSparseMemoryRequirements2KHR);
+#ifdef VK_USE_PLATFORM_WIN32_KHR
+    F(GetMemoryWin32HandleKHR);
+    F(GetMemoryWin32HandlePropertiesKHR);
+    F(ImportSemaphoreWin32HandleKHR);
+    F(GetSemaphoreWin32HandleKHR);
+    F(ImportFenceWin32HandleKHR);
+    F(GetFenceWin32HandleKHR);
+#endif
 } device_dt_t;
 
 #undef F

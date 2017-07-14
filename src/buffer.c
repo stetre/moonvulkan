@@ -63,12 +63,34 @@ static int Create(lua_State *L)
     return 1;
     }
 
+static int GetBufferMemoryRequirements2(lua_State *L, VkBuffer buffer, ud_t *ud) //@@DOC
+    {
+    VkMemoryRequirements2KHR req;
+    VkBufferMemoryRequirementsInfo2KHR info;
+    VkDevice device = ud->device;
+
+    info.sType = VK_STRUCTURE_TYPE_BUFFER_MEMORY_REQUIREMENTS_INFO_2_KHR;
+    info.pNext = NULL;
+    info.buffer = buffer;
+
+    memset(&req, 0, sizeof(req));
+    req.sType = VK_STRUCTURE_TYPE_MEMORY_REQUIREMENTS_2_KHR;
+    req.pNext = NULL; //@@ next in chain
+
+    ud->ddt->GetBufferMemoryRequirements2KHR(device, &info, &req);
+    return pushmemoryrequirements2(L, &req);
+    }
+
 static int GetBufferMemoryRequirements(lua_State *L)
     {
     ud_t *ud; 
     VkBuffer buffer = checkbuffer(L, 1, &ud);
     VkDevice device = ud->device;
     VkMemoryRequirements req;
+
+    if(ud->ddt->GetBufferMemoryRequirements2KHR)
+        return GetBufferMemoryRequirements2(L, buffer, ud);
+
     ud->ddt->GetBufferMemoryRequirements(device, buffer, &req);
     return pushmemoryrequirements(L, &req);
     }
