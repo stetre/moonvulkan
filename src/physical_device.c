@@ -140,22 +140,26 @@ static int GetPhysicalDeviceFormatProperties(lua_State *L)
     }
 
 /*-----------------------------------------------------------------------------*/
-static int GetPhysicalDeviceImageFormatProperties2
-        (lua_State *L, VkPhysicalDevice physical_device, ud_t *ud)
+static int GetPhysicalDeviceImageFormatProperties2(lua_State *L, VkPhysicalDevice physical_device, ud_t *ud)
     {
     VkResult ec;
     VkPhysicalDeviceImageFormatInfo2KHR info;
-    VkImageFormatProperties2KHR properties2;
+    VkImageFormatProperties2KHR *properties2;
     if(echeckphysicaldeviceimageformatinfo2(L, 2, &info))
         return luaL_argerror(L, 2, lua_tostring(L, -1));
 
-    Clear(properties2);
-    properties2.sType = VK_STRUCTURE_TYPE_IMAGE_FORMAT_PROPERTIES_2_KHR; 
-    properties2.pNext = NULL; // chain any other extension here
+    properties2 = newimageformatproperties2(L);
+    if(!properties2) return errmemory(L);
 
-    ec = ud->idt->GetPhysicalDeviceImageFormatProperties2KHR(physical_device, &info, &properties2);
-    CheckError(L, ec);
-    pushimageformatproperties2(L, &properties2);
+    ec = ud->idt->GetPhysicalDeviceImageFormatProperties2KHR(physical_device, &info, properties2);
+    if(!ec)
+        {
+        freeimageformatproperties2(L, properties2);
+        CheckError(L, ec);
+        return 0;
+        }
+    pushimageformatproperties2(L, properties2);
+    freeimageformatproperties2(L, properties2);
     return 1;
     }
 

@@ -169,6 +169,10 @@ int pushformatproperties(lua_State *L, VkFormatProperties *p);
 #define pushformatproperties2 moonvulkan_pushformatproperties2
 int pushformatproperties2(lua_State *L, VkFormatProperties2KHR *p);
 
+#define newimageformatproperties2 moonvulkan_newimageformatproperties2
+VkImageFormatProperties2KHR* newimageformatproperties2(lua_State *L);
+#define freeimageformatproperties2 moonvulkan_freeimageformatproperties2
+void freeimageformatproperties2(lua_State *L, VkImageFormatProperties2KHR *p);
 #define pushimageformatproperties moonvulkan_pushimageformatproperties
 int pushimageformatproperties(lua_State *L, VkImageFormatProperties *p);
 #define pushimageformatproperties2 moonvulkan_pushimageformatproperties2

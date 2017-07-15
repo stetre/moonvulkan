@@ -1606,6 +1606,60 @@ int pushformatproperties2(lua_State *L, VkFormatProperties2KHR *pp)
     }
 
 /*------------------------------------------------------------------------------*/
+int pushimageformatproperties(lua_State *L, VkImageFormatProperties *p)
+    {
+    lua_newtable(L);
+    SetStruct(maxExtent, "max_extent", pushextent3d);
+    SetInteger(maxMipLevels, "max_mip_levels");
+    SetInteger(maxArrayLayers, "max_array_layers");
+    SetInteger(sampleCounts, "sample_counts");
+    SetInteger(maxResourceSize, "max_resource_size");
+    return 1;
+    }
+
+typedef struct {
+	VkImageFormatProperties2KHR p1;
+} VkImageFormatProperties2KHR_CHAIN;
+
+VkImageFormatProperties2KHR* newimageformatproperties2(lua_State *L)
+	{
+    VkImageFormatProperties2KHR_CHAIN *p = MALLOC_NOERR(L, VkImageFormatProperties2KHR_CHAIN);
+    if(!p) return NULL;
+    p->p1.sType = VK_STRUCTURE_TYPE_IMAGE_FORMAT_PROPERTIES_2_KHR;
+    p->p1.pNext = NULL; // chain any other extension here
+    return (VkImageFormatProperties2KHR*)p;
+    }
+
+void freeimageformatproperties2(lua_State *L, VkImageFormatProperties2KHR *p)
+    {
+    Free(L, (void*)p);
+    }
+
+int pushimageformatproperties2(lua_State *L, VkImageFormatProperties2KHR *pp)
+    {
+	VkImageFormatProperties2KHR_CHAIN *p = (VkImageFormatProperties2KHR_CHAIN*)pp;
+    pushimageformatproperties(L, &p->p1.imageFormatProperties);
+    return 1;
+    }
+
+/*------------------------------------------------------------------------------*/
+int pushsparseimageformatproperties(lua_State *L, VkSparseImageFormatProperties *p)
+    {
+    lua_newtable(L);
+    SetFlags(aspectMask, "aspect_mask");
+    SetStruct(imageGranularity, "image_granularity", pushextent3d);
+    SetFlags(flags, "flags");
+    return 1;
+    }
+
+int pushsparseimageformatproperties2(lua_State *L, VkSparseImageFormatProperties2KHR *p)
+    {
+    pushsparseimageformatproperties(L, &p->properties);
+    //pushxxx(L, (VkXxxKHR*)p->pNext);  next extension in chain
+    return 1;
+    }
+
+/*------------------------------------------------------------------------------*/
 int pushqueuefamilyproperties(lua_State *L, VkQueueFamilyProperties *p, uint32_t index)
     {
     lua_newtable(L);
@@ -1667,43 +1721,6 @@ int pushphysicaldevicememoryproperties(lua_State *L, VkPhysicalDeviceMemoryPrope
 int pushphysicaldevicememoryproperties2(lua_State *L, VkPhysicalDeviceMemoryProperties2KHR *p)
     {
     pushphysicaldevicememoryproperties(L, &p->memoryProperties);
-    //pushxxx(L, (VkXxxKHR*)p->pNext);  next extension in chain
-    return 1;
-    }
-
-/*------------------------------------------------------------------------------*/
-int pushsparseimageformatproperties(lua_State *L, VkSparseImageFormatProperties *p)
-    {
-    lua_newtable(L);
-    SetFlags(aspectMask, "aspect_mask");
-    SetStruct(imageGranularity, "image_granularity", pushextent3d);
-    SetFlags(flags, "flags");
-    return 1;
-    }
-
-int pushsparseimageformatproperties2(lua_State *L, VkSparseImageFormatProperties2KHR *p)
-    {
-    pushsparseimageformatproperties(L, &p->properties);
-    //pushxxx(L, (VkXxxKHR*)p->pNext);  next extension in chain
-    return 1;
-    }
-
-
-/*------------------------------------------------------------------------------*/
-int pushimageformatproperties(lua_State *L, VkImageFormatProperties *p)
-    {
-    lua_newtable(L);
-    SetStruct(maxExtent, "max_extent", pushextent3d);
-    SetInteger(maxMipLevels, "max_mip_levels");
-    SetInteger(maxArrayLayers, "max_array_layers");
-    SetInteger(sampleCounts, "sample_counts");
-    SetInteger(maxResourceSize, "max_resource_size");
-    return 1;
-    }
-
-int pushimageformatproperties2(lua_State *L, VkImageFormatProperties2KHR *p)
-    {
-    pushimageformatproperties(L, &p->imageFormatProperties);
     //pushxxx(L, (VkXxxKHR*)p->pNext);  next extension in chain
     return 1;
     }
