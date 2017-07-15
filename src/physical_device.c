@@ -65,18 +65,13 @@ int pushphysical_device(lua_State *L, VkPhysicalDevice physical_device, VkInstan
 static int GetPhysicalDeviceProperties2
         (lua_State *L, VkPhysicalDevice physical_device, ud_t *ud)
     {
-    VkPhysicalDeviceProperties2KHR properties2;
-    VkPhysicalDevicePushDescriptorPropertiesKHR pushdescriptorproperties;
+    VkPhysicalDeviceProperties2KHR *properties2 = newphysicaldeviceproperties2(L);
+	if(!properties2)
+		return luaL_error(L, errstring(ERR_MEMORY));
 
-    Clear(properties2);
-    properties2.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROPERTIES_2_KHR; 
-    properties2.pNext = &pushdescriptorproperties; 
-    Clear(pushdescriptorproperties);
-    pushdescriptorproperties.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PUSH_DESCRIPTOR_PROPERTIES_KHR; 
-    pushdescriptorproperties.pNext = NULL; // chain any other extension here
-    
-    ud->idt->GetPhysicalDeviceProperties2KHR(physical_device, &properties2);
-    pushphysicaldeviceproperties2(L, &properties2); // add new extensions
+    ud->idt->GetPhysicalDeviceProperties2KHR(physical_device, properties2);
+    pushphysicaldeviceproperties2(L, properties2);
+    freephysicaldeviceproperties2(L, properties2);
     return 1;
     }
 
@@ -85,7 +80,7 @@ static int GetPhysicalDeviceProperties(lua_State *L)
     VkPhysicalDeviceProperties properties;
     ud_t *ud;
     VkPhysicalDevice physical_device = checkphysical_device(L, 1, &ud);
-    if(ud->idt->GetPhysicalDeviceProperties2KHR) 
+    if(ud->idt->GetPhysicalDeviceProperties2KHR)
         return GetPhysicalDeviceProperties2(L, physical_device, ud);
     ud->idt->GetPhysicalDeviceProperties(physical_device, &properties);
     pushphysicaldeviceproperties(L, &properties);

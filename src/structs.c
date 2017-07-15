@@ -1516,6 +1516,8 @@ int pushphysicaldevicesparseproperties(lua_State *L, VkPhysicalDeviceSparsePrope
     return 1;
     }
 
+/*------------------------------------------------------------------------------*/
+
 int pushphysicaldeviceproperties(lua_State *L, VkPhysicalDeviceProperties *p)
     {
     lua_newtable(L);
@@ -1534,16 +1536,36 @@ int pushphysicaldeviceproperties(lua_State *L, VkPhysicalDeviceProperties *p)
 
 static int pushphysicaldevicepushdescriptorproperties(lua_State *L, VkPhysicalDevicePushDescriptorPropertiesKHR  *p)
     {
-    SetInteger(maxPushDescriptors, "max_push_descriptors"); //@@ DOC
-    //pushxxx(L, (VkXxxKHR*)p->pNext);  next extension in chain
+    SetInteger(maxPushDescriptors, "max_push_descriptors");
     return 0;
     }
 
+typedef struct {
+	VkPhysicalDeviceProperties2KHR p1;
+	VkPhysicalDevicePushDescriptorPropertiesKHR p2;
+} VkPhysicalDeviceProperties2KHR_CHAIN;
 
-int pushphysicaldeviceproperties2(lua_State *L, VkPhysicalDeviceProperties2KHR *p)
+VkPhysicalDeviceProperties2KHR* newphysicaldeviceproperties2(lua_State *L)
     {
-    pushphysicaldeviceproperties(L, &p->properties);
-    pushphysicaldevicepushdescriptorproperties(L, (VkPhysicalDevicePushDescriptorPropertiesKHR*)p->pNext);
+    VkPhysicalDeviceProperties2KHR_CHAIN *p = MALLOC_NOERR(L, VkPhysicalDeviceProperties2KHR_CHAIN);
+    if(!p) return NULL;
+    p->p1.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROPERTIES_2_KHR;
+    p->p2.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PUSH_DESCRIPTOR_PROPERTIES_KHR;
+    p->p1.pNext = &p->p2;
+    p->p2.pNext = NULL; // chain any other extension here
+    return (VkPhysicalDeviceProperties2KHR*)p;
+    }
+
+void freephysicaldeviceproperties2(lua_State *L, VkPhysicalDeviceProperties2KHR *p)
+    {
+    Free(L, (void*)p);
+    }
+
+int pushphysicaldeviceproperties2(lua_State *L, VkPhysicalDeviceProperties2KHR *pp)
+    {
+	VkPhysicalDeviceProperties2KHR_CHAIN *p = (VkPhysicalDeviceProperties2KHR_CHAIN*)pp;
+    pushphysicaldeviceproperties(L, &p->p1.properties);
+    pushphysicaldevicepushdescriptorproperties(L, &p->p2);
     return 1;
     }
 

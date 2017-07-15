@@ -142,11 +142,14 @@ void freedescriptorsetlayoutbindinglist(lua_State *L, void* list, uint32_t count
 #define echeckdescriptorsetlayoutbindinglist moonvulkan_echeckdescriptorsetlayoutbindinglist
 VkDescriptorSetLayoutBinding* echeckdescriptorsetlayoutbindinglist(lua_State *L, int arg, uint32_t *count, int *err);
 
+#define newphysicaldeviceproperties2 moonvulkan_newphysicaldeviceproperties2
+VkPhysicalDeviceProperties2KHR* newphysicaldeviceproperties2(lua_State *L);
+#define freephysicaldeviceproperties2 moonvulkan_freephysicaldeviceproperties2
+void freephysicaldeviceproperties2(lua_State *L, VkPhysicalDeviceProperties2KHR *p);
 #define pushphysicaldeviceproperties moonvulkan_pushphysicaldeviceproperties
 int pushphysicaldeviceproperties(lua_State *L, VkPhysicalDeviceProperties *p);
 #define pushphysicaldeviceproperties2 moonvulkan_pushphysicaldeviceproperties2
 int pushphysicaldeviceproperties2(lua_State *L, VkPhysicalDeviceProperties2KHR *p);
-
 
 #define newphysicaldevicefeatures2 moonvulkan_newphysicaldevicefeatures2
 VkPhysicalDeviceFeatures2KHR* newphysicaldevicefeatures2(lua_State *L);
