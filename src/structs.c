@@ -1541,8 +1541,8 @@ static int pushphysicaldevicepushdescriptorproperties(lua_State *L, VkPhysicalDe
     }
 
 typedef struct {
-	VkPhysicalDeviceProperties2KHR p1;
-	VkPhysicalDevicePushDescriptorPropertiesKHR p2;
+    VkPhysicalDeviceProperties2KHR p1;
+    VkPhysicalDevicePushDescriptorPropertiesKHR p2;
 } VkPhysicalDeviceProperties2KHR_CHAIN;
 
 VkPhysicalDeviceProperties2KHR* newphysicaldeviceproperties2(lua_State *L)
@@ -1563,7 +1563,7 @@ void freephysicaldeviceproperties2(lua_State *L, VkPhysicalDeviceProperties2KHR 
 
 int pushphysicaldeviceproperties2(lua_State *L, VkPhysicalDeviceProperties2KHR *pp)
     {
-	VkPhysicalDeviceProperties2KHR_CHAIN *p = (VkPhysicalDeviceProperties2KHR_CHAIN*)pp;
+    VkPhysicalDeviceProperties2KHR_CHAIN *p = (VkPhysicalDeviceProperties2KHR_CHAIN*)pp;
     pushphysicaldeviceproperties(L, &p->p1.properties);
     pushphysicaldevicepushdescriptorproperties(L, &p->p2);
     return 1;
@@ -1581,11 +1581,11 @@ int pushformatproperties(lua_State *L, VkFormatProperties *p)
     }
 
 typedef struct {
-	VkFormatProperties2KHR p1;
+    VkFormatProperties2KHR p1;
 } VkFormatProperties2KHR_CHAIN;
 
 VkFormatProperties2KHR* newformatproperties2(lua_State *L)
-	{
+    {
     VkFormatProperties2KHR_CHAIN *p = MALLOC_NOERR(L, VkFormatProperties2KHR_CHAIN);
     if(!p) return NULL;
     p->p1.sType = VK_STRUCTURE_TYPE_FORMAT_PROPERTIES_2_KHR;
@@ -1600,7 +1600,7 @@ void freeformatproperties2(lua_State *L, VkFormatProperties2KHR *p)
 
 int pushformatproperties2(lua_State *L, VkFormatProperties2KHR *pp)
     {
-	VkFormatProperties2KHR_CHAIN *p = (VkFormatProperties2KHR_CHAIN*)pp;
+    VkFormatProperties2KHR_CHAIN *p = (VkFormatProperties2KHR_CHAIN*)pp;
     pushformatproperties(L, &p->p1.formatProperties);
     return 1;
     }
@@ -1618,11 +1618,11 @@ int pushimageformatproperties(lua_State *L, VkImageFormatProperties *p)
     }
 
 typedef struct {
-	VkImageFormatProperties2KHR p1;
+    VkImageFormatProperties2KHR p1;
 } VkImageFormatProperties2KHR_CHAIN;
 
 VkImageFormatProperties2KHR* newimageformatproperties2(lua_State *L)
-	{
+    {
     VkImageFormatProperties2KHR_CHAIN *p = MALLOC_NOERR(L, VkImageFormatProperties2KHR_CHAIN);
     if(!p) return NULL;
     p->p1.sType = VK_STRUCTURE_TYPE_IMAGE_FORMAT_PROPERTIES_2_KHR;
@@ -1637,7 +1637,7 @@ void freeimageformatproperties2(lua_State *L, VkImageFormatProperties2KHR *p)
 
 int pushimageformatproperties2(lua_State *L, VkImageFormatProperties2KHR *pp)
     {
-	VkImageFormatProperties2KHR_CHAIN *p = (VkImageFormatProperties2KHR_CHAIN*)pp;
+    VkImageFormatProperties2KHR_CHAIN *p = (VkImageFormatProperties2KHR_CHAIN*)pp;
     pushimageformatproperties(L, &p->p1.imageFormatProperties);
     return 1;
     }
@@ -1718,10 +1718,28 @@ int pushphysicaldevicememoryproperties(lua_State *L, VkPhysicalDeviceMemoryPrope
     return 1;
     }
 
-int pushphysicaldevicememoryproperties2(lua_State *L, VkPhysicalDeviceMemoryProperties2KHR *p)
+typedef struct {
+    VkPhysicalDeviceMemoryProperties2KHR p1;
+} VkPhysicalDeviceMemoryProperties2KHR_CHAIN; 
+
+VkPhysicalDeviceMemoryProperties2KHR* newphysicaldevicememoryproperties2(lua_State *L)
     {
-    pushphysicaldevicememoryproperties(L, &p->memoryProperties);
-    //pushxxx(L, (VkXxxKHR*)p->pNext);  next extension in chain
+   VkPhysicalDeviceMemoryProperties2KHR_CHAIN *p = MALLOC_NOERR(L, VkPhysicalDeviceMemoryProperties2KHR_CHAIN);
+    if(!p) return NULL;
+    p->p1.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_PROPERTIES_2_KHR;
+    p->p1.pNext = NULL; // chain any other extension here
+    return (VkPhysicalDeviceMemoryProperties2KHR*)p;
+    }
+
+void freephysicaldevicememoryproperties2(lua_State *L, VkPhysicalDeviceMemoryProperties2KHR *p)
+    {
+    Free(L, (void*)p);
+    }
+
+int pushphysicaldevicememoryproperties2(lua_State *L, VkPhysicalDeviceMemoryProperties2KHR *pp)
+    {
+    VkPhysicalDeviceMemoryProperties2KHR_CHAIN *p = (VkPhysicalDeviceMemoryProperties2KHR_CHAIN*)pp;
+    pushphysicaldevicememoryproperties(L, &p->p1.memoryProperties);
     return 1;
     }
 
@@ -1739,7 +1757,6 @@ int echeckphysicaldeviceimageformatinfo2(lua_State *L, int arg, VkPhysicalDevice
     GetFlags(flags, "flags");
     return 0;
     }
-
 
 int echeckphysicaldevicesparseimageformatinfo2(lua_State *L, int arg, VkPhysicalDeviceSparseImageFormatInfo2KHR *p)
     {

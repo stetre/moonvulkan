@@ -60,8 +60,6 @@ int pushphysical_device(lua_State *L, VkPhysicalDevice physical_device, VkInstan
 
 /*-----------------------------------------------------------------------------*/
 
-#define Clear(x) memset(&(x), 0, sizeof(x))
-
 static int GetPhysicalDeviceProperties2
         (lua_State *L, VkPhysicalDevice physical_device, ud_t *ud)
     {
@@ -234,17 +232,16 @@ static int GetPhysicalDeviceQueueFamilyProperties(lua_State *L)
     }
 
 /*-----------------------------------------------------------------------------*/
-static int GetPhysicalDeviceMemoryProperties2
-        (lua_State *L, VkPhysicalDevice physical_device, ud_t *ud)
+static int GetPhysicalDeviceMemoryProperties2(lua_State *L, VkPhysicalDevice physical_device, ud_t *ud)
     {
-    VkPhysicalDeviceMemoryProperties2KHR properties2;
+    VkPhysicalDeviceMemoryProperties2KHR *properties2;
 
-    Clear(properties2);
-    properties2.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_PROPERTIES_2_KHR; 
-    properties2.pNext = NULL; // chain any other extension here
+    properties2 = newphysicaldevicememoryproperties2(L);
+    if(!properties2) return errmemory(L);
 
-    ud->idt->GetPhysicalDeviceMemoryProperties2KHR(physical_device, &properties2);
-    pushphysicaldevicememoryproperties2(L, &properties2);
+    ud->idt->GetPhysicalDeviceMemoryProperties2KHR(physical_device, properties2);
+    pushphysicaldevicememoryproperties2(L, properties2);
+    freephysicaldevicememoryproperties2(L, properties2);
     return 1;
     }
 

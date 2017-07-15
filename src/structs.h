@@ -192,6 +192,10 @@ int pushqueuefamilyproperties(lua_State *L, VkQueueFamilyProperties *p, uint32_t
 #define pushqueuefamilyproperties2 moonvulkan_pushqueuefamilyproperties2
 int pushqueuefamilyproperties2(lua_State *L, VkQueueFamilyProperties2KHR *p, uint32_t index);
 
+#define newphysicaldevicememoryproperties2 moonvulkan_newphysicaldevicememoryproperties2
+VkPhysicalDeviceMemoryProperties2KHR* newphysicaldevicememoryproperties2(lua_State *L);
+#define freephysicaldevicememoryproperties2 moonvulkan_freephysicaldevicememoryproperties2
+void freephysicaldevicememoryproperties2(lua_State *L, VkPhysicalDeviceMemoryProperties2KHR *p);
 #define pushphysicaldevicememoryproperties moonvulkan_pushphysicaldevicememoryproperties
 int pushphysicaldevicememoryproperties(lua_State *L, VkPhysicalDeviceMemoryProperties *p);
 #define pushphysicaldevicememoryproperties2 moonvulkan_pushphysicaldevicememoryproperties2
