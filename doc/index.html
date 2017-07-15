@@ -3214,13 +3214,17 @@ with 1-based integer keys and no gaps, a.k.a. 'sequence' in Lua&#8217;s jargon).
 <em>sparse_residency_aliased</em>: boolean,<br>
 <em>variable_multisample_rate</em>: boolean,<br>
 <em>inherited_queries</em>: boolean,<br>
-<em>storage_buffer_16bit_access</em>: boolean (<em>VK_KHR_16bit_storage</em>),<br>
-<em>uniform_and_storage_buffer_16bit_access</em>: boolean (<em>VK_KHR_16bit_storage</em>),<br>
-<em>storage_push_constant_16</em>: boolean (<em>VK_KHR_16bit_storage</em>),<br>
-<em>storage_input_output_16</em>: boolean (<em>VK_KHR_16bit_storage</em>),<br>
-<em>variable_pointers_storage_buffer</em>: boolean (<em>VK_KHR_variable_pointers</em>),<br>
-<em>variable_pointers</em>: boolean (<em>VK_KHR_variable_pointers</em>),<br>
-} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPhysicalDeviceFeatures">VkPhysicalDeviceFeatures</a>)</span></p>
+-- <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_16bit_storage">VK_KHR_16bit_storage</a> device extension:<br>
+<em>storage_buffer_16bit_access</em>: boolean,<br>
+<em>uniform_and_storage_buffer_16bit_access</em>: boolean,<br>
+<em>storage_push_constant_16</em>: boolean,<br>
+<em>storage_input_output_16</em>: boolean,<br>
+-- <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_variable_pointers">VK_KHR_variable_pointers</a> device extension:<br>
+<em>variable_pointers_storage_buffer</em>: boolean,<br>
+<em>variable_pointers</em>: boolean,<br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPhysicalDeviceFeatures">VkPhysicalDeviceFeatures</a>,<br>
+<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPhysicalDevice16BitStorageFeaturesKHR">VkPhysicalDevice16BitStorageFeaturesKHR</a>,<br>
+<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPhysicalDeviceVariablePointerFeaturesKHR">VkPhysicalDeviceVariablePointerFeaturesKHR</a>)</span></p>
 </li>
 <li>
 <p><a id="queuefamilyproperties"></a>

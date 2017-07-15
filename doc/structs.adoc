@@ -182,13 +182,17 @@ _sparse_residency_16_samples_: boolean, +
 _sparse_residency_aliased_: boolean, +
 _variable_multisample_rate_: boolean, +
 _inherited_queries_: boolean, +
-_storage_buffer_16bit_access_: boolean (_VK_KHR_16bit_storage_), +
-_uniform_and_storage_buffer_16bit_access_: boolean (_VK_KHR_16bit_storage_), +
-_storage_push_constant_16_: boolean (_VK_KHR_16bit_storage_), +
-_storage_input_output_16_: boolean (_VK_KHR_16bit_storage_), +
-_variable_pointers_storage_buffer_: boolean (_VK_KHR_variable_pointers_), +
-_variable_pointers_: boolean (_VK_KHR_variable_pointers_), +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPhysicalDeviceFeatures[VkPhysicalDeviceFeatures])#
+pass:[--] https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_16bit_storage[VK_KHR_16bit_storage] device extension: +
+_storage_buffer_16bit_access_: boolean, +
+_uniform_and_storage_buffer_16bit_access_: boolean, +
+_storage_push_constant_16_: boolean, +
+_storage_input_output_16_: boolean, +
+pass:[--] https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_variable_pointers[VK_KHR_variable_pointers] device extension: +
+_variable_pointers_storage_buffer_: boolean, +
+_variable_pointers_: boolean, +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPhysicalDeviceFeatures[VkPhysicalDeviceFeatures], +
+https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPhysicalDevice16BitStorageFeaturesKHR[VkPhysicalDevice16BitStorageFeaturesKHR], +
+https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPhysicalDeviceVariablePointerFeaturesKHR[VkPhysicalDeviceVariablePointerFeaturesKHR])#
 
 * [[queuefamilyproperties]]
 [small]#*queuefamilyproperties* = { +
