@@ -61,7 +61,7 @@ static int QueueSubmit(lua_State *L)
     ud_t *ud;
     VkQueue queue = checkqueue(L, 1, &ud);
     VkSubmitInfo* submits = echecksubmitinfolist(L, 2, &count, &err);
-    if(err) return luaL_argerror(L, 2, lua_tostring(L, -1));
+    if(err) return argerror(L, 2);
 
     fence = testfence(L, 3, NULL);
     ec = ud->ddt->QueueSubmit(queue, count, submits, fence);
@@ -79,7 +79,7 @@ static int QueueBindSparse(lua_State *L)
     ud_t *ud;
     VkQueue queue = checkqueue(L, 1, &ud);
     VkBindSparseInfo* binds = echeckbindsparseinfolist(L, 2, &count, &err);
-    if(err) return luaL_argerror(L, 2, lua_tostring(L, -1));
+    if(err) return argerror(L, 2);
     
     fence = testfence(L, 3, NULL);
     ec = ud->ddt->QueueBindSparse(queue, count, binds, fence);

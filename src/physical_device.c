@@ -143,8 +143,7 @@ static int GetPhysicalDeviceImageFormatProperties2(lua_State *L, VkPhysicalDevic
     VkResult ec;
     VkPhysicalDeviceImageFormatInfo2KHR info;
     VkImageFormatProperties2KHR *properties2;
-    if(echeckphysicaldeviceimageformatinfo2(L, 2, &info))
-        return luaL_argerror(L, 2, lua_tostring(L, -1));
+    if(echeckphysicaldeviceimageformatinfo2(L, 2, &info)) return argerror(L, 2);
 
     properties2 = newimageformatproperties2(L);
     if(!properties2) return errmemory(L);
@@ -170,8 +169,7 @@ static int GetPhysicalDeviceImageFormatProperties(lua_State *L)
     VkPhysicalDevice physical_device = checkphysical_device(L, 1, &ud);
     if(ud->idt->GetPhysicalDeviceImageFormatProperties2KHR) 
         return GetPhysicalDeviceImageFormatProperties2(L, physical_device, ud);
-    if(echeckphysicaldeviceimageformatinfo2(L, 2, &info))
-        return luaL_argerror(L, 2, lua_tostring(L, -1));
+    if(echeckphysicaldeviceimageformatinfo2(L, 2, &info)) return argerror(L, 2);
     ec = ud->idt->GetPhysicalDeviceImageFormatProperties(physical_device, 
             info.format, info.type, info.tiling, info.usage, info.flags, &properties);
     CheckError(L, ec);
@@ -261,8 +259,7 @@ static int GetPhysicalDeviceSparseImageFormatProperties2
     VkPhysicalDeviceSparseImageFormatInfo2KHR info;
     VkSparseImageFormatProperties2KHR *properties2;
 
-    if(echeckphysicaldevicesparseimageformatinfo2(L, 2, &info))
-        return luaL_argerror(L, 2, lua_tostring(L, -1));
+    if(echeckphysicaldevicesparseimageformatinfo2(L, 2, &info)) return argerror(L, 2);
 
     lua_newtable(L);
     ud->idt->GetPhysicalDeviceSparseImageFormatProperties2KHR(physical_device, &info, &count, NULL);
@@ -296,8 +293,7 @@ static int GetPhysicalDeviceSparseImageFormatProperties(lua_State *L)
     if(ud->idt->GetPhysicalDeviceSparseImageFormatProperties2KHR)
         return GetPhysicalDeviceSparseImageFormatProperties2(L, physical_device, ud);
 
-    if(echeckphysicaldevicesparseimageformatinfo2(L, 2, &info))
-        return luaL_argerror(L, 2, lua_tostring(L, -1));
+    if(echeckphysicaldevicesparseimageformatinfo2(L, 2, &info)) return argerror(L, 2);
 
     lua_newtable(L);
     ud->idt->GetPhysicalDeviceSparseImageFormatProperties(physical_device, 

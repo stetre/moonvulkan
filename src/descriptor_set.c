@@ -63,13 +63,11 @@ static int Create(lua_State *L)
     info.sType = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_ALLOCATE_INFO;
     info.pNext = NULL;
     info.descriptorPool = descriptor_pool;
-#define ARGERROR(n) \
-    do { FreeInfo(L, &info); return luaL_argerror(L, (n), lua_tostring(L, -1)); } while(0)
     info.pSetLayouts = checkdescriptor_set_layoutlist(L, 2, &count, &err, NULL);
     info.descriptorSetCount = count;
-    if(err) ARGERROR(2);
+    if(err)
+        { FreeInfo(L, &info); return argerror(L, 2); }
 
-#undef ARGERROR
     descriptor_set = (VkDescriptorSet*)MallocNoErr(L, sizeof(VkDescriptorSet)*count);
     if(!descriptor_set)
         {
@@ -166,14 +164,14 @@ static int UpdateDescriptorSets(lua_State *L)
     VkDevice device = checkdevice(L, 1, &ud);
 
     writes = echeckwritedescriptorsetlist(L, 2, &wcount, &err);
-    if(err < 0) return luaL_argerror(L, 2, lua_tostring(L, -1));
+    if(err < 0) return argerror(L, 2);
     if(err) lua_pop(L, 1);
 
     copies = echeckcopydescriptorsetlist(L, 3, &ccount, &err);
     if(err < 0)
         {
         if(writes) freewritedescriptorsetlist(L, writes, wcount);
-        return luaL_argerror(L, 3, lua_tostring(L, -1));
+        return argerror(L, 3);
         }
     if(err) lua_pop(L, 1);
 

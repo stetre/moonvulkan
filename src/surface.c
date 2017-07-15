@@ -309,8 +309,7 @@ static int CreateDisplayPlaneSurface(lua_State *L)
     VkDisplayModeKHR display_mode = checkdisplay_mode(L, 1, &ud);
     const VkAllocationCallbacks *allocator = optallocator(L, 3);
     VkDisplaySurfaceCreateInfoKHR info;
-    if(echeckdisplaysurfacecreateinfo(L, 2, &info))
-        return luaL_argerror(L, 2, lua_tostring(L, -1));
+    if(echeckdisplaysurfacecreateinfo(L, 2, &info)) return argerror(L, 2);
     info.displayMode = display_mode;
     CheckInstancePfn(L, ud, CreateDisplayPlaneSurfaceKHR);
     ec = ud->idt->CreateDisplayPlaneSurfaceKHR(ud->instance, &info, allocator, &surface);

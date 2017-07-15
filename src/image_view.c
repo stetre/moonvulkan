@@ -46,8 +46,7 @@ static int Create(lua_State *L)
     const VkAllocationCallbacks *allocator = optallocator(L, 3);
     VkImage image = checkimage(L, 1, &image_ud);
     VkDevice device = image_ud->device;
-    if(echeckimageviewcreateinfo(L, 2, &info))
-        return luaL_argerror(L, 2, lua_tostring(L, -1));
+    if(echeckimageviewcreateinfo(L, 2, &info)) return argerror(L, 2);
     info.image = image;
 
     ec = UD(device)->ddt->CreateImageView(device, &info, allocator, &image_view);

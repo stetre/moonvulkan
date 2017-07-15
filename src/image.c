@@ -80,8 +80,7 @@ static int Create(lua_State *L)
 
     VkDevice device = checkdevice(L, 1, &ud);
     const VkAllocationCallbacks *allocator = optallocator(L, 3);
-    if(echeckimagecreateinfo(L, 2, &info))
-        return luaL_argerror(L, 2, lua_tostring(L, -1));
+    if(echeckimagecreateinfo(L, 2, &info)) return argerror(L, 2);
 
     ec = ud->ddt->CreateImage(device, &info, allocator, &image);
     freeimagecreateinfo(L, &info);
@@ -197,8 +196,7 @@ static int GetImageSubresourceLayout(lua_State *L)
     ud_t *ud;
     VkImage image = checkimage(L, 1, &ud);
     VkDevice device = ud->device;
-    if(echeckimagesubresource(L, 2, &subresource))
-        return luaL_argerror(L, 2, lua_tostring(L, -1));
+    if(echeckimagesubresource(L, 2, &subresource)) return argerror(L, 2);
     ud->ddt->GetImageSubresourceLayout(device, image, &subresource, &layout);
     pushsubresourcelayout(L, &layout);
     return 1;

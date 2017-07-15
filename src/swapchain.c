@@ -62,8 +62,7 @@ static int CreateSwapchain(lua_State *L)
     VkSwapchainCreateInfoKHR info;
     VkDevice device = checkdevice(L, 1, &ud);
     const VkAllocationCallbacks *allocator = optallocator(L, 3);
-    if(echeckswapchaincreateinfo(L, 2, &info))
-        return luaL_argerror(L, 2, lua_tostring(L, -1));
+    if(echeckswapchaincreateinfo(L, 2, &info)) return argerror(L, 2);
     CheckDevicePfn(L, ud, CreateSwapchainKHR);
     ec = ud->ddt->CreateSwapchainKHR(device, &info, allocator, &swapchain);
     freeswapchaincreateinfo(L, &info);
@@ -85,7 +84,7 @@ static int CreateSharedSwapchains(lua_State *L)
     CheckDevicePfn(L, ud, CreateSharedSwapchainsKHR);
 
     infos = echeckswapchaincreateinfolist(L, 2, &count, &err);
-    if(err) return luaL_argerror(L, 2, lua_tostring(L, -1));
+    if(err) return argerror(L, 2);
 
     swapchains = (VkSwapchainKHR*)MallocNoErr(L, count*sizeof(VkSwapchainKHR));
     if(!swapchains)
@@ -204,7 +203,7 @@ static int QueuePresent(lua_State *L)
     CheckDevicePfn(L, ud, QueuePresentKHR);
 
     err = echeckpresentinfo(L, 2, &info);
-    if(err) return luaL_argerror(L, 2, lua_tostring(L, -1));
+    if(err) return argerror(L, 2);
 
     per_swapchain_results = optboolean(L, 3, 0);
 
@@ -213,7 +212,7 @@ static int QueuePresent(lua_State *L)
     if(err < 0)
         {
         freepresentinfo(L, &info); 
-        return luaL_argerror(L, 4, lua_tostring(L, -1));
+        return argerror(L, 4);
         }
     if(err == 0)
         {
@@ -229,7 +228,7 @@ static int QueuePresent(lua_State *L)
         {
         freepresentinfo(L, &info); 
         if(display_info_added) freedisplaypresentinfo(L, &display_info);
-        return luaL_argerror(L, 5, lua_tostring(L, -1));
+        return argerror(L, 5);
         }
     if(err == 0)
         {

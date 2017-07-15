@@ -48,8 +48,7 @@ static int Create(lua_State *L)
     VkBuffer buffer = checkbuffer(L, 1, &buffer_ud);
     VkDevice device = buffer_ud->device;
     const VkAllocationCallbacks *allocator = optallocator(L, 3);
-    if(echeckbufferviewcreateinfo(L, 2, &info))
-        return luaL_argerror(L, 2, lua_tostring(L, -1));
+    if(echeckbufferviewcreateinfo(L, 2, &info)) return argerror(L, 2);
     info.buffer = buffer;
 
     ec = buffer_ud->ddt->CreateBufferView(device, &info, allocator, &buffer_view);

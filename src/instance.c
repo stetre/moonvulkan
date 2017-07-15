@@ -50,8 +50,7 @@ static int Create(lua_State *L)
     VkInstanceCreateInfo info;
     const VkAllocationCallbacks *allocator = optallocator(L, 2);
 
-    if(echeckinstancecreateinfo(L, 1, &info))
-        return luaL_argerror(L, 1, lua_tostring(L, -1));
+    if(echeckinstancecreateinfo(L, 1, &info)) return argerror(L, 1);
 
     ec = vk.CreateInstance(&info, allocator, &instance);
     freeinstancecreateinfo(L, &info);

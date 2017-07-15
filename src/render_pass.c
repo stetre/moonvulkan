@@ -45,8 +45,7 @@ static int Create(lua_State *L)
     VkRenderPassCreateInfo info;
     VkDevice device = checkdevice(L, 1, &device_ud);
     const VkAllocationCallbacks *allocator = optallocator(L, 3);
-    if(echeckrenderpasscreateinfo(L, 2, &info))
-        return luaL_argerror(L, 2, lua_tostring(L, -1));
+    if(echeckrenderpasscreateinfo(L, 2, &info)) return argerror(L, 2);
 
     ec = device_ud->ddt->CreateRenderPass(device, &info, allocator, &render_pass);
     freerenderpasscreateinfo(L, &info);

@@ -49,7 +49,7 @@ static int Create(lua_State *L)
 
     CheckDevicePfn(L, device_ud, CreateDescriptorUpdateTemplateKHR);
     if(echeckdescriptorupdatetemplatecreateinfo(L, 2, &info))
-        return luaL_argerror(L, 2, lua_tostring(L, -1));
+        return argerror(L, 2);
 
     ec = device_ud->ddt->CreateDescriptorUpdateTemplateKHR(device, &info, allocator, &du_template);
     freedescriptorupdatetemplatecreateinfo(L, &info);

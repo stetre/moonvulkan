@@ -194,6 +194,7 @@ void moonvulkan_open_datahandling(lua_State *L);
 
 #define notsupported(L) luaL_error((L), "operation not supported")
 #define errmemory(L) luaL_error((L), errstring(ERR_MEMORY))
+#define argerror(L, arg) luaL_argerror((L), (arg), lua_tostring((L), -1))
 
 #define badvalue(L,s)   lua_pushfstring((L), "invalid value '%s'", (s))
 

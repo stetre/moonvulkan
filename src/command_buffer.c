@@ -129,8 +129,7 @@ static int BeginCommandBuffer(lua_State *L)
     info.flags = optflags(L, 2, 0);
 
     err = echeckcommandbufferinheritanceinfo(L, 3, &inherit);
-    if(err < 0)
-        return luaL_argerror(L, 3, lua_tostring(L, -1));
+    if(err < 0) return argerror(L, 3);
     if(err) lua_pop(L, 1);
 
     info.pInheritanceInfo = (err == 0) ? &inherit : NULL; 

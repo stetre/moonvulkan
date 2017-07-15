@@ -63,7 +63,7 @@ static int Create(lua_State *L)
 
     info.pBindings = echeckdescriptorsetlayoutbindinglist(L, 3, &info.bindingCount, &err);
     if(err < 0)
-        { FreeInfo(L, &info); return luaL_argerror(L, 3, lua_tostring(L, -1)); }
+        { FreeInfo(L, &info); return argerror(L, 3); }
     if(err) lua_pop(L, 1);
 
     ec = UD(device)->ddt->CreateDescriptorSetLayout(device, &info, allocator, &descriptor_set_layout);

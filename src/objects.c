@@ -142,7 +142,7 @@ uint64_t checkxxx(lua_State *L, int arg, ud_t **udp, const char *mt)
     if(ud && IsValid(ud)) 
         { if(udp) *udp = ud; return ud->handle; }
     lua_pushfstring(L, "not a %s", mt);
-    return luaL_argerror(L, arg, lua_tostring(L, -1));
+    return argerror(L, arg);
     }
 
 int pushxxx(lua_State *L, uint64_t handle)  /* dispatchable objects only */

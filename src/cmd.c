@@ -43,7 +43,7 @@ static int CmdSetViewport(lua_State *L)
     VkCommandBuffer cb = checkcommand_buffer(L, 1, &ud);
     uint32_t firstViewport = luaL_checkinteger(L, 2);
     VkViewport *viewports = echeckviewportlist(L, 3, &count, &err);
-    if(err) return luaL_argerror(L, 3, lua_tostring(L, -1));
+    if(err) return argerror(L, 3);
         
     ud->ddt->CmdSetViewport(cb, firstViewport, count, viewports);
     Free(L, viewports);
@@ -58,7 +58,7 @@ static int CmdSetScissor(lua_State *L)
     VkCommandBuffer cb = checkcommand_buffer(L, 1, &ud);
     uint32_t first = luaL_checkinteger(L, 2);
     VkRect2D *scissors = echeckrect2dlist(L, 3, &count, &err);
-    if(err) return luaL_argerror(L, 3, lua_tostring(L, -1));
+    if(err) return argerror(L, 3);
         
     ud->ddt->CmdSetScissor(cb, first, count, scissors);
     Free(L, scissors);
@@ -288,7 +288,7 @@ static int CmdCopyBuffer(lua_State *L)
     VkBuffer srcBuffer = checkbuffer(L, 2, NULL);
     VkBuffer dstBuffer = checkbuffer(L, 3, NULL);
     VkBufferCopy* regions = echeckbuffercopylist(L, 4, &count, &err);
-    if(err) return luaL_argerror(L, 4, lua_tostring(L, -1));
+    if(err) return argerror(L, 4);
 
     ud->ddt->CmdCopyBuffer(cb, srcBuffer, dstBuffer, count, regions);
     Free(L, regions);
@@ -306,7 +306,7 @@ static int CmdCopyImage(lua_State *L)
     VkImage dstImage = checkimage(L, 4, NULL);
     VkImageLayout dstImageLayout = checkimagelayout(L, 5);
     VkImageCopy* regions = echeckimagecopylist(L, 6, &count, &err);
-    if(err) return luaL_argerror(L, 6, lua_tostring(L, -1));
+    if(err) return argerror(L, 6);
 
     ud->ddt->CmdCopyImage(cb, srcImage, srcImageLayout, dstImage, dstImageLayout, count, regions);
     Free(L, regions);
@@ -325,7 +325,7 @@ static int CmdBlitImage(lua_State *L)
     VkImageLayout dstImageLayout = checkimagelayout(L, 5);
     VkFilter filter = checkfilter(L, 7); /* before regions so there is no need to free them on error */
     VkImageBlit* regions = echeckimageblitlist(L, 6, &count, &err);
-    if(err) return luaL_argerror(L, 6, lua_tostring(L, -1));
+    if(err) return argerror(L, 6);
 
     ud->ddt->CmdBlitImage(cb, srcImage, srcImageLayout, dstImage, dstImageLayout, count, regions, filter);
     Free(L, regions);
@@ -342,7 +342,7 @@ static int CmdCopyBufferToImage(lua_State *L)
     VkImage dstImage = checkimage(L, 3, NULL);
     VkImageLayout dstImageLayout = checkimagelayout(L, 4);
     VkBufferImageCopy* regions = echeckbufferimagecopylist(L, 5, &count, &err);
-    if(err) return luaL_argerror(L, 5, lua_tostring(L, -1));
+    if(err) return argerror(L, 5);
     ud->ddt->CmdCopyBufferToImage(cb, srcBuffer, dstImage, dstImageLayout, count, regions);
     Free(L, regions);
     return 0;
@@ -358,7 +358,7 @@ static int CmdCopyImageToBuffer(lua_State *L)
     VkImageLayout srcImageLayout = checkimagelayout(L, 3);
     VkBuffer dstBuffer = checkbuffer(L, 4, NULL);
     VkBufferImageCopy* regions = echeckbufferimagecopylist(L, 5, &count, &err);
-    if(err) return luaL_argerror(L, 5, lua_tostring(L, -1));
+    if(err) return argerror(L, 5);
 
     ud->ddt->CmdCopyImageToBuffer(cb, srcImage, srcImageLayout, dstBuffer, count, regions);
     Free(L, regions);
@@ -402,10 +402,9 @@ static int CmdClearColorImage(lua_State *L)
     VkCommandBuffer cb = checkcommand_buffer(L, 1, &ud);
     VkImage image = checkimage(L, 2, NULL);
     VkImageLayout imageLayout = checkimagelayout(L, 3);
-    if(echeckclearcolorvalue(L, 4, &color))
-        return luaL_argerror(L, 4, lua_tostring(L, -1));
+    if(echeckclearcolorvalue(L, 4, &color)) return argerror(L, 4);
     ranges = echeckimagesubresourcerangelist(L, 5, &count, &err);
-    if(err) return luaL_argerror(L, 5, lua_tostring(L, -1));
+    if(err) return argerror(L, 5);
     ud->ddt->CmdClearColorImage(cb, image, imageLayout, &color, count, ranges);
     Free(L, ranges);
     return 0;
@@ -424,7 +423,7 @@ static int CmdClearDepthStencilImage(lua_State *L)
     depthstencil.depth = luaL_checknumber(L, 4);
     depthstencil.stencil = luaL_checkinteger(L, 5);
     ranges = echeckimagesubresourcerangelist(L, 6, &count, &err);
-    if(err) return luaL_argerror(L, 6, lua_tostring(L, -1));
+    if(err) return argerror(L, 6);
     ud->ddt->CmdClearDepthStencilImage(cb, image, imageLayout, &depthstencil, count, ranges);
     Free(L, ranges);
     return 0;
@@ -440,13 +439,13 @@ static int CmdClearAttachments(lua_State *L)
     VkCommandBuffer cb = checkcommand_buffer(L, 1, &ud);
 
     attachments = echeckclearattachmentlist(L, 2, &att_count, &err);
-    if(err) return luaL_argerror(L, 2, lua_tostring(L, -1));
+    if(err) return argerror(L, 2);
 
     rects = echeckclearrectlist(L, 3, &rect_count, &err);
     if(err) 
         {
         Free(L, attachments);
-        return luaL_argerror(L, 3, lua_tostring(L, -1));
+        return argerror(L, 3);
         }
 
     ud->ddt->CmdClearAttachments(cb, att_count, attachments, rect_count, rects);
@@ -467,7 +466,7 @@ static int CmdResolveImage(lua_State *L)
     VkImage dstImage = checkimage(L, 4, NULL);
     VkImageLayout dstImageLayout = checkimagelayout(L, 5);
     VkImageResolve* regions = echeckimageresolvelist(L, 6, &count, &err);
-    if(err) return luaL_argerror(L, 6, lua_tostring(L, -1));
+    if(err) return argerror(L, 6);
     ud->ddt->CmdResolveImage(cb, srcImage, srcImageLayout, dstImage, dstImageLayout, count, regions);
     Free(L, regions);
     return 0;
@@ -533,7 +532,7 @@ done: /* I'm italian, I love spaghetti */
     if(pBufferMemoryBarriers) Free(L, pBufferMemoryBarriers);
     if(pImageMemoryBarriers) Free(L, pImageMemoryBarriers);
     if(errarg)
-        return luaL_argerror(L, errarg, lua_tostring(L, -1));
+        return argerror(L, errarg);
     return 0;
     }
 
@@ -573,7 +572,7 @@ done: /* I'm italian, I love spaghetti */
     if(pBufferMemoryBarriers) Free(L, pBufferMemoryBarriers);
     if(pImageMemoryBarriers) Free(L, pImageMemoryBarriers);
     if(errarg)
-        return luaL_argerror(L, errarg, lua_tostring(L, -1));
+        return argerror(L, errarg);
     return 0;
     }
 
@@ -657,7 +656,7 @@ static int CmdBeginRenderPass(lua_State *L)
     if(echeckrenderpassbegininfo(L, 2, &info) != 0)
         {
         freerenderpassbegininfo(L, &info);
-        return luaL_argerror(L, 2, lua_tostring(L, -1));
+        return argerror(L, 2);
         }
     
     contents = checksubpasscontents(L, 3);

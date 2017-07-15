@@ -70,8 +70,7 @@ static int Create(lua_State *L)
     VkPhysicalDevice physical_device = checkphysical_device(L, 1, &physdev_ud);
     const VkAllocationCallbacks *allocator = optallocator(L, 3);
 
-    if(echeckdevicecreateinfo(L, 2, &info, physdev_ud))
-        return luaL_argerror(L, 2, lua_tostring(L, -1));
+    if(echeckdevicecreateinfo(L, 2, &info, physdev_ud)) return argerror(L, 2);
 
     ec = physdev_ud->idt->CreateDevice(physical_device, &info, allocator, &device);
     freedevicecreateinfo(L, &info);

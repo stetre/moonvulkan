@@ -65,7 +65,7 @@ static int CreateGraphics(lua_State *L)
     VkPipelineCache cache = testpipeline_cache(L, 2, NULL);
     const VkAllocationCallbacks *allocator = optallocator(L, 4);
     VkGraphicsPipelineCreateInfo *info = echeckgraphicspipelinecreateinfolist(L, 3, &count, &err);
-    if(err) return luaL_argerror(L, 3, lua_tostring(L, -1));
+    if(err) return argerror(L, 3);
 
     pipeline = (VkPipeline*)MallocNoErr(L, count*sizeof(VkPipeline));
     if(!pipeline)
@@ -102,7 +102,7 @@ static int CreateCompute(lua_State *L)
     VkPipelineCache cache = testpipeline_cache(L, 2, NULL);
     const VkAllocationCallbacks *allocator = optallocator(L, 4);
     VkComputePipelineCreateInfo *info = echeckcomputepipelinecreateinfolist(L, 3, &count, &err);
-    if(err) return luaL_argerror(L, 3, lua_tostring(L, -1));
+    if(err) return argerror(L, 3);
 
     pipeline = (VkPipeline*)MallocNoErr(L, count*sizeof(VkPipeline));
     if(!pipeline)

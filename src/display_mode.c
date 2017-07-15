@@ -66,8 +66,7 @@ static int Create(lua_State *L)
     info.sType = VK_STRUCTURE_TYPE_DISPLAY_MODE_CREATE_INFO_KHR;
     info.pNext = NULL;
     info.flags = checkflags(L, 2);
-    if(echeckdisplaymodeparameters(L, 3, &info.parameters))
-        return luaL_argerror(L, 3, lua_tostring(L, -1));
+    if(echeckdisplaymodeparameters(L, 3, &info.parameters)) return argerror(L, 3);
     
     CheckInstancePfn(L, display_ud, CreateDisplayModeKHR);
     ec = display_ud->idt->CreateDisplayModeKHR(physical_device, display, &info, allocator, &display_mode);

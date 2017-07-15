@@ -66,7 +66,7 @@ static int Create(lua_State *L)
     info.pPoolSizes = echeckdescriptorpoolsizelist(L, 4, &count, &err);
     info.poolSizeCount = count;
     if(err)
-        { FreeInfo(L, &info); return luaL_argerror(L, 4, lua_tostring(L, -1)); }
+        { FreeInfo(L, &info); return argerror(L, 4); }
 
     ec = device_ud->ddt->CreateDescriptorPool(device, &info, allocator, &descriptor_pool);
     FreeInfo(L, &info);

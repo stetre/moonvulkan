@@ -47,8 +47,7 @@ static int Create(lua_State *L)
 
     VkDevice device = checkdevice(L, 1, &device_ud);
     const VkAllocationCallbacks *allocator = optallocator(L, 3);
-    if(echecksamplercreateinfo(L, 2, &info))
-        return luaL_argerror(L, 2, lua_tostring(L, -1));
+    if(echecksamplercreateinfo(L, 2, &info)) return argerror(L, 2);
 
     ec = device_ud->ddt->CreateSampler(device, &info, allocator, &sampler);
     freesamplercreateinfo(L, &info);

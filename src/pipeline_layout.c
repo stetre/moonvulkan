@@ -71,7 +71,7 @@ static int Create(lua_State *L)
     info.pPushConstantRanges = echeckpushconstantrangelist(L, 4, &count, &err);
     info.pushConstantRangeCount = count;
     if(err < 0)
-        { FreeInfo(L, &info); return luaL_argerror(L, 4, lua_tostring(L, -1)); }
+        { FreeInfo(L, &info); return argerror(L, 4); }
     if(err) lua_pop(L, 1);
 
     ec = device_ud->ddt->CreatePipelineLayout(device, &info, allocator, &pipeline_layout);
