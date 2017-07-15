@@ -160,6 +160,10 @@ int pushphysicaldevicefeatures(lua_State *L, VkPhysicalDeviceFeatures *p);
 #define pushphysicaldevicefeatures2 moonvulkan_pushphysicaldevicefeatures2
 int pushphysicaldevicefeatures2(lua_State *L, VkPhysicalDeviceFeatures2KHR *p);
 
+#define newformatproperties2 moonvulkan_newformatproperties2
+VkFormatProperties2KHR* newformatproperties2(lua_State *L);
+#define freeformatproperties2 moonvulkan_freeformatproperties2
+void freeformatproperties2(lua_State *L, VkFormatProperties2KHR *p);
 #define pushformatproperties moonvulkan_pushformatproperties
 int pushformatproperties(lua_State *L, VkFormatProperties *p);
 #define pushformatproperties2 moonvulkan_pushformatproperties2

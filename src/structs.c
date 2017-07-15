@@ -1570,6 +1570,42 @@ int pushphysicaldeviceproperties2(lua_State *L, VkPhysicalDeviceProperties2KHR *
     }
 
 /*------------------------------------------------------------------------------*/
+
+int pushformatproperties(lua_State *L, VkFormatProperties *p)
+    {
+    lua_newtable(L);
+    SetFlags(linearTilingFeatures, "linear_tiling_features");
+    SetFlags(optimalTilingFeatures, "optimal_tiling_features");
+    SetFlags(bufferFeatures, "buffer_features");
+    return 1;
+    }
+
+typedef struct {
+	VkFormatProperties2KHR p1;
+} VkFormatProperties2KHR_CHAIN;
+
+VkFormatProperties2KHR* newformatproperties2(lua_State *L)
+	{
+    VkFormatProperties2KHR_CHAIN *p = MALLOC_NOERR(L, VkFormatProperties2KHR_CHAIN);
+    if(!p) return NULL;
+    p->p1.sType = VK_STRUCTURE_TYPE_FORMAT_PROPERTIES_2_KHR;
+    p->p1.pNext = NULL; // chain any other extension here
+    return (VkFormatProperties2KHR*)p;
+    }
+
+void freeformatproperties2(lua_State *L, VkFormatProperties2KHR *p)
+    {
+    Free(L, (void*)p);
+    }
+
+int pushformatproperties2(lua_State *L, VkFormatProperties2KHR *pp)
+    {
+	VkFormatProperties2KHR_CHAIN *p = (VkFormatProperties2KHR_CHAIN*)pp;
+    pushformatproperties(L, &p->p1.formatProperties);
+    return 1;
+    }
+
+/*------------------------------------------------------------------------------*/
 int pushqueuefamilyproperties(lua_State *L, VkQueueFamilyProperties *p, uint32_t index)
     {
     lua_newtable(L);
@@ -1652,23 +1688,6 @@ int pushsparseimageformatproperties2(lua_State *L, VkSparseImageFormatProperties
     return 1;
     }
 
-
-/*------------------------------------------------------------------------------*/
-int pushformatproperties(lua_State *L, VkFormatProperties *p)
-    {
-    lua_newtable(L);
-    SetFlags(linearTilingFeatures, "linear_tiling_features");
-    SetFlags(optimalTilingFeatures, "optimal_tiling_features");
-    SetFlags(bufferFeatures, "buffer_features");
-    return 1;
-    }
-
-int pushformatproperties2(lua_State *L, VkFormatProperties2KHR *p)
-    {
-    pushformatproperties(L, &p->formatProperties);
-    //pushxxx(L, (VkXxxKHR*)p->pNext);  next extension in chain
-    return 1;
-    }
 
 /*------------------------------------------------------------------------------*/
 int pushimageformatproperties(lua_State *L, VkImageFormatProperties *p)
