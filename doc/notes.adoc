@@ -31,6 +31,7 @@ Khronos extensions (KHR):
 * https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_storage_buffer_storage_class[VK_KHR_storage_buffer_storage_class]
 * https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_16bit_storage[VK_KHR_16bit_storage]
 * https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_variable_pointers[VK_KHR_variable_pointers]
+* https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_dedicated_allocation[VK_KHR_dedicated_allocation]
 
 Khronos experimental extensions (KHX):
 

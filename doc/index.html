@@ -2026,9 +2026,10 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/
 <div id="allocate_memory" class="ulist">
 <ul>
 <li>
-<p><em>devmem</em> = <strong>allocate_memory</strong>(<em>device</em>, <em>allocation_size</em>, <em>memory_type_index</em>, [<a href="#allocators"><em>allocator</em></a>])<br>
+<p><em>devmem</em> = <strong>allocate_memory</strong>(<em>device</em>, <em>allocation_size</em>, <em>memory_type_index</em>, [<a href="#allocators"><em>allocator</em></a>], [<em>dedicated</em>])<br>
 <span class="small"><em>allocation_size</em>: integer<br>
 <em>memory_type_index</em>: integer<br>
+<em>dedicated</em>: <a href="#image"><em>image</em></a> or <a href="#buffer"><em>buffer</em></a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_dedicated_allocation">VK_KHR_dedicated_allocation</a> EXTENSION)<br>
 Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkAllocateMemory">vkAllocateMemory</a>.</span></p>
 </li>
 </ul>
@@ -2126,7 +2127,8 @@ Otherwise the original functions are used.
 <ul>
 <li>
 <p><a href="#memoryrequirements"><em>memoryrequirements</em></a> = <strong>get_buffer_memory_requirements</strong>(<a href="#buffer"><em>buffer</em></a>)<br>
-<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetBufferMemoryRequirements">vkGetBufferMemoryRequirements</a>.</span></p>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetBufferMemoryRequirements">vkGetBufferMemoryRequirements</a> -
+<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetBufferMemoryRequirements2KHR">vkGetBufferMemoryRequirements2KHR</a>.</span></p>
 </li>
 </ul>
 </div>
@@ -2134,7 +2136,8 @@ Otherwise the original functions are used.
 <ul>
 <li>
 <p><a href="#memoryrequirements"><em>memoryrequirements</em></a> = <strong>get_image_memory_requirements</strong>(<a href="#image"><em>image</em></a>)<br>
-<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetImageMemoryRequirements">vkGetImageMemoryRequirements</a>.</span></p>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetImageMemoryRequirements">vkGetImageMemoryRequirements</a> -
+<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetImageMemoryRequirements2KHR">vkGetImageMemoryRequirements2KHR</a>.</span></p>
 </li>
 </ul>
 </div>
@@ -2142,7 +2145,8 @@ Otherwise the original functions are used.
 <ul>
 <li>
 <p>{<a href="#sparseimagememoryrequirements"><em>sparseimagememoryrequirements</em></a>} = <strong>get_image_sparse_memory_requirements</strong>(<a href="#image"><em>image</em></a>)<br>
-<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetImageSparseMemoryRequirements">vkGetImageSparseMemoryRequirements</a>.</span></p>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetImageSparseMemoryRequirements">vkGetImageSparseMemoryRequirements</a> -
+<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetImageSparseMemoryRequirements2KHR">vkGetImageSparseMemoryRequirements2KHR</a>.</span></p>
 </li>
 </ul>
 </div>
@@ -3604,7 +3608,12 @@ with 1-based integer keys and no gaps, a.k.a. 'sequence' in Lua&#8217;s jargon).
 <em>size</em>: integer,<br>
 <em>alignment</em>: integer,<br>
 <em>memory_type_bits</em>: integer,<br>
-} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkMemoryRequirements">VkMemoryRequirements</a>)</span></p>
+---- <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_dedicated_allocation">VK_KHR_dedicated_allocation</a> EXTENSION ----<br>
+<em>prefers_dedicated_allocation</em>: boolean,<br>
+<em>requires_dedicated_allocation</em>: boolean,<br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkMemoryRequirements">VkMemoryRequirements</a>,<br>
+<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkMemoryRequirements2KHR">VkMemoryRequirements2KHR</a>,<br>
+<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkMemoryDedicatedRequirementsKHR">VkMemoryDedicatedRequirementsKHR</a>)</span></p>
 </li>
 <li>
 <p><a id="sparseimagememoryrequirements"></a>
@@ -5451,6 +5460,9 @@ previously obtained with the <a href="#now">now</a>(&nbsp;) function.</span></p>
 </li>
 <li>
 <p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_variable_pointers">VK_KHR_variable_pointers</a></p>
+</li>
+<li>
+<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_dedicated_allocation">VK_KHR_dedicated_allocation</a></p>
 </li>
 </ul>
 </div>

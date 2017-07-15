@@ -286,6 +286,12 @@ VkImageMemoryBarrier* echeckimagememorybarrierlist(lua_State *L, int arg, uint32
 #define echeckmappedmemoryrangelist moonvulkan_echeckmappedmemoryrangelist
 VkMappedMemoryRange* echeckmappedmemoryrangelist(lua_State *L, int arg, uint32_t *count, int *err);
 
+#define pushmemorydedicatedrequirements moonvulkan_pushmemorydedicatedrequirements
+int pushmemorydedicatedrequirements(lua_State *L, VkMemoryDedicatedRequirementsKHR *p);
+#define newmemoryrequirements2 moonvulkan_newmemoryrequirements2
+VkMemoryRequirements2KHR* newmemoryrequirements2(lua_State *L);
+#define freememoryrequirements2 moonvulkan_freememoryrequirements2
+void freememoryrequirements2(lua_State *L, VkMemoryRequirements2KHR *p);
 #define pushmemoryrequirements moonvulkan_pushmemoryrequirements
 int pushmemoryrequirements(lua_State *L, VkMemoryRequirements *p);
 #define pushmemoryrequirements2 moonvulkan_pushmemoryrequirements2

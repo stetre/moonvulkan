@@ -2306,11 +2306,39 @@ int pushmemoryrequirements(lua_State *L, VkMemoryRequirements *p)
     return 1;
     }
 
-
-int pushmemoryrequirements2(lua_State *L, VkMemoryRequirements2KHR *p) //@@DOC
+int pushmemorydedicatedrequirements(lua_State *L, VkMemoryDedicatedRequirementsKHR *p)
     {
-    pushmemoryrequirements(L, &p->memoryRequirements);
-    //pushxxx(L, (VkXxxKHR*)p->pNext);  next extension in chain
+    SetBoolean(prefersDedicatedAllocation, "prefers_dedicated_allocation");
+    SetBoolean(requiresDedicatedAllocation, "requires_dedicated_allocation");
+    return 1;
+    }
+
+typedef struct {
+	VkMemoryRequirements2KHR p1;
+	VkMemoryDedicatedRequirementsKHR p2;
+} VkMemoryRequirements2KHR_CHAIN;
+
+VkMemoryRequirements2KHR* newmemoryrequirements2(lua_State *L)
+    {
+    VkMemoryRequirements2KHR_CHAIN *p = MALLOC_NOERR(L, VkMemoryRequirements2KHR_CHAIN);
+    if(!p) return NULL;
+    p->p1.sType = VK_STRUCTURE_TYPE_MEMORY_REQUIREMENTS_2_KHR;
+    p->p2.sType = VK_STRUCTURE_TYPE_MEMORY_DEDICATED_REQUIREMENTS_KHR;
+    p->p1.pNext = &p->p2;
+    p->p2.pNext = NULL;
+    return (VkMemoryRequirements2KHR*)p;
+    }
+
+void freememoryrequirements2(lua_State *L, VkMemoryRequirements2KHR *p)
+    {
+    Free(L, (void*)p);
+    }
+
+int pushmemoryrequirements2(lua_State *L, VkMemoryRequirements2KHR *pp)
+    {
+	VkMemoryRequirements2KHR_CHAIN *p = (VkMemoryRequirements2KHR_CHAIN*)pp;
+    pushmemoryrequirements(L, &p->p1.memoryRequirements);
+    pushmemorydedicatedrequirements(L, &p->p2);
     return 1;
     }
 

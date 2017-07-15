@@ -3,9 +3,10 @@
 ==== device_memory (_devmem_)
 
 [[allocate_memory]]
-* _devmem_ = *allocate_memory*(_device_, _allocation_size_, _memory_type_index_, [<<allocators, _allocator_>>]) +
+* _devmem_ = *allocate_memory*(_device_, _allocation_size_, _memory_type_index_, [<<allocators, _allocator_>>], [_dedicated_]) +
 [small]#_allocation_size_: integer +
 _memory_type_index_: integer +
+_dedicated_: <<image, _image_>> or <<buffer, _buffer_>> (https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_dedicated_allocation[VK_KHR_dedicated_allocation] EXTENSION) +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkAllocateMemory[vkAllocateMemory].#
 
 [[free_memory]]
@@ -59,15 +60,18 @@ Otherwise the original functions are used.
 
 [[get_buffer_memory_requirements]]
 * <<memoryrequirements, _memoryrequirements_>> = *get_buffer_memory_requirements*(<<buffer, _buffer_>>) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetBufferMemoryRequirements[vkGetBufferMemoryRequirements].#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetBufferMemoryRequirements[vkGetBufferMemoryRequirements] -
+https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetBufferMemoryRequirements2KHR[vkGetBufferMemoryRequirements2KHR].#
 
 [[get_image_memory_requirements]]
 * <<memoryrequirements, _memoryrequirements_>> = *get_image_memory_requirements*(<<image, _image_>>) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetImageMemoryRequirements[vkGetImageMemoryRequirements].#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetImageMemoryRequirements[vkGetImageMemoryRequirements] -
+https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetImageMemoryRequirements2KHR[vkGetImageMemoryRequirements2KHR].#
 
 [[get_image_sparse_memory_requirements]]
 * {<<sparseimagememoryrequirements, _sparseimagememoryrequirements_>>} = *get_image_sparse_memory_requirements*(<<image, _image_>>) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetImageSparseMemoryRequirements[vkGetImageSparseMemoryRequirements].#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetImageSparseMemoryRequirements[vkGetImageSparseMemoryRequirements] -
+https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetImageSparseMemoryRequirements2KHR[vkGetImageSparseMemoryRequirements2KHR].#
 
 '''
 

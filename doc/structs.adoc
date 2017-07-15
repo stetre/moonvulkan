@@ -496,7 +496,12 @@ _size_: integer or '_whole size_' (defaults to '_whole size_'), +
 _size_: integer, +
 _alignment_: integer, +
 _memory_type_bits_: integer, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkMemoryRequirements[VkMemoryRequirements])#
+pass:[----] https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_dedicated_allocation[VK_KHR_dedicated_allocation] EXTENSION ---- +
+_prefers_dedicated_allocation_: boolean, +
+_requires_dedicated_allocation_: boolean, +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkMemoryRequirements[VkMemoryRequirements], +
+https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkMemoryRequirements2KHR[VkMemoryRequirements2KHR], +
+https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkMemoryDedicatedRequirementsKHR[VkMemoryDedicatedRequirementsKHR])#
 
 
 * [[sparseimagememoryrequirements]]

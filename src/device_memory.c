@@ -45,25 +45,18 @@ static int freedevice_memory(lua_State *L, ud_t *ud)
     return 0;
     }
 
-
-static int Create(lua_State *L)
+static int Create(lua_State *L, VkDevice device, VkMemoryAllocateInfo *info, const VkAllocationCallbacks *allocator)
     {
     ud_info_t *ud_info;
-    ud_t *ud, *device_ud;
+    ud_t *ud;
     VkResult ec;
     VkDeviceMemory device_memory;
-    VkMemoryAllocateInfo info;
-    VkDevice device = checkdevice(L, 1, &device_ud);
-    const VkAllocationCallbacks *allocator = optallocator(L, 4);
-    info.sType = VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO;
-    info.pNext = NULL;
-    info.allocationSize = luaL_checkinteger(L, 2);
-    info.memoryTypeIndex = luaL_checkinteger(L, 3);
+    ud_t *device_ud = UD(device);
 
     ud_info = (ud_info_t*)MallocNoErr(L, sizeof(ud_info_t));
     if(!ud_info) return errmemory(L);
 
-    ec = device_ud->ddt->AllocateMemory(device, &info, NULL, &device_memory);
+    ec = device_ud->ddt->AllocateMemory(device, info, allocator, &device_memory);
     if(ec)
         {
         Free(L, ud_info);
@@ -78,9 +71,37 @@ static int Create(lua_State *L)
     ud->allocator = allocator;
     ud->ddt = device_ud->ddt;
     ud->info = ud_info;
-    ud_info->maxsz = info.allocationSize;
+    ud_info->maxsz = info->allocationSize;
     return 1;
     }
+
+
+static int Allocate(lua_State *L)
+    {
+    VkMemoryAllocateInfo info;
+    VkMemoryDedicatedAllocateInfoKHR dedicated_info;
+    VkDevice device = checkdevice(L, 1, NULL);
+    const VkAllocationCallbacks *allocator = optallocator(L, 4);
+
+    info.sType = VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO;
+    info.pNext = NULL;
+    info.allocationSize = luaL_checkinteger(L, 2);
+    info.memoryTypeIndex = luaL_checkinteger(L, 3);
+
+    if(!lua_isnoneornil(L, 5)) /* chain extension */
+        {
+        info.pNext = &dedicated_info;
+        dedicated_info.sType = VK_STRUCTURE_TYPE_MEMORY_DEDICATED_ALLOCATE_INFO_KHR;
+        dedicated_info.pNext = NULL;
+        dedicated_info.image = testimage(L, 5, NULL);
+        dedicated_info.buffer = testbuffer(L, 5, NULL);
+        if(!dedicated_info.image && !dedicated_info.buffer)
+            return luaL_argerror(L, 5, errstring(ERR_TYPE));
+        }
+
+    return Create(L, device, &info, allocator);
+    }
+
 
 static int MapMemory(lua_State *L)
     {
@@ -206,6 +227,174 @@ static int InvalidateMappedMemoryRanges(lua_State *L)
     return 0;
     }
 
+/*--------------------------------------------------------------------------------*/
+
+static int GetBufferMemoryRequirements2(lua_State *L, VkBuffer buffer, ud_t *ud)
+    {
+    VkMemoryRequirements2KHR *req;
+    VkBufferMemoryRequirementsInfo2KHR info;
+    VkDevice device = ud->device;
+
+    info.sType = VK_STRUCTURE_TYPE_BUFFER_MEMORY_REQUIREMENTS_INFO_2_KHR;
+    info.pNext = NULL;
+    info.buffer = buffer;
+
+    req = newmemoryrequirements2(L);
+    if(!req) return errmemory(L);
+
+    ud->ddt->GetBufferMemoryRequirements2KHR(device, &info, req);
+    pushmemoryrequirements2(L, req);
+    freememoryrequirements2(L, req);
+    return 1;
+    }
+
+static int GetBufferMemoryRequirements(lua_State *L)
+    {
+    ud_t *ud;
+    VkBuffer buffer = checkbuffer(L, 1, &ud);
+    VkDevice device = ud->device;
+    VkMemoryRequirements req;
+
+    if(ud->ddt->GetBufferMemoryRequirements2KHR)
+        return GetBufferMemoryRequirements2(L, buffer, ud);
+
+    ud->ddt->GetBufferMemoryRequirements(device, buffer, &req);
+    pushmemoryrequirements(L, &req);
+    return 1;
+    }
+
+static int GetImageMemoryRequirements2(lua_State *L, VkImage image, ud_t *ud) //@@DOC
+    {
+    VkMemoryRequirements2KHR *req;
+    VkImageMemoryRequirementsInfo2KHR info;
+    VkDevice device = ud->device;
+
+    info.sType = VK_STRUCTURE_TYPE_IMAGE_MEMORY_REQUIREMENTS_INFO_2_KHR;
+    info.pNext = NULL;
+    info.image = image;
+
+    req = newmemoryrequirements2(L);
+    if(!req) return errmemory(L);
+
+    ud->ddt->GetImageMemoryRequirements2KHR(device, &info, req);
+    pushmemoryrequirements2(L, req);
+    freememoryrequirements2(L, req);
+    return 1;
+    }
+
+static int GetImageMemoryRequirements(lua_State *L)
+    {
+    ud_t *ud;
+    VkImage image = checkimage(L, 1, &ud);
+    VkDevice device = ud->device;
+    VkMemoryRequirements req;
+    if(ud->ddt->GetImageMemoryRequirements2KHR)
+        return GetImageMemoryRequirements2(L, image, ud);
+
+    ud->ddt->GetImageMemoryRequirements(device, image, &req);
+    pushmemoryrequirements(L, &req);
+    return 1;
+    }
+
+
+static int GetImageSparseMemoryRequirements2(lua_State *L, VkImage image, ud_t *ud) //@@DOC
+    {
+    uint32_t count, i;
+    VkSparseImageMemoryRequirements2KHR *requirements;
+    VkImageSparseMemoryRequirementsInfo2KHR info;
+    VkDevice device = ud->device;
+
+    info.sType = VK_STRUCTURE_TYPE_IMAGE_SPARSE_MEMORY_REQUIREMENTS_INFO_2_KHR;
+    info.pNext = NULL;
+    info.image = image;
+
+    lua_newtable(L);
+    ud->ddt->GetImageSparseMemoryRequirements2KHR(device, &info, &count, NULL);
+
+    if(count == 0)
+        return 1;
+
+    requirements = (VkSparseImageMemoryRequirements2KHR*)
+        Malloc(L, sizeof(VkSparseImageMemoryRequirements2KHR)*count);
+    for(i = 0; i <count; i++)
+        {
+        requirements[i].sType = VK_STRUCTURE_TYPE_SPARSE_IMAGE_MEMORY_REQUIREMENTS_2_KHR;
+        requirements[i].pNext = NULL; //@@ next in chain
+        }
+
+    ud->ddt->GetImageSparseMemoryRequirements2KHR(device, &info, &count, requirements);
+    for(i = 0; i <count; i++)
+        {
+        pushsparseimagememoryrequirements2(L, &requirements[i]);
+        lua_rawseti(L, -2, i+1);
+        }
+
+    Free(L, requirements);
+    return 1;
+    }
+
+
+static int GetImageSparseMemoryRequirements(lua_State *L)
+    {
+    uint32_t count, i;
+    VkSparseImageMemoryRequirements *requirements;
+    ud_t *ud;
+    VkImage image = checkimage(L, 1, &ud);
+    VkDevice device = ud->device;
+
+    if(ud->ddt->GetImageSparseMemoryRequirements2KHR)
+        return GetImageSparseMemoryRequirements2(L, image, ud);
+
+    lua_newtable(L);
+    ud->ddt->GetImageSparseMemoryRequirements(device, image, &count, NULL);
+
+    if(count == 0)
+        return 1;
+
+    requirements =
+        (VkSparseImageMemoryRequirements*)Malloc(L, sizeof(VkSparseImageMemoryRequirements)*count);
+
+    ud->ddt->GetImageSparseMemoryRequirements(device, image, &count, requirements);
+    for(i = 0; i <count; i++)
+        {
+        pushsparseimagememoryrequirements(L, &requirements[i]);
+        lua_rawseti(L, -2, i+1);
+        }
+
+    Free(L, requirements);
+    return 1;
+    }
+
+
+/*--------------------------------------------------------------------------------*/
+
+static int BindBufferMemory(lua_State *L)
+    {
+    VkResult ec;
+    ud_t *ud;
+    VkBuffer buffer = checkbuffer(L, 1, &ud);
+    VkDevice device = ud->device;
+    VkDeviceMemory memory = checkdevice_memory(L, 2, NULL);
+    VkDeviceSize offset = luaL_checkinteger(L, 3);
+    ec = ud->ddt->BindBufferMemory(device, buffer, memory, offset);
+    CheckError(L, ec);
+    return 0;
+    }
+
+static int BindImageMemory(lua_State *L)
+    {
+    VkResult ec;
+    ud_t *ud;
+    VkImage image = checkimage(L, 1, &ud);
+    VkDevice device = ud->device;
+    VkDeviceMemory memory = checkdevice_memory(L, 2, NULL);
+    VkDeviceSize offset = luaL_checkinteger(L, 3);
+    ec = ud->ddt->BindImageMemory(device, image, memory, offset);
+    CheckError(L, ec);
+    return 0;
+    }
+
+
 RAW_FUNC(device_memory)
 TYPE_FUNC(device_memory)
 INSTANCE_FUNC(device_memory)
@@ -232,7 +421,7 @@ static const struct luaL_Reg MetaMethods[] =
 
 static const struct luaL_Reg Functions[] = 
     {
-        { "allocate_memory",  Create },
+        { "allocate_memory",  Allocate },
         { "free_memory",  Destroy },
         { "map_memory", MapMemory },
         { "unmap_memory", UnmapMemory },
@@ -241,6 +430,11 @@ static const struct luaL_Reg Functions[] =
         { "invalidate_mapped_memory_ranges", InvalidateMappedMemoryRanges },
         { "write_memory", Write },
         { "read_memory", Read },
+        { "get_buffer_memory_requirements", GetBufferMemoryRequirements },
+        { "get_image_memory_requirements", GetImageMemoryRequirements },
+        { "get_image_sparse_memory_requirements", GetImageSparseMemoryRequirements },
+        { "bind_image_memory", BindImageMemory },
+        { "bind_buffer_memory", BindBufferMemory },
         { NULL, NULL } /* sentinel */
     };
 

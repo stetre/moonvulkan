@@ -88,107 +88,6 @@ static int Create(lua_State *L)
     return newimage(L, image, UD(device), device, allocator, 0);
     }
 
-static int GetImageMemoryRequirements2(lua_State *L, VkImage image, ud_t *ud) //@@DOC
-    {
-    VkMemoryRequirements2KHR req;
-    VkImageMemoryRequirementsInfo2KHR info;
-    VkDevice device = ud->device;
-
-    info.sType = VK_STRUCTURE_TYPE_IMAGE_MEMORY_REQUIREMENTS_INFO_2_KHR;
-    info.pNext = NULL;
-    info.image = image;
-
-    memset(&req, 0, sizeof(req));
-    req.sType = VK_STRUCTURE_TYPE_MEMORY_REQUIREMENTS_2_KHR;
-    req.pNext = NULL; //@@ next in chain
-
-    ud->ddt->GetImageMemoryRequirements2KHR(device, &info, &req);
-    return pushmemoryrequirements2(L, &req);
-    }
-
-static int GetImageMemoryRequirements(lua_State *L)
-    {
-    ud_t *ud;
-    VkImage image = checkimage(L, 1, &ud);
-    VkDevice device = ud->device;
-    VkMemoryRequirements req;
-    if(ud->ddt->GetImageMemoryRequirements2KHR)
-        return GetImageMemoryRequirements2(L, image, ud);
-
-    ud->ddt->GetImageMemoryRequirements(device, image, &req);
-    return pushmemoryrequirements(L, &req);
-    }
-
-
-static int GetImageSparseMemoryRequirements2(lua_State *L, VkImage image, ud_t *ud) //@@DOC
-    {
-    uint32_t count, i;
-    VkSparseImageMemoryRequirements2KHR *requirements;
-    VkImageSparseMemoryRequirementsInfo2KHR info;
-    VkDevice device = ud->device;
-
-    info.sType = VK_STRUCTURE_TYPE_IMAGE_SPARSE_MEMORY_REQUIREMENTS_INFO_2_KHR;
-    info.pNext = NULL;
-    info.image = image;
-
-    lua_newtable(L);
-    ud->ddt->GetImageSparseMemoryRequirements2KHR(device, &info, &count, NULL);
-
-    if(count == 0)
-        return 1;
-
-    requirements = (VkSparseImageMemoryRequirements2KHR*)
-        Malloc(L, sizeof(VkSparseImageMemoryRequirements2KHR)*count);
-    for(i = 0; i <count; i++)
-        {
-        requirements[i].sType = VK_STRUCTURE_TYPE_SPARSE_IMAGE_MEMORY_REQUIREMENTS_2_KHR;
-        requirements[i].pNext = NULL; //@@ next in chain
-        }
-
-    ud->ddt->GetImageSparseMemoryRequirements2KHR(device, &info, &count, requirements);
-    for(i = 0; i <count; i++)
-        {
-        pushsparseimagememoryrequirements2(L, &requirements[i]);
-        lua_rawseti(L, -2, i+1);
-        }
-
-    Free(L, requirements);
-    return 1;
-    }
-
-
-static int GetImageSparseMemoryRequirements(lua_State *L)
-    {
-    uint32_t count, i;
-    VkSparseImageMemoryRequirements *requirements;
-    ud_t *ud;
-    VkImage image = checkimage(L, 1, &ud);
-    VkDevice device = ud->device;
-
-    if(ud->ddt->GetImageSparseMemoryRequirements2KHR)
-        return GetImageSparseMemoryRequirements2(L, image, ud);
-
-    lua_newtable(L);
-    ud->ddt->GetImageSparseMemoryRequirements(device, image, &count, NULL);
-
-    if(count == 0)
-        return 1;
-    
-    requirements = 
-        (VkSparseImageMemoryRequirements*)Malloc(L, sizeof(VkSparseImageMemoryRequirements)*count);
-
-    ud->ddt->GetImageSparseMemoryRequirements(device, image, &count, requirements);
-    for(i = 0; i <count; i++)
-        {
-        pushsparseimagememoryrequirements(L, &requirements[i]);
-        lua_rawseti(L, -2, i+1);
-        }
-
-    Free(L, requirements);
-    return 1;
-    }
-
-
 static int GetImageSubresourceLayout(lua_State *L)
     {
     VkImageSubresource subresource;
@@ -202,19 +101,6 @@ static int GetImageSubresourceLayout(lua_State *L)
     return 1;
     }
 
- 
-static int BindImageMemory(lua_State *L)
-    {
-    VkResult ec;
-    ud_t *ud;
-    VkImage image = checkimage(L, 1, &ud);
-    VkDevice device = ud->device;
-    VkDeviceMemory memory = checkdevice_memory(L, 2, NULL);
-    VkDeviceSize offset = luaL_checkinteger(L, 3);
-    ec = ud->ddt->BindImageMemory(device, image, memory, offset);
-    CheckError(L, ec);
-    return 0;
-    }
 
 RAW_FUNC(image)
 TYPE_FUNC(image)
@@ -244,10 +130,7 @@ static const struct luaL_Reg Functions[] =
     {
         { "create_image",  Create },
         { "destroy_image",  Destroy },
-        { "get_image_memory_requirements", GetImageMemoryRequirements },
-        { "get_image_sparse_memory_requirements", GetImageSparseMemoryRequirements },
         { "get_image_subresource_layout", GetImageSubresourceLayout },
-        { "bind_image_memory", BindImageMemory },
         { NULL, NULL } /* sentinel */
     };
 
