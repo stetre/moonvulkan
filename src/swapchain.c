@@ -91,7 +91,7 @@ static int CreateSharedSwapchains(lua_State *L)
     if(!swapchains)
         {
         freeswapchaincreateinfolist(L, infos, count);
-        return luaL_error(L, errstring(ERR_MEMORY));
+        return errmemory(L);
         }
 
     ec = ud->ddt->CreateSharedSwapchainsKHR(device, count, infos, allocator, swapchains);
@@ -251,7 +251,7 @@ static int QueuePresent(lua_State *L)
             freepresentinfo(L, &info); 
             if(display_info_added) freedisplaypresentinfo(L, &display_info);
             if(regions_added) freepresentregions(L, &regions);
-            return luaL_error(L, errstring(ERR_MEMORY));
+            return errmemory(L);
             }
 
         }

@@ -74,7 +74,7 @@ static int Create(lua_State *L)
     if(!descriptor_set)
         {
         FreeInfo(L, &info);
-        return luaL_error(L, errstring(ERR_MEMORY));
+        return errmemory(L);
         }
 
     ec = descriptor_pool_ud->ddt->AllocateDescriptorSets(device, &info, descriptor_set);

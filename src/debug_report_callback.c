@@ -109,7 +109,7 @@ static int Create(lua_State *L)
     if(!ud_info)
         { 
         luaL_unref(L, LUA_REGISTRYINDEX, ref); 
-        return luaL_error(L, errstring(ERR_MEMORY));
+        return errmemory(L);
         }
     ud_info->lua_state = L;
     ud_info->ref = ref;

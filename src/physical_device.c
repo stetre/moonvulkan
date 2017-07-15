@@ -66,9 +66,7 @@ static int GetPhysicalDeviceProperties2
         (lua_State *L, VkPhysicalDevice physical_device, ud_t *ud)
     {
     VkPhysicalDeviceProperties2KHR *properties2 = newphysicaldeviceproperties2(L);
-    if(!properties2)
-        return luaL_error(L, errstring(ERR_MEMORY));
-
+    if(!properties2) return errmemory(L);
     ud->idt->GetPhysicalDeviceProperties2KHR(physical_device, properties2);
     pushphysicaldeviceproperties2(L, properties2);
     freephysicaldeviceproperties2(L, properties2);
@@ -92,8 +90,7 @@ static int GetPhysicalDeviceProperties(lua_State *L)
 static int GetPhysicalDeviceFeatures2(lua_State *L, VkPhysicalDevice physical_device, ud_t *ud)
     {
     VkPhysicalDeviceFeatures2KHR *features2 = newphysicaldevicefeatures2(L);
-    if(!features2)
-        return luaL_error(L, errstring(ERR_MEMORY));
+    if(!features2) return errmemory(L);
     ud->idt->GetPhysicalDeviceFeatures2KHR(physical_device, features2);
     pushphysicaldevicefeatures2(L, features2);
     freephysicaldevicefeatures2(L, features2);
@@ -120,8 +117,7 @@ static int GetPhysicalDeviceFormatProperties2
     VkFormat format = checkformat(L, 2);
 
     properties2 = newformatproperties2(L);
-    if(!properties2)
-        return luaL_error(L, errstring(ERR_MEMORY));
+    if(!properties2) return errmemory(L);
 
     ud->idt->GetPhysicalDeviceFormatProperties2KHR(physical_device, format, properties2);
     pushformatproperties2(L, properties2);

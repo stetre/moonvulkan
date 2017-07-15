@@ -56,8 +56,7 @@ static int Create(lua_State *L)
         return luaL_argerror(L, 2, errstring(ERR_VALUE));
 
     command_buffer = (VkCommandBuffer*)MallocNoErr(L, sizeof(VkCommandBuffer)*count);
-    if(!command_buffer)
-        return luaL_error(L, errstring(ERR_MEMORY));
+    if(!command_buffer) return errmemory(L);
 
     ec = command_pool_ud->ddt->AllocateCommandBuffers(command_pool_ud->device, &info, command_buffer);
     if(ec)

@@ -61,8 +61,7 @@ static int Create(lua_State *L)
     info.memoryTypeIndex = luaL_checkinteger(L, 3);
 
     ud_info = (ud_info_t*)MallocNoErr(L, sizeof(ud_info_t));
-    if(!ud_info)
-        return luaL_error(L, errstring(ERR_MEMORY));
+    if(!ud_info) return errmemory(L);
 
     ec = device_ud->ddt->AllocateMemory(device, &info, NULL, &device_memory);
     if(ec)

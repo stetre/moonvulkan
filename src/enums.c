@@ -109,8 +109,7 @@ static rec_t *str_root(void)
 static int enums_new(lua_State *L, uint32_t domain, uint32_t code, const char *str)
     {
     rec_t *rec;
-    if((rec = (rec_t*)Malloc(L, sizeof(rec_t))) == NULL) 
-        return luaL_error(L, errstring(ERR_MEMORY));
+    if((rec = (rec_t*)Malloc(L, sizeof(rec_t))) == NULL) return errmemory(L);
 
     memset(rec, 0, sizeof(rec_t));
     rec->domain = domain;

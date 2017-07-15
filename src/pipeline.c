@@ -71,7 +71,7 @@ static int CreateGraphics(lua_State *L)
     if(!pipeline)
         {
         freegraphicspipelinecreateinfolist(L, info, count);
-        return luaL_error(L, errstring(ERR_MEMORY));
+        return errmemory(L);
         }
 
     ec = UD(device)->ddt->CreateGraphicsPipelines(device, cache, count, info, allocator, pipeline);
@@ -108,7 +108,7 @@ static int CreateCompute(lua_State *L)
     if(!pipeline)
         {
         freecomputepipelinecreateinfolist(L, info, count);
-        return luaL_error(L, errstring(ERR_MEMORY));
+        return errmemory(L);
         }
 
     ec = UD(device)->ddt->CreateComputePipelines(device, cache, count, info, allocator, pipeline);
