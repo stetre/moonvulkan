@@ -264,20 +264,16 @@ static int GetPhysicalDeviceSparseImageFormatProperties2
     lua_newtable(L);
     ud->idt->GetPhysicalDeviceSparseImageFormatProperties2KHR(physical_device, &info, &count, NULL);
     if(count == 0) return 1;
-    properties2 = 
-        (VkSparseImageFormatProperties2KHR*)Malloc(L, sizeof(VkSparseImageFormatProperties2KHR)*count);
-    for(i=0; i<count; i++)
-        {
-        properties2[i].sType = VK_STRUCTURE_TYPE_SPARSE_IMAGE_FORMAT_PROPERTIES_2_KHR; 
-        properties2[i].pNext = NULL;  // chain additional extensions here
-        }
+    properties2 = newsparseimageformatproperties2(L, count);
+    if(!properties2) return errmemory(L);
+
     ud->idt->GetPhysicalDeviceSparseImageFormatProperties2KHR(physical_device, &info, &count, properties2);
     for(i=0; i<count; i++)
         {
         pushsparseimageformatproperties2(L, &(properties2[i]));
         lua_rawseti(L, -2, i+1);
         }
-    Free(L, properties2);
+    freesparseimageformatproperties2(L, properties2, count);
     return 1;
     }
 

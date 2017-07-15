@@ -1652,10 +1652,28 @@ int pushsparseimageformatproperties(lua_State *L, VkSparseImageFormatProperties 
     return 1;
     }
 
+VkSparseImageFormatProperties2KHR *newsparseimageformatproperties2(lua_State *L, uint32_t count)
+    {
+    uint32_t i;
+    VkSparseImageFormatProperties2KHR *p = NMALLOC_NOERR(L, VkSparseImageFormatProperties2KHR, count);
+    if(!p) return NULL;
+    for(i = 0; i < count; i++)
+        {
+        p[i].sType = VK_STRUCTURE_TYPE_SPARSE_IMAGE_FORMAT_PROPERTIES_2_KHR;
+        p[i].pNext = NULL;
+        }
+    return p;
+    }
+
+void freesparseimageformatproperties2(lua_State *L, VkSparseImageFormatProperties2KHR *p, uint32_t count)
+    {
+    (void)count;
+    Free(L, (void*)p);
+    }
+
 int pushsparseimageformatproperties2(lua_State *L, VkSparseImageFormatProperties2KHR *p)
     {
     pushsparseimageformatproperties(L, &p->properties);
-    //pushxxx(L, (VkXxxKHR*)p->pNext);  next extension in chain
     return 1;
     }
 
@@ -1673,23 +1691,23 @@ int pushqueuefamilyproperties(lua_State *L, VkQueueFamilyProperties *p, uint32_t
     }
 
 VkQueueFamilyProperties2KHR *newqueuefamilyproperties2(lua_State *L, uint32_t count)
-	{
-	uint32_t i;
-	VkQueueFamilyProperties2KHR *p = NMALLOC_NOERR(L, VkQueueFamilyProperties2KHR, count);
-	if(!p) return NULL;
-	for(i = 0; i < count; i++)
-		{
-		p[i].sType = VK_STRUCTURE_TYPE_QUEUE_FAMILY_PROPERTIES_2_KHR;
-		p[i].pNext = NULL;
-		}
-	return p;
-	}
+    {
+    uint32_t i;
+    VkQueueFamilyProperties2KHR *p = NMALLOC_NOERR(L, VkQueueFamilyProperties2KHR, count);
+    if(!p) return NULL;
+    for(i = 0; i < count; i++)
+        {
+        p[i].sType = VK_STRUCTURE_TYPE_QUEUE_FAMILY_PROPERTIES_2_KHR;
+        p[i].pNext = NULL;
+        }
+    return p;
+    }
 
 void freequeuefamilyproperties2(lua_State *L, VkQueueFamilyProperties2KHR *p, uint32_t count)
-	{
-	(void)count;
-	Free(L, (void*)p);
-	}
+    {
+    (void)count;
+    Free(L, (void*)p);
+    }
 
 int pushqueuefamilyproperties2(lua_State *L, VkQueueFamilyProperties2KHR *p, uint32_t index)
     {

@@ -205,6 +205,10 @@ int pushphysicaldevicememoryproperties(lua_State *L, VkPhysicalDeviceMemoryPrope
 #define pushphysicaldevicememoryproperties2 moonvulkan_pushphysicaldevicememoryproperties2
 int pushphysicaldevicememoryproperties2(lua_State *L, VkPhysicalDeviceMemoryProperties2KHR *p);
 
+#define newsparseimageformatproperties2 moonvulkan_newsparseimageformatproperties2
+VkSparseImageFormatProperties2KHR *newsparseimageformatproperties2(lua_State *L, uint32_t count);
+#define freesparseimageformatproperties2 moonvulkan_freesparseimageformatproperties2
+void freesparseimageformatproperties2(lua_State *L, VkSparseImageFormatProperties2KHR *p, uint32_t count);
 #define pushsparseimageformatproperties moonvulkan_pushsparseimageformatproperties
 int pushsparseimageformatproperties(lua_State *L, VkSparseImageFormatProperties *p);
 #define pushsparseimageformatproperties2 moonvulkan_pushsparseimageformatproperties2
