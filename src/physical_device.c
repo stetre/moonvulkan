@@ -189,13 +189,8 @@ static int GetPhysicalDeviceQueueFamilyProperties2
     lua_newtable(L);
     ud->idt->GetPhysicalDeviceQueueFamilyProperties2KHR(physical_device, &count, NULL);
     if(count == 0) return 1;
-    properties2 = (VkQueueFamilyProperties2KHR*)Malloc(L, sizeof(VkQueueFamilyProperties2KHR)*count);
-
-    for(i=0; i<count; i++)
-        {
-        properties2[i].sType = VK_STRUCTURE_TYPE_QUEUE_FAMILY_PROPERTIES_2_KHR; 
-        properties2[i].pNext = NULL; // chain additional extensions here
-        }
+    properties2 = newqueuefamilyproperties2(L, count);
+    if(!properties2) return errmemory(L);
 
     ud->idt->GetPhysicalDeviceQueueFamilyProperties2KHR(physical_device, &count, properties2);
     for(i=0; i<count; i++)
@@ -203,7 +198,7 @@ static int GetPhysicalDeviceQueueFamilyProperties2
         pushqueuefamilyproperties2(L, &(properties2[i]), i);
         lua_rawseti(L, -2, i+1);
         }
-    Free(L, properties2);
+    freequeuefamilyproperties2(L, properties2, count);
     return 1;
     }
 

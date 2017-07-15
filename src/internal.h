@@ -73,7 +73,9 @@ void *Malloc(lua_State *L, size_t size);
 #define MallocNoErr moonvulkan_MallocNoErr
 void *MallocNoErr(lua_State *L, size_t size);
 #define MALLOC(L, TTT)          (TTT*)Malloc((L), sizeof(TTT))
+#define NMALLOC(L, TTT, n)      (TTT*)Malloc((L), (n)*sizeof(TTT))
 #define MALLOC_NOERR(L, TTT)    (TTT*)MallocNoErr((L), sizeof(TTT))
+#define NMALLOC_NOERR(L, TTT, n)    (TTT*)MallocNoErr((L), (n)*sizeof(TTT))
 #define Strdup moonvulkan_Strdup
 char *Strdup(lua_State *L, const char *s);
 #define Free moonvulkan_Free

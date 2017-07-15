@@ -187,6 +187,10 @@ int echeckphysicaldevicesparseimageformatinfo2(lua_State *L, int arg, VkPhysical
 #define pushphysicaldevicesparseproperties moonvulkan_pushphysicaldevicesparseproperties
 int pushphysicaldevicesparseproperties(lua_State *L, VkPhysicalDeviceSparseProperties *p);
 
+#define newqueuefamilyproperties2 moonvulkan_newqueuefamilyproperties2
+VkQueueFamilyProperties2KHR *newqueuefamilyproperties2(lua_State *L, uint32_t count);
+#define freequeuefamilyproperties2 moonvulkan_freequeuefamilyproperties2
+void freequeuefamilyproperties2(lua_State *L, VkQueueFamilyProperties2KHR *p, uint32_t count);
 #define pushqueuefamilyproperties moonvulkan_pushqueuefamilyproperties
 int pushqueuefamilyproperties(lua_State *L, VkQueueFamilyProperties *p, uint32_t family_index);
 #define pushqueuefamilyproperties2 moonvulkan_pushqueuefamilyproperties2
