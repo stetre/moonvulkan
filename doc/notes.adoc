@@ -6,29 +6,31 @@ MoonVulkan supports the core Vulkan API, plus the *extensions* listed hereafter.
 
 Khronos extensions (KHR):
 
-* VK_KHR_surface
-* VK_KHR_swapchain
-* VK_KHR_display
-* VK_KHR_display_swapchain
-* VK_KHR_xlib_surface
-* VK_KHR_xcb_surface
-* VK_KHR_wayland_surface
-* VK_KHR_mir_surface
-//* VK_KHR_android_surface
-//* VK_KHR_win32_surface
-* VK_KHR_sampler_mirror_clamp_to_edge
-* VK_KHR_get_physical_device_properties2
-* VK_KHR_shader_draw_parameters
-* VK_KHR_maintenance1
-* VK_KHR_push_descriptor
-* VK_KHR_descriptor_update_template
-* VK_KHR_incremental_present
-* VK_KHR_shared_presentable_image
-* VK_KHR_get_surface_capabilities2
-* VK_KHR_get_memory_requirements2
-* VK_KHR_storage_buffer_storage_class
-* VK_KHR_16bit_storage
-* VK_KHR_variable_pointers
+//* https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#[]
+
+* https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_surface[VK_KHR_surface]
+* https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_swapchain[VK_KHR_swapchain]
+* https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_display[VK_KHR_display]
+* https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_display_swapchain[VK_KHR_display_swapchain]
+* https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_xlib_surface[VK_KHR_xlib_surface]
+* https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_xcb_surface[VK_KHR_xcb_surface]
+* https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_wayland_surface[VK_KHR_wayland_surface]
+* https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_mir_surface[VK_KHR_mir_surface]
+//* https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_android_surface[VK_KHR_android_surface]
+//* https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_win32_surface[VK_KHR_win32_surface]
+* https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_sampler_mirror_clamp_to_edge[VK_KHR_sampler_mirror_clamp_to_edge]
+* https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_get_physical_device_properties2[VK_KHR_get_physical_device_properties2]
+* https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_shader_draw_parameters[VK_KHR_shader_draw_parameters]
+* https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_maintenance1[VK_KHR_maintenance1]
+* https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_push_descriptor[VK_KHR_push_descriptor]
+* https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_descriptor_update_template[VK_KHR_descriptor_update_template]
+* https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_incremental_present[VK_KHR_incremental_present]
+* https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_shared_presentable_image[VK_KHR_shared_presentable_image]
+* https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_get_surface_capabilities2[VK_KHR_get_surface_capabilities2]
+* https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_get_memory_requirements2[VK_KHR_get_memory_requirements2]
+* https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_storage_buffer_storage_class[VK_KHR_storage_buffer_storage_class]
+* https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_16bit_storage[VK_KHR_16bit_storage]
+* https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_variable_pointers[VK_KHR_variable_pointers]
 
 Khronos experimental extensions (KHX):
 
@@ -36,16 +38,16 @@ Khronos experimental extensions (KHX):
 
 Multivendor extensions (EXT):
 
-* VK_EXT_debug_report
-* VK_EXT_debug_marker
-//* VK_EXT_validation_flags
-* VK_EXT_shader_subgroup_ballot
-* VK_EXT_shader_subgroup_vote
-//* VK_EXT_direct_mode_display
-//* VK_EXT_acquire_xlib_display
-//* VK_EXT_display_surface_counter
-//* VK_EXT_display_control
-//* VK_EXT_discard_rectangles
+* https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_debug_report[VK_EXT_debug_report]
+* https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_debug_marker[VK_EXT_debug_marker]
+//* https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_validation_flags[VK_EXT_validation_flags]
+* https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_shader_subgroup_ballot[VK_EXT_shader_subgroup_ballot]
+* https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_shader_subgroup_vote[VK_EXT_shader_subgroup_vote]
+//* https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_direct_mode_display[VK_EXT_direct_mode_display]
+//* https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_acquire_xlib_display[VK_EXT_acquire_xlib_display]
+//* https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_display_surface_counter[VK_EXT_display_surface_counter]
+//* https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_display_control[VK_EXT_display_control]
+//* https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_discard_rectangles[VK_EXT_discard_rectangles]
 
 Single vendor extensions (AMD, GOOGLE, IMG, MVK, NN, NV, NVX, ...):
 
