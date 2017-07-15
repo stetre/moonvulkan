@@ -113,7 +113,6 @@ static int GetImageMemoryRequirements(lua_State *L)
     VkImage image = checkimage(L, 1, &ud);
     VkDevice device = ud->device;
     VkMemoryRequirements req;
-
     if(ud->ddt->GetImageMemoryRequirements2KHR)
         return GetImageMemoryRequirements2(L, image, ud);
 
