@@ -71,8 +71,7 @@ static int ResetFences(lua_State *L)
     VkResult ec;
     VkDevice device;
     VkFence *fences = checkfencelist(L, 1, &count, &err, &ud);
-    if(err)
-        return luaL_argerror(L, 1, errstring(err));
+    if(err) return argerrorc(L, 1, err);
 
     device = ud[0]->device;
     ec = UD(device)->ddt->ResetFences(device, count, fences);
@@ -107,8 +106,7 @@ static int WaitForFences(lua_State *L)
     VkBool32 waitall = checkboolean(L, 2);
     uint64_t timeout = checktimeout(L, 3);
     VkFence *fences = checkfencelist(L, 1, &count, &err, &ud);
-    if(err)
-        return luaL_argerror(L, 1, errstring(err));
+    if(err) return argerrorc(L, 1, err);
     
     ec = ud[0]->ddt->WaitForFences(ud[0]->device, count, fences, waitall, timeout);
     Free(L, fences);

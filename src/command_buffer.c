@@ -52,8 +52,7 @@ static int Create(lua_State *L)
     info.commandBufferCount = luaL_checkinteger(L, 3);
 
     count = info.commandBufferCount;
-    if(count == 0)
-        return luaL_argerror(L, 2, errstring(ERR_VALUE));
+    if(count == 0) return argerrorc(L, 2, ERR_VALUE);
 
     command_buffer = (VkCommandBuffer*)MallocNoErr(L, sizeof(VkCommandBuffer)*count);
     if(!command_buffer) return errmemory(L);
@@ -89,8 +88,7 @@ static int FreeCmdBuffers(lua_State *L)
     VkDevice device;
     VkCommandPool command_pool;
     VkCommandBuffer *command_buffer = checkcommand_bufferlist(L, 1, &count, &err);
-    if(err)
-        return luaL_argerror(L, 1, errstring(err));
+    if(err) return argerrorc(L, 1, err);
     
     ud = UD(command_buffer[0]);
     /* check that they all are from the same pool */
@@ -99,7 +97,7 @@ static int FreeCmdBuffers(lua_State *L)
         if(UD(command_buffer[i])->parent_ud != ud->parent_ud)
             {
             Free(L, command_buffer);
-            return luaL_argerror(L, 1, errstring(ERR_POOL));
+            return argerrorc(L, 1, ERR_POOL);
             }
         }
     command_pool = (VkCommandPool)ud->parent_ud->handle;

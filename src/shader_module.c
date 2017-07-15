@@ -55,7 +55,7 @@ static int Create(lua_State *L)
 
     code = luaL_optlstring(L, 3, NULL, &size);
     if(!code || (size == 0))
-        return luaL_argerror(L, 3, errstring(ERR_LENGTH));
+        return argerrorc(L, 3, ERR_LENGTH);
     info.codeSize = size;
     info.pCode = (uint32_t*)code;
 

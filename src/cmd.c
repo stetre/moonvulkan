@@ -151,13 +151,10 @@ static int CmdBindDescriptorSets(lua_State *L)
     uint32_t firstSet = luaL_checkinteger(L, 4);
 
     sets = checkdescriptor_setlist(L, 5, &sets_count, &err, NULL);
-    if(err)
-        return luaL_argerror(L, 5, errstring(err));
+    if(err) return argerrorc(L, 5, err);
     
     offsets = checkuint32list(L, 6, &offsets_count, &err);
-    if(err < 0)
-        { Free(L, sets); return luaL_argerror(L, 6, errstring(err)); }
-        
+    if(err < 0) { Free(L, sets); return argerrorc(L, 6, err); }
 
     ud->ddt->CmdBindDescriptorSets(cb, bindpoint, layout, firstSet, sets_count, sets, offsets_count, offsets);
     Free(L, sets); 
@@ -187,20 +184,19 @@ static int CmdBindVertexBuffers(lua_State *L)
     uint32_t first = luaL_checkinteger(L, 2);
 
     buffers = checkbufferlist(L, 3, &count, &err);
-    if(err)
-        return luaL_argerror(L, 3, errstring(err));
+    if(err) return argerrorc(L, 3, err);
     
     offsets = checkdevicesizelist(L, 4, &offsets_count, &err);
     if(err)
         { 
         Free(L, buffers); 
-        return luaL_argerror(L, 4, errstring(err)); 
+        return argerrorc(L, 4, err);
         }
     if(offsets_count != count)
         { 
         Free(L, buffers); 
         Free(L, offsets); 
-        return luaL_argerror(L, 4, errstring(ERR_LENGTH)); 
+        return argerrorc(L, 4, ERR_LENGTH);
         }
 
     ud->ddt->CmdBindVertexBuffers(cb, first, count, buffers, offsets);
@@ -375,7 +371,7 @@ static int CmdUpdateBuffer(lua_State *L)
     VkDeviceSize dstOffset = luaL_checkinteger(L, 3);
     const char *data = luaL_checklstring(L, 4, &size);
     if((size==0) || (size % 4)!=0)
-        return luaL_argerror(L, 4, errstring(ERR_LENGTH));
+        return argerrorc(L, 4, ERR_LENGTH);
     ud->ddt->CmdUpdateBuffer(cb, dstBuffer, dstOffset, (VkDeviceSize)size, data);
     return 0;
     }
@@ -689,8 +685,7 @@ static int CmdExecuteCommands(lua_State *L)
     ud_t *ud;
     VkCommandBuffer cb = checkcommand_buffer(L, 1, &ud);
     VkCommandBuffer *buffers = checkcommand_bufferlist(L, 2, &count, &err);
-    if(err)
-        return luaL_argerror(L, 2, errstring(err));
+    if(err) return argerrorc(L, 2, err);
 
     ud->ddt->CmdExecuteCommands(cb, count, buffers);
     Free(L, buffers);
@@ -712,13 +707,13 @@ static int checkdebugmarkermarkerinfo(lua_State *L, int arg, VkDebugMarkerMarker
         return 0;
         }
     if(!lua_istable(L, argcolor))
-        return luaL_argerror(L, arg, errstring(ERR_TABLE));
+        return argerrorc(L, arg, ERR_TABLE);
     for(i = 0; i < 4; i++)
         {
         if(lua_rawgeti(L, argcolor, i+1) != LUA_TNUMBER)
             {
             lua_pop(L, 1);
-            return luaL_argerror(L, argcolor, errstring(ERR_TYPE));
+            return argerrorc(L, argcolor, ERR_TYPE);
             }
         info->color[i] = lua_tonumber(L, -1);
         lua_pop(L, 1);
@@ -770,8 +765,7 @@ static int CmdPushDescriptorSet(lua_State *L)
     uint32_t set = luaL_checkinteger(L, 4);
     CheckDevicePfn(L, ud, CmdPushDescriptorSetKHR);
     writes = echeckwritedescriptorsetlist(L, 5, &count, &err);
-    if(err)
-        return luaL_argerror(L, 5, errstring(err));
+    if(err) return argerrorc(L, 5, err);
     ud->ddt->CmdPushDescriptorSetKHR(cb, pipelineBindPoint, layout, set, count, writes);
     freewritedescriptorsetlist(L, writes, count);
     return 0;

@@ -107,8 +107,7 @@ static int MergePipelineCaches(lua_State *L)
     VkPipelineCache destination = checkpipeline_cache(L, 1, &ud);
     VkDevice device = ud->device;
     VkPipelineCache *source = checkpipeline_cachelist(L, 2, &count, &err, NULL);
-    if(err)
-        return luaL_argerror(L, 2, errstring(err));
+    if(err) return argerrorc(L, 2, err);
 
     ec = ud->ddt->MergePipelineCaches(device, destination, count, source);
     Free(L, source);

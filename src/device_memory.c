@@ -96,7 +96,7 @@ static int Allocate(lua_State *L)
         dedicated_info.image = testimage(L, 5, NULL);
         dedicated_info.buffer = testbuffer(L, 5, NULL);
         if(!dedicated_info.image && !dedicated_info.buffer)
-            return luaL_argerror(L, 5, errstring(ERR_TYPE));
+            return argerrorc(L, 5, ERR_TYPE);
         }
 
     return Create(L, device, &info, allocator);
@@ -168,7 +168,7 @@ static int Write(lua_State *L) /* NONVK */
         return luaL_error(L, "memory is not mapped");
     /* boundary checks */
     if(size > (ud_info->memsz - offset))
-        return luaL_argerror(L, 3, errstring(ERR_LENGTH));
+        return argerrorc(L, 3, ERR_LENGTH);
     memcpy(ud_info->memp + offset, data, size);
     return 0;
     }
@@ -190,7 +190,7 @@ static int Read(lua_State *L) /* NONVK */
     if(size == VK_WHOLE_SIZE)
         size = ud_info->memsz - offset;
     else if(size > (ud_info->memsz - offset))
-        return luaL_argerror(L, 3, errstring(ERR_LENGTH));
+        return argerrorc(L, 3, ERR_LENGTH);
     lua_pushlstring(L, ud_info->memp + offset, size);
     return 1;
     }
@@ -203,7 +203,7 @@ static int FlushMappedMemoryRanges(lua_State *L)
     ud_t *ud;
     VkDevice device = checkdevice(L, 1, &ud);
     VkMappedMemoryRange* ranges = echeckmappedmemoryrangelist(L, 2, &count, &err);
-    if(err) return luaL_argerror(L, 2, errstring(err));
+    if(err) return argerrorc(L, 2, err);
     
     ec = ud->ddt->FlushMappedMemoryRanges(device, count, ranges);
     Free(L, ranges);
@@ -219,7 +219,7 @@ static int InvalidateMappedMemoryRanges(lua_State *L)
     ud_t *ud;
     VkDevice device = checkdevice(L, 1, &ud);
     VkMappedMemoryRange* ranges = echeckmappedmemoryrangelist(L, 2, &count, &err);
-    if(err) return luaL_argerror(L, 2, errstring(err));
+    if(err) return argerrorc(L, 2, err);
     
     ec = ud->ddt->InvalidateMappedMemoryRanges(device, count, ranges);
     Free(L, ranges);

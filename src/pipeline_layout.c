@@ -66,7 +66,7 @@ static int Create(lua_State *L)
     info.pSetLayouts = checkdescriptor_set_layoutlist(L, 3, &count, &err, NULL);
     info.setLayoutCount = count;
     if(err < 0)
-        { FreeInfo(L, &info); return luaL_argerror(L, 3, errstring(err)); }
+        { FreeInfo(L, &info); return argerrorc(L, 3, err); }
 
     info.pPushConstantRanges = echeckpushconstantrangelist(L, 4, &count, &err);
     info.pushConstantRangeCount = count;

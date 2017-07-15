@@ -101,7 +101,7 @@ static int Create(lua_State *L)
 
     /* get the Lua function, arg 3 and anchor it in the Lua registry */
     if(!lua_isfunction(L, 3))
-        return luaL_argerror(L, 3, errstring(ERR_TYPE));
+        return argerrorc(L, 3, ERR_TYPE);
     lua_pushvalue(L, 3);
     ref = luaL_ref(L, LUA_REGISTRYINDEX);
 
@@ -171,7 +171,7 @@ static int DebugMarkerSetObjectTag(lua_State *L)
     info.tagName = luaL_checkinteger(L, 4);
     info.pTag = luaL_checklstring(L, 5, &info.tagSize);
     if(info.tagSize == 0)
-        return luaL_argerror(L, 5, errstring(ERR_LENGTH));
+        return argerrorc(L, 5, ERR_LENGTH);
     CheckDevicePfn(L, ud, DebugMarkerSetObjectTagEXT);
     ec = ud->ddt->DebugMarkerSetObjectTagEXT(device, &info);
     CheckError(L, ec);

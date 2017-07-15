@@ -109,8 +109,7 @@ static int FreeDescriptorSets(lua_State *L)
     uint32_t i, count;
     VkDescriptorPool descriptor_pool;
     VkDescriptorSet *descriptor_set = checkdescriptor_setlist(L, 1, &count, &err, &ud);
-    if(err)
-        return luaL_argerror(L, 1, errstring(err));
+    if(err) return argerrorc(L, 1, err);
     
     free_allowed = IsFreeDescriptorSetAllowed(ud[1]->parent_ud);
 
@@ -121,7 +120,7 @@ static int FreeDescriptorSets(lua_State *L)
             {
             Free(L, descriptor_set);
             Free(L, ud);
-            return luaL_argerror(L, 1, errstring(ERR_POOL));
+            return argerrorc(L, 1, ERR_POOL);
             }
         }
 
