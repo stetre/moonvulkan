@@ -319,7 +319,6 @@ static int CreateDisplayPlaneSurface(lua_State *L)
     }
 
 
-#define Clear(x) memset(&(x), 0, sizeof(x))
 static int GetPhysicalDeviceSurfaceSupport(lua_State *L)
     {
     VkResult ec;
@@ -338,21 +337,25 @@ static int GetPhysicalDeviceSurfaceSupport(lua_State *L)
 static int GetPhysicalDeviceSurfaceCapabilities2(lua_State *L, VkPhysicalDevice physdev, ud_t *ud)
     {
     VkResult ec;
-    VkSurfaceCapabilities2KHR capabilities;
     VkPhysicalDeviceSurfaceInfo2KHR info;
-    VkSharedPresentSurfaceCapabilitiesKHR shared_present_caps;
+    VkSurfaceCapabilities2KHR *capabilities;
 
-    Clear(info);
+    capabilities = newsurfacecapabilities2(L);
+    if(!capabilities) return errmemory(L);
+
     info.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SURFACE_INFO_2_KHR;
-    info.pNext = &shared_present_caps;
+    info.pNext = NULL;
     info.surface = checksurface(L, 2, NULL);
-    Clear(shared_present_caps);
-    shared_present_caps.sType = VK_STRUCTURE_TYPE_SHARED_PRESENT_SURFACE_CAPABILITIES_KHR;
-    shared_present_caps.pNext = NULL; // chain any other extension here
 
-    ec = ud->idt->GetPhysicalDeviceSurfaceCapabilities2KHR(physdev, &info, &capabilities);
-    CheckError(L, ec);
-    pushsurfacecapabilities2(L, &capabilities);
+    ec = ud->idt->GetPhysicalDeviceSurfaceCapabilities2KHR(physdev, &info, capabilities);
+    if(ec)
+        {
+        freesurfacecapabilities2(L, capabilities);
+        CheckError(L, ec);
+        return 0;
+        }
+    pushsurfacecapabilities2(L, capabilities);
+    freesurfacecapabilities2(L, capabilities);
     return 1;
     }
 
@@ -380,9 +383,11 @@ static int GetPhysicalDeviceSurfaceFormats2(lua_State *L, VkPhysicalDevice physd
     VkResult ec;
     uint32_t count, i;
     VkSurfaceFormat2KHR* formats;
+
     VkPhysicalDeviceSurfaceInfo2KHR info;
+
     info.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SURFACE_INFO_2_KHR;
-    info.pNext = NULL;  // chain any other extension here
+    info.pNext = NULL;
     info.surface = checksurface(L, 2, NULL);
 
     lua_newtable(L);
@@ -391,12 +396,12 @@ static int GetPhysicalDeviceSurfaceFormats2(lua_State *L, VkPhysicalDevice physd
     if(count == 0)
         return 1;
 
-    formats = (VkSurfaceFormat2KHR*)Malloc(L, sizeof(VkSurfaceFormat2KHR)*count);
+    formats = newsurfaceformat2(L, count);
 
     ec = ud->idt->GetPhysicalDeviceSurfaceFormats2KHR(physdev, &info, &count, formats);
     if(ec)
         {
-        Free(L, formats);
+        freesurfaceformat2(L, formats, count);
         CheckError(L, ec);
         return 0;
         }
@@ -405,7 +410,7 @@ static int GetPhysicalDeviceSurfaceFormats2(lua_State *L, VkPhysicalDevice physd
         pushsurfaceformat2(L, &formats[i]);
         lua_rawseti(L, -2, i+1);
         }
-    Free(L, formats);
+    freesurfaceformat2(L, formats, count);
     return 1;
     }
 

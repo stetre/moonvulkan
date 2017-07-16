@@ -4120,7 +4120,7 @@ See also the <a href="#clearcolor_snippet">example</a> in the code snippets sect
 <span class="small"><strong>surfacecapabilities</strong> = {<br>
 <em>min_image_count</em>: integer,<br>
 <em>max_image_count</em>: integer,<br>
-<em>current_extent</em>: <a href="#extent2d">extent2d</a> (may be <em>nil</em>, see Note1 below),<br>
+<em>current_extent</em>: <a href="#extent2d">extent2d</a> (=<em>nil</em> if undefined, see Note1 below),<br>
 <em>min_image_extent</em>: <a href="#extent2d">extent2d</a>,<br>
 <em>max_image_extent</em>: <a href="#extent2d">extent2d</a>,<br>
 <em>max_image_array_layers</em>: integer,<br>
@@ -4128,17 +4128,20 @@ See also the <a href="#clearcolor_snippet">example</a> in the code snippets sect
 <em>current_transform</em>: <a href="#surfacetransformflags">surfacetransformflags</a>,<br>
 <em>supported_composite_alpha</em>: <a href="#compositealphaflags">compositealphaflags</a>,<br>
 <em>supported_usage_flags</em>: <a href="#imageusageflags">imageusageflags</a>,<br>
-<em>shared_present_supported_usage_flags</em>: <a href="#imageusageflags">imageusageflags</a> (see Note2 below),<br>
-} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkSurfaceCapabilitiesKHR">VkSurfaceCapabilitiesKHR</a>)<br>
-Note1: The <em>current_extent</em> field is not set when <em>width</em> and <em>height</em> have the special value 0xFFFFFFFF, meaning that the current extent is undefined.<br>
-Note2: This field is present only if the relevant extensions are enabled (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkSharedPresentSurfaceCapabilitiesKHR">VkSharedPresentSurfaceCapabilitiesKHR</a>).</span></p>
+---- <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_get_surface_capabilities2">VK_KHR_get_surface_capabilities2</a> EXTENSION ----<br>
+<em>shared_present_supported_usage_flags</em>: <a href="#imageusageflags">imageusageflags</a>,<br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkSurfaceCapabilitiesKHR">VkSurfaceCapabilitiesKHR</a>,<br>
+<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkSurfaceCapabilities2KHR">VkSurfaceCapabilities2KHR</a>,<br>
+<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkSharedPresentSurfaceCapabilitiesKHR">VkSharedPresentSurfaceCapabilitiesKHR</a>)<br>
+Note1: The <em>current_extent</em> field is <em>nil</em> when <em>width</em> and <em>height</em> in the underlying C struct have the special value 0xFFFFFFFF.</span></p>
 </li>
 <li>
 <p><a id="surfaceformat"></a>
 <span class="small"><strong>surfaceformat</strong> = {<br>
 <em>format</em>: <a href="#format">format</a>,<br>
 <em>color_space</em>: <a href="#colorspace">colorspace</a>,<br>
-} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkSurfaceFormatKHR">VkSurfaceFormatKHR</a>)</span></p>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkSurfaceFormatKHR">VkSurfaceFormatKHR</a>,<br>
+<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkSurfaceFormat2KHR">VkSurfaceFormat2KHR</a>)</span></p>
 </li>
 </ul>
 </div>

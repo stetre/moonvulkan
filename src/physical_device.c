@@ -149,7 +149,7 @@ static int GetPhysicalDeviceImageFormatProperties2(lua_State *L, VkPhysicalDevic
     if(!properties2) return errmemory(L);
 
     ec = ud->idt->GetPhysicalDeviceImageFormatProperties2KHR(physical_device, &info, properties2);
-    if(!ec)
+    if(ec)
         {
         freeimageformatproperties2(L, properties2);
         CheckError(L, ec);

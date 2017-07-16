@@ -319,11 +319,19 @@ void freebindsparseinfolist(lua_State *L, void *list, uint32_t count);
 #define echeckbindsparseinfolist moonvulkan_echeckbindsparseinfolist
 VkBindSparseInfo* echeckbindsparseinfolist(lua_State *L, int arg, uint32_t *count, int *err);
 
+#define newsurfacecapabilities2 moonvulkan_newsurfacecapabilities2
+VkSurfaceCapabilities2KHR* newsurfacecapabilities2(lua_State *L);
+#define freesurfacecapabilities2 moonvulkan_freesurfacecapabilities2
+void freesurfacecapabilities2(lua_State *L, VkSurfaceCapabilities2KHR *p);
 #define pushsurfacecapabilities moonvulkan_pushsurfacecapabilities
 int pushsurfacecapabilities(lua_State *L, VkSurfaceCapabilitiesKHR *p);
 #define pushsurfacecapabilities2 moonvulkan_pushsurfacecapabilities2
 int pushsurfacecapabilities2(lua_State *L, VkSurfaceCapabilities2KHR *p);
 
+#define newsurfaceformat2 moonvulkan_newsurfaceformat2
+VkSurfaceFormat2KHR *newsurfaceformat2(lua_State *L, uint32_t count);
+#define freesurfaceformat2 moonvulkan_freesurfaceformat2
+void freesurfaceformat2(lua_State *L, VkSurfaceFormat2KHR *p, uint32_t count);
 #define pushsurfaceformat moonvulkan_pushsurfaceformat
 int pushsurfaceformat(lua_State *L, VkSurfaceFormatKHR *p);
 #define pushsurfaceformat2 moonvulkan_pushsurfaceformat2

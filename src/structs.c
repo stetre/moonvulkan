@@ -1274,7 +1274,7 @@ VkPhysicalDeviceFeatures2KHR* newphysicaldevicefeatures2(lua_State *L)
     p->p3.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VARIABLE_POINTER_FEATURES_KHR;
     p->p1.pNext = &p->p2;
     p->p2.pNext = &p->p3;
-    p->p3.pNext = NULL; // chain any other extension here
+    p->p3.pNext = NULL;
     return (VkPhysicalDeviceFeatures2KHR*)p;
     }
 
@@ -1298,7 +1298,7 @@ static int echeckphysicaldevicefeatures2(lua_State *L, int arg, VkPhysicalDevice
     p->p3.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VARIABLE_POINTER_FEATURES_KHR;
     p->p1.pNext = &p->p2;
     p->p2.pNext = &p->p3;
-    p->p3.pNext = NULL; // chain any other extension here
+    p->p3.pNext = NULL;
     return 0;
     }
 
@@ -1552,7 +1552,7 @@ VkPhysicalDeviceProperties2KHR* newphysicaldeviceproperties2(lua_State *L)
     p->p1.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROPERTIES_2_KHR;
     p->p2.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PUSH_DESCRIPTOR_PROPERTIES_KHR;
     p->p1.pNext = &p->p2;
-    p->p2.pNext = NULL; // chain any other extension here
+    p->p2.pNext = NULL;
     return (VkPhysicalDeviceProperties2KHR*)p;
     }
 
@@ -1589,7 +1589,7 @@ VkFormatProperties2KHR* newformatproperties2(lua_State *L)
     VkFormatProperties2KHR_CHAIN *p = MALLOC_NOERR(L, VkFormatProperties2KHR_CHAIN);
     if(!p) return NULL;
     p->p1.sType = VK_STRUCTURE_TYPE_FORMAT_PROPERTIES_2_KHR;
-    p->p1.pNext = NULL; // chain any other extension here
+    p->p1.pNext = NULL;
     return (VkFormatProperties2KHR*)p;
     }
 
@@ -1626,7 +1626,7 @@ VkImageFormatProperties2KHR* newimageformatproperties2(lua_State *L)
     VkImageFormatProperties2KHR_CHAIN *p = MALLOC_NOERR(L, VkImageFormatProperties2KHR_CHAIN);
     if(!p) return NULL;
     p->p1.sType = VK_STRUCTURE_TYPE_IMAGE_FORMAT_PROPERTIES_2_KHR;
-    p->p1.pNext = NULL; // chain any other extension here
+    p->p1.pNext = NULL;
     return (VkImageFormatProperties2KHR*)p;
     }
 
@@ -1764,7 +1764,7 @@ VkPhysicalDeviceMemoryProperties2KHR* newphysicaldevicememoryproperties2(lua_Sta
    VkPhysicalDeviceMemoryProperties2KHR_CHAIN *p = MALLOC_NOERR(L, VkPhysicalDeviceMemoryProperties2KHR_CHAIN);
     if(!p) return NULL;
     p->p1.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_PROPERTIES_2_KHR;
-    p->p1.pNext = NULL; // chain any other extension here
+    p->p1.pNext = NULL;
     return (VkPhysicalDeviceMemoryProperties2KHR*)p;
     }
 
@@ -2314,8 +2314,8 @@ int pushmemorydedicatedrequirements(lua_State *L, VkMemoryDedicatedRequirementsK
     }
 
 typedef struct {
-	VkMemoryRequirements2KHR p1;
-	VkMemoryDedicatedRequirementsKHR p2;
+    VkMemoryRequirements2KHR p1;
+    VkMemoryDedicatedRequirementsKHR p2;
 } VkMemoryRequirements2KHR_CHAIN;
 
 VkMemoryRequirements2KHR* newmemoryrequirements2(lua_State *L)
@@ -2336,7 +2336,7 @@ void freememoryrequirements2(lua_State *L, VkMemoryRequirements2KHR *p)
 
 int pushmemoryrequirements2(lua_State *L, VkMemoryRequirements2KHR *pp)
     {
-	VkMemoryRequirements2KHR_CHAIN *p = (VkMemoryRequirements2KHR_CHAIN*)pp;
+    VkMemoryRequirements2KHR_CHAIN *p = (VkMemoryRequirements2KHR_CHAIN*)pp;
     pushmemoryrequirements(L, &p->p1.memoryRequirements);
     pushmemorydedicatedrequirements(L, &p->p2);
     return 1;
@@ -2356,7 +2356,7 @@ int pushsparseimagememoryrequirements(lua_State *L, VkSparseImageMemoryRequireme
 
 VkSparseImageMemoryRequirements2KHR* newsparseimagememoryrequirements2(lua_State *L, uint32_t count)
     {
-	uint32_t i;
+    uint32_t i;
     VkSparseImageMemoryRequirements2KHR *p = NMALLOC_NOERR(L, VkSparseImageMemoryRequirements2KHR, count);
     if(!p) return NULL;
     for(i = 0; i < count; i++)
@@ -2369,7 +2369,7 @@ VkSparseImageMemoryRequirements2KHR* newsparseimagememoryrequirements2(lua_State
 
 void freesparseimagememoryrequirements2(lua_State *L, VkSparseImageMemoryRequirements2KHR *p, uint32_t count)
     {
-	(void)count;
+    (void)count;
     Free(L, (void*)p);
     }
 
@@ -2675,14 +2675,35 @@ int pushsurfacecapabilities(lua_State *L, VkSurfaceCapabilitiesKHR *p)
 static int pushsharedpresentsurfacecapabilities(lua_State *L, VkSharedPresentSurfaceCapabilitiesKHR *p)
     {
     SetFlags(sharedPresentSupportedUsageFlags, "shared_present_supported_usage_flags");
-    //pushxxx(L, (VkXxxKHR*)p->pNext);  next extension in chain
     return 1;
     }
 
-int pushsurfacecapabilities2(lua_State *L, VkSurfaceCapabilities2KHR *p)
+typedef struct {
+    VkSurfaceCapabilities2KHR p1;
+    VkSharedPresentSurfaceCapabilitiesKHR p2;
+} VkSurfaceCapabilities2KHR_CHAIN;
+
+VkSurfaceCapabilities2KHR* newsurfacecapabilities2(lua_State *L)
     {
-    pushsurfacecapabilities(L, &p->surfaceCapabilities);
-    pushsharedpresentsurfacecapabilities(L, (VkSharedPresentSurfaceCapabilitiesKHR*)p->pNext);
+    VkSurfaceCapabilities2KHR_CHAIN *p = MALLOC_NOERR(L, VkSurfaceCapabilities2KHR_CHAIN);
+    if(!p) return NULL;
+    p->p1.sType = VK_STRUCTURE_TYPE_SURFACE_CAPABILITIES_2_KHR;
+    p->p2.sType = VK_STRUCTURE_TYPE_SHARED_PRESENT_SURFACE_CAPABILITIES_KHR;
+    p->p1.pNext = &p->p2;
+    p->p2.pNext = NULL;
+    return (VkSurfaceCapabilities2KHR*)p;
+    }
+
+void freesurfacecapabilities2(lua_State *L, VkSurfaceCapabilities2KHR *p)
+    {
+    Free(L, (void*)p);
+    }
+
+int pushsurfacecapabilities2(lua_State *L, VkSurfaceCapabilities2KHR *pp)
+    {
+    VkSurfaceCapabilities2KHR_CHAIN *p = (VkSurfaceCapabilities2KHR_CHAIN*)pp;
+    pushsurfacecapabilities(L, &p->p1.surfaceCapabilities);
+    pushsharedpresentsurfacecapabilities(L, &p->p2);
     return 1;
     }
 
@@ -2696,10 +2717,29 @@ int pushsurfaceformat(lua_State *L, VkSurfaceFormatKHR *p)
     return 1;
     }
 
-int pushsurfaceformat2(lua_State *L, VkSurfaceFormat2KHR *p) //@@DOC
+VkSurfaceFormat2KHR *newsurfaceformat2(lua_State *L, uint32_t count)
+    {
+    uint32_t i;
+    VkSurfaceFormat2KHR *p = NMALLOC_NOERR(L, VkSurfaceFormat2KHR, count);
+    if(!p) return NULL;
+    for(i = 0; i < count; i++)
+        {
+        p[i].sType = VK_STRUCTURE_TYPE_SURFACE_FORMAT_2_KHR;
+        p[i].pNext = NULL;
+        }
+    return p;
+    }
+
+void freesurfaceformat2(lua_State *L, VkSurfaceFormat2KHR *p, uint32_t count)
+    {
+    (void)count;
+    Free(L, (void*)p);
+    }
+
+
+int pushsurfaceformat2(lua_State *L, VkSurfaceFormat2KHR *p)
     {
     pushsurfaceformat(L, &p->surfaceFormat);
-    //pushxxx(L, (VkXxxKHR*)p->pNext);  next extension in chain
     return 1;
     }
 
