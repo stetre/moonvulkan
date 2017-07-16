@@ -806,6 +806,19 @@ void moonvulkan_open_enums(lua_State *L)
 
     domain = DOMAIN_COLOR_SPACE; /* VkColorSpaceKHR */
     ADD(COLOR_SPACE_SRGB_NONLINEAR_KHR, "srgb nonlinear");
+    ADD(COLOR_SPACE_DISPLAY_P3_NONLINEAR_EXT, "display p3 nonlinear");
+    ADD(COLOR_SPACE_EXTENDED_SRGB_LINEAR_EXT, "extended srgb linear");
+    ADD(COLOR_SPACE_DCI_P3_LINEAR_EXT, "dci p3 linear");
+    ADD(COLOR_SPACE_DCI_P3_NONLINEAR_EXT, "dci p3 nonlinear");
+    ADD(COLOR_SPACE_BT709_LINEAR_EXT, "bt709 linear");
+    ADD(COLOR_SPACE_BT709_NONLINEAR_EXT, "bt709 nonlinear");
+    ADD(COLOR_SPACE_BT2020_LINEAR_EXT, "bt2020 linear");
+    ADD(COLOR_SPACE_HDR10_ST2084_EXT, "hdr10 st2084");
+    ADD(COLOR_SPACE_DOLBYVISION_EXT, "dolbyvision");
+    ADD(COLOR_SPACE_HDR10_HLG_EXT, "hdr10 hlg");
+    ADD(COLOR_SPACE_ADOBERGB_LINEAR_EXT, "adobergb linear");
+    ADD(COLOR_SPACE_ADOBERGB_NONLINEAR_EXT, "adobergb nonlinear");
+    ADD(COLOR_SPACE_PASS_THROUGH_EXT, "pass through");
 
     domain = DOMAIN_PRESENT_MODE; /* VkPresentModeKHR */
     ADD(PRESENT_MODE_IMMEDIATE_KHR, "immediate");
