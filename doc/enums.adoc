@@ -99,9 +99,9 @@ Values:
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkDynamicState[VkDynamicState].#
 
 [[blendop]]
-[small]#*blendop*: vk.BLEND_OP_XXX +
+[small]#*blendop*: vk.BLEND_OP_XXX,  vk.BLEND_OP_XXX_EXT +
 Values:
-'_add_' (default), '_subtract_', '_reverse subtract_', '_min_', '_max_'. +
+'_add_' (default), '_subtract_', '_reverse subtract_', '_min_', '_max_', '_zero_', '_src_', '_dst_', '_src over_', '_dst over_', '_src in_', '_dst in_', '_src out_', '_dst out_', '_src atop_', '_dst atop_', '_xor_', '_multiply_', '_screen_', '_overlay_', '_darken_', '_lighten_', '_colordodge_', '_colorburn_', '_hardlight_', '_softlight_', '_difference_', '_exclusion_', '_invert_', '_invert rgb_', '_lineardodge_', '_linearburn_', '_vividlight_', '_linearlight_', '_pinlight_', '_hardmix_', '_hsl hue_', '_hsl saturation_', '_hsl color_', '_hsl luminosity_', '_plus_', '_plus clamped_', '_plus clamped alpha_', '_plus darker_', '_minus_', '_minus clamped_', '_contrast_', '_invert ovg_', '_red_', '_green_', '_blue_'. +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkBlendOp[VkBlendOp].#
 
 [[blendfactor]]
@@ -238,6 +238,11 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.ht
 [small]#*descriptorupdatetemplatetype*: vk.DESCRIPTOR_UPDATE_TEMPLATE_TYPE_XXX_KHR +
 Values: '_descriptor set_', '_push descriptors_'. +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkDescriptorUpdateTemplateTypeKHR[VkDescriptorUpdateTemplateTypeKHR].#
+
+[[blendoverlap]]
+[small]#*blendoverlap*: vk.BLEND_OVERLAP_XXX_EXT +
+Values: '_uncorrelated_', '_disjoint_', '_conjoint_'. +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkBlendOverlapEXT[VkBlendOverlapEXT].#
 
 
 ////

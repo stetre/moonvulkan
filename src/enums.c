@@ -310,6 +310,7 @@ static int Enum(lua_State *L)
 //@@  CASE(debugreporterror);
     CASE(descriptorupdatetemplatetype);
     CASE(objecttype);
+    CASE(blendoverlap);
 #undef CASE
     return 0;
     }
@@ -730,6 +731,53 @@ void moonvulkan_open_enums(lua_State *L)
     ADD(BLEND_OP_REVERSE_SUBTRACT, "reverse subtract");
     ADD(BLEND_OP_MIN, "min");
     ADD(BLEND_OP_MAX, "max");
+    ADD(BLEND_OP_ZERO_EXT, "zero");
+    ADD(BLEND_OP_SRC_EXT, "src");
+    ADD(BLEND_OP_DST_EXT, "dst");
+    ADD(BLEND_OP_SRC_OVER_EXT, "src over");
+    ADD(BLEND_OP_DST_OVER_EXT, "dst over");
+    ADD(BLEND_OP_SRC_IN_EXT, "src in");
+    ADD(BLEND_OP_DST_IN_EXT, "dst in");
+    ADD(BLEND_OP_SRC_OUT_EXT, "src out");
+    ADD(BLEND_OP_DST_OUT_EXT, "dst out");
+    ADD(BLEND_OP_SRC_ATOP_EXT, "src atop");
+    ADD(BLEND_OP_DST_ATOP_EXT, "dst atop");
+    ADD(BLEND_OP_XOR_EXT, "xor");
+    ADD(BLEND_OP_MULTIPLY_EXT, "multiply");
+    ADD(BLEND_OP_SCREEN_EXT, "screen");
+    ADD(BLEND_OP_OVERLAY_EXT, "overlay");
+    ADD(BLEND_OP_DARKEN_EXT, "darken");
+    ADD(BLEND_OP_LIGHTEN_EXT, "lighten");
+    ADD(BLEND_OP_COLORDODGE_EXT, "colordodge");
+    ADD(BLEND_OP_COLORBURN_EXT, "colorburn");
+    ADD(BLEND_OP_HARDLIGHT_EXT, "hardlight");
+    ADD(BLEND_OP_SOFTLIGHT_EXT, "softlight");
+    ADD(BLEND_OP_DIFFERENCE_EXT, "difference");
+    ADD(BLEND_OP_EXCLUSION_EXT, "exclusion");
+    ADD(BLEND_OP_INVERT_EXT, "invert");
+    ADD(BLEND_OP_INVERT_RGB_EXT, "invert rgb");
+    ADD(BLEND_OP_LINEARDODGE_EXT, "lineardodge");
+    ADD(BLEND_OP_LINEARBURN_EXT, "linearburn");
+    ADD(BLEND_OP_VIVIDLIGHT_EXT, "vividlight");
+    ADD(BLEND_OP_LINEARLIGHT_EXT, "linearlight");
+    ADD(BLEND_OP_PINLIGHT_EXT, "pinlight");
+    ADD(BLEND_OP_HARDMIX_EXT, "hardmix");
+    ADD(BLEND_OP_HSL_HUE_EXT, "hsl hue");
+    ADD(BLEND_OP_HSL_SATURATION_EXT, "hsl saturation");
+    ADD(BLEND_OP_HSL_COLOR_EXT, "hsl color");
+    ADD(BLEND_OP_HSL_LUMINOSITY_EXT, "hsl luminosity");
+    ADD(BLEND_OP_PLUS_EXT, "plus");
+    ADD(BLEND_OP_PLUS_CLAMPED_EXT, "plus clamped");
+    ADD(BLEND_OP_PLUS_CLAMPED_ALPHA_EXT, "plus clamped alpha");
+    ADD(BLEND_OP_PLUS_DARKER_EXT, "plus darker");
+    ADD(BLEND_OP_MINUS_EXT, "minus");
+    ADD(BLEND_OP_MINUS_CLAMPED_EXT, "minus clamped");
+    ADD(BLEND_OP_CONTRAST_EXT, "contrast");
+    ADD(BLEND_OP_INVERT_OVG_EXT, "invert ovg");
+    ADD(BLEND_OP_RED_EXT, "red");
+    ADD(BLEND_OP_GREEN_EXT, "green");
+    ADD(BLEND_OP_BLUE_EXT, "blue");
+
 
     domain = DOMAIN_DYNAMIC_STATE; /* VkDynamicState */
     ADD(DYNAMIC_STATE_VIEWPORT, "viewport");
@@ -918,6 +966,12 @@ void moonvulkan_open_enums(lua_State *L)
     ADD(OBJECT_TYPE_DISPLAY_MODE_KHR, "display mode");
     ADD(OBJECT_TYPE_DEBUG_REPORT_CALLBACK_EXT, "debug report callback");
     ADD(OBJECT_TYPE_DESCRIPTOR_UPDATE_TEMPLATE_KHR, "descriptor update template");
+
+    domain = DOMAIN_BLEND_OVERLAP; /* VkBlendOverlapEXT */
+    ADD(BLEND_OVERLAP_UNCORRELATED_EXT, "uncorrelated");
+    ADD(BLEND_OVERLAP_DISJOINT_EXT, "disjoint");
+    ADD(BLEND_OVERLAP_CONJOINT_EXT, "conjoint");
+
 #undef ADD
     }
 
