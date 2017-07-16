@@ -5,7 +5,7 @@
 
 [[create_device]]
 * _device_ = *create_device*(<<physical_device, _physdev_>>, <<devicecreateinfo, _devicecreateinfo_>>, [<<allocators, _allocator_>>]) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCreateDevice[CreateDevice].#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCreateDevice[vkCreateDevice].#
 
 [[destroy_device]]
 * *destroy_device*(_device_) +

@@ -269,6 +269,7 @@ do {                                                \
 #define GetLogicOp(name, sname) GetEnumOpt(name, sname, testlogicop, VK_LOGIC_OP_CLEAR)
 #define GetColorSpace(name, sname) GetEnumOpt(name, sname, testcolorspace, VK_COLOR_SPACE_SRGB_NONLINEAR_KHR)
 #define GetPresentMode(name, sname) GetEnumOpt(name, sname, testpresentmode, VK_PRESENT_MODE_FIFO_KHR)
+#define GetBlendOverlap(name, sname) GetEnumOpt(name, sname, testblendoverlap, VK_BLEND_OVERLAP_UNCORRELATED_EXT)
 
 /* Structs -------------------------------------------------------------------*/
 
@@ -1259,22 +1260,38 @@ static int echeckphysicaldevicevariablepointerfeatures(lua_State *L, int arg, Vk
     return 0;
     }
 
+
+static int echeckphysicaldeviceblendoperationadvancedfeatures(lua_State *L, int arg, VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT *p)
+    {
+    int err;
+    ECHECK_PREAMBLE
+    GetBoolean(advancedBlendCoherentOperations, "advanced_blend_coherent_operations");
+    return 0;
+    }
+
 typedef struct {
     VkPhysicalDeviceFeatures2KHR p1;
     VkPhysicalDevice16BitStorageFeaturesKHR p2;
     VkPhysicalDeviceVariablePointerFeaturesKHR p3;
+    VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT p4;
 } VkPhysicalDeviceFeatures2KHR_CHAIN;
+
+#define BUILD_CHAIN_VkPhysicalDeviceFeatures2KHR(p) do { \
+    (p)->p1.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2_KHR; \
+    (p)->p2.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_16BIT_STORAGE_FEATURES_KHR; \
+    (p)->p3.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VARIABLE_POINTER_FEATURES_KHR; \
+    (p)->p4.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_BLEND_OPERATION_ADVANCED_FEATURES_EXT; \
+    (p)->p1.pNext = &p->p2; \
+    (p)->p2.pNext = &p->p3; \
+    (p)->p3.pNext = &p->p4; \
+    (p)->p4.pNext = NULL; \
+} while(0)
 
 VkPhysicalDeviceFeatures2KHR* newphysicaldevicefeatures2(lua_State *L)
     {
     VkPhysicalDeviceFeatures2KHR_CHAIN *p = MALLOC_NOERR(L, VkPhysicalDeviceFeatures2KHR_CHAIN);
     if(!p) return NULL;
-    p->p1.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2_KHR;
-    p->p2.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_16BIT_STORAGE_FEATURES_KHR;
-    p->p3.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VARIABLE_POINTER_FEATURES_KHR;
-    p->p1.pNext = &p->p2;
-    p->p2.pNext = &p->p3;
-    p->p3.pNext = NULL;
+    BUILD_CHAIN_VkPhysicalDeviceFeatures2KHR(p);
     return (VkPhysicalDeviceFeatures2KHR*)p;
     }
 
@@ -1293,12 +1310,9 @@ static int echeckphysicaldevicefeatures2(lua_State *L, int arg, VkPhysicalDevice
     if(err) return err;
     err = echeckphysicaldevicevariablepointerfeatures(L, arg, &p->p3);
     if(err) return err;
-    p->p1.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2_KHR;
-    p->p2.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_16BIT_STORAGE_FEATURES_KHR;
-    p->p3.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VARIABLE_POINTER_FEATURES_KHR;
-    p->p1.pNext = &p->p2;
-    p->p2.pNext = &p->p3;
-    p->p3.pNext = NULL;
+    err = echeckphysicaldeviceblendoperationadvancedfeatures(L, arg, &p->p4);
+    if(err) return err;
+    BUILD_CHAIN_VkPhysicalDeviceFeatures2KHR(p);
     return 0;
     }
 
@@ -1380,12 +1394,19 @@ static int pushphysicaldevicevariablepointerfeatures(lua_State *L, VkPhysicalDev
     return 1;
     }
 
+static int pushphysicaldeviceblendoperationadvancedfeatures(lua_State *L, VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT *p)
+    {
+    SetBoolean(advancedBlendCoherentOperations, "advanced_blend_coherent_operations");
+    return 1;
+    }
+
 int pushphysicaldevicefeatures2(lua_State *L, VkPhysicalDeviceFeatures2KHR *pp)
     {
     VkPhysicalDeviceFeatures2KHR_CHAIN *p = (VkPhysicalDeviceFeatures2KHR_CHAIN*)pp;
     pushphysicaldevicefeatures(L, &p->p1.features);
     pushphysicaldevice16bitstoragefeatures(L, &p->p2);
     pushphysicaldevicevariablepointerfeatures(L, &p->p3);
+    pushphysicaldeviceblendoperationadvancedfeatures(L, &p->p4);
     return 1;
     }
 
@@ -1540,9 +1561,21 @@ static int pushphysicaldevicepushdescriptorproperties(lua_State *L, VkPhysicalDe
     return 0;
     }
 
+static int pushphysicaldeviceblendoperationadvancedproperties(lua_State *L, VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT *p)
+    {
+    SetInteger(advancedBlendMaxColorAttachments, "advanced_blend_max_color_attachments");
+    SetBoolean(advancedBlendIndependentBlend, "advanced_blend_independent_blend");
+    SetBoolean(advancedBlendNonPremultipliedSrcColor, "advanced_blend_non_premultiplied_src_color");
+    SetBoolean(advancedBlendNonPremultipliedDstColor, "advanced_blend_non_premultiplied_dst_color");
+    SetBoolean(advancedBlendCorrelatedOverlap, "advanced_blend_correlated_overlap");
+    SetBoolean(advancedBlendAllOperations, "advanced_blend_all_operations");
+    return 0;
+    }
+
 typedef struct {
     VkPhysicalDeviceProperties2KHR p1;
     VkPhysicalDevicePushDescriptorPropertiesKHR p2;
+    VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT p3;
 } VkPhysicalDeviceProperties2KHR_CHAIN;
 
 VkPhysicalDeviceProperties2KHR* newphysicaldeviceproperties2(lua_State *L)
@@ -1551,8 +1584,10 @@ VkPhysicalDeviceProperties2KHR* newphysicaldeviceproperties2(lua_State *L)
     if(!p) return NULL;
     p->p1.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROPERTIES_2_KHR;
     p->p2.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PUSH_DESCRIPTOR_PROPERTIES_KHR;
+    p->p3.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_BLEND_OPERATION_ADVANCED_PROPERTIES_EXT;
     p->p1.pNext = &p->p2;
-    p->p2.pNext = NULL;
+    p->p2.pNext = &p->p3;
+    p->p3.pNext = NULL;
     return (VkPhysicalDeviceProperties2KHR*)p;
     }
 
@@ -1566,6 +1601,7 @@ int pushphysicaldeviceproperties2(lua_State *L, VkPhysicalDeviceProperties2KHR *
     VkPhysicalDeviceProperties2KHR_CHAIN *p = (VkPhysicalDeviceProperties2KHR_CHAIN*)pp;
     pushphysicaldeviceproperties(L, &p->p1.properties);
     pushphysicaldevicepushdescriptorproperties(L, &p->p2);
+    pushphysicaldeviceblendoperationadvancedproperties(L, &p->p3);
     return 1;
     }
 
@@ -3160,6 +3196,20 @@ static int echeckpipelinecolorblendstatecreateinfo(lua_State *L, int arg, VkPipe
     return 0;
     }
 
+#define freepipelinecolorblendadvancedstatecreateinfo(L, p) do { } while(0)
+static int echeckpipelinecolorblendadvancedstatecreateinfo(lua_State *L, int arg, VkPipelineColorBlendAdvancedStateCreateInfoEXT *p)
+    {
+    int err;
+    ECHECK_PREAMBLE
+    p->sType = VK_STRUCTURE_TYPE_PIPELINE_COLOR_BLEND_ADVANCED_STATE_CREATE_INFO_EXT ;
+    p->pNext = NULL;
+    GetBoolean(srcPremultiplied, "src_premultiplied");
+    GetBoolean(dstPremultiplied, "dst_premultiplied");
+    GetBlendOverlap(blendOverlap, "blend_overlap");
+    return 0;
+    }
+
+
 /*-------------------------------------------------------------------------------------*/
 
 static void freepipelinedynamicstatecreateinfo(lua_State *L, VkPipelineDynamicStateCreateInfo *p)
@@ -3191,6 +3241,7 @@ static int echeckpipelinedynamicstatecreateinfo(lua_State *L, int arg, VkPipelin
 
 static void freegraphicspipelinecreateinfo(lua_State *L, VkGraphicsPipelineCreateInfo *p)
     {
+    VkPipelineColorBlendAdvancedStateCreateInfoEXT *ColorBlendAdvancedState;
     if(!p) return;
     if(p->pStages) freepipelineshaderstagecreateinfolist(L, (void*)p->pStages, p->stageCount);
     if(p->pVertexInputState)
@@ -3237,6 +3288,12 @@ static void freegraphicspipelinecreateinfo(lua_State *L, VkGraphicsPipelineCreat
         }
     if(p->pColorBlendState) 
         {
+        if(p->pNext)
+            {
+            ColorBlendAdvancedState = (VkPipelineColorBlendAdvancedStateCreateInfoEXT*)(p->pNext);
+            freepipelinecolorblendadvancedstatecreateinfo(L, ColorBlendAdvancedState);
+            Free(L, (void*)ColorBlendAdvancedState);
+            }
         freepipelinecolorblendstatecreateinfo(L, 
             (VkPipelineColorBlendStateCreateInfo*)p->pColorBlendState);
         Free(L, (void*)p->pColorBlendState);
@@ -3249,6 +3306,9 @@ static void freegraphicspipelinecreateinfo(lua_State *L, VkGraphicsPipelineCreat
         }
     }
 
+/* Need this to trick the BEGIN macro: */
+#define VkPipelineColorBlendAdvancedStateCreateInfo VkPipelineColorBlendAdvancedStateCreateInfoEXT
+
 static int echeckgraphicspipelinecreateinfo(lua_State *L, int arg, VkGraphicsPipelineCreateInfo *p)
     {
     int err, arg1;
@@ -3260,6 +3320,7 @@ static int echeckgraphicspipelinecreateinfo(lua_State *L, int arg, VkGraphicsPip
     VkPipelineMultisampleStateCreateInfo       *MultisampleState;
     VkPipelineDepthStencilStateCreateInfo      *DepthStencilState;
     VkPipelineColorBlendStateCreateInfo        *ColorBlendState;
+    VkPipelineColorBlendAdvancedStateCreateInfoEXT *ColorBlendAdvancedState;
     VkPipelineDynamicStateCreateInfo           *DynamicState;
 
     ECHECK_PREAMBLE
@@ -3288,62 +3349,76 @@ static int echeckgraphicspipelinecreateinfo(lua_State *L, int arg, VkGraphicsPip
 #define END_MANDATORY(xxx)  do {                                                    \
     POPFIELD();                                                                     \
     if(err) { freegraphicspipelinecreateinfo(L, p); return efielderror(L, F); }     \
-    p->p##xxx = xxx;                                                                \
 } while(0)
 
 #define END_OPTIONAL(xxx)   do {                                                    \
     POPFIELD();                                                                     \
     if(err < 0) { freegraphicspipelinecreateinfo(L, p); return efielderror(L, F); } \
-    if(err == ERR_NOTPRESENT)                                                       \
-        POPERROR();                                                                 \
-    else                                                                            \
-        p->p##xxx = xxx;                                                            \
+    if(err == ERR_NOTPRESENT) { POPERROR(); xxx = NULL; }                           \
 } while(0)
 
 #define F "vertex_input_state"
     BEGIN(VertexInputState);
     err = echeckpipelinevertexinputstatecreateinfo(L, arg1, VertexInputState);
     END_MANDATORY(VertexInputState);
+    p->pVertexInputState = VertexInputState;
 #undef F
 #define F "input_assembly_state"
     BEGIN(InputAssemblyState);
     err = echeckpipelineinputassemblystatecreateinfo(L, arg1, InputAssemblyState);
     END_MANDATORY(InputAssemblyState);
+    p->pInputAssemblyState = InputAssemblyState;
 #undef F
 #define F "tessellation_state"
     BEGIN(TessellationState);
     err = echeckpipelinetessellationstatecreateinfo(L, arg1, TessellationState);
     END_OPTIONAL(TessellationState);
+    p->pTessellationState = TessellationState;
 #undef F
 #define F "viewport_state"
     BEGIN(ViewportState);
     err = echeckpipelineviewportstatecreateinfo(L, arg1, ViewportState);
     END_OPTIONAL(ViewportState);
+    p->pViewportState = ViewportState;
 #undef F
 #define F "rasterization_state"
     BEGIN(RasterizationState);
     err = echeckpipelinerasterizationstatecreateinfo(L, arg1, RasterizationState);
     END_MANDATORY(RasterizationState);
+    p->pRasterizationState = RasterizationState;
 #undef F
 #define F "multisample_state"
     BEGIN(MultisampleState);
     err = echeckpipelinemultisamplestatecreateinfo(L, arg1, MultisampleState);
     END_OPTIONAL(MultisampleState);
+    p->pMultisampleState = MultisampleState;
 #undef F
 #define F "depth_stencil_state"
     BEGIN(DepthStencilState);
     err = echeckpipelinedepthstencilstatecreateinfo(L, arg1, DepthStencilState);
     END_OPTIONAL(DepthStencilState);
+    p->pDepthStencilState = DepthStencilState;
 #undef F
 #define F "color_blend_state"
     BEGIN(ColorBlendState);
     err = echeckpipelinecolorblendstatecreateinfo(L, arg1, ColorBlendState);
     END_OPTIONAL(ColorBlendState);
+    p->pColorBlendState = ColorBlendState;
+#undef F
+#define F "color_blend_advanced_state"
+    if(ColorBlendState)
+        {
+        BEGIN(ColorBlendAdvancedState);
+        err = echeckpipelinecolorblendadvancedstatecreateinfo(L, arg1, ColorBlendAdvancedState);
+        END_OPTIONAL(ColorBlendAdvancedState);
+        ColorBlendState->pNext = (const void*)ColorBlendAdvancedState;
+        }
 #undef F
 #define F "dynamic_state"
     BEGIN(DynamicState);
     err = echeckpipelinedynamicstatecreateinfo(L, arg1, DynamicState);
     END_OPTIONAL(DynamicState);
+    p->pDynamicState = DynamicState;
 #undef F
     return 0;
 #undef BEGIN

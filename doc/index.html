@@ -1170,7 +1170,7 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/
 <ul>
 <li>
 <p><em>device</em> = <strong>create_device</strong>(<a href="#physical_device"><em>physdev</em></a>, <a href="#devicecreateinfo"><em>devicecreateinfo</em></a>, [<a href="#allocators"><em>allocator</em></a>])<br>
-<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCreateDevice">CreateDevice</a>.</span></p>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCreateDevice">vkCreateDevice</a>.</span></p>
 </li>
 </ul>
 </div>
@@ -3159,8 +3159,17 @@ with 1-based integer keys and no gaps, a.k.a. 'sequence' in Lua&#8217;s jargon).
 <em>sparse_properties</em>: <a href="#physicaldevicesparseproperties">physicaldevicesparseproperties</a>,<br>
 ---- <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_push_descriptor">VK_KHR_push_descriptor</a> EXTENSION ----<br>
 <em>max_push_descriptors</em>: integer,<br>
+---- <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_blend_operation_advanced">VK_EXT_blend_operation_advanced</a> EXTENSION ----<br>
+<em>advanced_blend_max_color_attachments</em>: integer,<br>
+<em>advanced_blend_independent_blend</em>: boolean,<br>
+<em>advanced_blend_non_premultiplied_src_color</em>: boolean,<br>
+<em>advanced_blend_non_premultiplied_dst_color</em>: boolean,<br>
+<em>advanced_blend_correlated_overlap</em>: boolean,<br>
+<em>advanced_blend_all_operations</em>: boolean,<br>
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPhysicalDeviceProperties">VkPhysicalDeviceProperties</a><br>
-<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPhysicalDevicePushDescriptorPropertiesKHR">VkPhysicalDevicePushDescriptorPropertiesKHR</a>)</span></p>
+<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPhysicalDeviceProperties2KHR">VkPhysicalDeviceProperties2KHR</a>,<br>
+<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPhysicalDevicePushDescriptorPropertiesKHR">VkPhysicalDevicePushDescriptorPropertiesKHR</a>,<br>
+<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT">VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT</a>)</span></p>
 </li>
 <li>
 <p><a id="physicaldeviceimageformatinfo"></a>
@@ -3254,9 +3263,12 @@ with 1-based integer keys and no gaps, a.k.a. 'sequence' in Lua&#8217;s jargon).
 ---- <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_variable_pointers">VK_KHR_variable_pointers</a> EXTENSION ----<br>
 <em>variable_pointers_storage_buffer</em>: boolean,<br>
 <em>variable_pointers</em>: boolean,<br>
+---- <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_blend_operation_advanced">VK_EXT_blend_operation_advanced</a> EXTENSION ----<br>
+<em>advanced_blend_coherent_operations</em>: boolean,<br>
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPhysicalDeviceFeatures">VkPhysicalDeviceFeatures</a>,<br>
 <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPhysicalDevice16BitStorageFeaturesKHR">VkPhysicalDevice16BitStorageFeaturesKHR</a>,<br>
-<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPhysicalDeviceVariablePointerFeaturesKHR">VkPhysicalDeviceVariablePointerFeaturesKHR</a>)</span></p>
+<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPhysicalDeviceVariablePointerFeaturesKHR">VkPhysicalDeviceVariablePointerFeaturesKHR</a>,<br>
+<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT">VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT</a>)</span></p>
 </li>
 <li>
 <p><a id="queuefamilyproperties"></a>
@@ -3745,13 +3757,15 @@ with 1-based integer keys and no gaps, a.k.a. 'sequence' in Lua&#8217;s jargon).
 <em>multisample_state</em>: <a href="#pipelinemultisamplestatecreateinfo">pipelinemultisamplestatecreateinfo</a>,<br>
 <em>depth_stencil_state</em>: <a href="#pipelinedepthstencilstatecreateinfo">pipelinedepthstencilstatecreateinfo</a>,<br>
 <em>color_blend_state</em>: <a href="#pipelinecolorblendstatecreateinfo">pipelinecolorblendstatecreateinfo</a>,<br>
+<em>color_blend_advanced_state</em>: <a href="#pipelinecolorblendadvancedstatecreateinfo">pipelinecolorblendadvancedstatecreateinfo</a> (see Note1 below),<br>
 <em>dynamic_state</em>: <a href="#pipelinedynamicstatecreateinfo">pipelinedynamicstatecreateinfo</a>,<br>
 <em>layout</em>: <a href="#pipeline_layout">pipeline_layout</a> <strong>[R]</strong>,<br>
 <em>render_pass</em>: <a href="#render_pass">render_pass</a> <strong>[R]</strong>,<br>
 <em>subpass</em>: integer,<br>
 <em>base_pipeline_handle</em>: <a href="#pipeline">pipeline</a>,<br>
 <em>base_pipeline_index</em>: integer,<br>
-} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkGraphicsPipelineCreateInfo">VkGraphicsPipelineCreateInfo</a>)</span></p>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkGraphicsPipelineCreateInfo">VkGraphicsPipelineCreateInfo</a>)<br>
+Note1: Requires the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_blend_operation_advanced">VK_EXT_blend_operation_advanced</a> extension and the <em>color_blend_state</em> field.</span></p>
 </li>
 <li>
 <p><a id="computepipelinecreateinfo"></a>
@@ -3902,6 +3916,14 @@ with 1-based integer keys and no gaps, a.k.a. 'sequence' in Lua&#8217;s jargon).
 <em>attachments</em>: {<a href="#pipelinecolorblendattachmentstate">pipelinecolorblendattachmentstate</a>},<br>
 <em>blend_constants</em>: {float} (length=4),<br>
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPipelineColorBlendStateCreateInfo">VkPipelineColorBlendStateCreateInfo</a>)</span></p>
+</li>
+<li>
+<p><a id="pipelinecolorblendadvancedstatecreateinfo"></a>
+<span class="small"><strong>pipelinecolorblendadvancedstatecreateinfo</strong> = {<br>
+<em>src_premultiplied</em>: boolean,<br>
+<em>dst_premultiplied</em>: boolean,<br>
+<em>blend_overlap</em>: <a href="#blendoverlap">blendoverlap</a>,<br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPipelineColorBlendAdvancedStateCreateInfoEXT">VkPipelineColorBlendAdvancedStateCreateInfoEXT</a>)</span></p>
 </li>
 <li>
 <p><a id="pipelinecolorblendattachmentstate"></a>
@@ -4630,7 +4652,7 @@ Rfr. <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/
 <div id="accessflags" class="paragraph">
 <p><span class="small"><strong>accessflags</strong>: vk.ACCESS_XXX_BIT<br>
 Values:
-'<em>indirect command read</em>', '<em>index read</em>', '<em>vertex attribute read</em>', '<em>uniform read</em>', '<em>input attachment read</em>', '<em>shader read</em>', '<em>shader write</em>', '<em>color attachment read</em>', '<em>color attachment write</em>', '<em>depth stencil attachment read</em>', '<em>depth stencil attachment write</em>', '<em>transfer read</em>', '<em>transfer write</em>', '<em>host read</em>', '<em>host write</em>', '<em>memory read</em>', '<em>memory write</em>', '<em>command process read</em>', '<em>command process write</em>'.<br>
+'<em>indirect command read</em>', '<em>index read</em>', '<em>vertex attribute read</em>', '<em>uniform read</em>', '<em>input attachment read</em>', '<em>shader read</em>', '<em>shader write</em>', '<em>color attachment read</em>', '<em>color attachment write</em>', '<em>depth stencil attachment read</em>', '<em>depth stencil attachment write</em>', '<em>transfer read</em>', '<em>transfer write</em>', '<em>host read</em>', '<em>host write</em>', '<em>memory read</em>', '<em>memory write</em>', '<em>color attachment read noncoherent</em>'.<br>
 Rfr. <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkAccessFlagBits">VkAccessFlagBits</a>.</span></p>
 </div>
 <div id="attachmentdescriptionflags" class="paragraph">
@@ -4771,12 +4793,6 @@ Values:
 '<em>sampled image</em>', '<em>storage image</em>', '<em>storage image atomic</em>', '<em>uniform texel buffer</em>', '<em>storage texel buffer</em>', '<em>storage texel buffer atomic</em>', '<em>vertex buffer</em>', '<em>color attachment</em>', '<em>color attachment blend</em>', '<em>depth stencil attachment</em>', '<em>blit src</em>', '<em>blit dst</em>', '<em>sampled image filter linear</em>'.<br>
 Rfr. <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkFormatFeatureFlagBits">VkFormatFeatureFlagBits</a>.</span></p>
 </div>
-<div id="subpassdescriptionflags" class="paragraph">
-<p><span class="small"><strong>subpassdescriptionflags</strong>: vk.SUBPASS_DESCRIPTION_XXX_BIT<br>
-Values:
-'<em>per view attributes</em>', '<em>per view position x only</em>'.<br>
-Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkSubpassDescriptionFlagBits">VkSubpassDescriptionFlagBits</a>.</span></p>
-</div>
 <div id="surfacetransformflags" class="paragraph">
 <p><span class="small"><strong>surfacetransformflags</strong>: vk.SURFACE_TRANSFORM_XXX_BIT_KHR<br>
 Values:
@@ -4895,6 +4911,9 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/
 </div>
 <div id="descriptorupdatetemplatecreateflags" class="paragraph">
 <p><span class="small"><strong>descriptorupdatetemplatecreateflags</strong>: 0</span></p>
+</div>
+<div id="subpassdescriptionflags" class="paragraph">
+<p><span class="small"><strong>subpassdescriptionflags</strong>: 0</span></p>
 </div>
 </div>
 </div>
@@ -5489,6 +5508,9 @@ previously obtained with the <a href="#now">now</a>(&nbsp;) function.</span></p>
 </div>
 <div class="ulist">
 <ul>
+<li>
+<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_blend_operation_advanced">VK_EXT_blend_operation_advanced</a></p>
+</li>
 <li>
 <p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_debug_marker">VK_EXT_debug_marker</a></p>
 </li>

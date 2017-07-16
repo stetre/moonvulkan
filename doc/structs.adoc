@@ -101,8 +101,17 @@ _limits_: <<physicaldevicelimits, physicaldevicelimits>>, +
 _sparse_properties_: <<physicaldevicesparseproperties, physicaldevicesparseproperties>>, +
 pass:[----] https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_push_descriptor[VK_KHR_push_descriptor] EXTENSION ---- +
 _max_push_descriptors_: integer, +
+pass:[----] https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_blend_operation_advanced[VK_EXT_blend_operation_advanced] EXTENSION ---- +
+_advanced_blend_max_color_attachments_: integer, +
+_advanced_blend_independent_blend_: boolean, +
+_advanced_blend_non_premultiplied_src_color_: boolean, +
+_advanced_blend_non_premultiplied_dst_color_: boolean, +
+_advanced_blend_correlated_overlap_: boolean, +
+_advanced_blend_all_operations_: boolean, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPhysicalDeviceProperties[VkPhysicalDeviceProperties] +
-https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPhysicalDevicePushDescriptorPropertiesKHR[VkPhysicalDevicePushDescriptorPropertiesKHR])#
+https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPhysicalDeviceProperties2KHR[VkPhysicalDeviceProperties2KHR], +
+https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPhysicalDevicePushDescriptorPropertiesKHR[VkPhysicalDevicePushDescriptorPropertiesKHR], +
+https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT[VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT])#
 
 * [[physicaldeviceimageformatinfo]]
 [small]#*physicaldeviceimageformatinfo* = { +
@@ -193,9 +202,13 @@ _storage_input_output_16_: boolean, +
 pass:[----] https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_variable_pointers[VK_KHR_variable_pointers] EXTENSION ---- +
 _variable_pointers_storage_buffer_: boolean, +
 _variable_pointers_: boolean, +
+pass:[----] https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_blend_operation_advanced[VK_EXT_blend_operation_advanced] EXTENSION ---- +
+_advanced_blend_coherent_operations_: boolean, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPhysicalDeviceFeatures[VkPhysicalDeviceFeatures], +
 https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPhysicalDevice16BitStorageFeaturesKHR[VkPhysicalDevice16BitStorageFeaturesKHR], +
-https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPhysicalDeviceVariablePointerFeaturesKHR[VkPhysicalDeviceVariablePointerFeaturesKHR])#
+https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPhysicalDeviceVariablePointerFeaturesKHR[VkPhysicalDeviceVariablePointerFeaturesKHR], +
+https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT[VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT])#
+
 
 * [[queuefamilyproperties]]
 [small]#*queuefamilyproperties* = { +
@@ -623,13 +636,15 @@ _rasterization_state_: <<pipelinerasterizationstatecreateinfo, pipelinerasteriza
 _multisample_state_: <<pipelinemultisamplestatecreateinfo, pipelinemultisamplestatecreateinfo>>, +
 _depth_stencil_state_: <<pipelinedepthstencilstatecreateinfo, pipelinedepthstencilstatecreateinfo>>, +
 _color_blend_state_: <<pipelinecolorblendstatecreateinfo, pipelinecolorblendstatecreateinfo>>, +
+_color_blend_advanced_state_: <<pipelinecolorblendadvancedstatecreateinfo, pipelinecolorblendadvancedstatecreateinfo>> (see Note1 below), +
 _dynamic_state_: <<pipelinedynamicstatecreateinfo, pipelinedynamicstatecreateinfo>>, +
 _layout_: <<pipeline_layout, pipeline_layout>> *[R]*, +
 _render_pass_: <<render_pass, render_pass>> *[R]*, +
 _subpass_: integer, +
 _base_pipeline_handle_: <<pipeline, pipeline>>, +
 _base_pipeline_index_: integer, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkGraphicsPipelineCreateInfo[VkGraphicsPipelineCreateInfo])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkGraphicsPipelineCreateInfo[VkGraphicsPipelineCreateInfo]) +
+Note1: Requires the https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_blend_operation_advanced[VK_EXT_blend_operation_advanced] extension and the _color_blend_state_ field.#
 
 
 * [[computepipelinecreateinfo]]
@@ -640,7 +655,6 @@ _layout_: <<pipeline_layout, pipeline_layout>> *[R]*, +
 _base_pipeline_handle_: <<pipeline, pipeline>>, +
 _base_pipeline_index_: integer, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkComputePipelineCreateInfo[VkComputePipelineCreateInfo])#
-
 
 
 * [[pipelineshaderstagecreateinfo]]
@@ -776,6 +790,14 @@ _logic_op_: <<logicop, logicop>>, +
 _attachments_: {<<pipelinecolorblendattachmentstate, pipelinecolorblendattachmentstate>>}, +
 _blend_constants_: {float} (length=4), +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPipelineColorBlendStateCreateInfo[VkPipelineColorBlendStateCreateInfo])#
+
+* [[pipelinecolorblendadvancedstatecreateinfo]]
+[small]#*pipelinecolorblendadvancedstatecreateinfo* = { +
+_src_premultiplied_: boolean, +
+_dst_premultiplied_: boolean, +
+_blend_overlap_: <<blendoverlap, blendoverlap>>, +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPipelineColorBlendAdvancedStateCreateInfoEXT[VkPipelineColorBlendAdvancedStateCreateInfoEXT])#
+
 
 * [[pipelinecolorblendattachmentstate]]
 [small]#*pipelinecolorblendattachmentstate* = { +

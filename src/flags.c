@@ -430,8 +430,7 @@ static VkFlags checkaccessflags(lua_State *L, int arg)
     CASE(VK_ACCESS_HOST_WRITE_BIT, "host write");
     CASE(VK_ACCESS_MEMORY_READ_BIT, "memory read");
     CASE(VK_ACCESS_MEMORY_WRITE_BIT, "memory write");
-    CASE(VK_ACCESS_COMMAND_PROCESS_READ_BIT_NVX, "command process read");
-    CASE(VK_ACCESS_COMMAND_PROCESS_WRITE_BIT_NVX, "command process write");
+    CASE(VK_ACCESS_COLOR_ATTACHMENT_READ_NONCOHERENT_BIT_EXT, "color attachment read noncoherent");
 #undef CASE
         return (VkFlags)luaL_argerror(L, --arg, badvalue(L,s));
         done: ;
@@ -462,8 +461,7 @@ static int pushaccessflags(lua_State *L, VkFlags flags)
     CASE(VK_ACCESS_HOST_WRITE_BIT, "host write");
     CASE(VK_ACCESS_MEMORY_READ_BIT, "memory read");
     CASE(VK_ACCESS_MEMORY_WRITE_BIT, "memory write");
-    CASE(VK_ACCESS_COMMAND_PROCESS_READ_BIT_NVX, "command process read");
-    CASE(VK_ACCESS_COMMAND_PROCESS_WRITE_BIT_NVX, "command process write");
+    CASE(VK_ACCESS_COLOR_ATTACHMENT_READ_NONCOHERENT_BIT_EXT, "color attachment read noncoherent");
 #undef CASE
 
     return n;
@@ -495,8 +493,7 @@ static int AccessFlags(lua_State *L)
     ADD(ACCESS_HOST_WRITE_BIT);\
     ADD(ACCESS_MEMORY_READ_BIT);\
     ADD(ACCESS_MEMORY_WRITE_BIT);\
-    ADD(ACCESS_COMMAND_PROCESS_READ_BIT_NVX);\
-    ADD(ACCESS_COMMAND_PROCESS_WRITE_BIT_NVX);\
+    ADD(ACCESS_COLOR_ATTACHMENT_READ_NONCOHERENT_BIT_EXT);\
 
 
 
@@ -1351,7 +1348,6 @@ static VkFlags checkpipelinestageflags(lua_State *L, int arg)
     // These are not individual bits:
         CASE(VK_PIPELINE_STAGE_ALL_GRAPHICS_BIT, "all graphics");
         CASE(VK_PIPELINE_STAGE_ALL_COMMANDS_BIT, "all commands");
-        CASE(VK_PIPELINE_STAGE_COMMAND_PROCESS_BIT_NVX, "command process nvx");
 #undef CASE
         return (VkFlags)luaL_argerror(L, --arg, badvalue(L,s));
         done: ;
@@ -1383,7 +1379,6 @@ static int pushpipelinestageflags(lua_State *L, VkFlags flags)
     // These are not individual bits:
         CASE(VK_PIPELINE_STAGE_ALL_GRAPHICS_BIT, "all graphics");
         CASE(VK_PIPELINE_STAGE_ALL_COMMANDS_BIT, "all commands");
-        CASE(VK_PIPELINE_STAGE_COMMAND_PROCESS_BIT_NVX, "command process nvx");
 #undef CASE
 
     return n;
@@ -1415,7 +1410,6 @@ static int PipelineStageFlags(lua_State *L)
     ADD(PIPELINE_STAGE_HOST_BIT);\
     ADD(PIPELINE_STAGE_ALL_GRAPHICS_BIT);\
     ADD(PIPELINE_STAGE_ALL_COMMANDS_BIT);\
-    ADD(PIPELINE_STAGE_COMMAND_PROCESS_BIT_NVX);\
 
 
 
@@ -2127,271 +2121,6 @@ static int SurfaceCounterFlagsEXT(lua_State *L)
     ADD(SURFACE_COUNTER_VBLANK_EXT);\
 
 
-/*----------------------------------------------------------------------*
- | VkSubpassDescriptionFlags
- *----------------------------------------------------------------------*/
-
-static VkFlags checksubpassdescriptionflags(lua_State *L, int arg) 
-    {
-    const char *s;
-    VkFlags flags = 0;
-    
-    while(lua_isstring(L, arg))
-        {
-        s = lua_tostring(L, arg++);
-#define CASE(CODE,str) if((strcmp(s, str)==0)) do { flags |= CODE; goto done; } while(0)
-        CASE(VK_SUBPASS_DESCRIPTION_PER_VIEW_ATTRIBUTES_BIT_NVX, "per view attributes");
-        CASE(VK_SUBPASS_DESCRIPTION_PER_VIEW_POSITION_X_ONLY_BIT_NVX, "per view position x only");
-#undef CASE
-        return (VkFlags)luaL_argerror(L, --arg, badvalue(L,s));
-        done: ;
-        }
-
-    return flags;
-    }
-
-static int pushsubpassdescriptionflags(lua_State *L, VkFlags flags)
-    {
-    int n = 0;
-
-#define CASE(CODE,str) do { if( flags & CODE) { lua_pushstring(L, str); n++; } } while(0)
-        CASE(VK_SUBPASS_DESCRIPTION_PER_VIEW_ATTRIBUTES_BIT_NVX, "per view attributes");
-        CASE(VK_SUBPASS_DESCRIPTION_PER_VIEW_POSITION_X_ONLY_BIT_NVX, "per view position x only");
-#undef CASE
-
-    return n;
-    }
-
-static int SubpassDescriptionFlags(lua_State *L)
-    {
-    if(lua_type(L, 1) == LUA_TNUMBER)
-        return pushsubpassdescriptionflags(L, luaL_checkinteger(L, 1));
-    lua_pushinteger(L, checksubpassdescriptionflags(L, 1));
-    return 1;
-    }
-
-#define Add_SubpassDescriptionFlags(L)  \
-    ADD(SUBPASS_DESCRIPTION_PER_VIEW_ATTRIBUTES_BIT_NVX);\
-    ADD(SUBPASS_DESCRIPTION_PER_VIEW_POSITION_X_ONLY_BIT_NVX);\
-
-
-/*----------------------------------------------------------------------*
- | VkExternalMemoryHandleTypeFlagsNV
- *----------------------------------------------------------------------*/
-
-#if 0
-static VkFlags checkexternalmemoryhandletypeflags(lua_State *L, int arg) 
-    {
-    const char *s;
-    VkFlags flags = 0;
-    
-    while(lua_isstring(L, arg))
-        {
-        s = lua_tostring(L, arg++);
-#define CASE(CODE,str) if((strcmp(s, str)==0)) do { flags |= CODE; goto done; } while(0)
-    CASE(VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_BIT_NV, "opaque win32");
-    CASE(VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT_NV, "opaque win32 kmt");
-    CASE(VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_IMAGE_BIT_NV, "d3d11 image");
-    CASE(VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_IMAGE_KMT_BIT_NV, "d3d11 image kmt");
-#undef CASE
-        return (VkFlags)luaL_argerror(L, --arg, badvalue(L,s));
-        done: ;
-        }
-
-    return flags;
-    }
-
-static int pushexternalmemoryhandletypeflags(lua_State *L, VkFlags flags)
-    {
-    int n = 0;
-
-#define CASE(CODE,str) do { if( flags & CODE) { lua_pushstring(L, str); n++; } } while(0)
-    CASE(VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_BIT_NV, "opaque win32");
-    CASE(VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT_NV, "opaque win32 kmt");
-    CASE(VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_IMAGE_BIT_NV, "d3d11 image");
-    CASE(VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_IMAGE_KMT_BIT_NV, "d3d11 image kmt");
-#undef CASE
-
-    return n;
-    }
-
-static int ExternalMemoryHandleTypeFlagsNV(lua_State *L)
-    {
-    if(lua_type(L, 1) == LUA_TNUMBER)
-        return pushexternalmemoryhandletypeflags(L, luaL_checkinteger(L, 1));
-    lua_pushinteger(L, checkexternalmemoryhandletypeflags(L, 1));
-    return 1;
-    }
-
-#define Add_ExternalMemoryHandleTypeFlagsNV(L)  \
-    ADD(EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_BIT_NV);\
-    ADD(EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT_NV);\
-    ADD(EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_IMAGE_BIT_NV);\
-    ADD(EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_IMAGE_KMT_BIT_NV);\
-
-#endif
-
-/*----------------------------------------------------------------------*
- | VkExternalMemoryFeatureFlagsNV
- *----------------------------------------------------------------------*/
-
-#if 0
-static VkFlags checkexternalmemoryfeatureflags(lua_State *L, int arg) 
-    {
-    const char *s;
-    VkFlags flags = 0;
-    
-    while(lua_isstring(L, arg))
-        {
-        s = lua_tostring(L, arg++);
-#define CASE(CODE,str) if((strcmp(s, str)==0)) do { flags |= CODE; goto done; } while(0)
-    CASE(VK_EXTERNAL_MEMORY_FEATURE_DEDICATED_ONLY_BIT_NV, "dedicated only");
-    CASE(VK_EXTERNAL_MEMORY_FEATURE_EXPORTABLE_BIT_NV, "exportable");
-    CASE(VK_EXTERNAL_MEMORY_FEATURE_IMPORTABLE_BIT_NV, "importable");
-#undef CASE
-        return (VkFlags)luaL_argerror(L, --arg, badvalue(L,s));
-        done: ;
-        }
-
-    return flags;
-    }
-
-static int pushexternalmemoryfeatureflags(lua_State *L, VkFlags flags)
-    {
-    int n = 0;
-
-#define CASE(CODE,str) do { if( flags & CODE) { lua_pushstring(L, str); n++; } } while(0)
-    CASE(VK_EXTERNAL_MEMORY_FEATURE_DEDICATED_ONLY_BIT_NV, "dedicated only");
-    CASE(VK_EXTERNAL_MEMORY_FEATURE_EXPORTABLE_BIT_NV, "exportable");
-    CASE(VK_EXTERNAL_MEMORY_FEATURE_IMPORTABLE_BIT_NV, "importable");
-#undef CASE
-
-    return n;
-    }
-
-static int ExternalMemoryFeatureFlagsNV(lua_State *L)
-    {
-    if(lua_type(L, 1) == LUA_TNUMBER)
-        return pushexternalmemoryfeatureflags(L, luaL_checkinteger(L, 1));
-    lua_pushinteger(L, checkexternalmemoryfeatureflags(L, 1));
-    return 1;
-    }
-
-#define Add_ExternalMemoryFeatureFlagsNV(L) \
-    ADD(EXTERNAL_MEMORY_FEATURE_DEDICATED_ONLY_BIT_NV);\
-    ADD(EXTERNAL_MEMORY_FEATURE_EXPORTABLE_BIT_NV);\
-    ADD(EXTERNAL_MEMORY_FEATURE_IMPORTABLE_BIT_NV);\
-
-#endif
-
-
-/*----------------------------------------------------------------------*
- | VkIndirectCommandsLayoutUsageFlagsNVX
- *----------------------------------------------------------------------*/
-
-#if 0
-static VkFlags checkindirectcommandslayoutusageflags(lua_State *L, int arg) 
-    {
-    const char *s;
-    VkFlags flags = 0;
-    
-    while(lua_isstring(L, arg))
-        {
-        s = lua_tostring(L, arg++);
-#define CASE(CODE,str) if((strcmp(s, str)==0)) do { flags |= CODE; goto done; } while(0)
-    CASE(VK_INDIRECT_COMMANDS_LAYOUT_USAGE_UNORDERED_SEQUENCES_BIT_NVX, "unordered sequences");
-    CASE(VK_INDIRECT_COMMANDS_LAYOUT_USAGE_SPARSE_SEQUENCES_BIT_NVX, "sparse sequences");
-    CASE(VK_INDIRECT_COMMANDS_LAYOUT_USAGE_EMPTY_EXECUTIONS_BIT_NVX, "empty executions");
-    CASE(VK_INDIRECT_COMMANDS_LAYOUT_USAGE_INDEXED_SEQUENCES_BIT_NVX, "indexed sequences");
-#undef CASE
-        return (VkFlags)luaL_argerror(L, --arg, badvalue(L,s));
-        done: ;
-        }
-
-    return flags;
-    }
-
-static int pushindirectcommandslayoutusageflags(lua_State *L, VkFlags flags)
-    {
-    int n = 0;
-
-#define CASE(CODE,str) do { if( flags & CODE) { lua_pushstring(L, str); n++; } } while(0)
-    CASE(VK_INDIRECT_COMMANDS_LAYOUT_USAGE_UNORDERED_SEQUENCES_BIT_NVX, "unordered sequences");
-    CASE(VK_INDIRECT_COMMANDS_LAYOUT_USAGE_SPARSE_SEQUENCES_BIT_NVX, "sparse sequences");
-    CASE(VK_INDIRECT_COMMANDS_LAYOUT_USAGE_EMPTY_EXECUTIONS_BIT_NVX, "empty executions");
-    CASE(VK_INDIRECT_COMMANDS_LAYOUT_USAGE_INDEXED_SEQUENCES_BIT_NVX, "indexed sequences");
-#undef CASE
-
-    return n;
-    }
-
-static int IndirectCommandsLayoutUsageFlagsNVX(lua_State *L)
-    {
-    if(lua_type(L, 1) == LUA_TNUMBER)
-        return pushindirectcommandslayoutusageflags(L, luaL_checkinteger(L, 1));
-    lua_pushinteger(L, checkindirectcommandslayoutusageflags(L, 1));
-    return 1;
-    }
-
-#define Add_IndirectCommandsLayoutUsageFlagsNVX(L)  \
-    ADD(INDIRECT_COMMANDS_LAYOUT_USAGE_UNORDERED_SEQUENCES_BIT_NVX);\
-    ADD(INDIRECT_COMMANDS_LAYOUT_USAGE_SPARSE_SEQUENCES_BIT_NVX);\
-    ADD(INDIRECT_COMMANDS_LAYOUT_USAGE_EMPTY_EXECUTIONS_BIT_NVX);\
-    ADD(INDIRECT_COMMANDS_LAYOUT_USAGE_INDEXED_SEQUENCES_BIT_NVX);\
-
-#endif
-
-/*----------------------------------------------------------------------*
- | VkObjectEntryUsageFlagsNVX
- *----------------------------------------------------------------------*/
-
-#if 0
-static VkFlags checkobjectentryusageflags(lua_State *L, int arg) 
-    {
-    const char *s;
-    VkFlags flags = 0;
-    
-    while(lua_isstring(L, arg))
-        {
-        s = lua_tostring(L, arg++);
-#define CASE(CODE,str) if((strcmp(s, str)==0)) do { flags |= CODE; goto done; } while(0)
-    CASE(VK_OBJECT_ENTRY_USAGE_GRAPHICS_BIT_NVX, "graphics");
-    CASE(VK_OBJECT_ENTRY_USAGE_COMPUTE_BIT_NVX, "compute");
-#undef CASE
-        return (VkFlags)luaL_argerror(L, --arg, badvalue(L,s));
-        done: ;
-        }
-
-    return flags;
-    }
-
-static int pushobjectentryusageflags(lua_State *L, VkFlags flags)
-    {
-    int n = 0;
-
-#define CASE(CODE,str) do { if( flags & CODE) { lua_pushstring(L, str); n++; } } while(0)
-    CASE(VK_OBJECT_ENTRY_USAGE_GRAPHICS_BIT_NVX, "graphics");
-    CASE(VK_OBJECT_ENTRY_USAGE_COMPUTE_BIT_NVX, "compute");
-#undef CASE
-
-    return n;
-    }
-
-static int ObjectEntryUsageFlagsNVX(lua_State *L)
-    {
-    if(lua_type(L, 1) == LUA_TNUMBER)
-        return pushobjectentryusageflags(L, luaL_checkinteger(L, 1));
-    lua_pushinteger(L, checkobjectentryusageflags(L, 1));
-    return 1;
-    }
-
-#define Add_ObjectEntryUsageFlagsNVX(L) \
-    ADD(OBJECT_ENTRY_USAGE_GRAPHICS_BIT_NVX);\
-    ADD(OBJECT_ENTRY_USAGE_COMPUTE_BIT_NVX);\
-
-#endif
-
-
 /*------------------------------------------------------------------------------*
  | Additional utilities                                                         |
  *------------------------------------------------------------------------------*/
@@ -2429,17 +2158,12 @@ static int AddConstants(lua_State *L) /* vk.XXX constants for VK_XXX values */
     Add_ImageCreateFlags(L);
     Add_ImageUsageFlags(L);
     Add_FormatFeatureFlags(L);
-    Add_SubpassDescriptionFlags(L);
     /* extensions */
     Add_SurfaceTransformFlagsKHR(L);
     Add_CompositeAlphaFlagKHR(L);
     Add_DisplayPlaneAlphaFlagsKHR(L);
     Add_DebugReportFlagsEXT(L);
     Add_SurfaceCounterFlagsEXT(L);
-//  Add_ExternalMemoryHandleTypeFlagsNV(L);
-//  Add_ExternalMemoryFeatureFlagsNV(L);
-//  Add_IndirectCommandsLayoutUsageFlagsNVX(L);
-//  Add_ObjectEntryUsageFlagsNVX(L);
     return 0;
     }
 
@@ -2476,7 +2200,6 @@ static const struct luaL_Reg Functions[] =
         { "imagecreateflags", ImageCreateFlags },
         { "imageusageflags", ImageUsageFlags },
         { "formatfeatureflags", FormatFeatureFlags },
-        { "subpassdescriptionflags", SubpassDescriptionFlags },
         /* Reserved flags */
         { "swapchaincreateflags", ReservedFlags },
         { "instancecreateflags", ReservedFlags },
@@ -2505,16 +2228,13 @@ static const struct luaL_Reg Functions[] =
         { "descriptorpoolresetflags", ReservedFlags },
         { "framebuffercreateflags", ReservedFlags },
         { "renderpasscreateflags", ReservedFlags },
+        { "subpassdescriptionflags", ReservedFlags },
         /* extensions */
         { "surfacetransformflags", SurfaceTransformFlagsKHR },
         { "compositealphaflags", CompositeAlphaFlagsKHR },
         { "displayplanealphaflags", DisplayPlaneAlphaFlagsKHR },
         { "debugreportflags", DebugReportFlagsEXT },
         { "surfacecounterflags", SurfaceCounterFlagsEXT },
-//      { "externalmemoryhandletypeflags", ExternalMemoryHandleTypeFlagsNV },
-//      { "externalmemoryfeatureflags", ExternalMemoryFeatureFlagsNV },
-//      { "indirectcommandslayoutusageflags", IndirectCommandsLayoutUsageFlagsNVX },
-//      { "objectentryusageflags", ObjectEntryUsageFlagsNVX },
         /* extensions, reserved */
         { "displaymodecreateflags", ReservedFlags }, /* VkDisplayModeCreateFlagsKHR */
         { "displaysurfacecreateflags", ReservedFlags }, /* VkDisplaySurfaceCreateFlagsKHR */
@@ -2525,7 +2245,6 @@ static const struct luaL_Reg Functions[] =
         { "androidsurfacecreateflags", ReservedFlags }, /* VkAndroidSurfaceCreateFlagsKHR */
         { "win32surfacecreateflags", ReservedFlags }, /* VkWin32SurfaceCreateFlagsKHR */
         { "commandpooltrimflags", ReservedFlags }, /* VkCommandPoolTrimFlagsKHR */
-//      { "visurfacecreateflags", ReservedFlags }, /* VkViSurfaceCreateFlagsNN */
         { "descriptorupdatetemplatecreateflags", ReservedFlags }, /* VkDescriptorUpdateTemplateCreateFlagsKHR */
         { NULL, NULL } /* sentinel */
     };

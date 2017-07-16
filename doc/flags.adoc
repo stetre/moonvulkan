@@ -73,7 +73,7 @@ Rfr. https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.ht
 [[accessflags]]
 [small]#*accessflags*: vk.ACCESS_XXX_BIT +
 Values: 
-'_indirect command read_', '_index read_', '_vertex attribute read_', '_uniform read_', '_input attachment read_', '_shader read_', '_shader write_', '_color attachment read_', '_color attachment write_', '_depth stencil attachment read_', '_depth stencil attachment write_', '_transfer read_', '_transfer write_', '_host read_', '_host write_', '_memory read_', '_memory write_', '_command process read_', '_command process write_'. +
+'_indirect command read_', '_index read_', '_vertex attribute read_', '_uniform read_', '_input attachment read_', '_shader read_', '_shader write_', '_color attachment read_', '_color attachment write_', '_depth stencil attachment read_', '_depth stencil attachment write_', '_transfer read_', '_transfer write_', '_host read_', '_host write_', '_memory read_', '_memory write_', '_color attachment read noncoherent_'. +
 Rfr. https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkAccessFlagBits[VkAccessFlagBits].#
 
 
@@ -236,11 +236,6 @@ Values:
 '_sampled image_', '_storage image_', '_storage image atomic_', '_uniform texel buffer_', '_storage texel buffer_', '_storage texel buffer atomic_', '_vertex buffer_', '_color attachment_', '_color attachment blend_', '_depth stencil attachment_', '_blit src_', '_blit dst_', '_sampled image filter linear_'. +
 Rfr. https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkFormatFeatureFlagBits[VkFormatFeatureFlagBits].#
 
-[[subpassdescriptionflags]]
-[small]#*subpassdescriptionflags*: vk.SUBPASS_DESCRIPTION_XXX_BIT +
-Values: 
-'_per view attributes_', '_per view position x only_'. +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkSubpassDescriptionFlagBits[VkSubpassDescriptionFlagBits].#
 
 [[surfacetransformflags]]
 [small]#*surfacetransformflags*: vk.SURFACE_TRANSFORM_XXX_BIT_KHR +
@@ -359,6 +354,9 @@ Reserved for future use (must be set to 0):
 
 [[descriptorupdatetemplatecreateflags]]
 [small]#*descriptorupdatetemplatecreateflags*: 0#
+
+[[subpassdescriptionflags]]
+[small]#*subpassdescriptionflags*: 0#
 
 ////
 [[flags]]
