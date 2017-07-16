@@ -2354,10 +2354,28 @@ int pushsparseimagememoryrequirements(lua_State *L, VkSparseImageMemoryRequireme
     return 1;
     }
 
-int pushsparseimagememoryrequirements2(lua_State *L, VkSparseImageMemoryRequirements2KHR *p) //@@DOC
+VkSparseImageMemoryRequirements2KHR* newsparseimagememoryrequirements2(lua_State *L, uint32_t count)
+    {
+	uint32_t i;
+    VkSparseImageMemoryRequirements2KHR *p = NMALLOC_NOERR(L, VkSparseImageMemoryRequirements2KHR, count);
+    if(!p) return NULL;
+    for(i = 0; i < count; i++)
+        {
+        p[i].sType = VK_STRUCTURE_TYPE_SPARSE_IMAGE_MEMORY_REQUIREMENTS_2_KHR;
+        p[i].pNext = NULL;
+        }
+    return p;
+    }
+
+void freesparseimagememoryrequirements2(lua_State *L, VkSparseImageMemoryRequirements2KHR *p, uint32_t count)
+    {
+	(void)count;
+    Free(L, (void*)p);
+    }
+
+int pushsparseimagememoryrequirements2(lua_State *L, VkSparseImageMemoryRequirements2KHR *p)
     {
     pushsparseimagememoryrequirements(L, &p->memoryRequirements);
-    //pushxxx(L, (VkXxxKHR*)p->pNext);  next extension in chain
     return 1;
     }
 

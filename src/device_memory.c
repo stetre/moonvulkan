@@ -263,7 +263,7 @@ static int GetBufferMemoryRequirements(lua_State *L)
     return 1;
     }
 
-static int GetImageMemoryRequirements2(lua_State *L, VkImage image, ud_t *ud) //@@DOC
+static int GetImageMemoryRequirements2(lua_State *L, VkImage image, ud_t *ud)
     {
     VkMemoryRequirements2KHR *req;
     VkImageMemoryRequirementsInfo2KHR info;
@@ -297,7 +297,7 @@ static int GetImageMemoryRequirements(lua_State *L)
     }
 
 
-static int GetImageSparseMemoryRequirements2(lua_State *L, VkImage image, ud_t *ud) //@@DOC
+static int GetImageSparseMemoryRequirements2(lua_State *L, VkImage image, ud_t *ud)
     {
     uint32_t count, i;
     VkSparseImageMemoryRequirements2KHR *requirements;
@@ -314,13 +314,7 @@ static int GetImageSparseMemoryRequirements2(lua_State *L, VkImage image, ud_t *
     if(count == 0)
         return 1;
 
-    requirements = (VkSparseImageMemoryRequirements2KHR*)
-        Malloc(L, sizeof(VkSparseImageMemoryRequirements2KHR)*count);
-    for(i = 0; i <count; i++)
-        {
-        requirements[i].sType = VK_STRUCTURE_TYPE_SPARSE_IMAGE_MEMORY_REQUIREMENTS_2_KHR;
-        requirements[i].pNext = NULL; //@@ next in chain
-        }
+    requirements = newsparseimagememoryrequirements2(L, count);
 
     ud->ddt->GetImageSparseMemoryRequirements2KHR(device, &info, &count, requirements);
     for(i = 0; i <count; i++)
@@ -329,7 +323,7 @@ static int GetImageSparseMemoryRequirements2(lua_State *L, VkImage image, ud_t *
         lua_rawseti(L, -2, i+1);
         }
 
-    Free(L, requirements);
+    freesparseimagememoryrequirements2(L, requirements, count);
     return 1;
     }
 

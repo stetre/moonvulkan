@@ -297,6 +297,10 @@ int pushmemoryrequirements(lua_State *L, VkMemoryRequirements *p);
 #define pushmemoryrequirements2 moonvulkan_pushmemoryrequirements2
 int pushmemoryrequirements2(lua_State *L, VkMemoryRequirements2KHR *p);
 
+#define newsparseimagememoryrequirements2 moonvulkan_newsparseimagememoryrequirements2
+VkSparseImageMemoryRequirements2KHR* newsparseimagememoryrequirements2(lua_State *L, uint32_t count);
+#define freesparseimagememoryrequirements2 moonvulkan_freesparseimagememoryrequirements2
+void freesparseimagememoryrequirements2(lua_State *L, VkSparseImageMemoryRequirements2KHR *p, uint32_t count);
 #define pushsparseimagememoryrequirements moonvulkan_pushsparseimagememoryrequirements
 int pushsparseimagememoryrequirements(lua_State *L, VkSparseImageMemoryRequirements *p);
 #define pushsparseimagememoryrequirements2 moonvulkan_pushsparseimagememoryrequirements2
