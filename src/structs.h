@@ -88,9 +88,10 @@ int echeckimagecreateinfo(lua_State *L, int arg, VkImageCreateInfo *p);
 #define echeckimageviewcreateinfo moonvulkan_echeckimageviewcreateinfo
 int echeckimageviewcreateinfo(lua_State *L, int arg, VkImageViewCreateInfo *p);
 
-#define freesamplercreateinfo(L, p) do { } while(0) 
+#define freesamplercreateinfo moonvulkan_freesamplercreateinfo
+void freesamplercreateinfo(lua_State *L, VkSamplerCreateInfo *p);
 #define echecksamplercreateinfo moonvulkan_echecksamplercreateinfo
-int echecksamplercreateinfo(lua_State *L, int arg, VkSamplerCreateInfo *p);
+VkSamplerCreateInfo *echecksamplercreateinfo(lua_State *L, int arg, int *err);
 
 #define echeckcommandbufferinheritanceinfo moonvulkan_echeckcommandbufferinheritanceinfo
 int echeckcommandbufferinheritanceinfo(lua_State *L, int arg, VkCommandBufferInheritanceInfo *p);

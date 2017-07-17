@@ -99,19 +99,23 @@ _device_name_: string, +
 _pipeline_cache_uuid_: binary string (length = 16), +
 _limits_: <<physicaldevicelimits, physicaldevicelimits>>, +
 _sparse_properties_: <<physicaldevicesparseproperties, physicaldevicesparseproperties>>, +
-pass:[----] https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_push_descriptor[VK_KHR_push_descriptor] EXTENSION ---- +
-_max_push_descriptors_: integer, +
-pass:[----] https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_blend_operation_advanced[VK_EXT_blend_operation_advanced] EXTENSION ---- +
-_advanced_blend_max_color_attachments_: integer, +
-_advanced_blend_independent_blend_: boolean, +
-_advanced_blend_non_premultiplied_src_color_: boolean, +
-_advanced_blend_non_premultiplied_dst_color_: boolean, +
-_advanced_blend_correlated_overlap_: boolean, +
-_advanced_blend_all_operations_: boolean, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPhysicalDeviceProperties[VkPhysicalDeviceProperties] +
-https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPhysicalDeviceProperties2KHR[VkPhysicalDeviceProperties2KHR], +
-https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPhysicalDevicePushDescriptorPropertiesKHR[VkPhysicalDevicePushDescriptorPropertiesKHR], +
-https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT[VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT])#
+pass:[----] extensions ---- +
+_max_push_descriptors_: integer (Note1), +
+_advanced_blend_max_color_attachments_: integer (Note2), +
+_advanced_blend_independent_blend_: boolean (Note2), +
+_advanced_blend_non_premultiplied_src_color_: boolean (Note2), +
+_advanced_blend_non_premultiplied_dst_color_: boolean (Note2), +
+_advanced_blend_correlated_overlap_: boolean (Note2), +
+_advanced_blend_all_operations_: boolean (Note2), +
+_filter_minmax_single_component_formats_: boolean (Note3), +
+_filter_minmax_image_component_mapping_: boolean (Note3), +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPhysicalDeviceProperties2KHR[VkPhysicalDeviceProperties2KHR]) +
+Note1: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_push_descriptor[VK_KHR_push_descriptor] extension (rfr:
+https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPhysicalDevicePushDescriptorPropertiesKHR[VkPhysicalDevicePushDescriptorPropertiesKHR]). +
+Note2: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_blend_operation_advanced[VK_EXT_blend_operation_advanced] extension (rfr:
+https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT[VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT]). +
+Note3: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_sampler_filter_minmax[VK_EXT_sampler_filter_minmax] extension (rfr:
+https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT[VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT]).#
 
 * [[physicaldeviceimageformatinfo]]
 [small]#*physicaldeviceimageformatinfo* = { +
@@ -194,20 +198,21 @@ _sparse_residency_16_samples_: boolean, +
 _sparse_residency_aliased_: boolean, +
 _variable_multisample_rate_: boolean, +
 _inherited_queries_: boolean, +
-pass:[----] https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_16bit_storage[VK_KHR_16bit_storage] EXTENSION ---- +
-_storage_buffer_16bit_access_: boolean, +
-_uniform_and_storage_buffer_16bit_access_: boolean, +
-_storage_push_constant_16_: boolean, +
-_storage_input_output_16_: boolean, +
-pass:[----] https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_variable_pointers[VK_KHR_variable_pointers] EXTENSION ---- +
-_variable_pointers_storage_buffer_: boolean, +
-_variable_pointers_: boolean, +
-pass:[----] https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_blend_operation_advanced[VK_EXT_blend_operation_advanced] EXTENSION ---- +
-_advanced_blend_coherent_operations_: boolean, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPhysicalDeviceFeatures[VkPhysicalDeviceFeatures], +
-https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPhysicalDevice16BitStorageFeaturesKHR[VkPhysicalDevice16BitStorageFeaturesKHR], +
-https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPhysicalDeviceVariablePointerFeaturesKHR[VkPhysicalDeviceVariablePointerFeaturesKHR], +
-https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT[VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT])#
+pass:[----] extensions ---- +
+_storage_buffer_16bit_access_: boolean (Note1), +
+_uniform_and_storage_buffer_16bit_access_: boolean (Note1), +
+_storage_push_constant_16_: boolean (Note1), +
+_storage_input_output_16_: boolean (Note1), +
+_variable_pointers_storage_buffer_: boolean (Note2), +
+_variable_pointers_: boolean (Note2), +
+_advanced_blend_coherent_operations_: boolean (Note3), +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPhysicalDeviceFeatures2KHR[VkPhysicalDeviceFeatures2KHR]) +
+Note1: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_16bit_storage[VK_KHR_16bit_storage] extension (rfr:
+https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPhysicalDevice16BitStorageFeaturesKHR[VkPhysicalDevice16BitStorageFeaturesKHR]). +
+Note2: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_variable_pointers[VK_KHR_variable_pointers] extension (rfr:
+https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPhysicalDeviceVariablePointerFeaturesKHR[VkPhysicalDeviceVariablePointerFeaturesKHR]). +
+Note3: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_blend_operation_advanced[VK_EXT_blend_operation_advanced] extension (rfr:
+https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT[VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT]).#
 
 
 * [[queuefamilyproperties]]
@@ -493,7 +498,11 @@ _min_lod_: float, +
 _max_lod_: float, +
 _border_color_: <<bordercolor, bordercolor>>, +
 _unnormalized_coordinates_: boolean, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkSamplerCreateInfo[VkSamplerCreateInfo])#
+pass:[----] extensions ---- +
+_reduction_mode_: <<samplerreductionmode, samplerreductionmode>> (Note1), +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkSamplerCreateInfo[VkSamplerCreateInfo]) +
+Note1: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_sampler_filter_minmax[VK_EXT_sampler_filter_minmax] extension (rfr:
+https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkSamplerReductionModeCreateInfoEXT[VkSamplerReductionModeCreateInfoEXT]).#
 
 '''
 * [[mappedmemoryrange]]
@@ -509,11 +518,11 @@ _size_: integer or '_whole size_' (defaults to '_whole size_'), +
 _size_: integer, +
 _alignment_: integer, +
 _memory_type_bits_: integer, +
-pass:[----] https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_dedicated_allocation[VK_KHR_dedicated_allocation] EXTENSION ---- +
-_prefers_dedicated_allocation_: boolean, +
-_requires_dedicated_allocation_: boolean, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkMemoryRequirements[VkMemoryRequirements], +
-https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkMemoryRequirements2KHR[VkMemoryRequirements2KHR], +
+pass:[----] extensions ---- +
+_prefers_dedicated_allocation_: boolean (Note1), +
+_requires_dedicated_allocation_: boolean (Note1), +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkMemoryRequirements2KHR[VkMemoryRequirements2KHR]) +
+Note1: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_dedicated_allocation[VK_KHR_dedicated_allocation] extension (rfr:
 https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkMemoryDedicatedRequirementsKHR[VkMemoryDedicatedRequirementsKHR])#
 
 
@@ -1000,20 +1009,19 @@ _supported_transforms_: <<surfacetransformflags, surfacetransformflags>>, +
 _current_transform_: <<surfacetransformflags, surfacetransformflags>>, +
 _supported_composite_alpha_: <<compositealphaflags, compositealphaflags>>, +
 _supported_usage_flags_: <<imageusageflags, imageusageflags>>, +
-pass:[----] https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_get_surface_capabilities2[VK_KHR_get_surface_capabilities2] EXTENSION ---- +
-_shared_present_supported_usage_flags_: <<imageusageflags, imageusageflags>>, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkSurfaceCapabilitiesKHR[VkSurfaceCapabilitiesKHR], +
-https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkSurfaceCapabilities2KHR[VkSurfaceCapabilities2KHR], +
-https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkSharedPresentSurfaceCapabilitiesKHR[VkSharedPresentSurfaceCapabilitiesKHR]) +
-Note1: The _current_extent_ field is _nil_ when _width_ and _height_ in the underlying C struct have the special value 0xFFFFFFFF.#
+pass:[----] extensions ---- +
+_shared_present_supported_usage_flags_: <<imageusageflags, imageusageflags>> (Note2), +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkSurfaceCapabilities2KHR[VkSurfaceCapabilities2KHR]) +
+Note1: The _current_extent_ field is _nil_ when _width_ and _height_ in the underlying C struct have the special value 0xFFFFFFFF. +
+Note2: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_get_surface_capabilities2[VK_KHR_get_surface_capabilities2] extension (rfr:
+https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkSharedPresentSurfaceCapabilitiesKHR[VkSharedPresentSurfaceCapabilitiesKHR]).#
 
 
 * [[surfaceformat]]
 [small]#*surfaceformat* = { +
 _format_: <<format, format>>, +
 _color_space_: <<colorspace, colorspace>>, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkSurfaceFormatKHR[VkSurfaceFormatKHR], +
-https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkSurfaceFormat2KHR[VkSurfaceFormat2KHR])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkSurfaceFormat2KHR[VkSurfaceFormat2KHR])#
 
 '''
 

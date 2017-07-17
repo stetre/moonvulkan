@@ -40,17 +40,18 @@ static int freesampler(lua_State *L, ud_t *ud)
 
 static int Create(lua_State *L)
     {
+    int err;
     ud_t *ud, *device_ud;
     VkResult ec;
     VkSampler sampler;
-    VkSamplerCreateInfo info;
 
     VkDevice device = checkdevice(L, 1, &device_ud);
     const VkAllocationCallbacks *allocator = optallocator(L, 3);
-    if(echecksamplercreateinfo(L, 2, &info)) return argerror(L, 2);
+    VkSamplerCreateInfo *info = echecksamplercreateinfo(L, 2, &err);
+    if(!info) return argerrorc(L, 2, err);
 
-    ec = device_ud->ddt->CreateSampler(device, &info, allocator, &sampler);
-    freesamplercreateinfo(L, &info);
+    ec = device_ud->ddt->CreateSampler(device, info, allocator, &sampler);
+    freesamplercreateinfo(L, info);
     CheckError(L, ec);
     TRACE_CREATE(sampler, "sampler");
     ud = newuserdata_nondispatchable(L, sampler, SAMPLER_MT);

@@ -2029,7 +2029,7 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/
 <p><em>devmem</em> = <strong>allocate_memory</strong>(<em>device</em>, <em>allocation_size</em>, <em>memory_type_index</em>, [<a href="#allocators"><em>allocator</em></a>], [<em>dedicated</em>])<br>
 <span class="small"><em>allocation_size</em>: integer<br>
 <em>memory_type_index</em>: integer<br>
-<em>dedicated</em>: <a href="#image"><em>image</em></a> or <a href="#buffer"><em>buffer</em></a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_dedicated_allocation">VK_KHR_dedicated_allocation</a> EXTENSION)<br>
+<em>dedicated</em>: <a href="#image"><em>image</em></a> or <a href="#buffer"><em>buffer</em></a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_dedicated_allocation">VK_KHR_dedicated_allocation</a> extension)<br>
 Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkAllocateMemory">vkAllocateMemory</a>.</span></p>
 </li>
 </ul>
@@ -3157,19 +3157,23 @@ with 1-based integer keys and no gaps, a.k.a. 'sequence' in Lua&#8217;s jargon).
 <em>pipeline_cache_uuid</em>: binary string (length = 16),<br>
 <em>limits</em>: <a href="#physicaldevicelimits">physicaldevicelimits</a>,<br>
 <em>sparse_properties</em>: <a href="#physicaldevicesparseproperties">physicaldevicesparseproperties</a>,<br>
----- <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_push_descriptor">VK_KHR_push_descriptor</a> EXTENSION ----<br>
-<em>max_push_descriptors</em>: integer,<br>
----- <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_blend_operation_advanced">VK_EXT_blend_operation_advanced</a> EXTENSION ----<br>
-<em>advanced_blend_max_color_attachments</em>: integer,<br>
-<em>advanced_blend_independent_blend</em>: boolean,<br>
-<em>advanced_blend_non_premultiplied_src_color</em>: boolean,<br>
-<em>advanced_blend_non_premultiplied_dst_color</em>: boolean,<br>
-<em>advanced_blend_correlated_overlap</em>: boolean,<br>
-<em>advanced_blend_all_operations</em>: boolean,<br>
-} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPhysicalDeviceProperties">VkPhysicalDeviceProperties</a><br>
-<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPhysicalDeviceProperties2KHR">VkPhysicalDeviceProperties2KHR</a>,<br>
-<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPhysicalDevicePushDescriptorPropertiesKHR">VkPhysicalDevicePushDescriptorPropertiesKHR</a>,<br>
-<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT">VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT</a>)</span></p>
+---- extensions ----<br>
+<em>max_push_descriptors</em>: integer (Note1),<br>
+<em>advanced_blend_max_color_attachments</em>: integer (Note2),<br>
+<em>advanced_blend_independent_blend</em>: boolean (Note2),<br>
+<em>advanced_blend_non_premultiplied_src_color</em>: boolean (Note2),<br>
+<em>advanced_blend_non_premultiplied_dst_color</em>: boolean (Note2),<br>
+<em>advanced_blend_correlated_overlap</em>: boolean (Note2),<br>
+<em>advanced_blend_all_operations</em>: boolean (Note2),<br>
+<em>filter_minmax_single_component_formats</em>: boolean (Note3),<br>
+<em>filter_minmax_image_component_mapping</em>: boolean (Note3),<br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPhysicalDeviceProperties2KHR">VkPhysicalDeviceProperties2KHR</a>)<br>
+Note1: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_push_descriptor">VK_KHR_push_descriptor</a> extension (rfr:
+<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPhysicalDevicePushDescriptorPropertiesKHR">VkPhysicalDevicePushDescriptorPropertiesKHR</a>).<br>
+Note2: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_blend_operation_advanced">VK_EXT_blend_operation_advanced</a> extension (rfr:
+<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT">VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT</a>).<br>
+Note3: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_sampler_filter_minmax">VK_EXT_sampler_filter_minmax</a> extension (rfr:
+<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT">VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT</a>).</span></p>
 </li>
 <li>
 <p><a id="physicaldeviceimageformatinfo"></a>
@@ -3255,20 +3259,21 @@ with 1-based integer keys and no gaps, a.k.a. 'sequence' in Lua&#8217;s jargon).
 <em>sparse_residency_aliased</em>: boolean,<br>
 <em>variable_multisample_rate</em>: boolean,<br>
 <em>inherited_queries</em>: boolean,<br>
----- <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_16bit_storage">VK_KHR_16bit_storage</a> EXTENSION ----<br>
-<em>storage_buffer_16bit_access</em>: boolean,<br>
-<em>uniform_and_storage_buffer_16bit_access</em>: boolean,<br>
-<em>storage_push_constant_16</em>: boolean,<br>
-<em>storage_input_output_16</em>: boolean,<br>
----- <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_variable_pointers">VK_KHR_variable_pointers</a> EXTENSION ----<br>
-<em>variable_pointers_storage_buffer</em>: boolean,<br>
-<em>variable_pointers</em>: boolean,<br>
----- <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_blend_operation_advanced">VK_EXT_blend_operation_advanced</a> EXTENSION ----<br>
-<em>advanced_blend_coherent_operations</em>: boolean,<br>
-} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPhysicalDeviceFeatures">VkPhysicalDeviceFeatures</a>,<br>
-<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPhysicalDevice16BitStorageFeaturesKHR">VkPhysicalDevice16BitStorageFeaturesKHR</a>,<br>
-<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPhysicalDeviceVariablePointerFeaturesKHR">VkPhysicalDeviceVariablePointerFeaturesKHR</a>,<br>
-<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT">VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT</a>)</span></p>
+---- extensions ----<br>
+<em>storage_buffer_16bit_access</em>: boolean (Note1),<br>
+<em>uniform_and_storage_buffer_16bit_access</em>: boolean (Note1),<br>
+<em>storage_push_constant_16</em>: boolean (Note1),<br>
+<em>storage_input_output_16</em>: boolean (Note1),<br>
+<em>variable_pointers_storage_buffer</em>: boolean (Note2),<br>
+<em>variable_pointers</em>: boolean (Note2),<br>
+<em>advanced_blend_coherent_operations</em>: boolean (Note3),<br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPhysicalDeviceFeatures2KHR">VkPhysicalDeviceFeatures2KHR</a>)<br>
+Note1: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_16bit_storage">VK_KHR_16bit_storage</a> extension (rfr:
+<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPhysicalDevice16BitStorageFeaturesKHR">VkPhysicalDevice16BitStorageFeaturesKHR</a>).<br>
+Note2: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_variable_pointers">VK_KHR_variable_pointers</a> extension (rfr:
+<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPhysicalDeviceVariablePointerFeaturesKHR">VkPhysicalDeviceVariablePointerFeaturesKHR</a>).<br>
+Note3: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_blend_operation_advanced">VK_EXT_blend_operation_advanced</a> extension (rfr:
+<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT">VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT</a>).</span></p>
 </li>
 <li>
 <p><a id="queuefamilyproperties"></a>
@@ -3599,7 +3604,11 @@ with 1-based integer keys and no gaps, a.k.a. 'sequence' in Lua&#8217;s jargon).
 <em>max_lod</em>: float,<br>
 <em>border_color</em>: <a href="#bordercolor">bordercolor</a>,<br>
 <em>unnormalized_coordinates</em>: boolean,<br>
-} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkSamplerCreateInfo">VkSamplerCreateInfo</a>)</span></p>
+---- extensions ----<br>
+<em>reduction_mode</em>: <a href="#samplerreductionmode">samplerreductionmode</a> (Note1),<br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkSamplerCreateInfo">VkSamplerCreateInfo</a>)<br>
+Note1: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_sampler_filter_minmax">VK_EXT_sampler_filter_minmax</a> extension (rfr:
+<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkSamplerReductionModeCreateInfoEXT">VkSamplerReductionModeCreateInfoEXT</a>).</span></p>
 </li>
 </ul>
 </div>
@@ -3620,11 +3629,11 @@ with 1-based integer keys and no gaps, a.k.a. 'sequence' in Lua&#8217;s jargon).
 <em>size</em>: integer,<br>
 <em>alignment</em>: integer,<br>
 <em>memory_type_bits</em>: integer,<br>
----- <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_dedicated_allocation">VK_KHR_dedicated_allocation</a> EXTENSION ----<br>
-<em>prefers_dedicated_allocation</em>: boolean,<br>
-<em>requires_dedicated_allocation</em>: boolean,<br>
-} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkMemoryRequirements">VkMemoryRequirements</a>,<br>
-<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkMemoryRequirements2KHR">VkMemoryRequirements2KHR</a>,<br>
+---- extensions ----<br>
+<em>prefers_dedicated_allocation</em>: boolean (Note1),<br>
+<em>requires_dedicated_allocation</em>: boolean (Note1),<br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkMemoryRequirements2KHR">VkMemoryRequirements2KHR</a>)<br>
+Note1: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_dedicated_allocation">VK_KHR_dedicated_allocation</a> extension (rfr:
 <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkMemoryDedicatedRequirementsKHR">VkMemoryDedicatedRequirementsKHR</a>)</span></p>
 </li>
 <li>
@@ -4150,20 +4159,19 @@ See also the <a href="#clearcolor_snippet">example</a> in the code snippets sect
 <em>current_transform</em>: <a href="#surfacetransformflags">surfacetransformflags</a>,<br>
 <em>supported_composite_alpha</em>: <a href="#compositealphaflags">compositealphaflags</a>,<br>
 <em>supported_usage_flags</em>: <a href="#imageusageflags">imageusageflags</a>,<br>
----- <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_get_surface_capabilities2">VK_KHR_get_surface_capabilities2</a> EXTENSION ----<br>
-<em>shared_present_supported_usage_flags</em>: <a href="#imageusageflags">imageusageflags</a>,<br>
-} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkSurfaceCapabilitiesKHR">VkSurfaceCapabilitiesKHR</a>,<br>
-<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkSurfaceCapabilities2KHR">VkSurfaceCapabilities2KHR</a>,<br>
-<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkSharedPresentSurfaceCapabilitiesKHR">VkSharedPresentSurfaceCapabilitiesKHR</a>)<br>
-Note1: The <em>current_extent</em> field is <em>nil</em> when <em>width</em> and <em>height</em> in the underlying C struct have the special value 0xFFFFFFFF.</span></p>
+---- extensions ----<br>
+<em>shared_present_supported_usage_flags</em>: <a href="#imageusageflags">imageusageflags</a> (Note2),<br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkSurfaceCapabilities2KHR">VkSurfaceCapabilities2KHR</a>)<br>
+Note1: The <em>current_extent</em> field is <em>nil</em> when <em>width</em> and <em>height</em> in the underlying C struct have the special value 0xFFFFFFFF.<br>
+Note2: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_get_surface_capabilities2">VK_KHR_get_surface_capabilities2</a> extension (rfr:
+<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkSharedPresentSurfaceCapabilitiesKHR">VkSharedPresentSurfaceCapabilitiesKHR</a>).</span></p>
 </li>
 <li>
 <p><a id="surfaceformat"></a>
 <span class="small"><strong>surfaceformat</strong> = {<br>
 <em>format</em>: <a href="#format">format</a>,<br>
 <em>color_space</em>: <a href="#colorspace">colorspace</a>,<br>
-} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkSurfaceFormatKHR">VkSurfaceFormatKHR</a>,<br>
-<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkSurfaceFormat2KHR">VkSurfaceFormat2KHR</a>)</span></p>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkSurfaceFormat2KHR">VkSurfaceFormat2KHR</a>)</span></p>
 </li>
 </ul>
 </div>
@@ -4571,8 +4579,13 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/
 </div>
 <div id="blendoverlap" class="paragraph">
 <p><span class="small"><strong>blendoverlap</strong>: vk.BLEND_OVERLAP_XXX_EXT<br>
-Values: '<em>uncorrelated</em>', '<em>disjoint</em>', '<em>conjoint</em>'.<br>
+Values: '<em>uncorrelated</em>' (default), '<em>disjoint</em>', '<em>conjoint</em>'.<br>
 Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkBlendOverlapEXT">VkBlendOverlapEXT</a>.</span></p>
+</div>
+<div id="samplerreductionmode" class="paragraph">
+<p><span class="small"><strong>samplerreductionmode</strong>: vk.SAMPLER_REDUCTION_MODE_XXX_EXT<br>
+Values: '<em>weighted average</em>' (default), '<em>min</em>', '<em>max</em>'.<br>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkSamplerReductionModeEXT">VkSamplerReductionModeEXT</a>.</span></p>
 </div>
 </div>
 </div>
@@ -5516,6 +5529,9 @@ previously obtained with the <a href="#now">now</a>(&nbsp;) function.</span></p>
 </li>
 <li>
 <p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_debug_report">VK_EXT_debug_report</a></p>
+</li>
+<li>
+<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_sampler_filter_minmax">VK_EXT_sampler_filter_minmax</a></p>
 </li>
 <li>
 <p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_shader_subgroup_ballot">VK_EXT_shader_subgroup_ballot</a></p>

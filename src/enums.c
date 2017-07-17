@@ -311,6 +311,7 @@ static int Enum(lua_State *L)
     CASE(descriptorupdatetemplatetype);
     CASE(objecttype);
     CASE(blendoverlap);
+    CASE(samplerreductionmode);
 #undef CASE
     return 0;
     }
@@ -972,6 +973,10 @@ void moonvulkan_open_enums(lua_State *L)
     ADD(BLEND_OVERLAP_DISJOINT_EXT, "disjoint");
     ADD(BLEND_OVERLAP_CONJOINT_EXT, "conjoint");
 
+	domain = DOMAIN_SAMPLER_REDUCTION_MODE; /* VkSamplerReductionModeEXT */
+	ADD(SAMPLER_REDUCTION_MODE_WEIGHTED_AVERAGE_EXT, "weighted average");
+	ADD(SAMPLER_REDUCTION_MODE_MIN_EXT, "min");
+	ADD(SAMPLER_REDUCTION_MODE_MAX_EXT, "max");
 #undef ADD
     }
 

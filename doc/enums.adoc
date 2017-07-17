@@ -241,9 +241,13 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.ht
 
 [[blendoverlap]]
 [small]#*blendoverlap*: vk.BLEND_OVERLAP_XXX_EXT +
-Values: '_uncorrelated_', '_disjoint_', '_conjoint_'. +
+Values: '_uncorrelated_' (default), '_disjoint_', '_conjoint_'. +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkBlendOverlapEXT[VkBlendOverlapEXT].#
 
+[[samplerreductionmode]]
+[small]#*samplerreductionmode*: vk.SAMPLER_REDUCTION_MODE_XXX_EXT +
+Values: '_weighted average_' (default), '_min_', '_max_'. +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkSamplerReductionModeEXT[VkSamplerReductionModeEXT].#
 
 ////
 

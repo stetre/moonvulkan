@@ -270,6 +270,7 @@ do {                                                \
 #define GetColorSpace(name, sname) GetEnumOpt(name, sname, testcolorspace, VK_COLOR_SPACE_SRGB_NONLINEAR_KHR)
 #define GetPresentMode(name, sname) GetEnumOpt(name, sname, testpresentmode, VK_PRESENT_MODE_FIFO_KHR)
 #define GetBlendOverlap(name, sname) GetEnumOpt(name, sname, testblendoverlap, VK_BLEND_OVERLAP_UNCORRELATED_EXT)
+#define GetSamplerReductionMode(name, sname) GetEnumOpt(name, sname, testsamplerreductionmode, VK_SAMPLER_REDUCTION_MODE_WEIGHTED_AVERAGE_EXT)
 
 /* Structs -------------------------------------------------------------------*/
 
@@ -1100,12 +1101,22 @@ int echeckimageviewcreateinfo(lua_State *L, int arg, VkImageViewCreateInfo *p)
 
 /*------------------------------------------------------------------------------*/
 
-int echecksamplercreateinfo(lua_State *L, int arg, VkSamplerCreateInfo *p)
+typedef struct {
+    VkSamplerCreateInfo p1;
+    VkSamplerReductionModeCreateInfoEXT p2;
+} VkSamplerCreateInfo_CHAIN;
+
+void freesamplercreateinfo(lua_State *L, VkSamplerCreateInfo *p)
+    {
+    if(!p) return;
+    Free(L, (void*)p);
+    }
+
+static int echecksamplercreateinfo_(lua_State *L, int arg, VkSamplerCreateInfo *p)
     {
     int err;
     ECHECK_PREAMBLE
     p->sType = VK_STRUCTURE_TYPE_SAMPLER_CREATE_INFO;
-    p->pNext = NULL;
     GetFlags(flags, "flags");
     GetFilter(magFilter, "mag_filter");
     GetFilter(minFilter, "min_filter");
@@ -1124,6 +1135,39 @@ int echecksamplercreateinfo(lua_State *L, int arg, VkSamplerCreateInfo *p)
     GetBoolean(unnormalizedCoordinates, "unnormalized_coordinates");
     return 0;
     }
+
+static int echecksamplerreductionmodecreateinfo(lua_State *L, int arg, VkSamplerReductionModeCreateInfoEXT *p)
+    {
+    int err;
+    ECHECK_PREAMBLE
+    p->sType = VK_STRUCTURE_TYPE_SAMPLER_REDUCTION_MODE_CREATE_INFO_EXT;
+    GetSamplerReductionMode(reductionMode, "reduction_mode");
+    return 0;
+    }
+
+VkSamplerCreateInfo *echecksamplercreateinfo(lua_State *L, int arg, int *err)
+    {
+    VkSamplerCreateInfo_CHAIN *p = MALLOC_NOERR(L, VkSamplerCreateInfo_CHAIN);
+    if(!p) { *err = ERR_MEMORY; return NULL; }
+    *err = echecksamplercreateinfo_(L, arg, &p->p1);
+    if(*err) { freesamplercreateinfo(L, (VkSamplerCreateInfo*)p); return NULL; }
+    *err = echecksamplerreductionmodecreateinfo(L, arg, &p->p2);
+    if(*err) { freesamplercreateinfo(L, (VkSamplerCreateInfo*)p); return NULL; }
+    p->p1.pNext = &p->p2;
+    p->p2.pNext = NULL;
+    return (VkSamplerCreateInfo*)p;
+    }
+
+
+#if 0 //@@
+typedef struct VkSamplerReductionModeCreateInfoEXT {
+    VkStructureType              sType;
+    const void*                  pNext;
+    VkSamplerReductionModeEXT    reductionMode;
+} VkSamplerReductionModeCreateInfoEXT;
+
+#endif
+
 
 
 /*------------------------------------------------------------------------------*/
@@ -1572,10 +1616,18 @@ static int pushphysicaldeviceblendoperationadvancedproperties(lua_State *L, VkPh
     return 0;
     }
 
+static int pushphysicaldevicesamplerfilterminmaxproperties(lua_State *L, VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT *p)
+    {
+    SetBoolean(filterMinmaxSingleComponentFormats, "filter_minmax_single_component_formats");
+    SetBoolean(filterMinmaxImageComponentMapping, "filter_minmax_image_component_mapping");
+    return 0;
+    }
+
 typedef struct {
     VkPhysicalDeviceProperties2KHR p1;
     VkPhysicalDevicePushDescriptorPropertiesKHR p2;
     VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT p3;
+    VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT p4;
 } VkPhysicalDeviceProperties2KHR_CHAIN;
 
 VkPhysicalDeviceProperties2KHR* newphysicaldeviceproperties2(lua_State *L)
@@ -1585,9 +1637,11 @@ VkPhysicalDeviceProperties2KHR* newphysicaldeviceproperties2(lua_State *L)
     p->p1.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROPERTIES_2_KHR;
     p->p2.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PUSH_DESCRIPTOR_PROPERTIES_KHR;
     p->p3.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_BLEND_OPERATION_ADVANCED_PROPERTIES_EXT;
+    p->p4.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLER_FILTER_MINMAX_PROPERTIES_EXT ;
     p->p1.pNext = &p->p2;
     p->p2.pNext = &p->p3;
-    p->p3.pNext = NULL;
+    p->p3.pNext = &p->p4;
+    p->p4.pNext = NULL;
     return (VkPhysicalDeviceProperties2KHR*)p;
     }
 
@@ -1602,6 +1656,7 @@ int pushphysicaldeviceproperties2(lua_State *L, VkPhysicalDeviceProperties2KHR *
     pushphysicaldeviceproperties(L, &p->p1.properties);
     pushphysicaldevicepushdescriptorproperties(L, &p->p2);
     pushphysicaldeviceblendoperationadvancedproperties(L, &p->p3);
+    pushphysicaldevicesamplerfilterminmaxproperties(L, &p->p4);
     return 1;
     }
 
