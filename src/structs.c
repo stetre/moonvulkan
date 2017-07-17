@@ -1159,17 +1159,6 @@ VkSamplerCreateInfo *echecksamplercreateinfo(lua_State *L, int arg, int *err)
     }
 
 
-#if 0 //@@
-typedef struct VkSamplerReductionModeCreateInfoEXT {
-    VkStructureType              sType;
-    const void*                  pNext;
-    VkSamplerReductionModeEXT    reductionMode;
-} VkSamplerReductionModeCreateInfoEXT;
-
-#endif
-
-
-
 /*------------------------------------------------------------------------------*/
 static ECHECKLISTFUNC(VkClearValue, clearvalue, NULL) /* echeckclearvaluelist() */
 
