@@ -3186,7 +3186,110 @@ Note3: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/htm
 <span class="small"><strong>physicaldevicelimits</strong> = {<br>
 <em>max_image_dimension_1d</em>: integer,<br>
 <em>max_image_dimension_2d</em>: integer,<br>
-<em>&#8230;&#8203;</em><br>
+<em>max_image_dimension_3d</em>: integer,<br>
+<em>max_image_dimension_cube</em>: integer,<br>
+<em>max_image_array_layers</em>: integer,<br>
+<em>max_texel_buffer_elements</em>: integer,<br>
+<em>max_uniform_buffer_range</em>: integer,<br>
+<em>max_storage_buffer_range</em>: integer,<br>
+<em>max_push_constants_size</em>: integer,<br>
+<em>max_memory_allocation_count</em>: integer,<br>
+<em>max_sampler_allocation_count</em>: integer,<br>
+<em>buffer_image_granularity</em>: integer,<br>
+<em>sparse_address_space_size</em>: integer,<br>
+<em>max_bound_descriptor_sets</em>: integer,<br>
+<em>max_per_stage_descriptor_samplers</em>: integer,<br>
+<em>max_per_stage_descriptor_uniform_buffers</em>: integer,<br>
+<em>max_per_stage_descriptor_storage_buffers</em>: integer,<br>
+<em>max_per_stage_descriptor_sampled_images</em>: integer,<br>
+<em>max_per_stage_descriptor_storage_images</em>: integer,<br>
+<em>max_per_stage_descriptor_input_attachments</em>: integer,<br>
+<em>max_per_stage_resources</em>: integer,<br>
+<em>max_descriptor_set_samplers</em>: integer,<br>
+<em>max_descriptor_set_uniform_buffers</em>: integer,<br>
+<em>max_descriptor_set_uniform_buffers_dynamic</em>: integer,<br>
+<em>max_descriptor_set_storage_buffers</em>: integer,<br>
+<em>max_descriptor_set_storage_buffers_dynamic</em>: integer,<br>
+<em>max_descriptor_set_sampled_images</em>: integer,<br>
+<em>max_descriptor_set_storage_images</em>: integer,<br>
+<em>max_descriptor_set_input_attachments</em>: integer,<br>
+<em>max_vertex_input_attributes</em>: integer,<br>
+<em>max_vertex_input_bindings</em>: integer,<br>
+<em>max_vertex_input_attribute_offset</em>: integer,<br>
+<em>max_vertex_input_binding_stride</em>: integer,<br>
+<em>max_vertex_output_components</em>: integer,<br>
+<em>max_tessellation_generation_level</em>: integer,<br>
+<em>max_tessellation_patch_size</em>: integer,<br>
+<em>max_tessellation_control_per_vertex_input_components</em>: integer,<br>
+<em>max_tessellation_control_per_vertex_output_components</em>: integer,<br>
+<em>max_tessellation_control_per_patch_output_components</em>: integer,<br>
+<em>max_tessellation_control_total_output_components</em>: integer,<br>
+<em>max_tessellation_evaluation_input_components</em>: integer,<br>
+<em>max_tessellation_evaluation_output_components</em>: integer,<br>
+<em>max_geometry_shader_invocations</em>: integer,<br>
+<em>max_geometry_input_components</em>: integer,<br>
+<em>max_geometry_output_components</em>: integer,<br>
+<em>max_geometry_output_vertices</em>: integer,<br>
+<em>max_geometry_total_output_components</em>: integer,<br>
+<em>max_fragment_input_components</em>: integer,<br>
+<em>max_fragment_output_attachments</em>: integer,<br>
+<em>max_fragment_dual_src_attachments</em>: integer,<br>
+<em>max_fragment_combined_output_resources</em>: integer,<br>
+<em>max_compute_shared_memory_size</em>: integer,<br>
+<em>max_compute_work_group_count</em>: {integer}[3],<br>
+<em>max_compute_work_group_invocations</em>: integer,<br>
+<em>max_compute_work_group_size</em>: {integer}[3],<br>
+<em>sub_pixel_precision_bits</em>: integer,<br>
+<em>sub_texel_precision_bits</em>: integer,<br>
+<em>mipmap_precision_bits</em>: integer,<br>
+<em>max_draw_indexed_index_value</em>: integer,<br>
+<em>max_draw_indirect_count</em>: integer,<br>
+<em>max_sampler_lod_bias</em>: integer,<br>
+<em>max_sampler_anisotropy</em>: float,<br>
+<em>max_viewports</em>: integer,<br>
+<em>max_viewport_dimensions</em>: {integer}[2],<br>
+<em>viewport_bounds_range</em>: {float}[2],<br>
+<em>viewport_sub_pixel_bits</em>: integer,<br>
+<em>min_memory_map_alignment</em>: integer,<br>
+<em>min_texel_buffer_offset_alignment</em>: integer,<br>
+<em>minuniform_buffer_offset_alignment</em>: integer,<br>
+<em>min_storage_buffer_offset_alignment</em>: integer,<br>
+<em>min_texel_offset</em>: integer,<br>
+<em>max_texel_offset</em>: integer,<br>
+<em>min_texel_gather_offset</em>: integer,<br>
+<em>max_texel_gather_offset</em>: integer,<br>
+<em>min_interpolation_offset</em>: float,<br>
+<em>max_interpolation_offset</em>: float,<br>
+<em>sub_pixel_interpolation_offset_bits</em>: integer,<br>
+<em>max_framebuffer_width</em>: integer,<br>
+<em>max_framebuffer_height</em>: integer,<br>
+<em>max_framebuffer_layers</em>: integer,<br>
+<em>framebuffer_color_sample_counts</em>: <a href="#samplecountflags">samplecountflags</a>,<br>
+<em>framebuffer_depth_sample_counts</em>: <a href="#samplecountflags">samplecountflags</a>,<br>
+<em>framebuffer_stencil_sample_counts</em>: <a href="#samplecountflags">samplecountflags</a>,<br>
+<em>framebuffer_no_attachments_sample_counts</em>: <a href="#samplecountflags">samplecountflags</a>,<br>
+<em>max_color_attachments</em>: integer,<br>
+<em>sampled_image_color_sample_counts</em>: <a href="#samplecountflags">samplecountflags</a>,<br>
+<em>sampled_image_integer_sample_counts</em>: <a href="#samplecountflags">samplecountflags</a>,<br>
+<em>sampled_image_depth_sample_counts</em>: <a href="#samplecountflags">samplecountflags</a>,<br>
+<em>sampled_image_stencil_sample_counts</em>: <a href="#samplecountflags">samplecountflags</a>,<br>
+<em>storage_image_sample_counts</em>: <a href="#samplecountflags">samplecountflags</a>,<br>
+<em>max_sample_mask_words</em>: integer,<br>
+<em>timestamp_compute_and_graphics</em>: boolean,<br>
+<em>timestamp_period</em>: float,<br>
+<em>max_clip_distances</em>: integer,<br>
+<em>max_cull_distances</em>: integer,<br>
+<em>max_combined_clip_and_cull_distances</em>: integer,<br>
+<em>discrete_queue_priorities</em>: integer,<br>
+<em>point_size_range</em>: {float}[2],<br>
+<em>line_width_range</em>: {float}[2],<br>
+<em>point_size_granularity</em>: float,<br>
+<em>line_width_granularity</em>: float,<br>
+<em>strict_lines</em>: boolean,<br>
+<em>standard_sample_locations</em>: boolean,<br>
+<em>optimal_buffer_copy_offset_alignment</em>: integer,<br>
+<em>optimal_buffer_copy_row_pitch_alignment</em>: integer,<br>
+<em>non_coherent_atom_size</em>: integer,<br>
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPhysicalDeviceLimits">VkPhysicalDeviceLimits</a>)</span></p>
 </li>
 <li>
