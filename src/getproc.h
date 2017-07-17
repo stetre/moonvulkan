@@ -63,6 +63,7 @@ typedef struct {
     F(GetPhysicalDeviceMemoryProperties);
     F(CreateDevice);
     F(GetPhysicalDeviceSparseImageFormatProperties);
+//  F(DebugReportCallbackEXT);
     F(DestroySurfaceKHR);
     F(GetPhysicalDeviceSurfaceSupportKHR);
     F(GetPhysicalDeviceSurfaceCapabilitiesKHR);
@@ -200,7 +201,6 @@ typedef struct {
     F(QueuePresentKHR);
     F(CreateSharedSwapchainsKHR);
     F(TrimCommandPoolKHR);
-    F(DebugReportCallbackEXT);
     F(DebugMarkerSetObjectTagEXT);
     F(DebugMarkerSetObjectNameEXT);
     F(DisplayPowerControlEXT);
@@ -287,9 +287,9 @@ typedef struct {
 extern global_dt_t vk;
 
 #define getproc_instance moonvulkan_getproc_instance
-instance_dt_t * getproc_instance(lua_State *L, VkInstance instance);
+instance_dt_t * getproc_instance(lua_State *L, VkInstance instance, VkInstanceCreateInfo *createinfo);
 #define getproc_device moonvulkan_getproc_device
-device_dt_t* getproc_device(lua_State *L, VkDevice device);
+device_dt_t* getproc_device(lua_State *L, VkDevice device, VkDeviceCreateInfo *createinfo);
 
 #endif /* getprocDEFINED */
 

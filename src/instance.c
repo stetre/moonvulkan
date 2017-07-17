@@ -53,15 +53,20 @@ static int Create(lua_State *L)
     if(echeckinstancecreateinfo(L, 1, &info)) return argerror(L, 1);
 
     ec = vk.CreateInstance(&info, allocator, &instance);
-    freeinstancecreateinfo(L, &info);
-    CheckError(L, ec);
+    if(ec)
+        {
+        freeinstancecreateinfo(L, &info);
+        CheckError(L, ec);
+        return 0;
+        }
     TRACE_CREATE(instance, "instance");
     ud = newuserdata_dispatchable(L, instance, INSTANCE_MT);
     ud->instance = instance;
 /*  ud->parent_ud = NULL; */
     ud->destructor = freeinstance;  
     ud->allocator = allocator; /* see you later allocator */
-    ud->idt = getproc_instance(L, instance);
+    ud->idt = getproc_instance(L, instance, &info);
+    freeinstancecreateinfo(L, &info);
     return 1;
     }
 

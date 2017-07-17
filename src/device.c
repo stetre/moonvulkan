@@ -73,8 +73,12 @@ static int Create(lua_State *L)
     if(echeckdevicecreateinfo(L, 2, &info, physdev_ud)) return argerror(L, 2);
 
     ec = physdev_ud->idt->CreateDevice(physical_device, &info, allocator, &device);
-    freedevicecreateinfo(L, &info);
-    CheckError(L, ec);
+    if(ec)
+        {
+        freedevicecreateinfo(L, &info);
+        CheckError(L, ec);
+        return 0;
+        }
 
     TRACE_CREATE(device, "device");
     ud = newuserdata_dispatchable(L, device, DEVICE_MT);
@@ -82,7 +86,8 @@ static int Create(lua_State *L)
     ud->instance = UD(physical_device)->instance;
     ud->allocator = allocator;
     ud->destructor = freedevice;
-    ud->ddt = getproc_device(L, device);
+    ud->ddt = getproc_device(L, device, &info);
+    freedevicecreateinfo(L, &info);
     return 1;
     }
 
