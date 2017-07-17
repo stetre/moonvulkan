@@ -29,15 +29,11 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.ht
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkAcquireNextImageKHR[vkAcquireNextImageKHR].#
 
 [[queue_present]]
-* <<result, _result_>>, {<<result, _result_>>} = *queue_present*(<<queue, _queue_>>, <<presentinfo, _presentinfo_>>, [_per_swapchain_results_], _..._) +
-[small]#arg3: [_per_swapchain_results_]: boolean +
-arg4: [_display_present_info_]: <<displaypresentinfo, displaypresentinfo>> +
-arg5: [_regions_]: <<presentregions, presentregions>> +
+* <<result, _result_>>, {<<result, _result_>>} = *queue_present*(<<queue, _queue_>>, <<presentinfo, _presentinfo_>>, [_per_swapchain_results_]) +
+[small]#[_per_swapchain_results_]: boolean +
 Returns the global _result_ for the operation, optionally followed by a table
 with the individual results for each of the given swapchains. +
 The individual results table is returned only if _per_swapchain_results_ is _true_. +
-Usage of the _display_present_info_ parameter requires the https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_display_swapchain[VK_KHR_display_swapchain] device extension. +
-Usage of the _regions_ parameter requires the https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_incremental_present[VK_KHR_incremental_present] device extension. +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkQueuePresentKHR[vkQueuePresentKHR].#
 
 [[get_swapchain_status]]

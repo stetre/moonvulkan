@@ -1051,19 +1051,16 @@ _old_swapchain_: <<swapchain, swapchain>>, +
 _swapchains_: {<<swapchain, swapchain>>}, +
 _image_indices_: {integer} (same length as _swapchains_), +
 _wait_semaphores_: {<<semaphore, semaphore>>}, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPresentInfoKHR[VkPresentInfoKHR])#
-
-* [[displaypresentinfo]]
-[small]#*displaypresentinfo* = { +
-_src_rect_: <<extent2d, extent2d>> *[R]*, +
-_dst_rect_: <<extent2d, extent2d>> *[R]*, +
-_persistent_: boolean, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkDisplayPresentInfoKHR[VkDisplayPresentInfoKHR])#
-
-* [[presentregions]]
-[small]#*presentregions* = { +
-_regions_: {<<presentregion, presentregion>>}, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPresentRegionsKHR[VkPresentRegionsKHR])#
+pass:[----] extensions ---- +
+_src_rect_: <<extent2d, extent2d>> (Note1), +
+_dst_rect_: <<extent2d, extent2d>> (Note1), +
+_persistent_: boolean (Note1), +
+_regions_: {<<presentregion, presentregion>>} (Note2), +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPresentInfoKHR[VkPresentInfoKHR]), +
+Note1: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_display_swapchain[VK_KHR_display_swapchain] extension (rfr:
+https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkDisplayPresentInfoKHR[VkDisplayPresentInfoKHR]). +
+Note2: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_incremental_present[VK_KHR_incremental_present] extension (rfr:
+https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPresentRegionsKHR[VkPresentRegionsKHR]).#
 
 * [[presentregion]]
 [small]#*presentregion* = { +

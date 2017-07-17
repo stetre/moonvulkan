@@ -185,7 +185,6 @@ static int AcquireNextImage(lua_State *L)
     return 0;
     }
 
-
 static int QueuePresent(lua_State *L)
     {
     int err, per_swapchain_results;
@@ -193,69 +192,29 @@ static int QueuePresent(lua_State *L)
     VkResult ec;
     VkResult *results = NULL;
     ud_t *ud;
-    VkPresentInfoKHR info;
-    VkDisplayPresentInfoKHR display_info;
-    int display_info_added = 0;
-    VkPresentRegionsKHR regions;
+    VkPresentInfoKHR  *info;
+
     VkQueue queue = checkqueue(L, 1, &ud);
-    int regions_added = 0;
     
     CheckDevicePfn(L, ud, QueuePresentKHR);
 
-    err = echeckpresentinfo(L, 2, &info);
-    if(err) return argerror(L, 2);
+    info = echeckpresentinfo(L, 2, &err);
+    if(!info) return argerror(L, 2);
 
     per_swapchain_results = optboolean(L, 3, 0);
 
-    /* optional VkDisplayPresentInfoKHR */
-    err = echeckdisplaypresentinfo(L, 4, &display_info);
-    if(err < 0)
-        {
-        freepresentinfo(L, &info); 
-        return argerror(L, 4);
-        }
-    if(err == 0)
-        {
-        display_info_added = 1;
-        info.pNext = &display_info;
-        }
-    else
-        lua_pop(L, 1);
-
-    /* optional VkPresentRegionsKHR */
-    err = echeckpresentregions(L, 5, &regions);
-    if(err < 0)
-        {
-        freepresentinfo(L, &info); 
-        if(display_info_added) freedisplaypresentinfo(L, &display_info);
-        return argerror(L, 5);
-        }
-    if(err == 0)
-        {
-        regions_added = 1;
-        if(display_info_added)
-            display_info.pNext = &regions;
-        else
-            info.pNext = &regions;
-        }
-    else
-        lua_pop(L, 1);
-
-    count = info.swapchainCount;
+    count = info->swapchainCount;
     if(per_swapchain_results)
         {
-        info.pResults = (VkResult*)MallocNoErr(L, sizeof(VkResult)*count);
-        if(!info.pResults)
-            { 
-            freepresentinfo(L, &info); 
-            if(display_info_added) freedisplaypresentinfo(L, &display_info);
-            if(regions_added) freepresentregions(L, &regions);
+        info->pResults = (VkResult*)MallocNoErr(L, sizeof(VkResult)*count);
+        if(!info->pResults)
+            {
+            freepresentinfo(L, info);
             return errmemory(L);
             }
-
         }
 
-    ec = ud->ddt->QueuePresentKHR(queue, &info);
+    ec = ud->ddt->QueuePresentKHR(queue, info);
 
     pushresult(L, ec);
     n = 1;
@@ -270,9 +229,7 @@ static int QueuePresent(lua_State *L)
             }
         n++;
         }
-    freepresentinfo(L, &info); 
-    if(display_info_added) freedisplaypresentinfo(L, &display_info);
-    if(regions_added) freepresentregions(L, &regions);
+    freepresentinfo(L, info);
     return n;
     }
 

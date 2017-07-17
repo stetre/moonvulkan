@@ -70,10 +70,17 @@ static int efielderror(lua_State *L, const char *fieldname)
 #define POPFIELD()          \
     do { lua_remove(L, arg1); } while(0)
 
+#define IsPresent(sname, dst) do {                                      \
+/* checks is a field is present and sets dst to 1 or 0 accordingly */   \
+    lua_pushstring(L, sname);                                           \
+    lua_rawget(L, arg);                                                 \
+    (dst) = lua_isnoneornil(L, -1) ? 0 : 1;                             \
+    lua_pop(L, 1);                                                      \
+} while(0)
+
 /* Flags ---------------------------------------------------------------------*/
 
-#define GetFlags(name, sname)  /* always opt., defaults to 0 */ \
-do {                                                \
+#define GetFlags(name, sname)  do { /* always opt., defaults to 0 */ \
     lua_pushstring(L, sname);                       \
     lua_rawget(L, arg);                             \
     p->name = testflags(L, -1, &err);               \
@@ -128,7 +135,7 @@ do {                                                \
         return fielderror(L, sname, err);           \
 } while(0)
 
-#define GetNumber(name, sname) GetNumberOpt(name, sname, 0) 
+#define GetNumber(name, sname) GetNumberOpt(name, sname, 0)
 
 #define GetIntegerOpt(name, sname, defval) do {     \
     int isnum_;                                     \
@@ -703,14 +710,14 @@ int echeckinstancecreateinfo(lua_State *L, int arg, VkInstanceCreateInfo *p)
     PUSHFIELD(F);
     p->ppEnabledLayerNames = (const char* const*)checkstringlist(L, arg1, &p->enabledLayerCount, &err);
     POPFIELD();
-    if(err < 0 && err != ERR_EMPTY) 
+    if(err < 0 && err != ERR_EMPTY)
         { freeinstancecreateinfo(L, p); return fielderror(L, F, err); }
 #undef F
 #define F "enabled_extension_names"
     PUSHFIELD(F);
     p->ppEnabledExtensionNames = (const char* const*)checkstringlist(L, arg1, &p->enabledExtensionCount, &err);
     POPFIELD();
-    if(err < 0 && err != ERR_EMPTY) 
+    if(err < 0 && err != ERR_EMPTY)
         { freeinstancecreateinfo(L, p); return fielderror(L, F, err); }
 #undef F
     
@@ -753,7 +760,7 @@ static void freedevicequeuecreateinfolist(lua_State *L, void *list, uint32_t cou
 
 
 /* echeckdevicequeuecreateinfolist() */
-static ECHECKLISTFUNC(VkDeviceQueueCreateInfo, devicequeuecreateinfo, freedevicequeuecreateinfolist) 
+static ECHECKLISTFUNC(VkDeviceQueueCreateInfo, devicequeuecreateinfo, freedevicequeuecreateinfolist)
 
     
 /*------------------------------------------------------------------------------*/
@@ -768,7 +775,7 @@ static int echeckdescriptorpoolsize(lua_State *L, int arg, VkDescriptorPoolSize 
     }
 
 /* echeckdescriptorpoolsizelist() */
-ECHECKLISTFUNC(VkDescriptorPoolSize, descriptorpoolsize, NULL) 
+ECHECKLISTFUNC(VkDescriptorPoolSize, descriptorpoolsize, NULL)
 
 /*------------------------------------------------------------------------------*/
 
@@ -799,7 +806,7 @@ static int echeckdescriptorsetlayoutbinding(lua_State *L, int arg, VkDescriptorS
         PUSHFIELD(F);
         p->pImmutableSamplers = checksamplerlist(L, arg1, &count, &err, NULL);
         POPFIELD();
-        if(err == ERR_NOTPRESENT) 
+        if(err == ERR_NOTPRESENT)
             return 0;
         if(err < 0)
             { freedescriptorsetlayoutbinding(L, p); return fielderror(L, F, err); }
@@ -811,8 +818,8 @@ static int echeckdescriptorsetlayoutbinding(lua_State *L, int arg, VkDescriptorS
     }
 
 /* echeckdescriptorsetlayoutbindinglist() */
-FREELISTFUNC(VkDescriptorSetLayoutBinding, descriptorsetlayoutbinding) 
-ECHECKLISTFUNC(VkDescriptorSetLayoutBinding, descriptorsetlayoutbinding, freedescriptorsetlayoutbindinglist) 
+FREELISTFUNC(VkDescriptorSetLayoutBinding, descriptorsetlayoutbinding)
+ECHECKLISTFUNC(VkDescriptorSetLayoutBinding, descriptorsetlayoutbinding, freedescriptorsetlayoutbindinglist)
 
 /*------------------------------------------------------------------------------*/
 
@@ -833,7 +840,7 @@ static int echeckattachmentdescription(lua_State *L, int arg, VkAttachmentDescri
     }
 
 /* echeckattachmentdescriptionlist() */
-static ECHECKLISTFUNC(VkAttachmentDescription, attachmentdescription, NULL) 
+static ECHECKLISTFUNC(VkAttachmentDescription, attachmentdescription, NULL)
 
 static int echecksubpassdependency(lua_State *L, int arg, VkSubpassDependency *p)
     {
@@ -850,7 +857,7 @@ static int echecksubpassdependency(lua_State *L, int arg, VkSubpassDependency *p
     }
 
 /* echecksubpassdependencylist() */
-static ECHECKLISTFUNC(VkSubpassDependency, subpassdependency, NULL) 
+static ECHECKLISTFUNC(VkSubpassDependency, subpassdependency, NULL)
 
 static int echeckattachmentreference(lua_State *L, int arg, VkAttachmentReference *p)
     {
@@ -862,7 +869,7 @@ static int echeckattachmentreference(lua_State *L, int arg, VkAttachmentReferenc
     }
 
 /* echeckattachmentreferencelist() */
-static ECHECKLISTFUNC(VkAttachmentReference, attachmentreference, NULL) 
+static ECHECKLISTFUNC(VkAttachmentReference, attachmentreference, NULL)
 
 static void freesubpassdescription(lua_State *L, VkSubpassDescription *p)
     {
@@ -903,7 +910,7 @@ static int echecksubpassdescription(lua_State *L, int arg, VkSubpassDescription 
     p->pResolveAttachments = echeckattachmentreferencelist(L, arg1, &count, &err);
     POPFIELD();
     if(err < 0) { freesubpassdescription(L, p); return efielderror(L, F); }
-    if(err == ERR_NOTPRESENT) 
+    if(err == ERR_NOTPRESENT)
         POPERROR();
     else if(count != p->colorAttachmentCount)
         { err = ERR_LENGTH; lua_pushstring(L, errstring(err)); }
@@ -931,8 +938,8 @@ static int echecksubpassdescription(lua_State *L, int arg, VkSubpassDescription 
     }
 
 /* echecksubpassdescriptionlist() */
-static FREELISTFUNC(VkSubpassDescription, subpassdescription) 
-static ECHECKLISTFUNC(VkSubpassDescription, subpassdescription, freesubpassdescriptionlist) 
+static FREELISTFUNC(VkSubpassDescription, subpassdescription)
+static ECHECKLISTFUNC(VkSubpassDescription, subpassdescription, freesubpassdescriptionlist)
 
 
 void freerenderpasscreateinfo(lua_State *L, VkRenderPassCreateInfo *p)
@@ -1147,14 +1154,18 @@ static int echecksamplerreductionmodecreateinfo(lua_State *L, int arg, VkSampler
 
 VkSamplerCreateInfo *echecksamplercreateinfo(lua_State *L, int arg, int *err)
     {
+    int p2_present;
     VkSamplerCreateInfo_CHAIN *p = MALLOC_NOERR(L, VkSamplerCreateInfo_CHAIN);
-    if(!p) { *err = ERR_MEMORY; return NULL; }
+    if(!p) { *err = ERR_MEMORY; pusherror(L, ERR_MEMORY); return NULL; }
     *err = echecksamplercreateinfo_(L, arg, &p->p1);
     if(*err) { freesamplercreateinfo(L, (VkSamplerCreateInfo*)p); return NULL; }
-    *err = echecksamplerreductionmodecreateinfo(L, arg, &p->p2);
-    if(*err) { freesamplercreateinfo(L, (VkSamplerCreateInfo*)p); return NULL; }
-    p->p1.pNext = &p->p2;
-    p->p2.pNext = NULL;
+    IsPresent("reduction_mode", p2_present);
+    if(p2_present)
+        {
+        *err = echecksamplerreductionmodecreateinfo(L, arg, &p->p2);
+        if(*err) { freesamplercreateinfo(L, (VkSamplerCreateInfo*)p); return NULL; }
+        p->p1.pNext = &p->p2;
+        }
     return (VkSamplerCreateInfo*)p;
     }
 
@@ -1924,7 +1935,7 @@ int echeckviewport(lua_State *L, int arg, VkViewport *p)
     }
 
 /* echeckviewportlist() */
-ECHECKLISTFUNC(VkViewport, viewport, NULL) 
+ECHECKLISTFUNC(VkViewport, viewport, NULL)
 
 int pushviewport(lua_State *L, VkViewport *p)
     {
@@ -2025,7 +2036,7 @@ int echeckrect2d(lua_State *L, int arg, VkRect2D *p)
     }
 
 /* echeckrect2dlist() */
-ECHECKLISTFUNC(VkRect2D, rect2d, NULL) 
+ECHECKLISTFUNC(VkRect2D, rect2d, NULL)
 
 int pushrect2d(lua_State *L, VkRect2D *p)
     {
@@ -2074,7 +2085,7 @@ int echeckimagesubresourcerange(lua_State *L, int arg, VkImageSubresourceRange *
     }
 
 /* echeckimagesubresourcerangelist() */
-ECHECKLISTFUNC(VkImageSubresourceRange, imagesubresourcerange, NULL) 
+ECHECKLISTFUNC(VkImageSubresourceRange, imagesubresourcerange, NULL)
 
 
 int pushimagesubresourcerange(lua_State *L, VkImageSubresourceRange *p)
@@ -2191,7 +2202,7 @@ int echeckclearattachment(lua_State *L, int arg, VkClearAttachment *p)
     }
 
 /* echeckclearattachmentlist() */
-ECHECKLISTFUNC(VkClearAttachment, clearattachment, NULL) 
+ECHECKLISTFUNC(VkClearAttachment, clearattachment, NULL)
 
 int echeckclearrect(lua_State *L, int arg, VkClearRect *p)
     {
@@ -2204,7 +2215,7 @@ int echeckclearrect(lua_State *L, int arg, VkClearRect *p)
     }
 
 /* echeckclearrectlist() */
-ECHECKLISTFUNC(VkClearRect, clearrect, NULL) 
+ECHECKLISTFUNC(VkClearRect, clearrect, NULL)
 
 int echeckimagesubresourcelayers(lua_State *L, int arg, VkImageSubresourceLayers *p)
     {
@@ -2230,7 +2241,7 @@ int echeckimagecopy(lua_State *L, int arg, VkImageCopy *p)
     }
 
 /* echeckimagecopylist() */
-ECHECKLISTFUNC(VkImageCopy, imagecopy, NULL) 
+ECHECKLISTFUNC(VkImageCopy, imagecopy, NULL)
 
 
 int echeckimageblit(lua_State *L, int arg, VkImageBlit *p)
@@ -2245,7 +2256,7 @@ int echeckimageblit(lua_State *L, int arg, VkImageBlit *p)
     }
 
 /* echeckimageblitlist() */
-ECHECKLISTFUNC(VkImageBlit, imageblit, NULL) 
+ECHECKLISTFUNC(VkImageBlit, imageblit, NULL)
 
 int echeckbufferimagecopy(lua_State *L, int arg, VkBufferImageCopy *p)
     {
@@ -2261,7 +2272,7 @@ int echeckbufferimagecopy(lua_State *L, int arg, VkBufferImageCopy *p)
     }
 
 /* echeckbufferimagecopylist() */
-ECHECKLISTFUNC(VkBufferImageCopy, bufferimagecopy, NULL) 
+ECHECKLISTFUNC(VkBufferImageCopy, bufferimagecopy, NULL)
 
 int echeckimageresolve(lua_State *L, int arg, VkImageResolve *p)
     {
@@ -2276,7 +2287,7 @@ int echeckimageresolve(lua_State *L, int arg, VkImageResolve *p)
     }
 
 /* echeckimageresolvelist() */
-ECHECKLISTFUNC(VkImageResolve, imageresolve, NULL) 
+ECHECKLISTFUNC(VkImageResolve, imageresolve, NULL)
 
 int echeckbuffercopy(lua_State *L, int arg, VkBufferCopy *p)
     {
@@ -2289,7 +2300,7 @@ int echeckbuffercopy(lua_State *L, int arg, VkBufferCopy *p)
     }
 
 /* echeckbuffercopylist() */
-ECHECKLISTFUNC(VkBufferCopy, buffercopy, NULL) 
+ECHECKLISTFUNC(VkBufferCopy, buffercopy, NULL)
 
 int echeckmemorybarrier(lua_State *L, int arg, VkMemoryBarrier *p)
     {
@@ -2303,7 +2314,7 @@ int echeckmemorybarrier(lua_State *L, int arg, VkMemoryBarrier *p)
     }
 
 /* echeckmemorybarrierlist() */
-ECHECKLISTFUNC(VkMemoryBarrier, memorybarrier, NULL) 
+ECHECKLISTFUNC(VkMemoryBarrier, memorybarrier, NULL)
 
 int echeckbuffermemorybarrier(lua_State *L, int arg, VkBufferMemoryBarrier *p)
     {
@@ -2322,7 +2333,7 @@ int echeckbuffermemorybarrier(lua_State *L, int arg, VkBufferMemoryBarrier *p)
     }
 
 /* echeckbuffermemorybarrierlist() */
-ECHECKLISTFUNC(VkBufferMemoryBarrier, buffermemorybarrier, NULL) 
+ECHECKLISTFUNC(VkBufferMemoryBarrier, buffermemorybarrier, NULL)
 
 int echeckimagememorybarrier(lua_State *L, int arg, VkImageMemoryBarrier *p)
     {
@@ -2342,7 +2353,7 @@ int echeckimagememorybarrier(lua_State *L, int arg, VkImageMemoryBarrier *p)
     }
 
 /* echeckimagememorybarrierlist() */
-ECHECKLISTFUNC(VkImageMemoryBarrier, imagememorybarrier, NULL) 
+ECHECKLISTFUNC(VkImageMemoryBarrier, imagememorybarrier, NULL)
 
 static int echeckpushconstantrange(lua_State *L, int arg, VkPushConstantRange *p)
     {
@@ -2355,7 +2366,7 @@ static int echeckpushconstantrange(lua_State *L, int arg, VkPushConstantRange *p
     }
 
 /* echeckpushconstantrangelist() */
-ECHECKLISTFUNC(VkPushConstantRange, pushconstantrange, NULL) 
+ECHECKLISTFUNC(VkPushConstantRange, pushconstantrange, NULL)
 
 /*------------------------------------------------------------------------------*/
 
@@ -2372,7 +2383,7 @@ static int echeckmappedmemoryrange(lua_State *L, int arg, VkMappedMemoryRange *p
     }
 
 /* echeckmappedmemoryrangelist() */
-ECHECKLISTFUNC(VkMappedMemoryRange, mappedmemoryrange, NULL) 
+ECHECKLISTFUNC(VkMappedMemoryRange, mappedmemoryrange, NULL)
 
 
 /*------------------------------------------------------------------------------*/
@@ -2500,7 +2511,7 @@ static int echecksparseimagememorybind(lua_State *L, int arg, VkSparseImageMemor
     }
 
 /* echecksparseimagememorybindlist() */
-static ECHECKLISTFUNC(VkSparseImageMemoryBind, sparseimagememorybind, NULL) 
+static ECHECKLISTFUNC(VkSparseImageMemoryBind, sparseimagememorybind, NULL)
 
 /*-------------------------------------------------------------------------------------*/
 
@@ -2528,8 +2539,8 @@ static int echecksparsebuffermemorybindinfo(lua_State *L, int arg, VkSparseBuffe
     }
 
 /* echecksparsebuffermemorybindinfolist() */
-static FREELISTFUNC(VkSparseBufferMemoryBindInfo, sparsebuffermemorybindinfo) 
-static ECHECKLISTFUNC(VkSparseBufferMemoryBindInfo, sparsebuffermemorybindinfo, freesparsebuffermemorybindinfolist) 
+static FREELISTFUNC(VkSparseBufferMemoryBindInfo, sparsebuffermemorybindinfo)
+static ECHECKLISTFUNC(VkSparseBufferMemoryBindInfo, sparsebuffermemorybindinfo, freesparsebuffermemorybindinfolist)
 
 
 /*-------------------------------------------------------------------------------------*/
@@ -2559,8 +2570,8 @@ static int echecksparseimageopaquememorybindinfo(lua_State *L, int arg, VkSparse
 
 
 /* echecksparseimageopaquememorybindinfolist() */
-static FREELISTFUNC(VkSparseImageOpaqueMemoryBindInfo, sparseimageopaquememorybindinfo) 
-static ECHECKLISTFUNC(VkSparseImageOpaqueMemoryBindInfo, sparseimageopaquememorybindinfo, freesparseimageopaquememorybindinfolist) 
+static FREELISTFUNC(VkSparseImageOpaqueMemoryBindInfo, sparseimageopaquememorybindinfo)
+static ECHECKLISTFUNC(VkSparseImageOpaqueMemoryBindInfo, sparseimageopaquememorybindinfo, freesparseimageopaquememorybindinfolist)
 
 /*-------------------------------------------------------------------------------------*/
 
@@ -2588,8 +2599,8 @@ static int echecksparseimagememorybindinfo(lua_State *L, int arg, VkSparseImageM
     }
 
 /* echecksparseimagememorybindinfolist() */
-static FREELISTFUNC(VkSparseImageMemoryBindInfo, sparseimagememorybindinfo) 
-static ECHECKLISTFUNC(VkSparseImageMemoryBindInfo, sparseimagememorybindinfo, freesparseimagememorybindinfolist) 
+static FREELISTFUNC(VkSparseImageMemoryBindInfo, sparseimagememorybindinfo)
+static ECHECKLISTFUNC(VkSparseImageMemoryBindInfo, sparseimagememorybindinfo, freesparseimagememorybindinfolist)
 
 /*-------------------------------------------------------------------------------------*/
 
@@ -2659,8 +2670,8 @@ static int echecksubmitinfo(lua_State *L, int arg, VkSubmitInfo *p)
     }
 
 /* echecksubmitinfolist() */
-FREELISTFUNC(VkSubmitInfo, submitinfo) 
-ECHECKLISTFUNC(VkSubmitInfo, submitinfo, freesubmitinfolist) 
+FREELISTFUNC(VkSubmitInfo, submitinfo)
+ECHECKLISTFUNC(VkSubmitInfo, submitinfo, freesubmitinfolist)
 
 
 static void freebindsparseinfo(lua_State *L, VkBindSparseInfo *p)
@@ -2668,7 +2679,7 @@ static void freebindsparseinfo(lua_State *L, VkBindSparseInfo *p)
     if(!p) return;
     if(p->pWaitSemaphores) Free(L, (void*)p->pWaitSemaphores);
     if(p->pBufferBinds) freesparsebuffermemorybindinfolist(L, (void*)p->pBufferBinds, p->bufferBindCount);
-    if(p->pImageOpaqueBinds) 
+    if(p->pImageOpaqueBinds)
         freesparseimageopaquememorybindinfolist(L, (void*)p->pImageOpaqueBinds, p->imageOpaqueBindCount);
     if(p->pImageBinds) freesparseimagememorybindinfolist(L, (void*)p->pImageBinds, p->imageBindCount);
     if(p->pSignalSemaphores) Free(L, (void*)p->pSignalSemaphores);
@@ -2725,8 +2736,8 @@ static int echeckbindsparseinfo(lua_State *L, int arg, VkBindSparseInfo *p)
     }
 
 /* echeckbindsparseinfolist() */
-FREELISTFUNC(VkBindSparseInfo, bindsparseinfo) 
-ECHECKLISTFUNC(VkBindSparseInfo, bindsparseinfo, freebindsparseinfolist) 
+FREELISTFUNC(VkBindSparseInfo, bindsparseinfo)
+ECHECKLISTFUNC(VkBindSparseInfo, bindsparseinfo, freebindsparseinfolist)
 
 /*-------------------------------------------------------------------------------------*/
 
@@ -2735,7 +2746,7 @@ int pushsurfacecapabilities(lua_State *L, VkSurfaceCapabilitiesKHR *p)
     lua_newtable(L);
     SetInteger(minImageCount, "min_image_count");
     SetInteger(maxImageCount, "max_image_count");
-    if(p->currentExtent.width != (uint32_t)-1) 
+    if(p->currentExtent.width != (uint32_t)-1)
         SetStruct(currentExtent, "current_extent", pushextent2d);
         /* width and height are either both -1 or ~=-1
          * the first case means 'not present', so instead of setting the width and height 
@@ -2837,7 +2848,7 @@ static int echeckspecializationmapentry(lua_State *L, int arg, VkSpecializationM
     }
 
 /* echeckspecializationmapentrylist() */
-static ECHECKLISTFUNC(VkSpecializationMapEntry, specializationmapentry, NULL) 
+static ECHECKLISTFUNC(VkSpecializationMapEntry, specializationmapentry, NULL)
 
 static void freespecializationinfo(lua_State *L, VkSpecializationInfo *p)
     {
@@ -2926,8 +2937,8 @@ static int echeckpipelineshaderstagecreateinfo(lua_State *L, int arg, VkPipeline
     }
 
 /* echeckpipelineshaderstagecreateinfolist() */
-static FREELISTFUNC(VkPipelineShaderStageCreateInfo, pipelineshaderstagecreateinfo) 
-static ECHECKLISTFUNC(VkPipelineShaderStageCreateInfo, pipelineshaderstagecreateinfo, freepipelineshaderstagecreateinfolist) 
+static FREELISTFUNC(VkPipelineShaderStageCreateInfo, pipelineshaderstagecreateinfo)
+static ECHECKLISTFUNC(VkPipelineShaderStageCreateInfo, pipelineshaderstagecreateinfo, freepipelineshaderstagecreateinfolist)
 
 /*-------------------------------------------------------------------------------------*/
 
@@ -3065,7 +3076,7 @@ static int echeckpipelinemultisamplestatecreateinfo(lua_State *L, int arg, VkPip
     POPFIELD();
     if(err < 0)
         { freepipelinemultisamplestatecreateinfo(L, p); return fielderror(L, F, err); }
-    if((count > 0) && (count != p->rasterizationSamples / 32)) 
+    if((count > 0) && (count != p->rasterizationSamples / 32))
         { freepipelinemultisamplestatecreateinfo(L, p); return fielderror(L, F, ERR_LENGTH); }
 #undef F
     return 0;
@@ -3084,7 +3095,7 @@ static int echeckvertexinputbindingdescription(lua_State *L, int arg, VkVertexIn
     }
 
 /* echeckvertexinputbindingdescriptionlist() */
-static ECHECKLISTFUNC(VkVertexInputBindingDescription, vertexinputbindingdescription, NULL) 
+static ECHECKLISTFUNC(VkVertexInputBindingDescription, vertexinputbindingdescription, NULL)
 
 static int echeckvertexinputattributedescription(lua_State *L, int arg, VkVertexInputAttributeDescription *p)
     {
@@ -3098,7 +3109,7 @@ static int echeckvertexinputattributedescription(lua_State *L, int arg, VkVertex
     }
 
 /* echeckvertexinputattributedescriptionlist() */
-static ECHECKLISTFUNC(VkVertexInputAttributeDescription, vertexinputattributedescription, NULL) 
+static ECHECKLISTFUNC(VkVertexInputAttributeDescription, vertexinputattributedescription, NULL)
 
 
 static void freepipelinevertexinputstatecreateinfo(lua_State *L, VkPipelineVertexInputStateCreateInfo *p)
@@ -3189,7 +3200,7 @@ static int echeckpipelinecolorblendattachmentstate(lua_State *L, int arg, VkPipe
     }
 
 /* echeckpipelinecolorblendattachmentstatelist() */
-static ECHECKLISTFUNC(VkPipelineColorBlendAttachmentState, pipelinecolorblendattachmentstate, NULL) 
+static ECHECKLISTFUNC(VkPipelineColorBlendAttachmentState, pipelinecolorblendattachmentstate, NULL)
 
 static void freepipelinecolorblendstatecreateinfo(lua_State *L, VkPipelineColorBlendStateCreateInfo *p)
     {
@@ -3275,7 +3286,7 @@ static int echeckpipelinedynamicstatecreateinfo(lua_State *L, int arg, VkPipelin
     p->pDynamicStates = checkdynamicstatelist(L, arg1, &count, &err);
     p->dynamicStateCount = count;
     POPFIELD();
-    if(err) 
+    if(err)
         { lua_pushstring(L, "dynamic_states"); return ERR_GENERIC; }
  
     return 0;
@@ -3294,43 +3305,43 @@ static void freegraphicspipelinecreateinfo(lua_State *L, VkGraphicsPipelineCreat
             (VkPipelineVertexInputStateCreateInfo*)p->pVertexInputState);
         Free(L, (void*)p->pVertexInputState);
         }
-    if(p->pInputAssemblyState) 
+    if(p->pInputAssemblyState)
         {
         freepipelineinputassemblystatecreateinfo(L, 
             (VkPipelineInputAssemblyStateCreateInfo*)p->pInputAssemblyState);
         Free(L, (void*)p->pInputAssemblyState);
         }
-    if(p->pTessellationState) 
+    if(p->pTessellationState)
         {
         freepipelinetessellationstatecreateinfo(L, 
             (VkPipelineTessellationStateCreateInfo*)p->pTessellationState);
         Free(L, (void*)p->pTessellationState);
         }
-    if(p->pViewportState) 
+    if(p->pViewportState)
         {
         freepipelineviewportstatecreateinfo(L, 
             (VkPipelineViewportStateCreateInfo*)p->pViewportState);
         Free(L, (void*)p->pViewportState);
         }
-    if(p->pRasterizationState) 
+    if(p->pRasterizationState)
         {
         freepipelinerasterizationstatecreateinfo(L, 
             (VkPipelineRasterizationStateCreateInfo*)p->pRasterizationState);
         Free(L, (void*)p->pRasterizationState);
         }
-    if(p->pMultisampleState) 
+    if(p->pMultisampleState)
         {
         freepipelinemultisamplestatecreateinfo(L, 
             (VkPipelineMultisampleStateCreateInfo*)p->pMultisampleState);
         Free(L, (void*)p->pMultisampleState);
         }
-    if(p->pDepthStencilState) 
+    if(p->pDepthStencilState)
         {
         freepipelinedepthstencilstatecreateinfo(L, 
             (VkPipelineDepthStencilStateCreateInfo*)p->pDepthStencilState);
         Free(L, (void*)p->pDepthStencilState);
         }
-    if(p->pColorBlendState) 
+    if(p->pColorBlendState)
         {
         if(p->pNext)
             {
@@ -3342,7 +3353,7 @@ static void freegraphicspipelinecreateinfo(lua_State *L, VkGraphicsPipelineCreat
             (VkPipelineColorBlendStateCreateInfo*)p->pColorBlendState);
         Free(L, (void*)p->pColorBlendState);
         }
-    if(p->pDynamicState) 
+    if(p->pDynamicState)
         {
         freepipelinedynamicstatecreateinfo(L, 
             (VkPipelineDynamicStateCreateInfo*)p->pDynamicState);
@@ -3471,8 +3482,8 @@ static int echeckgraphicspipelinecreateinfo(lua_State *L, int arg, VkGraphicsPip
     }
 
 /* echeckgraphicspipelinecreateinfolist() */
-FREELISTFUNC(VkGraphicsPipelineCreateInfo, graphicspipelinecreateinfo) 
-ECHECKLISTFUNC(VkGraphicsPipelineCreateInfo, graphicspipelinecreateinfo, freegraphicspipelinecreateinfolist) 
+FREELISTFUNC(VkGraphicsPipelineCreateInfo, graphicspipelinecreateinfo)
+ECHECKLISTFUNC(VkGraphicsPipelineCreateInfo, graphicspipelinecreateinfo, freegraphicspipelinecreateinfolist)
 
 /*-------------------------------------------------------------------------------------*/
 static void freecomputepipelinecreateinfo(lua_State *L, VkComputePipelineCreateInfo *p)
@@ -3496,8 +3507,8 @@ static int echeckcomputepipelinecreateinfo(lua_State *L, int arg, VkComputePipel
     }
 
 /* echeckcomputepipelinecreateinfolist() */
-FREELISTFUNC(VkComputePipelineCreateInfo, computepipelinecreateinfo) 
-ECHECKLISTFUNC(VkComputePipelineCreateInfo, computepipelinecreateinfo, freecomputepipelinecreateinfolist) 
+FREELISTFUNC(VkComputePipelineCreateInfo, computepipelinecreateinfo)
+ECHECKLISTFUNC(VkComputePipelineCreateInfo, computepipelinecreateinfo, freecomputepipelinecreateinfolist)
 
 /*-------------------------------------------------------------------------------------*/
 
@@ -3537,22 +3548,110 @@ int echeckswapchaincreateinfo(lua_State *L, int arg, VkSwapchainCreateInfoKHR *p
     }
 
 /* echeckswapchaincreateinfolist() */
-FREELISTFUNC(VkSwapchainCreateInfoKHR, swapchaincreateinfo) 
-ECHECKLISTFUNC(VkSwapchainCreateInfoKHR, swapchaincreateinfo, freeswapchaincreateinfolist) 
+FREELISTFUNC(VkSwapchainCreateInfoKHR, swapchaincreateinfo)
+ECHECKLISTFUNC(VkSwapchainCreateInfoKHR, swapchaincreateinfo, freeswapchaincreateinfolist)
 
 
+/*-------------------------------------------------------------------------------------*/
 
-
-void freepresentinfo(lua_State *L, VkPresentInfoKHR *p)
+static int echeckrectlayer(lua_State *L, int arg, VkRectLayerKHR *p)
     {
-    if(!p) return;
-    if(p->pWaitSemaphores) Free(L, (void*)p->pWaitSemaphores);
-    if(p->pSwapchains) Free(L, (void*)p->pSwapchains);
-    if(p->pImageIndices) Free(L, (void*)p->pImageIndices);
-    if(p->pResults) Free(L, (void*)p->pResults);
+    int err;
+    ECHECK_PREAMBLE
+    GetOffset2d(offset, "offset");
+    GetExtent2d(extent, "extent");
+    GetInteger(layer, "layer");
+    return 0;
     }
 
-int echeckpresentinfo(lua_State *L, int arg, VkPresentInfoKHR *p)
+/* echeckrectlayerlist() */
+static ECHECKLISTFUNC(VkRectLayerKHR, rectlayer, NULL)
+
+
+static void freepresentregion(lua_State *L, VkPresentRegionKHR *p)
+    {
+    if(!p) return;
+    if(p->pRectangles)
+        Free(L, (void*)p->pRectangles);
+    }
+
+static int echeckpresentregion(lua_State *L, int arg, VkPresentRegionKHR *p)
+    {
+    int err, arg1;
+    uint32_t count;
+    ECHECK_PREAMBLE
+#define F "rectangles"
+    PUSHFIELD(F);
+    p->pRectangles = echeckrectlayerlist(L, arg1, &count, &err);
+    p->rectangleCount = count;
+    POPFIELD();
+    if(err < 0) { freepresentregion(L, p); return efielderror(L, F); }
+    if(err == ERR_NOTPRESENT) POPERROR();
+#undef F
+    return 0;
+    }
+/* echeckpresentregionlist() */
+static FREELISTFUNC(VkPresentRegionKHR, presentregion)
+static ECHECKLISTFUNC(VkPresentRegionKHR, presentregion, freepresentregionlist)
+
+static void freepresentregions(lua_State *L, VkPresentRegionsKHR *p)
+    {
+    if(!p) return;
+    if(p->pRegions)
+        freepresentregionlist(L, (void*)p->pRegions, p->swapchainCount);
+    }
+
+static int echeckpresentregions(lua_State *L, int arg, VkPresentRegionsKHR *p)
+    {
+    int err, arg1;
+    uint32_t count;
+    ECHECK_PREAMBLE
+    p->sType = VK_STRUCTURE_TYPE_PRESENT_REGIONS_KHR;
+    p->pNext = NULL;
+#define F "regions"
+    PUSHFIELD(F);
+    p->pRegions = echeckpresentregionlist(L, arg1, &count, &err);
+    p->swapchainCount = count;
+    POPFIELD();
+    if(err < 0) { freepresentregions(L, p); return efielderror(L, F); }
+    if(err == ERR_NOTPRESENT) POPERROR();
+#undef F
+    return 0;
+    }
+
+/*-------------------------------------------------------------------------------------*/
+
+typedef struct {
+    VkPresentInfoKHR p1;
+    VkDisplayPresentInfoKHR p2;
+    VkPresentRegionsKHR p3;
+} VkPresentInfoKHR_CHAIN;
+
+void freepresentinfo(lua_State *L, VkPresentInfoKHR *pp)
+    {
+    VkPresentInfoKHR_CHAIN *p = (VkPresentInfoKHR_CHAIN*)pp;
+    if(!pp) return;
+    if(p->p1.pWaitSemaphores) Free(L, (void*)p->p1.pWaitSemaphores);
+    if(p->p1.pSwapchains) Free(L, (void*)p->p1.pSwapchains);
+    if(p->p1.pImageIndices) Free(L, (void*)p->p1.pImageIndices);
+    if(p->p1.pResults) Free(L, (void*)p->p1.pResults);
+    freepresentregions(L, &p->p3);
+    Free(L, (void*)p);
+    }
+
+static int echeckdisplaypresentinfo(lua_State *L, int arg, VkDisplayPresentInfoKHR *p)
+    {
+    int err;
+    ECHECK_PREAMBLE
+    p->sType = VK_STRUCTURE_TYPE_DISPLAY_PRESENT_INFO_KHR;
+    p->pNext = NULL;
+    GetRect2dOpt(srcRect, "src_rect");
+    GetRect2dOpt(dstRect, "dst_rect");
+    GetBoolean(persistent, "persistent");
+    return 0;
+    }
+
+static int echeckpresentinfo_(lua_State *L, int arg, VkPresentInfoKHR *p)
     {
     int err, arg1;
     uint32_t count;
@@ -3585,8 +3684,34 @@ int echeckpresentinfo(lua_State *L, int arg, VkPresentInfoKHR *p)
         { freepresentinfo(L, p); return fielderror(L, F, ERR_LENGTH); }
 #undef F
 /*  p->pResults = NULL; */
-
     return 0;
+    }
+
+VkPresentInfoKHR *echeckpresentinfo(lua_State *L, int arg, int *err)
+    {
+    int p2_present, p3_present;
+    VkPresentInfoKHR_CHAIN *p = MALLOC_NOERR(L, VkPresentInfoKHR_CHAIN);
+    if(!p) { *err = ERR_MEMORY; pusherror(L, ERR_MEMORY); return NULL; }
+    *err = echeckpresentinfo_(L, arg, &p->p1);
+    if(*err) { freepresentinfo(L, (VkPresentInfoKHR*)p); return NULL; }
+    IsPresent("src_rect", p2_present);
+    if(p2_present)
+        {
+        *err = echeckdisplaypresentinfo(L, arg, &p->p2);
+        if(*err) { freepresentinfo(L, (VkPresentInfoKHR*)p); return NULL; }
+        p->p1.pNext = &p->p2;
+        }
+    IsPresent("regions", p3_present);
+    if(p3_present)
+        {
+        *err = echeckpresentregions(L, arg, &p->p3);
+        if(*err) { freepresentinfo(L, (VkPresentInfoKHR*)p); return NULL; }
+        if(p2_present)
+            p->p1.pNext = &p->p3;
+        else
+            p->p2.pNext = &p->p3;
+        }
+    return (VkPresentInfoKHR*)p;
     }
 
 /*-------------------------------------------------------------------------------------*/
@@ -3602,7 +3727,7 @@ static int echeckdescriptorimageinfo(lua_State *L, int arg, VkDescriptorImageInf
     }
 
 /* echeckdescriptorimageinfolist() */
-static ECHECKLISTFUNC(VkDescriptorImageInfo, descriptorimageinfo, NULL) 
+static ECHECKLISTFUNC(VkDescriptorImageInfo, descriptorimageinfo, NULL)
 
 static int echeckdescriptorbufferinfo(lua_State *L, int arg, VkDescriptorBufferInfo *p)
     {
@@ -3615,7 +3740,7 @@ static int echeckdescriptorbufferinfo(lua_State *L, int arg, VkDescriptorBufferI
     }
 
 /* echeckdescriptorbufferinfolist() */
-static ECHECKLISTFUNC(VkDescriptorBufferInfo, descriptorbufferinfo, NULL) 
+static ECHECKLISTFUNC(VkDescriptorBufferInfo, descriptorbufferinfo, NULL)
 
 
 static void freewritedescriptorset(lua_State *L, VkWriteDescriptorSet *p)
@@ -3684,8 +3809,8 @@ static int echeckwritedescriptorset(lua_State *L, int arg, VkWriteDescriptorSet 
     }
 
 /* echeckwritedescriptorsetlist() */
-FREELISTFUNC(VkWriteDescriptorSet, writedescriptorset) 
-ECHECKLISTFUNC(VkWriteDescriptorSet, writedescriptorset, freewritedescriptorsetlist) 
+FREELISTFUNC(VkWriteDescriptorSet, writedescriptorset)
+ECHECKLISTFUNC(VkWriteDescriptorSet, writedescriptorset, freewritedescriptorsetlist)
 
 
 static void freecopydescriptorset(lua_State *L, VkCopyDescriptorSet *p)
@@ -3710,8 +3835,8 @@ static int echeckcopydescriptorset(lua_State *L, int arg, VkCopyDescriptorSet *p
     }
 
 /* echeckcopydescriptorsetlist() */
-FREELISTFUNC(VkCopyDescriptorSet, copydescriptorset) 
-ECHECKLISTFUNC(VkCopyDescriptorSet, copydescriptorset, freecopydescriptorsetlist) 
+FREELISTFUNC(VkCopyDescriptorSet, copydescriptorset)
+ECHECKLISTFUNC(VkCopyDescriptorSet, copydescriptorset, freecopydescriptorsetlist)
 
 /*-------------------------------------------------------------------------------------*/
 int pushdisplayproperties(lua_State *L, VkDisplayPropertiesKHR *p)
@@ -3802,90 +3927,7 @@ int echeckdisplaysurfacecreateinfo(lua_State *L, int arg, VkDisplaySurfaceCreate
     GetExtent2d(imageExtent, "image_extent");
     return 0;
     }
-
-void freedisplaypresentinfo(lua_State *L, VkDisplayPresentInfoKHR *p)
-    {
-    (void)p; (void)L; 
-    }
-
-int echeckdisplaypresentinfo(lua_State *L, int arg, VkDisplayPresentInfoKHR *p)
-    {
-    int err;
-    ECHECK_PREAMBLE
-    p->sType = VK_STRUCTURE_TYPE_DISPLAY_PRESENT_INFO_KHR;
-    p->pNext = NULL;
-    GetRect2d(srcRect, "src_rect");
-    GetRect2d(dstRect, "dst_rect");
-    GetBoolean(persistent, "persistent");
-    return 0;
-    }
  
-/*-------------------------------------------------------------------------------------*/
-
-static int echeckrectlayer(lua_State *L, int arg, VkRectLayerKHR *p)
-    {
-    int err;
-    ECHECK_PREAMBLE
-    GetOffset2d(offset, "offset");
-    GetExtent2d(extent, "extent");
-    GetInteger(layer, "layer");
-    return 0;
-    }
-
-/* echeckrectlayerlist() */
-static ECHECKLISTFUNC(VkRectLayerKHR, rectlayer, NULL) 
-
-static void freepresentregion(lua_State *L, VkPresentRegionKHR *p)
-    {
-    if(!p) return;
-    if(p->pRectangles)
-        Free(L, (void*)p->pRectangles);
-    }
-
-static int echeckpresentregion(lua_State *L, int arg, VkPresentRegionKHR *p)
-    {
-    int err, arg1;
-    uint32_t count;
-    ECHECK_PREAMBLE
-#define F "rectangles"
-    PUSHFIELD(F);
-    p->pRectangles = echeckrectlayerlist(L, arg1, &count, &err);
-    p->rectangleCount = count;
-    POPFIELD();
-    if(err < 0) { freepresentregion(L, p); return efielderror(L, F); }
-    if(err == ERR_NOTPRESENT) POPERROR();
-#undef F
-    return 0;
-    }
-/* echeckpresentregionlist() */
-static FREELISTFUNC(VkPresentRegionKHR, presentregion) 
-static ECHECKLISTFUNC(VkPresentRegionKHR, presentregion, freepresentregionlist) 
-
-void freepresentregions(lua_State *L, VkPresentRegionsKHR *p)
-    {
-    if(!p) return;
-    if(p->pRegions)
-        freepresentregionlist(L, (void*)p->pRegions, p->swapchainCount);
-    }
-
-int echeckpresentregions(lua_State *L, int arg, VkPresentRegionsKHR *p)
-    {
-    int err, arg1;
-    uint32_t count;
-    ECHECK_PREAMBLE
-    p->sType = VK_STRUCTURE_TYPE_PRESENT_REGIONS_KHR;
-    p->pNext = NULL;
-#define F "regions"
-    PUSHFIELD(F);
-    p->pRegions = echeckpresentregionlist(L, arg1, &count, &err);
-    p->swapchainCount = count;
-    POPFIELD();
-    if(err < 0) { freepresentregions(L, p); return efielderror(L, F); }
-    if(err == ERR_NOTPRESENT) POPERROR();
-#undef F
-    return 0;
-    }
-
 /*-------------------------------------------------------------------------------------*/
 
 static void freedescriptorupdatetemplateentry(lua_State *L, VkDescriptorUpdateTemplateEntryKHR *p)
@@ -3907,8 +3949,8 @@ static int echeckdescriptorupdatetemplateentry(lua_State *L, int arg, VkDescript
     }
 
 /* echeckdescriptorupdatetemplateentrylist() */
-static FREELISTFUNC(VkDescriptorUpdateTemplateEntryKHR, descriptorupdatetemplateentry) 
-static ECHECKLISTFUNC(VkDescriptorUpdateTemplateEntryKHR, descriptorupdatetemplateentry, freedescriptorupdatetemplateentrylist) 
+static FREELISTFUNC(VkDescriptorUpdateTemplateEntryKHR, descriptorupdatetemplateentry)
+static ECHECKLISTFUNC(VkDescriptorUpdateTemplateEntryKHR, descriptorupdatetemplateentry, freedescriptorupdatetemplateentrylist)
 
 
 void freedescriptorupdatetemplatecreateinfo(lua_State *L, VkDescriptorUpdateTemplateCreateInfoKHR *p)
@@ -4003,7 +4045,7 @@ int echeckdevicecreateinfo(lua_State *L, int arg, VkDeviceCreateInfo *p, ud_t *u
         PUSHFIELD(F);
         err = echeckphysicaldevicefeatures(L, arg1, features);
         POPFIELD();
-        if(err < 0) 
+        if(err < 0)
             { freedevicecreateinfo(L, p); return efielderror(L, F); }
         if(err == ERR_NOTPRESENT)
             { POPERROR(); Free(L, features); }

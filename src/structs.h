@@ -360,7 +360,7 @@ VkSwapchainCreateInfoKHR* echeckswapchaincreateinfolist(lua_State *L, int arg, u
 #define freepresentinfo moonvulkan_freepresentinfo
 void freepresentinfo(lua_State *L, VkPresentInfoKHR *p);
 #define echeckpresentinfo moonvulkan_echeckpresentinfo
-int echeckpresentinfo(lua_State *L, int arg, VkPresentInfoKHR *p);
+VkPresentInfoKHR *echeckpresentinfo(lua_State *L, int arg, int *err);
 
 #define freewritedescriptorsetlist moonvulkan_freewritedescriptorsetlist
 void freewritedescriptorsetlist(lua_State *L, void *list, uint32_t count);
@@ -389,16 +389,6 @@ int pushdisplayplanecapabilities(lua_State *L, VkDisplayPlaneCapabilitiesKHR *p)
 void freedisplaysurfacecreateinfo(lua_State *L, VkDisplaySurfaceCreateInfoKHR *p);
 #define echeckdisplaysurfacecreateinfo moonvulkan_echeckdisplaysurfacecreateinfo
 int echeckdisplaysurfacecreateinfo(lua_State *L, int arg, VkDisplaySurfaceCreateInfoKHR *p);
-
-#define freedisplaypresentinfo moonvulkan_freedisplaypresentinfo
-void freedisplaypresentinfo(lua_State *L, VkDisplayPresentInfoKHR *p);
-#define echeckdisplaypresentinfo moonvulkan_echeckdisplaypresentinfo
-int echeckdisplaypresentinfo(lua_State *L, int arg, VkDisplayPresentInfoKHR *p);
-
-#define freepresentregions moonvulkan_freepresentregions
-void freepresentregions(lua_State *L, VkPresentRegionsKHR *p);
-#define echeckpresentregions moonvulkan_echeckpresentregions
-int echeckpresentregions(lua_State *L, int arg, VkPresentRegionsKHR *p);
 
 #define freedescriptorupdatetemplatecreateinfo moonvulkan_freedescriptorupdatetemplatecreateinfo
 void freedescriptorupdatetemplatecreateinfo(lua_State *L, VkDescriptorUpdateTemplateCreateInfoKHR *p);

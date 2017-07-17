@@ -2810,15 +2810,11 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/
 <div id="queue_present" class="ulist">
 <ul>
 <li>
-<p><a href="#result"><em>result</em></a>, {<a href="#result"><em>result</em></a>} = <strong>queue_present</strong>(<a href="#queue"><em>queue</em></a>, <a href="#presentinfo"><em>presentinfo</em></a>, [<em>per_swapchain_results</em>], <em>&#8230;&#8203;</em>)<br>
-<span class="small">arg3: [<em>per_swapchain_results</em>]: boolean<br>
-arg4: [<em>display_present_info</em>]: <a href="#displaypresentinfo">displaypresentinfo</a><br>
-arg5: [<em>regions</em>]: <a href="#presentregions">presentregions</a><br>
+<p><a href="#result"><em>result</em></a>, {<a href="#result"><em>result</em></a>} = <strong>queue_present</strong>(<a href="#queue"><em>queue</em></a>, <a href="#presentinfo"><em>presentinfo</em></a>, [<em>per_swapchain_results</em>])<br>
+<span class="small">[<em>per_swapchain_results</em>]: boolean<br>
 Returns the global <em>result</em> for the operation, optionally followed by a table
 with the individual results for each of the given swapchains.<br>
 The individual results table is returned only if <em>per_swapchain_results</em> is <em>true</em>.<br>
-Usage of the <em>display_present_info</em> parameter requires the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_display_swapchain">VK_KHR_display_swapchain</a> device extension.<br>
-Usage of the <em>regions</em> parameter requires the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_incremental_present">VK_KHR_incremental_present</a> device extension.<br>
 Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkQueuePresentKHR">vkQueuePresentKHR</a>.</span></p>
 </li>
 </ul>
@@ -4204,21 +4200,16 @@ Note2: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/htm
 <em>swapchains</em>: {<a href="#swapchain">swapchain</a>},<br>
 <em>image_indices</em>: {integer} (same length as <em>swapchains</em>),<br>
 <em>wait_semaphores</em>: {<a href="#semaphore">semaphore</a>},<br>
-} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPresentInfoKHR">VkPresentInfoKHR</a>)</span></p>
-</li>
-<li>
-<p><a id="displaypresentinfo"></a>
-<span class="small"><strong>displaypresentinfo</strong> = {<br>
-<em>src_rect</em>: <a href="#extent2d">extent2d</a> <strong>[R]</strong>,<br>
-<em>dst_rect</em>: <a href="#extent2d">extent2d</a> <strong>[R]</strong>,<br>
-<em>persistent</em>: boolean,<br>
-} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkDisplayPresentInfoKHR">VkDisplayPresentInfoKHR</a>)</span></p>
-</li>
-<li>
-<p><a id="presentregions"></a>
-<span class="small"><strong>presentregions</strong> = {<br>
-<em>regions</em>: {<a href="#presentregion">presentregion</a>},<br>
-} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPresentRegionsKHR">VkPresentRegionsKHR</a>)</span></p>
+---- extensions ----<br>
+<em>src_rect</em>: <a href="#extent2d">extent2d</a> (Note1),<br>
+<em>dst_rect</em>: <a href="#extent2d">extent2d</a> (Note1),<br>
+<em>persistent</em>: boolean (Note1),<br>
+<em>regions</em>: {<a href="#presentregion">presentregion</a>} (Note2),<br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPresentInfoKHR">VkPresentInfoKHR</a>),<br>
+Note1: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_display_swapchain">VK_KHR_display_swapchain</a> extension (rfr:
+<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkDisplayPresentInfoKHR">VkDisplayPresentInfoKHR</a>).<br>
+Note2: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_incremental_present">VK_KHR_incremental_present</a> extension (rfr:
+<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPresentRegionsKHR">VkPresentRegionsKHR</a>).</span></p>
 </li>
 <li>
 <p><a id="presentregion"></a>
