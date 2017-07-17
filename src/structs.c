@@ -663,7 +663,6 @@ static int echeckapplicationinfo(lua_State *L, int arg, VkApplicationInfo *p)
     int err;
     ECHECK_PREAMBLE
     p->sType = VK_STRUCTURE_TYPE_APPLICATION_INFO;
-    p->pNext = NULL;
     GetStringOpt(pApplicationName, "application_name");
     GetInteger(applicationVersion, "application_version");
     GetStringOpt(pEngineName, "engine_name");
@@ -691,7 +690,6 @@ int echeckinstancecreateinfo(lua_State *L, int arg, VkInstanceCreateInfo *p)
 
     ECHECK_PREAMBLE
     p->sType = VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO;
-    p->pNext = NULL;
     GetFlags(flags, "flags");
 
 #define F "application_info"
@@ -732,7 +730,6 @@ static int echeckdevicequeuecreateinfo(lua_State *L, int arg, VkDeviceQueueCreat
     int arg1, err;
     uint32_t count;
     p->sType = VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO;
-    p->pNext = NULL;
     GetFlags(flags, "flags");
     GetInteger(queueFamilyIndex, "queue_family_index");
 #define F   "queue_priorities"
@@ -955,7 +952,6 @@ int echeckrenderpasscreateinfo(lua_State *L, int arg, VkRenderPassCreateInfo *p)
     int err, arg1;
     ECHECK_PREAMBLE
     p->sType = VK_STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO;
-    p->pNext = NULL;
     GetFlags(flags, "flags");
 
 #define F "attachments"
@@ -994,7 +990,6 @@ int echeckframebuffercreateinfo(lua_State *L, int arg, VkFramebufferCreateInfo *
     int err, arg1;
     ECHECK_PREAMBLE
     p->sType = VK_STRUCTURE_TYPE_FRAMEBUFFER_CREATE_INFO;
-    p->pNext = NULL;
     GetFlags(flags, "flags");
 
     GetRenderPass(renderPass, "render_pass");
@@ -1025,7 +1020,6 @@ int echeckbuffercreateinfo(lua_State *L, int arg, VkBufferCreateInfo *p)
     int err, arg1;
     ECHECK_PREAMBLE
     p->sType = VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO;
-    p->pNext = NULL;
     GetFlags(flags, "flags");
     GetInteger(size, "size");
     GetFlags(usage, "usage");
@@ -1046,7 +1040,6 @@ int echeckbufferviewcreateinfo(lua_State *L, int arg, VkBufferViewCreateInfo *p)
     int err;
     ECHECK_PREAMBLE
     p->sType = VK_STRUCTURE_TYPE_BUFFER_VIEW_CREATE_INFO;
-    p->pNext = NULL;
     GetFlags(flags, "flags");
 /*  p->buffer = set by caller */
     GetFormat(format, "format");
@@ -1068,7 +1061,6 @@ int echeckimagecreateinfo(lua_State *L, int arg, VkImageCreateInfo *p)
     int err, arg1;
     ECHECK_PREAMBLE
     p->sType = VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO;
-    p->pNext = NULL;
     GetFlags(flags, "flags");
     GetImageType(imageType, "image_type");
     GetFormat(format, "format");
@@ -1096,7 +1088,6 @@ int echeckimageviewcreateinfo(lua_State *L, int arg, VkImageViewCreateInfo *p)
     int err;
     ECHECK_PREAMBLE
     p->sType = VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO;
-    p->pNext = NULL;
     GetFlags(flags, "flags");
 /*  p->image = set by caller */
     GetImageViewType(viewType, "view_type");
@@ -1186,7 +1177,6 @@ int echeckrenderpassbegininfo(lua_State *L, int arg, VkRenderPassBeginInfo *p)
 
     ECHECK_PREAMBLE
     p->sType = VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO;
-    p->pNext = NULL;
 
     GetRenderPass(renderPass, "render_pass");
     GetFramebuffer(framebuffer, "framebuffer");
@@ -1210,7 +1200,6 @@ int echeckcommandbufferinheritanceinfo(lua_State *L, int arg, VkCommandBufferInh
     int err;
     ECHECK_PREAMBLE
     p->sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_INFO;
-    p->pNext = NULL;
     GetRenderPassOpt(renderPass, "render_pass");
     GetInteger(subpass, "subpass");
     GetFramebufferOpt(framebuffer, "framebuffer");
@@ -1680,7 +1669,6 @@ VkFormatProperties2KHR* newformatproperties2(lua_State *L)
     VkFormatProperties2KHR_CHAIN *p = MALLOC_NOERR(L, VkFormatProperties2KHR_CHAIN);
     if(!p) return NULL;
     p->p1.sType = VK_STRUCTURE_TYPE_FORMAT_PROPERTIES_2_KHR;
-    p->p1.pNext = NULL;
     return (VkFormatProperties2KHR*)p;
     }
 
@@ -1717,7 +1705,6 @@ VkImageFormatProperties2KHR* newimageformatproperties2(lua_State *L)
     VkImageFormatProperties2KHR_CHAIN *p = MALLOC_NOERR(L, VkImageFormatProperties2KHR_CHAIN);
     if(!p) return NULL;
     p->p1.sType = VK_STRUCTURE_TYPE_IMAGE_FORMAT_PROPERTIES_2_KHR;
-    p->p1.pNext = NULL;
     return (VkImageFormatProperties2KHR*)p;
     }
 
@@ -1751,7 +1738,6 @@ VkSparseImageFormatProperties2KHR *newsparseimageformatproperties2(lua_State *L,
     for(i = 0; i < count; i++)
         {
         p[i].sType = VK_STRUCTURE_TYPE_SPARSE_IMAGE_FORMAT_PROPERTIES_2_KHR;
-        p[i].pNext = NULL;
         }
     return p;
     }
@@ -1789,7 +1775,6 @@ VkQueueFamilyProperties2KHR *newqueuefamilyproperties2(lua_State *L, uint32_t co
     for(i = 0; i < count; i++)
         {
         p[i].sType = VK_STRUCTURE_TYPE_QUEUE_FAMILY_PROPERTIES_2_KHR;
-        p[i].pNext = NULL;
         }
     return p;
     }
@@ -1855,7 +1840,6 @@ VkPhysicalDeviceMemoryProperties2KHR* newphysicaldevicememoryproperties2(lua_Sta
    VkPhysicalDeviceMemoryProperties2KHR_CHAIN *p = MALLOC_NOERR(L, VkPhysicalDeviceMemoryProperties2KHR_CHAIN);
     if(!p) return NULL;
     p->p1.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_PROPERTIES_2_KHR;
-    p->p1.pNext = NULL;
     return (VkPhysicalDeviceMemoryProperties2KHR*)p;
     }
 
@@ -1877,7 +1861,6 @@ int echeckphysicaldeviceimageformatinfo2(lua_State *L, int arg, VkPhysicalDevice
     int err;
     ECHECK_PREAMBLE
     p->sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_FORMAT_INFO_2_KHR;
-    p->pNext = NULL;
     GetFormat(format, "format");
     GetImageType(type, "type");
     GetImageTiling(tiling, "tiling");
@@ -1891,7 +1874,6 @@ int echeckphysicaldevicesparseimageformatinfo2(lua_State *L, int arg, VkPhysical
     int err;
     ECHECK_PREAMBLE
     p->sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SPARSE_IMAGE_FORMAT_INFO_2_KHR;
-    p->pNext = NULL;
     GetFormat(format, "format");
     GetImageType(type, "type");
     GetSamples(samples, "samples");
@@ -2307,7 +2289,6 @@ int echeckmemorybarrier(lua_State *L, int arg, VkMemoryBarrier *p)
     int err;
     ECHECK_PREAMBLE
     p->sType = VK_STRUCTURE_TYPE_MEMORY_BARRIER;
-    p->pNext = NULL;
     GetFlags(srcAccessMask, "src_access_mask");
     GetFlags(dstAccessMask, "dst_access_mask");
     return 0;
@@ -2321,7 +2302,6 @@ int echeckbuffermemorybarrier(lua_State *L, int arg, VkBufferMemoryBarrier *p)
     int err;
     ECHECK_PREAMBLE
     p->sType = VK_STRUCTURE_TYPE_BUFFER_MEMORY_BARRIER;
-    p->pNext = NULL;
     GetFlags(srcAccessMask, "src_access_mask");
     GetFlags(dstAccessMask, "dst_access_mask");
     GetIntegerOpt(srcQueueFamilyIndex, "src_queue_family_index", VK_QUEUE_FAMILY_IGNORED);
@@ -2340,7 +2320,6 @@ int echeckimagememorybarrier(lua_State *L, int arg, VkImageMemoryBarrier *p)
     int err;
     ECHECK_PREAMBLE
     p->sType = VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER;
-    p->pNext = NULL;
     GetFlags(srcAccessMask, "src_access_mask");
     GetFlags(dstAccessMask, "dst_access_mask");
     GetImageLayout(oldLayout, "old_layout");
@@ -2375,7 +2354,6 @@ static int echeckmappedmemoryrange(lua_State *L, int arg, VkMappedMemoryRange *p
     int err;
     ECHECK_PREAMBLE
     p->sType = VK_STRUCTURE_TYPE_MAPPED_MEMORY_RANGE;
-    p->pNext = NULL;
     GetDeviceMemory(memory, "memory");
     GetInteger(offset, "offset");
     GetIntegerOrWholeSize(size, "size");
@@ -2453,7 +2431,6 @@ VkSparseImageMemoryRequirements2KHR* newsparseimagememoryrequirements2(lua_State
     for(i = 0; i < count; i++)
         {
         p[i].sType = VK_STRUCTURE_TYPE_SPARSE_IMAGE_MEMORY_REQUIREMENTS_2_KHR;
-        p[i].pNext = NULL;
         }
     return p;
     }
@@ -2631,7 +2608,6 @@ static int echecksubmitinfo(lua_State *L, int arg, VkSubmitInfo *p)
     uint32_t count;
     ECHECK_PREAMBLE
     p->sType = VK_STRUCTURE_TYPE_SUBMIT_INFO;
-    p->pNext = NULL;
 
 #define F "wait_semaphores"
     PUSHFIELD(F);
@@ -2691,7 +2667,6 @@ static int echeckbindsparseinfo(lua_State *L, int arg, VkBindSparseInfo *p)
     uint32_t count;
     ECHECK_PREAMBLE
     p->sType = VK_STRUCTURE_TYPE_BIND_SPARSE_INFO;
-    p->pNext = NULL;
 
 #define F "wait_semaphores"
     PUSHFIELD(F);
@@ -2816,7 +2791,6 @@ VkSurfaceFormat2KHR *newsurfaceformat2(lua_State *L, uint32_t count)
     for(i = 0; i < count; i++)
         {
         p[i].sType = VK_STRUCTURE_TYPE_SURFACE_FORMAT_2_KHR;
-        p[i].pNext = NULL;
         }
     return p;
     }
@@ -2910,7 +2884,6 @@ static int echeckpipelineshaderstagecreateinfo(lua_State *L, int arg, VkPipeline
     
     ECHECK_PREAMBLE
     p->sType = VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO;
-    p->pNext = NULL;
     GetFlags(flags, "flags");
     GetShaderStageFlagBits(stage, "stage");
     GetShaderModule(module, "module");
@@ -2948,7 +2921,6 @@ static int echeckpipelineinputassemblystatecreateinfo(lua_State *L, int arg, VkP
     int err;
     ECHECK_PREAMBLE
     p->sType = VK_STRUCTURE_TYPE_PIPELINE_INPUT_ASSEMBLY_STATE_CREATE_INFO;
-    p->pNext = NULL;
     GetFlags(flags, "flags");
     GetTopology(topology, "topology");
     GetBoolean(primitiveRestartEnable, "primitive_restart_enable");
@@ -2963,7 +2935,6 @@ static int echeckpipelinetessellationstatecreateinfo(lua_State *L, int arg, VkPi
     int err;
     ECHECK_PREAMBLE
     p->sType = VK_STRUCTURE_TYPE_PIPELINE_TESSELLATION_STATE_CREATE_INFO;
-    p->pNext = NULL;
     GetFlags(flags, "flags");
     GetInteger(patchControlPoints, "patch_control_points");
     return 0;
@@ -2985,7 +2956,6 @@ static int echeckpipelineviewportstatecreateinfo(lua_State *L, int arg, VkPipeli
 
     ECHECK_PREAMBLE
     p->sType = VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_STATE_CREATE_INFO;
-    p->pNext = NULL;
     GetFlags(flags, "flags");
     GetIntegerOpt(viewportCount, "viewport_count", 1);
     GetIntegerOpt(scissorCount, "scissor_count", 1);
@@ -3033,7 +3003,6 @@ static int echeckpipelinerasterizationstatecreateinfo(lua_State *L, int arg, VkP
 
     ECHECK_PREAMBLE
     p->sType = VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_CREATE_INFO;
-    p->pNext = NULL;
     GetFlags(flags, "flags");
     GetBoolean(depthClampEnable, "depth_clamp_enable");
     GetBoolean(rasterizerDiscardEnable, "rasterizer_discard_enable");
@@ -3062,7 +3031,6 @@ static int echeckpipelinemultisamplestatecreateinfo(lua_State *L, int arg, VkPip
     uint32_t count;
     ECHECK_PREAMBLE
     p->sType = VK_STRUCTURE_TYPE_PIPELINE_MULTISAMPLE_STATE_CREATE_INFO;
-    p->pNext = NULL;
     GetFlags(flags, "flags");
     GetSamples(rasterizationSamples, "rasterization_samples");
     GetBoolean(sampleShadingEnable, "sample_shading_enable");
@@ -3126,7 +3094,6 @@ static int echeckpipelinevertexinputstatecreateinfo(lua_State *L, int arg, VkPip
 
     ECHECK_PREAMBLE
     p->sType = VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO;
-    p->pNext = NULL;
     GetFlags(flags, "flags");
 #define F "vertex_binding_descriptions"
     PUSHFIELD(F);
@@ -3168,7 +3135,6 @@ static int echeckpipelinedepthstencilstatecreateinfo(lua_State *L, int arg, VkPi
     int err;
     ECHECK_PREAMBLE
     p->sType = VK_STRUCTURE_TYPE_PIPELINE_DEPTH_STENCIL_STATE_CREATE_INFO;
-    p->pNext = NULL;
     GetFlags(flags, "flags");
     GetBoolean(depthTestEnable, "depth_test_enable");
     GetBoolean(depthWriteEnable, "depth_write_enable");
@@ -3216,7 +3182,6 @@ static int echeckpipelinecolorblendstatecreateinfo(lua_State *L, int arg, VkPipe
 
     ECHECK_PREAMBLE
     p->sType = VK_STRUCTURE_TYPE_PIPELINE_COLOR_BLEND_STATE_CREATE_INFO;
-    p->pNext = NULL;
     GetFlags(flags, "flags");
     GetBoolean(logicOpEnable, "logic_op_enable");
     GetLogicOp(logicOp, "logic_op");
@@ -3257,7 +3222,6 @@ static int echeckpipelinecolorblendadvancedstatecreateinfo(lua_State *L, int arg
     int err;
     ECHECK_PREAMBLE
     p->sType = VK_STRUCTURE_TYPE_PIPELINE_COLOR_BLEND_ADVANCED_STATE_CREATE_INFO_EXT ;
-    p->pNext = NULL;
     GetBoolean(srcPremultiplied, "src_premultiplied");
     GetBoolean(dstPremultiplied, "dst_premultiplied");
     GetBlendOverlap(blendOverlap, "blend_overlap");
@@ -3280,7 +3244,6 @@ static int echeckpipelinedynamicstatecreateinfo(lua_State *L, int arg, VkPipelin
 
     ECHECK_PREAMBLE
     p->sType = VK_STRUCTURE_TYPE_PIPELINE_DYNAMIC_STATE_CREATE_INFO;
-    p->pNext = NULL;
     GetFlags(flags, "flags");
     PUSHFIELD("dynamic_states");
     p->pDynamicStates = checkdynamicstatelist(L, arg1, &count, &err);
@@ -3380,7 +3343,6 @@ static int echeckgraphicspipelinecreateinfo(lua_State *L, int arg, VkGraphicsPip
 
     ECHECK_PREAMBLE
     p->sType = VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_CREATE_INFO;
-    p->pNext = NULL;
     GetFlags(flags, "flags");
     GetPipelineLayout(layout, "layout");
     GetRenderPass(renderPass, "render_pass");
@@ -3497,7 +3459,6 @@ static int echeckcomputepipelinecreateinfo(lua_State *L, int arg, VkComputePipel
     int err;
     ECHECK_PREAMBLE
     p->sType = VK_STRUCTURE_TYPE_COMPUTE_PIPELINE_CREATE_INFO;
-    p->pNext = NULL;
     GetFlags(flags, "flags");
     GetPipelineLayout(layout, "layout");
     GetPipelineOpt(basePipelineHandle, "base_pipeline_handle");
@@ -3523,7 +3484,6 @@ int echeckswapchaincreateinfo(lua_State *L, int arg, VkSwapchainCreateInfoKHR *p
     int err, arg1;
     ECHECK_PREAMBLE
     p->sType = VK_STRUCTURE_TYPE_SWAPCHAIN_CREATE_INFO_KHR;
-    p->pNext = NULL;
     GetFlags(flags, "flags");
     GetSurface(surface, "surface");
     GetInteger(minImageCount, "min_image_count");
@@ -3607,7 +3567,6 @@ static int echeckpresentregions(lua_State *L, int arg, VkPresentRegionsKHR *p)
     uint32_t count;
     ECHECK_PREAMBLE
     p->sType = VK_STRUCTURE_TYPE_PRESENT_REGIONS_KHR;
-    p->pNext = NULL;
 #define F "regions"
     PUSHFIELD(F);
     p->pRegions = echeckpresentregionlist(L, arg1, &count, &err);
@@ -3644,7 +3603,6 @@ static int echeckdisplaypresentinfo(lua_State *L, int arg, VkDisplayPresentInfoK
     int err;
     ECHECK_PREAMBLE
     p->sType = VK_STRUCTURE_TYPE_DISPLAY_PRESENT_INFO_KHR;
-    p->pNext = NULL;
     GetRect2dOpt(srcRect, "src_rect");
     GetRect2dOpt(dstRect, "dst_rect");
     GetBoolean(persistent, "persistent");
@@ -3657,7 +3615,6 @@ static int echeckpresentinfo_(lua_State *L, int arg, VkPresentInfoKHR *p)
     uint32_t count;
     ECHECK_PREAMBLE
     p->sType = VK_STRUCTURE_TYPE_PRESENT_INFO_KHR;
-    p->pNext = NULL;
 
 #define F "wait_semaphores"
     PUSHFIELD(F);
@@ -3757,7 +3714,6 @@ static int echeckwritedescriptorset(lua_State *L, int arg, VkWriteDescriptorSet 
     uint32_t count;
     ECHECK_PREAMBLE
     p->sType = VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET;
-    p->pNext = NULL;
     GetDescriptorSet(dstSet, "dst_set");
     GetInteger(dstBinding, "dst_binding");
     GetInteger(dstArrayElement, "dst_array_element");
@@ -3823,7 +3779,6 @@ static int echeckcopydescriptorset(lua_State *L, int arg, VkCopyDescriptorSet *p
     int err;
     ECHECK_PREAMBLE
     p->sType = VK_STRUCTURE_TYPE_COPY_DESCRIPTOR_SET;
-    p->pNext = NULL;
     GetDescriptorSet(srcSet, "src_set");
     GetInteger(srcBinding, "src_binding");
     GetInteger(srcArrayElement, "src_array_element");
@@ -3916,7 +3871,6 @@ int echeckdisplaysurfacecreateinfo(lua_State *L, int arg, VkDisplaySurfaceCreate
     int err;
     ECHECK_PREAMBLE
     p->sType = VK_STRUCTURE_TYPE_DISPLAY_SURFACE_CREATE_INFO_KHR ;
-    p->pNext = NULL;
     GetFlags(flags, "flags");
 /*  p->displayMode = set by caller */
     GetInteger(planeIndex, "plane_index");
@@ -3966,7 +3920,6 @@ int echeckdescriptorupdatetemplatecreateinfo(lua_State *L, int arg, VkDescriptor
     uint32_t count;
     ECHECK_PREAMBLE
     p->sType = VK_STRUCTURE_TYPE_DESCRIPTOR_UPDATE_TEMPLATE_CREATE_INFO_KHR;
-    p->pNext = NULL;
     GetFlags(flags, "flags");
     GetDescriptorUpdateTemplateType(templateType, "template_type");
     GetDescriptorSetLayoutOpt(descriptorSetLayout, "descriptor_set_layout");
@@ -4011,7 +3964,6 @@ int echeckdevicecreateinfo(lua_State *L, int arg, VkDeviceCreateInfo *p, ud_t *u
 
     ECHECK_PREAMBLE
     p->sType = VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO;
-    p->pNext = NULL;
 
     GetFlags(flags, "flags");
 
@@ -4089,7 +4041,6 @@ int echeck(lua_State *L, int arg, Vk *p) //@@
     int err;
     ECHECK_PREAMBLE
     p->sType = VK_STRUCTURE_TYPE_;
-    p->pNext = NULL;
     GetFlags(flags, "flags");
 
     return 0;
