@@ -124,24 +124,24 @@ static int FreeCmdBuffers(lua_State *L)
 
 static int BeginCommandBuffer(lua_State *L)
     {
-    int err;
     VkResult ec;
-    VkCommandBufferBeginInfo info;
-    VkCommandBufferInheritanceInfo inherit;
     ud_t *ud;
+    VkCommandBufferBeginInfo_CHAIN info;
     VkCommandBuffer command_buffer = checkcommand_buffer(L, 1, &ud);
 
-    info.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO ;
-    info.pNext = NULL;
-    info.flags = optflags(L, 2, 0);
+    if(lua_istable(L, 2))
+        {
+        if(echeckcommandbufferbegininfo(L, 2, &info)) return argerror(L, 2);
+        }
+    else
+        {
+        info.p1.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO ;
+        info.p1.pNext = NULL;
+        info.p1.flags = optflags(L, 2, 0);
+        info.p1.pInheritanceInfo = NULL;
+        }
 
-    err = echeckcommandbufferinheritanceinfo(L, 3, &inherit);
-    if(err < 0) return argerror(L, 3);
-    if(err) lua_pop(L, 1);
-
-    info.pInheritanceInfo = (err == 0) ? &inherit : NULL; 
-
-    ec = ud->ddt->BeginCommandBuffer(command_buffer, &info);
+    ec = ud->ddt->BeginCommandBuffer(command_buffer, &info.p1);
     CheckError(L, ec);
     return 0;
     }

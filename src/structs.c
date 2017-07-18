@@ -674,7 +674,41 @@ int echeckcommandbufferallocateinfo(lua_State *L, int arg, VkCommandBufferAlloca
     return 0;
     }
 
+/*------------------------------------------------------------------------------*/
 
+static int echeckcommandbufferinheritanceinfo(lua_State *L, int arg, VkCommandBufferInheritanceInfo *p)
+    {
+    int err;
+    ECHECK_PREAMBLE(p);
+    p->sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_INFO;
+    GetRenderPassOpt(renderPass, "render_pass");
+    GetInteger(subpass, "subpass");
+    GetFramebufferOpt(framebuffer, "framebuffer");
+    GetBoolean(occlusionQueryEnable, "occlusion_query_enable");
+    GetFlags(queryFlags, "query_flags");
+    GetFlags(pipelineStatistics, "pipeline_statistics");
+    return 0;
+    }
+
+int echeckcommandbufferbegininfo(lua_State *L, int arg, VkCommandBufferBeginInfo_CHAIN *pp)
+    {
+    int err, arg1;
+    VkCommandBufferBeginInfo *p = &pp->p1;
+    ECHECK_PREAMBLE(pp);
+    p->sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO;
+    GetFlags(flags, "flags");
+#define F "inheritance_info"
+    PUSHFIELD(F);
+    err = echeckcommandbufferinheritanceinfo(L, arg1, &pp->p2);
+    POPFIELD();
+    if(err < 0) return efielderror(L, F);
+    if(err == ERR_NOTPRESENT)
+        POPERROR();
+    else
+        p->pInheritanceInfo = &pp->p2;
+#undef F
+    return 0;
+    }
 
 /*------------------------------------------------------------------------------*/
 
@@ -1098,22 +1132,6 @@ int echeckrenderpassbegininfo(lua_State *L, int arg, VkRenderPassBeginInfo *p)
     if(err == ERR_NOTPRESENT) POPERROR();
 #undef F
         
-    return 0;
-    }
-
-/*------------------------------------------------------------------------------*/
-
-int echeckcommandbufferinheritanceinfo(lua_State *L, int arg, VkCommandBufferInheritanceInfo *p)
-    {
-    int err;
-    ECHECK_PREAMBLE(p);
-    p->sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_INFO;
-    GetRenderPassOpt(renderPass, "render_pass");
-    GetInteger(subpass, "subpass");
-    GetFramebufferOpt(framebuffer, "framebuffer");
-    GetBoolean(occlusionQueryEnable, "occlusion_query_enable");
-    GetFlags(queryFlags, "query_flags");
-    GetFlags(pipelineStatistics, "pipeline_statistics");
     return 0;
     }
 

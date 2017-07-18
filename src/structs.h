@@ -50,6 +50,14 @@ int echeckcommandpoolcreateinfo(lua_State *L, int arg, VkCommandPoolCreateInfo *
 #define echeckcommandbufferallocateinfo moonvulkan_echeckcommandbufferallocateinfo
 int echeckcommandbufferallocateinfo(lua_State *L, int arg, VkCommandBufferAllocateInfo *p);
 
+typedef struct {
+    VkCommandBufferBeginInfo p1;
+    VkCommandBufferInheritanceInfo p2;
+} VkCommandBufferBeginInfo_CHAIN;
+
+#define echeckcommandbufferbegininfo moonvulkan_echeckcommandbufferbegininfo
+int echeckcommandbufferbegininfo(lua_State *L, int arg, VkCommandBufferBeginInfo_CHAIN *pp);
+
 #define freerenderpasscreateinfo moonvulkan_freerenderpasscreateinfo
 void freerenderpasscreateinfo(lua_State *L, VkRenderPassCreateInfo *p);
 #define echeckrenderpasscreateinfo moonvulkan_echeckrenderpasscreateinfo
@@ -92,9 +100,6 @@ typedef struct {
 void freesamplercreateinfo(lua_State *L, VkSamplerCreateInfo_CHAIN *p);
 #define echecksamplercreateinfo moonvulkan_echecksamplercreateinfo
 int echecksamplercreateinfo(lua_State *L, int arg, VkSamplerCreateInfo_CHAIN *p);
-
-#define echeckcommandbufferinheritanceinfo moonvulkan_echeckcommandbufferinheritanceinfo
-int echeckcommandbufferinheritanceinfo(lua_State *L, int arg, VkCommandBufferInheritanceInfo *p);
 
 #define pushphysicaldevicelimits moonvulkan_pushphysicaldevicelimits
 int pushphysicaldevicelimits(lua_State *L, VkPhysicalDeviceLimits *p);

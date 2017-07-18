@@ -474,6 +474,12 @@ _level_: <<commandbufferlevel, commandbufferlevel>> *[R]*, +
 _command_buffer_count_: integer, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkCommandBufferAllocateInfo[VkCommandBufferAllocateInfo])#
 
+* [[commandbufferbegininfo]]
+[small]#*commandbufferbegininfo* = { +
+_flags_: <<commandbufferusageflags, commandbufferusageflags>>, +
+_inheritance_info_: <<commandbufferinheritanceinfo, commandbufferinheritanceinfo>>, +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkCommandBufferBeginInfo[VkCommandBufferBeginInfo])#
+
 
 * [[commandbufferinheritanceinfo]]
 [small]#*commandbufferinheritanceinfo* = { +
