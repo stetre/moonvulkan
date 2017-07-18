@@ -6,10 +6,9 @@ In this document, _cb_ is an abbreviation for _command_buffer_ when referring to
 or a return value.
 
 [[allocate_command_buffers]]
-* {_cb_} = *allocate_command_buffers*(<<command_pool, _command_pool_>>, _level_, _count_) +
-[small]#_level_:  <<commandbufferlevel, commandbufferlevel>> +
-_count_: integer +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkAllocateCommandBuffers[vkAllocateCommandBuffers].#
+* {_cb_} = *allocate_command_buffers*(<<command_pool, _command_pool_>>, <<commandbufferallocateinfo, _commandbufferallocateinfo_>>) +
+{_cb_} = *allocate_command_buffers*(<<command_pool, _command_pool_>>, _level_, _count_) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkAllocateCommandBuffers[vkAllocateCommandBuffers].#
 
 [[free_command_buffers]]
 * *free_command_buffers*({_cb_}) +

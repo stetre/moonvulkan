@@ -1277,10 +1277,9 @@ or a return value.</p>
 <div id="allocate_command_buffers" class="ulist">
 <ul>
 <li>
-<p>{<em>cb</em>} = <strong>allocate_command_buffers</strong>(<a href="#command_pool"><em>command_pool</em></a>, <em>level</em>, <em>count</em>)<br>
-<span class="small"><em>level</em>:  <a href="#commandbufferlevel">commandbufferlevel</a><br>
-<em>count</em>: integer<br>
-Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkAllocateCommandBuffers">vkAllocateCommandBuffers</a>.</span></p>
+<p>{<em>cb</em>} = <strong>allocate_command_buffers</strong>(<a href="#command_pool"><em>command_pool</em></a>, <a href="#commandbufferallocateinfo"><em>commandbufferallocateinfo</em></a>)<br>
+{<em>cb</em>} = <strong>allocate_command_buffers</strong>(<a href="#command_pool"><em>command_pool</em></a>, <em>level</em>, <em>count</em>)<br>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkAllocateCommandBuffers">vkAllocateCommandBuffers</a>.</span></p>
 </li>
 </ul>
 </div>
@@ -3544,6 +3543,13 @@ Note3: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/htm
 <em>flags</em>: <a href="#commandpoolcreateflags">commandpoolcreateflags</a>,<br>
 <em>queue_family_index</em>: integer,<br>
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkCommandPoolCreateInfo">VkCommandPoolCreateInfo</a>)</span></p>
+</li>
+<li>
+<p><a id="commandbufferallocateinfo"></a>
+<span class="small"><strong>commandbufferallocateinfo</strong> = {<br>
+<em>level</em>: <a href="#commandbufferlevel">commandbufferlevel</a> <strong>[R]</strong>,<br>
+<em>command_buffer_count</em>: integer,<br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkCommandBufferAllocateInfo">VkCommandBufferAllocateInfo</a>)</span></p>
 </li>
 <li>
 <p><a id="commandbufferinheritanceinfo"></a>

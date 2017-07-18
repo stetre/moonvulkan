@@ -45,11 +45,20 @@ static int Create(lua_State *L)
     VkCommandBuffer *command_buffer;
     VkCommandBufferAllocateInfo info;
     VkCommandPool command_pool = checkcommand_pool(L, 1, &command_pool_ud);
-    info.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO;
-    info.pNext = NULL;
-    info.commandPool = command_pool;
-    info.level = checkcommandbufferlevel(L, 2);
-    info.commandBufferCount = luaL_checkinteger(L, 3);
+
+    if(lua_istable(L, 2))
+        {
+        if(echeckcommandbufferallocateinfo(L, 2, &info)) return argerror(L, 2);
+        info.commandPool = command_pool;
+        }
+    else
+        {
+        info.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO;
+        info.pNext = NULL;
+        info.commandPool = command_pool;
+        info.level = checkcommandbufferlevel(L, 2);
+        info.commandBufferCount = luaL_checkinteger(L, 3);
+        }
 
     count = info.commandBufferCount;
     if(count == 0) return argerrorc(L, 2, ERR_VALUE);

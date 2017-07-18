@@ -254,6 +254,7 @@ do {                                                \
 #define GetImageType(name, sname) GetEnum(name, sname, testimagetype)
 #define GetImageViewType(name, sname) GetEnum(name, sname, testimageviewtype)
 #define GetDescriptorUpdateTemplateType(name, sname) GetEnum(name, sname, testdescriptorupdatetemplatetype)
+#define GetCommandBufferLevel(name, sname) GetEnum(name, sname, testcommandbufferlevel)
 
 /* optional enums with defval */
 #define GetPipelineBindPoint(name, sname) GetEnumOpt(name, sname, testpipelinebindpoint, VK_PIPELINE_BIND_POINT_GRAPHICS)
@@ -660,6 +661,19 @@ int echeckcommandpoolcreateinfo(lua_State *L, int arg, VkCommandPoolCreateInfo *
     GetInteger(queueFamilyIndex, "queue_family_index");
     return 0;
     }
+
+/*------------------------------------------------------------------------------*/
+
+int echeckcommandbufferallocateinfo(lua_State *L, int arg, VkCommandBufferAllocateInfo *p)
+    {
+    int err;
+    ECHECK_PREAMBLE(p);
+    p->sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO;
+    GetCommandBufferLevel(level, "level");
+    GetInteger(commandBufferCount, "command_buffer_count");
+    return 0;
+    }
+
 
 
 /*------------------------------------------------------------------------------*/
