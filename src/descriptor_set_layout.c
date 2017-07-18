@@ -38,13 +38,6 @@ static int freedescriptor_set_layout(lua_State *L, ud_t *ud)
     }
 
 
-static void FreeInfo(lua_State *L, VkDescriptorSetLayoutCreateInfo *p)
-    {
-    if(p->pBindings)
-        freedescriptorsetlayoutbindinglist(L, 
-            (VkDescriptorSetLayoutBinding*)p->pBindings, p->bindingCount);
-    }
-
 static int Create(lua_State *L)
     {
     ud_t *ud;
@@ -52,22 +45,28 @@ static int Create(lua_State *L)
     VkResult ec;
     VkDescriptorSetLayout descriptor_set_layout;
     VkDescriptorSetLayoutCreateInfo info;
-
     VkDevice device = checkdevice(L, 1, NULL);
-    const VkAllocationCallbacks *allocator = optallocator(L, 4);
+    const VkAllocationCallbacks *allocator = NULL;
 
-    memset(&info, 0, sizeof(info));
-    info.sType = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_CREATE_INFO;
-    info.pNext = NULL;
-    info.flags = optflags(L, 2, 0);
-
-    info.pBindings = echeckdescriptorsetlayoutbindinglist(L, 3, &info.bindingCount, &err);
-    if(err < 0)
-        { FreeInfo(L, &info); return argerror(L, 3); }
-    if(err) lua_pop(L, 1);
+    if(lua_istable(L, 2))
+        {
+        allocator = optallocator(L, 3);
+        if(echeckdescriptorsetlayoutcreateinfo(L, 2, &info)) return argerror(L, 2);
+        }
+    else
+        {
+        memset(&info, 0, sizeof(info));
+        info.sType = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_CREATE_INFO;
+        info.pNext = NULL;
+        info.flags = optflags(L, 2, 0);
+        info.pBindings = echeckdescriptorsetlayoutbindinglist(L, 3, &info.bindingCount, &err);
+        if(err < 0)
+            { freedescriptorsetlayoutcreateinfo(L, &info); return argerror(L, 3); }
+        if(err) lua_pop(L, 1);
+        }
 
     ec = UD(device)->ddt->CreateDescriptorSetLayout(device, &info, allocator, &descriptor_set_layout);
-    FreeInfo(L, &info);
+    freedescriptorsetlayoutcreateinfo(L, &info);
     CheckError(L, ec);
     TRACE_CREATE(descriptor_set_layout, "descriptor_set_layout");
     ud = newuserdata_nondispatchable(L, descriptor_set_layout, DESCRIPTOR_SET_LAYOUT_MT);

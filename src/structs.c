@@ -779,9 +779,6 @@ int echeckdescriptorpoolcreateinfo(lua_State *L, int arg, VkDescriptorPoolCreate
     return 0;
     }
 
-
-
-
 /*------------------------------------------------------------------------------*/
 
 static void freedescriptorsetlayoutbinding(lua_State *L, VkDescriptorSetLayoutBinding *p)
@@ -825,6 +822,32 @@ static int echeckdescriptorsetlayoutbinding(lua_State *L, int arg, VkDescriptorS
 /* echeckdescriptorsetlayoutbindinglist() */
 FREELISTFUNC(VkDescriptorSetLayoutBinding, descriptorsetlayoutbinding)
 ECHECKLISTFUNC(VkDescriptorSetLayoutBinding, descriptorsetlayoutbinding, freedescriptorsetlayoutbindinglist)
+
+
+
+void freedescriptorsetlayoutcreateinfo(lua_State *L, VkDescriptorSetLayoutCreateInfo *p)
+    {
+    if(p->pBindings)
+        freedescriptorsetlayoutbindinglist(L, (VkDescriptorSetLayoutBinding*)p->pBindings, p->bindingCount);
+    }
+
+int echeckdescriptorsetlayoutcreateinfo(lua_State *L, int arg, VkDescriptorSetLayoutCreateInfo *p)
+    {
+    int err, arg1;
+    uint32_t count;
+    ECHECK_PREAMBLE(p);
+    p->sType = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_CREATE_INFO;
+    GetFlags(flags, "flags");
+#define F "bindings"
+    PUSHFIELD(F);
+    p->pBindings = echeckdescriptorsetlayoutbindinglist(L, arg1, &count, &err);
+    p->bindingCount = count;
+    POPFIELD();
+    if(err<0) return efielderror(L, F);
+    if(err == ERR_NOTPRESENT) POPERROR();
+#undef F
+    return 0;
+    }
 
 /*------------------------------------------------------------------------------*/
 

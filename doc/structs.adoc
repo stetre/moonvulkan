@@ -713,6 +713,8 @@ _size_: integer, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPushConstantRange[VkPushConstantRange]) +
 <<constructors, Constructor>>: *pushconstantrange*(_stage_flags_, _offset_, _size_)#
 
+'''
+
 * [[descriptorpoolcreateinfo]]
 [small]#*descriptorpoolcreateinfo* = { +
 _flags_: <<descriptorpoolcreateflags, descriptorpoolcreateflags>>, +
@@ -726,6 +728,13 @@ _type_: <<descriptortype, descriptortype>> *[R]*, +
 _descriptor_count_: integer (defaults to 1), +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkDescriptorPoolSize[VkDescriptorPoolSize])#
 
+'''
+
+* [[descriptorsetlayoutcreateinfo]]
+[small]#*descriptorsetlayoutcreateinfo* = { +
+_flags_: <<descriptorsetlayoutcreateflags, descriptorsetlayoutcreateflags>>, +
+_bindings_: {<<descriptorsetlayoutbinding, descriptorsetlayoutbinding>>}, +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkDescriptorSetLayoutCreateInfo[VkDescriptorSetLayoutCreateInfo])#
 
 * [[descriptorsetlayoutbinding]]
 [small]#*descriptorsetlayoutbinding* = { +

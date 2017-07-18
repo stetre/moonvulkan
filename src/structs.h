@@ -72,6 +72,15 @@ int echeckdescriptorpoolcreateinfo(lua_State *L, int arg, VkDescriptorPoolCreate
 #define echeckdescriptorpoolsizelist moonvulkan_echeckdescriptorpoolsizelist
 VkDescriptorPoolSize* echeckdescriptorpoolsizelist(lua_State *L, int arg, uint32_t *count, int *err);
 
+#define freedescriptorsetlayoutbindinglist moonvulkan_freedescriptorsetlayoutbindinglist
+void freedescriptorsetlayoutbindinglist(lua_State *L, void* list, uint32_t count);
+#define echeckdescriptorsetlayoutbindinglist moonvulkan_echeckdescriptorsetlayoutbindinglist
+VkDescriptorSetLayoutBinding* echeckdescriptorsetlayoutbindinglist(lua_State *L, int arg, uint32_t *count, int *err);
+#define echeckdescriptorsetlayoutcreateinfo moonvulkan_echeckdescriptorsetlayoutcreateinfo
+int echeckdescriptorsetlayoutcreateinfo(lua_State *L, int arg, VkDescriptorSetLayoutCreateInfo *p);
+#define freedescriptorsetlayoutcreateinfo moonvulkan_freedescriptorsetlayoutcreateinfo
+void freedescriptorsetlayoutcreateinfo(lua_State *L, VkDescriptorSetLayoutCreateInfo *p);
+
 #define freerenderpasscreateinfo moonvulkan_freerenderpasscreateinfo
 void freerenderpasscreateinfo(lua_State *L, VkRenderPassCreateInfo *p);
 #define echeckrenderpasscreateinfo moonvulkan_echeckrenderpasscreateinfo
@@ -153,12 +162,6 @@ int pushextent2d(lua_State *L, VkExtent2D *p);
 int echeckextent3d(lua_State *L, int arg, VkExtent3D *dst);
 #define pushextent3d moonvulkan_pushextent3d
 int pushextent3d(lua_State *L, VkExtent3D *p);
-
-#define freedescriptorsetlayoutbindinglist moonvulkan_freedescriptorsetlayoutbindinglist
-void freedescriptorsetlayoutbindinglist(lua_State *L, void* list, uint32_t count);
-#define echeckdescriptorsetlayoutbindinglist moonvulkan_echeckdescriptorsetlayoutbindinglist
-VkDescriptorSetLayoutBinding* echeckdescriptorsetlayoutbindinglist(lua_State *L, int arg, uint32_t *count, int *err);
-
 
 typedef struct {
     VkPhysicalDeviceProperties2KHR p1;
