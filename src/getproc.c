@@ -395,7 +395,7 @@ device_dt_t* getproc_device(lua_State *L, VkDevice device, VkDeviceCreateInfo *c
     /* EXTENSIONS -------------------------------- */
 #define GET(fn) do {                                            \
     dt->fn = (PFN_vk##fn)GetDeviceProcAddr(device, "vk"#fn);    \
-    /*printf("@@ "#fn" %p\n", (void*)(dt->fn));*/               \
+    /*printf(""#fn" %p\n", (void*)(dt->fn)); */                 \
 } while(0)
 
     for(i = 0; i < createinfo->enabledExtensionCount; i++)

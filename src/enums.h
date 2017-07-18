@@ -81,7 +81,7 @@ void enums_freelist(lua_State *L, uint32_t *list);
 #define DOMAIN_COLOR_SPACE                      34
 #define DOMAIN_PRESENT_MODE                     35
 #define DOMAIN_DEBUG_REPORT_OBJECT_TYPE         36
-#define DOMAIN_DEBUG_REPORT_ERROR               37
+#define DOMAIN_XXXXXXXXXXXXXXXXXX               37 //@@ reusable
 #define DOMAIN_DESCRIPTOR_UPDATE_TEMPLATE_TYPE  38
 #define DOMAIN_VALIDATION_CHECK                 39
 #define DOMAIN_DISPLAY_POWER_STATE              40
@@ -293,13 +293,6 @@ void enums_freelist(lua_State *L, uint32_t *list);
 #define checkdebugreportobjecttype(L, arg) (VkDebugReportObjectTypeEXT)enums_check((L), DOMAIN_DEBUG_REPORT_OBJECT_TYPE, (arg))
 #define pushdebugreportobjecttype(L, val) enums_push((L), DOMAIN_DEBUG_REPORT_OBJECT_TYPE, (uint32_t)(val))
 #define valuesdebugreportobjecttype(L) enums_values((L), DOMAIN_DEBUG_REPORT_OBJECT_TYPE)
-
-#if 0 //@@
-#define testdebugreporterror(L, arg, err) (VkDebugReportErrorEXT)enums_test((L), DOMAIN_DEBUG_REPORT_ERROR, (arg), (err))
-#define checkdebugreporterror(L, arg) (VkDebugReportErrorEXT)enums_check((L), DOMAIN_DEBUG_REPORT_ERROR, (arg))
-#define pushdebugreporterror(L, val) enums_push((L), DOMAIN_DEBUG_REPORT_ERROR, (uint32_t)(val))
-#define valuesdebugreporterror(L) enums_values((L), DOMAIN_DEBUG_REPORT_ERROR)
-#endif
 
 #define testdescriptorupdatetemplatetype(L, arg, err) (VkDescriptorUpdateTemplateTypeKHR)enums_test((L), DOMAIN_DESCRIPTOR_UPDATE_TEMPLATE_TYPE, (arg), (err))
 #define checkdescriptorupdatetemplatetype(L, arg) (VkDescriptorUpdateTemplateTypeKHR)enums_check((L), DOMAIN_DESCRIPTOR_UPDATE_TEMPLATE_TYPE, (arg))
