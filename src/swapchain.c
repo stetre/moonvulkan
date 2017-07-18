@@ -187,34 +187,18 @@ static int AcquireNextImage(lua_State *L)
 
 static int QueuePresent(lua_State *L)
     {
-    int err, per_swapchain_results;
-    uint32_t count, i, n;
+    int per_swapchain_results;
+    uint32_t i, n;
     VkResult ec;
-    VkResult *results = NULL;
     ud_t *ud;
-    VkPresentInfoKHR  *info;
+    VkPresentInfoKHR_CHAIN  info;
 
     VkQueue queue = checkqueue(L, 1, &ud);
-    
+    per_swapchain_results = optboolean(L, 3, 0);
     CheckDevicePfn(L, ud, QueuePresentKHR);
 
-    info = echeckpresentinfo(L, 2, &err);
-    if(!info) return argerror(L, 2);
-
-    per_swapchain_results = optboolean(L, 3, 0);
-
-    count = info->swapchainCount;
-    if(per_swapchain_results)
-        {
-        info->pResults = (VkResult*)MallocNoErr(L, sizeof(VkResult)*count);
-        if(!info->pResults)
-            {
-            freepresentinfo(L, info);
-            return errmemory(L);
-            }
-        }
-
-    ec = ud->ddt->QueuePresentKHR(queue, info);
+    if(echeckpresentinfo(L, 2, &info, per_swapchain_results)) return argerror(L, 2);
+    ec = ud->ddt->QueuePresentKHR(queue, &info.p1);
 
     pushresult(L, ec);
     n = 1;
@@ -222,14 +206,14 @@ static int QueuePresent(lua_State *L)
     if(per_swapchain_results)
         {   
         lua_newtable(L);
-        for(i = 0; i < count; i++)
+        for(i = 0; i < info.p1.swapchainCount; i++)
             {
-            pushresult(L, results[i]);
+            pushresult(L, info.p1.pResults[i]);
             lua_rawseti(L, -2, i+1);
             }
-        n++;
+        n = 2;
         }
-    freepresentinfo(L, info);
+    freepresentinfo(L, &info);
     return n;
     }
 

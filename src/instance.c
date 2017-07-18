@@ -47,12 +47,12 @@ static int Create(lua_State *L)
     ud_t *ud;
     VkResult ec;
     VkInstance instance;
-    VkInstanceCreateInfo info;
+    VkInstanceCreateInfo_CHAIN info;
     const VkAllocationCallbacks *allocator = optallocator(L, 2);
 
     if(echeckinstancecreateinfo(L, 1, &info)) return argerror(L, 1);
 
-    ec = vk.CreateInstance(&info, allocator, &instance);
+    ec = vk.CreateInstance(&info.p1, allocator, &instance);
     if(ec)
         {
         freeinstancecreateinfo(L, &info);
@@ -65,7 +65,7 @@ static int Create(lua_State *L)
 /*  ud->parent_ud = NULL; */
     ud->destructor = freeinstance;  
     ud->allocator = allocator; /* see you later allocator */
-    ud->idt = getproc_instance(L, instance, &info);
+    ud->idt = getproc_instance(L, instance, &info.p1);
     freeinstancecreateinfo(L, &info);
     return 1;
     }

@@ -338,24 +338,17 @@ static int GetPhysicalDeviceSurfaceCapabilities2(lua_State *L, VkPhysicalDevice 
     {
     VkResult ec;
     VkPhysicalDeviceSurfaceInfo2KHR info;
-    VkSurfaceCapabilities2KHR *capabilities;
+    VkSurfaceCapabilities2KHR_CHAIN capabilities;
 
-    capabilities = newsurfacecapabilities2(L);
-    if(!capabilities) return errmemory(L);
+    initsurfacecapabilities2(L, &capabilities);
 
     info.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SURFACE_INFO_2_KHR;
     info.pNext = NULL;
     info.surface = checksurface(L, 2, NULL);
 
-    ec = ud->idt->GetPhysicalDeviceSurfaceCapabilities2KHR(physdev, &info, capabilities);
-    if(ec)
-        {
-        freesurfacecapabilities2(L, capabilities);
-        CheckError(L, ec);
-        return 0;
-        }
-    pushsurfacecapabilities2(L, capabilities);
-    freesurfacecapabilities2(L, capabilities);
+    ec = ud->idt->GetPhysicalDeviceSurfaceCapabilities2KHR(physdev, &info, &capabilities.p1);
+    CheckError(L, ec);
+    pushsurfacecapabilities2(L, &capabilities);
     return 1;
     }
 

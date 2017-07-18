@@ -231,7 +231,7 @@ static int InvalidateMappedMemoryRanges(lua_State *L)
 
 static int GetBufferMemoryRequirements2(lua_State *L, VkBuffer buffer, ud_t *ud)
     {
-    VkMemoryRequirements2KHR *req;
+    VkMemoryRequirements2KHR_CHAIN req;
     VkBufferMemoryRequirementsInfo2KHR info;
     VkDevice device = ud->device;
 
@@ -239,12 +239,9 @@ static int GetBufferMemoryRequirements2(lua_State *L, VkBuffer buffer, ud_t *ud)
     info.pNext = NULL;
     info.buffer = buffer;
 
-    req = newmemoryrequirements2(L);
-    if(!req) return errmemory(L);
-
-    ud->ddt->GetBufferMemoryRequirements2KHR(device, &info, req);
-    pushmemoryrequirements2(L, req);
-    freememoryrequirements2(L, req);
+    initmemoryrequirements2(L, &req);
+    ud->ddt->GetBufferMemoryRequirements2KHR(device, &info, &req.p1);
+    pushmemoryrequirements2(L, &req);
     return 1;
     }
 
@@ -265,7 +262,7 @@ static int GetBufferMemoryRequirements(lua_State *L)
 
 static int GetImageMemoryRequirements2(lua_State *L, VkImage image, ud_t *ud)
     {
-    VkMemoryRequirements2KHR *req;
+    VkMemoryRequirements2KHR_CHAIN req;
     VkImageMemoryRequirementsInfo2KHR info;
     VkDevice device = ud->device;
 
@@ -273,12 +270,9 @@ static int GetImageMemoryRequirements2(lua_State *L, VkImage image, ud_t *ud)
     info.pNext = NULL;
     info.image = image;
 
-    req = newmemoryrequirements2(L);
-    if(!req) return errmemory(L);
-
-    ud->ddt->GetImageMemoryRequirements2KHR(device, &info, req);
-    pushmemoryrequirements2(L, req);
-    freememoryrequirements2(L, req);
+    initmemoryrequirements2(L, &req);
+    ud->ddt->GetImageMemoryRequirements2KHR(device, &info, &req.p1);
+    pushmemoryrequirements2(L, &req);
     return 1;
     }
 

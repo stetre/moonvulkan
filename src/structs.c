@@ -36,12 +36,16 @@
  *   Lua convention to raise errors.
  */
 
-#define ECHECK_PREAMBLE                                                         \
-    memset(p, 0, sizeof(*p));                                                   \
+#define UNUSED(p_) (void)(p_)
+#define CLEAR(p_) memset((p_), 0, sizeof(*(p_)))
+
+#define ECHECK_PREAMBLE(p_) do {                                                \
+    memset((p_), 0, sizeof(*(p_)));                                             \
     if(lua_isnoneornil(L, arg))                                                 \
         { lua_pushstring(L, errstring(ERR_NOTPRESENT)); return ERR_NOTPRESENT; }\
     if(lua_type(L, arg) != LUA_TTABLE)                                          \
-        { lua_pushstring(L, errstring(ERR_TABLE)); return ERR_TABLE; }
+        { lua_pushstring(L, errstring(ERR_TABLE)); return ERR_TABLE; }          \
+} while(0)
         
 #define POPERROR()  lua_pop(L, 1)
 
@@ -67,11 +71,10 @@ static int efielderror(lua_State *L, const char *fieldname)
 #define PUSHFIELD(sname)    \
     do { lua_pushstring(L, sname); lua_rawget(L, arg); arg1 = lua_gettop(L); } while(0)
 
-#define POPFIELD()          \
-    do { lua_remove(L, arg1); } while(0)
+#define POPFIELD() do { lua_remove(L, arg1); } while(0)
 
 #define IsPresent(sname, dst) do {                                      \
-/* checks is a field is present and sets dst to 1 or 0 accordingly */   \
+/* checks if a field is present and sets dst to 1 or 0 accordingly */   \
     lua_pushstring(L, sname);                                           \
     lua_rawget(L, arg);                                                 \
     (dst) = lua_isnoneornil(L, -1) ? 0 : 1;                             \
@@ -646,126 +649,13 @@ VkXxx* echeck##xxx##list(lua_State *L, int arg, uint32_t *count, int *err)  \
 } while(0)
 
 
-/*------------------------------------------------------------------------------*/
-
-static void freeapplicationinfo(lua_State *L, VkApplicationInfo *p)
-    {
-    if(!p) return;
-    if(p->pApplicationName) Free(L, (char*)p->pApplicationName);
-    if(p->pEngineName) Free(L, (char*)p->pEngineName);
-    }
-
-static int echeckapplicationinfo(lua_State *L, int arg, VkApplicationInfo *p)
-/* freeapplicationinfo() must be called in any case, even on error,
- * except for err = ERR_NOTPRESENT.
- */
-    {
-    int err;
-    ECHECK_PREAMBLE
-    p->sType = VK_STRUCTURE_TYPE_APPLICATION_INFO;
-    GetStringOpt(pApplicationName, "application_name");
-    GetInteger(applicationVersion, "application_version");
-    GetStringOpt(pEngineName, "engine_name");
-    GetInteger(engineVersion, "engine_version");
-    GetInteger(apiVersion, "api_version");
-    return 0;
-    }
-
-void freeinstancecreateinfo(lua_State *L, VkInstanceCreateInfo *p)
-    {
-    if(!p) return;
-    if(p->pApplicationInfo)
-        {
-        freeapplicationinfo(L, (VkApplicationInfo*)p->pApplicationInfo);
-        Free(L, (void*)p->pApplicationInfo);
-        }
-    if(p->ppEnabledLayerNames) freestringlist(L, (char**)p->ppEnabledLayerNames, p->enabledLayerCount);
-    if(p->ppEnabledExtensionNames) freestringlist(L, (char**)p->ppEnabledExtensionNames, p->enabledExtensionCount);
-    }
-
-int echeckinstancecreateinfo(lua_State *L, int arg, VkInstanceCreateInfo *p)
-    {
-    int arg1, err;
-    VkApplicationInfo *appinfo;
-
-    ECHECK_PREAMBLE
-    p->sType = VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO;
-    GetFlags(flags, "flags");
-
-#define F "application_info"
-    appinfo = MALLOC(L, VkApplicationInfo);
-    if(!appinfo) return pusherror(L, ERR_MEMORY);
-    PUSHFIELD(F);
-    err = echeckapplicationinfo(L, arg1, appinfo);
-    POPFIELD();
-    if(err < 0) return efielderror(L, F);
-    if(err == ERR_NOTPRESENT)
-        { POPERROR(); Free(L, appinfo); }
-    else
-        p->pApplicationInfo = appinfo; 
-#undef F
-#define F "enabled_layer_names"
-    PUSHFIELD(F);
-    p->ppEnabledLayerNames = (const char* const*)checkstringlist(L, arg1, &p->enabledLayerCount, &err);
-    POPFIELD();
-    if(err < 0 && err != ERR_EMPTY)
-        { freeinstancecreateinfo(L, p); return fielderror(L, F, err); }
-#undef F
-#define F "enabled_extension_names"
-    PUSHFIELD(F);
-    p->ppEnabledExtensionNames = (const char* const*)checkstringlist(L, arg1, &p->enabledExtensionCount, &err);
-    POPFIELD();
-    if(err < 0 && err != ERR_EMPTY)
-        { freeinstancecreateinfo(L, p); return fielderror(L, F, err); }
-#undef F
-    
-    return 0;
-    }
-
-
-/*------------------------------------------------------------------------------*/
-
-static int echeckdevicequeuecreateinfo(lua_State *L, int arg, VkDeviceQueueCreateInfo *p)
-    {
-    int arg1, err;
-    uint32_t count;
-    p->sType = VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO;
-    GetFlags(flags, "flags");
-    GetInteger(queueFamilyIndex, "queue_family_index");
-#define F   "queue_priorities"
-    PUSHFIELD(F);
-    p->pQueuePriorities = (const float*)checkfloatlist(L, arg1, &count, &err);
-    p->queueCount = count;
-    POPFIELD();
-    if(err) return fielderror(L, F, err);
-#undef F
-    return 0;
-    }
-
-static void freedevicequeuecreateinfolist(lua_State *L, void *list, uint32_t count)
-    {
-    uint32_t i;
-    VkDeviceQueueCreateInfo *p = (VkDeviceQueueCreateInfo*)list;
-    if((!p)||(count==0)) return;
-    for(i=0; i<count; i++)
-        {
-        if(p[i].pQueuePriorities)
-            Free(L, (void*)(p[i].pQueuePriorities));
-        }
-    Free(L, p);
-    }
-
-
-/* echeckdevicequeuecreateinfolist() */
-static ECHECKLISTFUNC(VkDeviceQueueCreateInfo, devicequeuecreateinfo, freedevicequeuecreateinfolist)
-
     
 /*------------------------------------------------------------------------------*/
 
 static int echeckdescriptorpoolsize(lua_State *L, int arg, VkDescriptorPoolSize *p)
     {
     int err;
-    ECHECK_PREAMBLE
+    ECHECK_PREAMBLE(p);
     GetDescriptorType(type, "type");
     GetIntegerOpt(descriptorCount, "descriptor_count", 1);
     return 0;
@@ -789,7 +679,7 @@ static int echeckdescriptorsetlayoutbinding(lua_State *L, int arg, VkDescriptorS
     int err, arg1;
     uint32_t count;
 
-    ECHECK_PREAMBLE
+    ECHECK_PREAMBLE(p);
     GetInteger(binding, "binding");
     GetDescriptorType(descriptorType, "descriptor_type");
     GetInteger(descriptorCount, "descriptor_count");
@@ -823,7 +713,7 @@ ECHECKLISTFUNC(VkDescriptorSetLayoutBinding, descriptorsetlayoutbinding, freedes
 static int echeckattachmentdescription(lua_State *L, int arg, VkAttachmentDescription *p)
     {
     int err;
-    ECHECK_PREAMBLE
+    ECHECK_PREAMBLE(p);
     GetFlags(flags, "flags");
     GetFormat(format, "format");
     GetSamples(samples, "samples");
@@ -842,7 +732,7 @@ static ECHECKLISTFUNC(VkAttachmentDescription, attachmentdescription, NULL)
 static int echecksubpassdependency(lua_State *L, int arg, VkSubpassDependency *p)
     {
     int err;
-    ECHECK_PREAMBLE
+    ECHECK_PREAMBLE(p);
     GetSubpass(srcSubpass, "src_subpass");
     GetSubpass(dstSubpass, "dst_subpass");
     GetFlags(srcStageMask, "src_stage_mask");
@@ -859,7 +749,7 @@ static ECHECKLISTFUNC(VkSubpassDependency, subpassdependency, NULL)
 static int echeckattachmentreference(lua_State *L, int arg, VkAttachmentReference *p)
     {
     int err;
-    ECHECK_PREAMBLE
+    ECHECK_PREAMBLE(p);
     GetAttachment(attachment, "attachment");
     GetImageLayout(layout, "layout");
     return 0;
@@ -883,7 +773,7 @@ static int echecksubpassdescription(lua_State *L, int arg, VkSubpassDescription 
     uint32_t count;
     VkAttachmentReference ref;
 
-    ECHECK_PREAMBLE
+    ECHECK_PREAMBLE(p);
     GetFlags(flags, "flags");
     GetPipelineBindPoint(pipelineBindPoint, "pipeline_bind_point");
 #define F "input_attachments"
@@ -950,7 +840,7 @@ void freerenderpasscreateinfo(lua_State *L, VkRenderPassCreateInfo *p)
 int echeckrenderpasscreateinfo(lua_State *L, int arg, VkRenderPassCreateInfo *p)
     {
     int err, arg1;
-    ECHECK_PREAMBLE
+    ECHECK_PREAMBLE(p);
     p->sType = VK_STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO;
     GetFlags(flags, "flags");
 
@@ -988,7 +878,7 @@ void freeframebuffercreateinfo(lua_State *L, VkFramebufferCreateInfo *p)
 int echeckframebuffercreateinfo(lua_State *L, int arg, VkFramebufferCreateInfo *p)
     {
     int err, arg1;
-    ECHECK_PREAMBLE
+    ECHECK_PREAMBLE(p);
     p->sType = VK_STRUCTURE_TYPE_FRAMEBUFFER_CREATE_INFO;
     GetFlags(flags, "flags");
 
@@ -1018,7 +908,7 @@ void freebuffercreateinfo(lua_State *L, VkBufferCreateInfo *p)
 int echeckbuffercreateinfo(lua_State *L, int arg, VkBufferCreateInfo *p)
     {
     int err, arg1;
-    ECHECK_PREAMBLE
+    ECHECK_PREAMBLE(p);
     p->sType = VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO;
     GetFlags(flags, "flags");
     GetInteger(size, "size");
@@ -1038,7 +928,7 @@ int echeckbuffercreateinfo(lua_State *L, int arg, VkBufferCreateInfo *p)
 int echeckbufferviewcreateinfo(lua_State *L, int arg, VkBufferViewCreateInfo *p)
     {
     int err;
-    ECHECK_PREAMBLE
+    ECHECK_PREAMBLE(p);
     p->sType = VK_STRUCTURE_TYPE_BUFFER_VIEW_CREATE_INFO;
     GetFlags(flags, "flags");
 /*  p->buffer = set by caller */
@@ -1059,7 +949,7 @@ void freeimagecreateinfo(lua_State *L, VkImageCreateInfo *p)
 int echeckimagecreateinfo(lua_State *L, int arg, VkImageCreateInfo *p)
     {
     int err, arg1;
-    ECHECK_PREAMBLE
+    ECHECK_PREAMBLE(p);
     p->sType = VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO;
     GetFlags(flags, "flags");
     GetImageType(imageType, "image_type");
@@ -1086,7 +976,7 @@ int echeckimagecreateinfo(lua_State *L, int arg, VkImageCreateInfo *p)
 int echeckimageviewcreateinfo(lua_State *L, int arg, VkImageViewCreateInfo *p)
     {
     int err;
-    ECHECK_PREAMBLE
+    ECHECK_PREAMBLE(p);
     p->sType = VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO;
     GetFlags(flags, "flags");
 /*  p->image = set by caller */
@@ -1099,21 +989,15 @@ int echeckimageviewcreateinfo(lua_State *L, int arg, VkImageViewCreateInfo *p)
 
 /*------------------------------------------------------------------------------*/
 
-typedef struct {
-    VkSamplerCreateInfo p1;
-    VkSamplerReductionModeCreateInfoEXT p2;
-} VkSamplerCreateInfo_CHAIN;
-
-void freesamplercreateinfo(lua_State *L, VkSamplerCreateInfo *p)
+void freesamplercreateinfo(lua_State *L, VkSamplerCreateInfo_CHAIN *p)
     {
-    if(!p) return;
-    Free(L, (void*)p);
+    (void)L; (void)p;
     }
 
 static int echecksamplercreateinfo_(lua_State *L, int arg, VkSamplerCreateInfo *p)
     {
     int err;
-    ECHECK_PREAMBLE
+    ECHECK_PREAMBLE(p);
     p->sType = VK_STRUCTURE_TYPE_SAMPLER_CREATE_INFO;
     GetFlags(flags, "flags");
     GetFilter(magFilter, "mag_filter");
@@ -1137,27 +1021,25 @@ static int echecksamplercreateinfo_(lua_State *L, int arg, VkSamplerCreateInfo *
 static int echecksamplerreductionmodecreateinfo(lua_State *L, int arg, VkSamplerReductionModeCreateInfoEXT *p)
     {
     int err;
-    ECHECK_PREAMBLE
+    ECHECK_PREAMBLE(p);
     p->sType = VK_STRUCTURE_TYPE_SAMPLER_REDUCTION_MODE_CREATE_INFO_EXT;
     GetSamplerReductionMode(reductionMode, "reduction_mode");
     return 0;
     }
 
-VkSamplerCreateInfo *echecksamplercreateinfo(lua_State *L, int arg, int *err)
+int echecksamplercreateinfo(lua_State *L, int arg, VkSamplerCreateInfo_CHAIN *p)
     {
-    int p2_present;
-    VkSamplerCreateInfo_CHAIN *p = MALLOC_NOERR(L, VkSamplerCreateInfo_CHAIN);
-    if(!p) { *err = ERR_MEMORY; pusherror(L, ERR_MEMORY); return NULL; }
-    *err = echecksamplercreateinfo_(L, arg, &p->p1);
-    if(*err) { freesamplercreateinfo(L, (VkSamplerCreateInfo*)p); return NULL; }
+    int err, p2_present;
+    err = echecksamplercreateinfo_(L, arg, &p->p1);
+    if(err) { freesamplercreateinfo(L, p); return err; }
     IsPresent("reduction_mode", p2_present);
     if(p2_present)
         {
-        *err = echecksamplerreductionmodecreateinfo(L, arg, &p->p2);
-        if(*err) { freesamplercreateinfo(L, (VkSamplerCreateInfo*)p); return NULL; }
+        err = echecksamplerreductionmodecreateinfo(L, arg, &p->p2);
+        if(err) { freesamplercreateinfo(L, p); return err; }
         p->p1.pNext = &p->p2;
         }
-    return (VkSamplerCreateInfo*)p;
+    return 0;
     }
 
 
@@ -1175,7 +1057,7 @@ int echeckrenderpassbegininfo(lua_State *L, int arg, VkRenderPassBeginInfo *p)
     int err, arg1;
     uint32_t count;
 
-    ECHECK_PREAMBLE
+    ECHECK_PREAMBLE(p);
     p->sType = VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO;
 
     GetRenderPass(renderPass, "render_pass");
@@ -1198,7 +1080,7 @@ int echeckrenderpassbegininfo(lua_State *L, int arg, VkRenderPassBeginInfo *p)
 int echeckcommandbufferinheritanceinfo(lua_State *L, int arg, VkCommandBufferInheritanceInfo *p)
     {
     int err;
-    ECHECK_PREAMBLE
+    ECHECK_PREAMBLE(p);
     p->sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_INFO;
     GetRenderPassOpt(renderPass, "render_pass");
     GetInteger(subpass, "subpass");
@@ -1214,7 +1096,7 @@ int echeckcommandbufferinheritanceinfo(lua_State *L, int arg, VkCommandBufferInh
 static int echeckphysicaldevicefeatures(lua_State *L, int arg, VkPhysicalDeviceFeatures *p)
     {
     int err;
-    ECHECK_PREAMBLE
+    ECHECK_PREAMBLE(p);
     GetBoolean(robustBufferAccess, "robust_buffer_access");
     GetBoolean(fullDrawIndexUint32, "full_draw_index_uint_32");
     GetBoolean(imageCubeArray, "image_cube_array");
@@ -1276,7 +1158,7 @@ static int echeckphysicaldevicefeatures(lua_State *L, int arg, VkPhysicalDeviceF
 static int echeckphysicaldevice16bitstoragefeatures(lua_State *L, int arg, VkPhysicalDevice16BitStorageFeaturesKHR *p)
     {
     int err;
-    ECHECK_PREAMBLE
+    ECHECK_PREAMBLE(p);
     GetBoolean(storageBuffer16BitAccess, "storage_buffer_16bit_access");
     GetBoolean(uniformAndStorageBuffer16BitAccess, "uniform_and_storage_buffer_16bit_access");
     GetBoolean(storagePushConstant16, "storage_push_constant_16");
@@ -1287,27 +1169,19 @@ static int echeckphysicaldevice16bitstoragefeatures(lua_State *L, int arg, VkPhy
 static int echeckphysicaldevicevariablepointerfeatures(lua_State *L, int arg, VkPhysicalDeviceVariablePointerFeaturesKHR *p)
     {
     int err;
-    ECHECK_PREAMBLE
+    ECHECK_PREAMBLE(p);
     GetBoolean(variablePointersStorageBuffer, "variable_pointers_storage_buffer");
     GetBoolean(variablePointers, "variable_pointers");
     return 0;
     }
 
-
 static int echeckphysicaldeviceblendoperationadvancedfeatures(lua_State *L, int arg, VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT *p)
     {
     int err;
-    ECHECK_PREAMBLE
+    ECHECK_PREAMBLE(p);
     GetBoolean(advancedBlendCoherentOperations, "advanced_blend_coherent_operations");
     return 0;
     }
-
-typedef struct {
-    VkPhysicalDeviceFeatures2KHR p1;
-    VkPhysicalDevice16BitStorageFeaturesKHR p2;
-    VkPhysicalDeviceVariablePointerFeaturesKHR p3;
-    VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT p4;
-} VkPhysicalDeviceFeatures2KHR_CHAIN;
 
 #define BUILD_CHAIN_VkPhysicalDeviceFeatures2KHR(p) do { \
     (p)->p1.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2_KHR; \
@@ -1320,23 +1194,15 @@ typedef struct {
     (p)->p4.pNext = NULL; \
 } while(0)
 
-VkPhysicalDeviceFeatures2KHR* newphysicaldevicefeatures2(lua_State *L)
+void initphysicaldevicefeatures2(lua_State *L, VkPhysicalDeviceFeatures2KHR_CHAIN *p)
     {
-    VkPhysicalDeviceFeatures2KHR_CHAIN *p = MALLOC_NOERR(L, VkPhysicalDeviceFeatures2KHR_CHAIN);
-    if(!p) return NULL;
+    UNUSED(L); CLEAR(p);
     BUILD_CHAIN_VkPhysicalDeviceFeatures2KHR(p);
-    return (VkPhysicalDeviceFeatures2KHR*)p;
     }
 
-void freephysicaldevicefeatures2(lua_State *L, VkPhysicalDeviceFeatures2KHR *p)
-    {
-    Free(L, (void*)p);
-    }
-
-static int echeckphysicaldevicefeatures2(lua_State *L, int arg, VkPhysicalDeviceFeatures2KHR *pp)
+static int echeckphysicaldevicefeatures2(lua_State *L, int arg, VkPhysicalDeviceFeatures2KHR_CHAIN *p)
     {
     int err;
-    VkPhysicalDeviceFeatures2KHR_CHAIN *p = (VkPhysicalDeviceFeatures2KHR_CHAIN*)pp;
     err = echeckphysicaldevicefeatures(L, arg, &p->p1.features);
     if(err) return err;
     err = echeckphysicaldevice16bitstoragefeatures(L, arg, &p->p2);
@@ -1433,9 +1299,8 @@ static int pushphysicaldeviceblendoperationadvancedfeatures(lua_State *L, VkPhys
     return 1;
     }
 
-int pushphysicaldevicefeatures2(lua_State *L, VkPhysicalDeviceFeatures2KHR *pp)
+int pushphysicaldevicefeatures2(lua_State *L, VkPhysicalDeviceFeatures2KHR_CHAIN *p)
     {
-    VkPhysicalDeviceFeatures2KHR_CHAIN *p = (VkPhysicalDeviceFeatures2KHR_CHAIN*)pp;
     pushphysicaldevicefeatures(L, &p->p1.features);
     pushphysicaldevice16bitstoragefeatures(L, &p->p2);
     pushphysicaldevicevariablepointerfeatures(L, &p->p3);
@@ -1612,17 +1477,9 @@ static int pushphysicaldevicesamplerfilterminmaxproperties(lua_State *L, VkPhysi
     return 0;
     }
 
-typedef struct {
-    VkPhysicalDeviceProperties2KHR p1;
-    VkPhysicalDevicePushDescriptorPropertiesKHR p2;
-    VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT p3;
-    VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT p4;
-} VkPhysicalDeviceProperties2KHR_CHAIN;
-
-VkPhysicalDeviceProperties2KHR* newphysicaldeviceproperties2(lua_State *L)
+void initphysicaldeviceproperties2(lua_State *L, VkPhysicalDeviceProperties2KHR_CHAIN *p)
     {
-    VkPhysicalDeviceProperties2KHR_CHAIN *p = MALLOC_NOERR(L, VkPhysicalDeviceProperties2KHR_CHAIN);
-    if(!p) return NULL;
+    UNUSED(L); CLEAR(p);
     p->p1.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROPERTIES_2_KHR;
     p->p2.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PUSH_DESCRIPTOR_PROPERTIES_KHR;
     p->p3.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_BLEND_OPERATION_ADVANCED_PROPERTIES_EXT;
@@ -1631,17 +1488,10 @@ VkPhysicalDeviceProperties2KHR* newphysicaldeviceproperties2(lua_State *L)
     p->p2.pNext = &p->p3;
     p->p3.pNext = &p->p4;
     p->p4.pNext = NULL;
-    return (VkPhysicalDeviceProperties2KHR*)p;
     }
 
-void freephysicaldeviceproperties2(lua_State *L, VkPhysicalDeviceProperties2KHR *p)
+int pushphysicaldeviceproperties2(lua_State *L, VkPhysicalDeviceProperties2KHR_CHAIN *p)
     {
-    Free(L, (void*)p);
-    }
-
-int pushphysicaldeviceproperties2(lua_State *L, VkPhysicalDeviceProperties2KHR *pp)
-    {
-    VkPhysicalDeviceProperties2KHR_CHAIN *p = (VkPhysicalDeviceProperties2KHR_CHAIN*)pp;
     pushphysicaldeviceproperties(L, &p->p1.properties);
     pushphysicaldevicepushdescriptorproperties(L, &p->p2);
     pushphysicaldeviceblendoperationadvancedproperties(L, &p->p3);
@@ -1660,26 +1510,14 @@ int pushformatproperties(lua_State *L, VkFormatProperties *p)
     return 1;
     }
 
-typedef struct {
-    VkFormatProperties2KHR p1;
-} VkFormatProperties2KHR_CHAIN;
-
-VkFormatProperties2KHR* newformatproperties2(lua_State *L)
+void initformatproperties2(lua_State *L, VkFormatProperties2KHR_CHAIN* p)
     {
-    VkFormatProperties2KHR_CHAIN *p = MALLOC_NOERR(L, VkFormatProperties2KHR_CHAIN);
-    if(!p) return NULL;
+    UNUSED(L); CLEAR(p);
     p->p1.sType = VK_STRUCTURE_TYPE_FORMAT_PROPERTIES_2_KHR;
-    return (VkFormatProperties2KHR*)p;
     }
 
-void freeformatproperties2(lua_State *L, VkFormatProperties2KHR *p)
+int pushformatproperties2(lua_State *L, VkFormatProperties2KHR_CHAIN *p)
     {
-    Free(L, (void*)p);
-    }
-
-int pushformatproperties2(lua_State *L, VkFormatProperties2KHR *pp)
-    {
-    VkFormatProperties2KHR_CHAIN *p = (VkFormatProperties2KHR_CHAIN*)pp;
     pushformatproperties(L, &p->p1.formatProperties);
     return 1;
     }
@@ -1696,26 +1534,14 @@ int pushimageformatproperties(lua_State *L, VkImageFormatProperties *p)
     return 1;
     }
 
-typedef struct {
-    VkImageFormatProperties2KHR p1;
-} VkImageFormatProperties2KHR_CHAIN;
-
-VkImageFormatProperties2KHR* newimageformatproperties2(lua_State *L)
+void initimageformatproperties2(lua_State *L, VkImageFormatProperties2KHR_CHAIN *p)
     {
-    VkImageFormatProperties2KHR_CHAIN *p = MALLOC_NOERR(L, VkImageFormatProperties2KHR_CHAIN);
-    if(!p) return NULL;
+    UNUSED(L); CLEAR(p);
     p->p1.sType = VK_STRUCTURE_TYPE_IMAGE_FORMAT_PROPERTIES_2_KHR;
-    return (VkImageFormatProperties2KHR*)p;
     }
 
-void freeimageformatproperties2(lua_State *L, VkImageFormatProperties2KHR *p)
+int pushimageformatproperties2(lua_State *L, VkImageFormatProperties2KHR_CHAIN *p)
     {
-    Free(L, (void*)p);
-    }
-
-int pushimageformatproperties2(lua_State *L, VkImageFormatProperties2KHR *pp)
-    {
-    VkImageFormatProperties2KHR_CHAIN *p = (VkImageFormatProperties2KHR_CHAIN*)pp;
     pushimageformatproperties(L, &p->p1.imageFormatProperties);
     return 1;
     }
@@ -1831,26 +1657,14 @@ int pushphysicaldevicememoryproperties(lua_State *L, VkPhysicalDeviceMemoryPrope
     return 1;
     }
 
-typedef struct {
-    VkPhysicalDeviceMemoryProperties2KHR p1;
-} VkPhysicalDeviceMemoryProperties2KHR_CHAIN; 
-
-VkPhysicalDeviceMemoryProperties2KHR* newphysicaldevicememoryproperties2(lua_State *L)
+void initphysicaldevicememoryproperties2(lua_State *L, VkPhysicalDeviceMemoryProperties2KHR_CHAIN *p)
     {
-   VkPhysicalDeviceMemoryProperties2KHR_CHAIN *p = MALLOC_NOERR(L, VkPhysicalDeviceMemoryProperties2KHR_CHAIN);
-    if(!p) return NULL;
+    UNUSED(L); CLEAR(p);
     p->p1.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_PROPERTIES_2_KHR;
-    return (VkPhysicalDeviceMemoryProperties2KHR*)p;
     }
 
-void freephysicaldevicememoryproperties2(lua_State *L, VkPhysicalDeviceMemoryProperties2KHR *p)
+int pushphysicaldevicememoryproperties2(lua_State *L, VkPhysicalDeviceMemoryProperties2KHR_CHAIN *p)
     {
-    Free(L, (void*)p);
-    }
-
-int pushphysicaldevicememoryproperties2(lua_State *L, VkPhysicalDeviceMemoryProperties2KHR *pp)
-    {
-    VkPhysicalDeviceMemoryProperties2KHR_CHAIN *p = (VkPhysicalDeviceMemoryProperties2KHR_CHAIN*)pp;
     pushphysicaldevicememoryproperties(L, &p->p1.memoryProperties);
     return 1;
     }
@@ -1859,7 +1673,7 @@ int pushphysicaldevicememoryproperties2(lua_State *L, VkPhysicalDeviceMemoryProp
 int echeckphysicaldeviceimageformatinfo2(lua_State *L, int arg, VkPhysicalDeviceImageFormatInfo2KHR *p)
     {
     int err;
-    ECHECK_PREAMBLE
+    ECHECK_PREAMBLE(p);
     p->sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_FORMAT_INFO_2_KHR;
     GetFormat(format, "format");
     GetImageType(type, "type");
@@ -1872,7 +1686,7 @@ int echeckphysicaldeviceimageformatinfo2(lua_State *L, int arg, VkPhysicalDevice
 int echeckphysicaldevicesparseimageformatinfo2(lua_State *L, int arg, VkPhysicalDeviceSparseImageFormatInfo2KHR *p)
     {
     int err;
-    ECHECK_PREAMBLE
+    ECHECK_PREAMBLE(p);
     p->sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SPARSE_IMAGE_FORMAT_INFO_2_KHR;
     GetFormat(format, "format");
     GetImageType(type, "type");
@@ -1906,7 +1720,7 @@ int pushlayerproperties(lua_State *L, VkLayerProperties *p)
 int echeckviewport(lua_State *L, int arg, VkViewport *p)
     {
     int err;
-    ECHECK_PREAMBLE
+    ECHECK_PREAMBLE(p);
     GetNumber(x, "x");
     GetNumber(y, "y");
     GetNumber(width, "width");
@@ -1936,7 +1750,7 @@ int pushviewport(lua_State *L, VkViewport *p)
 int echeckoffset2d(lua_State *L, int arg, VkOffset2D *p)
     {
     int err;
-    ECHECK_PREAMBLE
+    ECHECK_PREAMBLE(p);
     GetInteger(x, "x");
     GetInteger(y, "y");
     return 0;
@@ -1945,7 +1759,7 @@ int echeckoffset2d(lua_State *L, int arg, VkOffset2D *p)
 int echeckoffset3d(lua_State *L, int arg, VkOffset3D *p)
     {
     int err;
-    ECHECK_PREAMBLE
+    ECHECK_PREAMBLE(p);
     GetInteger(x, "x");
     GetInteger(y, "y");
     GetInteger(z, "z");
@@ -1955,7 +1769,7 @@ int echeckoffset3d(lua_State *L, int arg, VkOffset3D *p)
 int echeckextent2d(lua_State *L, int arg, VkExtent2D *p)
     {
     int err;
-    ECHECK_PREAMBLE
+    ECHECK_PREAMBLE(p);
     GetInteger(width, "width");
     GetInteger(height, "height");
     return 0;
@@ -1964,7 +1778,7 @@ int echeckextent2d(lua_State *L, int arg, VkExtent2D *p)
 int echeckextent3d(lua_State *L, int arg, VkExtent3D *p)
     {
     int err;
-    ECHECK_PREAMBLE
+    ECHECK_PREAMBLE(p);
     GetInteger(width, "width");
     GetInteger(height, "height");
     GetInteger(depth, "depth");
@@ -2011,7 +1825,7 @@ int pushextent3d(lua_State *L, VkExtent3D *p)
 int echeckrect2d(lua_State *L, int arg, VkRect2D *p)
     {
     int err;
-    ECHECK_PREAMBLE
+    ECHECK_PREAMBLE(p);
     GetOffset2dOpt(offset, "offset");
     GetExtent2dOpt(extent, "extent");
     return 0;
@@ -2033,7 +1847,7 @@ int pushrect2d(lua_State *L, VkRect2D *p)
 int echeckcomponentmapping(lua_State *L, int arg, VkComponentMapping *p)
     {
     int err;
-    ECHECK_PREAMBLE
+    ECHECK_PREAMBLE(p);
     GetComponentSwizzle(r, "r");
     GetComponentSwizzle(g, "g");
     GetComponentSwizzle(b, "b");
@@ -2057,7 +1871,7 @@ int pushcomponentmapping(lua_State *L, VkComponentMapping *p)
 int echeckimagesubresourcerange(lua_State *L, int arg, VkImageSubresourceRange *p)
     {
     int err;
-    ECHECK_PREAMBLE
+    ECHECK_PREAMBLE(p);
     GetFlags(aspectMask, "aspect_mask");
     GetInteger(baseMipLevel, "base_mip_level");
     GetIntegerOrRemaining(levelCount, "level_count", 1);
@@ -2090,7 +1904,7 @@ int echeckclearcolorvalue(lua_State *L, int arg, VkClearColorValue *p)
     const char* s;
     int colortype = -1;
 
-    ECHECK_PREAMBLE
+    ECHECK_PREAMBLE(p);
     lua_pushstring(L, "t"); lua_rawget(L, arg);
     s = luaL_optstring(L, -1, NULL);
     if(!s || (strcmp(s, "float32")==0))
@@ -2140,25 +1954,11 @@ int echeckclearcolorvalue(lua_State *L, int arg, VkClearColorValue *p)
     return 0;
     }
 
-#if 0 
-/* depth and stencil are passed from Lua separately */
-int echeckcleardepthstencilvalue(lua_State *L, int arg, VkClearDepthStencilValue *p)
-    {
-    int err;
-    ECHECK_PREAMBLE
-    GetNumber(depth, "depth");
-    GetInteger(stencil, "stencil");
-    return 0;
-    }
-#endif
 
-/* e.g. clearvalue = { color = { 1, 1, 1, 1, t='uint32' } } 
- *      clearvalue = { depth = 0.8, stencil = 12 } 
- */
 int echeckclearvalue(lua_State *L, int arg, VkClearValue *p)
     {
     int err, t;
-    ECHECK_PREAMBLE
+    ECHECK_PREAMBLE(p);
     lua_pushstring(L, "depth");
     t = lua_rawget(L, arg);
     lua_pop(L, 1);
@@ -2176,7 +1976,7 @@ int echeckclearvalue(lua_State *L, int arg, VkClearValue *p)
 int echeckclearattachment(lua_State *L, int arg, VkClearAttachment *p)
     {
     int err;
-    ECHECK_PREAMBLE
+    ECHECK_PREAMBLE(p);
     GetFlags(aspectMask, "aspect_mask");
     GetAttachment(colorAttachment, "color_attachment");
     GetClearValue(clearValue, "clear_value");
@@ -2189,7 +1989,7 @@ ECHECKLISTFUNC(VkClearAttachment, clearattachment, NULL)
 int echeckclearrect(lua_State *L, int arg, VkClearRect *p)
     {
     int err;
-    ECHECK_PREAMBLE
+    ECHECK_PREAMBLE(p);
     GetRect2dOpt(rect, "rect");
     GetInteger(baseArrayLayer, "base_array_layer");
     GetInteger(layerCount, "layer_count");
@@ -2202,7 +2002,7 @@ ECHECKLISTFUNC(VkClearRect, clearrect, NULL)
 int echeckimagesubresourcelayers(lua_State *L, int arg, VkImageSubresourceLayers *p)
     {
     int err;
-    ECHECK_PREAMBLE
+    ECHECK_PREAMBLE(p);
     GetFlags(aspectMask, "aspect_mask");
     GetInteger(mipLevel, "mip_level");
     GetInteger(baseArrayLayer, "base_array_layer");
@@ -2213,7 +2013,7 @@ int echeckimagesubresourcelayers(lua_State *L, int arg, VkImageSubresourceLayers
 int echeckimagecopy(lua_State *L, int arg, VkImageCopy *p)
     {
     int err;
-    ECHECK_PREAMBLE
+    ECHECK_PREAMBLE(p);
     GetImageSubresourceLayers(srcSubresource, "src_subresource");
     GetOffset3dOpt(srcOffset, "src_offset");
     GetImageSubresourceLayers(dstSubresource, "dst_subresource");
@@ -2229,7 +2029,7 @@ ECHECKLISTFUNC(VkImageCopy, imagecopy, NULL)
 int echeckimageblit(lua_State *L, int arg, VkImageBlit *p)
     {
     int err;
-    ECHECK_PREAMBLE
+    ECHECK_PREAMBLE(p);
     GetImageSubresourceLayers(srcSubresource, "src_subresource");
     GetStructArrayOpt(srcOffsets, "src_offsets", 2, echeckoffset3d);
     GetImageSubresourceLayers(dstSubresource, "dst_subresource");
@@ -2243,7 +2043,7 @@ ECHECKLISTFUNC(VkImageBlit, imageblit, NULL)
 int echeckbufferimagecopy(lua_State *L, int arg, VkBufferImageCopy *p)
     {
     int err;
-    ECHECK_PREAMBLE
+    ECHECK_PREAMBLE(p);
     GetInteger(bufferOffset, "buffer_offset");
     GetInteger(bufferRowLength, "buffer_row_length");
     GetInteger(bufferImageHeight, "buffer_image_height");
@@ -2259,7 +2059,7 @@ ECHECKLISTFUNC(VkBufferImageCopy, bufferimagecopy, NULL)
 int echeckimageresolve(lua_State *L, int arg, VkImageResolve *p)
     {
     int err;
-    ECHECK_PREAMBLE
+    ECHECK_PREAMBLE(p);
     GetImageSubresourceLayers(srcSubresource, "src_subresource");
     GetOffset3dOpt(srcOffset, "src_offset");
     GetImageSubresourceLayers(dstSubresource, "dst_subresource");
@@ -2274,7 +2074,7 @@ ECHECKLISTFUNC(VkImageResolve, imageresolve, NULL)
 int echeckbuffercopy(lua_State *L, int arg, VkBufferCopy *p)
     {
     int err;
-    ECHECK_PREAMBLE
+    ECHECK_PREAMBLE(p);
     GetInteger(srcOffset, "src_offset");
     GetInteger(dstOffset, "dst_offset");
     GetInteger(size, "size");
@@ -2287,7 +2087,7 @@ ECHECKLISTFUNC(VkBufferCopy, buffercopy, NULL)
 int echeckmemorybarrier(lua_State *L, int arg, VkMemoryBarrier *p)
     {
     int err;
-    ECHECK_PREAMBLE
+    ECHECK_PREAMBLE(p);
     p->sType = VK_STRUCTURE_TYPE_MEMORY_BARRIER;
     GetFlags(srcAccessMask, "src_access_mask");
     GetFlags(dstAccessMask, "dst_access_mask");
@@ -2300,7 +2100,7 @@ ECHECKLISTFUNC(VkMemoryBarrier, memorybarrier, NULL)
 int echeckbuffermemorybarrier(lua_State *L, int arg, VkBufferMemoryBarrier *p)
     {
     int err;
-    ECHECK_PREAMBLE
+    ECHECK_PREAMBLE(p);
     p->sType = VK_STRUCTURE_TYPE_BUFFER_MEMORY_BARRIER;
     GetFlags(srcAccessMask, "src_access_mask");
     GetFlags(dstAccessMask, "dst_access_mask");
@@ -2318,7 +2118,7 @@ ECHECKLISTFUNC(VkBufferMemoryBarrier, buffermemorybarrier, NULL)
 int echeckimagememorybarrier(lua_State *L, int arg, VkImageMemoryBarrier *p)
     {
     int err;
-    ECHECK_PREAMBLE
+    ECHECK_PREAMBLE(p);
     p->sType = VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER;
     GetFlags(srcAccessMask, "src_access_mask");
     GetFlags(dstAccessMask, "dst_access_mask");
@@ -2337,7 +2137,7 @@ ECHECKLISTFUNC(VkImageMemoryBarrier, imagememorybarrier, NULL)
 static int echeckpushconstantrange(lua_State *L, int arg, VkPushConstantRange *p)
     {
     int err;
-    ECHECK_PREAMBLE
+    ECHECK_PREAMBLE(p);
     GetFlags(stageFlags, "stage_flags");
     GetInteger(offset, "offset");
     GetInteger(size, "size");
@@ -2352,7 +2152,7 @@ ECHECKLISTFUNC(VkPushConstantRange, pushconstantrange, NULL)
 static int echeckmappedmemoryrange(lua_State *L, int arg, VkMappedMemoryRange *p)
     {
     int err;
-    ECHECK_PREAMBLE
+    ECHECK_PREAMBLE(p);
     p->sType = VK_STRUCTURE_TYPE_MAPPED_MEMORY_RANGE;
     GetDeviceMemory(memory, "memory");
     GetInteger(offset, "offset");
@@ -2382,30 +2182,17 @@ int pushmemorydedicatedrequirements(lua_State *L, VkMemoryDedicatedRequirementsK
     return 1;
     }
 
-typedef struct {
-    VkMemoryRequirements2KHR p1;
-    VkMemoryDedicatedRequirementsKHR p2;
-} VkMemoryRequirements2KHR_CHAIN;
-
-VkMemoryRequirements2KHR* newmemoryrequirements2(lua_State *L)
+void initmemoryrequirements2(lua_State *L, VkMemoryRequirements2KHR_CHAIN *p)
     {
-    VkMemoryRequirements2KHR_CHAIN *p = MALLOC_NOERR(L, VkMemoryRequirements2KHR_CHAIN);
-    if(!p) return NULL;
+    UNUSED(L); CLEAR(p);
     p->p1.sType = VK_STRUCTURE_TYPE_MEMORY_REQUIREMENTS_2_KHR;
     p->p2.sType = VK_STRUCTURE_TYPE_MEMORY_DEDICATED_REQUIREMENTS_KHR;
     p->p1.pNext = &p->p2;
     p->p2.pNext = NULL;
-    return (VkMemoryRequirements2KHR*)p;
     }
 
-void freememoryrequirements2(lua_State *L, VkMemoryRequirements2KHR *p)
+int pushmemoryrequirements2(lua_State *L, VkMemoryRequirements2KHR_CHAIN *p)
     {
-    Free(L, (void*)p);
-    }
-
-int pushmemoryrequirements2(lua_State *L, VkMemoryRequirements2KHR *pp)
-    {
-    VkMemoryRequirements2KHR_CHAIN *p = (VkMemoryRequirements2KHR_CHAIN*)pp;
     pushmemoryrequirements(L, &p->p1.memoryRequirements);
     pushmemorydedicatedrequirements(L, &p->p2);
     return 1;
@@ -2451,7 +2238,7 @@ int pushsparseimagememoryrequirements2(lua_State *L, VkSparseImageMemoryRequirem
 static int echecksparsememorybind(lua_State *L, int arg, VkSparseMemoryBind *p)
     {
     int err;
-    ECHECK_PREAMBLE
+    ECHECK_PREAMBLE(p);
     GetInteger(resourceOffset, "resource_offset");
     GetInteger(size, "size");
     GetDeviceMemory(memory, "memory");
@@ -2466,7 +2253,7 @@ static ECHECKLISTFUNC(VkSparseMemoryBind, sparsememorybind, NULL) /* echeckspars
 int echeckimagesubresource(lua_State *L, int arg, VkImageSubresource *p)
     {
     int err;
-    ECHECK_PREAMBLE
+    ECHECK_PREAMBLE(p);
     GetFlags(aspectMask, "aspect_mask");
     GetInteger(mipLevel, "mip_level");
     GetInteger(arrayLayer, "array_layer");
@@ -2477,7 +2264,7 @@ int echeckimagesubresource(lua_State *L, int arg, VkImageSubresource *p)
 static int echecksparseimagememorybind(lua_State *L, int arg, VkSparseImageMemoryBind *p)
     {
     int err;
-    ECHECK_PREAMBLE
+    ECHECK_PREAMBLE(p);
     GetImageSubresource(subresource, "subresource");
     GetOffset3dOpt(offset, "offset");
     GetExtent3dOpt(extent, "extent");
@@ -2502,7 +2289,7 @@ static int echecksparsebuffermemorybindinfo(lua_State *L, int arg, VkSparseBuffe
     {
     int err, arg1;
     uint32_t count;
-    ECHECK_PREAMBLE
+    ECHECK_PREAMBLE(p);
 
     GetBuffer(buffer, "buffer");
 #define F "binds"
@@ -2532,7 +2319,7 @@ static int echecksparseimageopaquememorybindinfo(lua_State *L, int arg, VkSparse
     {
     int err, arg1;
     uint32_t count;
-    ECHECK_PREAMBLE
+    ECHECK_PREAMBLE(p);
 
     GetImage(image, "image");
 #define F "binds"
@@ -2562,7 +2349,7 @@ static int echecksparseimagememorybindinfo(lua_State *L, int arg, VkSparseImageM
     {
     int err, arg1;
     uint32_t count;
-    ECHECK_PREAMBLE
+    ECHECK_PREAMBLE(p);
 
     GetImage(image, "image");
 #define F "binds"
@@ -2606,7 +2393,7 @@ static int echecksubmitinfo(lua_State *L, int arg, VkSubmitInfo *p)
     {
     int err, arg1;
     uint32_t count;
-    ECHECK_PREAMBLE
+    ECHECK_PREAMBLE(p);
     p->sType = VK_STRUCTURE_TYPE_SUBMIT_INFO;
 
 #define F "wait_semaphores"
@@ -2665,7 +2452,7 @@ static int echeckbindsparseinfo(lua_State *L, int arg, VkBindSparseInfo *p)
     {
     int err, arg1;
     uint32_t count;
-    ECHECK_PREAMBLE
+    ECHECK_PREAMBLE(p);
     p->sType = VK_STRUCTURE_TYPE_BIND_SPARSE_INFO;
 
 #define F "wait_semaphores"
@@ -2744,30 +2531,17 @@ static int pushsharedpresentsurfacecapabilities(lua_State *L, VkSharedPresentSur
     return 1;
     }
 
-typedef struct {
-    VkSurfaceCapabilities2KHR p1;
-    VkSharedPresentSurfaceCapabilitiesKHR p2;
-} VkSurfaceCapabilities2KHR_CHAIN;
-
-VkSurfaceCapabilities2KHR* newsurfacecapabilities2(lua_State *L)
+void initsurfacecapabilities2(lua_State *L, VkSurfaceCapabilities2KHR_CHAIN *p)
     {
-    VkSurfaceCapabilities2KHR_CHAIN *p = MALLOC_NOERR(L, VkSurfaceCapabilities2KHR_CHAIN);
-    if(!p) return NULL;
+    UNUSED(L); CLEAR(p);
     p->p1.sType = VK_STRUCTURE_TYPE_SURFACE_CAPABILITIES_2_KHR;
     p->p2.sType = VK_STRUCTURE_TYPE_SHARED_PRESENT_SURFACE_CAPABILITIES_KHR;
     p->p1.pNext = &p->p2;
     p->p2.pNext = NULL;
-    return (VkSurfaceCapabilities2KHR*)p;
     }
 
-void freesurfacecapabilities2(lua_State *L, VkSurfaceCapabilities2KHR *p)
+int pushsurfacecapabilities2(lua_State *L, VkSurfaceCapabilities2KHR_CHAIN *p)
     {
-    Free(L, (void*)p);
-    }
-
-int pushsurfacecapabilities2(lua_State *L, VkSurfaceCapabilities2KHR *pp)
-    {
-    VkSurfaceCapabilities2KHR_CHAIN *p = (VkSurfaceCapabilities2KHR_CHAIN*)pp;
     pushsurfacecapabilities(L, &p->p1.surfaceCapabilities);
     pushsharedpresentsurfacecapabilities(L, &p->p2);
     return 1;
@@ -2814,7 +2588,7 @@ int pushsurfaceformat2(lua_State *L, VkSurfaceFormat2KHR *p)
 static int echeckspecializationmapentry(lua_State *L, int arg, VkSpecializationMapEntry *p)
     {
     int err;
-    ECHECK_PREAMBLE
+    ECHECK_PREAMBLE(p);
     GetInteger(constantID, "constant_id");
     GetInteger(offset, "offset");
     GetInteger(size, "size");
@@ -2838,7 +2612,7 @@ static int echeckspecializationinfo(lua_State *L, int arg, VkSpecializationInfo 
     uint32_t count;
     const char* data;
 
-    ECHECK_PREAMBLE
+    ECHECK_PREAMBLE(p);
 #define F "map_entries"
     PUSHFIELD(F);
     p->pMapEntries = echeckspecializationmapentrylist(L, arg1, &count, &err);
@@ -2882,7 +2656,7 @@ static int echeckpipelineshaderstagecreateinfo(lua_State *L, int arg, VkPipeline
     int err, arg1;
     VkSpecializationInfo* specinfo;
     
-    ECHECK_PREAMBLE
+    ECHECK_PREAMBLE(p);
     p->sType = VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO;
     GetFlags(flags, "flags");
     GetShaderStageFlagBits(stage, "stage");
@@ -2919,7 +2693,7 @@ static ECHECKLISTFUNC(VkPipelineShaderStageCreateInfo, pipelineshaderstagecreate
 static int echeckpipelineinputassemblystatecreateinfo(lua_State *L, int arg, VkPipelineInputAssemblyStateCreateInfo *p)
     {
     int err;
-    ECHECK_PREAMBLE
+    ECHECK_PREAMBLE(p);
     p->sType = VK_STRUCTURE_TYPE_PIPELINE_INPUT_ASSEMBLY_STATE_CREATE_INFO;
     GetFlags(flags, "flags");
     GetTopology(topology, "topology");
@@ -2933,7 +2707,7 @@ static int echeckpipelineinputassemblystatecreateinfo(lua_State *L, int arg, VkP
 static int echeckpipelinetessellationstatecreateinfo(lua_State *L, int arg, VkPipelineTessellationStateCreateInfo *p)
     {
     int err;
-    ECHECK_PREAMBLE
+    ECHECK_PREAMBLE(p);
     p->sType = VK_STRUCTURE_TYPE_PIPELINE_TESSELLATION_STATE_CREATE_INFO;
     GetFlags(flags, "flags");
     GetInteger(patchControlPoints, "patch_control_points");
@@ -2954,7 +2728,7 @@ static int echeckpipelineviewportstatecreateinfo(lua_State *L, int arg, VkPipeli
     int err, arg1;
     uint32_t count;
 
-    ECHECK_PREAMBLE
+    ECHECK_PREAMBLE(p);
     p->sType = VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_STATE_CREATE_INFO;
     GetFlags(flags, "flags");
     GetIntegerOpt(viewportCount, "viewport_count", 1);
@@ -3001,7 +2775,7 @@ static int echeckpipelinerasterizationstatecreateinfo(lua_State *L, int arg, VkP
     {
     int err;
 
-    ECHECK_PREAMBLE
+    ECHECK_PREAMBLE(p);
     p->sType = VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_CREATE_INFO;
     GetFlags(flags, "flags");
     GetBoolean(depthClampEnable, "depth_clamp_enable");
@@ -3029,7 +2803,7 @@ static int echeckpipelinemultisamplestatecreateinfo(lua_State *L, int arg, VkPip
     {
     int err, arg1;
     uint32_t count;
-    ECHECK_PREAMBLE
+    ECHECK_PREAMBLE(p);
     p->sType = VK_STRUCTURE_TYPE_PIPELINE_MULTISAMPLE_STATE_CREATE_INFO;
     GetFlags(flags, "flags");
     GetSamples(rasterizationSamples, "rasterization_samples");
@@ -3055,7 +2829,7 @@ static int echeckpipelinemultisamplestatecreateinfo(lua_State *L, int arg, VkPip
 static int echeckvertexinputbindingdescription(lua_State *L, int arg, VkVertexInputBindingDescription *p)
     {
     int err;
-    ECHECK_PREAMBLE
+    ECHECK_PREAMBLE(p);
     GetInteger(binding, "binding");
     GetInteger(stride, "stride");
     GetVertexInputRate(inputRate, "input_rate");
@@ -3068,7 +2842,7 @@ static ECHECKLISTFUNC(VkVertexInputBindingDescription, vertexinputbindingdescrip
 static int echeckvertexinputattributedescription(lua_State *L, int arg, VkVertexInputAttributeDescription *p)
     {
     int err;
-    ECHECK_PREAMBLE
+    ECHECK_PREAMBLE(p);
     GetInteger(location, "location");
     GetInteger(binding, "binding");
     GetFormat(format, "format");
@@ -3092,7 +2866,7 @@ static int echeckpipelinevertexinputstatecreateinfo(lua_State *L, int arg, VkPip
     int err, arg1;
     uint32_t count;
 
-    ECHECK_PREAMBLE
+    ECHECK_PREAMBLE(p);
     p->sType = VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO;
     GetFlags(flags, "flags");
 #define F "vertex_binding_descriptions"
@@ -3118,7 +2892,7 @@ static int echeckpipelinevertexinputstatecreateinfo(lua_State *L, int arg, VkPip
 static int echeckstencilopstate(lua_State *L, int arg, VkStencilOpState *p)
     {
     int err;
-    ECHECK_PREAMBLE
+    ECHECK_PREAMBLE(p);
     GetStencilOp(failOp, "fail_op");
     GetStencilOp(passOp, "pass_op");
     GetStencilOp(depthFailOp, "depth_fail_op");
@@ -3133,7 +2907,7 @@ static int echeckstencilopstate(lua_State *L, int arg, VkStencilOpState *p)
 static int echeckpipelinedepthstencilstatecreateinfo(lua_State *L, int arg, VkPipelineDepthStencilStateCreateInfo *p)
     {
     int err;
-    ECHECK_PREAMBLE
+    ECHECK_PREAMBLE(p);
     p->sType = VK_STRUCTURE_TYPE_PIPELINE_DEPTH_STENCIL_STATE_CREATE_INFO;
     GetFlags(flags, "flags");
     GetBoolean(depthTestEnable, "depth_test_enable");
@@ -3153,7 +2927,7 @@ static int echeckpipelinedepthstencilstatecreateinfo(lua_State *L, int arg, VkPi
 static int echeckpipelinecolorblendattachmentstate(lua_State *L, int arg, VkPipelineColorBlendAttachmentState *p)
     {
     int err;
-    ECHECK_PREAMBLE
+    ECHECK_PREAMBLE(p);
     GetBoolean(blendEnable, "blend_enable");
     GetBlendFactor(srcColorBlendFactor, "src_color_blend_factor");
     GetBlendFactor(dstColorBlendFactor, "dst_color_blend_factor");
@@ -3180,7 +2954,7 @@ static int echeckpipelinecolorblendstatecreateinfo(lua_State *L, int arg, VkPipe
     uint32_t i, count;
     int isnum;
 
-    ECHECK_PREAMBLE
+    ECHECK_PREAMBLE(p);
     p->sType = VK_STRUCTURE_TYPE_PIPELINE_COLOR_BLEND_STATE_CREATE_INFO;
     GetFlags(flags, "flags");
     GetBoolean(logicOpEnable, "logic_op_enable");
@@ -3220,14 +2994,13 @@ static int echeckpipelinecolorblendstatecreateinfo(lua_State *L, int arg, VkPipe
 static int echeckpipelinecolorblendadvancedstatecreateinfo(lua_State *L, int arg, VkPipelineColorBlendAdvancedStateCreateInfoEXT *p)
     {
     int err;
-    ECHECK_PREAMBLE
+    ECHECK_PREAMBLE(p);
     p->sType = VK_STRUCTURE_TYPE_PIPELINE_COLOR_BLEND_ADVANCED_STATE_CREATE_INFO_EXT ;
     GetBoolean(srcPremultiplied, "src_premultiplied");
     GetBoolean(dstPremultiplied, "dst_premultiplied");
     GetBlendOverlap(blendOverlap, "blend_overlap");
     return 0;
     }
-
 
 /*-------------------------------------------------------------------------------------*/
 
@@ -3242,7 +3015,7 @@ static int echeckpipelinedynamicstatecreateinfo(lua_State *L, int arg, VkPipelin
     int err, arg1;
     uint32_t count;
 
-    ECHECK_PREAMBLE
+    ECHECK_PREAMBLE(p);
     p->sType = VK_STRUCTURE_TYPE_PIPELINE_DYNAMIC_STATE_CREATE_INFO;
     GetFlags(flags, "flags");
     PUSHFIELD("dynamic_states");
@@ -3341,7 +3114,7 @@ static int echeckgraphicspipelinecreateinfo(lua_State *L, int arg, VkGraphicsPip
     VkPipelineColorBlendAdvancedStateCreateInfoEXT *ColorBlendAdvancedState;
     VkPipelineDynamicStateCreateInfo           *DynamicState;
 
-    ECHECK_PREAMBLE
+    ECHECK_PREAMBLE(p);
     p->sType = VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_CREATE_INFO;
     GetFlags(flags, "flags");
     GetPipelineLayout(layout, "layout");
@@ -3457,7 +3230,7 @@ static void freecomputepipelinecreateinfo(lua_State *L, VkComputePipelineCreateI
 static int echeckcomputepipelinecreateinfo(lua_State *L, int arg, VkComputePipelineCreateInfo *p)
     {
     int err;
-    ECHECK_PREAMBLE
+    ECHECK_PREAMBLE(p);
     p->sType = VK_STRUCTURE_TYPE_COMPUTE_PIPELINE_CREATE_INFO;
     GetFlags(flags, "flags");
     GetPipelineLayout(layout, "layout");
@@ -3482,7 +3255,7 @@ void freeswapchaincreateinfo(lua_State *L, VkSwapchainCreateInfoKHR *p)
 int echeckswapchaincreateinfo(lua_State *L, int arg, VkSwapchainCreateInfoKHR *p)
     {
     int err, arg1;
-    ECHECK_PREAMBLE
+    ECHECK_PREAMBLE(p);
     p->sType = VK_STRUCTURE_TYPE_SWAPCHAIN_CREATE_INFO_KHR;
     GetFlags(flags, "flags");
     GetSurface(surface, "surface");
@@ -3517,7 +3290,7 @@ ECHECKLISTFUNC(VkSwapchainCreateInfoKHR, swapchaincreateinfo, freeswapchaincreat
 static int echeckrectlayer(lua_State *L, int arg, VkRectLayerKHR *p)
     {
     int err;
-    ECHECK_PREAMBLE
+    ECHECK_PREAMBLE(p);
     GetOffset2d(offset, "offset");
     GetExtent2d(extent, "extent");
     GetInteger(layer, "layer");
@@ -3539,7 +3312,7 @@ static int echeckpresentregion(lua_State *L, int arg, VkPresentRegionKHR *p)
     {
     int err, arg1;
     uint32_t count;
-    ECHECK_PREAMBLE
+    ECHECK_PREAMBLE(p);
 #define F "rectangles"
     PUSHFIELD(F);
     p->pRectangles = echeckrectlayerlist(L, arg1, &count, &err);
@@ -3565,7 +3338,7 @@ static int echeckpresentregions(lua_State *L, int arg, VkPresentRegionsKHR *p)
     {
     int err, arg1;
     uint32_t count;
-    ECHECK_PREAMBLE
+    ECHECK_PREAMBLE(p);
     p->sType = VK_STRUCTURE_TYPE_PRESENT_REGIONS_KHR;
 #define F "regions"
     PUSHFIELD(F);
@@ -3578,30 +3351,18 @@ static int echeckpresentregions(lua_State *L, int arg, VkPresentRegionsKHR *p)
     return 0;
     }
 
-/*-------------------------------------------------------------------------------------*/
-
-typedef struct {
-    VkPresentInfoKHR p1;
-    VkDisplayPresentInfoKHR p2;
-    VkPresentRegionsKHR p3;
-} VkPresentInfoKHR_CHAIN;
-
-void freepresentinfo(lua_State *L, VkPresentInfoKHR *pp)
+void freepresentinfo(lua_State *L, VkPresentInfoKHR_CHAIN *p)
     {
-    VkPresentInfoKHR_CHAIN *p = (VkPresentInfoKHR_CHAIN*)pp;
-    if(!pp) return;
     if(p->p1.pWaitSemaphores) Free(L, (void*)p->p1.pWaitSemaphores);
     if(p->p1.pSwapchains) Free(L, (void*)p->p1.pSwapchains);
     if(p->p1.pImageIndices) Free(L, (void*)p->p1.pImageIndices);
     if(p->p1.pResults) Free(L, (void*)p->p1.pResults);
     freepresentregions(L, &p->p3);
-    Free(L, (void*)p);
     }
 
 static int echeckdisplaypresentinfo(lua_State *L, int arg, VkDisplayPresentInfoKHR *p)
     {
     int err;
-    ECHECK_PREAMBLE
     p->sType = VK_STRUCTURE_TYPE_DISPLAY_PRESENT_INFO_KHR;
     GetRect2dOpt(srcRect, "src_rect");
     GetRect2dOpt(dstRect, "dst_rect");
@@ -3609,13 +3370,16 @@ static int echeckdisplaypresentinfo(lua_State *L, int arg, VkDisplayPresentInfoK
     return 0;
     }
 
-static int echeckpresentinfo_(lua_State *L, int arg, VkPresentInfoKHR *p)
+int echeckpresentinfo(lua_State *L, int arg, VkPresentInfoKHR_CHAIN *pp, int results)
     {
     int err, arg1;
+    int p2_present, p3_present;
     uint32_t count;
-    ECHECK_PREAMBLE
-    p->sType = VK_STRUCTURE_TYPE_PRESENT_INFO_KHR;
+    VkPresentInfoKHR *p = &pp->p1;
 
+    ECHECK_PREAMBLE(pp);
+
+    p->sType = VK_STRUCTURE_TYPE_PRESENT_INFO_KHR;
 #define F "wait_semaphores"
     PUSHFIELD(F);
     p->pWaitSemaphores = checksemaphorelist(L, arg1, &count, &err, NULL);
@@ -3630,45 +3394,41 @@ static int echeckpresentinfo_(lua_State *L, int arg, VkPresentInfoKHR *p)
     p->swapchainCount = count;
     POPFIELD();
     if(err)
-        { freepresentinfo(L, p); return fielderror(L, F, err); }
+        { freepresentinfo(L, pp); return fielderror(L, F, err); }
+    if(results) /* allocate memory for per-swapchain results */
+        {
+        p->pResults = (VkResult*)MallocNoErr(L, sizeof(VkResult)*(p->swapchainCount));
+        if(!p->pResults)
+            { freepresentinfo(L, pp); return pusherror(L, ERR_MEMORY); }
+        }
 #undef F
 #define F "image_indices"
     PUSHFIELD(F);
     p->pImageIndices = checkuint32list(L, arg1, &count, &err);
     POPFIELD();
-    if(err) { freepresentinfo(L, p); return fielderror(L, F, err); }
+    if(err) { freepresentinfo(L, pp); return fielderror(L, F, err); }
     if(p->swapchainCount != count)
-        { freepresentinfo(L, p); return fielderror(L, F, ERR_LENGTH); }
+        { freepresentinfo(L, pp); return fielderror(L, F, ERR_LENGTH); }
 #undef F
-/*  p->pResults = NULL; */
-    return 0;
-    }
-
-VkPresentInfoKHR *echeckpresentinfo(lua_State *L, int arg, int *err)
-    {
-    int p2_present, p3_present;
-    VkPresentInfoKHR_CHAIN *p = MALLOC_NOERR(L, VkPresentInfoKHR_CHAIN);
-    if(!p) { *err = ERR_MEMORY; pusherror(L, ERR_MEMORY); return NULL; }
-    *err = echeckpresentinfo_(L, arg, &p->p1);
-    if(*err) { freepresentinfo(L, (VkPresentInfoKHR*)p); return NULL; }
+    /*-- extensions --------------------*/
     IsPresent("src_rect", p2_present);
     if(p2_present)
         {
-        *err = echeckdisplaypresentinfo(L, arg, &p->p2);
-        if(*err) { freepresentinfo(L, (VkPresentInfoKHR*)p); return NULL; }
-        p->p1.pNext = &p->p2;
+        err = echeckdisplaypresentinfo(L, arg, &pp->p2);
+        if(err) { freepresentinfo(L, pp); return err; }
+        pp->p1.pNext = &pp->p2;
         }
     IsPresent("regions", p3_present);
     if(p3_present)
         {
-        *err = echeckpresentregions(L, arg, &p->p3);
-        if(*err) { freepresentinfo(L, (VkPresentInfoKHR*)p); return NULL; }
+        err = echeckpresentregions(L, arg, &pp->p3);
+        if(err) { freepresentinfo(L, pp); return err; }
         if(p2_present)
-            p->p1.pNext = &p->p3;
+            pp->p1.pNext = &pp->p3;
         else
-            p->p2.pNext = &p->p3;
+            pp->p2.pNext = &pp->p3;
         }
-    return (VkPresentInfoKHR*)p;
+    return 0;
     }
 
 /*-------------------------------------------------------------------------------------*/
@@ -3676,7 +3436,7 @@ VkPresentInfoKHR *echeckpresentinfo(lua_State *L, int arg, int *err)
 static int echeckdescriptorimageinfo(lua_State *L, int arg, VkDescriptorImageInfo *p)
     {
     int err;
-    ECHECK_PREAMBLE
+    ECHECK_PREAMBLE(p);
     GetSampler(sampler, "sampler");
     GetImageView(imageView, "image_view");
     GetImageLayout(imageLayout, "image_layout");
@@ -3689,7 +3449,7 @@ static ECHECKLISTFUNC(VkDescriptorImageInfo, descriptorimageinfo, NULL)
 static int echeckdescriptorbufferinfo(lua_State *L, int arg, VkDescriptorBufferInfo *p)
     {
     int err;
-    ECHECK_PREAMBLE
+    ECHECK_PREAMBLE(p);
     GetBuffer(buffer, "buffer");
     GetInteger(offset, "offset");
     GetIntegerOrWholeSize(range, "range");
@@ -3712,7 +3472,7 @@ static int echeckwritedescriptorset(lua_State *L, int arg, VkWriteDescriptorSet 
     {
     int err, arg1;
     uint32_t count;
-    ECHECK_PREAMBLE
+    ECHECK_PREAMBLE(p);
     p->sType = VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET;
     GetDescriptorSet(dstSet, "dst_set");
     GetInteger(dstBinding, "dst_binding");
@@ -3777,7 +3537,7 @@ static void freecopydescriptorset(lua_State *L, VkCopyDescriptorSet *p)
 static int echeckcopydescriptorset(lua_State *L, int arg, VkCopyDescriptorSet *p)
     {
     int err;
-    ECHECK_PREAMBLE
+    ECHECK_PREAMBLE(p);
     p->sType = VK_STRUCTURE_TYPE_COPY_DESCRIPTOR_SET;
     GetDescriptorSet(srcSet, "src_set");
     GetInteger(srcBinding, "src_binding");
@@ -3821,7 +3581,7 @@ int pushdisplayplaneproperties(lua_State *L, VkDisplayPlanePropertiesKHR *p)
 int echeckdisplaymodeparameters(lua_State *L, int arg, VkDisplayModeParametersKHR *p)
     {
     int err;
-    ECHECK_PREAMBLE
+    ECHECK_PREAMBLE(p);
     GetExtent2d(visibleRegion, "visible_region");
     GetInteger(refreshRate, "refresh_rate");
     return 0;
@@ -3869,7 +3629,7 @@ void freedisplaysurfacecreateinfo(lua_State *L, VkDisplaySurfaceCreateInfoKHR *p
 int echeckdisplaysurfacecreateinfo(lua_State *L, int arg, VkDisplaySurfaceCreateInfoKHR *p)
     {
     int err;
-    ECHECK_PREAMBLE
+    ECHECK_PREAMBLE(p);
     p->sType = VK_STRUCTURE_TYPE_DISPLAY_SURFACE_CREATE_INFO_KHR ;
     GetFlags(flags, "flags");
 /*  p->displayMode = set by caller */
@@ -3892,7 +3652,7 @@ static void freedescriptorupdatetemplateentry(lua_State *L, VkDescriptorUpdateTe
 static int echeckdescriptorupdatetemplateentry(lua_State *L, int arg, VkDescriptorUpdateTemplateEntryKHR *p)
     {
     int err;
-    ECHECK_PREAMBLE
+    ECHECK_PREAMBLE(p);
     GetInteger(dstBinding, "dst_binding");
     GetInteger(dstArrayElement, "dst_array_element");
     GetInteger(descriptorCount, "descriptor_count");
@@ -3918,7 +3678,7 @@ int echeckdescriptorupdatetemplatecreateinfo(lua_State *L, int arg, VkDescriptor
     {
     int err, arg1;
     uint32_t count;
-    ECHECK_PREAMBLE
+    ECHECK_PREAMBLE(p);
     p->sType = VK_STRUCTURE_TYPE_DESCRIPTOR_UPDATE_TEMPLATE_CREATE_INFO_KHR;
     GetFlags(flags, "flags");
     GetDescriptorUpdateTemplateType(templateType, "template_type");
@@ -3936,33 +3696,61 @@ int echeckdescriptorupdatetemplatecreateinfo(lua_State *L, int arg, VkDescriptor
     return 0;
     }
 
-/*-------------------------------------------------------------------------------------*/
+/*------------------------------------------------------------------------------*/
 
-void freedevicecreateinfo(lua_State *L, VkDeviceCreateInfo *p)
+static int echeckdevicequeuecreateinfo(lua_State *L, int arg, VkDeviceQueueCreateInfo *p)
     {
-    if(!p) return;
+    int arg1, err;
+    uint32_t count;
+    p->sType = VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO;
+    GetFlags(flags, "flags");
+    GetInteger(queueFamilyIndex, "queue_family_index");
+#define F   "queue_priorities"
+    PUSHFIELD(F);
+    p->pQueuePriorities = (const float*)checkfloatlist(L, arg1, &count, &err);
+    p->queueCount = count;
+    POPFIELD();
+    if(err) return fielderror(L, F, err);
+#undef F
+    return 0;
+    }
+
+static void freedevicequeuecreateinfolist(lua_State *L, void *list, uint32_t count)
+    {
+    uint32_t i;
+    VkDeviceQueueCreateInfo *p = (VkDeviceQueueCreateInfo*)list;
+    if((!p)||(count==0)) return;
+    for(i=0; i<count; i++)
+        {
+        if(p[i].pQueuePriorities)
+            Free(L, (void*)(p[i].pQueuePriorities));
+        }
+    Free(L, p);
+    }
+
+/* echeckdevicequeuecreateinfolist() */
+static ECHECKLISTFUNC(VkDeviceQueueCreateInfo, devicequeuecreateinfo, freedevicequeuecreateinfolist)
+
+void freedevicecreateinfo(lua_State *L, VkDeviceCreateInfo_CHAIN *pp)
+    {
+    VkDeviceCreateInfo *p = &pp->p1;
     if(p->pQueueCreateInfos)
         freedevicequeuecreateinfolist(L, (void*)p->pQueueCreateInfos,  p->queueCreateInfoCount);
     if(p->ppEnabledLayerNames)
         freestringlist(L, (char**)p->ppEnabledLayerNames, p->enabledLayerCount);
     if(p->ppEnabledExtensionNames)
         freestringlist(L,  (char**)p->ppEnabledExtensionNames, p->enabledExtensionCount);
-    if(p->pEnabledFeatures)
-        Free(L, (void*)p->pEnabledFeatures);
-    if(p->pNext)
-        freephysicaldevicefeatures2(L, (VkPhysicalDeviceFeatures2KHR*)p->pNext);
+    //freephysicaldevicefeatures(L, &pp->p2a);
+    //freephysicaldevicefeatures2(L, &pp->p2b);
     }
 
-
-
-int echeckdevicecreateinfo(lua_State *L, int arg, VkDeviceCreateInfo *p, ud_t *ud)
+int echeckdevicecreateinfo(lua_State *L, int arg, VkDeviceCreateInfo_CHAIN *pp, ud_t *ud)
     {
     int arg1, err;
     uint32_t count;
-    VkPhysicalDeviceFeatures *features;
-    VkPhysicalDeviceFeatures2KHR *features2;
+    VkDeviceCreateInfo *p = &pp->p1;
 
-    ECHECK_PREAMBLE
+    ECHECK_PREAMBLE(p);
     p->sType = VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO;
 
     GetFlags(flags, "flags");
@@ -3979,80 +3767,114 @@ int echeckdevicecreateinfo(lua_State *L, int arg, VkDeviceCreateInfo *p, ud_t *u
     p->ppEnabledLayerNames = (const char* const*)checkstringlist(L, arg1, &p->enabledLayerCount, &err);
     POPFIELD();
     if(err < 0 && err != ERR_EMPTY)
-        { freedevicecreateinfo(L, p); return fielderror(L, F, err); }
+        { freedevicecreateinfo(L, pp); return fielderror(L, F, err); }
 #undef F
 #define F "enabled_extension_names"
     PUSHFIELD(F);
     p->ppEnabledExtensionNames = (const char* const*)checkstringlist(L, arg1, &p->enabledExtensionCount, &err);
     POPFIELD();
     if(err < 0 && err != ERR_EMPTY)
-        { freedevicecreateinfo(L, p); return fielderror(L, F, err); }
+        { freedevicecreateinfo(L, pp); return fielderror(L, F, err); }
 #undef F
 
     if(!ud->idt->GetPhysicalDeviceFeatures2KHR)
         {
 #define F "enabled_features"
-        features = MALLOC_NOERR(L, VkPhysicalDeviceFeatures);
-        if(!features) { freedevicecreateinfo(L, p); return pusherror(L, ERR_MEMORY); }
         PUSHFIELD(F);
-        err = echeckphysicaldevicefeatures(L, arg1, features);
+        err = echeckphysicaldevicefeatures(L, arg1, &pp->p2a);
         POPFIELD();
         if(err < 0)
-            { freedevicecreateinfo(L, p); return efielderror(L, F); }
+            { freedevicecreateinfo(L, pp); return efielderror(L, F); }
         if(err == ERR_NOTPRESENT)
-            { POPERROR(); Free(L, features); }
+            POPERROR();
         else
-            p->pEnabledFeatures = features;
+            p->pEnabledFeatures = &pp->p2a;
 #undef F
         }
     else
         {
 #define F "enabled_features"
-//      p->pEnabledFeatures = NULL;
-        features2 = newphysicaldevicefeatures2(L);
-        if(!features2) { freedevicecreateinfo(L, p); return pusherror(L, ERR_MEMORY); }
+        p->pEnabledFeatures = NULL;
         PUSHFIELD(F);
-        err = echeckphysicaldevicefeatures2(L, arg1, features2);
+        err = echeckphysicaldevicefeatures2(L, arg1, &pp->p2b);
         POPFIELD();
         if(err < 0)
-            { freedevicecreateinfo(L, p); return efielderror(L, F); }
+            { freedevicecreateinfo(L, pp); return efielderror(L, F); }
         if(err == ERR_NOTPRESENT)
-            { POPERROR(); Free(L, features2); }
+            POPERROR();
         else
-            p->pNext = features2;
+            p->pNext = &pp->p2b;
 #undef F
         }
     return 0;
     }
 
+/*------------------------------------------------------------------------------*/
 
-/*-------------------------------------------------------------------------------------*/
-#if 0 // scaffolding
-
-#define  moonvulkan_
-void free(lua_State *L, Vk *p) //@@
+static void freeapplicationinfo(lua_State *L, VkApplicationInfo *p)
     {
-    if(!p) return;
+    if(p->pApplicationName) Free(L, (char*)p->pApplicationName);
+    if(p->pEngineName) Free(L, (char*)p->pEngineName);
     }
 
-#define  moonvulkan_
-int echeck(lua_State *L, int arg, Vk *p) //@@
+static int echeckapplicationinfo(lua_State *L, int arg, VkApplicationInfo *p)
+/* freeapplicationinfo() must be called in any case, even on error,
+ * except for err = ERR_NOTPRESENT.
+ */
     {
     int err;
-    ECHECK_PREAMBLE
-    p->sType = VK_STRUCTURE_TYPE_;
-    GetFlags(flags, "flags");
-
+    ECHECK_PREAMBLE(p);
+    p->sType = VK_STRUCTURE_TYPE_APPLICATION_INFO;
+    GetStringOpt(pApplicationName, "application_name");
+    GetInteger(applicationVersion, "application_version");
+    GetStringOpt(pEngineName, "engine_name");
+    GetInteger(engineVersion, "engine_version");
+    GetInteger(apiVersion, "api_version");
     return 0;
     }
 
-#define  moonvulkan_
-int push(lua_State *L, Vk *p) //@@
+void freeinstancecreateinfo(lua_State *L, VkInstanceCreateInfo_CHAIN *pp)
     {
-    lua_newtable(L);
-    Set(, "");
-    return 1;
+    VkInstanceCreateInfo *p = &pp->p1;
+    freeapplicationinfo(L, &pp->p2);
+    if(p->ppEnabledLayerNames) freestringlist(L, (char**)p->ppEnabledLayerNames, p->enabledLayerCount);
+    if(p->ppEnabledExtensionNames) freestringlist(L, (char**)p->ppEnabledExtensionNames, p->enabledExtensionCount);
     }
 
-#endif
+int echeckinstancecreateinfo(lua_State *L, int arg, VkInstanceCreateInfo_CHAIN *pp)
+    {
+    int arg1, err;
+    VkInstanceCreateInfo *p = &pp->p1;
+    VkApplicationInfo *appinfo = &pp->p2;
+
+    ECHECK_PREAMBLE(pp);
+    p->sType = VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO;
+    GetFlags(flags, "flags");
+
+#define F "application_info"
+    PUSHFIELD(F);
+    err = echeckapplicationinfo(L, arg1, appinfo);
+    POPFIELD();
+    if(err < 0) return efielderror(L, F);
+    if(err == ERR_NOTPRESENT)
+        POPERROR();
+    else
+        p->pApplicationInfo = appinfo;
+#undef F
+#define F "enabled_layer_names"
+    PUSHFIELD(F);
+    p->ppEnabledLayerNames = (const char* const*)checkstringlist(L, arg1, &p->enabledLayerCount, &err);
+    POPFIELD();
+    if(err < 0 && err != ERR_EMPTY)
+        { freeinstancecreateinfo(L, pp); return fielderror(L, F, err); }
+#undef F
+#define F "enabled_extension_names"
+    PUSHFIELD(F);
+    p->ppEnabledExtensionNames = (const char* const*)checkstringlist(L, arg1, &p->enabledExtensionCount, &err);
+    POPFIELD();
+    if(err < 0 && err != ERR_EMPTY)
+        { freeinstancecreateinfo(L, pp); return fielderror(L, F, err); }
+#undef F
+    return 0;
+    }
 

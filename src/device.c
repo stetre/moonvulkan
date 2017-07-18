@@ -65,14 +65,14 @@ static int Create(lua_State *L)
     ud_t *ud, *physdev_ud;
     VkResult ec;
     VkDevice device;
-    VkDeviceCreateInfo info;
+    VkDeviceCreateInfo_CHAIN info;
 
     VkPhysicalDevice physical_device = checkphysical_device(L, 1, &physdev_ud);
     const VkAllocationCallbacks *allocator = optallocator(L, 3);
 
     if(echeckdevicecreateinfo(L, 2, &info, physdev_ud)) return argerror(L, 2);
 
-    ec = physdev_ud->idt->CreateDevice(physical_device, &info, allocator, &device);
+    ec = physdev_ud->idt->CreateDevice(physical_device, &info.p1, allocator, &device);
     if(ec)
         {
         freedevicecreateinfo(L, &info);
@@ -86,7 +86,7 @@ static int Create(lua_State *L)
     ud->instance = UD(physical_device)->instance;
     ud->allocator = allocator;
     ud->destructor = freedevice;
-    ud->ddt = getproc_device(L, device, &info);
+    ud->ddt = getproc_device(L, device, &info.p1);
     freedevicecreateinfo(L, &info);
     return 1;
     }
