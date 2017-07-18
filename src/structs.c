@@ -756,6 +756,32 @@ static int echeckdescriptorpoolsize(lua_State *L, int arg, VkDescriptorPoolSize 
 /* echeckdescriptorpoolsizelist() */
 ECHECKLISTFUNC(VkDescriptorPoolSize, descriptorpoolsize, NULL)
 
+void freedescriptorpoolcreateinfo(lua_State *L, VkDescriptorPoolCreateInfo *p)
+    {
+    if(p->pPoolSizes) Free(L, (void*)p->pPoolSizes);
+    }
+
+int echeckdescriptorpoolcreateinfo(lua_State *L, int arg, VkDescriptorPoolCreateInfo *p)
+    {
+    int err, arg1;
+    uint32_t count;
+    ECHECK_PREAMBLE(p);
+    p->sType = VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO;
+    GetFlags(flags, "flags");
+    GetInteger(maxSets, "max_sets");
+#define F "pool_sizes"
+    PUSHFIELD(F);
+    p->pPoolSizes = echeckdescriptorpoolsizelist(L, arg1, &count, &err);
+    POPFIELD();
+    if(err) return efielderror(L, F);
+    p->poolSizeCount = count;
+#undef F
+    return 0;
+    }
+
+
+
+
 /*------------------------------------------------------------------------------*/
 
 static void freedescriptorsetlayoutbinding(lua_State *L, VkDescriptorSetLayoutBinding *p)

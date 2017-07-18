@@ -3,11 +3,9 @@
 ==== descriptor_pool
 
 [[create_descriptor_pool]]
-* _descriptor_pool_ = *create_descriptor_pool*(_device_, _flags_, _max_sets_, _pool_sizes_, [<<allocators, _allocator_>>]) +
-[small]#_flags_: <<descriptorpoolcreateflags, descriptorpoolcreateflags>> +
-_max_sets_: integer +
-_pool_sizes_: {<<descriptorpoolsize, descriptorpoolsize>>} +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCreateDescriptorPool[vkCreateDescriptorPool].#
+* _descriptor_pool_ = *create_descriptor_pool*(_device_, <<descriptorpoolcreateinfo, _descriptorpoolcreateinfo_>>, [<<allocators, _allocator_>>]) +
+_descriptor_pool_ = *create_descriptor_pool*(_device_, _flags_, _max_sets_, _pool_sizes_) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCreateDescriptorPool[vkCreateDescriptorPool].#
 
 [[destroy_descriptor_pool]]
 * *destroy_descriptor_pool*(_descriptor_pool_) +

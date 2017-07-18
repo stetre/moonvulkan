@@ -65,6 +65,13 @@ int echecksemaphorecreateinfo(lua_State *L, int arg, VkSemaphoreCreateInfo *p);
 #define echeckeventcreateinfo moonvulkan_echeckeventcreateinfo
 int echeckeventcreateinfo(lua_State *L, int arg, VkEventCreateInfo *p);
 
+#define freedescriptorpoolcreateinfo moonvulkan_freedescriptorpoolcreateinfo
+void freedescriptorpoolcreateinfo(lua_State *L, VkDescriptorPoolCreateInfo *p);
+#define echeckdescriptorpoolcreateinfo moonvulkan_echeckdescriptorpoolcreateinfo
+int echeckdescriptorpoolcreateinfo(lua_State *L, int arg, VkDescriptorPoolCreateInfo *p);
+#define echeckdescriptorpoolsizelist moonvulkan_echeckdescriptorpoolsizelist
+VkDescriptorPoolSize* echeckdescriptorpoolsizelist(lua_State *L, int arg, uint32_t *count, int *err);
+
 #define freerenderpasscreateinfo moonvulkan_freerenderpasscreateinfo
 void freerenderpasscreateinfo(lua_State *L, VkRenderPassCreateInfo *p);
 #define echeckrenderpasscreateinfo moonvulkan_echeckrenderpasscreateinfo
@@ -146,9 +153,6 @@ int pushextent2d(lua_State *L, VkExtent2D *p);
 int echeckextent3d(lua_State *L, int arg, VkExtent3D *dst);
 #define pushextent3d moonvulkan_pushextent3d
 int pushextent3d(lua_State *L, VkExtent3D *p);
-
-#define echeckdescriptorpoolsizelist moonvulkan_echeckdescriptorpoolsizelist
-VkDescriptorPoolSize* echeckdescriptorpoolsizelist(lua_State *L, int arg, uint32_t *count, int *err);
 
 #define freedescriptorsetlayoutbindinglist moonvulkan_freedescriptorsetlayoutbindinglist
 void freedescriptorsetlayoutbindinglist(lua_State *L, void* list, uint32_t count);

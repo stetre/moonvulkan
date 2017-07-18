@@ -39,37 +39,38 @@ static int freedescriptor_pool(lua_State *L, ud_t *ud)
     }
 
 
-static void FreeInfo(lua_State *L, VkDescriptorPoolCreateInfo *p)
-    {
-    if(p->pPoolSizes)
-        Free(L, (void*)p->pPoolSizes);
-    }
-
 static int Create(lua_State *L)
     {
     ud_t *ud, *device_ud;
     VkResult ec;
     VkDescriptorPool descriptor_pool;
     VkDescriptorPoolCreateInfo info;
-    int err;
+    int err, free_allowed;
     uint32_t count;
 
     VkDevice device = checkdevice(L, 1, &device_ud);
-    const VkAllocationCallbacks *allocator = optallocator(L, 5);
+    const VkAllocationCallbacks *allocator = NULL;
 
-    memset(&info, 0, sizeof(info));
-    info.sType = VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO;
-    info.pNext = NULL;
-
-    info.flags = checkflags(L, 2);
-    info.maxSets = luaL_checkinteger(L, 3);
-    info.pPoolSizes = echeckdescriptorpoolsizelist(L, 4, &count, &err);
-    info.poolSizeCount = count;
-    if(err)
-        { FreeInfo(L, &info); return argerror(L, 4); }
+    if(lua_istable(L, 2))
+        {
+        if(echeckdescriptorpoolcreateinfo(L, 2, &info)) return argerror(L, 2);
+        allocator = optallocator(L, 3);
+        }
+    else
+        {
+        memset(&info, 0, sizeof(info));
+        info.sType = VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO;
+        info.pNext = NULL;
+        info.flags = checkflags(L, 2);
+        info.maxSets = luaL_checkinteger(L, 3);
+        info.pPoolSizes = echeckdescriptorpoolsizelist(L, 4, &count, &err);
+        info.poolSizeCount = count;
+        if(err) { freedescriptorpoolcreateinfo(L, &info); return argerror(L, 4); }
+        }
 
     ec = device_ud->ddt->CreateDescriptorPool(device, &info, allocator, &descriptor_pool);
-    FreeInfo(L, &info);
+    free_allowed = info.flags & VK_DESCRIPTOR_POOL_CREATE_FREE_DESCRIPTOR_SET_BIT;
+    freedescriptorpoolcreateinfo(L, &info);
     CheckError(L, ec);
     TRACE_CREATE(descriptor_pool, "descriptor_pool");
     ud = newuserdata_nondispatchable(L, descriptor_pool, DESCRIPTOR_POOL_MT);
@@ -79,9 +80,8 @@ static int Create(lua_State *L)
     ud->allocator = allocator;
     ud->destructor = freedescriptor_pool;
     ud->ddt = device_ud->ddt;
-    /* Rfr. Vulkan Spec '13.2.3. Allocation of Descriptor Sets': */
-    if(info.flags & VK_DESCRIPTOR_POOL_CREATE_FREE_DESCRIPTOR_SET_BIT)
-        MarkFreeDescriptorSetAllowed(ud); 
+    if(free_allowed) /* Rfr. Vulkan Spec '13.2.3. Allocation of Descriptor Sets' */
+        MarkFreeDescriptorSetAllowed(ud);
     return 1;
     }
 

@@ -1235,7 +1235,7 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/
 <ul>
 <li>
 <p><em>command_pool</em> = <strong>create_command_pool</strong>(<em>device</em>, <a href="#commandpoolcreateinfo"><em>commandpoolcreateinfo</em></a>, [<a href="#allocators"><em>allocator</em></a>])<br>
-<em>command_pool</em> = <strong>create_command_pool</strong>(<em>device</em>, <a href="#commandpoolcreateflags"><em>commandpoolcreateflags</em></a>, <em>queue_family_index</em>)<br>
+<em>command_pool</em> = <strong>create_command_pool</strong>(<em>device</em>, <em>flags</em>, <em>queue_family_index</em>)<br>
 <span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCreateCommandPool">vkCreateCommandPool</a>.</span></p>
 </li>
 </ul>
@@ -1295,7 +1295,7 @@ or a return value.</p>
 <ul>
 <li>
 <p><strong>begin_command_buffer</strong>(<em>cb</em>, <a href="#commandbufferbegininfo"><em>commandbufferbegininfo</em></a>)<br>
-<strong>begin_command_buffer</strong>(<em>cb</em>, [<a href="#commandbufferusageflags"><em>commandbufferusageflags</em></a>])<br>
+<strong>begin_command_buffer</strong>(<em>cb</em>, [<em>flags</em>])<br>
 <span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkBeginCommandBuffer">vkBeginCommandBuffer</a>.</span></p>
 </li>
 </ul>
@@ -1763,7 +1763,7 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/
 <ul>
 <li>
 <p><em>fence</em> = <strong>create_fence</strong>(<em>device</em>, <a href="#fencecreateinfo"><em>fencecreateinfo</em></a>, [<a href="#allocators"><em>allocator</em></a>])<br>
-<em>fence</em> = <strong>create_fence</strong>(<em>device</em>, [<a href="#fencecreateflags"><em>fencecreateflags</em></a>])<br>
+<em>fence</em> = <strong>create_fence</strong>(<em>device</em>, [<em>flags</em>])<br>
 <span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCreateFence">vkCreateFence</a>.</span></p>
 </li>
 </ul>
@@ -1811,7 +1811,7 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/
 <ul>
 <li>
 <p><em>semaphore</em> = <strong>create_semaphore</strong>(<em>device</em>, <a href="#semaphorecreateinfo"><em>semaphorecreateinfo</em></a>, [<a href="#allocators"><em>allocator</em></a>])<br>
-<em>semaphore</em> = <strong>create_semaphore</strong>(<em>device</em>, [<a href="#semaphorecreateflags"><em>semaphorecreateflags</em></a>])<br>
+<em>semaphore</em> = <strong>create_semaphore</strong>(<em>device</em>, [<em>flags</em>])<br>
 <span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCreateSemaphore">vkCreateSemaphore</a>.</span></p>
 </li>
 </ul>
@@ -1831,7 +1831,7 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/
 <ul>
 <li>
 <p><em>event</em> = <strong>create_event</strong>(<em>device</em>, <a href="#eventcreateinfo"><em>eventcreateinfo</em></a>, [<a href="#allocators"><em>allocator</em></a>])<br>
-<em>event</em> = <strong>create_event</strong>(<em>device</em>, [<a href="#eventcreateflags"><em>eventcreateflags</em></a>])<br>
+<em>event</em> = <strong>create_event</strong>(<em>device</em>, [<em>flags</em>])<br>
 <span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCreateEvent">vkCreateEvent</a>.</span></p>
 </li>
 </ul>
@@ -2325,11 +2325,9 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/
 <div id="create_descriptor_pool" class="ulist">
 <ul>
 <li>
-<p><em>descriptor_pool</em> = <strong>create_descriptor_pool</strong>(<em>device</em>, <em>flags</em>, <em>max_sets</em>, <em>pool_sizes</em>, [<a href="#allocators"><em>allocator</em></a>])<br>
-<span class="small"><em>flags</em>: <a href="#descriptorpoolcreateflags">descriptorpoolcreateflags</a><br>
-<em>max_sets</em>: integer<br>
-<em>pool_sizes</em>: {<a href="#descriptorpoolsize">descriptorpoolsize</a>}<br>
-Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCreateDescriptorPool">vkCreateDescriptorPool</a>.</span></p>
+<p><em>descriptor_pool</em> = <strong>create_descriptor_pool</strong>(<em>device</em>, <a href="#descriptorpoolcreateinfo"><em>descriptorpoolcreateinfo</em></a>, [<a href="#allocators"><em>allocator</em></a>])<br>
+<em>descriptor_pool</em> = <strong>create_descriptor_pool</strong>(<em>device</em>, <em>flags</em>, <em>max_sets</em>, <em>pool_sizes</em>)<br>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCreateDescriptorPool">vkCreateDescriptorPool</a>.</span></p>
 </li>
 </ul>
 </div>
@@ -3826,6 +3824,14 @@ Note1: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/htm
 <em>size</em>: integer,<br>
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPushConstantRange">VkPushConstantRange</a>)<br>
 <a href="#constructors">Constructor</a>: <strong>pushconstantrange</strong>(<em>stage_flags</em>, <em>offset</em>, <em>size</em>)</span></p>
+</li>
+<li>
+<p><a id="descriptorpoolcreateinfo"></a>
+<span class="small"><strong>descriptorpoolcreateinfo</strong> = {<br>
+<em>flags</em>: <a href="#descriptorpoolcreateflags">descriptorpoolcreateflags</a>,<br>
+<em>max_sets</em>: integer,<br>
+<em>pool_sizes</em>: {<a href="#descriptorpoolsize">descriptorpoolsize</a>}, <strong>[R]</strong><br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkDescriptorPoolCreateInfo">VkDescriptorPoolCreateInfo</a>)</span></p>
 </li>
 <li>
 <p><a id="descriptorpoolsize"></a>

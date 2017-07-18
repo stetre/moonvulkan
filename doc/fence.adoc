@@ -4,7 +4,7 @@
 
 [[create_fence]]
 * _fence_ = *create_fence*(_device_, <<fencecreateinfo, _fencecreateinfo_>>, [<<allocators, _allocator_>>]) +
-_fence_ = *create_fence*(_device_, [<<fencecreateflags, _fencecreateflags_>>]) +
+_fence_ = *create_fence*(_device_, [_flags_]) +
 [small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCreateFence[vkCreateFence].#
 
 [[destroy_fence]]

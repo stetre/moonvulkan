@@ -498,12 +498,10 @@ _pipeline_statistics_: <<querypipelinestatisticflags, querypipelinestatisticflag
 _flags_: <<fencecreateflags, fencecreateflags>>, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkFenceCreateInfo[VkFenceCreateInfo])#
 
-
 * [[semaphorecreateinfo]]
 [small]#*semaphorecreateinfo* = { +
 _flags_: <<semaphorecreateflags, semaphorecreateflags>>, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkSemaphoreCreateInfo[VkSemaphoreCreateInfo])#
-
 
 * [[eventcreateinfo]]
 [small]#*eventcreateinfo* = { +
@@ -715,7 +713,12 @@ _size_: integer, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPushConstantRange[VkPushConstantRange]) +
 <<constructors, Constructor>>: *pushconstantrange*(_stage_flags_, _offset_, _size_)#
 
-
+* [[descriptorpoolcreateinfo]]
+[small]#*descriptorpoolcreateinfo* = { +
+_flags_: <<descriptorpoolcreateflags, descriptorpoolcreateflags>>, +
+_max_sets_: integer, +
+_pool_sizes_: {<<descriptorpoolsize, descriptorpoolsize>>}, *[R]* +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkDescriptorPoolCreateInfo[VkDescriptorPoolCreateInfo])#
 
 * [[descriptorpoolsize]]
 [small]#*descriptorpoolsize* = { +
