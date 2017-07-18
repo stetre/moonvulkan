@@ -88,7 +88,8 @@ void freepipelinelayoutcreateinfo(lua_State *L, VkPipelineLayoutCreateInfo *p);
 #define echeckpipelinelayoutcreateinfo moonvulkan_echeckpipelinelayoutcreateinfo
 int echeckpipelinelayoutcreateinfo(lua_State *L, int arg, VkPipelineLayoutCreateInfo *p);
 
-
+#define echeckquerypoolcreateinfo moonvulkan_echeckquerypoolcreateinfo
+int echeckquerypoolcreateinfo(lua_State *L, int arg, VkQueryPoolCreateInfo *p);
 
 
 #define freerenderpasscreateinfo moonvulkan_freerenderpasscreateinfo

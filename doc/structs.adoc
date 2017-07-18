@@ -794,6 +794,14 @@ _dst_array_element_: integer, +
 _descriptor_count_: integer, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkCopyDescriptorSet[VkCopyDescriptorSet])#
 
+'''
+* [[querypoolcreateinfo]]
+[small]#*querypoolcreateinfo* = { +
+_flags_: <<querypoolcreateflags, querypoolcreateflags>>, +
+_query_type_: <<querytype, querytype>> *[R]*, +
+_query_count_: integer, +
+_pipeline_statistics_: <<querypipelinestatisticflags, querypipelinestatisticflags>>, +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkQueryPoolCreateInfo[VkQueryPoolCreateInfo])#
 
 '''
 

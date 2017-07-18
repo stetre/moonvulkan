@@ -4,13 +4,8 @@
 
 
 [[create_query_pool]]
-* _query_pool_ = *create_query_pool*(_device_, _flags_, _..._) +
-[small]#arg2 - _flags_: <<querypoolcreateflags, querypoolcreateflags>> +
-arg3 - _query_type_: <<querytype, querytype>> +
-arg4 - _query_count_: integer +
-arg5 - _pipeline_statistics_: <<querypipelinestatisticflags, querypipelinestatisticflags>> +
-arg6 - [_allocator_]: <<allocators, allocator>> +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCreateQueryPool[vkCreateQueryPool].#
+* _query_pool_ = *create_query_pool*(_device_, <<querypoolcreateinfo, _querypoolcreateinfo_>>, [<<allocators, _allocator_>>]) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCreateQueryPool[vkCreateQueryPool].#
 
 [[destroy_query_pool]]
 * _data_ = *destroy_query_pool*(_query_pool_, _first_query_, _..._) +

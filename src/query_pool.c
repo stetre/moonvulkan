@@ -47,13 +47,8 @@ static int Create(lua_State *L)
     VkQueryPoolCreateInfo info;
 
     VkDevice device = checkdevice(L, 1, &device_ud);
-    const VkAllocationCallbacks *allocator = optallocator(L, 6);
-    info.sType = VK_STRUCTURE_TYPE_QUERY_POOL_CREATE_INFO;
-    info.pNext = NULL;
-    info.flags = checkflags(L, 2);
-    info.queryType = checkquerytype(L, 3);
-    info.queryCount = luaL_checkinteger(L, 4);
-    info.pipelineStatistics = checkflags(L, 5);
+    const VkAllocationCallbacks *allocator = optallocator(L, 3);
+    if(echeckquerypoolcreateinfo(L, 2, &info)) return argerror(L, 2);
 
     ec = device_ud->ddt->CreateQueryPool(device, &info, allocator, &query_pool);
     CheckError(L, ec);

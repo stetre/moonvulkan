@@ -2381,13 +2381,8 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/
 <div id="create_query_pool" class="ulist">
 <ul>
 <li>
-<p><em>query_pool</em> = <strong>create_query_pool</strong>(<em>device</em>, <em>flags</em>, <em>&#8230;&#8203;</em>)<br>
-<span class="small">arg2 - <em>flags</em>: <a href="#querypoolcreateflags">querypoolcreateflags</a><br>
-arg3 - <em>query_type</em>: <a href="#querytype">querytype</a><br>
-arg4 - <em>query_count</em>: integer<br>
-arg5 - <em>pipeline_statistics</em>: <a href="#querypipelinestatisticflags">querypipelinestatisticflags</a><br>
-arg6 - [<em>allocator</em>]: <a href="#allocators">allocator</a><br>
-Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCreateQueryPool">vkCreateQueryPool</a>.</span></p>
+<p><em>query_pool</em> = <strong>create_query_pool</strong>(<em>device</em>, <a href="#querypoolcreateinfo"><em>querypoolcreateinfo</em></a>, [<a href="#allocators"><em>allocator</em></a>])<br>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCreateQueryPool">vkCreateQueryPool</a>.</span></p>
 </li>
 </ul>
 </div>
@@ -3922,6 +3917,20 @@ Note1: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/htm
 <em>dst_array_element</em>: integer,<br>
 <em>descriptor_count</em>: integer,<br>
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkCopyDescriptorSet">VkCopyDescriptorSet</a>)</span></p>
+</li>
+</ul>
+</div>
+<hr>
+<div class="ulist">
+<ul>
+<li>
+<p><a id="querypoolcreateinfo"></a>
+<span class="small"><strong>querypoolcreateinfo</strong> = {<br>
+<em>flags</em>: <a href="#querypoolcreateflags">querypoolcreateflags</a>,<br>
+<em>query_type</em>: <a href="#querytype">querytype</a> <strong>[R]</strong>,<br>
+<em>query_count</em>: integer,<br>
+<em>pipeline_statistics</em>: <a href="#querypipelinestatisticflags">querypipelinestatisticflags</a>,<br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkQueryPoolCreateInfo">VkQueryPoolCreateInfo</a>)</span></p>
 </li>
 </ul>
 </div>

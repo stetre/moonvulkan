@@ -255,6 +255,7 @@ do {                                                \
 #define GetImageViewType(name, sname) GetEnum(name, sname, testimageviewtype)
 #define GetDescriptorUpdateTemplateType(name, sname) GetEnum(name, sname, testdescriptorupdatetemplatetype)
 #define GetCommandBufferLevel(name, sname) GetEnum(name, sname, testcommandbufferlevel)
+#define GetQueryType(name, sname) GetEnum(name, sname, testquerytype)
 
 /* optional enums with defval */
 #define GetPipelineBindPoint(name, sname) GetEnumOpt(name, sname, testpipelinebindpoint, VK_PIPELINE_BIND_POINT_GRAPHICS)
@@ -895,8 +896,22 @@ int echeckpipelinelayoutcreateinfo(lua_State *L, int arg, VkPipelineLayoutCreate
     return 0;
     }
 
+/*------------------------------------------------------------------------------*/
+
+int echeckquerypoolcreateinfo(lua_State *L, int arg, VkQueryPoolCreateInfo *p)
+    {
+    int err;
+    ECHECK_PREAMBLE(p);
+    p->sType = VK_STRUCTURE_TYPE_QUERY_POOL_CREATE_INFO;
+    GetFlags(flags, "flags");
+    GetQueryType(queryType, "query_type");
+    GetInteger(queryCount, "query_count");
+    GetFlags(pipelineStatistics, "pipeline_statistics");
+    return 0;
+    }
 
 /*------------------------------------------------------------------------------*/
+
 
 static int echeckattachmentdescription(lua_State *L, int arg, VkAttachmentDescription *p)
     {
