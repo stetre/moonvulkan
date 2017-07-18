@@ -2283,7 +2283,7 @@ Otherwise the original functions are used.
 <ul>
 <li>
 <p><em>descriptor_set_layout</em> = <strong>create_descriptor_set_layout</strong>(<em>device</em>, <a href="#descriptorsetlayoutcreateinfo"><em>descriptorsetlayoutcreateinfo</em></a>, [<a href="#allocators"><em>allocator</em></a>])<br>
-<em>descriptor_set_layout</em> = <strong>create_descriptor_set_layout</strong>(<em>device</em>, [<em>flags</em>], [{<em>binding</em>}])<br>
+<em>descriptor_set_layout</em> = <strong>create_descriptor_set_layout</strong>(<em>device</em>, [<em>flags</em>], [<em>bindings</em>])<br>
 <span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCreateDescriptorSetLayout">vkCreateDescriptorSetLayout</a>.</span></p>
 </li>
 </ul>
@@ -2302,11 +2302,9 @@ Otherwise the original functions are used.
 <div id="create_pipeline_layout" class="ulist">
 <ul>
 <li>
-<p><em>pipeline_layout</em> = <strong>create_pipeline_layout</strong>(<em>device</em>, [<em>flags</em>], [<em>set_layouts</em>], [<em>push_constant_ranges</em>], [<a href="#allocators"><em>allocator</em></a>])<br>
-<span class="small">[<em>flags</em>]: <a href="#pipelinelayoutcreateflags">pipelinelayoutcreateflags</a><br>
-[<em>set_layouts</em>]: {<a href="#descriptor_set_layout">descriptor_set_layout</a>}<br>
-[<em>push_constant_ranges</em>]: {<a href="#pushconstantrange">pushconstantrange</a>}<br>
-Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCreatePipelineLayout">vkCreatePipelineLayout</a>.</span></p>
+<p><em>pipeline_layout</em> = <strong>create_pipeline_layout</strong>(<em>device</em>, <a href="#pipelinelayoutcreateinfo"><em>pipelinelayoutcreateinfo</em></a>, [<a href="#allocators"><em>allocator</em></a>])<br>
+<em>pipeline_layout</em> = <strong>create_pipeline_layout</strong>(<em>device</em>, [<em>flags</em>], [<em>set_layouts</em>], [<em>push_constant_ranges</em>], [<a href="#allocators"><em>allocator</em></a>])<br>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCreatePipelineLayout">vkCreatePipelineLayout</a>.</span></p>
 </li>
 </ul>
 </div>
@@ -3815,15 +3813,6 @@ Note1: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/htm
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkImageSubresourceRange">VkImageSubresourceRange</a>)<br>
 <a href="#constructors">Constructor</a>: <strong>imagesubresourcerange</strong>(<em>aspect_mask</em>, <em>base_mip_level</em>, <em>level_count</em>, <em>base_array_layer</em>, <em>layer_count</em>)</span></p>
 </li>
-<li>
-<p><a id="pushconstantrange"></a>
-<span class="small"><strong>pushconstantrange</strong> = {<br>
-<em>stage_flags</em>: <a href="#shaderstageflags">shaderstageflags</a>,<br>
-<em>offset</em>: integer,<br>
-<em>size</em>: integer,<br>
-} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPushConstantRange">VkPushConstantRange</a>)<br>
-<a href="#constructors">Constructor</a>: <strong>pushconstantrange</strong>(<em>stage_flags</em>, <em>offset</em>, <em>size</em>)</span></p>
-</li>
 </ul>
 </div>
 <hr>
@@ -3866,6 +3855,28 @@ Note1: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/htm
 <em>immutable_samplers</em>: {<a href="#sampler">sampler</a>},<br>
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkDescriptorSetLayoutBinding">VkDescriptorSetLayoutBinding</a>)<br>
 <a href="#constructors">Constructor</a>: <strong>descriptorsetlayoutbinding</strong>(<em>binding</em>, <em>descriptor_type</em>, <em>descriptor_count</em>, <em>stage_flags</em>, {<em>immutable_samplers</em>})</span></p>
+</li>
+</ul>
+</div>
+<hr>
+<div class="ulist">
+<ul>
+<li>
+<p><a id="pipelinelayoutcreateinfo"></a>
+<span class="small"><strong>pipelinelayoutcreateinfo</strong> = {<br>
+<em>flags</em>: <a href="#pipelinelayoutcreateflags">pipelinelayoutcreateflags</a>,<br>
+<em>set_layouts</em>: {<a href="#descriptor_set_layout">descriptor_set_layout</a>},<br>
+<em>push_constant_ranges</em>: {<a href="#pushconstantrange">pushconstantrange</a>},<br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPipelineLayoutCreateInfo" class="bare">https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPipelineLayoutCreateInfo</a>)</span></p>
+</li>
+<li>
+<p><a id="pushconstantrange"></a>
+<span class="small"><strong>pushconstantrange</strong> = {<br>
+<em>stage_flags</em>: <a href="#shaderstageflags">shaderstageflags</a>,<br>
+<em>offset</em>: integer,<br>
+<em>size</em>: integer,<br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPushConstantRange">VkPushConstantRange</a>)<br>
+<a href="#constructors">Constructor</a>: <strong>pushconstantrange</strong>(<em>stage_flags</em>, <em>offset</em>, <em>size</em>)</span></p>
 </li>
 </ul>
 </div>

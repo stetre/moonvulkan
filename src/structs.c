@@ -823,8 +823,6 @@ static int echeckdescriptorsetlayoutbinding(lua_State *L, int arg, VkDescriptorS
 FREELISTFUNC(VkDescriptorSetLayoutBinding, descriptorsetlayoutbinding)
 ECHECKLISTFUNC(VkDescriptorSetLayoutBinding, descriptorsetlayoutbinding, freedescriptorsetlayoutbindinglist)
 
-
-
 void freedescriptorsetlayoutcreateinfo(lua_State *L, VkDescriptorSetLayoutCreateInfo *p)
     {
     if(p->pBindings)
@@ -848,6 +846,55 @@ int echeckdescriptorsetlayoutcreateinfo(lua_State *L, int arg, VkDescriptorSetLa
 #undef F
     return 0;
     }
+
+/*------------------------------------------------------------------------------*/
+
+static int echeckpushconstantrange(lua_State *L, int arg, VkPushConstantRange *p)
+    {
+    int err;
+    ECHECK_PREAMBLE(p);
+    GetFlags(stageFlags, "stage_flags");
+    GetInteger(offset, "offset");
+    GetInteger(size, "size");
+    return 0;
+    }
+
+/* echeckpushconstantrangelist() */
+ECHECKLISTFUNC(VkPushConstantRange, pushconstantrange, NULL)
+
+void freepipelinelayoutcreateinfo(lua_State *L, VkPipelineLayoutCreateInfo *p)
+    {
+    if(p->pSetLayouts) Free(L, (void*)p->pSetLayouts);
+    if(p->pPushConstantRanges) Free(L, (void*)p->pPushConstantRanges);
+    }
+
+int echeckpipelinelayoutcreateinfo(lua_State *L, int arg, VkPipelineLayoutCreateInfo *p)
+    {
+    int err, arg1;
+    uint32_t count;
+    ECHECK_PREAMBLE(p);
+    p->sType = VK_STRUCTURE_TYPE_PIPELINE_LAYOUT_CREATE_INFO;
+    GetFlags(flags, "flags");
+#define F "set_layouts"
+    PUSHFIELD(F);
+    p->pSetLayouts = checkdescriptor_set_layoutlist(L, arg1, &count, &err, NULL);
+    p->setLayoutCount = count;
+    POPFIELD();
+    if(err<0)
+        { freepipelinelayoutcreateinfo(L, p); return fielderror(L, F, err); }
+#undef F
+#define F "push_constant_ranges"
+    PUSHFIELD(F);
+    p->pPushConstantRanges = echeckpushconstantrangelist(L, arg1, &count, &err);
+    p->pushConstantRangeCount = count;
+    POPFIELD();
+    if(err<0)
+        { freepipelinelayoutcreateinfo(L, p); return efielderror(L, F); }
+    if(err == ERR_NOTPRESENT) POPERROR();
+#undef F
+    return 0;
+    }
+
 
 /*------------------------------------------------------------------------------*/
 
@@ -2258,19 +2305,6 @@ int echeckimagememorybarrier(lua_State *L, int arg, VkImageMemoryBarrier *p)
 
 /* echeckimagememorybarrierlist() */
 ECHECKLISTFUNC(VkImageMemoryBarrier, imagememorybarrier, NULL)
-
-static int echeckpushconstantrange(lua_State *L, int arg, VkPushConstantRange *p)
-    {
-    int err;
-    ECHECK_PREAMBLE(p);
-    GetFlags(stageFlags, "stage_flags");
-    GetInteger(offset, "offset");
-    GetInteger(size, "size");
-    return 0;
-    }
-
-/* echeckpushconstantrangelist() */
-ECHECKLISTFUNC(VkPushConstantRange, pushconstantrange, NULL)
 
 /*------------------------------------------------------------------------------*/
 

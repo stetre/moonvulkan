@@ -81,6 +81,16 @@ int echeckdescriptorsetlayoutcreateinfo(lua_State *L, int arg, VkDescriptorSetLa
 #define freedescriptorsetlayoutcreateinfo moonvulkan_freedescriptorsetlayoutcreateinfo
 void freedescriptorsetlayoutcreateinfo(lua_State *L, VkDescriptorSetLayoutCreateInfo *p);
 
+#define echeckpushconstantrangelist moonvulkan_echeckpushconstantrangelist
+VkPushConstantRange* echeckpushconstantrangelist(lua_State *L, int arg, uint32_t *count, int *err);
+#define freepipelinelayoutcreateinfo moonvulkan_freepipelinelayoutcreateinfo
+void freepipelinelayoutcreateinfo(lua_State *L, VkPipelineLayoutCreateInfo *p);
+#define echeckpipelinelayoutcreateinfo moonvulkan_echeckpipelinelayoutcreateinfo
+int echeckpipelinelayoutcreateinfo(lua_State *L, int arg, VkPipelineLayoutCreateInfo *p);
+
+
+
+
 #define freerenderpasscreateinfo moonvulkan_freerenderpasscreateinfo
 void freerenderpasscreateinfo(lua_State *L, VkRenderPassCreateInfo *p);
 #define echeckrenderpasscreateinfo moonvulkan_echeckrenderpasscreateinfo
@@ -132,9 +142,6 @@ int pushextensionproperties (lua_State *L, VkExtensionProperties *p);
 
 #define pushlayerproperties moonvulkan_pushlayerproperties
 int pushlayerproperties(lua_State *L, VkLayerProperties *p);
-
-#define echeckpushconstantrangelist moonvulkan_echeckpushconstantrangelist
-VkPushConstantRange* echeckpushconstantrangelist(lua_State *L, int arg, uint32_t *count, int *err);
 
 #define echeckviewport moonvulkan_echeckviewport
 int echeckviewport(lua_State *L, int arg, VkViewport *dst);

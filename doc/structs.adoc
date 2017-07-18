@@ -704,15 +704,6 @@ _layer_count_: integer or '_remaining_' (defaults to 1), +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkImageSubresourceRange[VkImageSubresourceRange]) +
 <<constructors, Constructor>>: *imagesubresourcerange*(_aspect_mask_, _base_mip_level_, _level_count_, _base_array_layer_, _layer_count_)#
 
-
-* [[pushconstantrange]]
-[small]#*pushconstantrange* = { +
-_stage_flags_: <<shaderstageflags, shaderstageflags>>, +
-_offset_: integer, +
-_size_: integer, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPushConstantRange[VkPushConstantRange]) +
-<<constructors, Constructor>>: *pushconstantrange*(_stage_flags_, _offset_, _size_)#
-
 '''
 
 * [[descriptorpoolcreateinfo]]
@@ -745,6 +736,24 @@ _stage_flags_: <<shaderstageflags, shaderstageflags>>, +
 _immutable_samplers_: {<<sampler, sampler>>}, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkDescriptorSetLayoutBinding[VkDescriptorSetLayoutBinding]) +
 <<constructors, Constructor>>: *descriptorsetlayoutbinding*(_binding_, _descriptor_type_, _descriptor_count_, _stage_flags_, {_immutable_samplers_})#
+
+'''
+
+* [[pipelinelayoutcreateinfo]]
+[small]#*pipelinelayoutcreateinfo* = { +
+_flags_: <<pipelinelayoutcreateflags, pipelinelayoutcreateflags>>, +
+_set_layouts_: {<<descriptor_set_layout, descriptor_set_layout>>}, +
+_push_constant_ranges_: {<<pushconstantrange, pushconstantrange>>}, +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPipelineLayoutCreateInfo[])#
+
+
+* [[pushconstantrange]]
+[small]#*pushconstantrange* = { +
+_stage_flags_: <<shaderstageflags, shaderstageflags>>, +
+_offset_: integer, +
+_size_: integer, +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPushConstantRange[VkPushConstantRange]) +
+<<constructors, Constructor>>: *pushconstantrange*(_stage_flags_, _offset_, _size_)#
 
 
 '''
