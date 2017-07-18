@@ -3,9 +3,9 @@
 ==== event
 
 [[create_event]]
-* _event_ = *create_event*(_device_, [_flags_], [<<allocators, _allocator_>>]) +
-[small]#[_flags_]: <<eventcreateflags, _eventcreateflags_>> +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCreateEvent[vkCreateEvent].#
+* _event_ = *create_event*(_device_, <<eventcreateinfo, _eventcreateinfo_>>, [<<allocators, _allocator_>>]) +
+_event_ = *create_event*(_device_, [<<eventcreateflags, _eventcreateflags_>>]) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCreateEvent[vkCreateEvent].#
 
 [[destroy_event]]
 * *destroy_event*(_event_) +

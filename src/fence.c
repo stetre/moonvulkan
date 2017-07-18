@@ -43,12 +43,20 @@ static int Create(lua_State *L)
     VkResult ec;
     VkFence fence;
     VkFenceCreateInfo info;
-
     VkDevice device = checkdevice(L, 1, &device_ud);
-    const VkAllocationCallbacks *allocator = optallocator(L, 3);
-    info.sType = VK_STRUCTURE_TYPE_FENCE_CREATE_INFO;
-    info.pNext = NULL;
-    info.flags = optflags(L, 2, 0);
+    const VkAllocationCallbacks *allocator = NULL;
+
+    if(lua_istable(L, 2))
+        {
+        if(echeckfencecreateinfo(L, 2, &info)) return argerror(L, 2);
+        allocator = optallocator(L, 3);
+        }
+    else
+        {
+        info.sType = VK_STRUCTURE_TYPE_FENCE_CREATE_INFO;
+        info.pNext = NULL;
+        info.flags = optflags(L, 2, 0);
+        }
 
     ec = device_ud->ddt->CreateFence(device, &info, allocator, &fence);
     CheckError(L, ec);

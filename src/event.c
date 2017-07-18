@@ -43,12 +43,20 @@ static int Create(lua_State *L)
     VkResult ec;
     VkEvent event;
     VkEventCreateInfo info;
-
     VkDevice device = checkdevice(L, 1, &device_ud);
-    const VkAllocationCallbacks *allocator = optallocator(L, 2);
-    info.sType = VK_STRUCTURE_TYPE_EVENT_CREATE_INFO;
-    info.pNext = NULL;
-    info.flags = optflags(L, 2, 0);
+    const VkAllocationCallbacks *allocator = NULL;
+
+    if(lua_istable(L, 2))
+        {
+        if(echeckeventcreateinfo(L, 2, &info)) return argerror(L, 2);
+        allocator = optallocator(L, 3);
+        }
+    else
+        {
+        info.sType = VK_STRUCTURE_TYPE_EVENT_CREATE_INFO;
+        info.pNext = NULL;
+        info.flags = optflags(L, 2, 0);
+        }
 
     ec = device_ud->ddt->CreateEvent(device, &info, allocator, &event);
     CheckError(L, ec);

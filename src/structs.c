@@ -712,6 +712,38 @@ int echeckcommandbufferbegininfo(lua_State *L, int arg, VkCommandBufferBeginInfo
 
 /*------------------------------------------------------------------------------*/
 
+int echeckfencecreateinfo(lua_State *L, int arg, VkFenceCreateInfo *p)
+    {
+    int err;
+    ECHECK_PREAMBLE(p);
+    p->sType = VK_STRUCTURE_TYPE_FENCE_CREATE_INFO;
+    GetFlags(flags, "flags");
+    return 0;
+    }
+
+
+int echecksemaphorecreateinfo(lua_State *L, int arg, VkSemaphoreCreateInfo *p)
+    {
+    int err;
+    ECHECK_PREAMBLE(p);
+    p->sType = VK_STRUCTURE_TYPE_SEMAPHORE_CREATE_INFO;
+    GetFlags(flags, "flags");
+    return 0;
+    }
+
+
+int echeckeventcreateinfo(lua_State *L, int arg, VkEventCreateInfo *p)
+    {
+    int err;
+    ECHECK_PREAMBLE(p);
+    p->sType = VK_STRUCTURE_TYPE_EVENT_CREATE_INFO;
+    GetFlags(flags, "flags");
+    return 0;
+    }
+
+
+/*------------------------------------------------------------------------------*/
+
 static int echeckdescriptorpoolsize(lua_State *L, int arg, VkDescriptorPoolSize *p)
     {
     int err;

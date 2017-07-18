@@ -44,13 +44,20 @@ static int Create(lua_State *L)
     VkResult ec;
     VkSemaphore semaphore;
     VkSemaphoreCreateInfo info;
-
     VkDevice device = checkdevice(L, 1, &device_ud);
-    const VkAllocationCallbacks *allocator = optallocator(L, 3);
+    const VkAllocationCallbacks *allocator = NULL;
 
-    info.sType = VK_STRUCTURE_TYPE_SEMAPHORE_CREATE_INFO;
-    info.pNext = NULL;
-    info.flags = optflags(L, 2, 0);
+    if(lua_istable(L, 2))
+        {
+        if(echecksemaphorecreateinfo(L, 2, &info)) return argerror(L, 2);
+        allocator = optallocator(L, 3);
+        }
+    else
+        {
+        info.sType = VK_STRUCTURE_TYPE_SEMAPHORE_CREATE_INFO;
+        info.pNext = NULL;
+        info.flags = optflags(L, 2, 0);
+        }
 
     ec = device_ud->ddt->CreateSemaphore(device, &info, allocator, &semaphore);
     CheckError(L, ec);

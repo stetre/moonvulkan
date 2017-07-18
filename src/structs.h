@@ -58,6 +58,13 @@ typedef struct {
 #define echeckcommandbufferbegininfo moonvulkan_echeckcommandbufferbegininfo
 int echeckcommandbufferbegininfo(lua_State *L, int arg, VkCommandBufferBeginInfo_CHAIN *pp);
 
+#define echeckfencecreateinfo moonvulkan_echeckfencecreateinfo
+int echeckfencecreateinfo(lua_State *L, int arg, VkFenceCreateInfo *p);
+#define echecksemaphorecreateinfo moonvulkan_echecksemaphorecreateinfo
+int echecksemaphorecreateinfo(lua_State *L, int arg, VkSemaphoreCreateInfo *p);
+#define echeckeventcreateinfo moonvulkan_echeckeventcreateinfo
+int echeckeventcreateinfo(lua_State *L, int arg, VkEventCreateInfo *p);
+
 #define freerenderpasscreateinfo moonvulkan_freerenderpasscreateinfo
 void freerenderpasscreateinfo(lua_State *L, VkRenderPassCreateInfo *p);
 #define echeckrenderpasscreateinfo moonvulkan_echeckrenderpasscreateinfo

@@ -1762,9 +1762,9 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/
 <div id="create_fence" class="ulist">
 <ul>
 <li>
-<p><em>fence</em> = <strong>create_fence</strong>(<em>device</em>, [<em>flags</em>], [<a href="#allocators"><em>allocator</em></a>])<br>
-<span class="small">[<em>flags</em>]: <a href="#fencecreateflags">fencecreateflags</a><br>
-Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCreateFence">vkCreateFence</a>.</span></p>
+<p><em>fence</em> = <strong>create_fence</strong>(<em>device</em>, <a href="#fencecreateinfo"><em>fencecreateinfo</em></a>, [<a href="#allocators"><em>allocator</em></a>])<br>
+<em>fence</em> = <strong>create_fence</strong>(<em>device</em>, [<a href="#fencecreateflags"><em>fencecreateflags</em></a>])<br>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCreateFence">vkCreateFence</a>.</span></p>
 </li>
 </ul>
 </div>
@@ -1810,9 +1810,9 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/
 <div id="create_semaphore" class="ulist">
 <ul>
 <li>
-<p><em>semaphore</em> = <strong>create_semaphore</strong>(<em>device</em>, [<em>flags</em>], [<a href="#allocators"><em>allocator</em></a>])<br>
-<span class="small">[<em>flags</em>]: <a href="#semaphorecreateflags"><em>semaphorecreateflags</em></a><br>
-Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCreateSemaphore">vkCreateSemaphore</a>.</span></p>
+<p><em>semaphore</em> = <strong>create_semaphore</strong>(<em>device</em>, <a href="#semaphorecreateinfo"><em>semaphorecreateinfo</em></a>, [<a href="#allocators"><em>allocator</em></a>])<br>
+<em>semaphore</em> = <strong>create_semaphore</strong>(<em>device</em>, [<a href="#semaphorecreateflags"><em>semaphorecreateflags</em></a>])<br>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCreateSemaphore">vkCreateSemaphore</a>.</span></p>
 </li>
 </ul>
 </div>
@@ -1830,9 +1830,9 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/
 <div id="create_event" class="ulist">
 <ul>
 <li>
-<p><em>event</em> = <strong>create_event</strong>(<em>device</em>, [<em>flags</em>], [<a href="#allocators"><em>allocator</em></a>])<br>
-<span class="small">[<em>flags</em>]: <a href="#eventcreateflags"><em>eventcreateflags</em></a><br>
-Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCreateEvent">vkCreateEvent</a>.</span></p>
+<p><em>event</em> = <strong>create_event</strong>(<em>device</em>, <a href="#eventcreateinfo"><em>eventcreateinfo</em></a>, [<a href="#allocators"><em>allocator</em></a>])<br>
+<em>event</em> = <strong>create_event</strong>(<em>device</em>, [<a href="#eventcreateflags"><em>eventcreateflags</em></a>])<br>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCreateEvent">vkCreateEvent</a>.</span></p>
 </li>
 </ul>
 </div>
@@ -3567,6 +3567,29 @@ Note3: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/htm
 <em>query_flags</em>: <a href="#querycontrolflags">querycontrolflags</a>,<br>
 <em>pipeline_statistics</em>: <a href="#querypipelinestatisticflags">querypipelinestatisticflags</a>,<br>
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkCommandBufferInheritanceInfo">VkCommandBufferInheritanceInfo</a>)</span></p>
+</li>
+</ul>
+</div>
+<hr>
+<div class="ulist">
+<ul>
+<li>
+<p><a id="fencecreateinfo"></a>
+<span class="small"><strong>fencecreateinfo</strong> = {<br>
+<em>flags</em>: <a href="#fencecreateflags">fencecreateflags</a>,<br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkFenceCreateInfo">VkFenceCreateInfo</a>)</span></p>
+</li>
+<li>
+<p><a id="semaphorecreateinfo"></a>
+<span class="small"><strong>semaphorecreateinfo</strong> = {<br>
+<em>flags</em>: <a href="#semaphorecreateflags">semaphorecreateflags</a>,<br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkSemaphoreCreateInfo">VkSemaphoreCreateInfo</a>)</span></p>
+</li>
+<li>
+<p><a id="eventcreateinfo"></a>
+<span class="small"><strong>eventcreateinfo</strong> = {<br>
+<em>flags</em>: <a href="#eventcreateflags">eventcreateflags</a>,<br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkEventCreateInfo">VkEventCreateInfo</a>)</span></p>
 </li>
 </ul>
 </div>

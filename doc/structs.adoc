@@ -493,6 +493,25 @@ _pipeline_statistics_: <<querypipelinestatisticflags, querypipelinestatisticflag
 
 '''
 
+* [[fencecreateinfo]]
+[small]#*fencecreateinfo* = { +
+_flags_: <<fencecreateflags, fencecreateflags>>, +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkFenceCreateInfo[VkFenceCreateInfo])#
+
+
+* [[semaphorecreateinfo]]
+[small]#*semaphorecreateinfo* = { +
+_flags_: <<semaphorecreateflags, semaphorecreateflags>>, +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkSemaphoreCreateInfo[VkSemaphoreCreateInfo])#
+
+
+* [[eventcreateinfo]]
+[small]#*eventcreateinfo* = { +
+_flags_: <<eventcreateflags, eventcreateflags>>, +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkEventCreateInfo[VkEventCreateInfo])#
+
+'''
+
 * [[renderpasscreateinfo]]
 [small]#*renderpasscreateinfo* = { +
 _flags_: <<renderpasscreateflags, renderpasscreateflags>>, +
