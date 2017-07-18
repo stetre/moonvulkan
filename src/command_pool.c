@@ -44,13 +44,23 @@ static int Create(lua_State *L)
     VkResult ec;
     VkCommandPool command_pool;
     VkCommandPoolCreateInfo info;
-    const VkAllocationCallbacks *allocator = optallocator(L, 4);
+    const VkAllocationCallbacks *allocator;
 
     VkDevice device = checkdevice(L, 1, &device_ud);
-    info.sType = VK_STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO;
-    info.pNext = NULL;
-    info.flags = checkflags(L, 2);
-    info.queueFamilyIndex = luaL_checkinteger(L, 3);
+
+    if(lua_istable(L, 2))
+        {
+        allocator = optallocator(L, 3);
+        if(echeckcommandpoolcreateinfo(L, 2, &info)) return argerror(L, 2);
+        }
+    else
+        {
+        allocator = NULL;
+        info.sType = VK_STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO;
+        info.pNext = NULL;
+        info.flags = checkflags(L, 2);
+        info.queueFamilyIndex = luaL_checkinteger(L, 3);
+        }
 
     ec = device_ud->ddt->CreateCommandPool(device, &info, allocator, &command_pool);
 

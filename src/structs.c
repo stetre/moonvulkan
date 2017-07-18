@@ -649,7 +649,19 @@ VkXxx* echeck##xxx##list(lua_State *L, int arg, uint32_t *count, int *err)  \
 } while(0)
 
 
-    
+/*------------------------------------------------------------------------------*/
+
+int echeckcommandpoolcreateinfo(lua_State *L, int arg, VkCommandPoolCreateInfo *p)
+    {
+    int err;
+    ECHECK_PREAMBLE(p);
+    p->sType = VK_STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO;
+    GetFlags(flags, "flags");
+    GetInteger(queueFamilyIndex, "queue_family_index");
+    return 0;
+    }
+
+
 /*------------------------------------------------------------------------------*/
 
 static int echeckdescriptorpoolsize(lua_State *L, int arg, VkDescriptorPoolSize *p)

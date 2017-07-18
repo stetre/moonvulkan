@@ -1234,10 +1234,9 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/
 <div id="create_command_pool" class="ulist">
 <ul>
 <li>
-<p><em>command_pool</em> = <strong>create_command_pool</strong>(<em>device</em>, <em>flags</em>, <em>familyindex</em>, [<a href="#allocators"><em>allocator</em></a>])<br>
-<span class="small"><em>flags</em>: <a href="#commandpoolcreateflags">commandpoolcreateflags</a><br>
-<em>familyindex</em>: integer<br>
-Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCreateCommandPool">vkCreateCommandPool</a>.</span></p>
+<p><em>command_pool</em> = <strong>create_command_pool</strong>(<em>device</em>, <a href="#commandpoolcreateinfo"><em>commandpoolcreateinfo</em></a>, [<a href="#allocators"><em>allocator</em></a>])<br>
+<em>command_pool</em> = <strong>create_command_pool</strong>(<em>device</em>, <a href="#commandpoolcreateflags"><em>commandpoolcreateflags</em></a>, <em>queue_family_index</em>)<br>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCreateCommandPool">vkCreateCommandPool</a>.</span></p>
 </li>
 </ul>
 </div>
@@ -3539,6 +3538,13 @@ Note3: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/htm
 <hr>
 <div class="ulist">
 <ul>
+<li>
+<p><a id="commandpoolcreateinfo"></a>
+<span class="small"><strong>commandpoolcreateinfo</strong> = {<br>
+<em>flags</em>: <a href="#commandpoolcreateflags">commandpoolcreateflags</a>,<br>
+<em>queue_family_index</em>: integer,<br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkCommandPoolCreateInfo">VkCommandPoolCreateInfo</a>)</span></p>
+</li>
 <li>
 <p><a id="commandbufferinheritanceinfo"></a>
 <span class="small"><strong>commandbufferinheritanceinfo</strong> = {<br>

@@ -3,10 +3,9 @@
 ==== command_pool
 
 [[create_command_pool]]
-* _command_pool_ = *create_command_pool*(_device_, _flags_, _familyindex_, [<<allocators, _allocator_>>]) +
-[small]#_flags_: <<commandpoolcreateflags, commandpoolcreateflags>> +
-_familyindex_: integer +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCreateCommandPool[vkCreateCommandPool].#
+* _command_pool_ = *create_command_pool*(_device_, <<commandpoolcreateinfo, _commandpoolcreateinfo_>>, [<<allocators, _allocator_>>]) +
+_command_pool_ = *create_command_pool*(_device_, <<commandpoolcreateflags, _commandpoolcreateflags_>>, _queue_family_index_) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCreateCommandPool[vkCreateCommandPool].#
 
 [[destroy_command_pool]]
 * *destroy_command_pool*(_command_pool_) +

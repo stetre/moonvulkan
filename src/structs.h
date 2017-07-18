@@ -44,6 +44,9 @@ VkZzz* echeckzzzlist(lua_State *L, int arg, uint32_t *count, int *err);
 
 #endif
 
+#define echeckcommandpoolcreateinfo moonvulkan_echeckcommandpoolcreateinfo
+int echeckcommandpoolcreateinfo(lua_State *L, int arg, VkCommandPoolCreateInfo *p);
+
 #define freerenderpasscreateinfo moonvulkan_freerenderpasscreateinfo
 void freerenderpasscreateinfo(lua_State *L, VkRenderPassCreateInfo *p);
 #define echeckrenderpasscreateinfo moonvulkan_echeckrenderpasscreateinfo

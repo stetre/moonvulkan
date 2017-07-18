@@ -462,6 +462,13 @@ _flags_: <<sparseimagememorybindflags, sparseimagememorybindflags>>, +
 
 '''
 
+* [[commandpoolcreateinfo]]
+[small]#*commandpoolcreateinfo* = { +
+_flags_: <<commandpoolcreateflags, commandpoolcreateflags>>, +
+_queue_family_index_: integer, +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkCommandPoolCreateInfo[VkCommandPoolCreateInfo])#
+
+
 * [[commandbufferinheritanceinfo]]
 [small]#*commandbufferinheritanceinfo* = { +
 _render_pass_: <<render_pass, render_pass>> *[R]*, +
