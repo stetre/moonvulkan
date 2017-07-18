@@ -2023,11 +2023,9 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/
 <div id="allocate_memory" class="ulist">
 <ul>
 <li>
-<p><em>devmem</em> = <strong>allocate_memory</strong>(<em>device</em>, <em>allocation_size</em>, <em>memory_type_index</em>, [<a href="#allocators"><em>allocator</em></a>], [<em>dedicated</em>])<br>
-<span class="small"><em>allocation_size</em>: integer<br>
-<em>memory_type_index</em>: integer<br>
-<em>dedicated</em>: <a href="#image"><em>image</em></a> or <a href="#buffer"><em>buffer</em></a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_dedicated_allocation">VK_KHR_dedicated_allocation</a> extension)<br>
-Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkAllocateMemory">vkAllocateMemory</a>.</span></p>
+<p><em>devmem</em> = <strong>allocate_memory</strong>(<em>device</em>, <a href="#memoryallocateinfo"><em>memoryallocateinfo</em></a>, [<a href="#allocators"><em>allocator</em></a>])<br>
+<em>devmem</em> = <strong>allocate_memory</strong>(<em>device</em>, <em>allocation_size</em>, <em>memory_type_index</em>)<br>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkAllocateMemory">vkAllocateMemory</a>.</span></p>
 </li>
 </ul>
 </div>
@@ -3755,6 +3753,28 @@ Note1: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/htm
 <em>size</em>: integer or '<em>whole size</em>' (defaults to '<em>whole size</em>'),<br>
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkMappedMemoryRange">VkMappedMemoryRange</a>)</span></p>
 </li>
+</ul>
+</div>
+<hr>
+<div class="ulist">
+<ul>
+<li>
+<p><a id="memoryallocateinfo"></a>
+<span class="small"><strong>memoryallocateinfo</strong> = {<br>
+<em>allocation_size</em>: integer,<br>
+<em>memory_type_index</em>: integer,<br>
+---- extensions ----<br>
+<em>image</em>: <a href="#image">image</a> (Note1),<br>
+<em>buffer</em>: <a href="#buffer">buffer</a> (Note1),<br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkMemoryAllocateInfo">VkMemoryAllocateInfo</a>)<br>
+Note1: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_dedicated_allocation">VK_KHR_dedicated_allocation</a> extension (rfr:
+<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkMemoryDedicatedAllocateInfoKHR">VkMemoryDedicatedAllocateInfoKHR</a>)</span></p>
+</li>
+</ul>
+</div>
+<hr>
+<div class="ulist">
+<ul>
 <li>
 <p><a id="memoryrequirements"></a>
 <span class="small"><strong>memoryrequirements</strong> = {<br>

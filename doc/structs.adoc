@@ -653,6 +653,20 @@ _offset_: integer, +
 _size_: integer or '_whole size_' (defaults to '_whole size_'), +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkMappedMemoryRange[VkMappedMemoryRange])#
 
+'''
+
+* [[memoryallocateinfo]]
+[small]#*memoryallocateinfo* = { +
+_allocation_size_: integer, +
+_memory_type_index_: integer, +
+pass:[----] extensions ---- +
+_image_: <<image, image>> (Note1), +
+_buffer_: <<buffer, buffer>> (Note1), +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkMemoryAllocateInfo[VkMemoryAllocateInfo]) +
+Note1: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_dedicated_allocation[VK_KHR_dedicated_allocation] extension (rfr:
+https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkMemoryDedicatedAllocateInfoKHR[VkMemoryDedicatedAllocateInfoKHR])#
+
+'''
 
 * [[memoryrequirements]]
 [small]#*memoryrequirements* = { +

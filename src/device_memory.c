@@ -45,18 +45,33 @@ static int freedevice_memory(lua_State *L, ud_t *ud)
     return 0;
     }
 
-static int Create(lua_State *L, VkDevice device, VkMemoryAllocateInfo *info, const VkAllocationCallbacks *allocator)
+static int Allocate(lua_State *L)
     {
-    ud_info_t *ud_info;
-    ud_t *ud;
     VkResult ec;
+    ud_info_t *ud_info;
+    ud_t *ud, *device_ud;
     VkDeviceMemory device_memory;
-    ud_t *device_ud = UD(device);
+    VkMemoryAllocateInfo_CHAIN info;
+    VkDevice device = checkdevice(L, 1, &device_ud);
+    const VkAllocationCallbacks *allocator = NULL;
+
+    if(lua_istable(L, 2))
+        {
+        allocator = optallocator(L, 3);
+        if(echeckmemoryallocateinfo(L, 2, &info)) return argerror(L, 2);
+        }
+    else
+        {
+        info.p1.sType = VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO;
+        info.p1.pNext = NULL;
+        info.p1.allocationSize = luaL_checkinteger(L, 2);
+        info.p1.memoryTypeIndex = luaL_checkinteger(L, 3);
+        }
 
     ud_info = (ud_info_t*)MallocNoErr(L, sizeof(ud_info_t));
     if(!ud_info) return errmemory(L);
 
-    ec = device_ud->ddt->AllocateMemory(device, info, allocator, &device_memory);
+    ec = device_ud->ddt->AllocateMemory(device, &info.p1, allocator, &device_memory);
     if(ec)
         {
         Free(L, ud_info);
@@ -71,37 +86,24 @@ static int Create(lua_State *L, VkDevice device, VkMemoryAllocateInfo *info, con
     ud->allocator = allocator;
     ud->ddt = device_ud->ddt;
     ud->info = ud_info;
-    ud_info->maxsz = info->allocationSize;
+    ud_info->maxsz = info.p1.allocationSize;
     return 1;
     }
 
 
-static int Allocate(lua_State *L)
+static int GetDeviceMemoryCommitment(lua_State *L)
     {
-    VkMemoryAllocateInfo info;
-    VkMemoryDedicatedAllocateInfoKHR dedicated_info;
-    VkDevice device = checkdevice(L, 1, NULL);
-    const VkAllocationCallbacks *allocator = optallocator(L, 4);
-
-    info.sType = VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO;
-    info.pNext = NULL;
-    info.allocationSize = luaL_checkinteger(L, 2);
-    info.memoryTypeIndex = luaL_checkinteger(L, 3);
-
-    if(!lua_isnoneornil(L, 5)) /* chain extension */
-        {
-        info.pNext = &dedicated_info;
-        dedicated_info.sType = VK_STRUCTURE_TYPE_MEMORY_DEDICATED_ALLOCATE_INFO_KHR;
-        dedicated_info.pNext = NULL;
-        dedicated_info.image = testimage(L, 5, NULL);
-        dedicated_info.buffer = testbuffer(L, 5, NULL);
-        if(!dedicated_info.image && !dedicated_info.buffer)
-            return argerrorc(L, 5, ERR_TYPE);
-        }
-
-    return Create(L, device, &info, allocator);
+    VkDeviceSize bytes;
+    ud_t *ud;
+    VkDeviceMemory memory = checkdevice_memory(L, 1, &ud);
+    VkDevice device = ud->device;
+    ud->ddt->GetDeviceMemoryCommitment(device, memory, &bytes);
+    lua_pushinteger(L, bytes);
+    return 1;
     }
 
+
+/*--------------------------------------------------------------------------------*/
 
 static int MapMemory(lua_State *L)
     {
@@ -139,17 +141,6 @@ static int UnmapMemory(lua_State *L)
     ud_info->memp = NULL;
     ud_info->memsz = 0;
     return 0;
-    }
-
-static int GetDeviceMemoryCommitment(lua_State *L)
-    {
-    VkDeviceSize bytes;
-    ud_t *ud;
-    VkDeviceMemory memory = checkdevice_memory(L, 1, &ud);
-    VkDevice device = ud->device;
-    ud->ddt->GetDeviceMemoryCommitment(device, memory, &bytes);
-    lua_pushinteger(L, bytes);
-    return 1;
     }
 
 static int Write(lua_State *L) /* NONVK */

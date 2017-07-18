@@ -3,11 +3,9 @@
 ==== device_memory (_devmem_)
 
 [[allocate_memory]]
-* _devmem_ = *allocate_memory*(_device_, _allocation_size_, _memory_type_index_, [<<allocators, _allocator_>>], [_dedicated_]) +
-[small]#_allocation_size_: integer +
-_memory_type_index_: integer +
-_dedicated_: <<image, _image_>> or <<buffer, _buffer_>> (https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_dedicated_allocation[VK_KHR_dedicated_allocation] extension) +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkAllocateMemory[vkAllocateMemory].#
+* _devmem_ = *allocate_memory*(_device_, <<memoryallocateinfo, _memoryallocateinfo_>>, [<<allocators, _allocator_>>]) +
+_devmem_ = *allocate_memory*(_device_, _allocation_size_, _memory_type_index_) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkAllocateMemory[vkAllocateMemory].#
 
 [[free_memory]]
 * *free_memory*(_devmem_) +

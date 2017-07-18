@@ -421,7 +421,9 @@ do {                                                \
 #define GetFramebuffer(name, sname) GetObject(name, sname, VkFramebuffer, framebuffer)
 #define GetFramebufferOpt(name, sname) GetObjectOpt(name, sname, VkFramebuffer, framebuffer)
 #define GetBuffer(name, sname) GetObject(name, sname, VkBuffer, buffer)
+#define GetBufferOpt(name, sname) GetObjectOpt(name, sname, VkBuffer, buffer)
 #define GetImage(name, sname) GetObject(name, sname, VkImage, image)
+#define GetImageOpt(name, sname) GetObjectOpt(name, sname, VkImage, image)
 #define GetDeviceMemory(name, sname) GetObject(name, sname, VkDeviceMemory, device_memory)
 #define GetShaderModule(name, sname) GetObject(name, sname, VkShaderModule, shader_module)
 #define GetPipelineLayout(name, sname) GetObject(name, sname, VkPipelineLayout, pipeline_layout)
@@ -2336,6 +2338,39 @@ static int echeckmappedmemoryrange(lua_State *L, int arg, VkMappedMemoryRange *p
 
 /* echeckmappedmemoryrangelist() */
 ECHECKLISTFUNC(VkMappedMemoryRange, mappedmemoryrange, NULL)
+
+
+/*------------------------------------------------------------------------------*/
+
+static int echeckmemorydedicatedallocateinfo(lua_State *L, int arg, VkMemoryDedicatedAllocateInfoKHR *p)
+    {
+    int err;
+    p->sType = VK_STRUCTURE_TYPE_MEMORY_DEDICATED_ALLOCATE_INFO_KHR;
+    GetImageOpt(image, "image");
+    GetBufferOpt(buffer, "buffer");
+    return 0;
+    }
+
+int echeckmemoryallocateinfo(lua_State *L, int arg, VkMemoryAllocateInfo_CHAIN *pp)
+    {
+    int err;
+    int p2_present;
+    VkMemoryAllocateInfo *p = &pp->p1;
+    ECHECK_PREAMBLE(pp);
+    p->sType = VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO;
+    GetInteger(allocationSize, "allocation_size");
+    GetInteger(memoryTypeIndex, "memory_type_index");
+    /*---------- extensions --------------*/
+    IsPresent("image", p2_present);
+    if(!p2_present) IsPresent("buffer", p2_present);
+    if(p2_present)
+        {
+        err = echeckmemorydedicatedallocateinfo(L, arg, &pp->p2);
+        if(err) return err;
+        pp->p1.pNext = &pp->p2;
+        }
+    return 0;
+    }
 
 
 /*------------------------------------------------------------------------------*/

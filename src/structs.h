@@ -331,6 +331,14 @@ VkImageMemoryBarrier* echeckimagememorybarrierlist(lua_State *L, int arg, uint32
 #define echeckmappedmemoryrangelist moonvulkan_echeckmappedmemoryrangelist
 VkMappedMemoryRange* echeckmappedmemoryrangelist(lua_State *L, int arg, uint32_t *count, int *err);
 
+typedef struct {
+    VkMemoryAllocateInfo p1;
+    VkMemoryDedicatedAllocateInfoKHR p2;
+} VkMemoryAllocateInfo_CHAIN;
+
+#define echeckmemoryallocateinfo moonvulkan_echeckmemoryallocateinfo
+int echeckmemoryallocateinfo(lua_State *L, int arg, VkMemoryAllocateInfo_CHAIN *pp);
+
 
 typedef struct {
     VkMemoryRequirements2KHR p1;
