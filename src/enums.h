@@ -89,6 +89,7 @@ void enums_freelist(lua_State *L, uint32_t *list);
 #define DOMAIN_OBJECT_TYPE                      42
 #define DOMAIN_BLEND_OVERLAP                    43
 #define DOMAIN_SAMPLER_REDUCTION_MODE           44
+#define DOMAIN_DISCARD_RECTANGLE_MODE           45
 /* NONVK additions */
 #define DOMAIN_NONVK_TYPE                       101
 
@@ -321,6 +322,13 @@ void enums_freelist(lua_State *L, uint32_t *list);
 #define valuesvalidationcheck(L) enums_values((L), DOMAIN_VALIDATION_CHECK)
 #define checkvalidationchecklist(L, arg, count, err) (VkValidationCheckEXT*)enums_checklist((L), DOMAIN_VALIDATION_CHECK, (arg), (count), (err))
 #define freevalidationchecklist(L, list) enums_freelist((L), (uint32_t*)(list))
+
+#define testdiscardrectanglemode(L, arg, err) (VkDiscardRectangleModeEXT)enums_test((L), DOMAIN_DISCARD_RECTANGLE_MODE, (arg), (err))
+#define checkdiscardrectanglemode(L, arg) (VkDiscardRectangleModeEXT)enums_check((L), DOMAIN_DISCARD_RECTANGLE_MODE, (arg))
+#define pushdiscardrectanglemode(L, val) enums_push((L), DOMAIN_DISCARD_RECTANGLE_MODE, (uint32_t)(val))
+#define valuesdiscardrectanglemode(L) enums_values((L), DOMAIN_DISCARD_RECTANGLE_MODE)
+#define checkdiscardrectanglemodelist(L, arg, count, err) (VkDiscardRectangleModeEXT*)enums_checklist((L), DOMAIN_DISCARD_RECTANGLE_MODE, (arg), (count), (err))
+#define freediscardrectanglemodelist(L, list) enums_freelist((L), (uint32_t*)(list))
 
 #if 0 /* scaffolding 7yy */
 #define testxxx(L, arg, err) (VkXxx)enums_test((L), DOMAIN_XXX, (arg), (err))

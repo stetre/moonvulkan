@@ -56,7 +56,7 @@ Multivendor extensions (EXT):
 * https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_debug_marker[VK_EXT_debug_marker]
 * https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_debug_report[VK_EXT_debug_report]
 //@@VK_EXT_direct_mode_display
-//@@VK_EXT_discard_rectangles
+* https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_discard_rectangles[VK_EXT_discard_rectangles]
 //@@VK_EXT_display_control
 //@@VK_EXT_display_surface_counter
 //@@VK_EXT_hdr_metadata

@@ -312,6 +312,7 @@ static int Enum(lua_State *L)
     CASE(blendoverlap);
     CASE(samplerreductionmode);
     CASE(validationcheck);
+    CASE(discardrectanglemode);
 #undef CASE
     return 0;
     }
@@ -972,6 +973,10 @@ void moonvulkan_open_enums(lua_State *L)
     ADD(SAMPLER_REDUCTION_MODE_WEIGHTED_AVERAGE_EXT, "weighted average");
     ADD(SAMPLER_REDUCTION_MODE_MIN_EXT, "min");
     ADD(SAMPLER_REDUCTION_MODE_MAX_EXT, "max");
+
+    domain = DOMAIN_DISCARD_RECTANGLE_MODE; /* VkDiscardRectangleModeEXT */
+    ADD(DISCARD_RECTANGLE_MODE_INCLUSIVE_EXT, "inclusive");
+    ADD(DISCARD_RECTANGLE_MODE_EXCLUSIVE_EXT, "exclusive");
 #undef ADD
     }
 

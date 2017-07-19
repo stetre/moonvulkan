@@ -1659,6 +1659,15 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/
 </li>
 </ul>
 </div>
+<div id="cmd_set_discard_rectangle" class="ulist">
+<ul>
+<li>
+<p><strong>cmd_set_discard_rectangle</strong>(<em>cb</em>, <em>first</em>, {<a href="#rect2d"><em>rect2d</em></a>})<br>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCmdSetDiscardRectangleEXT">vkCmdSetDiscardRectangleEXT</a> -
+<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_discard_rectangles">VK_EXT_discard_rectangles</a> extension.</span></p>
+</li>
+</ul>
+</div>
 <div id="cmd_set_event" class="ulist">
 <ul>
 <li>
@@ -3151,13 +3160,16 @@ Note1: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/htm
 <em>advanced_blend_all_operations</em>: boolean (Note2),<br>
 <em>filter_minmax_single_component_formats</em>: boolean (Note3),<br>
 <em>filter_minmax_image_component_mapping</em>: boolean (Note3),<br>
+<em>max_discard_rectangles</em>: integer (Note4),<br>
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPhysicalDeviceProperties2KHR">VkPhysicalDeviceProperties2KHR</a>)<br>
 Note1: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_push_descriptor">VK_KHR_push_descriptor</a> extension (rfr:
 <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPhysicalDevicePushDescriptorPropertiesKHR">VkPhysicalDevicePushDescriptorPropertiesKHR</a>).<br>
 Note2: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_blend_operation_advanced">VK_EXT_blend_operation_advanced</a> extension (rfr:
 <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT">VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT</a>).<br>
 Note3: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_sampler_filter_minmax">VK_EXT_sampler_filter_minmax</a> extension (rfr:
-<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT">VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT</a>).</span></p>
+<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT">VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT</a>).<br>
+Note4: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_discard_rectangles">VK_EXT_discard_rectangles</a> extension (rfr:
+<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPhysicalDeviceDiscardRectanglePropertiesEXT">VkPhysicalDeviceDiscardRectanglePropertiesEXT</a>).</span></p>
 </li>
 <li>
 <p><a id="physicaldeviceimageformatinfo"></a>
@@ -4008,15 +4020,18 @@ Note1: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/htm
 <em>multisample_state</em>: <a href="#pipelinemultisamplestatecreateinfo">pipelinemultisamplestatecreateinfo</a>,<br>
 <em>depth_stencil_state</em>: <a href="#pipelinedepthstencilstatecreateinfo">pipelinedepthstencilstatecreateinfo</a>,<br>
 <em>color_blend_state</em>: <a href="#pipelinecolorblendstatecreateinfo">pipelinecolorblendstatecreateinfo</a>,<br>
-<em>color_blend_advanced_state</em>: <a href="#pipelinecolorblendadvancedstatecreateinfo">pipelinecolorblendadvancedstatecreateinfo</a> (see Note1 below),<br>
 <em>dynamic_state</em>: <a href="#pipelinedynamicstatecreateinfo">pipelinedynamicstatecreateinfo</a>,<br>
 <em>layout</em>: <a href="#pipeline_layout">pipeline_layout</a> <strong>[R]</strong>,<br>
 <em>render_pass</em>: <a href="#render_pass">render_pass</a> <strong>[R]</strong>,<br>
 <em>subpass</em>: integer,<br>
 <em>base_pipeline_handle</em>: <a href="#pipeline">pipeline</a>,<br>
 <em>base_pipeline_index</em>: integer,<br>
+---- extensions ----<br>
+<em>color_blend_advanced_state</em>: <a href="#pipelinecolorblendadvancedstatecreateinfo">pipelinecolorblendadvancedstatecreateinfo</a> (Note1),<br>
+<em>discard_rectangle_state</em>: <a href="#pipelinediscardrectanglestatecreateinfo">pipelinediscardrectanglestatecreateinfo</a> (Note2),<br>
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkGraphicsPipelineCreateInfo">VkGraphicsPipelineCreateInfo</a>)<br>
-Note1: Requires the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_blend_operation_advanced">VK_EXT_blend_operation_advanced</a> extension and the <em>color_blend_state</em> field.</span></p>
+Note1: Requires the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_blend_operation_advanced">VK_EXT_blend_operation_advanced</a> extension and the <em>color_blend_state</em> field.<br>
+Note2: Requires the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_discard_rectangles">VK_EXT_discard_rectangles</a> extension.</span></p>
 </li>
 <li>
 <p><a id="computepipelinecreateinfo"></a>
@@ -4169,14 +4184,6 @@ Note1: Requires the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-e
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPipelineColorBlendStateCreateInfo">VkPipelineColorBlendStateCreateInfo</a>)</span></p>
 </li>
 <li>
-<p><a id="pipelinecolorblendadvancedstatecreateinfo"></a>
-<span class="small"><strong>pipelinecolorblendadvancedstatecreateinfo</strong> = {<br>
-<em>src_premultiplied</em>: boolean,<br>
-<em>dst_premultiplied</em>: boolean,<br>
-<em>blend_overlap</em>: <a href="#blendoverlap">blendoverlap</a>,<br>
-} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPipelineColorBlendAdvancedStateCreateInfoEXT">VkPipelineColorBlendAdvancedStateCreateInfoEXT</a>)</span></p>
-</li>
-<li>
 <p><a id="pipelinecolorblendattachmentstate"></a>
 <span class="small"><strong>pipelinecolorblendattachmentstate</strong> = {<br>
 <em>blend_enable</em>: boolean,<br>
@@ -4188,6 +4195,22 @@ Note1: Requires the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-e
 <em>alpha_blend_op</em>: <a href="#blendop">blendop</a>,<br>
 <em>color_write_mask</em>: <a href="#colorcomponentflags">colorcomponentflags</a>,<br>
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPipelineColorBlendAttachmentState">VkPipelineColorBlendAttachmentState</a>)</span></p>
+</li>
+<li>
+<p><a id="pipelinecolorblendadvancedstatecreateinfo"></a>
+<span class="small"><strong>pipelinecolorblendadvancedstatecreateinfo</strong> = {<br>
+<em>src_premultiplied</em>: boolean,<br>
+<em>dst_premultiplied</em>: boolean,<br>
+<em>blend_overlap</em>: <a href="#blendoverlap">blendoverlap</a>,<br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPipelineColorBlendAdvancedStateCreateInfoEXT">VkPipelineColorBlendAdvancedStateCreateInfoEXT</a>)</span></p>
+</li>
+<li>
+<p><a id="pipelinediscardrectanglestatecreateinfo"></a>
+<span class="small"><strong>pipelinediscardrectanglestatecreateinfo</strong> = {<br>
+<em>flags</em>: <a href="#discardrectangleflags">discardrectangleflags</a>,<br>
+<em>discard_rectangle_mode</em>: <a href="#discardrectanglemode">discardrectanglemode</a> <strong>[R]</strong>,<br>
+<em>discard_rectangles</em>: {<a href="#rect2d">rect2d</a>},<br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPipelineDiscardRectangleStateCreateInfoEXT">VkPipelineDiscardRectangleStateCreateInfoEXT</a>)</span></p>
 </li>
 <li>
 <p><a id="pipelinedynamicstatecreateinfo"></a>
@@ -4678,6 +4701,11 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/
 Values: '<em>descriptor set</em>', '<em>push descriptors</em>'.<br>
 Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkDescriptorUpdateTemplateTypeKHR">VkDescriptorUpdateTemplateTypeKHR</a>.</span></p>
 </div>
+<div id="discardrectanglemode" class="paragraph">
+<p><span class="small"><strong>discardrectanglemode</strong>: vk.DISCARD_RECTANGLE_MODE_XXX_EXT<br>
+Values: '<em>inclusive</em>', '<em>exclusive</em>'.<br>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkDiscardRectangleModeEXT">VkDiscardRectangleModeEXT</a>.</span></p>
+</div>
 <div id="dynamicstate" class="paragraph">
 <p><span class="small"><strong>dynamicstate</strong>: vk.DYNAMIC_STATE_XXX<br>
 Values:
@@ -5116,6 +5144,9 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/
 </div>
 <div id="pipelinedepthstencilstatecreateflags" class="paragraph">
 <p><span class="small"><strong>pipelinedepthstencilstatecreateflags</strong>: 0</span></p>
+</div>
+<div id="pipelinediscardrectanglestatecreateflags" class="paragraph">
+<p><span class="small"><strong>pipelinediscardrectanglestatecreateflags</strong>: 0</span></p>
 </div>
 <div id="pipelinedynamicstatecreateflags" class="paragraph">
 <p><span class="small"><strong>pipelinedynamicstatecreateflags</strong>: 0</span></p>
@@ -5766,6 +5797,9 @@ previously obtained with the <a href="#now">now</a>(&nbsp;) function.</span></p>
 </li>
 <li>
 <p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_debug_report">VK_EXT_debug_report</a></p>
+</li>
+<li>
+<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_discard_rectangles">VK_EXT_discard_rectangles</a></p>
 </li>
 <li>
 <p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_sampler_filter_minmax">VK_EXT_sampler_filter_minmax</a></p>

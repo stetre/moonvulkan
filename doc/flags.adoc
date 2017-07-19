@@ -282,6 +282,9 @@ Reserved for future use (must be set to 0):
 [[pipelinedepthstencilstatecreateflags]]
 [small]#*pipelinedepthstencilstatecreateflags*: 0#
 
+[[pipelinediscardrectanglestatecreateflags]]
+[small]#*pipelinediscardrectanglestatecreateflags*: 0#
+
 [[pipelinedynamicstatecreateflags]]
 [small]#*pipelinedynamicstatecreateflags*: 0#
 

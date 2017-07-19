@@ -102,6 +102,11 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.ht
 Values: '_descriptor set_', '_push descriptors_'. +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkDescriptorUpdateTemplateTypeKHR[VkDescriptorUpdateTemplateTypeKHR].#
 
+[[discardrectanglemode]]
+[small]#*discardrectanglemode*: vk.DISCARD_RECTANGLE_MODE_XXX_EXT +
+Values: '_inclusive_', '_exclusive_'. +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkDiscardRectangleModeEXT[VkDiscardRectangleModeEXT].#
+
 [[dynamicstate]]
 [small]#*dynamicstate*: vk.DYNAMIC_STATE_XXX +
 Values:

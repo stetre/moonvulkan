@@ -519,6 +519,7 @@ device_dt_t* getproc_device(lua_State *L, VkDevice device, VkDeviceCreateInfo *c
             }
         IF("VK_EXT_discard_rectangles")
             {
+            GET(CmdSetDiscardRectangleEXT);
             continue;
             }
         IF("VK_EXT_display_control")

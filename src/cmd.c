@@ -785,6 +785,21 @@ static int CmdPushDescriptorSetWithTemplate(lua_State *L)
     return 0;
     }
 
+static int CmdSetDiscardRectangle(lua_State *L)
+    {
+    int err;
+    uint32_t count;
+    ud_t *ud;
+    VkCommandBuffer cb = checkcommand_buffer(L, 1, &ud);
+    uint32_t first = luaL_checkinteger(L, 2);
+    VkRect2D *rects = echeckrect2dlist(L, 3, &count, &err);
+    if(err) return argerror(L, 3);
+    CheckDevicePfn(L, ud, CmdSetDiscardRectangleEXT);
+    ud->ddt->CmdSetDiscardRectangleEXT(cb, first, count, rects);
+    Free(L, rects);
+    return 0;
+    }
+
 #if 0 // 10yy
         { "",  },
 static int (lua_State *L) //@@ scaffolding
@@ -851,6 +866,7 @@ static const struct luaL_Reg Functions[] =
         { "cmd_debug_marker_insert", CmdDebugMarkerInsert },
         { "cmd_push_descriptor_set", CmdPushDescriptorSet },
         { "cmd_push_descriptor_set_with_template", CmdPushDescriptorSetWithTemplate },
+        { "cmd_set_discard_rectangle", CmdSetDiscardRectangle },
         { NULL, NULL } /* sentinel */
     };
 

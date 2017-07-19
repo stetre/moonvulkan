@@ -112,13 +112,16 @@ _advanced_blend_correlated_overlap_: boolean (Note2), +
 _advanced_blend_all_operations_: boolean (Note2), +
 _filter_minmax_single_component_formats_: boolean (Note3), +
 _filter_minmax_image_component_mapping_: boolean (Note3), +
+_max_discard_rectangles_: integer (Note4), +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPhysicalDeviceProperties2KHR[VkPhysicalDeviceProperties2KHR]) +
 Note1: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_push_descriptor[VK_KHR_push_descriptor] extension (rfr:
 https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPhysicalDevicePushDescriptorPropertiesKHR[VkPhysicalDevicePushDescriptorPropertiesKHR]). +
 Note2: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_blend_operation_advanced[VK_EXT_blend_operation_advanced] extension (rfr:
 https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT[VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT]). +
 Note3: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_sampler_filter_minmax[VK_EXT_sampler_filter_minmax] extension (rfr:
-https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT[VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT]).#
+https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT[VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT]). +
+Note4: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_discard_rectangles[VK_EXT_discard_rectangles] extension (rfr:
+https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPhysicalDeviceDiscardRectanglePropertiesEXT[VkPhysicalDeviceDiscardRectanglePropertiesEXT]).#
 
 * [[physicaldeviceimageformatinfo]]
 [small]#*physicaldeviceimageformatinfo* = { +
@@ -856,16 +859,18 @@ _rasterization_state_: <<pipelinerasterizationstatecreateinfo, pipelinerasteriza
 _multisample_state_: <<pipelinemultisamplestatecreateinfo, pipelinemultisamplestatecreateinfo>>, +
 _depth_stencil_state_: <<pipelinedepthstencilstatecreateinfo, pipelinedepthstencilstatecreateinfo>>, +
 _color_blend_state_: <<pipelinecolorblendstatecreateinfo, pipelinecolorblendstatecreateinfo>>, +
-_color_blend_advanced_state_: <<pipelinecolorblendadvancedstatecreateinfo, pipelinecolorblendadvancedstatecreateinfo>> (see Note1 below), +
 _dynamic_state_: <<pipelinedynamicstatecreateinfo, pipelinedynamicstatecreateinfo>>, +
 _layout_: <<pipeline_layout, pipeline_layout>> *[R]*, +
 _render_pass_: <<render_pass, render_pass>> *[R]*, +
 _subpass_: integer, +
 _base_pipeline_handle_: <<pipeline, pipeline>>, +
 _base_pipeline_index_: integer, +
+pass:[----] extensions ---- +
+_color_blend_advanced_state_: <<pipelinecolorblendadvancedstatecreateinfo, pipelinecolorblendadvancedstatecreateinfo>> (Note1), +
+_discard_rectangle_state_: <<pipelinediscardrectanglestatecreateinfo, pipelinediscardrectanglestatecreateinfo>> (Note2), +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkGraphicsPipelineCreateInfo[VkGraphicsPipelineCreateInfo]) +
-Note1: Requires the https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_blend_operation_advanced[VK_EXT_blend_operation_advanced] extension and the _color_blend_state_ field.#
-
+Note1: Requires the https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_blend_operation_advanced[VK_EXT_blend_operation_advanced] extension and the _color_blend_state_ field. +
+Note2: Requires the https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_discard_rectangles[VK_EXT_discard_rectangles] extension.#
 
 * [[computepipelinecreateinfo]]
 [small]#*computepipelinecreateinfo* = { +
@@ -1011,14 +1016,6 @@ _attachments_: {<<pipelinecolorblendattachmentstate, pipelinecolorblendattachmen
 _blend_constants_: {float} (length=4), +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPipelineColorBlendStateCreateInfo[VkPipelineColorBlendStateCreateInfo])#
 
-* [[pipelinecolorblendadvancedstatecreateinfo]]
-[small]#*pipelinecolorblendadvancedstatecreateinfo* = { +
-_src_premultiplied_: boolean, +
-_dst_premultiplied_: boolean, +
-_blend_overlap_: <<blendoverlap, blendoverlap>>, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPipelineColorBlendAdvancedStateCreateInfoEXT[VkPipelineColorBlendAdvancedStateCreateInfoEXT])#
-
-
 * [[pipelinecolorblendattachmentstate]]
 [small]#*pipelinecolorblendattachmentstate* = { +
 _blend_enable_: boolean, +
@@ -1031,6 +1028,19 @@ _alpha_blend_op_: <<blendop, blendop>>, +
 _color_write_mask_: <<colorcomponentflags, colorcomponentflags>>, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPipelineColorBlendAttachmentState[VkPipelineColorBlendAttachmentState])#
 
+* [[pipelinecolorblendadvancedstatecreateinfo]]
+[small]#*pipelinecolorblendadvancedstatecreateinfo* = { +
+_src_premultiplied_: boolean, +
+_dst_premultiplied_: boolean, +
+_blend_overlap_: <<blendoverlap, blendoverlap>>, +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPipelineColorBlendAdvancedStateCreateInfoEXT[VkPipelineColorBlendAdvancedStateCreateInfoEXT])#
+
+* [[pipelinediscardrectanglestatecreateinfo]]
+[small]#*pipelinediscardrectanglestatecreateinfo* = { +
+_flags_: <<discardrectangleflags, discardrectangleflags>>, +
+_discard_rectangle_mode_: <<discardrectanglemode, discardrectanglemode>> *[R]*, +
+_discard_rectangles_: {<<rect2d, rect2d>>}, +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPipelineDiscardRectangleStateCreateInfoEXT[VkPipelineDiscardRectangleStateCreateInfoEXT])#
 
 * [[pipelinedynamicstatecreateinfo]]
 [small]#*pipelinedynamicstatecreateinfo* = { +

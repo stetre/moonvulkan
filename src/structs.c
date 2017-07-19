@@ -256,6 +256,7 @@ do {                                                \
 #define GetDescriptorUpdateTemplateType(name, sname) GetEnum(name, sname, testdescriptorupdatetemplatetype)
 #define GetCommandBufferLevel(name, sname) GetEnum(name, sname, testcommandbufferlevel)
 #define GetQueryType(name, sname) GetEnum(name, sname, testquerytype)
+#define GetDiscardRectangleMode(name, sname) GetEnum(name, sname, testdiscardrectanglemode)
 
 /* optional enums with defval */
 #define GetPipelineBindPoint(name, sname) GetEnumOpt(name, sname, testpipelinebindpoint, VK_PIPELINE_BIND_POINT_GRAPHICS)
@@ -1717,6 +1718,12 @@ static int pushphysicaldevicesamplerfilterminmaxproperties(lua_State *L, VkPhysi
     return 0;
     }
 
+static int pushphysicaldevicediscardrectangleproperties(lua_State *L, VkPhysicalDeviceDiscardRectanglePropertiesEXT *p)
+    {
+    SetInteger(maxDiscardRectangles, "max_discard_rectangles");
+    return 0;
+    }
+
 void initphysicaldeviceproperties2(lua_State *L, VkPhysicalDeviceProperties2KHR_CHAIN *p)
     {
     UNUSED(L); CLEAR(p);
@@ -1724,10 +1731,12 @@ void initphysicaldeviceproperties2(lua_State *L, VkPhysicalDeviceProperties2KHR_
     p->p2.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PUSH_DESCRIPTOR_PROPERTIES_KHR;
     p->p3.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_BLEND_OPERATION_ADVANCED_PROPERTIES_EXT;
     p->p4.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLER_FILTER_MINMAX_PROPERTIES_EXT ;
+    p->p5.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DISCARD_RECTANGLE_PROPERTIES_EXT ;
     p->p1.pNext = &p->p2;
     p->p2.pNext = &p->p3;
     p->p3.pNext = &p->p4;
-    p->p4.pNext = NULL;
+    p->p4.pNext = &p->p5;
+    p->p5.pNext = NULL;
     }
 
 int pushphysicaldeviceproperties2(lua_State *L, VkPhysicalDeviceProperties2KHR_CHAIN *p)
@@ -1736,6 +1745,7 @@ int pushphysicaldeviceproperties2(lua_State *L, VkPhysicalDeviceProperties2KHR_C
     pushphysicaldevicepushdescriptorproperties(L, &p->p2);
     pushphysicaldeviceblendoperationadvancedproperties(L, &p->p3);
     pushphysicaldevicesamplerfilterminmaxproperties(L, &p->p4);
+    pushphysicaldevicediscardrectangleproperties(L, &p->p5);
     return 1;
     }
 
@@ -3322,9 +3332,41 @@ static int echeckpipelinedynamicstatecreateinfo(lua_State *L, int arg, VkPipelin
 
 /*-------------------------------------------------------------------------------------*/
 
+static void freediscardrectanglestatecreateinfo(lua_State *L, VkPipelineDiscardRectangleStateCreateInfoEXT *p)
+    {
+    if(!p) return;
+    if(p->pDiscardRectangles) Free(L, (void*)p->pDiscardRectangles);
+    }
+
+static int echeckdiscardrectanglestatecreateinfo(lua_State *L, int arg, VkPipelineDiscardRectangleStateCreateInfoEXT *p)
+    {
+    int err, arg1;
+    uint32_t count;
+
+    ECHECK_PREAMBLE(p);
+    p->sType = VK_STRUCTURE_TYPE_PIPELINE_DISCARD_RECTANGLE_STATE_CREATE_INFO_EXT;
+    GetFlags(flags, "flags");
+    GetDiscardRectangleMode(discardRectangleMode, "discard_rectangle_mode");
+#define F "discard_rectangles"
+    PUSHFIELD(F);
+    p->pDiscardRectangles = echeckrect2dlist(L, arg1, &count, &err);
+    POPFIELD();
+    if(err < 0) { freediscardrectanglestatecreateinfo(L, p); return efielderror(L, F); }
+    if(err == ERR_NOTPRESENT)
+        POPERROR();
+    else
+        p->discardRectangleCount = count;
+#undef F
+    return 0;
+    }
+
+
+/*-------------------------------------------------------------------------------------*/
+
 static void freegraphicspipelinecreateinfo(lua_State *L, VkGraphicsPipelineCreateInfo *p)
     {
     VkPipelineColorBlendAdvancedStateCreateInfoEXT *ColorBlendAdvancedState;
+    VkPipelineDiscardRectangleStateCreateInfoEXT *DiscardRectangleState;
     if(!p) return;
     if(p->pStages) freepipelineshaderstagecreateinfolist(L, (void*)p->pStages, p->stageCount);
     if(p->pVertexInputState)
@@ -3387,10 +3429,17 @@ static void freegraphicspipelinecreateinfo(lua_State *L, VkGraphicsPipelineCreat
             (VkPipelineDynamicStateCreateInfo*)p->pDynamicState);
         Free(L, (void*)p->pDynamicState);
         }
+    /* extensions in the main chain */
+    if(p->pNext)
+        {
+        DiscardRectangleState = (VkPipelineDiscardRectangleStateCreateInfoEXT*)p->pNext;
+        freediscardrectanglestatecreateinfo(L, DiscardRectangleState);
+        }
     }
 
-/* Need this to trick the BEGIN macro: */
+/* Need these to trick the BEGIN macro: */
 #define VkPipelineColorBlendAdvancedStateCreateInfo VkPipelineColorBlendAdvancedStateCreateInfoEXT
+#define VkPipelineDiscardRectangleStateCreateInfo VkPipelineDiscardRectangleStateCreateInfoEXT
 
 static int echeckgraphicspipelinecreateinfo(lua_State *L, int arg, VkGraphicsPipelineCreateInfo *p)
     {
@@ -3405,6 +3454,7 @@ static int echeckgraphicspipelinecreateinfo(lua_State *L, int arg, VkGraphicsPip
     VkPipelineColorBlendStateCreateInfo        *ColorBlendState;
     VkPipelineColorBlendAdvancedStateCreateInfoEXT *ColorBlendAdvancedState;
     VkPipelineDynamicStateCreateInfo           *DynamicState;
+    VkPipelineDiscardRectangleStateCreateInfoEXT *DiscardRectangleState;
 
     ECHECK_PREAMBLE(p);
     p->sType = VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_CREATE_INFO;
@@ -3501,6 +3551,12 @@ static int echeckgraphicspipelinecreateinfo(lua_State *L, int arg, VkGraphicsPip
     err = echeckpipelinedynamicstatecreateinfo(L, arg1, DynamicState);
     END_OPTIONAL(DynamicState);
     p->pDynamicState = DynamicState;
+#undef F
+#define F "discard_rectangle_state"
+    BEGIN(DiscardRectangleState);
+    err = echeckdiscardrectanglestatecreateinfo(L, arg1, DiscardRectangleState);
+    END_OPTIONAL(DiscardRectangleState);
+    if(!err) p->pNext = DiscardRectangleState;
 #undef F
     return 0;
 #undef BEGIN

@@ -187,6 +187,7 @@ typedef struct {
     VkPhysicalDevicePushDescriptorPropertiesKHR p2;
     VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT p3;
     VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT p4;
+    VkPhysicalDeviceDiscardRectanglePropertiesEXT p5;
 } VkPhysicalDeviceProperties2KHR_CHAIN;
 
 #define initphysicaldeviceproperties2 moonvulkan_initphysicaldeviceproperties2
