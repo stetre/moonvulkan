@@ -48,14 +48,25 @@ static int Create(lua_State *L)
     const char *code;
 
     VkDevice device = checkdevice(L, 1, &device_ud);
-    const VkAllocationCallbacks *allocator = optallocator(L, 4);
-    info.sType = VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO;
-    info.pNext = NULL;
-    info.flags = checkflags(L, 2);
+    const VkAllocationCallbacks *allocator = NULL;
 
-    code = luaL_optlstring(L, 3, NULL, &size);
+    if(lua_istable(L, 2))
+        {
+        allocator = optallocator(L, 3);
+        if(echeckshadermodulecreateinfo(L, 2, &info)) return argerror(L, 2);
+        lua_getfield(L, 2, "code");
+        code = luaL_optlstring(L, -1, NULL, &size);
+        }
+    else
+        {
+        info.sType = VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO;
+        info.pNext = NULL;
+        info.flags = checkflags(L, 2);
+        code = luaL_optlstring(L, 3, NULL, &size);
+        }
+
     if(!code || (size == 0))
-        return argerrorc(L, 3, ERR_LENGTH);
+        return luaL_error(L, "missing shader code");
     info.codeSize = size;
     info.pCode = (uint32_t*)code;
 

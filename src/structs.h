@@ -112,6 +112,9 @@ void freeframebuffercreateinfo(lua_State *L, VkFramebufferCreateInfo *p);
 #define echeckframebuffercreateinfo moonvulkan_echeckframebuffercreateinfo
 int echeckframebuffercreateinfo(lua_State *L, int arg, VkFramebufferCreateInfo *p);
 
+#define echeckshadermodulecreateinfo moonvulkan_echeckshadermodulecreateinfo
+int echeckshadermodulecreateinfo(lua_State *L, int arg, VkShaderModuleCreateInfo *p);
+
 #define freebuffercreateinfo moonvulkan_freebuffercreateinfo
 void freebuffercreateinfo(lua_State *L, VkBufferCreateInfo *p);
 #define echeckbuffercreateinfo moonvulkan_echeckbuffercreateinfo

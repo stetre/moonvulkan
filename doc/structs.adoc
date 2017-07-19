@@ -575,6 +575,14 @@ _attachments_: {<<image_view, image_view>>}, +
 
 '''
 
+* [[shadermodulecreateinfo]]
+[small]#*shadermodulecreateinfo* = { +
+_flags_: <<shadermodulecreateflags, shadermodulecreateflags>>, +
+_code_: binary string *[R]*, +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkShaderModuleCreateInfo[VkShaderModuleCreateInfo])#
+
+'''
+
 * [[buffercreateinfo]]
 [small]#*buffercreateinfo* = { +
 _flags_: <<buffercreateflags, buffercreateflags>>, +

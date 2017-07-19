@@ -1127,6 +1127,19 @@ int echeckframebuffercreateinfo(lua_State *L, int arg, VkFramebufferCreateInfo *
     return 0;
     }
 
+
+/*------------------------------------------------------------------------------*/
+
+int echeckshadermodulecreateinfo(lua_State *L, int arg, VkShaderModuleCreateInfo *p)
+    {
+    int err;
+    ECHECK_PREAMBLE(p);
+    p->sType = VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO;
+    GetFlags(flags, "flags");
+    /* p->pCode, p->codeSize: retrieved by the caller */
+    return 0;
+    }
+
 /*------------------------------------------------------------------------------*/
 
 void freebuffercreateinfo(lua_State *L, VkBufferCreateInfo *p)
