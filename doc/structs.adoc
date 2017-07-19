@@ -74,8 +74,11 @@ _flags_: <<instancecreateflags, instancecreateflags>> +
 _application_info_: <<applicationinfo, applicationinfo>> +
 _enabled_layer_names_: {string} +
 _enabled_extension_names_: {string} +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkInstanceCreateInfo[VkInstanceCreateInfo])#
-
+pass:[----] extensions ---- +
+_disabled_validation_checks_: {<<validationcheck, _validationcheck_>>} (Note1), +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkInstanceCreateInfo[VkInstanceCreateInfo]) +
+Note1: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_validation_flags[VK_EXT_validation_flags] extension (rfr:
+https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkValidationFlagsEXT[VkValidationFlagsEXT]).#
 
 [[applicationinfo]]
 * [small]#*applicationinfo* = { +

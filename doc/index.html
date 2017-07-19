@@ -3105,7 +3105,11 @@ with 1-based integer keys and no gaps, a.k.a. 'sequence' in Lua&#8217;s jargon).
 <em>application_info</em>: <a href="#applicationinfo">applicationinfo</a><br>
 <em>enabled_layer_names</em>: {string}<br>
 <em>enabled_extension_names</em>: {string}<br>
-} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkInstanceCreateInfo">VkInstanceCreateInfo</a>)</span></p>
+---- extensions ----<br>
+<em>disabled_validation_checks</em>: {<a href="#validationcheck"><em>validationcheck</em></a>} (Note1),<br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkInstanceCreateInfo">VkInstanceCreateInfo</a>)<br>
+Note1: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_validation_flags">VK_EXT_validation_flags</a> extension (rfr:
+<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkValidationFlagsEXT">VkValidationFlagsEXT</a>).</span></p>
 </li>
 </ul>
 </div>
@@ -4809,6 +4813,11 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/
 Values: '<em>inline</em>', '<em>secondary command buffers</em>'.<br>
 Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkSubpassContents">VkSubpassContents</a>.</span></p>
 </div>
+<div id="validationcheck" class="paragraph">
+<p><span class="small"><strong>validationcheck</strong>: vk.VALIDATION_CHECK_XXX_EXT<br>
+Values: '<em>all</em>', <em>shaders</em>'.<br>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkValidationCheckEXT">VkValidationCheckEXT</a>.</span></p>
+</div>
 <div id="vertexinputrate" class="paragraph">
 <p><span class="small"><strong>vertexinputrate</strong>: vk.VERTEX_INPUT_RATE_XXX<br>
 Values:
@@ -5769,6 +5778,9 @@ previously obtained with the <a href="#now">now</a>(&nbsp;) function.</span></p>
 </li>
 <li>
 <p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_swapchain_colorspace">VK_EXT_swapchain_colorspace</a></p>
+</li>
+<li>
+<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_validation_flags">VK_EXT_validation_flags</a></p>
 </li>
 </ul>
 </div>

@@ -4131,11 +4131,27 @@ void freeinstancecreateinfo(lua_State *L, VkInstanceCreateInfo_CHAIN *pp)
     freeapplicationinfo(L, &pp->p2);
     if(p->ppEnabledLayerNames) freestringlist(L, (char**)p->ppEnabledLayerNames, p->enabledLayerCount);
     if(p->ppEnabledExtensionNames) freestringlist(L, (char**)p->ppEnabledExtensionNames, p->enabledExtensionCount);
+    if(pp->p3.pDisabledValidationChecks)
+        freevalidationchecklist(L, pp->p3.pDisabledValidationChecks);
+    }
+
+static int echeckvalidationflags(lua_State *L, int arg, VkValidationFlagsEXT *p)
+    {
+    int err, arg1;
+    p->sType = VK_STRUCTURE_TYPE_VALIDATION_FLAGS_EXT;
+#define F "disabled_validation_checks"
+    PUSHFIELD(F);
+    p->pDisabledValidationChecks = checkvalidationchecklist(L, arg1, &p->disabledValidationCheckCount, &err);
+    POPFIELD();
+    if(err<0) return fielderror(L, F, err);
+#undef F
+    return 0;
     }
 
 int echeckinstancecreateinfo(lua_State *L, int arg, VkInstanceCreateInfo_CHAIN *pp)
     {
     int arg1, err;
+    int p3_present;
     VkInstanceCreateInfo *p = &pp->p1;
     VkApplicationInfo *appinfo = &pp->p2;
 
@@ -4167,6 +4183,14 @@ int echeckinstancecreateinfo(lua_State *L, int arg, VkInstanceCreateInfo_CHAIN *
     if(err < 0 && err != ERR_EMPTY)
         { freeinstancecreateinfo(L, pp); return fielderror(L, F, err); }
 #undef F
+    /* -- extensions ------ */
+    IsPresent("disabled_validation_checks", p3_present);
+    if(p3_present)
+        {
+        err = echeckvalidationflags(L, arg, &pp->p3);
+        if(err) { freeinstancecreateinfo(L, pp); return err; }
+        pp->p1.pNext = &pp->p3;
+        }
     return 0;
     }
 

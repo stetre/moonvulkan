@@ -311,6 +311,7 @@ static int Enum(lua_State *L)
     CASE(objecttype);
     CASE(blendoverlap);
     CASE(samplerreductionmode);
+    CASE(validationcheck);
 #undef CASE
     return 0;
     }
@@ -915,6 +916,7 @@ void moonvulkan_open_enums(lua_State *L)
 
     domain = DOMAIN_VALIDATION_CHECK; /* VkValidationCheckEXT */
     ADD(VALIDATION_CHECK_ALL_EXT, "all");
+    ADD(VALIDATION_CHECK_SHADERS_EXT, "shaders");
 
     domain = DOMAIN_DISPLAY_POWER_STATE; /* VkDisplayPowerStateEXT */
     ADD(DISPLAY_POWER_STATE_OFF_EXT, "off");

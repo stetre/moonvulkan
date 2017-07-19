@@ -237,6 +237,11 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.ht
 Values: '_inline_', '_secondary command buffers_'. +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkSubpassContents[VkSubpassContents].#
 
+[[validationcheck]]
+[small]#*validationcheck*: vk.VALIDATION_CHECK_XXX_EXT +
+Values: '_all_', _shaders_'. +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkValidationCheckEXT[VkValidationCheckEXT].#
+
 [[vertexinputrate]]
 [small]#*vertexinputrate*: vk.VERTEX_INPUT_RATE_XXX +
 Values:

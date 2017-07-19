@@ -6,7 +6,6 @@ MoonVulkan supports the core Vulkan API, plus the *extensions* listed hereafter.
 
 Khronos extensions (KHR):
 
-//* https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#[]
 
 * https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_16bit_storage[VK_KHR_16bit_storage]
 //@@VK_KHR_android_surface
@@ -65,7 +64,7 @@ Multivendor extensions (EXT):
 * https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_shader_subgroup_ballot[VK_EXT_shader_subgroup_ballot]
 * https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_shader_subgroup_vote[VK_EXT_shader_subgroup_vote]
 * https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_swapchain_colorspace[VK_EXT_swapchain_colorspace]
-//@@VK_EXT_validation_flags
+* https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_validation_flags[VK_EXT_validation_flags]
 
 Single vendor extensions (AMD, GOOGLE, IMG, MVK, NN, NV, NVX, ...):
 
@@ -75,4 +74,8 @@ Single vendor extensions (AMD, GOOGLE, IMG, MVK, NN, NV, NVX, ...):
 Support for multi-threaded applications is under study and may be added in the future
 (although one could argue that if performance is paramount for the application, maybe using a 
 binding library to a dynamic, garbage-collected language is not the way to go).
+
+////
+* https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#[]
+////
 

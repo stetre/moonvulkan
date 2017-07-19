@@ -81,15 +81,14 @@ void enums_freelist(lua_State *L, uint32_t *list);
 #define DOMAIN_COLOR_SPACE                      34
 #define DOMAIN_PRESENT_MODE                     35
 #define DOMAIN_DEBUG_REPORT_OBJECT_TYPE         36
-#define DOMAIN_XXXXXXXXXXXXXXXXXX               37 //@@ reusable
-#define DOMAIN_DESCRIPTOR_UPDATE_TEMPLATE_TYPE  38
-#define DOMAIN_VALIDATION_CHECK                 39
-#define DOMAIN_DISPLAY_POWER_STATE              40
-#define DOMAIN_DEVICE_EVENT_TYPE                41
-#define DOMAIN_DISPLAY_EVENT_TYPE               42
-#define DOMAIN_OBJECT_TYPE                      43
-#define DOMAIN_BLEND_OVERLAP                    44
-#define DOMAIN_SAMPLER_REDUCTION_MODE           45
+#define DOMAIN_DESCRIPTOR_UPDATE_TEMPLATE_TYPE  37
+#define DOMAIN_VALIDATION_CHECK                 38
+#define DOMAIN_DISPLAY_POWER_STATE              39
+#define DOMAIN_DEVICE_EVENT_TYPE                40
+#define DOMAIN_DISPLAY_EVENT_TYPE               41
+#define DOMAIN_OBJECT_TYPE                      42
+#define DOMAIN_BLEND_OVERLAP                    43
+#define DOMAIN_SAMPLER_REDUCTION_MODE           44
 /* NONVK additions */
 #define DOMAIN_NONVK_TYPE                       101
 
@@ -315,6 +314,13 @@ void enums_freelist(lua_State *L, uint32_t *list);
 #define checksamplerreductionmode(L, arg) (VkSamplerReductionModeEXT)enums_check((L), DOMAIN_SAMPLER_REDUCTION_MODE, (arg))
 #define pushsamplerreductionmode(L, val) enums_push((L), DOMAIN_SAMPLER_REDUCTION_MODE, (uint32_t)(val))
 #define valuessamplerreductionmode(L) enums_values((L), DOMAIN_SAMPLER_REDUCTION_MODE)
+
+#define testvalidationcheck(L, arg, err) (VkValidationCheckEXT)enums_test((L), DOMAIN_VALIDATION_CHECK, (arg), (err))
+#define checkvalidationcheck(L, arg) (VkValidationCheckEXT)enums_check((L), DOMAIN_VALIDATION_CHECK, (arg))
+#define pushvalidationcheck(L, val) enums_push((L), DOMAIN_VALIDATION_CHECK, (uint32_t)(val))
+#define valuesvalidationcheck(L) enums_values((L), DOMAIN_VALIDATION_CHECK)
+#define checkvalidationchecklist(L, arg, count, err) (VkValidationCheckEXT*)enums_checklist((L), DOMAIN_VALIDATION_CHECK, (arg), (count), (err))
+#define freevalidationchecklist(L, list) enums_freelist((L), (uint32_t*)(list))
 
 #if 0 /* scaffolding 7yy */
 #define testxxx(L, arg, err) (VkXxx)enums_test((L), DOMAIN_XXX, (arg), (err))

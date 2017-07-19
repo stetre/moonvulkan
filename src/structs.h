@@ -506,6 +506,7 @@ int echeckdevicecreateinfo(lua_State *L, int arg, VkDeviceCreateInfo_CHAIN *p, u
 typedef struct {
     VkInstanceCreateInfo p1;
     VkApplicationInfo p2;
+    VkValidationFlagsEXT p3;
 } VkInstanceCreateInfo_CHAIN;
 
 #define freeinstancecreateinfo moonvulkan_freeinstancecreateinfo
