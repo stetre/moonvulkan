@@ -4599,28 +4599,11 @@ for semantic and usage information.</p>
 Values: '<em>success</em>', '<em>not ready</em>', '<em>timeout</em>', '<em>event set</em>', '<em>event reset</em>', '<em>incomplete</em>', '<em>out of host memory</em>', '<em>out of device memory</em>', '<em>initialization failed</em>', '<em>device lost</em>', '<em>memory map failed</em>', '<em>layer not present</em>', '<em>extension not present</em>', '<em>feature not present</em>', '<em>incompatible driver</em>', '<em>too many objects</em>', '<em>format not supported</em>', '<em>fragmented pool</em>', '<em>surface lost</em>', '<em>native window in use</em>', '<em>suboptimal</em>', '<em>out of date</em>', '<em>incompatible display</em>', '<em>validation failed</em>', '<em>out of pool memory</em>', '<em>invalid external handle</em>'.<br>
 Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkResult">VkResult</a>.</span></p>
 </div>
-<div id="subpasscontents" class="paragraph">
-<p><span class="small"><strong>subpasscontents</strong>: vk.SUBPASS_CONTENTS_XXX<br>
-Values: '<em>inline</em>', '<em>secondary command buffers</em>'.<br>
-Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkSubpassContents">VkSubpassContents</a>.</span></p>
-</div>
-<div id="indextype" class="paragraph">
-<p><span class="small"><strong>indextype</strong>: vk.INDEX_TYPE_XXX<br>
+<div id="attachmentloadop" class="paragraph">
+<p><span class="small"><strong>attachmentloadop</strong>: vk.ATTACHMENT_LOAD_OP_XXX<br>
 Values:
-'<em>uint16</em>', '<em>uint32</em>'.<br>
-Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkIndexType">VkIndexType</a>.</span></p>
-</div>
-<div id="commandbufferlevel" class="paragraph">
-<p><span class="small"><strong>commandbufferlevel</strong>: vk.COMMAND_BUFFER_LEVEL_XXX<br>
-Values:
-'<em>primary</em>', '<em>secondary</em>'.<br>
-Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkCommandBufferLevel">VkCommandBufferLevel</a>.</span></p>
-</div>
-<div id="pipelinebindpoint" class="paragraph">
-<p><span class="small"><strong>pipelinebindpoint</strong>: vk.PIPELINE_BIND_POINT_XXX<br>
-Values:
-'<em>graphics</em>' (default), '<em>compute</em>'.<br>
-Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPipelineBindPoint">VkPipelineBindPoint</a>.</span></p>
+'<em>load</em>', '<em>clear</em>', '<em>dont care</em>' (default).<br>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkAttachmentLoadOp">VkAttachmentLoadOp</a>.</span></p>
 </div>
 <div id="attachmentstoreop" class="paragraph">
 <p><span class="small"><strong>attachmentstoreop</strong>: vk.ATTACHMENT_STORE_OP_XXX<br>
@@ -4628,47 +4611,11 @@ Values:
 '<em>store</em>', '<em>dont care</em>' (default).<br>
 Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkAttachmentStoreOp">VkAttachmentStoreOp</a>.</span></p>
 </div>
-<div id="attachmentloadop" class="paragraph">
-<p><span class="small"><strong>attachmentloadop</strong>: vk.ATTACHMENT_LOAD_OP_XXX<br>
+<div id="blendfactor" class="paragraph">
+<p><span class="small"><strong>blendfactor</strong>: vk.BLEND_FACTOR_XXX<br>
 Values:
-'<em>load</em>', '<em>clear</em>', '<em>dont care</em>' (default).<br>
-Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkAttachmentLoadOp">VkAttachmentLoadOp</a>.</span></p>
-</div>
-<div id="descriptortype" class="paragraph">
-<p><span class="small"><strong>descriptortype</strong>: vk.DESCRIPTOR_TYPE_XXX<br>
-Values:
-'<em>sampler</em>', '<em>combined image sampler</em>', '<em>sampled image</em>', '<em>storage image</em>', '<em>uniform texel buffer</em>', '<em>storage texel buffer</em>', '<em>uniform buffer</em>', '<em>storage buffer</em>', '<em>uniform buffer dynamic</em>', '<em>storage buffer dynamic</em>', '<em>input attachment</em>'.<br>
-Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkDescriptorType">VkDescriptorType</a>.</span></p>
-</div>
-<div id="bordercolor" class="paragraph">
-<p><span class="small"><strong>bordercolor</strong>: vk.BORDER_COLOR_XXX<br>
-Values:
-'<em>float transparent black</em>' (default), '<em>int transparent black</em>', '<em>float opaque black</em>', '<em>int opaque black</em>', '<em>float opaque white</em>', '<em>int opaque white</em>'.<br>
-Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkBorderColor">VkBorderColor</a>.</span></p>
-</div>
-<div id="sampleraddressmode" class="paragraph">
-<p><span class="small"><strong>sampleraddressmode</strong>: vk.SAMPLER_ADDRESS_MODE_XXX<br>
-Values:
-'<em>repeat</em>' (default), '<em>mirrored repeat</em>', '<em>clamp to edge</em>', '<em>clamp to border</em>', '<em>mirror clamp to edge</em>'.<br>
-Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkSamplerAddressMode">VkSamplerAddressMode</a>.</span></p>
-</div>
-<div id="samplermipmapmode" class="paragraph">
-<p><span class="small"><strong>samplermipmapmode</strong>: vk.SAMPLER_MIPMAP_MODE_XXX<br>
-Values:
-'<em>nearest</em>' (default), '<em>linear</em>'.<br>
-Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkSamplerMipmapMode">VkSamplerMipmapMode</a>.</span></p>
-</div>
-<div id="filter" class="paragraph">
-<p><span class="small"><strong>filter</strong>: vk.FILTER_XXX<br>
-Values:
-'<em>nearest</em>' (default), '<em>linear</em>'.<br>
-Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkFilter">VkFilter</a>.</span></p>
-</div>
-<div id="dynamicstate" class="paragraph">
-<p><span class="small"><strong>dynamicstate</strong>: vk.DYNAMIC_STATE_XXX<br>
-Values:
-'<em>viewport</em>', '<em>scissor</em>', '<em>line width</em>', '<em>depth bias</em>', '<em>blend constants</em>', '<em>depth bounds</em>', '<em>stencil compare mask</em>', '<em>stencil write mask</em>', '<em>stencil reference</em>', '<em>discard rectangle</em>'.<br>
-Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkDynamicState">VkDynamicState</a>.</span></p>
+'<em>zero</em>' (default), '<em>one</em>', '<em>src color</em>', '<em>one minus src color</em>', '<em>dst color</em>', '<em>one minus dst color</em>', '<em>src alpha</em>', '<em>one minus src alpha</em>', '<em>dst alpha</em>', '<em>one minus dst alpha</em>', '<em>constant color</em>', '<em>one minus constant color</em>', '<em>constant alpha</em>', '<em>one minus constant alpha</em>', '<em>src alpha saturate</em>', '<em>src1 color</em>', '<em>one minus src1 color</em>', '<em>src1 alpha</em>', '<em>one minus src1 alpha</em>'.<br>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkBlendFactor">VkBlendFactor</a>.</span></p>
 </div>
 <div id="blendop" class="paragraph">
 <p><span class="small"><strong>blendop</strong>: vk.BLEND_OP_XXX,  vk.BLEND_OP_XXX_EXT<br>
@@ -4676,23 +4623,28 @@ Values:
 '<em>add</em>' (default), '<em>subtract</em>', '<em>reverse subtract</em>', '<em>min</em>', '<em>max</em>', '<em>zero</em>', '<em>src</em>', '<em>dst</em>', '<em>src over</em>', '<em>dst over</em>', '<em>src in</em>', '<em>dst in</em>', '<em>src out</em>', '<em>dst out</em>', '<em>src atop</em>', '<em>dst atop</em>', '<em>xor</em>', '<em>multiply</em>', '<em>screen</em>', '<em>overlay</em>', '<em>darken</em>', '<em>lighten</em>', '<em>colordodge</em>', '<em>colorburn</em>', '<em>hardlight</em>', '<em>softlight</em>', '<em>difference</em>', '<em>exclusion</em>', '<em>invert</em>', '<em>invert rgb</em>', '<em>lineardodge</em>', '<em>linearburn</em>', '<em>vividlight</em>', '<em>linearlight</em>', '<em>pinlight</em>', '<em>hardmix</em>', '<em>hsl hue</em>', '<em>hsl saturation</em>', '<em>hsl color</em>', '<em>hsl luminosity</em>', '<em>plus</em>', '<em>plus clamped</em>', '<em>plus clamped alpha</em>', '<em>plus darker</em>', '<em>minus</em>', '<em>minus clamped</em>', '<em>contrast</em>', '<em>invert ovg</em>', '<em>red</em>', '<em>green</em>', '<em>blue</em>'.<br>
 Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkBlendOp">VkBlendOp</a>.</span></p>
 </div>
-<div id="blendfactor" class="paragraph">
-<p><span class="small"><strong>blendfactor</strong>: vk.BLEND_FACTOR_XXX<br>
-Values:
-'<em>zero</em>' (default), '<em>one</em>', '<em>src color</em>', '<em>one minus src color</em>', '<em>dst color</em>', '<em>one minus dst color</em>', '<em>src alpha</em>', '<em>one minus src alpha</em>', '<em>dst alpha</em>', '<em>one minus dst alpha</em>', '<em>constant color</em>', '<em>one minus constant color</em>', '<em>constant alpha</em>', '<em>one minus constant alpha</em>', '<em>src alpha saturate</em>', '<em>src1 color</em>', '<em>one minus src1 color</em>', '<em>src1 alpha</em>', '<em>one minus src1 alpha</em>'.<br>
-Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkBlendFactor">VkBlendFactor</a>.</span></p>
+<div id="blendoverlap" class="paragraph">
+<p><span class="small"><strong>blendoverlap</strong>: vk.BLEND_OVERLAP_XXX_EXT<br>
+Values: '<em>uncorrelated</em>' (default), '<em>disjoint</em>', '<em>conjoint</em>'.<br>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkBlendOverlapEXT">VkBlendOverlapEXT</a>.</span></p>
 </div>
-<div id="logicop" class="paragraph">
-<p><span class="small"><strong>logicop</strong>: vk.LOGIC_OP_XXX<br>
+<div id="bordercolor" class="paragraph">
+<p><span class="small"><strong>bordercolor</strong>: vk.BORDER_COLOR_XXX<br>
 Values:
-'<em>clear</em>' (default), '<em>and</em>', '<em>and reverse</em>', '<em>copy</em>', '<em>and inverted</em>', '<em>no op</em>', '<em>xor</em>', '<em>or</em>', '<em>nor</em>', '<em>equivalent</em>', '<em>invert</em>', '<em>or reverse</em>', '<em>copy inverted</em>', '<em>or inverted</em>', '<em>nand</em>', '<em>set</em>'.<br>
-Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkLogicOp">VkLogicOp</a>.</span></p>
+'<em>float transparent black</em>' (default), '<em>int transparent black</em>', '<em>float opaque black</em>', '<em>int opaque black</em>', '<em>float opaque white</em>', '<em>int opaque white</em>'.<br>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkBorderColor">VkBorderColor</a>.</span></p>
 </div>
-<div id="stencilop" class="paragraph">
-<p><span class="small"><strong>stencilop</strong>: vk.STENCIL_OP_XXX<br>
+<div id="colorspace" class="paragraph">
+<p><span class="small"><strong>colorspace</strong>: vk.COLOR_SPACE_XXX_KHR, vk.COLOR_SPACE_XXX_EXT<br>
 Values:
-'<em>keep</em>' (default), '<em>zero</em>', '<em>replace</em>', '<em>increment and clamp</em>', '<em>decrement and clamp</em>', '<em>invert</em>', '<em>increment and wrap</em>', '<em>decrement and wrap</em>'.<br>
-Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkStencilOp">VkStencilOp</a>.</span></p>
+'<em>srgb nonlinear</em>' (default), '<em>display p3 nonlinear</em>', '<em>extended srgb linear</em>', '<em>dci p3 linear</em>', '<em>dci p3 nonlinear</em>', '<em>bt709 linear</em>', '<em>bt709 nonlinear</em>', '<em>bt2020 linear</em>', '<em>hdr10 st2084</em>', '<em>dolbyvision</em>', '<em>hdr10 hlg</em>', '<em>adobergb linear</em>', '<em>adobergb nonlinear</em>', '<em>pass through</em>'.<br>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkColorSpaceKHR">VkColorSpaceKHR</a>.</span></p>
+</div>
+<div id="commandbufferlevel" class="paragraph">
+<p><span class="small"><strong>commandbufferlevel</strong>: vk.COMMAND_BUFFER_LEVEL_XXX<br>
+Values:
+'<em>primary</em>', '<em>secondary</em>'.<br>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkCommandBufferLevel">VkCommandBufferLevel</a>.</span></p>
 </div>
 <div id="compareop" class="paragraph">
 <p><span class="small"><strong>compareop</strong>: vk.COMPARE_OP_XXX<br>
@@ -4700,65 +4652,57 @@ Values:
 '<em>never</em>' (default), '<em>less</em>', '<em>equal</em>', '<em>less or equal</em>', '<em>greater</em>', '<em>not equal</em>', '<em>greater or equal</em>', '<em>always</em>'.<br>
 Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkCompareOp">VkCompareOp</a>.</span></p>
 </div>
-<div id="frontface" class="paragraph">
-<p><span class="small"><strong>frontface</strong>: vk.FRONT_FACE_XXX<br>
-Values:
-'<em>counter clockwise</em>' (default), '<em>clockwise</em>'.<br>
-Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkFrontFace">VkFrontFace</a>.</span></p>
-</div>
-<div id="polygonmode" class="paragraph">
-<p><span class="small"><strong>polygonmode</strong>: vk.POLYGON_MODE_XXX<br>
-Values:
-'<em>fill</em>' (default), '<em>line</em>', '<em>point</em>'.<br>
-Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPolygonMode">VkPolygonMode</a>.</span></p>
-</div>
-<div id="primitivetopology" class="paragraph">
-<p><span class="small"><strong>primitivetopology</strong>: vk.PRIMITIVE_TOPOLOGY_XXX<br>
-Values:
-'<em>point list</em>' (default), '<em>line list</em>', '<em>line strip</em>', '<em>triangle list</em>', '<em>triangle strip</em>', '<em>triangle fan</em>', '<em>line list with adjacency</em>', '<em>line strip with adjacency</em>', '<em>triangle list with adjacency</em>', '<em>triangle strip with adjacency</em>', '<em>patch list</em>'.<br>
-Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPrimitiveTopology">VkPrimitiveTopology</a>.</span></p>
-</div>
-<div id="vertexinputrate" class="paragraph">
-<p><span class="small"><strong>vertexinputrate</strong>: vk.VERTEX_INPUT_RATE_XXX<br>
-Values:
-'<em>vertex</em>' (default), '<em>instance</em>'.<br>
-Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkVertexInputRate">VkVertexInputRate</a>.</span></p>
-</div>
 <div id="componentswizzle" class="paragraph">
 <p><span class="small"><strong>componentswizzle</strong>: vk.COMPONENT_SWIZZLE_XXX<br>
 Values:
 '<em>identity</em>' (default), '<em>zero</em>', '<em>one</em>', '<em>r</em>', '<em>g</em>', '<em>b</em>', '<em>a</em>'.<br>
 Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkComponentSwizzle">VkComponentSwizzle</a>.</span></p>
 </div>
-<div id="imageviewtype" class="paragraph">
-<p><span class="small"><strong>imageviewtype</strong>: vk.IMAGE_VIEW_TYPE_XXX<br>
+<div id="debugreportobjecttype" class="paragraph">
+<p><span class="small"><strong>debugreportobjecttype</strong>: vk.DEBUG_REPORT_OBJECT_TYPE_XXX_EXT<br>
+Values: '<em>unknown</em>', '<em>instance</em>', '<em>physical device</em>', '<em>device</em>', '<em>queue</em>', '<em>semaphore</em>', '<em>command buffer</em>', '<em>fence</em>', '<em>device memory</em>', '<em>buffer</em>', '<em>image</em>', '<em>event</em>', '<em>query pool</em>', '<em>buffer view</em>', '<em>image view</em>', '<em>shader module</em>', '<em>pipeline cache</em>', '<em>pipeline layout</em>', '<em>render pass</em>', '<em>pipeline</em>', '<em>descriptor set layout</em>', '<em>sampler</em>', '<em>descriptor pool</em>', '<em>descriptor set</em>', '<em>framebuffer</em>', '<em>command pool</em>', '<em>surface</em>', '<em>swapchain</em>', '<em>debug report callback</em>', '<em>display</em>', '<em>display mode</em>'.<br>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkDebugReportObjectTypeEXT">VkDebugReportObjectTypeEXT</a>.</span></p>
+</div>
+<div id="descriptortype" class="paragraph">
+<p><span class="small"><strong>descriptortype</strong>: vk.DESCRIPTOR_TYPE_XXX<br>
 Values:
-'<em>1d</em>', '<em>2d</em>', '<em>3d</em>', '<em>cube</em>', '<em>1d array</em>', '<em>2d array</em>', '<em>cube array</em>'.<br>
-Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkImageViewType">VkImageViewType</a>.</span></p>
+'<em>sampler</em>', '<em>combined image sampler</em>', '<em>sampled image</em>', '<em>storage image</em>', '<em>uniform texel buffer</em>', '<em>storage texel buffer</em>', '<em>uniform buffer</em>', '<em>storage buffer</em>', '<em>uniform buffer dynamic</em>', '<em>storage buffer dynamic</em>', '<em>input attachment</em>'.<br>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkDescriptorType">VkDescriptorType</a>.</span></p>
+</div>
+<div id="descriptorupdatetemplatetype" class="paragraph">
+<p><span class="small"><strong>descriptorupdatetemplatetype</strong>: vk.DESCRIPTOR_UPDATE_TEMPLATE_TYPE_XXX_KHR<br>
+Values: '<em>descriptor set</em>', '<em>push descriptors</em>'.<br>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkDescriptorUpdateTemplateTypeKHR">VkDescriptorUpdateTemplateTypeKHR</a>.</span></p>
+</div>
+<div id="dynamicstate" class="paragraph">
+<p><span class="small"><strong>dynamicstate</strong>: vk.DYNAMIC_STATE_XXX<br>
+Values:
+'<em>viewport</em>', '<em>scissor</em>', '<em>line width</em>', '<em>depth bias</em>', '<em>blend constants</em>', '<em>depth bounds</em>', '<em>stencil compare mask</em>', '<em>stencil write mask</em>', '<em>stencil reference</em>', '<em>discard rectangle</em>'.<br>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkDynamicState">VkDynamicState</a>.</span></p>
+</div>
+<div id="filter" class="paragraph">
+<p><span class="small"><strong>filter</strong>: vk.FILTER_XXX<br>
+Values:
+'<em>nearest</em>' (default), '<em>linear</em>'.<br>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkFilter">VkFilter</a>.</span></p>
+</div>
+<div id="format" class="paragraph">
+<p><span class="small"><strong>format</strong>: vk.FORMAT_XXX<br>
+Values:
+'<em>undefined</em>' (default), '<em>r4g4 unorm pack8</em>', '<em>r4g4b4a4 unorm pack16</em>', etc.<br>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkFormat">VkFormat</a>.</span></p>
+</div>
+<div id="frontface" class="paragraph">
+<p><span class="small"><strong>frontface</strong>: vk.FRONT_FACE_XXX<br>
+Values:
+'<em>counter clockwise</em>' (default), '<em>clockwise</em>'.<br>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkFrontFace">VkFrontFace</a>.</span></p>
 </div>
 <div id="imagelayout" class="paragraph">
 <p><span class="small"><strong>imagelayout</strong>: vk.IMAGE_LAYOUT_XXX<br>
 Values:
 '<em>undefined</em>' (default), '<em>general</em>', '<em>color attachment optimal</em>', '<em>depth stencil attachment optimal</em>', '<em>depth stencil read only optimal</em>', '<em>shader read only optimal</em>', '<em>transfer src optimal</em>', '<em>transfer dst optimal</em>', '<em>preinitialized</em>', '<em>present src</em>', '<em>shared present</em>'.<br>
 Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkImageLayout">VkImageLayout</a>.</span></p>
-</div>
-<div id="sharingmode" class="paragraph">
-<p><span class="small"><strong>sharingmode</strong>: vk.SHARING_MODE_XXX<br>
-Values:
-'<em>exclusive</em>' (default), '<em>concurrent</em>'.<br>
-Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkSharingMode">VkSharingMode</a>.</span></p>
-</div>
-<div id="querytype" class="paragraph">
-<p><span class="small"><strong>querytype</strong>: vk.QUERY_TYPE_XXX<br>
-Values:
-'<em>occlusion</em>', '<em>pipeline statistics</em>', '<em>timestamp</em>'.<br>
-Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkQueryType">VkQueryType</a>.</span></p>
-</div>
-<div id="physicaldevicetype" class="paragraph">
-<p><span class="small"><strong>physicaldevicetype</strong>: vk.PHYSICAL_DEVICE_TYPE_XXX<br>
-Values:
-'<em>other</em>', '<em>integrated gpu</em>', '<em>discrete gpu</em>', '<em>virtual gpu</em>', '<em>cpu</em>'.<br>
-Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPhysicalDeviceType">VkPhysicalDeviceType</a>.</span></p>
 </div>
 <div id="imagetiling" class="paragraph">
 <p><span class="small"><strong>imagetiling</strong>: vk.IMAGE_TILING_XXX<br>
@@ -4772,17 +4716,46 @@ Values:
 '<em>1d</em>', '<em>2d</em>', '<em>3d</em>'.<br>
 Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkImageType">VkImageType</a>.</span></p>
 </div>
-<div id="format" class="paragraph">
-<p><span class="small"><strong>format</strong>: vk.FORMAT_XXX<br>
+<div id="imageviewtype" class="paragraph">
+<p><span class="small"><strong>imageviewtype</strong>: vk.IMAGE_VIEW_TYPE_XXX<br>
 Values:
-'<em>undefined</em>' (default), '<em>r4g4 unorm pack8</em>', '<em>r4g4b4a4 unorm pack16</em>', etc.<br>
-Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkFormat">VkFormat</a>.</span></p>
+'<em>1d</em>', '<em>2d</em>', '<em>3d</em>', '<em>cube</em>', '<em>1d array</em>', '<em>2d array</em>', '<em>cube array</em>'.<br>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkImageViewType">VkImageViewType</a>.</span></p>
 </div>
-<div id="colorspace" class="paragraph">
-<p><span class="small"><strong>colorspace</strong>: vk.COLOR_SPACE_XXX_KHR, vk.COLOR_SPACE_XXX_EXT<br>
+<div id="indextype" class="paragraph">
+<p><span class="small"><strong>indextype</strong>: vk.INDEX_TYPE_XXX<br>
 Values:
-'<em>srgb nonlinear</em>' (default), '<em>display p3 nonlinear</em>', '<em>extended srgb linear</em>', '<em>dci p3 linear</em>', '<em>dci p3 nonlinear</em>', '<em>bt709 linear</em>', '<em>bt709 nonlinear</em>', '<em>bt2020 linear</em>', '<em>hdr10 st2084</em>', '<em>dolbyvision</em>', '<em>hdr10 hlg</em>', '<em>adobergb linear</em>', '<em>adobergb nonlinear</em>', '<em>pass through</em>'.<br>
-Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkColorSpaceKHR">VkColorSpaceKHR</a>.</span></p>
+'<em>uint16</em>', '<em>uint32</em>'.<br>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkIndexType">VkIndexType</a>.</span></p>
+</div>
+<div id="logicop" class="paragraph">
+<p><span class="small"><strong>logicop</strong>: vk.LOGIC_OP_XXX<br>
+Values:
+'<em>clear</em>' (default), '<em>and</em>', '<em>and reverse</em>', '<em>copy</em>', '<em>and inverted</em>', '<em>no op</em>', '<em>xor</em>', '<em>or</em>', '<em>nor</em>', '<em>equivalent</em>', '<em>invert</em>', '<em>or reverse</em>', '<em>copy inverted</em>', '<em>or inverted</em>', '<em>nand</em>', '<em>set</em>'.<br>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkLogicOp">VkLogicOp</a>.</span></p>
+</div>
+<div id="objecttype" class="paragraph">
+<p><span class="small"><strong>objecttype</strong>: vk.OBJECT_TYPE_XXX<br>
+Values: '<em>unknown</em>', '<em>instance</em>', '<em>physical device</em>', '<em>device</em>', '<em>queue</em>', '<em>semaphore</em>', '<em>command buffer</em>', '<em>fence</em>', '<em>device memory</em>', '<em>buffer</em>', '<em>image</em>', '<em>event</em>', '<em>query pool</em>', '<em>buffer view</em>', '<em>image view</em>', '<em>shader module</em>', '<em>pipeline cache</em>', '<em>pipeline layout</em>', '<em>render pass</em>', '<em>pipeline</em>', '<em>descriptor set layout</em>', '<em>sampler</em>', '<em>descriptor pool</em>', '<em>descriptor set</em>', '<em>framebuffer</em>', '<em>command pool</em>', '<em>surface</em>', '<em>swapchain</em>', '<em>display</em>', '<em>display mode</em>', '<em>debug report callback</em>', '<em>descriptor update template</em>'.<br>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkObjectType">VkObjectType</a>.</span></p>
+</div>
+<div id="physicaldevicetype" class="paragraph">
+<p><span class="small"><strong>physicaldevicetype</strong>: vk.PHYSICAL_DEVICE_TYPE_XXX<br>
+Values:
+'<em>other</em>', '<em>integrated gpu</em>', '<em>discrete gpu</em>', '<em>virtual gpu</em>', '<em>cpu</em>'.<br>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPhysicalDeviceType">VkPhysicalDeviceType</a>.</span></p>
+</div>
+<div id="pipelinebindpoint" class="paragraph">
+<p><span class="small"><strong>pipelinebindpoint</strong>: vk.PIPELINE_BIND_POINT_XXX<br>
+Values:
+'<em>graphics</em>' (default), '<em>compute</em>'.<br>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPipelineBindPoint">VkPipelineBindPoint</a>.</span></p>
+</div>
+<div id="polygonmode" class="paragraph">
+<p><span class="small"><strong>polygonmode</strong>: vk.POLYGON_MODE_XXX<br>
+Values:
+'<em>fill</em>' (default), '<em>line</em>', '<em>point</em>'.<br>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPolygonMode">VkPolygonMode</a>.</span></p>
 </div>
 <div id="presentmode" class="paragraph">
 <p><span class="small"><strong>presentmode</strong>: vk.PRESENT_MODE_XXX_KHR<br>
@@ -4790,35 +4763,57 @@ Values:
 '<em>immediate</em>', '<em>mailbox</em>', '<em>fifo</em>' (default), '<em>fifo relaxed</em>', '<em>shared demand refresh</em>', '<em>shared continuous refresh</em>'.<br>
 Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPresentModeKHR">VkPresentModeKHR</a>.</span></p>
 </div>
-<div id="debugreporterror" class="paragraph">
-<p><span class="small"><strong>debugreporterror</strong>: vk.DEBUG_REPORT_ERROR_XXX_EXT<br>
-Values: '<em>none</em>', '<em>callback ref</em>'.<br>
-Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkDebugReportErrorEXT">VkDebugReportErrorEXT</a>.</span></p>
+<div id="primitivetopology" class="paragraph">
+<p><span class="small"><strong>primitivetopology</strong>: vk.PRIMITIVE_TOPOLOGY_XXX<br>
+Values:
+'<em>point list</em>' (default), '<em>line list</em>', '<em>line strip</em>', '<em>triangle list</em>', '<em>triangle strip</em>', '<em>triangle fan</em>', '<em>line list with adjacency</em>', '<em>line strip with adjacency</em>', '<em>triangle list with adjacency</em>', '<em>triangle strip with adjacency</em>', '<em>patch list</em>'.<br>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPrimitiveTopology">VkPrimitiveTopology</a>.</span></p>
 </div>
-<div id="debugreportobjecttype" class="paragraph">
-<p><span class="small"><strong>debugreportobjecttype</strong>: vk.DEBUG_REPORT_OBJECT_TYPE_XXX_EXT<br>
-Values: '<em>unknown</em>', '<em>instance</em>', '<em>physical device</em>', '<em>device</em>', '<em>queue</em>', '<em>semaphore</em>', '<em>command buffer</em>', '<em>fence</em>', '<em>device memory</em>', '<em>buffer</em>', '<em>image</em>', '<em>event</em>', '<em>query pool</em>', '<em>buffer view</em>', '<em>image view</em>', '<em>shader module</em>', '<em>pipeline cache</em>', '<em>pipeline layout</em>', '<em>render pass</em>', '<em>pipeline</em>', '<em>descriptor set layout</em>', '<em>sampler</em>', '<em>descriptor pool</em>', '<em>descriptor set</em>', '<em>framebuffer</em>', '<em>command pool</em>', '<em>surface</em>', '<em>swapchain</em>', '<em>debug report callback</em>', '<em>display</em>', '<em>display mode</em>'.<br>
-Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkDebugReportObjectTypeEXT">VkDebugReportObjectTypeEXT</a>.</span></p>
+<div id="querytype" class="paragraph">
+<p><span class="small"><strong>querytype</strong>: vk.QUERY_TYPE_XXX<br>
+Values:
+'<em>occlusion</em>', '<em>pipeline statistics</em>', '<em>timestamp</em>'.<br>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkQueryType">VkQueryType</a>.</span></p>
 </div>
-<div id="objecttype" class="paragraph">
-<p><span class="small"><strong>objecttype</strong>: vk.OBJECT_TYPE_XXX<br>
-Values: '<em>unknown</em>', '<em>instance</em>', '<em>physical device</em>', '<em>device</em>', '<em>queue</em>', '<em>semaphore</em>', '<em>command buffer</em>', '<em>fence</em>', '<em>device memory</em>', '<em>buffer</em>', '<em>image</em>', '<em>event</em>', '<em>query pool</em>', '<em>buffer view</em>', '<em>image view</em>', '<em>shader module</em>', '<em>pipeline cache</em>', '<em>pipeline layout</em>', '<em>render pass</em>', '<em>pipeline</em>', '<em>descriptor set layout</em>', '<em>sampler</em>', '<em>descriptor pool</em>', '<em>descriptor set</em>', '<em>framebuffer</em>', '<em>command pool</em>', '<em>surface</em>', '<em>swapchain</em>', '<em>display</em>', '<em>display mode</em>', '<em>debug report callback</em>', '<em>descriptor update template</em>'.<br>
-Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkObjectType">VkObjectType</a>.</span></p>
+<div id="sampleraddressmode" class="paragraph">
+<p><span class="small"><strong>sampleraddressmode</strong>: vk.SAMPLER_ADDRESS_MODE_XXX<br>
+Values:
+'<em>repeat</em>' (default), '<em>mirrored repeat</em>', '<em>clamp to edge</em>', '<em>clamp to border</em>', '<em>mirror clamp to edge</em>'.<br>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkSamplerAddressMode">VkSamplerAddressMode</a>.</span></p>
 </div>
-<div id="descriptorupdatetemplatetype" class="paragraph">
-<p><span class="small"><strong>descriptorupdatetemplatetype</strong>: vk.DESCRIPTOR_UPDATE_TEMPLATE_TYPE_XXX_KHR<br>
-Values: '<em>descriptor set</em>', '<em>push descriptors</em>'.<br>
-Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkDescriptorUpdateTemplateTypeKHR">VkDescriptorUpdateTemplateTypeKHR</a>.</span></p>
-</div>
-<div id="blendoverlap" class="paragraph">
-<p><span class="small"><strong>blendoverlap</strong>: vk.BLEND_OVERLAP_XXX_EXT<br>
-Values: '<em>uncorrelated</em>' (default), '<em>disjoint</em>', '<em>conjoint</em>'.<br>
-Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkBlendOverlapEXT">VkBlendOverlapEXT</a>.</span></p>
+<div id="samplermipmapmode" class="paragraph">
+<p><span class="small"><strong>samplermipmapmode</strong>: vk.SAMPLER_MIPMAP_MODE_XXX<br>
+Values:
+'<em>nearest</em>' (default), '<em>linear</em>'.<br>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkSamplerMipmapMode">VkSamplerMipmapMode</a>.</span></p>
 </div>
 <div id="samplerreductionmode" class="paragraph">
 <p><span class="small"><strong>samplerreductionmode</strong>: vk.SAMPLER_REDUCTION_MODE_XXX_EXT<br>
 Values: '<em>weighted average</em>' (default), '<em>min</em>', '<em>max</em>'.<br>
 Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkSamplerReductionModeEXT">VkSamplerReductionModeEXT</a>.</span></p>
+</div>
+<div id="sharingmode" class="paragraph">
+<p><span class="small"><strong>sharingmode</strong>: vk.SHARING_MODE_XXX<br>
+Values:
+'<em>exclusive</em>' (default), '<em>concurrent</em>'.<br>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkSharingMode">VkSharingMode</a>.</span></p>
+</div>
+<div id="stencilop" class="paragraph">
+<p><span class="small"><strong>stencilop</strong>: vk.STENCIL_OP_XXX<br>
+Values:
+'<em>keep</em>' (default), '<em>zero</em>', '<em>replace</em>', '<em>increment and clamp</em>', '<em>decrement and clamp</em>', '<em>invert</em>', '<em>increment and wrap</em>', '<em>decrement and wrap</em>'.<br>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkStencilOp">VkStencilOp</a>.</span></p>
+</div>
+<div id="subpasscontents" class="paragraph">
+<p><span class="small"><strong>subpasscontents</strong>: vk.SUBPASS_CONTENTS_XXX<br>
+Values: '<em>inline</em>', '<em>secondary command buffers</em>'.<br>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkSubpassContents">VkSubpassContents</a>.</span></p>
+</div>
+<div id="vertexinputrate" class="paragraph">
+<p><span class="small"><strong>vertexinputrate</strong>: vk.VERTEX_INPUT_RATE_XXX<br>
+Values:
+'<em>vertex</em>' (default), '<em>instance</em>'.<br>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkVertexInputRate">VkVertexInputRate</a>.</span></p>
 </div>
 </div>
 </div>
