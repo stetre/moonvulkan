@@ -4,7 +4,7 @@
 
 [[create_pipeline_layout]]
 * _pipeline_layout_ = *create_pipeline_layout*(_device_, <<pipelinelayoutcreateinfo, _pipelinelayoutcreateinfo_>>, [<<allocators, _allocator_>>]) +
-_pipeline_layout_ = *create_pipeline_layout*(_device_, [_flags_], [_set_layouts_], [_push_constant_ranges_], [<<allocators, _allocator_>>]) +
+_pipeline_layout_ = *create_pipeline_layout*(_device_, [_flags_], [_set_layouts_], [_push_constant_ranges_]) +
 [small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCreatePipelineLayout[vkCreatePipelineLayout].#
 
 [[destroy_pipeline_layout]]

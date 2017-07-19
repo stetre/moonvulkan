@@ -72,6 +72,11 @@ int echeckdescriptorpoolcreateinfo(lua_State *L, int arg, VkDescriptorPoolCreate
 #define echeckdescriptorpoolsizelist moonvulkan_echeckdescriptorpoolsizelist
 VkDescriptorPoolSize* echeckdescriptorpoolsizelist(lua_State *L, int arg, uint32_t *count, int *err);
 
+#define freedescriptorsetallocateinfo moonvulkan_freedescriptorsetallocateinfo
+void freedescriptorsetallocateinfo(lua_State *L, VkDescriptorSetAllocateInfo *p);
+#define echeckdescriptorsetallocateinfo moonvulkan_echeckdescriptorsetallocateinfo
+int echeckdescriptorsetallocateinfo(lua_State *L, int arg, VkDescriptorSetAllocateInfo *p);
+
 #define freedescriptorsetlayoutbindinglist moonvulkan_freedescriptorsetlayoutbindinglist
 void freedescriptorsetlayoutbindinglist(lua_State *L, void* list, uint32_t count);
 #define echeckdescriptorsetlayoutbindinglist moonvulkan_echeckdescriptorsetlayoutbindinglist

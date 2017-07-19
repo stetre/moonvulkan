@@ -2301,7 +2301,7 @@ Otherwise the original functions are used.
 <ul>
 <li>
 <p><em>pipeline_layout</em> = <strong>create_pipeline_layout</strong>(<em>device</em>, <a href="#pipelinelayoutcreateinfo"><em>pipelinelayoutcreateinfo</em></a>, [<a href="#allocators"><em>allocator</em></a>])<br>
-<em>pipeline_layout</em> = <strong>create_pipeline_layout</strong>(<em>device</em>, [<em>flags</em>], [<em>set_layouts</em>], [<em>push_constant_ranges</em>], [<a href="#allocators"><em>allocator</em></a>])<br>
+<em>pipeline_layout</em> = <strong>create_pipeline_layout</strong>(<em>device</em>, [<em>flags</em>], [<em>set_layouts</em>], [<em>push_constant_ranges</em>])<br>
 <span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCreatePipelineLayout">vkCreatePipelineLayout</a>.</span></p>
 </li>
 </ul>
@@ -2349,7 +2349,8 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/
 <div id="allocate_descriptor_sets" class="ulist">
 <ul>
 <li>
-<p>{<em>descriptor_set</em>} = <strong>allocate_descriptor_sets</strong>(<a href="#descriptor_pool"><em>descriptor_pool</em></a>, {<a href="#descriptor_set_layout"><em>descriptor_set_layout</em></a>})<br>
+<p>{<em>descriptor_set</em>} = <strong>allocate_descriptor_sets</strong>(<a href="#descriptor_pool"><em>descriptor_pool</em></a>, <a href="#descriptorsetallocateinfo"><em>descriptorsetallocateinfo</em></a>)<br>
+{<em>descriptor_set</em>} = <strong>allocate_descriptor_sets</strong>(<a href="#descriptor_pool"><em>descriptor_pool</em></a>, <em>set_layouts</em>)<br>
 <span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkAllocateDescriptorSets">vkAllocateDescriptorSets</a>.</span></p>
 </li>
 </ul>
@@ -3834,26 +3835,6 @@ Note1: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/htm
 <div class="ulist">
 <ul>
 <li>
-<p><a id="descriptorpoolcreateinfo"></a>
-<span class="small"><strong>descriptorpoolcreateinfo</strong> = {<br>
-<em>flags</em>: <a href="#descriptorpoolcreateflags">descriptorpoolcreateflags</a>,<br>
-<em>max_sets</em>: integer,<br>
-<em>pool_sizes</em>: {<a href="#descriptorpoolsize">descriptorpoolsize</a>}, <strong>[R]</strong><br>
-} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkDescriptorPoolCreateInfo">VkDescriptorPoolCreateInfo</a>)</span></p>
-</li>
-<li>
-<p><a id="descriptorpoolsize"></a>
-<span class="small"><strong>descriptorpoolsize</strong> = {<br>
-<em>type</em>: <a href="#descriptortype">descriptortype</a> <strong>[R]</strong>,<br>
-<em>descriptor_count</em>: integer (defaults to 1),<br>
-} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkDescriptorPoolSize">VkDescriptorPoolSize</a>)</span></p>
-</li>
-</ul>
-</div>
-<hr>
-<div class="ulist">
-<ul>
-<li>
 <p><a id="descriptorsetlayoutcreateinfo"></a>
 <span class="small"><strong>descriptorsetlayoutcreateinfo</strong> = {<br>
 <em>flags</em>: <a href="#descriptorsetlayoutcreateflags">descriptorsetlayoutcreateflags</a>,<br>
@@ -3892,6 +3873,37 @@ Note1: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/htm
 <em>size</em>: integer,<br>
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPushConstantRange">VkPushConstantRange</a>)<br>
 <a href="#constructors">Constructor</a>: <strong>pushconstantrange</strong>(<em>stage_flags</em>, <em>offset</em>, <em>size</em>)</span></p>
+</li>
+</ul>
+</div>
+<hr>
+<div class="ulist">
+<ul>
+<li>
+<p><a id="descriptorpoolcreateinfo"></a>
+<span class="small"><strong>descriptorpoolcreateinfo</strong> = {<br>
+<em>flags</em>: <a href="#descriptorpoolcreateflags">descriptorpoolcreateflags</a>,<br>
+<em>max_sets</em>: integer,<br>
+<em>pool_sizes</em>: {<a href="#descriptorpoolsize">descriptorpoolsize</a>}, <strong>[R]</strong><br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkDescriptorPoolCreateInfo">VkDescriptorPoolCreateInfo</a>)</span></p>
+</li>
+<li>
+<p><a id="descriptorpoolsize"></a>
+<span class="small"><strong>descriptorpoolsize</strong> = {<br>
+<em>type</em>: <a href="#descriptortype">descriptortype</a> <strong>[R]</strong>,<br>
+<em>descriptor_count</em>: integer (defaults to 1),<br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkDescriptorPoolSize">VkDescriptorPoolSize</a>)</span></p>
+</li>
+</ul>
+</div>
+<hr>
+<div class="ulist">
+<ul>
+<li>
+<p><a id="descriptorsetallocateinfo"></a>
+<span class="small"><strong>descriptorsetallocateinfo</strong> = {<br>
+<em>set_layouts</em>: <a href="#descriptor_set_layout">descriptor_set_layout</a>,<br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkDescriptorSetAllocateInfo">VkDescriptorSetAllocateInfo</a>)</span></p>
 </li>
 </ul>
 </div>

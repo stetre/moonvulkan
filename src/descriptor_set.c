@@ -41,16 +41,10 @@ static int freedescriptor_set(lua_State *L, ud_t *ud)
     return 0;
     }
 
-static void FreeInfo(lua_State *L, VkDescriptorSetAllocateInfo *p)
-    {
-    if(p->pSetLayouts)
-        Free(L, (void*)p->pSetLayouts);
-    }
-
 static int Create(lua_State *L)
     {
     ud_t *ud, *descriptor_pool_ud;
-    int err;
+    int err, isinfo;
     uint32_t count, i;
     VkResult ec;
     VkDescriptorSet *descriptor_set;
@@ -59,28 +53,49 @@ static int Create(lua_State *L)
     VkDescriptorPool descriptor_pool = checkdescriptor_pool(L, 1, &descriptor_pool_ud);
     VkDevice device = descriptor_pool_ud->device;
 
-    memset(&info, 0, sizeof(info));
-    info.sType = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_ALLOCATE_INFO;
-    info.pNext = NULL;
+    /* since both versions of the function have a table as second argoment, we need a bit
+     * of euristics to determine if the argument is a descriptorsetallocateinfo or a
+     * list of descriptor_set_layout objects.
+     */
+    if(lua_istable(L, 2))
+        {
+        lua_rawgeti(L, 2, 1);
+        isinfo = lua_isnoneornil(L, -1);
+        lua_pop(L, 1);
+        }
+    else
+        isinfo = 1; /* will fail later */
+
+    if(isinfo)
+        {
+        if(echeckdescriptorsetallocateinfo(L, 2, &info)) return argerror(L, 2);
+        }
+    else
+        {
+        memset(&info, 0, sizeof(info));
+        info.sType = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_ALLOCATE_INFO;
+        info.pNext = NULL;
+        info.pSetLayouts = checkdescriptor_set_layoutlist(L, 2, &count, &err, NULL);
+        info.descriptorSetCount = count;
+        if(err)
+            { freedescriptorsetallocateinfo(L, &info); return argerror(L, 2); }
+        }
+
     info.descriptorPool = descriptor_pool;
-    info.pSetLayouts = checkdescriptor_set_layoutlist(L, 2, &count, &err, NULL);
-    info.descriptorSetCount = count;
-    if(err)
-        { FreeInfo(L, &info); return argerror(L, 2); }
 
     descriptor_set = (VkDescriptorSet*)MallocNoErr(L, sizeof(VkDescriptorSet)*count);
     if(!descriptor_set)
         {
-        FreeInfo(L, &info);
+        freedescriptorsetallocateinfo(L, &info);
         return errmemory(L);
         }
 
     ec = descriptor_pool_ud->ddt->AllocateDescriptorSets(device, &info, descriptor_set);
-    FreeInfo(L, &info);
+    freedescriptorsetallocateinfo(L, &info);
     if(ec)
         {
         Free(L, descriptor_set);
-        CheckError(L, ec); /* raises an error */
+        CheckError(L, ec);
         return 0;
         }
 

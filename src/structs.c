@@ -784,6 +784,31 @@ int echeckdescriptorpoolcreateinfo(lua_State *L, int arg, VkDescriptorPoolCreate
 
 /*------------------------------------------------------------------------------*/
 
+void freedescriptorsetallocateinfo(lua_State *L, VkDescriptorSetAllocateInfo *p)
+    {
+    if(p->pSetLayouts) Free(L, (void*)p->pSetLayouts);
+    }
+
+int echeckdescriptorsetallocateinfo(lua_State *L, int arg, VkDescriptorSetAllocateInfo *p)
+    {
+    int err, arg1;
+    uint32_t count;
+    ECHECK_PREAMBLE(p);
+    p->sType = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_ALLOCATE_INFO;
+#define F "set_layouts"
+    PUSHFIELD(F);
+    p->pSetLayouts = checkdescriptor_set_layoutlist(L, arg1, &count, &err, NULL);
+    p->descriptorSetCount = count;
+    POPFIELD();
+    if(err)
+        { freedescriptorsetallocateinfo(L, p); return fielderror(L, F, err); }
+#undef F
+    /* p->descriptorPool = set by caller */
+    return 0;
+    }
+
+/*------------------------------------------------------------------------------*/
+
 static void freedescriptorsetlayoutbinding(lua_State *L, VkDescriptorSetLayoutBinding *p)
     {
     if(!p)

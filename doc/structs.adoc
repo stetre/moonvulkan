@@ -720,21 +720,6 @@ _layer_count_: integer or '_remaining_' (defaults to 1), +
 
 '''
 
-* [[descriptorpoolcreateinfo]]
-[small]#*descriptorpoolcreateinfo* = { +
-_flags_: <<descriptorpoolcreateflags, descriptorpoolcreateflags>>, +
-_max_sets_: integer, +
-_pool_sizes_: {<<descriptorpoolsize, descriptorpoolsize>>}, *[R]* +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkDescriptorPoolCreateInfo[VkDescriptorPoolCreateInfo])#
-
-* [[descriptorpoolsize]]
-[small]#*descriptorpoolsize* = { +
-_type_: <<descriptortype, descriptortype>> *[R]*, +
-_descriptor_count_: integer (defaults to 1), +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkDescriptorPoolSize[VkDescriptorPoolSize])#
-
-'''
-
 * [[descriptorsetlayoutcreateinfo]]
 [small]#*descriptorsetlayoutcreateinfo* = { +
 _flags_: <<descriptorsetlayoutcreateflags, descriptorsetlayoutcreateflags>>, +
@@ -769,6 +754,27 @@ _size_: integer, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPushConstantRange[VkPushConstantRange]) +
 <<constructors, Constructor>>: *pushconstantrange*(_stage_flags_, _offset_, _size_)#
 
+'''
+
+* [[descriptorpoolcreateinfo]]
+[small]#*descriptorpoolcreateinfo* = { +
+_flags_: <<descriptorpoolcreateflags, descriptorpoolcreateflags>>, +
+_max_sets_: integer, +
+_pool_sizes_: {<<descriptorpoolsize, descriptorpoolsize>>}, *[R]* +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkDescriptorPoolCreateInfo[VkDescriptorPoolCreateInfo])#
+
+* [[descriptorpoolsize]]
+[small]#*descriptorpoolsize* = { +
+_type_: <<descriptortype, descriptortype>> *[R]*, +
+_descriptor_count_: integer (defaults to 1), +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkDescriptorPoolSize[VkDescriptorPoolSize])#
+
+'''
+
+* [[descriptorsetallocateinfo]]
+[small]#*descriptorsetallocateinfo* = { +
+_set_layouts_: <<descriptor_set_layout, descriptor_set_layout>>, +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkDescriptorSetAllocateInfo[VkDescriptorSetAllocateInfo])#
 
 '''
 
