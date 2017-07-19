@@ -1142,6 +1142,19 @@ int echeckshadermodulecreateinfo(lua_State *L, int arg, VkShaderModuleCreateInfo
 
 /*------------------------------------------------------------------------------*/
 
+int echeckpipelinecachecreateinfo(lua_State *L, int arg, VkPipelineCacheCreateInfo *p)
+    {
+    int err;
+    ECHECK_PREAMBLE(p);
+    p->sType = VK_STRUCTURE_TYPE_PIPELINE_CACHE_CREATE_INFO;
+    GetFlags(flags, "flags");
+    /* p->pInitialData, p->initialDataSize: retrieved by the caller */
+    return 0;
+    }
+
+
+/*------------------------------------------------------------------------------*/
+
 void freebuffercreateinfo(lua_State *L, VkBufferCreateInfo *p)
     {
     if(!p) return;

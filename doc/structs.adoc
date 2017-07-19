@@ -583,6 +583,14 @@ _code_: binary string *[R]*, +
 
 '''
 
+* [[pipelinecachecreateinfo]]
+[small]#*pipelinecachecreateinfo* = { +
+_flags_: <<pipelinecachecreateflags, pipelinecachecreateflags>>, +
+_initial_data_: binary string, +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPipelineCacheCreateInfo[VkPipelineCacheCreateInfo])#
+
+'''
+
 * [[buffercreateinfo]]
 [small]#*buffercreateinfo* = { +
 _flags_: <<buffercreateflags, buffercreateflags>>, +

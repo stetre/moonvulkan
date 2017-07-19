@@ -1979,10 +1979,9 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/
 <div id="create_pipeline_cache" class="ulist">
 <ul>
 <li>
-<p><em>pipeline_cache</em> = <strong>create_pipeline_cache</strong>(<em>device</em>, [<em>flags</em>], [<em>initial_data</em>],  [<a href="#allocators"><em>allocator</em></a>])<br>
-<span class="small">[<em>flags</em>]: <a href="#pipelinecachecreateflags">pipelinecachecreateflags</a><br>
-[<em>initial_data</em>]: binary string<br>
-Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCreatePipelineCache">vkCreatePipelineCache</a>.</span></p>
+<p><em>pipeline_cache</em> = <strong>create_pipeline_cache</strong>(<em>device</em>, <a href="#pipelinecachecreateinfo"><em>pipelinecachecreateinfo</em></a>,  [<a href="#allocators"><em>allocator</em></a>])<br>
+<em>pipeline_cache</em> = <strong>create_pipeline_cache</strong>(<em>device</em>, [<em>flags</em>], [<em>initial_data</em>])<br>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCreatePipelineCache">vkCreatePipelineCache</a>.</span></p>
 </li>
 </ul>
 </div>
@@ -3665,6 +3664,18 @@ Note3: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/htm
 <em>flags</em>: <a href="#shadermodulecreateflags">shadermodulecreateflags</a>,<br>
 <em>code</em>: binary string <strong>[R]</strong>,<br>
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkShaderModuleCreateInfo">VkShaderModuleCreateInfo</a>)</span></p>
+</li>
+</ul>
+</div>
+<hr>
+<div class="ulist">
+<ul>
+<li>
+<p><a id="pipelinecachecreateinfo"></a>
+<span class="small"><strong>pipelinecachecreateinfo</strong> = {<br>
+<em>flags</em>: <a href="#pipelinecachecreateflags">pipelinecachecreateflags</a>,<br>
+<em>initial_data</em>: binary string,<br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPipelineCacheCreateInfo">VkPipelineCacheCreateInfo</a>)</span></p>
 </li>
 </ul>
 </div>

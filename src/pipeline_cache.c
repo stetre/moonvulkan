@@ -44,13 +44,23 @@ static int Create(lua_State *L)
     VkResult ec;
     VkPipelineCache pipeline_cache;
     VkPipelineCacheCreateInfo info;
-
     VkDevice device = checkdevice(L, 1, &device_ud);
-    const VkAllocationCallbacks *allocator = optallocator(L, 4);
-    info.sType = VK_STRUCTURE_TYPE_PIPELINE_CACHE_CREATE_INFO;
-    info.pNext = NULL;
-    info.flags = optflags(L, 2, 0);
-    info.pInitialData = (void*)luaL_optlstring(L, 3, NULL, &info.initialDataSize);
+    const VkAllocationCallbacks *allocator = NULL;
+
+    if(lua_istable(L, 2))
+        {
+        allocator = optallocator(L, 3);
+        if(echeckpipelinecachecreateinfo(L, 2, &info)) return argerror(L, 2);
+        lua_getfield(L, 2, "initial_data");
+        info.pInitialData = (void*)luaL_optlstring(L, -1, NULL, &info.initialDataSize);
+        }
+    else
+        {
+        info.sType = VK_STRUCTURE_TYPE_PIPELINE_CACHE_CREATE_INFO;
+        info.pNext = NULL;
+        info.flags = optflags(L, 2, 0);
+        info.pInitialData = (void*)luaL_optlstring(L, 3, NULL, &info.initialDataSize);
+        }
 
     ec = device_ud->ddt->CreatePipelineCache(device, &info, allocator, &pipeline_cache);
     CheckError(L, ec);
