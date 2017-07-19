@@ -2375,6 +2375,38 @@ int echeckmemoryallocateinfo(lua_State *L, int arg, VkMemoryAllocateInfo_CHAIN *
 
 /*------------------------------------------------------------------------------*/
 
+int echeckbuffermemoryrequirementsinfo2(lua_State *L, int arg, VkBufferMemoryRequirementsInfo2KHR_CHAIN *pp)
+    {
+    //int err;
+    VkBufferMemoryRequirementsInfo2KHR *p = &pp->p1;
+    ECHECK_PREAMBLE(pp);
+    p->sType = VK_STRUCTURE_TYPE_BUFFER_MEMORY_REQUIREMENTS_INFO_2_KHR;
+    /* p->buffer = set by caller */
+    return 0;
+    }
+
+int echeckimagememoryrequirementsinfo2(lua_State *L, int arg, VkImageMemoryRequirementsInfo2KHR_CHAIN *pp)
+    {
+    //int err;
+    VkImageMemoryRequirementsInfo2KHR *p = &pp->p1;
+    ECHECK_PREAMBLE(pp);
+    p->sType = VK_STRUCTURE_TYPE_IMAGE_MEMORY_REQUIREMENTS_INFO_2_KHR;
+    /* p->image = set by caller */
+    return 0;
+    }
+
+int echeckimagesparsememoryrequirementsinfo2(lua_State *L, int arg, VkImageSparseMemoryRequirementsInfo2KHR_CHAIN *pp)
+    {
+    //int err;
+    VkImageSparseMemoryRequirementsInfo2KHR *p = &pp->p1;
+    ECHECK_PREAMBLE(pp);
+    p->sType = VK_STRUCTURE_TYPE_IMAGE_SPARSE_MEMORY_REQUIREMENTS_INFO_2_KHR;
+    /* p->image = set by caller */
+    return 0;
+    }
+
+
+
 int pushmemoryrequirements(lua_State *L, VkMemoryRequirements *p)
     {
     lua_newtable(L);

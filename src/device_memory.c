@@ -223,15 +223,21 @@ static int InvalidateMappedMemoryRanges(lua_State *L)
 static int GetBufferMemoryRequirements2(lua_State *L, VkBuffer buffer, ud_t *ud)
     {
     VkMemoryRequirements2KHR_CHAIN req;
-    VkBufferMemoryRequirementsInfo2KHR info;
+    VkBufferMemoryRequirementsInfo2KHR_CHAIN info;
     VkDevice device = ud->device;
 
-    info.sType = VK_STRUCTURE_TYPE_BUFFER_MEMORY_REQUIREMENTS_INFO_2_KHR;
-    info.pNext = NULL;
-    info.buffer = buffer;
-
+    if(lua_istable(L, 2))
+        {
+        if(echeckbuffermemoryrequirementsinfo2(L, 2, &info)) return argerror(L, 2);
+        }
+    else
+        {
+        info.p1.sType = VK_STRUCTURE_TYPE_BUFFER_MEMORY_REQUIREMENTS_INFO_2_KHR;
+        info.p1.pNext = NULL;
+        }
+    info.p1.buffer = buffer;
     initmemoryrequirements2(L, &req);
-    ud->ddt->GetBufferMemoryRequirements2KHR(device, &info, &req.p1);
+    ud->ddt->GetBufferMemoryRequirements2KHR(device, &info.p1, &req.p1);
     pushmemoryrequirements2(L, &req);
     return 1;
     }
@@ -254,15 +260,22 @@ static int GetBufferMemoryRequirements(lua_State *L)
 static int GetImageMemoryRequirements2(lua_State *L, VkImage image, ud_t *ud)
     {
     VkMemoryRequirements2KHR_CHAIN req;
-    VkImageMemoryRequirementsInfo2KHR info;
+    VkImageMemoryRequirementsInfo2KHR_CHAIN info;
     VkDevice device = ud->device;
 
-    info.sType = VK_STRUCTURE_TYPE_IMAGE_MEMORY_REQUIREMENTS_INFO_2_KHR;
-    info.pNext = NULL;
-    info.image = image;
+    if(lua_istable(L, 2))
+        {
+        if(echeckimagememoryrequirementsinfo2(L, 2, &info)) return argerror(L, 2);
+        }
+    else
+        {
+        info.p1.sType = VK_STRUCTURE_TYPE_BUFFER_MEMORY_REQUIREMENTS_INFO_2_KHR;
+        info.p1.pNext = NULL;
+        }
+    info.p1.image = image;
 
     initmemoryrequirements2(L, &req);
-    ud->ddt->GetImageMemoryRequirements2KHR(device, &info, &req.p1);
+    ud->ddt->GetImageMemoryRequirements2KHR(device, &info.p1, &req.p1);
     pushmemoryrequirements2(L, &req);
     return 1;
     }
@@ -286,22 +299,29 @@ static int GetImageSparseMemoryRequirements2(lua_State *L, VkImage image, ud_t *
     {
     uint32_t count, i;
     VkSparseImageMemoryRequirements2KHR *requirements;
-    VkImageSparseMemoryRequirementsInfo2KHR info;
+    VkImageSparseMemoryRequirementsInfo2KHR_CHAIN info;
     VkDevice device = ud->device;
 
-    info.sType = VK_STRUCTURE_TYPE_IMAGE_SPARSE_MEMORY_REQUIREMENTS_INFO_2_KHR;
-    info.pNext = NULL;
-    info.image = image;
+    if(lua_istable(L, 2))
+        {
+        if(echeckimagesparsememoryrequirementsinfo2(L, 2, &info)) return argerror(L, 2);
+        }
+    else
+        {
+        info.p1.sType = VK_STRUCTURE_TYPE_IMAGE_SPARSE_MEMORY_REQUIREMENTS_INFO_2_KHR;
+        info.p1.pNext = NULL;
+        }
+    info.p1.image = image;
 
     lua_newtable(L);
-    ud->ddt->GetImageSparseMemoryRequirements2KHR(device, &info, &count, NULL);
+    ud->ddt->GetImageSparseMemoryRequirements2KHR(device, &info.p1, &count, NULL);
 
     if(count == 0)
         return 1;
 
     requirements = newsparseimagememoryrequirements2(L, count);
 
-    ud->ddt->GetImageSparseMemoryRequirements2KHR(device, &info, &count, requirements);
+    ud->ddt->GetImageSparseMemoryRequirements2KHR(device, &info.p1, &count, requirements);
     for(i = 0; i <count; i++)
         {
         pushsparseimagememoryrequirements2(L, &requirements[i]);

@@ -341,6 +341,27 @@ int echeckmemoryallocateinfo(lua_State *L, int arg, VkMemoryAllocateInfo_CHAIN *
 
 
 typedef struct {
+    VkBufferMemoryRequirementsInfo2KHR p1;
+} VkBufferMemoryRequirementsInfo2KHR_CHAIN;
+
+#define echeckbuffermemoryrequirementsinfo2 moonvulkan_echeckbuffermemoryrequirementsinfo2
+int echeckbuffermemoryrequirementsinfo2(lua_State *L, int arg, VkBufferMemoryRequirementsInfo2KHR_CHAIN *pp);
+
+typedef struct {
+    VkImageMemoryRequirementsInfo2KHR p1;
+} VkImageMemoryRequirementsInfo2KHR_CHAIN;
+
+#define echeckimagememoryrequirementsinfo2 moonvulkan_echeckimagememoryrequirementsinfo2
+int echeckimagememoryrequirementsinfo2(lua_State *L, int arg, VkImageMemoryRequirementsInfo2KHR_CHAIN *pp);
+
+typedef struct {
+    VkImageSparseMemoryRequirementsInfo2KHR p1;
+} VkImageSparseMemoryRequirementsInfo2KHR_CHAIN;
+
+#define echeckimagesparsememoryrequirementsinfo2 moonvulkan_echeckimagesparsememoryrequirementsinfo2
+int echeckimagesparsememoryrequirementsinfo2(lua_State *L, int arg, VkImageSparseMemoryRequirementsInfo2KHR_CHAIN *pp);
+
+typedef struct {
     VkMemoryRequirements2KHR p1;
     VkMemoryDedicatedRequirementsKHR p2;
 } VkMemoryRequirements2KHR_CHAIN;
