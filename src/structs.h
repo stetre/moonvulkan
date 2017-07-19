@@ -290,6 +290,11 @@ int pushrect2d(lua_State *L, VkRect2D *p);
 #define echeckrect2dlist moonvulkan_echeckrect2dlist
 VkRect2D* echeckrect2dlist(lua_State *L, int arg, uint32_t *count, int *err);
 
+#define echeckxycolor moonvulkan_echeckxycolor
+int echeckxycolor(lua_State *L, int arg, VkXYColorEXT *p);
+#define echeckhdrmetadata moonvulkan_echeckhdrmetadata
+int echeckhdrmetadata(lua_State *L, int arg, VkHdrMetadataEXT *p);
+
 #define echeckclearcolorvalue moonvulkan_echeckclearcolorvalue
 int echeckclearcolorvalue(lua_State *L, int arg, VkClearColorValue *p);
 #define echeckclearvalue moonvulkan_echeckclearvalue

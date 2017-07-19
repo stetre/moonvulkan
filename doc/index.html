@@ -2821,6 +2821,15 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/
 </li>
 </ul>
 </div>
+<div id="set_hdr_metadata" class="ulist">
+<ul>
+<li>
+<p><strong>set_hdr_metadata</strong>({<em>swapchain</em>}, <a href="#hdrmetadata"><em>hdrmetadata</em></a>)<br>
+<span class="small">This function requires the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_hdr_metadata">VK_EXT_hdr_metadata</a> device extension.<br>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkSetHdrMetadataEXT">vkSetHdrMetadataEXT</a>.</span></p>
+</li>
+</ul>
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -4500,6 +4509,30 @@ Note2: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/htm
 <div class="ulist">
 <ul>
 <li>
+<p><a id="hdrmetadata"></a>
+<span class="small"><strong>hdrmetadata</strong> = {<br>
+<em>display_primary_red</em>: <a href="#xycolor">xycolor</a>,<br>
+<em>display_primary_green</em>: <a href="#xycolor">xycolor</a>,<br>
+<em>display_primary_blue</em>: <a href="#xycolor">xycolor</a>,<br>
+<em>white_point</em>: <a href="#xycolor">xycolor</a>,<br>
+<em>max_luminance</em>: number,<br>
+<em>min_luminance</em>: number,<br>
+<em>max_content_light_level</em>: number,<br>
+<em>max_frame_average_light_level</em>: number,<br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkHdrMetadataEXT">VkHdrMetadataEXT</a>)</span></p>
+</li>
+<li>
+<p><a id="xycolor"></a>
+<span class="small"><strong>xycolor</strong> = {<br>
+<em>x</em>, <em>y</em>: number,<br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkXYColorEXT">VkXYColorEXT</a>)</span></p>
+</li>
+</ul>
+</div>
+<hr>
+<div class="ulist">
+<ul>
+<li>
 <p><a id="displayproperties"></a>
 <span class="small"><strong>displayproperties</strong> = {<br>
 <em>display</em>: <a href="#display">display</a>,<br>
@@ -5800,6 +5833,9 @@ previously obtained with the <a href="#now">now</a>(&nbsp;) function.</span></p>
 </li>
 <li>
 <p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_discard_rectangles">VK_EXT_discard_rectangles</a></p>
+</li>
+<li>
+<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_hdr_metadata">VK_EXT_hdr_metadata</a></p>
 </li>
 <li>
 <p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_sampler_filter_minmax">VK_EXT_sampler_filter_minmax</a></p>

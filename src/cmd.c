@@ -800,6 +800,7 @@ static int CmdSetDiscardRectangle(lua_State *L)
     return 0;
     }
 
+
 #if 0 // 10yy
         { "",  },
 static int (lua_State *L) //@@ scaffolding

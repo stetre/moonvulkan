@@ -41,6 +41,11 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.ht
 [small]#This function requires the https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_shared_presentable_image[VK_KHR_shared_presentable_image] device extension. +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetSwapchainStatusKHR[vkGetSwapchainStatusKHR].#
 
+[[set_hdr_metadata]]
+* *set_hdr_metadata*({_swapchain_}, <<hdrmetadata, _hdrmetadata_>>) +
+[small]#This function requires the https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_hdr_metadata[VK_EXT_hdr_metadata] device extension. +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkSetHdrMetadataEXT[vkSetHdrMetadataEXT].#
+
 ////
 [[]]
 * <<,__>> = **(_swapchain_) +

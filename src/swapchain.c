@@ -217,6 +217,25 @@ static int QueuePresent(lua_State *L)
     return n;
     }
 
+
+static int SetHdrMetadata(lua_State *L)
+    {
+    ud_t **ud;
+    int err;
+    uint32_t count;
+    VkHdrMetadataEXT metadata;
+    VkSwapchainKHR *swapchains = checkswapchainlist(L, 1, &count, &err, &ud);
+    if(err) return argerrorc(L, 1, err);
+    if(echeckhdrmetadata(L, 2, &metadata)) return argerror(L, 2);
+
+    CheckDevicePfn(L, ud[0], SetHdrMetadataEXT);
+    ud[0]->ddt->SetHdrMetadataEXT(ud[0]->device, count, swapchains, &metadata);
+    Free(L, ud);
+
+    return 0;
+    }
+
+
 RAW_FUNC(swapchain)
 TYPE_FUNC(swapchain)
 INSTANCE_FUNC(swapchain)
@@ -250,6 +269,7 @@ static const struct luaL_Reg Functions[] =
         { "acquire_next_image", AcquireNextImage },
         { "queue_present", QueuePresent },
         { "get_swapchain_status", GetSwapchainStatus },
+        { "set_hdr_metadata", SetHdrMetadata },
         { NULL, NULL } /* sentinel */
     };
 

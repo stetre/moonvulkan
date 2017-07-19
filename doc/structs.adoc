@@ -1297,6 +1297,25 @@ _layer_: integer, +
 
 '''
 
+* [[hdrmetadata]]
+[small]#*hdrmetadata* = { +
+_display_primary_red_: <<xycolor, xycolor>>, +
+_display_primary_green_: <<xycolor, xycolor>>, +
+_display_primary_blue_: <<xycolor, xycolor>>, +
+_white_point_: <<xycolor, xycolor>>, +
+_max_luminance_: number, +
+_min_luminance_: number, +
+_max_content_light_level_: number, +
+_max_frame_average_light_level_: number, +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkHdrMetadataEXT[VkHdrMetadataEXT])#
+
+* [[xycolor]]
+[small]#*xycolor* = { +
+_x_, _y_: number, +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkXYColorEXT[VkXYColorEXT])#
+
+'''
+
 * [[displayproperties]]
 [small]#*displayproperties* = { +
 _display_: <<display, display>>, +

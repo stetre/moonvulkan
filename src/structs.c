@@ -369,6 +369,7 @@ do {                                                \
         }                                           \
 } while(0)
 
+#define GetXYColorOpt(name, sname) GetStructOpt(name, sname, echeckxycolor)
 #define GetOffset2d(name, sname) GetStruct(name, sname, echeckoffset2d)
 #define GetOffset2dOpt(name, sname) GetStructOpt(name, sname, echeckoffset2d)
 #define GetOffset3d(name, sname) GetStruct(name, sname, echeckoffset3d)
@@ -2145,6 +2146,32 @@ int pushimagesubresourcerange(lua_State *L, VkImageSubresourceRange *p)
     return 1;
     }
 
+/*------------------------------------------------------------------------------*/
+
+int echeckxycolor(lua_State *L, int arg, VkXYColorEXT *p)
+    {
+    int err;
+    ECHECK_PREAMBLE(p);
+    GetNumber(x, "x");
+    GetNumber(y, "y");
+    return 0;
+    }
+
+int echeckhdrmetadata(lua_State *L, int arg, VkHdrMetadataEXT *p)
+    {
+    int err;
+    ECHECK_PREAMBLE(p);
+    p->sType = VK_STRUCTURE_TYPE_HDR_METADATA_EXT;
+    GetXYColorOpt(displayPrimaryRed, "display_primary_red");
+    GetXYColorOpt(displayPrimaryGreen, "display_primary_green");
+    GetXYColorOpt(displayPrimaryBlue, "display_primary_blue");
+    GetXYColorOpt(whitePoint, "white_point");
+    GetNumber(maxLuminance, "max_luminance");
+    GetNumber(minLuminance, "min_luminance");
+    GetNumber(maxContentLightLevel, "max_content_light_level");
+    GetNumber(maxFrameAverageLightLevel, "max_frame_average_light_level");
+    return 0;
+    }
 
 /*------------------------------------------------------------------------------*/
 

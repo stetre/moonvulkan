@@ -532,6 +532,7 @@ device_dt_t* getproc_device(lua_State *L, VkDevice device, VkDeviceCreateInfo *c
             }
         IF("VK_EXT_hdr_metadata")
             {
+            GET(SetHdrMetadataEXT);
             continue;
             }
         IF("VK_EXT_sampler_filter_minmax")

@@ -272,6 +272,7 @@ typedef struct {
     F(GetBufferMemoryRequirements2KHR);
     F(GetImageSparseMemoryRequirements2KHR);
     F(CmdSetDiscardRectangleEXT);
+    F(SetHdrMetadataEXT);
 #ifdef VK_USE_PLATFORM_WIN32_KHR
     F(GetMemoryWin32HandleKHR);
     F(GetMemoryWin32HandlePropertiesKHR);
