@@ -54,12 +54,12 @@ static int GetPhysicalDeviceDisplayProperties(lua_State *L)
     uint32_t count, remaining, tot, i;
     VkDisplayPropertiesKHR properties[32];
     ud_t *ud;
-    VkPhysicalDevice physical_device = checkphysical_device(L, 1, &ud);
+    VkPhysicalDevice physdev = checkphysical_device(L, 1, &ud);
 
     CheckInstancePfn(L, ud, GetPhysicalDeviceDisplayPropertiesKHR);
 
     lua_newtable(L);
-    ec = ud->idt->GetPhysicalDeviceDisplayPropertiesKHR(physical_device, &remaining, NULL);
+    ec = ud->idt->GetPhysicalDeviceDisplayPropertiesKHR(physdev, &remaining, NULL);
     CheckError(L, ec);
     if(remaining==0) return 1;
     tot = 0;
@@ -69,7 +69,7 @@ static int GetPhysicalDeviceDisplayProperties(lua_State *L)
         else
             { count = remaining; remaining = 0; }
 
-        ec = ud->idt->GetPhysicalDeviceDisplayPropertiesKHR(physical_device, &count, properties);
+        ec = ud->idt->GetPhysicalDeviceDisplayPropertiesKHR(physdev, &count, properties);
         if(ec != VK_INCOMPLETE)
             CheckError(L, ec);
     
@@ -92,12 +92,12 @@ static int GetPhysicalDeviceDisplayPlaneProperties(lua_State *L)
     uint32_t count, remaining, tot, i;
     VkDisplayPlanePropertiesKHR properties[32];
     ud_t *ud;
-    VkPhysicalDevice physical_device = checkphysical_device(L, 1, &ud);
+    VkPhysicalDevice physdev = checkphysical_device(L, 1, &ud);
 
     CheckInstancePfn(L, ud, GetPhysicalDeviceDisplayPlanePropertiesKHR);
 
     lua_newtable(L);
-    ec = ud->idt->GetPhysicalDeviceDisplayPlanePropertiesKHR(physical_device, &remaining, NULL);
+    ec = ud->idt->GetPhysicalDeviceDisplayPlanePropertiesKHR(physdev, &remaining, NULL);
     CheckError(L, ec);
     if(remaining==0) return 1;
     tot = 0;
@@ -107,7 +107,7 @@ static int GetPhysicalDeviceDisplayPlaneProperties(lua_State *L)
         else
             { count = remaining; remaining = 0; }
 
-        ec = ud->idt->GetPhysicalDeviceDisplayPlanePropertiesKHR(physical_device, &count, properties);
+        ec = ud->idt->GetPhysicalDeviceDisplayPlanePropertiesKHR(physdev, &count, properties);
         if(ec != VK_INCOMPLETE)
             CheckError(L, ec);
     
@@ -133,13 +133,13 @@ static int GetDisplayPlaneSupportedDisplays(lua_State *L)
     uint32_t count, remaining, tot, i;
     VkDisplayKHR display[32];
     ud_t *ud;
-    VkPhysicalDevice physical_device = checkphysical_device(L, 1, &ud);
+    VkPhysicalDevice physdev = checkphysical_device(L, 1, &ud);
     uint32_t planeIndex = luaL_checkinteger(L, 2);
 
     CheckInstancePfn(L, ud, GetDisplayPlaneSupportedDisplaysKHR);
 
     lua_newtable(L);
-    ec = ud->idt->GetDisplayPlaneSupportedDisplaysKHR(physical_device, planeIndex, &remaining, NULL);
+    ec = ud->idt->GetDisplayPlaneSupportedDisplaysKHR(physdev, planeIndex, &remaining, NULL);
     CheckError(L, ec);
     if(remaining==0) return 1;
     tot = 0;
@@ -149,7 +149,7 @@ static int GetDisplayPlaneSupportedDisplays(lua_State *L)
         else
             { count = remaining; remaining = 0; }
 
-        ec = ud->idt->GetDisplayPlaneSupportedDisplaysKHR(physical_device, planeIndex, &count, display);
+        ec = ud->idt->GetDisplayPlaneSupportedDisplaysKHR(physdev, planeIndex, &count, display);
         if(ec != VK_INCOMPLETE)
             CheckError(L, ec);
     
@@ -163,21 +163,17 @@ static int GetDisplayPlaneSupportedDisplays(lua_State *L)
     return 1;
     }
 
-#if 0
-#define VK_EXT_direct_mode_display 1
-//typedef VkResult (VKAPI_PTR *PFN_vkReleaseDisplayEXT)(VkPhysicalDevice physicalDevice, VkDisplayKHR display);
-        { "release_display", ReleaseDisplay },
-static int ReleaseDisplay(lua_State *L)//@@TODO?
+static int ReleaseDisplay(lua_State *L)
     {
-	VkResult ec;
-	VkPhysicalDevice physdev;
-	VkDisplayKHR display;
+    VkResult ec;
+    ud_t *ud;
+    VkPhysicalDevice physdev = checkphysical_device(L, 1, &ud);
+    VkDisplayKHR display = checkdisplay(L, 2, NULL);
     CheckInstancePfn(L, ud, ReleaseDisplayEXT);
-	ec = ud->idt->ReleaseDisplayEXT(physdev, display);
-	CheckError(L, ec);
+    ec = ud->idt->ReleaseDisplayEXT(physdev, display);
+    CheckError(L, ec);
     return 0;
     }
-#endif
 
 RAW_FUNC(display)
 TYPE_FUNC(display)
@@ -210,6 +206,7 @@ static const struct luaL_Reg Functions[] =
         { "get_physical_device_display_plane_properties", GetPhysicalDeviceDisplayPlaneProperties },
         { "get_display_plane_supported_displays", GetDisplayPlaneSupportedDisplays },
         { "destroy_display",  Destroy }, //@@
+        { "release_display", ReleaseDisplay },
         { NULL, NULL } /* sentinel */
     };
 
