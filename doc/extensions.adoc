@@ -1,11 +1,10 @@
 
-[[implementation_notes]]
-== Implementation notes
+[[extensions]]
+=== Supported extensions
 
 MoonVulkan supports the core Vulkan API, plus the *extensions* listed hereafter.
 
 Khronos extensions (KHR):
-
 
 * https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_16bit_storage[VK_KHR_16bit_storage]
 //@@VK_KHR_android_surface
@@ -69,11 +68,6 @@ Multivendor extensions (EXT):
 Single vendor extensions (AMD, GOOGLE, IMG, MVK, NN, NV, NVX, ...):
 
 * none.
-
-*Multithreading* is not supported, at least for now. 
-Support for multi-threaded applications is under study and may be added in the future
-(although one could argue that if performance is paramount for the application, maybe using a 
-binding library to a dynamic, garbage-collected language is not the way to go).
 
 ////
 * https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#[]

@@ -3,8 +3,7 @@
 
 MoonVulkan is an (almost) one-to-one Lua binding library to the Vulkan API.
 It provide means to implement scripted Vulkan applications using Lua instead
-of C or pass:[C++], with all its pros and cons and with the limitations listed in the 
-<<implementation_notes, 'Implementation notes'>> section. You can think of it as
+of C or pass:[C++], with all its pros and cons. You can think of it as
 a 'working pseudocode', less efficient but easier to write and read and to work with.
 
 This section gives a brief overview, while the details of the bindings are given 
@@ -63,6 +62,11 @@ In addition to the bindings to the Vulkan API, which are described in the sectio
 MoonVulkan also provides a few other utilities and object 'methods' that do not correspond
 to Vulkan functions.
 These are described mainly in the <<miscellanea, 'Miscellanea'>> subsections.
+
+MoonVulkan does not support *multithreading*, at least for now. 
+Support for multi-threaded applications is under study and may be added in the future
+(although one could argue that if performance is paramount for the application, maybe using a 
+binding library to a dynamic, garbage-collected language is not the way to go).
 
 ////
 @@TODO additional utilities (data handling, etc).

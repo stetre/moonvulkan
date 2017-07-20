@@ -1,6 +1,6 @@
 
 [[commands]]
-=== Commands
+== Commands
 
 The first argument (_cb_) of all the following functions is a <<command_buffer, command_buffer>>. 
 ////
@@ -112,6 +112,23 @@ arg7 - _stride_: integer +
 arg8 - _flags_: <<queryresultflags, queryresultflags>> +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCmdCopyQueryPoolResults[vkCmdCopyQueryPoolResults].#
 
+[[cmd_debug_marker_begin]]
+* *cmd_debug_marker_begin*(_cb_, _marker_name_, [_color_]) +
+[small]#_marker_name_: string +
+_color_: {float} (length = 4, opt.) +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCmdDebugMarkerBeginEXT[vkCmdDebugMarkerBeginEXT] (https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_debug_marker[VK_EXT_debug_marker] extension)#.
+
+[[cmd_debug_marker_end]]
+* *cmd_debug_marker_end*(_cb_) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCmdDebugMarkerEndEXT[vkCmdDebugMarkerEndEXT] (https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_debug_marker[VK_EXT_debug_marker] extension)#.
+
+[[cmd_debug_marker_insert]]
+* *cmd_debug_marker_insert*(_cb_, _marker_name_, [_color_]) +
+[small]#_marker_name_: string +
+_color_: {float} (length = 4, opt.) +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCmdDebugMarkerInsertEXT[vkCmdDebugMarkerInsertEXT] (https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_debug_marker[VK_EXT_debug_marker] extension)#.
+
+
 [[cmd_dispatch]]
 * *cmd_dispatch*(_cb_, _x_, _y_, _z_) +
 [small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCmdDispatch[vkCmdDispatch].#
@@ -170,6 +187,21 @@ arg6 - [_buffer_memory_barriers_]: {<<buffermemorybarrier, buffermemorybarrier>>
 arg7 - [_image_memory_barriers_]: {<<imagememorybarrier, imagememorybarrier>>} +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCmdPipelineBarrier[vkCmdPipelineBarrier].#
 
+[[cmd_push_descriptor_set]]
+* *cmd_push_descriptor_set*(_cb_, _bind_point_, _..._) +
+[small]#arg2 - _bind_point_: <<pipelinebindpoint, pipelinebindpoint>> +
+arg3 - _pipeline_layout_: <<pipeline_layout, pipeline_layout>> +
+arg4 - _set_: integer +
+arg5 - _writes_: {<<writedescriptorset, writedescriptorset>>} +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCmdPushDescriptorSetKHR[vkCmdPushDescriptorSetKHR] (https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_push_descriptor[VK_KHR_push_descriptor] extension).#
+
+[[cmd_push_descriptor_set_with_template]]
+* *cmd_push_descriptor_set_with_template*(_cb_, _descriptor_update_template_, _layout_, _..._) +
+[small]#arg3: _layout_: <<pipeline_layout, pipeline_layout>> +
+arg4: _set_: integer +
+arg5: _data_: binary string +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCmdPushDescriptorSetWithTemplateKHR[vkCmdPushDescriptorSetWithTemplateKHR] (https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_descriptor_update_template[VK_KHR_descriptor_update_template] extension).#
+
 [[cmd_push_constants]]
 * *cmd_push_constants*(_cb_, _layout_, _flags_, _offset_, _values_) +
 [small]#_layout_: <<pipeline_layout, pipeline_layout>> +
@@ -209,8 +241,7 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.ht
 
 [[cmd_set_discard_rectangle]]
 * *cmd_set_discard_rectangle*(_cb_, _first_, {<<rect2d, _rect2d_>>}) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCmdSetDiscardRectangleEXT[vkCmdSetDiscardRectangleEXT] -
-https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_discard_rectangles[VK_EXT_discard_rectangles] extension.#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCmdSetDiscardRectangleEXT[vkCmdSetDiscardRectangleEXT] (https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_discard_rectangles[VK_EXT_discard_rectangles] extension).#
 
 [[cmd_set_event]]
 * *cmd_set_event*(_cb_, <<event, _event_>>, <<pipelinestageflags, _pipelinestageflags_>>) +

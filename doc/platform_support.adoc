@@ -1,0 +1,18 @@
+
+[[platform_support]]
+=== Platforms support
+
+A few MoonVulkan functions are available only on specific platforms, in the same way the underlying Vulkan functions are. In order to use such functions, MoonVulkan must be compiled as described here.
+
+To enable support for a specific platform, set the PLATFORM_XXX environment variable before compiling MoonVulkan (XXX here stands for XCB, XLIB, WAYLAND, etc.). For example:
+
+[source,bash]
+----
+[moonvulkan]$ export PLATFORM_XCB=1      # enable XCB support
+[moonvulkan]$ export PLATFORM_XLIB=1     # enable XLIB support
+[moonvulkan]$ make && sudo make install  # compile and install MoonVulkan
+----
+
+As a prerequisite, you'll need to make sure that the platform libraries are installed on the system and
+that the relevant header files are where _vulkan.h_ expects them to be.
+

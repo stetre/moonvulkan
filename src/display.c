@@ -169,6 +169,12 @@ static int GetDisplayPlaneSupportedDisplays(lua_State *L)
         { "release_display", ReleaseDisplay },
 static int ReleaseDisplay(lua_State *L)//@@TODO?
     {
+	VkResult ec;
+	VkPhysicalDevice physdev;
+	VkDisplayKHR display;
+    CheckInstancePfn(L, ud, ReleaseDisplayEXT);
+	ec = ud->idt->ReleaseDisplayEXT(physdev, display);
+	CheckError(L, ec);
     return 0;
     }
 #endif

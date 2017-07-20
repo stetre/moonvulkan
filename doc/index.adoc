@@ -36,7 +36,6 @@ include::queue.adoc[]
 === Command Buffers
 include::command_pool.adoc[]
 include::command_buffer.adoc[]
-include::cmd.adoc[]
 
 === Synchronization
 include::fence.adoc[]
@@ -75,9 +74,12 @@ include::descriptor_set.adoc[]
 === Queries
 include::query_pool.adoc[]
 
+include::cmd.adoc[]
+
 [[layers]]
 == Layers and extensions
 
+include::extensions.adoc[]
 include::layers.adoc[]
 
 === Surfaces (KHR)
@@ -93,8 +95,8 @@ include::swapchain.adoc[]
 === Other (KHR)
 include::other_khr.adoc[]
 
-=== Debug (EXT)
-include::debug.adoc[]
+=== Other (EXT)
+include::other_ext.adoc[]
 
 include::structs.adoc[]
 
@@ -110,7 +112,7 @@ include::allocators.adoc[]
 include::creating_surfaces.adoc[]
 include::datahandling.adoc[]
 include::tracing.adoc[]
+include::platform_support.adoc[]
 
 include::snippets.adoc[]
 
-include::notes.adoc[]

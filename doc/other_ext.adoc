@@ -1,0 +1,45 @@
+
+[[debug_report_callback]]
+==== debug_report_callback
+
+[[create_debug_report_callback]]
+* _debug_report_callback_ = *create_debug_report_callback*(_instance_, _flags_, _func_, [<<allocators, _allocator_>>]) +
+[small]#_flags_: <<debugreportflags, debugreportflags>> +
+The _func_ callback (a Lua function) will be executed as: +
+*func(instance, flags, object_type, objectRAW, location, message_code, layer_prefix, message)*, +
+where the parameters are the same as those for the <<debug_report_message, debug_report_message>>(&nbsp;) function. +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCreateDebugReportCallbackEXT[vkCreateDebugReportCallbackEXT] (https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_debug_report[VK_EXT_debug_report] extension).#
+
+[[destroy_debug_report_callback]]
+* *destroy_debug_report_callback*(_debug_report_callback_) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkDestroyDebugReportCallbackEXT[vkDestroyDebugReportCallbackEXT] (https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_debug_report[VK_EXT_debug_report] extension).#
+
+[[debug_report_message]]
+* *debug_report_message*(_instance_, _flags_, _..._) +
+[small]#arg2: _flags_: <<debugreportflags, debugreportflags>> +
+arg3: _object_type_: <<debugreportobjecttype, debugreportobjecttype>> +
+arg4: _objectRAW_: integer raw object handle (may be 0) +
+arg5: _location_: integer +
+arg6: _message_code_: integer +
+arg7: _layer_prefix_: string +
+arg8: _message_: string +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkDebugReportMessageEXT[vkDebugReportMessageEXT] (https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_debug_report[VK_EXT_debug_report] extension).#
+
+[[debug_marker]]
+==== Debug Marker
+
+[[debug_marker_set_object_name]]
+* *debug_marker_set_object_name*(_device_, _object_type_, _objectRAW_, _object_name_) +
+[small]#_object_type_: <<debugreportobjecttype, debugreportobjecttype>> +
+_objectRAW_: integer raw object handle (may be 0) +
+_object_name_: string +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkDebugMarkerSetObjectNameEXT[vkDebugMarkerSetObjectNameEXT] (https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_debug_marker[VK_EXT_debug_marker] extension).#
+
+[[debug_marker_set_object_tag]]
+* *debug_marker_set_object_tag*(_device_, _object_type_, _objectRAW_, _tag_name_, _object_tag_) +
+[small]#_object_type_: <<debugreportobjecttype, debugreportobjecttype>> +
+_objectRAW_: integer raw object handle (may be 0) +
+_tag_name_: integer +
+_object_tag_: binary string +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkDebugMarkerSetObjectTagEXT[vkDebugMarkerSetObjectTagEXT] (https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_debug_marker[VK_EXT_debug_marker] extension).#
+

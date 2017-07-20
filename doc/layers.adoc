@@ -1,6 +1,6 @@
 
 [[enumerate_layers]]
-=== Enumerate
+=== Enumerate extensions
 
 [[enumerate_instance_layer_properties]]
 * {<<layerproperties, layerproperties>>} = *enumerate_instance_layer_properties*([_byname_]) +

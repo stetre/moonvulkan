@@ -19,6 +19,5 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.ht
 [[trim_command_pool]]
 * *trim_command_pool*(_command_pool_, [_flags_]) +
 [small]#[_flags_]: <<commandpooltrimflags, commandpooltrimflags>> +
-This function requires the https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_maintenance1[VK_KHR_maintenance1] device extension. +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkTrimCommandPoolKHR[vkTrimCommandPoolKHR].#
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkTrimCommandPoolKHR[vkTrimCommandPoolKHR] (https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_maintenance1[VK_KHR_maintenance1] device extension).#
 
