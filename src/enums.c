@@ -119,6 +119,7 @@ static int enums_new(lua_State *L, uint32_t domain, uint32_t code, const char *s
         { 
         Free(L, rec->str);
         Free(L, rec); 
+        printf("enum domain:%u value:'%s'(%u)\n", domain, str, code);
         return unexpected(L); /* duplicate value */
         }
     code_insert(rec);
@@ -313,6 +314,9 @@ static int Enum(lua_State *L)
     CASE(samplerreductionmode);
     CASE(validationcheck);
     CASE(discardrectanglemode);
+    CASE(displaypowerstate);
+    CASE(deviceeventtype);
+    CASE(displayeventtype);
 #undef CASE
     return 0;
     }
@@ -977,6 +981,7 @@ void moonvulkan_open_enums(lua_State *L)
     domain = DOMAIN_DISCARD_RECTANGLE_MODE; /* VkDiscardRectangleModeEXT */
     ADD(DISCARD_RECTANGLE_MODE_INCLUSIVE_EXT, "inclusive");
     ADD(DISCARD_RECTANGLE_MODE_EXCLUSIVE_EXT, "exclusive");
+
 #undef ADD
     }
 

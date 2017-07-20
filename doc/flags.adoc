@@ -226,6 +226,11 @@ Values:
 '_front_', '_back_'. +
 Rfr. https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkStencilFaceFlagBits[VkStencilFaceFlagBits].#
 
+[[surfacecounterflags]]
+[small]#*surfacecounterflags*: vk.SURFACE_COUNTER_XXX_BIT_EXT +
+Values: '_vblank_'. +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkSurfaceCounterFlagBitsEXT[VkSurfaceCounterFlagBitsEXT].#
+
 [[surfacetransformflags]]
 [small]#*surfacetransformflags*: vk.SURFACE_TRANSFORM_XXX_BIT_KHR +
 Values: 

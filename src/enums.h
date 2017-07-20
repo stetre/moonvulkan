@@ -330,6 +330,27 @@ void enums_freelist(lua_State *L, uint32_t *list);
 #define checkdiscardrectanglemodelist(L, arg, count, err) (VkDiscardRectangleModeEXT*)enums_checklist((L), DOMAIN_DISCARD_RECTANGLE_MODE, (arg), (count), (err))
 #define freediscardrectanglemodelist(L, list) enums_freelist((L), (uint32_t*)(list))
 
+#define testdisplaypowerstate(L, arg, err) (VkDisplayPowerStateEXT)enums_test((L), DOMAIN_DISPLAY_POWER_STATE, (arg), (err))
+#define checkdisplaypowerstate(L, arg) (VkDisplayPowerStateEXT)enums_check((L), DOMAIN_DISPLAY_POWER_STATE, (arg))
+#define pushdisplaypowerstate(L, val) enums_push((L), DOMAIN_DISPLAY_POWER_STATE, (uint32_t)(val))
+#define valuesdisplaypowerstate(L) enums_values((L), DOMAIN_DISPLAY_POWER_STATE)
+#define checkdisplaypowerstatelist(L, arg, count, err) (VkDisplayPowerStateEXT*)enums_checklist((L), DOMAIN_DISPLAY_POWER_STATE, (arg), (count), (err))
+#define freedisplaypowerstatelist(L, list) enums_freelist((L), (uint32_t*)(list))
+
+#define testdeviceeventtype(L, arg, err) (VkDeviceEventTypeEXT)enums_test((L), DOMAIN_DEVICE_EVENT_TYPE, (arg), (err))
+#define checkdeviceeventtype(L, arg) (VkDeviceEventTypeEXT)enums_check((L), DOMAIN_DEVICE_EVENT_TYPE, (arg))
+#define pushdeviceeventtype(L, val) enums_push((L), DOMAIN_DEVICE_EVENT_TYPE, (uint32_t)(val))
+#define valuesdeviceeventtype(L) enums_values((L), DOMAIN_DEVICE_EVENT_TYPE)
+#define checkdeviceeventtypelist(L, arg, count, err) (VkDeviceEventTypeEXT*)enums_checklist((L), DOMAIN_DEVICE_EVENT_TYPE, (arg), (count), (err))
+#define freedeviceeventtypelist(L, list) enums_freelist((L), (uint32_t*)(list))
+
+#define testdisplayeventtype(L, arg, err) (VkDisplayEventTypeEXT)enums_test((L), DOMAIN_DISPLAY_EVENT_TYPE, (arg), (err))
+#define checkdisplayeventtype(L, arg) (VkDisplayEventTypeEXT)enums_check((L), DOMAIN_DISPLAY_EVENT_TYPE, (arg))
+#define pushdisplayeventtype(L, val) enums_push((L), DOMAIN_DISPLAY_EVENT_TYPE, (uint32_t)(val))
+#define valuesdisplayeventtype(L) enums_values((L), DOMAIN_DISPLAY_EVENT_TYPE)
+#define checkdisplayeventtypelist(L, arg, count, err) (VkDisplayEventTypeEXT*)enums_checklist((L), DOMAIN_DISPLAY_EVENT_TYPE, (arg), (count), (err))
+#define freedisplayeventtypelist(L, list) enums_freelist((L), (uint32_t*)(list))
+
 #if 0 /* scaffolding 7yy */
 #define testxxx(L, arg, err) (VkXxx)enums_test((L), DOMAIN_XXX, (arg), (err))
 #define checkxxx(L, arg) (VkXxx)enums_check((L), DOMAIN_XXX, (arg))

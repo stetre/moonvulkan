@@ -102,10 +102,25 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.ht
 Values: '_descriptor set_', '_push descriptors_'. +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkDescriptorUpdateTemplateTypeKHR[VkDescriptorUpdateTemplateTypeKHR].#
 
+[[deviceeventtype]]
+[small]#*deviceeventtype*: vk.DEVICE_EVENT_TYPE_XXX_EXT +
+Values: '_display hotplug_'. +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkDeviceEventTypeEXT[VkDeviceEventTypeEXT].#
+
 [[discardrectanglemode]]
 [small]#*discardrectanglemode*: vk.DISCARD_RECTANGLE_MODE_XXX_EXT +
 Values: '_inclusive_', '_exclusive_'. +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkDiscardRectangleModeEXT[VkDiscardRectangleModeEXT].#
+
+[[displayeventtype]]
+[small]#*displayeventtype*: vk.DISPLAY_EVENT_TYPE_XXX_EXT +
+Values: '_first pixel out_'. +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkDisplayEventTypeEXT[VkDisplayEventTypeEXT].#
+
+[[displaypowerstate]]
+[small]#*displaypowerstate*: vk.DISPLAY_POWER_STATE_XXX_EXT +
+Values: '_off_', '_suspend_', '_on_'. +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkDisplayPowerStateEXT[VkDisplayPowerStateEXT].#
 
 [[dynamicstate]]
 [small]#*dynamicstate*: vk.DYNAMIC_STATE_XXX +

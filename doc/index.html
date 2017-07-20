@@ -4435,10 +4435,13 @@ See also the <a href="#clearcolor_snippet">example</a> in the code snippets sect
 <em>supported_usage_flags</em>: <a href="#imageusageflags">imageusageflags</a>,<br>
 ---- extensions ----<br>
 <em>shared_present_supported_usage_flags</em>: <a href="#imageusageflags">imageusageflags</a> (Note2),<br>
+<em>supported_surface_counters</em>: <a href="#surfacecounterflags"><em>surfacecounterflags</em></a> (Note3),<br>
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkSurfaceCapabilities2KHR">VkSurfaceCapabilities2KHR</a>)<br>
 Note1: The <em>current_extent</em> field is <em>nil</em> when <em>width</em> and <em>height</em> in the underlying C struct have the special value 0xFFFFFFFF.<br>
 Note2: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_get_surface_capabilities2">VK_KHR_get_surface_capabilities2</a> extension (rfr:
-<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkSharedPresentSurfaceCapabilitiesKHR">VkSharedPresentSurfaceCapabilitiesKHR</a>).</span></p>
+<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkSharedPresentSurfaceCapabilitiesKHR">VkSharedPresentSurfaceCapabilitiesKHR</a>).<br>
+Note3: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_display_surface_counter">VK_EXT_display_surface_counter</a> extension (rfr:
+<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPhysicalDeviceSurfaceCapabilities2EXT">VkPhysicalDeviceSurfaceCapabilities2EXT</a>).</span></p>
 </li>
 <li>
 <p><a id="surfaceformat"></a>
@@ -4734,10 +4737,25 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/
 Values: '<em>descriptor set</em>', '<em>push descriptors</em>'.<br>
 Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkDescriptorUpdateTemplateTypeKHR">VkDescriptorUpdateTemplateTypeKHR</a>.</span></p>
 </div>
+<div id="deviceeventtype" class="paragraph">
+<p><span class="small"><strong>deviceeventtype</strong>: vk.DEVICE_EVENT_TYPE_XXX_EXT<br>
+Values: '<em>display hotplug</em>'.<br>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkDeviceEventTypeEXT">VkDeviceEventTypeEXT</a>.</span></p>
+</div>
 <div id="discardrectanglemode" class="paragraph">
 <p><span class="small"><strong>discardrectanglemode</strong>: vk.DISCARD_RECTANGLE_MODE_XXX_EXT<br>
 Values: '<em>inclusive</em>', '<em>exclusive</em>'.<br>
 Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkDiscardRectangleModeEXT">VkDiscardRectangleModeEXT</a>.</span></p>
+</div>
+<div id="displayeventtype" class="paragraph">
+<p><span class="small"><strong>displayeventtype</strong>: vk.DISPLAY_EVENT_TYPE_XXX_EXT<br>
+Values: '<em>first pixel out</em>'.<br>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkDisplayEventTypeEXT">VkDisplayEventTypeEXT</a>.</span></p>
+</div>
+<div id="displaypowerstate" class="paragraph">
+<p><span class="small"><strong>displaypowerstate</strong>: vk.DISPLAY_POWER_STATE_XXX_EXT<br>
+Values: '<em>off</em>', '<em>suspend</em>', '<em>on</em>'.<br>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkDisplayPowerStateEXT">VkDisplayPowerStateEXT</a>.</span></p>
 </div>
 <div id="dynamicstate" class="paragraph">
 <p><span class="small"><strong>dynamicstate</strong>: vk.DYNAMIC_STATE_XXX<br>
@@ -5120,6 +5138,11 @@ Rfr. <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/
 Values:
 '<em>front</em>', '<em>back</em>'.<br>
 Rfr. <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkStencilFaceFlagBits">VkStencilFaceFlagBits</a>.</span></p>
+</div>
+<div id="surfacecounterflags" class="paragraph">
+<p><span class="small"><strong>surfacecounterflags</strong>: vk.SURFACE_COUNTER_XXX_BIT_EXT<br>
+Values: '<em>vblank</em>'.<br>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkSurfaceCounterFlagBitsEXT">VkSurfaceCounterFlagBitsEXT</a>.</span></p>
 </div>
 <div id="surfacetransformflags" class="paragraph">
 <p><span class="small"><strong>surfacetransformflags</strong>: vk.SURFACE_TRANSFORM_XXX_BIT_KHR<br>

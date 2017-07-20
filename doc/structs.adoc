@@ -1232,11 +1232,13 @@ _supported_composite_alpha_: <<compositealphaflags, compositealphaflags>>, +
 _supported_usage_flags_: <<imageusageflags, imageusageflags>>, +
 pass:[----] extensions ---- +
 _shared_present_supported_usage_flags_: <<imageusageflags, imageusageflags>> (Note2), +
+_supported_surface_counters_: <<surfacecounterflags, _surfacecounterflags_>> (Note3), +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkSurfaceCapabilities2KHR[VkSurfaceCapabilities2KHR]) +
 Note1: The _current_extent_ field is _nil_ when _width_ and _height_ in the underlying C struct have the special value 0xFFFFFFFF. +
 Note2: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_get_surface_capabilities2[VK_KHR_get_surface_capabilities2] extension (rfr:
-https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkSharedPresentSurfaceCapabilitiesKHR[VkSharedPresentSurfaceCapabilitiesKHR]).#
-
+https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkSharedPresentSurfaceCapabilitiesKHR[VkSharedPresentSurfaceCapabilitiesKHR]). +
+Note3: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_display_surface_counter[VK_EXT_display_surface_counter] extension (rfr:
+https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPhysicalDeviceSurfaceCapabilities2EXT[VkPhysicalDeviceSurfaceCapabilities2EXT]).#
 
 * [[surfaceformat]]
 [small]#*surfaceformat* = { +

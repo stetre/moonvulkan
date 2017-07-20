@@ -163,6 +163,15 @@ static int GetDisplayPlaneSupportedDisplays(lua_State *L)
     return 1;
     }
 
+#if 0
+#define VK_EXT_direct_mode_display 1
+//typedef VkResult (VKAPI_PTR *PFN_vkReleaseDisplayEXT)(VkPhysicalDevice physicalDevice, VkDisplayKHR display);
+        { "release_display", ReleaseDisplay },
+static int ReleaseDisplay(lua_State *L)//@@TODO?
+    {
+    return 0;
+    }
+#endif
 
 RAW_FUNC(display)
 TYPE_FUNC(display)

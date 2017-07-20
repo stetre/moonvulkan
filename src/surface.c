@@ -334,6 +334,26 @@ static int GetPhysicalDeviceSurfaceSupport(lua_State *L)
     return 1;
     }
 
+
+static int PushSupportedSurfaceCounters(lua_State *L, VkPhysicalDevice physdev, ud_t *ud, VkSurfaceKHR surface)
+/* Calls GetPhysicalDeviceSurfaceCapabilities2EXT() to retrieve the supportedSurfaceCounters
+ * field, and sets the field in the table on the top of the stack.
+ * (Note that all other capabilities retrieved by this function are the same as in
+ * GetPhysicalDeviceSurfaceCapabilitiesKHR(), so we don't bother about them).
+ */
+    {
+    VkResult ec;
+    VkSurfaceCapabilities2EXT caps;
+    if(!ud->idt->GetPhysicalDeviceSurfaceCapabilities2EXT) return 0;
+    memset(&caps, 0, sizeof(caps));
+    caps.sType = VK_STRUCTURE_TYPE_SURFACE_CAPABILITIES2_EXT;
+    ec = ud->idt->GetPhysicalDeviceSurfaceCapabilities2EXT(physdev, surface, &caps);
+    if(ec) return 0;
+    pushflags(L, caps.supportedSurfaceCounters);
+    lua_setfield(L, -2, "supported_surface_counters");
+    return 0;
+    }
+
 static int GetPhysicalDeviceSurfaceCapabilities2(lua_State *L, VkPhysicalDevice physdev, ud_t *ud)
     {
     VkResult ec;
@@ -349,6 +369,7 @@ static int GetPhysicalDeviceSurfaceCapabilities2(lua_State *L, VkPhysicalDevice 
     ec = ud->idt->GetPhysicalDeviceSurfaceCapabilities2KHR(physdev, &info, &capabilities.p1);
     CheckError(L, ec);
     pushsurfacecapabilities2(L, &capabilities);
+    PushSupportedSurfaceCounters(L, physdev, ud, info.surface);
     return 1;
     }
 
@@ -368,6 +389,7 @@ static int GetPhysicalDeviceSurfaceCapabilities(lua_State *L)
     ec = ud->idt->GetPhysicalDeviceSurfaceCapabilitiesKHR(physdev, surface, &capabilities);
     CheckError(L, ec);
     pushsurfacecapabilities(L, &capabilities);
+    PushSupportedSurfaceCounters(L, physdev, ud, surface);
     return 1;
     }
 

@@ -193,10 +193,12 @@ instance_dt_t * getproc_instance(lua_State *L, VkInstance instance, VkInstanceCr
             }
         IF("VK_EXT_direct_mode_display")
             {
+            GET(ReleaseDisplayEXT);
             continue;
             }
         IF("VK_EXT_display_surface_counter")
             {
+            GET(GetPhysicalDeviceSurfaceCapabilities2EXT);
             continue;
             }
         IF("VK_EXT_swapchain_colorspace")

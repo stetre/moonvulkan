@@ -114,6 +114,8 @@ typedef struct {
     F(GetPhysicalDeviceExternalBufferPropertiesKHR);
     F(GetPhysicalDeviceExternalSemaphorePropertiesKHR);
     F(GetPhysicalDeviceExternalFencePropertiesKHR);
+    F(ReleaseDisplayEXT);
+    F(GetPhysicalDeviceSurfaceCapabilities2EXT);
 } instance_dt_t;
 
 
