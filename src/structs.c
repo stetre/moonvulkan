@@ -257,6 +257,9 @@ do {                                                \
 #define GetCommandBufferLevel(name, sname) GetEnum(name, sname, testcommandbufferlevel)
 #define GetQueryType(name, sname) GetEnum(name, sname, testquerytype)
 #define GetDiscardRectangleMode(name, sname) GetEnum(name, sname, testdiscardrectanglemode)
+#define GetDeviceEventType(name, sname) GetEnum(name, sname, testdeviceeventtype)
+#define GetDisplayEventType(name, sname) GetEnum(name, sname, testdisplayeventtype)
+#define GetDisplayPowerState(name, sname) GetEnum(name, sname, testdisplaypowerstate)
 
 /* optional enums with defval */
 #define GetPipelineBindPoint(name, sname) GetEnumOpt(name, sname, testpipelinebindpoint, VK_PIPELINE_BIND_POINT_GRAPHICS)
@@ -726,6 +729,23 @@ int echeckfencecreateinfo(lua_State *L, int arg, VkFenceCreateInfo *p)
     return 0;
     }
 
+int echeckdeviceeventinfo(lua_State *L, int arg, VkDeviceEventInfoEXT *p)
+    {
+    int err;
+    ECHECK_PREAMBLE(p);
+    p->sType = VK_STRUCTURE_TYPE_DEVICE_EVENT_INFO_EXT;
+    GetDeviceEventType(deviceEvent, "device_event");
+    return 0;
+    }
+
+int echeckdisplayeventinfo(lua_State *L, int arg, VkDisplayEventInfoEXT *p)
+    {
+    int err;
+    ECHECK_PREAMBLE(p);
+    p->sType = VK_STRUCTURE_TYPE_DISPLAY_EVENT_INFO_EXT;
+    GetDisplayEventType(displayEvent, "display_event");
+    return 0;
+    }
 
 int echecksemaphorecreateinfo(lua_State *L, int arg, VkSemaphoreCreateInfo *p)
     {
@@ -3621,16 +3641,26 @@ ECHECKLISTFUNC(VkComputePipelineCreateInfo, computepipelinecreateinfo, freecompu
 
 /*-------------------------------------------------------------------------------------*/
 
-void freeswapchaincreateinfo(lua_State *L, VkSwapchainCreateInfoKHR *p)
+static int echeckswapchaincountercreateinfo(lua_State *L, int arg, VkSwapchainCounterCreateInfoEXT *p)
     {
-    if(!p) return;
+    int err;
+    p->sType = VK_STRUCTURE_TYPE_SWAPCHAIN_COUNTER_CREATE_INFO_EXT;
+    GetFlags(surfaceCounters, "surface_counters");
+    return 0;
+    }
+
+void freeswapchaincreateinfo(lua_State *L, VkSwapchainCreateInfoKHR_CHAIN *pp)
+    {
+    VkSwapchainCreateInfoKHR *p = &pp->p1;
     if(p->pQueueFamilyIndices) Free(L, (void*)p->pQueueFamilyIndices);
     }
 
-int echeckswapchaincreateinfo(lua_State *L, int arg, VkSwapchainCreateInfoKHR *p)
+int echeckswapchaincreateinfo(lua_State *L, int arg, VkSwapchainCreateInfoKHR_CHAIN *pp)
     {
     int err, arg1;
-    ECHECK_PREAMBLE(p);
+    int p2_present;
+    VkSwapchainCreateInfoKHR *p = &pp->p1;
+    ECHECK_PREAMBLE(pp);
     p->sType = VK_STRUCTURE_TYPE_SWAPCHAIN_CREATE_INFO_KHR;
     GetFlags(flags, "flags");
     GetSurface(surface, "surface");
@@ -3652,13 +3682,47 @@ int echeckswapchaincreateinfo(lua_State *L, int arg, VkSwapchainCreateInfoKHR *p
     POPFIELD();
     if(err < 0) return fielderror(L, F, err);
 #undef F
+    /*-- extensions --------------------*/
+    IsPresent("surface_counters", p2_present);
+    if(p2_present)
+        {
+        err = echeckswapchaincountercreateinfo(L, arg, &pp->p2);
+        if(err) { freeswapchaincreateinfo(L, pp); return err; }
+        pp->p1.pNext = &pp->p2;
+        }
     return 0;
     }
 
 /* echeckswapchaincreateinfolist() */
-FREELISTFUNC(VkSwapchainCreateInfoKHR, swapchaincreateinfo)
-ECHECKLISTFUNC(VkSwapchainCreateInfoKHR, swapchaincreateinfo, freeswapchaincreateinfolist)
+static FREELISTFUNC(VkSwapchainCreateInfoKHR_CHAIN, swapchaincreateinfo)
+static ECHECKLISTFUNC(VkSwapchainCreateInfoKHR_CHAIN, swapchaincreateinfo, freeswapchaincreateinfolist)
 
+void freeswapchaincreateinfoarray(lua_State *L, VkSwapchainCreateInfoKHR_ARRAY *pp, uint32_t count)
+    {
+    Free(L, pp->p);
+    freeswapchaincreateinfolist(L, pp->chain, count);
+    CLEAR(pp);
+    }
+
+int echeckswapchaincreateinfoarray(lua_State *L, int arg, VkSwapchainCreateInfoKHR_ARRAY *pp, uint32_t *count)
+/* Constructs an array of contiguous p1 elements from the list. */
+    {
+    int err;
+    uint32_t i;
+    pp->chain = echeckswapchaincreateinfolist(L, arg, count, &err);
+    pp->p = MALLOC_NOERR(L, VkSwapchainCreateInfoKHR);
+    if(!pp->p)
+        {
+        freeswapchaincreateinfolist(L, pp->chain, *count);
+        *count = 0;
+        return pusherror(L, ERR_MEMORY);
+        }
+
+    for(i=0; i < *count; i++)
+        memcpy(&pp->p[i], &(pp->chain[i].p1), sizeof(VkSwapchainCreateInfoKHR));
+
+    return 0;
+    }
 
 /*-------------------------------------------------------------------------------------*/
 
@@ -3927,6 +3991,18 @@ static int echeckcopydescriptorset(lua_State *L, int arg, VkCopyDescriptorSet *p
 /* echeckcopydescriptorsetlist() */
 FREELISTFUNC(VkCopyDescriptorSet, copydescriptorset)
 ECHECKLISTFUNC(VkCopyDescriptorSet, copydescriptorset, freecopydescriptorsetlist)
+
+
+/*-------------------------------------------------------------------------------------*/
+
+int echeckdisplaypowerinfo(lua_State *L, int arg, VkDisplayPowerInfoEXT *p)
+    {
+    int err;
+    ECHECK_PREAMBLE(p);
+    p->sType = VK_STRUCTURE_TYPE_DISPLAY_POWER_INFO_EXT;
+    GetDisplayPowerState(powerState, "power_state");
+    return 0;
+    }
 
 /*-------------------------------------------------------------------------------------*/
 int pushdisplayproperties(lua_State *L, VkDisplayPropertiesKHR *p)

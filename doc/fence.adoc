@@ -7,6 +7,14 @@
 _fence_ = *create_fence*(_device_, [_flags_]) +
 [small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCreateFence[vkCreateFence].#
 
+[[register_device_event]]
+* _fence_ = *register_device_event*(_device_, <<deviceeventinfo, _deviceeventinfo_>>, [<<allocators, _allocator_>>]) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkRegisterDeviceEventEXT[vkRegisterDeviceEventEXT] (https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_display_control[VK_EXT_display_control] extension).#
+
+[[register_display_event]]
+* _fence_ = *register_display_event*(_device_, <<display, _display_>>, <<displayeventinfo, _displayeventinfo_>>, [<<allocators, _allocator_>>]) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkRegisterDisplayEventEXT[vkRegisterDisplayEventEXT] (https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_display_control[VK_EXT_display_control] extension).#
+
 [[destroy_fence]]
 * *destroy_fence*(_fence_) +
 [small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkDestroyFence[vkDestroyFence].#

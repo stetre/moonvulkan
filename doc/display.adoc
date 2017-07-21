@@ -18,6 +18,10 @@
 * *release_display*(<<physical_device, _physdev_>>, _display_) +
 [small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkReleaseDisplayEXT[vkReleaseDisplayEXT] (https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_direct_mode_display[VK_EXT_direct_mode_display] extension).#
 
+[[display_power_control]]
+* *display_power_control*(<<device, _device_>>, _display_, <<displaypowerinfo, _displaypowerinfo_>>) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkDisplayPowerControlEXT[vkDisplayPowerControlEXT] (https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_display_control[VK_EXT_display_control] extension).#
+
 [[display_mode]]
 ==== display_mode
 

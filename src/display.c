@@ -175,6 +175,21 @@ static int ReleaseDisplay(lua_State *L)
     return 0;
     }
 
+static int DisplayPowerControl(lua_State *L)
+    {
+    VkResult ec;
+    ud_t *ud;
+    VkDevice device = checkdevice(L, 1, &ud);
+    VkDisplayKHR display = checkdisplay(L, 2, NULL);
+    VkDisplayPowerInfoEXT info;
+    CheckDevicePfn(L, ud, DisplayPowerControlEXT);
+    if(echeckdisplaypowerinfo(L, 3, &info)) return argerror(L, 3);
+    ec = ud->ddt->DisplayPowerControlEXT(device, display, &info);
+    CheckError(L, ec);
+    return 0;
+    }
+
+
 RAW_FUNC(display)
 TYPE_FUNC(display)
 INSTANCE_FUNC(display)
@@ -207,6 +222,7 @@ static const struct luaL_Reg Functions[] =
         { "get_display_plane_supported_displays", GetDisplayPlaneSupportedDisplays },
         { "destroy_display",  Destroy }, //@@
         { "release_display", ReleaseDisplay },
+        { "display_power_control", DisplayPowerControl },
         { NULL, NULL } /* sentinel */
     };
 

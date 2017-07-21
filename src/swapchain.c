@@ -59,12 +59,12 @@ static int CreateSwapchain(lua_State *L)
     ud_t *ud;
     VkResult ec;
     VkSwapchainKHR swapchain;
-    VkSwapchainCreateInfoKHR info;
+    VkSwapchainCreateInfoKHR_CHAIN info;
     VkDevice device = checkdevice(L, 1, &ud);
     const VkAllocationCallbacks *allocator = optallocator(L, 3);
     if(echeckswapchaincreateinfo(L, 2, &info)) return argerror(L, 2);
     CheckDevicePfn(L, ud, CreateSwapchainKHR);
-    ec = ud->ddt->CreateSwapchainKHR(device, &info, allocator, &swapchain);
+    ec = ud->ddt->CreateSwapchainKHR(device, &info.p1, allocator, &swapchain);
     freeswapchaincreateinfo(L, &info);
     CheckError(L, ec);
     return newswapchain(L, swapchain, device, allocator);
@@ -74,27 +74,25 @@ static int CreateSharedSwapchains(lua_State *L)
     {
     VkResult ec;
     ud_t *ud;
-    int err;
     uint32_t count, i;
     VkSwapchainKHR *swapchains;
-    VkSwapchainCreateInfoKHR *infos;
+    VkSwapchainCreateInfoKHR_ARRAY infos;
     VkDevice device = checkdevice(L, 1, &ud);
     const VkAllocationCallbacks *allocator = optallocator(L, 3);
 
     CheckDevicePfn(L, ud, CreateSharedSwapchainsKHR);
 
-    infos = echeckswapchaincreateinfolist(L, 2, &count, &err);
-    if(err) return argerror(L, 2);
+    if(echeckswapchaincreateinfoarray(L, 2, &infos, &count)) return argerror(L, 2);
 
     swapchains = (VkSwapchainKHR*)MallocNoErr(L, count*sizeof(VkSwapchainKHR));
     if(!swapchains)
         {
-        freeswapchaincreateinfolist(L, infos, count);
+        freeswapchaincreateinfoarray(L, &infos, count);
         return errmemory(L);
         }
 
-    ec = ud->ddt->CreateSharedSwapchainsKHR(device, count, infos, allocator, swapchains);
-    freeswapchaincreateinfolist(L, infos, count);
+    ec = ud->ddt->CreateSharedSwapchainsKHR(device, count, infos.p, allocator, swapchains);
+    freeswapchaincreateinfoarray(L, &infos, count);
 
     if(ec)
         {
@@ -235,6 +233,20 @@ static int SetHdrMetadata(lua_State *L)
     return 0;
     }
 
+static int GetSwapchainCounter(lua_State *L)
+    {
+    ud_t *ud;
+    uint64_t val;
+    VkSwapchainKHR swapchain = checkswapchain(L, 1, &ud);
+    VkSurfaceCounterFlagBitsEXT counter = (VkSurfaceCounterFlagBitsEXT)optflags(L, 2, 0);
+
+    CheckDevicePfn(L, ud, GetSwapchainCounterEXT);
+    ud->ddt->GetSwapchainCounterEXT(ud->device, swapchain, counter, &val);
+    lua_pushinteger(L, val);
+
+    return 1;
+    }
+
 
 RAW_FUNC(swapchain)
 TYPE_FUNC(swapchain)
@@ -270,6 +282,7 @@ static const struct luaL_Reg Functions[] =
         { "queue_present", QueuePresent },
         { "get_swapchain_status", GetSwapchainStatus },
         { "set_hdr_metadata", SetHdrMetadata },
+        { "get_swapchain_counter", GetSwapchainCounter },
         { NULL, NULL } /* sentinel */
     };
 

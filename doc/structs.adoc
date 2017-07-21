@@ -504,6 +504,16 @@ _pipeline_statistics_: <<querypipelinestatisticflags, querypipelinestatisticflag
 _flags_: <<fencecreateflags, fencecreateflags>>, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkFenceCreateInfo[VkFenceCreateInfo])#
 
+* [[deviceeventinfo]]
+[small]#*deviceeventinfo* = { +
+_device_event_: <<deviceeventtype, deviceeventtype>>, +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkDeviceEventInfoEXT[VkDeviceEventInfoEXT])#
+
+* [[displayeventinfo]]
+[small]#*displayeventinfo* = { +
+_display_event_: <<displayeventtype, displayeventtype>>, +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkDisplayEventInfoEXT[VkDisplayEventInfoEXT])#
+
 * [[semaphorecreateinfo]]
 [small]#*semaphorecreateinfo* = { +
 _flags_: <<semaphorecreateflags, semaphorecreateflags>>, +
@@ -765,7 +775,7 @@ _immutable_samplers_: {<<sampler, sampler>>}, +
 _flags_: <<pipelinelayoutcreateflags, pipelinelayoutcreateflags>>, +
 _set_layouts_: {<<descriptor_set_layout, descriptor_set_layout>>}, +
 _push_constant_ranges_: {<<pushconstantrange, pushconstantrange>>}, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPipelineLayoutCreateInfo[])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPipelineLayoutCreateInfo[PipelineLayoutCreateInfo])#
 
 
 * [[pushconstantrange]]
@@ -1266,7 +1276,12 @@ _composite_alpha_: <<compositealphaflags, compositealphaflags>>, +
 _present_mode_: <<presentmode, presentmode>>, +
 _clipped_: boolean, +
 _old_swapchain_: <<swapchain, swapchain>>, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkSwapchainCreateInfoKHR[VkSwapchainCreateInfoKHR])#
+pass:[----] extensions ---- +
+_surface_counters_: <<surfacecounterflags, surfacecounterflags>> (Note1), +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkSwapchainCreateInfoKHR[VkSwapchainCreateInfoKHR]) +
+Note1: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_display_control[VK_EXT_display_control] extension (rfr:
+https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkSwapchainCounterCreateInfoEXT[VkSwapchainCounterCreateInfoEXT]).#
+
 
 
 * [[presentinfo]]
@@ -1317,6 +1332,12 @@ _x_, _y_: number, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkXYColorEXT[VkXYColorEXT])#
 
 '''
+
+* [[displaypowerinfo]]
+[small]#*displaypowerinfo* = { +
+_power_state_: <<displaypowerstate, displaypowerstate>>, +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkDisplayPowerInfoEXT[VkDisplayPowerInfoEXT])#
+
 
 * [[displayproperties]]
 [small]#*displayproperties* = { +

@@ -1314,6 +1314,22 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/
 </li>
 </ul>
 </div>
+<div id="register_device_event" class="ulist">
+<ul>
+<li>
+<p><em>fence</em> = <strong>register_device_event</strong>(<em>device</em>, <a href="#deviceeventinfo"><em>deviceeventinfo</em></a>, [<a href="#allocators"><em>allocator</em></a>])<br>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkRegisterDeviceEventEXT">vkRegisterDeviceEventEXT</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_display_control">VK_EXT_display_control</a> extension).</span></p>
+</li>
+</ul>
+</div>
+<div id="register_display_event" class="ulist">
+<ul>
+<li>
+<p><em>fence</em> = <strong>register_display_event</strong>(<em>device</em>, <a href="#display"><em>display</em></a>, <a href="#displayeventinfo"><em>displayeventinfo</em></a>, [<a href="#allocators"><em>allocator</em></a>])<br>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkRegisterDisplayEventEXT">vkRegisterDisplayEventEXT</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_display_control">VK_EXT_display_control</a> extension).</span></p>
+</li>
+</ul>
+</div>
 <div id="destroy_fence" class="ulist">
 <ul>
 <li>
@@ -2545,7 +2561,10 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/
 <p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_discard_rectangles">VK_EXT_discard_rectangles</a></p>
 </li>
 <li>
-<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#K_EXT_display_surface_counter">K_EXT_display_surface_counter</a></p>
+<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_display_control">VK_EXT_display_control</a></p>
+</li>
+<li>
+<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_display_surface_counter">VK_EXT_display_surface_counter</a></p>
 </li>
 <li>
 <p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_hdr_metadata">VK_EXT_hdr_metadata</a></p>
@@ -2829,6 +2848,14 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/
 </li>
 </ul>
 </div>
+<div id="display_power_control" class="ulist">
+<ul>
+<li>
+<p><strong>display_power_control</strong>(<a href="#device"><em>device</em></a>, <em>display</em>, <a href="#displaypowerinfo"><em>displaypowerinfo</em></a>)<br>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkDisplayPowerControlEXT">vkDisplayPowerControlEXT</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_display_control">VK_EXT_display_control</a> extension).</span></p>
+</li>
+</ul>
+</div>
 </div>
 <div class="sect3">
 <h4 id="display_mode">display_mode</h4>
@@ -2930,7 +2957,15 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/
 <ul>
 <li>
 <p><strong>set_hdr_metadata</strong>({<em>swapchain</em>}, <a href="#hdrmetadata"><em>hdrmetadata</em></a>)<br>
-<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkSetHdrMetadataEXT">vkSetHdrMetadataEXT</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_hdr_metadata">VK_EXT_hdr_metadata</a> device extension).</span></p>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkSetHdrMetadataEXT">vkSetHdrMetadataEXT</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_hdr_metadata">VK_EXT_hdr_metadata</a> extension).</span></p>
+</li>
+</ul>
+</div>
+<div id="getswapchaincounter" class="ulist">
+<ul>
+<li>
+<p><em>value</em> = <strong>getswapchaincounter</strong>(<em>swapchain</em>, <a href="#surfacecounterflags"><em>surfacecounterflags</em></a>)<br>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetSwapchainCounterEXT">vkGetSwapchainCounterEXT</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_display_control">VK_EXT_display_control</a> extension).</span></p>
 </li>
 </ul>
 </div>
@@ -3619,6 +3654,18 @@ Note3: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/htm
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkFenceCreateInfo">VkFenceCreateInfo</a>)</span></p>
 </li>
 <li>
+<p><a id="deviceeventinfo"></a>
+<span class="small"><strong>deviceeventinfo</strong> = {<br>
+<em>device_event</em>: <a href="#deviceeventtype">deviceeventtype</a>,<br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkDeviceEventInfoEXT">VkDeviceEventInfoEXT</a>)</span></p>
+</li>
+<li>
+<p><a id="displayeventinfo"></a>
+<span class="small"><strong>displayeventinfo</strong> = {<br>
+<em>display_event</em>: <a href="#displayeventtype">displayeventtype</a>,<br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkDisplayEventInfoEXT">VkDisplayEventInfoEXT</a>)</span></p>
+</li>
+<li>
 <p><a id="semaphorecreateinfo"></a>
 <span class="small"><strong>semaphorecreateinfo</strong> = {<br>
 <em>flags</em>: <a href="#semaphorecreateflags">semaphorecreateflags</a>,<br>
@@ -3937,7 +3984,7 @@ Note1: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/htm
 <em>flags</em>: <a href="#pipelinelayoutcreateflags">pipelinelayoutcreateflags</a>,<br>
 <em>set_layouts</em>: {<a href="#descriptor_set_layout">descriptor_set_layout</a>},<br>
 <em>push_constant_ranges</em>: {<a href="#pushconstantrange">pushconstantrange</a>},<br>
-} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPipelineLayoutCreateInfo" class="bare">https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPipelineLayoutCreateInfo</a>)</span></p>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPipelineLayoutCreateInfo">PipelineLayoutCreateInfo</a>)</span></p>
 </li>
 <li>
 <p><a id="pushconstantrange"></a>
@@ -4500,7 +4547,11 @@ Note3: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/htm
 <em>present_mode</em>: <a href="#presentmode">presentmode</a>,<br>
 <em>clipped</em>: boolean,<br>
 <em>old_swapchain</em>: <a href="#swapchain">swapchain</a>,<br>
-} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkSwapchainCreateInfoKHR">VkSwapchainCreateInfoKHR</a>)</span></p>
+---- extensions ----<br>
+<em>surface_counters</em>: <a href="#surfacecounterflags">surfacecounterflags</a> (Note1),<br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkSwapchainCreateInfoKHR">VkSwapchainCreateInfoKHR</a>)<br>
+Note1: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_display_control">VK_EXT_display_control</a> extension (rfr:
+<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkSwapchainCounterCreateInfoEXT">VkSwapchainCounterCreateInfoEXT</a>).</span></p>
 </li>
 <li>
 <p><a id="presentinfo"></a>
@@ -4562,6 +4613,12 @@ Note2: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/htm
 <hr>
 <div class="ulist">
 <ul>
+<li>
+<p><a id="displaypowerinfo"></a>
+<span class="small"><strong>displaypowerinfo</strong> = {<br>
+<em>power_state</em>: <a href="#displaypowerstate">displaypowerstate</a>,<br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkDisplayPowerInfoEXT">VkDisplayPowerInfoEXT</a>)</span></p>
+</li>
 <li>
 <p><a id="displayproperties"></a>
 <span class="small"><strong>displayproperties</strong> = {<br>

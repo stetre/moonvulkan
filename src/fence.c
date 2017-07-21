@@ -37,9 +37,23 @@ static int freefence(lua_State *L, ud_t *ud)
     return 0;
     }
 
+static int Created(lua_State *L, VkFence fence, VkDevice device, const VkAllocationCallbacks *allocator)
+    {
+    ud_t *ud, *device_ud = UD(device);
+    TRACE_CREATE(fence, "fence");
+    ud = newuserdata_nondispatchable(L, fence, FENCE_MT);
+    ud->parent_ud = device_ud;
+    ud->device = device;
+    ud->instance = device_ud->instance;
+    ud->allocator = allocator;
+    ud->destructor = freefence;
+    ud->ddt = device_ud->ddt;
+    return 1;
+    }
+
 static int Create(lua_State *L)
     {
-    ud_t *ud, *device_ud;
+    ud_t *device_ud;
     VkResult ec;
     VkFence fence;
     VkFenceCreateInfo info;
@@ -60,16 +74,45 @@ static int Create(lua_State *L)
 
     ec = device_ud->ddt->CreateFence(device, &info, allocator, &fence);
     CheckError(L, ec);
-    TRACE_CREATE(fence, "fence");
-    ud = newuserdata_nondispatchable(L, fence, FENCE_MT);
-    ud->parent_ud = device_ud;
-    ud->device = device;
-    ud->instance = device_ud->instance;
-    ud->allocator = allocator;
-    ud->destructor = freefence;
-    ud->ddt = device_ud->ddt;
-    return 1;
+    return Created(L, fence, device, allocator);
     }
+
+
+static int RegisterDeviceEvent(lua_State *L)
+    {
+    ud_t *device_ud;
+    VkResult ec;
+    VkFence fence;
+    VkDeviceEventInfoEXT info;
+    VkDevice device = checkdevice(L, 1, &device_ud);
+    const VkAllocationCallbacks *allocator = optallocator(L, 3);
+
+    CheckDevicePfn(L, device_ud, RegisterDeviceEventEXT);
+    if(echeckdeviceeventinfo(L, 2, &info)) return argerror(L, 2);
+
+    ec = device_ud->ddt->RegisterDeviceEventEXT(device, &info, allocator, &fence);
+    CheckError(L, ec);
+    return Created(L, fence, device, allocator);
+    }
+
+static int RegisterDisplayEvent(lua_State *L)
+    {
+    ud_t *device_ud;
+    VkResult ec;
+    VkFence fence;
+    VkDisplayEventInfoEXT info;
+    VkDevice device = checkdevice(L, 1, &device_ud);
+    VkDisplayKHR display = checkdisplay(L, 2, NULL);
+    const VkAllocationCallbacks *allocator = optallocator(L, 4);
+
+    CheckDevicePfn(L, device_ud, RegisterDisplayEventEXT);
+    if(echeckdisplayeventinfo(L, 3, &info)) return argerror(L, 3);
+
+    ec = device_ud->ddt->RegisterDisplayEventEXT(device, display, &info, allocator, &fence);
+    CheckError(L, ec);
+    return Created(L, fence, device, allocator);
+    }
+
 
 static int ResetFences(lua_State *L)
     {
@@ -157,6 +200,8 @@ static const struct luaL_Reg MetaMethods[] =
 static const struct luaL_Reg Functions[] = 
     {
         { "create_fence",  Create },
+        { "register_device_event", RegisterDeviceEvent },
+        { "register_display_event", RegisterDisplayEvent },
         { "destroy_fence",  Destroy },
         { "reset_fences", ResetFences },
         { "get_fence_status", GetFenceStatus },

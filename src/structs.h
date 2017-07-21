@@ -60,6 +60,10 @@ int echeckcommandbufferbegininfo(lua_State *L, int arg, VkCommandBufferBeginInfo
 
 #define echeckfencecreateinfo moonvulkan_echeckfencecreateinfo
 int echeckfencecreateinfo(lua_State *L, int arg, VkFenceCreateInfo *p);
+#define echeckdeviceeventinfo moonvulkan_echeckdeviceeventinfo
+int echeckdeviceeventinfo(lua_State *L, int arg, VkDeviceEventInfoEXT *p);
+#define echeckdisplayeventinfo moonvulkan_echeckdisplayeventinfo
+int echeckdisplayeventinfo(lua_State *L, int arg, VkDisplayEventInfoEXT *p);
 #define echecksemaphorecreateinfo moonvulkan_echecksemaphorecreateinfo
 int echecksemaphorecreateinfo(lua_State *L, int arg, VkSemaphoreCreateInfo *p);
 #define echeckeventcreateinfo moonvulkan_echeckeventcreateinfo
@@ -445,14 +449,24 @@ void freecomputepipelinecreateinfolist(lua_State *L, void *list, uint32_t count)
 #define echeckcomputepipelinecreateinfolist moonvulkan_echeckcomputepipelinecreateinfolist
 VkComputePipelineCreateInfo* echeckcomputepipelinecreateinfolist(lua_State *L, int arg, uint32_t *count, int *err);
 
+typedef struct {
+    VkSwapchainCreateInfoKHR p1;
+    VkSwapchainCounterCreateInfoEXT p2;
+} VkSwapchainCreateInfoKHR_CHAIN;
+
+typedef struct {
+    VkSwapchainCreateInfoKHR *p;
+    VkSwapchainCreateInfoKHR_CHAIN *chain;
+} VkSwapchainCreateInfoKHR_ARRAY;
+
 #define freeswapchaincreateinfo moonvulkan_freeswapchaincreateinfo
-void freeswapchaincreateinfo(lua_State *L, VkSwapchainCreateInfoKHR *p);
+void freeswapchaincreateinfo(lua_State *L, VkSwapchainCreateInfoKHR_CHAIN *pp);
 #define echeckswapchaincreateinfo moonvulkan_echeckswapchaincreateinfo
-int echeckswapchaincreateinfo(lua_State *L, int arg, VkSwapchainCreateInfoKHR *p);
-#define freeswapchaincreateinfolist moonvulkan_freeswapchaincreateinfolist
-void freeswapchaincreateinfolist(lua_State *L, void *list, uint32_t count);
-#define echeckswapchaincreateinfolist moonvulkan_echeckswapchaincreateinfolist
-VkSwapchainCreateInfoKHR* echeckswapchaincreateinfolist(lua_State *L, int arg, uint32_t *count, int *err);
+int echeckswapchaincreateinfo(lua_State *L, int arg, VkSwapchainCreateInfoKHR_CHAIN *pp);
+#define freeswapchaincreateinfoarray moonvulkan_freeswapchaincreateinfoarray
+void freeswapchaincreateinfoarray(lua_State *L, VkSwapchainCreateInfoKHR_ARRAY *pp, uint32_t count);
+#define echeckswapchaincreateinfoarray moonvulkan_echeckswapchaincreateinfoarray
+int echeckswapchaincreateinfoarray(lua_State *L, int arg, VkSwapchainCreateInfoKHR_ARRAY *pp, uint32_t *count);
 
 typedef struct {
     VkPresentInfoKHR p1;
@@ -474,6 +488,9 @@ VkWriteDescriptorSet* echeckwritedescriptorsetlist(lua_State *L, int arg, uint32
 void freecopydescriptorsetlist(lua_State *L, void *list, uint32_t count);
 #define echeckcopydescriptorsetlist moonvulkan_echeckcopydescriptorsetlist
 VkCopyDescriptorSet* echeckcopydescriptorsetlist(lua_State *L, int arg, uint32_t *count, int *err);
+
+#define echeckdisplaypowerinfo moonvulkan_echeckdisplaypowerinfo
+int echeckdisplaypowerinfo(lua_State *L, int arg, VkDisplayPowerInfoEXT *p);
 
 #define pushdisplayproperties moonvulkan_pushdisplayproperties
 int pushdisplayproperties(lua_State *L, VkDisplayPropertiesKHR *p);
