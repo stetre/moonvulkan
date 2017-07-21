@@ -118,11 +118,46 @@ Rfr. https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.ht
 Values: '_opaque_', '_global_', '_per pixel_', '_per pixel premultiplied_'. +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkDisplayPlaneAlphaFlagBitsKHR[VkDisplayPlaneAlphaFlagBitsKHR].#
 
+[[externalfencefeatureflags]]
+[small]#*externalfencefeatureflags*: vk.EXTERNAL_FENCE_FEATURE_XXX_BIT_KHR +
+Values: '_exportable_', '_importable_'. +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkExternalFenceFeatureFlagBitsKHR[VkExternalFenceFeatureFlagBitsKHR].#
+
+[[externalfencehandletypeflags]]
+[small]#*externalfencehandletypeflags*: vk.EXTERNAL_FENCE_HANDLE_TYPE_XXX_BIT_KHR +
+Values: '_opaque_fd_', '_opaque_win32_', '_opaque_win32_kmt_', '_sync_fd_'. +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkExternalFenceHandleTypeFlagBitsKHR[VkExternalFenceHandleTypeFlagBitsKHR].#
+
+[[externalmemoryfeatureflags]]
+[small]#*externalmemoryfeatureflags*: vk.EXTERNAL_MEMORY_FEATURE_XXX_BIT_KHR +
+Values: '_dedicated only_', '_exportable_', '_importable_'. +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkExternalMemoryFeatureFlagBitsKHR[VkExternalMemoryFeatureFlagBitsKHR].#
+
+[[externalmemoryhandletypeflags]]
+[small]#*externalmemoryhandletypeflags*: vk.EXTERNAL_MEMORY_HANDLE_TYPE_XXX_BIT_KHR +
+Values: '_opaque fd_', '_opaque win32_', '_opaque win32 kmt_', '_d3d11 texture_', '_d3d11 texture kmt_', '_d3d12 heap_', '_d3d12 resource_'. +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkExternalMemoryHandleTypeFlagBitsKHR[VkExternalMemoryHandleTypeFlagBitsKHR].#
+
+[[externalsemaphorefeatureflags]]
+[small]#*externalsemaphorefeatureflags*: vk.EXTERNAL_SEMAPHORE_FEATURE_XXX_BIT_KHR +
+Values: '_exportable_', '_importable_'. +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkExternalSemaphoreFeatureFlagBitsKHR[VkExternalSemaphoreFeatureFlagBitsKHR].#
+
+[[externalsemaphorehandletypeflags]]
+[small]#*externalsemaphorehandletypeflags*: vk.EXTERNAL_SEMAPHORE_HANDLE_TYPE_XXX_BIT_KHR +
+Values: '_opaque fd_', '_opaque win32_', '_opaque win32 kmt_', '_d3d12 fence_', '_sync fd_'. +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkExternalSemaphoreHandleTypeFlagBitsKHR[VkExternalSemaphoreHandleTypeFlagBitsKHR].#
+
 [[fencecreateflags]]
 [small]#*fencecreateflags*: vk.FENCE_CREATE_XXX_BIT +
 Values: 
 '_signaled_'. +
 Rfr. https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkFenceCreateFlagBits[VkFenceCreateFlagBits].#
+
+[[fenceimportflags]]
+[small]#*fenceimportflags*: vk.FENCE_IMPORT_XXX_BIT_KHR +
+Values: '_temporary_'. +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkFenceImportFlagBitsKHR[VkFenceImportFlagBitsKHR].#
 
 [[formatfeatureflags]]
 [small]#*formatfeatureflags*: vk.FORMAT_FEATURE_XXX_BIT +
@@ -201,6 +236,11 @@ Rfr. https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.ht
 Values: 
 '_1_', '_2_', '_4_', '_8_', '_16_', '_32_', '_64_'. +
 Rfr. https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkSampleCountFlagBits[VkSampleCountFlagBits].#
+
+[[semaphoreimportflags]]
+[small]#*semaphoreimportflags*: vk.SEMAPHORE_IMPORT_XXX_BIT_KHR +
+Values: '_temporary_'. +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkSemaphoreImportFlagBitsKHR[VkSemaphoreImportFlagBitsKHR].#
 
 [[shaderstageflags]]
 [small]#*shaderstageflags*: vk.SHADER_STAGE_XXX_BIT +

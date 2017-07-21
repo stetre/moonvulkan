@@ -5115,11 +5115,46 @@ Rfr. <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/
 Values: '<em>opaque</em>', '<em>global</em>', '<em>per pixel</em>', '<em>per pixel premultiplied</em>'.<br>
 Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkDisplayPlaneAlphaFlagBitsKHR">VkDisplayPlaneAlphaFlagBitsKHR</a>.</span></p>
 </div>
+<div id="externalfencefeatureflags" class="paragraph">
+<p><span class="small"><strong>externalfencefeatureflags</strong>: vk.EXTERNAL_FENCE_FEATURE_XXX_BIT_KHR<br>
+Values: '<em>exportable</em>', '<em>importable</em>'.<br>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkExternalFenceFeatureFlagBitsKHR">VkExternalFenceFeatureFlagBitsKHR</a>.</span></p>
+</div>
+<div id="externalfencehandletypeflags" class="paragraph">
+<p><span class="small"><strong>externalfencehandletypeflags</strong>: vk.EXTERNAL_FENCE_HANDLE_TYPE_XXX_BIT_KHR<br>
+Values: '<em>opaque_fd</em>', '<em>opaque_win32</em>', '<em>opaque_win32_kmt</em>', '<em>sync_fd</em>'.<br>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkExternalFenceHandleTypeFlagBitsKHR">VkExternalFenceHandleTypeFlagBitsKHR</a>.</span></p>
+</div>
+<div id="externalmemoryfeatureflags" class="paragraph">
+<p><span class="small"><strong>externalmemoryfeatureflags</strong>: vk.EXTERNAL_MEMORY_FEATURE_XXX_BIT_KHR<br>
+Values: '<em>dedicated only</em>', '<em>exportable</em>', '<em>importable</em>'.<br>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkExternalMemoryFeatureFlagBitsKHR">VkExternalMemoryFeatureFlagBitsKHR</a>.</span></p>
+</div>
+<div id="externalmemoryhandletypeflags" class="paragraph">
+<p><span class="small"><strong>externalmemoryhandletypeflags</strong>: vk.EXTERNAL_MEMORY_HANDLE_TYPE_XXX_BIT_KHR<br>
+Values: '<em>opaque fd</em>', '<em>opaque win32</em>', '<em>opaque win32 kmt</em>', '<em>d3d11 texture</em>', '<em>d3d11 texture kmt</em>', '<em>d3d12 heap</em>', '<em>d3d12 resource</em>'.<br>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkExternalMemoryHandleTypeFlagBitsKHR">VkExternalMemoryHandleTypeFlagBitsKHR</a>.</span></p>
+</div>
+<div id="externalsemaphorefeatureflags" class="paragraph">
+<p><span class="small"><strong>externalsemaphorefeatureflags</strong>: vk.EXTERNAL_SEMAPHORE_FEATURE_XXX_BIT_KHR<br>
+Values: '<em>exportable</em>', '<em>importable</em>'.<br>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkExternalSemaphoreFeatureFlagBitsKHR">VkExternalSemaphoreFeatureFlagBitsKHR</a>.</span></p>
+</div>
+<div id="externalsemaphorehandletypeflags" class="paragraph">
+<p><span class="small"><strong>externalsemaphorehandletypeflags</strong>: vk.EXTERNAL_SEMAPHORE_HANDLE_TYPE_XXX_BIT_KHR<br>
+Values: '<em>opaque fd</em>', '<em>opaque win32</em>', '<em>opaque win32 kmt</em>', '<em>d3d12 fence</em>', '<em>sync fd</em>'.<br>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkExternalSemaphoreHandleTypeFlagBitsKHR">VkExternalSemaphoreHandleTypeFlagBitsKHR</a>.</span></p>
+</div>
 <div id="fencecreateflags" class="paragraph">
 <p><span class="small"><strong>fencecreateflags</strong>: vk.FENCE_CREATE_XXX_BIT<br>
 Values:
 '<em>signaled</em>'.<br>
 Rfr. <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkFenceCreateFlagBits">VkFenceCreateFlagBits</a>.</span></p>
+</div>
+<div id="fenceimportflags" class="paragraph">
+<p><span class="small"><strong>fenceimportflags</strong>: vk.FENCE_IMPORT_XXX_BIT_KHR<br>
+Values: '<em>temporary</em>'.<br>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkFenceImportFlagBitsKHR">VkFenceImportFlagBitsKHR</a>.</span></p>
 </div>
 <div id="formatfeatureflags" class="paragraph">
 <p><span class="small"><strong>formatfeatureflags</strong>: vk.FORMAT_FEATURE_XXX_BIT<br>
@@ -5198,6 +5233,11 @@ Rfr. <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/
 Values:
 '<em>1</em>', '<em>2</em>', '<em>4</em>', '<em>8</em>', '<em>16</em>', '<em>32</em>', '<em>64</em>'.<br>
 Rfr. <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkSampleCountFlagBits">VkSampleCountFlagBits</a>.</span></p>
+</div>
+<div id="semaphoreimportflags" class="paragraph">
+<p><span class="small"><strong>semaphoreimportflags</strong>: vk.SEMAPHORE_IMPORT_XXX_BIT_KHR<br>
+Values: '<em>temporary</em>'.<br>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkSemaphoreImportFlagBitsKHR">VkSemaphoreImportFlagBitsKHR</a>.</span></p>
 </div>
 <div id="shaderstageflags" class="paragraph">
 <p><span class="small"><strong>shaderstageflags</strong>: vk.SHADER_STAGE_XXX_BIT<br>

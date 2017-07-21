@@ -34,10 +34,10 @@
  | Reserved
  *----------------------------------------------------------------------*/
 
-static VkFlags checkreservedflags(lua_State *L, int arg) 
+static VkFlags checkreservedflags(lua_State *L, int arg)
     {
     const char *s;
-    
+
     while(lua_isstring(L, arg))
         {
         s = lua_tostring(L, arg++);
@@ -67,11 +67,11 @@ static int ReservedFlags(lua_State *L)
  | VkStencilFaceFlags
  *----------------------------------------------------------------------*/
 
-static VkFlags checkstencilfaceflags(lua_State *L, int arg) 
+static VkFlags checkstencilfaceflags(lua_State *L, int arg)
     {
     const char *s;
     VkFlags flags = 0;
-    
+
     while(lua_isstring(L, arg))
         {
         s = lua_tostring(L, arg++);
@@ -119,11 +119,11 @@ static int StencilFaceFlags(lua_State *L)
  | VkCommandBufferResetFlags
  *----------------------------------------------------------------------*/
 
-static VkFlags checkcommandbufferresetflags(lua_State *L, int arg) 
+static VkFlags checkcommandbufferresetflags(lua_State *L, int arg)
     {
     const char *s;
     VkFlags flags = 0;
-    
+
     while(lua_isstring(L, arg))
         {
         s = lua_tostring(L, arg++);
@@ -165,11 +165,11 @@ static int CommandBufferResetFlags(lua_State *L)
  | VkQueryControlFlags
  *----------------------------------------------------------------------*/
 
-static VkFlags checkquerycontrolflags(lua_State *L, int arg) 
+static VkFlags checkquerycontrolflags(lua_State *L, int arg)
     {
     const char *s;
     VkFlags flags = 0;
-    
+
     while(lua_isstring(L, arg))
         {
         s = lua_tostring(L, arg++);
@@ -210,11 +210,11 @@ static int QueryControlFlags(lua_State *L)
  | VkCommandBufferUsageFlags
  *----------------------------------------------------------------------*/
 
-static VkFlags checkcommandbufferusageflags(lua_State *L, int arg) 
+static VkFlags checkcommandbufferusageflags(lua_State *L, int arg)
     {
     const char *s;
     VkFlags flags = 0;
-    
+
     while(lua_isstring(L, arg))
         {
         s = lua_tostring(L, arg++);
@@ -261,11 +261,11 @@ static int CommandBufferUsageFlags(lua_State *L)
  | VkCommandPoolResetFlags
  *----------------------------------------------------------------------*/
 
-static VkFlags checkcommandpoolresetflags(lua_State *L, int arg) 
+static VkFlags checkcommandpoolresetflags(lua_State *L, int arg)
     {
     const char *s;
     VkFlags flags = 0;
-    
+
     while(lua_isstring(L, arg))
         {
         s = lua_tostring(L, arg++);
@@ -307,11 +307,11 @@ static int CommandPoolResetFlags(lua_State *L)
  | VkCommandPoolCreateFlags
  *----------------------------------------------------------------------*/
 
-static VkFlags checkcommandpoolcreateflags(lua_State *L, int arg) 
+static VkFlags checkcommandpoolcreateflags(lua_State *L, int arg)
     {
     const char *s;
     VkFlags flags = 0;
-    
+
     while(lua_isstring(L, arg))
         {
         s = lua_tostring(L, arg++);
@@ -357,11 +357,11 @@ static int CommandPoolCreateFlags(lua_State *L)
  | VkDependencyFlags
  *----------------------------------------------------------------------*/
 
-static VkFlags checkdependencyflags(lua_State *L, int arg) 
+static VkFlags checkdependencyflags(lua_State *L, int arg)
     {
     const char *s;
     VkFlags flags = 0;
-    
+
     while(lua_isstring(L, arg))
         {
         s = lua_tostring(L, arg++);
@@ -404,11 +404,11 @@ static int DependencyFlags(lua_State *L)
  | VkAccessFlags
  *----------------------------------------------------------------------*/
 
-static VkFlags checkaccessflags(lua_State *L, int arg) 
+static VkFlags checkaccessflags(lua_State *L, int arg)
     {
     const char *s;
     VkFlags flags = 0;
-    
+
     while(lua_isstring(L, arg))
         {
         s = lua_tostring(L, arg++);
@@ -501,11 +501,11 @@ static int AccessFlags(lua_State *L)
  | VkAttachmentDescriptionFlags
  *----------------------------------------------------------------------*/
 
-static VkFlags checkattachmentdescriptionflags(lua_State *L, int arg) 
+static VkFlags checkattachmentdescriptionflags(lua_State *L, int arg)
     {
     const char *s;
     VkFlags flags = 0;
-    
+
     while(lua_isstring(L, arg))
         {
         s = lua_tostring(L, arg++);
@@ -545,11 +545,11 @@ static int AttachmentDescriptionFlags(lua_State *L)
  | VkDescriptorPoolCreateFlags
  *----------------------------------------------------------------------*/
 
-static VkFlags checkdescriptorpoolcreateflags(lua_State *L, int arg) 
+static VkFlags checkdescriptorpoolcreateflags(lua_State *L, int arg)
     {
     const char *s;
     VkFlags flags = 0;
-    
+
     while(lua_isstring(L, arg))
         {
         s = lua_tostring(L, arg++);
@@ -590,11 +590,11 @@ static int DescriptorPoolCreateFlags(lua_State *L)
  | VkDescriptorSetLayoutCreateFlags
  *----------------------------------------------------------------------*/
 
-static VkFlags checkdescriptorsetlayoutcreateflags(lua_State *L, int arg) 
+static VkFlags checkdescriptorsetlayoutcreateflags(lua_State *L, int arg)
     {
     const char *s;
     VkFlags flags = 0;
-    
+
     while(lua_isstring(L, arg))
         {
         s = lua_tostring(L, arg++);
@@ -634,11 +634,11 @@ static int DescriptorSetLayoutCreateFlags(lua_State *L)
  | VkColorComponentFlags
  *----------------------------------------------------------------------*/
 
-static VkFlags checkcolorcomponentflags(lua_State *L, int arg) 
+static VkFlags checkcolorcomponentflags(lua_State *L, int arg)
     {
     const char *s;
     VkFlags flags = 0;
-    
+
     while(lua_isstring(L, arg))
         {
         s = lua_tostring(L, arg++);
@@ -689,11 +689,11 @@ static int ColorComponentFlags(lua_State *L)
  | VkCullModeFlags
  *----------------------------------------------------------------------*/
 
-static VkFlags checkcullmodeflags(lua_State *L, int arg) 
+static VkFlags checkcullmodeflags(lua_State *L, int arg)
     {
     const char *s;
     VkFlags flags = 0;
-    
+
     while(lua_isstring(L, arg))
         {
         s = lua_tostring(L, arg++);
@@ -746,11 +746,11 @@ static int CullModeFlags(lua_State *L)
  | VkShaderStageFlags
  *----------------------------------------------------------------------*/
 
-static VkFlags checkshaderstageflags(lua_State *L, int arg) 
+static VkFlags checkshaderstageflags(lua_State *L, int arg)
     {
     const char *s;
     VkFlags flags = 0;
-    
+
     while(lua_isstring(L, arg))
         {
         s = lua_tostring(L, arg++);
@@ -815,11 +815,11 @@ static int ShaderStageFlags(lua_State *L)
  | VkPipelineCreateFlags
  *----------------------------------------------------------------------*/
 
-static VkFlags checkpipelinecreateflags(lua_State *L, int arg) 
+static VkFlags checkpipelinecreateflags(lua_State *L, int arg)
     {
     const char *s;
     VkFlags flags = 0;
-    
+
     while(lua_isstring(L, arg))
         {
         s = lua_tostring(L, arg++);
@@ -867,11 +867,11 @@ static int PipelineCreateFlags(lua_State *L)
  | VkBufferUsageFlags
  *----------------------------------------------------------------------*/
 
-static VkFlags checkbufferusageflags(lua_State *L, int arg) 
+static VkFlags checkbufferusageflags(lua_State *L, int arg)
     {
     const char *s;
     VkFlags flags = 0;
-    
+
     while(lua_isstring(L, arg))
         {
         s = lua_tostring(L, arg++);
@@ -937,11 +937,11 @@ static int BufferUsageFlags(lua_State *L)
  | VkBufferCreateFlags
  *----------------------------------------------------------------------*/
 
-static VkFlags checkbuffercreateflags(lua_State *L, int arg) 
+static VkFlags checkbuffercreateflags(lua_State *L, int arg)
     {
     const char *s;
     VkFlags flags = 0;
-    
+
     while(lua_isstring(L, arg))
         {
         s = lua_tostring(L, arg++);
@@ -989,11 +989,11 @@ static int BufferCreateFlags(lua_State *L)
  | VkQueryResultFlags
  *----------------------------------------------------------------------*/
 
-static VkFlags checkqueryresultflags(lua_State *L, int arg) 
+static VkFlags checkqueryresultflags(lua_State *L, int arg)
     {
     const char *s;
     VkFlags flags = 0;
-    
+
     while(lua_isstring(L, arg))
         {
         s = lua_tostring(L, arg++);
@@ -1044,11 +1044,11 @@ static int QueryResultFlags(lua_State *L)
  | VkQueryPipelineStatisticFlags
  *----------------------------------------------------------------------*/
 
-static VkFlags checkquerypipelinestatisticflags(lua_State *L, int arg) 
+static VkFlags checkquerypipelinestatisticflags(lua_State *L, int arg)
     {
     const char *s;
     VkFlags flags = 0;
-    
+
     while(lua_isstring(L, arg))
         {
         s = lua_tostring(L, arg++);
@@ -1120,11 +1120,11 @@ static int QueryPipelineStatisticFlags(lua_State *L)
  | VkFenceCreateFlags
  *----------------------------------------------------------------------*/
 
-static VkFlags checkfencecreateflags(lua_State *L, int arg) 
+static VkFlags checkfencecreateflags(lua_State *L, int arg)
     {
     const char *s;
     VkFlags flags = 0;
-    
+
     while(lua_isstring(L, arg))
         {
         s = lua_tostring(L, arg++);
@@ -1167,11 +1167,11 @@ static int FenceCreateFlags(lua_State *L)
  | VkSparseMemoryBindFlags
  *----------------------------------------------------------------------*/
 
-static VkFlags checksparsememorybindflags(lua_State *L, int arg) 
+static VkFlags checksparsememorybindflags(lua_State *L, int arg)
     {
     const char *s;
     VkFlags flags = 0;
-    
+
     while(lua_isstring(L, arg))
         {
         s = lua_tostring(L, arg++);
@@ -1213,11 +1213,11 @@ static int SparseMemoryBindFlags(lua_State *L)
  | VkSparseImageFormatFlags
  *----------------------------------------------------------------------*/
 
-static VkFlags checksparseimageformatflags(lua_State *L, int arg) 
+static VkFlags checksparseimageformatflags(lua_State *L, int arg)
     {
     const char *s;
     VkFlags flags = 0;
-    
+
     while(lua_isstring(L, arg))
         {
         s = lua_tostring(L, arg++);
@@ -1265,11 +1265,11 @@ static int SparseImageFormatFlags(lua_State *L)
  | VkImageAspectFlags
  *----------------------------------------------------------------------*/
 
-static VkFlags checkimageaspectflags(lua_State *L, int arg) 
+static VkFlags checkimageaspectflags(lua_State *L, int arg)
     {
     const char *s;
     VkFlags flags = 0;
-    
+
     while(lua_isstring(L, arg))
         {
         s = lua_tostring(L, arg++);
@@ -1321,11 +1321,11 @@ static int ImageAspectFlags(lua_State *L)
  | VkPipelineStageFlags
  *----------------------------------------------------------------------*/
 
-static VkFlags checkpipelinestageflags(lua_State *L, int arg) 
+static VkFlags checkpipelinestageflags(lua_State *L, int arg)
     {
     const char *s;
     VkFlags flags = 0;
-    
+
     while(lua_isstring(L, arg))
         {
         s = lua_tostring(L, arg++);
@@ -1417,11 +1417,11 @@ static int PipelineStageFlags(lua_State *L)
  | VkMemoryHeapFlag
  *----------------------------------------------------------------------*/
 
-static VkFlags checkmemoryheapflags(lua_State *L, int arg) 
+static VkFlags checkmemoryheapflags(lua_State *L, int arg)
     {
     const char *s;
     VkFlags flags = 0;
-    
+
     while(lua_isstring(L, arg))
         {
         s = lua_tostring(L, arg++);
@@ -1462,11 +1462,11 @@ static int MemoryHeapFlag(lua_State *L)
  | VkMemoryPropertyFlags
  *----------------------------------------------------------------------*/
 
-static VkFlags checkmemorypropertyflags(lua_State *L, int arg) 
+static VkFlags checkmemorypropertyflags(lua_State *L, int arg)
     {
     const char *s;
     VkFlags flags = 0;
-    
+
     while(lua_isstring(L, arg))
         {
         s = lua_tostring(L, arg++);
@@ -1520,11 +1520,11 @@ static int MemoryPropertyFlags(lua_State *L)
  | VkQueueFlags
  *----------------------------------------------------------------------*/
 
-static VkFlags checkqueueflags(lua_State *L, int arg) 
+static VkFlags checkqueueflags(lua_State *L, int arg)
     {
     const char *s;
     VkFlags flags = 0;
-    
+
     while(lua_isstring(L, arg))
         {
         s = lua_tostring(L, arg++);
@@ -1576,11 +1576,11 @@ static int QueueFlags(lua_State *L)
  | VkSampleCountFlags
  *----------------------------------------------------------------------*/
 
-static VkFlags checksamplecountflags(lua_State *L, int arg) 
+static VkFlags checksamplecountflags(lua_State *L, int arg)
     {
     const char *s;
     VkFlags flags = 0;
-    
+
     while(lua_isstring(L, arg))
         {
         s = lua_tostring(L, arg++);
@@ -1640,11 +1640,11 @@ static int SampleCountFlags(lua_State *L)
  | VkImageCreateFlags
  *----------------------------------------------------------------------*/
 
-static VkFlags checkimagecreateflags(lua_State *L, int arg) 
+static VkFlags checkimagecreateflags(lua_State *L, int arg)
     {
     const char *s;
     VkFlags flags = 0;
-    
+
     while(lua_isstring(L, arg))
         {
         s = lua_tostring(L, arg++);
@@ -1697,11 +1697,11 @@ static int ImageCreateFlags(lua_State *L)
  | VkImageUsageFlags
  *----------------------------------------------------------------------*/
 
-static VkFlags checkimageusageflags(lua_State *L, int arg) 
+static VkFlags checkimageusageflags(lua_State *L, int arg)
     {
     const char *s;
     VkFlags flags = 0;
-    
+
     while(lua_isstring(L, arg))
         {
         s = lua_tostring(L, arg++);
@@ -1765,11 +1765,11 @@ static int ImageUsageFlags(lua_State *L)
  *----------------------------------------------------------------------*/
 
 
-static VkFlags checkformatfeatureflags(lua_State *L, int arg) 
+static VkFlags checkformatfeatureflags(lua_State *L, int arg)
     {
     const char *s;
     VkFlags flags = 0;
-    
+
     while(lua_isstring(L, arg))
         {
         s = lua_tostring(L, arg++);
@@ -1849,11 +1849,11 @@ static int FormatFeatureFlags(lua_State *L)
  | VkSurfaceTransformFlagsKHR
  *----------------------------------------------------------------------*/
 
-static VkFlags checksurfacetransformflags(lua_State *L, int arg) 
+static VkFlags checksurfacetransformflags(lua_State *L, int arg)
     {
     const char *s;
     VkFlags flags = 0;
-    
+
     while(lua_isstring(L, arg))
         {
         s = lua_tostring(L, arg++);
@@ -1918,11 +1918,11 @@ static int SurfaceTransformFlagsKHR(lua_State *L)
  | VkCompositeAlphaFlagsKHR
  *----------------------------------------------------------------------*/
 
-static VkFlags checkcompositealphaflags(lua_State *L, int arg) 
+static VkFlags checkcompositealphaflags(lua_State *L, int arg)
     {
     const char *s;
     VkFlags flags = 0;
-    
+
     while(lua_isstring(L, arg))
         {
         s = lua_tostring(L, arg++);
@@ -1971,11 +1971,11 @@ static int CompositeAlphaFlagsKHR(lua_State *L)
  | VkDisplayPlaneAlphaFlagsKHR
  *----------------------------------------------------------------------*/
 
-static VkFlags checkdisplayplanealphaflags(lua_State *L, int arg) 
+static VkFlags checkdisplayplanealphaflags(lua_State *L, int arg)
     {
     const char *s;
     VkFlags flags = 0;
-    
+
     while(lua_isstring(L, arg))
         {
         s = lua_tostring(L, arg++);
@@ -2026,11 +2026,11 @@ static int DisplayPlaneAlphaFlagsKHR(lua_State *L)
  | VkDebugReportFlagsEXT
  *----------------------------------------------------------------------*/
 
-static VkFlags checkdebugreportflags(lua_State *L, int arg) 
+static VkFlags checkdebugreportflags(lua_State *L, int arg)
     {
     const char *s;
     VkFlags flags = 0;
-    
+
     while(lua_isstring(L, arg))
         {
         s = lua_tostring(L, arg++);
@@ -2082,11 +2082,11 @@ static int DebugReportFlagsEXT(lua_State *L)
  | VkSurfaceCounterFlagsEXT
  *----------------------------------------------------------------------*/
 
-static VkFlags checksurfacecounterflags(lua_State *L, int arg) 
+static VkFlags checksurfacecounterflags(lua_State *L, int arg)
     {
     const char *s;
     VkFlags flags = 0;
-    
+
     while(lua_isstring(L, arg))
         {
         s = lua_tostring(L, arg++);
@@ -2121,6 +2121,416 @@ static int SurfaceCounterFlagsEXT(lua_State *L)
 
 #define Add_SurfaceCounterFlagsEXT(L)   \
     ADD(SURFACE_COUNTER_VBLANK_EXT);\
+
+
+/*----------------------------------------------------------------------*
+ | VkExternalMemoryHandleTypeFlags
+ *----------------------------------------------------------------------*/
+
+static VkFlags checkexternalmemoryhandletypeflags(lua_State *L, int arg)
+    {
+    const char *s;
+    VkFlags flags = 0;
+
+    while(lua_isstring(L, arg))
+        {
+        s = lua_tostring(L, arg++);
+#define CASE(CODE,str) if((strcmp(s, str)==0)) do { flags |= CODE; goto done; } while(0)
+    CASE(VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_FD_BIT_KHR, "opaque fd");
+    CASE(VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_BIT_KHR, "opaque win32");
+    CASE(VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT_KHR, "opaque win32 kmt");
+    CASE(VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_BIT_KHR, "d3d11 texture");
+    CASE(VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_KMT_BIT_KHR, "d3d11 texture kmt");
+    CASE(VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_HEAP_BIT_KHR, "d3d12 heap");
+    CASE(VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_RESOURCE_BIT_KHR, "d3d12 resource");
+#undef CASE
+        return (VkFlags)luaL_argerror(L, --arg, badvalue(L,s));
+        done: ;
+        }
+
+    return flags;
+    }
+
+static int pushexternalmemoryhandletypeflags(lua_State *L, VkFlags flags)
+    {
+    int n = 0;
+
+#define CASE(CODE,str) do { if( flags & CODE) { lua_pushstring(L, str); n++; } } while(0)
+    CASE(VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_FD_BIT_KHR, "opaque fd");
+    CASE(VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_BIT_KHR, "opaque win32");
+    CASE(VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT_KHR, "opaque win32 kmt");
+    CASE(VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_BIT_KHR, "d3d11 texture");
+    CASE(VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_KMT_BIT_KHR, "d3d11 texture kmt");
+    CASE(VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_HEAP_BIT_KHR, "d3d12 heap");
+    CASE(VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_RESOURCE_BIT_KHR, "d3d12 resource");
+#undef CASE
+
+    return n;
+    }
+
+static int ExternalMemoryHandleTypeFlagsKHR(lua_State *L)
+    {
+    if(lua_type(L, 1) == LUA_TNUMBER)
+        return pushexternalmemoryhandletypeflags(L, luaL_checkinteger(L, 1));
+    lua_pushinteger(L, checkexternalmemoryhandletypeflags(L, 1));
+    return 1;
+    }
+
+#define Add_ExternalMemoryHandleTypeFlagsKHR(L) \
+    ADD(EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_FD_BIT_KHR); \
+    ADD(EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_BIT_KHR); \
+    ADD(EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT_KHR); \
+    ADD(EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_BIT_KHR); \
+    ADD(EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_KMT_BIT_KHR); \
+    ADD(EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_HEAP_BIT_KHR); \
+    ADD(EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_RESOURCE_BIT_KHR); \
+
+/*----------------------------------------------------------------------*
+ | VkExternalMemoryFeatureFlagsKHR
+ *----------------------------------------------------------------------*/
+
+static VkFlags checkexternalmemoryfeatureflags(lua_State *L, int arg)
+    {
+    const char *s;
+    VkFlags flags = 0;
+
+    while(lua_isstring(L, arg))
+        {
+        s = lua_tostring(L, arg++);
+#define CASE(CODE,str) if((strcmp(s, str)==0)) do { flags |= CODE; goto done; } while(0)
+    CASE(VK_EXTERNAL_MEMORY_FEATURE_DEDICATED_ONLY_BIT_KHR, "dedicated only");
+    CASE(VK_EXTERNAL_MEMORY_FEATURE_EXPORTABLE_BIT_KHR, "exportable");
+    CASE(VK_EXTERNAL_MEMORY_FEATURE_IMPORTABLE_BIT_KHR, "importable");
+#undef CASE
+        return (VkFlags)luaL_argerror(L, --arg, badvalue(L,s));
+        done: ;
+        }
+
+    return flags;
+    }
+
+static int pushexternalmemoryfeatureflags(lua_State *L, VkFlags flags)
+    {
+    int n = 0;
+
+#define CASE(CODE,str) do { if( flags & CODE) { lua_pushstring(L, str); n++; } } while(0)
+    CASE(VK_EXTERNAL_MEMORY_FEATURE_DEDICATED_ONLY_BIT_KHR, "dedicated only");
+    CASE(VK_EXTERNAL_MEMORY_FEATURE_EXPORTABLE_BIT_KHR, "exportable");
+    CASE(VK_EXTERNAL_MEMORY_FEATURE_IMPORTABLE_BIT_KHR, "importable");
+#undef CASE
+
+    return n;
+    }
+
+static int ExternalMemoryFeatureFlagsKHR(lua_State *L)
+    {
+    if(lua_type(L, 1) == LUA_TNUMBER)
+        return pushexternalmemoryfeatureflags(L, luaL_checkinteger(L, 1));
+    lua_pushinteger(L, checkexternalmemoryfeatureflags(L, 1));
+    return 1;
+    }
+
+#define Add_ExternalMemoryFeatureFlagsKHR(L) \
+    ADD(EXTERNAL_MEMORY_FEATURE_DEDICATED_ONLY_BIT_KHR); \
+    ADD(EXTERNAL_MEMORY_FEATURE_EXPORTABLE_BIT_KHR); \
+    ADD(EXTERNAL_MEMORY_FEATURE_IMPORTABLE_BIT_KHR); \
+
+
+/*----------------------------------------------------------------------*
+ | VkExternalSemaphoreHandleTypeFlags
+ *----------------------------------------------------------------------*/
+
+static VkFlags checkexternalsemaphorehandletypeflags(lua_State *L, int arg)
+    {
+    const char *s;
+    VkFlags flags = 0;
+
+    while(lua_isstring(L, arg))
+        {
+        s = lua_tostring(L, arg++);
+#define CASE(CODE,str) if((strcmp(s, str)==0)) do { flags |= CODE; goto done; } while(0)
+    CASE(VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_FD_BIT_KHR, "opaque fd");
+    CASE(VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_BIT_KHR, "opaque win32");
+    CASE(VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT_KHR, "opaque win32 kmt");
+    CASE(VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D12_FENCE_BIT_KHR, "d3d12 fence");
+    CASE(VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_SYNC_FD_BIT_KHR, "sync fd");
+#undef CASE
+        return (VkFlags)luaL_argerror(L, --arg, badvalue(L,s));
+        done: ;
+        }
+
+    return flags;
+    }
+
+static int pushexternalsemaphorehandletypeflags(lua_State *L, VkFlags flags)
+    {
+    int n = 0;
+
+#define CASE(CODE,str) do { if( flags & CODE) { lua_pushstring(L, str); n++; } } while(0)
+    CASE(VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_FD_BIT_KHR, "opaque fd");
+    CASE(VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_BIT_KHR, "opaque win32");
+    CASE(VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT_KHR, "opaque win32 kmt");
+    CASE(VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D12_FENCE_BIT_KHR, "d3d12 fence");
+    CASE(VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_SYNC_FD_BIT_KHR, "sync fd");
+#undef CASE
+
+    return n;
+    }
+
+static int ExternalSemaphoreHandleTypeFlagsKHR(lua_State *L)
+    {
+    if(lua_type(L, 1) == LUA_TNUMBER)
+        return pushexternalsemaphorehandletypeflags(L, luaL_checkinteger(L, 1));
+    lua_pushinteger(L, checkexternalsemaphorehandletypeflags(L, 1));
+    return 1;
+    }
+
+#define Add_ExternalSemaphoreHandleTypeFlagsKHR(L) \
+    ADD(EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_FD_BIT_KHR); \
+    ADD(EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_BIT_KHR); \
+    ADD(EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT_KHR); \
+    ADD(EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D12_FENCE_BIT_KHR); \
+    ADD(EXTERNAL_SEMAPHORE_HANDLE_TYPE_SYNC_FD_BIT_KHR); \
+
+
+
+/*----------------------------------------------------------------------*
+ | VkExternalSemaphoreFeatureFlagsKHR
+ *----------------------------------------------------------------------*/
+
+static VkFlags checkexternalsemaphorefeatureflags(lua_State *L, int arg)
+    {
+    const char *s;
+    VkFlags flags = 0;
+
+    while(lua_isstring(L, arg))
+        {
+        s = lua_tostring(L, arg++);
+#define CASE(CODE,str) if((strcmp(s, str)==0)) do { flags |= CODE; goto done; } while(0)
+    CASE(VK_EXTERNAL_SEMAPHORE_FEATURE_EXPORTABLE_BIT_KHR, "exportable");
+    CASE(VK_EXTERNAL_SEMAPHORE_FEATURE_IMPORTABLE_BIT_KHR, "importable");
+#undef CASE
+        return (VkFlags)luaL_argerror(L, --arg, badvalue(L,s));
+        done: ;
+        }
+
+    return flags;
+    }
+
+static int pushexternalsemaphorefeatureflags(lua_State *L, VkFlags flags)
+    {
+    int n = 0;
+
+#define CASE(CODE,str) do { if( flags & CODE) { lua_pushstring(L, str); n++; } } while(0)
+    CASE(VK_EXTERNAL_SEMAPHORE_FEATURE_EXPORTABLE_BIT_KHR, "exportable");
+    CASE(VK_EXTERNAL_SEMAPHORE_FEATURE_IMPORTABLE_BIT_KHR, "importable");
+#undef CASE
+
+    return n;
+    }
+
+static int ExternalSemaphoreFeatureFlagsKHR(lua_State *L)
+    {
+    if(lua_type(L, 1) == LUA_TNUMBER)
+        return pushexternalsemaphorefeatureflags(L, luaL_checkinteger(L, 1));
+    lua_pushinteger(L, checkexternalsemaphorefeatureflags(L, 1));
+    return 1;
+    }
+
+#define Add_ExternalSemaphoreFeatureFlagsKHR(L) \
+    ADD(EXTERNAL_SEMAPHORE_FEATURE_EXPORTABLE_BIT_KHR); \
+    ADD(EXTERNAL_SEMAPHORE_FEATURE_IMPORTABLE_BIT_KHR); \
+
+
+/*----------------------------------------------------------------------*
+ | VkSemaphoreImportFlagsKHR
+ *----------------------------------------------------------------------*/
+
+static VkFlags checksemaphoreimportflags(lua_State *L, int arg)
+    {
+    const char *s;
+    VkFlags flags = 0;
+
+    while(lua_isstring(L, arg))
+        {
+        s = lua_tostring(L, arg++);
+#define CASE(CODE,str) if((strcmp(s, str)==0)) do { flags |= CODE; goto done; } while(0)
+    CASE(VK_SEMAPHORE_IMPORT_TEMPORARY_BIT_KHR, "temporary");
+#undef CASE
+        return (VkFlags)luaL_argerror(L, --arg, badvalue(L,s));
+        done: ;
+        }
+
+    return flags;
+    }
+
+static int pushsemaphoreimportflags(lua_State *L, VkFlags flags)
+    {
+    int n = 0;
+
+#define CASE(CODE,str) do { if( flags & CODE) { lua_pushstring(L, str); n++; } } while(0)
+    CASE(VK_SEMAPHORE_IMPORT_TEMPORARY_BIT_KHR, "temporary");
+#undef CASE
+
+    return n;
+    }
+
+static int SemaphoreImportFlagsKHR(lua_State *L)
+    {
+    if(lua_type(L, 1) == LUA_TNUMBER)
+        return pushsemaphoreimportflags(L, luaL_checkinteger(L, 1));
+    lua_pushinteger(L, checksemaphoreimportflags(L, 1));
+    return 1;
+    }
+
+#define Add_SemaphoreImportFlagsKHR(L) \
+    ADD(SEMAPHORE_IMPORT_TEMPORARY_BIT_KHR); \
+
+
+/*----------------------------------------------------------------------*
+ | VkExternalFenceHandleTypeFlagsKHR
+ *----------------------------------------------------------------------*/
+
+static VkFlags checkexternalfencehandletypeflags(lua_State *L, int arg)
+    {
+    const char *s;
+    VkFlags flags = 0;
+
+    while(lua_isstring(L, arg))
+        {
+        s = lua_tostring(L, arg++);
+#define CASE(CODE,str) if((strcmp(s, str)==0)) do { flags |= CODE; goto done; } while(0)
+    CASE(VK_EXTERNAL_FENCE_HANDLE_TYPE_OPAQUE_FD_BIT_KHR, "opaque_fd");
+    CASE(VK_EXTERNAL_FENCE_HANDLE_TYPE_OPAQUE_WIN32_BIT_KHR, "opaque_win32");
+    CASE(VK_EXTERNAL_FENCE_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT_KHR, "opaque_win32_kmt");
+    CASE(VK_EXTERNAL_FENCE_HANDLE_TYPE_SYNC_FD_BIT_KHR, "sync_fd");
+#undef CASE
+        return (VkFlags)luaL_argerror(L, --arg, badvalue(L,s));
+        done: ;
+        }
+
+    return flags;
+    }
+
+static int pushexternalfencehandletypeflags(lua_State *L, VkFlags flags)
+    {
+    int n = 0;
+
+#define CASE(CODE,str) do { if( flags & CODE) { lua_pushstring(L, str); n++; } } while(0)
+    CASE(VK_EXTERNAL_FENCE_HANDLE_TYPE_OPAQUE_FD_BIT_KHR, "opaque_fd");
+    CASE(VK_EXTERNAL_FENCE_HANDLE_TYPE_OPAQUE_WIN32_BIT_KHR, "opaque_win32");
+    CASE(VK_EXTERNAL_FENCE_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT_KHR, "opaque_win32_kmt");
+    CASE(VK_EXTERNAL_FENCE_HANDLE_TYPE_SYNC_FD_BIT_KHR, "sync_fd");
+#undef CASE
+
+    return n;
+    }
+
+static int ExternalFenceHandleTypeFlagsKHR(lua_State *L)
+    {
+    if(lua_type(L, 1) == LUA_TNUMBER)
+        return pushexternalfencehandletypeflags(L, luaL_checkinteger(L, 1));
+    lua_pushinteger(L, checkexternalfencehandletypeflags(L, 1));
+    return 1;
+    }
+
+#define Add_ExternalFenceHandleTypeFlagsKHR(L) \
+    ADD(EXTERNAL_FENCE_HANDLE_TYPE_OPAQUE_FD_BIT_KHR); \
+    ADD(EXTERNAL_FENCE_HANDLE_TYPE_OPAQUE_WIN32_BIT_KHR); \
+    ADD(EXTERNAL_FENCE_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT_KHR); \
+    ADD(EXTERNAL_FENCE_HANDLE_TYPE_SYNC_FD_BIT_KHR); \
+
+/*----------------------------------------------------------------------*
+ | VkExternalFenceFeatureFlagsKHR
+ *----------------------------------------------------------------------*/
+
+static VkFlags checkexternalfencefeatureflags(lua_State *L, int arg)
+    {
+    const char *s;
+    VkFlags flags = 0;
+
+    while(lua_isstring(L, arg))
+        {
+        s = lua_tostring(L, arg++);
+#define CASE(CODE,str) if((strcmp(s, str)==0)) do { flags |= CODE; goto done; } while(0)
+    CASE(VK_EXTERNAL_FENCE_FEATURE_EXPORTABLE_BIT_KHR, "exportable");
+    CASE(VK_EXTERNAL_FENCE_FEATURE_IMPORTABLE_BIT_KHR, "importable");
+#undef CASE
+        return (VkFlags)luaL_argerror(L, --arg, badvalue(L,s));
+        done: ;
+        }
+
+    return flags;
+    }
+
+static int pushexternalfencefeatureflags(lua_State *L, VkFlags flags)
+    {
+    int n = 0;
+
+#define CASE(CODE,str) do { if( flags & CODE) { lua_pushstring(L, str); n++; } } while(0)
+    CASE(VK_EXTERNAL_FENCE_FEATURE_EXPORTABLE_BIT_KHR, "exportable");
+    CASE(VK_EXTERNAL_FENCE_FEATURE_IMPORTABLE_BIT_KHR, "importable");
+#undef CASE
+
+    return n;
+    }
+
+static int ExternalFenceFeatureFlagsKHR(lua_State *L)
+    {
+    if(lua_type(L, 1) == LUA_TNUMBER)
+        return pushexternalfencefeatureflags(L, luaL_checkinteger(L, 1));
+    lua_pushinteger(L, checkexternalfencefeatureflags(L, 1));
+    return 1;
+    }
+
+#define Add_ExternalFenceFeatureFlagsKHR(L) \
+    ADD(EXTERNAL_FENCE_FEATURE_EXPORTABLE_BIT_KHR); \
+    ADD(EXTERNAL_FENCE_FEATURE_IMPORTABLE_BIT_KHR); \
+
+/*----------------------------------------------------------------------*
+ | VkFenceImportFlagsKHR
+ *----------------------------------------------------------------------*/
+
+static VkFlags checkfenceimportflags(lua_State *L, int arg)
+    {
+    const char *s;
+    VkFlags flags = 0;
+
+    while(lua_isstring(L, arg))
+        {
+        s = lua_tostring(L, arg++);
+#define CASE(CODE,str) if((strcmp(s, str)==0)) do { flags |= CODE; goto done; } while(0)
+    CASE(VK_FENCE_IMPORT_TEMPORARY_BIT_KHR, "temporary");
+#undef CASE
+        return (VkFlags)luaL_argerror(L, --arg, badvalue(L,s));
+        done: ;
+        }
+
+    return flags;
+    }
+
+static int pushfenceimportflags(lua_State *L, VkFlags flags)
+    {
+    int n = 0;
+
+#define CASE(CODE,str) do { if( flags & CODE) { lua_pushstring(L, str); n++; } } while(0)
+    CASE(VK_FENCE_IMPORT_TEMPORARY_BIT_KHR, "temporary");
+#undef CASE
+
+    return n;
+    }
+
+static int FenceImportFlagsKHR(lua_State *L)
+    {
+    if(lua_type(L, 1) == LUA_TNUMBER)
+        return pushfenceimportflags(L, luaL_checkinteger(L, 1));
+    lua_pushinteger(L, checkfenceimportflags(L, 1));
+    return 1;
+    }
+
+#define Add_FenceImportFlagsKHR(L) \
+    ADD(FENCE_IMPORT_TEMPORARY_BIT_KHR); \
+
 
 
 /*------------------------------------------------------------------------------*
@@ -2166,6 +2576,14 @@ static int AddConstants(lua_State *L) /* vk.XXX constants for VK_XXX values */
     Add_DisplayPlaneAlphaFlagsKHR(L);
     Add_DebugReportFlagsEXT(L);
     Add_SurfaceCounterFlagsEXT(L);
+    Add_ExternalMemoryHandleTypeFlagsKHR(L);
+    Add_ExternalMemoryFeatureFlagsKHR(L);
+    Add_ExternalSemaphoreHandleTypeFlagsKHR(L);
+    Add_ExternalSemaphoreFeatureFlagsKHR(L);
+    Add_SemaphoreImportFlagsKHR(L);
+    Add_ExternalFenceHandleTypeFlagsKHR(L);
+    Add_ExternalFenceFeatureFlagsKHR(L);
+    Add_FenceImportFlagsKHR(L);
     return 0;
     }
 
@@ -2237,6 +2655,14 @@ static const struct luaL_Reg Functions[] =
         { "displayplanealphaflags", DisplayPlaneAlphaFlagsKHR },
         { "debugreportflags", DebugReportFlagsEXT },
         { "surfacecounterflags", SurfaceCounterFlagsEXT },
+        { "externalmemoryhandletypeflags", ExternalMemoryHandleTypeFlagsKHR },
+        { "externalmemoryfeatureflags", ExternalMemoryFeatureFlagsKHR },
+        { "externalsemaphorehandletypeflags", ExternalSemaphoreHandleTypeFlagsKHR },
+        { "externalsemaphorefeatureflags", ExternalSemaphoreFeatureFlagsKHR },
+        { "semaphoreimportflags", SemaphoreImportFlagsKHR },
+        { "externalfencehandletypeflags", ExternalFenceHandleTypeFlagsKHR },
+        { "externalfencefeatureflags", ExternalFenceFeatureFlagsKHR },
+        { "fenceimportflags", FenceImportFlagsKHR },
         /* extensions, reserved */
         { "displaymodecreateflags", ReservedFlags }, /* VkDisplayModeCreateFlagsKHR */
         { "displaysurfacecreateflags", ReservedFlags }, /* VkDisplaySurfaceCreateFlagsKHR */
@@ -2263,14 +2689,14 @@ void moonvulkan_open_flags(lua_State *L)
 #if 0 // scaffolding
 
 /*----------------------------------------------------------------------*
- | VkZzzFlags
+ | VkZzzFlagsKHR
  *----------------------------------------------------------------------*/
 
-static VkFlags checkzzzflags(lua_State *L, int arg) 
+static VkFlags checkzzzflags(lua_State *L, int arg)
     {
     const char *s;
     VkFlags flags = 0;
-    
+
     while(lua_isstring(L, arg))
         {
         s = lua_tostring(L, arg++);
@@ -2295,7 +2721,7 @@ static int pushzzzflags(lua_State *L, VkFlags flags)
     return n;
     }
 
-static int ZzzFlags(lua_State *L)
+static int ZzzFlagsKHR(lua_State *L)
     {
     if(lua_type(L, 1) == LUA_TNUMBER)
         return pushzzzflags(L, luaL_checkinteger(L, 1));
@@ -2303,10 +2729,15 @@ static int ZzzFlags(lua_State *L)
     return 1;
     }
 
-    Add_ZzzFlags(L);
-        { "zzzflags", ZzzFlags },
-#define Add_ZzzFlags(L) \
+    Add_ZzzFlagsKHR(L);
+        { "zzzflags", ZzzFlagsKHR },
+#define Add_ZzzFlagsKHR(L) \
     ADD(ZZZ_);\
+
+[[zzzflags]]
+[small]#*zzzflags*: vk.ZZZ_XXX_BIT_KHR +
+Values:
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkZzzFlagBitsKHR[VkZzzFlagBitsKHR].#
 
 #endif
 
