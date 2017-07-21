@@ -192,6 +192,7 @@ typedef struct {
     VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT p3;
     VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT p4;
     VkPhysicalDeviceDiscardRectanglePropertiesEXT p5;
+    VkPhysicalDeviceIDPropertiesKHR p6;
 } VkPhysicalDeviceProperties2KHR_CHAIN;
 
 #define initphysicaldeviceproperties2 moonvulkan_initphysicaldeviceproperties2
@@ -228,6 +229,7 @@ int pushformatproperties(lua_State *L, VkFormatProperties *p);
 
 typedef struct {
     VkImageFormatProperties2KHR p1;
+    VkExternalImageFormatPropertiesKHR p2;
 } VkImageFormatProperties2KHR_CHAIN;
 
 #define initimageformatproperties2 moonvulkan_initimageformatproperties2
@@ -237,8 +239,18 @@ int pushimageformatproperties2(lua_State *L, VkImageFormatProperties2KHR_CHAIN *
 #define pushimageformatproperties moonvulkan_pushimageformatproperties
 int pushimageformatproperties(lua_State *L, VkImageFormatProperties *p);
 
+#define pushexternalbufferproperties moonvulkan_pushexternalbufferproperties
+int pushexternalbufferproperties(lua_State *L, VkExternalBufferPropertiesKHR *p);
+#define echeckphysicaldeviceexternalbufferinfo moonvulkan_echeckphysicaldeviceexternalbufferinfo
+int echeckphysicaldeviceexternalbufferinfo(lua_State *L, int arg, VkPhysicalDeviceExternalBufferInfoKHR *p);
+
+typedef struct {
+    VkPhysicalDeviceImageFormatInfo2KHR p1;
+    VkPhysicalDeviceExternalImageFormatInfoKHR p2;
+} VkPhysicalDeviceImageFormatInfo2KHR_CHAIN;
+
 #define echeckphysicaldeviceimageformatinfo2 moonvulkan_echeckphysicaldeviceimageformatinfo2
-int echeckphysicaldeviceimageformatinfo2(lua_State *L, int arg, VkPhysicalDeviceImageFormatInfo2KHR *p);
+int echeckphysicaldeviceimageformatinfo2(lua_State *L, int arg, VkPhysicalDeviceImageFormatInfo2KHR_CHAIN *p);
 
 #define echeckphysicaldevicesparseimageformatinfo2 moonvulkan_echeckphysicaldevicesparseimageformatinfo2
 int echeckphysicaldevicesparseimageformatinfo2(lua_State *L, int arg, VkPhysicalDeviceSparseImageFormatInfo2KHR *p);

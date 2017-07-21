@@ -113,6 +113,11 @@ _advanced_blend_all_operations_: boolean (Note2), +
 _filter_minmax_single_component_formats_: boolean (Note3), +
 _filter_minmax_image_component_mapping_: boolean (Note3), +
 _max_discard_rectangles_: integer (Note4), +
+_device_uuid_: binary string (Note5), +
+_driver_uuid_: binary string (Note5), +
+_device_luid_: binary string (Note5), +
+_device_node_mask_: integer (Note5), +
+_device_luid_valid_: boolean(Note5), +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPhysicalDeviceProperties2KHR[VkPhysicalDeviceProperties2KHR]) +
 Note1: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_push_descriptor[VK_KHR_push_descriptor] extension (rfr:
 https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPhysicalDevicePushDescriptorPropertiesKHR[VkPhysicalDevicePushDescriptorPropertiesKHR]). +
@@ -121,7 +126,9 @@ https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#Vk
 Note3: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_sampler_filter_minmax[VK_EXT_sampler_filter_minmax] extension (rfr:
 https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT[VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT]). +
 Note4: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_discard_rectangles[VK_EXT_discard_rectangles] extension (rfr:
-https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPhysicalDeviceDiscardRectanglePropertiesEXT[VkPhysicalDeviceDiscardRectanglePropertiesEXT]).#
+https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPhysicalDeviceDiscardRectanglePropertiesEXT[VkPhysicalDeviceDiscardRectanglePropertiesEXT]). +
+Note5: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_external_memory_capabilities[VK_KHR_external_memory_capabilities] extension (rfr:
+https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPhysicalDeviceIDPropertiesKHR[VkPhysicalDeviceIDPropertiesKHR]).#
 
 * [[physicaldeviceimageformatinfo]]
 [small]#*physicaldeviceimageformatinfo* = { +
@@ -130,8 +137,11 @@ _type_: <<imagetype, imagetype>>, +
 _tiling_: <<imagetiling, imagetiling>>, +
 _usage_: <<imageusageflags, imageusageflags>>, +
 _flags_: <<imagecreateflags, imagecreateflags>>, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPhysicalDeviceImageFormatInfo2KHR[VkPhysicalDeviceImageFormatInfo2KHR])#
-
+pass:[----] extensions ---- +
+_handle_type_: <<externalmemoryhandletypeflags, externalmemoryhandletypeflags>> (Note1), +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPhysicalDeviceImageFormatInfo2KHR[VkPhysicalDeviceImageFormatInfo2KHR]) +
+Note1: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_external_memory_capabilities[VK_KHR_external_memory_capabilities] extension (rfr:
+https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPhysicalDeviceExternalImageFormatInfoKHR[VkPhysicalDeviceExternalImageFormatInfoKHR]).#
 
 * [[physicaldevicelimits]]
 [small]#*physicaldevicelimits* = { +
@@ -371,8 +381,11 @@ _max_mip_levels_: integer, +
 _max_array_layers_: integer, +
 _sample_counts_: integer, +
 _max_resource_size_: integer, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkImageFormatProperties[VkImageFormatProperties])#
-
+pass:[----] extensions ---- +
+_external_memory_properties_: <<externalmemoryproperties, externalmemoryproperties>> (Note1), +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkImageFormatProperties[VkImageFormatProperties]) +
+Note1: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_external_memory_capabilities[VK_KHR_external_memory_capabilities] extension (rfr:
+https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkExternalImageFormatPropertiesKHR[VkExternalImageFormatPropertiesKHR]).#
 
 * [[physicaldevicesparseimageformatinfo]]
 [small]#*physicaldevicesparseimageformatinfo* = { +
@@ -389,6 +402,25 @@ _aspect_mask_: <<imageaspectflags, imageaspectflags>>, +
 _image_granularity_: <<extent3d, extent3d>>, +
 _flags_: <<sparseimageformatflags, sparseimageformatflags>>, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkSparseImageFormatProperties[VkSparseImageFormatProperties])#
+
+* [[externalmemoryproperties]]
+[small]#*externalmemoryproperties* = { +
+_external_memory_features_: <<externalmemoryfeatureflags, externalmemoryfeatureflags>>, +
+_export_from_imported_handle_types_: <<externalmemoryhandletypeflags, externalmemoryhandletypeflags>>, +
+_compatible_handle_types_: <<externalmemoryhandletypeflags, externalmemoryhandletypeflags>>, +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkExternalMemoryPropertiesKHR[VkExternalMemoryPropertiesKHR])#
+
+* [[physicaldeviceexternalbufferinfo]]
+[small]#*physicaldeviceexternalbufferinfo* = { +
+_flags_: <<buffercreateflags, buffercreateflags>>, +
+_usage_: <<bufferusageflags, bufferusageflags>>, +
+_handle_type_: <<externalmemoryhandletypeflags, externalmemoryhandletypeflags>>, +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPhysicalDeviceExternalBufferInfoKHR[VkPhysicalDeviceExternalBufferInfoKHR])#
+
+* [[externalbufferproperties]]
+[small]#*externalbufferproperties* = { +
+_external_memory_properties_, <<externalmemoryproperties, externalmemoryproperties>>, +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkExternalBufferPropertiesKHR[VkExternalBufferPropertiesKHR])#
 
 '''
 

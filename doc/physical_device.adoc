@@ -46,3 +46,8 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.ht
 [small]#_info_: <<physicaldevicesparseimageformatinfo, physicaldevicesparseimageformatinfo>>. +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetPhysicalDeviceSparseImageFormatProperties[vkGetPhysicalDeviceSparseImageFormatProperties].#
 
+[[get_physical_device_external_buffer_properties]]
+* <<externalbufferproperties,_externalbufferproperties_>> = *get_physical_device_external_buffer_properties*(_physdev_, _info_) +
+[small]#_info_: <<physicaldeviceexternalbufferinfo, physicaldeviceexternalbufferinfo>>. +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetPhysicalDeviceExternalBufferPropertiesKHR[vkGetPhysicalDeviceExternalBufferPropertiesKHR] (https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_external_memory_capabilities[VK_KHR_external_memory_capabilities] extension).#
+

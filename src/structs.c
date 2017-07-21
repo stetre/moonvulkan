@@ -1745,19 +1745,32 @@ static int pushphysicaldevicediscardrectangleproperties(lua_State *L, VkPhysical
     return 0;
     }
 
+
+static int pushphysicaldeviceidproperties(lua_State *L, VkPhysicalDeviceIDPropertiesKHR *p)
+    {
+    SetUUID(deviceUUID, "device_uuid", VK_UUID_SIZE);
+    SetUUID(driverUUID, "driver_uuid", VK_UUID_SIZE);
+    SetUUID(deviceLUID, "device_luid", VK_LUID_SIZE_KHR);
+    SetInteger(deviceNodeMask, "device_node_mask");
+    SetBoolean(deviceLUIDValid, "device_luid_valid");
+    return 0;
+    }
+
 void initphysicaldeviceproperties2(lua_State *L, VkPhysicalDeviceProperties2KHR_CHAIN *p)
     {
     UNUSED(L); CLEAR(p);
     p->p1.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROPERTIES_2_KHR;
     p->p2.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PUSH_DESCRIPTOR_PROPERTIES_KHR;
     p->p3.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_BLEND_OPERATION_ADVANCED_PROPERTIES_EXT;
-    p->p4.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLER_FILTER_MINMAX_PROPERTIES_EXT ;
-    p->p5.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DISCARD_RECTANGLE_PROPERTIES_EXT ;
+    p->p4.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLER_FILTER_MINMAX_PROPERTIES_EXT;
+    p->p5.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DISCARD_RECTANGLE_PROPERTIES_EXT;
+    p->p6.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ID_PROPERTIES_KHR;
     p->p1.pNext = &p->p2;
     p->p2.pNext = &p->p3;
     p->p3.pNext = &p->p4;
     p->p4.pNext = &p->p5;
-    p->p5.pNext = NULL;
+    p->p5.pNext = &p->p6;
+    p->p6.pNext = NULL;
     }
 
 int pushphysicaldeviceproperties2(lua_State *L, VkPhysicalDeviceProperties2KHR_CHAIN *p)
@@ -1767,6 +1780,7 @@ int pushphysicaldeviceproperties2(lua_State *L, VkPhysicalDeviceProperties2KHR_C
     pushphysicaldeviceblendoperationadvancedproperties(L, &p->p3);
     pushphysicaldevicesamplerfilterminmaxproperties(L, &p->p4);
     pushphysicaldevicediscardrectangleproperties(L, &p->p5);
+    pushphysicaldeviceidproperties(L, &p->p6);
     return 1;
     }
 
@@ -1794,6 +1808,16 @@ int pushformatproperties2(lua_State *L, VkFormatProperties2KHR_CHAIN *p)
     }
 
 /*------------------------------------------------------------------------------*/
+
+static int pushexternalmemoryproperties(lua_State *L, VkExternalMemoryPropertiesKHR *p)
+    {
+    lua_newtable(L);
+    SetFlags(externalMemoryFeatures, "external_memory_features");
+    SetFlags(exportFromImportedHandleTypes, "export_from_imported_handle_types");
+    SetFlags(compatibleHandleTypes, "compatible_handle_types");
+    return 1;
+    }
+
 int pushimageformatproperties(lua_State *L, VkImageFormatProperties *p)
     {
     lua_newtable(L);
@@ -1809,13 +1833,37 @@ void initimageformatproperties2(lua_State *L, VkImageFormatProperties2KHR_CHAIN 
     {
     UNUSED(L); CLEAR(p);
     p->p1.sType = VK_STRUCTURE_TYPE_IMAGE_FORMAT_PROPERTIES_2_KHR;
+    p->p2.sType = VK_STRUCTURE_TYPE_EXTERNAL_IMAGE_FORMAT_PROPERTIES_KHR;
     }
 
 int pushimageformatproperties2(lua_State *L, VkImageFormatProperties2KHR_CHAIN *p)
     {
     pushimageformatproperties(L, &p->p1.imageFormatProperties);
+    pushexternalmemoryproperties(L, &p->p2.externalMemoryProperties);
+    lua_setfield(L, -2, "external_memory_properties");
     return 1;
     }
+
+/*------------------------------------------------------------------------------*/
+
+int pushexternalbufferproperties(lua_State *L, VkExternalBufferPropertiesKHR *p)
+    {
+    lua_newtable(L);
+    SetStruct(externalMemoryProperties, "external_memory_properties", pushexternalmemoryproperties);
+    return 1;
+    }
+
+int echeckphysicaldeviceexternalbufferinfo(lua_State *L, int arg, VkPhysicalDeviceExternalBufferInfoKHR *p)
+    {
+    int err;
+    ECHECK_PREAMBLE(p);
+    p->sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_BUFFER_INFO_KHR;
+    GetFlags(flags, "flags");
+    GetFlags(usage, "usage");
+    GetBits(handleType, "handleType", VkExternalMemoryHandleTypeFlagBitsKHR);
+    return 0;
+    }
+
 
 /*------------------------------------------------------------------------------*/
 int pushsparseimageformatproperties(lua_State *L, VkSparseImageFormatProperties *p)
@@ -1941,9 +1989,20 @@ int pushphysicaldevicememoryproperties2(lua_State *L, VkPhysicalDeviceMemoryProp
     }
 
 /*------------------------------------------------------------------------------*/
-int echeckphysicaldeviceimageformatinfo2(lua_State *L, int arg, VkPhysicalDeviceImageFormatInfo2KHR *p)
+
+static int echeckphysicaldeviceexternalimageformatinfo(lua_State *L, int arg, VkPhysicalDeviceExternalImageFormatInfoKHR *p)
     {
     int err;
+    p->sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_IMAGE_FORMAT_INFO_KHR;
+    GetBits(handleType, "handle_type", VkExternalMemoryHandleTypeFlagBitsKHR);
+    return 0;
+    }
+
+int echeckphysicaldeviceimageformatinfo2(lua_State *L, int arg, VkPhysicalDeviceImageFormatInfo2KHR_CHAIN *pp)
+    {
+    int err;
+    int p2_present;
+    VkPhysicalDeviceImageFormatInfo2KHR *p = &pp->p1;
     ECHECK_PREAMBLE(p);
     p->sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_FORMAT_INFO_2_KHR;
     GetFormat(format, "format");
@@ -1951,6 +2010,13 @@ int echeckphysicaldeviceimageformatinfo2(lua_State *L, int arg, VkPhysicalDevice
     GetImageTiling(tiling, "tiling");
     GetFlags(usage, "usage");
     GetFlags(flags, "flags");
+    IsPresent("handle_type", p2_present);
+    if(p2_present)
+        {
+        err = echeckphysicaldeviceexternalimageformatinfo(L, arg, &pp->p2);
+        if(err) return err;
+        pp->p1.pNext = &pp->p2;
+        }
     return 0;
     }
 

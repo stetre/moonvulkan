@@ -133,14 +133,14 @@ static int GetPhysicalDeviceFormatProperties(lua_State *L)
 static int GetPhysicalDeviceImageFormatProperties2(lua_State *L, VkPhysicalDevice physical_device, ud_t *ud)
     {
     VkResult ec;
-    VkPhysicalDeviceImageFormatInfo2KHR info;
+    VkPhysicalDeviceImageFormatInfo2KHR_CHAIN info;
     VkImageFormatProperties2KHR_CHAIN properties2;
 
     if(echeckphysicaldeviceimageformatinfo2(L, 2, &info)) return argerror(L, 2);
 
     initimageformatproperties2(L, &properties2);
 
-    ec = ud->idt->GetPhysicalDeviceImageFormatProperties2KHR(physical_device, &info, &properties2.p1);
+    ec = ud->idt->GetPhysicalDeviceImageFormatProperties2KHR(physical_device, &info.p1, &properties2.p1);
     CheckError(L, ec);
     pushimageformatproperties2(L, &properties2);
     return 1;
@@ -149,7 +149,7 @@ static int GetPhysicalDeviceImageFormatProperties2(lua_State *L, VkPhysicalDevic
 static int GetPhysicalDeviceImageFormatProperties(lua_State *L)
     {
     VkResult ec;
-    VkPhysicalDeviceImageFormatInfo2KHR info;
+    VkPhysicalDeviceImageFormatInfo2KHR_CHAIN info;
     VkImageFormatProperties properties;
     ud_t *ud;
     VkPhysicalDevice physical_device = checkphysical_device(L, 1, &ud);
@@ -157,7 +157,7 @@ static int GetPhysicalDeviceImageFormatProperties(lua_State *L)
         return GetPhysicalDeviceImageFormatProperties2(L, physical_device, ud);
     if(echeckphysicaldeviceimageformatinfo2(L, 2, &info)) return argerror(L, 2);
     ec = ud->idt->GetPhysicalDeviceImageFormatProperties(physical_device, 
-            info.format, info.type, info.tiling, info.usage, info.flags, &properties);
+            info.p1.format, info.p1.type, info.p1.tiling, info.p1.usage, info.p1.flags, &properties);
     CheckError(L, ec);
     pushimageformatproperties(L, &properties);
     return 1;
@@ -291,6 +291,26 @@ static int GetPhysicalDeviceSparseImageFormatProperties(lua_State *L)
 
 /*-----------------------------------------------------------------------------*/
 
+static int GetPhysicalDeviceExternalBufferProperties(lua_State *L)
+    {
+    ud_t *ud;
+    VkPhysicalDeviceExternalBufferInfoKHR info;
+    VkExternalBufferPropertiesKHR properties;
+    VkPhysicalDevice physical_device = checkphysical_device(L, 1, &ud);
+
+    CheckInstancePfn(L, ud, GetPhysicalDeviceExternalBufferPropertiesKHR);
+    if(echeckphysicaldeviceexternalbufferinfo(L, 2, &info)) return argerror(L, 2);
+
+    memset(&properties, 0, sizeof(properties));
+    ud->idt->GetPhysicalDeviceExternalBufferPropertiesKHR(physical_device, &info, &properties);
+
+    pushexternalbufferproperties(L, &properties);
+    return 1;
+    }
+
+
+/*-----------------------------------------------------------------------------*/
+
 RAW_FUNC_DISPATCHABLE(physical_device)
 TYPE_FUNC(physical_device)
 INSTANCE_FUNC(physical_device)
@@ -324,6 +344,7 @@ static const struct luaL_Reg Functions[] =
         { "get_physical_device_queue_family_properties", GetPhysicalDeviceQueueFamilyProperties },
         { "get_physical_device_memory_properties", GetPhysicalDeviceMemoryProperties },
         { "get_physical_device_sparse_image_format_properties", GetPhysicalDeviceSparseImageFormatProperties },
+        { "get_physical_device_external_buffer_properties", GetPhysicalDeviceExternalBufferProperties },
         { NULL, NULL } /* sentinel */
     };
 
