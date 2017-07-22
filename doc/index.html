@@ -2524,6 +2524,9 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/
 <p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_display_swapchain">VK_KHR_display_swapchain</a></p>
 </li>
 <li>
+<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_external_fence">VK_KHR_external_fence</a></p>
+</li>
+<li>
 <p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_external_fence_capabilities">VK_KHR_external_fence_capabilities</a></p>
 </li>
 <li>
@@ -3780,7 +3783,11 @@ Note1: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/htm
 <p><a id="fencecreateinfo"></a>
 <span class="small"><strong>fencecreateinfo</strong> = {<br>
 <em>flags</em>: <a href="#fencecreateflags">fencecreateflags</a>,<br>
-} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkFenceCreateInfo">VkFenceCreateInfo</a>)</span></p>
+------- EXTENSIONS -------<br>
+<em>handle_types</em>: <a href="#externalfencehandletypeflags">externalfencehandletypeflags</a> (Note1),<br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkFenceCreateInfo">VkFenceCreateInfo</a>)<br>
+Note1: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_external_fence">VK_KHR_external_fence</a> extension (rfr:
+<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkExportFenceCreateInfoKHR">VkExportFenceCreateInfoKHR</a>).</span></p>
 </li>
 <li>
 <p><a id="deviceeventinfo"></a>
@@ -3801,7 +3808,7 @@ Note1: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/htm
 ------- EXTENSIONS -------<br>
 <em>handle_types</em>: <a href="#externalsemaphorehandletypeflags">externalsemaphorehandletypeflags</a> (Note1),<br>
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkSemaphoreCreateInfo">VkSemaphoreCreateInfo</a>)<br>
-Note1: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_external_semaphore">VK_EXT_external_semaphore</a> extension (rfr:
+Note1: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_external_semaphore">VK_KHR_external_semaphore</a> extension (rfr:
 <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkExportSemaphoreCreateInfoKHR">VkExportSemaphoreCreateInfoKHR</a>).</span></p>
 </li>
 <li>
@@ -3925,7 +3932,7 @@ Note1: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/htm
 ------- EXTENSIONS -------<br>
 <em>handle_types</em>: <a href="#externalmemoryhandletypeflags">externalmemoryhandletypeflags</a> (Note1),<br>
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkBufferCreateInfo">VkBufferCreateInfo</a>)<br>
-Note1: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_external_memory">VK_EXT_external_memory</a> extension (rfr:
+Note1: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_external_memory">VK_KHR_external_memory</a> extension (rfr:
 <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkExternalMemoryBufferCreateInfoKHR">VkExternalMemoryBufferCreateInfoKHR</a>).</span></p>
 </li>
 <li>
@@ -3960,7 +3967,7 @@ Note1: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/htm
 ------- EXTENSIONS -------<br>
 <em>handle_types</em>: <a href="#externalmemoryhandletypeflags">externalmemoryhandletypeflags</a> (Note1),<br>
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkImageCreateInfo">VkImageCreateInfo</a>)<br>
-Note1: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_external_memory">VK_EXT_external_memory</a> extension (rfr:
+Note1: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_external_memory">VK_KHR_external_memory</a> extension (rfr:
 <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkExternalMemoryImageCreateInfoKHR">VkExternalMemoryImageCreateInfoKHR</a>).</span></p>
 </li>
 <li>
@@ -4034,9 +4041,9 @@ Note1: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/htm
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkMemoryAllocateInfo">VkMemoryAllocateInfo</a>)<br>
 Note1: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_dedicated_allocation">VK_KHR_dedicated_allocation</a> extension (rfr:
 <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkMemoryDedicatedAllocateInfoKHR">VkMemoryDedicatedAllocateInfoKHR</a>).<br>
-Note2: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_external_memory">VK_EXT_external_memory</a> extension (rfr:
+Note2: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_external_memory">VK_KHR_external_memory</a> extension (rfr:
 <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkExportMemoryAllocateInfoKHR">VkExportMemoryAllocateInfoKHR</a>).<br>
-Note3: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_external_memory_fd">VK_EXT_external_memory_fd</a> extension).</span></p>
+Note3: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_external_memory_fd">VK_KHR_external_memory_fd</a> extension).</span></p>
 </li>
 <li>
 <p><a id="importmemoryfdinfo"></a>

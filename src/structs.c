@@ -724,13 +724,32 @@ int echeckcommandbufferbegininfo(lua_State *L, int arg, VkCommandBufferBeginInfo
 
 /*------------------------------------------------------------------------------*/
 
+static int echeckexportfencecreateinfo(lua_State *L, int arg, VkExportFenceCreateInfoKHR *p)
+    {
+    int err;
+    ECHECK_PREAMBLE(p);
+    p->sType = VK_STRUCTURE_TYPE_EXPORT_FENCE_CREATE_INFO_KHR;
+    GetFlags(handleTypes, "handle_types");
+    return 0;
+    }
+
 int echeckfencecreateinfo(lua_State *L, int arg, VkFenceCreateInfo_CHAIN *pp)
     {
     int err;
+    int p2_present;
     VkFenceCreateInfo *p = &pp->p1;
+    VkExportFenceCreateInfoKHR *p2 = &pp->p2;
+    INIT_NEXT(p);
     ECHECK_PREAMBLE(pp);
     p->sType = VK_STRUCTURE_TYPE_FENCE_CREATE_INFO;
     GetFlags(flags, "flags");
+    IS_PRESENT("handle_types", p2_present);
+    if(p2_present)
+        {
+        err = echeckexportfencecreateinfo(L, arg, p2);
+        if(err) return err;
+        SET_NEXT(p2);
+        }
     return 0;
     }
 

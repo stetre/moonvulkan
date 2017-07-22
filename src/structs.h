@@ -60,6 +60,7 @@ int echeckcommandbufferbegininfo(lua_State *L, int arg, VkCommandBufferBeginInfo
 
 typedef struct {
     VkFenceCreateInfo p1;
+    VkExportFenceCreateInfoKHR p2;
 } VkFenceCreateInfo_CHAIN;
 
 #define echeckfencecreateinfo moonvulkan_echeckfencecreateinfo

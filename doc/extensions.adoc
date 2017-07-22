@@ -12,7 +12,7 @@ Khronos extensions (KHR):
 * https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_descriptor_update_template[VK_KHR_descriptor_update_template]
 * https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_display[VK_KHR_display]
 * https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_display_swapchain[VK_KHR_display_swapchain]
-//@@VK_KHR_external_fence
+* https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_external_fence[VK_KHR_external_fence]
 * https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_external_fence_capabilities[VK_KHR_external_fence_capabilities]
 //@@VK_KHR_external_fence_fd
 //@@VK_KHR_external_fence_win32
