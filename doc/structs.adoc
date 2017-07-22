@@ -760,12 +760,29 @@ pass:[-------] EXTENSIONS ------- +
 _image_: <<image, image>> (Note1), +
 _buffer_: <<buffer, buffer>> (Note1), +
 _handle_types_: <<externalmemoryhandletypeflags, externalmemoryhandletypeflags>> (Note2), +
+_import_memory_fd_info_: <<importmemoryfdinfo, importmemoryfdinfo>> (Note3), +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkMemoryAllocateInfo[VkMemoryAllocateInfo]) +
 Note1: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_dedicated_allocation[VK_KHR_dedicated_allocation] extension (rfr:
 https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkMemoryDedicatedAllocateInfoKHR[VkMemoryDedicatedAllocateInfoKHR]). +
-Note1: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_external_memory[VK_EXT_external_memory] extension (rfr:
-https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkExportMemoryAllocateInfoKHR[VkExportMemoryAllocateInfoKHR]).#
+Note2: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_external_memory[VK_EXT_external_memory] extension (rfr:
+https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkExportMemoryAllocateInfoKHR[VkExportMemoryAllocateInfoKHR]). +
+Note3: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_external_memory_fd[VK_EXT_external_memory_fd] extension).#
 
+* [[importmemoryfdinfo]]
+[small]#*importmemoryfdinfo* = { +
+_handle_type_: <<externalmemoryhandletypeflags, externalmemoryhandletypeflags>>, +
+_fd_: integer, +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkImportMemoryFdInfoKHR[VkImportMemoryFdInfoKHR])#
+
+* [[memorygetfdinfo]]
+[small]#*memorygetfdinfo* = { +
+_handle_type_: <<externalmemoryhandletypeflags, externalmemoryhandletypeflags>>, +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkMemoryGetFdInfoKHR[VkMemoryGetFdInfoKHR])#
+
+* [[memoryfdproperties]]
+[small]#*memoryfdproperties* = { +
+_memory_type_bits_: integer, +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkMemoryFdPropertiesKHR[VkMemoryFdPropertiesKHR])#
 
 '''
 

@@ -73,13 +73,17 @@ static int efielderror(lua_State *L, const char *fieldname)
 
 #define POPFIELD() do { lua_remove(L, arg1); } while(0)
 
-#define IsPresent(sname, dst) do {                                      \
+#define IS_PRESENT(sname, dst) do {                                      \
 /* checks if a field is present and sets dst to 1 or 0 accordingly */   \
     lua_pushstring(L, sname);                                           \
     lua_rawget(L, arg);                                                 \
     (dst) = lua_isnoneornil(L, -1) ? 0 : 1;                             \
     lua_pop(L, 1);                                                      \
 } while(0)
+
+#define INIT_NEXT(p_) const void **next_ = &(p_)->pNext;
+#define SET_NEXT(p_) do { *next_ = (p_); next_ = &((p_)->pNext); } while(0)
+
 
 /* Flags ---------------------------------------------------------------------*/
 
@@ -1196,6 +1200,8 @@ int echeckbuffercreateinfo(lua_State *L, int arg, VkBufferCreateInfo_CHAIN *pp)
     int err, arg1;
     int p2_present;
     VkBufferCreateInfo *p = &pp->p1;
+    VkExternalMemoryBufferCreateInfoKHR *p2 = &pp->p2;
+    INIT_NEXT(p);
     ECHECK_PREAMBLE(p);
     p->sType = VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO;
     GetFlags(flags, "flags");
@@ -1208,12 +1214,12 @@ int echeckbuffercreateinfo(lua_State *L, int arg, VkBufferCreateInfo_CHAIN *pp)
     POPFIELD();
     if(err < 0) return fielderror(L, F, err);
 #undef F
-    IsPresent("handle_types", p2_present);
+    IS_PRESENT("handle_types", p2_present);
     if(p2_present)
         {
-        err = echeckexternalmemorybuffercreateinfo(L, arg, &pp->p2);
+        err = echeckexternalmemorybuffercreateinfo(L, arg, p2);
         if(err) { freebuffercreateinfo(L, pp); return err; }
-        pp->p1.pNext = &pp->p2;
+        SET_NEXT(p2);
         }
     return 0;
     }
@@ -1254,6 +1260,8 @@ int echeckimagecreateinfo(lua_State *L, int arg, VkImageCreateInfo_CHAIN *pp)
     int err, arg1;
     int p2_present;
     VkImageCreateInfo *p = &pp->p1;
+    VkExternalMemoryImageCreateInfoKHR *p2 = &pp->p2;
+    INIT_NEXT(p);
     ECHECK_PREAMBLE(p);
     p->sType = VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO;
     GetFlags(flags, "flags");
@@ -1273,12 +1281,12 @@ int echeckimagecreateinfo(lua_State *L, int arg, VkImageCreateInfo_CHAIN *pp)
     POPFIELD();
     if(err < 0) return fielderror(L, F, err);
 #undef F
-    IsPresent("handle_types", p2_present);
+    IS_PRESENT("handle_types", p2_present);
     if(p2_present)
         {
-        err = echeckexternalmemoryimagecreateinfo(L, arg, &pp->p2);
+        err = echeckexternalmemoryimagecreateinfo(L, arg, p2);
         if(err) { freeimagecreateinfo(L, pp); return err; }
-        pp->p1.pNext = &pp->p2;
+        SET_NEXT(p2);
         }
     return 0;
     }
@@ -1306,10 +1314,21 @@ void freesamplercreateinfo(lua_State *L, VkSamplerCreateInfo_CHAIN *p)
     (void)L; (void)p;
     }
 
-static int echecksamplercreateinfo_(lua_State *L, int arg, VkSamplerCreateInfo *p)
+static int echecksamplerreductionmodecreateinfo(lua_State *L, int arg, VkSamplerReductionModeCreateInfoEXT *p)
     {
     int err;
-    ECHECK_PREAMBLE(p);
+    p->sType = VK_STRUCTURE_TYPE_SAMPLER_REDUCTION_MODE_CREATE_INFO_EXT;
+    GetSamplerReductionMode(reductionMode, "reduction_mode");
+    return 0;
+    }
+
+int echecksamplercreateinfo(lua_State *L, int arg, VkSamplerCreateInfo_CHAIN *pp)
+    {
+    int err, p2_present;
+    VkSamplerCreateInfo *p = &pp->p1;
+    VkSamplerReductionModeCreateInfoEXT *p2 = &pp->p2;
+    INIT_NEXT(p);
+    ECHECK_PREAMBLE(pp);
     p->sType = VK_STRUCTURE_TYPE_SAMPLER_CREATE_INFO;
     GetFlags(flags, "flags");
     GetFilter(magFilter, "mag_filter");
@@ -1327,29 +1346,12 @@ static int echecksamplercreateinfo_(lua_State *L, int arg, VkSamplerCreateInfo *
     GetNumber(maxLod, "max_lod");
     GetBorderColor(borderColor, "border_color");
     GetBoolean(unnormalizedCoordinates, "unnormalized_coordinates");
-    return 0;
-    }
-
-static int echecksamplerreductionmodecreateinfo(lua_State *L, int arg, VkSamplerReductionModeCreateInfoEXT *p)
-    {
-    int err;
-    ECHECK_PREAMBLE(p);
-    p->sType = VK_STRUCTURE_TYPE_SAMPLER_REDUCTION_MODE_CREATE_INFO_EXT;
-    GetSamplerReductionMode(reductionMode, "reduction_mode");
-    return 0;
-    }
-
-int echecksamplercreateinfo(lua_State *L, int arg, VkSamplerCreateInfo_CHAIN *p)
-    {
-    int err, p2_present;
-    err = echecksamplercreateinfo_(L, arg, &p->p1);
-    if(err) { freesamplercreateinfo(L, p); return err; }
-    IsPresent("reduction_mode", p2_present);
+    IS_PRESENT("reduction_mode", p2_present);
     if(p2_present)
         {
-        err = echecksamplerreductionmodecreateinfo(L, arg, &p->p2);
-        if(err) { freesamplercreateinfo(L, p); return err; }
-        p->p1.pNext = &p->p2;
+        err = echecksamplerreductionmodecreateinfo(L, arg, p2);
+        if(err) { freesamplercreateinfo(L, pp); return err; }
+        SET_NEXT(p2);
         }
     return 0;
     }
@@ -2076,19 +2078,21 @@ int echeckphysicaldeviceimageformatinfo2(lua_State *L, int arg, VkPhysicalDevice
     int err;
     int p2_present;
     VkPhysicalDeviceImageFormatInfo2KHR *p = &pp->p1;
-    ECHECK_PREAMBLE(p);
+    VkPhysicalDeviceExternalImageFormatInfoKHR *p2 = &pp->p2;
+    INIT_NEXT(p);
+    ECHECK_PREAMBLE(pp);
     p->sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_FORMAT_INFO_2_KHR;
     GetFormat(format, "format");
     GetImageType(type, "type");
     GetImageTiling(tiling, "tiling");
     GetFlags(usage, "usage");
     GetFlags(flags, "flags");
-    IsPresent("handle_type", p2_present);
+    IS_PRESENT("handle_type", p2_present);
     if(p2_present)
         {
-        err = echeckphysicaldeviceexternalimageformatinfo(L, arg, &pp->p2);
+        err = echeckphysicaldeviceexternalimageformatinfo(L, arg, p2);
         if(err) return err;
-        pp->p1.pNext = &pp->p2;
+        SET_NEXT(p2);
         }
     return 0;
     }
@@ -2607,39 +2611,76 @@ static int echeckexportmemoryallocateinfo(lua_State *L, int arg, VkExportMemoryA
     return 0;
     }
 
-int echeckmemoryallocateinfo(lua_State *L, int arg, VkMemoryAllocateInfo_CHAIN *pp)
+static int echeckimportmemoryfdinfo(lua_State *L, int arg, VkImportMemoryFdInfoKHR *p)
     {
     int err;
+    p->sType = VK_STRUCTURE_TYPE_IMPORT_MEMORY_FD_INFO_KHR;
+    GetBits(handleType, "handle_type", VkExternalMemoryHandleTypeFlagBitsKHR);
+    GetInteger(fd, "fd");
+    return 0;
+    }
+
+int echeckmemoryallocateinfo(lua_State *L, int arg, VkMemoryAllocateInfo_CHAIN *pp)
+    {
+    int err, arg1;
     int p2_present, p3_present;
     VkMemoryAllocateInfo *p = &pp->p1;
     VkMemoryDedicatedAllocateInfoKHR *p2 = &pp->p2;
     VkExportMemoryAllocateInfoKHR *p3 = &pp->p3;
+    VkImportMemoryFdInfoKHR *p4 = &pp->p4;
+    INIT_NEXT(p);
     ECHECK_PREAMBLE(pp);
     p->sType = VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO;
     GetInteger(allocationSize, "allocation_size");
     GetInteger(memoryTypeIndex, "memory_type_index");
     /*---------- extensions --------------*/
-    IsPresent("image", p2_present);
-    if(!p2_present) IsPresent("buffer", p2_present);
+    IS_PRESENT("image", p2_present);
+    if(!p2_present) IS_PRESENT("buffer", p2_present);
     if(p2_present)
         {
         err = echeckmemorydedicatedallocateinfo(L, arg, p2);
         if(err) return err;
-        p->pNext = p2;
+        SET_NEXT(p2);
         }
-    IsPresent("handle_types", p3_present);
+    IS_PRESENT("handle_types", p3_present);
     if(p3_present)
         {
         err = echeckexportmemoryallocateinfo(L, arg, &pp->p3);
         if(err) return err;
-        if(p2_present)
-            p2->pNext = p3;
-        else
-            p->pNext = p3;
+        SET_NEXT(p3);
         }
+#define F "import_memory_fd_info"
+    PUSHFIELD(F);
+    err = echeckimportmemoryfdinfo(L, arg1, p4);
+    POPFIELD();
+    if(err<0) return efielderror(L, F);
+    if(err == ERR_NOTPRESENT)
+        POPERROR();
+    else
+        SET_NEXT(p4);
+#undef F
     return 0;
     }
 
+/*------------------------------------------------------------------------------*/
+
+
+int pushmemoryfdproperties(lua_State *L, VkMemoryFdPropertiesKHR *p)
+    {
+    lua_newtable(L);
+    SetInteger(memoryTypeBits, "memory_type_bits");
+    return 1;
+    }
+
+int echeckmemorygetfdinfo(lua_State *L, int arg, VkMemoryGetFdInfoKHR *p)
+    {
+    int err;
+    ECHECK_PREAMBLE(p);
+    p->sType = VK_STRUCTURE_TYPE_MEMORY_GET_FD_INFO_KHR;
+    /* p->memory = set by caller */
+    GetBits(handleType, "handle_type", VkExternalMemoryHandleTypeFlagBitsKHR);
+    return 0;
+    }
 
 /*------------------------------------------------------------------------------*/
 
@@ -3801,6 +3842,12 @@ ECHECKLISTFUNC(VkComputePipelineCreateInfo, computepipelinecreateinfo, freecompu
 
 /*-------------------------------------------------------------------------------------*/
 
+void freeswapchaincreateinfo(lua_State *L, VkSwapchainCreateInfoKHR_CHAIN *pp)
+    {
+    VkSwapchainCreateInfoKHR *p = &pp->p1;
+    if(p->pQueueFamilyIndices) Free(L, (void*)p->pQueueFamilyIndices);
+    }
+
 static int echeckswapchaincountercreateinfo(lua_State *L, int arg, VkSwapchainCounterCreateInfoEXT *p)
     {
     int err;
@@ -3809,17 +3856,13 @@ static int echeckswapchaincountercreateinfo(lua_State *L, int arg, VkSwapchainCo
     return 0;
     }
 
-void freeswapchaincreateinfo(lua_State *L, VkSwapchainCreateInfoKHR_CHAIN *pp)
-    {
-    VkSwapchainCreateInfoKHR *p = &pp->p1;
-    if(p->pQueueFamilyIndices) Free(L, (void*)p->pQueueFamilyIndices);
-    }
-
 int echeckswapchaincreateinfo(lua_State *L, int arg, VkSwapchainCreateInfoKHR_CHAIN *pp)
     {
     int err, arg1;
     int p2_present;
     VkSwapchainCreateInfoKHR *p = &pp->p1;
+    VkSwapchainCounterCreateInfoEXT *p2 = &pp->p2;
+    INIT_NEXT(p);
     ECHECK_PREAMBLE(pp);
     p->sType = VK_STRUCTURE_TYPE_SWAPCHAIN_CREATE_INFO_KHR;
     GetFlags(flags, "flags");
@@ -3843,12 +3886,12 @@ int echeckswapchaincreateinfo(lua_State *L, int arg, VkSwapchainCreateInfoKHR_CH
     if(err < 0) return fielderror(L, F, err);
 #undef F
     /*-- extensions --------------------*/
-    IsPresent("surface_counters", p2_present);
+    IS_PRESENT("surface_counters", p2_present);
     if(p2_present)
         {
-        err = echeckswapchaincountercreateinfo(L, arg, &pp->p2);
+        err = echeckswapchaincountercreateinfo(L, arg, p2);
         if(err) { freeswapchaincreateinfo(L, pp); return err; }
-        pp->p1.pNext = &pp->p2;
+        SET_NEXT(p2);
         }
     return 0;
     }
@@ -3975,9 +4018,10 @@ int echeckpresentinfo(lua_State *L, int arg, VkPresentInfoKHR_CHAIN *pp, int res
     int p2_present, p3_present;
     uint32_t count;
     VkPresentInfoKHR *p = &pp->p1;
-
+    VkDisplayPresentInfoKHR *p2 = &pp->p2;
+    VkPresentRegionsKHR *p3 = &pp->p3;
+    INIT_NEXT(p);
     ECHECK_PREAMBLE(pp);
-
     p->sType = VK_STRUCTURE_TYPE_PRESENT_INFO_KHR;
 #define F "wait_semaphores"
     PUSHFIELD(F);
@@ -4010,22 +4054,19 @@ int echeckpresentinfo(lua_State *L, int arg, VkPresentInfoKHR_CHAIN *pp, int res
         { freepresentinfo(L, pp); return fielderror(L, F, ERR_LENGTH); }
 #undef F
     /*-- extensions --------------------*/
-    IsPresent("src_rect", p2_present);
+    IS_PRESENT("src_rect", p2_present);
     if(p2_present)
         {
-        err = echeckdisplaypresentinfo(L, arg, &pp->p2);
+        err = echeckdisplaypresentinfo(L, arg, p2);
         if(err) { freepresentinfo(L, pp); return err; }
-        pp->p1.pNext = &pp->p2;
+        SET_NEXT(p2);
         }
-    IsPresent("regions", p3_present);
+    IS_PRESENT("regions", p3_present);
     if(p3_present)
         {
-        err = echeckpresentregions(L, arg, &pp->p3);
+        err = echeckpresentregions(L, arg, p3);
         if(err) { freepresentinfo(L, pp); return err; }
-        if(p2_present)
-            pp->p1.pNext = &pp->p3;
-        else
-            pp->p2.pNext = &pp->p3;
+        SET_NEXT(p3);
         }
     return 0;
     }
@@ -4447,11 +4488,14 @@ static int echeckapplicationinfo(lua_State *L, int arg, VkApplicationInfo *p)
 void freeinstancecreateinfo(lua_State *L, VkInstanceCreateInfo_CHAIN *pp)
     {
     VkInstanceCreateInfo *p = &pp->p1;
-    freeapplicationinfo(L, &pp->p2);
-    if(p->ppEnabledLayerNames) freestringlist(L, (char**)p->ppEnabledLayerNames, p->enabledLayerCount);
-    if(p->ppEnabledExtensionNames) freestringlist(L, (char**)p->ppEnabledExtensionNames, p->enabledExtensionCount);
-    if(pp->p3.pDisabledValidationChecks)
-        freevalidationchecklist(L, pp->p3.pDisabledValidationChecks);
+    VkValidationFlagsEXT *p2 = &pp->p2;
+    freeapplicationinfo(L, &pp->appinfo);
+    if(p->ppEnabledLayerNames)
+        freestringlist(L, (char**)p->ppEnabledLayerNames, p->enabledLayerCount);
+    if(p->ppEnabledExtensionNames)
+        freestringlist(L, (char**)p->ppEnabledExtensionNames, p->enabledExtensionCount);
+    if(p2->pDisabledValidationChecks)
+        freevalidationchecklist(L, p2->pDisabledValidationChecks);
     }
 
 static int echeckvalidationflags(lua_State *L, int arg, VkValidationFlagsEXT *p)
@@ -4470,10 +4514,11 @@ static int echeckvalidationflags(lua_State *L, int arg, VkValidationFlagsEXT *p)
 int echeckinstancecreateinfo(lua_State *L, int arg, VkInstanceCreateInfo_CHAIN *pp)
     {
     int arg1, err;
-    int p3_present;
+    int p2_present;
     VkInstanceCreateInfo *p = &pp->p1;
-    VkApplicationInfo *appinfo = &pp->p2;
-
+    VkApplicationInfo *appinfo = &pp->appinfo;
+    VkValidationFlagsEXT *p2 = &pp->p2;
+    INIT_NEXT(p);
     ECHECK_PREAMBLE(pp);
     p->sType = VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO;
     GetFlags(flags, "flags");
@@ -4503,12 +4548,12 @@ int echeckinstancecreateinfo(lua_State *L, int arg, VkInstanceCreateInfo_CHAIN *
         { freeinstancecreateinfo(L, pp); return fielderror(L, F, err); }
 #undef F
     /* -- extensions ------ */
-    IsPresent("disabled_validation_checks", p3_present);
-    if(p3_present)
+    IS_PRESENT("disabled_validation_checks", p2_present);
+    if(p2_present)
         {
-        err = echeckvalidationflags(L, arg, &pp->p3);
+        err = echeckvalidationflags(L, arg, p2);
         if(err) { freeinstancecreateinfo(L, pp); return err; }
-        pp->p1.pNext = &pp->p3;
+        SET_NEXT(p2);
         }
     return 0;
     }

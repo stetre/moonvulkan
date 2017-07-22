@@ -80,4 +80,15 @@ Otherwise the original functions are used.
 * *bind_image_memory*(<<image, _image_>>, _devmem_, _offset_) +
 [small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkBindImageMemory[vkBindImageMemory].#
 
+'''
+
+[[get_memory_fd]]
+* _fd_ = *get_memory_fd*(_devmem_, <<memorygetfdinfo, _memorygetfdinfo_>>) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetMemoryFdKHR[vkGetMemoryFdKHR] (https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_external_memory_fd[VK_KHR_external_memory_fd] extension).#
+
+[[get_memory_fd_properties]]
+* <<memoryfdproperties, _memoryfdproperties_>> = *get_memory_fd_properties*(<<device, _device_>>, _handle_type_, _fd_) +
+[small]#_handle_type_: <<externalmemoryhandletypeflags, externalmemoryhandletypeflags>>, +
+_fd_: integer. +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetMemoryFdPropertiesKHR[vkGetMemoryFdPropertiesKHR] (https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_external_memory_fd[VK_KHR_external_memory_fd] extension).#
 

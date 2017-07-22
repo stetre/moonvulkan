@@ -1730,6 +1730,25 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/
 </li>
 </ul>
 </div>
+<hr>
+<div id="get_memory_fd" class="ulist">
+<ul>
+<li>
+<p><em>fd</em> = <strong>get_memory_fd</strong>(<em>devmem</em>, <a href="#memorygetfdinfo"><em>memorygetfdinfo</em></a>)<br>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetMemoryFdKHR">vkGetMemoryFdKHR</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_external_memory_fd">VK_KHR_external_memory_fd</a> extension).</span></p>
+</li>
+</ul>
+</div>
+<div id="get_memory_fd_properties" class="ulist">
+<ul>
+<li>
+<p><a href="#memoryfdproperties"><em>memoryfdproperties</em></a> = <strong>get_memory_fd_properties</strong>(<a href="#device"><em>device</em></a>, <em>handle_type</em>, <em>fd</em>)<br>
+<span class="small"><em>handle_type</em>: <a href="#externalmemoryhandletypeflags">externalmemoryhandletypeflags</a>,<br>
+<em>fd</em>: integer.<br>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetMemoryFdPropertiesKHR">vkGetMemoryFdPropertiesKHR</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_external_memory_fd">VK_KHR_external_memory_fd</a> extension).</span></p>
+</li>
+</ul>
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -2512,6 +2531,9 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/
 </li>
 <li>
 <p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_external_memory">VK_KHR_external_memory</a></p>
+</li>
+<li>
+<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_external_memory_fd">VK_KHR_external_memory_fd</a></p>
 </li>
 <li>
 <p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_external_semaphore_capabilities">VK_KHR_external_semaphore_capabilities</a></p>
@@ -4001,11 +4023,32 @@ Note1: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/htm
 <em>image</em>: <a href="#image">image</a> (Note1),<br>
 <em>buffer</em>: <a href="#buffer">buffer</a> (Note1),<br>
 <em>handle_types</em>: <a href="#externalmemoryhandletypeflags">externalmemoryhandletypeflags</a> (Note2),<br>
+<em>import_memory_fd_info</em>: <a href="#importmemoryfdinfo">importmemoryfdinfo</a> (Note3),<br>
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkMemoryAllocateInfo">VkMemoryAllocateInfo</a>)<br>
 Note1: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_dedicated_allocation">VK_KHR_dedicated_allocation</a> extension (rfr:
 <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkMemoryDedicatedAllocateInfoKHR">VkMemoryDedicatedAllocateInfoKHR</a>).<br>
-Note1: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_external_memory">VK_EXT_external_memory</a> extension (rfr:
-<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkExportMemoryAllocateInfoKHR">VkExportMemoryAllocateInfoKHR</a>).</span></p>
+Note2: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_external_memory">VK_EXT_external_memory</a> extension (rfr:
+<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkExportMemoryAllocateInfoKHR">VkExportMemoryAllocateInfoKHR</a>).<br>
+Note3: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_external_memory_fd">VK_EXT_external_memory_fd</a> extension).</span></p>
+</li>
+<li>
+<p><a id="importmemoryfdinfo"></a>
+<span class="small"><strong>importmemoryfdinfo</strong> = {<br>
+<em>handle_type</em>: <a href="#externalmemoryhandletypeflags">externalmemoryhandletypeflags</a>,<br>
+<em>fd</em>: integer,<br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkImportMemoryFdInfoKHR">VkImportMemoryFdInfoKHR</a>)</span></p>
+</li>
+<li>
+<p><a id="memorygetfdinfo"></a>
+<span class="small"><strong>memorygetfdinfo</strong> = {<br>
+<em>handle_type</em>: <a href="#externalmemoryhandletypeflags">externalmemoryhandletypeflags</a>,<br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkMemoryGetFdInfoKHR">VkMemoryGetFdInfoKHR</a>)</span></p>
+</li>
+<li>
+<p><a id="memoryfdproperties"></a>
+<span class="small"><strong>memoryfdproperties</strong> = {<br>
+<em>memory_type_bits</em>: integer,<br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkMemoryFdPropertiesKHR">VkMemoryFdPropertiesKHR</a>)</span></p>
 </li>
 </ul>
 </div>

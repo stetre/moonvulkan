@@ -393,6 +393,42 @@ static int BindImageMemory(lua_State *L)
     return 0;
     }
 
+/*--------------------------------------------------------------------------------*/
+
+static int GetMemoryFd(lua_State *L)
+    {
+    VkResult ec;
+    ud_t *ud;
+    int fd;
+    VkMemoryGetFdInfoKHR info;
+    VkDeviceMemory memory = checkdevice_memory(L, 1, &ud);
+    CheckDevicePfn(L, ud, GetMemoryFdKHR);
+    if(echeckmemorygetfdinfo(L, 2, &info)) return argerror(L, 2);
+    info.memory = memory;
+
+    ec = ud->ddt->GetMemoryFdKHR(ud->device, &info, &fd);
+    CheckError(L, ec);
+    lua_pushinteger(L, fd);
+    return 1;
+    }
+
+static int GetMemoryFdProperties(lua_State *L)
+    {
+    VkResult ec;
+    ud_t *ud;
+    VkMemoryFdPropertiesKHR properties;
+    VkDevice device = checkdevice(L, 1, &ud);
+    VkExternalMemoryHandleTypeFlagBitsKHR handleType = checkflags(L, 2);
+    int fd = luaL_checkinteger(L, 3);
+
+    CheckDevicePfn(L, ud, GetMemoryFdPropertiesKHR);
+    ec = ud->ddt->GetMemoryFdPropertiesKHR(device, handleType, fd, &properties);
+    CheckError(L, ec);
+    pushmemoryfdproperties(L, &properties);
+    return 1;
+    }
+
+
 
 RAW_FUNC(device_memory)
 TYPE_FUNC(device_memory)
@@ -434,6 +470,8 @@ static const struct luaL_Reg Functions[] =
         { "get_image_sparse_memory_requirements", GetImageSparseMemoryRequirements },
         { "bind_image_memory", BindImageMemory },
         { "bind_buffer_memory", BindBufferMemory },
+        { "get_memory_fd", GetMemoryFd },
+        { "get_memory_fd_properties", GetMemoryFdProperties },
         { NULL, NULL } /* sentinel */
     };
 

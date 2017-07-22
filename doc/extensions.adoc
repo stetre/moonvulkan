@@ -18,7 +18,7 @@ Khronos extensions (KHR):
 //@@VK_KHR_external_fence_win32
 * https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_external_memory_capabilities[VK_KHR_external_memory_capabilities]
 * https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_external_memory[VK_KHR_external_memory]
-//@@VK_KHR_external_memory_fd
+* https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_external_memory_fd[VK_KHR_external_memory_fd]
 //@@VK_KHR_external_memory_win32
 //@@VK_KHR_external_semaphore
 * https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_external_semaphore_capabilities[VK_KHR_external_semaphore_capabilities]

@@ -388,11 +388,17 @@ typedef struct {
     VkMemoryAllocateInfo p1;
     VkMemoryDedicatedAllocateInfoKHR p2;
     VkExportMemoryAllocateInfoKHR p3;
+    VkImportMemoryFdInfoKHR p4;
 } VkMemoryAllocateInfo_CHAIN;
 
 #define echeckmemoryallocateinfo moonvulkan_echeckmemoryallocateinfo
 int echeckmemoryallocateinfo(lua_State *L, int arg, VkMemoryAllocateInfo_CHAIN *pp);
 
+
+#define pushmemoryfdproperties moonvulkan_pushmemoryfdproperties
+int pushmemoryfdproperties(lua_State *L, VkMemoryFdPropertiesKHR *p);
+#define echeckmemorygetfdinfo moonvulkan_echeckmemorygetfdinfo
+int echeckmemorygetfdinfo(lua_State *L, int arg, VkMemoryGetFdInfoKHR *p);
 
 typedef struct {
     VkBufferMemoryRequirementsInfo2KHR p1;
@@ -561,8 +567,8 @@ int echeckdevicecreateinfo(lua_State *L, int arg, VkDeviceCreateInfo_CHAIN *p, u
 
 typedef struct {
     VkInstanceCreateInfo p1;
-    VkApplicationInfo p2;
-    VkValidationFlagsEXT p3;
+    VkApplicationInfo appinfo;
+    VkValidationFlagsEXT p2;
 } VkInstanceCreateInfo_CHAIN;
 
 #define freeinstancecreateinfo moonvulkan_freeinstancecreateinfo
