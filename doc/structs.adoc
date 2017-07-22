@@ -574,7 +574,11 @@ _display_event_: <<displayeventtype, displayeventtype>>, +
 * [[semaphorecreateinfo]]
 [small]#*semaphorecreateinfo* = { +
 _flags_: <<semaphorecreateflags, semaphorecreateflags>>, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkSemaphoreCreateInfo[VkSemaphoreCreateInfo])#
+pass:[-------] EXTENSIONS ------- +
+_handle_types_: <<externalsemaphorehandletypeflags, externalsemaphorehandletypeflags>> (Note1), +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkSemaphoreCreateInfo[VkSemaphoreCreateInfo]) +
+Note1: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_external_semaphore[VK_EXT_external_semaphore] extension (rfr:
+https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkExportSemaphoreCreateInfoKHR[VkExportSemaphoreCreateInfoKHR]).#
 
 * [[eventcreateinfo]]
 [small]#*eventcreateinfo* = { +

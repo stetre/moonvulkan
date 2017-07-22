@@ -724,10 +724,11 @@ int echeckcommandbufferbegininfo(lua_State *L, int arg, VkCommandBufferBeginInfo
 
 /*------------------------------------------------------------------------------*/
 
-int echeckfencecreateinfo(lua_State *L, int arg, VkFenceCreateInfo *p)
+int echeckfencecreateinfo(lua_State *L, int arg, VkFenceCreateInfo_CHAIN *pp)
     {
     int err;
-    ECHECK_PREAMBLE(p);
+    VkFenceCreateInfo *p = &pp->p1;
+    ECHECK_PREAMBLE(pp);
     p->sType = VK_STRUCTURE_TYPE_FENCE_CREATE_INFO;
     GetFlags(flags, "flags");
     return 0;
@@ -751,12 +752,33 @@ int echeckdisplayeventinfo(lua_State *L, int arg, VkDisplayEventInfoEXT *p)
     return 0;
     }
 
-int echecksemaphorecreateinfo(lua_State *L, int arg, VkSemaphoreCreateInfo *p)
+static int echeckexportsemaphorecreateinfo(lua_State *L, int arg, VkExportSemaphoreCreateInfoKHR *p)
     {
     int err;
     ECHECK_PREAMBLE(p);
+    p->sType = VK_STRUCTURE_TYPE_EXPORT_SEMAPHORE_CREATE_INFO_KHR;
+    GetFlags(handleTypes, "handle_types");
+    return 0;
+    }
+
+
+int echecksemaphorecreateinfo(lua_State *L, int arg, VkSemaphoreCreateInfo_CHAIN *pp)
+    {
+    int err;
+    int p2_present;
+    VkSemaphoreCreateInfo *p = &pp->p1;
+    VkExportSemaphoreCreateInfoKHR *p2 = &pp->p2;
+    INIT_NEXT(p);
+    ECHECK_PREAMBLE(pp);
     p->sType = VK_STRUCTURE_TYPE_SEMAPHORE_CREATE_INFO;
     GetFlags(flags, "flags");
+    IS_PRESENT("handle_types", p2_present);
+    if(p2_present)
+        {
+        err = echeckexportsemaphorecreateinfo(L, arg, p2);
+        if(err) return err;
+        SET_NEXT(p2);
+        }
     return 0;
     }
 

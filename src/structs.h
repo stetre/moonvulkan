@@ -58,14 +58,27 @@ typedef struct {
 #define echeckcommandbufferbegininfo moonvulkan_echeckcommandbufferbegininfo
 int echeckcommandbufferbegininfo(lua_State *L, int arg, VkCommandBufferBeginInfo_CHAIN *pp);
 
+typedef struct {
+    VkFenceCreateInfo p1;
+} VkFenceCreateInfo_CHAIN;
+
 #define echeckfencecreateinfo moonvulkan_echeckfencecreateinfo
-int echeckfencecreateinfo(lua_State *L, int arg, VkFenceCreateInfo *p);
+int echeckfencecreateinfo(lua_State *L, int arg, VkFenceCreateInfo_CHAIN *p);
+
 #define echeckdeviceeventinfo moonvulkan_echeckdeviceeventinfo
 int echeckdeviceeventinfo(lua_State *L, int arg, VkDeviceEventInfoEXT *p);
 #define echeckdisplayeventinfo moonvulkan_echeckdisplayeventinfo
 int echeckdisplayeventinfo(lua_State *L, int arg, VkDisplayEventInfoEXT *p);
+
+
+typedef struct {
+    VkSemaphoreCreateInfo p1;
+    VkExportSemaphoreCreateInfoKHR p2;
+} VkSemaphoreCreateInfo_CHAIN;
+
 #define echecksemaphorecreateinfo moonvulkan_echecksemaphorecreateinfo
-int echecksemaphorecreateinfo(lua_State *L, int arg, VkSemaphoreCreateInfo *p);
+int echecksemaphorecreateinfo(lua_State *L, int arg, VkSemaphoreCreateInfo_CHAIN *p);
+
 #define echeckeventcreateinfo moonvulkan_echeckeventcreateinfo
 int echeckeventcreateinfo(lua_State *L, int arg, VkEventCreateInfo *p);
 
