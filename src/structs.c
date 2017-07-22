@@ -1177,15 +1177,25 @@ int echeckpipelinecachecreateinfo(lua_State *L, int arg, VkPipelineCacheCreateIn
 
 /*------------------------------------------------------------------------------*/
 
-void freebuffercreateinfo(lua_State *L, VkBufferCreateInfo *p)
+void freebuffercreateinfo(lua_State *L, VkBufferCreateInfo_CHAIN *pp)
     {
-    if(!p) return;
+    VkBufferCreateInfo *p = &pp->p1;
     if(p->pQueueFamilyIndices) Free(L, (void*)p->pQueueFamilyIndices);
     }
 
-int echeckbuffercreateinfo(lua_State *L, int arg, VkBufferCreateInfo *p)
+static int echeckexternalmemorybuffercreateinfo(lua_State *L, int arg, VkExternalMemoryBufferCreateInfoKHR *p)
+    {
+    int err;
+    p->sType = VK_STRUCTURE_TYPE_EXTERNAL_MEMORY_BUFFER_CREATE_INFO_KHR;
+    GetFlags(handleTypes, "handle_types");
+    return 0;
+    }
+
+int echeckbuffercreateinfo(lua_State *L, int arg, VkBufferCreateInfo_CHAIN *pp)
     {
     int err, arg1;
+    int p2_present;
+    VkBufferCreateInfo *p = &pp->p1;
     ECHECK_PREAMBLE(p);
     p->sType = VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO;
     GetFlags(flags, "flags");
@@ -1198,6 +1208,13 @@ int echeckbuffercreateinfo(lua_State *L, int arg, VkBufferCreateInfo *p)
     POPFIELD();
     if(err < 0) return fielderror(L, F, err);
 #undef F
+    IsPresent("handle_types", p2_present);
+    if(p2_present)
+        {
+        err = echeckexternalmemorybuffercreateinfo(L, arg, &pp->p2);
+        if(err) { freebuffercreateinfo(L, pp); return err; }
+        pp->p1.pNext = &pp->p2;
+        }
     return 0;
     }
 
@@ -1218,15 +1235,25 @@ int echeckbufferviewcreateinfo(lua_State *L, int arg, VkBufferViewCreateInfo *p)
 
 /*------------------------------------------------------------------------------*/
 
-void freeimagecreateinfo(lua_State *L, VkImageCreateInfo *p)
+void freeimagecreateinfo(lua_State *L, VkImageCreateInfo_CHAIN *pp)
     {
-    if(!p) return;
+    VkImageCreateInfo *p = &pp->p1;
     if(p->pQueueFamilyIndices) Free(L, (void*)p->pQueueFamilyIndices);
     }
 
-int echeckimagecreateinfo(lua_State *L, int arg, VkImageCreateInfo *p)
+static int echeckexternalmemoryimagecreateinfo(lua_State *L, int arg, VkExternalMemoryImageCreateInfoKHR *p)
+    {
+    int err;
+    p->sType = VK_STRUCTURE_TYPE_EXTERNAL_MEMORY_IMAGE_CREATE_INFO_KHR;
+    GetFlags(handleTypes, "handle_types");
+    return 0;
+    }
+
+int echeckimagecreateinfo(lua_State *L, int arg, VkImageCreateInfo_CHAIN *pp)
     {
     int err, arg1;
+    int p2_present;
+    VkImageCreateInfo *p = &pp->p1;
     ECHECK_PREAMBLE(p);
     p->sType = VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO;
     GetFlags(flags, "flags");
@@ -1246,6 +1273,13 @@ int echeckimagecreateinfo(lua_State *L, int arg, VkImageCreateInfo *p)
     POPFIELD();
     if(err < 0) return fielderror(L, F, err);
 #undef F
+    IsPresent("handle_types", p2_present);
+    if(p2_present)
+        {
+        err = echeckexternalmemoryimagecreateinfo(L, arg, &pp->p2);
+        if(err) { freeimagecreateinfo(L, pp); return err; }
+        pp->p1.pNext = &pp->p2;
+        }
     return 0;
     }
 
@@ -2564,11 +2598,22 @@ static int echeckmemorydedicatedallocateinfo(lua_State *L, int arg, VkMemoryDedi
     return 0;
     }
 
+
+static int echeckexportmemoryallocateinfo(lua_State *L, int arg, VkExportMemoryAllocateInfoKHR *p)
+    {
+    int err;
+    p->sType = VK_STRUCTURE_TYPE_EXPORT_MEMORY_ALLOCATE_INFO_KHR;
+    GetFlags(handleTypes, "handle_types");
+    return 0;
+    }
+
 int echeckmemoryallocateinfo(lua_State *L, int arg, VkMemoryAllocateInfo_CHAIN *pp)
     {
     int err;
-    int p2_present;
+    int p2_present, p3_present;
     VkMemoryAllocateInfo *p = &pp->p1;
+    VkMemoryDedicatedAllocateInfoKHR *p2 = &pp->p2;
+    VkExportMemoryAllocateInfoKHR *p3 = &pp->p3;
     ECHECK_PREAMBLE(pp);
     p->sType = VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO;
     GetInteger(allocationSize, "allocation_size");
@@ -2578,9 +2623,19 @@ int echeckmemoryallocateinfo(lua_State *L, int arg, VkMemoryAllocateInfo_CHAIN *
     if(!p2_present) IsPresent("buffer", p2_present);
     if(p2_present)
         {
-        err = echeckmemorydedicatedallocateinfo(L, arg, &pp->p2);
+        err = echeckmemorydedicatedallocateinfo(L, arg, p2);
         if(err) return err;
-        pp->p1.pNext = &pp->p2;
+        p->pNext = p2;
+        }
+    IsPresent("handle_types", p3_present);
+    if(p3_present)
+        {
+        err = echeckexportmemoryallocateinfo(L, arg, &pp->p3);
+        if(err) return err;
+        if(p2_present)
+            p2->pNext = p3;
+        else
+            p->pNext = p3;
         }
     return 0;
     }

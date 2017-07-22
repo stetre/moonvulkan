@@ -76,13 +76,13 @@ static int Create(lua_State *L)
     ud_t *ud;
     VkResult ec;
     VkImage image;
-    VkImageCreateInfo info;
+    VkImageCreateInfo_CHAIN info;
 
     VkDevice device = checkdevice(L, 1, &ud);
     const VkAllocationCallbacks *allocator = optallocator(L, 3);
     if(echeckimagecreateinfo(L, 2, &info)) return argerror(L, 2);
 
-    ec = ud->ddt->CreateImage(device, &info, allocator, &image);
+    ec = ud->ddt->CreateImage(device, &info.p1, allocator, &image);
     freeimagecreateinfo(L, &info);
     CheckError(L, ec);
     return newimage(L, image, UD(device), device, allocator, 0);

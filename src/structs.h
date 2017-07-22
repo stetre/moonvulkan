@@ -122,19 +122,29 @@ int echeckshadermodulecreateinfo(lua_State *L, int arg, VkShaderModuleCreateInfo
 #define echeckpipelinecachecreateinfo moonvulkan_echeckpipelinecachecreateinfo
 int echeckpipelinecachecreateinfo(lua_State *L, int arg, VkPipelineCacheCreateInfo *p);
 
+typedef struct {
+    VkBufferCreateInfo p1;
+    VkExternalMemoryBufferCreateInfoKHR p2;
+} VkBufferCreateInfo_CHAIN;
+
 #define freebuffercreateinfo moonvulkan_freebuffercreateinfo
-void freebuffercreateinfo(lua_State *L, VkBufferCreateInfo *p);
+void freebuffercreateinfo(lua_State *L, VkBufferCreateInfo_CHAIN *p);
 #define echeckbuffercreateinfo moonvulkan_echeckbuffercreateinfo
-int echeckbuffercreateinfo(lua_State *L, int arg, VkBufferCreateInfo *p);
+int echeckbuffercreateinfo(lua_State *L, int arg, VkBufferCreateInfo_CHAIN *p);
 
 #define freebufferviewcreateinfo(L, p) do { } while(0)
 #define echeckbufferviewcreateinfo moonvulkan_echeckbufferviewcreateinfo
 int echeckbufferviewcreateinfo(lua_State *L, int arg, VkBufferViewCreateInfo *p);
 
+typedef struct {
+    VkImageCreateInfo p1;
+    VkExternalMemoryImageCreateInfoKHR p2;
+} VkImageCreateInfo_CHAIN;
+
 #define freeimagecreateinfo moonvulkan_freeimagecreateinfo
-void freeimagecreateinfo(lua_State *L, VkImageCreateInfo *p);
+void freeimagecreateinfo(lua_State *L, VkImageCreateInfo_CHAIN *p);
 #define echeckimagecreateinfo moonvulkan_echeckimagecreateinfo
-int echeckimagecreateinfo(lua_State *L, int arg, VkImageCreateInfo *p);
+int echeckimagecreateinfo(lua_State *L, int arg, VkImageCreateInfo_CHAIN *p);
 
 #define freeimageviewcreateinfo(L, p) do { } while(0)
 #define echeckimageviewcreateinfo moonvulkan_echeckimageviewcreateinfo
@@ -377,6 +387,7 @@ VkMappedMemoryRange* echeckmappedmemoryrangelist(lua_State *L, int arg, uint32_t
 typedef struct {
     VkMemoryAllocateInfo p1;
     VkMemoryDedicatedAllocateInfoKHR p2;
+    VkExportMemoryAllocateInfoKHR p3;
 } VkMemoryAllocateInfo_CHAIN;
 
 #define echeckmemoryallocateinfo moonvulkan_echeckmemoryallocateinfo

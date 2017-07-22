@@ -43,12 +43,12 @@ static int Create(lua_State *L)
     ud_t *ud, *device_ud;
     VkResult ec;
     VkBuffer buffer;
-    VkBufferCreateInfo info;
+    VkBufferCreateInfo_CHAIN info;
     VkDevice device = checkdevice(L, 1, &device_ud);
     const VkAllocationCallbacks *allocator = optallocator(L, 3);
     if(echeckbuffercreateinfo(L, 2, &info)) return argerror(L, 2);
 
-    ec = device_ud->ddt->CreateBuffer(device, &info, allocator, &buffer);
+    ec = device_ud->ddt->CreateBuffer(device, &info.p1, allocator, &buffer);
     freebuffercreateinfo(L, &info);
     CheckError(L, ec);
     TRACE_CREATE(buffer, "buffer");
