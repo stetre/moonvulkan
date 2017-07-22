@@ -419,8 +419,20 @@ _handle_type_: <<externalmemoryhandletypeflags, externalmemoryhandletypeflags>>,
 
 * [[externalbufferproperties]]
 [small]#*externalbufferproperties* = { +
-_external_memory_properties_, <<externalmemoryproperties, externalmemoryproperties>>, +
+_external_memory_properties_: <<externalmemoryproperties, externalmemoryproperties>>, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkExternalBufferPropertiesKHR[VkExternalBufferPropertiesKHR])#
+
+* [[physicaldeviceexternalfenceinfo]]
+[small]#*physicaldeviceexternalfenceinfo* = { +
+_handle_type_: <<externalfencehandletypeflags, externalfencehandletypeflags>>, +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPhysicalDeviceExternalFenceInfoKHR[VkPhysicalDeviceExternalFenceInfoKHR])#
+
+* [[externalfenceproperties]]
+[small]#*externalfenceproperties* = { +
+_export_from_imported_handle_types_: <<externalfencehandletypeflags, externalfencehandletypeflags>>, +
+_compatible_handle_types_: <<externalfencehandletypeflags, externalfencehandletypeflags>>, +
+_external_fence_features_: <<externalfencefeatureflags, externalfencefeatureflags>>, +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkExternalFencePropertiesKHR[VkExternalFencePropertiesKHR])#
 
 '''
 

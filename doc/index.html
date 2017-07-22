@@ -1152,6 +1152,15 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/
 </li>
 </ul>
 </div>
+<div id="get_physical_device_external_fence_properties" class="ulist">
+<ul>
+<li>
+<p><a href="#externalfenceproperties"><em>externalfenceproperties</em></a> = <strong>get_physical_device_external_fence_properties</strong>(<em>physdev</em>, <em>info</em>)<br>
+<span class="small"><em>info</em>: <a href="#physicaldeviceexternalfenceinfo">physicaldeviceexternalfenceinfo</a>.<br>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetPhysicalDeviceExternalFencePropertiesKHR">vkGetPhysicalDeviceExternalFencePropertiesKHR</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_external_fence_capabilities">VK_KHR_external_fence_capabilities</a> extension).</span></p>
+</li>
+</ul>
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -3562,8 +3571,22 @@ Note1: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/htm
 <li>
 <p><a id="externalbufferproperties"></a>
 <span class="small"><strong>externalbufferproperties</strong> = {<br>
-<em>external_memory_properties</em>, <a href="#externalmemoryproperties">externalmemoryproperties</a>,<br>
+<em>external_memory_properties</em>: <a href="#externalmemoryproperties">externalmemoryproperties</a>,<br>
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkExternalBufferPropertiesKHR">VkExternalBufferPropertiesKHR</a>)</span></p>
+</li>
+<li>
+<p><a id="physicaldeviceexternalfenceinfo"></a>
+<span class="small"><strong>physicaldeviceexternalfenceinfo</strong> = {<br>
+<em>handle_type</em>: <a href="#externalfencehandletypeflags">externalfencehandletypeflags</a>,<br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPhysicalDeviceExternalFenceInfoKHR">VkPhysicalDeviceExternalFenceInfoKHR</a>)</span></p>
+</li>
+<li>
+<p><a id="externalfenceproperties"></a>
+<span class="small"><strong>externalfenceproperties</strong> = {<br>
+<em>export_from_imported_handle_types</em>: <a href="#externalfencehandletypeflags">externalfencehandletypeflags</a>,<br>
+<em>compatible_handle_types</em>: <a href="#externalfencehandletypeflags">externalfencehandletypeflags</a>,<br>
+<em>external_fence_features</em>: <a href="#externalfencefeatureflags">externalfencefeatureflags</a>,<br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkExternalFencePropertiesKHR">VkExternalFencePropertiesKHR</a>)</span></p>
 </li>
 </ul>
 </div>

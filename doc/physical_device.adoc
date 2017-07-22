@@ -51,3 +51,8 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.ht
 [small]#_info_: <<physicaldeviceexternalbufferinfo, physicaldeviceexternalbufferinfo>>. +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetPhysicalDeviceExternalBufferPropertiesKHR[vkGetPhysicalDeviceExternalBufferPropertiesKHR] (https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_external_memory_capabilities[VK_KHR_external_memory_capabilities] extension).#
 
+[[get_physical_device_external_fence_properties]]
+* <<externalfenceproperties,_externalfenceproperties_>> = *get_physical_device_external_fence_properties*(_physdev_, _info_) +
+[small]#_info_: <<physicaldeviceexternalfenceinfo, physicaldeviceexternalfenceinfo>>. +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetPhysicalDeviceExternalFencePropertiesKHR[vkGetPhysicalDeviceExternalFencePropertiesKHR] (https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_external_fence_capabilities[VK_KHR_external_fence_capabilities] extension).#
+

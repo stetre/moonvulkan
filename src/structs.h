@@ -244,6 +244,11 @@ int pushexternalbufferproperties(lua_State *L, VkExternalBufferPropertiesKHR *p)
 #define echeckphysicaldeviceexternalbufferinfo moonvulkan_echeckphysicaldeviceexternalbufferinfo
 int echeckphysicaldeviceexternalbufferinfo(lua_State *L, int arg, VkPhysicalDeviceExternalBufferInfoKHR *p);
 
+#define pushexternalfenceproperties moonvulkan_pushexternalfenceproperties
+int pushexternalfenceproperties(lua_State *L, VkExternalFencePropertiesKHR *p);
+#define echeckphysicaldeviceexternalfenceinfo moonvulkan_echeckphysicaldeviceexternalfenceinfo
+int echeckphysicaldeviceexternalfenceinfo(lua_State *L, int arg, VkPhysicalDeviceExternalFenceInfoKHR *p);
+
 typedef struct {
     VkPhysicalDeviceImageFormatInfo2KHR p1;
     VkPhysicalDeviceExternalImageFormatInfoKHR p2;

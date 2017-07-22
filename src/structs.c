@@ -1860,10 +1860,29 @@ int echeckphysicaldeviceexternalbufferinfo(lua_State *L, int arg, VkPhysicalDevi
     p->sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_BUFFER_INFO_KHR;
     GetFlags(flags, "flags");
     GetFlags(usage, "usage");
-    GetBits(handleType, "handleType", VkExternalMemoryHandleTypeFlagBitsKHR);
+    GetBits(handleType, "handle_type", VkExternalMemoryHandleTypeFlagBitsKHR);
     return 0;
     }
 
+/*------------------------------------------------------------------------------*/
+
+int pushexternalfenceproperties(lua_State *L, VkExternalFencePropertiesKHR *p)
+    {
+    lua_newtable(L);
+    SetFlags(exportFromImportedHandleTypes, "export_from_imported_handle_types");
+    SetFlags(compatibleHandleTypes, "compatible_handle_types");
+    SetFlags(externalFenceFeatures, "external_fence_features");
+    return 1;
+    }
+
+int echeckphysicaldeviceexternalfenceinfo(lua_State *L, int arg, VkPhysicalDeviceExternalFenceInfoKHR *p)
+    {
+    int err;
+    ECHECK_PREAMBLE(p);
+    p->sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_FENCE_INFO_KHR;
+    GetBits(handleType, "handle_type", VkExternalFenceHandleTypeFlagBitsKHR);
+    return 0;
+    }
 
 /*------------------------------------------------------------------------------*/
 int pushsparseimageformatproperties(lua_State *L, VkSparseImageFormatProperties *p)
