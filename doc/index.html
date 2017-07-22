@@ -1413,6 +1413,22 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/
 </li>
 </ul>
 </div>
+<div id="importsemaphorefd" class="ulist">
+<ul>
+<li>
+<p><strong>importsemaphorefd</strong>(<em>semaphore</em>, <a href="#importsemaphorefdinfo"><em>importsemaphorefdinfo</em></a>)<br>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkImportSemaphoreFdKHR">vkImportSemaphoreFdKHR</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_external_semaphore_fd">VK_KHR_external_semaphore_fd</a> extension).</span></p>
+</li>
+</ul>
+</div>
+<div id="getsemaphorefd" class="ulist">
+<ul>
+<li>
+<p><em>fd</em> = <strong>getsemaphorefd</strong>(<em>semaphore</em>, <a href="#semaphoregetfdinfo"><em>semaphoregetfdinfo</em></a>)<br>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetSemaphoreFdKHR">vkGetSemaphoreFdKHR</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_external_semaphore_fd">VK_KHR_external_semaphore_fd</a> extension).</span></p>
+</li>
+</ul>
+</div>
 </div>
 <div class="sect3">
 <h4 id="event">event</h4>
@@ -2543,6 +2559,9 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/
 </li>
 <li>
 <p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_external_semaphore_capabilities">VK_KHR_external_semaphore_capabilities</a></p>
+</li>
+<li>
+<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_external_semaphore_fd">VK_KHR_external_semaphore_fd</a></p>
 </li>
 <li>
 <p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_get_memory_requirements2">VK_KHR_get_memory_requirements2</a></p>
@@ -3801,6 +3820,11 @@ Note1: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/htm
 <em>display_event</em>: <a href="#displayeventtype">displayeventtype</a>,<br>
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkDisplayEventInfoEXT">VkDisplayEventInfoEXT</a>)</span></p>
 </li>
+</ul>
+</div>
+<hr>
+<div class="ulist">
+<ul>
 <li>
 <p><a id="semaphorecreateinfo"></a>
 <span class="small"><strong>semaphorecreateinfo</strong> = {<br>
@@ -3811,6 +3835,25 @@ Note1: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/htm
 Note1: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_external_semaphore">VK_KHR_external_semaphore</a> extension (rfr:
 <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkExportSemaphoreCreateInfoKHR">VkExportSemaphoreCreateInfoKHR</a>).</span></p>
 </li>
+<li>
+<p><a id="importsemaphorefdinfo"></a>
+<span class="small"><strong>importsemaphorefdinfo</strong> = {<br>
+<em>flags</em>: <a href="#semaphoreimportflags">semaphoreimportflags</a>,<br>
+<em>handle_type</em>: <a href="#externalsemaphorehandletypeflagbits">externalsemaphorehandletypeflagbits</a>,<br>
+<em>fd</em>: integer,<br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkImportSemaphoreFdInfoKHR">VkImportSemaphoreFdInfoKHR</a>)</span></p>
+</li>
+<li>
+<p><a id="semaphoregetfdinfo"></a>
+<span class="small"><strong>semaphoregetfdinfo</strong> = {<br>
+<em>handle_type</em>: <a href="#externalsemaphorehandletypeflagbits">externalsemaphorehandletypeflagbits</a>,<br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkSemaphoreGetFdInfoKHR">VkSemaphoreGetFdInfoKHR</a>)</span></p>
+</li>
+</ul>
+</div>
+<hr>
+<div class="ulist">
+<ul>
 <li>
 <p><a id="eventcreateinfo"></a>
 <span class="small"><strong>eventcreateinfo</strong> = {<br>

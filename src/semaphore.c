@@ -73,6 +73,38 @@ static int Create(lua_State *L)
     return 1;
     }
 
+static int ImportSemaphoreFd(lua_State *L)
+    {
+    VkResult ec;
+    ud_t *ud;
+    VkImportSemaphoreFdInfoKHR info;
+    VkSemaphore semaphore = checksemaphore(L, 1, &ud);
+    CheckDevicePfn(L, ud, ImportSemaphoreFdKHR);
+    if(echeckimportsemaphorefdinfo(L, 2, &info)) return argerror(L, 2);
+    info.semaphore = semaphore;
+    ec = ud->ddt->ImportSemaphoreFdKHR(ud->device, &info);
+    CheckError(L, ec);
+    return 0;
+    }
+
+
+static int GetSemaphoreFd(lua_State *L)
+    {
+    VkResult ec;
+    ud_t *ud;
+    int fd;
+    VkSemaphoreGetFdInfoKHR info;
+    VkSemaphore semaphore = checksemaphore(L, 1, &ud);
+    CheckDevicePfn(L, ud, GetSemaphoreFdKHR);
+    if(echecksemaphoregetfdinfo(L, 2, &info)) return argerror(L, 2);
+    info.semaphore = semaphore;
+    ec = ud->ddt->GetSemaphoreFdKHR(ud->device, &info, &fd);
+    CheckError(L, ec);
+    lua_pushinteger(L, fd);
+    return 1;
+    }
+
+
 RAW_FUNC(semaphore)
 TYPE_FUNC(semaphore)
 INSTANCE_FUNC(semaphore)
@@ -101,6 +133,8 @@ static const struct luaL_Reg Functions[] =
     {
         { "create_semaphore",  Create },
         { "destroy_semaphore",  Destroy },
+        { "import_semaphore_fd", ImportSemaphoreFd },
+        { "get_semaphore_fd", GetSemaphoreFd },
         { NULL, NULL } /* sentinel */
     };
 

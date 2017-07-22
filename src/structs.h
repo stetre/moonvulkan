@@ -79,6 +79,10 @@ typedef struct {
 
 #define echecksemaphorecreateinfo moonvulkan_echecksemaphorecreateinfo
 int echecksemaphorecreateinfo(lua_State *L, int arg, VkSemaphoreCreateInfo_CHAIN *p);
+#define echeckimportsemaphorefdinfo moonvulkan_echeckimportsemaphorefdinfo
+int echeckimportsemaphorefdinfo(lua_State *L, int arg, VkImportSemaphoreFdInfoKHR *p);
+#define echecksemaphoregetfdinfo moonvulkan_echecksemaphoregetfdinfo
+int echecksemaphoregetfdinfo(lua_State *L, int arg, VkSemaphoreGetFdInfoKHR *p);
 
 #define echeckeventcreateinfo moonvulkan_echeckeventcreateinfo
 int echeckeventcreateinfo(lua_State *L, int arg, VkEventCreateInfo *p);

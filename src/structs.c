@@ -727,7 +727,6 @@ int echeckcommandbufferbegininfo(lua_State *L, int arg, VkCommandBufferBeginInfo
 static int echeckexportfencecreateinfo(lua_State *L, int arg, VkExportFenceCreateInfoKHR *p)
     {
     int err;
-    ECHECK_PREAMBLE(p);
     p->sType = VK_STRUCTURE_TYPE_EXPORT_FENCE_CREATE_INFO_KHR;
     GetFlags(handleTypes, "handle_types");
     return 0;
@@ -771,10 +770,11 @@ int echeckdisplayeventinfo(lua_State *L, int arg, VkDisplayEventInfoEXT *p)
     return 0;
     }
 
+/*------------------------------------------------------------------------------*/
+
 static int echeckexportsemaphorecreateinfo(lua_State *L, int arg, VkExportSemaphoreCreateInfoKHR *p)
     {
     int err;
-    ECHECK_PREAMBLE(p);
     p->sType = VK_STRUCTURE_TYPE_EXPORT_SEMAPHORE_CREATE_INFO_KHR;
     GetFlags(handleTypes, "handle_types");
     return 0;
@@ -801,6 +801,30 @@ int echecksemaphorecreateinfo(lua_State *L, int arg, VkSemaphoreCreateInfo_CHAIN
     return 0;
     }
 
+int echeckimportsemaphorefdinfo(lua_State *L, int arg, VkImportSemaphoreFdInfoKHR *p)
+    {
+    int err;
+    ECHECK_PREAMBLE(p);
+    p->sType = VK_STRUCTURE_TYPE_IMPORT_SEMAPHORE_FD_INFO_KHR;
+    /* p->semaphore is set by the caller */
+    GetFlags(flags, "flags");
+    GetBits(handleType, "handle_type", VkExternalSemaphoreHandleTypeFlagBitsKHR);
+    GetInteger(fd, "fd");
+    return 0;
+    }
+
+int echecksemaphoregetfdinfo(lua_State *L, int arg, VkSemaphoreGetFdInfoKHR *p)
+    {
+    int err;
+    ECHECK_PREAMBLE(p);
+    p->sType = VK_STRUCTURE_TYPE_SEMAPHORE_GET_FD_INFO_KHR;
+    /* p->semaphore is set by the caller */
+    GetBits(handleType, "handle_type", VkExternalSemaphoreHandleTypeFlagBitsKHR);
+    return 0;
+    }
+
+
+/*------------------------------------------------------------------------------*/
 
 int echeckeventcreateinfo(lua_State *L, int arg, VkEventCreateInfo *p)
     {
