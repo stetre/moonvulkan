@@ -770,6 +770,29 @@ int echeckdisplayeventinfo(lua_State *L, int arg, VkDisplayEventInfoEXT *p)
     return 0;
     }
 
+int echeckimportfencefdinfo(lua_State *L, int arg, VkImportFenceFdInfoKHR *p)
+    {
+    int err;
+    ECHECK_PREAMBLE(p);
+    p->sType = VK_STRUCTURE_TYPE_IMPORT_FENCE_FD_INFO_KHR;
+    /* p->fence is set by the caller */
+    GetFlags(flags, "flags");
+    GetBits(handleType, "handle_type", VkExternalFenceHandleTypeFlagBitsKHR);
+    GetInteger(fd, "fd");
+    return 0;
+    }
+
+int echeckfencegetfdinfo(lua_State *L, int arg, VkFenceGetFdInfoKHR *p)
+    {
+    int err;
+    ECHECK_PREAMBLE(p);
+    p->sType = VK_STRUCTURE_TYPE_FENCE_GET_FD_INFO_KHR;
+    /* p->fence is set by the caller */
+    GetBits(handleType, "handle_type", VkExternalFenceHandleTypeFlagBitsKHR);
+    return 0;
+    }
+
+
 /*------------------------------------------------------------------------------*/
 
 static int echeckexportsemaphorecreateinfo(lua_State *L, int arg, VkExportSemaphoreCreateInfoKHR *p)

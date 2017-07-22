@@ -70,6 +70,10 @@ int echeckfencecreateinfo(lua_State *L, int arg, VkFenceCreateInfo_CHAIN *p);
 int echeckdeviceeventinfo(lua_State *L, int arg, VkDeviceEventInfoEXT *p);
 #define echeckdisplayeventinfo moonvulkan_echeckdisplayeventinfo
 int echeckdisplayeventinfo(lua_State *L, int arg, VkDisplayEventInfoEXT *p);
+#define echeckimportfencefdinfo moonvulkan_echeckimportfencefdinfo
+int echeckimportfencefdinfo(lua_State *L, int arg, VkImportFenceFdInfoKHR *p);
+#define echeckfencegetfdinfo moonvulkan_echeckfencegetfdinfo
+int echeckfencegetfdinfo(lua_State *L, int arg, VkFenceGetFdInfoKHR *p);
 
 
 typedef struct {

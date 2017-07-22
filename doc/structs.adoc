@@ -575,6 +575,18 @@ _device_event_: <<deviceeventtype, deviceeventtype>>, +
 _display_event_: <<displayeventtype, displayeventtype>>, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkDisplayEventInfoEXT[VkDisplayEventInfoEXT])#
 
+* [[importfencefdinfo]]
+[small]#*importfencefdinfo* = { +
+_flags_: <<fenceimportflags, fenceimportflags>>, +
+_handle_type_: <<externalfencehandletypeflagbits, externalfencehandletypeflagbits>>, +
+_fd_: integer, +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkImportFenceFdInfoKHR[VkImportFenceFdInfoKHR])#
+
+* [[fencegetfdinfo]]
+[small]#*fencegetfdinfo* = { +
+_handle_type_: <<externalfencehandletypeflagbits, externalfencehandletypeflagbits>>, +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkFenceGetFdInfoKHR[VkFenceGetFdInfoKHR])#
+
 '''
 
 * [[semaphorecreateinfo]]

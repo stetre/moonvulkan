@@ -19,6 +19,8 @@ _fence_ = *create_fence*(_device_, [_flags_]) +
 * *destroy_fence*(_fence_) +
 [small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkDestroyFence[vkDestroyFence].#
 
+'''
+
 [[reset_fences]]
 * *reset_fences*({_fence_}) +
 [small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkResetFences[vkResetFences].#
@@ -34,5 +36,15 @@ _fence_ = *create_fence*(_device_, [_flags_]) +
 [_timeout_]: <<timeout, timeout>> +
 Returns _true_ on success, _false_ on timeout. +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkWaitForFences[vkWaitForFences].#
+
+'''
+
+[[importfencefd]]
+* *importfencefd*(_fence_, <<importfencefdinfo, _importfencefdinfo_>>) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkImportFenceFdKHR[vkImportFenceFdKHR] (https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_external_fence_fd[VK_KHR_external_fence_fd] extension).#
+
+[[getfencefd]]
+* _fd_ = *getfencefd*(_fence_, <<fencegetfdinfo, _fencegetfdinfo_>>) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetFenceFdKHR[vkGetFenceFdKHR] (https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_external_fence_fd[VK_KHR_external_fence_fd] extension).#
 
 

@@ -1365,6 +1365,7 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/
 </li>
 </ul>
 </div>
+<hr>
 <div id="reset_fences" class="ulist">
 <ul>
 <li>
@@ -1393,6 +1394,23 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/
 </li>
 </ul>
 </div>
+<hr>
+<div id="importfencefd" class="ulist">
+<ul>
+<li>
+<p><strong>importfencefd</strong>(<em>fence</em>, <a href="#importfencefdinfo"><em>importfencefdinfo</em></a>)<br>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkImportFenceFdKHR">vkImportFenceFdKHR</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_external_fence_fd">VK_KHR_external_fence_fd</a> extension).</span></p>
+</li>
+</ul>
+</div>
+<div id="getfencefd" class="ulist">
+<ul>
+<li>
+<p><em>fd</em> = <strong>getfencefd</strong>(<em>fence</em>, <a href="#fencegetfdinfo"><em>fencegetfdinfo</em></a>)<br>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetFenceFdKHR">vkGetFenceFdKHR</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_external_fence_fd">VK_KHR_external_fence_fd</a> extension).</span></p>
+</li>
+</ul>
+</div>
 </div>
 <div class="sect3">
 <h4 id="semaphore">semaphore</h4>
@@ -1413,6 +1431,7 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/
 </li>
 </ul>
 </div>
+<hr>
 <div id="importsemaphorefd" class="ulist">
 <ul>
 <li>
@@ -2544,6 +2563,9 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/
 </li>
 <li>
 <p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_external_fence_capabilities">VK_KHR_external_fence_capabilities</a></p>
+</li>
+<li>
+<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_external_fence_fd">VK_KHR_external_fence_fd</a></p>
 </li>
 <li>
 <p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_external_memory_capabilities">VK_KHR_external_memory_capabilities</a></p>
@@ -3819,6 +3841,20 @@ Note1: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/htm
 <span class="small"><strong>displayeventinfo</strong> = {<br>
 <em>display_event</em>: <a href="#displayeventtype">displayeventtype</a>,<br>
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkDisplayEventInfoEXT">VkDisplayEventInfoEXT</a>)</span></p>
+</li>
+<li>
+<p><a id="importfencefdinfo"></a>
+<span class="small"><strong>importfencefdinfo</strong> = {<br>
+<em>flags</em>: <a href="#fenceimportflags">fenceimportflags</a>,<br>
+<em>handle_type</em>: <a href="#externalfencehandletypeflagbits">externalfencehandletypeflagbits</a>,<br>
+<em>fd</em>: integer,<br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkImportFenceFdInfoKHR">VkImportFenceFdInfoKHR</a>)</span></p>
+</li>
+<li>
+<p><a id="fencegetfdinfo"></a>
+<span class="small"><strong>fencegetfdinfo</strong> = {<br>
+<em>handle_type</em>: <a href="#externalfencehandletypeflagbits">externalfencehandletypeflagbits</a>,<br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkFenceGetFdInfoKHR">VkFenceGetFdInfoKHR</a>)</span></p>
 </li>
 </ul>
 </div>

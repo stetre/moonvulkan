@@ -173,6 +173,38 @@ static int WaitForFences(lua_State *L)
     return 0;
     }
 
+static int ImportFenceFd(lua_State *L)
+    {
+    VkResult ec;
+    ud_t *ud;
+    VkImportFenceFdInfoKHR info;
+    VkFence fence = checkfence(L, 1, &ud);
+    CheckDevicePfn(L, ud, ImportFenceFdKHR);
+    if(echeckimportfencefdinfo(L, 2, &info)) return argerror(L, 2);
+    info.fence = fence;
+    ec = ud->ddt->ImportFenceFdKHR(ud->device, &info);
+    CheckError(L, ec);
+    return 0;
+    }
+
+
+static int GetFenceFd(lua_State *L)
+    {
+    VkResult ec;
+    ud_t *ud;
+    int fd;
+    VkFenceGetFdInfoKHR info;
+    VkFence fence = checkfence(L, 1, &ud);
+    CheckDevicePfn(L, ud, GetFenceFdKHR);
+    if(echeckfencegetfdinfo(L, 2, &info)) return argerror(L, 2);
+    info.fence = fence;
+    ec = ud->ddt->GetFenceFdKHR(ud->device, &info, &fd);
+    CheckError(L, ec);
+    lua_pushinteger(L, fd);
+    return 1;
+    }
+
+
 RAW_FUNC(fence)
 TYPE_FUNC(fence)
 INSTANCE_FUNC(fence)
@@ -206,6 +238,8 @@ static const struct luaL_Reg Functions[] =
         { "reset_fences", ResetFences },
         { "get_fence_status", GetFenceStatus },
         { "wait_for_fences", WaitForFences },
+        { "import_fence_fd", ImportFenceFd },
+        { "get_fence_fd", GetFenceFd },
         { NULL, NULL } /* sentinel */
     };
 
