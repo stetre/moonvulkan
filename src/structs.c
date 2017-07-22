@@ -1885,6 +1885,26 @@ int echeckphysicaldeviceexternalfenceinfo(lua_State *L, int arg, VkPhysicalDevic
     }
 
 /*------------------------------------------------------------------------------*/
+
+int pushexternalsemaphoreproperties(lua_State *L, VkExternalSemaphorePropertiesKHR *p)
+    {
+    lua_newtable(L);
+    SetFlags(exportFromImportedHandleTypes, "export_from_imported_handle_types");
+    SetFlags(compatibleHandleTypes, "compatible_handle_types");
+    SetFlags(externalSemaphoreFeatures, "external_semaphore_features");
+    return 1;
+    }
+
+int echeckphysicaldeviceexternalsemaphoreinfo(lua_State *L, int arg, VkPhysicalDeviceExternalSemaphoreInfoKHR *p)
+    {
+    int err;
+    ECHECK_PREAMBLE(p);
+    p->sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_SEMAPHORE_INFO_KHR;
+    GetBits(handleType, "handle_type", VkExternalSemaphoreHandleTypeFlagBitsKHR);
+    return 0;
+    }
+
+/*------------------------------------------------------------------------------*/
 int pushsparseimageformatproperties(lua_State *L, VkSparseImageFormatProperties *p)
     {
     lua_newtable(L);

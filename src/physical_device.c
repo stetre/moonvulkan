@@ -326,6 +326,22 @@ static int GetPhysicalDeviceExternalFenceProperties(lua_State *L)
     return 1;
     }
 
+static int GetPhysicalDeviceExternalSemaphoreProperties(lua_State *L)
+    {
+    ud_t *ud;
+    VkPhysicalDeviceExternalSemaphoreInfoKHR info;
+    VkExternalSemaphorePropertiesKHR properties;
+    VkPhysicalDevice physical_device = checkphysical_device(L, 1, &ud);
+
+    CheckInstancePfn(L, ud, GetPhysicalDeviceExternalSemaphorePropertiesKHR);
+    if(echeckphysicaldeviceexternalsemaphoreinfo(L, 2, &info)) return argerror(L, 2);
+
+    memset(&properties, 0, sizeof(properties));
+    ud->idt->GetPhysicalDeviceExternalSemaphorePropertiesKHR(physical_device, &info, &properties);
+
+    pushexternalsemaphoreproperties(L, &properties);
+    return 1;
+    }
 
 
 /*-----------------------------------------------------------------------------*/
@@ -365,6 +381,7 @@ static const struct luaL_Reg Functions[] =
         { "get_physical_device_sparse_image_format_properties", GetPhysicalDeviceSparseImageFormatProperties },
         { "get_physical_device_external_buffer_properties", GetPhysicalDeviceExternalBufferProperties },
         { "get_physical_device_external_fence_properties", GetPhysicalDeviceExternalFenceProperties },
+        { "get_physical_device_external_semaphore_properties", GetPhysicalDeviceExternalSemaphoreProperties },
         { NULL, NULL } /* sentinel */
     };
 
