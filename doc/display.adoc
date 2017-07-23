@@ -26,7 +26,7 @@
 
 [[acquire_xlib_display]]
 * *acquire_xlib_display*(_dpy_, _display_) +
-[small]#_dpy_: lightuserdata (Display*). +
+[small]#_dpy_: lightuserdata (_Display*_). +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkAcquireXlibDisplayEXT[vkAcquireXlibDisplayEXT] (https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_acquire_xlib_display[VK_EXT_acquire_xlib_display] extension, <<platform_support, PLATFORM_XLIB_XRANDR>>).#
 
 [[get_randr_output_display]]
