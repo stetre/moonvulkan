@@ -2847,7 +2847,7 @@ surfaces are created using MoonGLFW or equivalent libraries that handle platform
 <li>
 <p><em>boolean</em> = <strong>get_physical_device_xlib_presentation_support</strong>(<em>physdev</em>, <em>familyindex</em>, <em>dpy</em>, <em>visual_id</em>)<br>
 <span class="small"><em>dpy</em>: lightuserdata (<em>Display*</em>)<br>
-Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetPhysicalDeviceXlibPresentationSupportKHR">vkGetPhysicalDeviceXlibPresentationSupportKHR</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_xlib_surface">VK_KHR_xlib_surface</a> extension).</span></p>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetPhysicalDeviceXlibPresentationSupportKHR">vkGetPhysicalDeviceXlibPresentationSupportKHR</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_xlib_surface">VK_KHR_xlib_surface</a> extension, <a href="#platform_support">PLATFORM_XLIB</a>).</span></p>
 </li>
 </ul>
 </div>
@@ -2857,7 +2857,7 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/
 <p><em>surface</em> = <strong>create_xlib_surface</strong>(<em>instance</em>, <em>flags</em>, <em>dpy</em>, <em>window</em>, [<a href="#allocators"><em>allocator</em></a>])<br>
 <span class="small"><em>dpy</em>: lightuserdata (<em>Display*</em>)<br>
 <em>window</em>: lightuserdata (<em>Window</em>)<br>
-Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCreateXlibSurfaceKHR">vkCreateXlibSurfaceKHR</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_xlib_surface">VK_KHR_xlib_surface</a> extension).</span></p>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCreateXlibSurfaceKHR">vkCreateXlibSurfaceKHR</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_xlib_surface">VK_KHR_xlib_surface</a> extension, <a href="#platform_support">PLATFORM_XLIB</a>).</span></p>
 </li>
 </ul>
 </div>
@@ -2867,7 +2867,7 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/
 <li>
 <p><em>boolean</em> = <strong>get_physical_device_xcb_presentation_support</strong>(<em>physdev</em>, <em>familyindex</em>, <em>connection</em>, <em>visual_id</em>)<br>
 <span class="small"><em>connection</em>: lightuserdata (<em>xcb_connection_t*</em>)<br>
-Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetPhysicalDeviceXcbPresentationSupportKHR">vkGetPhysicalDeviceXcbPresentationSupportKHR</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_xcb_surface">VK_KHR_xcb_surface</a> extension).</span></p>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetPhysicalDeviceXcbPresentationSupportKHR">vkGetPhysicalDeviceXcbPresentationSupportKHR</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_xcb_surface">VK_KHR_xcb_surface</a> extension, <a href="#platform_support">PLATFORM_XCB</a>).</span></p>
 </li>
 </ul>
 </div>
@@ -2876,7 +2876,7 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/
 <li>
 <p><em>surface</em> = <strong>create_xcb_surface</strong>(<em>instance</em>, <em>flags</em>, <em>connection</em>, <em>window</em>, [<a href="#allocators"><em>allocator</em></a>])<br>
 <span class="small"><em>connection</em>: lightuserdata (<em>xcb_connection_t*</em>)<br>
-Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCreateXcbSurfaceKHR">vkCreateXcbSurfaceKHR</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_xcb_surface">VK_KHR_xcb_surface</a> extension).</span></p>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCreateXcbSurfaceKHR">vkCreateXcbSurfaceKHR</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_xcb_surface">VK_KHR_xcb_surface</a> extension, <a href="#platform_support">PLATFORM_XCB</a>).</span></p>
 </li>
 </ul>
 </div>
@@ -2886,7 +2886,7 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/
 <li>
 <p><em>boolean</em> = <strong>get_physical_device_wayland_presentation_support</strong>(<em>physdev</em>, <em>familyindex</em>, <em>wldisplay</em>)<br>
 <span class="small"><em>wldisplay</em>: lightuserdata (<em>wl_display*</em>)<br>
-Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetPhysicalDeviceWaylandPresentationSupportKHR">vkGetPhysicalDeviceWaylandPresentationSupportKHR</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_wayland_surface">VK_KHR_wayland_surface</a> extension).</span></p>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetPhysicalDeviceWaylandPresentationSupportKHR">vkGetPhysicalDeviceWaylandPresentationSupportKHR</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_wayland_surface">VK_KHR_wayland_surface</a> extension, <a href="#platform_support">PLATFORM_WAYLAND</a>).</span></p>
 </li>
 </ul>
 </div>
@@ -2896,7 +2896,7 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/
 <p><em>surface</em> = <strong>create_wayland_surface</strong>(<em>instance</em>, <em>flags</em>, <em>wldisplay</em>, <em>wlsurface</em>, [<a href="#allocators"><em>allocator</em></a>])<br>
 <span class="small"><em>wldisplay</em>: lightuserdata (<em>wl_display*</em>)<br>
 <em>wlsurface</em>: lightuserdata (<em>wl_surface*</em>)<br>
-Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCreateWaylandSurfaceKHR">vkCreateWaylandSurfaceKHR</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_wayland_surface">VK_KHR_wayland_surface</a> extension).</span></p>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCreateWaylandSurfaceKHR">vkCreateWaylandSurfaceKHR</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_wayland_surface">VK_KHR_wayland_surface</a> extension, <a href="#platform_support">PLATFORM_WAYLAND</a>).</span></p>
 </li>
 </ul>
 </div>
@@ -2906,7 +2906,7 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/
 <li>
 <p><em>boolean</em> = <strong>get_physical_device_mir_presentation_support</strong>(<em>physdev</em>, <em>familyindex</em>, <em>mirconnection</em>)<br>
 <span class="small"><em>mirconnection</em>: lightuserdata (<em>MirConnection*</em>)<br>
-Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetPhysicalDeviceMirPresentationSupportKHR">vkGetPhysicalDeviceMirPresentationSupportKHR</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_mir_surface">VK_KHR_mir_surface</a> extension).</span></p>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetPhysicalDeviceMirPresentationSupportKHR">vkGetPhysicalDeviceMirPresentationSupportKHR</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_mir_surface">VK_KHR_mir_surface</a> extension, <a href="#platform_support">PLATFORM_MIR</a>).</span></p>
 </li>
 </ul>
 </div>
@@ -2916,7 +2916,7 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/
 <p><em>surface</em> = <strong>create_mir_surface</strong>(<em>instance</em>, <em>flags</em>, <em>mirconnection</em>, <em>mirsurface</em>, [<a href="#allocators"><em>allocator</em></a>])<br>
 <span class="small"><em>mirconnection</em>: lightuserdata (<em>MirConnection*</em>)<br>
 <em>mirsurface</em>: lightuserdata (<em>MirSurface*</em>)<br>
-Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCreateMirSurfaceKHR">vkCreateMirSurfaceKHR</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_mir_surface">VK_KHR_mir_surface</a> extension).</span></p>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCreateMirSurfaceKHR">vkCreateMirSurfaceKHR</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_mir_surface">VK_KHR_mir_surface</a> extension, <a href="#platform_support">PLATFORM_MIR</a>).</span></p>
 </li>
 </ul>
 </div>
@@ -6046,7 +6046,7 @@ previously obtained with the <a href="#now">now</a>(&nbsp;) function.</span></p>
 <div class="sect2">
 <h3 id="platform_support">Platforms support</h3>
 <div class="paragraph">
-<p>A few MoonVulkan functions are available only on specific platforms, in the same way the underlying Vulkan functions are. In order to use such functions, MoonVulkan must be compiled as described here.</p>
+<p>A few MoonVulkan functions are available only on specific platforms, in the same way the underlying Vulkan functions are. In order to use such functions, MoonVulkan must be compiled as described in this section.</p>
 </div>
 <div class="paragraph">
 <p>To enable support for a specific platform, set the PLATFORM_XXX environment variable before compiling MoonVulkan (XXX here stands for XCB, XLIB, WAYLAND, etc.). For example:</p>
@@ -6061,6 +6061,9 @@ previously obtained with the <a href="#now">now</a>(&nbsp;) function.</span></p>
 <div class="paragraph">
 <p>As a prerequisite, you&#8217;ll need to make sure that the platform libraries are installed on the system and
 that the relevant header files are where <em>vulkan.h</em> expects them to be.</p>
+</div>
+<div class="paragraph">
+<p>(Functions that need platform-specific support are those that have a PLATFORM_XXX link to this section in their references. For example, the <a href="#create_xlib_surface">create_xlib_surface</a>(&nbsp;) function has a PLATFORM_XLIB link, meaning that it requires MoonVulkan to be compiled with the PLATFORM_XLIB environment variable set).</p>
 </div>
 </div>
 </div>
