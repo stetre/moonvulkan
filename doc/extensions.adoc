@@ -50,7 +50,7 @@ Khronos experimental extensions (KHX):
 
 Multivendor extensions (EXT):
 
-//@@VK_EXT_acquire_xlib_display
+* https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_acquire_xlib_display[VK_EXT_acquire_xlib_display]
 * https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_blend_operation_advanced[VK_EXT_blend_operation_advanced]
 * https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_debug_marker[VK_EXT_debug_marker]
 * https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_debug_report[VK_EXT_debug_report]

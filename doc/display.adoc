@@ -15,12 +15,25 @@
 [small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetDisplayPlaneSupportedDisplaysKHR[vkGetDisplayPlaneSupportedDisplaysKHR] (https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_display[VK_KHR_display] extension).#
 
 [[release_display]]
-* *release_display*(<<physical_device, _physdev_>>, _display_) +
+* *release_display*(_display_) +
 [small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkReleaseDisplayEXT[vkReleaseDisplayEXT] (https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_direct_mode_display[VK_EXT_direct_mode_display] extension).#
 
 [[display_power_control]]
 * *display_power_control*(<<device, _device_>>, _display_, <<displaypowerinfo, _displaypowerinfo_>>) +
 [small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkDisplayPowerControlEXT[vkDisplayPowerControlEXT] (https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_display_control[VK_EXT_display_control] extension).#
+
+'''
+
+[[acquire_xlib_display]]
+* *acquire_xlib_display*(_dpy_, _display_) +
+[small]#_dpy_: lightuserdata (Display*). +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkAcquireXlibDisplayEXT[vkAcquireXlibDisplayEXT] (https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_acquire_xlib_display[VK_EXT_acquire_xlib_display] extension, <<platform_support, PLATFORM_XLIB_XRANDR>>).#
+
+[[get_randr_output_display]]
+* _display_ = *get_randr_output_display*(<<physical_device, _physdev_>>, _dpy_, _rroutput_) +
+[small]#_dpy_: lightuserdata (_Display*_), +
+_rroutput_: integer (_RROutput_). +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetRandROutputDisplayEXT[vkGetRandROutputDisplayEXT] (https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_acquire_xlib_display[VK_EXT_acquire_xlib_display] extension, <<platform_support, PLATFORM_XLIB_XRANDR>>).#
 
 [[display_mode]]
 ==== display_mode

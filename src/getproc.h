@@ -86,6 +86,10 @@ typedef struct {
     F(CreateXlibSurfaceKHR);
     F(GetPhysicalDeviceXlibPresentationSupportKHR);
 #endif
+#ifdef VK_USE_PLATFORM_XLIB_XRANDR_EXT
+    F(AcquireXlibDisplayEXT);
+    F(GetRandROutputDisplayEXT);
+#endif
 #ifdef VK_USE_PLATFORM_WAYLAND_KHR
     F(CreateWaylandSurfaceKHR);
     F(GetPhysicalDeviceWaylandPresentationSupportKHR);

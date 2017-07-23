@@ -25,6 +25,8 @@
 
 #include "internal.h"
 
+#define PHYSDEV(display_ud) (VkPhysicalDevice)(uintptr_t)((display_ud)->parent_ud->handle)
+
 static int freedisplay(lua_State *L, ud_t *ud)
     {
     VkDisplayKHR display = (VkDisplayKHR)ud->handle;
@@ -47,6 +49,7 @@ static int pushdisplay(lua_State *L, VkDisplayKHR display, ud_t *parent_ud)
     ud->idt = parent_ud->idt;
     return 1;
     }
+
 
 static int GetPhysicalDeviceDisplayProperties(lua_State *L)
     {
@@ -163,12 +166,13 @@ static int GetDisplayPlaneSupportedDisplays(lua_State *L)
     return 1;
     }
 
+
 static int ReleaseDisplay(lua_State *L)
     {
     VkResult ec;
     ud_t *ud;
-    VkPhysicalDevice physdev = checkphysical_device(L, 1, &ud);
-    VkDisplayKHR display = checkdisplay(L, 2, NULL);
+    VkDisplayKHR display = checkdisplay(L, 1, &ud);
+    VkPhysicalDevice physdev = PHYSDEV(ud);
     CheckInstancePfn(L, ud, ReleaseDisplayEXT);
     ec = ud->idt->ReleaseDisplayEXT(physdev, display);
     CheckError(L, ec);
@@ -188,6 +192,43 @@ static int DisplayPowerControl(lua_State *L)
     CheckError(L, ec);
     return 0;
     }
+
+static int AcquireXlibDisplay(lua_State *L)
+    {
+#ifdef VK_USE_PLATFORM_XLIB_XRANDR_EXT
+    VkResult ec;
+    ud_t *ud;
+    Display *dpy = (Display*)checklightuserdata(L, 1);
+    VkDisplayKHR display = checkdisplay(L, 2, &ud);
+    VkPhysicalDevice physdev = PHYSDEV(ud);
+    CheckInstancePfn(L, ud, AcquireXlibDisplayEXT);
+    ec = ud->idt->AcquireXlibDisplayEXT(physdev, dpy, display);
+    CheckError(L, ec);
+    return 0;
+#else
+    return notsupported(L);
+#endif
+    }
+
+static int GetRandROutputDisplay(lua_State *L)
+    {
+#ifdef VK_USE_PLATFORM_XLIB_XRANDR_EXT
+    VkResult ec;
+    ud_t *ud;
+    VkDisplayKHR display;
+    VkPhysicalDevice physdev = checkphysical_device(L, 1, &ud);
+    Display *dpy = (Display*)checklightuserdata(L, 2);
+    RROutput rrOutput = (RROutput)luaL_checkinteger(L, 1);
+    CheckInstancePfn(L, ud, GetRandROutputDisplayEXT);
+    ec = ud->idt->GetRandROutputDisplayEXT(physdev, dpy, rrOutput, &display);
+    CheckError(L, ec);
+    pushdisplay(L, display, ud);
+    return 1;
+#else
+    return notsupported(L);
+#endif
+    }
+
 
 
 RAW_FUNC(display)
@@ -223,6 +264,8 @@ static const struct luaL_Reg Functions[] =
         { "destroy_display",  Destroy }, //@@
         { "release_display", ReleaseDisplay },
         { "display_power_control", DisplayPowerControl },
+        { "acquire_xlib_display", AcquireXlibDisplay },
+        { "get_randr_output_display", GetRandROutputDisplay },
         { NULL, NULL } /* sentinel */
     };
 

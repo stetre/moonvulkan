@@ -2654,6 +2654,9 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/
 <div class="ulist">
 <ul>
 <li>
+<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_acquire_xlib_display">VK_EXT_acquire_xlib_display</a></p>
+</li>
+<li>
 <p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_blend_operation_advanced">VK_EXT_blend_operation_advanced</a></p>
 </li>
 <li>
@@ -2951,7 +2954,7 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/
 <div id="release_display" class="ulist">
 <ul>
 <li>
-<p><strong>release_display</strong>(<a href="#physical_device"><em>physdev</em></a>, <em>display</em>)<br>
+<p><strong>release_display</strong>(<em>display</em>)<br>
 <span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkReleaseDisplayEXT">vkReleaseDisplayEXT</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_direct_mode_display">VK_EXT_direct_mode_display</a> extension).</span></p>
 </li>
 </ul>
@@ -2961,6 +2964,26 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/
 <li>
 <p><strong>display_power_control</strong>(<a href="#device"><em>device</em></a>, <em>display</em>, <a href="#displaypowerinfo"><em>displaypowerinfo</em></a>)<br>
 <span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkDisplayPowerControlEXT">vkDisplayPowerControlEXT</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_display_control">VK_EXT_display_control</a> extension).</span></p>
+</li>
+</ul>
+</div>
+<hr>
+<div id="acquire_xlib_display" class="ulist">
+<ul>
+<li>
+<p><strong>acquire_xlib_display</strong>(<em>dpy</em>, <em>display</em>)<br>
+<span class="small"><em>dpy</em>: lightuserdata (Display*).<br>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkAcquireXlibDisplayEXT">vkAcquireXlibDisplayEXT</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_acquire_xlib_display">VK_EXT_acquire_xlib_display</a> extension, <a href="#platform_support">PLATFORM_XLIB_XRANDR</a>).</span></p>
+</li>
+</ul>
+</div>
+<div id="get_randr_output_display" class="ulist">
+<ul>
+<li>
+<p><em>display</em> = <strong>get_randr_output_display</strong>(<a href="#physical_device"><em>physdev</em></a>, <em>dpy</em>, <em>rroutput</em>)<br>
+<span class="small"><em>dpy</em>: lightuserdata (<em>Display*</em>),<br>
+<em>rroutput</em>: integer (<em>RROutput</em>).<br>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetRandROutputDisplayEXT">vkGetRandROutputDisplayEXT</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_acquire_xlib_display">VK_EXT_acquire_xlib_display</a> extension, <a href="#platform_support">PLATFORM_XLIB_XRANDR</a>).</span></p>
 </li>
 </ul>
 </div>

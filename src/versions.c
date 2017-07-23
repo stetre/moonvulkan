@@ -80,6 +80,9 @@ static int Platforms(lua_State *L) //@@DOC
 #ifdef VK_USE_PLATFORM_XLIB_KHR
     ADD("xlib");
 #endif
+#ifdef VK_USE_PLATFORM_XLIB_XRANDR_EXT
+    ADD("xlib_xrandr");
+#endif
 #ifdef VK_USE_PLATFORM_XCB_KHR
     ADD("xcb");
 #endif

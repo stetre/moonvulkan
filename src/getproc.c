@@ -225,6 +225,14 @@ instance_dt_t * getproc_instance(lua_State *L, VkInstance instance, VkInstanceCr
             continue;
             }
 #endif
+#ifdef VK_USE_PLATFORM_XLIB_XRANDR_EXT
+        IF("VK_EXT_acquire_xlib_display")
+            {
+            GET(AcquireXlibDisplayEXT);
+            GET(GetRandROutputDisplayEXT);
+            continue;
+            }
+#endif
 #ifdef VK_USE_PLATFORM_WAYLAND_KHR
         IF("VK_KHR_wayland_surface")
             {
