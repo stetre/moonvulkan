@@ -31,29 +31,20 @@ global_dt_t vk; /* global dispatch table (non-instance and non-device functions)
 /*----------------------------------------------------------------------------------*
  | Linux                                                                            |
  *----------------------------------------------------------------------------------*/
-typedef union { 
-    /* To avoid "ISO C forbids conversion of function pointer to object pointer type" 
-     * warnings without giving up the -Wpedantic flag, we store the dlsym return value 
-     * into fp, and then use it as a function pointer by dereferencing one of the two
-     * other union fields.
-     */
-    void * fp;
-    PFN_vkGetInstanceProcAddr get_instance_proc_addr;
-    PFN_vkGetDeviceProcAddr get_device_proc_addr;
-} getproc_u;
 
-static getproc_u gp_instance;
-static getproc_u gp_device;
-#define GetInstanceProcAddr gp_instance.get_instance_proc_addr 
-#define GetDeviceProcAddr gp_device.get_device_proc_addr 
-/* pfn = GetInstanceProcAddr(instance, name) 
- * pfn = GetDeviceProcAddr(device, name)
+static PFN_vkGetInstanceProcAddr GetInstanceProcAddr;
+static PFN_vkGetDeviceProcAddr GetDeviceProcAddr;
+
+#define FP(f) *(void**)(&(f))
+/* Cast to silent compiler warnings without giving up the -Wpedantic flag.
+ *("ISO C forbids conversion of function pointer to object pointer type")
  */
 
 #include <dlfcn.h>
 static int Init(lua_State *L)
     {
     char *err;
+
     void *handle = dlopen("libvulkan.so", RTLD_LAZY | RTLD_LOCAL);
     if(!handle)
         {
@@ -61,12 +52,12 @@ static int Init(lua_State *L)
         return luaL_error(L, err != NULL ? err : "cannot load libvulkan.so");
         }
 
-    gp_instance.fp = dlsym(handle, "vkGetInstanceProcAddr");
-    if(!gp_instance.fp)
+    FP(GetInstanceProcAddr) = dlsym(handle, "vkGetInstanceProcAddr");
+    if(!GetInstanceProcAddr)
         return luaL_error(L, "cannot find vkGetInstanceProcAddr");
 
-    gp_device.fp = dlsym(handle, "vkGetDeviceProcAddr");
-    if(!gp_device.fp)
+    FP(GetDeviceProcAddr) = dlsym(handle, "vkGetDeviceProcAddr");
+    if(!GetDeviceProcAddr)
         return luaL_error(L, "cannot find vkGetDeviceProcAddr");
 
     /* Fill the global dispatch table */
