@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Asciidoctor 1.5.4">
+<meta name="generator" content="Asciidoctor 1.5.6.1">
 <meta name="author" content="Stefano Trettel">
 <title>MoonVulkan Reference Manual</title>
 <style>
@@ -696,12 +696,14 @@ p.tableblock.header { color: #6d6e71; }
 </style>
 <style>
 .listingblock .pygments .hll { background-color: #ffffcc }
-.listingblock .pygments  { background: #ffffff; }
+.listingblock .pygments, .listingblock .pygments code { background: #ffffff; }
 .listingblock .pygments .tok-c { color: #aaaaaa; font-style: italic } /* Comment */
 .listingblock .pygments .tok-err { color: #FF0000; background-color: #FFAAAA } /* Error */
 .listingblock .pygments .tok-k { color: #0000aa } /* Keyword */
+.listingblock .pygments .tok-ch { color: #aaaaaa; font-style: italic } /* Comment.Hashbang */
 .listingblock .pygments .tok-cm { color: #aaaaaa; font-style: italic } /* Comment.Multiline */
 .listingblock .pygments .tok-cp { color: #4c8317 } /* Comment.Preproc */
+.listingblock .pygments .tok-cpf { color: #aaaaaa; font-style: italic } /* Comment.PreprocFile */
 .listingblock .pygments .tok-c1 { color: #aaaaaa; font-style: italic } /* Comment.Single */
 .listingblock .pygments .tok-cs { color: #0000aa; font-style: italic } /* Comment.Special */
 .listingblock .pygments .tok-gd { color: #aa0000 } /* Generic.Deleted */
@@ -739,8 +741,10 @@ p.tableblock.header { color: #6d6e71; }
 .listingblock .pygments .tok-mh { color: #009999 } /* Literal.Number.Hex */
 .listingblock .pygments .tok-mi { color: #009999 } /* Literal.Number.Integer */
 .listingblock .pygments .tok-mo { color: #009999 } /* Literal.Number.Oct */
+.listingblock .pygments .tok-sa { color: #aa5500 } /* Literal.String.Affix */
 .listingblock .pygments .tok-sb { color: #aa5500 } /* Literal.String.Backtick */
 .listingblock .pygments .tok-sc { color: #aa5500 } /* Literal.String.Char */
+.listingblock .pygments .tok-dl { color: #aa5500 } /* Literal.String.Delimiter */
 .listingblock .pygments .tok-sd { color: #aa5500 } /* Literal.String.Doc */
 .listingblock .pygments .tok-s2 { color: #aa5500 } /* Literal.String.Double */
 .listingblock .pygments .tok-se { color: #aa5500 } /* Literal.String.Escape */
@@ -751,9 +755,11 @@ p.tableblock.header { color: #6d6e71; }
 .listingblock .pygments .tok-s1 { color: #aa5500 } /* Literal.String.Single */
 .listingblock .pygments .tok-ss { color: #0000aa } /* Literal.String.Symbol */
 .listingblock .pygments .tok-bp { color: #00aaaa } /* Name.Builtin.Pseudo */
+.listingblock .pygments .tok-fm { color: #00aa00 } /* Name.Function.Magic */
 .listingblock .pygments .tok-vc { color: #aa0000 } /* Name.Variable.Class */
 .listingblock .pygments .tok-vg { color: #aa0000 } /* Name.Variable.Global */
 .listingblock .pygments .tok-vi { color: #aa0000 } /* Name.Variable.Instance */
+.listingblock .pygments .tok-vm { color: #aa0000 } /* Name.Variable.Magic */
 .listingblock .pygments .tok-il { color: #009999 } /* Literal.Number.Integer.Long */
 </style>
 </head>
@@ -872,7 +878,7 @@ table is named <strong>vk</strong>, i.e. that it is loaded with:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="pygments highlight"><code data-lang="lua"> <span class="tok-n">vk</span> <span class="tok-o">=</span> <span class="tok-nb">require</span><span class="tok-p">(</span><span class="tok-s2">&quot;</span><span class="tok-s">moonvulkan&quot;</span><span class="tok-p">)</span></code></pre>
+<pre class="pygments highlight"><code data-lang="lua"><span></span> <span class="tok-n">vk</span> <span class="tok-o">=</span> <span class="tok-nb">require</span><span class="tok-p">(</span><span class="tok-s2">&quot;moonvulkan&quot;</span><span class="tok-p">)</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1007,7 +1013,7 @@ binding library to a dynamic, garbage-collected language is not the way to go).<
 &#9474;&#8192;&#8192;&#8192;&#9500;&#9472;&#8192;<a href="#event">event</a> <em>(VkEvent)</em><br>
 &#9474;&#8192;&#8192;&#8192;&#9500;&#9472;&#8192;<a href="#render_pass">render_pass</a> <em>(VkRenderPass)</em><br>
 &#9474;&#8192;&#8192;&#8192;&#9500;&#9472;&#8192;<a href="#framebuffer">framebuffer</a> <em>(VkFramebuffer)</em><br>
-&#9474;&#8192;&#8192;&#8192;&#9500;&#9472;&#8192;<a href="#shader_module">shader_module</a> <em>(VkShaderModule )</em><br>
+&#9474;&#8192;&#8192;&#8192;&#9500;&#9472;&#8192;<a href="#shader_module">shader_module </a> <em>(VkShaderModule )</em><br>
 &#9474;&#8192;&#8192;&#8192;&#9500;&#9472;&#8192;<a href="#pipeline">pipeline</a> <em>(VkPipeline)</em><br>
 &#9474;&#8192;&#8192;&#8192;&#9500;&#9472;&#8192;<a href="#pipeline_cache">pipeline_cache</a> <em>(VkPipelineCache)</em><br>
 &#9474;&#8192;&#8192;&#8192;&#9500;&#9472;&#8192;<a href="#device_memory">device_memory</a> <em>(VkDeviceMemory)</em><br>
@@ -5783,13 +5789,13 @@ and  <a href="#vk.imagesubresource">imagesubresource</a> struct types:</p>
 <div class="listingblock">
 <div class="title">Examples</div>
 <div class="content">
-<pre class="pygments highlight"><code data-lang="lua"> <span class="tok-c1">-- Two alternative ways to create an instance of the &#39;offset2d&#39; type:</span>
+<pre class="pygments highlight"><code data-lang="lua"><span></span> <span class="tok-c1">-- Two alternative ways to create an instance of the &#39;offset2d&#39; type:</span>
  <span class="tok-n">ext1</span> <span class="tok-o">=</span> <span class="tok-p">{</span> <span class="tok-n">width</span><span class="tok-o">=</span><span class="tok-mi">300</span><span class="tok-p">,</span> <span class="tok-n">height</span><span class="tok-o">=</span><span class="tok-mi">200</span> <span class="tok-p">}</span>   <span class="tok-c1">-- manually</span>
  <span class="tok-n">ext2</span> <span class="tok-o">=</span> <span class="tok-n">vk</span><span class="tok-p">.</span><span class="tok-n">extent2d</span><span class="tok-p">(</span><span class="tok-mi">300</span><span class="tok-p">,</span> <span class="tok-mi">200</span><span class="tok-p">)</span>       <span class="tok-c1">-- using the table constructor</span>
 
  <span class="tok-c1">-- Two alternative way of passing an &#39;imageaspectflags&#39; parameter:</span>
  <span class="tok-n">subres1</span> <span class="tok-o">=</span> <span class="tok-n">vk</span><span class="tok-p">.</span><span class="tok-n">imagesubresource</span><span class="tok-p">(</span><span class="tok-n">vk</span><span class="tok-p">.</span><span class="tok-n">IMAGE_ASPECT_COLOR_BIT</span><span class="tok-p">,</span> <span class="tok-mi">0</span><span class="tok-p">,</span> <span class="tok-mi">0</span><span class="tok-p">)</span>  <span class="tok-c1">-- as an integer</span>
- <span class="tok-n">subres2</span> <span class="tok-o">=</span> <span class="tok-n">vk</span><span class="tok-p">.</span><span class="tok-n">imagesubresource</span><span class="tok-p">({</span><span class="tok-s1">&#39;</span><span class="tok-s">color&#39;</span><span class="tok-p">},</span> <span class="tok-mi">0</span><span class="tok-p">,</span> <span class="tok-mi">0</span><span class="tok-p">)</span> <span class="tok-c1">-- as a table of admitted literals</span></code></pre>
+ <span class="tok-n">subres2</span> <span class="tok-o">=</span> <span class="tok-n">vk</span><span class="tok-p">.</span><span class="tok-n">imagesubresource</span><span class="tok-p">({</span><span class="tok-s1">&#39;color&#39;</span><span class="tok-p">},</span> <span class="tok-mi">0</span><span class="tok-p">,</span> <span class="tok-mi">0</span><span class="tok-p">)</span> <span class="tok-c1">-- as a table of admitted literals</span></code></pre>
 </div>
 </div>
 </div>
@@ -6053,9 +6059,9 @@ previously obtained with the <a href="#now">now</a>(&nbsp;) function.</span></p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="pygments highlight"><code data-lang="bash"><span class="tok-o">[</span>moonvulkan<span class="tok-o">]</span><span class="tok-nv">$ </span><span class="tok-nb">export </span><span class="tok-nv">PLATFORM_XCB</span><span class="tok-o">=</span><span class="tok-m">1</span>      <span class="tok-c"># enable XCB support</span>
-<span class="tok-o">[</span>moonvulkan<span class="tok-o">]</span><span class="tok-nv">$ </span><span class="tok-nb">export </span><span class="tok-nv">PLATFORM_XLIB</span><span class="tok-o">=</span><span class="tok-m">1</span>     <span class="tok-c"># enable XLIB support</span>
-<span class="tok-o">[</span>moonvulkan<span class="tok-o">]</span><span class="tok-nv">$ </span>make <span class="tok-o">&amp;&amp;</span> sudo make install  <span class="tok-c"># compile and install MoonVulkan</span></code></pre>
+<pre class="pygments highlight"><code data-lang="bash"><span></span><span class="tok-o">[</span>moonvulkan<span class="tok-o">]</span>$ <span class="tok-nb">export</span> <span class="tok-nv">PLATFORM_XCB</span><span class="tok-o">=</span><span class="tok-m">1</span>      <span class="tok-c1"># enable XCB support</span>
+<span class="tok-o">[</span>moonvulkan<span class="tok-o">]</span>$ <span class="tok-nb">export</span> <span class="tok-nv">PLATFORM_XLIB</span><span class="tok-o">=</span><span class="tok-m">1</span>     <span class="tok-c1"># enable XLIB support</span>
+<span class="tok-o">[</span>moonvulkan<span class="tok-o">]</span>$ make <span class="tok-o">&amp;&amp;</span> sudo make install  <span class="tok-c1"># compile and install MoonVulkan</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -6074,69 +6080,69 @@ that the relevant header files are where <em>vulkan.h</em> expects them to be.</
 <div id="clearvalue_snippet" class="listingblock">
 <div class="title">Examples for clearcolorvalue and clearvalue</div>
 <div class="content">
-<pre class="pygments highlight"><code data-lang="lua"> <span class="tok-n">clearvalue</span> <span class="tok-o">=</span> <span class="tok-p">{</span> <span class="tok-n">color</span> <span class="tok-o">=</span> <span class="tok-p">{</span> <span class="tok-mf">0.2</span><span class="tok-p">,</span> <span class="tok-mf">0.5</span><span class="tok-p">,</span> <span class="tok-mf">0.1</span><span class="tok-p">,</span> <span class="tok-mf">1.0</span> <span class="tok-p">}</span> <span class="tok-p">}</span>  <span class="tok-c1">-- t defaults to &#39;float32&#39;</span>
- <span class="tok-n">clearvalue</span> <span class="tok-o">=</span> <span class="tok-p">{</span> <span class="tok-n">color</span> <span class="tok-o">=</span> <span class="tok-p">{</span> <span class="tok-mf">0.2</span><span class="tok-p">,</span> <span class="tok-mf">0.5</span><span class="tok-p">,</span> <span class="tok-mf">0.1</span><span class="tok-p">,</span> <span class="tok-mf">1.0</span><span class="tok-p">,</span> <span class="tok-n">t</span><span class="tok-o">=</span><span class="tok-s1">&#39;</span><span class="tok-s">float32&#39;</span> <span class="tok-p">}</span> <span class="tok-p">}</span>
- <span class="tok-n">clearvalue</span> <span class="tok-o">=</span> <span class="tok-p">{</span> <span class="tok-n">color</span> <span class="tok-o">=</span> <span class="tok-p">{</span> <span class="tok-mi">20</span><span class="tok-p">,</span> <span class="tok-mi">112</span><span class="tok-p">,</span> <span class="tok-mi">200</span><span class="tok-p">,</span> <span class="tok-mi">1</span><span class="tok-p">,</span> <span class="tok-n">t</span><span class="tok-o">=</span><span class="tok-s1">&#39;</span><span class="tok-s">uint32&#39;</span> <span class="tok-p">}</span> <span class="tok-p">}</span>
+<pre class="pygments highlight"><code data-lang="lua"><span></span> <span class="tok-n">clearvalue</span> <span class="tok-o">=</span> <span class="tok-p">{</span> <span class="tok-n">color</span> <span class="tok-o">=</span> <span class="tok-p">{</span> <span class="tok-mf">0.2</span><span class="tok-p">,</span> <span class="tok-mf">0.5</span><span class="tok-p">,</span> <span class="tok-mf">0.1</span><span class="tok-p">,</span> <span class="tok-mf">1.0</span> <span class="tok-p">}</span> <span class="tok-p">}</span>  <span class="tok-c1">-- t defaults to &#39;float32&#39;</span>
+ <span class="tok-n">clearvalue</span> <span class="tok-o">=</span> <span class="tok-p">{</span> <span class="tok-n">color</span> <span class="tok-o">=</span> <span class="tok-p">{</span> <span class="tok-mf">0.2</span><span class="tok-p">,</span> <span class="tok-mf">0.5</span><span class="tok-p">,</span> <span class="tok-mf">0.1</span><span class="tok-p">,</span> <span class="tok-mf">1.0</span><span class="tok-p">,</span> <span class="tok-n">t</span><span class="tok-o">=</span><span class="tok-s1">&#39;float32&#39;</span> <span class="tok-p">}</span> <span class="tok-p">}</span>
+ <span class="tok-n">clearvalue</span> <span class="tok-o">=</span> <span class="tok-p">{</span> <span class="tok-n">color</span> <span class="tok-o">=</span> <span class="tok-p">{</span> <span class="tok-mi">20</span><span class="tok-p">,</span> <span class="tok-mi">112</span><span class="tok-p">,</span> <span class="tok-mi">200</span><span class="tok-p">,</span> <span class="tok-mi">1</span><span class="tok-p">,</span> <span class="tok-n">t</span><span class="tok-o">=</span><span class="tok-s1">&#39;uint32&#39;</span> <span class="tok-p">}</span> <span class="tok-p">}</span>
  <span class="tok-n">clearvalue</span> <span class="tok-o">=</span> <span class="tok-p">{</span> <span class="tok-n">depth</span> <span class="tok-o">=</span> <span class="tok-mf">1.0</span><span class="tok-p">,</span> <span class="tok-n">stencil</span> <span class="tok-o">=</span> <span class="tok-mi">0</span> <span class="tok-p">}</span></code></pre>
 </div>
 </div>
 <div id="enums_snippet" class="listingblock">
 <div class="title">Dealing with enums</div>
 <div class="content">
-<pre class="pygments highlight"><code data-lang="lua"> <span class="tok-c1">-- Alternative and equivalent ways to assign values of the &#39;blendop&#39; enum type</span>
+<pre class="pygments highlight"><code data-lang="lua"><span></span> <span class="tok-c1">-- Alternative and equivalent ways to assign values of the &#39;blendop&#39; enum type</span>
  <span class="tok-c1">-- (whose hint is vk.BLEND_OP_XXX):</span>
  <span class="tok-n">op1</span> <span class="tok-o">=</span> <span class="tok-n">vk</span><span class="tok-p">.</span><span class="tok-n">BLEND_OP_ADD</span>
- <span class="tok-n">op2</span> <span class="tok-o">=</span> <span class="tok-s1">&#39;</span><span class="tok-s">add&#39;</span> <span class="tok-c1">-- XXX=ADD</span>
+ <span class="tok-n">op2</span> <span class="tok-o">=</span> <span class="tok-s1">&#39;add&#39;</span> <span class="tok-c1">-- XXX=ADD</span>
  <span class="tok-n">op3</span> <span class="tok-o">=</span> <span class="tok-n">vk</span><span class="tok-p">.</span><span class="tok-n">BLEND_OP_REVERSE_SUBTRACT</span>
- <span class="tok-n">op4</span> <span class="tok-o">=</span> <span class="tok-s1">&#39;</span><span class="tok-s">reverse subtract&#39;</span> <span class="tok-c1">-- XXX=REVERSE_SUBTRACT</span>
+ <span class="tok-n">op4</span> <span class="tok-o">=</span> <span class="tok-s1">&#39;reverse subtract&#39;</span> <span class="tok-c1">-- XXX=REVERSE_SUBTRACT</span>
 
  <span class="tok-nb">print</span><span class="tok-p">(</span><span class="tok-n">op1</span><span class="tok-p">)</span> <span class="tok-c1">--&gt; &#39;add&#39;</span>
  <span class="tok-nb">print</span><span class="tok-p">(</span><span class="tok-n">op2</span><span class="tok-p">)</span> <span class="tok-c1">--&gt; &#39;add&#39;</span>
  <span class="tok-nb">print</span><span class="tok-p">(</span><span class="tok-n">op3</span><span class="tok-p">)</span> <span class="tok-c1">--&gt; &#39;reverse subtract&#39;</span>
  <span class="tok-nb">print</span><span class="tok-p">(</span><span class="tok-n">op4</span><span class="tok-p">)</span> <span class="tok-c1">--&gt; &#39;reverse subtract&#39;</span>
- <span class="tok-nb">print</span><span class="tok-p">(</span><span class="tok-n">op1</span> <span class="tok-o">==</span> <span class="tok-s1">&#39;</span><span class="tok-s">add&#39;</span><span class="tok-p">)</span> <span class="tok-c1">--&gt; true</span>
+ <span class="tok-nb">print</span><span class="tok-p">(</span><span class="tok-n">op1</span> <span class="tok-o">==</span> <span class="tok-s1">&#39;add&#39;</span><span class="tok-p">)</span> <span class="tok-c1">--&gt; true</span>
  <span class="tok-nb">print</span><span class="tok-p">(</span><span class="tok-n">op3</span> <span class="tok-o">==</span> <span class="tok-n">op4</span><span class="tok-p">)</span> <span class="tok-c1">--&gt; true</span>
 
  <span class="tok-c1">-- List the literals admitted by the &#39;blendop&#39; enum type:</span>
- <span class="tok-n">ops</span> <span class="tok-o">=</span> <span class="tok-n">vk</span><span class="tok-p">.</span><span class="tok-n">enum</span><span class="tok-p">(</span><span class="tok-s1">&#39;</span><span class="tok-s">blendop&#39;</span><span class="tok-p">)</span>
- <span class="tok-nb">print</span><span class="tok-p">(</span><span class="tok-nb">table.concat</span><span class="tok-p">(</span><span class="tok-n">ops</span><span class="tok-p">,</span> <span class="tok-s1">&#39;</span><span class="tok-s">, &#39;</span><span class="tok-p">))</span> <span class="tok-c1">--&gt; &#39;add&#39;, &#39;subtract&#39;, &#39;reverse subtract&#39;, &#39;min&#39;, &#39;max&#39;</span></code></pre>
+ <span class="tok-n">ops</span> <span class="tok-o">=</span> <span class="tok-n">vk</span><span class="tok-p">.</span><span class="tok-n">enum</span><span class="tok-p">(</span><span class="tok-s1">&#39;blendop&#39;</span><span class="tok-p">)</span>
+ <span class="tok-nb">print</span><span class="tok-p">(</span><span class="tok-nb">table.concat</span><span class="tok-p">(</span><span class="tok-n">ops</span><span class="tok-p">,</span> <span class="tok-s1">&#39;, &#39;</span><span class="tok-p">))</span> <span class="tok-c1">--&gt; &#39;add&#39;, &#39;subtract&#39;, &#39;reverse subtract&#39;, &#39;min&#39;, &#39;max&#39;</span></code></pre>
 </div>
 </div>
 <div id="flags_snippet" class="listingblock">
 <div class="title">Dealing with flags</div>
 <div class="content">
-<pre class="pygments highlight"><code data-lang="lua"> <span class="tok-c1">-- Two alternative equivalent ways to produce a &#39;stencilfaceflags&#39; value:</span>
- <span class="tok-n">code1</span> <span class="tok-o">=</span> <span class="tok-n">vk</span><span class="tok-p">.</span><span class="tok-n">STENCIL_FACE_FRONT_BIT</span> <span class="tok-err">|</span> <span class="tok-n">vk</span><span class="tok-p">.</span><span class="tok-n">STENCIL_FACE_BACK_BIT</span>
- <span class="tok-n">code2</span> <span class="tok-o">=</span> <span class="tok-n">vk</span><span class="tok-p">.</span><span class="tok-n">stencilfaceflags</span><span class="tok-p">(</span><span class="tok-s1">&#39;</span><span class="tok-s">front&#39;</span><span class="tok-p">,</span> <span class="tok-s1">&#39;</span><span class="tok-s">back&#39;</span><span class="tok-p">)</span>
+<pre class="pygments highlight"><code data-lang="lua"><span></span> <span class="tok-c1">-- Two alternative equivalent ways to produce a &#39;stencilfaceflags&#39; value:</span>
+ <span class="tok-n">code1</span> <span class="tok-o">=</span> <span class="tok-n">vk</span><span class="tok-p">.</span><span class="tok-n">STENCIL_FACE_FRONT_BIT</span> <span class="tok-o">|</span> <span class="tok-n">vk</span><span class="tok-p">.</span><span class="tok-n">STENCIL_FACE_BACK_BIT</span>
+ <span class="tok-n">code2</span> <span class="tok-o">=</span> <span class="tok-n">vk</span><span class="tok-p">.</span><span class="tok-n">stencilfaceflags</span><span class="tok-p">(</span><span class="tok-s1">&#39;front&#39;</span><span class="tok-p">,</span> <span class="tok-s1">&#39;back&#39;</span><span class="tok-p">)</span>
 
  <span class="tok-nb">assert</span><span class="tok-p">(</span><span class="tok-n">code1</span> <span class="tok-o">==</span> <span class="tok-n">code2</span><span class="tok-p">)</span> <span class="tok-c1">-- true</span>
  <span class="tok-nb">print</span><span class="tok-p">(</span><span class="tok-n">code1</span><span class="tok-p">)</span> <span class="tok-c1">--&gt; 3</span>
  <span class="tok-nb">print</span><span class="tok-p">(</span><span class="tok-n">vk</span><span class="tok-p">.</span><span class="tok-n">stencilfaceflags</span><span class="tok-p">(</span><span class="tok-n">code1</span><span class="tok-p">))</span> <span class="tok-c1">--&gt; front back</span>
  <span class="tok-nb">print</span><span class="tok-p">(</span><span class="tok-n">vk</span><span class="tok-p">.</span><span class="tok-n">stencilfaceflags</span><span class="tok-p">(</span><span class="tok-n">code2</span><span class="tok-p">))</span> <span class="tok-c1">--&gt; ditto</span>
 
- <span class="tok-k">if</span> <span class="tok-p">(</span><span class="tok-n">code1</span> <span class="tok-err">&amp;</span> <span class="tok-n">vk</span><span class="tok-p">.</span><span class="tok-n">STENCIL_FACE_FRONT_BIT</span><span class="tok-p">)</span> <span class="tok-o">~=</span> <span class="tok-mi">0</span> <span class="tok-k">then</span> <span class="tok-c1">-- NB: 0 is not false in Lua</span>
-   <span class="tok-nb">print</span><span class="tok-p">(</span><span class="tok-s2">&quot;</span><span class="tok-s">&#39;front&#39; bit is set&quot;</span><span class="tok-p">)</span>
- <span class="tok-k">else</span>
-   <span class="tok-nb">print</span><span class="tok-p">(</span><span class="tok-s2">&quot;</span><span class="tok-s">&#39;front&#39; bit is not set&quot;</span><span class="tok-p">)</span>
- <span class="tok-k">end</span></code></pre>
+ <span class="tok-kr">if</span> <span class="tok-p">(</span><span class="tok-n">code1</span> <span class="tok-o">&amp;</span> <span class="tok-n">vk</span><span class="tok-p">.</span><span class="tok-n">STENCIL_FACE_FRONT_BIT</span><span class="tok-p">)</span> <span class="tok-o">~=</span> <span class="tok-mi">0</span> <span class="tok-kr">then</span> <span class="tok-c1">-- NB: 0 is not false in Lua</span>
+   <span class="tok-nb">print</span><span class="tok-p">(</span><span class="tok-s2">&quot;&#39;front&#39; bit is set&quot;</span><span class="tok-p">)</span>
+ <span class="tok-kr">else</span>
+   <span class="tok-nb">print</span><span class="tok-p">(</span><span class="tok-s2">&quot;&#39;front&#39; bit is not set&quot;</span><span class="tok-p">)</span>
+ <span class="tok-kr">end</span></code></pre>
 </div>
 </div>
 <div id="glfwsurface_snippet" class="listingblock">
 <div class="title">Creating a surface with MoonGLFW</div>
 <div class="content">
-<pre class="pygments highlight"><code data-lang="lua"> <span class="tok-n">glfw</span> <span class="tok-o">=</span> <span class="tok-nb">require</span><span class="tok-p">(</span><span class="tok-s2">&quot;</span><span class="tok-s">moonglfw&quot;</span><span class="tok-p">)</span>
- <span class="tok-n">vk</span> <span class="tok-o">=</span> <span class="tok-nb">require</span><span class="tok-p">(</span><span class="tok-s2">&quot;</span><span class="tok-s">moonvulkan&quot;</span><span class="tok-p">)</span>
+<pre class="pygments highlight"><code data-lang="lua"><span></span> <span class="tok-n">glfw</span> <span class="tok-o">=</span> <span class="tok-nb">require</span><span class="tok-p">(</span><span class="tok-s2">&quot;moonglfw&quot;</span><span class="tok-p">)</span>
+ <span class="tok-n">vk</span> <span class="tok-o">=</span> <span class="tok-nb">require</span><span class="tok-p">(</span><span class="tok-s2">&quot;moonvulkan&quot;</span><span class="tok-p">)</span>
 
  <span class="tok-c1">-- 1) Get the list of extensions required by GLFW to create surfaces:</span>
  <span class="tok-n">extension_names</span> <span class="tok-o">=</span> <span class="tok-n">glfw</span><span class="tok-p">.</span><span class="tok-n">get_required_instance_extensions</span><span class="tok-p">()</span>
- <span class="tok-nb">print</span><span class="tok-p">(</span><span class="tok-s2">&quot;</span><span class="tok-s">Required extensions: &quot;</span> <span class="tok-o">..</span> <span class="tok-nb">table.concat</span><span class="tok-p">(</span><span class="tok-n">extension_names</span><span class="tok-p">,</span> <span class="tok-s1">&#39;</span><span class="tok-s">, &#39;</span><span class="tok-p">))</span>
+ <span class="tok-nb">print</span><span class="tok-p">(</span><span class="tok-s2">&quot;Required extensions: &quot;</span> <span class="tok-o">..</span> <span class="tok-nb">table.concat</span><span class="tok-p">(</span><span class="tok-n">extension_names</span><span class="tok-p">,</span> <span class="tok-s1">&#39;, &#39;</span><span class="tok-p">))</span>
 
  <span class="tok-c1">-- 2) Create a Vulkan instance, enabling the required extensions:</span>
  <span class="tok-n">instance</span> <span class="tok-o">=</span> <span class="tok-n">vk</span><span class="tok-p">.</span><span class="tok-n">create_instance</span><span class="tok-p">({</span> <span class="tok-n">enabled_extension_names</span> <span class="tok-o">=</span> <span class="tok-n">extension_names</span> <span class="tok-p">})</span>
 
  <span class="tok-c1">-- 3.1) Create a window, not tied to any particular API:</span>
- <span class="tok-n">glfw</span><span class="tok-p">.</span><span class="tok-n">window_hint</span><span class="tok-p">(</span><span class="tok-s1">&#39;</span><span class="tok-s">client api&#39;</span><span class="tok-p">,</span> <span class="tok-s1">&#39;</span><span class="tok-s">no api&#39;</span><span class="tok-p">)</span>
- <span class="tok-n">window</span> <span class="tok-o">=</span> <span class="tok-n">glfw</span><span class="tok-p">.</span><span class="tok-n">create_window</span><span class="tok-p">(</span><span class="tok-mi">640</span><span class="tok-p">,</span> <span class="tok-mi">480</span><span class="tok-p">,</span> <span class="tok-s2">&quot;</span><span class="tok-s">My first GLFW/Vulkan window&quot;</span><span class="tok-p">)</span>
+ <span class="tok-n">glfw</span><span class="tok-p">.</span><span class="tok-n">window_hint</span><span class="tok-p">(</span><span class="tok-s1">&#39;client api&#39;</span><span class="tok-p">,</span> <span class="tok-s1">&#39;no api&#39;</span><span class="tok-p">)</span>
+ <span class="tok-n">window</span> <span class="tok-o">=</span> <span class="tok-n">glfw</span><span class="tok-p">.</span><span class="tok-n">create_window</span><span class="tok-p">(</span><span class="tok-mi">640</span><span class="tok-p">,</span> <span class="tok-mi">480</span><span class="tok-p">,</span> <span class="tok-s2">&quot;My first GLFW/Vulkan window&quot;</span><span class="tok-p">)</span>
 
  <span class="tok-c1">-- 3.2) Create a surface for the window:</span>
  <span class="tok-n">surfaceRAW</span> <span class="tok-o">=</span> <span class="tok-n">glfw</span><span class="tok-p">.</span><span class="tok-n">create_window_surface</span><span class="tok-p">(</span><span class="tok-n">window</span><span class="tok-p">,</span> <span class="tok-n">instance</span><span class="tok-p">:</span><span class="tok-n">raw</span><span class="tok-p">())</span>
@@ -6145,27 +6151,28 @@ that the relevant header files are where <em>vulkan.h</em> expects them to be.</
  <span class="tok-n">surface</span> <span class="tok-o">=</span> <span class="tok-n">vk</span><span class="tok-p">.</span><span class="tok-n">created_surface</span><span class="tok-p">(</span><span class="tok-n">instance</span><span class="tok-p">,</span> <span class="tok-n">surfaceRAW</span><span class="tok-p">)</span>
 
  <span class="tok-c1">-- Event loop:</span>
- <span class="tok-k">while</span> <span class="tok-ow">not</span> <span class="tok-n">glfw</span><span class="tok-p">.</span><span class="tok-n">window_should_close</span><span class="tok-p">(</span><span class="tok-n">window</span><span class="tok-p">)</span> <span class="tok-k">do</span>
+ <span class="tok-kr">while</span> <span class="tok-ow">not</span> <span class="tok-n">glfw</span><span class="tok-p">.</span><span class="tok-n">window_should_close</span><span class="tok-p">(</span><span class="tok-n">window</span><span class="tok-p">)</span> <span class="tok-kr">do</span>
     <span class="tok-n">glfw</span><span class="tok-p">.</span><span class="tok-n">poll_events</span><span class="tok-p">()</span>
- <span class="tok-k">end</span></code></pre>
+ <span class="tok-kr">end</span></code></pre>
 </div>
 </div>
 <div id="versions_snippet" class="listingblock">
 <div class="title">Handling versions</div>
 <div class="content">
-<pre class="pygments highlight"><code data-lang="lua"> <span class="tok-nb">print</span><span class="tok-p">(</span><span class="tok-s2">&quot;</span><span class="tok-s">MoonVulkan version:&quot;</span><span class="tok-p">,</span> <span class="tok-n">vk</span><span class="tok-p">.</span><span class="tok-n">_VERSION</span><span class="tok-p">)</span>
- <span class="tok-nb">print</span><span class="tok-p">(</span><span class="tok-s2">&quot;</span><span class="tok-s">Header version (vulkan.h):&quot;</span><span class="tok-p">,</span> <span class="tok-n">vk</span><span class="tok-p">.</span><span class="tok-n">HEADER_VERSION</span><span class="tok-p">)</span>
- <span class="tok-nb">print</span><span class="tok-p">(</span><span class="tok-s2">&quot;</span><span class="tok-s">Supported versions:&quot;</span><span class="tok-p">,</span> <span class="tok-nb">table.concat</span><span class="tok-p">(</span><span class="tok-n">vk</span><span class="tok-p">.</span><span class="tok-n">API_VERSIONS</span><span class="tok-p">,</span> <span class="tok-s2">&quot;</span><span class="tok-s">,&quot;</span><span class="tok-p">))</span>
+<pre class="pygments highlight"><code data-lang="lua"><span></span>
+ <span class="tok-nb">print</span><span class="tok-p">(</span><span class="tok-s2">&quot;MoonVulkan version:&quot;</span><span class="tok-p">,</span> <span class="tok-n">vk</span><span class="tok-p">.</span><span class="tok-n">_VERSION</span><span class="tok-p">)</span>
+ <span class="tok-nb">print</span><span class="tok-p">(</span><span class="tok-s2">&quot;Header version (vulkan.h):&quot;</span><span class="tok-p">,</span> <span class="tok-n">vk</span><span class="tok-p">.</span><span class="tok-n">HEADER_VERSION</span><span class="tok-p">)</span>
+ <span class="tok-nb">print</span><span class="tok-p">(</span><span class="tok-s2">&quot;Supported versions:&quot;</span><span class="tok-p">,</span> <span class="tok-nb">table.concat</span><span class="tok-p">(</span><span class="tok-n">vk</span><span class="tok-p">.</span><span class="tok-n">API_VERSIONS</span><span class="tok-p">,</span> <span class="tok-s2">&quot;,&quot;</span><span class="tok-p">))</span>
 
- <span class="tok-k">for</span> <span class="tok-n">_</span><span class="tok-p">,</span> <span class="tok-n">s</span> <span class="tok-k">in</span> <span class="tok-nb">ipairs</span><span class="tok-p">(</span><span class="tok-n">vk</span><span class="tok-p">.</span><span class="tok-n">API_VERSIONS</span><span class="tok-p">)</span> <span class="tok-k">do</span>
+ <span class="tok-kr">for</span> <span class="tok-n">_</span><span class="tok-p">,</span> <span class="tok-n">s</span> <span class="tok-kr">in</span> <span class="tok-nb">ipairs</span><span class="tok-p">(</span><span class="tok-n">vk</span><span class="tok-p">.</span><span class="tok-n">API_VERSIONS</span><span class="tok-p">)</span> <span class="tok-kr">do</span>
      <span class="tok-kd">local</span> <span class="tok-n">ver</span> <span class="tok-o">=</span> <span class="tok-n">vk</span><span class="tok-p">[</span><span class="tok-n">s</span><span class="tok-p">]</span>
      <span class="tok-kd">local</span> <span class="tok-n">major</span><span class="tok-p">,</span> <span class="tok-n">minor</span><span class="tok-p">,</span> <span class="tok-n">patch</span> <span class="tok-o">=</span> <span class="tok-n">vk</span><span class="tok-p">.</span><span class="tok-n">version_numbers</span><span class="tok-p">(</span><span class="tok-n">ver</span><span class="tok-p">)</span>
-     <span class="tok-nb">print</span><span class="tok-p">(</span><span class="tok-n">s</span> <span class="tok-o">..</span> <span class="tok-s2">&quot;</span><span class="tok-s">: &quot;</span> <span class="tok-o">..</span> <span class="tok-n">ver</span> <span class="tok-o">..</span> <span class="tok-s2">&quot;</span><span class="tok-s"> (&quot;</span> <span class="tok-o">..</span>  <span class="tok-n">vk</span><span class="tok-p">.</span><span class="tok-n">version_string</span><span class="tok-p">(</span><span class="tok-n">ver</span><span class="tok-p">)</span> <span class="tok-o">..</span><span class="tok-s2">&quot;</span><span class="tok-s">)&quot;</span> <span class="tok-o">..</span>
-         <span class="tok-s2">&quot;</span><span class="tok-s"> major=&quot;</span><span class="tok-o">..</span><span class="tok-n">major</span><span class="tok-o">..</span><span class="tok-s2">&quot;</span><span class="tok-s"> minor=&quot;</span><span class="tok-o">..</span><span class="tok-n">minor</span><span class="tok-o">..</span><span class="tok-s2">&quot;</span><span class="tok-s"> patch=&quot;</span><span class="tok-o">..</span><span class="tok-n">patch</span><span class="tok-p">)</span>
- <span class="tok-k">end</span>
+     <span class="tok-nb">print</span><span class="tok-p">(</span><span class="tok-n">s</span> <span class="tok-o">..</span> <span class="tok-s2">&quot;: &quot;</span> <span class="tok-o">..</span> <span class="tok-n">ver</span> <span class="tok-o">..</span> <span class="tok-s2">&quot; (&quot;</span> <span class="tok-o">..</span>  <span class="tok-n">vk</span><span class="tok-p">.</span><span class="tok-n">version_string</span><span class="tok-p">(</span><span class="tok-n">ver</span><span class="tok-p">)</span> <span class="tok-o">..</span><span class="tok-s2">&quot;)&quot;</span> <span class="tok-o">..</span>
+         <span class="tok-s2">&quot; major=&quot;</span><span class="tok-o">..</span><span class="tok-n">major</span><span class="tok-o">..</span><span class="tok-s2">&quot; minor=&quot;</span><span class="tok-o">..</span><span class="tok-n">minor</span><span class="tok-o">..</span><span class="tok-s2">&quot; patch=&quot;</span><span class="tok-o">..</span><span class="tok-n">patch</span><span class="tok-p">)</span>
+ <span class="tok-kr">end</span>
 
- <span class="tok-k">if</span> <span class="tok-ow">not</span> <span class="tok-n">vk</span><span class="tok-p">.</span><span class="tok-n">API_VERSION_1_0</span> <span class="tok-k">then</span> <span class="tok-nb">print</span><span class="tok-p">(</span><span class="tok-s2">&quot;</span><span class="tok-s">API_VERSION_1_0 is not supported&quot;</span><span class="tok-p">)</span> <span class="tok-k">end</span>
- <span class="tok-k">if</span> <span class="tok-ow">not</span> <span class="tok-n">vk</span><span class="tok-p">.</span><span class="tok-n">API_VERSION_2_0</span> <span class="tok-k">then</span> <span class="tok-nb">print</span><span class="tok-p">(</span><span class="tok-s2">&quot;</span><span class="tok-s">API_VERSION_2_0 is not supported&quot;</span><span class="tok-p">)</span> <span class="tok-k">end</span>
+ <span class="tok-kr">if</span> <span class="tok-ow">not</span> <span class="tok-n">vk</span><span class="tok-p">.</span><span class="tok-n">API_VERSION_1_0</span> <span class="tok-kr">then</span> <span class="tok-nb">print</span><span class="tok-p">(</span><span class="tok-s2">&quot;API_VERSION_1_0 is not supported&quot;</span><span class="tok-p">)</span> <span class="tok-kr">end</span>
+ <span class="tok-kr">if</span> <span class="tok-ow">not</span> <span class="tok-n">vk</span><span class="tok-p">.</span><span class="tok-n">API_VERSION_2_0</span> <span class="tok-kr">then</span> <span class="tok-nb">print</span><span class="tok-p">(</span><span class="tok-s2">&quot;API_VERSION_2_0 is not supported&quot;</span><span class="tok-p">)</span> <span class="tok-kr">end</span>
 
  <span class="tok-nb">assert</span><span class="tok-p">(</span><span class="tok-n">vk</span><span class="tok-p">.</span><span class="tok-n">make_version</span><span class="tok-p">(</span><span class="tok-mi">1</span><span class="tok-p">,</span> <span class="tok-mi">0</span><span class="tok-p">,</span> <span class="tok-mi">0</span><span class="tok-p">)</span> <span class="tok-o">==</span> <span class="tok-n">vk</span><span class="tok-p">.</span><span class="tok-n">API_VERSION_1_0</span><span class="tok-p">)</span> <span class="tok-c1">--&gt; true</span></code></pre>
 </div>
@@ -6194,7 +6201,7 @@ that the relevant header files are where <em>vulkan.h</em> expects them to be.</
 <div id="footer">
 <div id="footer-text">
 Version 0.4<br>
-Last updated 2017-07-23 10:59:32 CEST
+Last updated 2017-08-09 20:11:14 CEST
 </div>
 </div>
 </body>
