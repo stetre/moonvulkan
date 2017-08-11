@@ -65,7 +65,7 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.ht
 [[colorspace]]
 [small]#*colorspace*: vk.COLOR_SPACE_XXX_KHR, vk.COLOR_SPACE_XXX_EXT +
 Values:
-'_srgb nonlinear_' (default), '_display p3 nonlinear_', '_extended srgb linear_', '_dci p3 linear_', '_dci p3 nonlinear_', '_bt709 linear_', '_bt709 nonlinear_', '_bt2020 linear_', '_hdr10 st2084_', '_dolbyvision_', '_hdr10 hlg_', '_adobergb linear_', '_adobergb nonlinear_', '_pass through_'. +
+'_srgb nonlinear_' (default), '_display p3 nonlinear_', '_extended srgb linear_', '_extended srgb nonlinear_', '_dci p3 linear_', '_dci p3 nonlinear_', '_bt709 linear_', '_bt709 nonlinear_', '_bt2020 linear_', '_hdr10 st2084_', '_dolbyvision_', '_hdr10 hlg_', '_adobergb linear_', '_adobergb nonlinear_', '_pass through_'. +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkColorSpaceKHR[VkColorSpaceKHR].#
 
 [[commandbufferlevel]]

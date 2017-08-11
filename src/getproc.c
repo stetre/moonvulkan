@@ -505,6 +505,10 @@ device_dt_t* getproc_device(lua_State *L, VkDevice device, VkDeviceCreateInfo *c
             {
             continue;
             }
+        IF("VK_KHR_relaxed_block_layout")
+            {
+            continue;
+            }
         IF("VK_EXT_blend_operation_advanced")
             {
             continue;
@@ -516,6 +520,10 @@ device_dt_t* getproc_device(lua_State *L, VkDevice device, VkDeviceCreateInfo *c
             GET(CmdDebugMarkerBeginEXT);
             GET(CmdDebugMarkerEndEXT);
             GET(CmdDebugMarkerInsertEXT);
+            continue;
+            }
+        IF("VK_EXT_depth_range_unrestricted")
+            {
             continue;
             }
         IF("VK_EXT_discard_rectangles")
@@ -534,6 +542,10 @@ device_dt_t* getproc_device(lua_State *L, VkDevice device, VkDeviceCreateInfo *c
         IF("VK_EXT_hdr_metadata")
             {
             GET(SetHdrMetadataEXT);
+            continue;
+            }
+        IF("VK_EXT_post_depth_coverage")
+            {
             continue;
             }
         IF("VK_EXT_sampler_filter_minmax")

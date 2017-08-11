@@ -862,6 +862,7 @@ void moonvulkan_open_enums(lua_State *L)
     ADD(COLOR_SPACE_SRGB_NONLINEAR_KHR, "srgb nonlinear");
     ADD(COLOR_SPACE_DISPLAY_P3_NONLINEAR_EXT, "display p3 nonlinear");
     ADD(COLOR_SPACE_EXTENDED_SRGB_LINEAR_EXT, "extended srgb linear");
+    ADD(COLOR_SPACE_EXTENDED_SRGB_NONLINEAR_EXT, "extended srgb nonlinear");
     ADD(COLOR_SPACE_DCI_P3_LINEAR_EXT, "dci p3 linear");
     ADD(COLOR_SPACE_DCI_P3_NONLINEAR_EXT, "dci p3 nonlinear");
     ADD(COLOR_SPACE_BT709_LINEAR_EXT, "bt709 linear");
