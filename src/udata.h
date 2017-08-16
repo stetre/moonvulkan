@@ -28,6 +28,7 @@
 extern "C" {
 #endif
 
+#include <stdint.h>
 #include "lua.h"
 #include "lauxlib.h"
 

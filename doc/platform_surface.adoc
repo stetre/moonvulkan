@@ -70,6 +70,8 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.ht
 [small]#_awindow_: lightuserdata  (_ANativeWindow*_)+
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCreateAndroidSurfaceKHR[vkCreateAndroidSurfaceKHR] (https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_android_surface[VK_KHR_android_surface] extension, <<platform_support, PLATFORM_ANDROID>>).#
 
+////
+
 '''
 
 [[get_physical_device_win32_presentation_support]]
@@ -78,9 +80,8 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.ht
 
 [[create_win32_surface]]
 * _surface_ = *create_win32_surface*(_instance_, _flags_, _hinstance_, _hwnd_, [<<allocators, _allocator_>>]) +
-[small]#_hinstance_: lightuserdata (_HINSTANCE*_) +
-_hwnd: lightuserdata (_HWND*_) +
+[small]#_hinstance_: lightuserdata (_HINSTANCE_) +
+_hwnd_: lightuserdata (_HWND_) +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCreateWin32SurfaceKHR[vkCreateWin32SurfaceKHR] (https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_win32_surface[VK_KHR_win32_surface] extension, <<platform_support, PLATFORM_WIN32>>).#
 
-////
 

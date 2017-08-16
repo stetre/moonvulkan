@@ -97,7 +97,7 @@ static int Create(lua_State *L)
     info.sType = VK_STRUCTURE_TYPE_DEBUG_REPORT_CALLBACK_CREATE_INFO_EXT;
     info.pNext = NULL;
     info.flags = checkflags(L, 2);
-    info.pfnCallback = Callback;
+    info.pfnCallback = (PFN_vkDebugReportCallbackEXT)Callback;
 
     /* get the Lua function, arg 3 and anchor it in the Lua registry */
     if(!lua_isfunction(L, 3))

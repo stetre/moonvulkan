@@ -27,36 +27,61 @@
 
 global_dt_t vk; /* global dispatch table (non-instance and non-device functions) */
 
-#ifdef LINUX
-/*----------------------------------------------------------------------------------*
- | Linux                                                                            |
- *----------------------------------------------------------------------------------*/
+#if defined(LINUX)
+#include <dlfcn.h>
+static void *Handle = NULL;
+#define LIBNAME "libvulkan.so"
+
+#elif defined(MINGW)
+#include "damnwindows.h"
+#define LIBNAME "libvulkan-1.dll"
+#define LLIBNAME L"libvulkan-1.dll"
+#define LIBNAME1 "vulkan.dll"
+#define LLIBNAME1 L"vulkan.dll"
+static HMODULE Handle = NULL;
+
+#else
+#error "Cannot determine platform"
+#endif
+
 
 static PFN_vkGetInstanceProcAddr GetInstanceProcAddr;
 static PFN_vkGetDeviceProcAddr GetDeviceProcAddr;
 
 #define FP(f) *(void**)(&(f))
-/* Cast to silent compiler warnings without giving up the -Wpedantic flag.
+/* Cast to silence compiler warnings without giving up the -Wpedantic flag.
  *("ISO C forbids conversion of function pointer to object pointer type")
  */
 
-#include <dlfcn.h>
 static int Init(lua_State *L)
     {
+#if defined(LINUX)
     char *err;
 
-    void *handle = dlopen("libvulkan.so", RTLD_LAZY | RTLD_LOCAL);
-    if(!handle)
+    Handle = dlopen(LIBNAME, RTLD_LAZY | RTLD_LOCAL);
+    if(!Handle)
         {
         err = dlerror();
-        return luaL_error(L, err != NULL ? err : "cannot load libvulkan.so");
+        return luaL_error(L, err != NULL ? err : "cannot load " LIBNAME);
         }
 
-    FP(GetInstanceProcAddr) = dlsym(handle, "vkGetInstanceProcAddr");
+    FP(GetInstanceProcAddr) = dlsym(Handle, "vkGetInstanceProcAddr");
+    FP(GetDeviceProcAddr) = dlsym(Handle, "vkGetDeviceProcAddr");
+
+#elif defined(MINGW)
+    Handle = LoadLibraryW(LLIBNAME);
+    if(!Handle)
+        Handle = LoadLibraryW(LLIBNAME1);
+    if(!Handle)
+        return luaL_error(L, "cannot load " LIBNAME " or " LIBNAME1);
+
+    GetInstanceProcAddr = (PFN_vkGetInstanceProcAddr)GetProcAddress(Handle, "vkGetInstanceProcAddr");
+    GetDeviceProcAddr = (PFN_vkGetDeviceProcAddr)GetProcAddress(Handle, "vkGetDeviceProcAddr");
+
+#endif
+
     if(!GetInstanceProcAddr)
         return luaL_error(L, "cannot find vkGetInstanceProcAddr");
-
-    FP(GetDeviceProcAddr) = dlsym(handle, "vkGetDeviceProcAddr");
     if(!GetDeviceProcAddr)
         return luaL_error(L, "cannot find vkGetDeviceProcAddr");
 
@@ -73,19 +98,6 @@ static int Init(lua_State *L)
     return 0;
     }
 
-#else
-/*----------------------------------------------------------------------------------*
- | @@ Other platforms (MINGW, WIN32, ecc) 
- *----------------------------------------------------------------------------------*/
-#define GetInstanceProcAddr(instance, name) NULL
-#define GetDeviceProcAddr(device, name) NULL
-static int Init(lua_State *L)
-    {
-    return luaL_error(L, "platform not supported");
-    return 0;
-    }
-
-#endif
 
 /*----------------------------------------------------------------------------------*/
 
@@ -594,6 +606,15 @@ device_dt_t* getproc_device(lua_State *L, VkDevice device, VkDeviceCreateInfo *c
     return dt;
     }
 
+
+void moonvulkan_atexit_getproc(void)
+    {
+#if defined(LINUX)
+    if(Handle) dlclose(Handle);
+#elif defined(MINGW)
+    if(Handle) FreeLibrary(Handle);
+#endif
+    }
 
 int moonvulkan_open_getproc(lua_State *L)
     {

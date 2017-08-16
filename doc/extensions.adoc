@@ -41,7 +41,7 @@ Khronos extensions (KHR):
 * https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_variable_pointers[VK_KHR_variable_pointers]
 * https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_wayland_surface[VK_KHR_wayland_surface]
 //@@VK_KHR_win32_keyed_mutex
-//@@VK_KHR_win32_surface
+* https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_win32_surface[VK_KHR_win32_surface]
 * https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_xcb_surface[VK_KHR_xcb_surface]
 * https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_xlib_surface[VK_KHR_xlib_surface]
 

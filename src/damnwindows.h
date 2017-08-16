@@ -23,22 +23,15 @@
  * SOFTWARE.
  */
 
-/****************************************************************************
- * MoonVulkan library - C API                                               *
- ****************************************************************************/
+#ifndef damnwindowsDEFINED
+#define damnwindowsDEFINED
 
-#ifndef moonvulkanDEFINED
-#define moonvulkanDEFINED
+/* Damn MS and your f**ing careless naming convenctions */
+#include <windows.h>
+#undef CreateSemaphore
+#undef CreateEvent
+#undef SetEvent
+#undef ResetEvent
+#undef GetObject
 
-#include <lua.h>
-#include "lualib.h"
-#include "lauxlib.h"
-#include <stdint.h>
-
-#define VK_NO_PROTOTYPES 1
-#include "vulkan/vulkan.h"  /* include locally from moonvulkan/src/vulkan/ */
-
-#define MOONVULKAN_VERSION      "0.4"
-
-#endif /* moonvulkanDEFINED */
-
+#endif /* damnwindowsDEFINED */

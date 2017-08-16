@@ -87,7 +87,7 @@ static int GetEventStatus(lua_State *L)
     return 0;
     }
 
-static int SetEvent(lua_State *L)
+static int SetEvent_damnwindows (lua_State *L)
     {
     ud_t *ud;
     VkEvent event = checkevent(L, 1, &ud);
@@ -97,7 +97,7 @@ static int SetEvent(lua_State *L)
     return 0;
     }
 
-static int ResetEvent(lua_State *L)
+static int ResetEvent_damnwindows (lua_State *L)
     {
     ud_t *ud;
     VkEvent event = checkevent(L, 1, &ud);
@@ -136,8 +136,8 @@ static const struct luaL_Reg Functions[] =
         { "create_event",  Create },
         { "destroy_event",  Destroy },
         { "get_event_status", GetEventStatus },
-        { "set_event", SetEvent },
-        { "reset_event", ResetEvent },
+        { "set_event", SetEvent_damnwindows },
+        { "reset_event", ResetEvent_damnwindows },
         { NULL, NULL } /* sentinel */
     };
 

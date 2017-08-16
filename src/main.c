@@ -32,6 +32,7 @@ static void AtExit(void)
     if(moonvulkan_L)
         {
         enums_free_all(moonvulkan_L);
+        moonvulkan_atexit_getproc();
         moonvulkan_L = NULL;
         }
     }
@@ -41,7 +42,7 @@ int luaopen_moonvulkan(lua_State *L)
     {
     moonvulkan_L = L;
 
-    malloc_init(L);
+    moonvulkan_utils_init(L);
     atexit(AtExit);
 
     lua_newtable(L); /* the vk table */

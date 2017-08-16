@@ -37,7 +37,7 @@ ifdef LINUX
 #LIBS = -lvulkan
 endif
 ifdef MINGW
-#LIBS = -lvulkan
+LIBS = -llua
 endif
 
 Tgt	:= moonvulkan

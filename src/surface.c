@@ -272,8 +272,8 @@ static int CreateWin32Surface(lua_State *L)
     info.sType = VK_STRUCTURE_TYPE_WIN32_SURFACE_CREATE_INFO_KHR; 
     info.pNext = NULL;
     info.flags = checkflags(L, 2);
-    info.hinstance = (HINSTANCE *)checklightuserdata(L, 3);
-    info.hwnd = (HWND*)checklightuserdata(L, 4);
+    info.hinstance = (HINSTANCE)checklightuserdata(L, 3);
+    info.hwnd = (HWND)checklightuserdata(L, 4);
     CheckInstancePfn(L, ud, CreateWin32SurfaceKHR);
     ec = ud->idt->CreateWin32SurfaceKHR(instance, &info, allocator, &surface);
     CheckError(L, ec);

@@ -35,6 +35,10 @@
 #include <time.h>
 #include "moonvulkan.h"
 
+#ifdef VK_USE_PLATFORM_WIN32_KHR
+#include "damnwindows.h"
+#endif
+
 #define TOSTR_(x) #x
 #define TOSTR(x) TOSTR_(x)
 
@@ -60,14 +64,10 @@ int noprintf(const char *fmt, ...);
 #define now moonvulkan_now
 double now(void);
 #define since(t) (now() - (t))
-#define tstosec moonvulkan_tstosec
-double tstosec(const struct timespec *ts);
-#define sectots moonvulkan_sectots
-void sectots(struct timespec *ts, double seconds);
+#define sleeep moonvulkan_sleeep
+void sleeep(double seconds);
 #define notavailable moonvulkan_notavailable
 int notavailable(lua_State *L, ...);
-#define malloc_init moonvulkan_malloc_init
-void malloc_init(lua_State *L);
 #define Malloc moonvulkan_Malloc
 void *Malloc(lua_State *L, size_t size);
 #define MallocNoErr moonvulkan_MallocNoErr
@@ -163,7 +163,9 @@ extern int trace_objects;
 
 /* main.c */
 int luaopen_moonvulkan(lua_State *L);
+void moonvulkan_utils_init(lua_State *L);
 int moonvulkan_open_getproc(lua_State *L);
+void moonvulkan_atexit_getproc(void);
 void moonvulkan_open_enums(lua_State *L);
 void moonvulkan_open_flags(lua_State *L);
 void moonvulkan_open_cmd(lua_State *L);
@@ -176,13 +178,23 @@ void moonvulkan_open_datahandling(lua_State *L);
  | Debug and other utilities                                                    |
  *------------------------------------------------------------------------------*/
 
+#if defined(MINGW) /*@@FIXME: find a way to print uint64_t on f**ing Windows without warnings */
 #define TRACE_CREATE(p, ttt) do {                                   \
-    if(trace_objects) { printf("create "ttt" 0x%.16llx\n", (long long unsigned int)(uintptr_t)(p)); }   \
+    if(trace_objects) { printf("create "ttt" %p\n", (void*)(uintptr_t)(p)); }   \
 } while(0)
 
 #define TRACE_DELETE(p, ttt) do {                                   \
-    if(trace_objects) { printf("delete "ttt" 0x%.16llx\n", (long long unsigned int)(uintptr_t)(p)); }   \
+    if(trace_objects) { printf("delete "ttt" %p\n", (void*)(uintptr_t)(p)); }   \
 } while(0)
+#else
+#define TRACE_CREATE(p, ttt) do {                                   \
+    if(trace_objects) { printf("create "ttt" 0x%.16lx\n", (uint64_t)(uintptr_t)(p)); }   \
+} while(0)
+
+#define TRACE_DELETE(p, ttt) do {                                   \
+    if(trace_objects) { printf("delete "ttt" 0x%.16lx\n", (uint64_t)(uintptr_t)(p)); }   \
+} while(0)
+#endif
 
 
 #define CheckError(L, ec) \

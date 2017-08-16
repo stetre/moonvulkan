@@ -2640,6 +2640,9 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/
 <p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_wayland_surface">VK_KHR_wayland_surface</a></p>
 </li>
 <li>
+<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_win32_surface">VK_KHR_win32_surface</a></p>
+</li>
+<li>
 <p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_xcb_surface">VK_KHR_xcb_surface</a></p>
 </li>
 <li>
@@ -2932,6 +2935,25 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/
 <span class="small"><em>mirconnection</em>: lightuserdata (<em>MirConnection*</em>)<br>
 <em>mirsurface</em>: lightuserdata (<em>MirSurface*</em>)<br>
 Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCreateMirSurfaceKHR">vkCreateMirSurfaceKHR</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_mir_surface">VK_KHR_mir_surface</a> extension, <a href="#platform_support">PLATFORM_MIR</a>).</span></p>
+</li>
+</ul>
+</div>
+<hr>
+<div id="get_physical_device_win32_presentation_support" class="ulist">
+<ul>
+<li>
+<p><em>boolean</em> = <strong>get_physical_device_win32_presentation_support</strong>(<em>physdev</em>, <em>familyindex</em>)<br>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetPhysicalDeviceWin32PresentationSupportKHR">vkGetPhysicalDeviceWin32PresentationSupportKHR</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_win32_surface">VK_KHR_win32_surface</a> extension, <a href="#platform_support">PLATFORM_WIN32</a>).</span></p>
+</li>
+</ul>
+</div>
+<div id="create_win32_surface" class="ulist">
+<ul>
+<li>
+<p><em>surface</em> = <strong>create_win32_surface</strong>(<em>instance</em>, <em>flags</em>, <em>hinstance</em>, <em>hwnd</em>, [<a href="#allocators"><em>allocator</em></a>])<br>
+<span class="small"><em>hinstance</em>: lightuserdata (<em>HINSTANCE</em>)<br>
+<em>hwnd</em>: lightuserdata (<em>HWND</em>)<br>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCreateWin32SurfaceKHR">vkCreateWin32SurfaceKHR</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_win32_surface">VK_KHR_win32_surface</a> extension, <a href="#platform_support">PLATFORM_WIN32</a>).</span></p>
 </li>
 </ul>
 </div>
