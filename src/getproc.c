@@ -34,8 +34,8 @@ static void *Handle = NULL;
 
 #elif defined(MINGW)
 #include "damnwindows.h"
-#define LIBNAME "libvulkan-1.dll"
-#define LLIBNAME L"libvulkan-1.dll"
+#define LIBNAME "vulkan-1.dll"
+#define LLIBNAME L"vulkan-1.dll"
 #define LIBNAME1 "vulkan.dll"
 #define LLIBNAME1 L"vulkan.dll"
 static HMODULE Handle = NULL;
