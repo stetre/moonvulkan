@@ -1006,6 +1006,8 @@ void moonvulkan_open_enums(lua_State *L)
     ADD(OBJECT_TYPE_DISPLAY_MODE_KHR, "display mode");
     ADD(OBJECT_TYPE_DEBUG_REPORT_CALLBACK_EXT, "debug report callback");
     ADD(OBJECT_TYPE_DESCRIPTOR_UPDATE_TEMPLATE_KHR, "descriptor update template");
+    ADD(OBJECT_TYPE_SAMPLER_YCBCR_CONVERSION_KHR, "sampler ycbcr conversion");
+    ADD(OBJECT_TYPE_VALIDATION_CACHE_EXT, "validation cache");
 
     domain = DOMAIN_BLEND_OVERLAP; /* VkBlendOverlapEXT */
     ADD(BLEND_OVERLAP_UNCORRELATED_EXT, "uncorrelated");
