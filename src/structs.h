@@ -598,4 +598,13 @@ void freeinstancecreateinfo(lua_State *L, VkInstanceCreateInfo_CHAIN *p);
 #define echeckinstancecreateinfo moonvulkan_echeckinstancecreateinfo
 int echeckinstancecreateinfo(lua_State *L, int arg, VkInstanceCreateInfo_CHAIN *p);
 
+#ifdef VK_USE_PLATFORM_WIN32_KHR
+
+#define echeckimportsemaphorewin32handleinfo moonvulkan_echeckimportsemaphorewin32handleinfo
+int echeckimportsemaphorewin32handleinfo(lua_State *L, int arg, VkImportSemaphoreWin32HandleInfoKHR *p);
+#define echecksemaphoregetwin32handleinfo moonvulkan_echecksemaphoregetwin32handleinfo
+int echecksemaphoregetwin32handleinfo(lua_State *L, int arg, VkSemaphoreGetWin32HandleInfoKHR *p);
+
+#endif /* VK_USE_PLATFORM_WIN32_KHR */
+
 #endif /* structsDEFINED */

@@ -231,6 +231,26 @@ do {                                                \
         return fielderror(L, sname, err);           \
 } while(0)
 
+#define GetLightuserdataOpt(name, sname, TTT) do {  \
+    lua_pushstring(L, sname);                       \
+    lua_rawget(L, arg);                             \
+    err = 0;                                        \
+    if(lua_isnoneornil(L, -1))                      \
+        p->name = NULL;                             \
+    else                                            \
+        {                                           \
+        if(lua_type(L, -1) != LUA_TLIGHTUSERDATA)   \
+            err = ERR_TYPE;                         \
+        else                                        \
+            p->name = (TTT)lua_touserdata(L, -1);   \
+        }                                           \
+    lua_pop(L, 1);                                  \
+    if(err)                                         \
+        return fielderror(L, sname, err);           \
+} while(0)
+
+#define GetLightuserdata GetLightuserdataOpt
+
 /* Enums ---------------------------------------------------------------------*/
 
 #define GetEnum(name, sname, testfunc) do {         \
@@ -795,6 +815,27 @@ int echeckfencegetfdinfo(lua_State *L, int arg, VkFenceGetFdInfoKHR *p)
 
 /*------------------------------------------------------------------------------*/
 
+#ifdef VK_USE_PLATFORM_WIN32_KHR
+#if 0 //@@TODO VK_KHR_external_semaphore_win32
+typedef struct VkExportSemaphoreWin32HandleInfoKHR {
+    VkStructureType               sType;
+    const void*                   pNext;
+    const SECURITY_ATTRIBUTES*    pAttributes;
+    DWORD                         dwAccess;
+    LPCWSTR                       name;
+} VkExportSemaphoreWin32HandleInfoKHR;
+
+typedef struct VkD3D12FenceSubmitInfoKHR {
+    VkStructureType    sType;
+    const void*        pNext;
+    uint32_t           waitSemaphoreValuesCount;
+    const uint64_t*    pWaitSemaphoreValues;
+    uint32_t           signalSemaphoreValuesCount;
+    const uint64_t*    pSignalSemaphoreValues;
+} VkD3D12FenceSubmitInfoKHR;
+#endif
+#endif /* VK_USE_PLATFORM_WIN32_KHR */
+
 static int echeckexportsemaphorecreateinfo(lua_State *L, int arg, VkExportSemaphoreCreateInfoKHR *p)
     {
     int err;
@@ -845,6 +886,34 @@ int echecksemaphoregetfdinfo(lua_State *L, int arg, VkSemaphoreGetFdInfoKHR *p)
     GetBits(handleType, "handle_type", VkExternalSemaphoreHandleTypeFlagBitsKHR);
     return 0;
     }
+
+#ifdef VK_USE_PLATFORM_WIN32_KHR
+
+int echeckimportsemaphorewin32handleinfo(lua_State *L, int arg, VkImportSemaphoreWin32HandleInfoKHR *p) //@@DOC VK_KHR_external_semaphore_win32
+    {
+    int err;
+    ECHECK_PREAMBLE(p);
+    p->sType = VK_STRUCTURE_TYPE_IMPORT_SEMAPHORE_WIN32_HANDLE_INFO_KHR;
+    /* p->semaphore is set by the caller */
+    GetFlags(flags, "flags");
+    GetBits(handleType, "handle_type", VkExternalSemaphoreHandleTypeFlagBitsKHR);
+    GetLightuserdata(handle, "handle", HANDLE);
+    p->name = NULL; //@@ LPCWSTR name;
+    return 0;
+    }
+
+int echecksemaphoregetwin32handleinfo(lua_State *L, int arg, VkSemaphoreGetWin32HandleInfoKHR *p) //@@ DOC VK_KHR_external_semaphore_win32
+    {
+    int err;
+    ECHECK_PREAMBLE(p);
+    p->sType = VK_STRUCTURE_TYPE_SEMAPHORE_GET_WIN32_HANDLE_INFO_KHR;
+    /* p->semaphore is set by the caller */
+    GetBits(handleType, "handle_type", VkExternalSemaphoreHandleTypeFlagBitsKHR);
+    return 0;
+    }
+
+
+#endif /* VK_USE_PLATFORM_WIN32_KHR */
 
 
 /*------------------------------------------------------------------------------*/

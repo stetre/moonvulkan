@@ -83,7 +83,7 @@ static int GetPhysicalDeviceDisplayProperties(lua_State *L)
             lua_setfield(L, -2, "display");
             lua_rawseti(L, -2, ++tot);
             }
-        } while (ec==VK_INCOMPLETE);
+        } while (remaining > 0);
 
     return 1;
     }
@@ -124,7 +124,7 @@ static int GetPhysicalDeviceDisplayPlaneProperties(lua_State *L)
                 }
             lua_rawseti(L, -2, ++tot);
             }
-        } while (ec==VK_INCOMPLETE);
+        } while (remaining > 0);
 
     return 1;
     }
@@ -161,7 +161,7 @@ static int GetDisplayPlaneSupportedDisplays(lua_State *L)
             pushdisplay(L, display[i], ud);
             lua_rawseti(L, -2, ++tot);
             }
-        } while (ec==VK_INCOMPLETE);
+        } while (remaining > 0);
 
     return 1;
     }

@@ -65,7 +65,7 @@ static int EnumerateInstanceLayerProperties(lua_State *L)
                 lua_rawseti(L, -2, ++tot);
                 }
             }
-        } while(ec==VK_INCOMPLETE);
+        } while(remaining > 0);
     
     return 1;
     }
@@ -111,7 +111,7 @@ static int EnumerateInstanceExtensionProperties(lua_State *L)
                 }
             }
 
-        } while(ec==VK_INCOMPLETE);
+        } while(remaining > 0);
     
     return 1;
     }
@@ -158,7 +158,7 @@ static int EnumerateDeviceLayerProperties(lua_State *L) /* DEPRECATED */
                 lua_rawseti(L, -2, ++tot);
                 }
             }
-    } while (ec==VK_INCOMPLETE);
+    } while (remaining > 0);
 
     return 1;
     }
@@ -206,7 +206,7 @@ static int EnumerateDeviceExtensionProperties(lua_State *L)
                 }
             }
 
-    } while (ec==VK_INCOMPLETE);
+    } while (remaining > 0);
 
     return 1;
     }

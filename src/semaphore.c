@@ -104,6 +104,40 @@ static int GetSemaphoreFd(lua_State *L)
     return 1;
     }
 
+#ifdef VK_USE_PLATFORM_WIN32_KHR
+
+static int ImportSemaphoreWin32Handle(lua_State *L) //@@DOC VK_KHR_external_semaphore_win32
+    {
+    VkResult ec;
+    ud_t *ud;
+    VkImportSemaphoreWin32HandleInfoKHR info;
+    VkSemaphore semaphore = checksemaphore(L, 1, &ud);
+    CheckDevicePfn(L, ud, ImportSemaphoreWin32HandleKHR);
+    if(echeckimportsemaphorewin32handleinfo(L, 2, &info)) return argerror(L, 2);
+    info.semaphore = semaphore;
+    ec = ud->ddt->ImportSemaphoreWin32HandleKHR(ud->device, &info);
+    CheckError(L, ec);
+    return 0;
+    }
+
+static int GetSemaphoreWin32Handle(lua_State *L) //@@DOC VK_KHR_external_semaphore_win32
+    {
+    VkResult ec;
+    ud_t *ud;
+    HANDLE handle;
+    VkSemaphoreGetWin32HandleInfoKHR info;
+    VkSemaphore semaphore = checksemaphore(L, 1, &ud);
+    CheckDevicePfn(L, ud, GetSemaphoreWin32HandleKHR);
+    if(echecksemaphoregetwin32handleinfo(L, 2, &info)) return argerror(L, 2);
+    info.semaphore = semaphore;
+    ec = ud->ddt->GetSemaphoreWin32HandleKHR(ud->device, &info, &handle);
+    CheckError(L, ec);
+    lua_pushlightuserdata(L, handle);
+    return 1;
+    }
+
+#endif /* VK_USE_PLATFORM_WIN32_KHR */
+
 
 RAW_FUNC(semaphore)
 TYPE_FUNC(semaphore)
@@ -135,6 +169,10 @@ static const struct luaL_Reg Functions[] =
         { "destroy_semaphore",  Destroy },
         { "import_semaphore_fd", ImportSemaphoreFd },
         { "get_semaphore_fd", GetSemaphoreFd },
+#ifdef VK_USE_PLATFORM_WIN32_KHR
+        { "import_semaphore_win32_handle", ImportSemaphoreWin32Handle },
+        { "get_semaphore_win32_handle", GetSemaphoreWin32Handle },
+#endif /* VK_USE_PLATFORM_WIN32_KHR */
         { NULL, NULL } /* sentinel */
     };
 

@@ -99,7 +99,7 @@ static int EnumeratePhysicalDevices(lua_State *L)
             pushphysical_device(L, physical_device[i], instance);
             lua_rawseti(L, -2, ++tot);
             }
-    } while(ec==VK_INCOMPLETE);
+    } while(remaining > 0);
 
     return 1;
     }

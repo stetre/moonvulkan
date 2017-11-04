@@ -108,7 +108,7 @@ static int GetDisplayModeProperties(lua_State *L)
             lua_setfield(L, -2, "display_mode");
             lua_rawseti(L, -2, ++tot);
             }
-        } while (ec==VK_INCOMPLETE);
+        } while (remaining > 0);
 
     return 1;
     }
