@@ -346,7 +346,7 @@ static int PushSupportedSurfaceCounters(lua_State *L, VkPhysicalDevice physdev, 
     VkSurfaceCapabilities2EXT caps;
     if(!ud->idt->GetPhysicalDeviceSurfaceCapabilities2EXT) return 0;
     memset(&caps, 0, sizeof(caps));
-    caps.sType = VK_STRUCTURE_TYPE_SURFACE_CAPABILITIES2_EXT;
+    caps.sType = VK_STRUCTURE_TYPE_SURFACE_CAPABILITIES_2_EXT;
     ec = ud->idt->GetPhysicalDeviceSurfaceCapabilities2EXT(physdev, surface, &caps);
     if(ec) return 0;
     pushflags(L, caps.supportedSurfaceCounters);

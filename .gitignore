@@ -6,5 +6,6 @@
 core.*
 local/
 tutorials/
+src/OLD
 src/DIFF
 src/TODO
