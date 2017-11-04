@@ -125,7 +125,7 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.ht
 [[dynamicstate]]
 [small]#*dynamicstate*: vk.DYNAMIC_STATE_XXX +
 Values:
-'_viewport_', '_scissor_', '_line width_', '_depth bias_', '_blend constants_', '_depth bounds_', '_stencil compare mask_', '_stencil write mask_', '_stencil reference_', '_discard rectangle_'. +
+'_viewport_', '_scissor_', '_line width_', '_depth bias_', '_blend constants_', '_depth bounds_', '_stencil compare mask_', '_stencil write mask_', '_stencil reference_', '_discard rectangle_', '_sample locations_'. +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkDynamicState[VkDynamicState].#
 
 [[filter]]

@@ -833,6 +833,7 @@ void moonvulkan_open_enums(lua_State *L)
     ADD(DYNAMIC_STATE_STENCIL_WRITE_MASK, "stencil write mask");
     ADD(DYNAMIC_STATE_STENCIL_REFERENCE, "stencil reference");
     ADD(DYNAMIC_STATE_DISCARD_RECTANGLE_EXT, "discard rectangle");
+    ADD(DYNAMIC_STATE_SAMPLE_LOCATIONS_EXT, "sample locations");
 
     domain = DOMAIN_FILTER; /* VkFilter */
     ADD(FILTER_NEAREST, "nearest");
