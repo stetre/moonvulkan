@@ -662,6 +662,8 @@ void moonvulkan_open_enums(lua_State *L)
     ADD(IMAGE_LAYOUT_PREINITIALIZED, "preinitialized");
     ADD(IMAGE_LAYOUT_PRESENT_SRC_KHR, "present src");
     ADD(IMAGE_LAYOUT_SHARED_PRESENT_KHR, "shared present");
+    ADD(IMAGE_LAYOUT_DEPTH_READ_ONLY_STENCIL_ATTACHMENT_OPTIMAL_KHR, "depth read only stencil attachment optimal");
+    ADD(IMAGE_LAYOUT_DEPTH_ATTACHMENT_STENCIL_READ_ONLY_OPTIMAL_KHR, "depth attachment stencil read only optimal");
 
     domain = DOMAIN_IMAGE_VIEW_TYPE; /* VkImageViewType */
     ADD(IMAGE_VIEW_TYPE_1D, "1d");

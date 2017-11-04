@@ -149,7 +149,7 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.ht
 [[imagelayout]]
 [small]#*imagelayout*: vk.IMAGE_LAYOUT_XXX +
 Values:
-'_undefined_' (default), '_general_', '_color attachment optimal_', '_depth stencil attachment optimal_', '_depth stencil read only optimal_', '_shader read only optimal_', '_transfer src optimal_', '_transfer dst optimal_', '_preinitialized_', '_present src_', '_shared present_'. +
+'_undefined_' (default), '_general_', '_color attachment optimal_', '_depth stencil attachment optimal_', '_depth stencil read only optimal_', '_shader read only optimal_', '_transfer src optimal_', '_transfer dst optimal_', '_preinitialized_', '_present src_', '_shared present_', '_depth read only stencil attachment optimal_', '_depth attachment stencil read only optimal_'. +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkImageLayout[VkImageLayout].#
 
 [[imagetiling]]
