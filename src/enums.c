@@ -321,6 +321,7 @@ static int Enum(lua_State *L)
     CASE(tessellationdomainorigin);
     CASE(samplerycbcrmodelconversion);
     CASE(samplerycbcrrange);
+    CASE(chromalocation);
 #undef CASE
     return 0;
     }
@@ -1045,6 +1046,10 @@ void moonvulkan_open_enums(lua_State *L)
     domain = DOMAIN_SAMPLER_YCBCR_RANGE; /* VkSamplerYcbcrRangeKHR */
     ADD(SAMPLER_YCBCR_RANGE_ITU_FULL_KHR, "itu full");
     ADD(SAMPLER_YCBCR_RANGE_ITU_NARROW_KHR, "itu narrow");
+
+    domain = DOMAIN_CHROMA_LOCATION; /* VkChromaLocationKHR */
+    ADD(CHROMA_LOCATION_COSITED_EVEN_KHR, "cosited even");
+    ADD(CHROMA_LOCATION_MIDPOINT_KHR, "midpoint");
 
 #undef ADD
     }

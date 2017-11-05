@@ -62,6 +62,11 @@ Values:
 '_float transparent black_' (default), '_int transparent black_', '_float opaque black_', '_int opaque black_', '_float opaque white_', '_int opaque white_'. +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkBorderColor[VkBorderColor].#
 
+[[chromalocation]]
+[small]#*chromalocation*: vk.CHROMA_LOCATION_XXX_KHR +
+Values: '_cosited even_', '_midpoint_'. +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkChromaLocationKHR[VkChromaLocationKHR].#
+
 [[colorspace]]
 [small]#*colorspace*: vk.COLOR_SPACE_XXX_KHR, vk.COLOR_SPACE_XXX_EXT +
 Values:

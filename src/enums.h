@@ -94,6 +94,7 @@ void enums_freelist(lua_State *L, uint32_t *list);
 #define DOMAIN_TESSELLATION_DOMAIN_ORIGIN       47
 #define DOMAIN_SAMPLER_YCBCR_MODEL_CONVERSION   48
 #define DOMAIN_SAMPLER_YCBCR_RANGE              49
+#define DOMAIN_CHROMA_LOCATION                  50
 
 /* NONVK additions */
 #define DOMAIN_NONVK_TYPE                       101
@@ -383,6 +384,14 @@ void enums_freelist(lua_State *L, uint32_t *list);
 #define valuessamplerycbcrrange(L) enums_values((L), DOMAIN_SAMPLER_YCBCR_RANGE)
 #define checksamplerycbcrrangelist(L, arg, count, err) (VkSamplerYcbcrRangeKHR*)enums_checklist((L), DOMAIN_SAMPLER_YCBCR_RANGE, (arg), (count), (err))
 #define freesamplerycbcrrangelist(L, list) enums_freelist((L), (uint32_t*)(list))
+
+#define testchromalocation(L, arg, err) (VkChromaLocationKHR)enums_test((L), DOMAIN_CHROMA_LOCATION, (arg), (err))
+#define checkchromalocation(L, arg) (VkChromaLocationKHR)enums_check((L), DOMAIN_CHROMA_LOCATION, (arg))
+#define pushchromalocation(L, val) enums_push((L), DOMAIN_CHROMA_LOCATION, (uint32_t)(val))
+#define valueschromalocation(L) enums_values((L), DOMAIN_CHROMA_LOCATION)
+#define checkchromalocationlist(L, arg, count, err) (VkChromaLocationKHR*)enums_checklist((L), DOMAIN_CHROMA_LOCATION, (arg), (count), (err))
+#define freechromalocationlist(L, list) enums_freelist((L), (uint32_t*)(list))
+
 
 #if 0 /* scaffolding 7yy */
 #define testxxx(L, arg, err) (VkXxx)enums_test((L), DOMAIN_XXX, (arg), (err))
