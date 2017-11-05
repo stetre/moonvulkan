@@ -1278,6 +1278,9 @@ static VkFlags checkimageaspectflags(lua_State *L, int arg)
     CASE(VK_IMAGE_ASPECT_DEPTH_BIT, "depth");
     CASE(VK_IMAGE_ASPECT_STENCIL_BIT, "stencil");
     CASE(VK_IMAGE_ASPECT_METADATA_BIT, "metadata");
+    CASE(VK_IMAGE_ASPECT_PLANE_0_BIT_KHR, "plane 0");
+    CASE(VK_IMAGE_ASPECT_PLANE_1_BIT_KHR, "plane 1");
+    CASE(VK_IMAGE_ASPECT_PLANE_2_BIT_KHR, "plane 2");
 #undef CASE
         return (VkFlags)luaL_argerror(L, --arg, badvalue(L,s));
         done: ;
@@ -1295,6 +1298,9 @@ static int pushimageaspectflags(lua_State *L, VkFlags flags)
     CASE(VK_IMAGE_ASPECT_DEPTH_BIT, "depth");
     CASE(VK_IMAGE_ASPECT_STENCIL_BIT, "stencil");
     CASE(VK_IMAGE_ASPECT_METADATA_BIT, "metadata");
+    CASE(VK_IMAGE_ASPECT_PLANE_0_BIT_KHR, "plane 0");
+    CASE(VK_IMAGE_ASPECT_PLANE_1_BIT_KHR, "plane 1");
+    CASE(VK_IMAGE_ASPECT_PLANE_2_BIT_KHR, "plane 2");
 #undef CASE
 
     return n;
@@ -1313,6 +1319,9 @@ static int ImageAspectFlags(lua_State *L)
     ADD(IMAGE_ASPECT_DEPTH_BIT);\
     ADD(IMAGE_ASPECT_STENCIL_BIT);\
     ADD(IMAGE_ASPECT_METADATA_BIT);\
+    ADD(IMAGE_ASPECT_PLANE_0_BIT_KHR);\
+    ADD(IMAGE_ASPECT_PLANE_1_BIT_KHR);\
+    ADD(IMAGE_ASPECT_PLANE_2_BIT_KHR);\
 
 
 

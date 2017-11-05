@@ -168,7 +168,7 @@ Rfr. https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.ht
 [[imageaspectflags]]
 [small]#*imageaspectflags*: vk.IMAGE_ASPECT_XXX_BIT +
 Values: 
-'_color_', '_depth_', '_stencil_', '_metadata_'. +
+'_color_', '_depth_', '_stencil_', '_metadata_', '_plane 0_', '_plane 1_', '_plane 2_'. +
 Rfr. https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkImageAspectFlagBits[VkImageAspectFlagBits].#
 
 [[imagecreateflags]]
