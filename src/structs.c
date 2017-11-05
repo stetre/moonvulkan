@@ -55,13 +55,13 @@ static int pusherror(lua_State *L, int errcode)
     return ERR_GENERIC; 
     }
 
-static int fielderror(lua_State *L, const char *fieldname, int errcode)
+static int pushfielderror(lua_State *L, const char *fieldname, int errcode)
     { 
     lua_pushfstring(L, "%s: %s", fieldname, errstring(errcode)); 
     return ERR_GENERIC; 
     }
 
-static int efielderror(lua_State *L, const char *fieldname)
+static int prependfieldtoerror(lua_State *L, const char *fieldname)
     { 
     lua_pushfstring(L, "%s.%s", fieldname, lua_tostring(L, -1));
     lua_remove(L, -2);
@@ -95,7 +95,7 @@ static int efielderror(lua_State *L, const char *fieldname)
     if(err == ERR_NOTPRESENT)                       \
         p->name = 0;                                \
     else if(err)                                    \
-        return fielderror(L, sname, err);           \
+        return pushfielderror(L, sname, err);       \
 } while(0)
 
 #define GetBits(name, sname, T) do {                \
@@ -106,7 +106,7 @@ static int efielderror(lua_State *L, const char *fieldname)
     if(err == ERR_NOTPRESENT)                       \
         p->name = (T)0;                             \
     else if(err)                                    \
-        return fielderror(L, sname, err);           \
+        return pushfielderror(L, sname, err);       \
 } while(0)
 
 #define GetShaderStageFlagBits(name, sname) GetBits(name, sname, VkShaderStageFlagBits)
@@ -124,7 +124,7 @@ static int efielderror(lua_State *L, const char *fieldname)
     if(err == ERR_NOTPRESENT)                       \
         p->name = VK_SAMPLE_COUNT_1_BIT;            \
     else if(err)                                    \
-        return fielderror(L, sname, err);           \
+        return pushfielderror(L, sname, err);       \
 } while(0)
 
 #define GetNumberOpt(name, sname, defval) do {      \
@@ -139,7 +139,7 @@ static int efielderror(lua_State *L, const char *fieldname)
         err = ERR_TYPE;                             \
     lua_pop(L, 1);                                  \
     if(err)                                         \
-        return fielderror(L, sname, err);           \
+        return pushfielderror(L, sname, err);       \
 } while(0)
 
 #define GetNumber(name, sname) GetNumberOpt(name, sname, 0)
@@ -158,7 +158,7 @@ static int efielderror(lua_State *L, const char *fieldname)
         }                                           \
     lua_pop(L, 1);                                  \
     if(err)                                         \
-        return fielderror(L, sname, err);           \
+        return pushfielderror(L, sname, err);       \
 } while(0)
 
 #define GetInteger(name, sname) GetIntegerOpt(name, sname, 0)
@@ -176,7 +176,7 @@ do {                                                \
         err = ERR_TYPE;                             \
     lua_pop(L, 1);                                  \
     if(err)                                         \
-        return fielderror(L, sname, err);           \
+        return pushfielderror(L, sname, err);       \
 } while(0)
 
 #define GetString(name, sname) do {                 \
@@ -192,7 +192,7 @@ do {                                                \
         }                                           \
     lua_pop(L, 1);                                  \
     if(err)                                         \
-        return fielderror(L, sname, err);           \
+        return pushfielderror(L, sname, err);       \
 } while(0)
 
 #define GetStringOpt(name, sname) do {              \
@@ -210,7 +210,7 @@ do {                                                \
         }                                           \
     lua_pop(L, 1);                                  \
     if(err)                                         \
-        return fielderror(L, sname, err);           \
+        return pushfielderror(L, sname, err);       \
 } while(0)
 
 #define GetStringDef(name, sname, defval) do {      \
@@ -228,7 +228,7 @@ do {                                                \
         }                                           \
     lua_pop(L, 1);                                  \
     if(err)                                         \
-        return fielderror(L, sname, err);           \
+        return pushfielderror(L, sname, err);       \
 } while(0)
 
 #define GetLightuserdataOpt(name, sname, TTT) do {  \
@@ -246,7 +246,7 @@ do {                                                \
         }                                           \
     lua_pop(L, 1);                                  \
     if(err)                                         \
-        return fielderror(L, sname, err);           \
+        return pushfielderror(L, sname, err);       \
 } while(0)
 
 #define GetLightuserdata GetLightuserdataOpt
@@ -259,7 +259,7 @@ do {                                                \
     p->name = testfunc(L, -1, &err);                \
     lua_pop(L, 1);                                  \
     if(err)                                         \
-        return fielderror(L, sname, err);           \
+        return pushfielderror(L, sname, err);       \
 } while(0)
 
 #define GetEnumOpt(name, sname, testfunc, defval) do {      \
@@ -270,7 +270,7 @@ do {                                                \
     if(err == ERR_NOTPRESENT)                       \
         p->name = (defval);                         \
     else if(err < 0)                                \
-        return fielderror(L, sname, err);           \
+        return pushfielderror(L, sname, err);       \
 } while(0)
 
 /* enums without defval (ie required) */
@@ -331,9 +331,9 @@ do {                                                \
             case ERR_TABLE:                         \
             case ERR_MEMORY:                        \
             case ERR_EMPTY:                         \
-                return fielderror(L, sname, err);   \
+                return pushfielderror(L, sname, err);  \
             default:                                \
-                return efielderror(L, sname);       \
+                return prependfieldtoerror(L, sname);  \
             }                                       \
         }                                           \
 } while(0)
@@ -352,9 +352,9 @@ do {                                                \
             case ERR_TABLE:                         \
             case ERR_MEMORY:                        \
             case ERR_EMPTY:                         \
-                return fielderror(L, sname, err);   \
+                return pushfielderror(L, sname, err); \
             default:                                \
-                return efielderror(L, sname);       \
+                return prependfieldtoerror(L, sname); \
             }                                       \
         }                                           \
 } while(0)
@@ -371,7 +371,7 @@ do {                                                \
         if(t_ == LUA_TNIL || t_ == LUA_TNONE)       \
             err = ERR_NOTPRESENT;                   \
         else                                        \
-            return fielderror(L, sname, ERR_TABLE); \
+            return pushfielderror(L, sname, ERR_TABLE); \
         }                                           \
     else {                                          \
         for(i_=0; i_ <(n); i_++)                    \
@@ -390,9 +390,9 @@ do {                                                \
                 case ERR_TABLE:                     \
                 case ERR_MEMORY:                    \
                 case ERR_EMPTY:                     \
-                    return fielderror(L, sname, err);   \
+                    return pushfielderror(L, sname, err);   \
                 default:                            \
-                    return efielderror(L, sname);   \
+                    return prependfieldtoerror(L, sname);   \
                 }                                   \
             }                                       \
         }                                           \
@@ -427,7 +427,7 @@ do {                                                \
     p->name = test##ttt(L, -1, NULL);               \
     lua_pop(L, 1);                                  \
     if(!p->name)                                    \
-        return fielderror(L, sname, ERR_TYPE);      \
+        return pushfielderror(L, sname, ERR_TYPE);  \
 } while(0)
 
 #define GetObjectOpt(name, sname, TTT, ttt) do {    \
@@ -444,7 +444,7 @@ do {                                                \
         }                                           \
     lua_pop(L, 1);                                  \
     if(err)                                         \
-        return fielderror(L, sname, err);           \
+        return pushfielderror(L, sname, err);       \
 } while(0)
 
 #define GetRenderPass(name, sname) GetObject(name, sname, VkRenderPass, render_pass)
@@ -496,7 +496,7 @@ do {                                                \
         err = ERR_TYPE;                             \
     lua_pop(L, 1);                                  \
     if(err)                                         \
-        return fielderror(L, sname, err);           \
+        return pushfielderror(L, sname, err);       \
 } while(0)
 
 
@@ -524,7 +524,7 @@ do {                                                \
         err = ERR_TYPE;                             \
     lua_pop(L, 1);                                  \
     if(err)                                         \
-        return fielderror(L, sname, err);           \
+        return pushfielderror(L, sname, err);       \
 } while(0)
 
 #define GetIntegerOrWholeSize(name, sname) /* integer or 'whole size' */ do {\
@@ -550,7 +550,7 @@ do {                                                \
         err = ERR_TYPE;                             \
     lua_pop(L, 1);                                  \
     if(err)                                         \
-        return fielderror(L, sname, err);           \
+        return pushfielderror(L, sname, err);       \
 } while(0)
 
 #define GetAttachment(name, sname) /* integer or 'unused', defval = 'unused' */ do {\
@@ -576,7 +576,7 @@ do {                                                \
         err = ERR_TYPE;                             \
     lua_pop(L, 1);                                  \
     if(err)                                         \
-        return fielderror(L, sname, err);           \
+        return pushfielderror(L, sname, err);       \
 } while(0)
 
 /* Lists ---------------------------------------------------------------------*
@@ -735,7 +735,7 @@ int echeckcommandbufferbegininfo(lua_State *L, int arg, VkCommandBufferBeginInfo
     PUSHFIELD(F);
     err = echeckcommandbufferinheritanceinfo(L, arg1, &pp->p2);
     POPFIELD();
-    if(err < 0) return efielderror(L, F);
+    if(err < 0) return prependfieldtoerror(L, F);
     if(err == ERR_NOTPRESENT)
         POPERROR();
     else
@@ -961,7 +961,7 @@ int echeckdescriptorpoolcreateinfo(lua_State *L, int arg, VkDescriptorPoolCreate
     PUSHFIELD(F);
     p->pPoolSizes = echeckdescriptorpoolsizelist(L, arg1, &count, &err);
     POPFIELD();
-    if(err) return efielderror(L, F);
+    if(err) return prependfieldtoerror(L, F);
     p->poolSizeCount = count;
 #undef F
     return 0;
@@ -986,7 +986,7 @@ int echeckdescriptorsetallocateinfo(lua_State *L, int arg, VkDescriptorSetAlloca
     p->descriptorSetCount = count;
     POPFIELD();
     if(err)
-        { freedescriptorsetallocateinfo(L, p); return fielderror(L, F, err); }
+        { freedescriptorsetallocateinfo(L, p); return pushfielderror(L, F, err); }
 #undef F
     /* p->descriptorPool = set by caller */
     return 0;
@@ -1024,9 +1024,9 @@ static int echeckdescriptorsetlayoutbinding(lua_State *L, int arg, VkDescriptorS
         if(err == ERR_NOTPRESENT)
             return 0;
         if(err < 0)
-            { freedescriptorsetlayoutbinding(L, p); return fielderror(L, F, err); }
+            { freedescriptorsetlayoutbinding(L, p); return pushfielderror(L, F, err); }
         if(count != p->descriptorCount)
-            { freedescriptorsetlayoutbinding(L, p); return fielderror(L, F, ERR_LENGTH); }
+            { freedescriptorsetlayoutbinding(L, p); return pushfielderror(L, F, ERR_LENGTH); }
 #undef F
         }
     return 0;
@@ -1054,7 +1054,7 @@ int echeckdescriptorsetlayoutcreateinfo(lua_State *L, int arg, VkDescriptorSetLa
     p->pBindings = echeckdescriptorsetlayoutbindinglist(L, arg1, &count, &err);
     p->bindingCount = count;
     POPFIELD();
-    if(err<0) return efielderror(L, F);
+    if(err<0) return prependfieldtoerror(L, F);
     if(err == ERR_NOTPRESENT) POPERROR();
 #undef F
     return 0;
@@ -1094,7 +1094,7 @@ int echeckpipelinelayoutcreateinfo(lua_State *L, int arg, VkPipelineLayoutCreate
     p->setLayoutCount = count;
     POPFIELD();
     if(err<0)
-        { freepipelinelayoutcreateinfo(L, p); return fielderror(L, F, err); }
+        { freepipelinelayoutcreateinfo(L, p); return pushfielderror(L, F, err); }
 #undef F
 #define F "push_constant_ranges"
     PUSHFIELD(F);
@@ -1102,7 +1102,7 @@ int echeckpipelinelayoutcreateinfo(lua_State *L, int arg, VkPipelineLayoutCreate
     p->pushConstantRangeCount = count;
     POPFIELD();
     if(err<0)
-        { freepipelinelayoutcreateinfo(L, p); return efielderror(L, F); }
+        { freepipelinelayoutcreateinfo(L, p); return prependfieldtoerror(L, F); }
     if(err == ERR_NOTPRESENT) POPERROR();
 #undef F
     return 0;
@@ -1196,7 +1196,7 @@ static int echecksubpassdescription(lua_State *L, int arg, VkSubpassDescription 
     p->pInputAttachments = echeckattachmentreferencelist(L, arg1, &count, &err);
     p->inputAttachmentCount = count;
     POPFIELD();
-    if(err < 0) { freesubpassdescription(L, p); return efielderror(L, F); }
+    if(err < 0) { freesubpassdescription(L, p); return prependfieldtoerror(L, F); }
     if(err == ERR_NOTPRESENT) POPERROR();
 #undef F
 #define F "color_attachments"
@@ -1204,14 +1204,14 @@ static int echecksubpassdescription(lua_State *L, int arg, VkSubpassDescription 
     p->pColorAttachments = echeckattachmentreferencelist(L, arg1, &count, &err);
     p->colorAttachmentCount = count;
     POPFIELD();
-    if(err < 0) { freesubpassdescription(L, p); return efielderror(L, F); }
+    if(err < 0) { freesubpassdescription(L, p); return prependfieldtoerror(L, F); }
     if(err == ERR_NOTPRESENT) POPERROR();
 #undef F
 #define F "resolve_attachments"
     PUSHFIELD(F);
     p->pResolveAttachments = echeckattachmentreferencelist(L, arg1, &count, &err);
     POPFIELD();
-    if(err < 0) { freesubpassdescription(L, p); return efielderror(L, F); }
+    if(err < 0) { freesubpassdescription(L, p); return prependfieldtoerror(L, F); }
     if(err == ERR_NOTPRESENT)
         POPERROR();
     else if(count != p->colorAttachmentCount)
@@ -1221,7 +1221,7 @@ static int echecksubpassdescription(lua_State *L, int arg, VkSubpassDescription 
     PUSHFIELD(F);
     err = echeckattachmentreference(L, arg1, &ref);
     POPFIELD();
-    if(err < 0) { freesubpassdescription(L, p); return efielderror(L, F); }
+    if(err < 0) { freesubpassdescription(L, p); return prependfieldtoerror(L, F); }
     if(err == ERR_NOTPRESENT) POPERROR();
     else
         {
@@ -1234,7 +1234,7 @@ static int echecksubpassdescription(lua_State *L, int arg, VkSubpassDescription 
     p->pPreserveAttachments = checkuint32list(L, arg1, &count, &err);
     p->inputAttachmentCount = count;
     POPFIELD();
-    if(err < 0) { freesubpassdescription(L, p); return fielderror(L, F, err); }
+    if(err < 0) { freesubpassdescription(L, p); return pushfielderror(L, F, err); }
 #undef F
     return 0;
     }
@@ -1263,20 +1263,20 @@ int echeckrenderpasscreateinfo(lua_State *L, int arg, VkRenderPassCreateInfo *p)
     PUSHFIELD(F);
     p->pAttachments = echeckattachmentdescriptionlist(L, arg1, &p->attachmentCount, &err);
     POPFIELD();
-    if(err < 0) { freerenderpasscreateinfo(L, p); return efielderror(L, F); }
+    if(err < 0) { freerenderpasscreateinfo(L, p); return prependfieldtoerror(L, F); }
     if(err == ERR_NOTPRESENT) POPERROR();
 #undef F
 #define F "subpasses"
     PUSHFIELD(F);
     p->pSubpasses = echecksubpassdescriptionlist(L, arg1, &p->subpassCount, &err);
     POPFIELD();
-    if(err) { freerenderpasscreateinfo(L, p); return efielderror(L, F); }
+    if(err) { freerenderpasscreateinfo(L, p); return prependfieldtoerror(L, F); }
 #undef F
 #define F "dependencies"
     PUSHFIELD(F);
     p->pDependencies = echecksubpassdependencylist(L, arg1, &p->dependencyCount, &err);
     POPFIELD();
-    if(err < 0) { freerenderpasscreateinfo(L, p); return efielderror(L, F); }
+    if(err < 0) { freerenderpasscreateinfo(L, p); return prependfieldtoerror(L, F); }
     if(err == ERR_NOTPRESENT) POPERROR();
 #undef F
     return 0;
@@ -1306,7 +1306,7 @@ int echeckframebuffercreateinfo(lua_State *L, int arg, VkFramebufferCreateInfo *
     PUSHFIELD(F);
     p->pAttachments = checkimage_viewlist(L, arg1, &p->attachmentCount, &err, NULL);
     POPFIELD();
-    if(err < 0) return fielderror(L, F, err);
+    if(err < 0) return pushfielderror(L, F, err);
     if(err == ERR_NOTPRESENT) POPERROR();
 #undef F
     return 0;
@@ -1371,7 +1371,7 @@ int echeckbuffercreateinfo(lua_State *L, int arg, VkBufferCreateInfo_CHAIN *pp)
     PUSHFIELD(F);
     p->pQueueFamilyIndices = checkuint32list(L, arg1, &p->queueFamilyIndexCount, &err);
     POPFIELD();
-    if(err < 0) return fielderror(L, F, err);
+    if(err < 0) return pushfielderror(L, F, err);
 #undef F
     IS_PRESENT("handle_types", p2_present);
     if(p2_present)
@@ -1438,7 +1438,7 @@ int echeckimagecreateinfo(lua_State *L, int arg, VkImageCreateInfo_CHAIN *pp)
     PUSHFIELD(F);
     p->pQueueFamilyIndices = checkuint32list(L, arg1, &p->queueFamilyIndexCount, &err);
     POPFIELD();
-    if(err < 0) return fielderror(L, F, err);
+    if(err < 0) return pushfielderror(L, F, err);
 #undef F
     IS_PRESENT("handle_types", p2_present);
     if(p2_present)
@@ -1541,7 +1541,7 @@ int echeckrenderpassbegininfo(lua_State *L, int arg, VkRenderPassBeginInfo *p)
     p->pClearValues = echeckclearvaluelist(L, arg1, &count, &err);
     p->clearValueCount = count;
     POPFIELD();
-    if(err < 0) return efielderror(L, F);
+    if(err < 0) return prependfieldtoerror(L, F);
     if(err == ERR_NOTPRESENT) POPERROR();
 #undef F
         
@@ -2812,7 +2812,7 @@ int echeckmemoryallocateinfo(lua_State *L, int arg, VkMemoryAllocateInfo_CHAIN *
     PUSHFIELD(F);
     err = echeckimportmemoryfdinfo(L, arg1, p4);
     POPFIELD();
-    if(err<0) return efielderror(L, F);
+    if(err<0) return prependfieldtoerror(L, F);
     if(err == ERR_NOTPRESENT)
         POPERROR();
     else
@@ -3006,7 +3006,7 @@ static int echecksparsebuffermemorybindinfo(lua_State *L, int arg, VkSparseBuffe
     p->pBinds = echecksparsememorybindlist(L, arg1, &count, &err);
     p->bindCount = count;
     POPFIELD();
-    if(err) return efielderror(L, F);
+    if(err) return prependfieldtoerror(L, F);
 #undef F
     return 0;
     }
@@ -3036,7 +3036,7 @@ static int echecksparseimageopaquememorybindinfo(lua_State *L, int arg, VkSparse
     p->pBinds = echecksparsememorybindlist(L, arg1, &count, &err);
     p->bindCount = count;
     POPFIELD();
-    if(err) return efielderror(L, F);
+    if(err) return prependfieldtoerror(L, F);
 #undef F
     return 0;
     }
@@ -3066,7 +3066,7 @@ static int echecksparseimagememorybindinfo(lua_State *L, int arg, VkSparseImageM
     p->pBinds = echecksparseimagememorybindlist(L, arg1, &count, &err);
     p->bindCount = count;
     POPFIELD();
-    if(err) return efielderror(L, F);
+    if(err) return prependfieldtoerror(L, F);
 #undef F
     return 0;
     }
@@ -3111,16 +3111,16 @@ static int echecksubmitinfo(lua_State *L, int arg, VkSubmitInfo *p)
     p->waitSemaphoreCount = count;
     POPFIELD();
     if(err < 0)
-        return fielderror(L, F, err);
+        return pushfielderror(L, F, err);
 #undef F
 #define F "wait_dst_stage_mask"
     PUSHFIELD(F);
     p->pWaitDstStageMask = checkflaglist(L, arg1, &count, &err);
     POPFIELD();
     if(err < 0)
-        { freesubmitinfo(L, p); return fielderror(L, F, err); }
+        { freesubmitinfo(L, p); return pushfielderror(L, F, err); }
     if(count != p->waitSemaphoreCount)
-        { freesubmitinfo(L, p); return fielderror(L, F, ERR_LENGTH); }
+        { freesubmitinfo(L, p); return pushfielderror(L, F, ERR_LENGTH); }
 #undef F
 #define F "command_buffers"
     PUSHFIELD(F);
@@ -3128,7 +3128,7 @@ static int echecksubmitinfo(lua_State *L, int arg, VkSubmitInfo *p)
     p->commandBufferCount = count;
     POPFIELD();
     if(err < 0)
-        { freesubmitinfo(L, p); return fielderror(L, F, err); }
+        { freesubmitinfo(L, p); return pushfielderror(L, F, err); }
 #undef F
 #define F "signal_semaphores"
     PUSHFIELD(F);
@@ -3136,7 +3136,7 @@ static int echecksubmitinfo(lua_State *L, int arg, VkSubmitInfo *p)
     p->signalSemaphoreCount = count;
     POPFIELD();
     if(err < 0)
-        { freesubmitinfo(L, p); return fielderror(L, F, err); }
+        { freesubmitinfo(L, p); return pushfielderror(L, F, err); }
 #undef F
     return 0;
     }
@@ -3169,14 +3169,14 @@ static int echeckbindsparseinfo(lua_State *L, int arg, VkBindSparseInfo *p)
     p->pWaitSemaphores = checksemaphorelist(L, arg1, &count, &err, NULL);
     p->waitSemaphoreCount = count;
     POPFIELD();
-    if(err < 0) { freebindsparseinfo(L, p); return fielderror(L, F, err); }
+    if(err < 0) { freebindsparseinfo(L, p); return pushfielderror(L, F, err); }
 #undef F
 #define F "buffer_binds"
     PUSHFIELD(F);
     p->pBufferBinds = echecksparsebuffermemorybindinfolist(L, arg1, &count, &err);
     p->bufferBindCount = count;
     POPFIELD();
-    if(err < 0) { freebindsparseinfo(L, p); return efielderror(L, F); }
+    if(err < 0) { freebindsparseinfo(L, p); return prependfieldtoerror(L, F); }
     if(err == ERR_NOTPRESENT) POPERROR();
 #undef F
 #define F "image_opaque_binds"
@@ -3184,7 +3184,7 @@ static int echeckbindsparseinfo(lua_State *L, int arg, VkBindSparseInfo *p)
     p->pImageOpaqueBinds = echecksparseimageopaquememorybindinfolist(L, arg1, &count, &err);
     p->imageOpaqueBindCount = count;
     POPFIELD();
-    if(err < 0) { freebindsparseinfo(L, p); return efielderror(L, F); }
+    if(err < 0) { freebindsparseinfo(L, p); return prependfieldtoerror(L, F); }
     if(err == ERR_NOTPRESENT) POPERROR();
 #undef F
 #define F "image_binds"
@@ -3192,7 +3192,7 @@ static int echeckbindsparseinfo(lua_State *L, int arg, VkBindSparseInfo *p)
     p->pImageBinds = echecksparseimagememorybindinfolist(L, arg1, &count, &err);
     p->imageBindCount = count;
     POPFIELD();
-    if(err < 0) { freebindsparseinfo(L, p); return efielderror(L, F); }
+    if(err < 0) { freebindsparseinfo(L, p); return prependfieldtoerror(L, F); }
     if(err == ERR_NOTPRESENT) POPERROR();
 #undef F
 #define F "signal_semaphores"
@@ -3200,7 +3200,7 @@ static int echeckbindsparseinfo(lua_State *L, int arg, VkBindSparseInfo *p)
     p->pSignalSemaphores = checksemaphorelist(L, arg1, &count, &err, NULL);
     p->signalSemaphoreCount = count;
     POPFIELD();
-    if(err < 0) { freebindsparseinfo(L, p); return efielderror(L, F); }
+    if(err < 0) { freebindsparseinfo(L, p); return prependfieldtoerror(L, F); }
     if(err == ERR_NOTPRESENT) POPERROR();
 #undef F
     return 0;
@@ -3327,17 +3327,17 @@ static int echeckspecializationinfo(lua_State *L, int arg, VkSpecializationInfo 
     p->pMapEntries = echeckspecializationmapentrylist(L, arg1, &count, &err);
     p->mapEntryCount = count;
     POPFIELD();
-    if(err < 0) { freespecializationinfo(L, p); return efielderror(L, F); }
+    if(err < 0) { freespecializationinfo(L, p); return prependfieldtoerror(L, F); }
     if(err == ERR_NOTPRESENT) POPERROR();
 #undef F
 #define F "data"
     PUSHFIELD(F);
     data = lua_tolstring(L, arg1, &size);
     if(!data || size == 0)
-        { POPFIELD(); freespecializationinfo(L, p); return fielderror(L, F, ERR_LENGTH); }
+        { POPFIELD(); freespecializationinfo(L, p); return pushfielderror(L, F, ERR_LENGTH); }
     p->pData = MallocNoErr(L, size);
     if(!p->pData)
-        { POPFIELD(); freespecializationinfo(L, p); return fielderror(L, F, ERR_MEMORY); }
+        { POPFIELD(); freespecializationinfo(L, p); return pushfielderror(L, F, ERR_MEMORY); }
     memcpy((void*)p->pData, data, size);
     p->dataSize = size;
     POPFIELD();
@@ -3383,11 +3383,11 @@ static int echeckpipelineshaderstagecreateinfo(lua_State *L, int arg, VkPipeline
 
     specinfo = (VkSpecializationInfo*)MallocNoErr(L, sizeof(VkSpecializationInfo));
     if(!specinfo)
-        { POPFIELD(); freepipelineshaderstagecreateinfo(L, p); return fielderror(L, F, ERR_MEMORY); }
+        { POPFIELD(); freepipelineshaderstagecreateinfo(L, p); return pushfielderror(L, F, ERR_MEMORY); }
     err = echeckspecializationinfo(L, arg1, specinfo);
     p->pSpecializationInfo = specinfo;
     POPFIELD();
-    if(err) { freepipelineshaderstagecreateinfo(L, p); return efielderror(L, F); }
+    if(err) { freepipelineshaderstagecreateinfo(L, p); return prependfieldtoerror(L, F); }
 #undef F
     return 0;
     }
@@ -3449,28 +3449,28 @@ static int echeckpipelineviewportstatecreateinfo(lua_State *L, int arg, VkPipeli
     PUSHFIELD(F);
     p->pViewports = echeckviewportlist(L, arg1, &count, &err);
     POPFIELD();
-    if(err < 0) { freepipelineviewportstatecreateinfo(L, p); return efielderror(L, F); }
+    if(err < 0) { freepipelineviewportstatecreateinfo(L, p); return prependfieldtoerror(L, F); }
     if(err == ERR_NOTPRESENT)
         POPERROR();
     else
         p->viewportCount = count;
 /*
     else if(count != p->viewportCount)
-        { freepipelineviewportstatecreateinfo(L, p); return fielderror(L, F, ERR_LENGTH); }
+        { freepipelineviewportstatecreateinfo(L, p); return pushfielderror(L, F, ERR_LENGTH); }
 */
 #undef F
 #define F "scissors"
     PUSHFIELD(F);
     p->pScissors = echeckrect2dlist(L, arg1, &count, &err);
     POPFIELD();
-    if(err < 0) { freepipelineviewportstatecreateinfo(L, p); return efielderror(L, F); }
+    if(err < 0) { freepipelineviewportstatecreateinfo(L, p); return prependfieldtoerror(L, F); }
     if(err == ERR_NOTPRESENT)
         POPERROR();
     else
         p->scissorCount = count;
 /*
     else if(count != p->scissorCount)
-        { freepipelineviewportstatecreateinfo(L, p); return fielderror(L, F, ERR_LENGTH); }
+        { freepipelineviewportstatecreateinfo(L, p); return pushfielderror(L, F, ERR_LENGTH); }
 */
 #undef F
     return 0;
@@ -3526,9 +3526,9 @@ static int echeckpipelinemultisamplestatecreateinfo(lua_State *L, int arg, VkPip
     p->pSampleMask = (VkSampleMask*)checkuint32list(L, arg1, &count, &err);
     POPFIELD();
     if(err < 0)
-        { freepipelinemultisamplestatecreateinfo(L, p); return fielderror(L, F, err); }
+        { freepipelinemultisamplestatecreateinfo(L, p); return pushfielderror(L, F, err); }
     if((count > 0) && (count != p->rasterizationSamples / 32))
-        { freepipelinemultisamplestatecreateinfo(L, p); return fielderror(L, F, ERR_LENGTH); }
+        { freepipelinemultisamplestatecreateinfo(L, p); return pushfielderror(L, F, ERR_LENGTH); }
 #undef F
     return 0;
     }
@@ -3583,7 +3583,7 @@ static int echeckpipelinevertexinputstatecreateinfo(lua_State *L, int arg, VkPip
     p->pVertexBindingDescriptions = echeckvertexinputbindingdescriptionlist(L, arg1, &count, &err);
     p->vertexBindingDescriptionCount = count;
     POPFIELD();
-    if(err < 0) { freepipelinevertexinputstatecreateinfo(L, p); return efielderror(L, F); }
+    if(err < 0) { freepipelinevertexinputstatecreateinfo(L, p); return prependfieldtoerror(L, F); }
     if(err == ERR_NOTPRESENT) POPERROR();
 #undef F
 #define F "vertex_attribute_descriptions"
@@ -3591,7 +3591,7 @@ static int echeckpipelinevertexinputstatecreateinfo(lua_State *L, int arg, VkPip
     p->pVertexAttributeDescriptions = echeckvertexinputattributedescriptionlist(L, arg1, &count, &err);
     p->vertexAttributeDescriptionCount = count;
     POPFIELD();
-    if(err < 0) { freepipelinevertexinputstatecreateinfo(L, p); return efielderror(L, F); }
+    if(err < 0) { freepipelinevertexinputstatecreateinfo(L, p); return prependfieldtoerror(L, F); }
     if(err == ERR_NOTPRESENT) POPERROR();
 #undef F
     return 0;
@@ -3673,7 +3673,7 @@ static int echeckpipelinecolorblendstatecreateinfo(lua_State *L, int arg, VkPipe
     p->pAttachments = echeckpipelinecolorblendattachmentstatelist(L, arg1, &count, &err);
     p->attachmentCount = count;
     POPFIELD();
-    if(err < 0) { freepipelinecolorblendstatecreateinfo(L, p); return efielderror(L, F); }
+    if(err < 0) { freepipelinecolorblendstatecreateinfo(L, p); return prependfieldtoerror(L, F); }
     if(err == ERR_NOTPRESENT) POPERROR();
 #undef F
 #define F "blend_constants"
@@ -3681,7 +3681,7 @@ static int echeckpipelinecolorblendstatecreateinfo(lua_State *L, int arg, VkPipe
     if(lua_isnoneornil(L, arg1))
         { POPFIELD(); return 0; }
     if(lua_type(L, arg1) != LUA_TTABLE)
-        { POPFIELD(); freepipelinecolorblendstatecreateinfo(L, p); return fielderror(L, F, ERR_TABLE); }
+        { POPFIELD(); freepipelinecolorblendstatecreateinfo(L, p); return pushfielderror(L, F, ERR_TABLE); }
     for(i = 0; i < 4; i++)
         { 
         lua_rawgeti(L, arg1, i+1);
@@ -3691,7 +3691,7 @@ static int echeckpipelinecolorblendstatecreateinfo(lua_State *L, int arg, VkPipe
             { 
             POPFIELD(); 
             freepipelinecolorblendstatecreateinfo(L, p); 
-            return fielderror(L, F, ERR_TYPE); 
+            return pushfielderror(L, F, ERR_TYPE);
             }
         }
     POPFIELD();
@@ -3758,7 +3758,7 @@ static int echeckdiscardrectanglestatecreateinfo(lua_State *L, int arg, VkPipeli
     PUSHFIELD(F);
     p->pDiscardRectangles = echeckrect2dlist(L, arg1, &count, &err);
     POPFIELD();
-    if(err < 0) { freediscardrectanglestatecreateinfo(L, p); return efielderror(L, F); }
+    if(err < 0) { freediscardrectanglestatecreateinfo(L, p); return prependfieldtoerror(L, F); }
     if(err == ERR_NOTPRESENT)
         POPERROR();
     else
@@ -3876,7 +3876,7 @@ static int echeckgraphicspipelinecreateinfo(lua_State *L, int arg, VkGraphicsPip
     PUSHFIELD(F);
     p->pStages = echeckpipelineshaderstagecreateinfolist(L, arg1, &p->stageCount, &err);
     POPFIELD();
-    if(err) return efielderror(L, F);
+    if(err) return prependfieldtoerror(L, F);
 #undef F
 
 #define BEGIN(xxx) do {                                                             \
@@ -3887,12 +3887,12 @@ static int echeckgraphicspipelinecreateinfo(lua_State *L, int arg, VkGraphicsPip
 
 #define END_MANDATORY(xxx)  do {                                                    \
     POPFIELD();                                                                     \
-    if(err) { freegraphicspipelinecreateinfo(L, p); return efielderror(L, F); }     \
+    if(err) { freegraphicspipelinecreateinfo(L, p); return prependfieldtoerror(L, F); }     \
 } while(0)
 
 #define END_OPTIONAL(xxx)   do {                                                    \
     POPFIELD();                                                                     \
-    if(err < 0) { freegraphicspipelinecreateinfo(L, p); return efielderror(L, F); } \
+    if(err < 0) { freegraphicspipelinecreateinfo(L, p); return prependfieldtoerror(L, F); } \
     if(err == ERR_NOTPRESENT) { POPERROR(); xxx = NULL; }                           \
 } while(0)
 
@@ -4042,7 +4042,7 @@ int echeckswapchaincreateinfo(lua_State *L, int arg, VkSwapchainCreateInfoKHR_CH
     PUSHFIELD(F);
     p->pQueueFamilyIndices = checkuint32list(L, arg1, &p->queueFamilyIndexCount, &err);
     POPFIELD();
-    if(err < 0) return fielderror(L, F, err);
+    if(err < 0) return pushfielderror(L, F, err);
 #undef F
     /*-- extensions --------------------*/
     IS_PRESENT("surface_counters", p2_present);
@@ -4119,7 +4119,7 @@ static int echeckpresentregion(lua_State *L, int arg, VkPresentRegionKHR *p)
     p->pRectangles = echeckrectlayerlist(L, arg1, &count, &err);
     p->rectangleCount = count;
     POPFIELD();
-    if(err < 0) { freepresentregion(L, p); return efielderror(L, F); }
+    if(err < 0) { freepresentregion(L, p); return prependfieldtoerror(L, F); }
     if(err == ERR_NOTPRESENT) POPERROR();
 #undef F
     return 0;
@@ -4146,7 +4146,7 @@ static int echeckpresentregions(lua_State *L, int arg, VkPresentRegionsKHR *p)
     p->pRegions = echeckpresentregionlist(L, arg1, &count, &err);
     p->swapchainCount = count;
     POPFIELD();
-    if(err < 0) { freepresentregions(L, p); return efielderror(L, F); }
+    if(err < 0) { freepresentregions(L, p); return prependfieldtoerror(L, F); }
     if(err == ERR_NOTPRESENT) POPERROR();
 #undef F
     return 0;
@@ -4188,7 +4188,7 @@ int echeckpresentinfo(lua_State *L, int arg, VkPresentInfoKHR_CHAIN *pp, int res
     p->waitSemaphoreCount = count;
     POPFIELD();
     if(err < 0)
-        return fielderror(L, F, err);
+        return pushfielderror(L, F, err);
 #undef F
 #define F "swapchains"
     PUSHFIELD(F);
@@ -4196,7 +4196,7 @@ int echeckpresentinfo(lua_State *L, int arg, VkPresentInfoKHR_CHAIN *pp, int res
     p->swapchainCount = count;
     POPFIELD();
     if(err)
-        { freepresentinfo(L, pp); return fielderror(L, F, err); }
+        { freepresentinfo(L, pp); return pushfielderror(L, F, err); }
     if(results) /* allocate memory for per-swapchain results */
         {
         p->pResults = (VkResult*)MallocNoErr(L, sizeof(VkResult)*(p->swapchainCount));
@@ -4208,9 +4208,9 @@ int echeckpresentinfo(lua_State *L, int arg, VkPresentInfoKHR_CHAIN *pp, int res
     PUSHFIELD(F);
     p->pImageIndices = checkuint32list(L, arg1, &count, &err);
     POPFIELD();
-    if(err) { freepresentinfo(L, pp); return fielderror(L, F, err); }
+    if(err) { freepresentinfo(L, pp); return pushfielderror(L, F, err); }
     if(p->swapchainCount != count)
-        { freepresentinfo(L, pp); return fielderror(L, F, ERR_LENGTH); }
+        { freepresentinfo(L, pp); return pushfielderror(L, F, ERR_LENGTH); }
 #undef F
     /*-- extensions --------------------*/
     IS_PRESENT("src_rect", p2_present);
@@ -4290,7 +4290,7 @@ static int echeckwritedescriptorset(lua_State *L, int arg, VkWriteDescriptorSet 
             PUSHFIELD(F);
             p->pImageInfo = echeckdescriptorimageinfolist(L, arg1, &count, &err);
             POPFIELD();
-            if(err) { freewritedescriptorset(L, p); return efielderror(L, F); }
+            if(err) { freewritedescriptorset(L, p); return prependfieldtoerror(L, F); }
             p->descriptorCount = count;
             return 0;
 #undef F
@@ -4302,7 +4302,7 @@ static int echeckwritedescriptorset(lua_State *L, int arg, VkWriteDescriptorSet 
             PUSHFIELD(F);
             p->pBufferInfo = echeckdescriptorbufferinfolist(L, arg1, &count, &err);
             POPFIELD();
-            if(err) { freewritedescriptorset(L, p); return efielderror(L, F); }
+            if(err) { freewritedescriptorset(L, p); return prependfieldtoerror(L, F); }
             p->descriptorCount = count;
             return 0;
 #undef F
@@ -4312,7 +4312,7 @@ static int echeckwritedescriptorset(lua_State *L, int arg, VkWriteDescriptorSet 
             PUSHFIELD(F);
             p->pTexelBufferView = checkbuffer_viewlist(L, arg1, &count, &err, NULL);
             POPFIELD();
-            if(err) { freewritedescriptorset(L, p); return fielderror(L, F, err); }
+            if(err) { freewritedescriptorset(L, p); return pushfielderror(L, F, err); }
             if(err == ERR_NOTPRESENT) POPERROR();
             p->descriptorCount = count;
             return 0;
@@ -4502,7 +4502,7 @@ int echeckdescriptorupdatetemplatecreateinfo(lua_State *L, int arg, VkDescriptor
     p->pDescriptorUpdateEntries = echeckdescriptorupdatetemplateentrylist(L, arg1, &count, &err);
     p->descriptorUpdateEntryCount = count;
     POPFIELD();
-    if(err) { freedescriptorupdatetemplatecreateinfo(L, p); return efielderror(L, F); }
+    if(err) { freedescriptorupdatetemplatecreateinfo(L, p); return prependfieldtoerror(L, F); }
 #undef F
     return 0;
     }
@@ -4521,7 +4521,7 @@ static void freedevicequeuecreateinfo(lua_State *L, VkDeviceQueueCreateInfo *p)
     {
     if(p->pQueuePriorities)
         Free(L, (void*)(p->pQueuePriorities));
-    if(p->pNext)
+    if(p->pNext) /* VkDeviceQueueGlobalPriorityCreateInfoEXT */
         Free(L, (void*)p->pNext);
     }
 
@@ -4537,7 +4537,7 @@ static int echeckdevicequeuecreateinfo(lua_State *L, int arg, VkDeviceQueueCreat
     p->pQueuePriorities = (const float*)checkfloatlist(L, arg1, &count, &err);
     p->queueCount = count;
     POPFIELD();
-    if(err) return fielderror(L, F, err);
+    if(err) return pushfielderror(L, F, err);
 #undef F
 #define F   "global_priority"
     IS_PRESENT("global_priority", present);
@@ -4545,16 +4545,10 @@ static int echeckdevicequeuecreateinfo(lua_State *L, int arg, VkDeviceQueueCreat
         {
         p->pNext = MALLOC_NOERR(L, VkDeviceQueueGlobalPriorityCreateInfoEXT);
         if(!p->pNext)
-            {
-            freedevicequeuecreateinfo(L, p);
-            return pusherror(L, ERR_MEMORY);
-            }
+            { freedevicequeuecreateinfo(L, p); return pusherror(L, ERR_MEMORY); }
         err = echeckdevicequeueglobalprioritycreateinfo(L, arg, (VkDeviceQueueGlobalPriorityCreateInfoEXT*)(p->pNext));
         if(err)
-            {
-            freedevicequeuecreateinfo(L, p);
-            return efielderror(L, F);
-            }
+            { freedevicequeuecreateinfo(L, p); return err; /* field and error already pushed */ }
         }
 #undef F
     return 0;
@@ -4593,21 +4587,21 @@ int echeckdevicecreateinfo(lua_State *L, int arg, VkDeviceCreateInfo_CHAIN *pp, 
     p->pQueueCreateInfos = echeckdevicequeuecreateinfolist(L, arg1, &count, &err);
     p->queueCreateInfoCount = count;
     POPFIELD();
-    if(err) return efielderror(L, F);
+    if(err) return prependfieldtoerror(L, F);
 #undef F
 #define F "enabled_layer_names" /* deprecated: aggiungere comunque */
     PUSHFIELD(F);
     p->ppEnabledLayerNames = (const char* const*)checkstringlist(L, arg1, &p->enabledLayerCount, &err);
     POPFIELD();
     if(err < 0 && err != ERR_EMPTY)
-        { freedevicecreateinfo(L, pp); return fielderror(L, F, err); }
+        { freedevicecreateinfo(L, pp); return pushfielderror(L, F, err); }
 #undef F
 #define F "enabled_extension_names"
     PUSHFIELD(F);
     p->ppEnabledExtensionNames = (const char* const*)checkstringlist(L, arg1, &p->enabledExtensionCount, &err);
     POPFIELD();
     if(err < 0 && err != ERR_EMPTY)
-        { freedevicecreateinfo(L, pp); return fielderror(L, F, err); }
+        { freedevicecreateinfo(L, pp); return pushfielderror(L, F, err); }
 #undef F
 
     if(!ud->idt->GetPhysicalDeviceFeatures2KHR)
@@ -4617,7 +4611,7 @@ int echeckdevicecreateinfo(lua_State *L, int arg, VkDeviceCreateInfo_CHAIN *pp, 
         err = echeckphysicaldevicefeatures(L, arg1, &pp->p2a);
         POPFIELD();
         if(err < 0)
-            { freedevicecreateinfo(L, pp); return efielderror(L, F); }
+            { freedevicecreateinfo(L, pp); return prependfieldtoerror(L, F); }
         if(err == ERR_NOTPRESENT)
             POPERROR();
         else
@@ -4632,7 +4626,7 @@ int echeckdevicecreateinfo(lua_State *L, int arg, VkDeviceCreateInfo_CHAIN *pp, 
         err = echeckphysicaldevicefeatures2(L, arg1, &pp->p2b);
         POPFIELD();
         if(err < 0)
-            { freedevicecreateinfo(L, pp); return efielderror(L, F); }
+            { freedevicecreateinfo(L, pp); return prependfieldtoerror(L, F); }
         if(err == ERR_NOTPRESENT)
             POPERROR();
         else
@@ -4687,7 +4681,7 @@ static int echeckvalidationflags(lua_State *L, int arg, VkValidationFlagsEXT *p)
     PUSHFIELD(F);
     p->pDisabledValidationChecks = checkvalidationchecklist(L, arg1, &p->disabledValidationCheckCount, &err);
     POPFIELD();
-    if(err<0) return fielderror(L, F, err);
+    if(err<0) return pushfielderror(L, F, err);
 #undef F
     return 0;
     }
@@ -4708,7 +4702,7 @@ int echeckinstancecreateinfo(lua_State *L, int arg, VkInstanceCreateInfo_CHAIN *
     PUSHFIELD(F);
     err = echeckapplicationinfo(L, arg1, appinfo);
     POPFIELD();
-    if(err < 0) return efielderror(L, F);
+    if(err < 0) return prependfieldtoerror(L, F);
     if(err == ERR_NOTPRESENT)
         POPERROR();
     else
@@ -4719,14 +4713,14 @@ int echeckinstancecreateinfo(lua_State *L, int arg, VkInstanceCreateInfo_CHAIN *
     p->ppEnabledLayerNames = (const char* const*)checkstringlist(L, arg1, &p->enabledLayerCount, &err);
     POPFIELD();
     if(err < 0 && err != ERR_EMPTY)
-        { freeinstancecreateinfo(L, pp); return fielderror(L, F, err); }
+        { freeinstancecreateinfo(L, pp); return pushfielderror(L, F, err); }
 #undef F
 #define F "enabled_extension_names"
     PUSHFIELD(F);
     p->ppEnabledExtensionNames = (const char* const*)checkstringlist(L, arg1, &p->enabledExtensionCount, &err);
     POPFIELD();
     if(err < 0 && err != ERR_EMPTY)
-        { freeinstancecreateinfo(L, pp); return fielderror(L, F, err); }
+        { freeinstancecreateinfo(L, pp); return pushfielderror(L, F, err); }
 #undef F
     /* -- extensions ------ */
     IS_PRESENT("disabled_validation_checks", p2_present);
