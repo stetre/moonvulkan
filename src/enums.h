@@ -95,6 +95,8 @@ void enums_freelist(lua_State *L, uint32_t *list);
 #define DOMAIN_SAMPLER_YCBCR_MODEL_CONVERSION   48
 #define DOMAIN_SAMPLER_YCBCR_RANGE              49
 #define DOMAIN_CHROMA_LOCATION                  50
+#define DOMAIN_VALIDATION_CACHE_HEADER_VERSION  51
+
 
 /* NONVK additions */
 #define DOMAIN_NONVK_TYPE                       101
@@ -391,6 +393,14 @@ void enums_freelist(lua_State *L, uint32_t *list);
 #define valueschromalocation(L) enums_values((L), DOMAIN_CHROMA_LOCATION)
 #define checkchromalocationlist(L, arg, count, err) (VkChromaLocationKHR*)enums_checklist((L), DOMAIN_CHROMA_LOCATION, (arg), (count), (err))
 #define freechromalocationlist(L, list) enums_freelist((L), (uint32_t*)(list))
+
+#define testvalidationcacheheaderversion(L, arg, err) (VkValidationCacheHeaderVersionEXT)enums_test((L), DOMAIN_VALIDATION_CACHE_HEADER_VERSION, (arg), (err))
+#define checkvalidationcacheheaderversion(L, arg) (VkValidationCacheHeaderVersionEXT)enums_check((L), DOMAIN_VALIDATION_CACHE_HEADER_VERSION, (arg))
+#define pushvalidationcacheheaderversion(L, val) enums_push((L), DOMAIN_VALIDATION_CACHE_HEADER_VERSION, (uint32_t)(val))
+#define valuesvalidationcacheheaderversion(L) enums_values((L), DOMAIN_VALIDATION_CACHE_HEADER_VERSION)
+#define checkvalidationcacheheaderversionlist(L, arg, count, err) (VkValidationCacheHeaderVersionEXT*)enums_checklist((L), DOMAIN_VALIDATION_CACHE_HEADER_VERSION, (arg), (count), (err))
+#define freevalidationcacheheaderversionlist(L, list) enums_freelist((L), (uint32_t*)(list))
+
 
 
 #if 0 /* scaffolding 7yy */

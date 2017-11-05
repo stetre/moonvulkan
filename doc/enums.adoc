@@ -282,6 +282,11 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.ht
 Values: '_upper left_', '_lower left_'. +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkTessellationDomainOriginKHR[VkTessellationDomainOriginKHR].#
 
+[[validationcacheheaderversion]]
+[small]#*validationcacheheaderversion*: vk.VALIDATION_CACHE_HEADER_VERSION_XXX_EXT +
+Values: '_one_'. +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkValidationCacheHeaderVersionEXT[VkValidationCacheHeaderVersionEXT].#
+
 [[validationcheck]]
 [small]#*validationcheck*: vk.VALIDATION_CHECK_XXX_EXT +
 Values: '_all_', _shaders_'. +

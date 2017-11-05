@@ -322,6 +322,7 @@ static int Enum(lua_State *L)
     CASE(samplerycbcrmodelconversion);
     CASE(samplerycbcrrange);
     CASE(chromalocation);
+    CASE(validationcacheheaderversion);
 #undef CASE
     return 0;
     }
@@ -1050,6 +1051,9 @@ void moonvulkan_open_enums(lua_State *L)
     domain = DOMAIN_CHROMA_LOCATION; /* VkChromaLocationKHR */
     ADD(CHROMA_LOCATION_COSITED_EVEN_KHR, "cosited even");
     ADD(CHROMA_LOCATION_MIDPOINT_KHR, "midpoint");
+
+    domain = DOMAIN_VALIDATION_CACHE_HEADER_VERSION; /* VkValidationCacheHeaderVersionKHR */
+    ADD(VALIDATION_CACHE_HEADER_VERSION_ONE_EXT, "one");
 
 #undef ADD
     }
