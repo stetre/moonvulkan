@@ -319,6 +319,7 @@ static int Enum(lua_State *L)
     CASE(displayeventtype);
     CASE(pointclippingbehavior);
     CASE(tessellationdomainorigin);
+    CASE(samplerycbcrmodelconversion);
 #undef CASE
     return 0;
     }
@@ -1032,6 +1033,14 @@ void moonvulkan_open_enums(lua_State *L)
     domain = DOMAIN_TESSELLATION_DOMAIN_ORIGIN; /* VkTessellationDomainOriginKHR */
     ADD(TESSELLATION_DOMAIN_ORIGIN_UPPER_LEFT_KHR, "upper left");
     ADD(TESSELLATION_DOMAIN_ORIGIN_LOWER_LEFT_KHR, "lower left");
+
+    domain = DOMAIN_SAMPLER_YCBCR_MODEL_CONVERSION; /* VkSamplerYcbcrModelConversionKHR */
+    ADD(SAMPLER_YCBCR_MODEL_CONVERSION_RGB_IDENTITY_KHR, "rgb identity");
+    ADD(SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_IDENTITY_KHR, "ycbcr identity");
+    ADD(SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_709_KHR, "ycbc _709");
+    ADD(SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_601_KHR, "ycbcr 601");
+    ADD(SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_2020_KHR, "ycbcr 2020");
+
 #undef ADD
     }
 

@@ -92,6 +92,7 @@ void enums_freelist(lua_State *L, uint32_t *list);
 #define DOMAIN_DISCARD_RECTANGLE_MODE           45
 #define DOMAIN_POINT_CLIPPING_BEHAVIOR          46
 #define DOMAIN_TESSELLATION_DOMAIN_ORIGIN       47
+#define DOMAIN_SAMPLER_YCBCR_MODEL_CONVERSION   48
 
 /* NONVK additions */
 #define DOMAIN_NONVK_TYPE                       101
@@ -367,6 +368,13 @@ void enums_freelist(lua_State *L, uint32_t *list);
 #define valuestessellationdomainorigin(L) enums_values((L), DOMAIN_TESSELLATION_DOMAIN_ORIGIN)
 #define checktessellationdomainoriginlist(L, arg, count, err) (VkTessellationDomainOriginKHR*)enums_checklist((L), DOMAIN_TESSELLATION_DOMAIN_ORIGIN, (arg), (count), (err))
 #define freetessellationdomainoriginlist(L, list) enums_freelist((L), (uint32_t*)(list))
+
+#define testsamplerycbcrmodelconversion(L, arg, err) (VkSamplerYcbcrModelConversionKHR)enums_test((L), DOMAIN_SAMPLER_YCBCR_MODEL_CONVERSION, (arg), (err))
+#define checksamplerycbcrmodelconversion(L, arg) (VkSamplerYcbcrModelConversionKHR)enums_check((L), DOMAIN_SAMPLER_YCBCR_MODEL_CONVERSION, (arg))
+#define pushsamplerycbcrmodelconversion(L, val) enums_push((L), DOMAIN_SAMPLER_YCBCR_MODEL_CONVERSION, (uint32_t)(val))
+#define valuessamplerycbcrmodelconversion(L) enums_values((L), DOMAIN_SAMPLER_YCBCR_MODEL_CONVERSION)
+#define checksamplerycbcrmodelconversionlist(L, arg, count, err) (VkSamplerYcbcrModelConversionKHR*)enums_checklist((L), DOMAIN_SAMPLER_YCBCR_MODEL_CONVERSION, (arg), (count), (err))
+#define freesamplerycbcrmodelconversionlist(L, list) enums_freelist((L), (uint32_t*)(list))
 
 
 #if 0 /* scaffolding 7yy */
