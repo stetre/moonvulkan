@@ -1788,6 +1788,13 @@ static VkFlags checkformatfeatureflags(lua_State *L, int arg)
         CASE(VK_FORMAT_FEATURE_BLIT_DST_BIT, "blit dst");
         CASE(VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT, "sampled image filter linear");
         CASE(VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_MINMAX_BIT_EXT , "sampled image filter minmax");
+        CASE(VK_FORMAT_FEATURE_MIDPOINT_CHROMA_SAMPLES_BIT_KHR,"midpoint chroma samples");
+        CASE(VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_LINEAR_FILTER_BIT_KHR,"sampled image ycbcr conversion linear filter");
+        CASE(VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_SEPARATE_RECONSTRUCTION_FILTER_BIT_KHR,"sampled image ycbcr conversion separate reconstruction filter");
+        CASE(VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_CHROMA_RECONSTRUCTION_EXPLICIT_BIT_KHR,"sampled image ycbcr conversion chroma reconstruction explicit");
+        CASE(VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_CHROMA_RECONSTRUCTION_EXPLICIT_FORCEABLE_BIT_KHR,"sampled image ycbcr conversion chroma reconstruction explicit forceable");
+        CASE(VK_FORMAT_FEATURE_DISJOINT_BIT_KHR,"disjoint");
+        CASE(VK_FORMAT_FEATURE_COSITED_CHROMA_SAMPLES_BIT_KHR,"cosited chroma samples");
 #undef CASE
         return (VkFlags)luaL_argerror(L, --arg, badvalue(L,s));
         done: ;
@@ -1816,6 +1823,13 @@ static int pushformatfeatureflags(lua_State *L, VkFlags flags)
         CASE(VK_FORMAT_FEATURE_BLIT_DST_BIT, "blit dst");
         CASE(VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT, "sampled image filter linear");
         CASE(VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_MINMAX_BIT_EXT , "sampled image filter minmax");
+        CASE(VK_FORMAT_FEATURE_MIDPOINT_CHROMA_SAMPLES_BIT_KHR,"midpoint chroma samples");
+        CASE(VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_LINEAR_FILTER_BIT_KHR,"sampled image ycbcr conversion linear filter");
+        CASE(VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_SEPARATE_RECONSTRUCTION_FILTER_BIT_KHR,"sampled image ycbcr conversion separate reconstruction filter");
+        CASE(VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_CHROMA_RECONSTRUCTION_EXPLICIT_BIT_KHR,"sampled image ycbcr conversion chroma reconstruction explicit");
+        CASE(VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_CHROMA_RECONSTRUCTION_EXPLICIT_FORCEABLE_BIT_KHR,"sampled image ycbcr conversion chroma reconstruction explicit forceable");
+        CASE(VK_FORMAT_FEATURE_DISJOINT_BIT_KHR,"disjoint");
+        CASE(VK_FORMAT_FEATURE_COSITED_CHROMA_SAMPLES_BIT_KHR,"cosited chroma samples");
 #undef CASE
 
     return n;
@@ -1844,6 +1858,13 @@ static int FormatFeatureFlags(lua_State *L)
     ADD(FORMAT_FEATURE_BLIT_DST_BIT);\
     ADD(FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT);\
     ADD(FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_MINMAX_BIT_EXT);\
+    ADD(FORMAT_FEATURE_MIDPOINT_CHROMA_SAMPLES_BIT_KHR);\
+    ADD(FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_LINEAR_FILTER_BIT_KHR);\
+    ADD(FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_SEPARATE_RECONSTRUCTION_FILTER_BIT_KHR);\
+    ADD(FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_CHROMA_RECONSTRUCTION_EXPLICIT_BIT_KHR);\
+    ADD(FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_CHROMA_RECONSTRUCTION_EXPLICIT_FORCEABLE_BIT_KHR);\
+    ADD(FORMAT_FEATURE_DISJOINT_BIT_KHR);\
+    ADD(FORMAT_FEATURE_COSITED_CHROMA_SAMPLES_BIT_KHR);\
 
 /*----------------------------------------------------------------------*
  | VkSurfaceTransformFlagsKHR
