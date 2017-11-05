@@ -93,6 +93,7 @@ void enums_freelist(lua_State *L, uint32_t *list);
 #define DOMAIN_POINT_CLIPPING_BEHAVIOR          46
 #define DOMAIN_TESSELLATION_DOMAIN_ORIGIN       47
 #define DOMAIN_SAMPLER_YCBCR_MODEL_CONVERSION   48
+#define DOMAIN_SAMPLER_YCBCR_RANGE              49
 
 /* NONVK additions */
 #define DOMAIN_NONVK_TYPE                       101
@@ -376,6 +377,12 @@ void enums_freelist(lua_State *L, uint32_t *list);
 #define checksamplerycbcrmodelconversionlist(L, arg, count, err) (VkSamplerYcbcrModelConversionKHR*)enums_checklist((L), DOMAIN_SAMPLER_YCBCR_MODEL_CONVERSION, (arg), (count), (err))
 #define freesamplerycbcrmodelconversionlist(L, list) enums_freelist((L), (uint32_t*)(list))
 
+#define testsamplerycbcrrange(L, arg, err) (VkSamplerYcbcrRangeKHR)enums_test((L), DOMAIN_SAMPLER_YCBCR_RANGE, (arg), (err))
+#define checksamplerycbcrrange(L, arg) (VkSamplerYcbcrRangeKHR)enums_check((L), DOMAIN_SAMPLER_YCBCR_RANGE, (arg))
+#define pushsamplerycbcrrange(L, val) enums_push((L), DOMAIN_SAMPLER_YCBCR_RANGE, (uint32_t)(val))
+#define valuessamplerycbcrrange(L) enums_values((L), DOMAIN_SAMPLER_YCBCR_RANGE)
+#define checksamplerycbcrrangelist(L, arg, count, err) (VkSamplerYcbcrRangeKHR*)enums_checklist((L), DOMAIN_SAMPLER_YCBCR_RANGE, (arg), (count), (err))
+#define freesamplerycbcrrangelist(L, list) enums_freelist((L), (uint32_t*)(list))
 
 #if 0 /* scaffolding 7yy */
 #define testxxx(L, arg, err) (VkXxx)enums_test((L), DOMAIN_XXX, (arg), (err))

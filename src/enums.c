@@ -320,6 +320,7 @@ static int Enum(lua_State *L)
     CASE(pointclippingbehavior);
     CASE(tessellationdomainorigin);
     CASE(samplerycbcrmodelconversion);
+    CASE(samplerycbcrrange);
 #undef CASE
     return 0;
     }
@@ -1037,9 +1038,13 @@ void moonvulkan_open_enums(lua_State *L)
     domain = DOMAIN_SAMPLER_YCBCR_MODEL_CONVERSION; /* VkSamplerYcbcrModelConversionKHR */
     ADD(SAMPLER_YCBCR_MODEL_CONVERSION_RGB_IDENTITY_KHR, "rgb identity");
     ADD(SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_IDENTITY_KHR, "ycbcr identity");
-    ADD(SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_709_KHR, "ycbc _709");
+    ADD(SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_709_KHR, "ycbcr 709");
     ADD(SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_601_KHR, "ycbcr 601");
     ADD(SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_2020_KHR, "ycbcr 2020");
+
+    domain = DOMAIN_SAMPLER_YCBCR_RANGE; /* VkSamplerYcbcrRangeKHR */
+    ADD(SAMPLER_YCBCR_RANGE_ITU_FULL_KHR, "itu full");
+    ADD(SAMPLER_YCBCR_RANGE_ITU_NARROW_KHR, "itu narrow");
 
 #undef ADD
     }
