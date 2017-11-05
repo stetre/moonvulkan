@@ -323,6 +323,7 @@ static int Enum(lua_State *L)
     CASE(samplerycbcrrange);
     CASE(chromalocation);
     CASE(validationcacheheaderversion);
+    CASE(queueglobalpriority);
 #undef CASE
     return 0;
     }
@@ -1054,6 +1055,12 @@ void moonvulkan_open_enums(lua_State *L)
 
     domain = DOMAIN_VALIDATION_CACHE_HEADER_VERSION; /* VkValidationCacheHeaderVersionKHR */
     ADD(VALIDATION_CACHE_HEADER_VERSION_ONE_EXT, "one");
+
+    domain = DOMAIN_QUEUE_GLOBAL_PRIORITY; /* VkQueueGlobalPriorityEXT */
+    ADD(QUEUE_GLOBAL_PRIORITY_LOW, "low");
+    ADD(QUEUE_GLOBAL_PRIORITY_MEDIUM, "medium");
+    ADD(QUEUE_GLOBAL_PRIORITY_HIGH, "high");
+    ADD(QUEUE_GLOBAL_PRIORITY_REALTIME, "realtime");
 
 #undef ADD
     }

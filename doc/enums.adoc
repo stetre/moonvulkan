@@ -233,6 +233,11 @@ Values:
 '_occlusion_', '_pipeline statistics_', '_timestamp_'. +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkQueryType[VkQueryType].#
 
+[[queueglobalpriority]]
+[small]#*queueglobalpriority*: vk.QUEUE_GLOBAL_PRIORITY_XXX_EXT +
+Values: '_low_', '_medium_', '_high_', '_realtime_'. +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkQueueGlobalPriorityEXT[VkQueueGlobalPriorityEXT].#
+
 [[sampleraddressmode]]
 [small]#*sampleraddressmode*: vk.SAMPLER_ADDRESS_MODE_XXX +
 Values:

@@ -96,7 +96,7 @@ void enums_freelist(lua_State *L, uint32_t *list);
 #define DOMAIN_SAMPLER_YCBCR_RANGE              49
 #define DOMAIN_CHROMA_LOCATION                  50
 #define DOMAIN_VALIDATION_CACHE_HEADER_VERSION  51
-
+#define DOMAIN_QUEUE_GLOBAL_PRIORITY            52
 
 /* NONVK additions */
 #define DOMAIN_NONVK_TYPE                       101
@@ -401,6 +401,12 @@ void enums_freelist(lua_State *L, uint32_t *list);
 #define checkvalidationcacheheaderversionlist(L, arg, count, err) (VkValidationCacheHeaderVersionEXT*)enums_checklist((L), DOMAIN_VALIDATION_CACHE_HEADER_VERSION, (arg), (count), (err))
 #define freevalidationcacheheaderversionlist(L, list) enums_freelist((L), (uint32_t*)(list))
 
+#define testqueueglobalpriority(L, arg, err) (VkQueueGlobalPriorityEXT)enums_test((L), DOMAIN_QUEUE_GLOBAL_PRIORITY, (arg), (err))
+#define checkqueueglobalpriority(L, arg) (VkQueueGlobalPriorityEXT)enums_check((L), DOMAIN_QUEUE_GLOBAL_PRIORITY, (arg))
+#define pushqueueglobalpriority(L, val) enums_push((L), DOMAIN_QUEUE_GLOBAL_PRIORITY, (uint32_t)(val))
+#define valuesqueueglobalpriority(L) enums_values((L), DOMAIN_QUEUE_GLOBAL_PRIORITY)
+#define checkqueueglobalprioritylist(L, arg, count, err) (VkQueueGlobalPriorityEXT*)enums_checklist((L), DOMAIN_QUEUE_GLOBAL_PRIORITY, (arg), (count), (err))
+#define freequeueglobalprioritylist(L, list) enums_freelist((L), (uint32_t*)(list))
 
 
 #if 0 /* scaffolding 7yy */
