@@ -435,7 +435,6 @@ device_dt_t* getproc_device(lua_State *L, VkDevice device, VkDeviceCreateInfo *c
             GET(CreateSharedSwapchainsKHR);
             continue;
             }
-
         IF("VK_KHR_external_fence")
             {
             continue;
@@ -572,7 +571,11 @@ device_dt_t* getproc_device(lua_State *L, VkDevice device, VkDeviceCreateInfo *c
             {
             continue;
             }
-        IF("VK_EXT_")
+        IF("VK_EXT_shader_stencil_export")
+            {
+            continue;
+            }
+        IF("VK_EXT_shader_viewport_index_layer")
             {
             continue;
             }
