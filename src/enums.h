@@ -91,6 +91,7 @@ void enums_freelist(lua_State *L, uint32_t *list);
 #define DOMAIN_SAMPLER_REDUCTION_MODE           44
 #define DOMAIN_DISCARD_RECTANGLE_MODE           45
 #define DOMAIN_POINT_CLIPPING_BEHAVIOR          46
+#define DOMAIN_TESSELLATION_DOMAIN_ORIGIN       47
 
 /* NONVK additions */
 #define DOMAIN_NONVK_TYPE                       101
@@ -359,6 +360,14 @@ void enums_freelist(lua_State *L, uint32_t *list);
 #define valuespointclippingbehavior(L) enums_values((L), DOMAIN_POINT_CLIPPING_BEHAVIOR)
 #define checkpointclippingbehaviorlist(L, arg, count, err) (VkPointClippingBehaviorKHR*)enums_checklist((L), DOMAIN_POINT_CLIPPING_BEHAVIOR, (arg), (count), (err))
 #define freepointclippingbehaviorlist(L, list) enums_freelist((L), (uint32_t*)(list))
+
+#define testtessellationdomainorigin(L, arg, err) (VkTessellationDomainOriginKHR)enums_test((L), DOMAIN_TESSELLATION_DOMAIN_ORIGIN, (arg), (err))
+#define checktessellationdomainorigin(L, arg) (VkTessellationDomainOriginKHR)enums_check((L), DOMAIN_TESSELLATION_DOMAIN_ORIGIN, (arg))
+#define pushtessellationdomainorigin(L, val) enums_push((L), DOMAIN_TESSELLATION_DOMAIN_ORIGIN, (uint32_t)(val))
+#define valuestessellationdomainorigin(L) enums_values((L), DOMAIN_TESSELLATION_DOMAIN_ORIGIN)
+#define checktessellationdomainoriginlist(L, arg, count, err) (VkTessellationDomainOriginKHR*)enums_checklist((L), DOMAIN_TESSELLATION_DOMAIN_ORIGIN, (arg), (count), (err))
+#define freetessellationdomainoriginlist(L, list) enums_freelist((L), (uint32_t*)(list))
+
 
 #if 0 /* scaffolding 7yy */
 #define testxxx(L, arg, err) (VkXxx)enums_test((L), DOMAIN_XXX, (arg), (err))

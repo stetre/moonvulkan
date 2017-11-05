@@ -318,6 +318,7 @@ static int Enum(lua_State *L)
     CASE(deviceeventtype);
     CASE(displayeventtype);
     CASE(pointclippingbehavior);
+    CASE(tessellationdomainorigin);
 #undef CASE
     return 0;
     }
@@ -1027,6 +1028,10 @@ void moonvulkan_open_enums(lua_State *L)
     domain = DOMAIN_POINT_CLIPPING_BEHAVIOR; /* VkPointClippingBehaviorKHR */
     ADD(POINT_CLIPPING_BEHAVIOR_ALL_CLIP_PLANES_KHR, "all clip planes");
     ADD(POINT_CLIPPING_BEHAVIOR_USER_CLIP_PLANES_ONLY_KHR, "user clip planes only");
+
+    domain = DOMAIN_TESSELLATION_DOMAIN_ORIGIN; /* VkTessellationDomainOriginKHR */
+    ADD(TESSELLATION_DOMAIN_ORIGIN_UPPER_LEFT_KHR, "upper left");
+    ADD(TESSELLATION_DOMAIN_ORIGIN_LOWER_LEFT_KHR, "lower left");
 #undef ADD
     }
 
