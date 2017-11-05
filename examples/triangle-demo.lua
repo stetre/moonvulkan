@@ -1028,7 +1028,7 @@ demo_prepare(demo)
 collectgarbage()
 -- event loop
 while not glfw.window_should_close(demo.window) do
-   glfw.poll_events()
+   glfw.wait_events_timeout(1/60) -- glfw.poll_events()
    demo_draw(demo)
 
    if demo.depthStencil > 0.99 then 

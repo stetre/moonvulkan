@@ -2601,6 +2601,9 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/
 <p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_get_surface_capabilities2">VK_KHR_get_surface_capabilities2</a></p>
 </li>
 <li>
+<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_global_priority">VK_KHR_global_priority</a></p>
+</li>
+<li>
 <p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_incremental_present">VK_KHR_incremental_present</a></p>
 </li>
 <li>
@@ -3776,7 +3779,11 @@ Note1: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/htm
 <em>flags</em>: <a href="#devicequeuecreateflags">devicequeuecreateflags</a>,<br>
 <em>queue_family_index</em>: integer,<br>
 <em>queue_priorities</em>: {float} <strong>[R]</strong>,<br>
-} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkDeviceQueueCreateInfo">VkDeviceQueueCreateInfo</a>)</span></p>
+------- EXTENSIONS -------<br>
+<em>global_priority</em>: <a href="#queueglobalpriority">queueglobalpriority</a> (Note1),<br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkDeviceQueueCreateInfo">VkDeviceQueueCreateInfo</a>)<br>
+Note1: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_global_priority">VK_KHR_global_priority</a> extension (rfr:
+<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkDeviceQueueGlobalPriorityCreateInfoKHR">VkDeviceQueueGlobalPriorityCreateInfoKHR</a>).</span></p>
 </li>
 </ul>
 </div>

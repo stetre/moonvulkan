@@ -73,7 +73,7 @@ static int efielderror(lua_State *L, const char *fieldname)
 
 #define POPFIELD() do { lua_remove(L, arg1); } while(0)
 
-#define IS_PRESENT(sname, dst) do {                                      \
+#define IS_PRESENT(sname, dst) do {                                     \
 /* checks if a field is present and sets dst to 1 or 0 accordingly */   \
     lua_pushstring(L, sname);                                           \
     lua_rawget(L, arg);                                                 \
@@ -278,6 +278,8 @@ do {                                                \
 #define GetImageType(name, sname) GetEnum(name, sname, testimagetype)
 #define GetImageViewType(name, sname) GetEnum(name, sname, testimageviewtype)
 #define GetDescriptorUpdateTemplateType(name, sname) GetEnum(name, sname, testdescriptorupdatetemplatetype)
+#define GetQueueGlobalPriority(name, sname) GetEnum(name, sname, testqueueglobalpriority)
+
 #define GetCommandBufferLevel(name, sname) GetEnum(name, sname, testcommandbufferlevel)
 #define GetQueryType(name, sname) GetEnum(name, sname, testquerytype)
 #define GetDiscardRectangleMode(name, sname) GetEnum(name, sname, testdiscardrectanglemode)
@@ -4507,9 +4509,25 @@ int echeckdescriptorupdatetemplatecreateinfo(lua_State *L, int arg, VkDescriptor
 
 /*------------------------------------------------------------------------------*/
 
+static int echeckdevicequeueglobalprioritycreateinfo(lua_State *L, int arg, VkDeviceQueueGlobalPriorityCreateInfoEXT *p)
+    {
+    int err;
+    p->sType = VK_STRUCTURE_TYPE_DEVICE_QUEUE_GLOBAL_PRIORITY_CREATE_INFO_EXT;
+    GetQueueGlobalPriority(globalPriority, "global_priority");
+    return 0;
+    }
+
+static void freedevicequeuecreateinfo(lua_State *L, VkDeviceQueueCreateInfo *p)
+    {
+    if(p->pQueuePriorities)
+        Free(L, (void*)(p->pQueuePriorities));
+    if(p->pNext)
+        Free(L, (void*)p->pNext);
+    }
+
 static int echeckdevicequeuecreateinfo(lua_State *L, int arg, VkDeviceQueueCreateInfo *p)
     {
-    int arg1, err;
+    int arg1, err, present;
     uint32_t count;
     p->sType = VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO;
     GetFlags(flags, "flags");
@@ -4521,23 +4539,29 @@ static int echeckdevicequeuecreateinfo(lua_State *L, int arg, VkDeviceQueueCreat
     POPFIELD();
     if(err) return fielderror(L, F, err);
 #undef F
+#define F   "global_priority"
+    IS_PRESENT("global_priority", present);
+    if(present)
+        {
+        p->pNext = MALLOC_NOERR(L, VkDeviceQueueGlobalPriorityCreateInfoEXT);
+        if(!p->pNext)
+            {
+            freedevicequeuecreateinfo(L, p);
+            return pusherror(L, ERR_MEMORY);
+            }
+        err = echeckdevicequeueglobalprioritycreateinfo(L, arg, (VkDeviceQueueGlobalPriorityCreateInfoEXT*)(p->pNext));
+        if(err)
+            {
+            freedevicequeuecreateinfo(L, p);
+            return efielderror(L, F);
+            }
+        }
+#undef F
     return 0;
     }
 
-static void freedevicequeuecreateinfolist(lua_State *L, void *list, uint32_t count)
-    {
-    uint32_t i;
-    VkDeviceQueueCreateInfo *p = (VkDeviceQueueCreateInfo*)list;
-    if((!p)||(count==0)) return;
-    for(i=0; i<count; i++)
-        {
-        if(p[i].pQueuePriorities)
-            Free(L, (void*)(p[i].pQueuePriorities));
-        }
-    Free(L, p);
-    }
-
 /* echeckdevicequeuecreateinfolist() */
+static FREELISTFUNC(VkDeviceQueueCreateInfo, devicequeuecreateinfo)
 static ECHECKLISTFUNC(VkDeviceQueueCreateInfo, devicequeuecreateinfo, freedevicequeuecreateinfolist)
 
 void freedevicecreateinfo(lua_State *L, VkDeviceCreateInfo_CHAIN *pp)

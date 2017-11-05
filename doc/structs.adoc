@@ -464,7 +464,11 @@ _enabled_features_: {<<physicaldevicefeatures, physicaldevicefeatures>>}, +
 _flags_: <<devicequeuecreateflags, devicequeuecreateflags>>, +
 _queue_family_index_: integer, +
 _queue_priorities_: {float} *[R]*, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkDeviceQueueCreateInfo[VkDeviceQueueCreateInfo])#
+pass:[-------] EXTENSIONS ------- +
+_global_priority_: <<queueglobalpriority, queueglobalpriority>> (Note1), +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkDeviceQueueCreateInfo[VkDeviceQueueCreateInfo]) +
+Note1: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_global_priority[VK_KHR_global_priority] extension (rfr:
+https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkDeviceQueueGlobalPriorityCreateInfoKHR[VkDeviceQueueGlobalPriorityCreateInfoKHR]).#
 
 '''
 
