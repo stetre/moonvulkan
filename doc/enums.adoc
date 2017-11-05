@@ -199,6 +199,11 @@ Values:
 '_graphics_' (default), '_compute_'. +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPipelineBindPoint[VkPipelineBindPoint].#
 
+[[pointclippingbehavior]]
+[small]#*pointclippingbehavior*: vk.POINT_CLIPPING_BEHAVIOR_XXX_KHR +
+Values: '_all clip planes_', '_user clip planes only_'. +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPointClippingBehaviorKHR[VkPointClippingBehaviorKHR].#
+
 [[polygonmode]]
 [small]#*polygonmode*: vk.POLYGON_MODE_XXX +
 Values:

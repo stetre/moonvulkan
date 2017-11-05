@@ -317,6 +317,7 @@ static int Enum(lua_State *L)
     CASE(displaypowerstate);
     CASE(deviceeventtype);
     CASE(displayeventtype);
+    CASE(pointclippingbehavior);
 #undef CASE
     return 0;
     }
@@ -1023,6 +1024,9 @@ void moonvulkan_open_enums(lua_State *L)
     ADD(DISCARD_RECTANGLE_MODE_INCLUSIVE_EXT, "inclusive");
     ADD(DISCARD_RECTANGLE_MODE_EXCLUSIVE_EXT, "exclusive");
 
+    domain = DOMAIN_POINT_CLIPPING_BEHAVIOR; /* VkPointClippingBehaviorKHR */
+    ADD(POINT_CLIPPING_BEHAVIOR_ALL_CLIP_PLANES_KHR, "all clip planes");
+    ADD(POINT_CLIPPING_BEHAVIOR_USER_CLIP_PLANES_ONLY_KHR, "user clip planes only");
 #undef ADD
     }
 

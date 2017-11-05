@@ -90,6 +90,8 @@ void enums_freelist(lua_State *L, uint32_t *list);
 #define DOMAIN_BLEND_OVERLAP                    43
 #define DOMAIN_SAMPLER_REDUCTION_MODE           44
 #define DOMAIN_DISCARD_RECTANGLE_MODE           45
+#define DOMAIN_POINT_CLIPPING_BEHAVIOR          46
+
 /* NONVK additions */
 #define DOMAIN_NONVK_TYPE                       101
 
@@ -350,6 +352,13 @@ void enums_freelist(lua_State *L, uint32_t *list);
 #define valuesdisplayeventtype(L) enums_values((L), DOMAIN_DISPLAY_EVENT_TYPE)
 #define checkdisplayeventtypelist(L, arg, count, err) (VkDisplayEventTypeEXT*)enums_checklist((L), DOMAIN_DISPLAY_EVENT_TYPE, (arg), (count), (err))
 #define freedisplayeventtypelist(L, list) enums_freelist((L), (uint32_t*)(list))
+
+#define testpointclippingbehavior(L, arg, err) (VkPointClippingBehaviorKHR)enums_test((L), DOMAIN_POINT_CLIPPING_BEHAVIOR, (arg), (err))
+#define checkpointclippingbehavior(L, arg) (VkPointClippingBehaviorKHR)enums_check((L), DOMAIN_POINT_CLIPPING_BEHAVIOR, (arg))
+#define pushpointclippingbehavior(L, val) enums_push((L), DOMAIN_POINT_CLIPPING_BEHAVIOR, (uint32_t)(val))
+#define valuespointclippingbehavior(L) enums_values((L), DOMAIN_POINT_CLIPPING_BEHAVIOR)
+#define checkpointclippingbehaviorlist(L, arg, count, err) (VkPointClippingBehaviorKHR*)enums_checklist((L), DOMAIN_POINT_CLIPPING_BEHAVIOR, (arg), (count), (err))
+#define freepointclippingbehaviorlist(L, list) enums_freelist((L), (uint32_t*)(list))
 
 #if 0 /* scaffolding 7yy */
 #define testxxx(L, arg, err) (VkXxx)enums_test((L), DOMAIN_XXX, (arg), (err))
