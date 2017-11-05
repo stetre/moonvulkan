@@ -174,7 +174,7 @@ Rfr. https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.ht
 [[imagecreateflags]]
 [small]#*imagecreateflags*: vk.IMAGE_CREATE_XXX_BIT +
 Values: 
-'_sparse binding_', '_sparse residency_', '_sparse aliased_', '_mutable format_', '_cube compatible_'. +
+'_sparse binding_', '_sparse residency_', '_sparse aliased_', '_mutable format_', '_cube compatible_', '_block texel view compatible_', '_extended usage_', '_sample locations compatible depth_', '_disjoint_', '_alias_'. +
 Rfr. https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkImageCreateFlagBits[VkImageCreateFlagBits].#
 
 [[imageusageflags]]

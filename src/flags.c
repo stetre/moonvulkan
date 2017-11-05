@@ -1654,6 +1654,11 @@ static VkFlags checkimagecreateflags(lua_State *L, int arg)
         CASE(VK_IMAGE_CREATE_SPARSE_ALIASED_BIT, "sparse aliased");
         CASE(VK_IMAGE_CREATE_MUTABLE_FORMAT_BIT, "mutable format");
         CASE(VK_IMAGE_CREATE_CUBE_COMPATIBLE_BIT, "cube compatible");
+        CASE(VK_IMAGE_CREATE_BLOCK_TEXEL_VIEW_COMPATIBLE_BIT_KHR, "block texel view compatible");
+        CASE(VK_IMAGE_CREATE_EXTENDED_USAGE_BIT_KHR, "extended usage");
+        CASE(VK_IMAGE_CREATE_SAMPLE_LOCATIONS_COMPATIBLE_DEPTH_BIT_EXT, "sample locations compatible depth");
+        CASE(VK_IMAGE_CREATE_DISJOINT_BIT_KHR, "disjoint");
+        CASE(VK_IMAGE_CREATE_ALIAS_BIT_KHR, "alias");
 #undef CASE
         return (VkFlags)luaL_argerror(L, --arg, badvalue(L,s));
         done: ;
@@ -1672,6 +1677,11 @@ static int pushimagecreateflags(lua_State *L, VkFlags flags)
         CASE(VK_IMAGE_CREATE_SPARSE_ALIASED_BIT, "sparse aliased");
         CASE(VK_IMAGE_CREATE_MUTABLE_FORMAT_BIT, "mutable format");
         CASE(VK_IMAGE_CREATE_CUBE_COMPATIBLE_BIT, "cube compatible");
+        CASE(VK_IMAGE_CREATE_BLOCK_TEXEL_VIEW_COMPATIBLE_BIT_KHR, "block texel view compatible");
+        CASE(VK_IMAGE_CREATE_EXTENDED_USAGE_BIT_KHR, "extended usage");
+        CASE(VK_IMAGE_CREATE_SAMPLE_LOCATIONS_COMPATIBLE_DEPTH_BIT_EXT, "sample locations compatible depth");
+        CASE(VK_IMAGE_CREATE_DISJOINT_BIT_KHR, "disjoint");
+        CASE(VK_IMAGE_CREATE_ALIAS_BIT_KHR, "alias");
 #undef CASE
 
     return n;
@@ -1691,6 +1701,11 @@ static int ImageCreateFlags(lua_State *L)
     ADD(IMAGE_CREATE_SPARSE_ALIASED_BIT);\
     ADD(IMAGE_CREATE_MUTABLE_FORMAT_BIT);\
     ADD(IMAGE_CREATE_CUBE_COMPATIBLE_BIT);\
+    ADD(IMAGE_CREATE_BLOCK_TEXEL_VIEW_COMPATIBLE_BIT_KHR);\
+    ADD(IMAGE_CREATE_EXTENDED_USAGE_BIT_KHR);\
+    ADD(IMAGE_CREATE_SAMPLE_LOCATIONS_COMPATIBLE_DEPTH_BIT_EXT);\
+    ADD(IMAGE_CREATE_DISJOINT_BIT_KHR);\
+    ADD(IMAGE_CREATE_ALIAS_BIT_KHR);\
 
 
 /*----------------------------------------------------------------------*
