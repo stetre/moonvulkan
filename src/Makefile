@@ -63,7 +63,8 @@ COPT	+= -DDEBUG
 COPT 	+= -Wshadow -Wsign-compare -Wundef -Wwrite-strings
 COPT	+= -Wdisabled-optimization -Wdeclaration-after-statement
 COPT    += -Wmissing-prototypes -Wstrict-prototypes -Wnested-externs
-COPT    += -Wc++-compat -Wold-style-definition
+COPT    += -Wold-style-definition
+#COPT    += -Wc++-compat
 endif
 
 ifdef PLATFORM_XLIB

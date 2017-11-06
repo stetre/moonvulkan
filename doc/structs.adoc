@@ -117,7 +117,8 @@ _device_uuid_: binary string (Note5), +
 _driver_uuid_: binary string (Note5), +
 _device_luid_: binary string (Note5), +
 _device_node_mask_: integer (Note5), +
-_device_luid_valid_: boolean(Note5), +
+_device_luid_valid_: boolean (Note5), +
+_point_clipping_behavior_: <<pointclippingbehavior, pointclippingbehavior>> (Note6), +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPhysicalDeviceProperties2KHR[VkPhysicalDeviceProperties2KHR]) +
 Note1: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_push_descriptor[VK_KHR_push_descriptor] extension (rfr:
 https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPhysicalDevicePushDescriptorPropertiesKHR[VkPhysicalDevicePushDescriptorPropertiesKHR]). +
@@ -128,7 +129,9 @@ https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#Vk
 Note4: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_discard_rectangles[VK_EXT_discard_rectangles] extension (rfr:
 https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPhysicalDeviceDiscardRectanglePropertiesEXT[VkPhysicalDeviceDiscardRectanglePropertiesEXT]). +
 Note5: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_external_memory_capabilities[VK_KHR_external_memory_capabilities] extension (rfr:
-https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPhysicalDeviceIDPropertiesKHR[VkPhysicalDeviceIDPropertiesKHR]).#
+https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPhysicalDeviceIDPropertiesKHR[VkPhysicalDeviceIDPropertiesKHR]). +
+Note6: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_maintenance2[VK_KHR_maintenance2] extension (rfr:
+https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPhysicalDevicePointClippingPropertiesKHR[VkPhysicalDevicePointClippingPropertiesKHR]).#
 
 * [[physicaldeviceimageformatinfo]]
 [small]#*physicaldeviceimageformatinfo* = { +
@@ -629,7 +632,11 @@ _flags_: <<renderpasscreateflags, renderpasscreateflags>>, +
 _subpasses_: {<<subpassdescription, subpassdescription>>} *[R]*, +
 _attachments_: {<<attachmentdescription, attachmentdescription>>}, +
 _dependencies_: {<<subpassdependency, subpassdependency>>}, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkRenderPassCreateInfo[VkRenderPassCreateInfo])#
+pass:[-------] EXTENSIONS ------- +
+_input_attachment_aspect_references_: {<<inputattachmentaspectreference, inputattachmentaspectreference>>} (Note1), +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkRenderPassCreateInfo[VkRenderPassCreateInfo]) +
+Note1: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_maintenance2[VK_KHR_maintenance2] extension (rfr:
+https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkRenderPassInputAttachmentAspectCreateInfoKHR[VkRenderPassInputAttachmentAspectCreateInfoKHR]).#
 
 
 * [[attachmentdescription]]
@@ -673,6 +680,13 @@ _src_access_mask_: <<accessflags, accessflags>>, +
 _dst_access_mask_: <<accessflags, accessflags>>, +
 _dependency_flags_: <<dependencyflags, dependencyflags>>, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkSubpassDependency[VkSubpassDependency])#
+
+* [[inputattachmentaspectreference]]
+[small]#*inputattachmentaspectreference* = { +
+_subpass_: integer, +
+_input_attachment_index_: integer, +
+_aspect_mask_: <<imageaspectflags, imageaspectflags>>, +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkInputAttachmentAspectReferenceKHR[VkInputAttachmentAspectReferenceKHR])#
 
 '''
 
@@ -754,7 +768,11 @@ _view_type_: <<imageviewtype, imageviewtype>> *[R]*, +
 _format_: <<format, format>>, +
 _components_: <<componentmapping, componentmapping>>, +
 _subresource_range_: <<imagesubresourcerange, imagesubresourcerange>>, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkImageViewCreateInfo[VkImageViewCreateInfo])#
+pass:[-------] EXTENSIONS ------- +
+_usage_: <<imageusageflags, imageusageflags>> (Note1), +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkImageViewCreateInfo[VkImageViewCreateInfo]) +
+Note1: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_maintenance2[VK_KHR_maintenance2] extension (rfr:
+https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkImageViewUsageCreateInfoKHR[VkImageViewUsageCreateInfoKHR]).#
 
 '''
 
@@ -1076,7 +1094,11 @@ _primitive_restart_enable_: boolean, +
 [small]#*pipelinetessellationstatecreateinfo* = { +
 _flags_: <<pipelinetessellationstatecreateflags, pipelinetessellationstatecreateflags>>, +
 _patch_control_points_: integer, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPipelineTessellationStateCreateInfo[VkPipelineTessellationStateCreateInfo])#
+pass:[-------] EXTENSIONS ------- +
+_domain_origin_: <<tessellationdomainorigin, tessellationdomainorigin>> (Note1), +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPipelineTessellationStateCreateInfo[VkPipelineTessellationStateCreateInfo]) +
+Note1: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_maintenance2[VK_KHR_maintenance2] extension (rfr:
+https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPipelineTessellationDomainOriginStateCreateInfoKHR[VkPipelineTessellationDomainOriginStateCreateInfoKHR]).#
 
 
 * [[pipelineviewportstatecreateinfo]]

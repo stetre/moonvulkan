@@ -42,12 +42,12 @@ static int Create(lua_State *L)
     ud_t *ud, *device_ud;
     VkResult ec;
     VkRenderPass render_pass;
-    VkRenderPassCreateInfo info;
+    VkRenderPassCreateInfo_CHAIN info;
     VkDevice device = checkdevice(L, 1, &device_ud);
     const VkAllocationCallbacks *allocator = optallocator(L, 3);
     if(echeckrenderpasscreateinfo(L, 2, &info)) return argerror(L, 2);
 
-    ec = device_ud->ddt->CreateRenderPass(device, &info, allocator, &render_pass);
+    ec = device_ud->ddt->CreateRenderPass(device, &info.p1, allocator, &render_pass);
     freerenderpasscreateinfo(L, &info);
     CheckError(L, ec);
     TRACE_CREATE(render_pass, "render_pass");

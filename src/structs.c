@@ -290,7 +290,7 @@ static const char *GetString_(lua_State *L, int arg, const char *sname, const ch
     int err_, arg_ = pushfield(L, arg, sname);              \
     p->name = testfunc(L, arg_, &err_);                     \
     popfield(L, arg_);                                      \
-    if( opt && (err_ == ERR_NOTPRESENT))                    \
+    if(opt && (err_ == ERR_NOTPRESENT))                     \
         p->name = (defval);                                 \
     else if(err_)                                           \
         return pushfielderror(L, sname, err_);              \
@@ -312,6 +312,7 @@ static const char *GetString_(lua_State *L, int arg, const char *sname, const ch
 #define GetDeviceEventType(name, sname) GetEnum(name, sname, testdeviceeventtype)
 #define GetDisplayEventType(name, sname) GetEnum(name, sname, testdisplayeventtype)
 #define GetDisplayPowerState(name, sname) GetEnum(name, sname, testdisplaypowerstate)
+#define GetTessellationDomainOrigin(name, sname) GetEnum(name, sname, testtessellationdomainorigin)
 
 /* optional enums with defval */
 #define GetPipelineBindPoint(name, sname) GetEnumOpt(name, sname, testpipelinebindpoint, VK_PIPELINE_BIND_POINT_GRAPHICS)
@@ -1095,7 +1096,6 @@ int echeckquerypoolcreateinfo(lua_State *L, int arg, VkQueryPoolCreateInfo *p)
 
 /*------------------------------------------------------------------------------*/
 
-
 static int echeckattachmentdescription(lua_State *L, int arg, VkAttachmentDescription *p)
     {
     CHECK_TABLE(L, arg, p);
@@ -1211,41 +1211,69 @@ static int echecksubpassdescription(lua_State *L, int arg, VkSubpassDescription 
 static FREELISTFUNC(VkSubpassDescription, subpassdescription)
 static ECHECKLISTFUNC(VkSubpassDescription, subpassdescription, freesubpassdescriptionlist)
 
-
-void freerenderpasscreateinfo(lua_State *L, VkRenderPassCreateInfo *p)
+static int echeckinputattachmentaspectreference(lua_State *L, int arg, VkInputAttachmentAspectReferenceKHR *p)
     {
+    CHECK_TABLE(L, arg, p);
+    GetInteger(subpass, "subpass");
+    GetInteger(inputAttachmentIndex, "input_attachment_index");
+    GetFlags(aspectMask, "aspect_mask");
+    return 0;
+    }
+
+/* echeckinputattachmentaspectreferencelist() */
+static ECHECKLISTFUNC(VkInputAttachmentAspectReferenceKHR, inputattachmentaspectreference, NULL)
+
+void freerenderpasscreateinfo(lua_State *L, VkRenderPassCreateInfo_CHAIN *pp)
+    {
+    VkRenderPassCreateInfo *p = &pp->p1;
+    VkRenderPassInputAttachmentAspectCreateInfoKHR *p2 = &pp->p2;
     if(!p) return;
     if(p->pAttachments) Free(L, (VkAttachmentDescription*)p->pAttachments);
     if(p->pSubpasses) freesubpassdescriptionlist(L, (void*)p->pSubpasses, p->subpassCount);
     if(p->pDependencies) Free(L, (VkSubpassDependency*)p->pDependencies);
+    if((p->pNext == &p2) && p2->pAspectReferences)
+        Free(L, (void*)p2->pAspectReferences);
     }
 
-int echeckrenderpasscreateinfo(lua_State *L, int arg, VkRenderPassCreateInfo *p)
+int echeckrenderpasscreateinfo(lua_State *L, int arg, VkRenderPassCreateInfo_CHAIN *pp)
     {
     int err, arg1;
-    CHECK_TABLE(L, arg, p);
+    VkRenderPassCreateInfo *p = &pp->p1;
+    VkRenderPassInputAttachmentAspectCreateInfoKHR *p2 = &pp->p2;
+    const void **chain = pnextof(p);
+    CHECK_TABLE(L, arg, pp);
     p->sType = VK_STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO;
     GetFlags(flags, "flags");
-
 #define F "attachments"
     arg1 = pushfield(L, arg, F);
     p->pAttachments = echeckattachmentdescriptionlist(L, arg1, &p->attachmentCount, &err);
     popfield(L, arg1);
-    if(err < 0) { freerenderpasscreateinfo(L, p); return prependfield(L, F); }
+    if(err < 0) { freerenderpasscreateinfo(L, pp); return prependfield(L, F); }
     if(err == ERR_NOTPRESENT) poperror();
 #undef F
 #define F "subpasses"
     arg1 = pushfield(L, arg, F);
     p->pSubpasses = echecksubpassdescriptionlist(L, arg1, &p->subpassCount, &err);
     popfield(L, arg1);
-    if(err) { freerenderpasscreateinfo(L, p); return prependfield(L, F); }
+    if(err) { freerenderpasscreateinfo(L, pp); return prependfield(L, F); }
 #undef F
 #define F "dependencies"
     arg1 = pushfield(L, arg, F);
     p->pDependencies = echecksubpassdependencylist(L, arg1, &p->dependencyCount, &err);
     popfield(L, arg1);
-    if(err < 0) { freerenderpasscreateinfo(L, p); return prependfield(L, F); }
+    if(err < 0) { freerenderpasscreateinfo(L, pp); return prependfield(L, F); }
     if(err == ERR_NOTPRESENT) poperror();
+#undef F
+#define F "input_attachment_aspect_references"
+    arg1 = pushfield(L, arg, F);
+    p2->sType = VK_STRUCTURE_TYPE_RENDER_PASS_INPUT_ATTACHMENT_ASPECT_CREATE_INFO_KHR;
+    p2->pAspectReferences = echeckinputattachmentaspectreferencelist(L, arg1, &p2->aspectReferenceCount, &err);
+    popfield(L, arg1);
+    if(err < 0) { freerenderpasscreateinfo(L, pp); return prependfield(L, F); }
+    if(err == ERR_NOTPRESENT)
+        poperror();
+    else
+        addtochain(chain, p2);
 #undef F
     return 0;
     }
@@ -1325,7 +1353,7 @@ int echeckbuffercreateinfo(lua_State *L, int arg, VkBufferCreateInfo_CHAIN *pp)
     VkBufferCreateInfo *p = &pp->p1;
     VkExternalMemoryBufferCreateInfoKHR *p2 = &pp->p2;
     const void **chain = pnextof(p);
-    CHECK_TABLE(L, arg, p);
+    CHECK_TABLE(L, arg, pp);
     p->sType = VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO;
     GetFlags(flags, "flags");
     GetInteger(size, "size");
@@ -1411,8 +1439,19 @@ int echeckimagecreateinfo(lua_State *L, int arg, VkImageCreateInfo_CHAIN *pp)
 
 /*------------------------------------------------------------------------------*/
 
-int echeckimageviewcreateinfo(lua_State *L, int arg, VkImageViewCreateInfo *p)
+static int echeckimageviewusagecreateinfo(lua_State *L, int arg, VkImageViewUsageCreateInfoKHR *p)
     {
+    p->sType = VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO;
+    GetFlags(usage, "usage");
+    return 0;
+    }
+
+int echeckimageviewcreateinfo(lua_State *L, int arg, VkImageViewCreateInfo_CHAIN *pp)
+    {
+    int err;
+    VkImageViewCreateInfo  *p = &pp->p1;
+    VkImageViewUsageCreateInfoKHR *p2 = &pp->p2;
+    const void **chain = pnextof(p);
     CHECK_TABLE(L, arg, p);
     p->sType = VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO;
     GetFlags(flags, "flags");
@@ -1421,6 +1460,12 @@ int echeckimageviewcreateinfo(lua_State *L, int arg, VkImageViewCreateInfo *p)
     GetFormat(format, "format");
     GetComponentMappingOpt(components, "components");
     GetImageSubresourceRangeOpt(subresourceRange, "subresource_range");
+    if(ispresent("usage"))
+        {
+        err = echeckimageviewusagecreateinfo(L, arg, p2);
+        if(err) { freeimageviewcreateinfo(L, pp); return err; }
+        addtochain(chain, p2);
+        }
     return 0;
     }
 
@@ -1903,6 +1948,12 @@ static int pushphysicaldeviceidproperties(lua_State *L, VkPhysicalDeviceIDProper
     return 0;
     }
 
+static int pushphysicaldevicepointclippingproperties(lua_State *L, VkPhysicalDevicePointClippingPropertiesKHR *p)
+    {
+    SetEnum(pointClippingBehavior, "point_clipping_behavior", pushpointclippingbehavior);
+    return 0;
+    }
+
 void initphysicaldeviceproperties2(lua_State *L, VkPhysicalDeviceProperties2KHR_CHAIN *p)
     {
     (void)L;
@@ -1913,12 +1964,14 @@ void initphysicaldeviceproperties2(lua_State *L, VkPhysicalDeviceProperties2KHR_
     p->p4.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLER_FILTER_MINMAX_PROPERTIES_EXT;
     p->p5.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DISCARD_RECTANGLE_PROPERTIES_EXT;
     p->p6.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ID_PROPERTIES_KHR;
+    p->p7.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_POINT_CLIPPING_PROPERTIES_KHR;
     p->p1.pNext = &p->p2;
     p->p2.pNext = &p->p3;
     p->p3.pNext = &p->p4;
     p->p4.pNext = &p->p5;
     p->p5.pNext = &p->p6;
-    p->p6.pNext = NULL;
+    p->p6.pNext = &p->p7;
+    p->p7.pNext = NULL;
     }
 
 int pushphysicaldeviceproperties2(lua_State *L, VkPhysicalDeviceProperties2KHR_CHAIN *p)
@@ -1929,6 +1982,7 @@ int pushphysicaldeviceproperties2(lua_State *L, VkPhysicalDeviceProperties2KHR_C
     pushphysicaldevicesamplerfilterminmaxproperties(L, &p->p4);
     pushphysicaldevicediscardrectangleproperties(L, &p->p5);
     pushphysicaldeviceidproperties(L, &p->p6);
+    pushphysicaldevicepointclippingproperties(L, &p->p7);
     return 1;
     }
 
@@ -3324,13 +3378,37 @@ static int echeckpipelineinputassemblystatecreateinfo(lua_State *L, int arg, VkP
 
 /*-------------------------------------------------------------------------------------*/
 
-#define freepipelinetessellationstatecreateinfo(L, p) do { } while(0)
+static int echeckpipelinetessellationdomainoriginstatecreateinfo(lua_State *L, int arg, VkPipelineTessellationDomainOriginStateCreateInfoKHR *p)
+    {
+    p->sType = VK_STRUCTURE_TYPE_PIPELINE_TESSELLATION_DOMAIN_ORIGIN_STATE_CREATE_INFO_KHR;
+    GetTessellationDomainOrigin(domainOrigin, "domain_origin");
+    return 0;
+    }
+
+static void freepipelinetessellationstatecreateinfo(lua_State *L, VkPipelineTessellationStateCreateInfo *p)
+    {
+    if(p->pNext) Free(L, (void*)p->pNext);
+    }
+
 static int echeckpipelinetessellationstatecreateinfo(lua_State *L, int arg, VkPipelineTessellationStateCreateInfo *p)
     {
+    int err;
     CHECK_TABLE(L, arg, p);
     p->sType = VK_STRUCTURE_TYPE_PIPELINE_TESSELLATION_STATE_CREATE_INFO;
     GetFlags(flags, "flags");
     GetInteger(patchControlPoints, "patch_control_points");
+#define F   "domain_origin"
+    if(ispresent(F))
+        {
+        p->pNext = MALLOC_NOERR(L, VkPipelineTessellationDomainOriginStateCreateInfoKHR);
+        if(!p->pNext)
+            { freepipelinetessellationstatecreateinfo(L, p); return pusherror(L, ERR_MEMORY); }
+        err = echeckpipelinetessellationdomainoriginstatecreateinfo(L, arg,
+                    (VkPipelineTessellationDomainOriginStateCreateInfoKHR*)(p->pNext));
+        if(err)
+            { freepipelinetessellationstatecreateinfo(L, p); return err; /* field and error already pushed */ }
+        }
+#undef F
     return 0;
     }
 
@@ -3782,10 +3860,10 @@ static int echeckgraphicspipelinecreateinfo(lua_State *L, int arg, VkGraphicsPip
     if(err) return prependfield(L, F);
 #undef F
 
-#define BEGIN(xxx) do {                                                             \
+#define BEGIN(xxx) do {                                                                 \
     xxx = (VkPipeline##xxx##CreateInfo*)Malloc(L, sizeof(VkPipeline##xxx##CreateInfo)); \
     if(!xxx) { freegraphicspipelinecreateinfo(L, p); return pusherror(L, ERR_MEMORY); } \
-    arg1 = pushfield(L, arg, F);                                                                   \
+    arg1 = pushfield(L, arg, F);                                                        \
 } while (0)
 
 #define END_MANDATORY(xxx)  do {                                                    \
@@ -4426,7 +4504,7 @@ static int echeckdevicequeuecreateinfo(lua_State *L, int arg, VkDeviceQueueCreat
     if(err) return pushfielderror(L, F, err);
 #undef F
 #define F   "global_priority"
-    if(ispresent("global_priority"))
+    if(ispresent(F))
         {
         p->pNext = MALLOC_NOERR(L, VkDeviceQueueGlobalPriorityCreateInfoEXT);
         if(!p->pNext)

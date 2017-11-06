@@ -481,6 +481,10 @@ device_dt_t* getproc_device(lua_State *L, VkDevice device, VkDeviceCreateInfo *c
             GET(TrimCommandPoolKHR);
             continue;
             }
+        IF("VK_KHR_maintenance2")
+            {
+            continue;
+            }
         IF("VK_KHR_push_descriptor")
             {
             GET(CmdPushDescriptorSetKHR);

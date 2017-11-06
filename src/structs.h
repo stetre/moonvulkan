@@ -123,10 +123,15 @@ int echeckpipelinelayoutcreateinfo(lua_State *L, int arg, VkPipelineLayoutCreate
 int echeckquerypoolcreateinfo(lua_State *L, int arg, VkQueryPoolCreateInfo *p);
 
 
+typedef struct {
+    VkRenderPassCreateInfo p1;
+    VkRenderPassInputAttachmentAspectCreateInfoKHR p2;
+} VkRenderPassCreateInfo_CHAIN;
+
 #define freerenderpasscreateinfo moonvulkan_freerenderpasscreateinfo
-void freerenderpasscreateinfo(lua_State *L, VkRenderPassCreateInfo *p);
+void freerenderpasscreateinfo(lua_State *L, VkRenderPassCreateInfo_CHAIN *p);
 #define echeckrenderpasscreateinfo moonvulkan_echeckrenderpasscreateinfo
-int echeckrenderpasscreateinfo(lua_State *L, int arg, VkRenderPassCreateInfo *p);
+int echeckrenderpasscreateinfo(lua_State *L, int arg, VkRenderPassCreateInfo_CHAIN *p);
 
 #define freerenderpassbegininfo moonvulkan_freerenderpassbegininfo
 void freerenderpassbegininfo(lua_State *L, VkRenderPassBeginInfo *p);
@@ -168,9 +173,14 @@ void freeimagecreateinfo(lua_State *L, VkImageCreateInfo_CHAIN *p);
 #define echeckimagecreateinfo moonvulkan_echeckimagecreateinfo
 int echeckimagecreateinfo(lua_State *L, int arg, VkImageCreateInfo_CHAIN *p);
 
+typedef struct {
+    VkImageViewCreateInfo p1;
+    VkImageViewUsageCreateInfoKHR p2;
+} VkImageViewCreateInfo_CHAIN;
+
 #define freeimageviewcreateinfo(L, p) do { } while(0)
 #define echeckimageviewcreateinfo moonvulkan_echeckimageviewcreateinfo
-int echeckimageviewcreateinfo(lua_State *L, int arg, VkImageViewCreateInfo *p);
+int echeckimageviewcreateinfo(lua_State *L, int arg, VkImageViewCreateInfo_CHAIN *p);
 
 typedef struct {
     VkSamplerCreateInfo p1;
@@ -225,6 +235,7 @@ typedef struct {
     VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT p4;
     VkPhysicalDeviceDiscardRectanglePropertiesEXT p5;
     VkPhysicalDeviceIDPropertiesKHR p6;
+    VkPhysicalDevicePointClippingPropertiesKHR p7;
 } VkPhysicalDeviceProperties2KHR_CHAIN;
 
 #define initphysicaldeviceproperties2 moonvulkan_initphysicaldeviceproperties2
