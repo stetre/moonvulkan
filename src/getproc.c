@@ -182,10 +182,7 @@ instance_dt_t * getproc_instance(lua_State *L, VkInstance instance, VkInstanceCr
             GET(GetPhysicalDeviceSurfacePresentModesKHR);
             continue;
             }
-        IF("VK_EXT_acquire_xlib_display")
-            {
-            continue;
-            }
+        IF("VK_EXT_acquire_xlib_display") { continue; }
         IF("VK_EXT_debug_report")
             {
             //  GET(DebugReportCallbackEXT);
@@ -204,14 +201,8 @@ instance_dt_t * getproc_instance(lua_State *L, VkInstance instance, VkInstanceCr
             GET(GetPhysicalDeviceSurfaceCapabilities2EXT);
             continue;
             }
-        IF("VK_EXT_swapchain_colorspace")
-            {
-            continue;
-            }
-        IF("VK_EXT_validation_flags")
-            {
-            continue;
-            }
+        IF("VK_EXT_swapchain_colorspace") { continue; }
+        IF("VK_EXT_validation_flags") { continue; }
 #ifdef VK_USE_PLATFORM_XCB_KHR
         IF("VK_KHR_xcb_surface")
             {
@@ -414,10 +405,7 @@ device_dt_t* getproc_device(lua_State *L, VkDevice device, VkDeviceCreateInfo *c
     for(i = 0; i < createinfo->enabledExtensionCount; i++)
         {
 #define IF(extensionname) if(strncmp(extensionname, createinfo->ppEnabledExtensionNames[i], 256)==0)
-        IF("VK_KHR_16_bit_storage")
-            {
-            continue;
-            }
+        IF("VK_KHR_16_bit_storage") { continue; }
         IF("VK_KHR_descriptor_update_template")
             {
             GET(CreateDescriptorUpdateTemplateKHR);
@@ -426,39 +414,27 @@ device_dt_t* getproc_device(lua_State *L, VkDevice device, VkDeviceCreateInfo *c
             GET(CmdPushDescriptorSetWithTemplateKHR);
             continue;
             }
-        IF("VK_KHR_dedicated_allocation")
-            {
-            continue;
-            }
+        IF("VK_KHR_dedicated_allocation") { continue; }
         IF("VK_KHR_display_swapchain")
             {
             GET(CreateSharedSwapchainsKHR);
             continue;
             }
-        IF("VK_KHR_external_fence")
-            {
-            continue;
-            }
+        IF("VK_KHR_external_fence") { continue; }
         IF("VK_KHR_external_fence_fd")
             {
             GET(ImportFenceFdKHR);
             GET(GetFenceFdKHR);
             continue;
             }
-        IF("VK_KHR_external_memory")
-            {
-            continue;
-            }
+        IF("VK_KHR_external_memory") { continue; }
         IF("VK_KHR_external_memory_fd")
             {
             GET(GetMemoryFdKHR);
             GET(GetMemoryFdPropertiesKHR);
             continue;
             }
-        IF("VK_KHR_external_semaphore")
-            {
-            continue;
-            }
+        IF("VK_KHR_external_semaphore") { continue; }
         IF("VK_KHR_external_semaphore_fd")
             {
             GET(ImportSemaphoreFdKHR);
@@ -472,41 +448,26 @@ device_dt_t* getproc_device(lua_State *L, VkDevice device, VkDeviceCreateInfo *c
             GET(GetImageSparseMemoryRequirements2KHR);
             continue;
             }
-        IF("VK_KHR_incremental_present")
-            {
-            continue;
-            }
+        IF("VK_KHR_incremental_present") { continue; }
         IF("VK_KHR_maintenance1")
             {
             GET(TrimCommandPoolKHR);
             continue;
             }
-        IF("VK_KHR_maintenance2")
-            {
-            continue;
-            }
+        IF("VK_KHR_maintenance2") { continue; }
         IF("VK_KHR_push_descriptor")
             {
             GET(CmdPushDescriptorSetKHR);
             continue;
             }
-        IF("VK_KHR_sampler_mirror_clamp_to_edge")
-            {
-            continue;
-            }
-        IF("VK_KHR_shader_draw_parameters")
-            {
-            continue;
-            }
+        IF("VK_KHR_sampler_mirror_clamp_to_edge") { continue; }
+        IF("VK_KHR_shader_draw_parameters") { continue; }
         IF("VK_KHR_shader_presentable_image")
             {
             GET(GetSwapchainStatusKHR);
             continue;
             }
-        IF("VK_KHR_storage_buffer_storage_class")
-            {
-            continue;
-            }
+        IF("VK_KHR_storage_buffer_storage_class") { continue; }
         IF("VK_KHR_swapchain")
             {
             GET(CreateSwapchainKHR);
@@ -516,18 +477,9 @@ device_dt_t* getproc_device(lua_State *L, VkDevice device, VkDeviceCreateInfo *c
             GET(QueuePresentKHR);
             continue;
             }
-        IF("VK_KHR_variable_pointers")
-            {
-            continue;
-            }
-        IF("VK_KHR_relaxed_block_layout")
-            {
-            continue;
-            }
-        IF("VK_EXT_blend_operation_advanced")
-            {
-            continue;
-            }
+        IF("VK_KHR_variable_pointers") { continue; }
+        IF("VK_KHR_relaxed_block_layout") { continue; }
+        IF("VK_EXT_blend_operation_advanced") { continue; }
         IF("VK_EXT_debug_marker")
             {
             GET(DebugMarkerSetObjectTagEXT);
@@ -537,10 +489,7 @@ device_dt_t* getproc_device(lua_State *L, VkDevice device, VkDeviceCreateInfo *c
             GET(CmdDebugMarkerInsertEXT);
             continue;
             }
-        IF("VK_EXT_depth_range_unrestricted")
-            {
-            continue;
-            }
+        IF("VK_EXT_depth_range_unrestricted") { continue; }
         IF("VK_EXT_discard_rectangles")
             {
             GET(CmdSetDiscardRectangleEXT);
@@ -559,38 +508,14 @@ device_dt_t* getproc_device(lua_State *L, VkDevice device, VkDeviceCreateInfo *c
             GET(SetHdrMetadataEXT);
             continue;
             }
-        IF("VK_EXT_post_depth_coverage")
-            {
-            continue;
-            }
-        IF("VK_EXT_sampler_filter_minmax")
-            {
-            continue;
-            }
-        IF("VK_EXT_shader_subgroup_ballot")
-            {
-            continue;
-            }
-        IF("VK_EXT_shader_subgroup_vote")
-            {
-            continue;
-            }
-        IF("VK_EXT_shader_stencil_export")
-            {
-            continue;
-            }
-        IF("VK_EXT_shader_viewport_index_layer")
-            {
-            continue;
-            }
-        IF("VK_EXT_global_priority")
-            {
-            continue;
-            }
-        IF("VK_KHR_image_format_list")
-            {
-            continue;
-            }
+        IF("VK_EXT_post_depth_coverage") { continue; }
+        IF("VK_EXT_sampler_filter_minmax") { continue; }
+        IF("VK_EXT_shader_subgroup_ballot") { continue; }
+        IF("VK_EXT_shader_subgroup_vote") { continue; }
+        IF("VK_EXT_shader_stencil_export") { continue; }
+        IF("VK_EXT_shader_viewport_index_layer") { continue; }
+        IF("VK_EXT_global_priority") { continue; }
+        IF("VK_KHR_image_format_list") { continue; }
         IF("VK_KHR_bind_memory2")
             {
             GET(BindBufferMemory2KHR);
@@ -598,10 +523,7 @@ device_dt_t* getproc_device(lua_State *L, VkDevice device, VkDeviceCreateInfo *c
             continue;
             }
 #ifdef VK_USE_PLATFORM_WIN32_KHR
-        IF("VK_KHR_win32_keyed_mutex")
-            {
-            continue;
-            }
+        IF("VK_KHR_win32_keyed_mutex") { continue; }
         IF("VK_KHR_external_fence_win32")
             {
             GET(ImportFenceWin32HandleKHR);
