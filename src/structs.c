@@ -4711,3 +4711,43 @@ int echeckinstancecreateinfo(lua_State *L, int arg, VkInstanceCreateInfo_CHAIN *
     return 0;
     }
 
+/*------------------------------------------------------------------------------*/
+
+static void freebindbuffermemoryinfo(lua_State *L, VkBindBufferMemoryInfoKHR *p)
+    {
+    (void)L; (void)p;
+    }
+
+static int echeckbindbuffermemoryinfo(lua_State *L, int arg, VkBindBufferMemoryInfoKHR *p)
+    {
+    CHECK_TABLE(L, arg, p);
+    p->sType = VK_STRUCTURE_TYPE_BIND_BUFFER_MEMORY_INFO_KHR;
+    GetBuffer(buffer, "buffer");
+    GetDeviceMemory(memory, "memory");
+    GetInteger(memoryOffset, "offset");
+    return 0;
+    }
+
+/* echeckbindbuffermemoryinfolist() */
+FREELISTFUNC(VkBindBufferMemoryInfoKHR, bindbuffermemoryinfo)
+ECHECKLISTFUNC(VkBindBufferMemoryInfoKHR, bindbuffermemoryinfo, freebindbuffermemoryinfolist)
+
+static void freebindimagememoryinfo(lua_State *L, VkBindImageMemoryInfoKHR *p)
+    {
+    (void)L; (void)p;
+    }
+
+static int echeckbindimagememoryinfo(lua_State *L, int arg, VkBindImageMemoryInfoKHR *p)
+    {
+    CHECK_TABLE(L, arg, p);
+    p->sType = VK_STRUCTURE_TYPE_BIND_IMAGE_MEMORY_INFO_KHR;
+    GetImage(image, "image");
+    GetDeviceMemory(memory, "memory");
+    GetInteger(memoryOffset, "offset");
+    return 0;
+    }
+
+/* echeckbindimagememoryinfolist() */
+FREELISTFUNC(VkBindImageMemoryInfoKHR, bindimagememoryinfo)
+ECHECKLISTFUNC(VkBindImageMemoryInfoKHR, bindimagememoryinfo, freebindimagememoryinfolist)
+

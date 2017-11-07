@@ -591,6 +591,12 @@ device_dt_t* getproc_device(lua_State *L, VkDevice device, VkDeviceCreateInfo *c
             {
             continue;
             }
+        IF("VK_KHR_bind_memory2")
+            {
+            GET(BindBufferMemory2KHR);
+            GET(BindImageMemory2KHR);
+            continue;
+            }
 #ifdef VK_USE_PLATFORM_WIN32_KHR
         IF("VK_KHR_win32_keyed_mutex")
             {

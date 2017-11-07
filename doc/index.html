@@ -1759,7 +1759,9 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/
 <ul>
 <li>
 <p><strong>bind_buffer_memory</strong>(<a href="#buffer"><em>buffer</em></a>, <em>devmem</em>, <em>offset</em>)<br>
-<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkBindBufferMemory">vkBindBufferMemory</a>.</span></p>
+<strong>bind_buffer_memory</strong>(<a href="#device"><em>device</em></a>, {<a href="#bindbuffermemoryinfo"><em>bindbuffermemoryinfo</em></a>})<br>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkBindBufferMemory">vkBindBufferMemory</a> -
+<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkBindBufferMemory2KHR">vkBindBufferMemory2KHR</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_bind_memory2">VK_KHR_bind_memory2</a> extension).</span></p>
 </li>
 </ul>
 </div>
@@ -1767,7 +1769,9 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/
 <ul>
 <li>
 <p><strong>bind_image_memory</strong>(<a href="#image"><em>image</em></a>, <em>devmem</em>, <em>offset</em>)<br>
-<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkBindImageMemory">vkBindImageMemory</a>.</span></p>
+<strong>bind_image_memory</strong>(<a href="#device"><em>device</em></a>, {<a href="#bindimagememoryinfo"><em>bindimagememoryinfo</em></a>})<br>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkBindImageMemory">vkBindImageMemory</a> -
+<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkBindImageMemory2KHR">vkBindImageMemory2KHR</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_bind_memory2">VK_KHR_bind_memory2</a> extension).</span></p>
 </li>
 </ul>
 </div>
@@ -2551,6 +2555,9 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/
 <ul>
 <li>
 <p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_16bit_storage">VK_KHR_16bit_storage</a></p>
+</li>
+<li>
+<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_bind_memory2">VK_KHR_bind_memory2</a></p>
 </li>
 <li>
 <p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_dedicated_allocation">VK_KHR_dedicated_allocation</a></p>
@@ -4301,6 +4308,27 @@ Note1: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/htm
 <em>layer_count</em>: integer or '<em>remaining</em>' (defaults to 1),<br>
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkImageSubresourceRange">VkImageSubresourceRange</a>)<br>
 <a href="#constructors">Constructor</a>: <strong>imagesubresourcerange</strong>(<em>aspect_mask</em>, <em>base_mip_level</em>, <em>level_count</em>, <em>base_array_layer</em>, <em>layer_count</em>)</span></p>
+</li>
+</ul>
+</div>
+<hr>
+<div class="ulist">
+<ul>
+<li>
+<p><a id="bindbuffermemoryinfo"></a>
+<span class="small"><strong>bindbuffermemoryinfo</strong> = {<br>
+<em>buffer</em>: <a href="#buffer">buffer</a> <strong>[R]</strong>,<br>
+<em>memory</em>: <a href="#device_memory"><em>device_memory</em></a> <strong>[R]</strong>,<br>
+<em>offset</em>: integer,<br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkBindBufferMemoryInfoKHR">VkBindBufferMemoryInfoKHR</a>)</span></p>
+</li>
+<li>
+<p><a id="bindimagememoryinfo"></a>
+<span class="small"><strong>bindimagememoryinfo</strong> = {<br>
+<em>image</em>: <a href="#image">image</a> <strong>[R]</strong>,<br>
+<em>memory</em>: <a href="#device_memory"><em>device_memory</em></a> <strong>[R]</strong>,<br>
+<em>offset</em>: integer,<br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkBindImageMemoryInfoKHR">VkBindImageMemoryInfoKHR</a>)</span></p>
 </li>
 </ul>
 </div>

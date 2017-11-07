@@ -30,13 +30,13 @@
 #define  moonvulkan_
 
 /* echeckzzzlist() */
-ECHECKLISTFUNC(VkZzz, zzz, NULL) 
+ECHECKLISTFUNC(VkZzz, zzz, NULL)
 #define echeckzzzlist moonvulkan_echeckzzzlist
 VkZzz* echeckzzzlist(lua_State *L, int arg, uint32_t *count, int *err);
 
 /* echeckzzzlist() */
-FREELISTFUNC(VkZzz, zzz) 
-ECHECKLISTFUNC(VkZzz, zzz, freezzzlist) 
+FREELISTFUNC(VkZzz, zzz)
+ECHECKLISTFUNC(VkZzz, zzz, freezzzlist)
 #define freezzzlist moonvulkan_freezzzlist
 void freezzzlist(lua_State *L, void *list, uint32_t count);
 #define echeckzzzlist moonvulkan_echeckzzzlist
@@ -609,6 +609,17 @@ typedef struct {
 void freeinstancecreateinfo(lua_State *L, VkInstanceCreateInfo_CHAIN *p);
 #define echeckinstancecreateinfo moonvulkan_echeckinstancecreateinfo
 int echeckinstancecreateinfo(lua_State *L, int arg, VkInstanceCreateInfo_CHAIN *p);
+
+#define freebindbuffermemoryinfolist moonvulkan_freebindbuffermemoryinfolist
+void freebindbuffermemoryinfolist(lua_State *L, void *list, uint32_t count);
+#define echeckbindbuffermemoryinfolist moonvulkan_echeckbindbuffermemoryinfolist
+VkBindBufferMemoryInfoKHR* echeckbindbuffermemoryinfolist(lua_State *L, int arg, uint32_t *count, int *err);
+
+#define freebindimagememoryinfolist moonvulkan_freebindimagememoryinfolist
+void freebindimagememoryinfolist(lua_State *L, void *list, uint32_t count);
+#define echeckbindimagememoryinfolist moonvulkan_echeckbindimagememoryinfolist
+VkBindImageMemoryInfoKHR* echeckbindimagememoryinfolist(lua_State *L, int arg, uint32_t *count, int *err);
+
 
 #ifdef VK_USE_PLATFORM_WIN32_KHR
 

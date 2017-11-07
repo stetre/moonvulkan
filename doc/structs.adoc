@@ -899,6 +899,23 @@ _layer_count_: integer or '_remaining_' (defaults to 1), +
 <<constructors, Constructor>>: *imagesubresourcerange*(_aspect_mask_, _base_mip_level_, _level_count_, _base_array_layer_, _layer_count_)#
 
 '''
+* [[bindbuffermemoryinfo]]
+[small]#*bindbuffermemoryinfo* = { +
+_buffer_: <<buffer, buffer>> *[R]*, +
+_memory_: <<device_memory, _device_memory_>> *[R]*, +
+_offset_: integer, +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkBindBufferMemoryInfoKHR[VkBindBufferMemoryInfoKHR])#
+
+
+* [[bindimagememoryinfo]]
+[small]#*bindimagememoryinfo* = { +
+_image_: <<image, image>> *[R]*, +
+_memory_: <<device_memory, _device_memory_>> *[R]*, +
+_offset_: integer, +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkBindImageMemoryInfoKHR[VkBindImageMemoryInfoKHR])#
+
+
+'''
 
 * [[descriptorsetlayoutcreateinfo]]
 [small]#*descriptorsetlayoutcreateinfo* = { +

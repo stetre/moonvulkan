@@ -74,11 +74,15 @@ Otherwise the original functions are used.
 
 [[bind_buffer_memory]]
 * *bind_buffer_memory*(<<buffer, _buffer_>>, _devmem_, _offset_) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkBindBufferMemory[vkBindBufferMemory].#
+*bind_buffer_memory*(<<device, _device_>>, {<<bindbuffermemoryinfo, _bindbuffermemoryinfo_>>}) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkBindBufferMemory[vkBindBufferMemory] -
+https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkBindBufferMemory2KHR[vkBindBufferMemory2KHR] (https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_bind_memory2[VK_KHR_bind_memory2] extension).#
 
 [[bind_image_memory]]
 * *bind_image_memory*(<<image, _image_>>, _devmem_, _offset_) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkBindImageMemory[vkBindImageMemory].#
+*bind_image_memory*(<<device, _device_>>, {<<bindimagememoryinfo, _bindimagememoryinfo_>>}) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkBindImageMemory[vkBindImageMemory] -
+https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkBindImageMemory2KHR[vkBindImageMemory2KHR] (https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_bind_memory2[VK_KHR_bind_memory2] extension).#
 
 '''
 

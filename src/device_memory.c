@@ -367,7 +367,7 @@ static int GetImageSparseMemoryRequirements(lua_State *L)
 
 /*--------------------------------------------------------------------------------*/
 
-static int BindBufferMemory(lua_State *L)
+static int BindBufferMemory1(lua_State *L)
     {
     VkResult ec;
     ud_t *ud;
@@ -380,7 +380,7 @@ static int BindBufferMemory(lua_State *L)
     return 0;
     }
 
-static int BindImageMemory(lua_State *L)
+static int BindImageMemory1(lua_State *L)
     {
     VkResult ec;
     ud_t *ud;
@@ -392,6 +392,56 @@ static int BindImageMemory(lua_State *L)
     CheckError(L, ec);
     return 0;
     }
+
+static int BindBufferMemory2(lua_State *L)
+    {
+    VkResult ec;
+    ud_t *ud;
+    uint32_t count;
+    int err;
+    VkBindBufferMemoryInfoKHR *bind_infos;
+    VkDevice device = checkdevice(L, 1, &ud);
+    CheckDevicePfn(L, ud, BindBufferMemory2KHR);
+    bind_infos = echeckbindbuffermemoryinfolist(L, 2, &count, &err);
+    if(err) return argerror(L, 2);
+    ec = ud->ddt->BindBufferMemory2KHR(device, count, bind_infos);
+    freebindbuffermemoryinfolist(L, bind_infos, count);
+    CheckError(L, ec);
+    return 0;
+    }
+
+static int BindImageMemory2(lua_State *L)
+    {
+    VkResult ec;
+    ud_t *ud;
+    uint32_t count;
+    int err;
+    VkBindImageMemoryInfoKHR *bind_infos;
+    VkDevice device = checkdevice(L, 1, &ud);
+    CheckDevicePfn(L, ud, BindImageMemory2KHR);
+    bind_infos = echeckbindimagememoryinfolist(L, 2, &count, &err);
+    if(err) return argerror(L, 2);
+    ec = ud->ddt->BindImageMemory2KHR(device, count, bind_infos);
+    freebindimagememoryinfolist(L, bind_infos, count);
+    CheckError(L, ec);
+    return 0;
+    }
+
+
+static int BindBufferMemory(lua_State *L)
+    {
+    if(testbuffer(L, 1, NULL))
+        return BindBufferMemory1(L);
+    return BindBufferMemory2(L);
+    }
+
+static int BindImageMemory(lua_State *L)
+    {
+    if(testimage(L, 1, NULL))
+        return BindImageMemory1(L);
+    return BindImageMemory2(L);
+    }
+
 
 /*--------------------------------------------------------------------------------*/
 
