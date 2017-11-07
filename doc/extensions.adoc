@@ -28,6 +28,7 @@ Khronos extensions (KHR):
 * https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_get_physical_device_properties2[VK_KHR_get_physical_device_properties2]
 * https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_get_surface_capabilities2[VK_KHR_get_surface_capabilities2]
 * https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_global_priority[VK_KHR_global_priority]
+* https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_image_format_list[VK_KHR_image_format_list]
 * https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_incremental_present[VK_KHR_incremental_present]
 * https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_maintenance1[VK_KHR_maintenance1]
 * https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_maintenance2[VK_KHR_maintenance2]

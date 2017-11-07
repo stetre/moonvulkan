@@ -757,9 +757,13 @@ _sharing_mode_: <<sharingmode, sharingmode>>, +
 _queue_family_indices_: {integer}, +
 pass:[-------] EXTENSIONS ------- +
 _handle_types_: <<externalmemoryhandletypeflags, externalmemoryhandletypeflags>> (Note1), +
+_view_formats_: {<<format, format>>}, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkImageCreateInfo[VkImageCreateInfo]) +
 Note1: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_external_memory[VK_KHR_external_memory] extension (rfr:
-https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkExternalMemoryImageCreateInfoKHR[VkExternalMemoryImageCreateInfoKHR]).#
+https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkExternalMemoryImageCreateInfoKHR[VkExternalMemoryImageCreateInfoKHR]). +
+Note2: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_image_format_list[VK_KHR_image_format_list] extension (rfr:
+https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkImageFormatListCreateInfoKHR[VkImageFormatListCreateInfoKHR]).#
+
 
 * [[imageviewcreateinfo]]
 [small]#*imageviewcreateinfo* = { +

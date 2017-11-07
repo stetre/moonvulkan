@@ -1393,7 +1393,9 @@ int echeckbufferviewcreateinfo(lua_State *L, int arg, VkBufferViewCreateInfo *p)
 void freeimagecreateinfo(lua_State *L, VkImageCreateInfo_CHAIN *pp)
     {
     VkImageCreateInfo *p = &pp->p1;
+    VkImageFormatListCreateInfoKHR *p3 = &pp->p3;
     if(p->pQueueFamilyIndices) Free(L, (void*)p->pQueueFamilyIndices);
+    if(p3->pViewFormats) freeformatlist(L, p3->pViewFormats);
     }
 
 static int echeckexternalmemoryimagecreateinfo(lua_State *L, int arg, VkExternalMemoryImageCreateInfoKHR *p)
@@ -1408,8 +1410,9 @@ int echeckimagecreateinfo(lua_State *L, int arg, VkImageCreateInfo_CHAIN *pp)
     int err, arg1;
     VkImageCreateInfo *p = &pp->p1;
     VkExternalMemoryImageCreateInfoKHR *p2 = &pp->p2;
+    VkImageFormatListCreateInfoKHR *p3 = &pp->p3;
     const void **chain = pnextof(p);
-    CHECK_TABLE(L, arg, p);
+    CHECK_TABLE(L, arg, pp);
     p->sType = VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO;
     GetFlags(flags, "flags");
     GetImageType(imageType, "image_type");
@@ -1428,14 +1431,28 @@ int echeckimagecreateinfo(lua_State *L, int arg, VkImageCreateInfo_CHAIN *pp)
     popfield(L, arg1);
     if(err < 0) return pushfielderror(L, F, err);
 #undef F
-    if(ispresent("handle_types"))
+#define F "handle_types"
+    if(ispresent(F))
         {
         err = echeckexternalmemoryimagecreateinfo(L, arg, p2);
         if(err) { freeimagecreateinfo(L, pp); return err; }
         addtochain(chain, p2);
         }
+#undef F
+#define F "view_formats"
+    if(ispresent(F))
+        {
+        arg1 = pushfield(L, arg, F);
+        p3->sType = VK_STRUCTURE_TYPE_IMAGE_FORMAT_LIST_CREATE_INFO_KHR;
+        p3->pViewFormats = checkformatlist(L, arg1, &p3->viewFormatCount, &err);
+        popfield(L, arg1);
+        if(err) { freeimagecreateinfo(L, pp); return pushfielderror(L, F, err); }
+        addtochain(chain, p3);
+        }
+#undef F
     return 0;
     }
+
 
 /*------------------------------------------------------------------------------*/
 

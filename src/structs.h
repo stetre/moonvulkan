@@ -166,6 +166,7 @@ int echeckbufferviewcreateinfo(lua_State *L, int arg, VkBufferViewCreateInfo *p)
 typedef struct {
     VkImageCreateInfo p1;
     VkExternalMemoryImageCreateInfoKHR p2;
+    VkImageFormatListCreateInfoKHR p3;
 } VkImageCreateInfo_CHAIN;
 
 #define freeimagecreateinfo moonvulkan_freeimagecreateinfo

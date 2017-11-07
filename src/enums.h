@@ -148,6 +148,8 @@ void enums_freelist(lua_State *L, uint32_t *list);
 #define checkformat(L, arg) (VkFormat)enums_check((L), DOMAIN_FORMAT, (arg))
 #define pushformat(L, val) enums_push((L), DOMAIN_FORMAT, (uint32_t)(val))
 #define valuesformat(L) enums_values((L), DOMAIN_FORMAT)
+#define checkformatlist(L, arg, count, err) (VkFormat*)enums_checklist((L), DOMAIN_FORMAT, (arg), (count), (err))
+#define freeformatlist(L, list) enums_freelist((L), (uint32_t*)(list))
 
 
 #define testcommandbufferlevel(L, arg, err) (VkCommandBufferLevel)enums_test((L), DOMAIN_COMMAND_BUFFER_LEVEL, (arg), (err))
