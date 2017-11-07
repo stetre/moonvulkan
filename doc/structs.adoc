@@ -452,6 +452,13 @@ _external_semaphore_features_: <<externalsemaphorefeatureflags, externalsemaphor
 
 '''
 
+* [[multisampleproperties]]
+[small]#*multisampleproperties* = { +
+_max_sample_location_grid_size_: <<extent2d, _extent2d_>>, +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkMultisamplePropertiesEXT[VkMultisamplePropertiesEXT])#
+
+'''
+
 * [[devicecreateinfo]]
 [small]#*devicecreateinfo* = { +
 _flags_: <<devicecreateflags, devicecreateflags>>, +

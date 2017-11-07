@@ -343,6 +343,24 @@ static int GetPhysicalDeviceExternalSemaphoreProperties(lua_State *L)
     return 1;
     }
 
+/*-----------------------------------------------------------------------------*/
+
+static int GetPhysicalDeviceMultisampleProperties(lua_State *L)
+    {
+    ud_t *ud;
+    VkMultisamplePropertiesEXT properties;
+    VkPhysicalDevice physical_device = checkphysical_device(L, 1, &ud);
+    VkSampleCountFlagBits samples = checkflags(L, 2);
+    CheckDevicePfn(L, ud, GetPhysicalDeviceMultisamplePropertiesEXT);
+
+    memset(&properties, 0, sizeof(properties));
+    properties.sType = VK_STRUCTURE_TYPE_MULTISAMPLE_PROPERTIES_EXT;
+    ud->ddt->GetPhysicalDeviceMultisamplePropertiesEXT(physical_device, samples, &properties);
+
+    pushmultisampleproperties(L, &properties);
+    return 1;
+    }
+
 
 /*-----------------------------------------------------------------------------*/
 
@@ -382,6 +400,7 @@ static const struct luaL_Reg Functions[] =
         { "get_physical_device_external_buffer_properties", GetPhysicalDeviceExternalBufferProperties },
         { "get_physical_device_external_fence_properties", GetPhysicalDeviceExternalFenceProperties },
         { "get_physical_device_external_semaphore_properties", GetPhysicalDeviceExternalSemaphoreProperties },
+        { "get_physical_device_multisample_properties", GetPhysicalDeviceMultisampleProperties },
         { NULL, NULL } /* sentinel */
     };
 

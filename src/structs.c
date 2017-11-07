@@ -4374,6 +4374,15 @@ int pushdisplayplaneproperties(lua_State *L, VkDisplayPlanePropertiesKHR *p)
 
 /*-------------------------------------------------------------------------------------*/
 
+int pushmultisampleproperties(lua_State *L, VkMultisamplePropertiesEXT *p)
+    {
+    lua_newtable(L);
+    SetStruct(maxSampleLocationGridSize, "max_sample_location_grid_size", pushextent2d);
+    return 1;
+    }
+
+/*-------------------------------------------------------------------------------------*/
+
 int echeckdisplaymodeparameters(lua_State *L, int arg, VkDisplayModeParametersKHR *p)
     {
     CHECK_TABLE(L, arg, p);

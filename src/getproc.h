@@ -281,6 +281,8 @@ typedef struct {
     F(SetHdrMetadataEXT);
     F(BindBufferMemory2KHR);
     F(BindImageMemory2KHR);
+    F(CmdSetSampleLocationsEXT);
+    F(GetPhysicalDeviceMultisamplePropertiesEXT);
 #ifdef VK_USE_PLATFORM_WIN32_KHR
     F(GetMemoryWin32HandleKHR);
     F(GetMemoryWin32HandlePropertiesKHR);

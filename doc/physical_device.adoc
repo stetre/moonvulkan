@@ -61,3 +61,7 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.ht
 [small]#_info_: <<physicaldeviceexternalsemaphoreinfo, physicaldeviceexternalsemaphoreinfo>>. +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetPhysicalDeviceExternalSemaphorePropertiesKHR[vkGetPhysicalDeviceExternalSemaphorePropertiesKHR] (https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_external_semaphore_capabilities[VK_KHR_external_semaphore_capabilities] extension).#
 
+[[get_physical_device_multisample_properties]]
+* <<multisampleproperties,_multisampleproperties_>> = *get_physical_device_multisample_properties*(_physdev_, <<samplecountflags, _samplecountflags_>>) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetPhysicalDeviceMultisamplePropertiesEXT[vkGetPhysicalDeviceMultisamplePropertiesEXT] (https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_sample_locations[VK_EXT_sample_locations] extension).#
+

@@ -1176,6 +1176,14 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/
 </li>
 </ul>
 </div>
+<div id="get_physical_device_multisample_properties" class="ulist">
+<ul>
+<li>
+<p><a href="#multisampleproperties"><em>multisampleproperties</em></a> = <strong>get_physical_device_multisample_properties</strong>(<em>physdev</em>, <a href="#samplecountflags"><em>samplecountflags</em></a>)<br>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetPhysicalDeviceMultisamplePropertiesEXT">vkGetPhysicalDeviceMultisamplePropertiesEXT</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_sample_locations">VK_EXT_sample_locations</a> extension).</span></p>
+</li>
+</ul>
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -2715,6 +2723,9 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/
 <p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_post_depth_coverage">VK_EXT_post_depth_coverage</a></p>
 </li>
 <li>
+<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_sample_locations">VK_EXT_sample_locations</a></p>
+</li>
+<li>
 <p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_sampler_filter_minmax">VK_EXT_sampler_filter_minmax</a></p>
 </li>
 <li>
@@ -3773,6 +3784,17 @@ Note1: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/htm
 <em>compatible_handle_types</em>: <a href="#externalsemaphorehandletypeflags">externalsemaphorehandletypeflags</a>,<br>
 <em>external_semaphore_features</em>: <a href="#externalsemaphorefeatureflags">externalsemaphorefeatureflags</a>,<br>
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkExternalSemaphorePropertiesKHR">VkExternalSemaphorePropertiesKHR</a>)</span></p>
+</li>
+</ul>
+</div>
+<hr>
+<div class="ulist">
+<ul>
+<li>
+<p><a id="multisampleproperties"></a>
+<span class="small"><strong>multisampleproperties</strong> = {<br>
+<em>max_sample_location_grid_size</em>: <a href="#extent2d"><em>extent2d</em></a>,<br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkMultisamplePropertiesEXT">VkMultisamplePropertiesEXT</a>)</span></p>
 </li>
 </ul>
 </div>
