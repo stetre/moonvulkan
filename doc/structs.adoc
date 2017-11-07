@@ -1183,7 +1183,12 @@ _min_sample_shading_: float, +
 _alpha_to_coverage_enable_: boolean, +
 _alpha_to_one_enable_: boolean, +
 _sample_mask_: {integer}, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPipelineMultisampleStateCreateInfo[VkPipelineMultisampleStateCreateInfo])#
+pass:[-------] EXTENSIONS ------- +
+_sample_locations_enable_: boolean (Note1), +
+_sample_locations_info_: <<samplelocationsinfo, samplelocationsinfo>> (Note1), +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPipelineMultisampleStateCreateInfo[VkPipelineMultisampleStateCreateInfo]) +
+Note1: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_sample_locations[VK_EXT_sample_locations] extension (rfr:
+https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPipelineSampleLocationsStateCreateInfoEXT[VkPipelineSampleLocationsStateCreateInfoEXT]).#
 
 
 * [[pipelinedepthstencilstatecreateinfo]]

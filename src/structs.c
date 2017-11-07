@@ -422,6 +422,7 @@ static const char *GetString_(lua_State *L, int arg, const char *sname, const ch
 #define GetImageSubresource(name, sname) GetStruct(name, sname, echeckimagesubresource)
 #define GetStencilOpStateOpt(name, sname) GetStructOpt(name, sname, echeckstencilopstate)
 #define GetPipelineShaderStageCreateInfo(name, sname) GetStruct(name, sname, echeckpipelineshaderstagecreateinfo)
+#define GetSampleLocationsInfo(name, sname) GetStruct(name, sname, echecksamplelocationsinfo)
 
 /* Objects -------------------------------------------------------------------*/
 
@@ -3541,10 +3542,27 @@ static int echeckpipelinerasterizationstatecreateinfo(lua_State *L, int arg, VkP
 
 /*-------------------------------------------------------------------------------------*/
 
+static void freepipelinesamplelocationsstatecreateinfo(lua_State *L, VkPipelineSampleLocationsStateCreateInfoEXT *p)
+    {
+    if(!p) return;
+    freesamplelocationsinfo(L, &p->sampleLocationsInfo);
+    Free(L, (void*)p);
+    }
+
+static int echeckpipelinesamplelocationsstatecreateinfo(lua_State *L, int arg, VkPipelineSampleLocationsStateCreateInfoEXT *p)
+    {
+    p->sType = VK_STRUCTURE_TYPE_PIPELINE_SAMPLE_LOCATIONS_STATE_CREATE_INFO_EXT;
+    GetBoolean(sampleLocationsEnable, "sample_locations_enable");
+    GetSampleLocationsInfo(sampleLocationsInfo, "sample_locations_info");
+    return 0;
+    }
+
 static void freepipelinemultisamplestatecreateinfo(lua_State *L, VkPipelineMultisampleStateCreateInfo *p)
     {
     if(!p) return;
     if(p->pSampleMask) Free(L, (void*)p->pSampleMask);
+    if(p->pNext)
+        freepipelinesamplelocationsstatecreateinfo(L, (VkPipelineSampleLocationsStateCreateInfoEXT*)p->pNext);
     }
 
 static int echeckpipelinemultisamplestatecreateinfo(lua_State *L, int arg, VkPipelineMultisampleStateCreateInfo *p)
@@ -3568,6 +3586,18 @@ static int echeckpipelinemultisamplestatecreateinfo(lua_State *L, int arg, VkPip
         { freepipelinemultisamplestatecreateinfo(L, p); return pushfielderror(L, F, err); }
     if((count > 0) && (count != p->rasterizationSamples / 32))
         { freepipelinemultisamplestatecreateinfo(L, p); return pushfielderror(L, F, ERR_LENGTH); }
+#undef F
+#define F   "sample_locations_info"
+    if(ispresent(F))
+        {
+        p->pNext = MALLOC_NOERR(L, VkPipelineSampleLocationsStateCreateInfoEXT);
+        if(!p->pNext)
+            { freepipelinemultisamplestatecreateinfo(L, p); return pusherror(L, ERR_MEMORY); }
+        err = echeckpipelinesamplelocationsstatecreateinfo(L, arg,
+                    (VkPipelineSampleLocationsStateCreateInfoEXT*)(p->pNext));
+        if(err)
+            { freepipelinemultisamplestatecreateinfo(L, p); return err; }
+        }
 #undef F
     return 0;
     }
