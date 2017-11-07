@@ -1971,6 +1971,17 @@ static int pushphysicaldevicepointclippingproperties(lua_State *L, VkPhysicalDev
     return 0;
     }
 
+static int pushphysicaldevicesamplelocationsproperties(lua_State *L, VkPhysicalDeviceSampleLocationsPropertiesEXT *p)
+    {
+    SetFlags(sampleLocationSampleCounts, "sample_location_sample_counts");
+    SetStruct(maxSampleLocationGridSize, "max_sample_location_grid_size", pushextent2d);
+    SetNumberArray(sampleLocationCoordinateRange, "sample_location_coordinate_range", 2);
+    SetInteger(sampleLocationSubPixelBits, "sample_location_sub_pixel_bits");
+    SetBoolean(variableSampleLocations, "variable_sample_locations");
+    return 0;
+    }
+
+//@@TODO: Investigate if it is legal to chain all structs, even if extensions are not enabled
 void initphysicaldeviceproperties2(lua_State *L, VkPhysicalDeviceProperties2KHR_CHAIN *p)
     {
     (void)L;
@@ -1982,13 +1993,15 @@ void initphysicaldeviceproperties2(lua_State *L, VkPhysicalDeviceProperties2KHR_
     p->p5.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DISCARD_RECTANGLE_PROPERTIES_EXT;
     p->p6.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ID_PROPERTIES_KHR;
     p->p7.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_POINT_CLIPPING_PROPERTIES_KHR;
+    p->p8.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLE_LOCATIONS_PROPERTIES_EXT;
     p->p1.pNext = &p->p2;
     p->p2.pNext = &p->p3;
     p->p3.pNext = &p->p4;
     p->p4.pNext = &p->p5;
     p->p5.pNext = &p->p6;
     p->p6.pNext = &p->p7;
-    p->p7.pNext = NULL;
+    p->p7.pNext = &p->p8;
+    p->p8.pNext = NULL;
     }
 
 int pushphysicaldeviceproperties2(lua_State *L, VkPhysicalDeviceProperties2KHR_CHAIN *p)
@@ -2000,6 +2013,7 @@ int pushphysicaldeviceproperties2(lua_State *L, VkPhysicalDeviceProperties2KHR_C
     pushphysicaldevicediscardrectangleproperties(L, &p->p5);
     pushphysicaldeviceidproperties(L, &p->p6);
     pushphysicaldevicepointclippingproperties(L, &p->p7);
+    pushphysicaldevicesamplelocationsproperties(L, &p->p8);
     return 1;
     }
 
@@ -2426,6 +2440,27 @@ int pushrect2d(lua_State *L, VkRect2D *p)
     lua_newtable(L);
     SetStruct(offset, "offset", pushoffset2d);
     SetStruct(extent, "extent", pushextent2d);
+    return 1;
+    }
+
+/*------------------------------------------------------------------------------*/
+
+int echecksamplelocation(lua_State *L, int arg, VkSampleLocationEXT *p)
+    {
+    CHECK_TABLE(L, arg, p);
+    GetNumber(x, "x");
+    GetNumber(y, "y");
+    return 0;
+    }
+
+/* echecksamplelocationlist() */
+ECHECKLISTFUNC(VkSampleLocationEXT, samplelocation, NULL)
+
+int pushsamplelocation(lua_State *L, VkSampleLocationEXT *p)
+    {
+    lua_newtable(L);
+    SetNumber(x, "x");
+    SetNumber(y, "y");
     return 1;
     }
 

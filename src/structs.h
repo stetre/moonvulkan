@@ -237,6 +237,7 @@ typedef struct {
     VkPhysicalDeviceDiscardRectanglePropertiesEXT p5;
     VkPhysicalDeviceIDPropertiesKHR p6;
     VkPhysicalDevicePointClippingPropertiesKHR p7;
+    VkPhysicalDeviceSampleLocationsPropertiesEXT p8;
 } VkPhysicalDeviceProperties2KHR_CHAIN;
 
 #define initphysicaldeviceproperties2 moonvulkan_initphysicaldeviceproperties2
@@ -359,6 +360,13 @@ int echeckrect2d(lua_State *L, int arg, VkRect2D *p);
 int pushrect2d(lua_State *L, VkRect2D *p);
 #define echeckrect2dlist moonvulkan_echeckrect2dlist
 VkRect2D* echeckrect2dlist(lua_State *L, int arg, uint32_t *count, int *err);
+
+#define echecksamplelocation moonvulkan_echecksamplelocation
+int echecksamplelocation(lua_State *L, int arg, VkSampleLocationEXT *p);
+#define pushsamplelocation moonvulkan_pushsamplelocation
+int pushsamplelocation(lua_State *L, VkSampleLocationEXT *p);
+#define echecksamplelocationlist moonvulkan_echecksamplelocationlist
+VkSampleLocationEXT* echecksamplelocationlist(lua_State *L, int arg, uint32_t *count, int *err);
 
 #define echeckxycolor moonvulkan_echeckxycolor
 int echeckxycolor(lua_State *L, int arg, VkXYColorEXT *p);

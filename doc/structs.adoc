@@ -119,6 +119,11 @@ _device_luid_: binary string (Note5), +
 _device_node_mask_: integer (Note5), +
 _device_luid_valid_: boolean (Note5), +
 _point_clipping_behavior_: <<pointclippingbehavior, pointclippingbehavior>> (Note6), +
+_sample_location_sample_counts_: <<samplecountflags, samplecountflags>> (Note7), +
+_max_sample_location_grid_size_: <<extent2d, extent2d>> (Note7), +
+_sample_location_coordinate_range_: {float}[2] (Note7), +
+_sample_location_sub_pixel_bits_: integer (Note7), +
+_variable_sample_locations_: boolean (Note7), +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPhysicalDeviceProperties2KHR[VkPhysicalDeviceProperties2KHR]) +
 Note1: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_push_descriptor[VK_KHR_push_descriptor] extension (rfr:
 https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPhysicalDevicePushDescriptorPropertiesKHR[VkPhysicalDevicePushDescriptorPropertiesKHR]). +
@@ -131,7 +136,10 @@ https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#Vk
 Note5: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_external_memory_capabilities[VK_KHR_external_memory_capabilities] extension (rfr:
 https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPhysicalDeviceIDPropertiesKHR[VkPhysicalDeviceIDPropertiesKHR]). +
 Note6: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_maintenance2[VK_KHR_maintenance2] extension (rfr:
-https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPhysicalDevicePointClippingPropertiesKHR[VkPhysicalDevicePointClippingPropertiesKHR]).#
+https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPhysicalDevicePointClippingPropertiesKHR[VkPhysicalDevicePointClippingPropertiesKHR]). +
+Note7: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_sample_locations[VK_EXT_sample_locations] extension (rfr:
+https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPhysicalDeviceSampleLocationsPropertiesEXT[VkPhysicalDeviceSampleLocationsPropertiesEXT]).#
+
 
 * [[physicaldeviceimageformatinfo]]
 [small]#*physicaldeviceimageformatinfo* = { +
@@ -1355,6 +1363,11 @@ _offset_: <<offset2d, offset2d>>, +
 _extent_: <<extent2d, extent2d>> +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkRect2D[VkRect2D]) +
 <<constructors, Constructor>>: *rect2d*(_x_, _y_, _width_, _height_)#
+
+* [[samplelocation]]
+[small]#*samplelocation* = { +
+_x_, _y_: number +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkSampleLocationEXT[VkSampleLocationEXT])#
 
 * [[componentmapping]]
 [small]#*componentmapping* = { +
