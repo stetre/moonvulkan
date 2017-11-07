@@ -581,6 +581,11 @@ int pushdisplayplaneproperties(lua_State *L, VkDisplayPlanePropertiesKHR *p);
 #define pushmultisampleproperties moonvulkan_pushmultisampleproperties
 int pushmultisampleproperties(lua_State *L, VkMultisamplePropertiesEXT *p);
 
+#define echecksamplelocationsinfo moonvulkan_echecksamplelocationsinfo
+int echecksamplelocationsinfo(lua_State *L, int arg, VkSampleLocationsInfoEXT *p);
+#define freesamplelocationsinfo moonvulkan_freesamplelocationsinfo
+void freesamplelocationsinfo(lua_State *L, VkSampleLocationsInfoEXT *p);
+
 #define echeckdisplaymodeparameters moonvulkan_echeckdisplaymodeparameters
 int echeckdisplaymodeparameters(lua_State *L, int arg, VkDisplayModeParametersKHR *p);
 #define pushdisplaymodeparameters moonvulkan_pushdisplaymodeparameters

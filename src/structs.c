@@ -4418,6 +4418,30 @@ int pushmultisampleproperties(lua_State *L, VkMultisamplePropertiesEXT *p)
 
 /*-------------------------------------------------------------------------------------*/
 
+void freesamplelocationsinfo(lua_State *L, VkSampleLocationsInfoEXT *p)
+    {
+    if(p->pSampleLocations)
+        Free(L, (void*)p->pSampleLocations);
+    }
+
+int echecksamplelocationsinfo(lua_State *L, int arg, VkSampleLocationsInfoEXT *p)
+    {
+    int err, arg1;
+    CHECK_TABLE(L, arg, p);
+    p->sType = VK_STRUCTURE_TYPE_SAMPLE_LOCATIONS_INFO_EXT;
+    GetBits(sampleLocationsPerPixel, "sample_locations_per_pixel", VkSampleCountFlagBits);
+    GetExtent2d(sampleLocationGridSize, "sample_location_grid_size");
+#define F "sample_locations"
+    arg1 = pushfield(L, arg, F);
+    p->pSampleLocations = echecksamplelocationlist(L, arg1, &p->sampleLocationsCount, &err);
+    popfield(L, arg1);
+    if(err) { freesamplelocationsinfo(L, p); return prependfield(L, F); }
+#undef F
+    return 0;
+    }
+
+/*-------------------------------------------------------------------------------------*/
+
 int echeckdisplaymodeparameters(lua_State *L, int arg, VkDisplayModeParametersKHR *p)
     {
     CHECK_TABLE(L, arg, p);

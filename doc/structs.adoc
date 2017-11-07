@@ -819,7 +819,18 @@ _reduction_mode_: <<samplerreductionmode, samplerreductionmode>> (Note1), +
 Note1: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_sampler_filter_minmax[VK_EXT_sampler_filter_minmax] extension (rfr:
 https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkSamplerReductionModeCreateInfoEXT[VkSamplerReductionModeCreateInfoEXT]).#
 
+
 '''
+
+* [[samplelocationsinfo]]
+[small]#*samplelocationsinfo* = { +
+_sample_locations_per_pixel_: <<samplecountflags, samplecountflags>>, +
+_sample_location_grid_size_: <<extent2d, extent2d>> *[R]*, +
+_sample_locations_: {<<samplelocation, samplelocation>>} *[R]*, +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkSampleLocationsInfoEXT[VkSampleLocationsInfoEXT])#
+
+'''
+
 * [[mappedmemoryrange]]
 [small]#*mappedmemoryrange* = { +
 _memory_: <<device_memory, device_memory>> *[R]*, +
