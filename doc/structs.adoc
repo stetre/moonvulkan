@@ -822,15 +822,6 @@ https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#Vk
 
 '''
 
-* [[samplelocationsinfo]]
-[small]#*samplelocationsinfo* = { +
-_sample_locations_per_pixel_: <<samplecountflags, samplecountflags>>, +
-_sample_location_grid_size_: <<extent2d, extent2d>> *[R]*, +
-_sample_locations_: {<<samplelocation, samplelocation>>} *[R]*, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkSampleLocationsInfoEXT[VkSampleLocationsInfoEXT])#
-
-'''
-
 * [[mappedmemoryrange]]
 [small]#*mappedmemoryrange* = { +
 _memory_: <<device_memory, device_memory>> *[R]*, +
@@ -1429,7 +1420,31 @@ _render_pass_: <<render_pass, render_pass>> *[R]*, +
 _framebuffer_: <<framebuffer, framebuffer>> *[R]*, +
 _render_area_: <<rect2d, rect2d>>, +
 _clear_values_: {<<clearvalue, clearvalue>>}, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkRenderPassBeginInfo[VkRenderPassBeginInfo])#
+pass:[-------] EXTENSIONS ------- +
+_attachment_initial_sample_locations_count_: {<<attachmentsamplelocations, attachmentsamplelocations>>} (Note1), +
+_post_subpass_sample_locations_count_: {<<subpasssamplelocations, subpasssamplelocations>>} (Note1), +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkRenderPassBeginInfo[VkRenderPassBeginInfo]) +
+Note1: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_sample_locations[VK_EXT_sample_locations] extension (rfr:
+https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkRenderPassSampleLocationsBeginInfoEXT[VkRenderPassSampleLocationsBeginInfoEXT]).#
+
+* [[attachmentsamplelocations]]
+[small]#*attachmentsamplelocations* = { +
+_attachment_index_: integer, +
+_sample_locations_info_, <<samplelocationsinfo, samplelocationsinfo>>, +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkAttachmentSampleLocationsEXT[VkAttachmentSampleLocationsEXT])#
+
+* [[subpasssamplelocations]]
+[small]#*subpasssamplelocations* = { +
+_subpass_index_: integer, +
+_sample_locations_info_, <<samplelocationsinfo, samplelocationsinfo>>, +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkSubpassSampleLocationsEXT[VkSubpassSampleLocationsEXT])#
+
+* [[samplelocationsinfo]]
+[small]#*samplelocationsinfo* = { +
+_sample_locations_per_pixel_: <<samplecountflags, samplecountflags>>, +
+_sample_location_grid_size_: <<extent2d, extent2d>> *[R]*, +
+_sample_locations_: {<<samplelocation, samplelocation>>} *[R]*, +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkSampleLocationsInfoEXT[VkSampleLocationsInfoEXT])#
 
 '''
 

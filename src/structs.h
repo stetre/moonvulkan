@@ -133,10 +133,16 @@ void freerenderpasscreateinfo(lua_State *L, VkRenderPassCreateInfo_CHAIN *p);
 #define echeckrenderpasscreateinfo moonvulkan_echeckrenderpasscreateinfo
 int echeckrenderpasscreateinfo(lua_State *L, int arg, VkRenderPassCreateInfo_CHAIN *p);
 
+typedef struct {
+    VkRenderPassBeginInfo p1;
+    VkRenderPassSampleLocationsBeginInfoEXT p2;
+} VkRenderPassBeginInfo_CHAIN;
+
 #define freerenderpassbegininfo moonvulkan_freerenderpassbegininfo
-void freerenderpassbegininfo(lua_State *L, VkRenderPassBeginInfo *p);
+void freerenderpassbegininfo(lua_State *L, VkRenderPassBeginInfo_CHAIN *p);
 #define echeckrenderpassbegininfo moonvulkan_echeckrenderpassbegininfo
-int echeckrenderpassbegininfo(lua_State *L, int arg, VkRenderPassBeginInfo *p);
+int echeckrenderpassbegininfo(lua_State *L, int arg, VkRenderPassBeginInfo_CHAIN *p);
+
 
 #define freeframebuffercreateinfo moonvulkan_freeframebuffercreateinfo
 void freeframebuffercreateinfo(lua_State *L, VkFramebufferCreateInfo *p);

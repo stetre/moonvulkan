@@ -251,6 +251,10 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.ht
 * *cmd_set_line_width*(_cb_, [_linewidth_ = 1.0]) +
 [small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCmdSetLineWidth[vkCmdSetLineWidth].#
 
+[[cmd_set_sample_locations]]
+* *cmd_set_sample_locations*(_cb_, <<samplelocationsinfo, _samplelocationsinfo_>>) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCmdSetSampleLocationsEXT[vkCmdSetSampleLocationsEXT] (https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_sample_locations[VK_EXT_sample_locations] extension).#
+
 [[cmd_set_scissor]]
 * *cmd_set_scissor*(_cb_, _first_, {<<rect2d, _rect2d_>>}) +
 [small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCmdSetScissor[vkCmdSetScissor].#
@@ -297,19 +301,4 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.ht
 [[cmd_write_timestamp]]
 * *cmd_write_timestamp*(_cb_, <<pipelinestageflags, _pipelinestageflags_>>, <<query_pool, _query_pool_>>, _query_) +
 [small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCmdWriteTimestamp[vkCmdWriteTimestamp].#
-
-////
-[[]]
-* **(_cb_) +
-[small]#
-This function requires the https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#[] device extension. +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vk[].#
-
-arg3 - __: integer +
-arg3 - __: <<, >> +
-arg3 - __: {<<, >>} +
-arg3 - [__]: <<, >> +
-arg3 - __: {<<, >>} (opt.) +
-
-////
 

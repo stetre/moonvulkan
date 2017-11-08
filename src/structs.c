@@ -1536,20 +1536,86 @@ int echecksamplercreateinfo(lua_State *L, int arg, VkSamplerCreateInfo_CHAIN *pp
 
 
 /*------------------------------------------------------------------------------*/
-static ECHECKLISTFUNC(VkClearValue, clearvalue, NULL) /* echeckclearvaluelist() */
 
-void freerenderpassbegininfo(lua_State *L, VkRenderPassBeginInfo *p)
+static void freeattachmentsamplelocations(lua_State *L, VkAttachmentSampleLocationsEXT *p)
     {
-    if(!p) return;
-    if(p->pClearValues) Free(L, (void*)p->pClearValues);
+    freesamplelocationsinfo(L, &p->sampleLocationsInfo);
     }
 
-int echeckrenderpassbegininfo(lua_State *L, int arg, VkRenderPassBeginInfo *p)
+static int echeckattachmentsamplelocations(lua_State *L, int arg, VkAttachmentSampleLocationsEXT *p)
+    {
+    CHECK_TABLE(L, arg, p);
+    GetInteger(attachmentIndex, "attachment_index");
+    GetSampleLocationsInfo(sampleLocationsInfo, "sample_locations_info");
+    return 0;
+    }
+
+static FREELISTFUNC(VkAttachmentSampleLocationsEXT, attachmentsamplelocations)
+static ECHECKLISTFUNC(VkAttachmentSampleLocationsEXT, attachmentsamplelocations, freeattachmentsamplelocationslist) /* echeckattachmentsamplelocationslist() */
+
+static void freesubpasssamplelocations(lua_State *L, VkSubpassSampleLocationsEXT *p)
+    {
+    freesamplelocationsinfo(L, &p->sampleLocationsInfo);
+    }
+
+static int echecksubpasssamplelocations(lua_State *L, int arg, VkSubpassSampleLocationsEXT *p)
+    {
+    CHECK_TABLE(L, arg, p);
+    GetInteger(subpassIndex, "subpass_index");
+    GetSampleLocationsInfo(sampleLocationsInfo, "sample_locations_info");
+    return 0;
+    }
+static FREELISTFUNC(VkSubpassSampleLocationsEXT, subpasssamplelocations)
+static ECHECKLISTFUNC(VkSubpassSampleLocationsEXT, subpasssamplelocations, freesubpasssamplelocationslist) /* echecksubpasssamplelocationslist() */
+
+
+static void freerenderpasssamplelocationsbegininfo(lua_State *L, VkRenderPassSampleLocationsBeginInfoEXT *p)
+    {
+    if(p->pAttachmentInitialSampleLocations) Free(L, (void*)p->pAttachmentInitialSampleLocations);
+    if(p->pPostSubpassSampleLocations) Free(L, (void*)p->pPostSubpassSampleLocations);
+    }
+
+static int echeckrenderpasssamplelocationsbegininfo(lua_State *L, int arg, VkRenderPassSampleLocationsBeginInfoEXT *p)
+    {
+    int err, arg1;
+    p->sType = VK_STRUCTURE_TYPE_RENDER_PASS_SAMPLE_LOCATIONS_BEGIN_INFO_EXT;
+#define F "attachment_initial_sample_locations"
+    arg1 = pushfield(L, arg, F);
+    p->pAttachmentInitialSampleLocations = echeckattachmentsamplelocationslist(L, arg1, &p->attachmentInitialSampleLocationsCount, &err);
+    popfield(L, arg1);
+    if(err < 0) return prependfield(L, F);
+#undef F
+#define F "post_subpass_sample_locations"
+    arg1 = pushfield(L, arg, F);
+    p->pPostSubpassSampleLocations = echecksubpasssamplelocationslist(L, arg1, &p->postSubpassSampleLocationsCount, &err);
+    popfield(L, arg1);
+    if(err < 0) return prependfield(L, F);
+#undef F
+    if((p->attachmentInitialSampleLocationsCount + p->postSubpassSampleLocationsCount) == 0)
+        {
+        lua_pushstring(L, errstring(ERR_NOTPRESENT));
+        return ERR_NOTPRESENT;
+        }
+    return 0;
+    }
+
+void freerenderpassbegininfo(lua_State *L, VkRenderPassBeginInfo_CHAIN *pp)
+    {
+    VkRenderPassBeginInfo *p = &pp->p1;
+    VkRenderPassSampleLocationsBeginInfoEXT *p2 = &pp->p2;
+    if(p->pClearValues) Free(L, (void*)p->pClearValues);
+    freerenderpasssamplelocationsbegininfo(L, p2);
+    }
+
+static VkClearValue* echeckclearvaluelist(lua_State*, int, uint32_t*, int*); /* forward decl. */
+int echeckrenderpassbegininfo(lua_State *L, int arg, VkRenderPassBeginInfo_CHAIN *pp)
     {
     int err, arg1;
     uint32_t count;
-
-    CHECK_TABLE(L, arg, p);
+    VkRenderPassBeginInfo *p = &pp->p1;
+    VkRenderPassSampleLocationsBeginInfoEXT *p2 = &pp->p2;
+    const void **chain = pnextof(p);
+    CHECK_TABLE(L, arg, pp);
     p->sType = VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO;
 
     GetRenderPass(renderPass, "render_pass");
@@ -1563,7 +1629,12 @@ int echeckrenderpassbegininfo(lua_State *L, int arg, VkRenderPassBeginInfo *p)
     if(err < 0) return prependfield(L, F);
     if(err == ERR_NOTPRESENT) poperror();
 #undef F
-        
+    err = echeckrenderpasssamplelocationsbegininfo(L, arg, p2);
+    if(err < 0) { freerenderpassbegininfo(L, pp); return err; }
+    if(err == ERR_NOTPRESENT)
+        poperror();
+    else
+        addtochain(chain, p2);
     return 0;
     }
 
@@ -2599,7 +2670,6 @@ int echeckclearcolorvalue(lua_State *L, int arg, VkClearColorValue *p)
     return 0;
     }
 
-
 int echeckclearvalue(lua_State *L, int arg, VkClearValue *p)
     {
     int t;
@@ -2615,7 +2685,7 @@ int echeckclearvalue(lua_State *L, int arg, VkClearValue *p)
     GetInteger(depthStencil.stencil, "stencil");
     return 0;
     }
-
+static ECHECKLISTFUNC(VkClearValue, clearvalue, NULL) /* echeckclearvaluelist() */
 
 int echeckclearattachment(lua_State *L, int arg, VkClearAttachment *p)
     {

@@ -2467,6 +2467,14 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/
 </li>
 </ul>
 </div>
+<div id="cmd_set_sample_locations" class="ulist">
+<ul>
+<li>
+<p><strong>cmd_set_sample_locations</strong>(<em>cb</em>, <a href="#samplelocationsinfo"><em>samplelocationsinfo</em></a>)<br>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCmdSetSampleLocationsEXT">vkCmdSetSampleLocationsEXT</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_sample_locations">VK_EXT_sample_locations</a> extension).</span></p>
+</li>
+</ul>
+</div>
 <div id="cmd_set_scissor" class="ulist">
 <ul>
 <li>
@@ -4232,19 +4240,6 @@ Note1: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/htm
 <div class="ulist">
 <ul>
 <li>
-<p><a id="samplelocationsinfo"></a>
-<span class="small"><strong>samplelocationsinfo</strong> = {<br>
-<em>sample_locations_per_pixel</em>: <a href="#samplecountflags">samplecountflags</a>,<br>
-<em>sample_location_grid_size</em>: <a href="#extent2d">extent2d</a> <strong>[R]</strong>,<br>
-<em>sample_locations</em>: {<a href="#samplelocation">samplelocation</a>} <strong>[R]</strong>,<br>
-} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkSampleLocationsInfoEXT">VkSampleLocationsInfoEXT</a>)</span></p>
-</li>
-</ul>
-</div>
-<hr>
-<div class="ulist">
-<ul>
-<li>
 <p><a id="mappedmemoryrange"></a>
 <span class="small"><strong>mappedmemoryrange</strong> = {<br>
 <em>memory</em>: <a href="#device_memory">device_memory</a> <strong>[R]</strong>,<br>
@@ -4924,7 +4919,34 @@ See also the <a href="#clearcolor_snippet">example</a> in the code snippets sect
 <em>framebuffer</em>: <a href="#framebuffer">framebuffer</a> <strong>[R]</strong>,<br>
 <em>render_area</em>: <a href="#rect2d">rect2d</a>,<br>
 <em>clear_values</em>: {<a href="#clearvalue">clearvalue</a>},<br>
-} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkRenderPassBeginInfo">VkRenderPassBeginInfo</a>)</span></p>
+------- EXTENSIONS -------<br>
+<em>attachment_initial_sample_locations_count</em>: {<a href="#attachmentsamplelocations">attachmentsamplelocations</a>} (Note1),<br>
+<em>post_subpass_sample_locations_count</em>: {<a href="#subpasssamplelocations">subpasssamplelocations</a>} (Note1),<br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkRenderPassBeginInfo">VkRenderPassBeginInfo</a>)<br>
+Note1: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_sample_locations">VK_EXT_sample_locations</a> extension (rfr:
+<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkRenderPassSampleLocationsBeginInfoEXT">VkRenderPassSampleLocationsBeginInfoEXT</a>).</span></p>
+</li>
+<li>
+<p><a id="attachmentsamplelocations"></a>
+<span class="small"><strong>attachmentsamplelocations</strong> = {<br>
+<em>attachment_index</em>: integer,<br>
+<em>sample_locations_info</em>, <a href="#samplelocationsinfo">samplelocationsinfo</a>,<br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkAttachmentSampleLocationsEXT">VkAttachmentSampleLocationsEXT</a>)</span></p>
+</li>
+<li>
+<p><a id="subpasssamplelocations"></a>
+<span class="small"><strong>subpasssamplelocations</strong> = {<br>
+<em>subpass_index</em>: integer,<br>
+<em>sample_locations_info</em>, <a href="#samplelocationsinfo">samplelocationsinfo</a>,<br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkSubpassSampleLocationsEXT">VkSubpassSampleLocationsEXT</a>)</span></p>
+</li>
+<li>
+<p><a id="samplelocationsinfo"></a>
+<span class="small"><strong>samplelocationsinfo</strong> = {<br>
+<em>sample_locations_per_pixel</em>: <a href="#samplecountflags">samplecountflags</a>,<br>
+<em>sample_location_grid_size</em>: <a href="#extent2d">extent2d</a> <strong>[R]</strong>,<br>
+<em>sample_locations</em>: {<a href="#samplelocation">samplelocation</a>} <strong>[R]</strong>,<br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkSampleLocationsInfoEXT">VkSampleLocationsInfoEXT</a>)</span></p>
 </li>
 </ul>
 </div>
@@ -6393,7 +6415,7 @@ that the relevant header files are where <em>vulkan.h</em> expects them to be.</
 <div id="footer">
 <div id="footer-text">
 Version 0.4<br>
-Last updated 2017-08-09 20:11:14 CEST
+Last updated 2017-11-08 10:29:49 CET
 </div>
 </div>
 </body>

@@ -646,7 +646,7 @@ static int CmdPushConstants(lua_State *L)
 static int CmdBeginRenderPass(lua_State *L)
     {
     VkSubpassContents contents;
-    VkRenderPassBeginInfo info;
+    VkRenderPassBeginInfo_CHAIN info;
     ud_t *ud;
     VkCommandBuffer cb = checkcommand_buffer(L, 1, &ud);
     if(echeckrenderpassbegininfo(L, 2, &info) != 0)
@@ -656,7 +656,7 @@ static int CmdBeginRenderPass(lua_State *L)
         }
     
     contents = checksubpasscontents(L, 3);
-    ud->ddt->CmdBeginRenderPass(cb, &info, contents);
+    ud->ddt->CmdBeginRenderPass(cb, &info.p1, contents);
     freerenderpassbegininfo(L, &info);
     return 0;
     }
@@ -790,13 +790,28 @@ static int CmdSetDiscardRectangle(lua_State *L)
     int err;
     uint32_t count;
     ud_t *ud;
+    VkRect2D *rects;
     VkCommandBuffer cb = checkcommand_buffer(L, 1, &ud);
     uint32_t first = luaL_checkinteger(L, 2);
-    VkRect2D *rects = echeckrect2dlist(L, 3, &count, &err);
-    if(err) return argerror(L, 3);
     CheckDevicePfn(L, ud, CmdSetDiscardRectangleEXT);
+    rects = echeckrect2dlist(L, 3, &count, &err);
+    if(err) return argerror(L, 3);
     ud->ddt->CmdSetDiscardRectangleEXT(cb, first, count, rects);
     Free(L, rects);
+    return 0;
+    }
+
+static int CmdSetSampleLocations(lua_State *L)
+    {
+    int err;
+    ud_t *ud;
+    VkSampleLocationsInfoEXT info;
+    VkCommandBuffer cb = checkcommand_buffer(L, 1, &ud);
+    CheckDevicePfn(L, ud, CmdSetSampleLocationsEXT);
+    err = echecksamplelocationsinfo(L, 2, &info);
+    if(err) return argerror(L, 2);
+    ud->ddt->CmdSetSampleLocationsEXT(cb, &info);
+    freesamplelocationsinfo(L, &info);
     return 0;
     }
 
@@ -868,6 +883,7 @@ static const struct luaL_Reg Functions[] =
         { "cmd_push_descriptor_set", CmdPushDescriptorSet },
         { "cmd_push_descriptor_set_with_template", CmdPushDescriptorSetWithTemplate },
         { "cmd_set_discard_rectangle", CmdSetDiscardRectangle },
+        { "cmd_set_sample_locations", CmdSetSampleLocations },
         { NULL, NULL } /* sentinel */
     };
 
