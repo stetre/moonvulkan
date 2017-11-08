@@ -58,6 +58,7 @@ static int Type(lua_State *L)
     TRY(display_mode);
     TRY(descriptor_update_template);
     TRY(validation_cache);
+    TRY(sampler_ycbcr_conversion);
     return 0;
 #undef TRY
     }

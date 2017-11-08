@@ -885,6 +885,7 @@ p.tableblock.header { color: #6d6e71; }
 <li><a href="#_other_khr">Other (KHR)</a>
 <ul class="sectlevel3">
 <li><a href="#descriptor_update_template">descriptor_update_template</a></li>
+<li><a href="#sampler_ycbcr_conversion">sampler_ycbcr_conversion</a></li>
 </ul>
 </li>
 <li><a href="#_other_ext">Other (EXT)</a>
@@ -1117,6 +1118,7 @@ binding library to a dynamic, garbage-collected language is not the way to go).<
 &#9474;&#8192;&#8192;&#8192;&#9474;&#8192;&#8192;&#8192;&#9492;&#9472;&#8192;<a href="#descriptor_set">descriptor_set</a> <em>(VkDescriptorSet)</em><br>
 &#9474;&#8192;&#8192;&#8192;&#9500;&#9472;&#8192;<a href="#descriptor_update_template">descriptor_update_template</a> <em>(VkDescriptorUpdateTemplateKHR)</em><br>
 &#9474;&#8192;&#8192;&#8192;&#9500;&#9472;&#8192;<a href="#validation_cache">validation_cache</a> <em>(VkValidationCacheEXT)</em><br>
+&#9474;&#8192;&#8192;&#8192;&#9500;&#9472;&#8192;<a href="#sampler_ycbcr_conversion">sampler_ycbcr_conversion</a> <em>(VkSamplerYcbcrConversionKHR)</em><br>
 &#9474;&#8192;&#8192;&#8192;&#9500;&#9472;&#8192;<a href="#query_pool">query_pool</a> <em>(VkQueryPool)</em><br>
 &#9474;&#8192;&#8192;&#8192;&#9492;&#9472;&#8192;<a href="#swapchain">swapchain</a> <em>(VkSwapchainKHR)</em><br>
 &#9474;&#8192;&#8192;&#8192;&#8192;&#8192;&#8192;&#8192;&#9492;&#9472;&#8192;<a href="#image">image</a> <em>(VkImage, present)</em><br>
@@ -1835,24 +1837,27 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/
 <div id="get_buffer_memory_requirements" class="ulist">
 <ul>
 <li>
-<p><a href="#memoryrequirements"><em>memoryrequirements</em></a> = <strong>get_buffer_memory_requirements</strong>(<a href="#buffer"><em>buffer</em></a>)<br>
-<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetBufferMemoryRequirements">vkGetBufferMemoryRequirements</a>.</span></p>
+<p><a href="#memoryrequirements"><em>memoryrequirements</em></a> = <strong>get_buffer_memory_requirements</strong>(<a href="#buffer"><em>buffer</em></a>, [<a href="#buffermemoryrequirementsinfo"><em>buffermemoryrequirementsinfo</em></a>])<br>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetBufferMemoryRequirements">vkGetBufferMemoryRequirements</a> -
+<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetBufferMemoryRequirements2KHR">vkGetBufferMemoryRequirements2KHR</a>.</span></p>
 </li>
 </ul>
 </div>
 <div id="get_image_memory_requirements" class="ulist">
 <ul>
 <li>
-<p><a href="#memoryrequirements"><em>memoryrequirements</em></a> = <strong>get_image_memory_requirements</strong>(<a href="#image"><em>image</em></a>)<br>
-<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetImageMemoryRequirements">vkGetImageMemoryRequirements</a>.</span></p>
+<p><a href="#memoryrequirements"><em>memoryrequirements</em></a> = <strong>get_image_memory_requirements</strong>(<a href="#image"><em>image</em></a>, [<a href="#imagememoryrequirementsinfo"><em>imagememoryrequirementsinfo</em></a>])<br>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetImageMemoryRequirements">vkGetImageMemoryRequirements</a> -
+<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetImageMemoryRequirements2KHR">vkGetImageMemoryRequirements2KHR</a>.</span></p>
 </li>
 </ul>
 </div>
 <div id="get_image_sparse_memory_requirements" class="ulist">
 <ul>
 <li>
-<p>{<a href="#sparseimagememoryrequirements"><em>sparseimagememoryrequirements</em></a>} = <strong>get_image_sparse_memory_requirements</strong>(<a href="#image"><em>image</em></a>)<br>
-<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetImageSparseMemoryRequirements">vkGetImageSparseMemoryRequirements</a>.</span></p>
+<p>{<a href="#sparseimagememoryrequirements"><em>sparseimagememoryrequirements</em></a>} = <strong>get_image_sparse_memory_requirements</strong>(<a href="#image"><em>image</em></a>, [<a href="#imagesparsememoryrequirementsinfo"><em>imagesparsememoryrequirementsinfo</em></a>])<br>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetImageSparseMemoryRequirements">vkGetImageSparseMemoryRequirements</a> -
+<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetImageSparseMemoryRequirements2KHR">vkGetImageSparseMemoryRequirements2KHR</a>.</span></p>
 </li>
 </ul>
 </div>
@@ -3098,6 +3103,25 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/
 </ul>
 </div>
 </div>
+<div class="sect3">
+<h4 id="sampler_ycbcr_conversion">sampler_ycbcr_conversion</h4>
+<div id="create_sampler_ycbcr_conversion" class="ulist">
+<ul>
+<li>
+<p><em>sampler_ycbcr_conversion</em> = <strong>create_sampler_ycbcr_conversion</strong>(<em>device</em>, <a href="#samplerycbcrconversioncreateinfo"><em>samplerycbcrconversioncreateinfo</em></a>,  [<a href="#allocators"><em>allocator</em></a>])<br>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCreateSamplerYcbcrConversionKHR">vkCreateSamplerYcbcrConversionKHR</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_sampler_ycbcr_conversion">VK_KHR_sampler_ycbcr_conversion</a> extension).</span></p>
+</li>
+</ul>
+</div>
+<div id="destroy_sampler_ycbcr_conversion" class="ulist">
+<ul>
+<li>
+<p><strong>destroy_sampler_ycbcr_conversion</strong>(<em>sampler_ycbcr_conversion</em>)<br>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkDestroySamplerYcbcrConversionKHR">vkDestroySamplerYcbcrConversionKHR</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_sampler_ycbcr_conversion">VK_KHR_sampler_ycbcr_conversion</a> extension).</span></p>
+</li>
+</ul>
+</div>
+</div>
 </div>
 <div class="sect2">
 <h3 id="_other_ext">Other (EXT)</h3>
@@ -3171,7 +3195,7 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/
 <ul>
 <li>
 <p><em>validation_cache</em> = <strong>create_validation_cache</strong>(<em>device</em>, <a href="#validationcachecreateinfo"><em>validationcachecreateinfo</em></a>,  [<a href="#allocators"><em>allocator</em></a>])<br>
-<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCreateValidationCacheEXT">vkCreateValidationCacheEXT</a>.</span></p>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCreateValidationCacheEXT">vkCreateValidationCacheEXT</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_validation_cache">VK_EXT_validation_cache</a> extension).</span></p>
 </li>
 </ul>
 </div>
@@ -3179,7 +3203,7 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/
 <ul>
 <li>
 <p><strong>destroy_validation_cache</strong>(<em>validation_cache</em>)<br>
-<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkDestroyValidationCacheEXT">vkDestroyValidationCacheEXT</a>.</span></p>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkDestroyValidationCacheEXT">vkDestroyValidationCacheEXT</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_validation_cache">VK_EXT_validation_cache</a> extension).</span></p>
 </li>
 </ul>
 </div>
@@ -3188,7 +3212,7 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/
 <li>
 <p><em>data</em> = <strong>get_validation_cache_data</strong>(<em>validation_cache</em>)<br>
 <span class="small">Returns <em>data</em> as a binary string.<br>
-Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetValidationCacheDataEXT">vkGetValidationCacheDataEXT</a>.</span></p>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetValidationCacheDataEXT">vkGetValidationCacheDataEXT</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_validation_cache">VK_EXT_validation_cache</a> extension).</span></p>
 </li>
 </ul>
 </div>
@@ -3198,7 +3222,7 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/
 <p><strong>merge_validation_caches</strong>(<em>destination</em>, <em>sources</em>)<br>
 <span class="small"><em>destination</em>: <em>validation_cache</em><br>
 <em>sources</em>: {<em>validation_cache</em>}<br>
-Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkMergeValidationCachesEXT">vkMergeValidationCachesEXT</a>.</span></p>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkMergeValidationCachesEXT">vkMergeValidationCachesEXT</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_validation_cache">VK_EXT_validation_cache</a> extension).</span></p>
 </li>
 </ul>
 </div>
@@ -3294,6 +3318,9 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/
 </li>
 <li>
 <p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_sampler_mirror_clamp_to_edge">VK_KHR_sampler_mirror_clamp_to_edge</a></p>
+</li>
+<li>
+<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_sampler_ycbcr_conversion">VK_KHR_sampler_ycbcr_conversion</a></p>
 </li>
 <li>
 <p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_shader_draw_parameters">VK_KHR_shader_draw_parameters</a></p>
@@ -3804,13 +3831,16 @@ Note1: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/htm
 <em>variable_pointers_storage_buffer</em>: boolean (Note2),<br>
 <em>variable_pointers</em>: boolean (Note2),<br>
 <em>advanced_blend_coherent_operations</em>: boolean (Note3),<br>
+<em>sampler_ycbcr_conversion</em>: boolean (Note4),<br>
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPhysicalDeviceFeatures2KHR">VkPhysicalDeviceFeatures2KHR</a>)<br>
 Note1: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_16bit_storage">VK_KHR_16bit_storage</a> extension (rfr:
 <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPhysicalDevice16BitStorageFeaturesKHR">VkPhysicalDevice16BitStorageFeaturesKHR</a>).<br>
 Note2: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_variable_pointers">VK_KHR_variable_pointers</a> extension (rfr:
 <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPhysicalDeviceVariablePointerFeaturesKHR">VkPhysicalDeviceVariablePointerFeaturesKHR</a>).<br>
 Note3: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_blend_operation_advanced">VK_EXT_blend_operation_advanced</a> extension (rfr:
-<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT">VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT</a>).</span></p>
+<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT">VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT</a>).<br>
+Note4: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_sampler_ycbcr_conversion">VK_KHR_sampler_ycbcr_conversion</a> extension (rfr:
+<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPhysicalDeviceSamplerYcbcrConversionFeaturesKHR">VkPhysicalDeviceSamplerYcbcrConversionFeaturesKHR</a>).</span></p>
 </li>
 <li>
 <p><a id="queuefamilyproperties"></a>
@@ -3863,9 +3893,12 @@ Note3: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/htm
 <em>max_resource_size</em>: integer,<br>
 ------- EXTENSIONS -------<br>
 <em>external_memory_properties</em>: <a href="#externalmemoryproperties">externalmemoryproperties</a> (Note1),<br>
+<em>combined_image_sampler_descriptor_count</em>: integer (Note2),<br>
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkImageFormatProperties">VkImageFormatProperties</a>)<br>
 Note1: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_external_memory_capabilities">VK_KHR_external_memory_capabilities</a> extension (rfr:
-<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkExternalImageFormatPropertiesKHR">VkExternalImageFormatPropertiesKHR</a>).</span></p>
+<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkExternalImageFormatPropertiesKHR">VkExternalImageFormatPropertiesKHR</a>).<br>
+Note2: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_sampler_ycbcr_conversion">VK_KHR_sampler_ycbcr_conversion</a> extension (rfr:
+<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkSamplerYcbcrConversionImageFormatPropertiesKHR">VkSamplerYcbcrConversionImageFormatPropertiesKHR</a>).</span></p>
 </li>
 <li>
 <p><a id="physicaldevicesparseimageformatinfo"></a>
@@ -4381,9 +4414,25 @@ Note1: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/htm
 <em>unnormalized_coordinates</em>: boolean,<br>
 ------- EXTENSIONS -------<br>
 <em>reduction_mode</em>: <a href="#samplerreductionmode">samplerreductionmode</a> (Note1),<br>
+<em>conversion</em>: <a href="#sampler_ycbcr_conversion">sampler_ycbcr_conversion</a> (Note2),<br>
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkSamplerCreateInfo">VkSamplerCreateInfo</a>)<br>
 Note1: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_sampler_filter_minmax">VK_EXT_sampler_filter_minmax</a> extension (rfr:
-<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkSamplerReductionModeCreateInfoEXT">VkSamplerReductionModeCreateInfoEXT</a>).</span></p>
+<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkSamplerReductionModeCreateInfoEXT">VkSamplerReductionModeCreateInfoEXT</a>).<br>
+Note2: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_sampler_ycbcr_conversion">VK_KHR_sampler_ycbcr_conversion</a> extension (rfr:
+<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkSamplerYcbcrConversionInfoKHR">VkSamplerYcbcrConversionInfoKHR</a>).</span></p>
+</li>
+<li>
+<p><a id="samplerycbcrconversioncreateinfo"></a>
+<span class="small"><strong>samplerycbcrconversioncreateinfo</strong> = {<br>
+<em>format</em>: <a href="#format">format</a>,<br>
+<em>ycbcr_model</em>: <a href="#samplerycbcrmodelconversion">samplerycbcrmodelconversion</a>,<br>
+<em>ycbcr_range</em>: <a href="#samplerycbcrrange">samplerycbcrrange</a>,<br>
+<em>components</em>: <a href="#componentmapping">componentmapping</a>,<br>
+<em>x_chroma_offset</em>: <a href="#chromalocation">chromalocation</a>,<br>
+<em>y_chroma_offset</em>: <a href="#chromalocation">chromalocation</a>,<br>
+<em>chroma_filter</em>: <a href="#filter">filter</a>,<br>
+<em>force_explicit_reconstruction</em>: boolean,<br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkSamplerYcbcrConversionCreateInfoKHR">VkSamplerYcbcrConversionCreateInfoKHR</a>)</span></p>
 </li>
 </ul>
 </div>
@@ -4438,6 +4487,32 @@ Note3: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/htm
 <span class="small"><strong>memoryfdproperties</strong> = {<br>
 <em>memory_type_bits</em>: integer,<br>
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkMemoryFdPropertiesKHR">VkMemoryFdPropertiesKHR</a>)</span></p>
+</li>
+</ul>
+</div>
+<hr>
+<div class="ulist">
+<ul>
+<li>
+<p><a id="buffermemoryrequirementsinfo"></a>
+<span class="small"><strong>buffermemoryrequirementsinfo</strong> = {<br>
+-- for future use,<br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkBufferMemoryRequirementsInfo2KHR">VkBufferMemoryRequirementsInfo2KHR</a>)</span></p>
+</li>
+<li>
+<p><a id="imagememoryrequirementsinfo"></a>
+<span class="small"><strong>imagememoryrequirementsinfo</strong> = {<br>
+------- EXTENSIONS -------<br>
+<em>plane_aspect</em>: <a href="#imageaspectflags">imageaspectflags</a> (Note1),<br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkImageMemoryRequirementsInfo2KHR">VkImageMemoryRequirementsInfo2KHR</a>)<br>
+Note1: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_sampler_ycbcr_conversion">VK_KHR_sampler_ycbcr_conversion</a> extension (rfr:
+<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkImagePlaneMemoryRequirementsInfoKHR">VkImagePlaneMemoryRequirementsInfoKHR</a>)</span></p>
+</li>
+<li>
+<p><a id="imagesparsememoryrequirementsinfo"></a>
+<span class="small"><strong>imagesparsememoryrequirementsinfo</strong> = {<br>
+-- for future use,<br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkImageSparseMemoryRequirementsInfo2KHR">VkImageSparseMemoryRequirementsInfo2KHR</a>)</span></p>
 </li>
 </ul>
 </div>
@@ -4516,7 +4591,11 @@ Note1: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/htm
 <em>image</em>: <a href="#image">image</a> <strong>[R]</strong>,<br>
 <em>memory</em>: <a href="#device_memory"><em>device_memory</em></a> <strong>[R]</strong>,<br>
 <em>offset</em>: integer,<br>
-} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkBindImageMemoryInfoKHR">VkBindImageMemoryInfoKHR</a>)</span></p>
+------- EXTENSIONS -------<br>
+<em>plane_aspect</em>: <a href="#imageaspectflags">imageaspectflags</a> (Note1),<br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkBindImageMemoryInfoKHR">VkBindImageMemoryInfoKHR</a>)<br>
+Note1: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_sampler_ycbcr_conversion">VK_KHR_sampler_ycbcr_conversion</a> extension (rfr:
+<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkBindImagePlaneMemoryInfoKHR">VkBindImagePlaneMemoryInfoKHR</a>)</span></p>
 </li>
 </ul>
 </div>
@@ -5393,7 +5472,7 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/
 </div>
 <div id="chromalocation" class="paragraph">
 <p><span class="small"><strong>chromalocation</strong>: vk.CHROMA_LOCATION_XXX_KHR<br>
-Values: '<em>cosited even</em>', '<em>midpoint</em>'.<br>
+Values: '<em>cosited even</em>' (default), '<em>midpoint</em>'.<br>
 Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkChromaLocationKHR">VkChromaLocationKHR</a>.</span></p>
 </div>
 <div id="colorspace" class="paragraph">
@@ -5586,12 +5665,12 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/
 </div>
 <div id="samplerycbcrmodelconversion" class="paragraph">
 <p><span class="small"><strong>samplerycbcrmodelconversion</strong>: vk.SAMPLER_YCBCR_MODEL_CONVERSION_XXX_KHR<br>
-Values: '<em>rgb identity</em>', '<em>ycbcr identity</em>', '<em>ycbcr 709</em>', '<em>ycbcr 601</em>', '<em>ycbcr 2020</em>'.<br>
+Values: '<em>rgb identity</em>' (default), '<em>ycbcr identity</em>', '<em>ycbcr 709</em>', '<em>ycbcr 601</em>', '<em>ycbcr 2020</em>'.<br>
 Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkSamplerYcbcrModelConversionKHR">VkSamplerYcbcrModelConversionKHR</a>.</span></p>
 </div>
 <div id="samplerycbcrrange" class="paragraph">
 <p><span class="small"><strong>samplerycbcrrange</strong>: vk.SAMPLER_YCBCR_RANGE_XXX_KHR<br>
-Values: '<em>itu full</em>', '<em>itu narrow</em>'.<br>
+Values: '<em>itu full</em>' (default), '<em>itu narrow</em>'.<br>
 Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkSamplerYcbcrRangeKHR">VkSamplerYcbcrRangeKHR</a>.</span></p>
 </div>
 <div id="sharingmode" class="paragraph">
@@ -6569,7 +6648,7 @@ that the relevant header files are where <em>vulkan.h</em> expects them to be.</
 <div id="footer">
 <div id="footer-text">
 Version 0.4<br>
-Last updated 2017-11-08 12:12:17 CET
+Last updated 2017-11-08 19:37:34 CET
 </div>
 </div>
 </body>

@@ -556,6 +556,12 @@ device_dt_t* getproc_device(lua_State *L, VkDevice device, VkDeviceCreateInfo *c
             GET(GetValidationCacheDataEXT);
             continue;
             }
+        IF("VK_KHR_sampler_ycbcr_conversion")
+            {
+            GET(CreateSamplerYcbcrConversionKHR);
+            GET(DestroySamplerYcbcrConversionKHR);
+            continue;
+            }
 #endif
 #undef IF
         }

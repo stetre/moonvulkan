@@ -48,6 +48,8 @@ static int Create(lua_State *L)
     VkDevice device = checkdevice(L, 1, &device_ud);
     const VkAllocationCallbacks *allocator = optallocator(L, 3);
 
+    CheckDevicePfn(L, device_ud, CreateValidationCacheEXT);
+
     if(echeckvalidationcachecreateinfo(L, 2, &info)) return argerror(L, 2);
     lua_getfield(L, 2, "initial_data");
     info.pInitialData = (void*)luaL_optlstring(L, -1, NULL, &info.initialDataSize);
@@ -74,6 +76,8 @@ static int GetValidationCacheData(lua_State *L)
     VkValidationCacheEXT validation_cache = checkvalidation_cache(L, 1, &ud);
     VkDevice device = ud->device;
     
+    CheckDevicePfn(L, ud, GetValidationCacheDataEXT);
+
     /* first, get the size */
     ec = ud->ddt->GetValidationCacheDataEXT(device, validation_cache, &size, NULL);
     CheckError(L, ec);
@@ -104,9 +108,13 @@ static int MergeValidationCaches(lua_State *L)
     uint32_t count;
     VkResult ec;
     ud_t *ud;
+    VkValidationCacheEXT *source;
     VkValidationCacheEXT destination = checkvalidation_cache(L, 1, &ud);
     VkDevice device = ud->device;
-    VkValidationCacheEXT *source = checkvalidation_cachelist(L, 2, &count, &err, NULL);
+
+    CheckDevicePfn(L, ud, MergeValidationCachesEXT);
+
+    source = checkvalidation_cachelist(L, 2, &count, &err, NULL);
     if(err) return argerrorc(L, 2, err);
 
     ec = ud->ddt->MergeValidationCachesEXT(device, destination, count, source);

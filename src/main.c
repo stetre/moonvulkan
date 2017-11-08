@@ -88,6 +88,7 @@ int luaopen_moonvulkan(lua_State *L)
     moonvulkan_open_display_mode(L);
     moonvulkan_open_descriptor_update_template(L);
     moonvulkan_open_validation_cache(L);
+    moonvulkan_open_sampler_ycbcr_conversion(L);
     
 
     /* Add functions implemented in Lua */

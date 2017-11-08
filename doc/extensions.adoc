@@ -37,6 +37,7 @@ Khronos extensions (KHR):
 * https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_push_descriptor[VK_KHR_push_descriptor]
 * https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_relaxed_block_layout[VK_KHR_relaxed_block_layout]
 * https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_sampler_mirror_clamp_to_edge[VK_KHR_sampler_mirror_clamp_to_edge]
+* https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_sampler_ycbcr_conversion[VK_KHR_sampler_ycbcr_conversion]
 * https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_shader_draw_parameters[VK_KHR_shader_draw_parameters]
 * https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_shared_presentable_image[VK_KHR_shared_presentable_image]
 * https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_storage_buffer_storage_class[VK_KHR_storage_buffer_storage_class]

@@ -64,7 +64,7 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.ht
 
 [[chromalocation]]
 [small]#*chromalocation*: vk.CHROMA_LOCATION_XXX_KHR +
-Values: '_cosited even_', '_midpoint_'. +
+Values: '_cosited even_' (default), '_midpoint_'. +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkChromaLocationKHR[VkChromaLocationKHR].#
 
 [[colorspace]]
@@ -257,12 +257,12 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.ht
 
 [[samplerycbcrmodelconversion]]
 [small]#*samplerycbcrmodelconversion*: vk.SAMPLER_YCBCR_MODEL_CONVERSION_XXX_KHR +
-Values: '_rgb identity_', '_ycbcr identity_', '_ycbcr 709_', '_ycbcr 601_', '_ycbcr 2020_'. +
+Values: '_rgb identity_' (default), '_ycbcr identity_', '_ycbcr 709_', '_ycbcr 601_', '_ycbcr 2020_'. +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkSamplerYcbcrModelConversionKHR[VkSamplerYcbcrModelConversionKHR].#
 
 [[samplerycbcrrange]]
 [small]#*samplerycbcrrange*: vk.SAMPLER_YCBCR_RANGE_XXX_KHR +
-Values: '_itu full_', '_itu narrow_'. +
+Values: '_itu full_' (default), '_itu narrow_'. +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkSamplerYcbcrRangeKHR[VkSamplerYcbcrRangeKHR].#
 
 [[sharingmode]]

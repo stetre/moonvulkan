@@ -340,6 +340,9 @@ static const char *GetString_(lua_State *L, int arg, const char *sname, const ch
 #define GetPresentMode(name, sname) GetEnumOpt(name, sname, testpresentmode, VK_PRESENT_MODE_FIFO_KHR)
 #define GetBlendOverlap(name, sname) GetEnumOpt(name, sname, testblendoverlap, VK_BLEND_OVERLAP_UNCORRELATED_EXT)
 #define GetSamplerReductionMode(name, sname) GetEnumOpt(name, sname, testsamplerreductionmode, VK_SAMPLER_REDUCTION_MODE_WEIGHTED_AVERAGE_EXT)
+#define GetSamplerYcbcrModelConversion(name, sname) GetEnumOpt(name, sname, testsamplerycbcrmodelconversion, VK_SAMPLER_YCBCR_MODEL_CONVERSION_RGB_IDENTITY_KHR)
+#define GetSamplerYcbcrRange(name, sname) GetEnumOpt(name, sname, testsamplerycbcrrange, VK_SAMPLER_YCBCR_RANGE_ITU_FULL_KHR)
+#define GetChromaLocation(name, sname) GetEnumOpt(name, sname, testchromalocation, VK_CHROMA_LOCATION_COSITED_EVEN_KHR)
 
 /* Structs -------------------------------------------------------------------*/
 
@@ -468,6 +471,8 @@ static const char *GetString_(lua_State *L, int arg, const char *sname, const ch
 #define GetDescriptorSet(name, sname) GetObject(name, sname, VkDescriptorSet, descriptor_set)
 #define GetDescriptorSetLayoutOpt(name, sname) GetObject(name, sname, VkDescriptorSetLayout, descriptor_set_layout)
 #define GetValidationCache(name, sname) GetObject(name, sname, VkValidationCacheEXT, validation_cache)
+#define GetSamplerYcbcrConversion(name, sname) GetObject(name, sname, VkSamplerYcbcrConversionKHR, sampler_ycbcr_conversion)
+
 #if 0
 #define Get(name, sname) GetObject(name, sname, Vk, )
 #define GetOpt(name, sname) GetObjectOpt(name, sname, Vk, )
@@ -1531,11 +1536,19 @@ static int echecksamplerreductionmodecreateinfo(lua_State *L, int arg, VkSampler
     return 0;
     }
 
+static int echecksamplerycbcrconversioninfo(lua_State *L, int arg, VkSamplerYcbcrConversionInfoKHR *p)
+    {
+    p->sType = VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_INFO_KHR;
+    GetSamplerYcbcrConversion(conversion, "conversion");
+    return 0;
+    }
+
 int echecksamplercreateinfo(lua_State *L, int arg, VkSamplerCreateInfo_CHAIN *pp)
     {
     int err;
     VkSamplerCreateInfo *p = &pp->p1;
     VkSamplerReductionModeCreateInfoEXT *p2 = &pp->p2;
+    VkSamplerYcbcrConversionInfoKHR *p3 = &pp->p3;
     const void **chain = pnextof(p);
     CHECK_TABLE(L, arg, pp);
     p->sType = VK_STRUCTURE_TYPE_SAMPLER_CREATE_INFO;
@@ -1560,6 +1573,12 @@ int echecksamplercreateinfo(lua_State *L, int arg, VkSamplerCreateInfo_CHAIN *pp
         err = echecksamplerreductionmodecreateinfo(L, arg, p2);
         if(err) { freesamplercreateinfo(L, pp); return err; }
         addtochain(chain, p2);
+        }
+    if(ispresent("conversion"))
+        {
+        err = echecksamplerycbcrconversioninfo(L, arg, p3);
+        if(err) { freesamplercreateinfo(L, pp); return err; }
+        addtochain(chain, p3);
         }
     return 0;
     }
@@ -1756,15 +1775,25 @@ static int echeckphysicaldeviceblendoperationadvancedfeatures(lua_State *L, int 
     return 0;
     }
 
+static int echeckphysicaldevicesamplerycbcrconversionfeatures(lua_State *L, int arg, VkPhysicalDeviceSamplerYcbcrConversionFeaturesKHR *p)
+    {
+    CHECK_TABLE(L, arg, p);
+    GetBoolean(samplerYcbcrConversion, "sampler_ycbcr_conversion");
+    return 0;
+    }
+
+
 #define BUILD_CHAIN_VkPhysicalDeviceFeatures2KHR(p) do { \
     (p)->p1.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2_KHR; \
     (p)->p2.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_16BIT_STORAGE_FEATURES_KHR; \
     (p)->p3.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VARIABLE_POINTER_FEATURES_KHR; \
     (p)->p4.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_BLEND_OPERATION_ADVANCED_FEATURES_EXT; \
+    (p)->p5.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLER_YCBCR_CONVERSION_FEATURES_KHR; \
     (p)->p1.pNext = &p->p2; \
     (p)->p2.pNext = &p->p3; \
     (p)->p3.pNext = &p->p4; \
-    (p)->p4.pNext = NULL; \
+    (p)->p4.pNext = &p->p5; \
+    (p)->p5.pNext = NULL;   \
 } while(0)
 
 void initphysicaldevicefeatures2(lua_State *L, VkPhysicalDeviceFeatures2KHR_CHAIN *p)
@@ -1784,6 +1813,8 @@ static int echeckphysicaldevicefeatures2(lua_State *L, int arg, VkPhysicalDevice
     err = echeckphysicaldevicevariablepointerfeatures(L, arg, &p->p3);
     if(err) return err;
     err = echeckphysicaldeviceblendoperationadvancedfeatures(L, arg, &p->p4);
+    if(err) return err;
+    err = echeckphysicaldevicesamplerycbcrconversionfeatures(L, arg, &p->p5);
     if(err) return err;
     BUILD_CHAIN_VkPhysicalDeviceFeatures2KHR(p);
     return 0;
@@ -1872,12 +1903,20 @@ static int pushphysicaldeviceblendoperationadvancedfeatures(lua_State *L, VkPhys
     return 1;
     }
 
+static int pushphysicaldevicesamplerycbcrconversionfeatures(lua_State *L, VkPhysicalDeviceSamplerYcbcrConversionFeaturesKHR *p)
+    {
+    SetBoolean(samplerYcbcrConversion, "sampler_ycbcr_conversion");
+    return 0;
+    }
+
+
 int pushphysicaldevicefeatures2(lua_State *L, VkPhysicalDeviceFeatures2KHR_CHAIN *p)
     {
     pushphysicaldevicefeatures(L, &p->p1.features);
     pushphysicaldevice16bitstoragefeatures(L, &p->p2);
     pushphysicaldevicevariablepointerfeatures(L, &p->p3);
     pushphysicaldeviceblendoperationadvancedfeatures(L, &p->p4);
+    pushphysicaldevicesamplerycbcrconversionfeatures(L, &p->p5);
     return 1;
     }
 
@@ -2154,6 +2193,12 @@ static int pushexternalmemoryproperties(lua_State *L, VkExternalMemoryProperties
     return 1;
     }
 
+static int pushsamplerycbcrconversionimageformatproperties(lua_State *L, VkSamplerYcbcrConversionImageFormatPropertiesKHR *p)
+    {
+    SetInteger(combinedImageSamplerDescriptorCount, "combined_image_sampler_descriptor_count");
+    return 1;
+    }
+
 int pushimageformatproperties(lua_State *L, VkImageFormatProperties *p)
     {
     lua_newtable(L);
@@ -2171,6 +2216,7 @@ void initimageformatproperties2(lua_State *L, VkImageFormatProperties2KHR_CHAIN 
     MEMZERO(p);
     p->p1.sType = VK_STRUCTURE_TYPE_IMAGE_FORMAT_PROPERTIES_2_KHR;
     p->p2.sType = VK_STRUCTURE_TYPE_EXTERNAL_IMAGE_FORMAT_PROPERTIES_KHR;
+    p->p3.sType = VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_IMAGE_FORMAT_PROPERTIES_KHR;
     }
 
 int pushimageformatproperties2(lua_State *L, VkImageFormatProperties2KHR_CHAIN *p)
@@ -2178,6 +2224,7 @@ int pushimageformatproperties2(lua_State *L, VkImageFormatProperties2KHR_CHAIN *
     pushimageformatproperties(L, &p->p1.imageFormatProperties);
     pushexternalmemoryproperties(L, &p->p2.externalMemoryProperties);
     lua_setfield(L, -2, "external_memory_properties");
+    pushsamplerycbcrconversionimageformatproperties(L, &p->p3);
     return 1;
     }
 
@@ -2977,14 +3024,33 @@ int echeckbuffermemoryrequirementsinfo2(lua_State *L, int arg, VkBufferMemoryReq
     return 0;
     }
 
+static int echeckimageplanememoryrequirementsinfo(lua_State *L, int arg, VkImagePlaneMemoryRequirementsInfoKHR *p)
+    {
+    p->sType = VK_STRUCTURE_TYPE_IMAGE_PLANE_MEMORY_REQUIREMENTS_INFO_KHR;
+    GetFlags(planeAspect, "plane_aspect");
+    return 0;
+    }
+
 int echeckimagememoryrequirementsinfo2(lua_State *L, int arg, VkImageMemoryRequirementsInfo2KHR_CHAIN *pp)
     {
+    int err;
     VkImageMemoryRequirementsInfo2KHR *p = &pp->p1;
+    VkImagePlaneMemoryRequirementsInfoKHR *p2 = &pp->p2;
+    const void **chain = pnextof(p);
     CHECK_TABLE(L, arg, pp);
     p->sType = VK_STRUCTURE_TYPE_IMAGE_MEMORY_REQUIREMENTS_INFO_2_KHR;
     /* p->image = set by caller */
+#define F "plane_aspect"
+    if(ispresent(F))
+        {
+        err = echeckimageplanememoryrequirementsinfo(L, arg, &pp->p2);
+        if(err) return err;
+        addtochain(chain, p2);
+        }
+#undef F
     return 0;
     }
+
 
 int echeckimagesparsememoryrequirementsinfo2(lua_State *L, int arg, VkImageSparseMemoryRequirementsInfo2KHR_CHAIN *pp)
     {
@@ -2994,8 +3060,6 @@ int echeckimagesparsememoryrequirementsinfo2(lua_State *L, int arg, VkImageSpars
     /* p->image = set by caller */
     return 0;
     }
-
-
 
 int pushmemoryrequirements(lua_State *L, VkMemoryRequirements *p)
     {
@@ -4930,22 +4994,57 @@ static int echeckbindbuffermemoryinfo(lua_State *L, int arg, VkBindBufferMemoryI
 FREELISTFUNC(VkBindBufferMemoryInfoKHR, bindbuffermemoryinfo)
 ECHECKLISTFUNC(VkBindBufferMemoryInfoKHR, bindbuffermemoryinfo, freebindbuffermemoryinfolist)
 
+static int echeckbindimageplanememoryinfo(lua_State *L, int arg, VkBindImagePlaneMemoryInfoKHR *p)
+    {
+    p->sType = VK_STRUCTURE_TYPE_BIND_IMAGE_PLANE_MEMORY_INFO_KHR;
+    GetFlags(planeAspect, "plane_aspect");
+    return 0;
+    }
+
 static void freebindimagememoryinfo(lua_State *L, VkBindImageMemoryInfoKHR *p)
     {
-    (void)L; (void)p;
+    VkBindImagePlaneMemoryInfoKHR *p2 = (VkBindImagePlaneMemoryInfoKHR*)p->pNext;
+    if(p2) Free(L, (void*)p2);
     }
 
 static int echeckbindimagememoryinfo(lua_State *L, int arg, VkBindImageMemoryInfoKHR *p)
     {
+    int err;
     CHECK_TABLE(L, arg, p);
     p->sType = VK_STRUCTURE_TYPE_BIND_IMAGE_MEMORY_INFO_KHR;
     GetImage(image, "image");
     GetDeviceMemory(memory, "memory");
     GetInteger(memoryOffset, "offset");
+#define F "plane_aspect"
+    if(ispresent(F))
+        {
+        p->pNext = MALLOC_NOERR(L, VkBindImagePlaneMemoryInfoKHR);
+        if(!p->pNext) { freebindimagememoryinfo(L, p); return pusherror(L, ERR_MEMORY); }
+        err = echeckbindimageplanememoryinfo(L, arg, (VkBindImagePlaneMemoryInfoKHR*)(p->pNext));
+        if(err) { freebindimagememoryinfo(L, p); return err; }
+        }
+#undef F
     return 0;
     }
 
 /* echeckbindimagememoryinfolist() */
 FREELISTFUNC(VkBindImageMemoryInfoKHR, bindimagememoryinfo)
 ECHECKLISTFUNC(VkBindImageMemoryInfoKHR, bindimagememoryinfo, freebindimagememoryinfolist)
+
+/*------------------------------------------------------------------------------*/
+
+int echecksamplerycbcrconversioncreateinfo(lua_State *L, int arg, VkSamplerYcbcrConversionCreateInfoKHR *p)
+    {
+    CHECK_TABLE(L, arg, p);
+    p->sType = VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_CREATE_INFO_KHR;
+    GetFormat(format, "format");
+    GetSamplerYcbcrModelConversion(ycbcrModel, "ycbcr_model");
+    GetSamplerYcbcrRange(ycbcrRange, "ycbcr_range");
+    GetComponentMappingOpt(components, "components");
+    GetChromaLocation(xChromaOffset, "x_chroma_offset");
+    GetChromaLocation(yChromaOffset, "y_chroma_offset");
+    GetFilter(chromaFilter, "chroma_filter");
+    GetBoolean(forceExplicitReconstruction, "force_explicit_reconstruction");
+    return 0;
+    }
 

@@ -63,6 +63,7 @@
 #define DEBUG_REPORT_CALLBACK_MT "moonvulkan_debug_report_callback" /* EXT */
 #define DESCRIPTOR_UPDATE_TEMPLATE_MT "moonvulkan_descriptor_update_template" /* KHR */
 #define VALIDATION_CACHE_MT "moonvulkan_validation_cache" /* EXT */
+#define SAMPLER_YCBCR_CONVERSION_MT "moonvulkan_sampler_ycbcr_conversion" /* KHR */
 
 /* Userdata memory associated with objects */
 #define ud_t moonvulkan_ud_t
@@ -334,6 +335,10 @@ int pushimage_swapchain(lua_State *L, VkImage image, ud_t *swapchain_ud);
 #define checkvalidation_cachelist(L, arg, count, err, ud) \
     (VkValidationCacheEXT*)checkxxxlist_nondispatchable((L), (arg), (count), (err), (ud), VALIDATION_CACHE_MT)
 
+/* sampler_ycbcr_conversion.c */
+#define checksampler_ycbcr_conversion(L, arg, udp) (VkSamplerYcbcrConversionKHR)checkxxx((L), (arg), (udp), SAMPLER_YCBCR_CONVERSION_MT)
+#define testsampler_ycbcr_conversion(L, arg, udp) (VkSamplerYcbcrConversionKHR)testxxx((L), (arg), (udp), SAMPLER_YCBCR_CONVERSION_MT)
+#define pushsampler_ycbcr_conversion(L, handle) pushxxx((L), (uint64_t)(handle))
 
 /* used in main.c */
 void moonvulkan_open_instance(lua_State *L);
@@ -369,6 +374,8 @@ void moonvulkan_open_display(lua_State *L);
 void moonvulkan_open_display_mode(lua_State *L);
 void moonvulkan_open_descriptor_update_template(lua_State *L);
 void moonvulkan_open_validation_cache(lua_State *L);
+void moonvulkan_open_sampler_ycbcr_conversion(lua_State *L);
+
 
 
 #define RAW_FUNC(xxx)                       \

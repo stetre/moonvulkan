@@ -93,6 +93,7 @@ include::swapchain.adoc[]
 
 === Other (KHR)
 include::other_khr.adoc[]
+include::sampler_ycbcr_conversion.adoc[]
 
 === Other (EXT)
 include::other_ext.adoc[]

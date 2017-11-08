@@ -199,6 +199,7 @@ int echeckimageviewcreateinfo(lua_State *L, int arg, VkImageViewCreateInfo_CHAIN
 typedef struct {
     VkSamplerCreateInfo p1;
     VkSamplerReductionModeCreateInfoEXT p2;
+    VkSamplerYcbcrConversionInfoKHR p3;
 } VkSamplerCreateInfo_CHAIN;
 
 #define freesamplercreateinfo moonvulkan_freesamplercreateinfo
@@ -265,14 +266,15 @@ typedef struct {
     VkPhysicalDevice16BitStorageFeaturesKHR p2;
     VkPhysicalDeviceVariablePointerFeaturesKHR p3;
     VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT p4;
+    VkPhysicalDeviceSamplerYcbcrConversionFeaturesKHR p5;
 } VkPhysicalDeviceFeatures2KHR_CHAIN;
-
 #define initphysicaldevicefeatures2 moonvulkan_initphysicaldevicefeatures2
 void initphysicaldevicefeatures2(lua_State *L, VkPhysicalDeviceFeatures2KHR_CHAIN*);
 #define pushphysicaldevicefeatures2 moonvulkan_pushphysicaldevicefeatures2
 int pushphysicaldevicefeatures2(lua_State *L, VkPhysicalDeviceFeatures2KHR_CHAIN *p);
 #define pushphysicaldevicefeatures moonvulkan_pushphysicaldevicefeatures
 int pushphysicaldevicefeatures(lua_State *L, VkPhysicalDeviceFeatures *p);
+
 
 typedef struct {
     VkFormatProperties2KHR p1;
@@ -288,8 +290,8 @@ int pushformatproperties(lua_State *L, VkFormatProperties *p);
 typedef struct {
     VkImageFormatProperties2KHR p1;
     VkExternalImageFormatPropertiesKHR p2;
+    VkSamplerYcbcrConversionImageFormatPropertiesKHR p3;
 } VkImageFormatProperties2KHR_CHAIN;
-
 #define initimageformatproperties2 moonvulkan_initimageformatproperties2
 void initimageformatproperties2(lua_State *L, VkImageFormatProperties2KHR_CHAIN *p);
 #define pushimageformatproperties2 moonvulkan_pushimageformatproperties2
@@ -464,6 +466,7 @@ int echeckbuffermemoryrequirementsinfo2(lua_State *L, int arg, VkBufferMemoryReq
 
 typedef struct {
     VkImageMemoryRequirementsInfo2KHR p1;
+    VkImagePlaneMemoryRequirementsInfoKHR p2;
 } VkImageMemoryRequirementsInfo2KHR_CHAIN;
 
 #define echeckimagememoryrequirementsinfo2 moonvulkan_echeckimagememoryrequirementsinfo2
@@ -649,6 +652,8 @@ void freebindimagememoryinfolist(lua_State *L, void *list, uint32_t count);
 #define echeckbindimagememoryinfolist moonvulkan_echeckbindimagememoryinfolist
 VkBindImageMemoryInfoKHR* echeckbindimagememoryinfolist(lua_State *L, int arg, uint32_t *count, int *err);
 
+#define echecksamplerycbcrconversioncreateinfo moonvulkan_echecksamplerycbcrconversioncreateinfo
+int echecksamplerycbcrconversioncreateinfo(lua_State *L, int arg, VkSamplerYcbcrConversionCreateInfoKHR *p);
 
 #ifdef VK_USE_PLATFORM_WIN32_KHR
 
