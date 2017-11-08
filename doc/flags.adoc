@@ -378,6 +378,9 @@ Reserved for future use (must be set to 0):
 [[swapchaincreateflags]]
 [small]#*swapchaincreateflags*: 0#
 
+[[validationcachecreateflags]]
+[small]#*validationcachecreateflags*: 0#
+
 ////
 [[flags]]
 [small]#**: 0#

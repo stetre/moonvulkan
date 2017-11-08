@@ -891,6 +891,7 @@ p.tableblock.header { color: #6d6e71; }
 <ul class="sectlevel3">
 <li><a href="#debug_report_callback">debug_report_callback</a></li>
 <li><a href="#debug_marker">Debug Marker</a></li>
+<li><a href="#validation_cache">validation_cache</a></li>
 </ul>
 </li>
 <li><a href="#extensions">Supported extensions</a></li>
@@ -1115,6 +1116,7 @@ binding library to a dynamic, garbage-collected language is not the way to go).<
 &#9474;&#8192;&#8192;&#8192;&#9500;&#9472;&#8192;<a href="#descriptor_pool">descriptor_pool</a> <em>(VkDescriptorPool)</em><br>
 &#9474;&#8192;&#8192;&#8192;&#9474;&#8192;&#8192;&#8192;&#9492;&#9472;&#8192;<a href="#descriptor_set">descriptor_set</a> <em>(VkDescriptorSet)</em><br>
 &#9474;&#8192;&#8192;&#8192;&#9500;&#9472;&#8192;<a href="#descriptor_update_template">descriptor_update_template</a> <em>(VkDescriptorUpdateTemplateKHR)</em><br>
+&#9474;&#8192;&#8192;&#8192;&#9500;&#9472;&#8192;<a href="#validation_cache">validation_cache</a> <em>(VkValidationCacheEXT)</em><br>
 &#9474;&#8192;&#8192;&#8192;&#9500;&#9472;&#8192;<a href="#query_pool">query_pool</a> <em>(VkQueryPool)</em><br>
 &#9474;&#8192;&#8192;&#8192;&#9492;&#9472;&#8192;<a href="#swapchain">swapchain</a> <em>(VkSwapchainKHR)</em><br>
 &#9474;&#8192;&#8192;&#8192;&#8192;&#8192;&#8192;&#8192;&#9492;&#9472;&#8192;<a href="#image">image</a> <em>(VkImage, present)</em><br>
@@ -1724,7 +1726,7 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/
 <li>
 <p><em>data</em> = <strong>get_pipeline_cache_data</strong>(<em>pipeline_cache</em>)<br>
 <span class="small">Returns <em>data</em> as a binary string.<br>
-Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetPipelineCachedata">vkGetPipelineCachedata</a>.</span></p>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetPipelineCacheData">vkGetPipelineCacheData</a>.</span></p>
 </li>
 </ul>
 </div>
@@ -3163,6 +3165,44 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/
 </ul>
 </div>
 </div>
+<div class="sect3">
+<h4 id="validation_cache">validation_cache</h4>
+<div id="create_validation_cache" class="ulist">
+<ul>
+<li>
+<p><em>validation_cache</em> = <strong>create_validation_cache</strong>(<em>device</em>, <a href="#validationcachecreateinfo"><em>validationcachecreateinfo</em></a>,  [<a href="#allocators"><em>allocator</em></a>])<br>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCreateValidationCacheEXT">vkCreateValidationCacheEXT</a>.</span></p>
+</li>
+</ul>
+</div>
+<div id="destroy_validation_cache" class="ulist">
+<ul>
+<li>
+<p><strong>destroy_validation_cache</strong>(<em>validation_cache</em>)<br>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkDestroyValidationCacheEXT">vkDestroyValidationCacheEXT</a>.</span></p>
+</li>
+</ul>
+</div>
+<div id="get_validation_cache_data" class="ulist">
+<ul>
+<li>
+<p><em>data</em> = <strong>get_validation_cache_data</strong>(<em>validation_cache</em>)<br>
+<span class="small">Returns <em>data</em> as a binary string.<br>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetValidationCacheDataEXT">vkGetValidationCacheDataEXT</a>.</span></p>
+</li>
+</ul>
+</div>
+<div id="merge_validation_caches" class="ulist">
+<ul>
+<li>
+<p><strong>merge_validation_caches</strong>(<em>destination</em>, <em>sources</em>)<br>
+<span class="small"><em>destination</em>: <em>validation_cache</em><br>
+<em>sources</em>: {<em>validation_cache</em>}<br>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkMergeValidationCachesEXT">vkMergeValidationCachesEXT</a>.</span></p>
+</li>
+</ul>
+</div>
+</div>
 </div>
 <div class="sect2">
 <h3 id="extensions">Supported extensions</h3>
@@ -3355,6 +3395,9 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/
 </li>
 <li>
 <p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_swapchain_colorspace">VK_EXT_swapchain_colorspace</a></p>
+</li>
+<li>
+<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_validation_cache">VK_EXT_validation_cache</a></p>
 </li>
 <li>
 <p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_validation_flags">VK_EXT_validation_flags</a></p>
@@ -4211,7 +4254,11 @@ Note1: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/htm
 <span class="small"><strong>shadermodulecreateinfo</strong> = {<br>
 <em>flags</em>: <a href="#shadermodulecreateflags">shadermodulecreateflags</a>,<br>
 <em>code</em>: binary string <strong>[R]</strong>,<br>
-} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkShaderModuleCreateInfo">VkShaderModuleCreateInfo</a>)</span></p>
+------- EXTENSIONS -------<br>
+<em>validation_cache</em>: <a href="#validation_cache">validation_cache</a> (Note1),<br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkShaderModuleCreateInfo">VkShaderModuleCreateInfo</a>)<br>
+Note1: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_validation_cache">VK_EXT_validation_cache</a> extension (rfr:
+<a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkShaderModuleValidationCacheCreateInfoEXT">VkShaderModuleValidationCacheCreateInfoEXT</a>).</span></p>
 </li>
 </ul>
 </div>
@@ -4224,6 +4271,18 @@ Note1: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/htm
 <em>flags</em>: <a href="#pipelinecachecreateflags">pipelinecachecreateflags</a>,<br>
 <em>initial_data</em>: binary string,<br>
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPipelineCacheCreateInfo">VkPipelineCacheCreateInfo</a>)</span></p>
+</li>
+</ul>
+</div>
+<hr>
+<div class="ulist">
+<ul>
+<li>
+<p><a id="validationcachecreateinfo"></a>
+<span class="small"><strong>validationcachecreateinfo</strong> = {<br>
+<em>flags</em>: <a href="#validationcachecreateflags">validationcachecreateflags</a>,<br>
+<em>initial_data</em>: binary string,<br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkValidationCacheCreateInfoEXT">VkValidationCacheCreateInfoEXT</a>)</span></p>
 </li>
 </ul>
 </div>
@@ -5962,6 +6021,9 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/
 <div id="swapchaincreateflags" class="paragraph">
 <p><span class="small"><strong>swapchaincreateflags</strong>: 0</span></p>
 </div>
+<div id="validationcachecreateflags" class="paragraph">
+<p><span class="small"><strong>validationcachecreateflags</strong>: 0</span></p>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -6507,7 +6569,7 @@ that the relevant header files are where <em>vulkan.h</em> expects them to be.</
 <div id="footer">
 <div id="footer-text">
 Version 0.4<br>
-Last updated 2017-11-08 10:50:51 CET
+Last updated 2017-11-08 12:12:17 CET
 </div>
 </div>
 </body>

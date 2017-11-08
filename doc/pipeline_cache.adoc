@@ -14,7 +14,7 @@ _pipeline_cache_ = *create_pipeline_cache*(_device_, [_flags_], [_initial_data_]
 [[get_pipeline_cache_data]]
 * _data_ = *get_pipeline_cache_data*(_pipeline_cache_) +
 [small]#Returns _data_ as a binary string. +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetPipelineCachedata[vkGetPipelineCachedata].#
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetPipelineCacheData[vkGetPipelineCacheData].#
 
 [[merge_pipeline_caches]]
 * *merge_pipeline_caches*(_destination_, _sources_) +

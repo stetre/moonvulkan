@@ -57,6 +57,7 @@ static int Type(lua_State *L)
     TRY(display);
     TRY(display_mode);
     TRY(descriptor_update_template);
+    TRY(validation_cache);
     return 0;
 #undef TRY
     }

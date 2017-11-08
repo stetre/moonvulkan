@@ -73,8 +73,8 @@ Multivendor extensions (EXT):
 * https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_shader_subgroup_vote[VK_EXT_shader_subgroup_vote]
 * https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_shader_viewport_index_layer[VK_EXT_shader_viewport_index_layer]
 * https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_swapchain_colorspace[VK_EXT_swapchain_colorspace]
+* https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_validation_cache[VK_EXT_validation_cache]
 * https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_validation_flags[VK_EXT_validation_flags]
-
 
 Single vendor extensions (AMD, GOOGLE, IMG, MVK, NN, NV, NVX, ...):
 

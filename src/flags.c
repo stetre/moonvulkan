@@ -2720,6 +2720,7 @@ static const struct luaL_Reg Functions[] =
         { "commandpooltrimflags", ReservedFlags }, /* VkCommandPoolTrimFlagsKHR */
         { "descriptorupdatetemplatecreateflags", ReservedFlags }, /* VkDescriptorUpdateTemplateCreateFlagsKHR */
         { "pipelinediscardrectanglestatecreateflags", ReservedFlags }, /* VkPipelineDiscardRectangleStateCreateFlagsEXT */
+        { "validationcachecreateflags", ReservedFlags }, /* VkValidationCacheCreateFlagsEXT */
         { NULL, NULL } /* sentinel */
     };
 

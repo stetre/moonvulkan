@@ -467,6 +467,7 @@ static const char *GetString_(lua_State *L, int arg, const char *sname, const ch
 #define GetImageView(name, sname) GetObject(name, sname, VkImageView, image_view)
 #define GetDescriptorSet(name, sname) GetObject(name, sname, VkDescriptorSet, descriptor_set)
 #define GetDescriptorSetLayoutOpt(name, sname) GetObject(name, sname, VkDescriptorSetLayout, descriptor_set_layout)
+#define GetValidationCache(name, sname) GetObject(name, sname, VkValidationCacheEXT, validation_cache)
 #if 0
 #define Get(name, sname) GetObject(name, sname, Vk, )
 #define GetOpt(name, sname) GetObjectOpt(name, sname, Vk, )
@@ -1312,12 +1313,31 @@ int echeckframebuffercreateinfo(lua_State *L, int arg, VkFramebufferCreateInfo *
 
 /*------------------------------------------------------------------------------*/
 
-int echeckshadermodulecreateinfo(lua_State *L, int arg, VkShaderModuleCreateInfo *p)
+static int echeckshadermodulevalidationcachecreateinfo(lua_State *L, int arg, VkShaderModuleValidationCacheCreateInfoEXT *p)
     {
-    CHECK_TABLE(L, arg, p);
+    p->sType = VK_STRUCTURE_TYPE_SHADER_MODULE_VALIDATION_CACHE_CREATE_INFO_EXT;
+    GetValidationCache(validationCache, "validation_cache");
+    return 0;
+    }
+
+int echeckshadermodulecreateinfo(lua_State *L, int arg, VkShaderModuleCreateInfo_CHAIN *pp)
+    {
+    int err;
+    VkShaderModuleCreateInfo *p = &pp->p1;
+    VkShaderModuleValidationCacheCreateInfoEXT *p2 = &pp->p2;
+    const void **chain = pnextof(p);
+    CHECK_TABLE(L, arg, pp);
     p->sType = VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO;
     GetFlags(flags, "flags");
     /* p->pCode, p->codeSize: retrieved by the caller */
+#define F "validation_cache"
+    if(ispresent(F))
+        {
+        err = echeckshadermodulevalidationcachecreateinfo(L, arg, p2);
+        if(err) return err;
+        addtochain(chain, p2);
+        }
+#undef F
     return 0;
     }
 
@@ -1332,6 +1352,16 @@ int echeckpipelinecachecreateinfo(lua_State *L, int arg, VkPipelineCacheCreateIn
     return 0;
     }
 
+/*------------------------------------------------------------------------------*/
+
+int echeckvalidationcachecreateinfo(lua_State *L, int arg, VkValidationCacheCreateInfoEXT *p)
+    {
+    CHECK_TABLE(L, arg, p);
+    p->sType = VK_STRUCTURE_TYPE_VALIDATION_CACHE_CREATE_INFO_EXT;
+    GetFlags(flags, "flags");
+    /* p->pInitialData, p->initialDataSize: retrieved by the caller */
+    return 0;
+    }
 
 /*------------------------------------------------------------------------------*/
 

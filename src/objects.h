@@ -62,6 +62,7 @@
 #define DISPLAY_MODE_MT "moonvulkan_display_mode" /* KHR */
 #define DEBUG_REPORT_CALLBACK_MT "moonvulkan_debug_report_callback" /* EXT */
 #define DESCRIPTOR_UPDATE_TEMPLATE_MT "moonvulkan_descriptor_update_template" /* KHR */
+#define VALIDATION_CACHE_MT "moonvulkan_validation_cache" /* EXT */
 
 /* Userdata memory associated with objects */
 #define ud_t moonvulkan_ud_t
@@ -326,6 +327,12 @@ int pushimage_swapchain(lua_State *L, VkImage image, ud_t *swapchain_ud);
 #define testdescriptor_update_template(L, arg, udp) (VkDescriptorUpdateTemplateKHR)testxxx((L), (arg), (udp), DESCRIPTOR_UPDATE_TEMPLATE_MT)
 #define pushdescriptor_update_template(L, handle) pushxxx((L), (uint64_t)(handle))
 
+/* validation_cache.c */
+#define checkvalidation_cache(L, arg, udp) (VkValidationCacheEXT)checkxxx((L), (arg), (udp), VALIDATION_CACHE_MT)
+#define testvalidation_cache(L, arg, udp) (VkValidationCacheEXT)testxxx((L), (arg), (udp), VALIDATION_CACHE_MT)
+#define pushvalidation_cache(L, handle) pushxxx((L), (uint64_t)(handle))
+#define checkvalidation_cachelist(L, arg, count, err, ud) \
+    (VkValidationCacheEXT*)checkxxxlist_nondispatchable((L), (arg), (count), (err), (ud), VALIDATION_CACHE_MT)
 
 
 /* used in main.c */
@@ -361,6 +368,7 @@ void moonvulkan_open_debug_report_callback(lua_State *L);
 void moonvulkan_open_display(lua_State *L);
 void moonvulkan_open_display_mode(lua_State *L);
 void moonvulkan_open_descriptor_update_template(lua_State *L);
+void moonvulkan_open_validation_cache(lua_State *L);
 
 
 #define RAW_FUNC(xxx)                       \

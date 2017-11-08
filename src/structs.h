@@ -149,11 +149,18 @@ void freeframebuffercreateinfo(lua_State *L, VkFramebufferCreateInfo *p);
 #define echeckframebuffercreateinfo moonvulkan_echeckframebuffercreateinfo
 int echeckframebuffercreateinfo(lua_State *L, int arg, VkFramebufferCreateInfo *p);
 
+typedef struct {
+    VkShaderModuleCreateInfo p1;
+    VkShaderModuleValidationCacheCreateInfoEXT p2;
+} VkShaderModuleCreateInfo_CHAIN;
 #define echeckshadermodulecreateinfo moonvulkan_echeckshadermodulecreateinfo
-int echeckshadermodulecreateinfo(lua_State *L, int arg, VkShaderModuleCreateInfo *p);
+int echeckshadermodulecreateinfo(lua_State *L, int arg, VkShaderModuleCreateInfo_CHAIN *p);
 
 #define echeckpipelinecachecreateinfo moonvulkan_echeckpipelinecachecreateinfo
 int echeckpipelinecachecreateinfo(lua_State *L, int arg, VkPipelineCacheCreateInfo *p);
+
+#define echeckvalidationcachecreateinfo moonvulkan_echeckvalidationcachecreateinfo
+int echeckvalidationcachecreateinfo(lua_State *L, int arg, VkValidationCacheCreateInfoEXT *p);
 
 typedef struct {
     VkBufferCreateInfo p1;

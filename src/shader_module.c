@@ -43,7 +43,7 @@ static int Create(lua_State *L)
     ud_t *ud, *device_ud;
     VkResult ec;
     VkShaderModule shader_module;
-    VkShaderModuleCreateInfo info;
+    VkShaderModuleCreateInfo_CHAIN info;
     size_t size;
     const char *code;
 
@@ -59,18 +59,18 @@ static int Create(lua_State *L)
         }
     else
         {
-        info.sType = VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO;
-        info.pNext = NULL;
-        info.flags = checkflags(L, 2);
+        info.p1.sType = VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO;
+        info.p1.pNext = NULL;
+        info.p1.flags = checkflags(L, 2);
         code = luaL_optlstring(L, 3, NULL, &size);
         }
 
     if(!code || (size == 0))
         return luaL_error(L, "missing shader code");
-    info.codeSize = size;
-    info.pCode = (uint32_t*)code;
+    info.p1.codeSize = size;
+    info.p1.pCode = (uint32_t*)code;
 
-    ec = device_ud->ddt->CreateShaderModule(device, &info, allocator, &shader_module);
+    ec = device_ud->ddt->CreateShaderModule(device, &info.p1, allocator, &shader_module);
     CheckError(L, ec);
     TRACE_CREATE(shader_module, "shader_module");
     ud = newuserdata_nondispatchable(L, shader_module, SHADER_MODULE_MT);

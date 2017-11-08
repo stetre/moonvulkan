@@ -283,6 +283,10 @@ typedef struct {
     F(BindImageMemory2KHR);
     F(CmdSetSampleLocationsEXT);
     F(GetPhysicalDeviceMultisamplePropertiesEXT);
+    F(CreateValidationCacheEXT);
+    F(DestroyValidationCacheEXT);
+    F(MergeValidationCachesEXT);
+    F(GetValidationCacheDataEXT);
 #ifdef VK_USE_PLATFORM_WIN32_KHR
     F(GetMemoryWin32HandleKHR);
     F(GetMemoryWin32HandlePropertiesKHR);

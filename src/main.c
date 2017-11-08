@@ -87,6 +87,7 @@ int luaopen_moonvulkan(lua_State *L)
     moonvulkan_open_display(L);
     moonvulkan_open_display_mode(L);
     moonvulkan_open_descriptor_update_template(L);
+    moonvulkan_open_validation_cache(L);
     
 
     /* Add functions implemented in Lua */

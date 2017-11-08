@@ -548,6 +548,14 @@ device_dt_t* getproc_device(lua_State *L, VkDevice device, VkDeviceCreateInfo *c
             GET(GetSemaphoreWin32HandleKHR);
             continue;
             }
+        IF("VK_EXT_validation_cache")
+            {
+            GET(CreateValidationCacheEXT);
+            GET(DestroyValidationCacheEXT);
+            GET(MergeValidationCachesEXT);
+            GET(GetValidationCacheDataEXT);
+            continue;
+            }
 #endif
 #undef IF
         }

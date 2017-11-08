@@ -31,6 +31,7 @@ static int freedevice(lua_State *L, ud_t *ud)
     const VkAllocationCallbacks *allocator = ud->allocator;
     PFN_vkDeviceWaitIdle DeviceWaitIdle = ud->ddt->DeviceWaitIdle;
     PFN_vkDestroyDevice DestroyDevice = ud->ddt->DestroyDevice;
+    freechildren(L, VALIDATION_CACHE_MT, ud);
     freechildren(L, DESCRIPTOR_UPDATE_TEMPLATE_MT, ud);
     freechildren(L, SWAPCHAIN_MT, ud);
     freechildren(L, COMMAND_POOL_MT, ud);

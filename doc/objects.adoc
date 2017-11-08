@@ -31,6 +31,7 @@ The following tree shows the MoonVulkan (_Vulkan_) objects and their parent-chil
 {tI}{tH}<<descriptor_pool, descriptor_pool>> _(VkDescriptorPool)_ +
 {tI}{tI}{tL}<<descriptor_set, descriptor_set>> _(VkDescriptorSet)_ +
 {tI}{tH}<<descriptor_update_template, descriptor_update_template>> _(VkDescriptorUpdateTemplateKHR)_ +
+{tI}{tH}<<validation_cache, validation_cache>> _(VkValidationCacheEXT)_ +
 {tI}{tH}<<query_pool, query_pool>> _(VkQueryPool)_ +
 {tI}{tL}<<swapchain, swapchain>> _(VkSwapchainKHR)_ +
 {tI}{tS}{tL}<<image, image>> _(VkImage, present)_ +
