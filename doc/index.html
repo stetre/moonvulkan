@@ -787,30 +787,113 @@ p.tableblock.header { color: #6d6e71; }
 <li><a href="#objects">Objects</a></li>
 <li><a href="#functions">Core functions</a>
 <ul class="sectlevel2">
-<li><a href="#_initialization">Initialization</a></li>
-<li><a href="#_devices_and_queues">Devices and Queues</a></li>
-<li><a href="#_command_buffers">Command Buffers</a></li>
-<li><a href="#_synchronization">Synchronization</a></li>
-<li><a href="#_render_pass">Render Pass</a></li>
-<li><a href="#_shaders">Shaders</a></li>
-<li><a href="#_pipelines">Pipelines</a></li>
-<li><a href="#_memory_allocation">Memory Allocation</a></li>
-<li><a href="#_resource_creation">Resource Creation</a></li>
-<li><a href="#_samplers">Samplers</a></li>
-<li><a href="#_resource_descriptors">Resource Descriptors</a></li>
-<li><a href="#_queries">Queries</a></li>
+<li><a href="#_initialization">Initialization</a>
+<ul class="sectlevel3">
+<li><a href="#instance">instance</a></li>
+<li><a href="#physical_device">physical_device</a></li>
+</ul>
+</li>
+<li><a href="#_devices_and_queues">Devices and Queues</a>
+<ul class="sectlevel3">
+<li><a href="#device">device</a></li>
+<li><a href="#queue">queue</a></li>
+</ul>
+</li>
+<li><a href="#_command_buffers">Command Buffers</a>
+<ul class="sectlevel3">
+<li><a href="#command_pool">command_pool</a></li>
+<li><a href="#command_buffer">command_buffer</a></li>
+</ul>
+</li>
+<li><a href="#_synchronization">Synchronization</a>
+<ul class="sectlevel3">
+<li><a href="#fence">fence</a></li>
+<li><a href="#semaphore">semaphore</a></li>
+<li><a href="#event">event</a></li>
+</ul>
+</li>
+<li><a href="#_render_pass">Render Pass</a>
+<ul class="sectlevel3">
+<li><a href="#render_pass">render_pass</a></li>
+<li><a href="#framebuffer">framebuffer</a></li>
+</ul>
+</li>
+<li><a href="#_shaders">Shaders</a>
+<ul class="sectlevel3">
+<li><a href="#shader_module">shader_module</a></li>
+</ul>
+</li>
+<li><a href="#_pipelines">Pipelines</a>
+<ul class="sectlevel3">
+<li><a href="#pipeline">pipeline</a></li>
+<li><a href="#pipeline_cache">pipeline_cache</a></li>
+</ul>
+</li>
+<li><a href="#_memory_allocation">Memory Allocation</a>
+<ul class="sectlevel3">
+<li><a href="#device_memory">device_memory</a></li>
+</ul>
+</li>
+<li><a href="#_resource_creation">Resource Creation</a>
+<ul class="sectlevel3">
+<li><a href="#buffer">buffer</a></li>
+<li><a href="#buffer_view">buffer_view</a></li>
+<li><a href="#image">image</a></li>
+<li><a href="#image_view">image_view</a></li>
+</ul>
+</li>
+<li><a href="#_samplers">Samplers</a>
+<ul class="sectlevel3">
+<li><a href="#sampler">sampler</a></li>
+</ul>
+</li>
+<li><a href="#_resource_descriptors">Resource Descriptors</a>
+<ul class="sectlevel3">
+<li><a href="#descriptor_set_layout">descriptor_set_layout</a></li>
+<li><a href="#pipeline_layout">pipeline_layout</a></li>
+<li><a href="#descriptor_pool">descriptor_pool</a></li>
+<li><a href="#descriptor_set">descriptor_set</a></li>
+</ul>
+</li>
+<li><a href="#_queries">Queries</a>
+<ul class="sectlevel3">
+<li><a href="#query_pool">query_pool</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a href="#commands">Commands</a></li>
 <li><a href="#layers">Layers and extensions</a>
 <ul class="sectlevel2">
-<li><a href="#extensions">Supported extensions</a></li>
 <li><a href="#enumerate_layers">Enumerate extensions</a></li>
-<li><a href="#_surfaces_khr">Surfaces (KHR)</a></li>
-<li><a href="#_displays_khr">Displays (KHR)</a></li>
-<li><a href="#_swapchains_khr">Swapchains (KHR)</a></li>
-<li><a href="#_other_khr">Other (KHR)</a></li>
-<li><a href="#_other_ext">Other (EXT)</a></li>
+<li><a href="#_surfaces_khr">Surfaces (KHR)</a>
+<ul class="sectlevel3">
+<li><a href="#surface">surface</a></li>
+</ul>
+</li>
+<li><a href="#_displays_khr">Displays (KHR)</a>
+<ul class="sectlevel3">
+<li><a href="#display">display</a></li>
+<li><a href="#display_mode">display_mode</a></li>
+</ul>
+</li>
+<li><a href="#_swapchains_khr">Swapchains (KHR)</a>
+<ul class="sectlevel3">
+<li><a href="#swapchain">swapchain</a></li>
+</ul>
+</li>
+<li><a href="#_other_khr">Other (KHR)</a>
+<ul class="sectlevel3">
+<li><a href="#descriptor_update_template">descriptor_update_template</a></li>
+</ul>
+</li>
+<li><a href="#_other_ext">Other (EXT)</a>
+<ul class="sectlevel3">
+<li><a href="#debug_report_callback">debug_report_callback</a></li>
+<li><a href="#debug_marker">Debug Marker</a></li>
+</ul>
+</li>
+<li><a href="#extensions">Supported extensions</a></li>
 </ul>
 </li>
 <li><a href="#structs">Structs</a></li>
@@ -822,7 +905,12 @@ p.tableblock.header { color: #6d6e71; }
 <li><a href="#commonmethods">Common methods</a></li>
 <li><a href="#constructors">Constructors</a></li>
 <li><a href="#allocators">Custom allocators</a></li>
-<li><a href="#creating_surfaces">Creating surfaces</a></li>
+<li><a href="#creating_surfaces">Creating surfaces</a>
+<ul class="sectlevel3">
+<li><a href="#creating_surfaces_platform">Creating surfaces with the platform-specific API</a></li>
+<li><a href="#creating_surfaces_other_means">Creating surfaces by other means</a></li>
+</ul>
+</li>
 <li><a href="#datahandling">Data handling</a></li>
 <li><a href="#tracing">Tracing utilities</a></li>
 <li><a href="#platform_support">Platforms support</a></li>
@@ -1078,7 +1166,7 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/
 </div>
 </div>
 <div class="sect3">
-<h4 id="physical_device">physical_device (<em>physdev</em>)</h4>
+<h4 id="physical_device">physical_device</h4>
 <div class="paragraph">
 <p>In this document, <em>physdev</em> is an abbreviation for <em>physical_device</em> when referring to a variable
 or a return value.</p>
@@ -1292,7 +1380,7 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/
 </div>
 </div>
 <div class="sect3">
-<h4 id="command_buffer">command_buffer (<em>cb</em>)</h4>
+<h4 id="command_buffer">command_buffer</h4>
 <div class="paragraph">
 <p>In this document, <em>cb</em> is an abbreviation for <em>command_buffer</em> when referring to a variable
 or a return value.</p>
@@ -1655,7 +1743,11 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/
 <div class="sect2">
 <h3 id="_memory_allocation">Memory Allocation</h3>
 <div class="sect3">
-<h4 id="device_memory">device_memory (<em>devmem</em>)</h4>
+<h4 id="device_memory">device_memory</h4>
+<div class="paragraph">
+<p>In this document, <em>devmem</em> is an abbreviation for <em>device_memory</em> when referring to a variable
+or a return value.</p>
+</div>
 <div id="allocate_memory" class="ulist">
 <ul>
 <li>
@@ -2560,214 +2652,6 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/
 <h2 id="layers">Layers and extensions</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="extensions">Supported extensions</h3>
-<div class="paragraph">
-<p>MoonVulkan supports the core Vulkan API, plus the <strong>extensions</strong> listed hereafter.</p>
-</div>
-<div class="paragraph">
-<p>Khronos extensions (KHR):</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_16bit_storage">VK_KHR_16bit_storage</a></p>
-</li>
-<li>
-<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_bind_memory2">VK_KHR_bind_memory2</a></p>
-</li>
-<li>
-<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_dedicated_allocation">VK_KHR_dedicated_allocation</a></p>
-</li>
-<li>
-<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_descriptor_update_template">VK_KHR_descriptor_update_template</a></p>
-</li>
-<li>
-<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_display">VK_KHR_display</a></p>
-</li>
-<li>
-<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_display_swapchain">VK_KHR_display_swapchain</a></p>
-</li>
-<li>
-<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_external_fence">VK_KHR_external_fence</a></p>
-</li>
-<li>
-<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_external_fence_capabilities">VK_KHR_external_fence_capabilities</a></p>
-</li>
-<li>
-<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_external_fence_fd">VK_KHR_external_fence_fd</a></p>
-</li>
-<li>
-<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_external_memory_capabilities">VK_KHR_external_memory_capabilities</a></p>
-</li>
-<li>
-<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_external_memory">VK_KHR_external_memory</a></p>
-</li>
-<li>
-<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_external_memory_fd">VK_KHR_external_memory_fd</a></p>
-</li>
-<li>
-<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_external_semaphore">VK_KHR_external_semaphore</a></p>
-</li>
-<li>
-<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_external_semaphore_capabilities">VK_KHR_external_semaphore_capabilities</a></p>
-</li>
-<li>
-<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_external_semaphore_fd">VK_KHR_external_semaphore_fd</a></p>
-</li>
-<li>
-<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_get_memory_requirements2">VK_KHR_get_memory_requirements2</a></p>
-</li>
-<li>
-<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_get_physical_device_properties2">VK_KHR_get_physical_device_properties2</a></p>
-</li>
-<li>
-<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_get_surface_capabilities2">VK_KHR_get_surface_capabilities2</a></p>
-</li>
-<li>
-<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_global_priority">VK_KHR_global_priority</a></p>
-</li>
-<li>
-<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_image_format_list">VK_KHR_image_format_list</a></p>
-</li>
-<li>
-<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_incremental_present">VK_KHR_incremental_present</a></p>
-</li>
-<li>
-<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_maintenance1">VK_KHR_maintenance1</a></p>
-</li>
-<li>
-<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_maintenance2">VK_KHR_maintenance2</a></p>
-</li>
-<li>
-<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_mir_surface">VK_KHR_mir_surface</a></p>
-</li>
-<li>
-<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_push_descriptor">VK_KHR_push_descriptor</a></p>
-</li>
-<li>
-<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_relaxed_block_layout">VK_KHR_relaxed_block_layout</a></p>
-</li>
-<li>
-<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_sampler_mirror_clamp_to_edge">VK_KHR_sampler_mirror_clamp_to_edge</a></p>
-</li>
-<li>
-<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_shader_draw_parameters">VK_KHR_shader_draw_parameters</a></p>
-</li>
-<li>
-<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_shared_presentable_image">VK_KHR_shared_presentable_image</a></p>
-</li>
-<li>
-<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_storage_buffer_storage_class">VK_KHR_storage_buffer_storage_class</a></p>
-</li>
-<li>
-<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_surface">VK_KHR_surface</a></p>
-</li>
-<li>
-<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_swapchain">VK_KHR_swapchain</a></p>
-</li>
-<li>
-<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_variable_pointers">VK_KHR_variable_pointers</a></p>
-</li>
-<li>
-<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_wayland_surface">VK_KHR_wayland_surface</a></p>
-</li>
-<li>
-<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_win32_surface">VK_KHR_win32_surface</a></p>
-</li>
-<li>
-<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_xcb_surface">VK_KHR_xcb_surface</a></p>
-</li>
-<li>
-<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_xlib_surface">VK_KHR_xlib_surface</a></p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>Khronos experimental extensions (KHX):</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>none.</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>Multivendor extensions (EXT):</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_acquire_xlib_display">VK_EXT_acquire_xlib_display</a></p>
-</li>
-<li>
-<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_blend_operation_advanced">VK_EXT_blend_operation_advanced</a></p>
-</li>
-<li>
-<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_debug_marker">VK_EXT_debug_marker</a></p>
-</li>
-<li>
-<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_debug_report">VK_EXT_debug_report</a></p>
-</li>
-<li>
-<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_depth_range_unrestricted">VK_EXT_depth_range_unrestricted</a></p>
-</li>
-<li>
-<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_direct_mode_display">VK_EXT_direct_mode_display</a></p>
-</li>
-<li>
-<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_discard_rectangles">VK_EXT_discard_rectangles</a></p>
-</li>
-<li>
-<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_display_control">VK_EXT_display_control</a></p>
-</li>
-<li>
-<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_display_surface_counter">VK_EXT_display_surface_counter</a></p>
-</li>
-<li>
-<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_hdr_metadata">VK_EXT_hdr_metadata</a></p>
-</li>
-<li>
-<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_post_depth_coverage">VK_EXT_post_depth_coverage</a></p>
-</li>
-<li>
-<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_sample_locations">VK_EXT_sample_locations</a></p>
-</li>
-<li>
-<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_sampler_filter_minmax">VK_EXT_sampler_filter_minmax</a></p>
-</li>
-<li>
-<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_shader_stencil_export">VK_EXT_shader_stencil_export</a></p>
-</li>
-<li>
-<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_shader_subgroup_ballot">VK_EXT_shader_subgroup_ballot</a></p>
-</li>
-<li>
-<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_shader_subgroup_vote">VK_EXT_shader_subgroup_vote</a></p>
-</li>
-<li>
-<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_shader_viewport_index_layer">VK_EXT_shader_viewport_index_layer</a></p>
-</li>
-<li>
-<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_swapchain_colorspace">VK_EXT_swapchain_colorspace</a></p>
-</li>
-<li>
-<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_validation_flags">VK_EXT_validation_flags</a></p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>Single vendor extensions (AMD, GOOGLE, IMG, MVK, NN, NV, NVX, &#8230;&#8203;):</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>none.</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect2">
 <h3 id="enumerate_layers">Enumerate extensions</h3>
 <div id="enumerate_instance_layer_properties" class="ulist">
 <ul>
@@ -3278,6 +3162,214 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/
 </li>
 </ul>
 </div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="extensions">Supported extensions</h3>
+<div class="paragraph">
+<p>MoonVulkan supports the core Vulkan API, plus the <strong>extensions</strong> listed hereafter.</p>
+</div>
+<div class="paragraph">
+<p>Khronos extensions (KHR):</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_16bit_storage">VK_KHR_16bit_storage</a></p>
+</li>
+<li>
+<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_bind_memory2">VK_KHR_bind_memory2</a></p>
+</li>
+<li>
+<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_dedicated_allocation">VK_KHR_dedicated_allocation</a></p>
+</li>
+<li>
+<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_descriptor_update_template">VK_KHR_descriptor_update_template</a></p>
+</li>
+<li>
+<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_display">VK_KHR_display</a></p>
+</li>
+<li>
+<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_display_swapchain">VK_KHR_display_swapchain</a></p>
+</li>
+<li>
+<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_external_fence">VK_KHR_external_fence</a></p>
+</li>
+<li>
+<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_external_fence_capabilities">VK_KHR_external_fence_capabilities</a></p>
+</li>
+<li>
+<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_external_fence_fd">VK_KHR_external_fence_fd</a></p>
+</li>
+<li>
+<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_external_memory_capabilities">VK_KHR_external_memory_capabilities</a></p>
+</li>
+<li>
+<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_external_memory">VK_KHR_external_memory</a></p>
+</li>
+<li>
+<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_external_memory_fd">VK_KHR_external_memory_fd</a></p>
+</li>
+<li>
+<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_external_semaphore">VK_KHR_external_semaphore</a></p>
+</li>
+<li>
+<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_external_semaphore_capabilities">VK_KHR_external_semaphore_capabilities</a></p>
+</li>
+<li>
+<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_external_semaphore_fd">VK_KHR_external_semaphore_fd</a></p>
+</li>
+<li>
+<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_get_memory_requirements2">VK_KHR_get_memory_requirements2</a></p>
+</li>
+<li>
+<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_get_physical_device_properties2">VK_KHR_get_physical_device_properties2</a></p>
+</li>
+<li>
+<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_get_surface_capabilities2">VK_KHR_get_surface_capabilities2</a></p>
+</li>
+<li>
+<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_global_priority">VK_KHR_global_priority</a></p>
+</li>
+<li>
+<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_image_format_list">VK_KHR_image_format_list</a></p>
+</li>
+<li>
+<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_incremental_present">VK_KHR_incremental_present</a></p>
+</li>
+<li>
+<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_maintenance1">VK_KHR_maintenance1</a></p>
+</li>
+<li>
+<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_maintenance2">VK_KHR_maintenance2</a></p>
+</li>
+<li>
+<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_mir_surface">VK_KHR_mir_surface</a></p>
+</li>
+<li>
+<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_push_descriptor">VK_KHR_push_descriptor</a></p>
+</li>
+<li>
+<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_relaxed_block_layout">VK_KHR_relaxed_block_layout</a></p>
+</li>
+<li>
+<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_sampler_mirror_clamp_to_edge">VK_KHR_sampler_mirror_clamp_to_edge</a></p>
+</li>
+<li>
+<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_shader_draw_parameters">VK_KHR_shader_draw_parameters</a></p>
+</li>
+<li>
+<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_shared_presentable_image">VK_KHR_shared_presentable_image</a></p>
+</li>
+<li>
+<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_storage_buffer_storage_class">VK_KHR_storage_buffer_storage_class</a></p>
+</li>
+<li>
+<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_surface">VK_KHR_surface</a></p>
+</li>
+<li>
+<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_swapchain">VK_KHR_swapchain</a></p>
+</li>
+<li>
+<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_variable_pointers">VK_KHR_variable_pointers</a></p>
+</li>
+<li>
+<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_wayland_surface">VK_KHR_wayland_surface</a></p>
+</li>
+<li>
+<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_win32_surface">VK_KHR_win32_surface</a></p>
+</li>
+<li>
+<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_xcb_surface">VK_KHR_xcb_surface</a></p>
+</li>
+<li>
+<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_xlib_surface">VK_KHR_xlib_surface</a></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Khronos experimental extensions (KHX):</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>none.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Multivendor extensions (EXT):</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_acquire_xlib_display">VK_EXT_acquire_xlib_display</a></p>
+</li>
+<li>
+<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_blend_operation_advanced">VK_EXT_blend_operation_advanced</a></p>
+</li>
+<li>
+<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_debug_marker">VK_EXT_debug_marker</a></p>
+</li>
+<li>
+<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_debug_report">VK_EXT_debug_report</a></p>
+</li>
+<li>
+<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_depth_range_unrestricted">VK_EXT_depth_range_unrestricted</a></p>
+</li>
+<li>
+<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_direct_mode_display">VK_EXT_direct_mode_display</a></p>
+</li>
+<li>
+<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_discard_rectangles">VK_EXT_discard_rectangles</a></p>
+</li>
+<li>
+<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_display_control">VK_EXT_display_control</a></p>
+</li>
+<li>
+<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_display_surface_counter">VK_EXT_display_surface_counter</a></p>
+</li>
+<li>
+<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_hdr_metadata">VK_EXT_hdr_metadata</a></p>
+</li>
+<li>
+<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_post_depth_coverage">VK_EXT_post_depth_coverage</a></p>
+</li>
+<li>
+<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_sample_locations">VK_EXT_sample_locations</a></p>
+</li>
+<li>
+<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_sampler_filter_minmax">VK_EXT_sampler_filter_minmax</a></p>
+</li>
+<li>
+<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_shader_stencil_export">VK_EXT_shader_stencil_export</a></p>
+</li>
+<li>
+<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_shader_subgroup_ballot">VK_EXT_shader_subgroup_ballot</a></p>
+</li>
+<li>
+<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_shader_subgroup_vote">VK_EXT_shader_subgroup_vote</a></p>
+</li>
+<li>
+<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_shader_viewport_index_layer">VK_EXT_shader_viewport_index_layer</a></p>
+</li>
+<li>
+<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_swapchain_colorspace">VK_EXT_swapchain_colorspace</a></p>
+</li>
+<li>
+<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_validation_flags">VK_EXT_validation_flags</a></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Single vendor extensions (AMD, GOOGLE, IMG, MVK, NN, NV, NVX, &#8230;&#8203;):</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>none.</p>
+</li>
+</ul>
 </div>
 </div>
 </div>
@@ -6415,7 +6507,7 @@ that the relevant header files are where <em>vulkan.h</em> expects them to be.</
 <div id="footer">
 <div id="footer-text">
 Version 0.4<br>
-Last updated 2017-11-08 10:29:49 CET
+Last updated 2017-11-08 10:50:51 CET
 </div>
 </div>
 </body>

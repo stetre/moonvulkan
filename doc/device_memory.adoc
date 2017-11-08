@@ -1,6 +1,9 @@
 
 [[device_memory]]
-==== device_memory (_devmem_)
+==== device_memory
+
+In this document, _devmem_ is an abbreviation for _device_memory_ when referring to a variable
+or a return value.
 
 [[allocate_memory]]
 * _devmem_ = *allocate_memory*(_device_, <<memoryallocateinfo, _memoryallocateinfo_>>, [<<allocators, _allocator_>>]) +

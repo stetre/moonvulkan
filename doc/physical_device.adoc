@@ -1,6 +1,6 @@
 
 [[physical_device]]
-==== physical_device (_physdev_)
+==== physical_device
 
 In this document, _physdev_ is an abbreviation for _physical_device_ when referring to a variable
 or a return value.

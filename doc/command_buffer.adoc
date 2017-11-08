@@ -1,6 +1,6 @@
 
 [[command_buffer]]
-==== command_buffer (_cb_)
+==== command_buffer
 
 In this document, _cb_ is an abbreviation for _command_buffer_ when referring to a variable
 or a return value.
