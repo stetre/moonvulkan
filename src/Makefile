@@ -82,7 +82,7 @@ endif
 ifdef PLATFORM_MIR
 COPT	+= -DVK_USE_PLATFORM_MIR_KHR
 #@@ fix for mir include path under Ubuntu:
-INCDIR = -I/usr/include/mirclient/ -I/usr/include/mircommon
+INCDIR = -I/usr/include/mirclient/ -I/usr/include/mircommon -I/usr/include/mircore
 endif
 ifdef PLATFORM_ANDROID
 COPT	+= -DVK_USE_PLATFORM_ANDROID_KHR

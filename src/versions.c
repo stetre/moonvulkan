@@ -56,6 +56,9 @@ static int AddVersions(lua_State *L)
 #ifdef VK_API_VERSION_1_0
     ADD(API_VERSION_1_0);
 #endif
+#ifdef VK_API_VERSION_1_1
+    ADD(API_VERSION_1_1);
+#endif
 /* @@ Add future versions like so:
 #ifdef VK_API_VERSION_2_0
     ADD(API_VERSION_2_0);
