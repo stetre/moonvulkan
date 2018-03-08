@@ -745,7 +745,7 @@ int echeckcommandbufferbegininfo(lua_State *L, int arg, VkCommandBufferBeginInfo
 
 static int echeckexportfencecreateinfo(lua_State *L, int arg, VkExportFenceCreateInfoKHR *p)
     {
-    p->sType = VK_STRUCTURE_TYPE_EXPORT_FENCE_CREATE_INFO_KHR;
+    p->sType = VK_STRUCTURE_TYPE_EXPORT_FENCE_CREATE_INFO;
     GetFlags(handleTypes, "handle_types");
     return 0;
     }
@@ -830,7 +830,7 @@ typedef struct VkD3D12FenceSubmitInfoKHR {
 
 static int echeckexportsemaphorecreateinfo(lua_State *L, int arg, VkExportSemaphoreCreateInfoKHR *p)
     {
-    p->sType = VK_STRUCTURE_TYPE_EXPORT_SEMAPHORE_CREATE_INFO_KHR;
+    p->sType = VK_STRUCTURE_TYPE_EXPORT_SEMAPHORE_CREATE_INFO;
     GetFlags(handleTypes, "handle_types");
     return 0;
     }
@@ -1273,7 +1273,7 @@ int echeckrenderpasscreateinfo(lua_State *L, int arg, VkRenderPassCreateInfo_CHA
 #undef F
 #define F "input_attachment_aspect_references"
     arg1 = pushfield(L, arg, F);
-    p2->sType = VK_STRUCTURE_TYPE_RENDER_PASS_INPUT_ATTACHMENT_ASPECT_CREATE_INFO_KHR;
+    p2->sType = VK_STRUCTURE_TYPE_RENDER_PASS_INPUT_ATTACHMENT_ASPECT_CREATE_INFO;
     p2->pAspectReferences = echeckinputattachmentaspectreferencelist(L, arg1, &p2->aspectReferenceCount, &err);
     popfield(L, arg1);
     if(err < 0) { freerenderpasscreateinfo(L, pp); return prependfield(L, F); }
@@ -1378,7 +1378,7 @@ void freebuffercreateinfo(lua_State *L, VkBufferCreateInfo_CHAIN *pp)
 
 static int echeckexternalmemorybuffercreateinfo(lua_State *L, int arg, VkExternalMemoryBufferCreateInfoKHR *p)
     {
-    p->sType = VK_STRUCTURE_TYPE_EXTERNAL_MEMORY_BUFFER_CREATE_INFO_KHR;
+    p->sType = VK_STRUCTURE_TYPE_EXTERNAL_MEMORY_BUFFER_CREATE_INFO;
     GetFlags(handleTypes, "handle_types");
     return 0;
     }
@@ -1436,7 +1436,7 @@ void freeimagecreateinfo(lua_State *L, VkImageCreateInfo_CHAIN *pp)
 
 static int echeckexternalmemoryimagecreateinfo(lua_State *L, int arg, VkExternalMemoryImageCreateInfoKHR *p)
     {
-    p->sType = VK_STRUCTURE_TYPE_EXTERNAL_MEMORY_IMAGE_CREATE_INFO_KHR;
+    p->sType = VK_STRUCTURE_TYPE_EXTERNAL_MEMORY_IMAGE_CREATE_INFO;
     GetFlags(handleTypes, "handle_types");
     return 0;
     }
@@ -1538,7 +1538,7 @@ static int echecksamplerreductionmodecreateinfo(lua_State *L, int arg, VkSampler
 
 static int echecksamplerycbcrconversioninfo(lua_State *L, int arg, VkSamplerYcbcrConversionInfoKHR *p)
     {
-    p->sType = VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_INFO_KHR;
+    p->sType = VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_INFO;
     GetSamplerYcbcrConversion(conversion, "conversion");
     return 0;
     }
@@ -1784,11 +1784,11 @@ static int echeckphysicaldevicesamplerycbcrconversionfeatures(lua_State *L, int 
 
 
 #define BUILD_CHAIN_VkPhysicalDeviceFeatures2KHR(p) do { \
-    (p)->p1.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2_KHR; \
-    (p)->p2.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_16BIT_STORAGE_FEATURES_KHR; \
-    (p)->p3.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VARIABLE_POINTER_FEATURES_KHR; \
+    (p)->p1.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2; \
+    (p)->p2.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_16BIT_STORAGE_FEATURES; \
+    (p)->p3.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VARIABLE_POINTER_FEATURES; \
     (p)->p4.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_BLEND_OPERATION_ADVANCED_FEATURES_EXT; \
-    (p)->p5.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLER_YCBCR_CONVERSION_FEATURES_KHR; \
+    (p)->p5.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLER_YCBCR_CONVERSION_FEATURES; \
     (p)->p1.pNext = &p->p2; \
     (p)->p2.pNext = &p->p3; \
     (p)->p3.pNext = &p->p4; \
@@ -2127,13 +2127,13 @@ void initphysicaldeviceproperties2(lua_State *L, VkPhysicalDeviceProperties2KHR_
     {
     (void)L;
     MEMZERO(p);
-    p->p1.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROPERTIES_2_KHR;
+    p->p1.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROPERTIES_2;
     p->p2.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PUSH_DESCRIPTOR_PROPERTIES_KHR;
     p->p3.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_BLEND_OPERATION_ADVANCED_PROPERTIES_EXT;
     p->p4.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLER_FILTER_MINMAX_PROPERTIES_EXT;
     p->p5.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DISCARD_RECTANGLE_PROPERTIES_EXT;
-    p->p6.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ID_PROPERTIES_KHR;
-    p->p7.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_POINT_CLIPPING_PROPERTIES_KHR;
+    p->p6.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ID_PROPERTIES;
+    p->p7.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_POINT_CLIPPING_PROPERTIES;
     p->p8.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLE_LOCATIONS_PROPERTIES_EXT;
     p->p1.pNext = &p->p2;
     p->p2.pNext = &p->p3;
@@ -2173,7 +2173,7 @@ void initformatproperties2(lua_State *L, VkFormatProperties2KHR_CHAIN* p)
     {
     (void)L;
     MEMZERO(p);
-    p->p1.sType = VK_STRUCTURE_TYPE_FORMAT_PROPERTIES_2_KHR;
+    p->p1.sType = VK_STRUCTURE_TYPE_FORMAT_PROPERTIES_2;
     }
 
 int pushformatproperties2(lua_State *L, VkFormatProperties2KHR_CHAIN *p)
@@ -2214,9 +2214,9 @@ void initimageformatproperties2(lua_State *L, VkImageFormatProperties2KHR_CHAIN 
     {
     (void)L;
     MEMZERO(p);
-    p->p1.sType = VK_STRUCTURE_TYPE_IMAGE_FORMAT_PROPERTIES_2_KHR;
-    p->p2.sType = VK_STRUCTURE_TYPE_EXTERNAL_IMAGE_FORMAT_PROPERTIES_KHR;
-    p->p3.sType = VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_IMAGE_FORMAT_PROPERTIES_KHR;
+    p->p1.sType = VK_STRUCTURE_TYPE_IMAGE_FORMAT_PROPERTIES_2;
+    p->p2.sType = VK_STRUCTURE_TYPE_EXTERNAL_IMAGE_FORMAT_PROPERTIES;
+    p->p3.sType = VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_IMAGE_FORMAT_PROPERTIES;
     }
 
 int pushimageformatproperties2(lua_State *L, VkImageFormatProperties2KHR_CHAIN *p)
@@ -2240,7 +2240,7 @@ int pushexternalbufferproperties(lua_State *L, VkExternalBufferPropertiesKHR *p)
 int echeckphysicaldeviceexternalbufferinfo(lua_State *L, int arg, VkPhysicalDeviceExternalBufferInfoKHR *p)
     {
     CHECK_TABLE(L, arg, p);
-    p->sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_BUFFER_INFO_KHR;
+    p->sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_BUFFER_INFO;
     GetFlags(flags, "flags");
     GetFlags(usage, "usage");
     GetBits(handleType, "handle_type", VkExternalMemoryHandleTypeFlagBitsKHR);
@@ -2261,7 +2261,7 @@ int pushexternalfenceproperties(lua_State *L, VkExternalFencePropertiesKHR *p)
 int echeckphysicaldeviceexternalfenceinfo(lua_State *L, int arg, VkPhysicalDeviceExternalFenceInfoKHR *p)
     {
     CHECK_TABLE(L, arg, p);
-    p->sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_FENCE_INFO_KHR;
+    p->sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_FENCE_INFO;
     GetBits(handleType, "handle_type", VkExternalFenceHandleTypeFlagBitsKHR);
     return 0;
     }
@@ -2280,7 +2280,7 @@ int pushexternalsemaphoreproperties(lua_State *L, VkExternalSemaphorePropertiesK
 int echeckphysicaldeviceexternalsemaphoreinfo(lua_State *L, int arg, VkPhysicalDeviceExternalSemaphoreInfoKHR *p)
     {
     CHECK_TABLE(L, arg, p);
-    p->sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_SEMAPHORE_INFO_KHR;
+    p->sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_SEMAPHORE_INFO;
     GetBits(handleType, "handle_type", VkExternalSemaphoreHandleTypeFlagBitsKHR);
     return 0;
     }
@@ -2302,7 +2302,7 @@ VkSparseImageFormatProperties2KHR *newsparseimageformatproperties2(lua_State *L,
     if(!p) return NULL;
     for(i = 0; i < count; i++)
         {
-        p[i].sType = VK_STRUCTURE_TYPE_SPARSE_IMAGE_FORMAT_PROPERTIES_2_KHR;
+        p[i].sType = VK_STRUCTURE_TYPE_SPARSE_IMAGE_FORMAT_PROPERTIES_2;
         }
     return p;
     }
@@ -2339,7 +2339,7 @@ VkQueueFamilyProperties2KHR *newqueuefamilyproperties2(lua_State *L, uint32_t co
     if(!p) return NULL;
     for(i = 0; i < count; i++)
         {
-        p[i].sType = VK_STRUCTURE_TYPE_QUEUE_FAMILY_PROPERTIES_2_KHR;
+        p[i].sType = VK_STRUCTURE_TYPE_QUEUE_FAMILY_PROPERTIES_2;
         }
     return p;
     }
@@ -2400,7 +2400,7 @@ void initphysicaldevicememoryproperties2(lua_State *L, VkPhysicalDeviceMemoryPro
     {
     (void)L;
     MEMZERO(p);
-    p->p1.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_PROPERTIES_2_KHR;
+    p->p1.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_PROPERTIES_2;
     }
 
 int pushphysicaldevicememoryproperties2(lua_State *L, VkPhysicalDeviceMemoryProperties2KHR_CHAIN *p)
@@ -2413,7 +2413,7 @@ int pushphysicaldevicememoryproperties2(lua_State *L, VkPhysicalDeviceMemoryProp
 
 static int echeckphysicaldeviceexternalimageformatinfo(lua_State *L, int arg, VkPhysicalDeviceExternalImageFormatInfoKHR *p)
     {
-    p->sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_IMAGE_FORMAT_INFO_KHR;
+    p->sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_IMAGE_FORMAT_INFO;
     GetBits(handleType, "handle_type", VkExternalMemoryHandleTypeFlagBitsKHR);
     return 0;
     }
@@ -2425,7 +2425,7 @@ int echeckphysicaldeviceimageformatinfo2(lua_State *L, int arg, VkPhysicalDevice
     VkPhysicalDeviceExternalImageFormatInfoKHR *p2 = &pp->p2;
     const void **chain = pnextof(p);
     CHECK_TABLE(L, arg, pp);
-    p->sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_FORMAT_INFO_2_KHR;
+    p->sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_FORMAT_INFO_2;
     GetFormat(format, "format");
     GetImageType(type, "type");
     GetImageTiling(tiling, "tiling");
@@ -2443,7 +2443,7 @@ int echeckphysicaldeviceimageformatinfo2(lua_State *L, int arg, VkPhysicalDevice
 int echeckphysicaldevicesparseimageformatinfo2(lua_State *L, int arg, VkPhysicalDeviceSparseImageFormatInfo2KHR *p)
     {
     CHECK_TABLE(L, arg, p);
-    p->sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SPARSE_IMAGE_FORMAT_INFO_2_KHR;
+    p->sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SPARSE_IMAGE_FORMAT_INFO_2;
     GetFormat(format, "format");
     GetImageType(type, "type");
     GetSamples(samples, "samples");
@@ -2934,7 +2934,7 @@ ECHECKLISTFUNC(VkMappedMemoryRange, mappedmemoryrange, NULL)
 
 static int echeckmemorydedicatedallocateinfo(lua_State *L, int arg, VkMemoryDedicatedAllocateInfoKHR *p)
     {
-    p->sType = VK_STRUCTURE_TYPE_MEMORY_DEDICATED_ALLOCATE_INFO_KHR;
+    p->sType = VK_STRUCTURE_TYPE_MEMORY_DEDICATED_ALLOCATE_INFO;
     GetImageOpt(image, "image");
     GetBufferOpt(buffer, "buffer");
     return 0;
@@ -2943,7 +2943,7 @@ static int echeckmemorydedicatedallocateinfo(lua_State *L, int arg, VkMemoryDedi
 
 static int echeckexportmemoryallocateinfo(lua_State *L, int arg, VkExportMemoryAllocateInfoKHR *p)
     {
-    p->sType = VK_STRUCTURE_TYPE_EXPORT_MEMORY_ALLOCATE_INFO_KHR;
+    p->sType = VK_STRUCTURE_TYPE_EXPORT_MEMORY_ALLOCATE_INFO;
     GetFlags(handleTypes, "handle_types");
     return 0;
     }
@@ -3019,14 +3019,14 @@ int echeckbuffermemoryrequirementsinfo2(lua_State *L, int arg, VkBufferMemoryReq
     {
     VkBufferMemoryRequirementsInfo2KHR *p = &pp->p1;
     CHECK_TABLE(L, arg, pp);
-    p->sType = VK_STRUCTURE_TYPE_BUFFER_MEMORY_REQUIREMENTS_INFO_2_KHR;
+    p->sType = VK_STRUCTURE_TYPE_BUFFER_MEMORY_REQUIREMENTS_INFO_2;
     /* p->buffer = set by caller */
     return 0;
     }
 
 static int echeckimageplanememoryrequirementsinfo(lua_State *L, int arg, VkImagePlaneMemoryRequirementsInfoKHR *p)
     {
-    p->sType = VK_STRUCTURE_TYPE_IMAGE_PLANE_MEMORY_REQUIREMENTS_INFO_KHR;
+    p->sType = VK_STRUCTURE_TYPE_IMAGE_PLANE_MEMORY_REQUIREMENTS_INFO;
     GetFlags(planeAspect, "plane_aspect");
     return 0;
     }
@@ -3038,7 +3038,7 @@ int echeckimagememoryrequirementsinfo2(lua_State *L, int arg, VkImageMemoryRequi
     VkImagePlaneMemoryRequirementsInfoKHR *p2 = &pp->p2;
     const void **chain = pnextof(p);
     CHECK_TABLE(L, arg, pp);
-    p->sType = VK_STRUCTURE_TYPE_IMAGE_MEMORY_REQUIREMENTS_INFO_2_KHR;
+    p->sType = VK_STRUCTURE_TYPE_IMAGE_MEMORY_REQUIREMENTS_INFO_2;
     /* p->image = set by caller */
 #define F "plane_aspect"
     if(ispresent(F))
@@ -3056,7 +3056,7 @@ int echeckimagesparsememoryrequirementsinfo2(lua_State *L, int arg, VkImageSpars
     {
     VkImageSparseMemoryRequirementsInfo2KHR *p = &pp->p1;
     CHECK_TABLE(L, arg, pp);
-    p->sType = VK_STRUCTURE_TYPE_IMAGE_SPARSE_MEMORY_REQUIREMENTS_INFO_2_KHR;
+    p->sType = VK_STRUCTURE_TYPE_IMAGE_SPARSE_MEMORY_REQUIREMENTS_INFO_2;
     /* p->image = set by caller */
     return 0;
     }
@@ -3081,8 +3081,8 @@ void initmemoryrequirements2(lua_State *L, VkMemoryRequirements2KHR_CHAIN *p)
     {
     (void)L;
     MEMZERO(p);
-    p->p1.sType = VK_STRUCTURE_TYPE_MEMORY_REQUIREMENTS_2_KHR;
-    p->p2.sType = VK_STRUCTURE_TYPE_MEMORY_DEDICATED_REQUIREMENTS_KHR;
+    p->p1.sType = VK_STRUCTURE_TYPE_MEMORY_REQUIREMENTS_2;
+    p->p2.sType = VK_STRUCTURE_TYPE_MEMORY_DEDICATED_REQUIREMENTS;
     p->p1.pNext = &p->p2;
     p->p2.pNext = NULL;
     }
@@ -3113,7 +3113,7 @@ VkSparseImageMemoryRequirements2KHR* newsparseimagememoryrequirements2(lua_State
     if(!p) return NULL;
     for(i = 0; i < count; i++)
         {
-        p[i].sType = VK_STRUCTURE_TYPE_SPARSE_IMAGE_MEMORY_REQUIREMENTS_2_KHR;
+        p[i].sType = VK_STRUCTURE_TYPE_SPARSE_IMAGE_MEMORY_REQUIREMENTS_2;
         }
     return p;
     }
@@ -3597,7 +3597,7 @@ static int echeckpipelineinputassemblystatecreateinfo(lua_State *L, int arg, VkP
 
 static int echeckpipelinetessellationdomainoriginstatecreateinfo(lua_State *L, int arg, VkPipelineTessellationDomainOriginStateCreateInfoKHR *p)
     {
-    p->sType = VK_STRUCTURE_TYPE_PIPELINE_TESSELLATION_DOMAIN_ORIGIN_STATE_CREATE_INFO_KHR;
+    p->sType = VK_STRUCTURE_TYPE_PIPELINE_TESSELLATION_DOMAIN_ORIGIN_STATE_CREATE_INFO;
     GetTessellationDomainOrigin(domainOrigin, "domain_origin");
     return 0;
     }
@@ -4734,7 +4734,7 @@ int echeckdescriptorupdatetemplatecreateinfo(lua_State *L, int arg, VkDescriptor
     int err, arg1;
     uint32_t count;
     CHECK_TABLE(L, arg, p);
-    p->sType = VK_STRUCTURE_TYPE_DESCRIPTOR_UPDATE_TEMPLATE_CREATE_INFO_KHR;
+    p->sType = VK_STRUCTURE_TYPE_DESCRIPTOR_UPDATE_TEMPLATE_CREATE_INFO;
     GetFlags(flags, "flags");
     GetDescriptorUpdateTemplateType(templateType, "template_type");
     GetDescriptorSetLayoutOpt(descriptorSetLayout, "descriptor_set_layout");
@@ -4983,7 +4983,7 @@ static void freebindbuffermemoryinfo(lua_State *L, VkBindBufferMemoryInfoKHR *p)
 static int echeckbindbuffermemoryinfo(lua_State *L, int arg, VkBindBufferMemoryInfoKHR *p)
     {
     CHECK_TABLE(L, arg, p);
-    p->sType = VK_STRUCTURE_TYPE_BIND_BUFFER_MEMORY_INFO_KHR;
+    p->sType = VK_STRUCTURE_TYPE_BIND_BUFFER_MEMORY_INFO;
     GetBuffer(buffer, "buffer");
     GetDeviceMemory(memory, "memory");
     GetInteger(memoryOffset, "offset");
@@ -4996,7 +4996,7 @@ ECHECKLISTFUNC(VkBindBufferMemoryInfoKHR, bindbuffermemoryinfo, freebindbufferme
 
 static int echeckbindimageplanememoryinfo(lua_State *L, int arg, VkBindImagePlaneMemoryInfoKHR *p)
     {
-    p->sType = VK_STRUCTURE_TYPE_BIND_IMAGE_PLANE_MEMORY_INFO_KHR;
+    p->sType = VK_STRUCTURE_TYPE_BIND_IMAGE_PLANE_MEMORY_INFO;
     GetFlags(planeAspect, "plane_aspect");
     return 0;
     }
@@ -5011,7 +5011,7 @@ static int echeckbindimagememoryinfo(lua_State *L, int arg, VkBindImageMemoryInf
     {
     int err;
     CHECK_TABLE(L, arg, p);
-    p->sType = VK_STRUCTURE_TYPE_BIND_IMAGE_MEMORY_INFO_KHR;
+    p->sType = VK_STRUCTURE_TYPE_BIND_IMAGE_MEMORY_INFO;
     GetImage(image, "image");
     GetDeviceMemory(memory, "memory");
     GetInteger(memoryOffset, "offset");
@@ -5036,7 +5036,7 @@ ECHECKLISTFUNC(VkBindImageMemoryInfoKHR, bindimagememoryinfo, freebindimagememor
 int echecksamplerycbcrconversioncreateinfo(lua_State *L, int arg, VkSamplerYcbcrConversionCreateInfoKHR *p)
     {
     CHECK_TABLE(L, arg, p);
-    p->sType = VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_CREATE_INFO_KHR;
+    p->sType = VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_CREATE_INFO;
     GetFormat(format, "format");
     GetSamplerYcbcrModelConversion(ycbcrModel, "ycbcr_model");
     GetSamplerYcbcrRange(ycbcrRange, "ycbcr_range");

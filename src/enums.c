@@ -394,8 +394,8 @@ void moonvulkan_open_enums(lua_State *L)
     ADD(ERROR_OUT_OF_DATE_KHR, "out of date");
     ADD(ERROR_INCOMPATIBLE_DISPLAY_KHR, "incompatible display");
     ADD(ERROR_VALIDATION_FAILED_EXT, "validation failed");
-    ADD(ERROR_OUT_OF_POOL_MEMORY_KHR, "out of pool memory");
-    ADD(ERROR_INVALID_EXTERNAL_HANDLE_KHR, "invalid external handle");
+    ADD(ERROR_OUT_OF_POOL_MEMORY, "out of pool memory");
+    ADD(ERROR_INVALID_EXTERNAL_HANDLE, "invalid external handle");
     ADD(ERROR_NOT_PERMITTED_EXT, "not permitted");
 
     domain = DOMAIN_PIPELINE_CACHE_HEADER_VERSION; /* VkPipelineCacheHeaderVersion */

@@ -232,7 +232,7 @@ static int GetBufferMemoryRequirements2(lua_State *L, VkBuffer buffer, ud_t *ud)
         }
     else
         {
-        info.p1.sType = VK_STRUCTURE_TYPE_BUFFER_MEMORY_REQUIREMENTS_INFO_2_KHR;
+        info.p1.sType = VK_STRUCTURE_TYPE_BUFFER_MEMORY_REQUIREMENTS_INFO_2;
         info.p1.pNext = NULL;
         }
     info.p1.buffer = buffer;
@@ -269,7 +269,7 @@ static int GetImageMemoryRequirements2(lua_State *L, VkImage image, ud_t *ud)
         }
     else
         {
-        info.p1.sType = VK_STRUCTURE_TYPE_BUFFER_MEMORY_REQUIREMENTS_INFO_2_KHR;
+        info.p1.sType = VK_STRUCTURE_TYPE_BUFFER_MEMORY_REQUIREMENTS_INFO_2;
         info.p1.pNext = NULL;
         }
     info.p1.image = image;
@@ -308,7 +308,7 @@ static int GetImageSparseMemoryRequirements2(lua_State *L, VkImage image, ud_t *
         }
     else
         {
-        info.p1.sType = VK_STRUCTURE_TYPE_IMAGE_SPARSE_MEMORY_REQUIREMENTS_INFO_2_KHR;
+        info.p1.sType = VK_STRUCTURE_TYPE_IMAGE_SPARSE_MEMORY_REQUIREMENTS_INFO_2;
         info.p1.pNext = NULL;
         }
     info.p1.image = image;
