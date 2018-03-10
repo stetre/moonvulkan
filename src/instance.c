@@ -29,7 +29,8 @@ static int freeinstance(lua_State *L, ud_t *ud)
     {
     VkInstance instance = (VkInstance)(uintptr_t)ud->handle;
     const VkAllocationCallbacks *allocator = ud->allocator;
-    PFN_vkDestroyInstance DestroyInstance = ud->idt->DestroyInstance;
+    PFN_vkDestroyInstance DestroyInstance = NULL;
+    if(ud->idt) DestroyInstance = ud->idt->DestroyInstance;
     freechildren(L, DEBUG_REPORT_CALLBACK_MT, ud);
     freechildren(L, DEVICE_MT, ud);
     freechildren(L, PHYSICAL_DEVICE_MT, ud);
@@ -38,7 +39,7 @@ static int freeinstance(lua_State *L, ud_t *ud)
     if(!freeuserdata(L, ud))
         return 0; /* double call */
     TRACE_DELETE(instance, "instance");
-    DestroyInstance(instance, allocator);
+    if(DestroyInstance) DestroyInstance(instance, allocator);
     return 0;
     }
 

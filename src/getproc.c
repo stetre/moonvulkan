@@ -108,7 +108,7 @@ instance_dt_t * getproc_instance(lua_State *L, VkInstance instance, VkInstanceCr
     /* Core functions ---------------------------- */
 #define GET(fn) do {                                                \
     dt->fn = (PFN_vk##fn)GetInstanceProcAddr(instance, "vk"#fn);    \
-    if(!dt->fn) luaL_error(L, "cannot find vk"#fn);                 \
+    if(!dt->fn) { luaL_error(L, "cannot find vk"#fn); return dt; }\
 } while(0)
     GET(DestroyInstance);
     GET(EnumeratePhysicalDevices);
@@ -125,7 +125,10 @@ instance_dt_t * getproc_instance(lua_State *L, VkInstance instance, VkInstanceCr
 #undef GET
 
     /* EXTENSIONS -------------------------------- */
-#define GET(fn) do { dt->fn = (PFN_vk##fn)GetInstanceProcAddr(instance, "vk"#fn); } while(0)
+#define GET(fn) do { \
+    dt->fn = (PFN_vk##fn)GetInstanceProcAddr(instance, "vk"#fn); \
+    /*printf(""#fn" %p\n", (void*)(dt->fn));                  */\
+} while(0)
 
     for(i = 0; i < createinfo->enabledExtensionCount; i++)
         {
@@ -272,7 +275,7 @@ device_dt_t* getproc_device(lua_State *L, VkDevice device, VkDeviceCreateInfo *c
     /* Core functions ---------------------------- */
 #define GET(fn) do {                                            \
     dt->fn = (PFN_vk##fn)GetDeviceProcAddr(device, "vk"#fn);    \
-    if(!dt->fn) luaL_error(L, "cannot find vk"#fn);             \
+    if(!dt->fn) { luaL_error(L, "cannot find vk"#fn); return dt; }  \
 } while(0)
     GET(DestroyDevice);
     GET(GetDeviceQueue);
@@ -399,7 +402,7 @@ device_dt_t* getproc_device(lua_State *L, VkDevice device, VkDeviceCreateInfo *c
     /* EXTENSIONS -------------------------------- */
 #define GET(fn) do {                                            \
     dt->fn = (PFN_vk##fn)GetDeviceProcAddr(device, "vk"#fn);    \
-    /*printf(""#fn" %p\n", (void*)(dt->fn)); */                 \
+    /*printf(""#fn" %p\n", (void*)(dt->fn));                  */\
 } while(0)
 
     for(i = 0; i < createinfo->enabledExtensionCount; i++)

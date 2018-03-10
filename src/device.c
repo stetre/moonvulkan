@@ -29,8 +29,13 @@ static int freedevice(lua_State *L, ud_t *ud)
     {
     VkDevice device = (VkDevice)(uintptr_t)ud->handle;
     const VkAllocationCallbacks *allocator = ud->allocator;
-    PFN_vkDeviceWaitIdle DeviceWaitIdle = ud->ddt->DeviceWaitIdle;
-    PFN_vkDestroyDevice DestroyDevice = ud->ddt->DestroyDevice;
+    PFN_vkDeviceWaitIdle DeviceWaitIdle = NULL;
+    PFN_vkDestroyDevice DestroyDevice = NULL;
+    if(ud->ddt)
+        {
+        DeviceWaitIdle = ud->ddt->DeviceWaitIdle;
+        DestroyDevice = ud->ddt->DestroyDevice;
+        }
     freechildren(L, SAMPLER_YCBCR_CONVERSION_MT, ud);
     freechildren(L, VALIDATION_CACHE_MT, ud);
     freechildren(L, DESCRIPTOR_UPDATE_TEMPLATE_MT, ud);
@@ -57,8 +62,8 @@ static int freedevice(lua_State *L, ud_t *ud)
     if(!freeuserdata(L, ud))
         return 0; /* double call */
     TRACE_DELETE(device, "device");
-    DeviceWaitIdle(device);
-    DestroyDevice(device, allocator);
+    if(DeviceWaitIdle) DeviceWaitIdle(device);
+    if(DestroyDevice) DestroyDevice(device, allocator);
     return 0;
     }
 
