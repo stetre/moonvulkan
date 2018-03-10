@@ -110,12 +110,12 @@ static int ImportSemaphoreWin32Handle(lua_State *L) //@@DOC VK_KHR_external_sema
     {
     VkResult ec;
     ud_t *ud;
-    VkImportSemaphoreWin32HandleInfo info;
+    VkImportSemaphoreWin32HandleInfoKHR info;
     VkSemaphore semaphore = checksemaphore(L, 1, &ud);
-    CheckDevicePfn(L, ud, ImportSemaphoreWin32Handle);
+    CheckDevicePfn(L, ud, ImportSemaphoreWin32HandleKHR);
     if(echeckimportsemaphorewin32handleinfo(L, 2, &info)) return argerror(L, 2);
     info.semaphore = semaphore;
-    ec = ud->ddt->ImportSemaphoreWin32Handle(ud->device, &info);
+    ec = ud->ddt->ImportSemaphoreWin32HandleKHR(ud->device, &info);
     CheckError(L, ec);
     return 0;
     }

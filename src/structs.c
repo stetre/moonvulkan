@@ -809,13 +809,13 @@ int echeckfencegetfdinfo(lua_State *L, int arg, VkFenceGetFdInfoKHR *p)
 
 #ifdef VK_USE_PLATFORM_WIN32_KHR
 #if 0 //@@TODO VK_KHR_external_semaphore_win32
-typedef struct VkExportSemaphoreWin32HandleInfo {
+typedef struct VkExportSemaphoreWin32HandleInfoKHR {
     VkStructureType               sType;
     const void*                   pNext;
     const SECURITY_ATTRIBUTES*    pAttributes;
     DWORD                         dwAccess;
     LPCWSTR                       name;
-} VkExportSemaphoreWin32HandleInfo;
+} VkExportSemaphoreWin32HandleInfoKHR;
 
 typedef struct VkD3D12FenceSubmitInfoKHR {
     VkStructureType    sType;
@@ -876,7 +876,7 @@ int echecksemaphoregetfdinfo(lua_State *L, int arg, VkSemaphoreGetFdInfoKHR *p)
 
 #ifdef VK_USE_PLATFORM_WIN32_KHR
 
-int echeckimportsemaphorewin32handleinfo(lua_State *L, int arg, VkImportSemaphoreWin32HandleInfo *p) //@@DOC VK_KHR_external_semaphore_win32
+int echeckimportsemaphorewin32handleinfo(lua_State *L, int arg, VkImportSemaphoreWin32HandleInfoKHR *p) //@@DOC VK_KHR_external_semaphore_win32
     {
     int err;
     CHECK_TABLE(L, arg, p);

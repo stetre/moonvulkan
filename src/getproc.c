@@ -532,7 +532,7 @@ device_dt_t* getproc_device(lua_State *L, VkDevice device, VkDeviceCreateInfo *c
         IF("VK_KHR_win32_keyed_mutex") { continue; }
         IF("VK_KHR_external_fence_win32")
             {
-            GET(ImportFenceWin32Handle);
+            GET(ImportFenceWin32HandleKHR);
             GET(GetFenceWin32HandleKHR);
             continue;
             }
@@ -544,7 +544,7 @@ device_dt_t* getproc_device(lua_State *L, VkDevice device, VkDeviceCreateInfo *c
             }
         IF("VK_KHR_external_semaphore_win32")
             {
-            GET(ImportSemaphoreWin32Handle);
+            GET(ImportSemaphoreWin32HandleKHR);
             GET(GetSemaphoreWin32HandleKHR);
             continue;
             }

@@ -658,7 +658,7 @@ int echecksamplerycbcrconversioncreateinfo(lua_State *L, int arg, VkSamplerYcbcr
 #ifdef VK_USE_PLATFORM_WIN32_KHR
 
 #define echeckimportsemaphorewin32handleinfo moonvulkan_echeckimportsemaphorewin32handleinfo
-int echeckimportsemaphorewin32handleinfo(lua_State *L, int arg, VkImportSemaphoreWin32HandleInfo *p);
+int echeckimportsemaphorewin32handleinfo(lua_State *L, int arg, VkImportSemaphoreWin32HandleInfoKHR *p);
 #define echecksemaphoregetwin32handleinfo moonvulkan_echecksemaphoregetwin32handleinfo
 int echecksemaphoregetwin32handleinfo(lua_State *L, int arg, VkSemaphoreGetWin32HandleInfoKHR *p);
 

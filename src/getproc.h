@@ -292,9 +292,9 @@ typedef struct {
 #ifdef VK_USE_PLATFORM_WIN32_KHR
     F(GetMemoryWin32HandleKHR);
     F(GetMemoryWin32HandlePropertiesKHR);
-    F(ImportSemaphoreWin32Handle);
+    F(ImportSemaphoreWin32HandleKHR);
     F(GetSemaphoreWin32HandleKHR);
-    F(ImportFenceWin32Handle);
+    F(ImportFenceWin32HandleKHR);
     F(GetFenceWin32HandleKHR);
 #endif
 } device_dt_t;
