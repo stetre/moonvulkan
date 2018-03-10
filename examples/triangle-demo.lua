@@ -321,7 +321,8 @@ function demo_draw(demo)
       swapchains = {demo.swapchain},
       image_indices = {demo.current_buffer-1},
    })
-   assert(result == 'success', "result = "..result)
+   --assert(result == 'success', "result = "..result)
+   if result ~= 'success' then print("queue_present result = "..result) end
 
    vk.queue_wait_idle(demo.queue)
 

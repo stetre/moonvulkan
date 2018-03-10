@@ -1278,9 +1278,9 @@ static VkFlags checkimageaspectflags(lua_State *L, int arg)
     CASE(VK_IMAGE_ASPECT_DEPTH_BIT, "depth");
     CASE(VK_IMAGE_ASPECT_STENCIL_BIT, "stencil");
     CASE(VK_IMAGE_ASPECT_METADATA_BIT, "metadata");
-    CASE(VK_IMAGE_ASPECT_PLANE_0_BIT_KHR, "plane 0");
-    CASE(VK_IMAGE_ASPECT_PLANE_1_BIT_KHR, "plane 1");
-    CASE(VK_IMAGE_ASPECT_PLANE_2_BIT_KHR, "plane 2");
+    CASE(VK_IMAGE_ASPECT_PLANE_0_BIT, "plane 0");
+    CASE(VK_IMAGE_ASPECT_PLANE_1_BIT, "plane 1");
+    CASE(VK_IMAGE_ASPECT_PLANE_2_BIT, "plane 2");
 #undef CASE
         return (VkFlags)luaL_argerror(L, --arg, badvalue(L,s));
         done: ;
@@ -1298,9 +1298,9 @@ static int pushimageaspectflags(lua_State *L, VkFlags flags)
     CASE(VK_IMAGE_ASPECT_DEPTH_BIT, "depth");
     CASE(VK_IMAGE_ASPECT_STENCIL_BIT, "stencil");
     CASE(VK_IMAGE_ASPECT_METADATA_BIT, "metadata");
-    CASE(VK_IMAGE_ASPECT_PLANE_0_BIT_KHR, "plane 0");
-    CASE(VK_IMAGE_ASPECT_PLANE_1_BIT_KHR, "plane 1");
-    CASE(VK_IMAGE_ASPECT_PLANE_2_BIT_KHR, "plane 2");
+    CASE(VK_IMAGE_ASPECT_PLANE_0_BIT, "plane 0");
+    CASE(VK_IMAGE_ASPECT_PLANE_1_BIT, "plane 1");
+    CASE(VK_IMAGE_ASPECT_PLANE_2_BIT, "plane 2");
 #undef CASE
 
     return n;
@@ -1319,9 +1319,9 @@ static int ImageAspectFlags(lua_State *L)
     ADD(IMAGE_ASPECT_DEPTH_BIT);\
     ADD(IMAGE_ASPECT_STENCIL_BIT);\
     ADD(IMAGE_ASPECT_METADATA_BIT);\
-    ADD(IMAGE_ASPECT_PLANE_0_BIT_KHR);\
-    ADD(IMAGE_ASPECT_PLANE_1_BIT_KHR);\
-    ADD(IMAGE_ASPECT_PLANE_2_BIT_KHR);\
+    ADD(IMAGE_ASPECT_PLANE_0_BIT);\
+    ADD(IMAGE_ASPECT_PLANE_1_BIT);\
+    ADD(IMAGE_ASPECT_PLANE_2_BIT);\
 
 
 
@@ -1663,11 +1663,11 @@ static VkFlags checkimagecreateflags(lua_State *L, int arg)
         CASE(VK_IMAGE_CREATE_SPARSE_ALIASED_BIT, "sparse aliased");
         CASE(VK_IMAGE_CREATE_MUTABLE_FORMAT_BIT, "mutable format");
         CASE(VK_IMAGE_CREATE_CUBE_COMPATIBLE_BIT, "cube compatible");
-        CASE(VK_IMAGE_CREATE_BLOCK_TEXEL_VIEW_COMPATIBLE_BIT_KHR, "block texel view compatible");
-        CASE(VK_IMAGE_CREATE_EXTENDED_USAGE_BIT_KHR, "extended usage");
+        CASE(VK_IMAGE_CREATE_BLOCK_TEXEL_VIEW_COMPATIBLE_BIT, "block texel view compatible");
+        CASE(VK_IMAGE_CREATE_EXTENDED_USAGE_BIT, "extended usage");
         CASE(VK_IMAGE_CREATE_SAMPLE_LOCATIONS_COMPATIBLE_DEPTH_BIT_EXT, "sample locations compatible depth");
-        CASE(VK_IMAGE_CREATE_DISJOINT_BIT_KHR, "disjoint");
-        CASE(VK_IMAGE_CREATE_ALIAS_BIT_KHR, "alias");
+        CASE(VK_IMAGE_CREATE_DISJOINT_BIT, "disjoint");
+        CASE(VK_IMAGE_CREATE_ALIAS_BIT, "alias");
 #undef CASE
         return (VkFlags)luaL_argerror(L, --arg, badvalue(L,s));
         done: ;
@@ -1686,11 +1686,11 @@ static int pushimagecreateflags(lua_State *L, VkFlags flags)
         CASE(VK_IMAGE_CREATE_SPARSE_ALIASED_BIT, "sparse aliased");
         CASE(VK_IMAGE_CREATE_MUTABLE_FORMAT_BIT, "mutable format");
         CASE(VK_IMAGE_CREATE_CUBE_COMPATIBLE_BIT, "cube compatible");
-        CASE(VK_IMAGE_CREATE_BLOCK_TEXEL_VIEW_COMPATIBLE_BIT_KHR, "block texel view compatible");
-        CASE(VK_IMAGE_CREATE_EXTENDED_USAGE_BIT_KHR, "extended usage");
+        CASE(VK_IMAGE_CREATE_BLOCK_TEXEL_VIEW_COMPATIBLE_BIT, "block texel view compatible");
+        CASE(VK_IMAGE_CREATE_EXTENDED_USAGE_BIT, "extended usage");
         CASE(VK_IMAGE_CREATE_SAMPLE_LOCATIONS_COMPATIBLE_DEPTH_BIT_EXT, "sample locations compatible depth");
-        CASE(VK_IMAGE_CREATE_DISJOINT_BIT_KHR, "disjoint");
-        CASE(VK_IMAGE_CREATE_ALIAS_BIT_KHR, "alias");
+        CASE(VK_IMAGE_CREATE_DISJOINT_BIT, "disjoint");
+        CASE(VK_IMAGE_CREATE_ALIAS_BIT, "alias");
 #undef CASE
 
     return n;
@@ -1710,11 +1710,11 @@ static int ImageCreateFlags(lua_State *L)
     ADD(IMAGE_CREATE_SPARSE_ALIASED_BIT);\
     ADD(IMAGE_CREATE_MUTABLE_FORMAT_BIT);\
     ADD(IMAGE_CREATE_CUBE_COMPATIBLE_BIT);\
-    ADD(IMAGE_CREATE_BLOCK_TEXEL_VIEW_COMPATIBLE_BIT_KHR);\
-    ADD(IMAGE_CREATE_EXTENDED_USAGE_BIT_KHR);\
+    ADD(IMAGE_CREATE_BLOCK_TEXEL_VIEW_COMPATIBLE_BIT);\
+    ADD(IMAGE_CREATE_EXTENDED_USAGE_BIT);\
     ADD(IMAGE_CREATE_SAMPLE_LOCATIONS_COMPATIBLE_DEPTH_BIT_EXT);\
-    ADD(IMAGE_CREATE_DISJOINT_BIT_KHR);\
-    ADD(IMAGE_CREATE_ALIAS_BIT_KHR);\
+    ADD(IMAGE_CREATE_DISJOINT_BIT);\
+    ADD(IMAGE_CREATE_ALIAS_BIT);\
 
 
 /*----------------------------------------------------------------------*
@@ -1810,15 +1810,17 @@ static VkFlags checkformatfeatureflags(lua_State *L, int arg)
         CASE(VK_FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT, "depth stencil attachment");
         CASE(VK_FORMAT_FEATURE_BLIT_SRC_BIT, "blit src");
         CASE(VK_FORMAT_FEATURE_BLIT_DST_BIT, "blit dst");
+        CASE(VK_FORMAT_FEATURE_TRANSFER_SRC_BIT, "transfer src");
+        CASE(VK_FORMAT_FEATURE_TRANSFER_DST_BIT, "transfer dst");
         CASE(VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT, "sampled image filter linear");
         CASE(VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_MINMAX_BIT_EXT , "sampled image filter minmax");
-        CASE(VK_FORMAT_FEATURE_MIDPOINT_CHROMA_SAMPLES_BIT_KHR,"midpoint chroma samples");
-        CASE(VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_LINEAR_FILTER_BIT_KHR,"sampled image ycbcr conversion linear filter");
-        CASE(VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_SEPARATE_RECONSTRUCTION_FILTER_BIT_KHR,"sampled image ycbcr conversion separate reconstruction filter");
-        CASE(VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_CHROMA_RECONSTRUCTION_EXPLICIT_BIT_KHR,"sampled image ycbcr conversion chroma reconstruction explicit");
-        CASE(VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_CHROMA_RECONSTRUCTION_EXPLICIT_FORCEABLE_BIT_KHR,"sampled image ycbcr conversion chroma reconstruction explicit forceable");
-        CASE(VK_FORMAT_FEATURE_DISJOINT_BIT_KHR,"disjoint");
-        CASE(VK_FORMAT_FEATURE_COSITED_CHROMA_SAMPLES_BIT_KHR,"cosited chroma samples");
+        CASE(VK_FORMAT_FEATURE_MIDPOINT_CHROMA_SAMPLES_BIT,"midpoint chroma samples");
+        CASE(VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_LINEAR_FILTER_BIT,"sampled image ycbcr conversion linear filter");
+        CASE(VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_SEPARATE_RECONSTRUCTION_FILTER_BIT,"sampled image ycbcr conversion separate reconstruction filter");
+        CASE(VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_CHROMA_RECONSTRUCTION_EXPLICIT_BIT,"sampled image ycbcr conversion chroma reconstruction explicit");
+        CASE(VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_CHROMA_RECONSTRUCTION_EXPLICIT_FORCEABLE_BIT,"sampled image ycbcr conversion chroma reconstruction explicit forceable");
+        CASE(VK_FORMAT_FEATURE_DISJOINT_BIT,"disjoint");
+        CASE(VK_FORMAT_FEATURE_COSITED_CHROMA_SAMPLES_BIT,"cosited chroma samples");
 #undef CASE
         return (VkFlags)luaL_argerror(L, --arg, badvalue(L,s));
         done: ;
@@ -1845,15 +1847,17 @@ static int pushformatfeatureflags(lua_State *L, VkFlags flags)
         CASE(VK_FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT, "depth stencil attachment");
         CASE(VK_FORMAT_FEATURE_BLIT_SRC_BIT, "blit src");
         CASE(VK_FORMAT_FEATURE_BLIT_DST_BIT, "blit dst");
+        CASE(VK_FORMAT_FEATURE_TRANSFER_SRC_BIT, "transfer src");
+        CASE(VK_FORMAT_FEATURE_TRANSFER_DST_BIT, "transfer dst");
         CASE(VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT, "sampled image filter linear");
         CASE(VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_MINMAX_BIT_EXT , "sampled image filter minmax");
-        CASE(VK_FORMAT_FEATURE_MIDPOINT_CHROMA_SAMPLES_BIT_KHR,"midpoint chroma samples");
-        CASE(VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_LINEAR_FILTER_BIT_KHR,"sampled image ycbcr conversion linear filter");
-        CASE(VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_SEPARATE_RECONSTRUCTION_FILTER_BIT_KHR,"sampled image ycbcr conversion separate reconstruction filter");
-        CASE(VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_CHROMA_RECONSTRUCTION_EXPLICIT_BIT_KHR,"sampled image ycbcr conversion chroma reconstruction explicit");
-        CASE(VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_CHROMA_RECONSTRUCTION_EXPLICIT_FORCEABLE_BIT_KHR,"sampled image ycbcr conversion chroma reconstruction explicit forceable");
-        CASE(VK_FORMAT_FEATURE_DISJOINT_BIT_KHR,"disjoint");
-        CASE(VK_FORMAT_FEATURE_COSITED_CHROMA_SAMPLES_BIT_KHR,"cosited chroma samples");
+        CASE(VK_FORMAT_FEATURE_MIDPOINT_CHROMA_SAMPLES_BIT,"midpoint chroma samples");
+        CASE(VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_LINEAR_FILTER_BIT,"sampled image ycbcr conversion linear filter");
+        CASE(VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_SEPARATE_RECONSTRUCTION_FILTER_BIT,"sampled image ycbcr conversion separate reconstruction filter");
+        CASE(VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_CHROMA_RECONSTRUCTION_EXPLICIT_BIT,"sampled image ycbcr conversion chroma reconstruction explicit");
+        CASE(VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_CHROMA_RECONSTRUCTION_EXPLICIT_FORCEABLE_BIT,"sampled image ycbcr conversion chroma reconstruction explicit forceable");
+        CASE(VK_FORMAT_FEATURE_DISJOINT_BIT,"disjoint");
+        CASE(VK_FORMAT_FEATURE_COSITED_CHROMA_SAMPLES_BIT,"cosited chroma samples");
 #undef CASE
 
     return n;
@@ -1880,15 +1884,17 @@ static int FormatFeatureFlags(lua_State *L)
     ADD(FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT);\
     ADD(FORMAT_FEATURE_BLIT_SRC_BIT);\
     ADD(FORMAT_FEATURE_BLIT_DST_BIT);\
+    ADD(FORMAT_FEATURE_TRANSFER_SRC_BIT);\
+    ADD(FORMAT_FEATURE_TRANSFER_DST_BIT);\
     ADD(FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT);\
     ADD(FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_MINMAX_BIT_EXT);\
-    ADD(FORMAT_FEATURE_MIDPOINT_CHROMA_SAMPLES_BIT_KHR);\
-    ADD(FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_LINEAR_FILTER_BIT_KHR);\
-    ADD(FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_SEPARATE_RECONSTRUCTION_FILTER_BIT_KHR);\
-    ADD(FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_CHROMA_RECONSTRUCTION_EXPLICIT_BIT_KHR);\
-    ADD(FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_CHROMA_RECONSTRUCTION_EXPLICIT_FORCEABLE_BIT_KHR);\
-    ADD(FORMAT_FEATURE_DISJOINT_BIT_KHR);\
-    ADD(FORMAT_FEATURE_COSITED_CHROMA_SAMPLES_BIT_KHR);\
+    ADD(FORMAT_FEATURE_MIDPOINT_CHROMA_SAMPLES_BIT);\
+    ADD(FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_LINEAR_FILTER_BIT);\
+    ADD(FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_SEPARATE_RECONSTRUCTION_FILTER_BIT);\
+    ADD(FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_CHROMA_RECONSTRUCTION_EXPLICIT_BIT);\
+    ADD(FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_CHROMA_RECONSTRUCTION_EXPLICIT_FORCEABLE_BIT);\
+    ADD(FORMAT_FEATURE_DISJOINT_BIT);\
+    ADD(FORMAT_FEATURE_COSITED_CHROMA_SAMPLES_BIT);\
 
 /*----------------------------------------------------------------------*
  | VkSurfaceTransformFlagsKHR
@@ -2181,13 +2187,13 @@ static VkFlags checkexternalmemoryhandletypeflags(lua_State *L, int arg)
         {
         s = lua_tostring(L, arg++);
 #define CASE(CODE,str) if((strcmp(s, str)==0)) do { flags |= CODE; goto done; } while(0)
-    CASE(VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_FD_BIT_KHR, "opaque fd");
-    CASE(VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_BIT_KHR, "opaque win32");
-    CASE(VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT_KHR, "opaque win32 kmt");
-    CASE(VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_BIT_KHR, "d3d11 texture");
-    CASE(VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_KMT_BIT_KHR, "d3d11 texture kmt");
-    CASE(VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_HEAP_BIT_KHR, "d3d12 heap");
-    CASE(VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_RESOURCE_BIT_KHR, "d3d12 resource");
+    CASE(VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_FD_BIT, "opaque fd");
+    CASE(VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_BIT, "opaque win32");
+    CASE(VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT, "opaque win32 kmt");
+    CASE(VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_BIT, "d3d11 texture");
+    CASE(VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_KMT_BIT, "d3d11 texture kmt");
+    CASE(VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_HEAP_BIT, "d3d12 heap");
+    CASE(VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_RESOURCE_BIT, "d3d12 resource");
 #undef CASE
         return (VkFlags)luaL_argerror(L, --arg, badvalue(L,s));
         done: ;
@@ -2201,19 +2207,19 @@ static int pushexternalmemoryhandletypeflags(lua_State *L, VkFlags flags)
     int n = 0;
 
 #define CASE(CODE,str) do { if( flags & CODE) { lua_pushstring(L, str); n++; } } while(0)
-    CASE(VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_FD_BIT_KHR, "opaque fd");
-    CASE(VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_BIT_KHR, "opaque win32");
-    CASE(VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT_KHR, "opaque win32 kmt");
-    CASE(VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_BIT_KHR, "d3d11 texture");
-    CASE(VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_KMT_BIT_KHR, "d3d11 texture kmt");
-    CASE(VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_HEAP_BIT_KHR, "d3d12 heap");
-    CASE(VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_RESOURCE_BIT_KHR, "d3d12 resource");
+    CASE(VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_FD_BIT, "opaque fd");
+    CASE(VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_BIT, "opaque win32");
+    CASE(VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT, "opaque win32 kmt");
+    CASE(VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_BIT, "d3d11 texture");
+    CASE(VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_KMT_BIT, "d3d11 texture kmt");
+    CASE(VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_HEAP_BIT, "d3d12 heap");
+    CASE(VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_RESOURCE_BIT, "d3d12 resource");
 #undef CASE
 
     return n;
     }
 
-static int ExternalMemoryHandleTypeFlagsKHR(lua_State *L)
+static int ExternalMemoryHandleTypeFlags(lua_State *L)
     {
     if(lua_type(L, 1) == LUA_TNUMBER)
         return pushexternalmemoryhandletypeflags(L, luaL_checkinteger(L, 1));
@@ -2221,17 +2227,17 @@ static int ExternalMemoryHandleTypeFlagsKHR(lua_State *L)
     return 1;
     }
 
-#define Add_ExternalMemoryHandleTypeFlagsKHR(L) \
-    ADD(EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_FD_BIT_KHR); \
-    ADD(EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_BIT_KHR); \
-    ADD(EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT_KHR); \
-    ADD(EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_BIT_KHR); \
-    ADD(EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_KMT_BIT_KHR); \
-    ADD(EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_HEAP_BIT_KHR); \
-    ADD(EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_RESOURCE_BIT_KHR); \
+#define Add_ExternalMemoryHandleTypeFlags(L) \
+    ADD(EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_FD_BIT); \
+    ADD(EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_BIT); \
+    ADD(EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT); \
+    ADD(EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_BIT); \
+    ADD(EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_KMT_BIT); \
+    ADD(EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_HEAP_BIT); \
+    ADD(EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_RESOURCE_BIT); \
 
 /*----------------------------------------------------------------------*
- | VkExternalMemoryFeatureFlagsKHR
+ | VkExternalMemoryFeatureFlags
  *----------------------------------------------------------------------*/
 
 static VkFlags checkexternalmemoryfeatureflags(lua_State *L, int arg)
@@ -2243,9 +2249,9 @@ static VkFlags checkexternalmemoryfeatureflags(lua_State *L, int arg)
         {
         s = lua_tostring(L, arg++);
 #define CASE(CODE,str) if((strcmp(s, str)==0)) do { flags |= CODE; goto done; } while(0)
-    CASE(VK_EXTERNAL_MEMORY_FEATURE_DEDICATED_ONLY_BIT_KHR, "dedicated only");
-    CASE(VK_EXTERNAL_MEMORY_FEATURE_EXPORTABLE_BIT_KHR, "exportable");
-    CASE(VK_EXTERNAL_MEMORY_FEATURE_IMPORTABLE_BIT_KHR, "importable");
+    CASE(VK_EXTERNAL_MEMORY_FEATURE_DEDICATED_ONLY_BIT, "dedicated only");
+    CASE(VK_EXTERNAL_MEMORY_FEATURE_EXPORTABLE_BIT, "exportable");
+    CASE(VK_EXTERNAL_MEMORY_FEATURE_IMPORTABLE_BIT, "importable");
 #undef CASE
         return (VkFlags)luaL_argerror(L, --arg, badvalue(L,s));
         done: ;
@@ -2259,15 +2265,15 @@ static int pushexternalmemoryfeatureflags(lua_State *L, VkFlags flags)
     int n = 0;
 
 #define CASE(CODE,str) do { if( flags & CODE) { lua_pushstring(L, str); n++; } } while(0)
-    CASE(VK_EXTERNAL_MEMORY_FEATURE_DEDICATED_ONLY_BIT_KHR, "dedicated only");
-    CASE(VK_EXTERNAL_MEMORY_FEATURE_EXPORTABLE_BIT_KHR, "exportable");
-    CASE(VK_EXTERNAL_MEMORY_FEATURE_IMPORTABLE_BIT_KHR, "importable");
+    CASE(VK_EXTERNAL_MEMORY_FEATURE_DEDICATED_ONLY_BIT, "dedicated only");
+    CASE(VK_EXTERNAL_MEMORY_FEATURE_EXPORTABLE_BIT, "exportable");
+    CASE(VK_EXTERNAL_MEMORY_FEATURE_IMPORTABLE_BIT, "importable");
 #undef CASE
 
     return n;
     }
 
-static int ExternalMemoryFeatureFlagsKHR(lua_State *L)
+static int ExternalMemoryFeatureFlags(lua_State *L)
     {
     if(lua_type(L, 1) == LUA_TNUMBER)
         return pushexternalmemoryfeatureflags(L, luaL_checkinteger(L, 1));
@@ -2275,10 +2281,10 @@ static int ExternalMemoryFeatureFlagsKHR(lua_State *L)
     return 1;
     }
 
-#define Add_ExternalMemoryFeatureFlagsKHR(L) \
-    ADD(EXTERNAL_MEMORY_FEATURE_DEDICATED_ONLY_BIT_KHR); \
-    ADD(EXTERNAL_MEMORY_FEATURE_EXPORTABLE_BIT_KHR); \
-    ADD(EXTERNAL_MEMORY_FEATURE_IMPORTABLE_BIT_KHR); \
+#define Add_ExternalMemoryFeatureFlags(L) \
+    ADD(EXTERNAL_MEMORY_FEATURE_DEDICATED_ONLY_BIT); \
+    ADD(EXTERNAL_MEMORY_FEATURE_EXPORTABLE_BIT); \
+    ADD(EXTERNAL_MEMORY_FEATURE_IMPORTABLE_BIT); \
 
 
 /*----------------------------------------------------------------------*
@@ -2294,11 +2300,11 @@ static VkFlags checkexternalsemaphorehandletypeflags(lua_State *L, int arg)
         {
         s = lua_tostring(L, arg++);
 #define CASE(CODE,str) if((strcmp(s, str)==0)) do { flags |= CODE; goto done; } while(0)
-    CASE(VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_FD_BIT_KHR, "opaque fd");
-    CASE(VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_BIT_KHR, "opaque win32");
-    CASE(VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT_KHR, "opaque win32 kmt");
-    CASE(VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D12_FENCE_BIT_KHR, "d3d12 fence");
-    CASE(VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_SYNC_FD_BIT_KHR, "sync fd");
+    CASE(VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_FD_BIT, "opaque fd");
+    CASE(VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_BIT, "opaque win32");
+    CASE(VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT, "opaque win32 kmt");
+    CASE(VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D12_FENCE_BIT, "d3d12 fence");
+    CASE(VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_SYNC_FD_BIT, "sync fd");
 #undef CASE
         return (VkFlags)luaL_argerror(L, --arg, badvalue(L,s));
         done: ;
@@ -2312,17 +2318,17 @@ static int pushexternalsemaphorehandletypeflags(lua_State *L, VkFlags flags)
     int n = 0;
 
 #define CASE(CODE,str) do { if( flags & CODE) { lua_pushstring(L, str); n++; } } while(0)
-    CASE(VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_FD_BIT_KHR, "opaque fd");
-    CASE(VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_BIT_KHR, "opaque win32");
-    CASE(VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT_KHR, "opaque win32 kmt");
-    CASE(VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D12_FENCE_BIT_KHR, "d3d12 fence");
-    CASE(VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_SYNC_FD_BIT_KHR, "sync fd");
+    CASE(VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_FD_BIT, "opaque fd");
+    CASE(VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_BIT, "opaque win32");
+    CASE(VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT, "opaque win32 kmt");
+    CASE(VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D12_FENCE_BIT, "d3d12 fence");
+    CASE(VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_SYNC_FD_BIT, "sync fd");
 #undef CASE
 
     return n;
     }
 
-static int ExternalSemaphoreHandleTypeFlagsKHR(lua_State *L)
+static int ExternalSemaphoreHandleTypeFlags(lua_State *L)
     {
     if(lua_type(L, 1) == LUA_TNUMBER)
         return pushexternalsemaphorehandletypeflags(L, luaL_checkinteger(L, 1));
@@ -2330,17 +2336,17 @@ static int ExternalSemaphoreHandleTypeFlagsKHR(lua_State *L)
     return 1;
     }
 
-#define Add_ExternalSemaphoreHandleTypeFlagsKHR(L) \
-    ADD(EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_FD_BIT_KHR); \
-    ADD(EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_BIT_KHR); \
-    ADD(EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT_KHR); \
-    ADD(EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D12_FENCE_BIT_KHR); \
-    ADD(EXTERNAL_SEMAPHORE_HANDLE_TYPE_SYNC_FD_BIT_KHR); \
+#define Add_ExternalSemaphoreHandleTypeFlags(L) \
+    ADD(EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_FD_BIT); \
+    ADD(EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_BIT); \
+    ADD(EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT); \
+    ADD(EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D12_FENCE_BIT); \
+    ADD(EXTERNAL_SEMAPHORE_HANDLE_TYPE_SYNC_FD_BIT); \
 
 
 
 /*----------------------------------------------------------------------*
- | VkExternalSemaphoreFeatureFlagsKHR
+ | VkExternalSemaphoreFeatureFlags
  *----------------------------------------------------------------------*/
 
 static VkFlags checkexternalsemaphorefeatureflags(lua_State *L, int arg)
@@ -2352,8 +2358,8 @@ static VkFlags checkexternalsemaphorefeatureflags(lua_State *L, int arg)
         {
         s = lua_tostring(L, arg++);
 #define CASE(CODE,str) if((strcmp(s, str)==0)) do { flags |= CODE; goto done; } while(0)
-    CASE(VK_EXTERNAL_SEMAPHORE_FEATURE_EXPORTABLE_BIT_KHR, "exportable");
-    CASE(VK_EXTERNAL_SEMAPHORE_FEATURE_IMPORTABLE_BIT_KHR, "importable");
+    CASE(VK_EXTERNAL_SEMAPHORE_FEATURE_EXPORTABLE_BIT, "exportable");
+    CASE(VK_EXTERNAL_SEMAPHORE_FEATURE_IMPORTABLE_BIT, "importable");
 #undef CASE
         return (VkFlags)luaL_argerror(L, --arg, badvalue(L,s));
         done: ;
@@ -2367,14 +2373,14 @@ static int pushexternalsemaphorefeatureflags(lua_State *L, VkFlags flags)
     int n = 0;
 
 #define CASE(CODE,str) do { if( flags & CODE) { lua_pushstring(L, str); n++; } } while(0)
-    CASE(VK_EXTERNAL_SEMAPHORE_FEATURE_EXPORTABLE_BIT_KHR, "exportable");
-    CASE(VK_EXTERNAL_SEMAPHORE_FEATURE_IMPORTABLE_BIT_KHR, "importable");
+    CASE(VK_EXTERNAL_SEMAPHORE_FEATURE_EXPORTABLE_BIT, "exportable");
+    CASE(VK_EXTERNAL_SEMAPHORE_FEATURE_IMPORTABLE_BIT, "importable");
 #undef CASE
 
     return n;
     }
 
-static int ExternalSemaphoreFeatureFlagsKHR(lua_State *L)
+static int ExternalSemaphoreFeatureFlags(lua_State *L)
     {
     if(lua_type(L, 1) == LUA_TNUMBER)
         return pushexternalsemaphorefeatureflags(L, luaL_checkinteger(L, 1));
@@ -2382,13 +2388,13 @@ static int ExternalSemaphoreFeatureFlagsKHR(lua_State *L)
     return 1;
     }
 
-#define Add_ExternalSemaphoreFeatureFlagsKHR(L) \
-    ADD(EXTERNAL_SEMAPHORE_FEATURE_EXPORTABLE_BIT_KHR); \
-    ADD(EXTERNAL_SEMAPHORE_FEATURE_IMPORTABLE_BIT_KHR); \
+#define Add_ExternalSemaphoreFeatureFlags(L) \
+    ADD(EXTERNAL_SEMAPHORE_FEATURE_EXPORTABLE_BIT); \
+    ADD(EXTERNAL_SEMAPHORE_FEATURE_IMPORTABLE_BIT); \
 
 
 /*----------------------------------------------------------------------*
- | VkSemaphoreImportFlagsKHR
+ | VkSemaphoreImportFlags
  *----------------------------------------------------------------------*/
 
 static VkFlags checksemaphoreimportflags(lua_State *L, int arg)
@@ -2400,7 +2406,7 @@ static VkFlags checksemaphoreimportflags(lua_State *L, int arg)
         {
         s = lua_tostring(L, arg++);
 #define CASE(CODE,str) if((strcmp(s, str)==0)) do { flags |= CODE; goto done; } while(0)
-    CASE(VK_SEMAPHORE_IMPORT_TEMPORARY_BIT_KHR, "temporary");
+    CASE(VK_SEMAPHORE_IMPORT_TEMPORARY_BIT, "temporary");
 #undef CASE
         return (VkFlags)luaL_argerror(L, --arg, badvalue(L,s));
         done: ;
@@ -2414,13 +2420,13 @@ static int pushsemaphoreimportflags(lua_State *L, VkFlags flags)
     int n = 0;
 
 #define CASE(CODE,str) do { if( flags & CODE) { lua_pushstring(L, str); n++; } } while(0)
-    CASE(VK_SEMAPHORE_IMPORT_TEMPORARY_BIT_KHR, "temporary");
+    CASE(VK_SEMAPHORE_IMPORT_TEMPORARY_BIT, "temporary");
 #undef CASE
 
     return n;
     }
 
-static int SemaphoreImportFlagsKHR(lua_State *L)
+static int SemaphoreImportFlags(lua_State *L)
     {
     if(lua_type(L, 1) == LUA_TNUMBER)
         return pushsemaphoreimportflags(L, luaL_checkinteger(L, 1));
@@ -2428,12 +2434,12 @@ static int SemaphoreImportFlagsKHR(lua_State *L)
     return 1;
     }
 
-#define Add_SemaphoreImportFlagsKHR(L) \
-    ADD(SEMAPHORE_IMPORT_TEMPORARY_BIT_KHR); \
+#define Add_SemaphoreImportFlags(L) \
+    ADD(SEMAPHORE_IMPORT_TEMPORARY_BIT); \
 
 
 /*----------------------------------------------------------------------*
- | VkExternalFenceHandleTypeFlagsKHR
+ | VkExternalFenceHandleTypeFlags
  *----------------------------------------------------------------------*/
 
 static VkFlags checkexternalfencehandletypeflags(lua_State *L, int arg)
@@ -2445,10 +2451,10 @@ static VkFlags checkexternalfencehandletypeflags(lua_State *L, int arg)
         {
         s = lua_tostring(L, arg++);
 #define CASE(CODE,str) if((strcmp(s, str)==0)) do { flags |= CODE; goto done; } while(0)
-    CASE(VK_EXTERNAL_FENCE_HANDLE_TYPE_OPAQUE_FD_BIT_KHR, "opaque_fd");
-    CASE(VK_EXTERNAL_FENCE_HANDLE_TYPE_OPAQUE_WIN32_BIT_KHR, "opaque_win32");
-    CASE(VK_EXTERNAL_FENCE_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT_KHR, "opaque_win32_kmt");
-    CASE(VK_EXTERNAL_FENCE_HANDLE_TYPE_SYNC_FD_BIT_KHR, "sync_fd");
+    CASE(VK_EXTERNAL_FENCE_HANDLE_TYPE_OPAQUE_FD_BIT, "opaque_fd");
+    CASE(VK_EXTERNAL_FENCE_HANDLE_TYPE_OPAQUE_WIN32_BIT, "opaque_win32");
+    CASE(VK_EXTERNAL_FENCE_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT, "opaque_win32_kmt");
+    CASE(VK_EXTERNAL_FENCE_HANDLE_TYPE_SYNC_FD_BIT, "sync_fd");
 #undef CASE
         return (VkFlags)luaL_argerror(L, --arg, badvalue(L,s));
         done: ;
@@ -2462,16 +2468,16 @@ static int pushexternalfencehandletypeflags(lua_State *L, VkFlags flags)
     int n = 0;
 
 #define CASE(CODE,str) do { if( flags & CODE) { lua_pushstring(L, str); n++; } } while(0)
-    CASE(VK_EXTERNAL_FENCE_HANDLE_TYPE_OPAQUE_FD_BIT_KHR, "opaque_fd");
-    CASE(VK_EXTERNAL_FENCE_HANDLE_TYPE_OPAQUE_WIN32_BIT_KHR, "opaque_win32");
-    CASE(VK_EXTERNAL_FENCE_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT_KHR, "opaque_win32_kmt");
-    CASE(VK_EXTERNAL_FENCE_HANDLE_TYPE_SYNC_FD_BIT_KHR, "sync_fd");
+    CASE(VK_EXTERNAL_FENCE_HANDLE_TYPE_OPAQUE_FD_BIT, "opaque_fd");
+    CASE(VK_EXTERNAL_FENCE_HANDLE_TYPE_OPAQUE_WIN32_BIT, "opaque_win32");
+    CASE(VK_EXTERNAL_FENCE_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT, "opaque_win32_kmt");
+    CASE(VK_EXTERNAL_FENCE_HANDLE_TYPE_SYNC_FD_BIT, "sync_fd");
 #undef CASE
 
     return n;
     }
 
-static int ExternalFenceHandleTypeFlagsKHR(lua_State *L)
+static int ExternalFenceHandleTypeFlags(lua_State *L)
     {
     if(lua_type(L, 1) == LUA_TNUMBER)
         return pushexternalfencehandletypeflags(L, luaL_checkinteger(L, 1));
@@ -2479,14 +2485,14 @@ static int ExternalFenceHandleTypeFlagsKHR(lua_State *L)
     return 1;
     }
 
-#define Add_ExternalFenceHandleTypeFlagsKHR(L) \
-    ADD(EXTERNAL_FENCE_HANDLE_TYPE_OPAQUE_FD_BIT_KHR); \
-    ADD(EXTERNAL_FENCE_HANDLE_TYPE_OPAQUE_WIN32_BIT_KHR); \
-    ADD(EXTERNAL_FENCE_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT_KHR); \
-    ADD(EXTERNAL_FENCE_HANDLE_TYPE_SYNC_FD_BIT_KHR); \
+#define Add_ExternalFenceHandleTypeFlags(L) \
+    ADD(EXTERNAL_FENCE_HANDLE_TYPE_OPAQUE_FD_BIT); \
+    ADD(EXTERNAL_FENCE_HANDLE_TYPE_OPAQUE_WIN32_BIT); \
+    ADD(EXTERNAL_FENCE_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT); \
+    ADD(EXTERNAL_FENCE_HANDLE_TYPE_SYNC_FD_BIT); \
 
 /*----------------------------------------------------------------------*
- | VkExternalFenceFeatureFlagsKHR
+ | VkExternalFenceFeatureFlags
  *----------------------------------------------------------------------*/
 
 static VkFlags checkexternalfencefeatureflags(lua_State *L, int arg)
@@ -2498,8 +2504,8 @@ static VkFlags checkexternalfencefeatureflags(lua_State *L, int arg)
         {
         s = lua_tostring(L, arg++);
 #define CASE(CODE,str) if((strcmp(s, str)==0)) do { flags |= CODE; goto done; } while(0)
-    CASE(VK_EXTERNAL_FENCE_FEATURE_EXPORTABLE_BIT_KHR, "exportable");
-    CASE(VK_EXTERNAL_FENCE_FEATURE_IMPORTABLE_BIT_KHR, "importable");
+    CASE(VK_EXTERNAL_FENCE_FEATURE_EXPORTABLE_BIT, "exportable");
+    CASE(VK_EXTERNAL_FENCE_FEATURE_IMPORTABLE_BIT, "importable");
 #undef CASE
         return (VkFlags)luaL_argerror(L, --arg, badvalue(L,s));
         done: ;
@@ -2513,14 +2519,14 @@ static int pushexternalfencefeatureflags(lua_State *L, VkFlags flags)
     int n = 0;
 
 #define CASE(CODE,str) do { if( flags & CODE) { lua_pushstring(L, str); n++; } } while(0)
-    CASE(VK_EXTERNAL_FENCE_FEATURE_EXPORTABLE_BIT_KHR, "exportable");
-    CASE(VK_EXTERNAL_FENCE_FEATURE_IMPORTABLE_BIT_KHR, "importable");
+    CASE(VK_EXTERNAL_FENCE_FEATURE_EXPORTABLE_BIT, "exportable");
+    CASE(VK_EXTERNAL_FENCE_FEATURE_IMPORTABLE_BIT, "importable");
 #undef CASE
 
     return n;
     }
 
-static int ExternalFenceFeatureFlagsKHR(lua_State *L)
+static int ExternalFenceFeatureFlags(lua_State *L)
     {
     if(lua_type(L, 1) == LUA_TNUMBER)
         return pushexternalfencefeatureflags(L, luaL_checkinteger(L, 1));
@@ -2528,12 +2534,12 @@ static int ExternalFenceFeatureFlagsKHR(lua_State *L)
     return 1;
     }
 
-#define Add_ExternalFenceFeatureFlagsKHR(L) \
-    ADD(EXTERNAL_FENCE_FEATURE_EXPORTABLE_BIT_KHR); \
-    ADD(EXTERNAL_FENCE_FEATURE_IMPORTABLE_BIT_KHR); \
+#define Add_ExternalFenceFeatureFlags(L) \
+    ADD(EXTERNAL_FENCE_FEATURE_EXPORTABLE_BIT); \
+    ADD(EXTERNAL_FENCE_FEATURE_IMPORTABLE_BIT); \
 
 /*----------------------------------------------------------------------*
- | VkFenceImportFlagsKHR
+ | VkFenceImportFlags
  *----------------------------------------------------------------------*/
 
 static VkFlags checkfenceimportflags(lua_State *L, int arg)
@@ -2545,7 +2551,7 @@ static VkFlags checkfenceimportflags(lua_State *L, int arg)
         {
         s = lua_tostring(L, arg++);
 #define CASE(CODE,str) if((strcmp(s, str)==0)) do { flags |= CODE; goto done; } while(0)
-    CASE(VK_FENCE_IMPORT_TEMPORARY_BIT_KHR, "temporary");
+    CASE(VK_FENCE_IMPORT_TEMPORARY_BIT, "temporary");
 #undef CASE
         return (VkFlags)luaL_argerror(L, --arg, badvalue(L,s));
         done: ;
@@ -2559,13 +2565,13 @@ static int pushfenceimportflags(lua_State *L, VkFlags flags)
     int n = 0;
 
 #define CASE(CODE,str) do { if( flags & CODE) { lua_pushstring(L, str); n++; } } while(0)
-    CASE(VK_FENCE_IMPORT_TEMPORARY_BIT_KHR, "temporary");
+    CASE(VK_FENCE_IMPORT_TEMPORARY_BIT, "temporary");
 #undef CASE
 
     return n;
     }
 
-static int FenceImportFlagsKHR(lua_State *L)
+static int FenceImportFlags(lua_State *L)
     {
     if(lua_type(L, 1) == LUA_TNUMBER)
         return pushfenceimportflags(L, luaL_checkinteger(L, 1));
@@ -2573,8 +2579,8 @@ static int FenceImportFlagsKHR(lua_State *L)
     return 1;
     }
 
-#define Add_FenceImportFlagsKHR(L) \
-    ADD(FENCE_IMPORT_TEMPORARY_BIT_KHR); \
+#define Add_FenceImportFlags(L) \
+    ADD(FENCE_IMPORT_TEMPORARY_BIT); \
 
 
 
@@ -2621,14 +2627,14 @@ static int AddConstants(lua_State *L) /* vk.XXX constants for VK_XXX values */
     Add_DisplayPlaneAlphaFlagsKHR(L);
     Add_DebugReportFlagsEXT(L);
     Add_SurfaceCounterFlagsEXT(L);
-    Add_ExternalMemoryHandleTypeFlagsKHR(L);
-    Add_ExternalMemoryFeatureFlagsKHR(L);
-    Add_ExternalSemaphoreHandleTypeFlagsKHR(L);
-    Add_ExternalSemaphoreFeatureFlagsKHR(L);
-    Add_SemaphoreImportFlagsKHR(L);
-    Add_ExternalFenceHandleTypeFlagsKHR(L);
-    Add_ExternalFenceFeatureFlagsKHR(L);
-    Add_FenceImportFlagsKHR(L);
+    Add_ExternalMemoryHandleTypeFlags(L);
+    Add_ExternalMemoryFeatureFlags(L);
+    Add_ExternalSemaphoreHandleTypeFlags(L);
+    Add_ExternalSemaphoreFeatureFlags(L);
+    Add_SemaphoreImportFlags(L);
+    Add_ExternalFenceHandleTypeFlags(L);
+    Add_ExternalFenceFeatureFlags(L);
+    Add_FenceImportFlags(L);
     return 0;
     }
 
@@ -2700,14 +2706,14 @@ static const struct luaL_Reg Functions[] =
         { "displayplanealphaflags", DisplayPlaneAlphaFlagsKHR },
         { "debugreportflags", DebugReportFlagsEXT },
         { "surfacecounterflags", SurfaceCounterFlagsEXT },
-        { "externalmemoryhandletypeflags", ExternalMemoryHandleTypeFlagsKHR },
-        { "externalmemoryfeatureflags", ExternalMemoryFeatureFlagsKHR },
-        { "externalsemaphorehandletypeflags", ExternalSemaphoreHandleTypeFlagsKHR },
-        { "externalsemaphorefeatureflags", ExternalSemaphoreFeatureFlagsKHR },
-        { "semaphoreimportflags", SemaphoreImportFlagsKHR },
-        { "externalfencehandletypeflags", ExternalFenceHandleTypeFlagsKHR },
-        { "externalfencefeatureflags", ExternalFenceFeatureFlagsKHR },
-        { "fenceimportflags", FenceImportFlagsKHR },
+        { "externalmemoryhandletypeflags", ExternalMemoryHandleTypeFlags },
+        { "externalmemoryfeatureflags", ExternalMemoryFeatureFlags },
+        { "externalsemaphorehandletypeflags", ExternalSemaphoreHandleTypeFlags },
+        { "externalsemaphorefeatureflags", ExternalSemaphoreFeatureFlags },
+        { "semaphoreimportflags", SemaphoreImportFlags },
+        { "externalfencehandletypeflags", ExternalFenceHandleTypeFlags },
+        { "externalfencefeatureflags", ExternalFenceFeatureFlags },
+        { "fenceimportflags", FenceImportFlags },
         /* extensions, reserved */
         { "displaymodecreateflags", ReservedFlags }, /* VkDisplayModeCreateFlagsKHR */
         { "displaysurfacecreateflags", ReservedFlags }, /* VkDisplaySurfaceCreateFlagsKHR */
@@ -2717,8 +2723,8 @@ static const struct luaL_Reg Functions[] =
         { "mirsurfacecreateflags", ReservedFlags }, /* VkMirSurfaceCreateFlagsKHR */
         { "androidsurfacecreateflags", ReservedFlags }, /* VkAndroidSurfaceCreateFlagsKHR */
         { "win32surfacecreateflags", ReservedFlags }, /* VkWin32SurfaceCreateFlagsKHR */
-        { "commandpooltrimflags", ReservedFlags }, /* VkCommandPoolTrimFlagsKHR */
-        { "descriptorupdatetemplatecreateflags", ReservedFlags }, /* VkDescriptorUpdateTemplateCreateFlagsKHR */
+        { "commandpooltrimflags", ReservedFlags }, /* VkCommandPoolTrimFlags */
+        { "descriptorupdatetemplatecreateflags", ReservedFlags }, /* VkDescriptorUpdateTemplateCreateFlags */
         { "pipelinediscardrectanglestatecreateflags", ReservedFlags }, /* VkPipelineDiscardRectangleStateCreateFlagsEXT */
         { "validationcachecreateflags", ReservedFlags }, /* VkValidationCacheCreateFlagsEXT */
         { NULL, NULL } /* sentinel */

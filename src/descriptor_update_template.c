@@ -27,13 +27,13 @@
 
 static int freedescriptor_update_template(lua_State *L, ud_t *ud)
     {
-    VkDescriptorUpdateTemplateKHR du_template = (VkDescriptorUpdateTemplateKHR)ud->handle;
+    VkDescriptorUpdateTemplate du_template = (VkDescriptorUpdateTemplate)ud->handle;
     const VkAllocationCallbacks *allocator = ud->allocator;
     VkDevice device = ud->device;
     if(!freeuserdata(L, ud))
         return 0; /* double call */
     TRACE_DELETE(du_template, "descriptor_update_template");
-    UD(device)->ddt->DestroyDescriptorUpdateTemplateKHR(device, du_template, allocator);
+    UD(device)->ddt->DestroyDescriptorUpdateTemplate(device, du_template, allocator);
     return 0;
     }
 
@@ -41,17 +41,17 @@ static int Create(lua_State *L)
     {
     ud_t *ud, *device_ud;
     VkResult ec;
-    VkDescriptorUpdateTemplateKHR du_template;
-    VkDescriptorUpdateTemplateCreateInfoKHR info;
+    VkDescriptorUpdateTemplate du_template;
+    VkDescriptorUpdateTemplateCreateInfo info;
 
     VkDevice device = checkdevice(L, 1, &device_ud);
     const VkAllocationCallbacks *allocator = optallocator(L, 3);
 
-    CheckDevicePfn(L, device_ud, CreateDescriptorUpdateTemplateKHR);
+    CheckDevicePfn(L, device_ud, CreateDescriptorUpdateTemplate);
     if(echeckdescriptorupdatetemplatecreateinfo(L, 2, &info))
         return argerror(L, 2);
 
-    ec = device_ud->ddt->CreateDescriptorUpdateTemplateKHR(device, &info, allocator, &du_template);
+    ec = device_ud->ddt->CreateDescriptorUpdateTemplate(device, &info, allocator, &du_template);
     freedescriptorupdatetemplatecreateinfo(L, &info);
     CheckError(L, ec);
     TRACE_CREATE(du_template, "descriptor_update_template");
@@ -74,10 +74,10 @@ static int UpdateDescriptorSetWithTemplate(lua_State *L)
     size_t len;
     ud_t *ud1, *ud2;
     VkDescriptorSet descriptor_set = checkdescriptor_set(L, 1, &ud1);
-    VkDescriptorUpdateTemplateKHR du_template = checkdescriptor_update_template(L, 2, &ud2);
+    VkDescriptorUpdateTemplate du_template = checkdescriptor_update_template(L, 2, &ud2);
     const void* data = luaL_checklstring(L, 3, &len);
-    CheckDevicePfn(L, ud1, UpdateDescriptorSetWithTemplateKHR);
-    ud1->ddt->UpdateDescriptorSetWithTemplateKHR(ud1->device, descriptor_set, du_template, data); 
+    CheckDevicePfn(L, ud1, UpdateDescriptorSetWithTemplate);
+    ud1->ddt->UpdateDescriptorSetWithTemplate(ud1->device, descriptor_set, du_template, data);
     return 0;
     }
 

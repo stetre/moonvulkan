@@ -776,7 +776,7 @@ static int CmdPushDescriptorSetWithTemplate(lua_State *L)
     size_t len;
     ud_t *ud;
     VkCommandBuffer cb = checkcommand_buffer(L, 1, &ud);
-    VkDescriptorUpdateTemplateKHR desc_template = checkdescriptor_update_template(L, 2, NULL);
+    VkDescriptorUpdateTemplate desc_template = checkdescriptor_update_template(L, 2, NULL);
     VkPipelineLayout layout = checkpipeline_layout(L, 3, NULL);
     uint32_t set = luaL_checkinteger(L, 4);
     const void* data = luaL_checklstring(L, 5, &len);

@@ -60,7 +60,7 @@ int echeckcommandbufferbegininfo(lua_State *L, int arg, VkCommandBufferBeginInfo
 
 typedef struct {
     VkFenceCreateInfo p1;
-    VkExportFenceCreateInfoKHR p2;
+    VkExportFenceCreateInfo p2;
 } VkFenceCreateInfo_CHAIN;
 
 #define echeckfencecreateinfo moonvulkan_echeckfencecreateinfo
@@ -78,7 +78,7 @@ int echeckfencegetfdinfo(lua_State *L, int arg, VkFenceGetFdInfoKHR *p);
 
 typedef struct {
     VkSemaphoreCreateInfo p1;
-    VkExportSemaphoreCreateInfoKHR p2;
+    VkExportSemaphoreCreateInfo p2;
 } VkSemaphoreCreateInfo_CHAIN;
 
 #define echecksemaphorecreateinfo moonvulkan_echecksemaphorecreateinfo
@@ -125,7 +125,7 @@ int echeckquerypoolcreateinfo(lua_State *L, int arg, VkQueryPoolCreateInfo *p);
 
 typedef struct {
     VkRenderPassCreateInfo p1;
-    VkRenderPassInputAttachmentAspectCreateInfoKHR p2;
+    VkRenderPassInputAttachmentAspectCreateInfo p2;
 } VkRenderPassCreateInfo_CHAIN;
 
 #define freerenderpasscreateinfo moonvulkan_freerenderpasscreateinfo
@@ -164,7 +164,7 @@ int echeckvalidationcachecreateinfo(lua_State *L, int arg, VkValidationCacheCrea
 
 typedef struct {
     VkBufferCreateInfo p1;
-    VkExternalMemoryBufferCreateInfoKHR p2;
+    VkExternalMemoryBufferCreateInfo p2;
 } VkBufferCreateInfo_CHAIN;
 
 #define freebuffercreateinfo moonvulkan_freebuffercreateinfo
@@ -178,7 +178,7 @@ int echeckbufferviewcreateinfo(lua_State *L, int arg, VkBufferViewCreateInfo *p)
 
 typedef struct {
     VkImageCreateInfo p1;
-    VkExternalMemoryImageCreateInfoKHR p2;
+    VkExternalMemoryImageCreateInfo p2;
     VkImageFormatListCreateInfoKHR p3;
 } VkImageCreateInfo_CHAIN;
 
@@ -189,7 +189,7 @@ int echeckimagecreateinfo(lua_State *L, int arg, VkImageCreateInfo_CHAIN *p);
 
 typedef struct {
     VkImageViewCreateInfo p1;
-    VkImageViewUsageCreateInfoKHR p2;
+    VkImageViewUsageCreateInfo p2;
 } VkImageViewCreateInfo_CHAIN;
 
 #define freeimageviewcreateinfo(L, p) do { } while(0)
@@ -199,7 +199,7 @@ int echeckimageviewcreateinfo(lua_State *L, int arg, VkImageViewCreateInfo_CHAIN
 typedef struct {
     VkSamplerCreateInfo p1;
     VkSamplerReductionModeCreateInfoEXT p2;
-    VkSamplerYcbcrConversionInfoKHR p3;
+    VkSamplerYcbcrConversionInfo p3;
 } VkSamplerCreateInfo_CHAIN;
 
 #define freesamplercreateinfo moonvulkan_freesamplercreateinfo
@@ -244,118 +244,118 @@ int echeckextent3d(lua_State *L, int arg, VkExtent3D *dst);
 int pushextent3d(lua_State *L, VkExtent3D *p);
 
 typedef struct {
-    VkPhysicalDeviceProperties2KHR p1;
+    VkPhysicalDeviceProperties2 p1;
     VkPhysicalDevicePushDescriptorPropertiesKHR p2;
     VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT p3;
     VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT p4;
     VkPhysicalDeviceDiscardRectanglePropertiesEXT p5;
-    VkPhysicalDeviceIDPropertiesKHR p6;
-    VkPhysicalDevicePointClippingPropertiesKHR p7;
+    VkPhysicalDeviceIDProperties p6;
+    VkPhysicalDevicePointClippingProperties p7;
     VkPhysicalDeviceSampleLocationsPropertiesEXT p8;
-} VkPhysicalDeviceProperties2KHR_CHAIN;
+} VkPhysicalDeviceProperties2_CHAIN;
 
 #define initphysicaldeviceproperties2 moonvulkan_initphysicaldeviceproperties2
-void initphysicaldeviceproperties2(lua_State *L, VkPhysicalDeviceProperties2KHR_CHAIN *p);
+void initphysicaldeviceproperties2(lua_State *L, VkPhysicalDeviceProperties2_CHAIN *p);
 #define pushphysicaldeviceproperties2 moonvulkan_pushphysicaldeviceproperties2
-int pushphysicaldeviceproperties2(lua_State *L, VkPhysicalDeviceProperties2KHR_CHAIN *p);
+int pushphysicaldeviceproperties2(lua_State *L, VkPhysicalDeviceProperties2_CHAIN *p);
 #define pushphysicaldeviceproperties moonvulkan_pushphysicaldeviceproperties
 int pushphysicaldeviceproperties(lua_State *L, VkPhysicalDeviceProperties *p);
 
 typedef struct {
-    VkPhysicalDeviceFeatures2KHR p1;
-    VkPhysicalDevice16BitStorageFeaturesKHR p2;
-    VkPhysicalDeviceVariablePointerFeaturesKHR p3;
+    VkPhysicalDeviceFeatures2 p1;
+    VkPhysicalDevice16BitStorageFeatures p2;
+    VkPhysicalDeviceVariablePointerFeatures p3;
     VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT p4;
-    VkPhysicalDeviceSamplerYcbcrConversionFeaturesKHR p5;
-} VkPhysicalDeviceFeatures2KHR_CHAIN;
+    VkPhysicalDeviceSamplerYcbcrConversionFeatures p5;
+} VkPhysicalDeviceFeatures2_CHAIN;
 #define initphysicaldevicefeatures2 moonvulkan_initphysicaldevicefeatures2
-void initphysicaldevicefeatures2(lua_State *L, VkPhysicalDeviceFeatures2KHR_CHAIN*);
+void initphysicaldevicefeatures2(lua_State *L, VkPhysicalDeviceFeatures2_CHAIN*);
 #define pushphysicaldevicefeatures2 moonvulkan_pushphysicaldevicefeatures2
-int pushphysicaldevicefeatures2(lua_State *L, VkPhysicalDeviceFeatures2KHR_CHAIN *p);
+int pushphysicaldevicefeatures2(lua_State *L, VkPhysicalDeviceFeatures2_CHAIN *p);
 #define pushphysicaldevicefeatures moonvulkan_pushphysicaldevicefeatures
 int pushphysicaldevicefeatures(lua_State *L, VkPhysicalDeviceFeatures *p);
 
 
 typedef struct {
-    VkFormatProperties2KHR p1;
-} VkFormatProperties2KHR_CHAIN;
+    VkFormatProperties2 p1;
+} VkFormatProperties2_CHAIN;
 
 #define initformatproperties2 moonvulkan_initformatproperties2
-void initformatproperties2(lua_State *L, VkFormatProperties2KHR_CHAIN* p);
+void initformatproperties2(lua_State *L, VkFormatProperties2_CHAIN* p);
 #define pushformatproperties2 moonvulkan_pushformatproperties2
-int pushformatproperties2(lua_State *L, VkFormatProperties2KHR_CHAIN *p);
+int pushformatproperties2(lua_State *L, VkFormatProperties2_CHAIN *p);
 #define pushformatproperties moonvulkan_pushformatproperties
 int pushformatproperties(lua_State *L, VkFormatProperties *p);
 
 typedef struct {
-    VkImageFormatProperties2KHR p1;
-    VkExternalImageFormatPropertiesKHR p2;
-    VkSamplerYcbcrConversionImageFormatPropertiesKHR p3;
-} VkImageFormatProperties2KHR_CHAIN;
+    VkImageFormatProperties2 p1;
+    VkExternalImageFormatProperties p2;
+    VkSamplerYcbcrConversionImageFormatProperties p3;
+} VkImageFormatProperties2_CHAIN;
 #define initimageformatproperties2 moonvulkan_initimageformatproperties2
-void initimageformatproperties2(lua_State *L, VkImageFormatProperties2KHR_CHAIN *p);
+void initimageformatproperties2(lua_State *L, VkImageFormatProperties2_CHAIN *p);
 #define pushimageformatproperties2 moonvulkan_pushimageformatproperties2
-int pushimageformatproperties2(lua_State *L, VkImageFormatProperties2KHR_CHAIN *p);
+int pushimageformatproperties2(lua_State *L, VkImageFormatProperties2_CHAIN *p);
 #define pushimageformatproperties moonvulkan_pushimageformatproperties
 int pushimageformatproperties(lua_State *L, VkImageFormatProperties *p);
 
 #define pushexternalbufferproperties moonvulkan_pushexternalbufferproperties
-int pushexternalbufferproperties(lua_State *L, VkExternalBufferPropertiesKHR *p);
+int pushexternalbufferproperties(lua_State *L, VkExternalBufferProperties *p);
 #define echeckphysicaldeviceexternalbufferinfo moonvulkan_echeckphysicaldeviceexternalbufferinfo
-int echeckphysicaldeviceexternalbufferinfo(lua_State *L, int arg, VkPhysicalDeviceExternalBufferInfoKHR *p);
+int echeckphysicaldeviceexternalbufferinfo(lua_State *L, int arg, VkPhysicalDeviceExternalBufferInfo *p);
 
 #define pushexternalfenceproperties moonvulkan_pushexternalfenceproperties
-int pushexternalfenceproperties(lua_State *L, VkExternalFencePropertiesKHR *p);
+int pushexternalfenceproperties(lua_State *L, VkExternalFenceProperties *p);
 #define echeckphysicaldeviceexternalfenceinfo moonvulkan_echeckphysicaldeviceexternalfenceinfo
-int echeckphysicaldeviceexternalfenceinfo(lua_State *L, int arg, VkPhysicalDeviceExternalFenceInfoKHR *p);
+int echeckphysicaldeviceexternalfenceinfo(lua_State *L, int arg, VkPhysicalDeviceExternalFenceInfo *p);
 
 #define pushexternalsemaphoreproperties moonvulkan_pushexternalsemaphoreproperties
-int pushexternalsemaphoreproperties(lua_State *L, VkExternalSemaphorePropertiesKHR *p);
+int pushexternalsemaphoreproperties(lua_State *L, VkExternalSemaphoreProperties *p);
 #define echeckphysicaldeviceexternalsemaphoreinfo moonvulkan_echeckphysicaldeviceexternalsemaphoreinfo
-int echeckphysicaldeviceexternalsemaphoreinfo(lua_State *L, int arg, VkPhysicalDeviceExternalSemaphoreInfoKHR *p);
+int echeckphysicaldeviceexternalsemaphoreinfo(lua_State *L, int arg, VkPhysicalDeviceExternalSemaphoreInfo *p);
 
 typedef struct {
-    VkPhysicalDeviceImageFormatInfo2KHR p1;
-    VkPhysicalDeviceExternalImageFormatInfoKHR p2;
-} VkPhysicalDeviceImageFormatInfo2KHR_CHAIN;
+    VkPhysicalDeviceImageFormatInfo2 p1;
+    VkPhysicalDeviceExternalImageFormatInfo p2;
+} VkPhysicalDeviceImageFormatInfo2_CHAIN;
 
 #define echeckphysicaldeviceimageformatinfo2 moonvulkan_echeckphysicaldeviceimageformatinfo2
-int echeckphysicaldeviceimageformatinfo2(lua_State *L, int arg, VkPhysicalDeviceImageFormatInfo2KHR_CHAIN *p);
+int echeckphysicaldeviceimageformatinfo2(lua_State *L, int arg, VkPhysicalDeviceImageFormatInfo2_CHAIN *p);
 
 #define echeckphysicaldevicesparseimageformatinfo2 moonvulkan_echeckphysicaldevicesparseimageformatinfo2
-int echeckphysicaldevicesparseimageformatinfo2(lua_State *L, int arg, VkPhysicalDeviceSparseImageFormatInfo2KHR *p);
+int echeckphysicaldevicesparseimageformatinfo2(lua_State *L, int arg, VkPhysicalDeviceSparseImageFormatInfo2 *p);
 
 #define pushphysicaldevicesparseproperties moonvulkan_pushphysicaldevicesparseproperties
 int pushphysicaldevicesparseproperties(lua_State *L, VkPhysicalDeviceSparseProperties *p);
 
 #define newqueuefamilyproperties2 moonvulkan_newqueuefamilyproperties2
-VkQueueFamilyProperties2KHR *newqueuefamilyproperties2(lua_State *L, uint32_t count);
+VkQueueFamilyProperties2 *newqueuefamilyproperties2(lua_State *L, uint32_t count);
 #define freequeuefamilyproperties2 moonvulkan_freequeuefamilyproperties2
-void freequeuefamilyproperties2(lua_State *L, VkQueueFamilyProperties2KHR *p, uint32_t count);
+void freequeuefamilyproperties2(lua_State *L, VkQueueFamilyProperties2 *p, uint32_t count);
 #define pushqueuefamilyproperties moonvulkan_pushqueuefamilyproperties
 int pushqueuefamilyproperties(lua_State *L, VkQueueFamilyProperties *p, uint32_t family_index);
 #define pushqueuefamilyproperties2 moonvulkan_pushqueuefamilyproperties2
-int pushqueuefamilyproperties2(lua_State *L, VkQueueFamilyProperties2KHR *p, uint32_t index);
+int pushqueuefamilyproperties2(lua_State *L, VkQueueFamilyProperties2 *p, uint32_t index);
 
 typedef struct {
-    VkPhysicalDeviceMemoryProperties2KHR p1;
-} VkPhysicalDeviceMemoryProperties2KHR_CHAIN;
+    VkPhysicalDeviceMemoryProperties2 p1;
+} VkPhysicalDeviceMemoryProperties2_CHAIN;
 
 #define initphysicaldevicememoryproperties2 moonvulkan_initphysicaldevicememoryproperties2
-void initphysicaldevicememoryproperties2(lua_State *L, VkPhysicalDeviceMemoryProperties2KHR_CHAIN *p);
+void initphysicaldevicememoryproperties2(lua_State *L, VkPhysicalDeviceMemoryProperties2_CHAIN *p);
 #define pushphysicaldevicememoryproperties2 moonvulkan_pushphysicaldevicememoryproperties2
-int pushphysicaldevicememoryproperties2(lua_State *L, VkPhysicalDeviceMemoryProperties2KHR_CHAIN *p);
+int pushphysicaldevicememoryproperties2(lua_State *L, VkPhysicalDeviceMemoryProperties2_CHAIN *p);
 #define pushphysicaldevicememoryproperties moonvulkan_pushphysicaldevicememoryproperties
 int pushphysicaldevicememoryproperties(lua_State *L, VkPhysicalDeviceMemoryProperties *p);
 
 #define newsparseimageformatproperties2 moonvulkan_newsparseimageformatproperties2
-VkSparseImageFormatProperties2KHR *newsparseimageformatproperties2(lua_State *L, uint32_t count);
+VkSparseImageFormatProperties2 *newsparseimageformatproperties2(lua_State *L, uint32_t count);
 #define freesparseimageformatproperties2 moonvulkan_freesparseimageformatproperties2
-void freesparseimageformatproperties2(lua_State *L, VkSparseImageFormatProperties2KHR *p, uint32_t count);
+void freesparseimageformatproperties2(lua_State *L, VkSparseImageFormatProperties2 *p, uint32_t count);
 #define pushsparseimageformatproperties moonvulkan_pushsparseimageformatproperties
 int pushsparseimageformatproperties(lua_State *L, VkSparseImageFormatProperties *p);
 #define pushsparseimageformatproperties2 moonvulkan_pushsparseimageformatproperties2
-int pushsparseimageformatproperties2(lua_State *L, VkSparseImageFormatProperties2KHR *p);
+int pushsparseimageformatproperties2(lua_State *L, VkSparseImageFormatProperties2 *p);
 
 #define echeckcomponentmapping moonvulkan_echeckcomponentmapping
 int echeckcomponentmapping(lua_State *L, int arg, VkComponentMapping *dst);
@@ -443,8 +443,8 @@ VkMappedMemoryRange* echeckmappedmemoryrangelist(lua_State *L, int arg, uint32_t
 
 typedef struct {
     VkMemoryAllocateInfo p1;
-    VkMemoryDedicatedAllocateInfoKHR p2;
-    VkExportMemoryAllocateInfoKHR p3;
+    VkMemoryDedicatedAllocateInfo p2;
+    VkExportMemoryAllocateInfo p3;
     VkImportMemoryFdInfoKHR p4;
 } VkMemoryAllocateInfo_CHAIN;
 
@@ -458,49 +458,49 @@ int pushmemoryfdproperties(lua_State *L, VkMemoryFdPropertiesKHR *p);
 int echeckmemorygetfdinfo(lua_State *L, int arg, VkMemoryGetFdInfoKHR *p);
 
 typedef struct {
-    VkBufferMemoryRequirementsInfo2KHR p1;
-} VkBufferMemoryRequirementsInfo2KHR_CHAIN;
+    VkBufferMemoryRequirementsInfo2 p1;
+} VkBufferMemoryRequirementsInfo2_CHAIN;
 
 #define echeckbuffermemoryrequirementsinfo2 moonvulkan_echeckbuffermemoryrequirementsinfo2
-int echeckbuffermemoryrequirementsinfo2(lua_State *L, int arg, VkBufferMemoryRequirementsInfo2KHR_CHAIN *pp);
+int echeckbuffermemoryrequirementsinfo2(lua_State *L, int arg, VkBufferMemoryRequirementsInfo2_CHAIN *pp);
 
 typedef struct {
-    VkImageMemoryRequirementsInfo2KHR p1;
-    VkImagePlaneMemoryRequirementsInfoKHR p2;
-} VkImageMemoryRequirementsInfo2KHR_CHAIN;
+    VkImageMemoryRequirementsInfo2 p1;
+    VkImagePlaneMemoryRequirementsInfo p2;
+} VkImageMemoryRequirementsInfo2_CHAIN;
 
 #define echeckimagememoryrequirementsinfo2 moonvulkan_echeckimagememoryrequirementsinfo2
-int echeckimagememoryrequirementsinfo2(lua_State *L, int arg, VkImageMemoryRequirementsInfo2KHR_CHAIN *pp);
+int echeckimagememoryrequirementsinfo2(lua_State *L, int arg, VkImageMemoryRequirementsInfo2_CHAIN *pp);
 
 typedef struct {
-    VkImageSparseMemoryRequirementsInfo2KHR p1;
-} VkImageSparseMemoryRequirementsInfo2KHR_CHAIN;
+    VkImageSparseMemoryRequirementsInfo2 p1;
+} VkImageSparseMemoryRequirementsInfo2_CHAIN;
 
 #define echeckimagesparsememoryrequirementsinfo2 moonvulkan_echeckimagesparsememoryrequirementsinfo2
-int echeckimagesparsememoryrequirementsinfo2(lua_State *L, int arg, VkImageSparseMemoryRequirementsInfo2KHR_CHAIN *pp);
+int echeckimagesparsememoryrequirementsinfo2(lua_State *L, int arg, VkImageSparseMemoryRequirementsInfo2_CHAIN *pp);
 
 typedef struct {
-    VkMemoryRequirements2KHR p1;
-    VkMemoryDedicatedRequirementsKHR p2;
-} VkMemoryRequirements2KHR_CHAIN;
+    VkMemoryRequirements2 p1;
+    VkMemoryDedicatedRequirements p2;
+} VkMemoryRequirements2_CHAIN;
 
 #define initmemoryrequirements2 moonvulkan_initmemoryrequirements2
-void initmemoryrequirements2(lua_State *L, VkMemoryRequirements2KHR_CHAIN *p);
+void initmemoryrequirements2(lua_State *L, VkMemoryRequirements2_CHAIN *p);
 #define pushmemoryrequirements2 moonvulkan_pushmemoryrequirements2
-int pushmemoryrequirements2(lua_State *L, VkMemoryRequirements2KHR_CHAIN *p);
+int pushmemoryrequirements2(lua_State *L, VkMemoryRequirements2_CHAIN *p);
 #define pushmemorydedicatedrequirements moonvulkan_pushmemorydedicatedrequirements
-int pushmemorydedicatedrequirements(lua_State *L, VkMemoryDedicatedRequirementsKHR *p);
+int pushmemorydedicatedrequirements(lua_State *L, VkMemoryDedicatedRequirements *p);
 #define pushmemoryrequirements moonvulkan_pushmemoryrequirements
 int pushmemoryrequirements(lua_State *L, VkMemoryRequirements *p);
 
 #define newsparseimagememoryrequirements2 moonvulkan_newsparseimagememoryrequirements2
-VkSparseImageMemoryRequirements2KHR* newsparseimagememoryrequirements2(lua_State *L, uint32_t count);
+VkSparseImageMemoryRequirements2* newsparseimagememoryrequirements2(lua_State *L, uint32_t count);
 #define freesparseimagememoryrequirements2 moonvulkan_freesparseimagememoryrequirements2
-void freesparseimagememoryrequirements2(lua_State *L, VkSparseImageMemoryRequirements2KHR *p, uint32_t count);
+void freesparseimagememoryrequirements2(lua_State *L, VkSparseImageMemoryRequirements2 *p, uint32_t count);
 #define pushsparseimagememoryrequirements moonvulkan_pushsparseimagememoryrequirements
 int pushsparseimagememoryrequirements(lua_State *L, VkSparseImageMemoryRequirements *p);
 #define pushsparseimagememoryrequirements2 moonvulkan_pushsparseimagememoryrequirements2
-int pushsparseimagememoryrequirements2(lua_State *L, VkSparseImageMemoryRequirements2KHR *p);
+int pushsparseimagememoryrequirements2(lua_State *L, VkSparseImageMemoryRequirements2 *p);
 
 #define pushsubresourcelayout moonvulkan_pushsubresourcelayout
 int pushsubresourcelayout(lua_State *L, VkSubresourceLayout *p);
@@ -616,14 +616,14 @@ void freedisplaysurfacecreateinfo(lua_State *L, VkDisplaySurfaceCreateInfoKHR *p
 int echeckdisplaysurfacecreateinfo(lua_State *L, int arg, VkDisplaySurfaceCreateInfoKHR *p);
 
 #define freedescriptorupdatetemplatecreateinfo moonvulkan_freedescriptorupdatetemplatecreateinfo
-void freedescriptorupdatetemplatecreateinfo(lua_State *L, VkDescriptorUpdateTemplateCreateInfoKHR *p);
+void freedescriptorupdatetemplatecreateinfo(lua_State *L, VkDescriptorUpdateTemplateCreateInfo *p);
 #define echeckdescriptorupdatetemplatecreateinfo moonvulkan_echeckdescriptorupdatetemplatecreateinfo
-int echeckdescriptorupdatetemplatecreateinfo(lua_State *L, int arg, VkDescriptorUpdateTemplateCreateInfoKHR *p);
+int echeckdescriptorupdatetemplatecreateinfo(lua_State *L, int arg, VkDescriptorUpdateTemplateCreateInfo *p);
 
 typedef struct {
     VkDeviceCreateInfo p1;
     VkPhysicalDeviceFeatures p2a;
-    VkPhysicalDeviceFeatures2KHR_CHAIN p2b;
+    VkPhysicalDeviceFeatures2_CHAIN p2b;
 } VkDeviceCreateInfo_CHAIN;
 
 #define freedevicecreateinfo moonvulkan_freedevicecreateinfo
@@ -645,20 +645,20 @@ int echeckinstancecreateinfo(lua_State *L, int arg, VkInstanceCreateInfo_CHAIN *
 #define freebindbuffermemoryinfolist moonvulkan_freebindbuffermemoryinfolist
 void freebindbuffermemoryinfolist(lua_State *L, void *list, uint32_t count);
 #define echeckbindbuffermemoryinfolist moonvulkan_echeckbindbuffermemoryinfolist
-VkBindBufferMemoryInfoKHR* echeckbindbuffermemoryinfolist(lua_State *L, int arg, uint32_t *count, int *err);
+VkBindBufferMemoryInfo* echeckbindbuffermemoryinfolist(lua_State *L, int arg, uint32_t *count, int *err);
 
 #define freebindimagememoryinfolist moonvulkan_freebindimagememoryinfolist
 void freebindimagememoryinfolist(lua_State *L, void *list, uint32_t count);
 #define echeckbindimagememoryinfolist moonvulkan_echeckbindimagememoryinfolist
-VkBindImageMemoryInfoKHR* echeckbindimagememoryinfolist(lua_State *L, int arg, uint32_t *count, int *err);
+VkBindImageMemoryInfo* echeckbindimagememoryinfolist(lua_State *L, int arg, uint32_t *count, int *err);
 
 #define echecksamplerycbcrconversioncreateinfo moonvulkan_echecksamplerycbcrconversioncreateinfo
-int echecksamplerycbcrconversioncreateinfo(lua_State *L, int arg, VkSamplerYcbcrConversionCreateInfoKHR *p);
+int echecksamplerycbcrconversioncreateinfo(lua_State *L, int arg, VkSamplerYcbcrConversionCreateInfo *p);
 
 #ifdef VK_USE_PLATFORM_WIN32_KHR
 
 #define echeckimportsemaphorewin32handleinfo moonvulkan_echeckimportsemaphorewin32handleinfo
-int echeckimportsemaphorewin32handleinfo(lua_State *L, int arg, VkImportSemaphoreWin32HandleInfoKHR *p);
+int echeckimportsemaphorewin32handleinfo(lua_State *L, int arg, VkImportSemaphoreWin32HandleInfo *p);
 #define echecksemaphoregetwin32handleinfo moonvulkan_echecksemaphoregetwin32handleinfo
 int echecksemaphoregetwin32handleinfo(lua_State *L, int arg, VkSemaphoreGetWin32HandleInfoKHR *p);
 

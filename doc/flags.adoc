@@ -162,7 +162,7 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.ht
 [[formatfeatureflags]]
 [small]#*formatfeatureflags*: vk.FORMAT_FEATURE_XXX_BIT +
 Values: 
-'_sampled image_', '_storage image_', '_storage image atomic_', '_uniform texel buffer_', '_storage texel buffer_', '_storage texel buffer atomic_', '_vertex buffer_', '_color attachment_', '_color attachment blend_', '_depth stencil attachment_', '_blit src_', '_blit dst_', '_sampled image filter linear_', '_sampled image filter minmax_', '_midpoint chroma samples_', '_sampled image ycbcr conversion linear filter_', '_sampled image ycbcr conversion separate reconstruction filter_', '_sampled image ycbcr conversion chroma reconstruction explicit_', '_sampled image ycbcr conversion chroma reconstruction explicit forceable_', '_disjoint_', '_cosited chroma samples_'. +
+'_sampled image_', '_storage image_', '_storage image atomic_', '_uniform texel buffer_', '_storage texel buffer_', '_storage texel buffer atomic_', '_vertex buffer_', '_color attachment_', '_color attachment blend_', '_depth stencil attachment_', '_blit src_', '_blit dst_', '_transfer src_', '_transfer dst_', '_sampled image filter linear_', '_sampled image filter minmax_', '_midpoint chroma samples_', '_sampled image ycbcr conversion linear filter_', '_sampled image ycbcr conversion separate reconstruction filter_', '_sampled image ycbcr conversion chroma reconstruction explicit_', '_sampled image ycbcr conversion chroma reconstruction explicit forceable_', '_disjoint_', '_cosited chroma samples_'. +
 Rfr. https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkFormatFeatureFlagBits[VkFormatFeatureFlagBits].#
 
 [[imageaspectflags]]

@@ -61,9 +61,9 @@
 #define DISPLAY_MT "moonvulkan_display" /* KHR */
 #define DISPLAY_MODE_MT "moonvulkan_display_mode" /* KHR */
 #define DEBUG_REPORT_CALLBACK_MT "moonvulkan_debug_report_callback" /* EXT */
-#define DESCRIPTOR_UPDATE_TEMPLATE_MT "moonvulkan_descriptor_update_template" /* KHR */
+#define DESCRIPTOR_UPDATE_TEMPLATE_MT "moonvulkan_descriptor_update_template"
 #define VALIDATION_CACHE_MT "moonvulkan_validation_cache" /* EXT */
-#define SAMPLER_YCBCR_CONVERSION_MT "moonvulkan_sampler_ycbcr_conversion" /* KHR */
+#define SAMPLER_YCBCR_CONVERSION_MT "moonvulkan_sampler_ycbcr_conversion"
 
 /* Userdata memory associated with objects */
 #define ud_t moonvulkan_ud_t
@@ -324,8 +324,8 @@ int pushimage_swapchain(lua_State *L, VkImage image, ud_t *swapchain_ud);
 #define testdisplay_mode(L, arg, udp) (VkDisplayModeKHR)testxxx((L), (arg), (udp), DISPLAY_MODE_MT)
 
 /* descriptor_update_template.c */
-#define checkdescriptor_update_template(L, arg, udp) (VkDescriptorUpdateTemplateKHR)checkxxx((L), (arg), (udp), DESCRIPTOR_UPDATE_TEMPLATE_MT)
-#define testdescriptor_update_template(L, arg, udp) (VkDescriptorUpdateTemplateKHR)testxxx((L), (arg), (udp), DESCRIPTOR_UPDATE_TEMPLATE_MT)
+#define checkdescriptor_update_template(L, arg, udp) (VkDescriptorUpdateTemplate)checkxxx((L), (arg), (udp), DESCRIPTOR_UPDATE_TEMPLATE_MT)
+#define testdescriptor_update_template(L, arg, udp) (VkDescriptorUpdateTemplate)testxxx((L), (arg), (udp), DESCRIPTOR_UPDATE_TEMPLATE_MT)
 #define pushdescriptor_update_template(L, handle) pushxxx((L), (uint64_t)(handle))
 
 /* validation_cache.c */
@@ -336,8 +336,8 @@ int pushimage_swapchain(lua_State *L, VkImage image, ud_t *swapchain_ud);
     (VkValidationCacheEXT*)checkxxxlist_nondispatchable((L), (arg), (count), (err), (ud), VALIDATION_CACHE_MT)
 
 /* sampler_ycbcr_conversion.c */
-#define checksampler_ycbcr_conversion(L, arg, udp) (VkSamplerYcbcrConversionKHR)checkxxx((L), (arg), (udp), SAMPLER_YCBCR_CONVERSION_MT)
-#define testsampler_ycbcr_conversion(L, arg, udp) (VkSamplerYcbcrConversionKHR)testxxx((L), (arg), (udp), SAMPLER_YCBCR_CONVERSION_MT)
+#define checksampler_ycbcr_conversion(L, arg, udp) (VkSamplerYcbcrConversion)checkxxx((L), (arg), (udp), SAMPLER_YCBCR_CONVERSION_MT)
+#define testsampler_ycbcr_conversion(L, arg, udp) (VkSamplerYcbcrConversion)testxxx((L), (arg), (udp), SAMPLER_YCBCR_CONVERSION_MT)
 #define pushsampler_ycbcr_conversion(L, handle) pushxxx((L), (uint64_t)(handle))
 
 /* used in main.c */

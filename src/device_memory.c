@@ -222,8 +222,8 @@ static int InvalidateMappedMemoryRanges(lua_State *L)
 
 static int GetBufferMemoryRequirements2(lua_State *L, VkBuffer buffer, ud_t *ud)
     {
-    VkMemoryRequirements2KHR_CHAIN req;
-    VkBufferMemoryRequirementsInfo2KHR_CHAIN info;
+    VkMemoryRequirements2_CHAIN req;
+    VkBufferMemoryRequirementsInfo2_CHAIN info;
     VkDevice device = ud->device;
 
     if(lua_istable(L, 2))
@@ -237,7 +237,7 @@ static int GetBufferMemoryRequirements2(lua_State *L, VkBuffer buffer, ud_t *ud)
         }
     info.p1.buffer = buffer;
     initmemoryrequirements2(L, &req);
-    ud->ddt->GetBufferMemoryRequirements2KHR(device, &info.p1, &req.p1);
+    ud->ddt->GetBufferMemoryRequirements2(device, &info.p1, &req.p1);
     pushmemoryrequirements2(L, &req);
     return 1;
     }
@@ -249,7 +249,7 @@ static int GetBufferMemoryRequirements(lua_State *L)
     VkDevice device = ud->device;
     VkMemoryRequirements req;
 
-    if(ud->ddt->GetBufferMemoryRequirements2KHR)
+    if(ud->ddt->GetBufferMemoryRequirements2)
         return GetBufferMemoryRequirements2(L, buffer, ud);
 
     ud->ddt->GetBufferMemoryRequirements(device, buffer, &req);
@@ -259,8 +259,8 @@ static int GetBufferMemoryRequirements(lua_State *L)
 
 static int GetImageMemoryRequirements2(lua_State *L, VkImage image, ud_t *ud)
     {
-    VkMemoryRequirements2KHR_CHAIN req;
-    VkImageMemoryRequirementsInfo2KHR_CHAIN info;
+    VkMemoryRequirements2_CHAIN req;
+    VkImageMemoryRequirementsInfo2_CHAIN info;
     VkDevice device = ud->device;
 
     if(lua_istable(L, 2))
@@ -275,7 +275,7 @@ static int GetImageMemoryRequirements2(lua_State *L, VkImage image, ud_t *ud)
     info.p1.image = image;
 
     initmemoryrequirements2(L, &req);
-    ud->ddt->GetImageMemoryRequirements2KHR(device, &info.p1, &req.p1);
+    ud->ddt->GetImageMemoryRequirements2(device, &info.p1, &req.p1);
     pushmemoryrequirements2(L, &req);
     return 1;
     }
@@ -286,7 +286,7 @@ static int GetImageMemoryRequirements(lua_State *L)
     VkImage image = checkimage(L, 1, &ud);
     VkDevice device = ud->device;
     VkMemoryRequirements req;
-    if(ud->ddt->GetImageMemoryRequirements2KHR)
+    if(ud->ddt->GetImageMemoryRequirements2)
         return GetImageMemoryRequirements2(L, image, ud);
 
     ud->ddt->GetImageMemoryRequirements(device, image, &req);
@@ -298,8 +298,8 @@ static int GetImageMemoryRequirements(lua_State *L)
 static int GetImageSparseMemoryRequirements2(lua_State *L, VkImage image, ud_t *ud)
     {
     uint32_t count, i;
-    VkSparseImageMemoryRequirements2KHR *requirements;
-    VkImageSparseMemoryRequirementsInfo2KHR_CHAIN info;
+    VkSparseImageMemoryRequirements2 *requirements;
+    VkImageSparseMemoryRequirementsInfo2_CHAIN info;
     VkDevice device = ud->device;
 
     if(lua_istable(L, 2))
@@ -314,14 +314,14 @@ static int GetImageSparseMemoryRequirements2(lua_State *L, VkImage image, ud_t *
     info.p1.image = image;
 
     lua_newtable(L);
-    ud->ddt->GetImageSparseMemoryRequirements2KHR(device, &info.p1, &count, NULL);
+    ud->ddt->GetImageSparseMemoryRequirements2(device, &info.p1, &count, NULL);
 
     if(count == 0)
         return 1;
 
     requirements = newsparseimagememoryrequirements2(L, count);
 
-    ud->ddt->GetImageSparseMemoryRequirements2KHR(device, &info.p1, &count, requirements);
+    ud->ddt->GetImageSparseMemoryRequirements2(device, &info.p1, &count, requirements);
     for(i = 0; i <count; i++)
         {
         pushsparseimagememoryrequirements2(L, &requirements[i]);
@@ -341,7 +341,7 @@ static int GetImageSparseMemoryRequirements(lua_State *L)
     VkImage image = checkimage(L, 1, &ud);
     VkDevice device = ud->device;
 
-    if(ud->ddt->GetImageSparseMemoryRequirements2KHR)
+    if(ud->ddt->GetImageSparseMemoryRequirements2)
         return GetImageSparseMemoryRequirements2(L, image, ud);
 
     lua_newtable(L);
@@ -399,12 +399,12 @@ static int BindBufferMemory2(lua_State *L)
     ud_t *ud;
     uint32_t count;
     int err;
-    VkBindBufferMemoryInfoKHR *bind_infos;
+    VkBindBufferMemoryInfo *bind_infos;
     VkDevice device = checkdevice(L, 1, &ud);
-    CheckDevicePfn(L, ud, BindBufferMemory2KHR);
+    CheckDevicePfn(L, ud, BindBufferMemory2);
     bind_infos = echeckbindbuffermemoryinfolist(L, 2, &count, &err);
     if(err) return argerror(L, 2);
-    ec = ud->ddt->BindBufferMemory2KHR(device, count, bind_infos);
+    ec = ud->ddt->BindBufferMemory2(device, count, bind_infos);
     freebindbuffermemoryinfolist(L, bind_infos, count);
     CheckError(L, ec);
     return 0;
@@ -416,12 +416,12 @@ static int BindImageMemory2(lua_State *L)
     ud_t *ud;
     uint32_t count;
     int err;
-    VkBindImageMemoryInfoKHR *bind_infos;
+    VkBindImageMemoryInfo *bind_infos;
     VkDevice device = checkdevice(L, 1, &ud);
-    CheckDevicePfn(L, ud, BindImageMemory2KHR);
+    CheckDevicePfn(L, ud, BindImageMemory2);
     bind_infos = echeckbindimagememoryinfolist(L, 2, &count, &err);
     if(err) return argerror(L, 2);
-    ec = ud->ddt->BindImageMemory2KHR(device, count, bind_infos);
+    ec = ud->ddt->BindImageMemory2(device, count, bind_infos);
     freebindimagememoryinfolist(L, bind_infos, count);
     CheckError(L, ec);
     return 0;
@@ -468,7 +468,7 @@ static int GetMemoryFdProperties(lua_State *L)
     ud_t *ud;
     VkMemoryFdPropertiesKHR properties;
     VkDevice device = checkdevice(L, 1, &ud);
-    VkExternalMemoryHandleTypeFlagBitsKHR handleType = checkflags(L, 2);
+    VkExternalMemoryHandleTypeFlagBits handleType = checkflags(L, 2);
     int fd = luaL_checkinteger(L, 3);
 
     CheckDevicePfn(L, ud, GetMemoryFdPropertiesKHR);
