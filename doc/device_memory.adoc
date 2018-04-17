@@ -8,22 +8,22 @@ or a return value.
 [[allocate_memory]]
 * _devmem_ = *allocate_memory*(_device_, <<memoryallocateinfo, _memoryallocateinfo_>>, [<<allocators, _allocator_>>]) +
 _devmem_ = *allocate_memory*(_device_, _allocation_size_, _memory_type_index_) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkAllocateMemory[vkAllocateMemory].#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkAllocateMemory[vkAllocateMemory].#
 
 [[free_memory]]
 * *free_memory*(_devmem_) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkFreeMemory[vkFreeMemory].#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkFreeMemory[vkFreeMemory].#
 
 [[map_memory]]
 * *map_memory*(_devmem_, _offset_, _size_, [_flags_]) +
 [small]#_offset_: integer +
 _size_: integer or '_whole size_' +
 [_flags_]: <<memorymapflags, memorymapflags>> +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkMapMemory[vkMapMemory].#
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkMapMemory[vkMapMemory].#
 
 [[unmap_memory]]
 * *unmap_memory*(_devmem_) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkUnmapMemory[vkUnmapMemory].#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkUnmapMemory[vkUnmapMemory].#
 
 [[write_memory]]
 * *write_memory*(_devmem_, _offset_, _data_) +
@@ -38,23 +38,23 @@ Returns _data_ as a binary string.#
 
 [[get_device_memory_commitment]]
 * _bytes_ = *get_device_memory_commitment*(_devmem_) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetDeviceMemoryCommitment[vkGetDeviceMemoryCommitment].#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkGetDeviceMemoryCommitment[vkGetDeviceMemoryCommitment].#
 
 [[flush_mapped_memory_ranges]]
 * *flush_mapped_memory_ranges*(_device_, _ranges_) +
 [small]#_ranges_: {<<mappedmemoryrange, mappedmemoryrange>>} +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkFlushMappedMemoryRanges[vkFlushMappedMemoryRanges].#
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkFlushMappedMemoryRanges[vkFlushMappedMemoryRanges].#
 
 [[invalidate_mapped_memory_ranges]]
 * *invalidate_mapped_memory_ranges*(_device_, _ranges_) +
 [small]#_ranges_: {<<mappedmemoryrange, mappedmemoryrange>>} +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkInvalidateMappedMemoryRanges[vkInvalidateMappedMemoryRanges].#
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkInvalidateMappedMemoryRanges[vkInvalidateMappedMemoryRanges].#
 
 '''
 
 ////
 NOTE: If the
-https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_get_memory_requirements2[VK_KHR_get_memory_requirements2]
+https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_get_memory_requirements2[VK_KHR_get_memory_requirements2]
 device extension is enabled for the affected device,
 then the functions it provides are used by the bindings described in this section.
 Otherwise the original functions are used.
@@ -63,42 +63,42 @@ Otherwise the original functions are used.
 
 [[get_buffer_memory_requirements]]
 * <<memoryrequirements, _memoryrequirements_>> = *get_buffer_memory_requirements*(<<buffer, _buffer_>>, [<<buffermemoryrequirementsinfo, _buffermemoryrequirementsinfo_>>]) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetBufferMemoryRequirements[vkGetBufferMemoryRequirements] -
-https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetBufferMemoryRequirements2KHR[vkGetBufferMemoryRequirements2KHR].#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkGetBufferMemoryRequirements[vkGetBufferMemoryRequirements] -
+https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkGetBufferMemoryRequirements2KHR[vkGetBufferMemoryRequirements2KHR].#
 
 [[get_image_memory_requirements]]
 * <<memoryrequirements, _memoryrequirements_>> = *get_image_memory_requirements*(<<image, _image_>>, [<<imagememoryrequirementsinfo, _imagememoryrequirementsinfo_>>]) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetImageMemoryRequirements[vkGetImageMemoryRequirements] -
-https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetImageMemoryRequirements2KHR[vkGetImageMemoryRequirements2KHR].#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkGetImageMemoryRequirements[vkGetImageMemoryRequirements] -
+https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkGetImageMemoryRequirements2KHR[vkGetImageMemoryRequirements2KHR].#
 
 [[get_image_sparse_memory_requirements]]
 * {<<sparseimagememoryrequirements, _sparseimagememoryrequirements_>>} = *get_image_sparse_memory_requirements*(<<image, _image_>>, [<<imagesparsememoryrequirementsinfo, _imagesparsememoryrequirementsinfo_>>]) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetImageSparseMemoryRequirements[vkGetImageSparseMemoryRequirements] -
-https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetImageSparseMemoryRequirements2KHR[vkGetImageSparseMemoryRequirements2KHR].#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkGetImageSparseMemoryRequirements[vkGetImageSparseMemoryRequirements] -
+https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkGetImageSparseMemoryRequirements2KHR[vkGetImageSparseMemoryRequirements2KHR].#
 
 '''
 
 [[bind_buffer_memory]]
 * *bind_buffer_memory*(<<buffer, _buffer_>>, _devmem_, _offset_) +
 *bind_buffer_memory*(<<device, _device_>>, {<<bindbuffermemoryinfo, _bindbuffermemoryinfo_>>}) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkBindBufferMemory[vkBindBufferMemory] -
-https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkBindBufferMemory2KHR[vkBindBufferMemory2KHR] (https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_bind_memory2[VK_KHR_bind_memory2] extension).#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkBindBufferMemory[vkBindBufferMemory] -
+https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkBindBufferMemory2KHR[vkBindBufferMemory2KHR] (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_bind_memory2[VK_KHR_bind_memory2] extension).#
 
 [[bind_image_memory]]
 * *bind_image_memory*(<<image, _image_>>, _devmem_, _offset_) +
 *bind_image_memory*(<<device, _device_>>, {<<bindimagememoryinfo, _bindimagememoryinfo_>>}) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkBindImageMemory[vkBindImageMemory] -
-https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkBindImageMemory2KHR[vkBindImageMemory2KHR] (https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_bind_memory2[VK_KHR_bind_memory2] extension).#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkBindImageMemory[vkBindImageMemory] -
+https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkBindImageMemory2KHR[vkBindImageMemory2KHR] (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_bind_memory2[VK_KHR_bind_memory2] extension).#
 
 '''
 
 [[get_memory_fd]]
 * _fd_ = *get_memory_fd*(_devmem_, <<memorygetfdinfo, _memorygetfdinfo_>>) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetMemoryFdKHR[vkGetMemoryFdKHR] (https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_external_memory_fd[VK_KHR_external_memory_fd] extension).#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkGetMemoryFdKHR[vkGetMemoryFdKHR] (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_external_memory_fd[VK_KHR_external_memory_fd] extension).#
 
 [[get_memory_fd_properties]]
 * <<memoryfdproperties, _memoryfdproperties_>> = *get_memory_fd_properties*(<<device, _device_>>, _handle_type_, _fd_) +
 [small]#_handle_type_: <<externalmemoryhandletypeflags, externalmemoryhandletypeflags>>, +
 _fd_: integer. +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetMemoryFdPropertiesKHR[vkGetMemoryFdPropertiesKHR] (https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_external_memory_fd[VK_KHR_external_memory_fd] extension).#
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkGetMemoryFdPropertiesKHR[vkGetMemoryFdPropertiesKHR] (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_external_memory_fd[VK_KHR_external_memory_fd] extension).#
 

@@ -4,10 +4,10 @@
 
 [[create_sampler]]
 * _sampler_ = *create_sampler*(_device_, <<samplercreateinfo, _samplercreateinfo_>>, [<<allocators, _allocator_>>]) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCreateSampler[vkCreateSampler].#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkCreateSampler[vkCreateSampler].#
 
 [[destroy_sampler]]
 * *destroy_sampler*(_sampler_) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkDestroySampler[vkDestroySampler].#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkDestroySampler[vkDestroySampler].#
 
 

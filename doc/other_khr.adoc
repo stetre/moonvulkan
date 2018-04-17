@@ -6,15 +6,15 @@
 [[create_descriptor_update_template]]
 * _descriptor_update_template_ = *create_descriptor_update_template*(_device_, _info_, [<<allocators, _allocator_>>]) +
 [small]#_info_: <<descriptorupdatetemplatecreateinfo, _descriptorupdatetemplatecreateinfo_>> +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCreateDescriptorUpdateTemplateKHR[vkCreateDescriptorUpdateTemplateKHR] (https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_descriptor_update_template[VK_KHR_descriptor_update_template] extension).#
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkCreateDescriptorUpdateTemplateKHR[vkCreateDescriptorUpdateTemplateKHR] (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_descriptor_update_template[VK_KHR_descriptor_update_template] extension).#
 
 [[destroy_descriptor_update_template]]
 * *destroy_descriptor_update_template*(_descriptor_update_template_) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkDestroyDescriptorUpdateTemplateKHR[vkDestroyDescriptorUpdateTemplateKHR] (https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_descriptor_update_template[VK_KHR_descriptor_update_template] extension).#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkDestroyDescriptorUpdateTemplateKHR[vkDestroyDescriptorUpdateTemplateKHR] (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_descriptor_update_template[VK_KHR_descriptor_update_template] extension).#
 
 [[update_descriptor_set_with_template]]
 * *update_descriptor_set_with_template*(<<descriptor_set, _descriptor_set_>>, _descriptor_update_template_, _data_) +
 [small]#_data_: binary string +
 The _data_ parameter can be constructed using the <<pack_descriptorimageinfo, pack_descriptorimageinfo>>(&nbsp;), <<pack_descriptorbufferinfo, pack_descriptorbufferinfo>>(&nbsp;), and <<pack_bufferview, pack_bufferview>>(&nbsp;) utilities. +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkUpdateDescriptorSetWithTemplateKHR[vkUpdateDescriptorSetWithTemplateKHR] (https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_descriptor_update_template[VK_KHR_descriptor_update_template] extension).#
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkUpdateDescriptorSetWithTemplateKHR[vkUpdateDescriptorSetWithTemplateKHR] (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_descriptor_update_template[VK_KHR_descriptor_update_template] extension).#
 

@@ -4,12 +4,12 @@
 
 [[create_image]]
 * _image_ = *create_image*(_device_, <<imagecreateinfo, _imagecreateinfo_>>, [<<allocators, _allocator_>>]) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCreateImage[vkCreateImage].#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkCreateImage[vkCreateImage].#
 
 [[destroy_image]]
 * *destroy_image*(_image_) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkDestroyImage[vkDestroyImage].#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkDestroyImage[vkDestroyImage].#
 
 [[get_image_subresource_layout]]
 * <<subresourcelayout, _subresourcelayout_>> = *get_image_subresource_layout*(_image_, <<imagesubresource, _imagesubresource_>>) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetImageSubresourceLayout[vkGetImageSubresourceLayout].#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkGetImageSubresourceLayout[vkGetImageSubresourceLayout].#

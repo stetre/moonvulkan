@@ -4,18 +4,18 @@
 
 [[get_device_queue]]
 * _queue_ = *get_device_queue*(<<device, _device_>>, _familyindex_, _queueindex_) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetDeviceQueue[vkGetDeviceQueue].#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkGetDeviceQueue[vkGetDeviceQueue].#
 
 [[queue_submit]]
 * *queue_submit*(_queue_, {<<submitinfo, _submitinfo_>>}, [<<fence, _fence_>>]) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkQueueSubmit[vkQueueSubmit].#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkQueueSubmit[vkQueueSubmit].#
 
 [[queue_bind_sparse]]
 * *queue_bind_sparse*(_queue_, {<<bindsparseinfo, _bindsparseinfo_>>}, [<<fence, _fence_>>]) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkQueueBindSparse[vkQueueBindSparse].#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkQueueBindSparse[vkQueueBindSparse].#
 
 [[queue_wait_idle]]
 * *queue_wait_idle*(_queue_) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkQueueWaitIdle[vkQueueWaitIdle].#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkQueueWaitIdle[vkQueueWaitIdle].#
 
 

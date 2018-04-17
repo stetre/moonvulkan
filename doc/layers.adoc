@@ -5,24 +5,24 @@
 [[enumerate_instance_layer_properties]]
 * {<<layerproperties, layerproperties>>} = *enumerate_instance_layer_properties*([_byname_]) +
 [small]#If _byname_=_true_ then the returned table is indexed by _layer_name_, otherwise it is returned as an integer indexed array. +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkEnumerateInstanceLayerProperties[vkEnumerateInstanceLayerProperties].#
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkEnumerateInstanceLayerProperties[vkEnumerateInstanceLayerProperties].#
 
 [[enumerate_instance_extension_properties]]
 * {<<extensionproperties, extensionproperties>>} = *enumerate_instance_extension_properties*([_layer_], [_byname_]) +
 [small]#[_layer_]: string +
 If _byname_=_true_ then the returned table is indexed by _extension_name_, otherwise it is returned as an integer indexed array. +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkEnumerateInstanceExtensionProperties[vkEnumerateInstanceExtensionProperties].#
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkEnumerateInstanceExtensionProperties[vkEnumerateInstanceExtensionProperties].#
 
 [[enumerate_device_layer_properties]]
 * {<<layerproperties, layerproperties>>} = *enumerate_device_layer_properties*(<<physical_device, _physdev_>>, [_byname_]) +
 [small]#If _byname_=_true_ then the returned table is indexed by _layer_name_, otherwise it is returned as an integer indexed array. +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkEnumerateDeviceLayerProperties[vkEnumerateDeviceLayerProperties].#
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkEnumerateDeviceLayerProperties[vkEnumerateDeviceLayerProperties].#
 
 [[enumerate_device_extension_properties]]
 * {<<extensionproperties, extensionproperties>>} = *enumerate_device_extension_properties*(<<physical_device, _physdev_>>, [_layer_], [_byname_]) +
 [small]#[_layer_]: string +
 If _byname_=_true_ then the returned table is indexed by _extension_name_, otherwise it is returned as an integer indexed array. +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkEnumerateDeviceExtensionProperties[vkEnumerateDeviceExtensionProperties].#
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkEnumerateDeviceExtensionProperties[vkEnumerateDeviceExtensionProperties].#
 
 [[layer_deprecation]]
 NOTE: Device layers are deprecated (rfr: 'Device Layer Deprecation' section in the Vulkan specification).

@@ -4,25 +4,25 @@
 
 [[create_swapchain]]
 * _swapchain_ = *create_swapchain*(<<device, _device_>>, <<swapchaincreateinfo, _swapchaincreateinfo_>>, [<<allocators, _allocator_>>]) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCreateSwapchainKHR[vkCreateSwapchainKHR] (https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_swapchain[VK_KHR_swapchain] extension).#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkCreateSwapchainKHR[vkCreateSwapchainKHR] (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_swapchain[VK_KHR_swapchain] extension).#
 
 [[create_shared_swapchains]]
 * {_swapchain_} = *create_shared_swapchains*(<<device, _device_>>, {<<swapchaincreateinfo, _swapchaincreateinfo_>>}, [<<allocators, _allocator_>>]) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCreateSharedSwapchainsKHR[vkCreateSharedSwapchainsKHR] (https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_display_swapchain[VK_KHR_display_swapchain] extension).#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkCreateSharedSwapchainsKHR[vkCreateSharedSwapchainsKHR] (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_display_swapchain[VK_KHR_display_swapchain] extension).#
 
 [[destroy_swapchain]]
 * *destroy_swapchain*(_swapchain_) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkDestroySwapchainKHR[vkDestroySwapchainKHR] (https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_swapchain[VK_KHR_swapchain] extension).#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkDestroySwapchainKHR[vkDestroySwapchainKHR] (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_swapchain[VK_KHR_swapchain] extension).#
 
 [[get_swapchain_images]]
 * {<<image, _image_>>} = *get_swapchain_images*(_swapchain_) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetSwapchainImagesKHR[vkGetSwapchainImagesKHR] (https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_swapchain[VK_KHR_swapchain] extension).#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkGetSwapchainImagesKHR[vkGetSwapchainImagesKHR] (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_swapchain[VK_KHR_swapchain] extension).#
 
 [[acquire_next_image]]
 * _image_index_, _message_ = *acquire_next_image*(_swapchain_, <<timeout, _timeout_>>, [<<semaphore, _semaphore_>>], [<<fence, _fence_>>]) +
 [small]#Returns one of the following combinations of _image_index_ and _message_: +
 1) _integer_, _nil_ 2) _integer_, '_suboptimal_' 3) _nil_, '_timeout_'  4) _nil_, '_not ready_' +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkAcquireNextImageKHR[vkAcquireNextImageKHR] (https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_swapchain[VK_KHR_swapchain] extension).#
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkAcquireNextImageKHR[vkAcquireNextImageKHR] (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_swapchain[VK_KHR_swapchain] extension).#
 
 [[queue_present]]
 * <<result, _result_>>, {<<result, _result_>>} = *queue_present*(<<queue, _queue_>>, <<presentinfo, _presentinfo_>>, [_per_swapchain_results_]) +
@@ -30,17 +30,17 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.ht
 Returns the global _result_ for the operation, optionally followed by a table
 with the individual results for each of the given swapchains. +
 The individual results table is returned only if _per_swapchain_results_ is _true_. +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkQueuePresentKHR[vkQueuePresentKHR] (https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_swapchain[VK_KHR_swapchain] extension).#
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkQueuePresentKHR[vkQueuePresentKHR] (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_swapchain[VK_KHR_swapchain] extension).#
 
 [[get_swapchain_status]]
 * <<result, _result_>> = *get_swapchain_status*(_swapchain_) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetSwapchainStatusKHR[vkGetSwapchainStatusKHR] (https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_shared_presentable_image[VK_KHR_shared_presentable_image] extension).#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkGetSwapchainStatusKHR[vkGetSwapchainStatusKHR] (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_shared_presentable_image[VK_KHR_shared_presentable_image] extension).#
 
 [[set_hdr_metadata]]
 * *set_hdr_metadata*({_swapchain_}, <<hdrmetadata, _hdrmetadata_>>) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkSetHdrMetadataEXT[vkSetHdrMetadataEXT] (https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_hdr_metadata[VK_EXT_hdr_metadata] extension).#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkSetHdrMetadataEXT[vkSetHdrMetadataEXT] (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_hdr_metadata[VK_EXT_hdr_metadata] extension).#
 
 [[getswapchaincounter]]
 * _value_ = *getswapchaincounter*(_swapchain_, <<surfacecounterflags, _surfacecounterflags_>>) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkGetSwapchainCounterEXT[vkGetSwapchainCounterEXT] (https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_EXT_display_control[VK_EXT_display_control] extension).#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkGetSwapchainCounterEXT[vkGetSwapchainCounterEXT] (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_display_control[VK_EXT_display_control] extension).#
 

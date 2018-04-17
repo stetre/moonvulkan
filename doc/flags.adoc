@@ -27,255 +27,255 @@ See also the <<flags_snippet, example>> contained in the code snippets section.
 [small]#*accessflags*: vk.ACCESS_XXX_BIT +
 Values: 
 '_indirect command read_', '_index read_', '_vertex attribute read_', '_uniform read_', '_input attachment read_', '_shader read_', '_shader write_', '_color attachment read_', '_color attachment write_', '_depth stencil attachment read_', '_depth stencil attachment write_', '_transfer read_', '_transfer write_', '_host read_', '_host write_', '_memory read_', '_memory write_', '_color attachment read noncoherent_'. +
-Rfr. https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkAccessFlagBits[VkAccessFlagBits].#
+Rfr. https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkAccessFlagBits[VkAccessFlagBits].#
 
 [[attachmentdescriptionflags]]
 [small]#*attachmentdescriptionflags*: vk.ATTACHMENT_DESCRIPTION_XXX_BIT +
 Values: 
 '_may alias_'. +
-Rfr. https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkAttachmentDescriptionFlagBits[VkAttachmentDescriptionFlagBits].#
+Rfr. https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkAttachmentDescriptionFlagBits[VkAttachmentDescriptionFlagBits].#
 
 [[buffercreateflags]]
 [small]#*buffercreateflags*: vk.BUFFER_CREATE_XXX_BIT +
 Values: 
 '_sparse binding_', '_sparse residency_', '_sparse aliased_'. +
-Rfr. https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkBufferCreateFlagBits[VkBufferCreateFlagBits].#
+Rfr. https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkBufferCreateFlagBits[VkBufferCreateFlagBits].#
 
 [[bufferusageflags]]
 [small]#*bufferusageflags*: vk.BUFFER_USAGE_XXX_BIT +
 Values: 
 '_transfer src_', '_transfer dst_', '_uniform texel buffer_', '_storage texel buffer_', '_uniform buffer_', '_storage buffer_', '_index buffer_', '_vertex buffer_', '_indirect buffer_'. +
-Rfr. https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkBufferUsageFlagBits[VkBufferUsageFlagBits].#
+Rfr. https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkBufferUsageFlagBits[VkBufferUsageFlagBits].#
 
 [[colorcomponentflags]]
 [small]#*colorcomponentflags*: vk.COLOR_COMPONENT_XXX_BIT +
 Values: 
 '_r_', '_g_', '_b_', '_a_'. +
-Rfr. https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkColorComponentFlagBits[VkColorComponentFlagBits].#
+Rfr. https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkColorComponentFlagBits[VkColorComponentFlagBits].#
 
 [[commandbufferresetflags]]
 [small]#*commandbufferresetflags*: vk.COMMAND_BUFFER_RESET_XXX_BIT +
 Values: 
 '_release resources_'. +
-Rfr. https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkCommandBufferResetFlagBits[VkCommandBufferResetFlagBits].#
+Rfr. https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkCommandBufferResetFlagBits[VkCommandBufferResetFlagBits].#
 
 [[commandbufferusageflags]]
 [small]#*commandbufferusageflags*: vk.COMMAND_BUFFER_USAGE_XXX_BIT +
 Values: 
 '_one time submit_', '_render pass continue_', '_simultaneous use_'. +
-Rfr. https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkCommandBufferUsageFlagBits[VkCommandBufferUsageFlagBits].#
+Rfr. https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkCommandBufferUsageFlagBits[VkCommandBufferUsageFlagBits].#
 
 [[commandpoolcreateflags]]
 [small]#*commandpoolcreateflags*: vk.COMMAND_POOL_CREATE_XXX_BIT +
 Values: 
 '_transient_', '_reset command buffer_'. +
-Rfr. https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkCommandPoolCreateFlagBits[VkCommandPoolCreateFlagBits].#
+Rfr. https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkCommandPoolCreateFlagBits[VkCommandPoolCreateFlagBits].#
 
 [[commandpoolresetflags]]
 [small]#*commandpoolresetflags*: vk.COMMAND_POOL_RESET_XXX_BIT +
 Values: 
 '_release resources_'. +
-Rfr. https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkCommandPoolResetFlagBits[VkCommandPoolResetFlagBits].#
+Rfr. https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkCommandPoolResetFlagBits[VkCommandPoolResetFlagBits].#
 
 [[compositealphaflags]]
 [small]#*compositealphaflags*: vk.COMPOSITE_ALPHA_XXX_BIT_KHR +
 Values: 
 '_opaque_', '_pre multiplied_', '_post multiplied_', '_inherit_'. +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkCompositeAlphaFlagBitsKHR[VkCompositeAlphaFlagBitsKHR].#
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkCompositeAlphaFlagBitsKHR[VkCompositeAlphaFlagBitsKHR].#
 
 [[cullmodeflags]]
 [small]#*cullmodeflags*: vk.CULL_MODE_XXX +
 Values: 
 '_none_' (=0), '_front_', '_back_', '_front and back_'. +
-Rfr. https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkCullModeFlagBits[VkCullModeFlagBits].#
+Rfr. https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkCullModeFlagBits[VkCullModeFlagBits].#
 
 [[debugreportflags]]
 [small]#*debugreportflags*: vk.DEBUG_REPORT_XXX_BIT_EXT +
 Values: 
 '_information_', '_warning_', '_performance warning_', '_report_', '_debug_'. +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkDebugReportFlagBitsEXT[VkDebugReportFlagBitsEXT].#
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkDebugReportFlagBitsEXT[VkDebugReportFlagBitsEXT].#
 
 [[dependencyflags]]
 [small]#*dependencyflags*: vk.DEPENDENCY_XXX_BIT +
 Values: 
 '_by region_'. +
-Rfr. https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkDependencyFlagBits[VkDependencyFlagBits].#
+Rfr. https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkDependencyFlagBits[VkDependencyFlagBits].#
 
 [[descriptorpoolcreateflags]]
 [small]#*descriptorpoolcreateflags*: vk.DESCRIPTOR_POOL_CREATE_XXX_BIT +
 Values: 
 '_free descriptor set_'. +
-Rfr. https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkDescriptorPoolCreateFlagBits[VkDescriptorPoolCreateFlagBits].#
+Rfr. https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkDescriptorPoolCreateFlagBits[VkDescriptorPoolCreateFlagBits].#
 
 [[descriptorsetlayoutcreateflags]]
 [small]#*descriptorsetlayoutcreateflags*: vk.DESCRIPTOR_SET_LAYOUT_CREATE_XXX_BIT +
 Values: 
 '_push descriptor_'. +
-Rfr. https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkDescriptorSetLayoutCreateFlagBits[VkDescriptorSetLayoutCreateFlagBits].#
+Rfr. https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkDescriptorSetLayoutCreateFlagBits[VkDescriptorSetLayoutCreateFlagBits].#
 
 [[displayplanealphaflags]]
 [small]#*displayplanealphaflags*: vk.DISPLAY_PLANE_ALPHA_XXX_BIT_KHR +
 Values: '_opaque_', '_global_', '_per pixel_', '_per pixel premultiplied_'. +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkDisplayPlaneAlphaFlagBitsKHR[VkDisplayPlaneAlphaFlagBitsKHR].#
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkDisplayPlaneAlphaFlagBitsKHR[VkDisplayPlaneAlphaFlagBitsKHR].#
 
 [[externalfencefeatureflags]]
 [small]#*externalfencefeatureflags*: vk.EXTERNAL_FENCE_FEATURE_XXX_BIT_KHR +
 Values: '_exportable_', '_importable_'. +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkExternalFenceFeatureFlagBitsKHR[VkExternalFenceFeatureFlagBitsKHR].#
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkExternalFenceFeatureFlagBitsKHR[VkExternalFenceFeatureFlagBitsKHR].#
 
 [[externalfencehandletypeflags]]
 [small]#*externalfencehandletypeflags*: vk.EXTERNAL_FENCE_HANDLE_TYPE_XXX_BIT_KHR +
 Values: '_opaque_fd_', '_opaque_win32_', '_opaque_win32_kmt_', '_sync_fd_'. +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkExternalFenceHandleTypeFlagBitsKHR[VkExternalFenceHandleTypeFlagBitsKHR].#
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkExternalFenceHandleTypeFlagBitsKHR[VkExternalFenceHandleTypeFlagBitsKHR].#
 
 [[externalmemoryfeatureflags]]
 [small]#*externalmemoryfeatureflags*: vk.EXTERNAL_MEMORY_FEATURE_XXX_BIT_KHR +
 Values: '_dedicated only_', '_exportable_', '_importable_'. +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkExternalMemoryFeatureFlagBitsKHR[VkExternalMemoryFeatureFlagBitsKHR].#
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkExternalMemoryFeatureFlagBitsKHR[VkExternalMemoryFeatureFlagBitsKHR].#
 
 [[externalmemoryhandletypeflags]]
 [small]#*externalmemoryhandletypeflags*: vk.EXTERNAL_MEMORY_HANDLE_TYPE_XXX_BIT_KHR +
 Values: '_opaque fd_', '_opaque win32_', '_opaque win32 kmt_', '_d3d11 texture_', '_d3d11 texture kmt_', '_d3d12 heap_', '_d3d12 resource_'. +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkExternalMemoryHandleTypeFlagBitsKHR[VkExternalMemoryHandleTypeFlagBitsKHR].#
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkExternalMemoryHandleTypeFlagBitsKHR[VkExternalMemoryHandleTypeFlagBitsKHR].#
 
 [[externalsemaphorefeatureflags]]
 [small]#*externalsemaphorefeatureflags*: vk.EXTERNAL_SEMAPHORE_FEATURE_XXX_BIT_KHR +
 Values: '_exportable_', '_importable_'. +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkExternalSemaphoreFeatureFlagBitsKHR[VkExternalSemaphoreFeatureFlagBitsKHR].#
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkExternalSemaphoreFeatureFlagBitsKHR[VkExternalSemaphoreFeatureFlagBitsKHR].#
 
 [[externalsemaphorehandletypeflags]]
 [small]#*externalsemaphorehandletypeflags*: vk.EXTERNAL_SEMAPHORE_HANDLE_TYPE_XXX_BIT_KHR +
 Values: '_opaque fd_', '_opaque win32_', '_opaque win32 kmt_', '_d3d12 fence_', '_sync fd_'. +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkExternalSemaphoreHandleTypeFlagBitsKHR[VkExternalSemaphoreHandleTypeFlagBitsKHR].#
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkExternalSemaphoreHandleTypeFlagBitsKHR[VkExternalSemaphoreHandleTypeFlagBitsKHR].#
 
 [[fencecreateflags]]
 [small]#*fencecreateflags*: vk.FENCE_CREATE_XXX_BIT +
 Values: 
 '_signaled_'. +
-Rfr. https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkFenceCreateFlagBits[VkFenceCreateFlagBits].#
+Rfr. https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkFenceCreateFlagBits[VkFenceCreateFlagBits].#
 
 [[fenceimportflags]]
 [small]#*fenceimportflags*: vk.FENCE_IMPORT_XXX_BIT_KHR +
 Values: '_temporary_'. +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkFenceImportFlagBitsKHR[VkFenceImportFlagBitsKHR].#
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkFenceImportFlagBitsKHR[VkFenceImportFlagBitsKHR].#
 
 [[formatfeatureflags]]
 [small]#*formatfeatureflags*: vk.FORMAT_FEATURE_XXX_BIT +
 Values: 
 '_sampled image_', '_storage image_', '_storage image atomic_', '_uniform texel buffer_', '_storage texel buffer_', '_storage texel buffer atomic_', '_vertex buffer_', '_color attachment_', '_color attachment blend_', '_depth stencil attachment_', '_blit src_', '_blit dst_', '_transfer src_', '_transfer dst_', '_sampled image filter linear_', '_sampled image filter minmax_', '_midpoint chroma samples_', '_sampled image ycbcr conversion linear filter_', '_sampled image ycbcr conversion separate reconstruction filter_', '_sampled image ycbcr conversion chroma reconstruction explicit_', '_sampled image ycbcr conversion chroma reconstruction explicit forceable_', '_disjoint_', '_cosited chroma samples_'. +
-Rfr. https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkFormatFeatureFlagBits[VkFormatFeatureFlagBits].#
+Rfr. https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkFormatFeatureFlagBits[VkFormatFeatureFlagBits].#
 
 [[imageaspectflags]]
 [small]#*imageaspectflags*: vk.IMAGE_ASPECT_XXX_BIT +
 Values: 
 '_color_', '_depth_', '_stencil_', '_metadata_', '_plane 0_', '_plane 1_', '_plane 2_'. +
-Rfr. https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkImageAspectFlagBits[VkImageAspectFlagBits].#
+Rfr. https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkImageAspectFlagBits[VkImageAspectFlagBits].#
 
 [[imagecreateflags]]
 [small]#*imagecreateflags*: vk.IMAGE_CREATE_XXX_BIT +
 Values: 
 '_sparse binding_', '_sparse residency_', '_sparse aliased_', '_mutable format_', '_cube compatible_', '_block texel view compatible_', '_extended usage_', '_sample locations compatible depth_', '_disjoint_', '_alias_'. +
-Rfr. https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkImageCreateFlagBits[VkImageCreateFlagBits].#
+Rfr. https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkImageCreateFlagBits[VkImageCreateFlagBits].#
 
 [[imageusageflags]]
 [small]#*imageusageflags*: vk.IMAGE_USAGE_XXX_BIT +
 Values: 
 '_transfer src_', '_transfer dst_', '_sampled_', '_storage_', '_color attachment_', '_depth stencil attachment_', '_transient attachment_', '_input attachment_'. +
-Rfr. https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkImageUsageFlagBits[VkImageUsageFlagBits].#
+Rfr. https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkImageUsageFlagBits[VkImageUsageFlagBits].#
 
 [[memoryheapflags]]
 [small]#*memoryheapflags*: vk.MEMORY_HEAP_XXX_BIT +
 Values: 
 '_device local_'. +
-Rfr. https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkMemoryHeapFlagBits[VkMemoryHeapFlagBits].#
+Rfr. https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkMemoryHeapFlagBits[VkMemoryHeapFlagBits].#
 
 [[memorypropertyflags]]
 [small]#*memorypropertyflags*: vk.MEMORY_PROPERTY_XXX_BIT +
 Values: 
 '_device local_', '_host visible_', '_host coherent_', '_host cached_', '_lazily allocated_'. +
-Rfr. https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkMemoryPropertyFlagBits[VkMemoryPropertyFlagBits].#
+Rfr. https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkMemoryPropertyFlagBits[VkMemoryPropertyFlagBits].#
 
 [[pipelinecreateflags]]
 [small]#*pipelinecreateflags*: vk.PIPELINE_CREATE_XXX_BIT +
 Values: 
 '_disable optimization_', '_allow derivatives_', '_derivative_'. +
-Rfr. https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPipelineCreateFlagBits[VkPipelineCreateFlagBits].#
+Rfr. https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkPipelineCreateFlagBits[VkPipelineCreateFlagBits].#
 
 [[pipelinestageflags]]
 [small]#*pipelinestageflags*: vk.PIPELINE_STAGE_XXX_BIT +
 Values: 
 '_top of pipe_', '_draw indirect_', '_vertex input_', '_vertex shader_', '_tessellation control shader_', '_tessellation evaluation shader_', '_geometry shader_', '_fragment shader_', '_early fragment tests_', '_late fragment tests_', '_color attachment output_', '_compute shader_', '_transfer_', '_bottom of pipe_', '_host_', '_all graphics_', '_all commands_'. +
-Rfr. https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkPipelineStageFlagBits[VkPipelineStageFlagBits].#
+Rfr. https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkPipelineStageFlagBits[VkPipelineStageFlagBits].#
 
 [[querycontrolflags]]
 [small]#*querycontrolflags*: vk.QUERY_CONTROL_XXX_BIT +
 Values: 
 '_precise_'. +
-Rfr. https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkQueryControlFlagBits[VkQueryControlFlagBits].#
+Rfr. https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkQueryControlFlagBits[VkQueryControlFlagBits].#
 
 [[querypipelinestatisticflags]]
 [small]#*querypipelinestatisticflags*: vk.QUERY_PIPELINE_STATISTIC_XXX_BIT +
 Values: 
 '_input assembly vertices_', '_input assembly primitives_', '_vertex shader invocations_', '_geometry shader invocations_', '_geometry shader primitives_', '_clipping invocations_', '_clipping primitives_', '_fragment shader invocations_', '_tessellation control shader patches_', '_tessellation evaluation shader invocations_', '_compute shader invocations_'. +
-Rfr. https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkQueryPipelineStatisticFlagBits[VkQueryPipelineStatisticFlagBits].#
+Rfr. https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkQueryPipelineStatisticFlagBits[VkQueryPipelineStatisticFlagBits].#
 
 [[queryresultflags]]
 [small]#*queryresultflags*: vk.QUERY_RESULT_XXX_BIT +
 Values: 
 '_64_', '_wait_', '_with availability_', '_partial_'. +
-Rfr. https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkQueryResultFlagBits[VkQueryResultFlagBits].#
+Rfr. https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkQueryResultFlagBits[VkQueryResultFlagBits].#
 
 [[queueflags]]
 [small]#*queueflags*: vk.QUEUE_XXX_BIT +
 Values: 
 '_graphics_', '_compute_', '_transfer_', '_sparse binding_'. +
-Rfr. https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkQueueFlagBits[VkQueueFlagBits].#
+Rfr. https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkQueueFlagBits[VkQueueFlagBits].#
 
 [[samplecountflags]]
 [small]#*samplecountflags*: vk.SAMPLE_COUNT_XXX_BIT +
 Values: 
 '_1_', '_2_', '_4_', '_8_', '_16_', '_32_', '_64_'. +
-Rfr. https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkSampleCountFlagBits[VkSampleCountFlagBits].#
+Rfr. https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkSampleCountFlagBits[VkSampleCountFlagBits].#
 
 [[semaphoreimportflags]]
 [small]#*semaphoreimportflags*: vk.SEMAPHORE_IMPORT_XXX_BIT_KHR +
 Values: '_temporary_'. +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkSemaphoreImportFlagBitsKHR[VkSemaphoreImportFlagBitsKHR].#
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkSemaphoreImportFlagBitsKHR[VkSemaphoreImportFlagBitsKHR].#
 
 [[shaderstageflags]]
 [small]#*shaderstageflags*: vk.SHADER_STAGE_XXX_BIT +
 Values: 
 '_vertex_', '_tessellation control_', '_tessellation evaluation_', '_geometry_', '_fragment_', '_compute_', '_all graphics_', '_all_'. +
-Rfr. https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkShaderStageFlagBits[VkShaderStageFlagBits].#
+Rfr. https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkShaderStageFlagBits[VkShaderStageFlagBits].#
 
 [[sparseimageformatflags]]
 [small]#*sparseimageformatflags*: vk.SPARSE_IMAGE_FORMAT_XXX_BIT +
 Values: 
 '_single miptail_', '_aligned mip size_', '_nonstandard block size_'. +
-Rfr. https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkSparseImageFormatFlagBits[VkSparseImageFormatFlagBits].#
+Rfr. https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkSparseImageFormatFlagBits[VkSparseImageFormatFlagBits].#
 
 [[sparsememorybindflags]]
 [small]#*sparsememorybindflags*: vk.SPARSE_MEMORY_BIND_XXX_BIT +
 Values: 
 '_metadata_'. +
-Rfr. https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkSparseMemoryBindFlagBits[VkSparseMemoryBindFlagBits].#
+Rfr. https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkSparseMemoryBindFlagBits[VkSparseMemoryBindFlagBits].#
 
 [[stencilfaceflags]]
 [small]#*stencilfaceflags*: vk.STENCIL_FACE_XXX_BIT +
 Values: 
 '_front_', '_back_'. +
-Rfr. https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkStencilFaceFlagBits[VkStencilFaceFlagBits].#
+Rfr. https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkStencilFaceFlagBits[VkStencilFaceFlagBits].#
 
 [[surfacecounterflags]]
 [small]#*surfacecounterflags*: vk.SURFACE_COUNTER_XXX_BIT_EXT +
 Values: '_vblank_'. +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkSurfaceCounterFlagBitsEXT[VkSurfaceCounterFlagBitsEXT].#
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkSurfaceCounterFlagBitsEXT[VkSurfaceCounterFlagBitsEXT].#
 
 [[surfacetransformflags]]
 [small]#*surfacetransformflags*: vk.SURFACE_TRANSFORM_XXX_BIT_KHR +
 Values: 
 '_identity_', '_rotate 90_', '_rotate 180_', '_rotate 270_', '_horizontal mirror_', '_horizontal mirror rotate 90_', '_horizontal mirror rotate 180_', '_horizontal mirror rotate 270_', '_inherit_'. +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkSurfaceTransformFlagBitsKHR[VkSurfaceTransformFlagBitsKHR].#
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkSurfaceTransformFlagBitsKHR[VkSurfaceTransformFlagBitsKHR].#
 
 Reserved for future use (must be set to 0):
 
@@ -388,7 +388,7 @@ Reserved for future use (must be set to 0):
 [[zzzflags]]
 [small]#*zzzflags*: vk.ZZZ_XXX_BIT_KHR +
 Values: 
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkZzzFlagBits[VkZzzFlagBits].#
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkZzzFlagBits[VkZzzFlagBits].#
 
 ////
 

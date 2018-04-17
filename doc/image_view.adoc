@@ -4,10 +4,10 @@
 
 [[create_image_view]]
 * _image_view_ = *create_image_view*(_image_, <<imageviewcreateinfo, _imageviewcreateinfo_>>, [<<allocators, _allocator_>>]) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkCreateImageView[vkCreateImageView].#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkCreateImageView[vkCreateImageView].#
 
 [[destroy_image_view]]
 * *destroy_image_view*(_image_view_) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vkDestroyImageView[vkDestroyImageView].#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkDestroyImageView[vkDestroyImageView].#
 
 
