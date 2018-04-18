@@ -15,9 +15,10 @@ _devmem_ = *allocate_memory*(_device_, _allocation_size_, _memory_type_index_) +
 [small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkFreeMemory[vkFreeMemory].#
 
 [[map_memory]]
-* *map_memory*(_devmem_, _offset_, _size_, [<<memorymapflags, _memorymapflags_>>]) +
+* _ptr_ = *map_memory*(_devmem_, _offset_, _size_, [<<memorymapflags, _memorymapflags_>>]) +
 [small]#_offset_: integer +
 _size_: integer or '_whole size_' +
+The returned _ptr_ value is a lightuserdata containing the raw pointer to the mapped memory. +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkMapMemory[vkMapMemory].#
 
 [[unmap_memory]]

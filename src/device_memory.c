@@ -124,7 +124,8 @@ static int MapMemory(lua_State *L)
     CheckError(L, ec);
     ud_info->memp = (char*)data;
     ud_info->memsz = (size == VK_WHOLE_SIZE) ? ud_info->maxsz - offset : size;
-    return 0;
+    lua_pushlightuserdata(L, data);
+    return 1;
     }
 
 static int UnmapMemory(lua_State *L)

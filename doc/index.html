@@ -1764,9 +1764,10 @@ or a return value.</p>
 <div id="map_memory" class="ulist">
 <ul>
 <li>
-<p><strong>map_memory</strong>(<em>devmem</em>, <em>offset</em>, <em>size</em>, [<a href="#memorymapflags"><em>memorymapflags</em></a>])<br>
+<p><em>ptr</em> = <strong>map_memory</strong>(<em>devmem</em>, <em>offset</em>, <em>size</em>, [<a href="#memorymapflags"><em>memorymapflags</em></a>])<br>
 <span class="small"><em>offset</em>: integer<br>
 <em>size</em>: integer or '<em>whole size</em>'<br>
+The returned <em>ptr</em> value is a lightuserdata containing the raw pointer to the mapped memory.<br>
 Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkMapMemory">vkMapMemory</a>.</span></p>
 </li>
 </ul>
