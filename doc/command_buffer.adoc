@@ -16,7 +16,7 @@ or a return value.
 
 [[begin_command_buffer]]
 * *begin_command_buffer*(_cb_, <<commandbufferbegininfo, _commandbufferbegininfo_>>) +
-*begin_command_buffer*(_cb_, [_flags_]) +
+*begin_command_buffer*(_cb_, [<<commandbufferusageflags, _commandbufferusageflags_>>]) +
 [small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkBeginCommandBuffer[vkBeginCommandBuffer].#
 
 [[end_command_buffer]]
@@ -24,7 +24,6 @@ or a return value.
 [small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkEndCommandBuffer[vkEndCommandBuffer].#
 
 [[reset_command_buffer]]
-* *reset_command_buffer*(_cb_, [_flags_]) +
-[small]#[_flags_] : <<commandbufferresetflags, commandbufferresetflags>> +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkResetCommandBuffer[vkResetCommandBuffer].#
+* *reset_command_buffer*(_cb_, [<<commandbufferresetflags, _commandbufferresetflags_>>]) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkResetCommandBuffer[vkResetCommandBuffer].#
 

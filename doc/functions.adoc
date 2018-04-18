@@ -5,7 +5,7 @@
 This section lists the MoonVulkan bindings to the core Vulkan API functions.
 
 Only the synopses are given. 
-The functionalities, usages, meanings of parameters and return values are 
+The functionalities, usages, and meanings of parameters and return values are 
 basically the same as for the underlying Vulkan API.
 
 The structure of this section purposedly reflects the structure of the 
