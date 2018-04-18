@@ -115,18 +115,18 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.ht
 [[cmd_debug_marker_begin]]
 * *cmd_debug_marker_begin*(_cb_, _marker_name_, [_color_]) +
 [small]#_marker_name_: string +
-_color_: {float} (length = 4, opt.) +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkCmdDebugMarkerBeginEXT[vkCmdDebugMarkerBeginEXT] (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_debug_marker[VK_EXT_debug_marker] extension)#.
+_color_: {float}[4] (opt.) +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkCmdDebugMarkerBeginEXT[vkCmdDebugMarkerBeginEXT] (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_debug_marker[VK_EXT_debug_marker])#.
 
 [[cmd_debug_marker_end]]
 * *cmd_debug_marker_end*(_cb_) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkCmdDebugMarkerEndEXT[vkCmdDebugMarkerEndEXT] (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_debug_marker[VK_EXT_debug_marker] extension)#.
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkCmdDebugMarkerEndEXT[vkCmdDebugMarkerEndEXT] (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_debug_marker[VK_EXT_debug_marker])#.
 
 [[cmd_debug_marker_insert]]
 * *cmd_debug_marker_insert*(_cb_, _marker_name_, [_color_]) +
 [small]#_marker_name_: string +
-_color_: {float} (length = 4, opt.) +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkCmdDebugMarkerInsertEXT[vkCmdDebugMarkerInsertEXT] (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_debug_marker[VK_EXT_debug_marker] extension)#.
+_color_: {float}[4] (opt.) +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkCmdDebugMarkerInsertEXT[vkCmdDebugMarkerInsertEXT] (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_debug_marker[VK_EXT_debug_marker])#.
 
 
 [[cmd_dispatch]]
@@ -193,14 +193,14 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.ht
 arg3 - _pipeline_layout_: <<pipeline_layout, pipeline_layout>> +
 arg4 - _set_: integer +
 arg5 - _writes_: {<<writedescriptorset, writedescriptorset>>} +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkCmdPushDescriptorSetKHR[vkCmdPushDescriptorSetKHR] (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_push_descriptor[VK_KHR_push_descriptor] extension).#
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkCmdPushDescriptorSetKHR[vkCmdPushDescriptorSetKHR] (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_push_descriptor[VK_KHR_push_descriptor]).#
 
 [[cmd_push_descriptor_set_with_template]]
 * *cmd_push_descriptor_set_with_template*(_cb_, _descriptor_update_template_, _layout_, _..._) +
 [small]#arg3: _layout_: <<pipeline_layout, pipeline_layout>> +
 arg4: _set_: integer +
 arg5: _data_: binary string +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkCmdPushDescriptorSetWithTemplateKHR[vkCmdPushDescriptorSetWithTemplateKHR] (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_descriptor_update_template[VK_KHR_descriptor_update_template] extension).#
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkCmdPushDescriptorSetWithTemplateKHR[vkCmdPushDescriptorSetWithTemplateKHR] (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_descriptor_update_template[VK_KHR_descriptor_update_template]).#
 
 [[cmd_push_constants]]
 * *cmd_push_constants*(_cb_, _layout_, _flags_, _offset_, _values_) +
@@ -241,7 +241,7 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.ht
 
 [[cmd_set_discard_rectangle]]
 * *cmd_set_discard_rectangle*(_cb_, _first_, {<<rect2d, _rect2d_>>}) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkCmdSetDiscardRectangleEXT[vkCmdSetDiscardRectangleEXT] (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_discard_rectangles[VK_EXT_discard_rectangles] extension).#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkCmdSetDiscardRectangleEXT[vkCmdSetDiscardRectangleEXT] (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_discard_rectangles[VK_EXT_discard_rectangles]).#
 
 [[cmd_set_event]]
 * *cmd_set_event*(_cb_, <<event, _event_>>, <<pipelinestageflags, _pipelinestageflags_>>) +
@@ -253,7 +253,7 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.ht
 
 [[cmd_set_sample_locations]]
 * *cmd_set_sample_locations*(_cb_, <<samplelocationsinfo, _samplelocationsinfo_>>) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkCmdSetSampleLocationsEXT[vkCmdSetSampleLocationsEXT] (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_sample_locations[VK_EXT_sample_locations] extension).#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkCmdSetSampleLocationsEXT[vkCmdSetSampleLocationsEXT] (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_sample_locations[VK_EXT_sample_locations]).#
 
 [[cmd_set_scissor]]
 * *cmd_set_scissor*(_cb_, _first_, {<<rect2d, _rect2d_>>}) +

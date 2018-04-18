@@ -4,23 +4,22 @@
 
 [[create_validation_cache]]
 * _validation_cache_ = *create_validation_cache*(_device_, <<validationcachecreateinfo, _validationcachecreateinfo_>>,  [<<allocators, _allocator_>>]) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkCreateValidationCacheEXT[vkCreateValidationCacheEXT] (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_validation_cache[VK_EXT_validation_cache] extension).#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkCreateValidationCacheEXT[vkCreateValidationCacheEXT] (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_validation_cache[VK_EXT_validation_cache]).#
 
 
 [[destroy_validation_cache]]
 * *destroy_validation_cache*(_validation_cache_) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkDestroyValidationCacheEXT[vkDestroyValidationCacheEXT] (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_validation_cache[VK_EXT_validation_cache] extension).#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkDestroyValidationCacheEXT[vkDestroyValidationCacheEXT] (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_validation_cache[VK_EXT_validation_cache]).#
 
 
 [[get_validation_cache_data]]
 * _data_ = *get_validation_cache_data*(_validation_cache_) +
 [small]#Returns _data_ as a binary string. +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkGetValidationCacheDataEXT[vkGetValidationCacheDataEXT] (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_validation_cache[VK_EXT_validation_cache] extension).#
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkGetValidationCacheDataEXT[vkGetValidationCacheDataEXT] (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_validation_cache[VK_EXT_validation_cache]).#
 
 
 [[merge_validation_caches]]
-* *merge_validation_caches*(_destination_, _sources_) +
-[small]#_destination_: _validation_cache_ +
-_sources_: {_validation_cache_} +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkMergeValidationCachesEXT[vkMergeValidationCachesEXT] (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_validation_cache[VK_EXT_validation_cache] extension).#
+* *merge_validation_caches*(_destination_, {_source_}) +
+[small]#_destination_, _source_: _validation_cache_ +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkMergeValidationCachesEXT[vkMergeValidationCachesEXT] (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_validation_cache[VK_EXT_validation_cache]).#
 
