@@ -2650,41 +2650,41 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/
 <div class="sectionbody">
 <div class="sect2">
 <h3 id="enumerate_layers">Enumerate extensions</h3>
+<div id="enumerate.byname" class="paragraph">
+<p>Each of the following functions returns an integer-indexed array unless it is called with
+<em>byname=true</em>, in which case the returned table is indexed by name. For example,
+<em>vk.enumerate_instance_layer_properties(true)</em> returns a table indexed by <em>layer_name</em>
+(which is usually more convenient).</p>
+</div>
 <div id="enumerate_instance_layer_properties" class="ulist">
 <ul>
 <li>
-<p>{<a href="#layerproperties">layerproperties</a>} = <strong>enumerate_instance_layer_properties</strong>([<em>byname</em>])<br>
-<span class="small">If <em>byname</em>=<em>true</em> then the returned table is indexed by <em>layer_name</em>, otherwise it is returned as an integer indexed array.<br>
-Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkEnumerateInstanceLayerProperties">vkEnumerateInstanceLayerProperties</a>.</span></p>
+<p>{<a href="#layerproperties"><em>layerproperties</em></a>} = <strong>enumerate_instance_layer_properties</strong>([<em>byname=false</em>])<br>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkEnumerateInstanceLayerProperties">vkEnumerateInstanceLayerProperties</a>.</span></p>
 </li>
 </ul>
 </div>
 <div id="enumerate_instance_extension_properties" class="ulist">
 <ul>
 <li>
-<p>{<a href="#extensionproperties">extensionproperties</a>} = <strong>enumerate_instance_extension_properties</strong>([<em>layer</em>], [<em>byname</em>])<br>
-<span class="small">[<em>layer</em>]: string<br>
-If <em>byname</em>=<em>true</em> then the returned table is indexed by <em>extension_name</em>, otherwise it is returned as an integer indexed array.<br>
-Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkEnumerateInstanceExtensionProperties">vkEnumerateInstanceExtensionProperties</a>.</span></p>
+<p>{<a href="#extensionproperties"><em>extensionproperties</em></a>} = <strong>enumerate_instance_extension_properties</strong>([<em>layer_name</em>], [<em>byname=false</em>])<br>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkEnumerateInstanceExtensionProperties">vkEnumerateInstanceExtensionProperties</a>.</span></p>
 </li>
 </ul>
 </div>
 <div id="enumerate_device_layer_properties" class="ulist">
 <ul>
 <li>
-<p>{<a href="#layerproperties">layerproperties</a>} = <strong>enumerate_device_layer_properties</strong>(<a href="#physical_device"><em>physdev</em></a>, [<em>byname</em>])<br>
-<span class="small">If <em>byname</em>=<em>true</em> then the returned table is indexed by <em>layer_name</em>, otherwise it is returned as an integer indexed array.<br>
-Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkEnumerateDeviceLayerProperties">vkEnumerateDeviceLayerProperties</a>.</span></p>
+<p>{<a href="#layerproperties"><em>layerproperties</em></a>} = <em>enumerate_device_layer_properties</em>(<a href="#physical_device"><em>physdev</em></a>, [<em>byname=false</em>]) <em>DEPRECATED</em><br>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkEnumerateDeviceLayerProperties">vkEnumerateDeviceLayerProperties</a>.</span></p>
 </li>
 </ul>
 </div>
 <div id="enumerate_device_extension_properties" class="ulist">
 <ul>
 <li>
-<p>{<a href="#extensionproperties">extensionproperties</a>} = <strong>enumerate_device_extension_properties</strong>(<a href="#physical_device"><em>physdev</em></a>, [<em>layer</em>], [<em>byname</em>])<br>
-<span class="small">[<em>layer</em>]: string<br>
-If <em>byname</em>=<em>true</em> then the returned table is indexed by <em>extension_name</em>, otherwise it is returned as an integer indexed array.<br>
-Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkEnumerateDeviceExtensionProperties">vkEnumerateDeviceExtensionProperties</a>.</span></p>
+<p>{<a href="#extensionproperties"><em>extensionproperties</em></a>} = <strong>enumerate_device_extension_properties</strong>(<a href="#physical_device"><em>physdev</em></a>, [<em>layer_name</em>], [<em>byname=false</em>])<br>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkEnumerateDeviceExtensionProperties">vkEnumerateDeviceExtensionProperties</a>.</span></p>
 </li>
 </ul>
 </div>
@@ -2695,7 +2695,8 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/
 <div class="title">Note</div>
 </td>
 <td class="content">
-Device layers are deprecated (rfr: 'Device Layer Deprecation' section in the Vulkan specification).
+Device layers are deprecated (rfr:
+<a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#extended-functionality-device-layer-deprecation">'Device Layer Deprecation'</a>).
 As a consequence, with up to date Vulkan implementations, the
 <a href="#enumerate_device_layer_properties">enumerate_device_layer_properties</a>(&nbsp;) function will always
 return an empty list, and the <em>layer</em> parameter in the
