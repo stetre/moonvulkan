@@ -3115,9 +3115,8 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/
 <div id="create_debug_report_callback" class="ulist">
 <ul>
 <li>
-<p><em>debug_report_callback</em> = <strong>create_debug_report_callback</strong>(<em>instance</em>, <em>flags</em>, <em>func</em>, [<a href="#allocators"><em>allocator</em></a>])<br>
-<span class="small"><em>flags</em>: <a href="#debugreportflags">debugreportflags</a><br>
-The <em>func</em> callback (a Lua function) will be executed as:<br>
+<p><em>debug_report_callback</em> = <strong>create_debug_report_callback</strong>(<em>instance</em>, <a href="#debugreportflags"><em>debugreportflags</em></a>, <em>func</em>, [<a href="#allocators"><em>allocator</em></a>])<br>
+<span class="small">The <em>func</em> callback (a Lua function) will be executed as:<br>
 <strong>func(instance, flags, object_type, objectRAW, location, message_code, layer_prefix, message)</strong>,<br>
 where the parameters are the same as those for the <a href="#debug_report_message">debug_report_message</a>(&nbsp;) function.<br>
 Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkCreateDebugReportCallbackEXT">vkCreateDebugReportCallbackEXT</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_debug_report">VK_EXT_debug_report</a>).</span></p>
@@ -3135,9 +3134,8 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/
 <div id="debug_report_message" class="ulist">
 <ul>
 <li>
-<p><strong>debug_report_message</strong>(<em>instance</em>, <em>flags</em>, <em>&#8230;&#8203;</em>)<br>
-<span class="small">arg2: <em>flags</em>: <a href="#debugreportflags">debugreportflags</a><br>
-arg3: <em>object_type</em>: <a href="#debugreportobjecttype">debugreportobjecttype</a><br>
+<p><strong>debug_report_message</strong>(<em>instance</em>, <a href="#debugreportflags"><em>debugreportflags</em></a>, <em>object_type</em>, <em>&#8230;&#8203;</em>)<br>
+<span class="small">arg3: <em>object_type</em>: <a href="#debugreportobjecttype">debugreportobjecttype</a><br>
 arg4: <em>objectRAW</em>: integer raw object handle (may be 0)<br>
 arg5: <em>location</em>: integer<br>
 arg6: <em>message_code</em>: integer<br>
