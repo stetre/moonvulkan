@@ -555,6 +555,7 @@ static VkFlags checkdescriptorpoolcreateflags(lua_State *L, int arg)
         s = lua_tostring(L, arg++);
 #define CASE(CODE,str) if((strcmp(s, str)==0)) do { flags |= CODE; goto done; } while(0)
     CASE(VK_DESCRIPTOR_POOL_CREATE_FREE_DESCRIPTOR_SET_BIT, "free descriptor set");
+    CASE(VK_DESCRIPTOR_POOL_CREATE_UPDATE_AFTER_BIND_BIT_EXT, "update after bind");
 #undef CASE
         return (VkFlags)luaL_argerror(L, --arg, badvalue(L,s));
         done: ;
@@ -600,6 +601,7 @@ static VkFlags checkdescriptorsetlayoutcreateflags(lua_State *L, int arg)
         s = lua_tostring(L, arg++);
 #define CASE(CODE,str) if((strcmp(s, str)==0)) do { flags |= CODE; goto done; } while(0)
         CASE(VK_DESCRIPTOR_SET_LAYOUT_CREATE_PUSH_DESCRIPTOR_BIT_KHR, "push descriptor");
+        CASE(VK_DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT_EXT, "update after bind pool");
 #undef CASE
         return (VkFlags)luaL_argerror(L, --arg, badvalue(L,s));
         done: ;

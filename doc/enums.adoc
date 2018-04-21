@@ -24,7 +24,7 @@ for semantic and usage information.
 
 [[result]]
 [small]#*result*: vk.XXX (results), vk.ERROR_XXX (errors) +
-Values: '_success_', '_not ready_', '_timeout_', '_event set_', '_event reset_', '_incomplete_', '_out of host memory_', '_out of device memory_', '_initialization failed_', '_device lost_', '_memory map failed_', '_layer not present_', '_extension not present_', '_feature not present_', '_incompatible driver_', '_too many objects_', '_format not supported_', '_fragmented pool_', '_surface lost_', '_native window in use_', '_suboptimal_', '_out of date_', '_incompatible display_', '_validation failed_', '_out of pool memory_', '_invalid external handle_', '_not permitted_'. +
+Values: '_success_', '_not ready_', '_timeout_', '_event set_', '_event reset_', '_incomplete_', '_out of host memory_', '_out of device memory_', '_initialization failed_', '_device lost_', '_memory map failed_', '_layer not present_', '_extension not present_', '_feature not present_', '_incompatible driver_', '_too many objects_', '_format not supported_', '_fragmented pool_', '_surface lost_', '_native window in use_', '_suboptimal_', '_out of date_', '_incompatible display_', '_validation failed_', '_out of pool memory_', '_invalid external handle_', '_not permitted_', '_fragmentation_'. +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkResult[VkResult].#
 
 [[attachmentloadop]]
