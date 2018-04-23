@@ -1311,7 +1311,7 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/
 <div id="get_device_queue" class="ulist">
 <ul>
 <li>
-<p><em>queue</em> = <strong>get_device_queue</strong>(<a href="#device"><em>device</em></a>, <em>familyindex</em>, <em>queueindex</em>)<br>
+<p><em>queue</em> = <strong>get_device_queue</strong>(<a href="#device"><em>device</em></a>, <a href="#queue_family_index"><em>queue_family_index</em></a>, <a href="#queue_index"><em>queue_index</em></a>)<br>
 <span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkGetDeviceQueue">vkGetDeviceQueue</a>.</span></p>
 </li>
 </ul>
@@ -1350,7 +1350,7 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/
 <ul>
 <li>
 <p><em>command_pool</em> = <strong>create_command_pool</strong>(<em>device</em>, <a href="#commandpoolcreateinfo"><em>commandpoolcreateinfo</em></a>, [<a href="#allocators"><em>allocator</em></a>])<br>
-<em>command_pool</em> = <strong>create_command_pool</strong>(<em>device</em>, <a href="#commandpoolcreateflags"><em>commandpoolcreateflags</em></a>, <em>queue_family_index</em>)<br>
+<em>command_pool</em> = <strong>create_command_pool</strong>(<em>device</em>, <a href="#commandpoolcreateflags"><em>commandpoolcreateflags</em></a>, <a href="#queue_family_index"><em>queue_family_index</em></a>)<br>
 <span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkCreateCommandPool">vkCreateCommandPool</a>.</span></p>
 </li>
 </ul>
@@ -2739,7 +2739,7 @@ Creates and returns a <em>surface</em> userdata (MoonVulkan object) bound to the
 <div id="get_physical_device_surface_support" class="ulist">
 <ul>
 <li>
-<p><em>boolean</em> = <strong>get_physical_device_surface_support</strong>(<a href="#physical_device"><em>physdev</em></a>, <em>familyindex</em>, <em>surface</em>)<br>
+<p><em>boolean</em> = <strong>get_physical_device_surface_support</strong>(<a href="#physical_device"><em>physdev</em></a>, <a href="#queue_family_index"><em>queue_family_index</em></a>, <em>surface</em>)<br>
 <span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkGetPhysicalDeviceSurfaceSupportKHR">vkGetPhysicalDeviceSurfaceSupportKHR</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_surface">VK_KHR_surface</a>).</span></p>
 </li>
 </ul>
@@ -2782,7 +2782,7 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/
 <div id="get_physical_device_xlib_presentation_support" class="ulist">
 <ul>
 <li>
-<p><em>boolean</em> = <strong>get_physical_device_xlib_presentation_support</strong>(<em>physdev</em>, <em>familyindex</em>, <em>dpy</em>, <em>visual_id</em>)<br>
+<p><em>boolean</em> = <strong>get_physical_device_xlib_presentation_support</strong>(<em>physdev</em>, <a href="#queue_family_index"><em>queue_family_index</em></a>, <em>dpy</em>, <em>visual_id</em>)<br>
 <span class="small"><em>dpy</em>: lightuserdata (<em>Display*</em>)<br>
 Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkGetPhysicalDeviceXlibPresentationSupportKHR">vkGetPhysicalDeviceXlibPresentationSupportKHR</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_xlib_surface">VK_KHR_xlib_surface</a>, <a href="#platform_support">PLATFORM_XLIB</a>).</span></p>
 </li>
@@ -2802,7 +2802,7 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/
 <div id="get_physical_device_xcb_presentation_support" class="ulist">
 <ul>
 <li>
-<p><em>boolean</em> = <strong>get_physical_device_xcb_presentation_support</strong>(<em>physdev</em>, <em>familyindex</em>, <em>connection</em>, <em>visual_id</em>)<br>
+<p><em>boolean</em> = <strong>get_physical_device_xcb_presentation_support</strong>(<em>physdev</em>, <a href="#queue_family_index"><em>queue_family_index</em></a>, <em>connection</em>, <em>visual_id</em>)<br>
 <span class="small"><em>connection</em>: lightuserdata (<em>xcb_connection_t*</em>)<br>
 Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkGetPhysicalDeviceXcbPresentationSupportKHR">vkGetPhysicalDeviceXcbPresentationSupportKHR</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_xcb_surface">VK_KHR_xcb_surface</a>, <a href="#platform_support">PLATFORM_XCB</a>).</span></p>
 </li>
@@ -2821,7 +2821,7 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/
 <div id="get_physical_device_wayland_presentation_support" class="ulist">
 <ul>
 <li>
-<p><em>boolean</em> = <strong>get_physical_device_wayland_presentation_support</strong>(<em>physdev</em>, <em>familyindex</em>, <em>wldisplay</em>)<br>
+<p><em>boolean</em> = <strong>get_physical_device_wayland_presentation_support</strong>(<em>physdev</em>, <a href="#queue_family_index"><em>queue_family_index</em></a>, <em>wldisplay</em>)<br>
 <span class="small"><em>wldisplay</em>: lightuserdata (<em>wl_display*</em>)<br>
 Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkGetPhysicalDeviceWaylandPresentationSupportKHR">vkGetPhysicalDeviceWaylandPresentationSupportKHR</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_wayland_surface">VK_KHR_wayland_surface</a>, <a href="#platform_support">PLATFORM_WAYLAND</a>).</span></p>
 </li>
@@ -2841,7 +2841,7 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/
 <div id="get_physical_device_mir_presentation_support" class="ulist">
 <ul>
 <li>
-<p><em>boolean</em> = <strong>get_physical_device_mir_presentation_support</strong>(<em>physdev</em>, <em>familyindex</em>, <em>mirconnection</em>)<br>
+<p><em>boolean</em> = <strong>get_physical_device_mir_presentation_support</strong>(<em>physdev</em>, <a href="#queue_family_index"><em>queue_family_index</em></a>, <em>mirconnection</em>)<br>
 <span class="small"><em>mirconnection</em>: lightuserdata (<em>MirConnection*</em>)<br>
 Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkGetPhysicalDeviceMirPresentationSupportKHR">vkGetPhysicalDeviceMirPresentationSupportKHR</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_mir_surface">VK_KHR_mir_surface</a>, <a href="#platform_support">PLATFORM_MIR</a>).</span></p>
 </li>
@@ -2861,7 +2861,7 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/
 <div id="get_physical_device_win32_presentation_support" class="ulist">
 <ul>
 <li>
-<p><em>boolean</em> = <strong>get_physical_device_win32_presentation_support</strong>(<em>physdev</em>, <em>familyindex</em>)<br>
+<p><em>boolean</em> = <strong>get_physical_device_win32_presentation_support</strong>(<em>physdev</em>, <a href="#queue_family_index"><em>queue_family_index</em></a>)<br>
 <span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkGetPhysicalDeviceWin32PresentationSupportKHR">vkGetPhysicalDeviceWin32PresentationSupportKHR</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_win32_surface">VK_KHR_win32_surface</a>, <a href="#platform_support">PLATFORM_WIN32</a>).</span></p>
 </li>
 </ul>
@@ -3505,7 +3505,31 @@ with 1-based integer keys and no gaps, a.k.a. 'sequence' in Lua&#8217;s jargon).
 <p><a id="timeout"></a>
 <span class="small"><strong>timeout</strong> = integer (nanoseconds) or '<em>blocking</em>' or <em>nil</em> (both for blocking).</span></p>
 </li>
+<li>
+<p><a id="queue_family_index"></a>
+<span class="small"><strong>queue_family_index</strong> = 0-based integer index.</span></p>
+</li>
+<li>
+<p><a id="queue_index"></a>
+<span class="small"><strong>queue_index</strong> = 0-based integer index.</span></p>
+</li>
 </ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+Indices that are used as identifiers in the Vulkan C API, like queue indices or queue family
+indices, are 0-based also in MoonVulkan when used as function parameters or as fields of structs.
+They are not remapped to Lua-style 1-based indices to avoid confusion when using the validation layers.
+Care must be taken, however, when deducing their values from positions in Lua tables (for example,
+the <em>queue_family_index</em> of the <em>i-th</em> element in the table returned by <a href="#get_physical_device_queue_family_properties">get_physical_device_queue_family_properties</a>(&nbsp;) is <em>i-1</em>).
+</td>
+</tr>
+</table>
 </div>
 <hr>
 <div class="ulist">
@@ -3810,7 +3834,7 @@ with 1-based integer keys and no gaps, a.k.a. 'sequence' in Lua&#8217;s jargon).
 <li>
 <p><a id="queuefamilyproperties"></a>
 <span class="small"><strong>queuefamilyproperties</strong> = {<br>
-<em>queue_family_index</em>: integer,<br>
+<em>queue_family_index</em>: <a href="#queue_family_index">queue_family_index</a>,<br>
 <em>queue_flags</em>: <a href="#queueflags">queueflags</a>,<br>
 <em>queue_count</em>: integer,<br>
 <em>timestamp_valid_bits</em>: integer,<br>
@@ -3960,7 +3984,7 @@ with 1-based integer keys and no gaps, a.k.a. 'sequence' in Lua&#8217;s jargon).
 <p><a id="devicequeuecreateinfo"></a>
 <span class="small"><strong>devicequeuecreateinfo</strong> = {<br>
 <em>flags</em>: <a href="#devicequeuecreateflags">devicequeuecreateflags</a>,<br>
-<em>queue_family_index</em>: integer,<br>
+<em>queue_family_index</em>: <a href="#queue_family_index">queue_family_index</a>,<br>
 <em>queue_priorities</em>: {float} <strong>[R]</strong>,<br>
 -- EXTENSION (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkDeviceQueueGlobalPriorityCreateInfoKHR">VkDeviceQueueGlobalPriorityCreateInfoKHR</a>, <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_global_priority">VK_KHR_global_priority</a>):<br>
 <em>global_priority</em>: <a href="#queueglobalpriority">queueglobalpriority</a>,<br>
@@ -4041,7 +4065,7 @@ with 1-based integer keys and no gaps, a.k.a. 'sequence' in Lua&#8217;s jargon).
 <p><a id="commandpoolcreateinfo"></a>
 <span class="small"><strong>commandpoolcreateinfo</strong> = {<br>
 <em>flags</em>: <a href="#commandpoolcreateflags">commandpoolcreateflags</a>,<br>
-<em>queue_family_index</em>: integer,<br>
+<em>queue_family_index</em>: <a href="#queue_family_index">queue_family_index</a>,<br>
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkCommandPoolCreateInfo">VkCommandPoolCreateInfo</a>)</span></p>
 </li>
 <li>
@@ -4281,7 +4305,7 @@ with 1-based integer keys and no gaps, a.k.a. 'sequence' in Lua&#8217;s jargon).
 <em>size</em>: integer<br>
 <em>usage</em>: <a href="#bufferusageflags">bufferusageflags</a>,<br>
 <em>sharing_mode</em>: <a href="#sharingmode">sharingmode</a>,<br>
-<em>queue_family_indices</em>: {integer},<br>
+<em>queue_family_indices</em>: {<a href="#queue_family_index">queue_family_index</a>},<br>
 -- EXTENSION (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkExternalMemoryBufferCreateInfoKHR">VkExternalMemoryBufferCreateInfoKHR</a>, <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_external_memory">VK_KHR_external_memory</a>):<br>
 <em>handle_types</em>: <a href="#externalmemoryhandletypeflags">externalmemoryhandletypeflags</a>,<br>
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkBufferCreateInfo">VkBufferCreateInfo</a>)</span></p>
@@ -4314,7 +4338,7 @@ with 1-based integer keys and no gaps, a.k.a. 'sequence' in Lua&#8217;s jargon).
 <em>usage</em>: <a href="#imageusageflags">imageusageflags</a>,<br>
 <em>initial_layout</em>: <a href="#imagelayout">imagelayout</a>,<br>
 <em>sharing_mode</em>: <a href="#sharingmode">sharingmode</a>,<br>
-<em>queue_family_indices</em>: {integer},<br>
+<em>queue_family_indices</em>: {<a href="#queue_family_index">queue_family_index</a>},<br>
 -- EXTENSION (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkExternalMemoryImageCreateInfoKHR">VkExternalMemoryImageCreateInfoKHR</a>, <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_external_memory">VK_KHR_external_memory</a>):<br>
 <em>handle_types</em>: <a href="#externalmemoryhandletypeflags">externalmemoryhandletypeflags</a>,<br>
 -- EXTENSION (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkImageFormatListCreateInfoKHR">VkImageFormatListCreateInfoKHR</a>, <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_image_format_list">VK_KHR_image_format_list</a>):<br>
@@ -4956,8 +4980,8 @@ Note2: Requires the <a href="https://www.khronos.org/registry/vulkan/specs/1.1-e
 <span class="small"><strong>buffermemorybarrier</strong> = {<br>
 <em>src_access_mask</em>: <a href="#accessflags">accessflags</a>,<br>
 <em>dst_access_mask</em>: <a href="#accessflags">accessflags</a>,<br>
-<em>src_queue_family_index</em>: integer (default: ignored),<br>
-<em>dst_queue_family_index</em>: integer (default: ignored),<br>
+<em>src_queue_family_index</em>: <a href="#queue_family_index">queue_family_index</a> (default: ignored),<br>
+<em>dst_queue_family_index</em>: <a href="#queue_family_index">queue_family_index</a> (default: ignored),<br>
 <em>buffer</em>: <a href="#buffer">buffer</a> <strong>[R]</strong>,<br>
 <em>offset</em>: integer,<br>
 <em>size</em>: integer,<br>
@@ -4968,8 +4992,8 @@ Note2: Requires the <a href="https://www.khronos.org/registry/vulkan/specs/1.1-e
 <span class="small"><strong>imagememorybarrier</strong> = {<br>
 <em>src_access_mask</em>: <a href="#accessflags">accessflags</a>,<br>
 <em>dst_access_mask</em>: <a href="#accessflags">accessflags</a>,<br>
-<em>src_queue_family_index</em>: integer (default: ignored),<br>
-<em>dst_queue_family_index</em>: integer (default: ignored),<br>
+<em>src_queue_family_index</em>: <a href="#queue_family_index">queue_family_index</a> (default: ignored),<br>
+<em>dst_queue_family_index</em>: <a href="#queue_family_index">queue_family_index</a> (default: ignored),<br>
 <em>old_layout</em>: <a href="#imagelayout">imagelayout</a>,<br>
 <em>new_layout</em>: <a href="#imagelayout">imagelayout</a>,<br>
 <em>image</em>: <a href="#image">image</a>,<br>
@@ -5153,7 +5177,7 @@ Note1: The <em>current_extent</em> field is <em>nil</em> when <em>width</em> and
 <em>image_array_layers</em>: integer,<br>
 <em>image_usage</em>: <a href="#imageusageflags">imageusageflags</a>,<br>
 <em>image_sharing_mode</em>: <a href="#sharingmode">sharingmode</a>,<br>
-<em>queue_family_indices</em>: {integer},<br>
+<em>queue_family_indices</em>: {<a href="#queue_family_index">queue_family_index</a>},<br>
 <em>pre_transform</em>: <a href="#surfacetransformflags">surfacetransformflags</a>,<br>
 <em>composite_alpha</em>: <a href="#compositealphaflags">compositealphaflags</a>,<br>
 <em>present_mode</em>: <a href="#presentmode">presentmode</a>,<br>

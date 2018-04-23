@@ -4,7 +4,7 @@
 
 [[create_command_pool]]
 * _command_pool_ = *create_command_pool*(_device_, <<commandpoolcreateinfo, _commandpoolcreateinfo_>>, [<<allocators, _allocator_>>]) +
-_command_pool_ = *create_command_pool*(_device_, <<commandpoolcreateflags, _commandpoolcreateflags_>>, _queue_family_index_) +
+_command_pool_ = *create_command_pool*(_device_, <<commandpoolcreateflags, _commandpoolcreateflags_>>, <<queue_family_index, _queue_family_index_>>) +
 [small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkCreateCommandPool[vkCreateCommandPool].#
 
 [[destroy_command_pool]]
