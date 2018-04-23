@@ -17,7 +17,7 @@ Creates and returns a _surface_ userdata (MoonVulkan object) bound to the given 
 
 
 [[get_physical_device_surface_support]]
-* _boolean_ = *get_physical_device_surface_support*(<<physical_device, _physdev_>>, <<queue_family_index, _queue_family_index_>>, _surface_) +
+* _boolean_ = *get_physical_device_surface_support*(<<physical_device, _physdev_>>, <<index, _queue_family_index_>>, _surface_) +
 [small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkGetPhysicalDeviceSurfaceSupportKHR[vkGetPhysicalDeviceSurfaceSupportKHR] (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_surface[VK_KHR_surface]).#
 
 [[get_physical_device_surface_capabilities]]

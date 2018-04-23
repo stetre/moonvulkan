@@ -9,7 +9,7 @@ Platform-specific surface API are available only if MoonVulkan was <<platform_su
 '''
 
 [[get_physical_device_xlib_presentation_support]]
-* _boolean_ = *get_physical_device_xlib_presentation_support*(_physdev_, <<queue_family_index, _queue_family_index_>>, _dpy_, _visual_id_) +
+* _boolean_ = *get_physical_device_xlib_presentation_support*(_physdev_, <<index, _queue_family_index_>>, _dpy_, _visual_id_) +
 [small]#_dpy_: lightuserdata (_Display*_) +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkGetPhysicalDeviceXlibPresentationSupportKHR[vkGetPhysicalDeviceXlibPresentationSupportKHR] (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_xlib_surface[VK_KHR_xlib_surface], <<platform_support, PLATFORM_XLIB>>).#
 
@@ -22,7 +22,7 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.ht
 '''
 
 [[get_physical_device_xcb_presentation_support]]
-* _boolean_ = *get_physical_device_xcb_presentation_support*(_physdev_, <<queue_family_index, _queue_family_index_>>, _connection_, _visual_id_) +
+* _boolean_ = *get_physical_device_xcb_presentation_support*(_physdev_, <<index, _queue_family_index_>>, _connection_, _visual_id_) +
 [small]#_connection_: lightuserdata (_xcb_connection_t*_) +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkGetPhysicalDeviceXcbPresentationSupportKHR[vkGetPhysicalDeviceXcbPresentationSupportKHR] (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_xcb_surface[VK_KHR_xcb_surface], <<platform_support, PLATFORM_XCB>>).#
 
@@ -34,7 +34,7 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.ht
 '''
 
 [[get_physical_device_wayland_presentation_support]]
-* _boolean_ = *get_physical_device_wayland_presentation_support*(_physdev_, <<queue_family_index, _queue_family_index_>>, _wldisplay_) +
+* _boolean_ = *get_physical_device_wayland_presentation_support*(_physdev_, <<index, _queue_family_index_>>, _wldisplay_) +
 [small]#_wldisplay_: lightuserdata (_wl_display*_) +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkGetPhysicalDeviceWaylandPresentationSupportKHR[vkGetPhysicalDeviceWaylandPresentationSupportKHR] (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_wayland_surface[VK_KHR_wayland_surface], <<platform_support, PLATFORM_WAYLAND>>).#
 
@@ -47,7 +47,7 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.ht
 '''
 
 [[get_physical_device_mir_presentation_support]]
-* _boolean_ = *get_physical_device_mir_presentation_support*(_physdev_, <<queue_family_index, _queue_family_index_>>, _mirconnection_) +
+* _boolean_ = *get_physical_device_mir_presentation_support*(_physdev_, <<index, _queue_family_index_>>, _mirconnection_) +
 [small]#_mirconnection_: lightuserdata (_MirConnection*_) +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkGetPhysicalDeviceMirPresentationSupportKHR[vkGetPhysicalDeviceMirPresentationSupportKHR] (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_mir_surface[VK_KHR_mir_surface], <<platform_support, PLATFORM_MIR>>).#
 
@@ -72,7 +72,7 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.ht
 '''
 
 [[get_physical_device_win32_presentation_support]]
-* _boolean_ = *get_physical_device_win32_presentation_support*(_physdev_, <<queue_family_index, _queue_family_index_>>) +
+* _boolean_ = *get_physical_device_win32_presentation_support*(_physdev_, <<index, _queue_family_index_>>) +
 [small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkGetPhysicalDeviceWin32PresentationSupportKHR[vkGetPhysicalDeviceWin32PresentationSupportKHR] (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_win32_surface[VK_KHR_win32_surface], <<platform_support, PLATFORM_WIN32>>).#
 
 [[create_win32_surface]]

@@ -7,7 +7,7 @@ or a return value.
 
 [[allocate_memory]]
 * _devmem_ = *allocate_memory*(_device_, <<memoryallocateinfo, _memoryallocateinfo_>>, [<<allocators, _allocator_>>]) +
-_devmem_ = *allocate_memory*(_device_, _allocation_size_, _memory_type_index_) +
+_devmem_ = *allocate_memory*(_device_, _allocation_size_, <<index, _memory_type_index_>>) +
 [small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkAllocateMemory[vkAllocateMemory].#
 
 [[free_memory]]

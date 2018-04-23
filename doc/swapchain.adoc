@@ -19,7 +19,7 @@
 [small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkGetSwapchainImagesKHR[vkGetSwapchainImagesKHR] (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_swapchain[VK_KHR_swapchain]).#
 
 [[acquire_next_image]]
-* _image_index_, _message_ = *acquire_next_image*(_swapchain_, <<timeout, _timeout_>>, [<<semaphore, _semaphore_>>], [<<fence, _fence_>>]) +
+* <<index, _image_index_>>, , _message_ = *acquire_next_image*(_swapchain_, <<timeout, _timeout_>>, [<<semaphore, _semaphore_>>], [<<fence, _fence_>>]) +
 [small]#Returns one of the following combinations of _image_index_ and _message_: +
 1) _integer_, _nil_ 2) _integer_, '_suboptimal_' 3) _nil_, '_timeout_'  4) _nil_, '_not ready_' +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkAcquireNextImageKHR[vkAcquireNextImageKHR] (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_swapchain[VK_KHR_swapchain]).#

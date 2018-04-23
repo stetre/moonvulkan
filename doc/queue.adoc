@@ -3,7 +3,7 @@
 ==== queue
 
 [[get_device_queue]]
-* _queue_ = *get_device_queue*(<<device, _device_>>, <<queue_family_index, _queue_family_index_>>, <<queue_index, _queue_index_>>) +
+* _queue_ = *get_device_queue*(<<device, _device_>>, <<index, _queue_family_index_>>, <<index, _queue_index_>>) +
 [small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkGetDeviceQueue[vkGetDeviceQueue].#
 
 

@@ -49,14 +49,11 @@ Basic types used in the table description that follow:
 * [[timeout]]
 [small]#*timeout* = integer (nanoseconds) or '_blocking_' or _nil_ (both for blocking).#
 
-* [[queue_family_index]]
-[small]#*queue_family_index* = 0-based integer index.#
+* [[index]]
+[small]#*index* = 0-based integer index.#
 
-* [[queue_index]]
-[small]#*queue_index* = 0-based integer index.#
-
-NOTE: Indices that are used as identifiers in the Vulkan C API, like queue indices or queue family
-indices, are 0-based also in MoonVulkan when used as function parameters or as fields of structs.
+NOTE: 0-based indices that are used as identifiers in the Vulkan C API, like queue indices or queue family
+indices, are 0-based also in MoonVulkan functions and structs.
 They are not remapped to Lua-style 1-based indices to avoid confusion when using the validation layers.
 Care must be taken, however, when deducing their values from positions in Lua tables (for example,
 the _queue_family_index_ of the _i-th_ element in the table returned by <<get_physical_device_queue_family_properties, get_physical_device_queue_family_properties>>(&nbsp;) is _i-1_).
@@ -347,7 +344,7 @@ _sampler_ycbcr_conversion_: boolean, +
 
 * [[queuefamilyproperties]]
 [small]#*queuefamilyproperties* = { +
-_queue_family_index_: <<queue_family_index, queue_family_index>>, +
+_queue_family_index_: <<index, index>>, +
 _queue_flags_: <<queueflags, queueflags>>, +
 _queue_count_: integer, +
 _timestamp_valid_bits_: integer, +
@@ -362,14 +359,14 @@ _memory_heaps_: {<<memoryheap, memoryheap>>}, +
 
 * [[memorytype]]
 [small]#*memorytype* = { +
-_memory_type_index_: integer, +
+_memory_type_index_: <<index, index>>, +
 _property_flags_: <<memorypropertyflags, memorypropertyflags>>, +
-_heap_index_: integer, +
+_heap_index_: <<index, index>>, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkMemoryType[VkMemoryType])#
 
 * [[memoryheap]]
 [small]#*memoryheap* = { +
-_memory_heap_index_: integer, +
+_memory_heap_index_: <<index, index>>, +
 _size_: integer, +
 _flags_: <<memoryheapflags, memoryheapflags>>, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkMemoryHeap[VkMemoryHeap])#
@@ -479,7 +476,7 @@ _enabled_features_: {<<physicaldevicefeatures, physicaldevicefeatures>>}, +
 * [[devicequeuecreateinfo]]
 [small]#*devicequeuecreateinfo* = { +
 _flags_: <<devicequeuecreateflags, devicequeuecreateflags>>, +
-_queue_family_index_: <<queue_family_index, queue_family_index>>, +
+_queue_family_index_: <<index, index>>, +
 _queue_priorities_: {float} *[R]*, +
 pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkDeviceQueueGlobalPriorityCreateInfoKHR[VkDeviceQueueGlobalPriorityCreateInfoKHR], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_global_priority[VK_KHR_global_priority]): +
 _global_priority_: <<queueglobalpriority, queueglobalpriority>>, +
@@ -547,7 +544,7 @@ _flags_: <<sparseimagememorybindflags, sparseimagememorybindflags>>, +
 * [[commandpoolcreateinfo]]
 [small]#*commandpoolcreateinfo* = { +
 _flags_: <<commandpoolcreateflags, commandpoolcreateflags>>, +
-_queue_family_index_: <<queue_family_index, queue_family_index>>, +
+_queue_family_index_: <<index, index>>, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkCommandPoolCreateInfo[VkCommandPoolCreateInfo])#
 
 * [[commandbufferallocateinfo]]
@@ -690,7 +687,7 @@ _dependency_flags_: <<dependencyflags, dependencyflags>>, +
 * [[inputattachmentaspectreference]]
 [small]#*inputattachmentaspectreference* = { +
 _subpass_: integer, +
-_input_attachment_index_: integer, +
+_input_attachment_index_: <<index, index>>, +
 _aspect_mask_: <<imageaspectflags, imageaspectflags>>, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkInputAttachmentAspectReferenceKHR[VkInputAttachmentAspectReferenceKHR])#
 
@@ -740,7 +737,7 @@ _flags_: <<buffercreateflags, buffercreateflags>>, +
 _size_: integer +
 _usage_: <<bufferusageflags, bufferusageflags>>, +
 _sharing_mode_: <<sharingmode, sharingmode>>, +
-_queue_family_indices_: {<<queue_family_index, queue_family_index>>}, +
+_queue_family_indices_: {<<index, index>>}, +
 pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkExternalMemoryBufferCreateInfoKHR[VkExternalMemoryBufferCreateInfoKHR], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_external_memory[VK_KHR_external_memory]): +
 _handle_types_: <<externalmemoryhandletypeflags, externalmemoryhandletypeflags>>, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkBufferCreateInfo[VkBufferCreateInfo])#
@@ -768,7 +765,7 @@ _tiling_: <<imagetiling, imagetiling>>, +
 _usage_: <<imageusageflags, imageusageflags>>, +
 _initial_layout_: <<imagelayout, imagelayout>>, +
 _sharing_mode_: <<sharingmode, sharingmode>>, +
-_queue_family_indices_: {<<queue_family_index, queue_family_index>>}, +
+_queue_family_indices_: {<<index, index>>}, +
 pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkExternalMemoryImageCreateInfoKHR[VkExternalMemoryImageCreateInfoKHR], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_external_memory[VK_KHR_external_memory]): +
 _handle_types_: <<externalmemoryhandletypeflags, externalmemoryhandletypeflags>>, +
 pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkImageFormatListCreateInfoKHR[VkImageFormatListCreateInfoKHR], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_image_format_list[VK_KHR_image_format_list]): +
@@ -841,7 +838,7 @@ _size_: integer or '_whole size_' (defaults to '_whole size_'), +
 * [[memoryallocateinfo]]
 [small]#*memoryallocateinfo* = { +
 _allocation_size_: integer, +
-_memory_type_index_: integer, +
+_memory_type_index_: <<index, index>>, +
 pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkMemoryDedicatedAllocateInfoKHR[VkMemoryDedicatedAllocateInfoKHR], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_dedicated_allocation[VK_KHR_dedicated_allocation]): +
 _image_: <<image, image>>, +
 _buffer_: <<buffer, buffer>>, +
@@ -1079,7 +1076,7 @@ _layout_: <<pipeline_layout, pipeline_layout>> *[R]*, +
 _render_pass_: <<render_pass, render_pass>> *[R]*, +
 _subpass_: integer, +
 _base_pipeline_handle_: <<pipeline, pipeline>>, +
-_base_pipeline_index_: integer, +
+_base_pipeline_index_: <<index, index>>, +
 _color_blend_advanced_state_: <<pipelinecolorblendadvancedstatecreateinfo, pipelinecolorblendadvancedstatecreateinfo>> (Note1), +
 _discard_rectangle_state_: <<pipelinediscardrectanglestatecreateinfo, pipelinediscardrectanglestatecreateinfo>> (Note2), +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkGraphicsPipelineCreateInfo[VkGraphicsPipelineCreateInfo]) +
@@ -1092,7 +1089,7 @@ _flags_: <<pipelinecreateflags, pipelinecreateflags>>, +
 _stage_: <<pipelineshaderstagecreateinfo, pipelineshaderstagecreateinfo>> *[R]*, +
 _layout_: <<pipeline_layout, pipeline_layout>> *[R]*, +
 _base_pipeline_handle_: <<pipeline, pipeline>>, +
-_base_pipeline_index_: integer, +
+_base_pipeline_index_: <<index, index>>, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkComputePipelineCreateInfo[VkComputePipelineCreateInfo])#
 
 
@@ -1331,8 +1328,8 @@ _dst_access_mask_: <<accessflags, accessflags>>, +
 [small]#*buffermemorybarrier* = { +
 _src_access_mask_: <<accessflags, accessflags>>, +
 _dst_access_mask_: <<accessflags, accessflags>>, +
-_src_queue_family_index_: <<queue_family_index, queue_family_index>> (default: ignored), +
-_dst_queue_family_index_: <<queue_family_index, queue_family_index>> (default: ignored), +
+_src_queue_family_index_: <<index, index>> (default: ignored), +
+_dst_queue_family_index_: <<index, index>> (default: ignored), +
 _buffer_: <<buffer, buffer>> *[R]*, +
 _offset_: integer, +
 _size_: integer, +
@@ -1342,8 +1339,8 @@ _size_: integer, +
 [small]#*imagememorybarrier* = { +
 _src_access_mask_: <<accessflags, accessflags>>, +
 _dst_access_mask_: <<accessflags, accessflags>>, +
-_src_queue_family_index_: <<queue_family_index, queue_family_index>> (default: ignored), +
-_dst_queue_family_index_: <<queue_family_index, queue_family_index>> (default: ignored), +
+_src_queue_family_index_: <<index, index>> (default: ignored), +
+_dst_queue_family_index_: <<index, index>> (default: ignored), +
 _old_layout_: <<imagelayout, imagelayout>>, +
 _new_layout_: <<imagelayout, imagelayout>>, +
 _image_: <<image, image>>, +
@@ -1445,13 +1442,13 @@ _post_subpass_sample_locations_count_: {<<subpasssamplelocations, subpasssamplel
 
 * [[attachmentsamplelocations]]
 [small]#*attachmentsamplelocations* = { +
-_attachment_index_: integer, +
+_attachment_index_: <<index, index>>, +
 _sample_locations_info_, <<samplelocationsinfo, samplelocationsinfo>>, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkAttachmentSampleLocationsEXT[VkAttachmentSampleLocationsEXT])#
 
 * [[subpasssamplelocations]]
 [small]#*subpasssamplelocations* = { +
-_subpass_index_: integer, +
+_subpass_index_: <<index, index>>, +
 _sample_locations_info_, <<samplelocationsinfo, samplelocationsinfo>>, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkSubpassSampleLocationsEXT[VkSubpassSampleLocationsEXT])#
 
@@ -1503,7 +1500,7 @@ _image_extent_: <<extent2d, extent2d>>, +
 _image_array_layers_: integer, +
 _image_usage_: <<imageusageflags, imageusageflags>>, +
 _image_sharing_mode_: <<sharingmode, sharingmode>>, +
-_queue_family_indices_: {<<queue_family_index, queue_family_index>>}, +
+_queue_family_indices_: {<<index, index>>}, +
 _pre_transform_: <<surfacetransformflags, surfacetransformflags>>, +
 _composite_alpha_: <<compositealphaflags, compositealphaflags>>, +
 _present_mode_: <<presentmode, presentmode>>, +
@@ -1581,7 +1578,7 @@ _persistent_content_: boolean, +
 * [[displayplaneproperties]]
 [small]#*displayplaneproperties* = { +
 _current_display_: <<display, display>> (may be _nil_), +
-_current_stack_index_: integer, +
+_current_stack_index_: <<index, index>>, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkDisplayPlanePropertiesKHR[VkDisplayPlanePropertiesKHR])#
 
 * [[displaymodeproperties]]
@@ -1612,8 +1609,8 @@ _max_dst_extent_: <<extent2d, extent2d>>, +
 * [[displaysurfacecreateinfo]]
 [small]#*displaysurfacecreateinfo* = { +
 _flags_: <<displaysurfacecreateflags, displaysurfacecreateflags>>, +
-_plane_index_: integer, +
-_plane_stack_index_: integer, +
+_plane_index_: <<index, index>>, +
+_plane_stack_index_: <<index, index>>, +
 _transform_: <<surfacetransformflags, surfacetransformflags>>, +
 _global_alpha_: float, +
 _alpha_mode_: <<displayplanealphaflags, displayplanealphaflags>>, +
