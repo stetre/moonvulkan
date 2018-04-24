@@ -61,7 +61,7 @@ static int Create(lua_State *L)
         }
 
     count = info.commandBufferCount;
-    if(count == 0) return argerrorc(L, 2, ERR_VALUE);
+    if(count == 0) return luaL_error(L, "invalid count");
 
     command_buffer = (VkCommandBuffer*)MallocNoErr(L, sizeof(VkCommandBuffer)*count);
     if(!command_buffer) return errmemory(L);
