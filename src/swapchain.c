@@ -172,15 +172,12 @@ static int AcquireNextImage(lua_State *L)
     ec = ud->ddt->AcquireNextImageKHR(device, swapchain, timeout, semaphore, fence, &imageindex);
     switch(ec)
         {
-        case VK_SUCCESS: lua_pushinteger(L, imageindex); return 1;
-        case VK_SUBOPTIMAL_KHR: lua_pushinteger(L, imageindex); lua_pushstring(L, "suboptimal"); return 2;
-        case VK_TIMEOUT: lua_pushnil(L); lua_pushstring(L, "timeout"); return 2;
-        case VK_NOT_READY: lua_pushnil(L); lua_pushstring(L, "not ready"); return 2;
-        default:
-            break;
+        case VK_SUCCESS:
+        case VK_SUBOPTIMAL_KHR: lua_pushinteger(L, imageindex); break;
+        default: lua_pushnil(L); break;
         }
-    CheckError(L, ec);
-    return 0;
+    pushresult(L, ec);
+    return 2;
     }
 
 static int QueuePresent(lua_State *L)

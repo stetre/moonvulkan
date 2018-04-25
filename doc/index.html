@@ -3011,9 +3011,9 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/
 <div id="acquire_next_image" class="ulist">
 <ul>
 <li>
-<p><a href="#index"><em>image_index</em></a>, , <em>message</em> = <strong>acquire_next_image</strong>(<em>swapchain</em>, <a href="#timeout"><em>timeout</em></a>, [<a href="#semaphore"><em>semaphore</em></a>], [<a href="#fence"><em>fence</em></a>])<br>
-<span class="small">Returns one of the following combinations of <em>image_index</em> and <em>message</em>:<br>
-1) <em>integer</em>, <em>nil</em> 2) <em>integer</em>, '<em>suboptimal</em>' 3) <em>nil</em>, '<em>timeout</em>'  4) <em>nil</em>, '<em>not ready</em>'<br>
+<p><a href="#index"><em>image_index</em></a>, <a href="#result"><em>result</em></a> = <strong>acquire_next_image</strong>(<em>swapchain</em>, <a href="#timeout"><em>timeout</em></a>, [<a href="#semaphore"><em>semaphore</em></a>], [<a href="#fence"><em>fence</em></a>])<br>
+<span class="small">Returns one of the following combinations of <em>image_index</em> and <em>result</em>:<br>
+1) <em>image_index</em>, '<em>success</em>' 2) <em>image_index</em>, '<em>suboptimal</em>' 3) <em>nil</em>, '<em>&#8230;&#8203;</em>' (any other result)<br>
 Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkAcquireNextImageKHR">vkAcquireNextImageKHR</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_swapchain">VK_KHR_swapchain</a>).</span></p>
 </li>
 </ul>
