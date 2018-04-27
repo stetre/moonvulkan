@@ -5003,75 +5003,66 @@ Note2: Requires the <a href="https://www.khronos.org/registry/vulkan/specs/1.1-e
 <ul>
 <li>
 <p><a id="viewport"></a>
-<span class="small"><strong>viewport</strong> = {<br>
-<em>x</em>, <em>y</em>, <em>width</em>, <em>height</em>, <em>min_depth</em>, <em>max_depth</em>: float,<br>
-} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkViewport">VkViewport</a>)<br>
+<span class="small"><strong>viewport</strong> = { <em>x</em>, <em>y</em>, <em>width</em>, <em>height</em>, <em>min_depth</em>, <em>max_depth</em>: float }<br>
+(rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkViewport">VkViewport</a>)<br>
 <a href="#constructors">Constructor</a>: <strong>viewport</strong>(<em>x</em>, <em>y</em>, <em>width</em>, <em>height</em>, <em>min_depth</em>, <em>max_depth</em>)</span></p>
 </li>
 <li>
 <p><a id="offset2d"></a>
-<span class="small"><strong>offset2d</strong> = {<br>
-<em>x</em>, <em>y</em>: integer<br>
-} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkOffset2D">VkOffset2D</a>)<br>
+<span class="small"><strong>offset2d</strong> = { <em>x</em>, <em>y</em>: integer }<br>
+(rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkOffset2D">VkOffset2D</a>)<br>
 <a href="#constructors">Constructor</a>: <strong>offset2d</strong>(<em>x</em>, <em>y</em>)</span></p>
 </li>
 <li>
 <p><a id="offset3d"></a>
-<span class="small"><strong>offset3d</strong> = {<br>
-<em>x</em>, <em>y</em>, <em>z</em>: integer<br>
-} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkOffset3D">VkOffset3D</a>)<br>
+<span class="small"><strong>offset3d</strong> = { <em>x</em>, <em>y</em>, <em>z</em>: integer }<br>
+(rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkOffset3D">VkOffset3D</a>)<br>
 <a href="#constructors">Constructor</a>: <strong>offset3d</strong>(<em>x</em>, <em>y</em>, <em>z</em>)</span></p>
 </li>
 <li>
 <p><a id="extent2d"></a>
-<span class="small"><strong>extent2d</strong> = {<br>
-<em>width</em>, <em>height</em>: integer<br>
-} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkExtent2D">VkExtent2D</a>)<br>
+<span class="small"><strong>extent2d</strong> = { <em>width</em>, <em>height</em>: integer }<br>
+(rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkExtent2D">VkExtent2D</a>)<br>
 <a href="#constructors">Constructor</a>: <strong>extent2d</strong>(<em>width</em>, <em>height</em>)</span></p>
 </li>
 <li>
 <p><a id="extent3d"></a>
-<span class="small"><strong>extent3d</strong> = {<br>
-<em>width</em>, <em>height</em>, <em>depth</em>: integer<br>
-} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkExtent3D">VkExtent3D</a>)<br>
+<span class="small"><strong>extent3d</strong> = { <em>width</em>, <em>height</em>, <em>depth</em>: integer }<br>
+(rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkExtent3D">VkExtent3D</a>)<br>
 <a href="#constructors">Constructor</a>: <strong>extent3d</strong>(<em>width</em>, <em>height</em>, <em>depth</em>)</span></p>
 </li>
 <li>
 <p><a id="rect2d"></a>
-<span class="small"><strong>rect2d</strong> = {<br>
-<em>offset</em>: <a href="#offset2d">offset2d</a>,<br>
-<em>extent</em>: <a href="#extent2d">extent2d</a><br>
-} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkRect2D">VkRect2D</a>)<br>
+<span class="small"><strong>rect2d</strong> = { <em>offset</em>: <a href="#offset2d">offset2d</a>, <em>extent</em>: <a href="#extent2d">extent2d</a> }<br>
+(rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkRect2D">VkRect2D</a>)<br>
 <a href="#constructors">Constructor</a>: <strong>rect2d</strong>(<em>x</em>, <em>y</em>, <em>width</em>, <em>height</em>)</span></p>
 </li>
 <li>
 <p><a id="samplelocation"></a>
-<span class="small"><strong>samplelocation</strong> = {<br>
-<em>x</em>, <em>y</em>: number<br>
-} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkSampleLocationEXT">VkSampleLocationEXT</a>)</span></p>
+<span class="small"><strong>samplelocation</strong> = { <em>x</em>, <em>y</em>: float }<br>
+(rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkSampleLocationEXT">VkSampleLocationEXT</a>)</span></p>
 </li>
 <li>
 <p><a id="componentmapping"></a>
-<span class="small"><strong>componentmapping</strong> = {<br>
-<em>r</em>, <em>g</em>, <em>b</em>, <em>a</em>: <a href="#componentswizzle">componentswizzle</a><br>
-} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkComponentMapping">VkComponentMapping</a>)<br>
+<span class="small"><strong>componentmapping</strong> = { <em>r</em>, <em>g</em>, <em>b</em>, <em>a</em>: <a href="#componentswizzle">componentswizzle</a> }<br>
+(rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkComponentMapping">VkComponentMapping</a>)<br>
 <a href="#constructors">Constructor</a>: <strong>componentmapping</strong>(<em>r</em>, <em>g</em>, <em>b</em>, <em>a</em>)</span></p>
 </li>
 <li>
 <p><a id="clearcolorvalue"></a>
-<span class="small"><strong>clearcolorvalue</strong> = {<br>
-<em>[1],[2],[3],[4]</em>: float <strong>|</strong><br>
-<em>[1],[2],[3],[4]</em>: float, <em>t</em>='<em>float32</em>' <strong>|</strong><br>
-<em>[1],[2],[3],[4]</em>: integer, <em>t</em>='<em>uint32</em>' <strong>|</strong><br>
-<em>[1],[2],[3],[4]</em>: integer, <em>t</em>='<em>int32</em>'<br>
-} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkClearColorValue">VkClearColorValue</a>)</span></p>
+<span class="small"><strong>clearcolorvalue</strong> =<br>
+{ <em>[1],[2],[3],[4]</em>: float } or<br>
+{ <em>[1],[2],[3],[4]</em>: float, <em>t</em>='<em>float32</em>' } or<br>
+{ <em>[1],[2],[3],[4]</em>: integer, <em>t</em>='<em>uint32</em>' } or<br>
+{ <em>[1],[2],[3],[4]</em>: integer, <em>t</em>='<em>int32</em>' }<br>
+(rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkClearColorValue">VkClearColorValue</a>)</span></p>
 </li>
 <li>
 <p><a id="clearvalue"></a>
-<span class="small"><strong>clearvalue</strong> = {<br>
-<em>color</em>: <a href="#clearcolorvalue">clearcolorvalue</a> <strong>|</strong><br>
-<em>depth</em>: float, <em>stencil</em>: integer,<br>
-} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkClearValue">VkClearValue</a>).<br>
+<span class="small"><strong>clearvalue</strong> =<br>
+{ <em>color</em>: <a href="#clearcolorvalue">clearcolorvalue</a> } or<br>
+{ <em>depth</em>: float, <em>stencil</em>: integer, }<br>
+(rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkClearValue">VkClearValue</a>).<br>
 See also the <a href="#clearcolor_snippet">example</a> in the code snippets section.</span></p>
 </li>
 <li>
@@ -5199,9 +5190,8 @@ Note1: The <em>current_extent</em> field is <em>nil</em> when <em>width</em> and
 </li>
 <li>
 <p><a id="presentregion"></a>
-<span class="small"><strong>presentregion</strong> = {<br>
-<em>rectangles</em>: {<a href="#rectlayer">rectlayer</a>},<br>
-} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkPresentRegionKHR">VkPresentRegionKHR</a>)</span></p>
+<span class="small"><strong>presentregion</strong> = { <em>rectangles</em>: {<a href="#rectlayer">rectlayer</a>} }<br>
+(rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkPresentRegionKHR">VkPresentRegionKHR</a>)</span></p>
 </li>
 <li>
 <p><a id="rectlayer"></a>
@@ -5223,17 +5213,16 @@ Note1: The <em>current_extent</em> field is <em>nil</em> when <em>width</em> and
 <em>display_primary_green</em>: <a href="#xycolor">xycolor</a>,<br>
 <em>display_primary_blue</em>: <a href="#xycolor">xycolor</a>,<br>
 <em>white_point</em>: <a href="#xycolor">xycolor</a>,<br>
-<em>max_luminance</em>: number,<br>
-<em>min_luminance</em>: number,<br>
-<em>max_content_light_level</em>: number,<br>
-<em>max_frame_average_light_level</em>: number,<br>
+<em>max_luminance</em>: float,<br>
+<em>min_luminance</em>: float,<br>
+<em>max_content_light_level</em>: float,<br>
+<em>max_frame_average_light_level</em>: float,<br>
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkHdrMetadataEXT">VkHdrMetadataEXT</a>)</span></p>
 </li>
 <li>
 <p><a id="xycolor"></a>
-<span class="small"><strong>xycolor</strong> = {<br>
-<em>x</em>, <em>y</em>: number,<br>
-} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkXYColorEXT">VkXYColorEXT</a>)</span></p>
+<span class="small"><strong>xycolor</strong> = { <em>x</em>, <em>y</em>: float, }<br>
+(rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkXYColorEXT">VkXYColorEXT</a>)</span></p>
 </li>
 </ul>
 </div>

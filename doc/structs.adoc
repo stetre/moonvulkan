@@ -1350,67 +1350,58 @@ _subresource_range_: <<imagesubresourcerange, imagesubresourcerange>>, +
 '''
 
 * [[viewport]]
-[small]#*viewport* = { +
-_x_, _y_, _width_, _height_, _min_depth_, _max_depth_: float, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkViewport[VkViewport]) +
+[small]#*viewport* = { _x_, _y_, _width_, _height_, _min_depth_, _max_depth_: float } +
+(rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkViewport[VkViewport]) +
 <<constructors, Constructor>>: *viewport*(_x_, _y_, _width_, _height_, _min_depth_, _max_depth_)#
 
 * [[offset2d]]
-[small]#*offset2d* = { +
-_x_, _y_: integer +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkOffset2D[VkOffset2D]) +
+[small]#*offset2d* = { _x_, _y_: integer } +
+(rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkOffset2D[VkOffset2D]) +
 <<constructors, Constructor>>: *offset2d*(_x_, _y_)#
 
 * [[offset3d]]
-[small]#*offset3d* = { +
-_x_, _y_, _z_: integer +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkOffset3D[VkOffset3D]) +
+[small]#*offset3d* = { _x_, _y_, _z_: integer } +
+(rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkOffset3D[VkOffset3D]) +
 <<constructors, Constructor>>: *offset3d*(_x_, _y_, _z_)#
 
 * [[extent2d]]
-[small]#*extent2d* = { +
-_width_, _height_: integer +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkExtent2D[VkExtent2D]) +
+[small]#*extent2d* = { _width_, _height_: integer } +
+(rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkExtent2D[VkExtent2D]) +
 <<constructors, Constructor>>: *extent2d*(_width_, _height_)#
 
 * [[extent3d]]
-[small]#*extent3d* = { +
-_width_, _height_, _depth_: integer +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkExtent3D[VkExtent3D]) +
+[small]#*extent3d* = { _width_, _height_, _depth_: integer } +
+(rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkExtent3D[VkExtent3D]) +
 <<constructors, Constructor>>: *extent3d*(_width_, _height_, _depth_)#
 
 * [[rect2d]]
-[small]#*rect2d* = { +
-_offset_: <<offset2d, offset2d>>, +
-_extent_: <<extent2d, extent2d>> +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkRect2D[VkRect2D]) +
+[small]#*rect2d* = { _offset_: <<offset2d, offset2d>>, _extent_: <<extent2d, extent2d>> } +
+(rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkRect2D[VkRect2D]) +
 <<constructors, Constructor>>: *rect2d*(_x_, _y_, _width_, _height_)#
 
 * [[samplelocation]]
-[small]#*samplelocation* = { +
-_x_, _y_: number +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkSampleLocationEXT[VkSampleLocationEXT])#
+[small]#*samplelocation* = { _x_, _y_: float } +
+(rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkSampleLocationEXT[VkSampleLocationEXT])#
 
 * [[componentmapping]]
-[small]#*componentmapping* = { +
-_r_, _g_, _b_, _a_: <<componentswizzle, componentswizzle>> +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkComponentMapping[VkComponentMapping]) +
+[small]#*componentmapping* = { _r_, _g_, _b_, _a_: <<componentswizzle, componentswizzle>> } +
+(rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkComponentMapping[VkComponentMapping]) +
 <<constructors, Constructor>>: *componentmapping*(_r_, _g_, _b_, _a_)#
 
 
 * [[clearcolorvalue]]
-[small]#*clearcolorvalue* = { +
-_[1],[2],[3],[4]_: float *|* +
-_[1],[2],[3],[4]_: float, _t_='_float32_' *|* +
-_[1],[2],[3],[4]_: integer, _t_='_uint32_' *|* +
-_[1],[2],[3],[4]_: integer, _t_='_int32_' + 
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkClearColorValue[VkClearColorValue])#
+[small]#*clearcolorvalue* = +
+{ _[1],[2],[3],[4]_: float } or +
+{ _[1],[2],[3],[4]_: float, _t_='_float32_' } or +
+{ _[1],[2],[3],[4]_: integer, _t_='_uint32_' } or +
+{ _[1],[2],[3],[4]_: integer, _t_='_int32_' } +
+(rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkClearColorValue[VkClearColorValue])#
 
 * [[clearvalue]]
-[small]#*clearvalue* = { +
-_color_: <<clearcolorvalue, clearcolorvalue>> *|* +
-_depth_: float, _stencil_: integer, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkClearValue[VkClearValue]). +
+[small]#*clearvalue* = +
+{ _color_: <<clearcolorvalue, clearcolorvalue>> } or +
+{ _depth_: float, _stencil_: integer, } +
+(rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkClearValue[VkClearValue]). +
 See also the <<clearcolor_snippet, example>> in the code snippets section.#
 
 
@@ -1526,9 +1517,8 @@ _regions_: {<<presentregion, presentregion>>}, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkPresentInfoKHR[VkPresentInfoKHR])#
 
 * [[presentregion]]
-[small]#*presentregion* = { +
-_rectangles_: {<<rectlayer, rectlayer>>}, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkPresentRegionKHR[VkPresentRegionKHR])#
+[small]#*presentregion* = { _rectangles_: {<<rectlayer, rectlayer>>} } +
+(rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkPresentRegionKHR[VkPresentRegionKHR])#
 
 * [[rectlayer]]
 [small]#*rectlayer* = { +
@@ -1545,16 +1535,15 @@ _display_primary_red_: <<xycolor, xycolor>>, +
 _display_primary_green_: <<xycolor, xycolor>>, +
 _display_primary_blue_: <<xycolor, xycolor>>, +
 _white_point_: <<xycolor, xycolor>>, +
-_max_luminance_: number, +
-_min_luminance_: number, +
-_max_content_light_level_: number, +
-_max_frame_average_light_level_: number, +
+_max_luminance_: float, +
+_min_luminance_: float, +
+_max_content_light_level_: float, +
+_max_frame_average_light_level_: float, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkHdrMetadataEXT[VkHdrMetadataEXT])#
 
 * [[xycolor]]
-[small]#*xycolor* = { +
-_x_, _y_: number, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkXYColorEXT[VkXYColorEXT])#
+[small]#*xycolor* = { _x_, _y_: float, } +
+(rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkXYColorEXT[VkXYColorEXT])#
 
 '''
 
