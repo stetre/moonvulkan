@@ -11,19 +11,19 @@ _vk.enumerate_instance_layer_properties(true)_ returns a table indexed by _layer
 
 [[enumerate_instance_layer_properties]]
 * {<<layerproperties, _layerproperties_>>} = *enumerate_instance_layer_properties*([_byname=false_]) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkEnumerateInstanceLayerProperties[vkEnumerateInstanceLayerProperties].#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkEnumerateInstanceLayerProperties.html[vkEnumerateInstanceLayerProperties].#
 
 [[enumerate_instance_extension_properties]]
 * {<<extensionproperties, _extensionproperties_>>} = *enumerate_instance_extension_properties*([_layer_name_], [_byname=false_]) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkEnumerateInstanceExtensionProperties[vkEnumerateInstanceExtensionProperties].#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkEnumerateInstanceExtensionProperties.html[vkEnumerateInstanceExtensionProperties].#
 
 [[enumerate_device_layer_properties]]
 * {<<layerproperties, _layerproperties_>>} = _enumerate_device_layer_properties_(<<physical_device, _physdev_>>, [_byname=false_]) _DEPRECATED_ +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkEnumerateDeviceLayerProperties[vkEnumerateDeviceLayerProperties].#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkEnumerateDeviceLayerProperties.html[vkEnumerateDeviceLayerProperties].#
 
 [[enumerate_device_extension_properties]]
 * {<<extensionproperties, _extensionproperties_>>} = *enumerate_device_extension_properties*(<<physical_device, _physdev_>>, [_layer_name_], [_byname=false_]) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkEnumerateDeviceExtensionProperties[vkEnumerateDeviceExtensionProperties].#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkEnumerateDeviceExtensionProperties.html[vkEnumerateDeviceExtensionProperties].#
 
 [[layer_deprecation]]
 NOTE: Device layers are deprecated (rfr: 

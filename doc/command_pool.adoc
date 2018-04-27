@@ -5,17 +5,17 @@
 [[create_command_pool]]
 * _command_pool_ = *create_command_pool*(_device_, <<commandpoolcreateinfo, _commandpoolcreateinfo_>>, [<<allocators, _allocator_>>]) +
 _command_pool_ = *create_command_pool*(_device_, <<commandpoolcreateflags, _commandpoolcreateflags_>>, <<index, _queue_family_index_>>) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkCreateCommandPool[vkCreateCommandPool].#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCreateCommandPool.html[vkCreateCommandPool].#
 
 [[destroy_command_pool]]
 * *destroy_command_pool*(_command_pool_) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkDestroyCommandPool[vkDestroyCommandPool].#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkDestroyCommandPool.html[vkDestroyCommandPool].#
 
 [[reset_command_pool]]
 * *reset_command_pool*(_command_pool_, [<<commandpoolresetflags, _commandpoolresetflags_>>]) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkResetCommandPool[vkResetCommandPool].#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkResetCommandPool.html[vkResetCommandPool].#
 
 [[trim_command_pool]]
 * *trim_command_pool*(_command_pool_, [<<commandpooltrimflags, _commandpooltrimflags_>>]) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkTrimCommandPoolKHR[vkTrimCommandPoolKHR] (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_maintenance1[VK_KHR_maintenance1]).#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkTrimCommandPool.html[vkTrimCommandPool] (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_maintenance1[VK_KHR_maintenance1]).#
 

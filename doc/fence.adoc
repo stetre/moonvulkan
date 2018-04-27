@@ -5,7 +5,7 @@
 [[create_fence]]
 * _fence_ = *create_fence*(_device_, <<fencecreateinfo, _fencecreateinfo_>>, [<<allocators, _allocator_>>]) +
 _fence_ = *create_fence*(_device_, [<<fencecreateflags, _fencecreateflags_>>]) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkCreateFence[vkCreateFence].#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCreateFence.html[vkCreateFence].#
 
 [[register_device_event]]
 * _fence_ = *register_device_event*(_device_, <<deviceeventinfo, _deviceeventinfo_>>, [<<allocators, _allocator_>>]) +
@@ -17,24 +17,24 @@ _fence_ = *create_fence*(_device_, [<<fencecreateflags, _fencecreateflags_>>]) +
 
 [[destroy_fence]]
 * *destroy_fence*(_fence_) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkDestroyFence[vkDestroyFence].#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkDestroyFence.html[vkDestroyFence].#
 
 '''
 
 [[reset_fences]]
 * *reset_fences*({_fence_}) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkResetFences[vkResetFences].#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkResetFences.html[vkResetFences].#
 
 [[get_fence_status]]
 * _boolean_ = *get_fence_status*(_fence_) +
 [small]#Returns _true_ if the given _fence_ is ready, _false_ otherwise. +
- Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkGetFenceStatus[vkGetFenceStatus].#
+ Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkGetFenceStatus.html[vkGetFenceStatus].#
 
 [[wait_for_fences]]
 * _boolean_ = *wait_for_fences*({_fence_}, _waitall_, [<<timeout, _timeout_>>]) +
 [small]#_waitall_: boolean +
 Returns _true_ on success, _false_ on timeout. +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkWaitForFences[vkWaitForFences].#
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkWaitForFences.html[vkWaitForFences].#
 
 '''
 

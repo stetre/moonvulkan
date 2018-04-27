@@ -4,9 +4,9 @@
 
 [[create_sampler_ycbcr_conversion]]
 * _sampler_ycbcr_conversion_ = *create_sampler_ycbcr_conversion*(_device_, <<samplerycbcrconversioncreateinfo, _samplerycbcrconversioncreateinfo_>>,  [<<allocators, _allocator_>>]) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkCreateSamplerYcbcrConversionKHR[vkCreateSamplerYcbcrConversionKHR] (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_sampler_ycbcr_conversion[VK_KHR_sampler_ycbcr_conversion]).#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCreateSamplerYcbcrConversion.html[vkCreateSamplerYcbcrConversion] (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_sampler_ycbcr_conversion[VK_KHR_sampler_ycbcr_conversion]).#
 
 [[destroy_sampler_ycbcr_conversion]]
 * *destroy_sampler_ycbcr_conversion*(_sampler_ycbcr_conversion_) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkDestroySamplerYcbcrConversionKHR[vkDestroySamplerYcbcrConversionKHR] (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_sampler_ycbcr_conversion[VK_KHR_sampler_ycbcr_conversion]).#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkDestroySamplerYcbcrConversion.html[vkDestroySamplerYcbcrConversion] (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_sampler_ycbcr_conversion[VK_KHR_sampler_ycbcr_conversion]).#
 

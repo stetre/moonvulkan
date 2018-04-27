@@ -66,14 +66,14 @@ _layer_name_: string, +
 _spec_version_: integer, +
 _implementation_version_: integer, +
 _description_: string, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkLayerProperties[VkLayerProperties])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkLayerProperties.html[VkLayerProperties])#
 
 
 * [[extensionproperties]]
 [small]#*extensionproperties* = { +
 _extension_name_: string, +
 _spec_version_: integer, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkExtensionProperties[VkExtensionProperties])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkExtensionProperties.html[VkExtensionProperties])#
 
 '''
 
@@ -85,7 +85,7 @@ _enabled_layer_names_: {string} +
 _enabled_extension_names_: {string} +
 pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkValidationFlagsEXT[VkValidationFlagsEXT], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_validation_flags[VK_EXT_validation_flags]): +
 _disabled_validation_checks_: {<<validationcheck, _validationcheck_>>}, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkInstanceCreateInfo[VkInstanceCreateInfo])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkInstanceCreateInfo.html[VkInstanceCreateInfo])#
 
 [[applicationinfo]]
 * [small]#*applicationinfo* = { +
@@ -94,7 +94,7 @@ _application_version_: integer, +
 _engine_name_: string, +
 _engine_version_: integer, +
 _api_version_: integer, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkApplicationInfo[VkApplicationInfo])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkApplicationInfo.html[VkApplicationInfo])#
 
 '''
 
@@ -123,13 +123,13 @@ _filter_minmax_single_component_formats_: boolean, +
 _filter_minmax_image_component_mapping_: boolean, +
 pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkPhysicalDeviceDiscardRectanglePropertiesEXT[VkPhysicalDeviceDiscardRectanglePropertiesEXT], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_discard_rectangles[VK_EXT_discard_rectangles]): +
 _max_discard_rectangles_: integer, +
-pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkPhysicalDeviceIDPropertiesKHR[VkPhysicalDeviceIDPropertiesKHR], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_external_memory_capabilities[VK_KHR_external_memory_capabilities]): +
+pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkPhysicalDeviceIDProperties.html[VkPhysicalDeviceIDProperties], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_external_memory_capabilities[VK_KHR_external_memory_capabilities]): +
 _device_uuid_: binary string, +
 _driver_uuid_: binary string, +
 _device_luid_: binary string, +
 _device_node_mask_: integer, +
 _device_luid_valid_: boolean, +
-pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkPhysicalDevicePointClippingPropertiesKHR[VkPhysicalDevicePointClippingPropertiesKHR], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_maintenance2[VK_KHR_maintenance2]): +
+pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkPhysicalDevicePointClippingProperties.html[VkPhysicalDevicePointClippingProperties], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_maintenance2[VK_KHR_maintenance2]): +
 _point_clipping_behavior_: <<pointclippingbehavior, pointclippingbehavior>>, +
 pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkPhysicalDeviceSampleLocationsPropertiesEXT[VkPhysicalDeviceSampleLocationsPropertiesEXT], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_sample_locations[VK_EXT_sample_locations]): +
 _sample_location_sample_counts_: <<samplecountflags, samplecountflags>>, +
@@ -137,7 +137,7 @@ _max_sample_location_grid_size_: <<extent2d, extent2d>>, +
 _sample_location_coordinate_range_: {float}[2], +
 _sample_location_sub_pixel_bits_: integer, +
 _variable_sample_locations_: boolean, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkPhysicalDeviceProperties2KHR[VkPhysicalDeviceProperties2KHR])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkPhysicalDeviceProperties2KHR.html[VkPhysicalDeviceProperties2KHR])#
 
 
 * [[physicaldeviceimageformatinfo]]
@@ -147,9 +147,9 @@ _type_: <<imagetype, imagetype>>, +
 _tiling_: <<imagetiling, imagetiling>>, +
 _usage_: <<imageusageflags, imageusageflags>>, +
 _flags_: <<imagecreateflags, imagecreateflags>>, +
-pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkPhysicalDeviceExternalImageFormatInfoKHR[VkPhysicalDeviceExternalImageFormatInfoKHR], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_external_memory_capabilities[VK_KHR_external_memory_capabilities]): +
+pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkPhysicalDeviceExternalImageFormatInfo.html[VkPhysicalDeviceExternalImageFormatInfo], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_external_memory_capabilities[VK_KHR_external_memory_capabilities]): +
 _handle_type_: <<externalmemoryhandletypeflags, externalmemoryhandletypeflags>>, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkPhysicalDeviceImageFormatInfo2KHR[VkPhysicalDeviceImageFormatInfo2KHR])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkPhysicalDeviceImageFormatInfo2.html[VkPhysicalDeviceImageFormatInfo2])#
 
 * [[physicaldevicelimits]]
 [small]#*physicaldevicelimits* = { +
@@ -259,7 +259,7 @@ _standard_sample_locations_: boolean, +
 _optimal_buffer_copy_offset_alignment_: integer, +
 _optimal_buffer_copy_row_pitch_alignment_: integer, +
 _non_coherent_atom_size_: integer, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkPhysicalDeviceLimits[VkPhysicalDeviceLimits])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkPhysicalDeviceLimits.html[VkPhysicalDeviceLimits])#
 
 * [[physicaldevicesparseproperties]]
 [small]#*physicaldevicesparseproperties* = { +
@@ -268,7 +268,7 @@ _residency_standard_2d_multisample_block_shape_: boolean, +
 _residency_standard_3d_block_shape_: boolean, +
 _residency_aligned_mip_size_: boolean, +
 _residency_non_resident_strict_: boolean, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkPhysicalDeviceSparseProperties[VkPhysicalDeviceSparseProperties])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkPhysicalDeviceSparseProperties.html[VkPhysicalDeviceSparseProperties])#
 
 * [[physicaldevicefeatures]]
 [small]#*physicaldevicefeatures* = { +
@@ -327,19 +327,19 @@ _sparse_residency_16_samples_: boolean, +
 _sparse_residency_aliased_: boolean, +
 _variable_multisample_rate_: boolean, +
 _inherited_queries_: boolean, +
-pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkPhysicalDevice16BitStorageFeaturesKHR[VkPhysicalDevice16BitStorageFeaturesKHR], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_16bit_storage[VK_KHR_16bit_storage]): +
+pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkPhysicalDevice16BitStorageFeatures.html[VkPhysicalDevice16BitStorageFeatures], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_16bit_storage[VK_KHR_16bit_storage]): +
 _storage_buffer_16bit_access_: boolean, +
 _uniform_and_storage_buffer_16bit_access_: boolean, +
 _storage_push_constant_16_: boolean, +
 _storage_input_output_16_: boolean, +
-pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkPhysicalDeviceVariablePointerFeaturesKHR[VkPhysicalDeviceVariablePointerFeaturesKHR], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_variable_pointers[VK_KHR_variable_pointers]): +
+pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkPhysicalDeviceVariablePointerFeatures.html[VkPhysicalDeviceVariablePointerFeatures], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_variable_pointers[VK_KHR_variable_pointers]): +
 _variable_pointers_storage_buffer_: boolean, +
 _variable_pointers_: boolean, +
 pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT[VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_blend_operation_advanced[VK_EXT_blend_operation_advanced]): +
 _advanced_blend_coherent_operations_: boolean, +
-pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkPhysicalDeviceSamplerYcbcrConversionFeaturesKHR[VkPhysicalDeviceSamplerYcbcrConversionFeaturesKHR], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_sampler_ycbcr_conversion[VK_KHR_sampler_ycbcr_conversion]): +
+pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkPhysicalDeviceSamplerYcbcrConversionFeatures.html[VkPhysicalDeviceSamplerYcbcrConversionFeatures], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_sampler_ycbcr_conversion[VK_KHR_sampler_ycbcr_conversion]): +
 _sampler_ycbcr_conversion_: boolean, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkPhysicalDeviceFeatures2KHR[VkPhysicalDeviceFeatures2KHR])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkPhysicalDeviceFeatures2.html[VkPhysicalDeviceFeatures2])#
 
 
 * [[queuefamilyproperties]]
@@ -349,27 +349,27 @@ _queue_flags_: <<queueflags, queueflags>>, +
 _queue_count_: integer, +
 _timestamp_valid_bits_: integer, +
 _min_image_transfer_granularity_: <<extent3d, extent3d>>, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkQueueFamilyProperties[VkQueueFamilyProperties])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkQueueFamilyProperties.html[VkQueueFamilyProperties])#
 
 * [[physicaldevicememoryproperties]]
 [small]#*physicaldevicememoryproperties* = { +
 _memory_types_: {<<memorytype, memorytype>>}, +
 _memory_heaps_: {<<memoryheap, memoryheap>>}, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkPhysicalDeviceMemoryProperties[VkPhysicalDeviceMemoryProperties])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkPhysicalDeviceMemoryProperties.html[VkPhysicalDeviceMemoryProperties])#
 
 * [[memorytype]]
 [small]#*memorytype* = { +
 _memory_type_index_: <<index, index>>, +
 _property_flags_: <<memorypropertyflags, memorypropertyflags>>, +
 _heap_index_: <<index, index>>, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkMemoryType[VkMemoryType])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkMemoryType.html[VkMemoryType])#
 
 * [[memoryheap]]
 [small]#*memoryheap* = { +
 _memory_heap_index_: <<index, index>>, +
 _size_: integer, +
 _flags_: <<memoryheapflags, memoryheapflags>>, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkMemoryHeap[VkMemoryHeap])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkMemoryHeap.html[VkMemoryHeap])#
 
 
 * [[formatproperties]]
@@ -377,7 +377,7 @@ _flags_: <<memoryheapflags, memoryheapflags>>, +
 _linear_tiling_features_: <<formatfeatureflags, formatfeatureflags>>, +
 _optimal_tiling_features_: <<formatfeatureflags, formatfeatureflags>>, +
 _buffer_features_: <<formatfeatureflags, formatfeatureflags>>, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkFormatProperties[VkFormatProperties])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkFormatProperties.html[VkFormatProperties])#
 
 
 * [[imageformatproperties]]
@@ -387,11 +387,11 @@ _max_mip_levels_: integer, +
 _max_array_layers_: integer, +
 _sample_counts_: integer, +
 _max_resource_size_: integer, +
-pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkExternalImageFormatPropertiesKHR[VkExternalImageFormatPropertiesKHR], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_external_memory_capabilities[VK_KHR_external_memory_capabilities]): +
+pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkExternalImageFormatProperties.html[VkExternalImageFormatProperties], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_external_memory_capabilities[VK_KHR_external_memory_capabilities]): +
 _external_memory_properties_: <<externalmemoryproperties, externalmemoryproperties>>, +
-pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkSamplerYcbcrConversionImageFormatPropertiesKHR[VkSamplerYcbcrConversionImageFormatPropertiesKHR], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_sampler_ycbcr_conversion[VK_KHR_sampler_ycbcr_conversion]): +
+pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkSamplerYcbcrConversionImageFormatProperties.html[VkSamplerYcbcrConversionImageFormatProperties], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_sampler_ycbcr_conversion[VK_KHR_sampler_ycbcr_conversion]): +
 _combined_image_sampler_descriptor_count_: integer, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkImageFormatProperties[VkImageFormatProperties])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkImageFormatProperties.html[VkImageFormatProperties])#
 
 
 * [[physicaldevicesparseimageformatinfo]]
@@ -401,58 +401,58 @@ _type_: <<imagetype, imagetype>>, +
 _samples_: <<samplecountflags, samplecountflags>>, +
 _usage_: <<imageusageflags, imageusageflags>>, +
 _tiling_: <<imagetiling, imagetiling>>, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkPhysicalDeviceSparseImageFormatInfo2KHR[VkPhysicalDeviceSparseImageFormatInfo2KHR])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkPhysicalDeviceSparseImageFormatInfo2.html[VkPhysicalDeviceSparseImageFormatInfo2])#
 
 * [[sparseimageformatproperties]]
 [small]#*sparseimageformatproperties* = { +
 _aspect_mask_: <<imageaspectflags, imageaspectflags>>, +
 _image_granularity_: <<extent3d, extent3d>>, +
 _flags_: <<sparseimageformatflags, sparseimageformatflags>>, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkSparseImageFormatProperties[VkSparseImageFormatProperties])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkSparseImageFormatProperties.html[VkSparseImageFormatProperties])#
 
 * [[externalmemoryproperties]]
 [small]#*externalmemoryproperties* = { +
 _external_memory_features_: <<externalmemoryfeatureflags, externalmemoryfeatureflags>>, +
 _export_from_imported_handle_types_: <<externalmemoryhandletypeflags, externalmemoryhandletypeflags>>, +
 _compatible_handle_types_: <<externalmemoryhandletypeflags, externalmemoryhandletypeflags>>, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkExternalMemoryPropertiesKHR[VkExternalMemoryPropertiesKHR])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkExternalMemoryProperties.html[VkExternalMemoryProperties])#
 
 * [[physicaldeviceexternalbufferinfo]]
 [small]#*physicaldeviceexternalbufferinfo* = { +
 _flags_: <<buffercreateflags, buffercreateflags>>, +
 _usage_: <<bufferusageflags, bufferusageflags>>, +
 _handle_type_: <<externalmemoryhandletypeflags, externalmemoryhandletypeflags>>, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkPhysicalDeviceExternalBufferInfoKHR[VkPhysicalDeviceExternalBufferInfoKHR])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkPhysicalDeviceExternalBufferInfo.html[VkPhysicalDeviceExternalBufferInfo])#
 
 * [[externalbufferproperties]]
 [small]#*externalbufferproperties* = { +
 _external_memory_properties_: <<externalmemoryproperties, externalmemoryproperties>>, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkExternalBufferPropertiesKHR[VkExternalBufferPropertiesKHR])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkExternalBufferProperties.html[VkExternalBufferProperties])#
 
 * [[physicaldeviceexternalfenceinfo]]
 [small]#*physicaldeviceexternalfenceinfo* = { +
 _handle_type_: <<externalfencehandletypeflags, externalfencehandletypeflags>>, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkPhysicalDeviceExternalFenceInfoKHR[VkPhysicalDeviceExternalFenceInfoKHR])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkPhysicalDeviceExternalFenceInfo.html[VkPhysicalDeviceExternalFenceInfo])#
 
 * [[externalfenceproperties]]
 [small]#*externalfenceproperties* = { +
 _export_from_imported_handle_types_: <<externalfencehandletypeflags, externalfencehandletypeflags>>, +
 _compatible_handle_types_: <<externalfencehandletypeflags, externalfencehandletypeflags>>, +
 _external_fence_features_: <<externalfencefeatureflags, externalfencefeatureflags>>, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkExternalFencePropertiesKHR[VkExternalFencePropertiesKHR])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkExternalFenceProperties.html[VkExternalFenceProperties])#
 
 
 * [[physicaldeviceexternalsemaphoreinfo]]
 [small]#*physicaldeviceexternalsemaphoreinfo* = { +
 _handle_type_: <<externalsemaphorehandletypeflags, externalsemaphorehandletypeflags>>, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkPhysicalDeviceExternalSemaphoreInfoKHR[VkPhysicalDeviceExternalSemaphoreInfoKHR])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkPhysicalDeviceExternalSemaphoreInfo.html[VkPhysicalDeviceExternalSemaphoreInfo])#
 
 * [[externalsemaphoreproperties]]
 [small]#*externalsemaphoreproperties* = { +
 _export_from_imported_handle_types_: <<externalsemaphorehandletypeflags, externalsemaphorehandletypeflags>>, +
 _compatible_handle_types_: <<externalsemaphorehandletypeflags, externalsemaphorehandletypeflags>>, +
 _external_semaphore_features_: <<externalsemaphorefeatureflags, externalsemaphorefeatureflags>>, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkExternalSemaphorePropertiesKHR[VkExternalSemaphorePropertiesKHR])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkExternalSemaphoreProperties.html[VkExternalSemaphoreProperties])#
 
 '''
 
@@ -470,7 +470,7 @@ _queue_create_infos_: {<<devicequeuecreateinfo, devicequeuecreateinfo>>} *[R]*, 
 _enabled_layer_names_: {string} _(DEPRECATED)_, +
 _enabled_extension_names_: {_string_}, +
 _enabled_features_: {<<physicaldevicefeatures, physicaldevicefeatures>>}, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkDeviceCreateInfo[VkDeviceCreateInfo])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkDeviceCreateInfo.html[VkDeviceCreateInfo])#
 
 
 * [[devicequeuecreateinfo]]
@@ -480,7 +480,7 @@ _queue_family_index_: <<index, index>>, +
 _queue_priorities_: {float} *[R]*, +
 pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkDeviceQueueGlobalPriorityCreateInfoKHR[VkDeviceQueueGlobalPriorityCreateInfoKHR], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_global_priority[VK_KHR_global_priority]): +
 _global_priority_: <<queueglobalpriority, queueglobalpriority>>, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkDeviceQueueCreateInfo[VkDeviceQueueCreateInfo])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkDeviceQueueCreateInfo.html[VkDeviceQueueCreateInfo])#
 
 '''
 
@@ -490,7 +490,7 @@ _wait_semaphores_: {<<semaphore, semaphore>>}, +
 _wait_dst_stage_mask_: {<<pipelinestageflags, pipelinestageflags>>}, +
 _command_buffers_: {<<command_buffer, command_buffer>>}, +
 _signal_semaphores_: {<<semaphore, semaphore>>}, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkSubmitInfo[VkSubmitInfo])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkSubmitInfo.html[VkSubmitInfo])#
 
 * [[bindsparseinfo]]
 [small]#*bindsparseinfo* = { +
@@ -499,19 +499,19 @@ _buffer_binds_: {<<sparsebuffermemorybindinfo, sparsebuffermemorybindinfo>>}, +
 _image_opaque_binds_: {<<sparseimageopaquememorybindinfo, sparseimageopaquememorybindinfo>>}, +
 _image_binds_: {<<sparseimagememorybindinfo, sparseimagememorybindinfo>>}, +
 _signal_semaphores_: {<<semaphore, semaphore>>}, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkBindSparseInfo[VkBindSparseInfo])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkBindSparseInfo.html[VkBindSparseInfo])#
 
 * [[sparsebuffermemorybindinfo]]
 [small]#*sparsebuffermemorybindinfo* = { +
 _buffer_: <<buffer, buffer>> *[R]*, +
 _binds_: {<<sparsememorybind, sparsememorybind>>} *[R]*, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkSparseBufferMemoryBindInfo[VkSparseBufferMemoryBindInfo])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkSparseBufferMemoryBindInfo.html[VkSparseBufferMemoryBindInfo])#
 
 * [[sparseimageopaquememorybindinfo]]
 [small]#*sparseimageopaquememorybindinfo* = { +
 _image_: <<image, image>> *[R]*, +
 _binds_: {<<sparsememorybind, sparsememorybind>>} *[R]*, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkSparseImageOpaqueMemoryBindInfo[VkSparseImageOpaqueMemoryBindInfo])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkSparseImageOpaqueMemoryBindInfo.html[VkSparseImageOpaqueMemoryBindInfo])#
 
 * [[sparsememorybind]]
 [small]#*sparsememorybind* = { +
@@ -520,14 +520,14 @@ _size_: integer, +
 _memory_: <<device_memory, device_memory>> *[R]*, +
 _memory_offset_: integer, +
 _flags_: <<sparsememorybindflags, sparsememorybindflags>>, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkSparseMemoryBind[VkSparseMemoryBind])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkSparseMemoryBind.html[VkSparseMemoryBind])#
 
 
 * [[sparseimagememorybindinfo]]
 [small]#*sparseimagememorybindinfo* = { +
 _image_: <<image, image>> *[R]*, +
 _binds_: {<<sparseimagememorybind, sparseimagememorybind>>} *[R]*, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkSparseImageMemoryBindInfo[VkSparseImageMemoryBindInfo])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkSparseImageMemoryBindInfo.html[VkSparseImageMemoryBindInfo])#
 
 * [[sparseimagememorybind]]
 [small]#*sparseimagememorybind* = { +
@@ -537,7 +537,7 @@ _extent_: <<extent3d, extent3d>>, +
 _memory_: <<device_memory, device_memory>> *[R]*, +
 _memory_offset_: integer, +
 _flags_: <<sparseimagememorybindflags, sparseimagememorybindflags>>, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkSparseImageMemoryBind[VkSparseImageMemoryBind])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkSparseImageMemoryBind.html[VkSparseImageMemoryBind])#
 
 '''
 
@@ -545,19 +545,19 @@ _flags_: <<sparseimagememorybindflags, sparseimagememorybindflags>>, +
 [small]#*commandpoolcreateinfo* = { +
 _flags_: <<commandpoolcreateflags, commandpoolcreateflags>>, +
 _queue_family_index_: <<index, index>>, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkCommandPoolCreateInfo[VkCommandPoolCreateInfo])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkCommandPoolCreateInfo.html[VkCommandPoolCreateInfo])#
 
 * [[commandbufferallocateinfo]]
 [small]#*commandbufferallocateinfo* = { +
 _level_: <<commandbufferlevel, commandbufferlevel>> *[R]*, +
 _command_buffer_count_: integer, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkCommandBufferAllocateInfo[VkCommandBufferAllocateInfo])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkCommandBufferAllocateInfo.html[VkCommandBufferAllocateInfo])#
 
 * [[commandbufferbegininfo]]
 [small]#*commandbufferbegininfo* = { +
 _flags_: <<commandbufferusageflags, commandbufferusageflags>>, +
 _inheritance_info_: <<commandbufferinheritanceinfo, commandbufferinheritanceinfo>>, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkCommandBufferBeginInfo[VkCommandBufferBeginInfo])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkCommandBufferBeginInfo.html[VkCommandBufferBeginInfo])#
 
 
 * [[commandbufferinheritanceinfo]]
@@ -568,16 +568,16 @@ _framebuffer_: <<framebuffer, framebuffer>> *[R]*, +
 _occlusion_query_enable_: boolean, +
 _query_flags_: <<querycontrolflags, querycontrolflags>>, +
 _pipeline_statistics_: <<querypipelinestatisticflags, querypipelinestatisticflags>>, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkCommandBufferInheritanceInfo[VkCommandBufferInheritanceInfo])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkCommandBufferInheritanceInfo.html[VkCommandBufferInheritanceInfo])#
 
 '''
 
 * [[fencecreateinfo]]
 [small]#*fencecreateinfo* = { +
 _flags_: <<fencecreateflags, fencecreateflags>>, +
-pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkExportFenceCreateInfoKHR[VkExportFenceCreateInfoKHR], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_external_fence[VK_KHR_external_fence]): +
+pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkExportFenceCreateInfo.html[VkExportFenceCreateInfo], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_external_fence[VK_KHR_external_fence]): +
 _handle_types_: <<externalfencehandletypeflags, externalfencehandletypeflags>>, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkFenceCreateInfo[VkFenceCreateInfo])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkFenceCreateInfo.html[VkFenceCreateInfo])#
 
 * [[deviceeventinfo]]
 [small]#*deviceeventinfo* = { +
@@ -606,9 +606,9 @@ _handle_type_: <<externalfencehandletypeflagbits, externalfencehandletypeflagbit
 * [[semaphorecreateinfo]]
 [small]#*semaphorecreateinfo* = { +
 _flags_: <<semaphorecreateflags, semaphorecreateflags>>, +
-pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkExportSemaphoreCreateInfoKHR[VkExportSemaphoreCreateInfoKHR], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_external_semaphore[VK_KHR_external_semaphore]): +
+pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkExportSemaphoreCreateInfo.html[VkExportSemaphoreCreateInfo], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_external_semaphore[VK_KHR_external_semaphore]): +
 _handle_types_: <<externalsemaphorehandletypeflags, externalsemaphorehandletypeflags>>, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkSemaphoreCreateInfo[VkSemaphoreCreateInfo])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkSemaphoreCreateInfo.html[VkSemaphoreCreateInfo])#
 
 * [[importsemaphorefdinfo]]
 [small]#*importsemaphorefdinfo* = { +
@@ -627,7 +627,7 @@ _handle_type_: <<externalsemaphorehandletypeflagbits, externalsemaphorehandletyp
 * [[eventcreateinfo]]
 [small]#*eventcreateinfo* = { +
 _flags_: <<eventcreateflags, eventcreateflags>>, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkEventCreateInfo[VkEventCreateInfo])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkEventCreateInfo.html[VkEventCreateInfo])#
 
 '''
 
@@ -637,9 +637,9 @@ _flags_: <<renderpasscreateflags, renderpasscreateflags>>, +
 _subpasses_: {<<subpassdescription, subpassdescription>>} *[R]*, +
 _attachments_: {<<attachmentdescription, attachmentdescription>>}, +
 _dependencies_: {<<subpassdependency, subpassdependency>>}, +
-pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkRenderPassInputAttachmentAspectCreateInfoKHR[VkRenderPassInputAttachmentAspectCreateInfoKHR], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_maintenance2[VK_KHR_maintenance2]): +
+pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkRenderPassInputAttachmentAspectCreateInfo.html[VkRenderPassInputAttachmentAspectCreateInfo], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_maintenance2[VK_KHR_maintenance2]): +
 _input_attachment_aspect_references_: {<<inputattachmentaspectreference, inputattachmentaspectreference>>}, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkRenderPassCreateInfo[VkRenderPassCreateInfo])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkRenderPassCreateInfo.html[VkRenderPassCreateInfo])#
 
 
 * [[attachmentdescription]]
@@ -653,7 +653,7 @@ _stencil_load_op_: <<attachmentloadop, attachmentloadop>>, +
 _stencil_store_op_: <<attachmentstoreop, attachmentstoreop>>, +
 _initial_layout_: <<imagelayout, imagelayout>>, +
 _final_layout_: <<imagelayout, imagelayout>>, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkAttachmentDescription[VkAttachmentDescription])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkAttachmentDescription.html[VkAttachmentDescription])#
 
 
 * [[subpassdescription]]
@@ -665,13 +665,13 @@ _color_attachments_: {<<attachmentreference, attachmentreference>>}, +
 _resolve_attachments_: {<<attachmentreference, attachmentreference>>}, +
 _depth_stencil_attachment_: <<attachmentreference, attachmentreference>>, +
 _preserve_attachments_: {integer}, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkSubpassDescription[VkSubpassDescription])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkSubpassDescription.html[VkSubpassDescription])#
 
 * [[attachmentreference]]
 [small]#*attachmentreference* = { +
 _attachment_: integer or '_unused_' (defaults to '_unused_'), +
 _layout_: <<imagelayout, imagelayout>> *[R]*, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkAttachmentReference[VkAttachmentReference])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkAttachmentReference.html[VkAttachmentReference])#
 
 * [[subpassdependency]]
 [small]#*subpassdependency* = { +
@@ -682,14 +682,14 @@ _dst_stage_mask_: <<pipelinestageflags, pipelinestageflags>>, +
 _src_access_mask_: <<accessflags, accessflags>>, +
 _dst_access_mask_: <<accessflags, accessflags>>, +
 _dependency_flags_: <<dependencyflags, dependencyflags>>, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkSubpassDependency[VkSubpassDependency])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkSubpassDependency.html[VkSubpassDependency])#
 
 * [[inputattachmentaspectreference]]
 [small]#*inputattachmentaspectreference* = { +
 _subpass_: integer, +
 _input_attachment_index_: <<index, index>>, +
 _aspect_mask_: <<imageaspectflags, imageaspectflags>>, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkInputAttachmentAspectReferenceKHR[VkInputAttachmentAspectReferenceKHR])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkInputAttachmentAspectReference.html[VkInputAttachmentAspectReference])#
 
 '''
 
@@ -701,7 +701,7 @@ _width_: integer, +
 _height_: integer, +
 _layers_: integer (defaults to 1), +
 _attachments_: {<<image_view, image_view>>}, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkFramebufferCreateInfo[VkFramebufferCreateInfo])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkFramebufferCreateInfo.html[VkFramebufferCreateInfo])#
 
 '''
 
@@ -711,7 +711,7 @@ _flags_: <<shadermodulecreateflags, shadermodulecreateflags>>, +
 _code_: binary string *[R]*, +
 pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkShaderModuleValidationCacheCreateInfoEXT[VkShaderModuleValidationCacheCreateInfoEXT], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_validation_cache[VK_EXT_validation_cache]): +
 _validation_cache_: <<validation_cache, validation_cache>>, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkShaderModuleCreateInfo[VkShaderModuleCreateInfo])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkShaderModuleCreateInfo.html[VkShaderModuleCreateInfo])#
 
 '''
 
@@ -719,7 +719,7 @@ _validation_cache_: <<validation_cache, validation_cache>>, +
 [small]#*pipelinecachecreateinfo* = { +
 _flags_: <<pipelinecachecreateflags, pipelinecachecreateflags>>, +
 _initial_data_: binary string, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkPipelineCacheCreateInfo[VkPipelineCacheCreateInfo])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkPipelineCacheCreateInfo.html[VkPipelineCacheCreateInfo])#
 
 '''
 
@@ -738,9 +738,9 @@ _size_: integer +
 _usage_: <<bufferusageflags, bufferusageflags>>, +
 _sharing_mode_: <<sharingmode, sharingmode>>, +
 _queue_family_indices_: {<<index, index>>}, +
-pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkExternalMemoryBufferCreateInfoKHR[VkExternalMemoryBufferCreateInfoKHR], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_external_memory[VK_KHR_external_memory]): +
+pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkExternalMemoryBufferCreateInfo.html[VkExternalMemoryBufferCreateInfo], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_external_memory[VK_KHR_external_memory]): +
 _handle_types_: <<externalmemoryhandletypeflags, externalmemoryhandletypeflags>>, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkBufferCreateInfo[VkBufferCreateInfo])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkBufferCreateInfo.html[VkBufferCreateInfo])#
 
 * [[bufferviewcreateinfo]]
 [small]#*bufferviewcreateinfo* = { +
@@ -748,7 +748,7 @@ _flags_: <<bufferviewcreateflags, bufferviewcreateflags>>, +
 _format_: <<format, format>>, +
 _offset_: integer, +
 _range_: integer, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkBufferViewCreateInfo[VkBufferViewCreateInfo])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkBufferViewCreateInfo.html[VkBufferViewCreateInfo])#
 
 '''
 
@@ -766,11 +766,11 @@ _usage_: <<imageusageflags, imageusageflags>>, +
 _initial_layout_: <<imagelayout, imagelayout>>, +
 _sharing_mode_: <<sharingmode, sharingmode>>, +
 _queue_family_indices_: {<<index, index>>}, +
-pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkExternalMemoryImageCreateInfoKHR[VkExternalMemoryImageCreateInfoKHR], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_external_memory[VK_KHR_external_memory]): +
+pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkExternalMemoryImageCreateInfo.html[VkExternalMemoryImageCreateInfo], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_external_memory[VK_KHR_external_memory]): +
 _handle_types_: <<externalmemoryhandletypeflags, externalmemoryhandletypeflags>>, +
 pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkImageFormatListCreateInfoKHR[VkImageFormatListCreateInfoKHR], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_image_format_list[VK_KHR_image_format_list]): +
 _view_formats_: {<<format, format>>}, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkImageCreateInfo[VkImageCreateInfo])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkImageCreateInfo.html[VkImageCreateInfo])#
 
 
 * [[imageviewcreateinfo]]
@@ -780,9 +780,9 @@ _view_type_: <<imageviewtype, imageviewtype>> *[R]*, +
 _format_: <<format, format>>, +
 _components_: <<componentmapping, componentmapping>>, +
 _subresource_range_: <<imagesubresourcerange, imagesubresourcerange>>, +
-pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkImageViewUsageCreateInfoKHR[VkImageViewUsageCreateInfoKHR], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_maintenance2[VK_KHR_maintenance2]): +
+pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkImageViewUsageCreateInfo.html[VkImageViewUsageCreateInfo], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_maintenance2[VK_KHR_maintenance2]): +
 _usage_: <<imageusageflags, imageusageflags>>, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkImageViewCreateInfo[VkImageViewCreateInfo])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkImageViewCreateInfo.html[VkImageViewCreateInfo])#
 
 '''
 
@@ -806,9 +806,9 @@ _border_color_: <<bordercolor, bordercolor>>, +
 _unnormalized_coordinates_: boolean, +
 pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkSamplerReductionModeCreateInfoEXT[VkSamplerReductionModeCreateInfoEXT], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_sampler_filter_minmax[VK_EXT_sampler_filter_minmax]): +
 _reduction_mode_: <<samplerreductionmode, samplerreductionmode>>, +
-pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkSamplerYcbcrConversionInfoKHR[VkSamplerYcbcrConversionInfoKHR], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_sampler_ycbcr_conversion[VK_KHR_sampler_ycbcr_conversion]): +
+pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkSamplerYcbcrConversionInfo.html[VkSamplerYcbcrConversionInfo], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_sampler_ycbcr_conversion[VK_KHR_sampler_ycbcr_conversion]): +
 _conversion_: <<sampler_ycbcr_conversion, sampler_ycbcr_conversion>>, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkSamplerCreateInfo[VkSamplerCreateInfo])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkSamplerCreateInfo.html[VkSamplerCreateInfo])#
 
 
 * [[samplerycbcrconversioncreateinfo]]
@@ -821,7 +821,7 @@ _x_chroma_offset_: <<chromalocation, chromalocation>>, +
 _y_chroma_offset_: <<chromalocation, chromalocation>>, +
 _chroma_filter_: <<filter, filter>>, +
 _force_explicit_reconstruction_: boolean, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkSamplerYcbcrConversionCreateInfoKHR[VkSamplerYcbcrConversionCreateInfoKHR])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkSamplerYcbcrConversionCreateInfo.html[VkSamplerYcbcrConversionCreateInfo])#
 
 
 '''
@@ -831,7 +831,7 @@ _force_explicit_reconstruction_: boolean, +
 _memory_: <<device_memory, device_memory>> *[R]*, +
 _offset_: integer, +
 _size_: integer or '_whole size_' (defaults to '_whole size_'), +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkMappedMemoryRange[VkMappedMemoryRange])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkMappedMemoryRange.html[VkMappedMemoryRange])#
 
 '''
 
@@ -839,14 +839,14 @@ _size_: integer or '_whole size_' (defaults to '_whole size_'), +
 [small]#*memoryallocateinfo* = { +
 _allocation_size_: integer, +
 _memory_type_index_: <<index, index>>, +
-pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkMemoryDedicatedAllocateInfoKHR[VkMemoryDedicatedAllocateInfoKHR], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_dedicated_allocation[VK_KHR_dedicated_allocation]): +
+pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkMemoryDedicatedAllocateInfo.html[VkMemoryDedicatedAllocateInfo], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_dedicated_allocation[VK_KHR_dedicated_allocation]): +
 _image_: <<image, image>>, +
 _buffer_: <<buffer, buffer>>, +
-pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkExportMemoryAllocateInfoKHR[VkExportMemoryAllocateInfoKHR], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_external_memory[VK_KHR_external_memory]): +
+pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkExportMemoryAllocateInfo.html[VkExportMemoryAllocateInfo], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_external_memory[VK_KHR_external_memory]): +
 _handle_types_: <<externalmemoryhandletypeflags, externalmemoryhandletypeflags>>, +
 pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkImportMemoryFdInfoKHR[VkImportMemoryFdInfoKHR], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_external_memory_fd[VK_KHR_external_memory_fd]): +
 _import_memory_fd_info_: <<importmemoryfdinfo, importmemoryfdinfo>>, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkMemoryAllocateInfo[VkMemoryAllocateInfo])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkMemoryAllocateInfo.html[VkMemoryAllocateInfo])#
 
 * [[importmemoryfdinfo]]
 [small]#*importmemoryfdinfo* = { +
@@ -869,20 +869,20 @@ _memory_type_bits_: integer, +
 * [[buffermemoryrequirementsinfo]]
 [small]#*buffermemoryrequirementsinfo* = { +
 pass:[--] for future use, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkBufferMemoryRequirementsInfo2KHR[VkBufferMemoryRequirementsInfo2KHR])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkBufferMemoryRequirementsInfo2.html[VkBufferMemoryRequirementsInfo2])#
 
 
 * [[imagememoryrequirementsinfo]]
 [small]#*imagememoryrequirementsinfo* = { +
-pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkImagePlaneMemoryRequirementsInfoKHR[VkImagePlaneMemoryRequirementsInfoKHR], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_sampler_ycbcr_conversion[VK_KHR_sampler_ycbcr_conversion]): +
+pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkImagePlaneMemoryRequirementsInfo.html[VkImagePlaneMemoryRequirementsInfo], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_sampler_ycbcr_conversion[VK_KHR_sampler_ycbcr_conversion]): +
 _plane_aspect_: <<imageaspectflags, imageaspectflags>>, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkImageMemoryRequirementsInfo2KHR[VkImageMemoryRequirementsInfo2KHR])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkImageMemoryRequirementsInfo2.html[VkImageMemoryRequirementsInfo2])#
 
 
 * [[imagesparsememoryrequirementsinfo]]
 [small]#*imagesparsememoryrequirementsinfo* = { +
 pass:[--] for future use, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkImageSparseMemoryRequirementsInfo2KHR[VkImageSparseMemoryRequirementsInfo2KHR])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkImageSparseMemoryRequirementsInfo2.html[VkImageSparseMemoryRequirementsInfo2])#
 
 '''
 
@@ -891,10 +891,10 @@ pass:[--] for future use, +
 _size_: integer, +
 _alignment_: integer, +
 _memory_type_bits_: integer, +
-pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkMemoryDedicatedRequirementsKHR[VkMemoryDedicatedRequirementsKHR], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_dedicated_allocation[VK_KHR_dedicated_allocation]): +
+pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkMemoryDedicatedRequirements.html[VkMemoryDedicatedRequirements], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_dedicated_allocation[VK_KHR_dedicated_allocation]): +
 _prefers_dedicated_allocation_: boolean, +
 _requires_dedicated_allocation_: boolean, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkMemoryRequirements2KHR[VkMemoryRequirements2KHR])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkMemoryRequirements2.html[VkMemoryRequirements2])#
 
 
 * [[sparseimagememoryrequirements]]
@@ -904,7 +904,7 @@ _image_mip_tail_first_lod_: integer, +
 _image_mip_tail_size_: integer, +
 _image_mip_tail_offset_: integer, +
 _image_mip_tail_stride_: integer, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkSparseImageMemoryRequirements[VkSparseImageMemoryRequirements])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkSparseImageMemoryRequirements.html[VkSparseImageMemoryRequirements])#
 
 * [[subresourcelayout]]
 [small]#*subresourcelayout* = { +
@@ -913,7 +913,7 @@ _size_: integer, +
 _row_pitch_: integer, +
 _array_pitch_: integer, +
 _depth_pitch_: integer, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkSubresourceLayout[VkSubresourceLayout])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkSubresourceLayout.html[VkSubresourceLayout])#
 
 
 * [[imagesubresource]]
@@ -921,7 +921,7 @@ _depth_pitch_: integer, +
 _aspect_mask_: <<imageaspectflags, imageaspectflags>>, +
 _mip_level_: integer, +
 _array_layer_: integer, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkImageSubresource[VkImageSubresource]) +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkImageSubresource.html[VkImageSubresource]) +
 <<constructors, Constructor>>: *imagesubresource*(_aspect_mask_, _mip_level_, _array_layer_)#
 
 * [[imagesubresourcerange]]
@@ -931,7 +931,7 @@ _base_mip_level_: integer, +
 _level_count_: integer or '_remaining_' (defaults to 1), +
 _base_array_layer_: integer, +
 _layer_count_: integer or '_remaining_' (defaults to 1), +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkImageSubresourceRange[VkImageSubresourceRange]) +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkImageSubresourceRange.html[VkImageSubresourceRange]) +
 <<constructors, Constructor>>: *imagesubresourcerange*(_aspect_mask_, _base_mip_level_, _level_count_, _base_array_layer_, _layer_count_)#
 
 '''
@@ -940,7 +940,7 @@ _layer_count_: integer or '_remaining_' (defaults to 1), +
 _buffer_: <<buffer, buffer>> *[R]*, +
 _memory_: <<device_memory, _device_memory_>> *[R]*, +
 _offset_: integer, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkBindBufferMemoryInfoKHR[VkBindBufferMemoryInfoKHR])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkBindBufferMemoryInfo.html[VkBindBufferMemoryInfo])#
 
 
 * [[bindimagememoryinfo]]
@@ -948,9 +948,9 @@ _offset_: integer, +
 _image_: <<image, image>> *[R]*, +
 _memory_: <<device_memory, _device_memory_>> *[R]*, +
 _offset_: integer, +
-pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkBindImagePlaneMemoryInfoKHR[VkBindImagePlaneMemoryInfoKHR], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_sampler_ycbcr_conversion[VK_KHR_sampler_ycbcr_conversion]): +
+pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkBindImagePlaneMemoryInfo.html[VkBindImagePlaneMemoryInfo], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_sampler_ycbcr_conversion[VK_KHR_sampler_ycbcr_conversion]): +
 _plane_aspect_: <<imageaspectflags, imageaspectflags>>: +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkBindImageMemoryInfoKHR[VkBindImageMemoryInfoKHR])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkBindImageMemoryInfo.html[VkBindImageMemoryInfo])#
 
 '''
 
@@ -958,7 +958,7 @@ _plane_aspect_: <<imageaspectflags, imageaspectflags>>: +
 [small]#*descriptorsetlayoutcreateinfo* = { +
 _flags_: <<descriptorsetlayoutcreateflags, descriptorsetlayoutcreateflags>>, +
 _bindings_: {<<descriptorsetlayoutbinding, descriptorsetlayoutbinding>>}, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkDescriptorSetLayoutCreateInfo[VkDescriptorSetLayoutCreateInfo])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkDescriptorSetLayoutCreateInfo.html[VkDescriptorSetLayoutCreateInfo])#
 
 * [[descriptorsetlayoutbinding]]
 [small]#*descriptorsetlayoutbinding* = { +
@@ -967,7 +967,7 @@ _descriptor_type_: <<descriptortype, descriptortype>> *[R]*, +
 _descriptor_count_: integer, +
 _stage_flags_: <<shaderstageflags, shaderstageflags>>, +
 _immutable_samplers_: {<<sampler, sampler>>}, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkDescriptorSetLayoutBinding[VkDescriptorSetLayoutBinding]) +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkDescriptorSetLayoutBinding.html[VkDescriptorSetLayoutBinding]) +
 <<constructors, Constructor>>: *descriptorsetlayoutbinding*(_binding_, _descriptor_type_, _descriptor_count_, _stage_flags_, {_immutable_samplers_})#
 
 '''
@@ -977,7 +977,7 @@ _immutable_samplers_: {<<sampler, sampler>>}, +
 _flags_: <<pipelinelayoutcreateflags, pipelinelayoutcreateflags>>, +
 _set_layouts_: {<<descriptor_set_layout, descriptor_set_layout>>}, +
 _push_constant_ranges_: {<<pushconstantrange, pushconstantrange>>}, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkPipelineLayoutCreateInfo[PipelineLayoutCreateInfo])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkPipelineLayoutCreateInfo.html[PipelineLayoutCreateInfo])#
 
 
 * [[pushconstantrange]]
@@ -985,7 +985,7 @@ _push_constant_ranges_: {<<pushconstantrange, pushconstantrange>>}, +
 _stage_flags_: <<shaderstageflags, shaderstageflags>>, +
 _offset_: integer, +
 _size_: integer, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkPushConstantRange[VkPushConstantRange]) +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkPushConstantRange.html[VkPushConstantRange]) +
 <<constructors, Constructor>>: *pushconstantrange*(_stage_flags_, _offset_, _size_)#
 
 '''
@@ -995,20 +995,20 @@ _size_: integer, +
 _flags_: <<descriptorpoolcreateflags, descriptorpoolcreateflags>>, +
 _max_sets_: integer, +
 _pool_sizes_: {<<descriptorpoolsize, descriptorpoolsize>>}, *[R]* +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkDescriptorPoolCreateInfo[VkDescriptorPoolCreateInfo])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkDescriptorPoolCreateInfo.html[VkDescriptorPoolCreateInfo])#
 
 * [[descriptorpoolsize]]
 [small]#*descriptorpoolsize* = { +
 _type_: <<descriptortype, descriptortype>> *[R]*, +
 _descriptor_count_: integer (defaults to 1), +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkDescriptorPoolSize[VkDescriptorPoolSize])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkDescriptorPoolSize.html[VkDescriptorPoolSize])#
 
 '''
 
 * [[descriptorsetallocateinfo]]
 [small]#*descriptorsetallocateinfo* = { +
 _set_layouts_: {<<descriptor_set_layout, descriptor_set_layout>>}, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkDescriptorSetAllocateInfo[VkDescriptorSetAllocateInfo])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkDescriptorSetAllocateInfo.html[VkDescriptorSetAllocateInfo])#
 
 '''
 
@@ -1017,14 +1017,14 @@ _set_layouts_: {<<descriptor_set_layout, descriptor_set_layout>>}, +
 _sampler_: <<sampler, sampler>> *[R]*, +
 _image_view_: <<image_view, image_view>> *[R]*, +
 _image_layout_: <<imagelayout, imagelayout>>, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkDescriptorImageInfo[VkDescriptorImageInfo])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkDescriptorImageInfo.html[VkDescriptorImageInfo])#
 
 * [[descriptorbufferinfo]]
 [small]#*descriptorbufferinfo* = { +
 _buffer_: <<buffer, buffer>> *[R]*, +
 _offset_: integer, +
 _range_: integer or '_whole size_' (defaults to '_whole size_'), +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkDescriptorBufferInfo[VkDescriptorBufferInfo])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkDescriptorBufferInfo.html[VkDescriptorBufferInfo])#
 
 * [[writedescriptorset]]
 [small]#*writedescriptorset* = { +
@@ -1035,7 +1035,7 @@ _descriptor_type_: <<descriptortype, descriptortype>> *[R]*, +
 _image_info_: {<<descriptorimageinfo, descriptorimageinfo>>}, +
 _buffer_info_: {<<descriptorbufferinfo, descriptorbufferinfo>>}, +
 _texel_buffer_view_: {<<buffer_view, buffer_view>>}, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkWriteDescriptorSet[VkWriteDescriptorSet])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkWriteDescriptorSet.html[VkWriteDescriptorSet])#
 
 * [[copydescriptorset]]
 [small]#*copydescriptorset* = { +
@@ -1046,7 +1046,7 @@ _dst_set_: <<descriptor_set, descriptor_set>> *[R]*, +
 _dst_binding_: integer, +
 _dst_array_element_: integer, +
 _descriptor_count_: integer, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkCopyDescriptorSet[VkCopyDescriptorSet])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkCopyDescriptorSet.html[VkCopyDescriptorSet])#
 
 '''
 * [[querypoolcreateinfo]]
@@ -1055,7 +1055,7 @@ _flags_: <<querypoolcreateflags, querypoolcreateflags>>, +
 _query_type_: <<querytype, querytype>> *[R]*, +
 _query_count_: integer, +
 _pipeline_statistics_: <<querypipelinestatisticflags, querypipelinestatisticflags>>, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkQueryPoolCreateInfo[VkQueryPoolCreateInfo])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkQueryPoolCreateInfo.html[VkQueryPoolCreateInfo])#
 
 '''
 
@@ -1079,7 +1079,7 @@ _base_pipeline_handle_: <<pipeline, pipeline>>, +
 _base_pipeline_index_: <<index, index>>, +
 _color_blend_advanced_state_: <<pipelinecolorblendadvancedstatecreateinfo, pipelinecolorblendadvancedstatecreateinfo>> (Note1), +
 _discard_rectangle_state_: <<pipelinediscardrectanglestatecreateinfo, pipelinediscardrectanglestatecreateinfo>> (Note2), +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkGraphicsPipelineCreateInfo[VkGraphicsPipelineCreateInfo]) +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkGraphicsPipelineCreateInfo.html[VkGraphicsPipelineCreateInfo]) +
 Note1: Requires the https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_blend_operation_advanced[VK_EXT_blend_operation_advanced] extension and the _color_blend_state_ field. +
 Note2: Requires the https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_discard_rectangles[VK_EXT_discard_rectangles] extension.#
 
@@ -1090,7 +1090,7 @@ _stage_: <<pipelineshaderstagecreateinfo, pipelineshaderstagecreateinfo>> *[R]*,
 _layout_: <<pipeline_layout, pipeline_layout>> *[R]*, +
 _base_pipeline_handle_: <<pipeline, pipeline>>, +
 _base_pipeline_index_: <<index, index>>, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkComputePipelineCreateInfo[VkComputePipelineCreateInfo])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkComputePipelineCreateInfo.html[VkComputePipelineCreateInfo])#
 
 
 * [[pipelineshaderstagecreateinfo]]
@@ -1100,20 +1100,20 @@ _stage_: <<shaderstageflags, shaderstageflags>>, +
 _module_: <<shader_module, shader_module>> *[R]*, +
 _name_: string (defaults to '_main_'), +
 _specialization_info_: <<specializationinfo, specializationinfo>>, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkPipelineShaderStageCreateInfo[VkPipelineShaderStageCreateInfo])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkPipelineShaderStageCreateInfo.html[VkPipelineShaderStageCreateInfo])#
 
 * [[specializationinfo]]
 [small]#*specializationinfo* = { +
 _map_entries_: {<<specializationmapentry, specializationmapentry>>}, +
 _data_: binary string *[R]*, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkSpecializationInfo[VkSpecializationInfo])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkSpecializationInfo.html[VkSpecializationInfo])#
 
 * [[specializationmapentry]]
 [small]#*specializationmapentry* = { +
 _constant_id_: integer, +
 _offset_: integer, +
 _size_: integer, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkSpecializationMapEntry[VkSpecializationMapEntry])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkSpecializationMapEntry.html[VkSpecializationMapEntry])#
 
 
 * [[pipelinevertexinputstatecreateinfo]]
@@ -1121,7 +1121,7 @@ _size_: integer, +
 _flags_: <<pipelinevertexinputstatecreateflags, pipelinevertexinputstatecreateflags>>, +
 _vertex_binding_descriptions_: {<<vertexinputbindingdescription, vertexinputbindingdescription>>}, +
 _vertex_attribute_descriptions_: {<<vertexinputattributedescription, vertexinputattributedescription>>}, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkPipelineVertexInputStateCreateInfo[VkPipelineVertexInputStateCreateInfo])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkPipelineVertexInputStateCreateInfo.html[VkPipelineVertexInputStateCreateInfo])#
 
 
 * [[vertexinputbindingdescription]]
@@ -1129,7 +1129,7 @@ _vertex_attribute_descriptions_: {<<vertexinputattributedescription, vertexinput
 _binding_: integer, +
 _stride_: integer, +
 _input_rate_: <<vertexinputrate, vertexinputrate>>, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkVertexInputBindingDescription[VkVertexInputBindingDescription])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkVertexInputBindingDescription.html[VkVertexInputBindingDescription])#
 
 * [[vertexinputattributedescription]]
 [small]#*vertexinputattributedescription* = { +
@@ -1137,23 +1137,23 @@ _binding_: integer, +
 _location_: integer, +
 _format_: <<format, format>>, +
 _offset_: integer, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkVertexInputAttributeDescription[VkVertexInputAttributeDescription])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkVertexInputAttributeDescription.html[VkVertexInputAttributeDescription])#
 
 * [[pipelineinputassemblystatecreateinfo]]
 [small]#*pipelineinputassemblystatecreateinfo* = { +
 _flags_: <<pipelineinputassemblystatecreateflags, pipelineinputassemblystatecreateflags>>, +
 _topology_: <<primitivetopology, primitivetopology>>, +
 _primitive_restart_enable_: boolean, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkPipelineInputAssemblyStateCreateInfo[VkPipelineInputAssemblyStateCreateInfo])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkPipelineInputAssemblyStateCreateInfo.html[VkPipelineInputAssemblyStateCreateInfo])#
 
 
 * [[pipelinetessellationstatecreateinfo]]
 [small]#*pipelinetessellationstatecreateinfo* = { +
 _flags_: <<pipelinetessellationstatecreateflags, pipelinetessellationstatecreateflags>>, +
 _patch_control_points_: integer, +
-pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkPipelineTessellationDomainOriginStateCreateInfoKHR[VkPipelineTessellationDomainOriginStateCreateInfoKHR], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_maintenance2[VK_KHR_maintenance2]): +
+pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkPipelineTessellationDomainOriginStateCreateInfo.html[VkPipelineTessellationDomainOriginStateCreateInfo], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_maintenance2[VK_KHR_maintenance2]): +
 _domain_origin_: <<tessellationdomainorigin, tessellationdomainorigin>>, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkPipelineTessellationStateCreateInfo[VkPipelineTessellationStateCreateInfo])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkPipelineTessellationStateCreateInfo.html[VkPipelineTessellationStateCreateInfo])#
 
 
 * [[pipelineviewportstatecreateinfo]]
@@ -1163,7 +1163,7 @@ _viewports_: {<<viewport, viewport>>}, +
 _scissors_: {<<rect2d, rect2d>>}, +
 _viewport_count_: integer (forced to #_viewports_, if given, or defaults to 1), +
 _scissor_count_: integer (forced to #_scissors_, if given, or defaults to 1), +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkPipelineViewportStateCreateInfo[VkPipelineViewportStateCreateInfo])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkPipelineViewportStateCreateInfo.html[VkPipelineViewportStateCreateInfo])#
 
 
 * [[pipelinerasterizationstatecreateinfo]]
@@ -1179,7 +1179,7 @@ _depth_bias_constant_factor_: float, +
 _depth_bias_clamp_: float, +
 _depth_bias_slope_factor_: float, +
 _line_width_: float (defaults to 1.0), +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkPipelineRasterizationStateCreateInfo[VkPipelineRasterizationStateCreateInfo])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkPipelineRasterizationStateCreateInfo.html[VkPipelineRasterizationStateCreateInfo])#
 
 
 * [[pipelinemultisamplestatecreateinfo]]
@@ -1194,7 +1194,7 @@ _sample_mask_: {integer}, +
 pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkPipelineSampleLocationsStateCreateInfoEXT[VkPipelineSampleLocationsStateCreateInfoEXT], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_sample_locations[VK_EXT_sample_locations]): +
 _sample_locations_enable_: boolean, +
 _sample_locations_info_: <<samplelocationsinfo, samplelocationsinfo>>, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkPipelineMultisampleStateCreateInfo[VkPipelineMultisampleStateCreateInfo])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkPipelineMultisampleStateCreateInfo.html[VkPipelineMultisampleStateCreateInfo])#
 
 
 * [[pipelinedepthstencilstatecreateinfo]]
@@ -1209,7 +1209,7 @@ _front_: <<stencilopstate, stencilopstate>>, +
 _back_: <<stencilopstate, stencilopstate>>, +
 _min_depth_bounds_: float, +
 _max_depth_bounds_: float, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkPipelineDepthStencilStateCreateInfo[VkPipelineDepthStencilStateCreateInfo])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkPipelineDepthStencilStateCreateInfo.html[VkPipelineDepthStencilStateCreateInfo])#
 
 * [[stencilopstate]]
 [small]#*stencilopstate* = { +
@@ -1220,7 +1220,7 @@ _compare_op_: <<compareop, compareop>>, +
 _compare_mask_: integer, +
 _write_mask_: integer, +
 _reference_: integer, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkStencilOpState[VkStencilOpState])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkStencilOpState.html[VkStencilOpState])#
 
 
 * [[pipelinecolorblendstatecreateinfo]]
@@ -1230,7 +1230,7 @@ _logic_op_enable_: boolean, +
 _logic_op_: <<logicop, logicop>>, +
 _attachments_: {<<pipelinecolorblendattachmentstate, pipelinecolorblendattachmentstate>>}, +
 _blend_constants_: {float}[4], +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkPipelineColorBlendStateCreateInfo[VkPipelineColorBlendStateCreateInfo])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkPipelineColorBlendStateCreateInfo.html[VkPipelineColorBlendStateCreateInfo])#
 
 * [[pipelinecolorblendattachmentstate]]
 [small]#*pipelinecolorblendattachmentstate* = { +
@@ -1242,7 +1242,7 @@ _src_alpha_blend_factor_: <<blendfactor, blendfactor>>, +
 _dst_alpha_blend_factor_: <<blendfactor, blendfactor>>, +
 _alpha_blend_op_: <<blendop, blendop>>, +
 _color_write_mask_: <<colorcomponentflags, colorcomponentflags>>, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkPipelineColorBlendAttachmentState[VkPipelineColorBlendAttachmentState])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkPipelineColorBlendAttachmentState.html[VkPipelineColorBlendAttachmentState])#
 
 * [[pipelinecolorblendadvancedstatecreateinfo]]
 [small]#*pipelinecolorblendadvancedstatecreateinfo* = { +
@@ -1262,7 +1262,7 @@ _discard_rectangles_: {<<rect2d, rect2d>>}, +
 [small]#*pipelinedynamicstatecreateinfo* = { +
 _flags_: <<pipelinedynamicstatecreateflags, pipelinedynamicstatecreateflags>>, +
 _dynamic_states_: {<<dynamicstate, dynamicstate>>} *[R]*, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkPipelineDynamicStateCreateInfo[VkPipelineDynamicStateCreateInfo])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkPipelineDynamicStateCreateInfo.html[VkPipelineDynamicStateCreateInfo])#
 
 
 * [[buffercopy]]
@@ -1270,7 +1270,7 @@ _dynamic_states_: {<<dynamicstate, dynamicstate>>} *[R]*, +
 _src_offset_: integer, +
 _dst_offset_: integer, +
 _size_: integer, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkBufferCopy[VkBufferCopy])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkBufferCopy.html[VkBufferCopy])#
 
 * [[imagecopy]]
 [small]#*imagecopy* = { +
@@ -1279,7 +1279,7 @@ _dst_subresource_: <<imagesubresourcelayers, imagesubresourcelayers>> *[R]*, +
 _src_offset_: <<offset3d, offset3d>>, +
 _dst_offset_: <<offset3d, offset3d>>, +
 _extent_: <<extent3d, extent3d>>, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkImageCopy[VkImageCopy])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkImageCopy.html[VkImageCopy])#
 
 
 * [[imageblit]]
@@ -1288,7 +1288,7 @@ _src_subresource_: <<imagesubresourcelayers, imagesubresourcelayers>> *[R]*, +
 _dst_subresource_: <<imagesubresourcelayers, imagesubresourcelayers>> *[R]*, +
 _src_offsets_: {<<offset3d, offset3d>>}[2], +
 _dst_offsets_: {<<offset3d, offset3d>>}[2], +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkImageBlit[VkImageBlit])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkImageBlit.html[VkImageBlit])#
 
 * [[imagesubresourcelayers]]
 [small]#*imagesubresourcelayers* = { +
@@ -1296,7 +1296,7 @@ _aspect_flags_: <<imageaspectflags, imageaspectflags>>, +
 _mip_level_: integer, +
 _base_array_layer_: integer, +
 _layer_count_: integer, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkImageSubresourceLayers[VkImageSubresourceLayers]) +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkImageSubresourceLayers.html[VkImageSubresourceLayers]) +
 <<constructors, Constructor>>: *imagesubresourcelayers*(_aspect_mask_, _mip_level_, _base_array_layer_, _layer_count_)#
 
 * [[bufferimagecopy]]
@@ -1307,7 +1307,7 @@ _buffer_image_height_: integer, +
 _image_subresource_: <<imagesubresourcelayers, imagesubresourcelayers>> *[R]*, +
 _image_offset_: <<offset3d, offset3d>>, +
 _image_extent_: <<extent3d, extent3d>>, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkBufferImageCopy[VkBufferImageCopy])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkBufferImageCopy.html[VkBufferImageCopy])#
 
 * [[imageresolve]]
 [small]#*imageresolve* = { +
@@ -1316,13 +1316,13 @@ _dst_subresource_: <<imagesubresourcelayers, imagesubresourcelayers>> *[R]*, +
 _src_offset_: <<offset3d, offset3d>>, +
 _dst_offset_: <<offset3d, offset3d>>, +
 _extent_: <<extent3d, extent3d>>, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkImageResolve[VkImageResolve])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkImageResolve.html[VkImageResolve])#
 
 * [[memorybarrier]]
 [small]#*memorybarrier* = { +
 _src_access_mask_: <<accessflags, accessflags>>, +
 _dst_access_mask_: <<accessflags, accessflags>>, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkMemoryBarrier[VkMemoryBarrier])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkMemoryBarrier.html[VkMemoryBarrier])#
 
 * [[buffermemorybarrier]]
 [small]#*buffermemorybarrier* = { +
@@ -1333,7 +1333,7 @@ _dst_queue_family_index_: <<index, index>> (default: ignored), +
 _buffer_: <<buffer, buffer>> *[R]*, +
 _offset_: integer, +
 _size_: integer, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkBufferMemoryBarrier[VkBufferMemoryBarrier])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkBufferMemoryBarrier.html[VkBufferMemoryBarrier])#
 
 * [[imagememorybarrier]]
 [small]#*imagememorybarrier* = { +
@@ -1345,38 +1345,38 @@ _old_layout_: <<imagelayout, imagelayout>>, +
 _new_layout_: <<imagelayout, imagelayout>>, +
 _image_: <<image, image>>, +
 _subresource_range_: <<imagesubresourcerange, imagesubresourcerange>>, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkImageMemoryBarrier[VkImageMemoryBarrier])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkImageMemoryBarrier.html[VkImageMemoryBarrier])#
 
 '''
 
 * [[viewport]]
 [small]#*viewport* = { _x_, _y_, _width_, _height_, _min_depth_, _max_depth_: float } +
-(rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkViewport[VkViewport]) +
+(rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkViewport.html[VkViewport]) +
 <<constructors, Constructor>>: *viewport*(_x_, _y_, _width_, _height_, _min_depth_, _max_depth_)#
 
 * [[offset2d]]
 [small]#*offset2d* = { _x_, _y_: integer } +
-(rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkOffset2D[VkOffset2D]) +
+(rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkOffset2D.html[VkOffset2D]) +
 <<constructors, Constructor>>: *offset2d*(_x_, _y_)#
 
 * [[offset3d]]
 [small]#*offset3d* = { _x_, _y_, _z_: integer } +
-(rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkOffset3D[VkOffset3D]) +
+(rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkOffset3D.html[VkOffset3D]) +
 <<constructors, Constructor>>: *offset3d*(_x_, _y_, _z_)#
 
 * [[extent2d]]
 [small]#*extent2d* = { _width_, _height_: integer } +
-(rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkExtent2D[VkExtent2D]) +
+(rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkExtent2D.html[VkExtent2D]) +
 <<constructors, Constructor>>: *extent2d*(_width_, _height_)#
 
 * [[extent3d]]
 [small]#*extent3d* = { _width_, _height_, _depth_: integer } +
-(rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkExtent3D[VkExtent3D]) +
+(rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkExtent3D.html[VkExtent3D]) +
 <<constructors, Constructor>>: *extent3d*(_width_, _height_, _depth_)#
 
 * [[rect2d]]
 [small]#*rect2d* = { _offset_: <<offset2d, offset2d>>, _extent_: <<extent2d, extent2d>> } +
-(rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkRect2D[VkRect2D]) +
+(rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkRect2D.html[VkRect2D]) +
 <<constructors, Constructor>>: *rect2d*(_x_, _y_, _width_, _height_)#
 
 * [[samplelocation]]
@@ -1385,7 +1385,7 @@ _subresource_range_: <<imagesubresourcerange, imagesubresourcerange>>, +
 
 * [[componentmapping]]
 [small]#*componentmapping* = { _r_, _g_, _b_, _a_: <<componentswizzle, componentswizzle>> } +
-(rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkComponentMapping[VkComponentMapping]) +
+(rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkComponentMapping.html[VkComponentMapping]) +
 <<constructors, Constructor>>: *componentmapping*(_r_, _g_, _b_, _a_)#
 
 
@@ -1395,13 +1395,13 @@ _subresource_range_: <<imagesubresourcerange, imagesubresourcerange>>, +
 { _[1],[2],[3],[4]_: float, _t_='_float32_' } or +
 { _[1],[2],[3],[4]_: integer, _t_='_uint32_' } or +
 { _[1],[2],[3],[4]_: integer, _t_='_int32_' } +
-(rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkClearColorValue[VkClearColorValue])#
+(rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkClearColorValue.html[VkClearColorValue])#
 
 * [[clearvalue]]
 [small]#*clearvalue* = +
 { _color_: <<clearcolorvalue, clearcolorvalue>> } or +
 { _depth_: float, _stencil_: integer, } +
-(rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkClearValue[VkClearValue]). +
+(rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkClearValue.html[VkClearValue]). +
 See also the <<clearcolor_snippet, example>> in the code snippets section.#
 
 
@@ -1410,14 +1410,14 @@ See also the <<clearcolor_snippet, example>> in the code snippets section.#
 _aspect_mask_: <<imageaspectmask, imageaspectmask>>, +
 _color_attachment_: integer or '_unused_' (defaults to '_unused_'), +
 _clear_value_: <<clearvalue, clearvalue>>, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkClearAttachment[VkClearAttachment])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkClearAttachment.html[VkClearAttachment])#
 
 * [[clearrect]]
 [small]#*clearrect* = { +
 _rect_: <<rect2d, rect2d>>, +
 _base_array_layer_: integer, +
 _layer_count_: integer, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkClearRect[VkClearRect])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkClearRect.html[VkClearRect])#
 
 
 * [[renderpassbegininfo]]
@@ -1429,7 +1429,7 @@ _clear_values_: {<<clearvalue, clearvalue>>}, +
 pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkRenderPassSampleLocationsBeginInfoEXT[VkRenderPassSampleLocationsBeginInfoEXT], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_sample_locations[VK_EXT_sample_locations]): +
 _attachment_initial_sample_locations_count_: {<<attachmentsamplelocations, attachmentsamplelocations>>}, +
 _post_subpass_sample_locations_count_: {<<subpasssamplelocations, subpasssamplelocations>>}, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkRenderPassBeginInfo[VkRenderPassBeginInfo])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkRenderPassBeginInfo.html[VkRenderPassBeginInfo])#
 
 * [[attachmentsamplelocations]]
 [small]#*attachmentsamplelocations* = { +
@@ -1617,7 +1617,7 @@ _descriptor_set_layout_: <<descriptor_set_layout, descriptor_set_layout>>, +
 _pipeline_bind_point_: <<pipelinebindpoint, pipelinebindpoint>>, +
 _pipeline_layout_: <<pipeline_layout, pipeline_layout>>, +
 _set_: integer, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkDescriptorUpdateTemplateCreateInfoKHR[VkDescriptorUpdateTemplateCreateInfoKHR])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkDescriptorUpdateTemplateCreateInfo.html[VkDescriptorUpdateTemplateCreateInfo])#
 
 * [[descriptorupdatetemplateentry]]
 [small]#*descriptorupdatetemplateentry* = { +
@@ -1627,7 +1627,7 @@ _descriptor_count_: integer, +
 _descriptor_type_: <<descriptortype, descriptortype>> *[R]*, +
 _offset_: integer, +
 _stride_: integer, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkDescriptorUpdateTemplateEntryKHR[VkDescriptorUpdateTemplateEntryKHR])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkDescriptorUpdateTemplateEntry.html[VkDescriptorUpdateTemplateEntry])#
 
 
 ////

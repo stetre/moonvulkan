@@ -34,16 +34,3 @@ The *vk.type*(&nbsp;) function returns _nil_ if _object_ is not a valid MoonVulk
 * _parent_ = _object_++++*:parent*( ) +
 [small]#Returns the parent object of the given object.#
 
-////
-[[]]
-* <<,__>> = **(_xxx_) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vk[].#
-
-arg3 - __: integer +
-arg3 - __: <<, >> +
-arg3 - __: {<<, >>} +
-arg3 - __: <<, >> (opt.) +
-arg3 - __: {<<, >>} (opt.) +
-
-////
-

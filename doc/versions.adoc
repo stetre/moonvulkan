@@ -25,18 +25,3 @@ The *vk* table contains also the following version related information:
 Note that this refers to the vulkan.h header that MoonVulkan is built against, which may not be 
 aligned with the Vulkan implementation(s) installed on the system.
 
-
- 
-////
-[[]]
-* <<,__>> = **(_xxx_) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vk[].#
-
-arg3 - __: integer +
-arg3 - __: <<, >> +
-arg3 - __: {<<, >>} +
-arg3 - __: <<, >> (opt.) +
-arg3 - __: {<<, >>} (opt.) +
-
-////
-

@@ -8,22 +8,22 @@ or a return value.
 [[allocate_command_buffers]]
 * {_cb_} = *allocate_command_buffers*(<<command_pool, _command_pool_>>, <<commandbufferallocateinfo, _commandbufferallocateinfo_>>) +
 {_cb_} = *allocate_command_buffers*(<<command_pool, _command_pool_>>, _level_, _count_) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkAllocateCommandBuffers[vkAllocateCommandBuffers].#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkAllocateCommandBuffers.html[vkAllocateCommandBuffers].#
 
 [[free_command_buffers]]
 * *free_command_buffers*({_cb_}) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkFreeCommandBuffers[vkFreeCommandBuffers].#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkFreeCommandBuffers.html[vkFreeCommandBuffers].#
 
 [[begin_command_buffer]]
 * *begin_command_buffer*(_cb_, <<commandbufferbegininfo, _commandbufferbegininfo_>>) +
 *begin_command_buffer*(_cb_, [<<commandbufferusageflags, _commandbufferusageflags_>>]) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkBeginCommandBuffer[vkBeginCommandBuffer].#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkBeginCommandBuffer.html[vkBeginCommandBuffer].#
 
 [[end_command_buffer]]
 * *end_command_buffer*(_cb_) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkEndCommandBuffer[vkEndCommandBuffer].#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkEndCommandBuffer.html[vkEndCommandBuffer].#
 
 [[reset_command_buffer]]
 * *reset_command_buffer*(_cb_, [<<commandbufferresetflags, _commandbufferresetflags_>>]) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkResetCommandBuffer[vkResetCommandBuffer].#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkResetCommandBuffer.html[vkResetCommandBuffer].#
 

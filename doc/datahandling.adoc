@@ -48,13 +48,13 @@ The following functions can be used to pack (serialize) data when
 
 [[pack_descriptorimageinfo]]
 * _data_ = *pack_descriptorimageinfo*(<<sampler, _sampler_>>, <<image_view, _image_view_>>, <<imagelayout, _imagelayout_>>) +
-[small]#Constructs a https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkDescriptorImageInfo[VkDescriptorImageInfo] with the given parameters and returns it as a binary string.#
+[small]#Constructs a https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkDescriptorImageInfo.html[VkDescriptorImageInfo] with the given parameters and returns it as a binary string.#
 
 [[pack_descriptorbufferinfo]]
 * _data_ = *pack_descriptorbufferinfo*(<<buffer, _buffer_>>, _offset_, _range_) +
 [small]#_offset_: integer +
 _range_: integer or '_whole size_' (defaults to '_whole size_') +
-Constructs a https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkDescriptorBufferInfo[VkDescriptorBufferInfo] with the given parameters and returns it as a binary string.#
+Constructs a https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkDescriptorBufferInfo.html[VkDescriptorBufferInfo] with the given parameters and returns it as a binary string.#
 
 [[pack_bufferview]]
 * _data_ = *pack_bufferview*(<<buffer_view, _buffer_view_>>, _application_data_) +
@@ -62,20 +62,4 @@ Constructs a https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/v
 concatenating it with _application_data_ (a binary string). +
 The _application_data_ binary string encodes application specific data and may be constructed
 using Lua's http://www.lua.org/manual/5.3/manual.html#pdf-string.pack[string.pack](&nbsp;).#
-
-////
-[[datahandling_]]
-* **(_xxx_) +
-[small]#.#
-
-* <<,__>> = **(_xxx_) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vk[].#
-
-arg3 - __: integer +
-arg3 - __: <<, >> +
-arg3 - __: {<<, >>} +
-arg3 - __: <<, >> (opt.) +
-arg3 - __: {<<, >>} (opt.) +
-
-////
 
