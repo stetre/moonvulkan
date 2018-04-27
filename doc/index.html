@@ -2079,7 +2079,7 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/
 <ul>
 <li>
 <p>{<em>descriptor_set</em>} = <strong>allocate_descriptor_sets</strong>(<a href="#descriptor_pool"><em>descriptor_pool</em></a>, <a href="#descriptorsetallocateinfo"><em>descriptorsetallocateinfo</em></a>)<br>
-{<em>descriptor_set</em>} = <strong>allocate_descriptor_sets</strong>(<a href="#descriptor_pool"><em>descriptor_pool</em></a>, <em>set_layouts</em>)<br>
+{<em>descriptor_set</em>} = <strong>allocate_descriptor_sets</strong>(<a href="#descriptor_pool"><em>descriptor_pool</em></a>, {<a href="#descriptor_set_layout"><em>descriptor_set_layout</em></a>})<br>
 <span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkAllocateDescriptorSets">vkAllocateDescriptorSets</a>.</span></p>
 </li>
 </ul>
@@ -2095,7 +2095,7 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/
 <div id="update_descriptor_sets" class="ulist">
 <ul>
 <li>
-<p><strong>update_descriptor_sets</strong>(<em>device</em>, [{<a href="#writedescriptorset">writedescriptorset</a>}], [{<a href="#copydescriptorset">copydescriptorset</a>}])<br>
+<p><strong>update_descriptor_sets</strong>(<em>device</em>, [{<a href="#writedescriptorset"><em>writedescriptorset</em></a>}], [{<a href="#copydescriptorset"><em>copydescriptorset</em></a>}])<br>
 <span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkUpdateDescriptorSets">vkUpdateDescriptorSets</a>.</span></p>
 </li>
 </ul>
@@ -4623,7 +4623,7 @@ the <em>queue_family_index</em> of the <em>i-th</em> element in the table return
 <li>
 <p><a id="descriptorsetallocateinfo"></a>
 <span class="small"><strong>descriptorsetallocateinfo</strong> = {<br>
-<em>set_layouts</em>: <a href="#descriptor_set_layout">descriptor_set_layout</a>,<br>
+<em>set_layouts</em>: {<a href="#descriptor_set_layout">descriptor_set_layout</a>},<br>
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkDescriptorSetAllocateInfo">VkDescriptorSetAllocateInfo</a>)</span></p>
 </li>
 </ul>

@@ -1007,7 +1007,7 @@ _descriptor_count_: integer (defaults to 1), +
 
 * [[descriptorsetallocateinfo]]
 [small]#*descriptorsetallocateinfo* = { +
-_set_layouts_: <<descriptor_set_layout, descriptor_set_layout>>, +
+_set_layouts_: {<<descriptor_set_layout, descriptor_set_layout>>}, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkDescriptorSetAllocateInfo[VkDescriptorSetAllocateInfo])#
 
 '''
