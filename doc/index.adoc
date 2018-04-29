@@ -26,52 +26,64 @@ include::objects.adoc[]
 include::functions.adoc[]
 
 === Initialization
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#initialization[Initialization].#
 include::instance.adoc[]
-include::physical_device.adoc[]
 
 === Devices and Queues
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#devsandqueues[Devices and Queues].#
+include::physical_device.adoc[]
 include::device.adoc[]
 include::queue.adoc[]
 
 === Command Buffers
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#commandbuffers[Command Buffers].#
 include::command_pool.adoc[]
 include::command_buffer.adoc[]
 
 === Synchronization
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#synchronization[Synchronization and Cache Control].#
 include::fence.adoc[]
 include::semaphore.adoc[]
 include::event.adoc[]
 
 === Render Pass
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#renderpass[Render Pass].#
 include::render_pass.adoc[]
 include::framebuffer.adoc[]
 
 === Shaders
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#shaders[Shaders].#
 include::shader_module.adoc[]
 
 === Pipelines
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#pipelines[Pipelines].#
 include::pipeline.adoc[]
 include::pipeline_cache.adoc[]
 
 === Memory Allocation
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#memory[Memory Allocation].#
 include::device_memory.adoc[]
 
 === Resource Creation
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#resources[Resource Creation].#
 include::buffer.adoc[]
 include::buffer_view.adoc[]
 include::image.adoc[]
 include::image_view.adoc[]
 
 === Samplers
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#samplers[Samplers].#
 include::sampler.adoc[]
 
 === Resource Descriptors
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#descriptorsets[Resource Descriptors].#
 include::descriptor_set_layout.adoc[]
 include::pipeline_layout.adoc[]
 include::descriptor_pool.adoc[]
 include::descriptor_set.adoc[]
 
 === Queries
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#queries[Queries].#
 include::query_pool.adoc[]
 
 include::cmd.adoc[]
