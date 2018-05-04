@@ -45,6 +45,7 @@ typedef struct {
     F(EnumerateInstanceExtensionProperties);
     F(EnumerateInstanceLayerProperties);
     F(CreateInstance);
+    F(EnumerateInstanceVersion);
 } global_dt_t;
 
 

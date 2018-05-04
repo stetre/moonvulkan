@@ -94,6 +94,11 @@ static int Init(lua_State *L)
     GET(EnumerateInstanceLayerProperties);
     GET(CreateInstance);
 #undef GET
+#define GET(fn) do {                                            \
+    vk.fn = (PFN_vk##fn)GetInstanceProcAddr(NULL, "vk"#fn);     \
+} while(0)
+    GET(EnumerateInstanceVersion);
+#undef GET
 
     return 0;
     }

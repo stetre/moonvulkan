@@ -136,6 +136,18 @@ static int MakeVersion(lua_State *L)
     return 1;
     }
 
+static int EnumerateInstanceVersion(lua_State *L)
+    {
+    VkResult ec;
+    uint32_t version = VK_API_VERSION_1_0;
+    if(vk.EnumerateInstanceVersion)
+        {
+        ec = vk.EnumerateInstanceVersion(&version);
+        CheckError(L, ec);
+        }
+    lua_pushinteger(L, version);
+    return 1;
+    }
 
 static const struct luaL_Reg Functions[] = 
     {
@@ -144,6 +156,7 @@ static const struct luaL_Reg Functions[] =
         { "version_string", VersionString },
         { "make_version", MakeVersion },
         { "platforms", Platforms },
+        { "enumerate_instance_version", EnumerateInstanceVersion },
         { NULL, NULL } /* sentinel */
     };
 

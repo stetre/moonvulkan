@@ -2,6 +2,10 @@
 [[versions]]
 === Version handling
 
+[[enumerate_instance_version]]
+* _version_ = *enumerate_instance_version*( ) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkEnumerateInstanceVersion.html[vkEnumerateInstanceVersion].#
+
 [[version]]
 * _version_ = *make_version*(_major_, _minor_, _patch_) +
 [small]#Constructs _version_ (an integer) from _major_, _minor_ and _patch_ numbers (also integers). +

@@ -4,7 +4,9 @@ vk = require("moonvulkan")
 
 print("MoonVulkan version:", vk._VERSION)
 print("Header version (vulkan.h):", vk.HEADER_VERSION)
-print("Supported versions:", table.concat(vk.API_VERSIONS, ","))
+print("Versions supported by MoonVulkan:", table.concat(vk.API_VERSIONS, ","))
+print("Instance-level version supported by the implementation:",
+      vk.version_string(vk.enumerate_instance_version()))
 
 for _, s in ipairs(vk.API_VERSIONS) do
    local ver = vk[s]
