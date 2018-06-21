@@ -10,8 +10,8 @@
 # In order to use it, you'll need to change the following two definitions 
 # according to where the SDK is installed on your system, and to the SDK 
 # version you are using:
-VULKAN_SDK_BASE=$HOME/vulkan/VulkanSDK
-VULKAN_SDK_VERSION=1.1.73.0
+VULKAN_SDK_BASE=$HOME/vulkan
+VULKAN_SDK_VERSION=1.1.77.0
 VULKAN_SDK=$VULKAN_SDK_BASE/$VULKAN_SDK_VERSION/x86_64
 
 #----------------------------------------------------------------------

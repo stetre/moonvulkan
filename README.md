@@ -53,9 +53,9 @@ You can do this by installing it in the standard search directories (e.g. `/usr/
 or by properly setting the LD_LIBRARY_PATH environment variable in the shell where you execute
 the Lua scripts. 
 
-For example, assuming you are using the VulkanSDK version 1.0.42.2:
+For example, assuming you are using the VulkanSDK version 1.1.77.0:
 ```sh
-$ export LD_LIBRARY_PATH=<path-to-vulkan-sdk>/VulkanSDK/1.0.42.2/x86_64/lib
+$ export LD_LIBRARY_PATH=<path-to-vulkan-sdk>/1.1.77.0/x86_64/lib
 $ lua -e "require('moonvulkan')"     # just tests if it works
 ```
  
