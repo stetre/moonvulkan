@@ -91,6 +91,11 @@ Values:
 '_identity_' (default), '_zero_', '_one_', '_r_', '_g_', '_b_', '_a_'. +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkComponentSwizzle.html[VkComponentSwizzle].#
 
+[[conservativerasterizationmode]]
+[small]#*conservativerasterizationmode*: vk.CONSERVATIVE_RASTERIZATION_MODE_XXX_EXT +
+Values: '_disabled_', '_overestimate_', '_underestimate_'. +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkConservativeRasterizationModeEXT.html[VkConservativeRasterizationModeEXT].#
+
 [[debugreportobjecttype]]
 [small]#*debugreportobjecttype*: vk.DEBUG_REPORT_OBJECT_TYPE_XXX_EXT +
 Values: '_unknown_', '_instance_', '_physical device_', '_device_', '_queue_', '_semaphore_', '_command buffer_', '_fence_', '_device memory_', '_buffer_', '_image_', '_event_', '_query pool_', '_buffer view_', '_image view_', '_shader module_', '_pipeline cache_', '_pipeline layout_', '_render pass_', '_pipeline_', '_descriptor set layout_', '_sampler_', '_descriptor pool_', '_descriptor set_', '_framebuffer_', '_command pool_', '_surface_', '_swapchain_', '_debug report callback_', '_display_', '_display mode_', '_validation cache_', '_sampler ycbcr conversion_', '_descriptor update template_'. +
@@ -99,7 +104,7 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.ht
 [[descriptortype]]
 [small]#*descriptortype*: vk.DESCRIPTOR_TYPE_XXX +
 Values:
-'_sampler_', '_combined image sampler_', '_sampled image_', '_storage image_', '_uniform texel buffer_', '_storage texel buffer_', '_uniform buffer_', '_storage buffer_', '_uniform buffer dynamic_', '_storage buffer dynamic_', '_input attachment_'. +
+'_sampler_', '_combined image sampler_', '_sampled image_', '_storage image_', '_uniform texel buffer_', '_storage texel buffer_', '_uniform buffer_', '_storage buffer_', '_uniform buffer dynamic_', '_storage buffer dynamic_', '_input attachment_', '_inline uniform block_'. +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkDescriptorType.html[VkDescriptorType].#
 
 [[descriptorupdatetemplatetype]]
@@ -189,7 +194,7 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkLog
 
 [[objecttype]]
 [small]#*objecttype*: vk.OBJECT_TYPE_XXX +
-Values: '_unknown_', '_instance_', '_physical device_', '_device_', '_queue_', '_semaphore_', '_command buffer_', '_fence_', '_device memory_', '_buffer_', '_image_', '_event_', '_query pool_', '_buffer view_', '_image view_', '_shader module_', '_pipeline cache_', '_pipeline layout_', '_render pass_', '_pipeline_', '_descriptor set layout_', '_sampler_', '_descriptor pool_', '_descriptor set_', '_framebuffer_', '_command pool_', '_surface_', '_swapchain_', '_display_', '_display mode_', '_debug report callback_', '_descriptor update template_', '_sampler ycbcr conversion_', '_validation cache_'. +
+Values: '_unknown_', '_instance_', '_physical device_', '_device_', '_queue_', '_semaphore_', '_command buffer_', '_fence_', '_device memory_', '_buffer_', '_image_', '_event_', '_query pool_', '_buffer view_', '_image view_', '_shader module_', '_pipeline cache_', '_pipeline layout_', '_render pass_', '_pipeline_', '_descriptor set layout_', '_sampler_', '_descriptor pool_', '_descriptor set_', '_framebuffer_', '_command pool_', '_surface_', '_swapchain_', '_display_', '_display mode_', '_debug report callback_', '_descriptor update template_', '_sampler ycbcr conversion_', '_validation cache_', '_debug utils messenger_'. +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkObjectType.html[VkObjectType].#
 
 [[physicaldevicetype]]
@@ -296,6 +301,11 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.ht
 [small]#*validationcheck*: vk.VALIDATION_CHECK_XXX_EXT +
 Values: '_all_', _shaders_'. +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkValidationCheckEXT[VkValidationCheckEXT].#
+
+[[vendorid]]
+[small]#*vendorid*: vk.VENDOR_ID_XXX +
+Values: '_viv_', '_vsi_', '_kazan_'. +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkVendorId.html[VkVendorId].#
 
 [[vertexinputrate]]
 [small]#*vertexinputrate*: vk.VERTEX_INPUT_RATE_XXX +

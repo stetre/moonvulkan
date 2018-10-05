@@ -435,6 +435,7 @@ static VkFlags checkaccessflags(lua_State *L, int arg)
     CASE(VK_ACCESS_MEMORY_READ_BIT, "memory read");
     CASE(VK_ACCESS_MEMORY_WRITE_BIT, "memory write");
     CASE(VK_ACCESS_COLOR_ATTACHMENT_READ_NONCOHERENT_BIT_EXT, "color attachment read noncoherent");
+    CASE(VK_ACCESS_CONDITIONAL_RENDERING_READ_BIT_EXT, "conditional rendering read");
 #undef CASE
         return (VkFlags)luaL_argerror(L, --arg, badvalue(L,s));
         done: ;
@@ -466,6 +467,7 @@ static int pushaccessflags(lua_State *L, VkFlags flags)
     CASE(VK_ACCESS_MEMORY_READ_BIT, "memory read");
     CASE(VK_ACCESS_MEMORY_WRITE_BIT, "memory write");
     CASE(VK_ACCESS_COLOR_ATTACHMENT_READ_NONCOHERENT_BIT_EXT, "color attachment read noncoherent");
+    CASE(VK_ACCESS_CONDITIONAL_RENDERING_READ_BIT_EXT, "conditional rendering read");
 #undef CASE
 
     return n;
@@ -498,6 +500,7 @@ static int AccessFlags(lua_State *L)
     ADD(ACCESS_MEMORY_READ_BIT);\
     ADD(ACCESS_MEMORY_WRITE_BIT);\
     ADD(ACCESS_COLOR_ATTACHMENT_READ_NONCOHERENT_BIT_EXT);\
+    ADD(ACCESS_CONDITIONAL_RENDERING_READ_BIT_EXT);\
 
 
 
@@ -897,6 +900,7 @@ static VkFlags checkbufferusageflags(lua_State *L, int arg)
     CASE(VK_BUFFER_USAGE_INDEX_BUFFER_BIT, "index buffer");
     CASE(VK_BUFFER_USAGE_VERTEX_BUFFER_BIT, "vertex buffer");
     CASE(VK_BUFFER_USAGE_INDIRECT_BUFFER_BIT, "indirect buffer");
+    CASE(VK_BUFFER_USAGE_CONDITIONAL_RENDERING_BIT_EXT, "conditional rendering");
 #undef CASE
         return (VkFlags)luaL_argerror(L, --arg, badvalue(L,s));
         done: ;
@@ -919,6 +923,7 @@ static int pushbufferusageflags(lua_State *L, VkFlags flags)
     CASE(VK_BUFFER_USAGE_INDEX_BUFFER_BIT, "index buffer");
     CASE(VK_BUFFER_USAGE_VERTEX_BUFFER_BIT, "vertex buffer");
     CASE(VK_BUFFER_USAGE_INDIRECT_BUFFER_BIT, "indirect buffer");
+    CASE(VK_BUFFER_USAGE_CONDITIONAL_RENDERING_BIT_EXT, "conditional rendering");
 #undef CASE
 
     return n;
@@ -942,7 +947,7 @@ static int BufferUsageFlags(lua_State *L)
     ADD(BUFFER_USAGE_INDEX_BUFFER_BIT);\
     ADD(BUFFER_USAGE_VERTEX_BUFFER_BIT);\
     ADD(BUFFER_USAGE_INDIRECT_BUFFER_BIT);\
-
+    ADD(BUFFER_USAGE_CONDITIONAL_RENDERING_BIT_EXT);\
 
 
 /*----------------------------------------------------------------------*
@@ -1368,6 +1373,7 @@ static VkFlags checkpipelinestageflags(lua_State *L, int arg)
         CASE(VK_PIPELINE_STAGE_TRANSFER_BIT, "transfer");
         CASE(VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT, "bottom of pipe");
         CASE(VK_PIPELINE_STAGE_HOST_BIT, "host");
+        CASE(VK_PIPELINE_STAGE_CONDITIONAL_RENDERING_BIT_EXT, "conditional rendering");
     // These are not individual bits:
         CASE(VK_PIPELINE_STAGE_ALL_GRAPHICS_BIT, "all graphics");
         CASE(VK_PIPELINE_STAGE_ALL_COMMANDS_BIT, "all commands");
@@ -1399,6 +1405,7 @@ static int pushpipelinestageflags(lua_State *L, VkFlags flags)
         CASE(VK_PIPELINE_STAGE_TRANSFER_BIT, "transfer");
         CASE(VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT, "bottom of pipe");
         CASE(VK_PIPELINE_STAGE_HOST_BIT, "host");
+        CASE(VK_PIPELINE_STAGE_CONDITIONAL_RENDERING_BIT_EXT, "conditional rendering");
     // These are not individual bits:
         CASE(VK_PIPELINE_STAGE_ALL_GRAPHICS_BIT, "all graphics");
         CASE(VK_PIPELINE_STAGE_ALL_COMMANDS_BIT, "all commands");
@@ -1433,7 +1440,7 @@ static int PipelineStageFlags(lua_State *L)
     ADD(PIPELINE_STAGE_HOST_BIT);\
     ADD(PIPELINE_STAGE_ALL_GRAPHICS_BIT);\
     ADD(PIPELINE_STAGE_ALL_COMMANDS_BIT);\
-
+    ADD(PIPELINE_STAGE_CONDITIONAL_RENDERING_BIT_EXT);\
 
 
 /*----------------------------------------------------------------------*
@@ -3117,7 +3124,6 @@ static int ConditionalRenderingFlags(lua_State *L)
 
 #define Add_ConditionalRenderingFlags(L) \
     ADD(CONDITIONAL_RENDERING_INVERTED_BIT_EXT);\
-
 
 
 /*------------------------------------------------------------------------------*

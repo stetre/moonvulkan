@@ -324,6 +324,8 @@ static int Enum(lua_State *L)
     CASE(chromalocation);
     CASE(validationcacheheaderversion);
     CASE(queueglobalpriority);
+    CASE(conservativerasterizationmode);
+    CASE(vendorid);
 #undef CASE
     return 0;
     }
@@ -878,6 +880,7 @@ void moonvulkan_open_enums(lua_State *L)
     ADD(DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC, "uniform buffer dynamic");
     ADD(DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC, "storage buffer dynamic");
     ADD(DESCRIPTOR_TYPE_INPUT_ATTACHMENT, "input attachment");
+    ADD(DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK_EXT, "inline uniform block");
 
     domain = DOMAIN_ATTACHMENT_LOAD_OP; /* VkAttachmentLoadOp */
     ADD(ATTACHMENT_LOAD_OP_LOAD, "load");
@@ -1019,6 +1022,7 @@ void moonvulkan_open_enums(lua_State *L)
     ADD(OBJECT_TYPE_DESCRIPTOR_UPDATE_TEMPLATE, "descriptor update template");
     ADD(OBJECT_TYPE_SAMPLER_YCBCR_CONVERSION, "sampler ycbcr conversion");
     ADD(OBJECT_TYPE_VALIDATION_CACHE_EXT, "validation cache");
+    ADD(OBJECT_TYPE_DEBUG_UTILS_MESSENGER_EXT, "debug utils messenger");
 
     domain = DOMAIN_BLEND_OVERLAP; /* VkBlendOverlapEXT */
     ADD(BLEND_OVERLAP_UNCORRELATED_EXT, "uncorrelated");
@@ -1065,6 +1069,16 @@ void moonvulkan_open_enums(lua_State *L)
     ADD(QUEUE_GLOBAL_PRIORITY_MEDIUM_EXT, "medium");
     ADD(QUEUE_GLOBAL_PRIORITY_HIGH_EXT, "high");
     ADD(QUEUE_GLOBAL_PRIORITY_REALTIME_EXT, "realtime");
+
+    domain = DOMAIN_CONSERVATIVE_RASTERIZATION_MODE; /* VkConservativeRasterizationModeEXT */
+    ADD(CONSERVATIVE_RASTERIZATION_MODE_DISABLED_EXT, "disabled");
+    ADD(CONSERVATIVE_RASTERIZATION_MODE_OVERESTIMATE_EXT, "overestimate");
+    ADD(CONSERVATIVE_RASTERIZATION_MODE_UNDERESTIMATE_EXT, "underestimate");
+
+    domain = DOMAIN_VENDOR_ID; /* VkVendorId */
+    ADD(VENDOR_ID_VIV, "viv");
+    ADD(VENDOR_ID_VSI, "vsi");
+    ADD(VENDOR_ID_KAZAN, "kazan");
 
 #undef ADD
     }

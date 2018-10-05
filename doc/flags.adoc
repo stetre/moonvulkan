@@ -26,7 +26,7 @@ See also the <<flags_snippet, example>> contained in the code snippets section.
 [[accessflags]]
 [small]#*accessflags*: vk.ACCESS_XXX_BIT +
 Values: 
-'_indirect command read_', '_index read_', '_vertex attribute read_', '_uniform read_', '_input attachment read_', '_shader read_', '_shader write_', '_color attachment read_', '_color attachment write_', '_depth stencil attachment read_', '_depth stencil attachment write_', '_transfer read_', '_transfer write_', '_host read_', '_host write_', '_memory read_', '_memory write_', '_color attachment read noncoherent_'. +
+'_indirect command read_', '_index read_', '_vertex attribute read_', '_uniform read_', '_input attachment read_', '_shader read_', '_shader write_', '_color attachment read_', '_color attachment write_', '_depth stencil attachment read_', '_depth stencil attachment write_', '_transfer read_', '_transfer write_', '_host read_', '_host write_', '_memory read_', '_memory write_', '_color attachment read noncoherent_', '_conditional rendering read_'. +
 Rfr. https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkAccessFlagBits.html[VkAccessFlagBits].#
 
 [[attachmentdescriptionflags]]
@@ -44,7 +44,7 @@ Rfr. https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkBuf
 [[bufferusageflags]]
 [small]#*bufferusageflags*: vk.BUFFER_USAGE_XXX_BIT +
 Values: 
-'_transfer src_', '_transfer dst_', '_uniform texel buffer_', '_storage texel buffer_', '_uniform buffer_', '_storage buffer_', '_index buffer_', '_vertex buffer_', '_indirect buffer_'. +
+'_transfer src_', '_transfer dst_', '_uniform texel buffer_', '_storage texel buffer_', '_uniform buffer_', '_storage buffer_', '_index buffer_', '_vertex buffer_', '_indirect buffer_', '_conditional rendering_'. +
 Rfr. https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkBufferUsageFlagBits.html[VkBufferUsageFlagBits].#
 
 [[colorcomponentflags]]
@@ -245,7 +245,7 @@ Rfr. https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkPip
 [[pipelinestageflags]]
 [small]#*pipelinestageflags*: vk.PIPELINE_STAGE_XXX_BIT +
 Values: 
-'_top of pipe_', '_draw indirect_', '_vertex input_', '_vertex shader_', '_tessellation control shader_', '_tessellation evaluation shader_', '_geometry shader_', '_fragment shader_', '_early fragment tests_', '_late fragment tests_', '_color attachment output_', '_compute shader_', '_transfer_', '_bottom of pipe_', '_host_', '_all graphics_', '_all commands_'. +
+'_top of pipe_', '_draw indirect_', '_vertex input_', '_vertex shader_', '_tessellation control shader_', '_tessellation evaluation shader_', '_geometry shader_', '_fragment shader_', '_early fragment tests_', '_late fragment tests_', '_color attachment output_', '_compute shader_', '_transfer_', '_bottom of pipe_', '_host_', '_all graphics_', '_all commands_', '_conditional rendering_'. +
 Rfr. https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkPipelineStageFlagBits.html[VkPipelineStageFlagBits].#
 
 [[querycontrolflags]]

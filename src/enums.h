@@ -97,6 +97,8 @@ void enums_freelist(lua_State *L, uint32_t *list);
 #define DOMAIN_CHROMA_LOCATION                  50
 #define DOMAIN_VALIDATION_CACHE_HEADER_VERSION  51
 #define DOMAIN_QUEUE_GLOBAL_PRIORITY            52
+#define DOMAIN_CONSERVATIVE_RASTERIZATION_MODE  53
+#define DOMAIN_VENDOR_ID                        54
 
 /* NONVK additions */
 #define DOMAIN_NONVK_TYPE                       101
@@ -410,6 +412,19 @@ void enums_freelist(lua_State *L, uint32_t *list);
 #define checkqueueglobalprioritylist(L, arg, count, err) (VkQueueGlobalPriorityEXT*)enums_checklist((L), DOMAIN_QUEUE_GLOBAL_PRIORITY, (arg), (count), (err))
 #define freequeueglobalprioritylist(L, list) enums_freelist((L), (uint32_t*)(list))
 
+#define testconservativerasterizationmode(L, arg, err) (VkConservativeRasterizationModeEXT)enums_test((L), DOMAIN_CONSERVATIVE_RASTERIZATION_MODE, (arg), (err))
+#define checkconservativerasterizationmode(L, arg) (VkConservativeRasterizationModeEXT)enums_check((L), DOMAIN_CONSERVATIVE_RASTERIZATION_MODE, (arg))
+#define pushconservativerasterizationmode(L, val) enums_push((L), DOMAIN_CONSERVATIVE_RASTERIZATION_MODE, (uint32_t)(val))
+#define valuesconservativerasterizationmode(L) enums_values((L), DOMAIN_CONSERVATIVE_RASTERIZATION_MODE)
+#define checkconservativerasterizationmodelist(L, arg, count, err) (VkConservativeRasterizationModeEXT*)enums_checklist((L), DOMAIN_CONSERVATIVE_RASTERIZATION_MODE, (arg), (count), (err))
+#define freeconservativerasterizationmodelist(L, list) enums_freelist((L), (uint32_t*)(list))
+
+#define testvendorid(L, arg, err) (VkVendorId)enums_test((L), DOMAIN_VENDOR_ID, (arg), (err))
+#define checkvendorid(L, arg) (VkVendorId)enums_check((L), DOMAIN_VENDOR_ID, (arg))
+#define pushvendorid(L, val) enums_push((L), DOMAIN_VENDOR_ID, (uint32_t)(val))
+#define valuesvendorid(L) enums_values((L), DOMAIN_VENDOR_ID)
+#define checkvendoridlist(L, arg, count, err) (VkVendorId*)enums_checklist((L), DOMAIN_VENDOR_ID, (arg), (count), (err))
+#define freevendoridlist(L, list) enums_freelist((L), (uint32_t*)(list))
 
 #if 0 /* scaffolding 7yy */
 #define testxxx(L, arg, err) (VkXxx)enums_test((L), DOMAIN_XXX, (arg), (err))
