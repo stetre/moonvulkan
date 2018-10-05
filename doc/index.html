@@ -5722,7 +5722,7 @@ Rfr. <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/h
 <div id="buffercreateflags" class="paragraph">
 <p><span class="small"><strong>buffercreateflags</strong>: vk.BUFFER_CREATE_XXX_BIT<br>
 Values:
-'<em>sparse binding</em>', '<em>sparse residency</em>', '<em>sparse aliased</em>'.<br>
+'<em>sparse binding</em>', '<em>sparse residency</em>', '<em>sparse aliased</em>', '<em>protected</em>'.<br>
 Rfr. <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkBufferCreateFlagBits.html">VkBufferCreateFlagBits</a>.</span></p>
 </div>
 <div id="bufferusageflags" class="paragraph">
@@ -5752,7 +5752,7 @@ Rfr. <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/h
 <div id="commandpoolcreateflags" class="paragraph">
 <p><span class="small"><strong>commandpoolcreateflags</strong>: vk.COMMAND_POOL_CREATE_XXX_BIT<br>
 Values:
-'<em>transient</em>', '<em>reset command buffer</em>'.<br>
+'<em>transient</em>', '<em>reset command buffer</em>', '<em>protected</em>'.<br>
 Rfr. <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkCommandPoolCreateFlagBits.html">VkCommandPoolCreateFlagBits</a>.</span></p>
 </div>
 <div id="commandpoolresetflags" class="paragraph">
@@ -5767,6 +5767,11 @@ Values:
 '<em>opaque</em>', '<em>pre multiplied</em>', '<em>post multiplied</em>', '<em>inherit</em>'.<br>
 Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkCompositeAlphaFlagBitsKHR">VkCompositeAlphaFlagBitsKHR</a>.</span></p>
 </div>
+<div id="conditionalrenderingflags" class="paragraph">
+<p><span class="small"><strong>conditionalrenderingflags</strong>: vk.CONDITIONAL_RENDERING_XXX_BIT_EXT<br>
+Values: '<em>inverted</em>'.<br>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkConditionalRenderingFlagBitsEXT">VkConditionalRenderingFlagBitsEXT</a>.</span></p>
+</div>
 <div id="cullmodeflags" class="paragraph">
 <p><span class="small"><strong>cullmodeflags</strong>: vk.CULL_MODE_XXX<br>
 Values:
@@ -5779,11 +5784,27 @@ Values:
 '<em>information</em>', '<em>warning</em>', '<em>performance warning</em>', '<em>report</em>', '<em>debug</em>'.<br>
 Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkDebugReportFlagBitsEXT">VkDebugReportFlagBitsEXT</a>.</span></p>
 </div>
+<div id="debugutilsmessageseverityflags" class="paragraph">
+<p><span class="small"><strong>debugutilsmessageseverityflags</strong>: vk.DEBUG_UTILS_MESSAGE_SEVERITY_XXX_BIT_EXT<br>
+Values: '<em>verbose</em>', '<em>info</em>', '<em>warning</em>', '<em>error</em>'.<br>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkDebugUtilsMessageSeverityFlagBitsEXT">VkDebugUtilsMessageSeverityFlagBitsEXT</a>.</span></p>
+</div>
+<div id="debugutilsmessagetypeflags" class="paragraph">
+<p><span class="small"><strong>debugutilsmessagetypeflags</strong>: vk.DEBUG_UTILS_MESSAGE_TYPE_XXX_BIT_EXT<br>
+Values: '<em>general</em>', '<em>validation</em>', '<em>performance</em>'.<br>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkDebugUtilsMessageTypeFlagBitsEXT">VkDebugUtilsMessageTypeFlagBitsEXT</a>.</span></p>
+</div>
 <div id="dependencyflags" class="paragraph">
 <p><span class="small"><strong>dependencyflags</strong>: vk.DEPENDENCY_XXX_BIT<br>
 Values:
-'<em>by region</em>'.<br>
+'<em>by region</em>', '<em>device group</em>', '<em>view local</em>'.<br>
 Rfr. <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkDependencyFlagBits.html">VkDependencyFlagBits</a>.</span></p>
+</div>
+<div id="descriptorbindingflags" class="paragraph">
+<p><span class="small"><strong>descriptorbindingflags</strong>: vk.DESCRIPTOR_BINDING_XXX_BIT_EXT<br>
+Values:
+'<em>update after bind</em>', '<em>update unused while pending</em>', '<em>partially bound</em>', '<em>variable descriptor count</em>'.<br>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkDescriptorBindingFlagBitsEXT">VkDescriptorBindingFlagBitsEXT</a>.</span></p>
 </div>
 <div id="descriptorpoolcreateflags" class="paragraph">
 <p><span class="small"><strong>descriptorpoolcreateflags</strong>: vk.DESCRIPTOR_POOL_CREATE_XXX_BIT<br>
@@ -5796,6 +5817,16 @@ Rfr. <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/h
 Values:
 '<em>push descriptor</em>', '<em>update after bind pool</em>'.<br>
 Rfr. <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkDescriptorSetLayoutCreateFlagBits.html">VkDescriptorSetLayoutCreateFlagBits</a>.</span></p>
+</div>
+<div id="devicegrouppresentmodeflags" class="paragraph">
+<p><span class="small"><strong>devicegrouppresentmodeflags</strong>: vk.DEVICE_GROUP_PRESENT_MODE_XXX_BIT_KHR<br>
+Values: '<em>local</em>', '<em>remote</em>', '<em>sum</em>', '<em>local multi device</em>'.<br>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkDeviceGroupPresentModeFlagBitsKHR">VkDeviceGroupPresentModeFlagBitsKHR</a>.</span></p>
+</div>
+<div id="devicequeuecreateflags" class="paragraph">
+<p><span class="small"><strong>devicequeuecreateflags</strong>: vk.DEVICE_QUEUE_CREATE_XXX_BIT<br>
+Values: '<em>protected</em>'.<br>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkDeviceQueueCreateFlagBits">VkDeviceQueueCreateFlagBits</a>.</span></p>
 </div>
 <div id="displayplanealphaflags" class="paragraph">
 <p><span class="small"><strong>displayplanealphaflags</strong>: vk.DISPLAY_PLANE_ALPHA_XXX_BIT_KHR<br>
@@ -5858,7 +5889,7 @@ Rfr. <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/h
 <div id="imagecreateflags" class="paragraph">
 <p><span class="small"><strong>imagecreateflags</strong>: vk.IMAGE_CREATE_XXX_BIT<br>
 Values:
-'<em>sparse binding</em>', '<em>sparse residency</em>', '<em>sparse aliased</em>', '<em>mutable format</em>', '<em>cube compatible</em>', '<em>block texel view compatible</em>', '<em>extended usage</em>', '<em>sample locations compatible depth</em>', '<em>disjoint</em>', '<em>alias</em>'.<br>
+'<em>sparse binding</em>', '<em>sparse residency</em>', '<em>sparse aliased</em>', '<em>mutable format</em>', '<em>cube compatible</em>', '<em>block texel view compatible</em>', '<em>extended usage</em>', '<em>sample locations compatible depth</em>', '<em>disjoint</em>', '<em>alias</em>','<em>split instance bind regions</em>', '<em>2d array compatible</em>', '<em>protected</em>'.<br>
 Rfr. <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkImageCreateFlagBits.html">VkImageCreateFlagBits</a>.</span></p>
 </div>
 <div id="imageusageflags" class="paragraph">
@@ -5867,22 +5898,32 @@ Values:
 '<em>transfer src</em>', '<em>transfer dst</em>', '<em>sampled</em>', '<em>storage</em>', '<em>color attachment</em>', '<em>depth stencil attachment</em>', '<em>transient attachment</em>', '<em>input attachment</em>'.<br>
 Rfr. <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkImageUsageFlagBits.html">VkImageUsageFlagBits</a>.</span></p>
 </div>
+<div id="memoryallocateflags" class="paragraph">
+<p><span class="small"><strong>memoryallocateflags</strong>: vk.MEMORY_ALLOCATE_XXX_BIT<br>
+Values: '<em>device mask</em>'.<br>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkMemoryAllocateFlagBits">VkMemoryAllocateFlagBits</a>.</span></p>
+</div>
 <div id="memoryheapflags" class="paragraph">
 <p><span class="small"><strong>memoryheapflags</strong>: vk.MEMORY_HEAP_XXX_BIT<br>
 Values:
-'<em>device local</em>'.<br>
+'<em>device local</em>', '<em>multi instance</em>'.<br>
 Rfr. <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkMemoryHeapFlagBits.html">VkMemoryHeapFlagBits</a>.</span></p>
 </div>
 <div id="memorypropertyflags" class="paragraph">
 <p><span class="small"><strong>memorypropertyflags</strong>: vk.MEMORY_PROPERTY_XXX_BIT<br>
 Values:
-'<em>device local</em>', '<em>host visible</em>', '<em>host coherent</em>', '<em>host cached</em>', '<em>lazily allocated</em>'.<br>
+'<em>device local</em>', '<em>host visible</em>', '<em>host coherent</em>', '<em>host cached</em>', '<em>lazily allocated</em>', '<em>protected</em>'.<br>
 Rfr. <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkMemoryPropertyFlagBits.html">VkMemoryPropertyFlagBits</a>.</span></p>
+</div>
+<div id="peermemoryfeatureflags" class="paragraph">
+<p><span class="small"><strong>peermemoryfeatureflags</strong>: vk.PEER_MEMORY_FEATURE_XXX_BIT<br>
+Values: '<em>copy src</em>', '<em>copy dst</em>', '<em>generic src</em>', '<em>generic dst</em>'.<br>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkPeerMemoryFeatureFlagBits">VkPeerMemoryFeatureFlagBits</a>.</span></p>
 </div>
 <div id="pipelinecreateflags" class="paragraph">
 <p><span class="small"><strong>pipelinecreateflags</strong>: vk.PIPELINE_CREATE_XXX_BIT<br>
 Values:
-'<em>disable optimization</em>', '<em>allow derivatives</em>', '<em>derivative</em>'.<br>
+'<em>disable optimization</em>', '<em>allow derivatives</em>', '<em>derivative</em>', '<em>view index from device index</em>', '<em>dispatch base</em>'.<br>
 Rfr. <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkPipelineCreateFlagBits.html">VkPipelineCreateFlagBits</a>.</span></p>
 </div>
 <div id="pipelinestageflags" class="paragraph">
@@ -5912,7 +5953,7 @@ Rfr. <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/h
 <div id="queueflags" class="paragraph">
 <p><span class="small"><strong>queueflags</strong>: vk.QUEUE_XXX_BIT<br>
 Values:
-'<em>graphics</em>', '<em>compute</em>', '<em>transfer</em>', '<em>sparse binding</em>'.<br>
+'<em>graphics</em>', '<em>compute</em>', '<em>transfer</em>', '<em>sparse binding</em>', '<em>protected</em>'.<br>
 Rfr. <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkQueueFlagBits.html">VkQueueFlagBits</a>.</span></p>
 </div>
 <div id="samplecountflags" class="paragraph">
@@ -5950,6 +5991,11 @@ Values:
 '<em>front</em>', '<em>back</em>'.<br>
 Rfr. <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkStencilFaceFlagBits.html">VkStencilFaceFlagBits</a>.</span></p>
 </div>
+<div id="subgroupfeatureflags" class="paragraph">
+<p><span class="small"><strong>subgroupfeatureflags</strong>: vk.SUBGROUP_FEATURE_XXX_BIT<br>
+Values: '<em>basic</em>', '<em>vote</em>', '<em>arithmetic</em>', '<em>ballot</em>', '<em>shuffle</em>', '<em>shuffle relative</em>', '<em>clustered</em>', '<em>quad</em>'.<br>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkSubgroupFeatureFlagBits">VkSubgroupFeatureFlagBits</a>.</span></p>
+</div>
 <div id="surfacecounterflags" class="paragraph">
 <p><span class="small"><strong>surfacecounterflags</strong>: vk.SURFACE_COUNTER_XXX_BIT_EXT<br>
 Values: '<em>vblank</em>'.<br>
@@ -5961,6 +6007,11 @@ Values:
 '<em>identity</em>', '<em>rotate 90</em>', '<em>rotate 180</em>', '<em>rotate 270</em>', '<em>horizontal mirror</em>', '<em>horizontal mirror rotate 90</em>', '<em>horizontal mirror rotate 180</em>', '<em>horizontal mirror rotate 270</em>', '<em>inherit</em>'.<br>
 Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkSurfaceTransformFlagBitsKHR">VkSurfaceTransformFlagBitsKHR</a>.</span></p>
 </div>
+<div id="swapchaincreateflags" class="paragraph">
+<p><span class="small"><strong>swapchaincreateflags</strong>: vk.SWAPCHAIN_CREATE_XXX_BIT_KHR<br>
+Values: '<em>split instance bind regions</em>', '<em>protected</em>'.<br>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkSwapchainCreateFlagBitsKHR">VkSwapchainCreateFlagBitsKHR</a>.</span></p>
+</div>
 <div class="paragraph">
 <p>Reserved for future use (must be set to 0):</p>
 </div>
@@ -5970,6 +6021,12 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/
 <div id="commandpooltrimflags" class="paragraph">
 <p><span class="small"><strong>commandpooltrimflags</strong>: 0</span></p>
 </div>
+<div id="debugutilsmessengercallbackdataflags" class="paragraph">
+<p><span class="small"><strong>debugutilsmessengercallbackdataflags</strong>: 0</span></p>
+</div>
+<div id="debugutilsmessengercreateflags" class="paragraph">
+<p><span class="small"><strong>debugutilsmessengercreateflags</strong>: 0</span></p>
+</div>
 <div id="descriptorpoolresetflags" class="paragraph">
 <p><span class="small"><strong>descriptorpoolresetflags</strong>: 0</span></p>
 </div>
@@ -5978,9 +6035,6 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/
 </div>
 <div id="devicecreateflags" class="paragraph">
 <p><span class="small"><strong>devicecreateflags</strong>: 0</span></p>
-</div>
-<div id="devicequeuecreateflags" class="paragraph">
-<p><span class="small"><strong>devicequeuecreateflags</strong>: 0</span></p>
 </div>
 <div id="displaymodecreateflags" class="paragraph">
 <p><span class="small"><strong>displaymodecreateflags</strong>: 0</span></p>
@@ -6059,9 +6113,6 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/
 </div>
 <div id="subpassdescriptionflags" class="paragraph">
 <p><span class="small"><strong>subpassdescriptionflags</strong>: 0</span></p>
-</div>
-<div id="swapchaincreateflags" class="paragraph">
-<p><span class="small"><strong>swapchaincreateflags</strong>: 0</span></p>
 </div>
 <div id="validationcachecreateflags" class="paragraph">
 <p><span class="small"><strong>validationcachecreateflags</strong>: 0</span></p>

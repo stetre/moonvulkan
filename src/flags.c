@@ -318,6 +318,7 @@ static VkFlags checkcommandpoolcreateflags(lua_State *L, int arg)
 #define CASE(CODE,str) if((strcmp(s, str)==0)) do { flags |= CODE; goto done; } while(0)
     CASE(VK_COMMAND_POOL_CREATE_TRANSIENT_BIT, "transient");
     CASE(VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT, "reset command buffer");
+    CASE(VK_COMMAND_POOL_CREATE_PROTECTED_BIT, "protected");
 #undef CASE
         return (VkFlags)luaL_argerror(L, --arg, badvalue(L,s));
         done: ;
@@ -333,6 +334,7 @@ static int pushcommandpoolcreateflags(lua_State *L, VkFlags flags)
 #define CASE(CODE,str) do { if( flags & CODE) { lua_pushstring(L, str); n++; } } while(0)
     CASE(VK_COMMAND_POOL_CREATE_TRANSIENT_BIT, "transient");
     CASE(VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT, "reset command buffer");
+    CASE(VK_COMMAND_POOL_CREATE_PROTECTED_BIT, "protected");
 #undef CASE
 
     return n;
@@ -349,9 +351,7 @@ static int CommandPoolCreateFlags(lua_State *L)
 #define Add_CommandPoolCreateFlags(L)   \
     ADD(COMMAND_POOL_CREATE_TRANSIENT_BIT);\
     ADD(COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT);\
-
-
-
+    ADD(COMMAND_POOL_CREATE_PROTECTED_BIT);\
 
 /*----------------------------------------------------------------------*
  | VkDependencyFlags
@@ -367,6 +367,8 @@ static VkFlags checkdependencyflags(lua_State *L, int arg)
         s = lua_tostring(L, arg++);
 #define CASE(CODE,str) if((strcmp(s, str)==0)) do { flags |= CODE; goto done; } while(0)
     CASE(VK_DEPENDENCY_BY_REGION_BIT, "by region");
+    CASE(VK_DEPENDENCY_DEVICE_GROUP_BIT, "device group");
+    CASE(VK_DEPENDENCY_VIEW_LOCAL_BIT, "view local");
 #undef CASE
         return (VkFlags)luaL_argerror(L, --arg, badvalue(L,s));
         done: ;
@@ -381,6 +383,8 @@ static int pushdependencyflags(lua_State *L, VkFlags flags)
 
 #define CASE(CODE,str) do { if( flags & CODE) { lua_pushstring(L, str); n++; } } while(0)
     CASE(VK_DEPENDENCY_BY_REGION_BIT, "by region");
+    CASE(VK_DEPENDENCY_DEVICE_GROUP_BIT, "device group");
+    CASE(VK_DEPENDENCY_VIEW_LOCAL_BIT, "view local");
 #undef CASE
 
     return n;
@@ -396,8 +400,8 @@ static int DependencyFlags(lua_State *L)
 
 #define Add_DependencyFlags(L)  \
     ADD(DEPENDENCY_BY_REGION_BIT);\
-
-
+    ADD(DEPENDENCY_DEVICE_GROUP_BIT);\
+    ADD(DEPENDENCY_VIEW_LOCAL_BIT);\
 
 
 /*----------------------------------------------------------------------*
@@ -829,6 +833,8 @@ static VkFlags checkpipelinecreateflags(lua_State *L, int arg)
     CASE(VK_PIPELINE_CREATE_DISABLE_OPTIMIZATION_BIT, "disable optimization");
     CASE(VK_PIPELINE_CREATE_ALLOW_DERIVATIVES_BIT, "allow derivatives");
     CASE(VK_PIPELINE_CREATE_DERIVATIVE_BIT, "derivative");
+    CASE(VK_PIPELINE_CREATE_VIEW_INDEX_FROM_DEVICE_INDEX_BIT, "view index from device index");
+    CASE(VK_PIPELINE_CREATE_DISPATCH_BASE, "dispatch base");
 #undef CASE
         return (VkFlags)luaL_argerror(L, --arg, badvalue(L,s));
         done: ;
@@ -845,6 +851,8 @@ static int pushpipelinecreateflags(lua_State *L, VkFlags flags)
     CASE(VK_PIPELINE_CREATE_DISABLE_OPTIMIZATION_BIT, "disable optimization");
     CASE(VK_PIPELINE_CREATE_ALLOW_DERIVATIVES_BIT, "allow derivatives");
     CASE(VK_PIPELINE_CREATE_DERIVATIVE_BIT, "derivative");
+    CASE(VK_PIPELINE_CREATE_VIEW_INDEX_FROM_DEVICE_INDEX_BIT, "view index from device index");
+    CASE(VK_PIPELINE_CREATE_DISPATCH_BASE, "dispatch base");
 #undef CASE
 
     return n;
@@ -858,11 +866,13 @@ static int PipelineCreateFlags(lua_State *L)
     return 1;
     }
 
+#define VK_PIPELINE_CREATE_DISPATCH_BASE_BIT VK_PIPELINE_CREATE_DISPATCH_BASE /*@@ spec bug ? */
 #define Add_PipelineCreateFlags(L)  \
     ADD(PIPELINE_CREATE_DISABLE_OPTIMIZATION_BIT);\
     ADD(PIPELINE_CREATE_ALLOW_DERIVATIVES_BIT);\
     ADD(PIPELINE_CREATE_DERIVATIVE_BIT);\
-
+    ADD(PIPELINE_CREATE_VIEW_INDEX_FROM_DEVICE_INDEX_BIT);\
+    ADD(PIPELINE_CREATE_DISPATCH_BASE_BIT);\
 
 
 /*----------------------------------------------------------------------*
@@ -951,6 +961,7 @@ static VkFlags checkbuffercreateflags(lua_State *L, int arg)
     CASE(VK_BUFFER_CREATE_SPARSE_BINDING_BIT, "sparse binding");
     CASE(VK_BUFFER_CREATE_SPARSE_RESIDENCY_BIT, "sparse residency");
     CASE(VK_BUFFER_CREATE_SPARSE_ALIASED_BIT, "sparse aliased");
+    CASE(VK_BUFFER_CREATE_PROTECTED_BIT, "protected");
 #undef CASE
         return (VkFlags)luaL_argerror(L, --arg, badvalue(L,s));
         done: ;
@@ -967,6 +978,7 @@ static int pushbuffercreateflags(lua_State *L, VkFlags flags)
     CASE(VK_BUFFER_CREATE_SPARSE_BINDING_BIT, "sparse binding");
     CASE(VK_BUFFER_CREATE_SPARSE_RESIDENCY_BIT, "sparse residency");
     CASE(VK_BUFFER_CREATE_SPARSE_ALIASED_BIT, "sparse aliased");
+    CASE(VK_BUFFER_CREATE_PROTECTED_BIT, "protected");
 #undef CASE
 
     return n;
@@ -984,7 +996,7 @@ static int BufferCreateFlags(lua_State *L)
     ADD(BUFFER_CREATE_SPARSE_BINDING_BIT);\
     ADD(BUFFER_CREATE_SPARSE_RESIDENCY_BIT);\
     ADD(BUFFER_CREATE_SPARSE_ALIASED_BIT);\
-
+    ADD(BUFFER_CREATE_PROTECTED_BIT);\
 
 
 /*----------------------------------------------------------------------*
@@ -1438,6 +1450,7 @@ static VkFlags checkmemoryheapflags(lua_State *L, int arg)
         s = lua_tostring(L, arg++);
 #define CASE(CODE,str) if((strcmp(s, str)==0)) do { flags |= CODE; goto done; } while(0)
         CASE(VK_MEMORY_HEAP_DEVICE_LOCAL_BIT, "device local");
+        CASE(VK_MEMORY_HEAP_MULTI_INSTANCE_BIT, "multi instance");
 #undef CASE
         return (VkFlags)luaL_argerror(L, --arg, badvalue(L,s));
         done: ;
@@ -1452,6 +1465,7 @@ static int pushmemoryheapflags(lua_State *L, VkFlags flags)
 
 #define CASE(CODE,str) do { if( flags & CODE) { lua_pushstring(L, str); n++; } } while(0)
         CASE(VK_MEMORY_HEAP_DEVICE_LOCAL_BIT, "device local");
+        CASE(VK_MEMORY_HEAP_MULTI_INSTANCE_BIT, "multi instance");
 #undef CASE
 
     return n;
@@ -1467,6 +1481,7 @@ static int MemoryHeapFlag(lua_State *L)
 
 #define Add_MemoryHeapFlag(L)   \
         ADD(MEMORY_HEAP_DEVICE_LOCAL_BIT);\
+        ADD(MEMORY_HEAP_MULTI_INSTANCE_BIT);\
 
 
 /*----------------------------------------------------------------------*
@@ -1487,6 +1502,7 @@ static VkFlags checkmemorypropertyflags(lua_State *L, int arg)
         CASE(VK_MEMORY_PROPERTY_HOST_COHERENT_BIT, "host coherent");
         CASE(VK_MEMORY_PROPERTY_HOST_CACHED_BIT, "host cached");
         CASE(VK_MEMORY_PROPERTY_LAZILY_ALLOCATED_BIT, "lazily allocated");
+        CASE(VK_MEMORY_PROPERTY_PROTECTED_BIT, "protected");
 #undef CASE
         return (VkFlags)luaL_argerror(L, --arg, badvalue(L,s));
         done: ;
@@ -1505,6 +1521,7 @@ static int pushmemorypropertyflags(lua_State *L, VkFlags flags)
         CASE(VK_MEMORY_PROPERTY_HOST_COHERENT_BIT, "host coherent");
         CASE(VK_MEMORY_PROPERTY_HOST_CACHED_BIT, "host cached");
         CASE(VK_MEMORY_PROPERTY_LAZILY_ALLOCATED_BIT, "lazily allocated");
+        CASE(VK_MEMORY_PROPERTY_PROTECTED_BIT, "protected");
 #undef CASE
 
     return n;
@@ -1524,7 +1541,7 @@ static int MemoryPropertyFlags(lua_State *L)
     ADD(MEMORY_PROPERTY_HOST_COHERENT_BIT);\
     ADD(MEMORY_PROPERTY_HOST_CACHED_BIT);\
     ADD(MEMORY_PROPERTY_LAZILY_ALLOCATED_BIT);\
-
+    ADD(MEMORY_PROPERTY_PROTECTED_BIT);\
 
 
 /*----------------------------------------------------------------------*
@@ -1544,6 +1561,7 @@ static VkFlags checkqueueflags(lua_State *L, int arg)
         CASE(VK_QUEUE_COMPUTE_BIT, "compute");
         CASE(VK_QUEUE_TRANSFER_BIT, "transfer");
         CASE(VK_QUEUE_SPARSE_BINDING_BIT, "sparse binding");
+        CASE(VK_QUEUE_PROTECTED_BIT, "protected");
 #undef CASE
         return (VkFlags)luaL_argerror(L, --arg, badvalue(L,s));
         done: ;
@@ -1561,6 +1579,7 @@ static int pushqueueflags(lua_State *L, VkFlags flags)
         CASE(VK_QUEUE_COMPUTE_BIT, "compute");
         CASE(VK_QUEUE_TRANSFER_BIT, "transfer");
         CASE(VK_QUEUE_SPARSE_BINDING_BIT, "sparse binding");
+        CASE(VK_QUEUE_PROTECTED_BIT, "protected");
 #undef CASE
 
     return n;
@@ -1579,8 +1598,7 @@ static int QueueFlags(lua_State *L)
     ADD(QUEUE_COMPUTE_BIT);\
     ADD(QUEUE_TRANSFER_BIT);\
     ADD(QUEUE_SPARSE_BINDING_BIT);\
-
-
+    ADD(QUEUE_PROTECTED_BIT);\
 
 
 /*----------------------------------------------------------------------*
@@ -1670,6 +1688,9 @@ static VkFlags checkimagecreateflags(lua_State *L, int arg)
         CASE(VK_IMAGE_CREATE_SAMPLE_LOCATIONS_COMPATIBLE_DEPTH_BIT_EXT, "sample locations compatible depth");
         CASE(VK_IMAGE_CREATE_DISJOINT_BIT, "disjoint");
         CASE(VK_IMAGE_CREATE_ALIAS_BIT, "alias");
+        CASE(VK_IMAGE_CREATE_SPLIT_INSTANCE_BIND_REGIONS_BIT,"split instance bind regions");
+        CASE(VK_IMAGE_CREATE_2D_ARRAY_COMPATIBLE_BIT,"2d array compatible");
+        CASE(VK_IMAGE_CREATE_PROTECTED_BIT, "protected");
 #undef CASE
         return (VkFlags)luaL_argerror(L, --arg, badvalue(L,s));
         done: ;
@@ -1693,6 +1714,9 @@ static int pushimagecreateflags(lua_State *L, VkFlags flags)
         CASE(VK_IMAGE_CREATE_SAMPLE_LOCATIONS_COMPATIBLE_DEPTH_BIT_EXT, "sample locations compatible depth");
         CASE(VK_IMAGE_CREATE_DISJOINT_BIT, "disjoint");
         CASE(VK_IMAGE_CREATE_ALIAS_BIT, "alias");
+        CASE(VK_IMAGE_CREATE_SPLIT_INSTANCE_BIND_REGIONS_BIT,"split instance bind regions");
+        CASE(VK_IMAGE_CREATE_2D_ARRAY_COMPATIBLE_BIT,"2d array compatible");
+        CASE(VK_IMAGE_CREATE_PROTECTED_BIT, "protected");
 #undef CASE
 
     return n;
@@ -1717,7 +1741,9 @@ static int ImageCreateFlags(lua_State *L)
     ADD(IMAGE_CREATE_SAMPLE_LOCATIONS_COMPATIBLE_DEPTH_BIT_EXT);\
     ADD(IMAGE_CREATE_DISJOINT_BIT);\
     ADD(IMAGE_CREATE_ALIAS_BIT);\
-
+    ADD(IMAGE_CREATE_SPLIT_INSTANCE_BIND_REGIONS_BIT);\
+    ADD(IMAGE_CREATE_2D_ARRAY_COMPATIBLE_BIT);\
+    ADD(IMAGE_CREATE_PROTECTED_BIT);\
 
 /*----------------------------------------------------------------------*
  | VkImageUsageFlags
@@ -2585,6 +2611,514 @@ static int FenceImportFlags(lua_State *L)
     ADD(FENCE_IMPORT_TEMPORARY_BIT); \
 
 
+/*----------------------------------------------------------------------*
+ | VkDeviceQueueCreateFlags
+ *----------------------------------------------------------------------*/
+
+static VkFlags checkdevicequeuecreateflags(lua_State *L, int arg)
+    {
+    const char *s;
+    VkFlags flags = 0;
+
+    while(lua_isstring(L, arg))
+        {
+        s = lua_tostring(L, arg++);
+#define CASE(CODE,str) if((strcmp(s, str)==0)) do { flags |= CODE; goto done; } while(0)
+    CASE(VK_DEVICE_QUEUE_CREATE_PROTECTED_BIT, "protected");
+#undef CASE
+        return (VkFlags)luaL_argerror(L, --arg, badvalue(L,s));
+        done: ;
+        }
+
+    return flags;
+    }
+
+static int pushdevicequeuecreateflags(lua_State *L, VkFlags flags)
+    {
+    int n = 0;
+
+#define CASE(CODE,str) do { if( flags & CODE) { lua_pushstring(L, str); n++; } } while(0)
+    CASE(VK_DEVICE_QUEUE_CREATE_PROTECTED_BIT, "protected");
+#undef CASE
+
+    return n;
+    }
+
+static int DeviceQueueCreateFlags(lua_State *L)
+    {
+    if(lua_type(L, 1) == LUA_TNUMBER)
+        return pushdevicequeuecreateflags(L, luaL_checkinteger(L, 1));
+    lua_pushinteger(L, checkdevicequeuecreateflags(L, 1));
+    return 1;
+    }
+
+#define Add_DeviceQueueCreateFlags(L) \
+    ADD(DEVICE_QUEUE_CREATE_PROTECTED_BIT);\
+
+/*----------------------------------------------------------------------*
+ | VkSubgroupFeatureFlags
+ *----------------------------------------------------------------------*/
+
+static VkFlags checksubgroupfeatureflags(lua_State *L, int arg)
+    {
+    const char *s;
+    VkFlags flags = 0;
+
+    while(lua_isstring(L, arg))
+        {
+        s = lua_tostring(L, arg++);
+#define CASE(CODE,str) if((strcmp(s, str)==0)) do { flags |= CODE; goto done; } while(0)
+        CASE(VK_SUBGROUP_FEATURE_BASIC_BIT, "basic");
+        CASE(VK_SUBGROUP_FEATURE_VOTE_BIT, "vote");
+        CASE(VK_SUBGROUP_FEATURE_ARITHMETIC_BIT, "arithmetic");
+        CASE(VK_SUBGROUP_FEATURE_BALLOT_BIT, "ballot");
+        CASE(VK_SUBGROUP_FEATURE_SHUFFLE_BIT, "shuffle");
+        CASE(VK_SUBGROUP_FEATURE_SHUFFLE_RELATIVE_BIT, "shuffle relative");
+        CASE(VK_SUBGROUP_FEATURE_CLUSTERED_BIT, "clustered");
+        CASE(VK_SUBGROUP_FEATURE_QUAD_BIT, "quad");
+#undef CASE
+        return (VkFlags)luaL_argerror(L, --arg, badvalue(L,s));
+        done: ;
+        }
+
+    return flags;
+    }
+
+static int pushsubgroupfeatureflags(lua_State *L, VkFlags flags)
+    {
+    int n = 0;
+
+#define CASE(CODE,str) do { if( flags & CODE) { lua_pushstring(L, str); n++; } } while(0)
+        CASE(VK_SUBGROUP_FEATURE_BASIC_BIT, "basic");
+        CASE(VK_SUBGROUP_FEATURE_VOTE_BIT, "vote");
+        CASE(VK_SUBGROUP_FEATURE_ARITHMETIC_BIT, "arithmetic");
+        CASE(VK_SUBGROUP_FEATURE_BALLOT_BIT, "ballot");
+        CASE(VK_SUBGROUP_FEATURE_SHUFFLE_BIT, "shuffle");
+        CASE(VK_SUBGROUP_FEATURE_SHUFFLE_RELATIVE_BIT, "shuffle relative");
+        CASE(VK_SUBGROUP_FEATURE_CLUSTERED_BIT, "clustered");
+        CASE(VK_SUBGROUP_FEATURE_QUAD_BIT, "quad");
+#undef CASE
+
+    return n;
+    }
+
+static int SubgroupFeatureFlags(lua_State *L)
+    {
+    if(lua_type(L, 1) == LUA_TNUMBER)
+        return pushsubgroupfeatureflags(L, luaL_checkinteger(L, 1));
+    lua_pushinteger(L, checksubgroupfeatureflags(L, 1));
+    return 1;
+    }
+
+#define Add_SubgroupFeatureFlags(L) \
+    ADD(SUBGROUP_FEATURE_BASIC_BIT);\
+    ADD(SUBGROUP_FEATURE_VOTE_BIT);\
+    ADD(SUBGROUP_FEATURE_ARITHMETIC_BIT);\
+    ADD(SUBGROUP_FEATURE_BALLOT_BIT);\
+    ADD(SUBGROUP_FEATURE_SHUFFLE_BIT);\
+    ADD(SUBGROUP_FEATURE_SHUFFLE_RELATIVE_BIT);\
+    ADD(SUBGROUP_FEATURE_CLUSTERED_BIT);\
+    ADD(SUBGROUP_FEATURE_QUAD_BIT);\
+
+/*----------------------------------------------------------------------*
+ | VkPeerMemoryFeatureFlags
+ *----------------------------------------------------------------------*/
+
+static VkFlags checkpeermemoryfeatureflags(lua_State *L, int arg)
+    {
+    const char *s;
+    VkFlags flags = 0;
+
+    while(lua_isstring(L, arg))
+        {
+        s = lua_tostring(L, arg++);
+#define CASE(CODE,str) if((strcmp(s, str)==0)) do { flags |= CODE; goto done; } while(0)
+        CASE(VK_PEER_MEMORY_FEATURE_COPY_SRC_BIT, "copy src");
+        CASE(VK_PEER_MEMORY_FEATURE_COPY_DST_BIT, "copy dst");
+        CASE(VK_PEER_MEMORY_FEATURE_GENERIC_SRC_BIT, "generic src");
+        CASE(VK_PEER_MEMORY_FEATURE_GENERIC_DST_BIT, "generic dst");
+#undef CASE
+        return (VkFlags)luaL_argerror(L, --arg, badvalue(L,s));
+        done: ;
+        }
+
+    return flags;
+    }
+
+static int pushpeermemoryfeatureflags(lua_State *L, VkFlags flags)
+    {
+    int n = 0;
+
+#define CASE(CODE,str) do { if( flags & CODE) { lua_pushstring(L, str); n++; } } while(0)
+        CASE(VK_PEER_MEMORY_FEATURE_COPY_SRC_BIT, "copy src");
+        CASE(VK_PEER_MEMORY_FEATURE_COPY_DST_BIT, "copy dst");
+        CASE(VK_PEER_MEMORY_FEATURE_GENERIC_SRC_BIT, "generic src");
+        CASE(VK_PEER_MEMORY_FEATURE_GENERIC_DST_BIT, "generic dst");
+#undef CASE
+
+    return n;
+    }
+
+static int PeerMemoryFeatureFlags(lua_State *L)
+    {
+    if(lua_type(L, 1) == LUA_TNUMBER)
+        return pushpeermemoryfeatureflags(L, luaL_checkinteger(L, 1));
+    lua_pushinteger(L, checkpeermemoryfeatureflags(L, 1));
+    return 1;
+    }
+
+#define Add_PeerMemoryFeatureFlags(L) \
+    ADD(PEER_MEMORY_FEATURE_COPY_SRC_BIT);\
+    ADD(PEER_MEMORY_FEATURE_COPY_DST_BIT);\
+    ADD(PEER_MEMORY_FEATURE_GENERIC_SRC_BIT);\
+    ADD(PEER_MEMORY_FEATURE_GENERIC_DST_BIT);\
+
+/*----------------------------------------------------------------------*
+ | VkMemoryAllocateFlags
+ *----------------------------------------------------------------------*/
+
+static VkFlags checkmemoryallocateflags(lua_State *L, int arg)
+    {
+    const char *s;
+    VkFlags flags = 0;
+
+    while(lua_isstring(L, arg))
+        {
+        s = lua_tostring(L, arg++);
+#define CASE(CODE,str) if((strcmp(s, str)==0)) do { flags |= CODE; goto done; } while(0)
+        CASE(VK_MEMORY_ALLOCATE_DEVICE_MASK_BIT, "device mask");
+#undef CASE
+        return (VkFlags)luaL_argerror(L, --arg, badvalue(L,s));
+        done: ;
+        }
+
+    return flags;
+    }
+
+static int pushmemoryallocateflags(lua_State *L, VkFlags flags)
+    {
+    int n = 0;
+
+#define CASE(CODE,str) do { if( flags & CODE) { lua_pushstring(L, str); n++; } } while(0)
+        CASE(VK_MEMORY_ALLOCATE_DEVICE_MASK_BIT, "device mask");
+#undef CASE
+
+    return n;
+    }
+
+static int MemoryAllocateFlags(lua_State *L)
+    {
+    if(lua_type(L, 1) == LUA_TNUMBER)
+        return pushmemoryallocateflags(L, luaL_checkinteger(L, 1));
+    lua_pushinteger(L, checkmemoryallocateflags(L, 1));
+    return 1;
+    }
+
+#define Add_MemoryAllocateFlags(L) \
+    ADD(MEMORY_ALLOCATE_DEVICE_MASK_BIT);\
+
+/*----------------------------------------------------------------------*
+ | VkDebugUtilsMessageSeverityFlagsEXT
+ *----------------------------------------------------------------------*/
+
+static VkFlags checkdebugutilsmessageseverityflags(lua_State *L, int arg)
+    {
+    const char *s;
+    VkFlags flags = 0;
+
+    while(lua_isstring(L, arg))
+        {
+        s = lua_tostring(L, arg++);
+#define CASE(CODE,str) if((strcmp(s, str)==0)) do { flags |= CODE; goto done; } while(0)
+        CASE(VK_DEBUG_UTILS_MESSAGE_SEVERITY_VERBOSE_BIT_EXT, "verbose");
+        CASE(VK_DEBUG_UTILS_MESSAGE_SEVERITY_INFO_BIT_EXT, "info");
+        CASE(VK_DEBUG_UTILS_MESSAGE_SEVERITY_WARNING_BIT_EXT, "warning");
+        CASE(VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT, "error");
+#undef CASE
+        return (VkFlags)luaL_argerror(L, --arg, badvalue(L,s));
+        done: ;
+        }
+
+    return flags;
+    }
+
+static int pushdebugutilsmessageseverityflags(lua_State *L, VkFlags flags)
+    {
+    int n = 0;
+
+#define CASE(CODE,str) do { if( flags & CODE) { lua_pushstring(L, str); n++; } } while(0)
+        CASE(VK_DEBUG_UTILS_MESSAGE_SEVERITY_VERBOSE_BIT_EXT, "verbose");
+        CASE(VK_DEBUG_UTILS_MESSAGE_SEVERITY_INFO_BIT_EXT, "info");
+        CASE(VK_DEBUG_UTILS_MESSAGE_SEVERITY_WARNING_BIT_EXT, "warning");
+        CASE(VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT, "error");
+#undef CASE
+
+    return n;
+    }
+
+static int DebugUtilsMessageSeverityFlags(lua_State *L)
+    {
+    if(lua_type(L, 1) == LUA_TNUMBER)
+        return pushdebugutilsmessageseverityflags(L, luaL_checkinteger(L, 1));
+    lua_pushinteger(L, checkdebugutilsmessageseverityflags(L, 1));
+    return 1;
+    }
+
+#define Add_DebugUtilsMessageSeverityFlags(L) \
+    ADD(DEBUG_UTILS_MESSAGE_SEVERITY_VERBOSE_BIT_EXT);\
+    ADD(DEBUG_UTILS_MESSAGE_SEVERITY_INFO_BIT_EXT);\
+    ADD(DEBUG_UTILS_MESSAGE_SEVERITY_WARNING_BIT_EXT);\
+    ADD(DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT);\
+
+/*----------------------------------------------------------------------*
+ | VkDebugUtilsMessageTypeFlagsEXT
+ *----------------------------------------------------------------------*/
+
+static VkFlags checkdebugutilsmessagetypeflags(lua_State *L, int arg)
+    {
+    const char *s;
+    VkFlags flags = 0;
+
+    while(lua_isstring(L, arg))
+        {
+        s = lua_tostring(L, arg++);
+#define CASE(CODE,str) if((strcmp(s, str)==0)) do { flags |= CODE; goto done; } while(0)
+        CASE(VK_DEBUG_UTILS_MESSAGE_TYPE_GENERAL_BIT_EXT, "general");
+        CASE(VK_DEBUG_UTILS_MESSAGE_TYPE_VALIDATION_BIT_EXT, "validation");
+        CASE(VK_DEBUG_UTILS_MESSAGE_TYPE_PERFORMANCE_BIT_EXT, "performance");
+#undef CASE
+        return (VkFlags)luaL_argerror(L, --arg, badvalue(L,s));
+        done: ;
+        }
+
+    return flags;
+    }
+
+static int pushdebugutilsmessagetypeflags(lua_State *L, VkFlags flags)
+    {
+    int n = 0;
+
+#define CASE(CODE,str) do { if( flags & CODE) { lua_pushstring(L, str); n++; } } while(0)
+        CASE(VK_DEBUG_UTILS_MESSAGE_TYPE_GENERAL_BIT_EXT, "general");
+        CASE(VK_DEBUG_UTILS_MESSAGE_TYPE_VALIDATION_BIT_EXT, "validation");
+        CASE(VK_DEBUG_UTILS_MESSAGE_TYPE_PERFORMANCE_BIT_EXT, "performance");
+#undef CASE
+
+    return n;
+    }
+
+static int DebugUtilsMessageTypeFlags(lua_State *L)
+    {
+    if(lua_type(L, 1) == LUA_TNUMBER)
+        return pushdebugutilsmessagetypeflags(L, luaL_checkinteger(L, 1));
+    lua_pushinteger(L, checkdebugutilsmessagetypeflags(L, 1));
+    return 1;
+    }
+
+#define Add_DebugUtilsMessageTypeFlags(L) \
+    ADD(DEBUG_UTILS_MESSAGE_TYPE_GENERAL_BIT_EXT);\
+    ADD(DEBUG_UTILS_MESSAGE_TYPE_VALIDATION_BIT_EXT);\
+    ADD(DEBUG_UTILS_MESSAGE_TYPE_PERFORMANCE_BIT_EXT);\
+
+/*----------------------------------------------------------------------*
+ | VkDeviceGroupPresentModeFlagsKHR
+ *----------------------------------------------------------------------*/
+
+static VkFlags checkdevicegrouppresentmodeflags(lua_State *L, int arg)
+    {
+    const char *s;
+    VkFlags flags = 0;
+
+    while(lua_isstring(L, arg))
+        {
+        s = lua_tostring(L, arg++);
+#define CASE(CODE,str) if((strcmp(s, str)==0)) do { flags |= CODE; goto done; } while(0)
+        CASE(VK_DEVICE_GROUP_PRESENT_MODE_LOCAL_BIT_KHR, "local");
+        CASE(VK_DEVICE_GROUP_PRESENT_MODE_REMOTE_BIT_KHR, "remote");
+        CASE(VK_DEVICE_GROUP_PRESENT_MODE_SUM_BIT_KHR, "sum");
+        CASE(VK_DEVICE_GROUP_PRESENT_MODE_LOCAL_MULTI_DEVICE_BIT_KHR, "local multi device");
+#undef CASE
+        return (VkFlags)luaL_argerror(L, --arg, badvalue(L,s));
+        done: ;
+        }
+
+    return flags;
+    }
+
+static int pushdevicegrouppresentmodeflags(lua_State *L, VkFlags flags)
+    {
+    int n = 0;
+
+#define CASE(CODE,str) do { if( flags & CODE) { lua_pushstring(L, str); n++; } } while(0)
+        CASE(VK_DEVICE_GROUP_PRESENT_MODE_LOCAL_BIT_KHR, "local");
+        CASE(VK_DEVICE_GROUP_PRESENT_MODE_REMOTE_BIT_KHR, "remote");
+        CASE(VK_DEVICE_GROUP_PRESENT_MODE_SUM_BIT_KHR, "sum");
+        CASE(VK_DEVICE_GROUP_PRESENT_MODE_LOCAL_MULTI_DEVICE_BIT_KHR, "local multi device");
+#undef CASE
+
+    return n;
+    }
+
+static int DeviceGroupPresentModeFlags(lua_State *L)
+    {
+    if(lua_type(L, 1) == LUA_TNUMBER)
+        return pushdevicegrouppresentmodeflags(L, luaL_checkinteger(L, 1));
+    lua_pushinteger(L, checkdevicegrouppresentmodeflags(L, 1));
+    return 1;
+    }
+
+#define Add_DeviceGroupPresentModeFlags(L) \
+    ADD(DEVICE_GROUP_PRESENT_MODE_LOCAL_BIT_KHR);\
+    ADD(DEVICE_GROUP_PRESENT_MODE_REMOTE_BIT_KHR);\
+    ADD(DEVICE_GROUP_PRESENT_MODE_SUM_BIT_KHR);\
+    ADD(DEVICE_GROUP_PRESENT_MODE_LOCAL_MULTI_DEVICE_BIT_KHR);\
+
+
+/*----------------------------------------------------------------------*
+ | VkSwapchainCreateFlagsKHR
+ *----------------------------------------------------------------------*/
+
+static VkFlags checkswapchaincreateflags(lua_State *L, int arg)
+    {
+    const char *s;
+    VkFlags flags = 0;
+
+    while(lua_isstring(L, arg))
+        {
+        s = lua_tostring(L, arg++);
+#define CASE(CODE,str) if((strcmp(s, str)==0)) do { flags |= CODE; goto done; } while(0)
+        CASE(VK_SWAPCHAIN_CREATE_SPLIT_INSTANCE_BIND_REGIONS_BIT_KHR, "split instance bind regions");
+        CASE(VK_SWAPCHAIN_CREATE_PROTECTED_BIT_KHR, "protected");
+#undef CASE
+        return (VkFlags)luaL_argerror(L, --arg, badvalue(L,s));
+        done: ;
+        }
+
+    return flags;
+    }
+
+static int pushswapchaincreateflags(lua_State *L, VkFlags flags)
+    {
+    int n = 0;
+
+#define CASE(CODE,str) do { if( flags & CODE) { lua_pushstring(L, str); n++; } } while(0)
+        CASE(VK_SWAPCHAIN_CREATE_SPLIT_INSTANCE_BIND_REGIONS_BIT_KHR, "split instance bind regions");
+        CASE(VK_SWAPCHAIN_CREATE_PROTECTED_BIT_KHR, "protected");
+#undef CASE
+
+    return n;
+    }
+
+static int SwapchainCreateFlags(lua_State *L)
+    {
+    if(lua_type(L, 1) == LUA_TNUMBER)
+        return pushswapchaincreateflags(L, luaL_checkinteger(L, 1));
+    lua_pushinteger(L, checkswapchaincreateflags(L, 1));
+    return 1;
+    }
+
+#define Add_SwapchainCreateFlags(L) \
+    ADD(SWAPCHAIN_CREATE_SPLIT_INSTANCE_BIND_REGIONS_BIT_KHR);\
+    ADD(SWAPCHAIN_CREATE_PROTECTED_BIT_KHR);\
+
+/*----------------------------------------------------------------------*
+ | VkDescriptorBindingFlagsEXT
+ *----------------------------------------------------------------------*/
+
+static VkFlags checkdescriptorbindingflags(lua_State *L, int arg)
+    {
+    const char *s;
+    VkFlags flags = 0;
+
+    while(lua_isstring(L, arg))
+        {
+        s = lua_tostring(L, arg++);
+#define CASE(CODE,str) if((strcmp(s, str)==0)) do { flags |= CODE; goto done; } while(0)
+        CASE(VK_DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT_EXT, "update after bind");
+        CASE(VK_DESCRIPTOR_BINDING_UPDATE_UNUSED_WHILE_PENDING_BIT_EXT, "update unused while pending");
+        CASE(VK_DESCRIPTOR_BINDING_PARTIALLY_BOUND_BIT_EXT, "partially bound");
+        CASE(VK_DESCRIPTOR_BINDING_VARIABLE_DESCRIPTOR_COUNT_BIT_EXT, "variable descriptor count");
+#undef CASE
+        return (VkFlags)luaL_argerror(L, --arg, badvalue(L,s));
+        done: ;
+        }
+
+    return flags;
+    }
+
+static int pushdescriptorbindingflags(lua_State *L, VkFlags flags)
+    {
+    int n = 0;
+
+#define CASE(CODE,str) do { if( flags & CODE) { lua_pushstring(L, str); n++; } } while(0)
+        CASE(VK_DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT_EXT, "update after bind");
+        CASE(VK_DESCRIPTOR_BINDING_UPDATE_UNUSED_WHILE_PENDING_BIT_EXT, "update unused while pending");
+        CASE(VK_DESCRIPTOR_BINDING_PARTIALLY_BOUND_BIT_EXT, "partially bound");
+        CASE(VK_DESCRIPTOR_BINDING_VARIABLE_DESCRIPTOR_COUNT_BIT_EXT, "variable descriptor count");
+#undef CASE
+
+    return n;
+    }
+
+static int DescriptorBindingFlags(lua_State *L)
+    {
+    if(lua_type(L, 1) == LUA_TNUMBER)
+        return pushdescriptorbindingflags(L, luaL_checkinteger(L, 1));
+    lua_pushinteger(L, checkdescriptorbindingflags(L, 1));
+    return 1;
+    }
+
+#define Add_DescriptorBindingFlags(L) \
+    ADD(DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT_EXT);\
+    ADD(DESCRIPTOR_BINDING_UPDATE_UNUSED_WHILE_PENDING_BIT_EXT);\
+    ADD(DESCRIPTOR_BINDING_PARTIALLY_BOUND_BIT_EXT);\
+    ADD(DESCRIPTOR_BINDING_VARIABLE_DESCRIPTOR_COUNT_BIT_EXT);\
+
+/*----------------------------------------------------------------------*
+ | VkConditionalRenderingFlagsEXT
+ *----------------------------------------------------------------------*/
+
+static VkFlags checkconditionalrenderingflags(lua_State *L, int arg)
+    {
+    const char *s;
+    VkFlags flags = 0;
+
+    while(lua_isstring(L, arg))
+        {
+        s = lua_tostring(L, arg++);
+#define CASE(CODE,str) if((strcmp(s, str)==0)) do { flags |= CODE; goto done; } while(0)
+        CASE(VK_CONDITIONAL_RENDERING_INVERTED_BIT_EXT, "inverted");
+#undef CASE
+        return (VkFlags)luaL_argerror(L, --arg, badvalue(L,s));
+        done: ;
+        }
+
+    return flags;
+    }
+
+static int pushconditionalrenderingflags(lua_State *L, VkFlags flags)
+    {
+    int n = 0;
+
+#define CASE(CODE,str) do { if( flags & CODE) { lua_pushstring(L, str); n++; } } while(0)
+        CASE(VK_CONDITIONAL_RENDERING_INVERTED_BIT_EXT, "inverted");
+#undef CASE
+
+    return n;
+    }
+
+static int ConditionalRenderingFlags(lua_State *L)
+    {
+    if(lua_type(L, 1) == LUA_TNUMBER)
+        return pushconditionalrenderingflags(L, luaL_checkinteger(L, 1));
+    lua_pushinteger(L, checkconditionalrenderingflags(L, 1));
+    return 1;
+    }
+
+#define Add_ConditionalRenderingFlags(L) \
+    ADD(CONDITIONAL_RENDERING_INVERTED_BIT_EXT);\
+
+
 
 /*------------------------------------------------------------------------------*
  | Additional utilities                                                         |
@@ -2623,6 +3157,10 @@ static int AddConstants(lua_State *L) /* vk.XXX constants for VK_XXX values */
     Add_ImageCreateFlags(L);
     Add_ImageUsageFlags(L);
     Add_FormatFeatureFlags(L);
+    Add_DeviceQueueCreateFlags(L);
+    Add_SubgroupFeatureFlags(L);
+    Add_PeerMemoryFeatureFlags(L);
+    Add_MemoryAllocateFlags(L);
     /* extensions */
     Add_SurfaceTransformFlagsKHR(L);
     Add_CompositeAlphaFlagKHR(L);
@@ -2637,6 +3175,12 @@ static int AddConstants(lua_State *L) /* vk.XXX constants for VK_XXX values */
     Add_ExternalFenceHandleTypeFlags(L);
     Add_ExternalFenceFeatureFlags(L);
     Add_FenceImportFlags(L);
+    Add_DebugUtilsMessageSeverityFlags(L);
+    Add_DebugUtilsMessageTypeFlags(L);
+    Add_DeviceGroupPresentModeFlags(L);
+    Add_SwapchainCreateFlags(L);
+    Add_DescriptorBindingFlags(L);
+    Add_ConditionalRenderingFlags(L);
     return 0;
     }
 
@@ -2673,11 +3217,13 @@ static const struct luaL_Reg Functions[] =
         { "imagecreateflags", ImageCreateFlags },
         { "imageusageflags", ImageUsageFlags },
         { "formatfeatureflags", FormatFeatureFlags },
+        { "devicequeuecreateflags", DeviceQueueCreateFlags },
+        { "subgroupfeatureflags", SubgroupFeatureFlags },
+        { "peermemoryfeatureflags", PeerMemoryFeatureFlags },
+        { "memoryallocateflags", MemoryAllocateFlags },
         /* Reserved flags */
-        { "swapchaincreateflags", ReservedFlags },
         { "instancecreateflags", ReservedFlags },
         { "devicecreateflags", ReservedFlags },
-        { "devicequeuecreateflags", ReservedFlags },
         { "memorymapflags", ReservedFlags },
         { "semaphorecreateflags", ReservedFlags },
         { "eventcreateflags", ReservedFlags },
@@ -2716,6 +3262,12 @@ static const struct luaL_Reg Functions[] =
         { "externalfencehandletypeflags", ExternalFenceHandleTypeFlags },
         { "externalfencefeatureflags", ExternalFenceFeatureFlags },
         { "fenceimportflags", FenceImportFlags },
+        { "debugutilsmessageseverityflags", DebugUtilsMessageSeverityFlags },
+        { "debugutilsmessagetypeflags", DebugUtilsMessageTypeFlags },
+        { "devicegrouppresentmodeflags", DeviceGroupPresentModeFlags },
+        { "swapchaincreateflags", SwapchainCreateFlags },
+        { "descriptorbindingflags", DescriptorBindingFlags },
+        { "conditionalrenderingflags", ConditionalRenderingFlags },
         /* extensions, reserved */
         { "displaymodecreateflags", ReservedFlags }, /* VkDisplayModeCreateFlagsKHR */
         { "displaysurfacecreateflags", ReservedFlags }, /* VkDisplaySurfaceCreateFlagsKHR */
@@ -2729,6 +3281,9 @@ static const struct luaL_Reg Functions[] =
         { "descriptorupdatetemplatecreateflags", ReservedFlags }, /* VkDescriptorUpdateTemplateCreateFlags */
         { "pipelinediscardrectanglestatecreateflags", ReservedFlags }, /* VkPipelineDiscardRectangleStateCreateFlagsEXT */
         { "validationcachecreateflags", ReservedFlags }, /* VkValidationCacheCreateFlagsEXT */
+        { "debugutilsmessengercallbackdataflags", ReservedFlags }, /* VkDebugUtilsMessengerCallbackDataFlagsEXT */
+        { "debugutilsmessengercreateflags", ReservedFlags }, /* VkDebugUtilsMessengerCreateFlagsEXT */
+//      { "", ReservedFlags }, /*  */
         { NULL, NULL } /* sentinel */
     };
 
