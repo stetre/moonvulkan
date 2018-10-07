@@ -852,6 +852,30 @@ static int CmdInsertDebugUtilsLabel(lua_State *L)
     return 0;
     }
 
+static int CmdBeginConditionalRendering(lua_State *L)
+    {
+    int err;
+    ud_t *ud;
+    VkConditionalRenderingBeginInfoEXT info;
+    VkCommandBuffer cb = checkcommand_buffer(L, 1, &ud);
+    err = echeckconditionalrenderingbegininfo(L, 2, &info);
+    if(err) return argerror(L, 2);
+    CheckDevicePfn(L, ud, CmdBeginConditionalRenderingEXT);
+    ud->ddt->CmdBeginConditionalRenderingEXT(cb, &info);
+    freeconditionalrenderingbegininfo(L, &info);
+    return 0;
+    }
+
+static int CmdEndConditionalRendering(lua_State *L)
+    {
+    ud_t *ud;
+    VkCommandBuffer cb = checkcommand_buffer(L, 1, &ud);
+    CheckDevicePfn(L, ud, CmdEndConditionalRenderingEXT);
+    ud->ddt->CmdEndConditionalRenderingEXT(cb);
+    return 0;
+    }
+
+
 
 #if 0 // 10yy
         { "",  },
@@ -924,6 +948,8 @@ static const struct luaL_Reg Functions[] =
         { "cmd_begin_debug_utils_label", CmdBeginDebugUtilsLabel },
         { "cmd_end_debug_utils_label", CmdEndDebugUtilsLabel },
         { "cmd_insert_debug_utils_label", CmdInsertDebugUtilsLabel },
+        { "cmd_begin_conditional_rendering", CmdBeginConditionalRendering },
+        { "cmd_end_conditional_rendering", CmdEndConditionalRendering },
         { NULL, NULL } /* sentinel */
     };
 

@@ -51,8 +51,13 @@ int echeckcommandpoolcreateinfo(lua_State *L, int arg, VkCommandPoolCreateInfo *
 int echeckcommandbufferallocateinfo(lua_State *L, int arg, VkCommandBufferAllocateInfo *p);
 
 typedef struct {
+    VkCommandBufferInheritanceInfo p1;
+    VkCommandBufferInheritanceConditionalRenderingInfoEXT p2;
+} VkCommandBufferInheritanceInfo_CHAIN;
+
+typedef struct {
     VkCommandBufferBeginInfo p1;
-    VkCommandBufferInheritanceInfo p2;
+    VkCommandBufferInheritanceInfo_CHAIN p2;
 } VkCommandBufferBeginInfo_CHAIN;
 
 #define echeckcommandbufferbegininfo moonvulkan_echeckcommandbufferbegininfo
@@ -267,6 +272,7 @@ typedef struct {
     VkPhysicalDeviceVariablePointerFeatures p3;
     VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT p4;
     VkPhysicalDeviceSamplerYcbcrConversionFeatures p5;
+    VkPhysicalDeviceConditionalRenderingFeaturesEXT p6;
 } VkPhysicalDeviceFeatures2_CHAIN;
 #define initphysicaldevicefeatures2 moonvulkan_initphysicaldevicefeatures2
 void initphysicaldevicefeatures2(lua_State *L, VkPhysicalDeviceFeatures2_CHAIN*);
@@ -691,6 +697,11 @@ void freedebugutilsmessengercallbackdata(lua_State *L, VkDebugUtilsMessengerCall
 int echeckdebugutilsmessengercallbackdata(lua_State *L, int arg, VkDebugUtilsMessengerCallbackDataEXT *p);
 #define pushdebugutilsmessengercallbackdata moonvulkan_pushdebugutilsmessengercallbackdata
 int pushdebugutilsmessengercallbackdata(lua_State *L, const VkDebugUtilsMessengerCallbackDataEXT *p);
+
+#define freeconditionalrenderingbegininfo moonvulkan_freeconditionalrenderingbegininfo
+void freeconditionalrenderingbegininfo(lua_State *L, VkConditionalRenderingBeginInfoEXT *p);
+#define echeckconditionalrenderingbegininfo moonvulkan_echeckconditionalrenderingbegininfo
+int echeckconditionalrenderingbegininfo(lua_State *L, int arg, VkConditionalRenderingBeginInfoEXT *p);
 
 #ifdef VK_USE_PLATFORM_WIN32_KHR
 

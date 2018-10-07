@@ -224,6 +224,7 @@ instance_dt_t * getproc_instance(lua_State *L, VkInstance instance, VkInstanceCr
             GET(CreateDebugUtilsMessengerEXT);
             GET(DestroyDebugUtilsMessengerEXT);
             GET(SubmitDebugUtilsMessageEXT);
+            continue;
             }
 #ifdef VK_USE_PLATFORM_XCB_KHR
         IF("VK_KHR_xcb_surface")
@@ -570,6 +571,7 @@ device_dt_t* getproc_device(lua_State *L, VkDevice device, VkDeviceCreateInfo *c
             GET(GetSemaphoreWin32HandleKHR);
             continue;
             }
+#endif
         IF("VK_EXT_validation_cache")
             {
             GET(CreateValidationCacheEXT);
@@ -584,7 +586,12 @@ device_dt_t* getproc_device(lua_State *L, VkDevice device, VkDeviceCreateInfo *c
             GET(DestroySamplerYcbcrConversion);
             continue;
             }
-#endif
+        IF("VK_EXT_conditional_rendering")
+            {
+            GET(CmdBeginConditionalRenderingEXT);
+            GET(CmdEndConditionalRenderingEXT);
+            continue;
+            }
 #undef IF
         }
 #undef GET

@@ -2184,6 +2184,22 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/h
 <div class="paragraph">
 <p>The first argument (<em>cb</em>) of all the following functions is a <a href="#command_buffer">command_buffer</a>.</p>
 </div>
+<div id="cmd_begin_conditional_rendering" class="ulist">
+<ul>
+<li>
+<p><strong>cmd_begin_conditional_rendering</strong>(<em>cb</em>, <a href="#conditionalrenderingbegininfo"><em>conditionalrenderingbegininfo</em></a>)<br>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkCmdBeginConditionalRenderingEXT">vkCmdBeginConditionalRenderingEXT</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_conditional_rendering">VK_EXT_conditional_rendering</a>).</span></p>
+</li>
+</ul>
+</div>
+<div id="cmd_end_conditional_rendering" class="ulist">
+<ul>
+<li>
+<p><strong>cmd_end_conditional_rendering</strong>(<em>cb</em>)<br>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkCmdEndConditionalRenderingEXT">vkCmdEndConditionalRenderingEXT</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_conditional_rendering">VK_EXT_conditional_rendering</a>).</span></p>
+</li>
+</ul>
+</div>
 <div id="cmd_begin_query" class="ulist">
 <ul>
 <li>
@@ -2192,11 +2208,27 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/h
 </li>
 </ul>
 </div>
+<div id="cmd_end_query" class="ulist">
+<ul>
+<li>
+<p><strong>cmd_end_query</strong>(<em>cb</em>, <a href="#query_pool"><em>query_pool</em></a>, <em>query</em>)<br>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdEndQuery.html">vkCmdEndQuery</a>.</span></p>
+</li>
+</ul>
+</div>
 <div id="cmd_begin_render_pass" class="ulist">
 <ul>
 <li>
 <p><strong>cmd_begin_render_pass</strong>(<em>cb</em>, <a href="#renderpassbegininfo"><em>renderpassbegininfo</em></a>, <a href="#subpasscontents"><em>subpasscontents</em></a>)<br>
 <span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdBeginRenderPass.html">vkCmdBeginRenderPass</a>.</span></p>
+</li>
+</ul>
+</div>
+<div id="cmd_end_render_pass" class="ulist">
+<ul>
+<li>
+<p><strong>cmd_end_render_pass</strong>(<em>cb</em>)<br>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdEndRenderPass.html">vkCmdEndRenderPass</a>.</span></p>
 </li>
 </ul>
 </div>
@@ -2445,22 +2477,6 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/
 <li>
 <p><strong>cmd_draw_indirect</strong>(<em>cb</em>, <a href="#buffer"><em>buffer</em></a>, <em>offset</em>, <em>draw_count</em>, <em>stride</em>)<br>
 <span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdDrawIndirect.html">vkCmdDrawIndirect</a>.</span></p>
-</li>
-</ul>
-</div>
-<div id="cmd_end_query" class="ulist">
-<ul>
-<li>
-<p><strong>cmd_end_query</strong>(<em>cb</em>, <a href="#query_pool"><em>query_pool</em></a>, <em>query</em>)<br>
-<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdEndQuery.html">vkCmdEndQuery</a>.</span></p>
-</li>
-</ul>
-</div>
-<div id="cmd_end_render_pass" class="ulist">
-<ul>
-<li>
-<p><strong>cmd_end_render_pass</strong>(<em>cb</em>)<br>
-<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdEndRenderPass.html">vkCmdEndRenderPass</a>.</span></p>
 </li>
 </ul>
 </div>
@@ -3756,6 +3772,9 @@ the <em>queue_family_index</em> of the <em>i-th</em> element in the table return
 <em>advanced_blend_coherent_operations</em>: boolean,<br>
 -- EXTENSION (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkPhysicalDeviceSamplerYcbcrConversionFeatures.html">VkPhysicalDeviceSamplerYcbcrConversionFeatures</a>, <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_sampler_ycbcr_conversion">VK_KHR_sampler_ycbcr_conversion</a>):<br>
 <em>sampler_ycbcr_conversion</em>: boolean,<br>
+-- EXTENSION (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkPhysicalDeviceConditionalRenderingFeaturesEXT.html">VkPhysicalDeviceConditionalRenderingFeaturesEXT</a>, <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_conditional_rendering">VK_EXT_conditional_rendering</a>):<br>
+<em>conditional_rendering</em>: boolean,<br>
+<em>inherited_conditional_rendering</em>: boolean,<br>
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkPhysicalDeviceFeatures2.html">VkPhysicalDeviceFeatures2</a>)</span></p>
 </li>
 <li>
@@ -4018,6 +4037,8 @@ the <em>queue_family_index</em> of the <em>i-th</em> element in the table return
 <em>occlusion_query_enable</em>: boolean,<br>
 <em>query_flags</em>: <a href="#querycontrolflags">querycontrolflags</a>,<br>
 <em>pipeline_statistics</em>: <a href="#querypipelinestatisticflags">querypipelinestatisticflags</a>,<br>
+-- EXTENSION (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkCommandBufferInheritanceConditionalRenderingInfoEXT.html">VkCommandBufferInheritanceConditionalRenderingInfoEXT</a>, <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_conditional_rendering">VK_EXT_conditional_rendering</a>):<br>
+<em>conditional_rendering_enable</em>: boolean,<br>
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkCommandBufferInheritanceInfo.html">VkCommandBufferInheritanceInfo</a>)</span></p>
 </li>
 </ul>
@@ -5299,6 +5320,19 @@ Note1: The <em>current_extent</em> field is <em>nil</em> when <em>width</em> and
 <em>cmd_buf_labels</em>: {<a href="#debugutilslabel">debugutilslabel</a>},<br>
 <em>objects</em>: {<a href="#debugutilsobjectnameinfo">debugutilsobjectnameinfo</a>},<br>
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkDebugUtilsMessengerCallbackDataEXT">VkDebugUtilsMessengerCallbackDataEXT</a>)</span></p>
+</li>
+</ul>
+</div>
+<hr>
+<div class="ulist">
+<ul>
+<li>
+<p><a id="conditionalrenderingbegininfo"></a>
+<span class="small"><strong>conditionalrenderingbegininfo</strong> = {<br>
+<em>buffer</em>: <a href="#buffer">buffer</a> <strong>[R]</strong>,<br>
+<em>offset</em>: integer,<br>
+<em>flags</em>: <a href="#conditionalrenderingflags">conditionalrenderingflags</a>,<br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkConditionalRenderingBeginInfoEXT">VkConditionalRenderingBeginInfoEXT</a>)</span></p>
 </li>
 </ul>
 </div>

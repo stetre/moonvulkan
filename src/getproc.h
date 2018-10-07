@@ -301,6 +301,8 @@ typedef struct {
     F(GetValidationCacheDataEXT);
     F(CreateSamplerYcbcrConversion);
     F(DestroySamplerYcbcrConversion);
+    F(CmdBeginConditionalRenderingEXT);
+    F(CmdEndConditionalRenderingEXT);
 #ifdef VK_USE_PLATFORM_WIN32_KHR
     F(GetMemoryWin32HandleKHR);
     F(GetMemoryWin32HandlePropertiesKHR);

@@ -339,6 +339,9 @@ pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-exte
 _advanced_blend_coherent_operations_: boolean, +
 pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkPhysicalDeviceSamplerYcbcrConversionFeatures.html[VkPhysicalDeviceSamplerYcbcrConversionFeatures], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_sampler_ycbcr_conversion[VK_KHR_sampler_ycbcr_conversion]): +
 _sampler_ycbcr_conversion_: boolean, +
+pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkPhysicalDeviceConditionalRenderingFeaturesEXT.html[VkPhysicalDeviceConditionalRenderingFeaturesEXT], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_conditional_rendering[VK_EXT_conditional_rendering]): +
+_conditional_rendering_: boolean, +
+_inherited_conditional_rendering_: boolean, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkPhysicalDeviceFeatures2.html[VkPhysicalDeviceFeatures2])#
 
 
@@ -568,6 +571,8 @@ _framebuffer_: <<framebuffer, framebuffer>> *[R]*, +
 _occlusion_query_enable_: boolean, +
 _query_flags_: <<querycontrolflags, querycontrolflags>>, +
 _pipeline_statistics_: <<querypipelinestatisticflags, querypipelinestatisticflags>>, +
+pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkCommandBufferInheritanceConditionalRenderingInfoEXT.html[VkCommandBufferInheritanceConditionalRenderingInfoEXT], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_conditional_rendering[VK_EXT_conditional_rendering]): +
+_conditional_rendering_enable_: boolean, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkCommandBufferInheritanceInfo.html[VkCommandBufferInheritanceInfo])#
 
 '''
@@ -1668,6 +1673,14 @@ _cmd_buf_labels_: {<<debugutilslabel, debugutilslabel>>}, +
 _objects_: {<<debugutilsobjectnameinfo, debugutilsobjectnameinfo>>}, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkDebugUtilsMessengerCallbackDataEXT[VkDebugUtilsMessengerCallbackDataEXT])#
 
+'''
+
+* [[conditionalrenderingbegininfo]]
+[small]#*conditionalrenderingbegininfo* = { +
+_buffer_: <<buffer, buffer>> *[R]*, +
+_offset_: integer, +
+_flags_: <<conditionalrenderingflags, conditionalrenderingflags>>, +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkConditionalRenderingBeginInfoEXT[VkConditionalRenderingBeginInfoEXT])#
 
 ////
 5yy

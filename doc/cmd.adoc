@@ -8,13 +8,30 @@ The functions are also available as methods with the same name except for the tr
 For example, _cb_++++*:bind_pipeline*(_..._) is the same as *vk.cmd_bind_pipeline*(_cb_, _..._).
 ////
 
+[[cmd_begin_conditional_rendering]]
+* *cmd_begin_conditional_rendering*(_cb_, <<conditionalrenderingbegininfo, _conditionalrenderingbegininfo_>>) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkCmdBeginConditionalRenderingEXT[vkCmdBeginConditionalRenderingEXT] (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_conditional_rendering[VK_EXT_conditional_rendering]).#
+
+[[cmd_end_conditional_rendering]]
+* *cmd_end_conditional_rendering*(_cb_) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkCmdEndConditionalRenderingEXT[vkCmdEndConditionalRenderingEXT] (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_conditional_rendering[VK_EXT_conditional_rendering]).#
+
 [[cmd_begin_query]]
 * *cmd_begin_query*(_cb_, <<query_pool, _query_pool_>>, _query_, <<querycontrolflags, _querycontrolflags_>>) +
 [small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdBeginQuery.html[vkCmdBeginQuery].#
 
+[[cmd_end_query]]
+* *cmd_end_query*(_cb_, <<query_pool, _query_pool_>>, _query_) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdEndQuery.html[vkCmdEndQuery].#
+
 [[cmd_begin_render_pass]]
 * *cmd_begin_render_pass*(_cb_, <<renderpassbegininfo, _renderpassbegininfo_>>, <<subpasscontents, _subpasscontents_>>) +
 [small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdBeginRenderPass.html[vkCmdBeginRenderPass].#
+
+[[cmd_end_render_pass]]
+* *cmd_end_render_pass*(_cb_) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdEndRenderPass.html[vkCmdEndRenderPass].#
+
 
 [[cmd_bind_descriptor_sets]]
 * *cmd_bind_descriptor_sets*(_cb_,  <<pipelinebindpoint, _pipelinebindpoint_>>, _..._) +
@@ -164,14 +181,6 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.ht
 * *cmd_draw_indirect*(_cb_, <<buffer, _buffer_>>, _offset_, _draw_count_, _stride_) +
 [small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdDrawIndirect.html[vkCmdDrawIndirect].#
 
-[[cmd_end_query]]
-* *cmd_end_query*(_cb_, <<query_pool, _query_pool_>>, _query_) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdEndQuery.html[vkCmdEndQuery].#
-
-[[cmd_end_render_pass]]
-* *cmd_end_render_pass*(_cb_) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdEndRenderPass.html[vkCmdEndRenderPass].#
-
 [[cmd_execute_commands]]
 * *cmd_execute_commands*(_cb_, {<<command_buffer, _command_buffer_>>}) +
 [small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdExecuteCommands.html[vkCmdExecuteCommands].#
@@ -312,4 +321,5 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmd
 [[cmd_write_timestamp]]
 * *cmd_write_timestamp*(_cb_, <<pipelinestageflags, _pipelinestageflags_>>, <<query_pool, _query_pool_>>, _query_) +
 [small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdWriteTimestamp.html[vkCmdWriteTimestamp].#
+
 

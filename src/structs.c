@@ -775,9 +775,20 @@ int echeckcommandbufferallocateinfo(lua_State *L, int arg, VkCommandBufferAlloca
 
 /*------------------------------------------------------------------------------*/
 
-static int echeckcommandbufferinheritanceinfo(lua_State *L, int arg, VkCommandBufferInheritanceInfo *p)
+static int echeckcommandbufferinheritanceconditionalrenderinginfo(lua_State *L, int arg, VkCommandBufferInheritanceConditionalRenderingInfoEXT *p)
     {
-    CHECK_TABLE(L, arg, p);
+    p->sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_CONDITIONAL_RENDERING_INFO_EXT;
+    GetBoolean(conditionalRenderingEnable, "conditional_rendering_enable");
+    return 0;
+    }
+
+static int echeckcommandbufferinheritanceinfo(lua_State *L, int arg, VkCommandBufferInheritanceInfo_CHAIN *pp)
+    {
+    int err;
+    VkCommandBufferInheritanceInfo *p = &pp->p1;
+    VkCommandBufferInheritanceConditionalRenderingInfoEXT *p2 = &pp->p2;
+    const void **chain = pnextof(p);
+    CHECK_TABLE(L, arg, pp);
     p->sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_INFO;
     GetRenderPassOpt(renderPass, "render_pass");
     GetInteger(subpass, "subpass");
@@ -785,6 +796,12 @@ static int echeckcommandbufferinheritanceinfo(lua_State *L, int arg, VkCommandBu
     GetBoolean(occlusionQueryEnable, "occlusion_query_enable");
     GetFlags(queryFlags, "query_flags");
     GetFlags(pipelineStatistics, "pipeline_statistics");
+    if(ispresent("conditional_rendering_enable"))
+        {
+        err = echeckcommandbufferinheritanceconditionalrenderinginfo(L, arg, p2);
+        if(err) return err;
+        addtochain(chain, p2);
+        }
     return 0;
     }
 
@@ -803,7 +820,7 @@ int echeckcommandbufferbegininfo(lua_State *L, int arg, VkCommandBufferBeginInfo
     if(err == ERR_NOTPRESENT)
         poperror();
     else
-        p->pInheritanceInfo = &pp->p2;
+        p->pInheritanceInfo = &pp->p2.p1;
 #undef F
     return 0;
     }
@@ -1849,6 +1866,13 @@ static int echeckphysicaldevicesamplerycbcrconversionfeatures(lua_State *L, int 
     return 0;
     }
 
+static int echeckphysicaldeviceconditionalrenderingfeatures(lua_State *L, int arg, VkPhysicalDeviceConditionalRenderingFeaturesEXT *p)
+    {
+    CHECK_TABLE(L, arg, p);
+    GetBoolean(conditionalRendering, "conditional_rendering");
+    GetBoolean(inheritedConditionalRendering, "inherited_conditional_rendering");
+    return 0;
+    }
 
 #define BUILD_CHAIN_VkPhysicalDeviceFeatures2(p) do { \
     (p)->p1.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2; \
@@ -1856,11 +1880,13 @@ static int echeckphysicaldevicesamplerycbcrconversionfeatures(lua_State *L, int 
     (p)->p3.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VARIABLE_POINTER_FEATURES; \
     (p)->p4.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_BLEND_OPERATION_ADVANCED_FEATURES_EXT; \
     (p)->p5.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLER_YCBCR_CONVERSION_FEATURES; \
+    (p)->p6.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CONDITIONAL_RENDERING_FEATURES_EXT; \
     (p)->p1.pNext = &p->p2; \
     (p)->p2.pNext = &p->p3; \
     (p)->p3.pNext = &p->p4; \
     (p)->p4.pNext = &p->p5; \
-    (p)->p5.pNext = NULL;   \
+    (p)->p5.pNext = &p->p6; \
+    (p)->p6.pNext = NULL;   \
 } while(0)
 
 void initphysicaldevicefeatures2(lua_State *L, VkPhysicalDeviceFeatures2_CHAIN *p)
@@ -1882,6 +1908,8 @@ static int echeckphysicaldevicefeatures2(lua_State *L, int arg, VkPhysicalDevice
     err = echeckphysicaldeviceblendoperationadvancedfeatures(L, arg, &p->p4);
     if(err) return err;
     err = echeckphysicaldevicesamplerycbcrconversionfeatures(L, arg, &p->p5);
+    if(err) return err;
+    err = echeckphysicaldeviceconditionalrenderingfeatures(L, arg, &p->p6);
     if(err) return err;
     BUILD_CHAIN_VkPhysicalDeviceFeatures2(p);
     return 0;
@@ -1976,6 +2004,12 @@ static int pushphysicaldevicesamplerycbcrconversionfeatures(lua_State *L, VkPhys
     return 0;
     }
 
+static int pushphysicaldeviceconditionalrenderingfeatures(lua_State *L, VkPhysicalDeviceConditionalRenderingFeaturesEXT *p)
+    {
+    SetBoolean(conditionalRendering, "conditional_rendering");
+    SetBoolean(inheritedConditionalRendering, "inherited_conditional_rendering");
+    return 0;
+    }
 
 int pushphysicaldevicefeatures2(lua_State *L, VkPhysicalDeviceFeatures2_CHAIN *p)
     {
@@ -1984,6 +2018,7 @@ int pushphysicaldevicefeatures2(lua_State *L, VkPhysicalDeviceFeatures2_CHAIN *p
     pushphysicaldevicevariablepointerfeatures(L, &p->p3);
     pushphysicaldeviceblendoperationadvancedfeatures(L, &p->p4);
     pushphysicaldevicesamplerycbcrconversionfeatures(L, &p->p5);
+    pushphysicaldeviceconditionalrenderingfeatures(L, &p->p6);
     return 1;
     }
 
@@ -5323,6 +5358,25 @@ int pushdebugutilsmessengercallbackdata(lua_State *L, const VkDebugUtilsMessenge
 #undef F
     return 1;
     }
+
+/*------------------------------------------------------------------------------*/
+
+void freeconditionalrenderingbegininfo(lua_State *L, VkConditionalRenderingBeginInfoEXT *p)
+    {
+    (void)L; (void)p;
+    }
+
+int echeckconditionalrenderingbegininfo(lua_State *L, int arg, VkConditionalRenderingBeginInfoEXT *p)
+    {
+    CHECK_TABLE(L, arg, p);
+    p->sType = VK_STRUCTURE_TYPE_CONDITIONAL_RENDERING_BEGIN_INFO_EXT;
+    GetBuffer(buffer, "buffer");
+    GetInteger(offset, "offset");
+    GetFlags(flags, "flags");
+    return 0;
+    }
+
+/*------------------------------------------------------------------------------*/
 
 #if 0 /* scaffolding 25yy */
 #define freezzz moonvulkan_freezzz
