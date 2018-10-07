@@ -2188,15 +2188,18 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/h
 <ul>
 <li>
 <p><strong>cmd_begin_conditional_rendering</strong>(<em>cb</em>, <a href="#conditionalrenderingbegininfo"><em>conditionalrenderingbegininfo</em></a>)<br>
-<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkCmdBeginConditionalRenderingEXT">vkCmdBeginConditionalRenderingEXT</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_conditional_rendering">VK_EXT_conditional_rendering</a>).</span></p>
+<strong>cmd_end_conditional_rendering</strong>(<em>cb</em>)<br>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkCmdBeginConditionalRenderingEXT">vkCmdBeginConditionalRenderingEXT</a>, <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkCmdEndConditionalRenderingEXT">vkCmdEndConditionalRenderingEXT</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_conditional_rendering">VK_EXT_conditional_rendering</a>).</span></p>
 </li>
 </ul>
 </div>
-<div id="cmd_end_conditional_rendering" class="ulist">
+<div id="cmd_begin_debug_utils_label" class="ulist">
 <ul>
 <li>
-<p><strong>cmd_end_conditional_rendering</strong>(<em>cb</em>)<br>
-<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkCmdEndConditionalRenderingEXT">vkCmdEndConditionalRenderingEXT</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_conditional_rendering">VK_EXT_conditional_rendering</a>).</span></p>
+<p><strong>cmd_begin_debug_utils_label</strong>(<em>cb</em>, <a href="#debugutilslabel"><em>debugutilslabel</em></a>)<br>
+<strong>cmd_end_debug_utils_label</strong>(<em>cb</em>)<br>
+<strong>cmd_insert_debug_utils_label</strong>(<em>cb</em>, <a href="#debugutilslabel"><em>debugutilslabel</em></a>)<br>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkCmdBeginDebugUtilsLabelEXT">vkCmdBeginDebugUtilsLabelEXT</a>, <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkCmdEndDebugUtilsLabelEXT">vkCmdEndDebugUtilsLabelEXT</a>, <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkCmdInsertDebugUtilsLabelEXT">vkCmdInsertDebugUtilsLabelEXT</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_debug_utils">VK_EXT_debug_utils</a>).</span></p>
 </li>
 </ul>
 </div>
@@ -2204,15 +2207,8 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/h
 <ul>
 <li>
 <p><strong>cmd_begin_query</strong>(<em>cb</em>, <a href="#query_pool"><em>query_pool</em></a>, <em>query</em>, <a href="#querycontrolflags"><em>querycontrolflags</em></a>)<br>
-<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdBeginQuery.html">vkCmdBeginQuery</a>.</span></p>
-</li>
-</ul>
-</div>
-<div id="cmd_end_query" class="ulist">
-<ul>
-<li>
-<p><strong>cmd_end_query</strong>(<em>cb</em>, <a href="#query_pool"><em>query_pool</em></a>, <em>query</em>)<br>
-<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdEndQuery.html">vkCmdEndQuery</a>.</span></p>
+<strong>cmd_end_query</strong>(<em>cb</em>, <a href="#query_pool"><em>query_pool</em></a>, <em>query</em>)<br>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdBeginQuery.html">vkCmdBeginQuery</a>, <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdEndQuery.html">vkCmdEndQuery</a>.</span></p>
 </li>
 </ul>
 </div>
@@ -2220,15 +2216,8 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/h
 <ul>
 <li>
 <p><strong>cmd_begin_render_pass</strong>(<em>cb</em>, <a href="#renderpassbegininfo"><em>renderpassbegininfo</em></a>, <a href="#subpasscontents"><em>subpasscontents</em></a>)<br>
-<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdBeginRenderPass.html">vkCmdBeginRenderPass</a>.</span></p>
-</li>
-</ul>
-</div>
-<div id="cmd_end_render_pass" class="ulist">
-<ul>
-<li>
-<p><strong>cmd_end_render_pass</strong>(<em>cb</em>)<br>
-<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdEndRenderPass.html">vkCmdEndRenderPass</a>.</span></p>
+<strong>cmd_end_render_pass</strong>(<em>cb</em>)<br>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdBeginRenderPass.html">vkCmdBeginRenderPass</a>, <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdEndRenderPass.html">vkCmdEndRenderPass</a>.</span></p>
 </li>
 </ul>
 </div>
@@ -2384,51 +2373,13 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/h
 <ul>
 <li>
 <p><strong>cmd_debug_marker_begin</strong>(<em>cb</em>, <em>marker_name</em>, [<em>color</em>])<br>
+<strong>cmd_debug_marker_end</strong>(<em>cb</em>)<br>
+<strong>cmd_debug_marker_insert</strong>(<em>cb</em>, <em>marker_name</em>, [<em>color</em>])<br>
 <span class="small"><em>marker_name</em>: string<br>
 <em>color</em>: {float}[4] (opt.)<br>
-Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkCmdDebugMarkerBeginEXT">vkCmdDebugMarkerBeginEXT</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_debug_marker">VK_EXT_debug_marker</a>)</span>.</p>
-</li>
-</ul>
-</div>
-<div id="cmd_debug_marker_end" class="ulist">
-<ul>
-<li>
-<p><strong>cmd_debug_marker_end</strong>(<em>cb</em>)<br>
-<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkCmdDebugMarkerEndEXT">vkCmdDebugMarkerEndEXT</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_debug_marker">VK_EXT_debug_marker</a>)</span>.</p>
-</li>
-</ul>
-</div>
-<div id="cmd_debug_marker_insert" class="ulist">
-<ul>
-<li>
-<p><strong>cmd_debug_marker_insert</strong>(<em>cb</em>, <em>marker_name</em>, [<em>color</em>])<br>
-<span class="small"><em>marker_name</em>: string<br>
-<em>color</em>: {float}[4] (opt.)<br>
-Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkCmdDebugMarkerInsertEXT">vkCmdDebugMarkerInsertEXT</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_debug_marker">VK_EXT_debug_marker</a>)</span>.</p>
-</li>
-</ul>
-</div>
-<div id="cmd_begin_debug_utils_label" class="ulist">
-<ul>
-<li>
-<p><strong>cmd_begin_debug_utils_label</strong>(<em>cb</em>, <a href="#debugutilslabel"><em>debugutilslabel</em></a>)<br>
-<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkCmdBeginDebugUtilsLabelEXT">vkCmdBeginDebugUtilsLabelEXT</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_debug_utils">VK_EXT_debug_utils</a>).</span></p>
-</li>
-</ul>
-</div>
-<div id="cmd_end_debug_utils_label" class="ulist">
-<ul>
-<li>
-<p><strong>cmd_end_debug_utils_label</strong>(<em>cb</em>)<br>
-<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkCmdEndDebugUtilsLabelEXT">vkCmdEndDebugUtilsLabelEXT</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_debug_utils">VK_EXT_debug_utils</a>).</span></p>
-</li>
-</ul>
-</div>
-<div id="cmd_insert_debug_utils_label" class="ulist">
-<ul>
-<li>
-<p><strong>cmd_insert_debug_utils_label</strong>(<em>cb</em>, <a href="#debugutilslabel"><em>debugutilslabel</em></a>)<br>
-<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkCmdInsertDebugUtilsLabelEXT">vkCmdInsertDebugUtilsLabelEXT</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_debug_utils">VK_EXT_debug_utils</a>).</span></p>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkCmdDebugMarkerBeginEXT">vkCmdDebugMarkerBeginEXT</a>,
+<a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkCmdDebugMarkerEndEXT">vkCmdDebugMarkerEndEXT</a>,
+<a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkCmdDebugMarkerInsertEXT">vkCmdDebugMarkerInsertEXT</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_debug_marker">VK_EXT_debug_marker</a>)</span>.</p>
 </li>
 </ul>
 </div>
@@ -6656,7 +6607,7 @@ that the relevant header files are where <em>vulkan.h</em> expects them to be.</
 <div id="footer">
 <div id="footer-text">
 Version 0.4<br>
-Last updated 2018-04-29 17:21:59 CEST
+Last updated 2018-10-07 12:39:42 CEST
 </div>
 </div>
 </body>
