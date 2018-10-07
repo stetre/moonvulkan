@@ -655,12 +655,49 @@ VkBindImageMemoryInfo* echeckbindimagememoryinfolist(lua_State *L, int arg, uint
 #define echecksamplerycbcrconversioncreateinfo moonvulkan_echecksamplerycbcrconversioncreateinfo
 int echecksamplerycbcrconversioncreateinfo(lua_State *L, int arg, VkSamplerYcbcrConversionCreateInfo *p);
 
+typedef struct {
+    VkDebugUtilsMessengerCreateInfoEXT p1;
+} VkDebugUtilsMessengerCreateInfo_CHAIN;
+
+#define freedebugutilsmessengercreateinfo moonvulkan_freedebugutilsmessengercreateinfo
+void freedebugutilsmessengercreateinfo(lua_State *L, VkDebugUtilsMessengerCreateInfo_CHAIN *p);
+#define echeckdebugutilsmessengercreateinfo moonvulkan_echeckdebugutilsmessengercreateinfo
+int echeckdebugutilsmessengercreateinfo(lua_State *L, int arg, VkDebugUtilsMessengerCreateInfo_CHAIN *p);
+
+#define freedebugutilsobjectnameinfo moonvulkan_freedebugutilsobjectnameinfo
+void freedebugutilsobjectnameinfo(lua_State *L, VkDebugUtilsObjectNameInfoEXT *p);
+#define echeckdebugutilsobjectnameinfo moonvulkan_echeckdebugutilsobjectnameinfo
+int echeckdebugutilsobjectnameinfo(lua_State *L, int arg, VkDebugUtilsObjectNameInfoEXT *p);
+#define pushdebugutilsobjectnameinfo moonvulkan_pushdebugutilsobjectnameinfo
+int pushdebugutilsobjectnameinfo(lua_State *L, const VkDebugUtilsObjectNameInfoEXT *p);
+
+#define freedebugutilsobjecttaginfo moonvulkan_freedebugutilsobjecttaginfo
+void freedebugutilsobjecttaginfo(lua_State *L, VkDebugUtilsObjectTagInfoEXT *p);
+#define echeckdebugutilsobjecttaginfo moonvulkan_echeckdebugutilsobjecttaginfo
+int echeckdebugutilsobjecttaginfo(lua_State *L, int arg, VkDebugUtilsObjectTagInfoEXT *p);
+#define pushdebugutilsobjecttaginfo moonvulkan_pushdebugutilsobjecttaginfo
+int pushdebugutilsobjecttaginfo(lua_State *L, const VkDebugUtilsObjectTagInfoEXT *p);
+
+#define freedebugutilslabel moonvulkan_freedebugutilslabel
+void freedebugutilslabel(lua_State *L, VkDebugUtilsLabelEXT *p);
+#define echeckdebugutilslabel moonvulkan_echeckdebugutilslabel
+int echeckdebugutilslabel(lua_State *L, int arg, VkDebugUtilsLabelEXT *p);
+#define pushdebugutilslabel moonvulkan_pushdebugutilslabel
+int pushdebugutilslabel(lua_State *L, const VkDebugUtilsLabelEXT *p);
+
+#define freedebugutilsmessengercallbackdata moonvulkan_freedebugutilsmessengercallbackdata
+void freedebugutilsmessengercallbackdata(lua_State *L, VkDebugUtilsMessengerCallbackDataEXT *p);
+#define echeckdebugutilsmessengercallbackdata moonvulkan_echeckdebugutilsmessengercallbackdata
+int echeckdebugutilsmessengercallbackdata(lua_State *L, int arg, VkDebugUtilsMessengerCallbackDataEXT *p);
+#define pushdebugutilsmessengercallbackdata moonvulkan_pushdebugutilsmessengercallbackdata
+int pushdebugutilsmessengercallbackdata(lua_State *L, const VkDebugUtilsMessengerCallbackDataEXT *p);
+
 #ifdef VK_USE_PLATFORM_WIN32_KHR
 
 #define echeckimportsemaphorewin32handleinfo moonvulkan_echeckimportsemaphorewin32handleinfo
 int echeckimportsemaphorewin32handleinfo(lua_State *L, int arg, VkImportSemaphoreWin32HandleInfoKHR *p);
 #define echecksemaphoregetwin32handleinfo moonvulkan_echecksemaphoregetwin32handleinfo
-int echecksemaphoregetwin32handleinfo(lua_State *L, int arg, VkSemaphoreGetWin32HandleInfoKHR *p);
+int echecksemaphoregetwin32handleinfo(lua_State *L, int arg, const VkSemaphoreGetWin32HandleInfoKHR *p);
 
 #endif /* VK_USE_PLATFORM_WIN32_KHR */
 

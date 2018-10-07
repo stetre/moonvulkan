@@ -121,6 +121,17 @@ typedef struct {
     F(GetPhysicalDeviceExternalFenceProperties);
     F(ReleaseDisplayEXT);
     F(GetPhysicalDeviceSurfaceCapabilities2EXT);
+    F(SetDebugUtilsObjectNameEXT);
+    F(SetDebugUtilsObjectTagEXT);
+    F(QueueBeginDebugUtilsLabelEXT);
+    F(QueueEndDebugUtilsLabelEXT);
+    F(QueueInsertDebugUtilsLabelEXT);
+    F(CmdBeginDebugUtilsLabelEXT);
+    F(CmdEndDebugUtilsLabelEXT);
+    F(CmdInsertDebugUtilsLabelEXT);
+    F(CreateDebugUtilsMessengerEXT);
+    F(DestroyDebugUtilsMessengerEXT);
+    F(SubmitDebugUtilsMessageEXT);
 } instance_dt_t;
 
 

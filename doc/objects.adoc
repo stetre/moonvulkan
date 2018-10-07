@@ -37,7 +37,8 @@ The following tree shows the MoonVulkan (_Vulkan_) objects and their parent-chil
 {tI}{tL}<<swapchain, swapchain>> _(VkSwapchainKHR)_ +
 {tI}{tS}{tL}<<image, image>> _(VkImage, present)_ +
 {tH}<<surface, surface>> _(VkSurfaceKHR)_ +
-{tL}<<debug_report_callback, debug_report_callback>> _(VkDebugReportCallbackEXT)_#
+{tH}<<debug_report_callback, debug_report_callback>> _(VkDebugReportCallbackEXT)_ +
+{tL}<<debug_utils, debug_utils_messenger>> _(VkDebugUtilsMessengerEXT)_#
 
 (Notice that the _image_ object is listed two times because it may be either created by
 the application or acquired from a _swapchain_).

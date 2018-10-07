@@ -128,6 +128,17 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.ht
 _color_: {float}[4] (opt.) +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkCmdDebugMarkerInsertEXT[vkCmdDebugMarkerInsertEXT] (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_debug_marker[VK_EXT_debug_marker])#.
 
+[[cmd_begin_debug_utils_label]]
+* *cmd_begin_debug_utils_label*(_cb_, <<debugutilslabel, _debugutilslabel_>>) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkCmdBeginDebugUtilsLabelEXT[vkCmdBeginDebugUtilsLabelEXT] (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_debug_utils[VK_EXT_debug_utils]).#
+
+[[cmd_end_debug_utils_label]]
+* *cmd_end_debug_utils_label*(_cb_) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkCmdEndDebugUtilsLabelEXT[vkCmdEndDebugUtilsLabelEXT] (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_debug_utils[VK_EXT_debug_utils]).#
+
+[[cmd_insert_debug_utils_label]]
+* *cmd_insert_debug_utils_label*(_cb_, <<debugutilslabel, _debugutilslabel_>>) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkCmdInsertDebugUtilsLabelEXT[vkCmdInsertDebugUtilsLabelEXT] (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_debug_utils[VK_EXT_debug_utils]).#
 
 [[cmd_dispatch]]
 * *cmd_dispatch*(_cb_, _x_, _y_, _z_) +

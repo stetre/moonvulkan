@@ -2,6 +2,9 @@
 [[extensions]]
 === Supported extensions
 
+
+// @@TODO: rimuovere la lista e riscrivere
+
 MoonVulkan supports the core Vulkan API, plus the *extensions* listed hereafter.
 
 Khronos extensions (KHR):

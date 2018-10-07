@@ -64,6 +64,7 @@
 #define DESCRIPTOR_UPDATE_TEMPLATE_MT "moonvulkan_descriptor_update_template"
 #define VALIDATION_CACHE_MT "moonvulkan_validation_cache" /* EXT */
 #define SAMPLER_YCBCR_CONVERSION_MT "moonvulkan_sampler_ycbcr_conversion"
+#define DEBUG_UTILS_MESSENGER_MT "moonvulkan_debug_utils_messenger" /* EXT */
 
 /* Userdata memory associated with objects */
 #define ud_t moonvulkan_ud_t
@@ -315,6 +316,10 @@ int pushimage_swapchain(lua_State *L, VkImage image, ud_t *swapchain_ud);
 #define checkdebug_report_callback(L, arg, udp) (VkDebugReportCallbackEXT)checkxxx((L), (arg), (udp), DEBUG_REPORT_CALLBACK_MT)
 #define testdebug_report_callback(L, arg, udp) (VkDebugReportCallbackEXT)testxxx((L), (arg), (udp), DEBUG_REPORT_CALLBACK_MT)
 
+/* debug_utils_messenger.c */
+#define checkdebug_utils_messenger(L, arg, udp) (VkDebugUtilsMessengerEXT)checkxxx((L), (arg), (udp), DEBUG_UTILS_MESSENGER_MT)
+#define testdebug_utils_messenger(L, arg, udp) (VkDebugUtilsMessengerEXT)testxxx((L), (arg), (udp), DEBUG_UTILS_MESSENGER_MT)
+
 /* display.c */
 #define checkdisplay(L, arg, udp) (VkDisplayKHR)checkxxx((L), (arg), (udp), DISPLAY_MT)
 #define testdisplay(L, arg, udp) (VkDisplayKHR)testxxx((L), (arg), (udp), DISPLAY_MT)
@@ -375,7 +380,7 @@ void moonvulkan_open_display_mode(lua_State *L);
 void moonvulkan_open_descriptor_update_template(lua_State *L);
 void moonvulkan_open_validation_cache(lua_State *L);
 void moonvulkan_open_sampler_ycbcr_conversion(lua_State *L);
-
+void moonvulkan_open_debug_utils_messenger(lua_State *L);
 
 
 #define RAW_FUNC(xxx)                       \

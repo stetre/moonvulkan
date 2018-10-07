@@ -1629,6 +1629,45 @@ _offset_: integer, +
 _stride_: integer, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkDescriptorUpdateTemplateEntry.html[VkDescriptorUpdateTemplateEntry])#
 
+'''
+
+* [[debugutilsmessengercreateinfo]]
+[small]#*debugutilsmessengercreateinfo* = { +
+_flags_: <<debugutilsmessengercreateflags, debugutilsmessengercreateflags>>, +
+_message_severity_: <<debugutilsmessageseverityflags, debugutilsmessageseverityflags>>, +
+_message_type_: <<debugutilsmessagetypeflags, debugutilsmessagetypeflags>>, +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkDebugUtilsMessengerCreateInfoEXT[VkDebugUtilsMessengerCreateInfoEXT])#
+
+* [[debugutilsobjectnameinfo]]
+[small]#*debugutilsobjectnameinfo* = { +
+_object_type_: <<objecttype, objecttype>> *[R]*, +
+_object_handle_: integer (raw handle) *[R]*, +
+_object_name_: string *[R]*, +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkDebugUtilsObjectNameInfoEXT[VkDebugUtilsObjectNameInfoEXT])#
+
+* [[debugutilsobjecttaginfo]]
+[small]#*debugutilsobjecttaginfo* = { +
+_object_type_: <<objecttype, objecttype>> *[R]*, +
+_object_handle_: integer (raw handle) *[R]*, +
+_tag_name_: integer *[R]*, +
+_tag_: string *[R]*, +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkDebugUtilsObjectTagInfoEXT[VkDebugUtilsObjectTagInfoEXT])#
+
+* [[debugutilslabel]]
+[small]#*debugutilslabel* = { +
+_label_name_: string *[R]*, +
+_color_: {float}[4], +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkDebugUtilsLabelEXT[VkDebugUtilsLabelEXT])#
+
+* [[debugutilsmessengercallbackdata]]
+[small]#*debugutilsmessengercallbackdata* = { +
+_message_id_name_: string *[R]*, +
+_message_: string *[R]*, +
+_queue_labels_: {<<debugutilslabel, debugutilslabel>>}, +
+_cmd_buf_labels_: {<<debugutilslabel, debugutilslabel>>}, +
+_objects_: {<<debugutilsobjectnameinfo, debugutilsobjectnameinfo>>}, +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkDebugUtilsMessengerCallbackDataEXT[VkDebugUtilsMessengerCallbackDataEXT])#
+
 
 ////
 5yy

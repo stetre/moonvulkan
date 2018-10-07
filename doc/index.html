@@ -892,6 +892,7 @@ p.tableblock.header { color: #6d6e71; }
 <ul class="sectlevel3">
 <li><a href="#debug_report_callback">debug_report_callback</a></li>
 <li><a href="#debug_marker">Debug Marker</a></li>
+<li><a href="#debug_utils">debug_utils</a></li>
 <li><a href="#validation_cache">validation_cache</a></li>
 </ul>
 </li>
@@ -1123,7 +1124,8 @@ binding library to a dynamic, garbage-collected language is not the way to go).<
 &#9474;&#8192;&#8192;&#8192;&#9492;&#9472;&#8192;<a href="#swapchain">swapchain</a> <em>(VkSwapchainKHR)</em><br>
 &#9474;&#8192;&#8192;&#8192;&#8192;&#8192;&#8192;&#8192;&#9492;&#9472;&#8192;<a href="#image">image</a> <em>(VkImage, present)</em><br>
 &#9500;&#9472;&#8192;<a href="#surface">surface</a> <em>(VkSurfaceKHR)</em><br>
-&#9492;&#9472;&#8192;<a href="#debug_report_callback">debug_report_callback</a> <em>(VkDebugReportCallbackEXT)</em></span></p>
+&#9500;&#9472;&#8192;<a href="#debug_report_callback">debug_report_callback</a> <em>(VkDebugReportCallbackEXT)</em><br>
+&#9492;&#9472;&#8192;<a href="#debug_utils">debug_utils_messenger</a> <em>(VkDebugUtilsMessengerEXT)</em></span></p>
 </div>
 <div class="paragraph">
 <p>(Notice that the <em>image</em> object is listed two times because it may be either created by
@@ -2374,6 +2376,30 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/
 </li>
 </ul>
 </div>
+<div id="cmd_begin_debug_utils_label" class="ulist">
+<ul>
+<li>
+<p><strong>cmd_begin_debug_utils_label</strong>(<em>cb</em>, <a href="#debugutilslabel"><em>debugutilslabel</em></a>)<br>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkCmdBeginDebugUtilsLabelEXT">vkCmdBeginDebugUtilsLabelEXT</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_debug_utils">VK_EXT_debug_utils</a>).</span></p>
+</li>
+</ul>
+</div>
+<div id="cmd_end_debug_utils_label" class="ulist">
+<ul>
+<li>
+<p><strong>cmd_end_debug_utils_label</strong>(<em>cb</em>)<br>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkCmdEndDebugUtilsLabelEXT">vkCmdEndDebugUtilsLabelEXT</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_debug_utils">VK_EXT_debug_utils</a>).</span></p>
+</li>
+</ul>
+</div>
+<div id="cmd_insert_debug_utils_label" class="ulist">
+<ul>
+<li>
+<p><strong>cmd_insert_debug_utils_label</strong>(<em>cb</em>, <a href="#debugutilslabel"><em>debugutilslabel</em></a>)<br>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkCmdInsertDebugUtilsLabelEXT">vkCmdInsertDebugUtilsLabelEXT</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_debug_utils">VK_EXT_debug_utils</a>).</span></p>
+</li>
+</ul>
+</div>
 <div id="cmd_dispatch" class="ulist">
 <ul>
 <li>
@@ -3204,6 +3230,79 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/
 <em>tag_name</em>: integer<br>
 <em>object_tag</em>: binary string<br>
 Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkDebugMarkerSetObjectTagEXT">vkDebugMarkerSetObjectTagEXT</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_debug_marker">VK_EXT_debug_marker</a>).</span></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="debug_utils">debug_utils</h4>
+<div id="create_debug_utils_messenger" class="ulist">
+<ul>
+<li>
+<p><em>debug_utils_messenger</em> = <strong>create_debug_utils_messenger</strong>(<em>instance</em>, <a href="#debugutilsmessengercreateinfo"><em>debugutilsmessengercreateinfo</em></a>, <em>func</em>, [<a href="#allocators"><em>allocator</em></a>])<br>
+<span class="small">The <em>func</em> callback (a Lua function) will be executed as:<br>
+<strong>func(instance, severityflags, typeflags, callbackdata)</strong>,<br>
+where the parameters are the same as those for the <a href="#submit_debug_utils_message">submit_debug_utils_message</a>(&nbsp;) function.<br>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkCreateDebugUtilsMessengerEXT">vkCreateDebugUtilsMessengerEXT</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_debug_utils">VK_EXT_debug_utils</a>).</span></p>
+</li>
+</ul>
+</div>
+<div id="destroy_debug_utils_messenger" class="ulist">
+<ul>
+<li>
+<p><strong>destroy_debug_utils_messenger</strong>(<em>debug_utils_messenger</em>)<br>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkDestroyDebugUtilsMessengerEXT">vkDestroyDebugUtilsMessengerEXT</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_debug_utils">VK_EXT_debug_utils</a>).</span></p>
+</li>
+</ul>
+</div>
+<div id="submit_debug_utils_message" class="ulist">
+<ul>
+<li>
+<p><strong>submit_debug_utils_message</strong>(<em>instance</em>, <em>severityflags</em>, <em>typeflags</em>, <em>callbackdata</em>)<br>
+<span class="small"><em>severityflags</em>: <a href="#debugutilsmessageseverityflags">debugutilsmessageseverityflags</a>,<br>
+<em>typeflags</em>: <a href="#debugutilsmessagetypeflags">debugutilsmessagetypeflags</a>,<br>
+<em>callbackdata</em>: <a href="#debugutilsmessengercallbackdata">debugutilsmessengercallbackdata</a>.<br>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkSubmitDebugUtilsMessageEXT">vkSubmitDebugUtilsMessageEXT</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_debug_utils">VK_EXT_debug_utils</a>).</span></p>
+</li>
+</ul>
+</div>
+<div id="set_debug_utils_object_name" class="ulist">
+<ul>
+<li>
+<p><strong>set_debug_utils_object_name</strong>(<em>device</em>, <a href="#debugutilsobjectnameinfo"><em>debugutilsobjectnameinfo</em></a>)<br>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkSetDebugUtilsObjectNameEXT">vkSetDebugUtilsObjectNameEXT</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_debug_utils">VK_EXT_debug_utils</a>).</span></p>
+</li>
+</ul>
+</div>
+<div id="set_debug_utils_object_tag" class="ulist">
+<ul>
+<li>
+<p><strong>set_debug_utils_object_tag</strong>(<em>device</em>, <a href="#debugutilsobjecttaginfo"><em>debugutilsobjecttaginfo</em></a>)<br>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkSetDebugUtilsObjectTagEXT">vkSetDebugUtilsObjectTagEXT</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_debug_utils">VK_EXT_debug_utils</a>).</span></p>
+</li>
+</ul>
+</div>
+<div id="queue_begin_debug_utils_label" class="ulist">
+<ul>
+<li>
+<p><strong>queue_begin_debug_utils_label</strong>(<a href="#queue"><em>queue</em></a>, <a href="#debugutilslabel"><em>debugutilslabel</em></a>)<br>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkQueueBeginDebugUtilsLabelEXT">vkQueueBeginDebugUtilsLabelEXT</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_debug_utils">VK_EXT_debug_utils</a>).</span></p>
+</li>
+</ul>
+</div>
+<div id="queue_end_debug_utils_label" class="ulist">
+<ul>
+<li>
+<p><strong>queue_end_debug_utils_label</strong>(<a href="#queue"><em>queue</em></a>)<br>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkQueueEndDebugUtilsLabelEXT">vkQueueEndDebugUtilsLabelEXT</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_debug_utils">VK_EXT_debug_utils</a>).</span></p>
+</li>
+</ul>
+</div>
+<div id="queue_insert_debug_utils_label" class="ulist">
+<ul>
+<li>
+<p><strong>queue_insert_debug_utils_label</strong>(<a href="#queue"><em>queue</em></a>, <a href="#debugutilslabel"><em>debugutilslabel</em></a>)<br>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkQueueInsertDebugUtilsLabelEXT">vkQueueInsertDebugUtilsLabelEXT</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_debug_utils">VK_EXT_debug_utils</a>).</span></p>
 </li>
 </ul>
 </div>
@@ -5357,6 +5456,53 @@ Note1: The <em>current_extent</em> field is <em>nil</em> when <em>width</em> and
 <em>offset</em>: integer,<br>
 <em>stride</em>: integer,<br>
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkDescriptorUpdateTemplateEntry.html">VkDescriptorUpdateTemplateEntry</a>)</span></p>
+</li>
+</ul>
+</div>
+<hr>
+<div class="ulist">
+<ul>
+<li>
+<p><a id="debugutilsmessengercreateinfo"></a>
+<span class="small"><strong>debugutilsmessengercreateinfo</strong> = {<br>
+<em>flags</em>: <a href="#debugutilsmessengercreateflags">debugutilsmessengercreateflags</a>,<br>
+<em>message_severity</em>: <a href="#debugutilsmessageseverityflags">debugutilsmessageseverityflags</a>,<br>
+<em>message_type</em>: <a href="#debugutilsmessagetypeflags">debugutilsmessagetypeflags</a>,<br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkDebugUtilsMessengerCreateInfoEXT">VkDebugUtilsMessengerCreateInfoEXT</a>)</span></p>
+</li>
+<li>
+<p><a id="debugutilsobjectnameinfo"></a>
+<span class="small"><strong>debugutilsobjectnameinfo</strong> = {<br>
+<em>object_type</em>: <a href="#objecttype">objecttype</a> <strong>[R]</strong>,<br>
+<em>object_handle</em>: integer (raw handle) <strong>[R]</strong>,<br>
+<em>object_name</em>: string <strong>[R]</strong>,<br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkDebugUtilsObjectNameInfoEXT">VkDebugUtilsObjectNameInfoEXT</a>)</span></p>
+</li>
+<li>
+<p><a id="debugutilsobjecttaginfo"></a>
+<span class="small"><strong>debugutilsobjecttaginfo</strong> = {<br>
+<em>object_type</em>: <a href="#objecttype">objecttype</a> <strong>[R]</strong>,<br>
+<em>object_handle</em>: integer (raw handle) <strong>[R]</strong>,<br>
+<em>tag_name</em>: integer <strong>[R]</strong>,<br>
+<em>tag</em>: string <strong>[R]</strong>,<br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkDebugUtilsObjectTagInfoEXT">VkDebugUtilsObjectTagInfoEXT</a>)</span></p>
+</li>
+<li>
+<p><a id="debugutilslabel"></a>
+<span class="small"><strong>debugutilslabel</strong> = {<br>
+<em>label_name</em>: string <strong>[R]</strong>,<br>
+<em>color</em>: {float}[4],<br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkDebugUtilsLabelEXT">VkDebugUtilsLabelEXT</a>)</span></p>
+</li>
+<li>
+<p><a id="debugutilsmessengercallbackdata"></a>
+<span class="small"><strong>debugutilsmessengercallbackdata</strong> = {<br>
+<em>message_id_name</em>: string <strong>[R]</strong>,<br>
+<em>message</em>: string <strong>[R]</strong>,<br>
+<em>queue_labels</em>: {<a href="#debugutilslabel">debugutilslabel</a>},<br>
+<em>cmd_buf_labels</em>: {<a href="#debugutilslabel">debugutilslabel</a>},<br>
+<em>objects</em>: {<a href="#debugutilsobjectnameinfo">debugutilsobjectnameinfo</a>},<br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkDebugUtilsMessengerCallbackDataEXT">VkDebugUtilsMessengerCallbackDataEXT</a>)</span></p>
 </li>
 </ul>
 </div>

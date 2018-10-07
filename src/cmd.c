@@ -815,6 +815,43 @@ static int CmdSetSampleLocations(lua_State *L)
     return 0;
     }
 
+static int CmdBeginDebugUtilsLabel(lua_State *L)
+    {
+    int err;
+    ud_t *ud;
+    VkDebugUtilsLabelEXT label;
+    VkCommandBuffer cb = checkcommand_buffer(L, 1, &ud);
+    CheckInstancePfn(L, ud, CmdBeginDebugUtilsLabelEXT);
+    err = echeckdebugutilslabel(L, 2, &label);
+    if(err) return argerror(L, 2);
+    ud->idt->CmdBeginDebugUtilsLabelEXT(cb, &label);
+    freedebugutilslabel(L, &label);
+    return 0;
+    }
+
+static int CmdEndDebugUtilsLabel(lua_State *L)
+    {
+    ud_t *ud;
+    VkCommandBuffer cb = checkcommand_buffer(L, 1, &ud);
+    CheckInstancePfn(L, ud, CmdEndDebugUtilsLabelEXT);
+    ud->idt->CmdEndDebugUtilsLabelEXT(cb);
+    return 0;
+    }
+
+static int CmdInsertDebugUtilsLabel(lua_State *L)
+    {
+    int err;
+    ud_t *ud;
+    VkDebugUtilsLabelEXT label;
+    VkCommandBuffer cb = checkcommand_buffer(L, 1, &ud);
+    CheckInstancePfn(L, ud, CmdInsertDebugUtilsLabelEXT);
+    err = echeckdebugutilslabel(L, 2, &label);
+    if(err) return argerror(L, 2);
+    ud->idt->CmdInsertDebugUtilsLabelEXT(cb, &label);
+    freedebugutilslabel(L, &label);
+    return 0;
+    }
+
 
 #if 0 // 10yy
         { "",  },
@@ -884,6 +921,9 @@ static const struct luaL_Reg Functions[] =
         { "cmd_push_descriptor_set_with_template", CmdPushDescriptorSetWithTemplate },
         { "cmd_set_discard_rectangle", CmdSetDiscardRectangle },
         { "cmd_set_sample_locations", CmdSetSampleLocations },
+        { "cmd_begin_debug_utils_label", CmdBeginDebugUtilsLabel },
+        { "cmd_end_debug_utils_label", CmdEndDebugUtilsLabel },
+        { "cmd_insert_debug_utils_label", CmdInsertDebugUtilsLabel },
         { NULL, NULL } /* sentinel */
     };
 

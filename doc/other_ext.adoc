@@ -41,3 +41,44 @@ _tag_name_: integer +
 _object_tag_: binary string +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkDebugMarkerSetObjectTagEXT[vkDebugMarkerSetObjectTagEXT] (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_debug_marker[VK_EXT_debug_marker]).#
 
+[[debug_utils]]
+==== debug_utils
+
+[[create_debug_utils_messenger]]
+* _debug_utils_messenger_ = *create_debug_utils_messenger*(_instance_, <<debugutilsmessengercreateinfo, _debugutilsmessengercreateinfo_>>, _func_, [<<allocators, _allocator_>>]) +
+[small]#The _func_ callback (a Lua function) will be executed as: +
+*func(instance, severityflags, typeflags, callbackdata)*, +
+where the parameters are the same as those for the <<submit_debug_utils_message, submit_debug_utils_message>>(&nbsp;) function. +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkCreateDebugUtilsMessengerEXT[vkCreateDebugUtilsMessengerEXT] (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_debug_utils[VK_EXT_debug_utils]).#
+
+[[destroy_debug_utils_messenger]]
+* *destroy_debug_utils_messenger*(_debug_utils_messenger_) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkDestroyDebugUtilsMessengerEXT[vkDestroyDebugUtilsMessengerEXT] (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_debug_utils[VK_EXT_debug_utils]).#
+
+[[submit_debug_utils_message]]
+* *submit_debug_utils_message*(_instance_, _severityflags_, _typeflags_, _callbackdata_) +
+[small]#_severityflags_: <<debugutilsmessageseverityflags, debugutilsmessageseverityflags>>, +
+_typeflags_: <<debugutilsmessagetypeflags, debugutilsmessagetypeflags>>, +
+_callbackdata_: <<debugutilsmessengercallbackdata, debugutilsmessengercallbackdata>>. +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkSubmitDebugUtilsMessageEXT[vkSubmitDebugUtilsMessageEXT] (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_debug_utils[VK_EXT_debug_utils]).#
+
+[[set_debug_utils_object_name]]
+* *set_debug_utils_object_name*(_device_, <<debugutilsobjectnameinfo, _debugutilsobjectnameinfo_>>) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkSetDebugUtilsObjectNameEXT[vkSetDebugUtilsObjectNameEXT] (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_debug_utils[VK_EXT_debug_utils]).#
+
+[[set_debug_utils_object_tag]]
+* *set_debug_utils_object_tag*(_device_, <<debugutilsobjecttaginfo, _debugutilsobjecttaginfo_>>) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkSetDebugUtilsObjectTagEXT[vkSetDebugUtilsObjectTagEXT] (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_debug_utils[VK_EXT_debug_utils]).#
+
+[[queue_begin_debug_utils_label]]
+* *queue_begin_debug_utils_label*(<<queue, _queue_>>, <<debugutilslabel, _debugutilslabel_>>) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkQueueBeginDebugUtilsLabelEXT[vkQueueBeginDebugUtilsLabelEXT] (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_debug_utils[VK_EXT_debug_utils]).#
+
+[[queue_end_debug_utils_label]]
+* *queue_end_debug_utils_label*(<<queue, _queue_>>) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkQueueEndDebugUtilsLabelEXT[vkQueueEndDebugUtilsLabelEXT] (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_debug_utils[VK_EXT_debug_utils]).#
+
+[[queue_insert_debug_utils_label]]
+* *queue_insert_debug_utils_label*(<<queue, _queue_>>, <<debugutilslabel, _debugutilslabel_>>) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkQueueInsertDebugUtilsLabelEXT[vkQueueInsertDebugUtilsLabelEXT] (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_debug_utils[VK_EXT_debug_utils]).#
+

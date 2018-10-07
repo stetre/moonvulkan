@@ -107,6 +107,10 @@ static int prependfield(lua_State *L, const char *fieldname)
  * structure that is currently last in the chain.
  */
 
+/*------------------------------------------------------------------------------*
+ | Get macros (for check functions)                                             |
+ *------------------------------------------------------------------------------*/
+
 /* Flags ---------------------------------------------------------------------*/
 
 static VkFlags GetFlags_(lua_State *L, int arg, const char *sname, int *err)
@@ -196,6 +200,48 @@ static lua_Integer GetInteger_(lua_State *L, int arg, const char *sname, lua_Int
 } while(0)
 
 #define GetInteger(name, sname) GetIntegerOpt(name, sname, 0)
+#define GetHandle GetInteger /* uint64_t handle */
+
+#define GetNumArray_(name, sname, n, towhatx) do {  \
+    int err_, arg2, arg3, t_, i_, isnum_;           \
+    arg2 = pushfield(L, arg, sname);                \
+    t_ = lua_type(L, arg2);                         \
+    err_ = 0;                                       \
+    if(t_ != LUA_TTABLE)                            \
+        {                                           \
+        popfield(L, arg2);                          \
+        if(t_ == LUA_TNIL || t_ == LUA_TNONE)       \
+            err_ = ERR_NOTPRESENT;                  \
+        else                                        \
+            return pushfielderror(L, sname, ERR_TABLE); \
+        }                                           \
+    else {                                          \
+        for(i_=0; i_ <(n); i_++)                    \
+            {                                       \
+            lua_rawgeti(L, arg2, i_+1);             \
+            arg3 = lua_gettop(L);                   \
+            p->name[i_] = towhatx(L, arg3, &isnum_); \
+            popfield(L, arg3);                      \
+            if(!isnum_) { err_=ERR_TYPE; break; }   \
+            }                                       \
+        popfield(L, arg2);                          \
+        if(err_ < 0)                                \
+            {                                       \
+            switch(err_)                            \
+                {                                   \
+                case ERR_TABLE:                     \
+                case ERR_MEMORY:                    \
+                case ERR_EMPTY:                     \
+                    return pushfielderror(L, sname, err_);   \
+                default:                            \
+                    return prependfield(L, sname);   \
+                }                                   \
+            }                                       \
+        }                                           \
+} while(0)
+
+#define GetIntegerArray(name, sname, n) GetNumArray_(name, sname, n, lua_tointegerx)
+#define GetNumberArray(name, sname, n) GetNumArray_(name, sname, n, lua_tonumberx)
 
 static int GetBoolean_(lua_State *L, int arg, const char *sname, int *err)
     {
@@ -220,15 +266,19 @@ static int GetBoolean_(lua_State *L, int arg, const char *sname, int *err)
 
 /* Strings -------------------------------------------------------------------*/
 
-static const char *GetString_(lua_State *L, int arg, const char *sname, const char *defval, int *err)
-/* The caller must Free() the returned string (if not NULL) */
+static const char *GetString_(lua_State *L, int arg, const char *sname, const char *defval, int *err, size_t *len)
+/* The caller must Free() the returned string (if not NULL).
+ * If len!=NULL, sets len with the string length or with 0 if defval is used.
+ *
+ */
     {
     const char *val = NULL;
     int arg_ = pushfield(L, arg, sname);
     int t_ = lua_type(L, arg_);
     *err = 0;
+    if(len) *len = 0;
     if(t_ == LUA_TSTRING)
-        val = Strdup(L, lua_tostring(L, arg_));
+        val = Strdup(L, lua_tolstring(L, arg_, len));
     else if((t_ == LUA_TNONE)||(t_ == LUA_TNIL))
         {
         if(defval)
@@ -246,22 +296,29 @@ static const char *GetString_(lua_State *L, int arg, const char *sname, const ch
 
 #define GetString(name, sname) do {                     \
     int err_;                                           \
-    p->name =  GetString_(L, arg, sname, NULL, &err_);  \
+    p->name =  GetString_(L, arg, sname, NULL, &err_, NULL);  \
     if(err_) return err_;                               \
 } while(0)
 
 #define GetStringOpt(name, sname) do {                  \
     int err_;                                           \
-    p->name =  GetString_(L, arg, sname, NULL, &err_);  \
+    p->name =  GetString_(L, arg, sname, NULL, &err_, NULL);  \
     if(err_ < 0) return err_;                           \
     if(err_ == ERR_NOTPRESENT) poperror();              \
 } while(0)
 
 #define GetStringDef(name, sname, defval) do {          \
     int err_;                                           \
-    p->name =  GetString_(L, arg, sname, defval, &err_);\
+    p->name =  GetString_(L, arg, sname, defval, &err_, NULL);\
     if(err_ < 0) return err_;                           \
 } while(0)
+
+#define GetLString(name, sname, len) /* size_t* */ do { \
+    int err_;                                           \
+    p->name =  GetString_(L, arg, sname, NULL, &err_, len);  \
+    if(err_) return err_;                               \
+} while(0)
+
 
 /* Lightuserdata -------------------------------------------------------------*/
 
@@ -313,6 +370,7 @@ static const char *GetString_(lua_State *L, int arg, const char *sname, const ch
 #define GetDisplayEventType(name, sname) GetEnum(name, sname, testdisplayeventtype)
 #define GetDisplayPowerState(name, sname) GetEnum(name, sname, testdisplaypowerstate)
 #define GetTessellationDomainOrigin(name, sname) GetEnum(name, sname, testtessellationdomainorigin)
+#define GetObjectType(name, sname) GetEnum(name, sname, testobjecttype)
 
 /* optional enums with defval */
 #define GetPipelineBindPoint(name, sname) GetEnumOpt(name, sname, testpipelinebindpoint, VK_PIPELINE_BIND_POINT_GRAPHICS)
@@ -579,7 +637,9 @@ static const char *GetString_(lua_State *L, int arg, const char *sname, const ch
         return pushfielderror(L, sname, err_);      \
 } while(0)
 
-/* Lists ---------------------------------------------------------------------*
+/*------------------------------------------------------------------------------*
+ | Lists                                                                        |
+ *------------------------------------------------------------------------------*
  *
  * VkXxx* echeckxxxlist(lua_State *L, int arg, uint32_t *count, int *err)
  *
@@ -662,13 +722,18 @@ VkXxx* echeck##xxx##list(lua_State *L, int arg, uint32_t *count, int *err)  \
     }
 
 
-/* Set macros (for push functions) ----------------------------------------------------*/
+/*------------------------------------------------------------------------------*
+ | Set macros (for push functions)                                              |
+ *------------------------------------------------------------------------------*/
+
 #define SetInteger(name, sname) do { lua_pushinteger(L, p->name); lua_setfield(L, -2, sname); } while(0)
+#define SetHandle SetInteger /* uint64_t handle */
 #define SetNumber(name, sname) do { lua_pushnumber(L, p->name); lua_setfield(L, -2, sname); } while(0)
 #define SetFlags(name, sname) do { pushflags(L, p->name); lua_setfield(L, -2, sname); } while(0)
 #define SetBits SetFlags
 #define SetBoolean(name, sname) do { lua_pushboolean(L, p->name); lua_setfield(L, -2, sname); } while(0)
 #define SetString(name, sname) do { lua_pushstring(L, p->name); lua_setfield(L, -2, sname); } while(0)
+#define SetLString(name, sname, len) do { lua_pushlstring(L, p->name, len); lua_setfield(L, -2, sname); } while(0)
 #define SetUUID(name, sname, len) do { lua_pushlstring(L, (char*)p->name,(len)); lua_setfield(L, -2, sname); } while(0)
 #define SetEnum(name, sname, pushfunc) do { pushfunc(L, p->name); lua_setfield(L, -2, sname); } while(0)
 #define SetStruct(name, sname, pushfunc) do { pushfunc(L, &(p->name)); lua_setfield(L, -2, sname); } while(0)
@@ -684,7 +749,9 @@ VkXxx* echeck##xxx##list(lua_State *L, int arg, uint32_t *count, int *err)  \
 } while(0)
 
 
-/*------------------------------------------------------------------------------*/
+/*------------------------------------------------------------------------------*
+ | Vulkan structs                                                               |
+ *------------------------------------------------------------------------------*/
 
 int echeckcommandpoolcreateinfo(lua_State *L, int arg, VkCommandPoolCreateInfo *p)
     {
@@ -5047,4 +5114,241 @@ int echecksamplerycbcrconversioncreateinfo(lua_State *L, int arg, VkSamplerYcbcr
     GetBoolean(forceExplicitReconstruction, "force_explicit_reconstruction");
     return 0;
     }
+
+/*------------------------------------------------------------------------------*/
+
+void freedebugutilsmessengercreateinfo(lua_State *L, VkDebugUtilsMessengerCreateInfo_CHAIN *p)
+    {
+    (void)L; (void)p;
+    }
+
+int echeckdebugutilsmessengercreateinfo(lua_State *L, int arg, VkDebugUtilsMessengerCreateInfo_CHAIN *pp)
+    {
+    VkDebugUtilsMessengerCreateInfoEXT *p = &pp->p1;
+    CHECK_TABLE(L, arg, pp);
+    p->sType = VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT;
+    GetFlags(flags, "flags");
+    GetFlags(messageSeverity, "message_severity");
+    GetFlags(messageType, "message_type");
+    /* pfnUserCallback and pUserData are set by the caller */
+    return 0;
+    }
+
+/*------------------------------------------------------------------------------*/
+
+void freedebugutilsobjectnameinfo(lua_State *L, VkDebugUtilsObjectNameInfoEXT *p)
+    {
+    if(p->pObjectName) Free(L, (char*)p->pObjectName);
+    }
+
+int echeckdebugutilsobjectnameinfo(lua_State *L, int arg, VkDebugUtilsObjectNameInfoEXT *p)
+    {
+    CHECK_TABLE(L, arg, p);
+    p->sType = VK_STRUCTURE_TYPE_DEBUG_UTILS_OBJECT_NAME_INFO_EXT;
+    GetObjectType(objectType, "object_type");
+    GetHandle(objectHandle, "object_handle");
+    GetString(pObjectName, "object_name");
+    return 0;
+    }
+
+int pushdebugutilsobjectnameinfo(lua_State *L, const VkDebugUtilsObjectNameInfoEXT *p)
+    {
+    lua_newtable(L);
+    SetEnum(objectType, "object_type", pushobjecttype);
+    SetHandle(objectHandle, "object_handle");
+    SetString(pObjectName, "object_name");
+    return 1;
+    }
+
+/* echeckdebugutilsobjectnamelist() */
+static FREELISTFUNC(VkDebugUtilsObjectNameInfoEXT, debugutilsobjectnameinfo)
+static ECHECKLISTFUNC(VkDebugUtilsObjectNameInfoEXT, debugutilsobjectnameinfo, freedebugutilsobjectnameinfolist)
+
+/*------------------------------------------------------------------------------*/
+
+void freedebugutilsobjecttaginfo(lua_State *L, VkDebugUtilsObjectTagInfoEXT *p)
+    {
+    if(p->pTag) Free(L, (char*)p->pTag);
+    }
+
+int echeckdebugutilsobjecttaginfo(lua_State *L, int arg, VkDebugUtilsObjectTagInfoEXT *p)
+    {
+    size_t len;
+    CHECK_TABLE(L, arg, p);
+    p->sType = VK_STRUCTURE_TYPE_DEBUG_UTILS_OBJECT_TAG_INFO_EXT;
+    GetObjectType(objectType, "object_type");
+    GetHandle(objectHandle, "object_handle");
+    GetInteger(tagName, "tag_name");
+    GetLString(pTag, "tag", &len);
+    p->tagSize = len;
+    return 0;
+    }
+
+int pushdebugutilsobjecttaginfo(lua_State *L, const VkDebugUtilsObjectTagInfoEXT *p)
+    {
+    lua_newtable(L);
+    SetEnum(objectType, "object_type", pushobjecttype);
+    SetHandle(objectHandle, "object_handle");
+    SetInteger(tagName, "tag_name");
+    SetLString(pTag, "tag", p->tagSize);
+    return 1;
+    }
+
+/*------------------------------------------------------------------------------*/
+
+void freedebugutilslabel(lua_State *L, VkDebugUtilsLabelEXT *p)
+    {
+    if(p->pLabelName) Free(L, (char*)p->pLabelName);
+    }
+
+int echeckdebugutilslabel(lua_State *L, int arg, VkDebugUtilsLabelEXT *p)
+    {
+    CHECK_TABLE(L, arg, p);
+    p->sType = VK_STRUCTURE_TYPE_DEBUG_UTILS_LABEL_EXT;
+    GetString(pLabelName, "label_name");
+    GetNumberArray(color, "color", 4);
+    return 0;
+    }
+
+int pushdebugutilslabel(lua_State *L, const VkDebugUtilsLabelEXT *p)
+    {
+    lua_newtable(L);
+    SetString(pLabelName, "label_name");
+    SetNumberArray(color, "color", 4);
+    return 1;
+    }
+
+/* echeckdebugutilslabellist() */
+static FREELISTFUNC(VkDebugUtilsLabelEXT, debugutilslabel)
+static ECHECKLISTFUNC(VkDebugUtilsLabelEXT, debugutilslabel, freedebugutilslabellist)
+
+/*------------------------------------------------------------------------------*/
+
+void freedebugutilsmessengercallbackdata(lua_State *L, VkDebugUtilsMessengerCallbackDataEXT *p)
+    {
+    if(!p) return;
+    if(p->pMessageIdName) Free(L, (char*)p->pMessageIdName);
+    if(p->pMessage) Free(L, (char*)p->pMessage);
+    if(p->pQueueLabels) freedebugutilslabellist(L, (void*)p->pQueueLabels, p->queueLabelCount);
+    if(p->pCmdBufLabels) freedebugutilslabellist(L, (void*)p->pCmdBufLabels, p->cmdBufLabelCount);
+    if(p->pObjects) freedebugutilsobjectnameinfolist(L, (void*)p->pObjects, p->objectCount);
+    }
+
+int echeckdebugutilsmessengercallbackdata(lua_State *L, int arg, VkDebugUtilsMessengerCallbackDataEXT *p)
+    {
+    int err, arg1;
+    CHECK_TABLE(L, arg, p);
+    p->sType = VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CALLBACK_DATA_EXT;
+    GetFlags(flags, "flags");
+    GetInteger(messageIdNumber, "message_id_number");
+#define F "message_id_name"
+    arg1 = pushfield(L, arg, F);
+    p->pMessageIdName =  GetString_(L, arg1, F, NULL, &err, NULL);
+    popfield(L, arg1);
+    if(err) { freedebugutilsmessengercallbackdata(L, p); return prependfield(L, F); }
+#undef F
+#define F "message"
+    arg1 = pushfield(L, arg, F);
+    p->pMessage =  GetString_(L, arg1, F, NULL, &err, NULL);
+    popfield(L, arg1);
+    if(err) { freedebugutilsmessengercallbackdata(L, p); return prependfield(L, F); }
+#undef F
+#define F "queue_labels"
+    arg1 = pushfield(L, arg, F);
+    p->pQueueLabels = echeckdebugutilslabellist(L, arg1, &p->queueLabelCount, &err);
+    popfield(L, arg1);
+    if(err == ERR_NOTPRESENT || err == ERR_EMPTY) poperror();
+    else if(err < 0) { freedebugutilsmessengercallbackdata(L, p); return prependfield(L, F); }
+#undef F
+#define F "cmd_buf_labels"
+    arg1 = pushfield(L, arg, F);
+    p->pCmdBufLabels = echeckdebugutilslabellist(L, arg1, &p->cmdBufLabelCount, &err);
+    popfield(L, arg1);
+    if(err == ERR_NOTPRESENT || err == ERR_EMPTY) poperror();
+    else if(err < 0) { freedebugutilsmessengercallbackdata(L, p); return prependfield(L, F); }
+#undef F
+#define F "objects"
+    arg1 = pushfield(L, arg, F);
+    p->pObjects = echeckdebugutilsobjectnameinfolist(L, arg1, &p->objectCount, &err);
+    popfield(L, arg1);
+    if(err == ERR_NOTPRESENT || err == ERR_EMPTY) poperror();
+    else if(err < 0) { freedebugutilsmessengercallbackdata(L, p); return prependfield(L, F); }
+#undef F
+    return 0;
+    }
+
+int pushdebugutilsmessengercallbackdata(lua_State *L, const VkDebugUtilsMessengerCallbackDataEXT *p)
+    {
+    uint32_t i;
+    lua_newtable(L);
+    SetFlags(flags, "flags");
+    SetString(pMessageIdName, "message_id_name");
+    SetInteger(messageIdNumber, "message_id_number");
+    SetString(pMessage, "message");
+#define F "queue_labels"
+    lua_newtable(L);
+    if(p->queueLabelCount > 0 && p->pQueueLabels)
+        {
+        for(i = 0; i < p->queueLabelCount; i++)
+            {
+            pushdebugutilslabel(L, &p->pQueueLabels[i]);
+            lua_rawseti(L, -2, i+1);
+            }
+        }
+    lua_setfield(L, -1, F);
+#undef F
+#define F "cmd_buf_labels"
+    lua_newtable(L);
+    if(p->cmdBufLabelCount > 0 && p->pCmdBufLabels)
+        {
+        for(i = 0; i < p->cmdBufLabelCount; i++)
+            {
+            pushdebugutilslabel(L, &p->pCmdBufLabels[i]);
+            lua_rawseti(L, -2, i+1);
+            }
+        }
+    lua_setfield(L, -1, F);
+#undef F
+#define F "objects"
+    lua_newtable(L);
+    if(p->objectCount > 0 && p->pObjects)
+        {
+        for(i = 0; i < p->objectCount; i++)
+            {
+            pushdebugutilsobjectnameinfo(L, &p->pObjects[i]);
+            lua_rawseti(L, -2, i+1);
+            }
+        }
+    lua_setfield(L, -1, F);
+#undef F
+    return 1;
+    }
+
+#if 0 /* scaffolding 25yy */
+#define freezzz moonvulkan_freezzz
+void freezzz(lua_State *L, VkZzz *p);
+#define echeckzzz moonvulkan_echeckzzz
+int echeckzzz(lua_State *L, int arg, VkZzz *p);
+#define pushzzz moonvulkan_pushzzz
+int pushzzz(lua_State *L, const VkZzz *p);
+
+void freezzz(lua_State *L, VkZzz *p)
+    {
+    (void)L; (void)p;
+    }
+
+int echeckzzz(lua_State *L, int arg, VkZzz *p)
+    {
+    CHECK_TABLE(L, arg, p);
+    p->sType = ;
+    return 0;
+    }
+
+int pushzzz(lua_State *L, const VkZzz *p)
+    {
+    lua_newtable(L);
+    return 1;
+    }
+
+#endif
 

@@ -211,6 +211,20 @@ instance_dt_t * getproc_instance(lua_State *L, VkInstance instance, VkInstanceCr
             }
         IF("VK_EXT_swapchain_colorspace") { continue; }
         IF("VK_EXT_validation_flags") { continue; }
+        IF("VK_EXT_debug_utils")
+            {
+            GET(SetDebugUtilsObjectNameEXT);
+            GET(SetDebugUtilsObjectTagEXT);
+            GET(QueueBeginDebugUtilsLabelEXT);
+            GET(QueueEndDebugUtilsLabelEXT);
+            GET(QueueInsertDebugUtilsLabelEXT);
+            GET(CmdBeginDebugUtilsLabelEXT);
+            GET(CmdEndDebugUtilsLabelEXT);
+            GET(CmdInsertDebugUtilsLabelEXT);
+            GET(CreateDebugUtilsMessengerEXT);
+            GET(DestroyDebugUtilsMessengerEXT);
+            GET(SubmitDebugUtilsMessageEXT);
+            }
 #ifdef VK_USE_PLATFORM_XCB_KHR
         IF("VK_KHR_xcb_surface")
             {
