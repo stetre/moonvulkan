@@ -151,28 +151,28 @@ instance_dt_t * getproc_instance(lua_State *L, VkInstance instance, VkInstanceCr
             }
         IF("VK_KHR_external_fence_capabilities")
             {
-            GET(GetPhysicalDeviceExternalFenceProperties);
+            GET(GetPhysicalDeviceExternalFencePropertiesKHR);
             continue;
             }
         IF("VK_KHR_external_memory_capabilities")
             {
-            GET(GetPhysicalDeviceExternalBufferProperties);
+            GET(GetPhysicalDeviceExternalBufferPropertiesKHR);
             continue;
             }
         IF("VK_KHR_external_semaphore_capabilities")
             {
-            GET(GetPhysicalDeviceExternalSemaphoreProperties);
+            GET(GetPhysicalDeviceExternalSemaphorePropertiesKHR);
             continue;
             }
         IF("VK_KHR_get_physical_device_properties2")
             {
-            GET(GetPhysicalDeviceFeatures2);
-            GET(GetPhysicalDeviceProperties2);
-            GET(GetPhysicalDeviceFormatProperties2);
-            GET(GetPhysicalDeviceImageFormatProperties2);
-            GET(GetPhysicalDeviceQueueFamilyProperties2);
-            GET(GetPhysicalDeviceMemoryProperties2);
-            GET(GetPhysicalDeviceSparseImageFormatProperties2);
+            GET(GetPhysicalDeviceFeatures2KHR);
+            GET(GetPhysicalDeviceProperties2KHR);
+            GET(GetPhysicalDeviceFormatProperties2KHR);
+            GET(GetPhysicalDeviceImageFormatProperties2KHR);
+            GET(GetPhysicalDeviceQueueFamilyProperties2KHR);
+            GET(GetPhysicalDeviceMemoryProperties2KHR);
+            GET(GetPhysicalDeviceSparseImageFormatProperties2KHR);
             continue;
             }
         IF("VK_KHR_get_surface_capabilities2")
@@ -431,9 +431,9 @@ device_dt_t* getproc_device(lua_State *L, VkDevice device, VkDeviceCreateInfo *c
         IF("VK_KHR_16_bit_storage") { continue; }
         IF("VK_KHR_descriptor_update_template")
             {
-            GET(CreateDescriptorUpdateTemplate);
-            GET(DestroyDescriptorUpdateTemplate);
-            GET(UpdateDescriptorSetWithTemplate);
+            GET(CreateDescriptorUpdateTemplateKHR);
+            GET(DestroyDescriptorUpdateTemplateKHR);
+            GET(UpdateDescriptorSetWithTemplateKHR);
             GET(CmdPushDescriptorSetWithTemplateKHR);
             continue;
             }
@@ -466,15 +466,15 @@ device_dt_t* getproc_device(lua_State *L, VkDevice device, VkDeviceCreateInfo *c
             }
         IF("VK_KHR_get_memory_requirements2")
             {
-            GET(GetImageMemoryRequirements2);
-            GET(GetBufferMemoryRequirements2);
-            GET(GetImageSparseMemoryRequirements2);
+            GET(GetImageMemoryRequirements2KHR);
+            GET(GetBufferMemoryRequirements2KHR);
+            GET(GetImageSparseMemoryRequirements2KHR);
             continue;
             }
         IF("VK_KHR_incremental_present") { continue; }
         IF("VK_KHR_maintenance1")
             {
-            GET(TrimCommandPool);
+            GET(TrimCommandPoolKHR);
             continue;
             }
         IF("VK_KHR_maintenance2") { continue; }
@@ -541,8 +541,8 @@ device_dt_t* getproc_device(lua_State *L, VkDevice device, VkDeviceCreateInfo *c
         IF("VK_KHR_image_format_list") { continue; }
         IF("VK_KHR_bind_memory2")
             {
-            GET(BindBufferMemory2);
-            GET(BindImageMemory2);
+            GET(BindBufferMemory2KHR);
+            GET(BindImageMemory2KHR);
             continue;
             }
         IF("VK_EXT_sample_locations")
@@ -582,8 +582,8 @@ device_dt_t* getproc_device(lua_State *L, VkDevice device, VkDeviceCreateInfo *c
             }
         IF("VK_KHR_sampler_ycbcr_conversion")
             {
-            GET(CreateSamplerYcbcrConversion);
-            GET(DestroySamplerYcbcrConversion);
+            GET(CreateSamplerYcbcrConversionKHR);
+            GET(DestroySamplerYcbcrConversionKHR);
             continue;
             }
         IF("VK_EXT_conditional_rendering")

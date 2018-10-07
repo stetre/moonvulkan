@@ -94,8 +94,8 @@ static int TrimCommandPool(lua_State *L)
     VkCommandPool command_pool = checkcommand_pool(L, 1, &ud);
     VkDevice device = ud->device;
     VkCommandPoolTrimFlags flags = optflags(L, 2, 0);
-    CheckDevicePfn(L, ud, TrimCommandPool);
-    ud->ddt->TrimCommandPool(device, command_pool, flags);
+    CheckDevicePfn(L, ud, TrimCommandPoolKHR);
+    ud->ddt->TrimCommandPoolKHR(device, command_pool, flags);
     return 0;
     }
 

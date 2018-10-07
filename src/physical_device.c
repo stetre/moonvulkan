@@ -64,7 +64,7 @@ static int GetPhysicalDeviceProperties2(lua_State *L, VkPhysicalDevice physical_
     {
     VkPhysicalDeviceProperties2_CHAIN properties2;
     initphysicaldeviceproperties2(L, &properties2);
-    ud->idt->GetPhysicalDeviceProperties2(physical_device, &properties2.p1);
+    ud->idt->GetPhysicalDeviceProperties2KHR(physical_device, &properties2.p1);
     pushphysicaldeviceproperties2(L, &properties2);
     return 1;
     }
@@ -74,7 +74,7 @@ static int GetPhysicalDeviceProperties(lua_State *L)
     ud_t *ud;
     VkPhysicalDeviceProperties properties;
     VkPhysicalDevice physical_device = checkphysical_device(L, 1, &ud);
-    if(ud->idt->GetPhysicalDeviceProperties2)
+    if(ud->idt->GetPhysicalDeviceProperties2KHR)
         return GetPhysicalDeviceProperties2(L, physical_device, ud);
     ud->idt->GetPhysicalDeviceProperties(physical_device, &properties);
     pushphysicaldeviceproperties(L, &properties);
@@ -87,7 +87,7 @@ static int GetPhysicalDeviceFeatures2(lua_State *L, VkPhysicalDevice physical_de
     {
     VkPhysicalDeviceFeatures2_CHAIN features2;
     initphysicaldevicefeatures2(L, &features2);
-    ud->idt->GetPhysicalDeviceFeatures2(physical_device, &features2.p1);
+    ud->idt->GetPhysicalDeviceFeatures2KHR(physical_device, &features2.p1);
     pushphysicaldevicefeatures2(L, &features2);
     return 1;
     }
@@ -97,7 +97,7 @@ static int GetPhysicalDeviceFeatures(lua_State *L)
     VkPhysicalDeviceFeatures features;
     ud_t *ud;
     VkPhysicalDevice physical_device = checkphysical_device(L, 1, &ud);
-    if(ud->idt->GetPhysicalDeviceFeatures2)
+    if(ud->idt->GetPhysicalDeviceFeatures2KHR)
         return GetPhysicalDeviceFeatures2(L, physical_device, ud);
     ud->idt->GetPhysicalDeviceFeatures(physical_device, &features);
     pushphysicaldevicefeatures(L, &features);
@@ -110,7 +110,7 @@ static int GetPhysicalDeviceFormatProperties2(lua_State *L, VkPhysicalDevice phy
     VkFormatProperties2_CHAIN properties2;
     VkFormat format = checkformat(L, 2);
     initformatproperties2(L, &properties2);
-    ud->idt->GetPhysicalDeviceFormatProperties2(physical_device, format, &properties2.p1);
+    ud->idt->GetPhysicalDeviceFormatProperties2KHR(physical_device, format, &properties2.p1);
     pushformatproperties2(L, &properties2);
     return 1;
     }
@@ -121,7 +121,7 @@ static int GetPhysicalDeviceFormatProperties(lua_State *L)
     VkFormat format;
     ud_t *ud;
     VkPhysicalDevice physical_device = checkphysical_device(L, 1, &ud);
-    if(ud->idt->GetPhysicalDeviceFormatProperties2)
+    if(ud->idt->GetPhysicalDeviceFormatProperties2KHR)
         return GetPhysicalDeviceFormatProperties2(L, physical_device, ud);
     format = checkformat(L, 2);
     ud->idt->GetPhysicalDeviceFormatProperties(physical_device, format, &properties);
@@ -140,7 +140,7 @@ static int GetPhysicalDeviceImageFormatProperties2(lua_State *L, VkPhysicalDevic
 
     initimageformatproperties2(L, &properties2);
 
-    ec = ud->idt->GetPhysicalDeviceImageFormatProperties2(physical_device, &info.p1, &properties2.p1);
+    ec = ud->idt->GetPhysicalDeviceImageFormatProperties2KHR(physical_device, &info.p1, &properties2.p1);
     CheckError(L, ec);
     pushimageformatproperties2(L, &properties2);
     return 1;
@@ -153,7 +153,7 @@ static int GetPhysicalDeviceImageFormatProperties(lua_State *L)
     VkImageFormatProperties properties;
     ud_t *ud;
     VkPhysicalDevice physical_device = checkphysical_device(L, 1, &ud);
-    if(ud->idt->GetPhysicalDeviceImageFormatProperties2)
+    if(ud->idt->GetPhysicalDeviceImageFormatProperties2KHR)
         return GetPhysicalDeviceImageFormatProperties2(L, physical_device, ud);
     if(echeckphysicaldeviceimageformatinfo2(L, 2, &info)) return argerror(L, 2);
     ec = ud->idt->GetPhysicalDeviceImageFormatProperties(physical_device, 
@@ -171,12 +171,12 @@ static int GetPhysicalDeviceQueueFamilyProperties2
     VkQueueFamilyProperties2 *properties2;
 
     lua_newtable(L);
-    ud->idt->GetPhysicalDeviceQueueFamilyProperties2(physical_device, &count, NULL);
+    ud->idt->GetPhysicalDeviceQueueFamilyProperties2KHR(physical_device, &count, NULL);
     if(count == 0) return 1;
     properties2 = newqueuefamilyproperties2(L, count);
     if(!properties2) return errmemory(L);
 
-    ud->idt->GetPhysicalDeviceQueueFamilyProperties2(physical_device, &count, properties2);
+    ud->idt->GetPhysicalDeviceQueueFamilyProperties2KHR(physical_device, &count, properties2);
     for(i=0; i<count; i++)
         {
         pushqueuefamilyproperties2(L, &(properties2[i]), i);
@@ -193,7 +193,7 @@ static int GetPhysicalDeviceQueueFamilyProperties(lua_State *L)
     ud_t *ud;
     VkPhysicalDevice physical_device = checkphysical_device(L, 1, &ud);
     
-    if(ud->idt->GetPhysicalDeviceQueueFamilyProperties2)
+    if(ud->idt->GetPhysicalDeviceQueueFamilyProperties2KHR)
         return GetPhysicalDeviceQueueFamilyProperties2(L, physical_device, ud);
 
     lua_newtable(L);
@@ -215,7 +215,7 @@ static int GetPhysicalDeviceMemoryProperties2(lua_State *L, VkPhysicalDevice phy
     {
     VkPhysicalDeviceMemoryProperties2_CHAIN properties2;
     initphysicaldevicememoryproperties2(L, &properties2);
-    ud->idt->GetPhysicalDeviceMemoryProperties2(physical_device, &properties2.p1);
+    ud->idt->GetPhysicalDeviceMemoryProperties2KHR(physical_device, &properties2.p1);
     pushphysicaldevicememoryproperties2(L, &properties2);
     return 1;
     }
@@ -225,7 +225,7 @@ static int GetPhysicalDeviceMemoryProperties(lua_State *L)
     VkPhysicalDeviceMemoryProperties properties;
     ud_t *ud;
     VkPhysicalDevice physical_device = checkphysical_device(L, 1, &ud);
-    if(ud->idt->GetPhysicalDeviceMemoryProperties2)
+    if(ud->idt->GetPhysicalDeviceMemoryProperties2KHR)
         return GetPhysicalDeviceMemoryProperties2(L, physical_device, ud);
     ud->idt->GetPhysicalDeviceMemoryProperties(physical_device, &properties);
     pushphysicaldevicememoryproperties(L, &properties);
@@ -244,12 +244,12 @@ static int GetPhysicalDeviceSparseImageFormatProperties2
     if(echeckphysicaldevicesparseimageformatinfo2(L, 2, &info)) return argerror(L, 2);
 
     lua_newtable(L);
-    ud->idt->GetPhysicalDeviceSparseImageFormatProperties2(physical_device, &info, &count, NULL);
+    ud->idt->GetPhysicalDeviceSparseImageFormatProperties2KHR(physical_device, &info, &count, NULL);
     if(count == 0) return 1;
     properties2 = newsparseimageformatproperties2(L, count);
     if(!properties2) return errmemory(L);
 
-    ud->idt->GetPhysicalDeviceSparseImageFormatProperties2(physical_device, &info, &count, properties2);
+    ud->idt->GetPhysicalDeviceSparseImageFormatProperties2KHR(physical_device, &info, &count, properties2);
     for(i=0; i<count; i++)
         {
         pushsparseimageformatproperties2(L, &(properties2[i]));
@@ -268,7 +268,7 @@ static int GetPhysicalDeviceSparseImageFormatProperties(lua_State *L)
     ud_t *ud;
     VkPhysicalDevice physical_device = checkphysical_device(L, 1, &ud);
     
-    if(ud->idt->GetPhysicalDeviceSparseImageFormatProperties2)
+    if(ud->idt->GetPhysicalDeviceSparseImageFormatProperties2KHR)
         return GetPhysicalDeviceSparseImageFormatProperties2(L, physical_device, ud);
 
     if(echeckphysicaldevicesparseimageformatinfo2(L, 2, &info)) return argerror(L, 2);
@@ -298,11 +298,11 @@ static int GetPhysicalDeviceExternalBufferProperties(lua_State *L)
     VkExternalBufferProperties properties;
     VkPhysicalDevice physical_device = checkphysical_device(L, 1, &ud);
 
-    CheckInstancePfn(L, ud, GetPhysicalDeviceExternalBufferProperties);
+    CheckInstancePfn(L, ud, GetPhysicalDeviceExternalBufferPropertiesKHR);
     if(echeckphysicaldeviceexternalbufferinfo(L, 2, &info)) return argerror(L, 2);
 
     memset(&properties, 0, sizeof(properties));
-    ud->idt->GetPhysicalDeviceExternalBufferProperties(physical_device, &info, &properties);
+    ud->idt->GetPhysicalDeviceExternalBufferPropertiesKHR(physical_device, &info, &properties);
 
     pushexternalbufferproperties(L, &properties);
     return 1;
@@ -316,11 +316,11 @@ static int GetPhysicalDeviceExternalFenceProperties(lua_State *L)
     VkExternalFenceProperties properties;
     VkPhysicalDevice physical_device = checkphysical_device(L, 1, &ud);
 
-    CheckInstancePfn(L, ud, GetPhysicalDeviceExternalFenceProperties);
+    CheckInstancePfn(L, ud, GetPhysicalDeviceExternalFencePropertiesKHR);
     if(echeckphysicaldeviceexternalfenceinfo(L, 2, &info)) return argerror(L, 2);
 
     memset(&properties, 0, sizeof(properties));
-    ud->idt->GetPhysicalDeviceExternalFenceProperties(physical_device, &info, &properties);
+    ud->idt->GetPhysicalDeviceExternalFencePropertiesKHR(physical_device, &info, &properties);
 
     pushexternalfenceproperties(L, &properties);
     return 1;
@@ -333,11 +333,11 @@ static int GetPhysicalDeviceExternalSemaphoreProperties(lua_State *L)
     VkExternalSemaphoreProperties properties;
     VkPhysicalDevice physical_device = checkphysical_device(L, 1, &ud);
 
-    CheckInstancePfn(L, ud, GetPhysicalDeviceExternalSemaphoreProperties);
+    CheckInstancePfn(L, ud, GetPhysicalDeviceExternalSemaphorePropertiesKHR);
     if(echeckphysicaldeviceexternalsemaphoreinfo(L, 2, &info)) return argerror(L, 2);
 
     memset(&properties, 0, sizeof(properties));
-    ud->idt->GetPhysicalDeviceExternalSemaphoreProperties(physical_device, &info, &properties);
+    ud->idt->GetPhysicalDeviceExternalSemaphorePropertiesKHR(physical_device, &info, &properties);
 
     pushexternalsemaphoreproperties(L, &properties);
     return 1;

@@ -4949,7 +4949,7 @@ int echeckdevicecreateinfo(lua_State *L, int arg, VkDeviceCreateInfo_CHAIN *pp, 
         { freedevicecreateinfo(L, pp); return pushfielderror(L, F, err); }
 #undef F
 
-    if(!ud->idt->GetPhysicalDeviceFeatures2)
+    if(!ud->idt->GetPhysicalDeviceFeatures2KHR)
         {
 #define F "enabled_features"
         arg1 = pushfield(L, arg, F);
