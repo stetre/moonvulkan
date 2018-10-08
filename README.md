@@ -6,7 +6,6 @@ It runs on GNU/Linux <!-- and on Windows (MSYS2/MinGW) --> and requires
 [Lua](http://www.lua.org/) (>=5.3) and Vulkan (>= 1.0).
 
 
-
 _Author:_ _[Stefano Trettel](https://www.linkedin.com/in/stetre)_
 
 [![Lua logo](./doc/powered-by-lua.gif)](http://www.lua.org/)
@@ -70,10 +69,10 @@ Other examples can be found in the **examples/** directory contained in the rele
 ```lua
 -- MoonVulkan example: hello.lua
 
-vk = require("moonvulkan")
+local vk = require("moonvulkan")
 
 -- Create a Vulkan instance:
-instance = vk.create_instance({
+local instance = vk.create_instance({
    application_info = {
       application_name = 'Hello',
       application_version = 1,
@@ -86,15 +85,15 @@ instance = vk.create_instance({
 })
 
 -- Enumerate physical devices:
-physdevs = vk.enumerate_physical_devices(instance)
+local physdevs = vk.enumerate_physical_devices(instance)
 print("Number of available physical devices: " ..#physdevs)
 assert(#physdevs > 0)
 
 -- Select the first device:
-gpu = physdevs[1]
+local gpu = physdevs[1]
 
 -- Get its properties, and print a few:
-props = vk.get_physical_device_properties(gpu)
+local props = vk.get_physical_device_properties(gpu)
 print("Device name: ".. props.device_name)
 print("Device type: ".. props.device_type)
 print("Driver version: ".. vk.version_string(props.driver_version))

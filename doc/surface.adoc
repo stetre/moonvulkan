@@ -2,6 +2,8 @@
 [[surface]]
 ==== surface
 
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_surface[VK_KHR_surface].#
+
 * _surface_ = *created_surface*(<<instance, _instance_>>, _surfaceRAW_, [<<allocators, _allocator_>>]) +
 [small]#_surfaceRAW_: a valid VkSurfaceKHR handle (integer) for the given _instance_. +
 Creates and returns a _surface_ userdata (MoonVulkan object) bound to the given handle. +
@@ -13,24 +15,23 @@ Creates and returns a _surface_ userdata (MoonVulkan object) bound to the given 
 
 [[destroy_surface]]
 * *destroy_surface*(_surface_) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkDestroySurfaceKHR[vkDestroySurfaceKHR] (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_surface[VK_KHR_surface]).#
-
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkDestroySurfaceKHR[vkDestroySurfaceKHR]#
 
 [[get_physical_device_surface_support]]
 * _boolean_ = *get_physical_device_surface_support*(<<physical_device, _physdev_>>, <<index, _queue_family_index_>>, _surface_) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkGetPhysicalDeviceSurfaceSupportKHR[vkGetPhysicalDeviceSurfaceSupportKHR] (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_surface[VK_KHR_surface]).#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkGetPhysicalDeviceSurfaceSupportKHR[vkGetPhysicalDeviceSurfaceSupportKHR].#
 
 [[get_physical_device_surface_capabilities]]
 * <<surfacecapabilities, _surfacecapabilities_>> = *get_physical_device_surface_capabilities*(<<physical_device, _physdev_>>, _surface_) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkGetPhysicalDeviceSurfaceCapabilitiesKHR[vkGetPhysicalDeviceSurfaceCapabilitiesKHR] (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_surface[VK_KHR_surface]).#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkGetPhysicalDeviceSurfaceCapabilitiesKHR[vkGetPhysicalDeviceSurfaceCapabilitiesKHR].#
 
 [[get_physical_device_surface_formats]]
 * {<<surfaceformat, _surfaceformat_>>} = *get_physical_device_surface_formats*(<<physical_device, _physdev_>>, _surface_) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkGetPhysicalDeviceSurfaceFormatsKHR[vkGetPhysicalDeviceSurfaceFormatsKHR] (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_surface[VK_KHR_surface]).#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkGetPhysicalDeviceSurfaceFormatsKHR[vkGetPhysicalDeviceSurfaceFormatsKHR].#
 
 [[get_physical_device_surface_present_modes]]
 * {<<presentmode, _presentmode_>>} = *get_physical_device_surface_present_modes*(<<physical_device, _physdev_>>, _surface_, [_byname_]) +
 [small]#If _byname_=_true_, then a table of booleans indexed by _presentmode_ is returned instead
 of the {_presentmode_} array. +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkGetPhysicalDeviceSurfacePresentModesKHR[vkGetPhysicalDeviceSurfacePresentModesKHR] (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_surface[VK_KHR_surface]).#
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkGetPhysicalDeviceSurfacePresentModesKHR[vkGetPhysicalDeviceSurfacePresentModesKHR].#
 

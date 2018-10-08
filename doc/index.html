@@ -866,6 +866,7 @@ p.tableblock.header { color: #6d6e71; }
 <li><a href="#layers">Layers and extensions</a>
 <ul class="sectlevel2">
 <li><a href="#enumerate_layers">Enumerate extensions</a></li>
+<li><a href="#extensions">Supported extensions</a></li>
 <li><a href="#_surfaces_khr">Surfaces (KHR)</a>
 <ul class="sectlevel3">
 <li><a href="#surface">surface</a></li>
@@ -890,13 +891,12 @@ p.tableblock.header { color: #6d6e71; }
 </li>
 <li><a href="#_other_ext">Other (EXT)</a>
 <ul class="sectlevel3">
-<li><a href="#debug_report_callback">debug_report_callback</a></li>
-<li><a href="#debug_marker">Debug Marker</a></li>
+<li><a href="#debug_report_callback">debug_report</a></li>
+<li><a href="#debug_marker">debug_marker</a></li>
 <li><a href="#debug_utils">debug_utils</a></li>
 <li><a href="#validation_cache">validation_cache</a></li>
 </ul>
 </li>
-<li><a href="#extensions">Supported extensions</a></li>
 </ul>
 </li>
 <li><a href="#structs">Structs</a></li>
@@ -2736,9 +2736,25 @@ return an empty list, and the <em>layer</em> parameter in the
 </div>
 </div>
 <div class="sect2">
+<h3 id="extensions">Supported extensions</h3>
+<div class="paragraph">
+<p>MoonVulkan supports the core Vulkan API, plus most of the Khronos (KHR) and
+multivendor (EXT) extensions.</p>
+</div>
+<div class="paragraph">
+<p>It also supports any extension that does not require API calls other than that for enabling it.</p>
+</div>
+<div class="paragraph">
+<p>It does not support Khronos experimental extensions (KHX) and single vendor extensions (AMD, GOOGLE, NV, &#8230;&#8203;).</p>
+</div>
+</div>
+<div class="sect2">
 <h3 id="_surfaces_khr">Surfaces (KHR)</h3>
 <div class="sect3">
 <h4 id="surface">surface</h4>
+<div class="paragraph">
+<p><span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_surface">VK_KHR_surface</a>.</span></p>
+</div>
 <div class="ulist">
 <ul>
 <li>
@@ -2761,7 +2777,7 @@ Creates and returns a <em>surface</em> userdata (MoonVulkan object) bound to the
 <ul>
 <li>
 <p><strong>destroy_surface</strong>(<em>surface</em>)<br>
-<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkDestroySurfaceKHR">vkDestroySurfaceKHR</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_surface">VK_KHR_surface</a>).</span></p>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkDestroySurfaceKHR">vkDestroySurfaceKHR</a></span></p>
 </li>
 </ul>
 </div>
@@ -2769,7 +2785,7 @@ Creates and returns a <em>surface</em> userdata (MoonVulkan object) bound to the
 <ul>
 <li>
 <p><em>boolean</em> = <strong>get_physical_device_surface_support</strong>(<a href="#physical_device"><em>physdev</em></a>, <a href="#index"><em>queue_family_index</em></a>, <em>surface</em>)<br>
-<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkGetPhysicalDeviceSurfaceSupportKHR">vkGetPhysicalDeviceSurfaceSupportKHR</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_surface">VK_KHR_surface</a>).</span></p>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkGetPhysicalDeviceSurfaceSupportKHR">vkGetPhysicalDeviceSurfaceSupportKHR</a>.</span></p>
 </li>
 </ul>
 </div>
@@ -2777,7 +2793,7 @@ Creates and returns a <em>surface</em> userdata (MoonVulkan object) bound to the
 <ul>
 <li>
 <p><a href="#surfacecapabilities"><em>surfacecapabilities</em></a> = <strong>get_physical_device_surface_capabilities</strong>(<a href="#physical_device"><em>physdev</em></a>, <em>surface</em>)<br>
-<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkGetPhysicalDeviceSurfaceCapabilitiesKHR">vkGetPhysicalDeviceSurfaceCapabilitiesKHR</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_surface">VK_KHR_surface</a>).</span></p>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkGetPhysicalDeviceSurfaceCapabilitiesKHR">vkGetPhysicalDeviceSurfaceCapabilitiesKHR</a>.</span></p>
 </li>
 </ul>
 </div>
@@ -2785,7 +2801,7 @@ Creates and returns a <em>surface</em> userdata (MoonVulkan object) bound to the
 <ul>
 <li>
 <p>{<a href="#surfaceformat"><em>surfaceformat</em></a>} = <strong>get_physical_device_surface_formats</strong>(<a href="#physical_device"><em>physdev</em></a>, <em>surface</em>)<br>
-<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkGetPhysicalDeviceSurfaceFormatsKHR">vkGetPhysicalDeviceSurfaceFormatsKHR</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_surface">VK_KHR_surface</a>).</span></p>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkGetPhysicalDeviceSurfaceFormatsKHR">vkGetPhysicalDeviceSurfaceFormatsKHR</a>.</span></p>
 </li>
 </ul>
 </div>
@@ -2795,7 +2811,7 @@ Creates and returns a <em>surface</em> userdata (MoonVulkan object) bound to the
 <p>{<a href="#presentmode"><em>presentmode</em></a>} = <strong>get_physical_device_surface_present_modes</strong>(<a href="#physical_device"><em>physdev</em></a>, <em>surface</em>, [<em>byname</em>])<br>
 <span class="small">If <em>byname</em>=<em>true</em>, then a table of booleans indexed by <em>presentmode</em> is returned instead
 of the {<em>presentmode</em>} array.<br>
-Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkGetPhysicalDeviceSurfacePresentModesKHR">vkGetPhysicalDeviceSurfacePresentModesKHR</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_surface">VK_KHR_surface</a>).</span></p>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkGetPhysicalDeviceSurfacePresentModesKHR">vkGetPhysicalDeviceSurfacePresentModesKHR</a>.</span></p>
 </li>
 </ul>
 </div>
@@ -2808,12 +2824,15 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/
 <p>(Hint: Use MoonGLFW, avoid compiling for specific platforms, and ignore this section).</p>
 </div>
 <hr>
+<div class="paragraph">
+<p><span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_xlib_surface">VK_KHR_xlib_surface</a>, <a href="#platform_support">PLATFORM_XLIB</a>.</span></p>
+</div>
 <div id="get_physical_device_xlib_presentation_support" class="ulist">
 <ul>
 <li>
 <p><em>boolean</em> = <strong>get_physical_device_xlib_presentation_support</strong>(<em>physdev</em>, <a href="#index"><em>queue_family_index</em></a>, <em>dpy</em>, <em>visual_id</em>)<br>
 <span class="small"><em>dpy</em>: lightuserdata (<em>Display*</em>)<br>
-Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkGetPhysicalDeviceXlibPresentationSupportKHR">vkGetPhysicalDeviceXlibPresentationSupportKHR</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_xlib_surface">VK_KHR_xlib_surface</a>, <a href="#platform_support">PLATFORM_XLIB</a>).</span></p>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkGetPhysicalDeviceXlibPresentationSupportKHR">vkGetPhysicalDeviceXlibPresentationSupportKHR</a>.</span></p>
 </li>
 </ul>
 </div>
@@ -2823,17 +2842,20 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/
 <p><em>surface</em> = <strong>create_xlib_surface</strong>(<em>instance</em>, <em>flags</em>, <em>dpy</em>, <em>window</em>, [<a href="#allocators"><em>allocator</em></a>])<br>
 <span class="small"><em>dpy</em>: lightuserdata (<em>Display*</em>)<br>
 <em>window</em>: lightuserdata (<em>Window</em>)<br>
-Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkCreateXlibSurfaceKHR">vkCreateXlibSurfaceKHR</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_xlib_surface">VK_KHR_xlib_surface</a>, <a href="#platform_support">PLATFORM_XLIB</a>).</span></p>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkCreateXlibSurfaceKHR">vkCreateXlibSurfaceKHR</a>.</span></p>
 </li>
 </ul>
 </div>
 <hr>
+<div class="paragraph">
+<p><span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_xcb_surface">VK_KHR_xcb_surface</a>, <a href="#platform_support">PLATFORM_XCB</a>.</span></p>
+</div>
 <div id="get_physical_device_xcb_presentation_support" class="ulist">
 <ul>
 <li>
 <p><em>boolean</em> = <strong>get_physical_device_xcb_presentation_support</strong>(<em>physdev</em>, <a href="#index"><em>queue_family_index</em></a>, <em>connection</em>, <em>visual_id</em>)<br>
 <span class="small"><em>connection</em>: lightuserdata (<em>xcb_connection_t*</em>)<br>
-Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkGetPhysicalDeviceXcbPresentationSupportKHR">vkGetPhysicalDeviceXcbPresentationSupportKHR</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_xcb_surface">VK_KHR_xcb_surface</a>, <a href="#platform_support">PLATFORM_XCB</a>).</span></p>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkGetPhysicalDeviceXcbPresentationSupportKHR">vkGetPhysicalDeviceXcbPresentationSupportKHR</a>.</span></p>
 </li>
 </ul>
 </div>
@@ -2842,17 +2864,20 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/
 <li>
 <p><em>surface</em> = <strong>create_xcb_surface</strong>(<em>instance</em>, <em>flags</em>, <em>connection</em>, <em>window</em>, [<a href="#allocators"><em>allocator</em></a>])<br>
 <span class="small"><em>connection</em>: lightuserdata (<em>xcb_connection_t*</em>)<br>
-Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkCreateXcbSurfaceKHR">vkCreateXcbSurfaceKHR</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_xcb_surface">VK_KHR_xcb_surface</a>, <a href="#platform_support">PLATFORM_XCB</a>).</span></p>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkCreateXcbSurfaceKHR">vkCreateXcbSurfaceKHR</a>.</span></p>
 </li>
 </ul>
 </div>
 <hr>
+<div class="paragraph">
+<p><span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_wayland_surface">VK_KHR_wayland_surface</a>, <a href="#platform_support">PLATFORM_WAYLAND</a>.</span></p>
+</div>
 <div id="get_physical_device_wayland_presentation_support" class="ulist">
 <ul>
 <li>
 <p><em>boolean</em> = <strong>get_physical_device_wayland_presentation_support</strong>(<em>physdev</em>, <a href="#index"><em>queue_family_index</em></a>, <em>wldisplay</em>)<br>
 <span class="small"><em>wldisplay</em>: lightuserdata (<em>wl_display*</em>)<br>
-Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkGetPhysicalDeviceWaylandPresentationSupportKHR">vkGetPhysicalDeviceWaylandPresentationSupportKHR</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_wayland_surface">VK_KHR_wayland_surface</a>, <a href="#platform_support">PLATFORM_WAYLAND</a>).</span></p>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkGetPhysicalDeviceWaylandPresentationSupportKHR">vkGetPhysicalDeviceWaylandPresentationSupportKHR</a>.</span></p>
 </li>
 </ul>
 </div>
@@ -2862,16 +2887,19 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/
 <p><em>surface</em> = <strong>create_wayland_surface</strong>(<em>instance</em>, <em>flags</em>, <em>wldisplay</em>, <em>wlsurface</em>, [<a href="#allocators"><em>allocator</em></a>])<br>
 <span class="small"><em>wldisplay</em>: lightuserdata (<em>wl_display*</em>)<br>
 <em>wlsurface</em>: lightuserdata (<em>wl_surface*</em>)<br>
-Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkCreateWaylandSurfaceKHR">vkCreateWaylandSurfaceKHR</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_wayland_surface">VK_KHR_wayland_surface</a>, <a href="#platform_support">PLATFORM_WAYLAND</a>).</span></p>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkCreateWaylandSurfaceKHR">vkCreateWaylandSurfaceKHR</a>.</span></p>
 </li>
 </ul>
 </div>
 <hr>
+<div class="paragraph">
+<p><span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_win32_surface">VK_KHR_win32_surface</a>, <a href="#platform_support">PLATFORM_WIN32</a>.</span></p>
+</div>
 <div id="get_physical_device_win32_presentation_support" class="ulist">
 <ul>
 <li>
 <p><em>boolean</em> = <strong>get_physical_device_win32_presentation_support</strong>(<em>physdev</em>, <a href="#index"><em>queue_family_index</em></a>)<br>
-<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkGetPhysicalDeviceWin32PresentationSupportKHR">vkGetPhysicalDeviceWin32PresentationSupportKHR</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_win32_surface">VK_KHR_win32_surface</a>, <a href="#platform_support">PLATFORM_WIN32</a>).</span></p>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkGetPhysicalDeviceWin32PresentationSupportKHR">vkGetPhysicalDeviceWin32PresentationSupportKHR</a>.</span></p>
 </li>
 </ul>
 </div>
@@ -2881,7 +2909,7 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/
 <p><em>surface</em> = <strong>create_win32_surface</strong>(<em>instance</em>, <em>flags</em>, <em>hinstance</em>, <em>hwnd</em>, [<a href="#allocators"><em>allocator</em></a>])<br>
 <span class="small"><em>hinstance</em>: lightuserdata (<em>HINSTANCE</em>)<br>
 <em>hwnd</em>: lightuserdata (<em>HWND</em>)<br>
-Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkCreateWin32SurfaceKHR">vkCreateWin32SurfaceKHR</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_win32_surface">VK_KHR_win32_surface</a>, <a href="#platform_support">PLATFORM_WIN32</a>).</span></p>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkCreateWin32SurfaceKHR">vkCreateWin32SurfaceKHR</a>.</span></p>
 </li>
 </ul>
 </div>
@@ -2892,11 +2920,14 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/
 <h3 id="_displays_khr">Displays (KHR)</h3>
 <div class="sect3">
 <h4 id="display">display</h4>
+<div class="paragraph">
+<p><span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_display">VK_KHR_display</a>.</span></p>
+</div>
 <div id="get_physical_device_display_properties" class="ulist">
 <ul>
 <li>
 <p>{<a href="#displayproperties"><em>displayproperties</em></a>} = <strong>get_physical_device_display_properties</strong>(<a href="#physical_device"><em>physdev</em></a>)<br>
-<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkGetPhysicalDeviceDisplayPropertiesKHR">vkGetPhysicalDeviceDisplayPropertiesKHR</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_display">VK_KHR_display</a>).</span></p>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkGetPhysicalDeviceDisplayPropertiesKHR">vkGetPhysicalDeviceDisplayPropertiesKHR</a>.</span></p>
 </li>
 </ul>
 </div>
@@ -2904,7 +2935,7 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/
 <ul>
 <li>
 <p>{<a href="#displayplaneproperties"><em>displayplaneproperties</em></a>} = <strong>get_physical_device_display_plane_properties</strong>(<a href="#physical_device"><em>physdev</em></a>)<br>
-<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkGetPhysicalDeviceDisplayPlanePropertiesKHR">vkGetPhysicalDeviceDisplayPlanePropertiesKHR</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_display">VK_KHR_display</a>).</span></p>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkGetPhysicalDeviceDisplayPlanePropertiesKHR">vkGetPhysicalDeviceDisplayPlanePropertiesKHR</a>.</span></p>
 </li>
 </ul>
 </div>
@@ -2912,7 +2943,7 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/
 <ul>
 <li>
 <p>{<em>display</em>} = <strong>get_display_plane_supported_displays</strong>(<a href="#physical_device"><em>physdev</em></a>, <a href="#index"><em>plane_index</em></a>)<br>
-<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkGetDisplayPlaneSupportedDisplaysKHR">vkGetDisplayPlaneSupportedDisplaysKHR</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_display">VK_KHR_display</a>).</span></p>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkGetDisplayPlaneSupportedDisplaysKHR">vkGetDisplayPlaneSupportedDisplaysKHR</a>.</span></p>
 </li>
 </ul>
 </div>
@@ -2937,29 +2968,24 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/
 <ul>
 <li>
 <p><strong>acquire_xlib_display</strong>(<em>dpy</em>, <em>display</em>)<br>
-<span class="small"><em>dpy</em>: lightuserdata (<em>Display*</em>).<br>
-Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkAcquireXlibDisplayEXT">vkAcquireXlibDisplayEXT</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_acquire_xlib_display">VK_EXT_acquire_xlib_display</a>, <a href="#platform_support">PLATFORM_XLIB_XRANDR</a>).</span></p>
-</li>
-</ul>
-</div>
-<div id="get_randr_output_display" class="ulist">
-<ul>
-<li>
-<p><em>display</em> = <strong>get_randr_output_display</strong>(<a href="#physical_device"><em>physdev</em></a>, <em>dpy</em>, <em>rroutput</em>)<br>
+<em>display</em> = <strong>get_randr_output_display</strong>(<a href="#physical_device"><em>physdev</em></a>, <em>dpy</em>, <em>rroutput</em>)<br>
 <span class="small"><em>dpy</em>: lightuserdata (<em>Display*</em>),<br>
 <em>rroutput</em>: integer (<em>RROutput</em>).<br>
-Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkGetRandROutputDisplayEXT">vkGetRandROutputDisplayEXT</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_acquire_xlib_display">VK_EXT_acquire_xlib_display</a>, <a href="#platform_support">PLATFORM_XLIB_XRANDR</a>).</span></p>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkAcquireXlibDisplayEXT">vkAcquireXlibDisplayEXT</a>, <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkGetRandROutputDisplayEXT">vkGetRandROutputDisplayEXT</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_acquire_xlib_display">VK_EXT_acquire_xlib_display</a>, <a href="#platform_support">PLATFORM_XLIB_XRANDR</a>).</span></p>
 </li>
 </ul>
 </div>
 </div>
 <div class="sect3">
 <h4 id="display_mode">display_mode</h4>
+<div class="paragraph">
+<p><span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_display">VK_KHR_display</a>.</span></p>
+</div>
 <div id="create_display_mode" class="ulist">
 <ul>
 <li>
 <p><em>display_mode</em> = <strong>create_display_mode</strong>(<a href="#display"><em>display</em></a>, <a href="#displaymodecreateflags"><em>displaymodecreateflags</em></a>, <a href="#displaymodeparameters"><em>displaymodeparameters</em></a>, [<a href="#allocators"><em>allocator</em></a>])<br>
-<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkCreateDisplayModeKHR">vkCreateDisplayModeKHR</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_display">VK_KHR_display</a>).</span></p>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkCreateDisplayModeKHR">vkCreateDisplayModeKHR</a>.</span></p>
 </li>
 </ul>
 </div>
@@ -2967,7 +2993,7 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/
 <ul>
 <li>
 <p>{<a href="#displaymodeproperties"><em>displaymodeproperties</em></a>} = <strong>get_display_mode_properties</strong>(<a href="#display"><em>display</em></a>)<br>
-<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkGetDisplayModePropertiesKHR">vkGetDisplayModePropertiesKHR</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_display">VK_KHR_display</a>).</span></p>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkGetDisplayModePropertiesKHR">vkGetDisplayModePropertiesKHR</a>.</span></p>
 </li>
 </ul>
 </div>
@@ -2975,7 +3001,7 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/
 <ul>
 <li>
 <p><a href="#displayplanecapabilities"><em>displayplanecapabilities</em></a> = <strong>get_display_plane_capabilities</strong>(<em>display_mode</em>, <a href="#index"><em>plane_index</em></a>)<br>
-<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkGetDisplayPlaneCapabilitiesKHR">vkGetDisplayPlaneCapabilitiesKHR</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_display">VK_KHR_display</a>).</span></p>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkGetDisplayPlaneCapabilitiesKHR">vkGetDisplayPlaneCapabilitiesKHR</a>.</span></p>
 </li>
 </ul>
 </div>
@@ -2985,11 +3011,14 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/
 <h3 id="_swapchains_khr">Swapchains (KHR)</h3>
 <div class="sect3">
 <h4 id="swapchain">swapchain</h4>
+<div class="paragraph">
+<p><span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_swapchain">VK_KHR_swapchain</a>.</span></p>
+</div>
 <div id="create_swapchain" class="ulist">
 <ul>
 <li>
 <p><em>swapchain</em> = <strong>create_swapchain</strong>(<a href="#device"><em>device</em></a>, <a href="#swapchaincreateinfo"><em>swapchaincreateinfo</em></a>, [<a href="#allocators"><em>allocator</em></a>])<br>
-<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkCreateSwapchainKHR">vkCreateSwapchainKHR</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_swapchain">VK_KHR_swapchain</a>).</span></p>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkCreateSwapchainKHR">vkCreateSwapchainKHR</a></span></p>
 </li>
 </ul>
 </div>
@@ -3005,7 +3034,7 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/
 <ul>
 <li>
 <p><strong>destroy_swapchain</strong>(<em>swapchain</em>)<br>
-<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkDestroySwapchainKHR">vkDestroySwapchainKHR</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_swapchain">VK_KHR_swapchain</a>).</span></p>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkDestroySwapchainKHR">vkDestroySwapchainKHR</a>.</span></p>
 </li>
 </ul>
 </div>
@@ -3013,7 +3042,7 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/
 <ul>
 <li>
 <p>{<a href="#image"><em>image</em></a>} = <strong>get_swapchain_images</strong>(<em>swapchain</em>)<br>
-<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkGetSwapchainImagesKHR">vkGetSwapchainImagesKHR</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_swapchain">VK_KHR_swapchain</a>).</span></p>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkGetSwapchainImagesKHR">vkGetSwapchainImagesKHR</a>.</span></p>
 </li>
 </ul>
 </div>
@@ -3023,7 +3052,7 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/
 <p><a href="#index"><em>image_index</em></a>, <a href="#result"><em>result</em></a> = <strong>acquire_next_image</strong>(<em>swapchain</em>, <a href="#timeout"><em>timeout</em></a>, [<a href="#semaphore"><em>semaphore</em></a>], [<a href="#fence"><em>fence</em></a>])<br>
 <span class="small">Returns one of the following combinations of <em>image_index</em> and <em>result</em>:<br>
 1) <em>image_index</em>, '<em>success</em>' 2) <em>image_index</em>, '<em>suboptimal</em>' 3) <em>nil</em>, '<em>&#8230;&#8203;</em>' (any other result)<br>
-Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkAcquireNextImageKHR">vkAcquireNextImageKHR</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_swapchain">VK_KHR_swapchain</a>).</span></p>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkAcquireNextImageKHR">vkAcquireNextImageKHR</a>.</span></p>
 </li>
 </ul>
 </div>
@@ -3035,7 +3064,7 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/
 Returns the global <em>result</em> for the operation, optionally followed by a table
 with the individual results for each of the given swapchains.<br>
 The individual results table is returned only if <em>per_swapchain_results</em> is <em>true</em>.<br>
-Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkQueuePresentKHR">vkQueuePresentKHR</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_swapchain">VK_KHR_swapchain</a>).</span></p>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkQueuePresentKHR">vkQueuePresentKHR</a>.</span></p>
 </li>
 </ul>
 </div>
@@ -3069,12 +3098,15 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/
 <h3 id="_other_khr">Other (KHR)</h3>
 <div class="sect3">
 <h4 id="descriptor_update_template">descriptor_update_template</h4>
+<div class="paragraph">
+<p><span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_descriptor_update_template">VK_KHR_descriptor_update_template</a>.</span></p>
+</div>
 <div id="create_descriptor_update_template" class="ulist">
 <ul>
 <li>
 <p><em>descriptor_update_template</em> = <strong>create_descriptor_update_template</strong>(<em>device</em>, <em>info</em>, [<a href="#allocators"><em>allocator</em></a>])<br>
 <span class="small"><em>info</em>: <a href="#descriptorupdatetemplatecreateinfo"><em>descriptorupdatetemplatecreateinfo</em></a><br>
-Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCreateDescriptorUpdateTemplate.html">vkCreateDescriptorUpdateTemplate</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_descriptor_update_template">VK_KHR_descriptor_update_template</a>).</span></p>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCreateDescriptorUpdateTemplate.html">vkCreateDescriptorUpdateTemplate</a>.</span></p>
 </li>
 </ul>
 </div>
@@ -3082,7 +3114,7 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/h
 <ul>
 <li>
 <p><strong>destroy_descriptor_update_template</strong>(<em>descriptor_update_template</em>)<br>
-<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkDestroyDescriptorUpdateTemplate.html">vkDestroyDescriptorUpdateTemplate</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_descriptor_update_template">VK_KHR_descriptor_update_template</a>).</span></p>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkDestroyDescriptorUpdateTemplate.html">vkDestroyDescriptorUpdateTemplate</a>.</span></p>
 </li>
 </ul>
 </div>
@@ -3092,18 +3124,24 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/h
 <p><strong>update_descriptor_set_with_template</strong>(<a href="#descriptor_set"><em>descriptor_set</em></a>, <em>descriptor_update_template</em>, <em>data</em>)<br>
 <span class="small"><em>data</em>: binary string<br>
 The <em>data</em> parameter can be constructed using the <a href="#pack_descriptorimageinfo">pack_descriptorimageinfo</a>(&nbsp;), <a href="#pack_descriptorbufferinfo">pack_descriptorbufferinfo</a>(&nbsp;), and <a href="#pack_bufferview">pack_bufferview</a>(&nbsp;) utilities.<br>
-Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkUpdateDescriptorSetWithTemplate.html">vkUpdateDescriptorSetWithTemplate</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_descriptor_update_template">VK_KHR_descriptor_update_template</a>).</span></p>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkUpdateDescriptorSetWithTemplate.html">vkUpdateDescriptorSetWithTemplate</a>.</span></p>
+</li>
+<li>
+<p>See also: <a href="#cmd_push_descriptor_set_with_template">commands</a>.</p>
 </li>
 </ul>
 </div>
 </div>
 <div class="sect3">
 <h4 id="sampler_ycbcr_conversion">sampler_ycbcr_conversion</h4>
+<div class="paragraph">
+<p><span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_sampler_ycbcr_conversion">VK_KHR_sampler_ycbcr_conversion</a>.</span></p>
+</div>
 <div id="create_sampler_ycbcr_conversion" class="ulist">
 <ul>
 <li>
 <p><em>sampler_ycbcr_conversion</em> = <strong>create_sampler_ycbcr_conversion</strong>(<em>device</em>, <a href="#samplerycbcrconversioncreateinfo"><em>samplerycbcrconversioncreateinfo</em></a>,  [<a href="#allocators"><em>allocator</em></a>])<br>
-<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCreateSamplerYcbcrConversion.html">vkCreateSamplerYcbcrConversion</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_sampler_ycbcr_conversion">VK_KHR_sampler_ycbcr_conversion</a>).</span></p>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCreateSamplerYcbcrConversion.html">vkCreateSamplerYcbcrConversion</a>.</span></p>
 </li>
 </ul>
 </div>
@@ -3111,7 +3149,7 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/h
 <ul>
 <li>
 <p><strong>destroy_sampler_ycbcr_conversion</strong>(<em>sampler_ycbcr_conversion</em>)<br>
-<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkDestroySamplerYcbcrConversion.html">vkDestroySamplerYcbcrConversion</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_sampler_ycbcr_conversion">VK_KHR_sampler_ycbcr_conversion</a>).</span></p>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkDestroySamplerYcbcrConversion.html">vkDestroySamplerYcbcrConversion</a>.</span></p>
 </li>
 </ul>
 </div>
@@ -3120,7 +3158,10 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/h
 <div class="sect2">
 <h3 id="_other_ext">Other (EXT)</h3>
 <div class="sect3">
-<h4 id="debug_report_callback">debug_report_callback</h4>
+<h4 id="debug_report_callback">debug_report</h4>
+<div class="paragraph">
+<p><span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_debug_report">VK_EXT_debug_report</a>.</span></p>
+</div>
 <div id="create_debug_report_callback" class="ulist">
 <ul>
 <li>
@@ -3128,7 +3169,7 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/h
 <span class="small">The <em>func</em> callback (a Lua function) will be executed as:<br>
 <strong>func(instance, flags, object_type, objectRAW, location, message_code, layer_prefix, message)</strong>,<br>
 where the parameters are the same as those for the <a href="#debug_report_message">debug_report_message</a>(&nbsp;) function.<br>
-Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkCreateDebugReportCallbackEXT">vkCreateDebugReportCallbackEXT</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_debug_report">VK_EXT_debug_report</a>).</span></p>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkCreateDebugReportCallbackEXT">vkCreateDebugReportCallbackEXT</a>.</span></p>
 </li>
 </ul>
 </div>
@@ -3136,7 +3177,7 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/
 <ul>
 <li>
 <p><strong>destroy_debug_report_callback</strong>(<em>debug_report_callback</em>)<br>
-<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkDestroyDebugReportCallbackEXT">vkDestroyDebugReportCallbackEXT</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_debug_report">VK_EXT_debug_report</a>).</span></p>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkDestroyDebugReportCallbackEXT">vkDestroyDebugReportCallbackEXT</a>.</span></p>
 </li>
 </ul>
 </div>
@@ -3150,13 +3191,16 @@ arg5: <em>location</em>: integer<br>
 arg6: <em>message_code</em>: integer<br>
 arg7: <em>layer_prefix</em>: string<br>
 arg8: <em>message</em>: string<br>
-Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkDebugReportMessageEXT">vkDebugReportMessageEXT</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_debug_report">VK_EXT_debug_report</a>).</span></p>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkDebugReportMessageEXT">vkDebugReportMessageEXT</a>.</span></p>
 </li>
 </ul>
 </div>
 </div>
 <div class="sect3">
-<h4 id="debug_marker">Debug Marker</h4>
+<h4 id="debug_marker">debug_marker</h4>
+<div class="paragraph">
+<p><span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_debug_marker">VK_EXT_debug_marker</a>.</span></p>
+</div>
 <div id="debug_marker_set_object_name" class="ulist">
 <ul>
 <li>
@@ -3164,7 +3208,7 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/
 <span class="small"><em>object_type</em>: <a href="#debugreportobjecttype">debugreportobjecttype</a><br>
 <em>objectRAW</em>: integer raw object handle (may be 0)<br>
 <em>object_name</em>: string<br>
-Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkDebugMarkerSetObjectNameEXT">vkDebugMarkerSetObjectNameEXT</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_debug_marker">VK_EXT_debug_marker</a>).</span></p>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkDebugMarkerSetObjectNameEXT">vkDebugMarkerSetObjectNameEXT</a>.</span></p>
 </li>
 </ul>
 </div>
@@ -3176,13 +3220,19 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/
 <em>objectRAW</em>: integer raw object handle (may be 0)<br>
 <em>tag_name</em>: integer<br>
 <em>object_tag</em>: binary string<br>
-Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkDebugMarkerSetObjectTagEXT">vkDebugMarkerSetObjectTagEXT</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_debug_marker">VK_EXT_debug_marker</a>).</span></p>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkDebugMarkerSetObjectTagEXT">vkDebugMarkerSetObjectTagEXT</a>.</span></p>
+</li>
+<li>
+<p>See also: <a href="#cmd_debug_marker_begin">commands</a>.</p>
 </li>
 </ul>
 </div>
 </div>
 <div class="sect3">
 <h4 id="debug_utils">debug_utils</h4>
+<div class="paragraph">
+<p><span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_debug_utils">VK_EXT_debug_utils</a>.</span></p>
+</div>
 <div id="create_debug_utils_messenger" class="ulist">
 <ul>
 <li>
@@ -3190,7 +3240,7 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/
 <span class="small">The <em>func</em> callback (a Lua function) will be executed as:<br>
 <strong>func(instance, severityflags, typeflags, callbackdata)</strong>,<br>
 where the parameters are the same as those for the <a href="#submit_debug_utils_message">submit_debug_utils_message</a>(&nbsp;) function.<br>
-Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkCreateDebugUtilsMessengerEXT">vkCreateDebugUtilsMessengerEXT</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_debug_utils">VK_EXT_debug_utils</a>).</span></p>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkCreateDebugUtilsMessengerEXT">vkCreateDebugUtilsMessengerEXT</a>.</span></p>
 </li>
 </ul>
 </div>
@@ -3198,7 +3248,7 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/
 <ul>
 <li>
 <p><strong>destroy_debug_utils_messenger</strong>(<em>debug_utils_messenger</em>)<br>
-<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkDestroyDebugUtilsMessengerEXT">vkDestroyDebugUtilsMessengerEXT</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_debug_utils">VK_EXT_debug_utils</a>).</span></p>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkDestroyDebugUtilsMessengerEXT">vkDestroyDebugUtilsMessengerEXT</a>.</span></p>
 </li>
 </ul>
 </div>
@@ -3209,7 +3259,7 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/
 <span class="small"><em>severityflags</em>: <a href="#debugutilsmessageseverityflags">debugutilsmessageseverityflags</a>,<br>
 <em>typeflags</em>: <a href="#debugutilsmessagetypeflags">debugutilsmessagetypeflags</a>,<br>
 <em>callbackdata</em>: <a href="#debugutilsmessengercallbackdata">debugutilsmessengercallbackdata</a>.<br>
-Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkSubmitDebugUtilsMessageEXT">vkSubmitDebugUtilsMessageEXT</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_debug_utils">VK_EXT_debug_utils</a>).</span></p>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkSubmitDebugUtilsMessageEXT">vkSubmitDebugUtilsMessageEXT</a>.</span></p>
 </li>
 </ul>
 </div>
@@ -3217,7 +3267,7 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/
 <ul>
 <li>
 <p><strong>set_debug_utils_object_name</strong>(<em>device</em>, <a href="#debugutilsobjectnameinfo"><em>debugutilsobjectnameinfo</em></a>)<br>
-<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkSetDebugUtilsObjectNameEXT">vkSetDebugUtilsObjectNameEXT</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_debug_utils">VK_EXT_debug_utils</a>).</span></p>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkSetDebugUtilsObjectNameEXT">vkSetDebugUtilsObjectNameEXT</a>.</span></p>
 </li>
 </ul>
 </div>
@@ -3225,7 +3275,7 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/
 <ul>
 <li>
 <p><strong>set_debug_utils_object_tag</strong>(<em>device</em>, <a href="#debugutilsobjecttaginfo"><em>debugutilsobjecttaginfo</em></a>)<br>
-<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkSetDebugUtilsObjectTagEXT">vkSetDebugUtilsObjectTagEXT</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_debug_utils">VK_EXT_debug_utils</a>).</span></p>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkSetDebugUtilsObjectTagEXT">vkSetDebugUtilsObjectTagEXT</a>.</span></p>
 </li>
 </ul>
 </div>
@@ -3233,7 +3283,7 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/
 <ul>
 <li>
 <p><strong>queue_begin_debug_utils_label</strong>(<a href="#queue"><em>queue</em></a>, <a href="#debugutilslabel"><em>debugutilslabel</em></a>)<br>
-<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkQueueBeginDebugUtilsLabelEXT">vkQueueBeginDebugUtilsLabelEXT</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_debug_utils">VK_EXT_debug_utils</a>).</span></p>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkQueueBeginDebugUtilsLabelEXT">vkQueueBeginDebugUtilsLabelEXT</a>.</span></p>
 </li>
 </ul>
 </div>
@@ -3241,7 +3291,7 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/
 <ul>
 <li>
 <p><strong>queue_end_debug_utils_label</strong>(<a href="#queue"><em>queue</em></a>)<br>
-<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkQueueEndDebugUtilsLabelEXT">vkQueueEndDebugUtilsLabelEXT</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_debug_utils">VK_EXT_debug_utils</a>).</span></p>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkQueueEndDebugUtilsLabelEXT">vkQueueEndDebugUtilsLabelEXT</a>.</span></p>
 </li>
 </ul>
 </div>
@@ -3249,18 +3299,24 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/
 <ul>
 <li>
 <p><strong>queue_insert_debug_utils_label</strong>(<a href="#queue"><em>queue</em></a>, <a href="#debugutilslabel"><em>debugutilslabel</em></a>)<br>
-<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkQueueInsertDebugUtilsLabelEXT">vkQueueInsertDebugUtilsLabelEXT</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_debug_utils">VK_EXT_debug_utils</a>).</span></p>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkQueueInsertDebugUtilsLabelEXT">vkQueueInsertDebugUtilsLabelEXT</a>.</span></p>
+</li>
+<li>
+<p>See also: <a href="#cmd_begin_debug_utils_label">commands</a>.</p>
 </li>
 </ul>
 </div>
 </div>
 <div class="sect3">
 <h4 id="validation_cache">validation_cache</h4>
+<div class="paragraph">
+<p><span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_validation_cache">VK_EXT_validation_cache</a>.</span></p>
+</div>
 <div id="create_validation_cache" class="ulist">
 <ul>
 <li>
 <p><em>validation_cache</em> = <strong>create_validation_cache</strong>(<em>device</em>, <a href="#validationcachecreateinfo"><em>validationcachecreateinfo</em></a>,  [<a href="#allocators"><em>allocator</em></a>])<br>
-<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkCreateValidationCacheEXT">vkCreateValidationCacheEXT</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_validation_cache">VK_EXT_validation_cache</a>).</span></p>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkCreateValidationCacheEXT">vkCreateValidationCacheEXT</a>.</span></p>
 </li>
 </ul>
 </div>
@@ -3268,7 +3324,7 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/
 <ul>
 <li>
 <p><strong>destroy_validation_cache</strong>(<em>validation_cache</em>)<br>
-<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkDestroyValidationCacheEXT">vkDestroyValidationCacheEXT</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_validation_cache">VK_EXT_validation_cache</a>).</span></p>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkDestroyValidationCacheEXT">vkDestroyValidationCacheEXT</a>.</span></p>
 </li>
 </ul>
 </div>
@@ -3277,7 +3333,7 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/
 <li>
 <p><em>data</em> = <strong>get_validation_cache_data</strong>(<em>validation_cache</em>)<br>
 <span class="small">Returns <em>data</em> as a binary string.<br>
-Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkGetValidationCacheDataEXT">vkGetValidationCacheDataEXT</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_validation_cache">VK_EXT_validation_cache</a>).</span></p>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkGetValidationCacheDataEXT">vkGetValidationCacheDataEXT</a>.</span></p>
 </li>
 </ul>
 </div>
@@ -3286,20 +3342,10 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/
 <li>
 <p><strong>merge_validation_caches</strong>(<em>destination</em>, {<em>source</em>})<br>
 <span class="small"><em>destination</em>, <em>source</em>: <em>validation_cache</em><br>
-Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkMergeValidationCachesEXT">vkMergeValidationCachesEXT</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_validation_cache">VK_EXT_validation_cache</a>).</span></p>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkMergeValidationCachesEXT">vkMergeValidationCachesEXT</a>.</span></p>
 </li>
 </ul>
 </div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="extensions">Supported extensions</h3>
-<div class="paragraph">
-<p>MoonVulkan supports the core Vulkan API, plus most of the Khronos (KHR) and
-multivendor (EXT) extensions.</p>
-</div>
-<div class="paragraph">
-<p>It does not support Khronos experimental extensions (KHX) and single vendor extensions (AMD, GOOGLE, IMG, MVK, NN, NV, NVX, &#8230;&#8203;).</p>
 </div>
 </div>
 </div>
@@ -6587,7 +6633,7 @@ that the relevant header files are where <em>vulkan.h</em> expects them to be.</
 <div id="footer">
 <div id="footer-text">
 Version 0.4<br>
-Last updated 2018-10-07 12:39:42 CEST
+Last updated 2018-10-08 10:53:46 CEST
 </div>
 </div>
 </body>

@@ -92,6 +92,7 @@ include::cmd.adoc[]
 == Layers and extensions
 
 include::layers.adoc[]
+include::extensions.adoc[]
 
 === Surfaces (KHR)
 include::surface.adoc[]
@@ -105,13 +106,9 @@ include::swapchain.adoc[]
 
 === Other (KHR)
 include::other_khr.adoc[]
-include::sampler_ycbcr_conversion.adoc[]
 
 === Other (EXT)
 include::other_ext.adoc[]
-include::validation_cache.adoc[]
-
-include::extensions.adoc[]
 
 include::structs.adoc[]
 
