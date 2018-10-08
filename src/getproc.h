@@ -94,10 +94,6 @@ typedef struct {
     F(CreateWaylandSurfaceKHR);
     F(GetPhysicalDeviceWaylandPresentationSupportKHR);
 #endif
-#ifdef VK_USE_PLATFORM_MIR_KHR
-    F(CreateMirSurfaceKHR);
-    F(GetPhysicalDeviceMirPresentationSupportKHR);
-#endif
 #ifdef VK_USE_PLATFORM_ANDROID_KHR
     F(CreateAndroidSurfaceKHR);
 #endif

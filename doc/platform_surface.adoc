@@ -44,20 +44,6 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.ht
 _wlsurface_: lightuserdata (_wl_surface*_) +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkCreateWaylandSurfaceKHR[vkCreateWaylandSurfaceKHR] (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_wayland_surface[VK_KHR_wayland_surface], <<platform_support, PLATFORM_WAYLAND>>).#
 
-'''
-
-[[get_physical_device_mir_presentation_support]]
-* _boolean_ = *get_physical_device_mir_presentation_support*(_physdev_, <<index, _queue_family_index_>>, _mirconnection_) +
-[small]#_mirconnection_: lightuserdata (_MirConnection*_) +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkGetPhysicalDeviceMirPresentationSupportKHR[vkGetPhysicalDeviceMirPresentationSupportKHR] (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_mir_surface[VK_KHR_mir_surface], <<platform_support, PLATFORM_MIR>>).#
-
-[[create_mir_surface]]
-* _surface_ = *create_mir_surface*(_instance_, _flags_, _mirconnection_, _mirsurface_, [<<allocators, _allocator_>>]) +
-[small]#_mirconnection_: lightuserdata (_MirConnection*_) +
-_mirsurface_: lightuserdata (_MirSurface*_) +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkCreateMirSurfaceKHR[vkCreateMirSurfaceKHR] (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_mir_surface[VK_KHR_mir_surface], <<platform_support, PLATFORM_MIR>>).#
-
-
 ////
 
 '''

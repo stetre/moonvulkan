@@ -190,50 +190,6 @@ static int GetPhysicalDeviceWaylandPresentationSupport(lua_State *L)
 #endif
     }
 
-
-/*- MIR --------------------------------------------------------------------*/
-
-static int CreateMirSurface(lua_State *L)
-    {
-#ifdef VK_USE_PLATFORM_MIR_KHR
-    VkResult ec;
-    VkSurfaceKHR surface;
-    VkMirSurfaceCreateInfoKHR info;
-    ud_t *ud;
-    VkInstance instance = checkinstance(L, 1, &ud);
-    const VkAllocationCallbacks *allocator = optallocator(L, 5);
-    info.sType = VK_STRUCTURE_TYPE_MIR_SURFACE_CREATE_INFO_KHR; 
-    info.pNext = NULL;
-    info.flags = checkflags(L, 2);
-    info.connection = (MirConnection*)checklightuserdata(L, 3);
-    info.mirSurface = (MirSurface*)checklightuserdata(L, 4);
-    CheckInstancePfn(L, ud, CreateMirSurfaceKHR);
-    ec = ud->idt->CreateMirSurfaceKHR(instance, &info, allocator, &surface);
-    CheckError(L, ec);
-    return newsurface(L, instance, surface, allocator);
-#else
-    return notsupported(L);
-#endif
-    }
-
-static int GetPhysicalDeviceMirPresentationSupport(lua_State *L)
-    {
-#ifdef VK_USE_PLATFORM_MIR_KHR
-    ud_t *ud;
-    VkBool32 rc;
-    VkPhysicalDevice physdev = checkphysical_device(L, 1, &ud);
-    uint32_t qfamily = luaL_checkinteger(L, 2);
-    MirConnection *connection = (MirConnection*)checklightuserdata(L, 3);
-    CheckInstancePfn(L, ud, GetPhysicalDeviceMirPresentationSupportKHR);
-    rc = ud->idt->GetPhysicalDeviceMirPresentationSupportKHR(physdev, qfamily, connection);
-    lua_pushboolean(L, rc);
-    return 1;
-#else
-    return notsupported(L);
-#endif
-    }
-
-
 /*- Android ----------------------------------------------------------------*/
 
 static int CreateAndroidSurface(lua_State *L)
@@ -552,12 +508,10 @@ static const struct luaL_Reg Functions[] =
         { "get_physical_device_xlib_presentation_support", GetPhysicalDeviceXlibPresentationSupport },
         { "get_physical_device_xcb_presentation_support", GetPhysicalDeviceXcbPresentationSupport },
         { "get_physical_device_wayland_presentation_support", GetPhysicalDeviceWaylandPresentationSupport },
-        { "get_physical_device_mir_presentation_support", GetPhysicalDeviceMirPresentationSupport },
         { "get_physical_device_win32_presentation_support", GetPhysicalDeviceWin32PresentationSupport },
         { "create_xlib_surface", CreateXlibSurface },
         { "create_xcb_surface", CreateXcbSurface },
         { "create_wayland_surface", CreateWaylandSurface },
-        { "create_mir_surface", CreateMirSurface },
         { "create_android_surface", CreateAndroidSurface },
         { "create_win32_surface", CreateWin32Surface },
         { "create_display_plane_surface", CreateDisplayPlaneSurface },

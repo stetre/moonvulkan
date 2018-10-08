@@ -209,11 +209,6 @@ instance_dt_t * getproc_instance(lua_State *L, VkInstance instance, VkInstanceCr
     GET(CreateWaylandSurfaceKHR);
     GET(GetPhysicalDeviceWaylandPresentationSupportKHR);
 #endif
-#ifdef VK_USE_PLATFORM_MIR_KHR
-    //VK_KHR_mir_surface
-    GET(CreateMirSurfaceKHR);
-    GET(GetPhysicalDeviceMirPresentationSupportKHR);
-#endif
 #ifdef VK_USE_PLATFORM_ANDROID_KHR
     //VK_KHR_android_surface
     GET(CreateAndroidSurfaceKHR);

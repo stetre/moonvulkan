@@ -92,9 +92,6 @@ static int Platforms(lua_State *L) //@@DOC
 #ifdef VK_USE_PLATFORM_WAYLAND_KHR
     ADD("wayland");
 #endif
-#ifdef VK_USE_PLATFORM_MIR_KHR
-    ADD("mir");
-#endif
 #ifdef VK_USE_PLATFORM_ANDROID_KHR
     ADD("android");
 #endif
