@@ -257,6 +257,7 @@ typedef struct {
     VkPhysicalDeviceIDProperties p6;
     VkPhysicalDevicePointClippingProperties p7;
     VkPhysicalDeviceSampleLocationsPropertiesEXT p8;
+    VkPhysicalDeviceMaintenance3Properties p9;
 } VkPhysicalDeviceProperties2_CHAIN;
 
 #define initphysicaldeviceproperties2 moonvulkan_initphysicaldeviceproperties2
@@ -712,5 +713,8 @@ int echeckimportsemaphorewin32handleinfo(lua_State *L, int arg, VkImportSemaphor
 int echecksemaphoregetwin32handleinfo(lua_State *L, int arg, const VkSemaphoreGetWin32HandleInfoKHR *p);
 
 #endif /* VK_USE_PLATFORM_WIN32_KHR */
+
+#define pushdescriptorsetlayoutsupport moonvulkan_pushdescriptorsetlayoutsupport
+int pushdescriptorsetlayoutsupport(lua_State *L, const VkDescriptorSetLayoutSupportKHR *p);
 
 #endif /* structsDEFINED */

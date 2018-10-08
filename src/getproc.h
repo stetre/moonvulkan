@@ -300,6 +300,7 @@ typedef struct {
     F(CmdEndConditionalRenderingEXT);
     F(CmdDrawIndirectCountKHR);
     F(CmdDrawIndexedIndirectCountKHR);
+    F(GetDescriptorSetLayoutSupportKHR);
 #ifdef VK_USE_PLATFORM_WIN32_KHR
     F(GetMemoryWin32HandleKHR);
     F(GetMemoryWin32HandlePropertiesKHR);

@@ -462,6 +462,8 @@ device_dt_t* getproc_device(lua_State *L, VkDevice device, VkDeviceCreateInfo *c
     //VK_KHR_draw_indirect_count
     GET(CmdDrawIndirectCountKHR);
     GET(CmdDrawIndexedIndirectCountKHR);
+    //VK_KHR_maintenance3
+    GET(GetDescriptorSetLayoutSupportKHR);
 #undef GET
     return dt;
     }

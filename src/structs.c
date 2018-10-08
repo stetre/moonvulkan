@@ -2246,6 +2246,13 @@ static int pushphysicaldevicesamplelocationsproperties(lua_State *L, VkPhysicalD
     return 0;
     }
 
+static int pushphysicaldevicemaintenance3properties(lua_State *L, VkPhysicalDeviceMaintenance3Properties *p)
+    {
+    SetInteger(maxPerSetDescriptors, "max_per_set_descriptors");
+    SetInteger(maxMemoryAllocationSize, "max_memory_allocation_size");
+    return 0;
+    }
+
 //@@TODO: Investigate if it is legal to chain all structs, even if extensions are not enabled
 void initphysicaldeviceproperties2(lua_State *L, VkPhysicalDeviceProperties2_CHAIN *p)
     {
@@ -2259,6 +2266,7 @@ void initphysicaldeviceproperties2(lua_State *L, VkPhysicalDeviceProperties2_CHA
     p->p6.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ID_PROPERTIES;
     p->p7.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_POINT_CLIPPING_PROPERTIES;
     p->p8.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLE_LOCATIONS_PROPERTIES_EXT;
+    p->p9.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_3_PROPERTIES;
     p->p1.pNext = &p->p2;
     p->p2.pNext = &p->p3;
     p->p3.pNext = &p->p4;
@@ -2266,7 +2274,8 @@ void initphysicaldeviceproperties2(lua_State *L, VkPhysicalDeviceProperties2_CHA
     p->p5.pNext = &p->p6;
     p->p6.pNext = &p->p7;
     p->p7.pNext = &p->p8;
-    p->p8.pNext = NULL;
+    p->p8.pNext = &p->p9;
+    p->p9.pNext = NULL;
     }
 
 int pushphysicaldeviceproperties2(lua_State *L, VkPhysicalDeviceProperties2_CHAIN *p)
@@ -2279,6 +2288,7 @@ int pushphysicaldeviceproperties2(lua_State *L, VkPhysicalDeviceProperties2_CHAI
     pushphysicaldeviceidproperties(L, &p->p6);
     pushphysicaldevicepointclippingproperties(L, &p->p7);
     pushphysicaldevicesamplelocationsproperties(L, &p->p8);
+    pushphysicaldevicemaintenance3properties(L, &p->p9);
     return 1;
     }
 
@@ -5399,6 +5409,14 @@ int echeckconditionalrenderingbegininfo(lua_State *L, int arg, VkConditionalRend
     }
 
 /*------------------------------------------------------------------------------*/
+
+int pushdescriptorsetlayoutsupport(lua_State *L, const VkDescriptorSetLayoutSupportKHR *p)
+    {
+    lua_newtable(L);
+    SetBoolean(supported, "supported");
+    return 1;
+    }
+
 
 #if 0 /* scaffolding 25yy */
 #define freezzz moonvulkan_freezzz

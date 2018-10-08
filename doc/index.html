@@ -2058,6 +2058,14 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/
 </li>
 </ul>
 </div>
+<div id="get_descriptor_set_layout_support" class="ulist">
+<ul>
+<li>
+<p><a href="#descriptorsetlayoutsupport"><em>descriptorsetlayoutsupport</em></a> = <strong>get_descriptor_set_layout_support</strong>(<em>device</em>, <a href="#descriptorsetlayoutcreateinfo"><em>descriptorsetlayoutcreateinfo</em></a>)<br>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkGetDescriptorSetLayoutSupportKHR">vkGetDescriptorSetLayoutSupportKHR</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_maintenance3">VK_KHR_maintenance3</a>).</span></p>
+</li>
+</ul>
+</div>
 </div>
 <div class="sect3">
 <h4 id="pipeline_layout">pipeline_layout</h4>
@@ -3525,6 +3533,9 @@ the <em>queue_family_index</em> of the <em>i-th</em> element in the table return
 <em>device_luid_valid</em>: boolean,<br>
 -- EXTENSION (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkPhysicalDevicePointClippingProperties.html">VkPhysicalDevicePointClippingProperties</a>, <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_maintenance2">VK_KHR_maintenance2</a>):<br>
 <em>point_clipping_behavior</em>: <a href="#pointclippingbehavior">pointclippingbehavior</a>,<br>
+-- EXTENSION (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkPhysicalDeviceMaintenance3Properties.html">VkPhysicalDeviceMaintenance3Properties</a>, <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_maintenance3">VK_KHR_maintenance3</a>):<br>
+<em>max_per_set_descriptors</em>: integer,<br>
+<em>max_memory_allocation_size</em>: integer,<br>
 -- EXTENSION (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkPhysicalDeviceSampleLocationsPropertiesEXT">VkPhysicalDeviceSampleLocationsPropertiesEXT</a>, <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_sample_locations">VK_EXT_sample_locations</a>):<br>
 <em>sample_location_sample_counts</em>: <a href="#samplecountflags">samplecountflags</a>,<br>
 <em>max_sample_location_grid_size</em>: <a href="#extent2d">extent2d</a>,<br>
@@ -4481,6 +4492,12 @@ the <em>queue_family_index</em> of the <em>i-th</em> element in the table return
 <em>flags</em>: <a href="#descriptorsetlayoutcreateflags">descriptorsetlayoutcreateflags</a>,<br>
 <em>bindings</em>: {<a href="#descriptorsetlayoutbinding">descriptorsetlayoutbinding</a>},<br>
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkDescriptorSetLayoutCreateInfo.html">VkDescriptorSetLayoutCreateInfo</a>)</span></p>
+</li>
+<li>
+<p><a id="descriptorsetlayoutsupport"></a>
+<span class="small"><strong>descriptorsetlayoutsupport</strong> = {<br>
+<em>supported</em>: boolean,<br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkDescriptorSetLayoutSupportKHR">VkDescriptorSetLayoutSupportKHR</a>)</span></p>
 </li>
 <li>
 <p><a id="descriptorsetlayoutbinding"></a>

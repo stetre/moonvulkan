@@ -131,6 +131,9 @@ _device_node_mask_: integer, +
 _device_luid_valid_: boolean, +
 pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkPhysicalDevicePointClippingProperties.html[VkPhysicalDevicePointClippingProperties], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_maintenance2[VK_KHR_maintenance2]): +
 _point_clipping_behavior_: <<pointclippingbehavior, pointclippingbehavior>>, +
+pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkPhysicalDeviceMaintenance3Properties.html[VkPhysicalDeviceMaintenance3Properties], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_maintenance3[VK_KHR_maintenance3]): +
+_max_per_set_descriptors_: integer, +
+_max_memory_allocation_size_: integer, +
 pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkPhysicalDeviceSampleLocationsPropertiesEXT[VkPhysicalDeviceSampleLocationsPropertiesEXT], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_sample_locations[VK_EXT_sample_locations]): +
 _sample_location_sample_counts_: <<samplecountflags, samplecountflags>>, +
 _max_sample_location_grid_size_: <<extent2d, extent2d>>, +
@@ -967,6 +970,11 @@ _plane_aspect_: <<imageaspectflags, imageaspectflags>>: +
 _flags_: <<descriptorsetlayoutcreateflags, descriptorsetlayoutcreateflags>>, +
 _bindings_: {<<descriptorsetlayoutbinding, descriptorsetlayoutbinding>>}, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkDescriptorSetLayoutCreateInfo.html[VkDescriptorSetLayoutCreateInfo])#
+
+* [[descriptorsetlayoutsupport]]
+[small]#*descriptorsetlayoutsupport* = { +
+_supported_: boolean, +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkDescriptorSetLayoutSupportKHR[VkDescriptorSetLayoutSupportKHR])#
 
 * [[descriptorsetlayoutbinding]]
 [small]#*descriptorsetlayoutbinding* = { +

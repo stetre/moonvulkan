@@ -79,6 +79,21 @@ static int Create(lua_State *L)
     return 1;
     }
 
+static int GetDescriptorSetLayoutSupport(lua_State *L)
+    {
+    ud_t *ud;
+    VkDescriptorSetLayoutCreateInfo info;
+    VkDescriptorSetLayoutSupport support;
+    VkDevice device = checkdevice(L, 1, &ud);
+    CheckDevicePfn(L, ud, GetDescriptorSetLayoutSupportKHR);
+    if(echeckdescriptorsetlayoutcreateinfo(L, 2, &info)) return argerror(L, 2);
+    memset(&support, 0, sizeof(support));
+    support.sType = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_SUPPORT_KHR;
+    ud->ddt->GetDescriptorSetLayoutSupportKHR(device, &info, &support);
+    pushdescriptorsetlayoutsupport(L, &support);
+    return 1;
+    }
+
 RAW_FUNC(descriptor_set_layout)
 TYPE_FUNC(descriptor_set_layout)
 INSTANCE_FUNC(descriptor_set_layout)
@@ -107,6 +122,7 @@ static const struct luaL_Reg Functions[] =
     {
         { "create_descriptor_set_layout",  Create },
         { "destroy_descriptor_set_layout",  Destroy },
+        { "get_descriptor_set_layout_support", GetDescriptorSetLayoutSupport },
         { NULL, NULL } /* sentinel */
     };
 
