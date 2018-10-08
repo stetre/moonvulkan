@@ -459,6 +459,9 @@ device_dt_t* getproc_device(lua_State *L, VkDevice device, VkDeviceCreateInfo *c
     //VK_EXT_conditional_rendering
     GET(CmdBeginConditionalRenderingEXT);
     GET(CmdEndConditionalRenderingEXT);
+    //VK_KHR_draw_indirect_count
+    GET(CmdDrawIndirectCountKHR);
+    GET(CmdDrawIndexedIndirectCountKHR);
 #undef GET
     return dt;
     }

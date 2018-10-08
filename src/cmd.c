@@ -875,7 +875,35 @@ static int CmdEndConditionalRendering(lua_State *L)
     return 0;
     }
 
+static int CmdDrawIndirectCount(lua_State *L)
+    {
+    ud_t *ud;
+    VkCommandBuffer cb = checkcommand_buffer(L, 1, &ud);
+    VkBuffer buffer = checkbuffer(L, 2, NULL);
+    VkDeviceSize offset = luaL_checkinteger(L, 3);
+    VkBuffer countBuffer = checkbuffer(L, 4, NULL);
+    VkDeviceSize countBufferOffset = luaL_checkinteger(L, 5);
+    uint32_t maxDrawCount = luaL_checkinteger(L, 6);
+    uint32_t stride = luaL_checkinteger(L, 7);
+    CheckDevicePfn(L, ud, CmdDrawIndirectCountKHR);
+    ud->ddt->CmdDrawIndirectCountKHR(cb, buffer, offset, countBuffer, countBufferOffset, maxDrawCount, stride);
+    return 0;
+    }
 
+static int CmdDrawIndexedIndirectCount(lua_State *L)
+    {
+    ud_t *ud;
+    VkCommandBuffer cb = checkcommand_buffer(L, 1, &ud);
+    VkBuffer buffer = checkbuffer(L, 2, NULL);
+    VkDeviceSize offset = luaL_checkinteger(L, 3);
+    VkBuffer countBuffer = checkbuffer(L, 4, NULL);
+    VkDeviceSize countBufferOffset = luaL_checkinteger(L, 5);
+    uint32_t maxDrawCount = luaL_checkinteger(L, 6);
+    uint32_t stride = luaL_checkinteger(L, 7);
+    CheckDevicePfn(L, ud, CmdDrawIndexedIndirectCountKHR);
+    ud->ddt->CmdDrawIndexedIndirectCountKHR(cb, buffer, offset, countBuffer, countBufferOffset, maxDrawCount, stride);
+    return 0;
+    }
 
 #if 0 // 10yy
         { "",  },
@@ -950,6 +978,8 @@ static const struct luaL_Reg Functions[] =
         { "cmd_insert_debug_utils_label", CmdInsertDebugUtilsLabel },
         { "cmd_begin_conditional_rendering", CmdBeginConditionalRendering },
         { "cmd_end_conditional_rendering", CmdEndConditionalRendering },
+        { "cmd_draw_indirect_count", CmdDrawIndirectCount },
+        { "cmd_draw_indexed_indirect_count", CmdDrawIndexedIndirectCount },
         { NULL, NULL } /* sentinel */
     };
 

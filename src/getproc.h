@@ -298,6 +298,8 @@ typedef struct {
     F(DestroySamplerYcbcrConversionKHR);
     F(CmdBeginConditionalRenderingEXT);
     F(CmdEndConditionalRenderingEXT);
+    F(CmdDrawIndirectCountKHR);
+    F(CmdDrawIndexedIndirectCountKHR);
 #ifdef VK_USE_PLATFORM_WIN32_KHR
     F(GetMemoryWin32HandleKHR);
     F(GetMemoryWin32HandlePropertiesKHR);

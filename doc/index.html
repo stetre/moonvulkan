@@ -2387,15 +2387,9 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/
 <ul>
 <li>
 <p><strong>cmd_dispatch</strong>(<em>cb</em>, <em>x</em>, <em>y</em>, <em>z</em>)<br>
-<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdDispatch.html">vkCmdDispatch</a>.</span></p>
-</li>
-</ul>
-</div>
-<div id="cmd_dispatch_indirect" class="ulist">
-<ul>
-<li>
-<p><strong>cmd_dispatch_indirect</strong>(<em>cb</em>, <a href="#buffer"><em>buffer</em></a>, <em>offset</em>)<br>
-<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdDispatchIndirect.html">vkCmdDispatchIndirect</a>.</span></p>
+<strong>cmd_dispatch_indirect</strong>(<em>cb</em>, <a href="#buffer"><em>buffer</em></a>, <em>offset</em>)<br>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdDispatch.html">vkCmdDispatch</a>,
+<a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdDispatchIndirect.html">vkCmdDispatchIndirect</a>.</span></p>
 </li>
 </ul>
 </div>
@@ -2403,31 +2397,24 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/
 <ul>
 <li>
 <p><strong>cmd_draw</strong>(<em>cb</em>, <em>vertex_count</em>, <em>instance_count</em>, <em>first_vertex</em>, <em>first_instance</em>)<br>
-<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdDraw.html">vkCmdDraw</a>.</span></p>
+<strong>cmd_draw_indexed</strong>(<em>cb</em>, <em>index_count</em>, <em>instance_count</em>, <em>first_index</em>, <em>vertex_offset</em>, <em>first_instance</em>)<br>
+<strong>cmd_draw_indexed_indirect</strong>(<em>cb</em>, <a href="#buffer"><em>buffer</em></a>, <em>offset</em>, <em>draw_count</em>, <em>stride</em>)<br>
+<strong>cmd_draw_indirect</strong>(<em>cb</em>, <a href="#buffer"><em>buffer</em></a>, <em>offset</em>, <em>draw_count</em>, <em>stride</em>)<br>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdDraw.html">vkCmdDraw</a>,
+<a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdDrawIndexed.html">vkCmdDrawIndexed</a>,
+<a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdDrawIndexedIndirect.html">vkCmdDrawIndexedIndirect</a>,
+<a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdDrawIndirect.html">vkCmdDrawIndirect</a>.</span></p>
 </li>
 </ul>
 </div>
-<div id="cmd_draw_indexed" class="ulist">
+<div id="cmd_draw_indirect_count" class="ulist">
 <ul>
 <li>
-<p><strong>cmd_draw_indexed</strong>(<em>cb</em>, <em>index_count</em>, <em>instance_count</em>, <em>first_index</em>, <em>vertex_offset</em>, <em>first_instance</em>)<br>
-<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdDrawIndexed.html">vkCmdDrawIndexed</a>.</span></p>
-</li>
-</ul>
-</div>
-<div id="cmd_draw_indexed_indirect" class="ulist">
-<ul>
-<li>
-<p><strong>cmd_draw_indexed_indirect</strong>(<em>cb</em>, <a href="#buffer"><em>buffer</em></a>, <em>offset</em>, <em>draw_count</em>, <em>stride</em>)<br>
-<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdDrawIndexedIndirect.html">vkCmdDrawIndexedIndirect</a>.</span></p>
-</li>
-</ul>
-</div>
-<div id="cmd_draw_indirect" class="ulist">
-<ul>
-<li>
-<p><strong>cmd_draw_indirect</strong>(<em>cb</em>, <a href="#buffer"><em>buffer</em></a>, <em>offset</em>, <em>draw_count</em>, <em>stride</em>)<br>
-<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdDrawIndirect.html">vkCmdDrawIndirect</a>.</span></p>
+<p><strong>cmd_draw_indirect_count</strong>(<em>cb</em>, <a href="#buffer"><em>buffer</em></a>, <em>offset</em>, <a href="#buffer"><em>count_buffer</em></a>, <em>count_buffer_offset</em>, <em>max_draw_count</em>, <em>stride</em>)<br>
+<strong>cmd_draw_indexed_indirect_count</strong>(<em>cb</em>, <a href="#buffer"><em>buffer</em></a>, <em>offset</em>, <a href="#buffer"><em>count_buffer</em></a>, <em>count_buffer_offset</em>, <em>max_draw_count</em>, <em>stride</em>)<br>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkCmdDrawIndirectCountKHR">vkCmdDrawIndirectCountKHR</a>,
+<a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkCmdDrawIndexedIndirectCountKHR">vkCmdDrawIndexedIndirectCountKHR</a>,
+(<a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_draw_indirect_count">VK_KHR_draw_indirect_count</a>)</span>.</p>
 </li>
 </ul>
 </div>

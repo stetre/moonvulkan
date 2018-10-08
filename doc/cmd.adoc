@@ -138,27 +138,26 @@ https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vk
 
 [[cmd_dispatch]]
 * *cmd_dispatch*(_cb_, _x_, _y_, _z_) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdDispatch.html[vkCmdDispatch].#
-
-[[cmd_dispatch_indirect]]
-* *cmd_dispatch_indirect*(_cb_, <<buffer, _buffer_>>, _offset_) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdDispatchIndirect.html[vkCmdDispatchIndirect].#
+*cmd_dispatch_indirect*(_cb_, <<buffer, _buffer_>>, _offset_) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdDispatch.html[vkCmdDispatch],
+https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdDispatchIndirect.html[vkCmdDispatchIndirect].#
 
 [[cmd_draw]]
 * *cmd_draw*(_cb_, _vertex_count_, _instance_count_, _first_vertex_, _first_instance_) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdDraw.html[vkCmdDraw].#
+*cmd_draw_indexed*(_cb_, _index_count_, _instance_count_, _first_index_, _vertex_offset_, _first_instance_) +
+*cmd_draw_indexed_indirect*(_cb_, <<buffer, _buffer_>>, _offset_, _draw_count_, _stride_) +
+*cmd_draw_indirect*(_cb_, <<buffer, _buffer_>>, _offset_, _draw_count_, _stride_) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdDraw.html[vkCmdDraw],
+https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdDrawIndexed.html[vkCmdDrawIndexed],
+https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdDrawIndexedIndirect.html[vkCmdDrawIndexedIndirect],
+https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdDrawIndirect.html[vkCmdDrawIndirect].#
 
-[[cmd_draw_indexed]]
-* *cmd_draw_indexed*(_cb_, _index_count_, _instance_count_, _first_index_, _vertex_offset_, _first_instance_) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdDrawIndexed.html[vkCmdDrawIndexed].#
-
-[[cmd_draw_indexed_indirect]]
-* *cmd_draw_indexed_indirect*(_cb_, <<buffer, _buffer_>>, _offset_, _draw_count_, _stride_) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdDrawIndexedIndirect.html[vkCmdDrawIndexedIndirect].#
-
-[[cmd_draw_indirect]]
-* *cmd_draw_indirect*(_cb_, <<buffer, _buffer_>>, _offset_, _draw_count_, _stride_) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdDrawIndirect.html[vkCmdDrawIndirect].#
+[[cmd_draw_indirect_count]]
+* *cmd_draw_indirect_count*(_cb_, <<buffer, _buffer_>>, _offset_, <<buffer, _count_buffer_>>, _count_buffer_offset_, _max_draw_count_, _stride_) +
+*cmd_draw_indexed_indirect_count*(_cb_, <<buffer, _buffer_>>, _offset_, <<buffer, _count_buffer_>>, _count_buffer_offset_, _max_draw_count_, _stride_) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkCmdDrawIndirectCountKHR[vkCmdDrawIndirectCountKHR],
+https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkCmdDrawIndexedIndirectCountKHR[vkCmdDrawIndexedIndirectCountKHR],
+(https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_draw_indirect_count[VK_KHR_draw_indirect_count])#.
 
 [[cmd_execute_commands]]
 * *cmd_execute_commands*(_cb_, {<<command_buffer, _command_buffer_>>}) +
