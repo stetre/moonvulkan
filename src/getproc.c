@@ -108,9 +108,10 @@ static int Init(lua_State *L)
 
 instance_dt_t * getproc_instance(lua_State *L, VkInstance instance, VkInstanceCreateInfo *createinfo)
     {
-    uint32_t i;
     instance_dt_t *dt = (instance_dt_t*)Malloc(L, sizeof(instance_dt_t));
-    /* Core functions ---------------------------- */
+    (void)createinfo;
+
+    /* Core 1.0 functions ---------------------------- */
 #define GET(fn) do {                                                \
     dt->fn = (PFN_vk##fn)GetInstanceProcAddr(instance, "vk"#fn);    \
     if(!dt->fn) { luaL_error(L, "cannot find vk"#fn); return dt; }\
@@ -129,170 +130,109 @@ instance_dt_t * getproc_instance(lua_State *L, VkInstance instance, VkInstanceCr
     GET(GetPhysicalDeviceSparseImageFormatProperties);
 #undef GET
 
-    /* EXTENSIONS -------------------------------- */
+    /* Extensions and core > 1.0 ----------------------- */
 #define GET(fn) do { \
     dt->fn = (PFN_vk##fn)GetInstanceProcAddr(instance, "vk"#fn); \
-    /*printf(""#fn" %p\n", (void*)(dt->fn));                  */\
+    /* printf(""#fn" %p\n", (void*)(dt->fn)); */                 \
 } while(0)
 
-    for(i = 0; i < createinfo->enabledExtensionCount; i++)
-        {
-#define IF(extensionname) if(strncmp(extensionname, createinfo->ppEnabledExtensionNames[i], 256)==0)
-        IF("VK_KHR_display")
-            {
-            GET(GetPhysicalDeviceDisplayPropertiesKHR);
-            GET(GetPhysicalDeviceDisplayPlanePropertiesKHR);
-            GET(GetDisplayPlaneSupportedDisplaysKHR);
-            GET(GetDisplayModePropertiesKHR);
-            GET(CreateDisplayModeKHR);
-            GET(GetDisplayPlaneCapabilitiesKHR);
-            GET(CreateDisplayPlaneSurfaceKHR);
-            continue;
-            }
-        IF("VK_KHR_external_fence_capabilities")
-            {
-            GET(GetPhysicalDeviceExternalFencePropertiesKHR);
-            continue;
-            }
-        IF("VK_KHR_external_memory_capabilities")
-            {
-            GET(GetPhysicalDeviceExternalBufferPropertiesKHR);
-            continue;
-            }
-        IF("VK_KHR_external_semaphore_capabilities")
-            {
-            GET(GetPhysicalDeviceExternalSemaphorePropertiesKHR);
-            continue;
-            }
-        IF("VK_KHR_get_physical_device_properties2")
-            {
-            GET(GetPhysicalDeviceFeatures2KHR);
-            GET(GetPhysicalDeviceProperties2KHR);
-            GET(GetPhysicalDeviceFormatProperties2KHR);
-            GET(GetPhysicalDeviceImageFormatProperties2KHR);
-            GET(GetPhysicalDeviceQueueFamilyProperties2KHR);
-            GET(GetPhysicalDeviceMemoryProperties2KHR);
-            GET(GetPhysicalDeviceSparseImageFormatProperties2KHR);
-            continue;
-            }
-        IF("VK_KHR_get_surface_capabilities2")
-            {
-            GET(GetPhysicalDeviceSurfaceCapabilities2KHR);
-            GET(GetPhysicalDeviceSurfaceFormats2KHR);
-            continue;
-            }
-        IF("VK_KHR_surface")
-            {
-            GET(DestroySurfaceKHR);
-            GET(GetPhysicalDeviceSurfaceSupportKHR);
-            GET(GetPhysicalDeviceSurfaceCapabilitiesKHR);
-            GET(GetPhysicalDeviceSurfaceFormatsKHR);
-            GET(GetPhysicalDeviceSurfacePresentModesKHR);
-            continue;
-            }
-        IF("VK_EXT_acquire_xlib_display") { continue; }
-        IF("VK_EXT_debug_report")
-            {
-            //  GET(DebugReportCallbackEXT);
-            GET(CreateDebugReportCallbackEXT);
-            GET(DestroyDebugReportCallbackEXT);
-            GET(DebugReportMessageEXT);
-            continue;
-            }
-        IF("VK_EXT_direct_mode_display")
-            {
-            GET(ReleaseDisplayEXT);
-            continue;
-            }
-        IF("VK_EXT_display_surface_counter")
-            {
-            GET(GetPhysicalDeviceSurfaceCapabilities2EXT);
-            continue;
-            }
-        IF("VK_EXT_swapchain_colorspace") { continue; }
-        IF("VK_EXT_validation_flags") { continue; }
-        IF("VK_EXT_debug_utils")
-            {
-            GET(SetDebugUtilsObjectNameEXT);
-            GET(SetDebugUtilsObjectTagEXT);
-            GET(QueueBeginDebugUtilsLabelEXT);
-            GET(QueueEndDebugUtilsLabelEXT);
-            GET(QueueInsertDebugUtilsLabelEXT);
-            GET(CmdBeginDebugUtilsLabelEXT);
-            GET(CmdEndDebugUtilsLabelEXT);
-            GET(CmdInsertDebugUtilsLabelEXT);
-            GET(CreateDebugUtilsMessengerEXT);
-            GET(DestroyDebugUtilsMessengerEXT);
-            GET(SubmitDebugUtilsMessageEXT);
-            continue;
-            }
+    //VK_KHR_display
+    GET(GetPhysicalDeviceDisplayPropertiesKHR);
+    GET(GetPhysicalDeviceDisplayPlanePropertiesKHR);
+    GET(GetDisplayPlaneSupportedDisplaysKHR);
+    GET(GetDisplayModePropertiesKHR);
+    GET(CreateDisplayModeKHR);
+    GET(GetDisplayPlaneCapabilitiesKHR);
+    GET(CreateDisplayPlaneSurfaceKHR);
+    //VK_KHR_external_fence_capabilities
+    GET(GetPhysicalDeviceExternalFencePropertiesKHR);
+    //VK_KHR_external_memory_capabilities
+    GET(GetPhysicalDeviceExternalBufferPropertiesKHR);
+    //VK_KHR_external_semaphore_capabilities
+    GET(GetPhysicalDeviceExternalSemaphorePropertiesKHR);
+    //VK_KHR_get_physical_device_properties2
+    GET(GetPhysicalDeviceFeatures2KHR);
+    GET(GetPhysicalDeviceProperties2KHR);
+    GET(GetPhysicalDeviceFormatProperties2KHR);
+    GET(GetPhysicalDeviceImageFormatProperties2KHR);
+    GET(GetPhysicalDeviceQueueFamilyProperties2KHR);
+    GET(GetPhysicalDeviceMemoryProperties2KHR);
+    GET(GetPhysicalDeviceSparseImageFormatProperties2KHR);
+    //VK_KHR_get_surface_capabilities2
+    GET(GetPhysicalDeviceSurfaceCapabilities2KHR);
+    GET(GetPhysicalDeviceSurfaceFormats2KHR);
+    //VK_KHR_surface
+    GET(DestroySurfaceKHR);
+    GET(GetPhysicalDeviceSurfaceSupportKHR);
+    GET(GetPhysicalDeviceSurfaceCapabilitiesKHR);
+    GET(GetPhysicalDeviceSurfaceFormatsKHR);
+    GET(GetPhysicalDeviceSurfacePresentModesKHR);
+    //VK_EXT_debug_report
+    GET(CreateDebugReportCallbackEXT);
+    GET(DestroyDebugReportCallbackEXT);
+    GET(DebugReportMessageEXT);
+    //VK_EXT_direct_mode_display
+    GET(ReleaseDisplayEXT);
+    //VK_EXT_display_surface_counter
+    GET(GetPhysicalDeviceSurfaceCapabilities2EXT);
+    //VK_EXT_swapchain_colorspace
+    //VK_EXT_validation_flags
+    //VK_EXT_debug_utils
+    GET(SetDebugUtilsObjectNameEXT);
+    GET(SetDebugUtilsObjectTagEXT);
+    GET(QueueBeginDebugUtilsLabelEXT);
+    GET(QueueEndDebugUtilsLabelEXT);
+    GET(QueueInsertDebugUtilsLabelEXT);
+    GET(CmdBeginDebugUtilsLabelEXT);
+    GET(CmdEndDebugUtilsLabelEXT);
+    GET(CmdInsertDebugUtilsLabelEXT);
+    GET(CreateDebugUtilsMessengerEXT);
+    GET(DestroyDebugUtilsMessengerEXT);
+    GET(SubmitDebugUtilsMessageEXT);
 #ifdef VK_USE_PLATFORM_XCB_KHR
-        IF("VK_KHR_xcb_surface")
-            {
-            GET(CreateXcbSurfaceKHR);
-            GET(GetPhysicalDeviceXcbPresentationSupportKHR);
-            continue;
-            }
+    //VK_KHR_xcb_surface
+    GET(CreateXcbSurfaceKHR);
+    GET(GetPhysicalDeviceXcbPresentationSupportKHR);
 #endif
 #ifdef VK_USE_PLATFORM_XLIB_KHR
-        IF("VK_KHR_xlib_surface")
-            {
-            GET(CreateXlibSurfaceKHR);
-            GET(GetPhysicalDeviceXlibPresentationSupportKHR);
-            continue;
-            }
+    //VK_KHR_xlib_surface
+    GET(CreateXlibSurfaceKHR);
+    GET(GetPhysicalDeviceXlibPresentationSupportKHR);
 #endif
 #ifdef VK_USE_PLATFORM_XLIB_XRANDR_EXT
-        IF("VK_EXT_acquire_xlib_display")
-            {
-            GET(AcquireXlibDisplayEXT);
-            GET(GetRandROutputDisplayEXT);
-            continue;
-            }
+    //VK_EXT_acquire_xlib_display
+    GET(AcquireXlibDisplayEXT);
+    GET(GetRandROutputDisplayEXT);
 #endif
 #ifdef VK_USE_PLATFORM_WAYLAND_KHR
-        IF("VK_KHR_wayland_surface")
-            {
-            GET(CreateWaylandSurfaceKHR);
-            GET(GetPhysicalDeviceWaylandPresentationSupportKHR);
-            continue;
-            }
+    //VK_KHR_wayland_surface
+    GET(CreateWaylandSurfaceKHR);
+    GET(GetPhysicalDeviceWaylandPresentationSupportKHR);
 #endif
 #ifdef VK_USE_PLATFORM_MIR_KHR
-        IF("VK_KHR_mir_surface")
-            {
-            GET(CreateMirSurfaceKHR);
-            GET(GetPhysicalDeviceMirPresentationSupportKHR);
-            continue;
-            }
+    //VK_KHR_mir_surface
+    GET(CreateMirSurfaceKHR);
+    GET(GetPhysicalDeviceMirPresentationSupportKHR);
 #endif
 #ifdef VK_USE_PLATFORM_ANDROID_KHR
-        IF("VK_KHR_android_surface")
-            {
-            GET(CreateAndroidSurfaceKHR);
-            continue;
-            }
+    //VK_KHR_android_surface
+    GET(CreateAndroidSurfaceKHR);
 #endif
 #ifdef VK_USE_PLATFORM_WIN32_KHR
-        IF("VK_KHR_win32_surface")
-            {
-            GET(CreateWin32SurfaceKHR);
-            GET(GetPhysicalDeviceWin32PresentationSupportKHR);
-            continue;
-            }
+    //VK_KHR_win32_surface
+    GET(CreateWin32SurfaceKHR);
+    GET(GetPhysicalDeviceWin32PresentationSupportKHR);
 #endif
-#undef IF
-        }
 #undef GET
     return dt;
     }
 
 device_dt_t* getproc_device(lua_State *L, VkDevice device, VkDeviceCreateInfo *createinfo)
     {
-    uint32_t i;
     device_dt_t *dt = (device_dt_t*)Malloc(L, sizeof(device_dt_t));
+    (void)createinfo;
 
-    /* Core functions ---------------------------- */
+    /* Core 1.0 functions ---------------------------- */
 #define GET(fn) do {                                            \
     dt->fn = (PFN_vk##fn)GetDeviceProcAddr(device, "vk"#fn);    \
     if(!dt->fn) { luaL_error(L, "cannot find vk"#fn); return dt; }  \
@@ -419,181 +359,110 @@ device_dt_t* getproc_device(lua_State *L, VkDevice device, VkDeviceCreateInfo *c
     GET(CmdExecuteCommands);
 #undef GET
 
-    /* EXTENSIONS -------------------------------- */
+    /* Extensions and core > 1.0 ----------------------- */
 #define GET(fn) do {                                            \
     dt->fn = (PFN_vk##fn)GetDeviceProcAddr(device, "vk"#fn);    \
-    /*printf(""#fn" %p\n", (void*)(dt->fn));                  */\
+    /* printf(""#fn" %p\n", (void*)(dt->fn)); */                \
 } while(0)
 
-    for(i = 0; i < createinfo->enabledExtensionCount; i++)
-        {
-#define IF(extensionname) if(strncmp(extensionname, createinfo->ppEnabledExtensionNames[i], 256)==0)
-        IF("VK_KHR_16_bit_storage") { continue; }
-        IF("VK_KHR_descriptor_update_template")
-            {
-            GET(CreateDescriptorUpdateTemplateKHR);
-            GET(DestroyDescriptorUpdateTemplateKHR);
-            GET(UpdateDescriptorSetWithTemplateKHR);
-            GET(CmdPushDescriptorSetWithTemplateKHR);
-            continue;
-            }
-        IF("VK_KHR_dedicated_allocation") { continue; }
-        IF("VK_KHR_display_swapchain")
-            {
-            GET(CreateSharedSwapchainsKHR);
-            continue;
-            }
-        IF("VK_KHR_external_fence") { continue; }
-        IF("VK_KHR_external_fence_fd")
-            {
-            GET(ImportFenceFdKHR);
-            GET(GetFenceFdKHR);
-            continue;
-            }
-        IF("VK_KHR_external_memory") { continue; }
-        IF("VK_KHR_external_memory_fd")
-            {
-            GET(GetMemoryFdKHR);
-            GET(GetMemoryFdPropertiesKHR);
-            continue;
-            }
-        IF("VK_KHR_external_semaphore") { continue; }
-        IF("VK_KHR_external_semaphore_fd")
-            {
-            GET(ImportSemaphoreFdKHR);
-            GET(GetSemaphoreFdKHR);
-            continue;
-            }
-        IF("VK_KHR_get_memory_requirements2")
-            {
-            GET(GetImageMemoryRequirements2KHR);
-            GET(GetBufferMemoryRequirements2KHR);
-            GET(GetImageSparseMemoryRequirements2KHR);
-            continue;
-            }
-        IF("VK_KHR_incremental_present") { continue; }
-        IF("VK_KHR_maintenance1")
-            {
-            GET(TrimCommandPoolKHR);
-            continue;
-            }
-        IF("VK_KHR_maintenance2") { continue; }
-        IF("VK_KHR_push_descriptor")
-            {
-            GET(CmdPushDescriptorSetKHR);
-            continue;
-            }
-        IF("VK_KHR_sampler_mirror_clamp_to_edge") { continue; }
-        IF("VK_KHR_shader_draw_parameters") { continue; }
-        IF("VK_KHR_shader_presentable_image")
-            {
-            GET(GetSwapchainStatusKHR);
-            continue;
-            }
-        IF("VK_KHR_storage_buffer_storage_class") { continue; }
-        IF("VK_KHR_swapchain")
-            {
-            GET(CreateSwapchainKHR);
-            GET(DestroySwapchainKHR);
-            GET(GetSwapchainImagesKHR);
-            GET(AcquireNextImageKHR);
-            GET(QueuePresentKHR);
-            continue;
-            }
-        IF("VK_KHR_variable_pointers") { continue; }
-        IF("VK_KHR_relaxed_block_layout") { continue; }
-        IF("VK_EXT_blend_operation_advanced") { continue; }
-        IF("VK_EXT_debug_marker")
-            {
-            GET(DebugMarkerSetObjectTagEXT);
-            GET(DebugMarkerSetObjectNameEXT);
-            GET(CmdDebugMarkerBeginEXT);
-            GET(CmdDebugMarkerEndEXT);
-            GET(CmdDebugMarkerInsertEXT);
-            continue;
-            }
-        IF("VK_EXT_depth_range_unrestricted") { continue; }
-        IF("VK_EXT_discard_rectangles")
-            {
-            GET(CmdSetDiscardRectangleEXT);
-            continue;
-            }
-        IF("VK_EXT_display_control")
-            {
-            GET(DisplayPowerControlEXT);
-            GET(RegisterDeviceEventEXT);
-            GET(RegisterDisplayEventEXT);
-            GET(GetSwapchainCounterEXT);
-            continue;
-            }
-        IF("VK_EXT_hdr_metadata")
-            {
-            GET(SetHdrMetadataEXT);
-            continue;
-            }
-        IF("VK_EXT_post_depth_coverage") { continue; }
-        IF("VK_EXT_sampler_filter_minmax") { continue; }
-        IF("VK_EXT_shader_subgroup_ballot") { continue; }
-        IF("VK_EXT_shader_subgroup_vote") { continue; }
-        IF("VK_EXT_shader_stencil_export") { continue; }
-        IF("VK_EXT_shader_viewport_index_layer") { continue; }
-        IF("VK_EXT_global_priority") { continue; }
-        IF("VK_KHR_image_format_list") { continue; }
-        IF("VK_KHR_bind_memory2")
-            {
-            GET(BindBufferMemory2KHR);
-            GET(BindImageMemory2KHR);
-            continue;
-            }
-        IF("VK_EXT_sample_locations")
-            {
-            GET(CmdSetSampleLocationsEXT);
-            GET(GetPhysicalDeviceMultisamplePropertiesEXT);
-            continue;
-            }
+    //VK_KHR_16_bit_storage
+    //VK_KHR_descriptor_update_template
+    GET(CreateDescriptorUpdateTemplateKHR);
+    GET(DestroyDescriptorUpdateTemplateKHR);
+    GET(UpdateDescriptorSetWithTemplateKHR);
+    GET(CmdPushDescriptorSetWithTemplateKHR);
+    //VK_KHR_dedicated_allocation
+    //VK_KHR_display_swapchain
+    GET(CreateSharedSwapchainsKHR);
+    //VK_KHR_external_fence
+    //VK_KHR_external_fence_fd
+    GET(ImportFenceFdKHR);
+    GET(GetFenceFdKHR);
+    //VK_KHR_external_memory
+    //VK_KHR_external_memory_fd
+    GET(GetMemoryFdKHR);
+    GET(GetMemoryFdPropertiesKHR);
+    //VK_KHR_external_semaphore
+    //VK_KHR_external_semaphore_fd
+    GET(ImportSemaphoreFdKHR);
+    GET(GetSemaphoreFdKHR);
+    //VK_KHR_get_memory_requirements2
+    GET(GetImageMemoryRequirements2KHR);
+    GET(GetBufferMemoryRequirements2KHR);
+    GET(GetImageSparseMemoryRequirements2KHR);
+    //VK_KHR_incremental_present
+    //VK_KHR_maintenance1
+    GET(TrimCommandPoolKHR);
+    //VK_KHR_maintenance2
+    //VK_KHR_push_descriptor
+    GET(CmdPushDescriptorSetKHR);
+    //VK_KHR_sampler_mirror_clamp_to_edge
+    //VK_KHR_shader_draw_parameters
+    //VK_KHR_shader_presentable_image
+    GET(GetSwapchainStatusKHR);
+    //VK_KHR_storage_buffer_storage_class
+    //VK_KHR_swapchain
+    GET(CreateSwapchainKHR);
+    GET(DestroySwapchainKHR);
+    GET(GetSwapchainImagesKHR);
+    GET(AcquireNextImageKHR);
+    GET(QueuePresentKHR);
+    //VK_KHR_variable_pointers
+    //VK_KHR_relaxed_block_layout
+    //VK_EXT_blend_operation_advanced
+    //VK_EXT_debug_marker
+    GET(DebugMarkerSetObjectTagEXT);
+    GET(DebugMarkerSetObjectNameEXT);
+    GET(CmdDebugMarkerBeginEXT);
+    GET(CmdDebugMarkerEndEXT);
+    GET(CmdDebugMarkerInsertEXT);
+    //VK_EXT_depth_range_unrestricted
+    //VK_EXT_discard_rectangles
+    GET(CmdSetDiscardRectangleEXT);
+    //VK_EXT_display_control
+    GET(DisplayPowerControlEXT);
+    GET(RegisterDeviceEventEXT);
+    GET(RegisterDisplayEventEXT);
+    GET(GetSwapchainCounterEXT);
+    //VK_EXT_hdr_metadata
+    GET(SetHdrMetadataEXT);
+    //VK_EXT_post_depth_coverage
+    //VK_EXT_sampler_filter_minmax
+    //VK_EXT_shader_subgroup_ballot
+    //VK_EXT_shader_subgroup_vote
+    //VK_EXT_shader_stencil_export
+    //VK_EXT_shader_viewport_index_layer
+    //VK_EXT_global_priority
+    //VK_KHR_image_format_list
+    //VK_KHR_bind_memory2
+    GET(BindBufferMemory2KHR);
+    GET(BindImageMemory2KHR);
+    //VK_EXT_sample_locations
+    GET(CmdSetSampleLocationsEXT);
+    GET(GetPhysicalDeviceMultisamplePropertiesEXT);
 #ifdef VK_USE_PLATFORM_WIN32_KHR
-        IF("VK_KHR_win32_keyed_mutex") { continue; }
-        IF("VK_KHR_external_fence_win32")
-            {
-            GET(ImportFenceWin32HandleKHR);
-            GET(GetFenceWin32HandleKHR);
-            continue;
-            }
-        IF("VK_KHR_external_memory_win32")
-            {
-            GET(GetMemoryWin32HandleKHR);
-            GET(GetMemoryWin32HandlePropertiesKHR);
-            continue;
-            }
-        IF("VK_KHR_external_semaphore_win32")
-            {
-            GET(ImportSemaphoreWin32HandleKHR);
-            GET(GetSemaphoreWin32HandleKHR);
-            continue;
-            }
+    //VK_KHR_win32_keyed_mutex
+    //VK_KHR_external_fence_win32
+    GET(ImportFenceWin32HandleKHR);
+    GET(GetFenceWin32HandleKHR);
+    //VK_KHR_external_memory_win32
+    GET(GetMemoryWin32HandleKHR);
+    GET(GetMemoryWin32HandlePropertiesKHR);
+    //VK_KHR_external_semaphore_win32
+    GET(ImportSemaphoreWin32HandleKHR);
+    GET(GetSemaphoreWin32HandleKHR);
 #endif
-        IF("VK_EXT_validation_cache")
-            {
-            GET(CreateValidationCacheEXT);
-            GET(DestroyValidationCacheEXT);
-            GET(MergeValidationCachesEXT);
-            GET(GetValidationCacheDataEXT);
-            continue;
-            }
-        IF("VK_KHR_sampler_ycbcr_conversion")
-            {
-            GET(CreateSamplerYcbcrConversionKHR);
-            GET(DestroySamplerYcbcrConversionKHR);
-            continue;
-            }
-        IF("VK_EXT_conditional_rendering")
-            {
-            GET(CmdBeginConditionalRenderingEXT);
-            GET(CmdEndConditionalRenderingEXT);
-            continue;
-            }
-#undef IF
-        }
+    //VK_EXT_validation_cache
+    GET(CreateValidationCacheEXT);
+    GET(DestroyValidationCacheEXT);
+    GET(MergeValidationCachesEXT);
+    GET(GetValidationCacheDataEXT);
+    //VK_KHR_sampler_ycbcr_conversion
+    GET(CreateSamplerYcbcrConversionKHR);
+    GET(DestroySamplerYcbcrConversionKHR);
+    //VK_EXT_conditional_rendering
+    GET(CmdBeginConditionalRenderingEXT);
+    GET(CmdEndConditionalRenderingEXT);
 #undef GET
     return dt;
     }

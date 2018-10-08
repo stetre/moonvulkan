@@ -64,7 +64,6 @@ typedef struct {
     F(GetPhysicalDeviceMemoryProperties);
     F(CreateDevice);
     F(GetPhysicalDeviceSparseImageFormatProperties);
-//  F(DebugReportCallbackEXT);
     F(DestroySurfaceKHR);
     F(GetPhysicalDeviceSurfaceSupportKHR);
     F(GetPhysicalDeviceSurfaceCapabilitiesKHR);
