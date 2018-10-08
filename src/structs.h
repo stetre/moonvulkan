@@ -273,6 +273,7 @@ typedef struct {
     VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT p4;
     VkPhysicalDeviceSamplerYcbcrConversionFeatures p5;
     VkPhysicalDeviceConditionalRenderingFeaturesEXT p6;
+    VkPhysicalDevice8BitStorageFeaturesKHR p7;
 } VkPhysicalDeviceFeatures2_CHAIN;
 #define initphysicaldevicefeatures2 moonvulkan_initphysicaldevicefeatures2
 void initphysicaldevicefeatures2(lua_State *L, VkPhysicalDeviceFeatures2_CHAIN*);

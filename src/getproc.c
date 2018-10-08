@@ -360,7 +360,8 @@ device_dt_t* getproc_device(lua_State *L, VkDevice device, VkDeviceCreateInfo *c
     /* printf(""#fn" %p\n", (void*)(dt->fn)); */                \
 } while(0)
 
-    //VK_KHR_16_bit_storage
+    //VK_KHR_8bit_storage
+    //VK_KHR_16bit_storage
     //VK_KHR_descriptor_update_template
     GET(CreateDescriptorUpdateTemplateKHR);
     GET(DestroyDescriptorUpdateTemplateKHR);

@@ -327,6 +327,10 @@ _sparse_residency_16_samples_: boolean, +
 _sparse_residency_aliased_: boolean, +
 _variable_multisample_rate_: boolean, +
 _inherited_queries_: boolean, +
+pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkPhysicalDevice8BitStorageFeaturesKHR.html[VkPhysicalDevice8BitStorageFeaturesKHR], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_8bit_storage[VK_KHR_8bit_storage]): +
+_storage_buffer_8bit_access_: boolean, +
+_uniform_and_storage_buffer_8bit_access_: boolean, +
+_storage_push_constant_8_: boolean, +
 pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkPhysicalDevice16BitStorageFeatures.html[VkPhysicalDevice16BitStorageFeatures], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_16bit_storage[VK_KHR_16bit_storage]): +
 _storage_buffer_16bit_access_: boolean, +
 _uniform_and_storage_buffer_16bit_access_: boolean, +
@@ -343,7 +347,6 @@ pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-exte
 _conditional_rendering_: boolean, +
 _inherited_conditional_rendering_: boolean, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkPhysicalDeviceFeatures2.html[VkPhysicalDeviceFeatures2])#
-
 
 * [[queuefamilyproperties]]
 [small]#*queuefamilyproperties* = { +

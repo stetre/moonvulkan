@@ -1874,6 +1874,15 @@ static int echeckphysicaldeviceconditionalrenderingfeatures(lua_State *L, int ar
     return 0;
     }
 
+static int echeckphysicaldevice8bitstoragefeatures(lua_State *L, int arg, VkPhysicalDevice8BitStorageFeaturesKHR *p)
+    {
+    CHECK_TABLE(L, arg, p);
+    GetBoolean(storageBuffer8BitAccess, "storage_buffer_8bit_access");
+    GetBoolean(uniformAndStorageBuffer8BitAccess, "uniform_and_storage_buffer_8bit_access");
+    GetBoolean(storagePushConstant8, "storage_push_constant_8");
+    return 0;
+    }
+
 #define BUILD_CHAIN_VkPhysicalDeviceFeatures2(p) do { \
     (p)->p1.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2; \
     (p)->p2.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_16BIT_STORAGE_FEATURES; \
@@ -1881,12 +1890,14 @@ static int echeckphysicaldeviceconditionalrenderingfeatures(lua_State *L, int ar
     (p)->p4.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_BLEND_OPERATION_ADVANCED_FEATURES_EXT; \
     (p)->p5.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLER_YCBCR_CONVERSION_FEATURES; \
     (p)->p6.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CONDITIONAL_RENDERING_FEATURES_EXT; \
+    (p)->p7.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_8BIT_STORAGE_FEATURES_KHR; \
     (p)->p1.pNext = &p->p2; \
     (p)->p2.pNext = &p->p3; \
     (p)->p3.pNext = &p->p4; \
     (p)->p4.pNext = &p->p5; \
     (p)->p5.pNext = &p->p6; \
-    (p)->p6.pNext = NULL;   \
+    (p)->p6.pNext = &p->p7; \
+    (p)->p7.pNext = NULL;   \
 } while(0)
 
 void initphysicaldevicefeatures2(lua_State *L, VkPhysicalDeviceFeatures2_CHAIN *p)
@@ -1910,6 +1921,8 @@ static int echeckphysicaldevicefeatures2(lua_State *L, int arg, VkPhysicalDevice
     err = echeckphysicaldevicesamplerycbcrconversionfeatures(L, arg, &p->p5);
     if(err) return err;
     err = echeckphysicaldeviceconditionalrenderingfeatures(L, arg, &p->p6);
+    if(err) return err;
+    err = echeckphysicaldevice8bitstoragefeatures(L, arg, &p->p7);
     if(err) return err;
     BUILD_CHAIN_VkPhysicalDeviceFeatures2(p);
     return 0;
@@ -2011,6 +2024,14 @@ static int pushphysicaldeviceconditionalrenderingfeatures(lua_State *L, VkPhysic
     return 0;
     }
 
+static int pushphysicaldevice8bitstoragefeatures(lua_State *L, VkPhysicalDevice8BitStorageFeaturesKHR *p)
+    {
+    SetBoolean(storageBuffer8BitAccess, "storage_buffer_8bit_access");
+    SetBoolean(uniformAndStorageBuffer8BitAccess, "uniform_and_storage_buffer_8bit_access");
+    SetBoolean(storagePushConstant8, "storage_push_constant_8");
+    return 0;
+    }
+
 int pushphysicaldevicefeatures2(lua_State *L, VkPhysicalDeviceFeatures2_CHAIN *p)
     {
     pushphysicaldevicefeatures(L, &p->p1.features);
@@ -2019,6 +2040,7 @@ int pushphysicaldevicefeatures2(lua_State *L, VkPhysicalDeviceFeatures2_CHAIN *p
     pushphysicaldeviceblendoperationadvancedfeatures(L, &p->p4);
     pushphysicaldevicesamplerycbcrconversionfeatures(L, &p->p5);
     pushphysicaldeviceconditionalrenderingfeatures(L, &p->p6);
+    pushphysicaldevice8bitstoragefeatures(L, &p->p7);
     return 1;
     }
 
