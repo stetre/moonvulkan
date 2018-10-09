@@ -103,11 +103,28 @@ static int GetDeviceQueue(lua_State *L)
     {
     VkQueue queue;
     ud_t *ud;
+    VkDeviceQueueInfo2_CHAIN info;
     VkDevice device = checkdevice(L, 1, &ud);
-    uint32_t family_index = luaL_checkinteger(L, 2);
-    uint32_t index = luaL_checkinteger(L, 3);
+    if(lua_istable(L, 2))
+        {
+        if(echeckdevicequeueinfo2(L, 2, &info)) return argerror(L, 2);
+        }
+    else
+        {
+        memset(&info, 0, sizeof(info));
+        info.p1.sType = VK_STRUCTURE_TYPE_DEVICE_QUEUE_INFO_2;
+        info.p1.pNext = NULL;
+        info.p1.flags = 0;
+        info.p1.queueFamilyIndex = luaL_checkinteger(L, 2);
+        info.p1.queueIndex = luaL_checkinteger(L, 3);
+        info.p1.flags = optflags(L, 4, 0);
+        }
+    if(ud->ddt->GetDeviceQueue2 && info.p1.flags != 0)
+        ud->ddt->GetDeviceQueue2(device, &info.p1, &queue);
+    else
+        ud->ddt->GetDeviceQueue(device, info.p1.queueFamilyIndex, info.p1.queueIndex, &queue);
     
-    ud->ddt->GetDeviceQueue(device, family_index, index, &queue);
+    freedevicequeueinfo2(L, &info);
     if(!queue) return luaL_error(L, "cannot retrieve queue");
     pushqueue(L, queue, device);
     return 1;

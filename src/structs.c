@@ -5417,6 +5417,24 @@ int pushdescriptorsetlayoutsupport(lua_State *L, const VkDescriptorSetLayoutSupp
     return 1;
     }
 
+/*------------------------------------------------------------------------------*/
+
+void freedevicequeueinfo2(lua_State *L, VkDeviceQueueInfo2_CHAIN *p)
+    {
+    (void)L; (void)p;
+    }
+
+int echeckdevicequeueinfo2(lua_State *L, int arg, VkDeviceQueueInfo2_CHAIN *pp)
+    {
+    VkDeviceQueueInfo2 *p = &pp->p1;
+    //const void **chain = pnextof(p);
+    CHECK_TABLE(L, arg, pp);
+    p->sType = VK_STRUCTURE_TYPE_DEVICE_QUEUE_INFO_2;
+    GetFlags(flags, "flags");
+    GetInteger(queueFamilyIndex, "queue_family_index");
+    GetInteger(queueIndex, "queue_index");
+    return 0;
+    }
 
 #if 0 /* scaffolding 25yy */
 #define freezzz moonvulkan_freezzz

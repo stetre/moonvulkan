@@ -1319,8 +1319,9 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/h
 <div id="get_device_queue" class="ulist">
 <ul>
 <li>
-<p><em>queue</em> = <strong>get_device_queue</strong>(<a href="#device"><em>device</em></a>, <a href="#index"><em>queue_family_index</em></a>, <a href="#index"><em>queue_index</em></a>)<br>
-<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkGetDeviceQueue.html">vkGetDeviceQueue</a>.</span></p>
+<p><em>queue</em> = <strong>get_device_queue</strong>(<a href="#device"><em>device</em></a>, <a href="#index"><em>queue_family_index</em></a>, <a href="#index"><em>queue_index</em></a>, [<a href="#devicequeuecreateflags"><em>devicequeuecreateflags</em></a>])<br>
+<em>queue</em> = <strong>get_device_queue</strong>(<a href="#device"><em>device</em></a>, <a href="#devicequeueinfo"><em>devicequeueinfo</em></a>)<br>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkGetDeviceQueue.html">vkGetDeviceQueue</a>, <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkGetDeviceQueue2.html">vkGetDeviceQueue2</a>.</span></p>
 </li>
 </ul>
 </div>
@@ -3914,6 +3915,14 @@ the <em>queue_family_index</em> of the <em>i-th</em> element in the table return
 -- EXTENSION (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkDeviceQueueGlobalPriorityCreateInfoKHR">VkDeviceQueueGlobalPriorityCreateInfoKHR</a>, <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_global_priority">VK_KHR_global_priority</a>):<br>
 <em>global_priority</em>: <a href="#queueglobalpriority">queueglobalpriority</a>,<br>
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkDeviceQueueCreateInfo.html">VkDeviceQueueCreateInfo</a>)</span></p>
+</li>
+<li>
+<p><a id="devicequeueinfo"></a>
+<span class="small"><strong>devicequeueinfo</strong> = {<br>
+<em>flags</em>: <a href="#devicequeuecreateflags">devicequeuecreateflags</a>,<br>
+<em>queue_family_index</em>: <a href="#index">index</a>,<br>
+<em>queue_index</em>: <a href="#index">index</a>,<br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkDeviceQueueInfo2">VkDeviceQueueInfo2</a>)</span></p>
 </li>
 </ul>
 </div>

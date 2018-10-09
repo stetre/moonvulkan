@@ -271,6 +271,7 @@ typedef struct {
     F(CmdDebugMarkerEndEXT);
     F(CmdDebugMarkerInsertEXT);
     F(CmdPushDescriptorSetKHR);
+    F(GetDeviceQueue2);
     F(CreateDescriptorUpdateTemplateKHR);
     F(DestroyDescriptorUpdateTemplateKHR);
     F(UpdateDescriptorSetWithTemplateKHR);

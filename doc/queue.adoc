@@ -3,8 +3,9 @@
 ==== queue
 
 [[get_device_queue]]
-* _queue_ = *get_device_queue*(<<device, _device_>>, <<index, _queue_family_index_>>, <<index, _queue_index_>>) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkGetDeviceQueue.html[vkGetDeviceQueue].#
+* _queue_ = *get_device_queue*(<<device, _device_>>, <<index, _queue_family_index_>>, <<index, _queue_index_>>, [<<devicequeuecreateflags, _devicequeuecreateflags_>>]) +
+_queue_ = *get_device_queue*(<<device, _device_>>, <<devicequeueinfo, _devicequeueinfo_>>) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkGetDeviceQueue.html[vkGetDeviceQueue], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkGetDeviceQueue2.html[vkGetDeviceQueue2].#
 
 
 [[queue_submit]]

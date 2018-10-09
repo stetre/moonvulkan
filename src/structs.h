@@ -717,4 +717,13 @@ int echecksemaphoregetwin32handleinfo(lua_State *L, int arg, const VkSemaphoreGe
 #define pushdescriptorsetlayoutsupport moonvulkan_pushdescriptorsetlayoutsupport
 int pushdescriptorsetlayoutsupport(lua_State *L, const VkDescriptorSetLayoutSupportKHR *p);
 
+typedef struct {
+    VkDeviceQueueInfo2 p1;
+} VkDeviceQueueInfo2_CHAIN;
+
+#define freedevicequeueinfo2 moonvulkan_freedevicequeueinfo2
+void freedevicequeueinfo2(lua_State *L, VkDeviceQueueInfo2_CHAIN *p);
+#define echeckdevicequeueinfo2 moonvulkan_echeckdevicequeueinfo2
+int echeckdevicequeueinfo2(lua_State *L, int arg, VkDeviceQueueInfo2_CHAIN *p);
+
 #endif /* structsDEFINED */

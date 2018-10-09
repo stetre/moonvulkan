@@ -491,6 +491,13 @@ pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-exte
 _global_priority_: <<queueglobalpriority, queueglobalpriority>>, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkDeviceQueueCreateInfo.html[VkDeviceQueueCreateInfo])#
 
+* [[devicequeueinfo]]
+[small]#*devicequeueinfo* = { +
+_flags_: <<devicequeuecreateflags, devicequeuecreateflags>>, +
+_queue_family_index_: <<index, index>>, +
+_queue_index_: <<index, index>>, +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkDeviceQueueInfo2[VkDeviceQueueInfo2])#
+
 '''
 
 * [[submitinfo]]
