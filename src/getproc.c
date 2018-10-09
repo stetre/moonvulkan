@@ -395,7 +395,7 @@ device_dt_t* getproc_device(lua_State *L, VkDevice device, VkDeviceCreateInfo *c
     GET(CmdPushDescriptorSetKHR);
     //VK_KHR_sampler_mirror_clamp_to_edge
     //VK_KHR_shader_draw_parameters
-    //VK_KHR_shader_presentable_image
+    //VK_KHR_shared_presentable_image
     GET(GetSwapchainStatusKHR);
     //VK_KHR_storage_buffer_storage_class
     //VK_KHR_swapchain

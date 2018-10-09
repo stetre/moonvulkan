@@ -3543,6 +3543,12 @@ the <em>queue_family_index</em> of the <em>i-th</em> element in the table return
 <em>sample_location_coordinate_range</em>: {float}[2],<br>
 <em>sample_location_sub_pixel_bits</em>: integer,<br>
 <em>variable_sample_locations</em>: boolean,<br>
+-- EXTENSION (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkPhysicalDeviceSubgroupProperties.html">VkPhysicalDeviceSubgroupProperties</a>):<br>
+<em>supported_stages</em>: <a href="#shaderstageflags">shaderstageflags</a>,<br>
+<em>supported_operations</em>: <a href="#subgroupfeatureflags">subgroupfeatureflags</a>,<br>
+<em>quad_operations_in_all_stages</em>: boolean,<br>
+-- EXTENSION (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkPhysicalDeviceProtectedMemoryProperties.html">VkPhysicalDeviceProtectedMemoryProperties</a>):<br>
+<em>protected_no_fault</em>: boolean,<br>
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkPhysicalDeviceProperties2KHR.html">VkPhysicalDeviceProperties2KHR</a>)</span></p>
 </li>
 <li>
@@ -3755,6 +3761,10 @@ the <em>queue_family_index</em> of the <em>i-th</em> element in the table return
 -- EXTENSION (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkPhysicalDeviceConditionalRenderingFeaturesEXT.html">VkPhysicalDeviceConditionalRenderingFeaturesEXT</a>, <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_conditional_rendering">VK_EXT_conditional_rendering</a>):<br>
 <em>conditional_rendering</em>: boolean,<br>
 <em>inherited_conditional_rendering</em>: boolean,<br>
+-- EXTENSION (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkPhysicalDeviceProtectedMemoryFeatures.html">VkPhysicalDeviceProtectedMemoryFeatures</a>):<br>
+<em>protected_memory</em>: boolean,<br>
+-- EXTENSION (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkPhysicalDeviceShaderDrawParameterFeatures.html">VkPhysicalDeviceShaderDrawParameterFeatures</a>):<br>
+<em>shader_draw_parameters</em>: boolean,<br>
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkPhysicalDeviceFeatures2.html">VkPhysicalDeviceFeatures2</a>)</span></p>
 </li>
 <li>

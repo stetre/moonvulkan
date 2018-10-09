@@ -1883,6 +1883,20 @@ static int echeckphysicaldevice8bitstoragefeatures(lua_State *L, int arg, VkPhys
     return 0;
     }
 
+static int echeckphysicaldeviceprotectedmemoryfeatures(lua_State *L, int arg, VkPhysicalDeviceProtectedMemoryFeatures *p)
+    {
+    CHECK_TABLE(L, arg, p);
+    GetBoolean(protectedMemory, "protected_memory");
+    return 0;
+    }
+
+static int echeckphysicaldeviceshaderdrawparameterfeatures(lua_State *L, int arg, VkPhysicalDeviceShaderDrawParameterFeatures *p)
+    {
+    CHECK_TABLE(L, arg, p);
+    GetBoolean(shaderDrawParameters, "shader_draw_parameters");
+    return 0;
+    }
+
 #define BUILD_CHAIN_VkPhysicalDeviceFeatures2(p) do { \
     (p)->p1.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2; \
     (p)->p2.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_16BIT_STORAGE_FEATURES; \
@@ -1891,13 +1905,17 @@ static int echeckphysicaldevice8bitstoragefeatures(lua_State *L, int arg, VkPhys
     (p)->p5.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLER_YCBCR_CONVERSION_FEATURES; \
     (p)->p6.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CONDITIONAL_RENDERING_FEATURES_EXT; \
     (p)->p7.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_8BIT_STORAGE_FEATURES_KHR; \
+    (p)->p8.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROTECTED_MEMORY_FEATURES; \
+    (p)->p9.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_DRAW_PARAMETER_FEATURES; \
     (p)->p1.pNext = &p->p2; \
     (p)->p2.pNext = &p->p3; \
     (p)->p3.pNext = &p->p4; \
     (p)->p4.pNext = &p->p5; \
     (p)->p5.pNext = &p->p6; \
     (p)->p6.pNext = &p->p7; \
-    (p)->p7.pNext = NULL;   \
+    (p)->p7.pNext = &p->p8; \
+    (p)->p8.pNext = &p->p9; \
+    (p)->p9.pNext = NULL;   \
 } while(0)
 
 void initphysicaldevicefeatures2(lua_State *L, VkPhysicalDeviceFeatures2_CHAIN *p)
@@ -1923,6 +1941,10 @@ static int echeckphysicaldevicefeatures2(lua_State *L, int arg, VkPhysicalDevice
     err = echeckphysicaldeviceconditionalrenderingfeatures(L, arg, &p->p6);
     if(err) return err;
     err = echeckphysicaldevice8bitstoragefeatures(L, arg, &p->p7);
+    if(err) return err;
+    err = echeckphysicaldeviceprotectedmemoryfeatures(L, arg, &p->p8);
+    if(err) return err;
+    err = echeckphysicaldeviceshaderdrawparameterfeatures(L, arg, &p->p9);
     if(err) return err;
     BUILD_CHAIN_VkPhysicalDeviceFeatures2(p);
     return 0;
@@ -2032,6 +2054,18 @@ static int pushphysicaldevice8bitstoragefeatures(lua_State *L, VkPhysicalDevice8
     return 0;
     }
 
+static int pushphysicaldeviceprotectedmemoryfeatures(lua_State *L, VkPhysicalDeviceProtectedMemoryFeatures *p)
+    {
+    SetBoolean(protectedMemory, "protected_memory");
+    return 0;
+    }
+
+static int pushphysicaldeviceshaderdrawparameterfeatures(lua_State *L, VkPhysicalDeviceShaderDrawParameterFeatures *p)
+    {
+    SetBoolean(shaderDrawParameters, "shader_draw_parameters");
+    return 0;
+    }
+
 int pushphysicaldevicefeatures2(lua_State *L, VkPhysicalDeviceFeatures2_CHAIN *p)
     {
     pushphysicaldevicefeatures(L, &p->p1.features);
@@ -2041,6 +2075,8 @@ int pushphysicaldevicefeatures2(lua_State *L, VkPhysicalDeviceFeatures2_CHAIN *p
     pushphysicaldevicesamplerycbcrconversionfeatures(L, &p->p5);
     pushphysicaldeviceconditionalrenderingfeatures(L, &p->p6);
     pushphysicaldevice8bitstoragefeatures(L, &p->p7);
+    pushphysicaldeviceprotectedmemoryfeatures(L, &p->p8);
+    pushphysicaldeviceshaderdrawparameterfeatures(L, &p->p9);
     return 1;
     }
 
@@ -2253,6 +2289,20 @@ static int pushphysicaldevicemaintenance3properties(lua_State *L, VkPhysicalDevi
     return 0;
     }
 
+static int pushphysicaldevicesubgroupproperties(lua_State *L, VkPhysicalDeviceSubgroupProperties *p)
+    {
+    SetFlags(supportedStages, "supported_stages");
+    SetFlags(supportedOperations, "supported_operations");
+    SetBoolean(quadOperationsInAllStages, "quad_operations_in_all_stages");
+    return 0;
+    }
+
+static int pushphysicaldeviceprotectedmemoryproperties(lua_State *L, VkPhysicalDeviceProtectedMemoryProperties *p)
+    {
+    SetBoolean(protectedNoFault, "protected_no_fault");
+    return 0;
+    }
+
 //@@TODO: Investigate if it is legal to chain all structs, even if extensions are not enabled
 void initphysicaldeviceproperties2(lua_State *L, VkPhysicalDeviceProperties2_CHAIN *p)
     {
@@ -2267,6 +2317,8 @@ void initphysicaldeviceproperties2(lua_State *L, VkPhysicalDeviceProperties2_CHA
     p->p7.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_POINT_CLIPPING_PROPERTIES;
     p->p8.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLE_LOCATIONS_PROPERTIES_EXT;
     p->p9.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_3_PROPERTIES;
+    p->p10.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_PROPERTIES;
+    p->p11.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROTECTED_MEMORY_PROPERTIES;
     p->p1.pNext = &p->p2;
     p->p2.pNext = &p->p3;
     p->p3.pNext = &p->p4;
@@ -2275,7 +2327,9 @@ void initphysicaldeviceproperties2(lua_State *L, VkPhysicalDeviceProperties2_CHA
     p->p6.pNext = &p->p7;
     p->p7.pNext = &p->p8;
     p->p8.pNext = &p->p9;
-    p->p9.pNext = NULL;
+    p->p9.pNext = &p->p10;
+    p->p10.pNext = &p->p11;
+    p->p11.pNext = NULL;
     }
 
 int pushphysicaldeviceproperties2(lua_State *L, VkPhysicalDeviceProperties2_CHAIN *p)
@@ -2289,6 +2343,8 @@ int pushphysicaldeviceproperties2(lua_State *L, VkPhysicalDeviceProperties2_CHAI
     pushphysicaldevicepointclippingproperties(L, &p->p7);
     pushphysicaldevicesamplelocationsproperties(L, &p->p8);
     pushphysicaldevicemaintenance3properties(L, &p->p9);
+    pushphysicaldevicesubgroupproperties(L, &p->p10);
+    pushphysicaldeviceprotectedmemoryproperties(L, &p->p11);
     return 1;
     }
 

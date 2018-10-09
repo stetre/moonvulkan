@@ -258,6 +258,8 @@ typedef struct {
     VkPhysicalDevicePointClippingProperties p7;
     VkPhysicalDeviceSampleLocationsPropertiesEXT p8;
     VkPhysicalDeviceMaintenance3Properties p9;
+    VkPhysicalDeviceSubgroupProperties p10;
+    VkPhysicalDeviceProtectedMemoryProperties p11;
 } VkPhysicalDeviceProperties2_CHAIN;
 
 #define initphysicaldeviceproperties2 moonvulkan_initphysicaldeviceproperties2
@@ -275,6 +277,8 @@ typedef struct {
     VkPhysicalDeviceSamplerYcbcrConversionFeatures p5;
     VkPhysicalDeviceConditionalRenderingFeaturesEXT p6;
     VkPhysicalDevice8BitStorageFeaturesKHR p7;
+    VkPhysicalDeviceProtectedMemoryFeatures p8;
+    VkPhysicalDeviceShaderDrawParameterFeatures p9;
 } VkPhysicalDeviceFeatures2_CHAIN;
 #define initphysicaldevicefeatures2 moonvulkan_initphysicaldevicefeatures2
 void initphysicaldevicefeatures2(lua_State *L, VkPhysicalDeviceFeatures2_CHAIN*);
@@ -282,7 +286,6 @@ void initphysicaldevicefeatures2(lua_State *L, VkPhysicalDeviceFeatures2_CHAIN*)
 int pushphysicaldevicefeatures2(lua_State *L, VkPhysicalDeviceFeatures2_CHAIN *p);
 #define pushphysicaldevicefeatures moonvulkan_pushphysicaldevicefeatures
 int pushphysicaldevicefeatures(lua_State *L, VkPhysicalDeviceFeatures *p);
-
 
 typedef struct {
     VkFormatProperties2 p1;
