@@ -44,7 +44,7 @@
 
 #include "getproc.h"
 #include "objects.h"
-#include "structs.h"
+#include "zcheck.h"
 #include "enums.h"
 
 
