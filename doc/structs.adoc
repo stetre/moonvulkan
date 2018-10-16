@@ -1110,7 +1110,7 @@ _render_pass_: <<render_pass, render_pass>> *[R]*, +
 _subpass_: integer, +
 _base_pipeline_handle_: <<pipeline, pipeline>>, +
 _base_pipeline_index_: <<index, index>>, +
-_color_blend_advanced_state_: <<pipelinecolorblendadvancedstatecreateinfo, pipelinecolorblendadvancedstatecreateinfo>> (Note1), +
+_color_blend_advanced_state_: <<pipelinecolorblendadvancedstatecreateinfo, pipelinecolorblendadvancedstatecreateinfo>> (Note1) _(DEPRECATED: will soon be moved within the color_blend_state field.)_, +
 _discard_rectangle_state_: <<pipelinediscardrectanglestatecreateinfo, pipelinediscardrectanglestatecreateinfo>> (Note2), +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkGraphicsPipelineCreateInfo.html[VkGraphicsPipelineCreateInfo]) +
 Note1: Requires the https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_blend_operation_advanced[VK_EXT_blend_operation_advanced] extension and the _color_blend_state_ field. +

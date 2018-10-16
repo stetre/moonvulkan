@@ -1274,7 +1274,7 @@ static int echecksubpassdescription(lua_State *L, int arg, VkSubpassDescription 
     if(err == ERR_NOTPRESENT)
         poperror();
     else if(count != p->colorAttachmentCount)
-        { err = ERR_LENGTH; lua_pushstring(L, errstring(err)); }
+        { err = ERR_LENGTH; lua_pushstring(L, errstring(err)); return err; }
 #undef F
 #define F "depth_stencil_attachment"
     arg1 = pushfield(L, arg, F);
@@ -1291,7 +1291,7 @@ static int echecksubpassdescription(lua_State *L, int arg, VkSubpassDescription 
 #define F "preserve_attachments"
     arg1 = pushfield(L, arg, F);
     p->pPreserveAttachments = checkuint32list(L, arg1, &count, &err);
-    p->inputAttachmentCount = count;
+    p->preserveAttachmentCount = count;
     popfield(L, arg1);
     if(err < 0) { freesubpassdescription(L, p); return pushfielderror(L, F, err); }
 #undef F
@@ -3726,8 +3726,8 @@ static int echeckspecializationinfo(lua_State *L, int arg, VkSpecializationInfo 
 static void freepipelineshaderstagecreateinfo(lua_State *L, VkPipelineShaderStageCreateInfo *p)
     {
     if(!p) return;
-    if(!p->pName) Free(L, (void*)p->pName);
-    if(!p->pSpecializationInfo)
+    if(p->pName) Free(L, (void*)p->pName);
+    if(p->pSpecializationInfo)
         {
         freespecializationinfo(L, (VkSpecializationInfo*)p->pSpecializationInfo);
         Free(L, (void*)p->pSpecializationInfo);
@@ -4718,7 +4718,7 @@ static int echeckwritedescriptorset(lua_State *L, int arg, VkWriteDescriptorSet 
             arg1 = pushfield(L, arg, F);
             p->pTexelBufferView = checkbuffer_viewlist(L, arg1, &count, &err, NULL);
             popfield(L, arg1);
-            if(err) { freewritedescriptorset(L, p); return pushfielderror(L, F, err); }
+            if(err<0) { freewritedescriptorset(L, p); return pushfielderror(L, F, err); }
             if(err == ERR_NOTPRESENT) poperror();
             p->descriptorCount = count;
             return 0;
