@@ -249,9 +249,7 @@ static int GetBufferMemoryRequirements2(lua_State *L, VkBuffer buffer, ud_t *ud)
         }
     info->buffer = buffer;
 
-    req = znewVkMemoryRequirements2(L, &err);
-    if(err) { CLEANUP; return lua_error(L); }
-    zinitVkMemoryRequirements2(L, req, &err);
+    req = znewchainVkMemoryRequirements2(L, &err);
     if(err) { CLEANUP; return lua_error(L); }
 
     ud->ddt->GetBufferMemoryRequirements2KHR(device, info, req);
@@ -299,9 +297,7 @@ static int GetImageMemoryRequirements2(lua_State *L, VkImage image, ud_t *ud)
         }
     info->image = image;
 
-    req = znewVkMemoryRequirements2(L, &err);
-    if(err) { CLEANUP; return lua_error(L); }
-    zinitVkMemoryRequirements2(L, req, &err);
+    req = znewchainVkMemoryRequirements2(L, &err);
     if(err) { CLEANUP; return lua_error(L); }
 
     ud->ddt->GetImageMemoryRequirements2KHR(device, info, req);
@@ -354,13 +350,8 @@ static int GetImageSparseMemoryRequirements2(lua_State *L, VkImage image, ud_t *
     ud->ddt->GetImageSparseMemoryRequirements2KHR(device, info, &count, NULL);
     if(count == 0) { CLEANUP; return 1; }
 
-    req = znewarrayVkSparseImageMemoryRequirements2(L, count, &err);
+    req = znewchainarrayVkSparseImageMemoryRequirements2(L, count, &err);
     if(err) { CLEANUP; return lua_error(L); }
-    for(i = 0; i <count; i++)
-        {
-        zinitVkSparseImageMemoryRequirements2(L, &req[i], &err);
-        if(err) { CLEANUP; return lua_error(L); }
-        }
 
     ud->ddt->GetImageSparseMemoryRequirements2KHR(device, info, &count, req);
 

@@ -26,11 +26,16 @@
 #include "internal.h"
 
 #if 0
-/* A 'typed' struct is a vulkan struct having the sType and pNext fields, while
- * a 'untyped' struct is one lacking those two fields (and thus not chainable).
+/* Terminology used here:
+ * - A 'typed struct' is a vulkan struct having the sType and pNext fields.
+ * - A 'untyped struct' is one lacking those two fields (and thus not extendable
+ *   nor chainable).
+ * - A 'fresh struct' is a newly allocated struct, zeroed out, and (if typed)
+ *   with its sType field properly initialized.
+ * - A 'fresh chain' is a pNext-chain of fresh structs.
  *
  * The following functions are declared for the generic VkXxx vulkan struct
- * (either typed or untyped), and implemented only if actually needed:
+ * (either typed or untyped), and implemented where actually needed:
  *
  * VkXxx* znewVkXxx(lua_State *L, int *err);
  * VkXxx* zcheckVkXxx(lua_State *L, int arg, int *err);
@@ -41,6 +46,8 @@
  * VkXxx* zcheckarrayVkXxx(lua_State *L, int arg, uint32_t *count, int *err);
  * void   zfreearrayVkXxx(lua_State *L, VkXxx *p, uint32_t count, int base);
  * int    zinitVkXxx(lua_State *L, VkXxx* p, int *err); 
+ * Xxx*   znewchainVkXxx(lua_State *L, int *err);
+ * Xxx*   znewchainarrayVkXxx(lua_State *L, uint32_t count, int *err);
  *
  * - znewVkXxx() allocates a new VkXxx struct, zeroed out and with the sType
  *          field properly initialized (if VkXxx is typed).
@@ -120,8 +127,31 @@ static int pushfield(lua_State *L, int arg, const char *sname)
 #define ZCLEAR_BEGIN(VkXxx) void zclear##VkXxx(lua_State *L, const void *p_) { VkXxx *p =(VkXxx*)p_; 
 #define ZCLEAR_END }
 
-#define ZINIT_BEGIN(VkXxx) int zinit##VkXxx(lua_State *L, VkXxx* p, int *err) {
-#define ZINIT_END *err=0; return *err; }
+#define ZINIT_BEGIN(VkXxx) /* also implements the znewchain functions */\
+VkXxx* znewchain##VkXxx(lua_State *L, int *err)                         \
+    {                                                               \
+    VkXxx* p = znew##VkXxx(L, err);                                 \
+    if(*err) return NULL;                                           \
+    zinit##VkXxx(L, p, err);                                        \
+    if(*err) { zfree##VkXxx(L, p, 1); return NULL; }                \
+    return p;                                                       \
+    }                                                               \
+VkXxx* znewchainarray##VkXxx(lua_State *L, uint32_t count, int *err)    \
+    {                                                               \
+    uint32_t i;                                                     \
+    VkXxx* p = znewarray##VkXxx(L, count, err);                     \
+    if(*err) return NULL;                                           \
+    for(i=0; i<count; i++)                                          \
+        {                                                           \
+        zinit##VkXxx(L, &p[i], err);                                \
+        if(*err) { zfreearray##VkXxx(L, p, count, 1); return NULL; }\
+        }                                                           \
+    return p;                                                       \
+    }                                                               \
+int zinit##VkXxx(lua_State *L, VkXxx* p, int *err) {
+#define ZINIT_END *err=0; return *err;  }
+
+
 #define ADDX(XXX, VkXxx) do {                                           \
     VkXxx* p2 = znew(L, VK_STRUCTURE_TYPE_##XXX, sizeof(VkXxx), err);   \
     if(*err) { zfree(L, p2, 1); return *err; }                          \
@@ -2381,7 +2411,6 @@ ZPUSH_END
 //ZPUSH_BEGIN(VkQueueFamilyProperties2KHR)
 int zpushVkQueueFamilyProperties2KHR(lua_State *L, const VkQueueFamilyProperties2KHR *p, uint32_t index) {
     VkQueueFamilyProperties2KHR* pp = (VkQueueFamilyProperties2KHR*)p->pNext;
-printf("@@ 0x%.16x %p\n", p->sType, (void*)pp);
     lua_newtable(L);
     pushVkQueueFamilyProperties(L, &p->queueFamilyProperties, index);
     while(pp)

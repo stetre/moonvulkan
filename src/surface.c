@@ -326,9 +326,7 @@ static int GetPhysicalDeviceSurfaceCapabilities2(lua_State *L, VkPhysicalDevice 
     zfreeVkSurfaceCapabilities2KHR(L, capabilities, 1); \
     zfreeVkPhysicalDeviceSurfaceInfo2KHR(L, info, 1);   \
 } while(0)
-    capabilities = znewVkSurfaceCapabilities2KHR(L, &err);
-    if(err) { CLEANUP; return lua_error(L); }
-    zinitVkSurfaceCapabilities2KHR(L, capabilities, &err);
+    capabilities = znewchainVkSurfaceCapabilities2KHR(L, &err);
     if(err) { CLEANUP; return lua_error(L); }
     info = znewVkPhysicalDeviceSurfaceInfo2KHR(L, &err);
     if(err) { CLEANUP; return lua_error(L); }
@@ -388,13 +386,8 @@ static int GetPhysicalDeviceSurfaceFormats2(lua_State *L, VkPhysicalDevice physd
     ec = ud->idt->GetPhysicalDeviceSurfaceFormats2KHR(physdev, info, &count, NULL);
     if(ec) { CLEANUP; CheckError(L, ec); return 0; }
     if(count == 0) { CLEANUP; return 1; }
-    formats = znewarrayVkSurfaceFormat2KHR(L, count, &err);
+    formats = znewchainarrayVkSurfaceFormat2KHR(L, count, &err);
     if(err) { CLEANUP; return lua_error(L); }
-    for(i = 0; i < count; i++)
-        {
-        zinitVkSurfaceFormat2KHR(L, &formats[i], &err);
-        if(err) { CLEANUP; return lua_error(L); }
-        }
     ec = ud->idt->GetPhysicalDeviceSurfaceFormats2KHR(physdev, info, &count, formats);
     if(ec) { CLEANUP; CheckError(L, ec); return 0; }
     for(i = 0; i < count; i++)

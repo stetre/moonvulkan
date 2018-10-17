@@ -286,6 +286,10 @@ local TYPED_WIN32 = {
 local template_typed =[[
 #define znewXxx(L, err) (Xxx*)znew((L), VK_STRUCTURE_TYPE_XXX, sizeof(Xxx), (err))
 #define znewarrayXxx(L, count, err) (Xxx*)znewarray((L), VK_STRUCTURE_TYPE_XXX, sizeof(Xxx), (count), (err))
+#define znewchainXxx moonvulkan_znewchainXxx
+Xxx* znewchainXxx(lua_State *L, int *err);
+#define znewchainarrayXxx moonvulkan_znewchainarrayXxx
+Xxx* znewchainarrayXxx(lua_State *L, uint32_t count, int *err);
 #define zcheckXxx moonvulkan_zcheckXxx
 Xxx* zcheckXxx(lua_State *L, int arg, int *err);
 #define zcheckarrayXxx moonvulkan_zcheckarrayXxx
