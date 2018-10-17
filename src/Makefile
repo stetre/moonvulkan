@@ -48,7 +48,7 @@ Objs := $(Src:.c=.o)
 COPT	+= -O2
 #COPT	+= -O0 -g
 #COPT	+= -m32
-COPT	+= -Wfatal-errors
+COPT	+= -Werror -Wfatal-errors
 COPT	+= -Wall -Wextra -Wpedantic
 COPT    += -std=gnu99
 COPT 	+= -DLUAVER=$(LUAVER)

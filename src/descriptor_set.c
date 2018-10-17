@@ -48,7 +48,7 @@ static int Create(lua_State *L)
     uint32_t count, i;
     VkResult ec;
     VkDescriptorSet *descriptor_set;
-    VkDescriptorSetAllocateInfo info;
+    VkDescriptorSetAllocateInfo* info;
 
     VkDescriptorPool descriptor_pool = checkdescriptor_pool(L, 1, &descriptor_pool_ud);
     VkDevice device = descriptor_pool_ud->device;
@@ -58,46 +58,35 @@ static int Create(lua_State *L)
      * list of descriptor_set_layout objects.
      */
     if(lua_istable(L, 2))
-        {
-        lua_rawgeti(L, 2, 1);
-        isinfo = lua_isnoneornil(L, -1);
-        lua_pop(L, 1);
-        }
+        { lua_rawgeti(L, 2, 1); isinfo = lua_isnoneornil(L, -1); lua_pop(L, 1); }
     else
         isinfo = 1; /* will fail later */
 
+#define CLEANUP zfreeVkDescriptorSetAllocateInfo(L, info, 1)
     if(isinfo)
         {
-        if(echeckdescriptorsetallocateinfo(L, 2, &info)) return argerror(L, 2);
+        info = zcheckVkDescriptorSetAllocateInfo(L, 2, &err);
+        if(err) { CLEANUP; return argerror(L, 2); }
         }
     else
         {
-        memset(&info, 0, sizeof(info));
-        info.sType = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_ALLOCATE_INFO;
-        info.pNext = NULL;
-        info.pSetLayouts = checkdescriptor_set_layoutlist(L, 2, &count, &err, NULL);
-        info.descriptorSetCount = count;
-        if(err)
-            { freedescriptorsetallocateinfo(L, &info); return argerror(L, 2); }
+        info = znewVkDescriptorSetAllocateInfo(L, &err);
+        if(err) { CLEANUP; return lua_error(L); }
+        info->pSetLayouts = checkdescriptor_set_layoutlist(L, 2, &count, &err, NULL);
+        info->descriptorSetCount = count;
+        if(err) { CLEANUP; return argerrorc(L, 2, err); }
         }
 
-    info.descriptorPool = descriptor_pool;
+    info->descriptorPool = descriptor_pool;
 
     descriptor_set = (VkDescriptorSet*)MallocNoErr(L, sizeof(VkDescriptorSet)*count);
-    if(!descriptor_set)
-        {
-        freedescriptorsetallocateinfo(L, &info);
-        return errmemory(L);
-        }
+    if(!descriptor_set) { CLEANUP; return errmemory(L); }
 
-    ec = descriptor_pool_ud->ddt->AllocateDescriptorSets(device, &info, descriptor_set);
-    freedescriptorsetallocateinfo(L, &info);
+    ec = descriptor_pool_ud->ddt->AllocateDescriptorSets(device, info, descriptor_set);
+    CLEANUP;
+#undef CLEANUP
     if(ec)
-        {
-        Free(L, descriptor_set);
-        CheckError(L, ec);
-        return 0;
-        }
+        { Free(L, descriptor_set); CheckError(L, ec); return 0; }
 
     lua_newtable(L);
     for(i=0; i < count; i++)
@@ -125,18 +114,13 @@ static int FreeDescriptorSets(lua_State *L)
     VkDescriptorPool descriptor_pool;
     VkDescriptorSet *descriptor_set = checkdescriptor_setlist(L, 1, &count, &err, &ud);
     if(err) return argerrorc(L, 1, err);
-    
     free_allowed = IsFreeDescriptorSetAllowed(ud[1]->parent_ud);
-
+#define CLEANUP do {  Free(L, descriptor_set); Free(L, ud); } while(0)
     /* check that they all are from the same pool */
     for(i = 1; i < count; i++)
         {
         if(ud[i]->parent_ud != ud[0]->parent_ud)
-            {
-            Free(L, descriptor_set);
-            Free(L, ud);
-            return argerrorc(L, 1, ERR_POOL);
-            }
+            { CLEANUP; return argerrorc(L, 1, ERR_POOL); }
         }
 
     descriptor_pool = (VkDescriptorPool)ud[0]->parent_ud->handle;
@@ -147,17 +131,13 @@ static int FreeDescriptorSets(lua_State *L)
         }
 
     if(!free_allowed)
-        {
-        Free(L, descriptor_set);
-        Free(L, ud);
-        return 0;
-        }
+        { CLEANUP; return argerrorc(L, 1, ERR_POOL); }
+
     ec = ud[0]->ddt->FreeDescriptorSets(ud[0]->device, descriptor_pool, count, descriptor_set);
-    Free(L, descriptor_set);
-    Free(L, ud);
+    CLEANUP;
     CheckError(L, ec);
     return 0;
-#undef first
+#undef CLEANUP
     }
 
 RAW_FUNC(descriptor_set)
@@ -172,28 +152,26 @@ static int UpdateDescriptorSets(lua_State *L)
     ud_t *ud;
     int err;
     uint32_t wcount, ccount;
-    VkWriteDescriptorSet* writes;
-    VkCopyDescriptorSet* copies;
-
+    VkWriteDescriptorSet* writes=NULL;
+    VkCopyDescriptorSet* copies=NULL;
     VkDevice device = checkdevice(L, 1, &ud);
+#define CLEANUP do {                                        \
+    zfreearrayVkWriteDescriptorSet(L, writes, wcount, 1);   \
+    zfreearrayVkCopyDescriptorSet(L, copies, ccount, 1);    \
+} while(0)
+    writes = zcheckarrayVkWriteDescriptorSet(L, 2, &wcount, &err);
+    if(err < 0) { CLEANUP; return argerror(L, 2); }
+    if(err==ERR_NOTPRESENT) lua_pop(L, 1);
 
-    writes = echeckwritedescriptorsetlist(L, 2, &wcount, &err);
-    if(err < 0) return argerror(L, 2);
-    if(err) lua_pop(L, 1);
-
-    copies = echeckcopydescriptorsetlist(L, 3, &ccount, &err);
-    if(err < 0)
-        {
-        if(writes) freewritedescriptorsetlist(L, writes, wcount);
-        return argerror(L, 3);
-        }
-    if(err) lua_pop(L, 1);
+    copies = zcheckarrayVkCopyDescriptorSet(L, 3, &ccount, &err);
+    if(err < 0) { CLEANUP; return argerror(L, 3); }
+    if(err==ERR_NOTPRESENT) lua_pop(L, 1);
 
     ud->ddt->UpdateDescriptorSets(device, wcount, writes, ccount, copies);
 
-    if(writes) freewritedescriptorsetlist(L, writes, wcount);
-    if(copies) freecopydescriptorsetlist(L, copies, ccount);
+    CLEANUP;
     return 0;
+#undef CLEANUP
     }
 
 static const struct luaL_Reg Methods[] = 

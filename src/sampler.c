@@ -30,7 +30,6 @@ static int freesampler(lua_State *L, ud_t *ud)
     VkSampler sampler = (VkSampler)ud->handle;
     const VkAllocationCallbacks *allocator = ud->allocator;
     VkDevice device = ud->device;
-
     if(!freeuserdata(L, ud))
         return 0; /* double call */
     TRACE_DELETE(sampler, "sampler");
@@ -44,16 +43,16 @@ static int Create(lua_State *L)
     ud_t *ud, *device_ud;
     VkResult ec;
     VkSampler sampler;
-    VkSamplerCreateInfo_CHAIN info;
-
+    VkSamplerCreateInfo* info;
     VkDevice device = checkdevice(L, 1, &device_ud);
     const VkAllocationCallbacks *allocator = optallocator(L, 3);
-    err = echecksamplercreateinfo(L, 2, &info);
-    if(err) return argerror(L, 2);
-
-    ec = device_ud->ddt->CreateSampler(device, &info.p1, allocator, &sampler);
-    freesamplercreateinfo(L, &info);
+#define CLEANUP zfreeVkSamplerCreateInfo(L, info, 1)
+    info = zcheckVkSamplerCreateInfo(L, 2, &err);
+    if(err) { CLEANUP; return argerror(L, 2); }
+    ec = device_ud->ddt->CreateSampler(device, info, allocator, &sampler);
+    CLEANUP;
     CheckError(L, ec);
+#undef CLEANUP
     TRACE_CREATE(sampler, "sampler");
     ud = newuserdata_nondispatchable(L, sampler, SAMPLER_MT);
     ud->parent_ud = device_ud;

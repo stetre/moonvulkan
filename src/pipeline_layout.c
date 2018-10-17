@@ -40,42 +40,38 @@ static int freepipeline_layout(lua_State *L, ud_t *ud)
 
 static int Create(lua_State *L)
     {
+    int err;
     ud_t *ud, *device_ud;
     VkResult ec;
     VkPipelineLayout pipeline_layout;
-    VkPipelineLayoutCreateInfo info;
-    int err;
-    uint32_t count;
+    VkPipelineLayoutCreateInfo* info;
     VkDevice device = checkdevice(L, 1, &device_ud);
     const VkAllocationCallbacks *allocator = NULL;
 
+#define CLEANUP zfreeVkPipelineLayoutCreateInfo(L, info, 1)
     if(lua_istable(L, 2))
         {
         allocator = optallocator(L, 3);
-        if(echeckpipelinelayoutcreateinfo(L, 2, &info)) return argerror(L, 2);
+        info = zcheckVkPipelineLayoutCreateInfo(L, 2, &err);
+        if(err) { CLEANUP; return argerror(L, 2); }
         }
     else
         {
-        memset(&info, 0, sizeof(info));
-        info.sType = VK_STRUCTURE_TYPE_PIPELINE_LAYOUT_CREATE_INFO;
-        info.pNext = NULL;
-        info.flags = checkflags(L, 2);
-
-        info.pSetLayouts = checkdescriptor_set_layoutlist(L, 3, &count, &err, NULL);
-        info.setLayoutCount = count;
-        if(err < 0)
-            { freepipelinelayoutcreateinfo(L, &info); return argerrorc(L, 3, err); }
-
-        info.pPushConstantRanges = echeckpushconstantrangelist(L, 4, &count, &err);
-        info.pushConstantRangeCount = count;
-        if(err < 0)
-            { freepipelinelayoutcreateinfo(L, &info); return argerror(L, 4); }
-        if(err) lua_pop(L, 1);
+        VkFlags flags = checkflags(L, 2);
+        info = znewVkPipelineLayoutCreateInfo(L, &err);
+        if(err) { CLEANUP; return lua_error(L); }
+        info->flags = flags;
+        info->pSetLayouts = checkdescriptor_set_layoutlist(L, 3, &info->setLayoutCount, &err, NULL);
+        if(err) { CLEANUP; return argerror(L, 3); }
+        info->pPushConstantRanges = zcheckarrayVkPushConstantRange(L, 4,
+                                        &info->pushConstantRangeCount, &err);
+        if(err<0) { CLEANUP; return argerror(L, 3); }
+        else if(err == ERR_NOTPRESENT) lua_pop(L, 1);
         }
-
-    ec = device_ud->ddt->CreatePipelineLayout(device, &info, allocator, &pipeline_layout);
-    freepipelinelayoutcreateinfo(L, &info);
+    ec = device_ud->ddt->CreatePipelineLayout(device, info, allocator, &pipeline_layout);
+    CLEANUP;
     CheckError(L, ec);
+#undef CLEANUP
     TRACE_CREATE(pipeline_layout, "pipeline_layout");
     ud = newuserdata_nondispatchable(L, pipeline_layout, PIPELINE_LAYOUT_MT);
     ud->parent_ud = device_ud;

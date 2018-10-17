@@ -39,27 +39,31 @@ static int freeevent(lua_State *L, ud_t *ud)
 
 static int Create(lua_State *L)
     {
+    int err;
     ud_t *ud, *device_ud;
     VkResult ec;
     VkEvent event;
-    VkEventCreateInfo info;
+    VkEventCreateInfo* info;
     VkDevice device = checkdevice(L, 1, &device_ud);
     const VkAllocationCallbacks *allocator = NULL;
-
+#define CLEANUP zfreeVkEventCreateInfo(L, info, 1)
     if(lua_istable(L, 2))
         {
-        if(echeckeventcreateinfo(L, 2, &info)) return argerror(L, 2);
         allocator = optallocator(L, 3);
+        info = zcheckVkEventCreateInfo(L, 2, &err);
+        if(err) { CLEANUP; return argerror(L, 2); }
         }
     else
         {
-        info.sType = VK_STRUCTURE_TYPE_EVENT_CREATE_INFO;
-        info.pNext = NULL;
-        info.flags = optflags(L, 2, 0);
+        VkFlags flags = optflags(L, 2, 0);
+        info = znewVkEventCreateInfo(L, &err);
+        if(err) { CLEANUP; return lua_error(L); }
+        info->flags = flags;
         }
-
-    ec = device_ud->ddt->CreateEvent(device, &info, allocator, &event);
+    ec = device_ud->ddt->CreateEvent(device, info, allocator, &event);
+    CLEANUP;
     CheckError(L, ec);
+#undef CLEANUP
     TRACE_CREATE(event, "event");
     ud = newuserdata_nondispatchable(L, event, EVENT_MT);
     ud->parent_ud = device_ud;

@@ -42,11 +42,12 @@ static int CmdSetViewport(lua_State *L)
     ud_t *ud;
     VkCommandBuffer cb = checkcommand_buffer(L, 1, &ud);
     uint32_t firstViewport = luaL_checkinteger(L, 2);
-    VkViewport *viewports = echeckviewportlist(L, 3, &count, &err);
-    if(err) return argerror(L, 3);
-        
+#define CLEANUP zfreearrayVkViewport (L, viewports, count, 1)
+    VkViewport *viewports = zcheckarrayVkViewport(L, 3, &count, &err);
+    if(err) { CLEANUP; return argerror(L, 3); }
     ud->ddt->CmdSetViewport(cb, firstViewport, count, viewports);
-    Free(L, viewports);
+    CLEANUP;
+#undef CLEANUP
     return 0;
     }
 
@@ -57,11 +58,12 @@ static int CmdSetScissor(lua_State *L)
     ud_t *ud;
     VkCommandBuffer cb = checkcommand_buffer(L, 1, &ud);
     uint32_t first = luaL_checkinteger(L, 2);
-    VkRect2D *scissors = echeckrect2dlist(L, 3, &count, &err);
-    if(err) return argerror(L, 3);
-        
+#define CLEANUP zfreearrayVkRect2D(L, scissors, count, 1)
+    VkRect2D* scissors = zcheckarrayVkRect2D(L, 3, &count, &err);
+    if(err) { CLEANUP; return argerror(L, 3); }
     ud->ddt->CmdSetScissor(cb, first, count, scissors);
-    Free(L, scissors);
+    CLEANUP;
+#undef CLEANUP
     return 0;
     }
 
@@ -283,11 +285,12 @@ static int CmdCopyBuffer(lua_State *L)
     VkCommandBuffer cb = checkcommand_buffer(L, 1, &ud);
     VkBuffer srcBuffer = checkbuffer(L, 2, NULL);
     VkBuffer dstBuffer = checkbuffer(L, 3, NULL);
-    VkBufferCopy* regions = echeckbuffercopylist(L, 4, &count, &err);
-    if(err) return argerror(L, 4);
-
+#define CLEANUP zfreearrayVkBufferCopy(L, regions, count, 1)
+    VkBufferCopy* regions = zcheckarrayVkBufferCopy(L, 4, &count, &err);
+    if(err) { CLEANUP; return argerror(L, 4); }
     ud->ddt->CmdCopyBuffer(cb, srcBuffer, dstBuffer, count, regions);
-    Free(L, regions);
+    CLEANUP;
+#undef CLEANUP
     return 0;
     }
 
@@ -301,11 +304,12 @@ static int CmdCopyImage(lua_State *L)
     VkImageLayout srcImageLayout = checkimagelayout(L, 3);
     VkImage dstImage = checkimage(L, 4, NULL);
     VkImageLayout dstImageLayout = checkimagelayout(L, 5);
-    VkImageCopy* regions = echeckimagecopylist(L, 6, &count, &err);
-    if(err) return argerror(L, 6);
-
+#define CLEANUP zfreearrayVkImageCopy(L, regions, count, 1)
+    VkImageCopy* regions = zcheckarrayVkImageCopy(L, 6, &count, &err);
+    if(err) { CLEANUP; return argerror(L, 6); }
     ud->ddt->CmdCopyImage(cb, srcImage, srcImageLayout, dstImage, dstImageLayout, count, regions);
-    Free(L, regions);
+    CLEANUP;
+#undef CLEANUP
     return 0;
     }
 
@@ -320,11 +324,12 @@ static int CmdBlitImage(lua_State *L)
     VkImage dstImage = checkimage(L, 4, NULL);
     VkImageLayout dstImageLayout = checkimagelayout(L, 5);
     VkFilter filter = checkfilter(L, 7); /* before regions so there is no need to free them on error */
-    VkImageBlit* regions = echeckimageblitlist(L, 6, &count, &err);
-    if(err) return argerror(L, 6);
-
+#define CLEANUP zfreearrayVkImageBlit(L, regions, count, 1)
+    VkImageBlit* regions = zcheckarrayVkImageBlit(L, 6, &count, &err);
+    if(err) { CLEANUP; return argerror(L, 6); }
     ud->ddt->CmdBlitImage(cb, srcImage, srcImageLayout, dstImage, dstImageLayout, count, regions, filter);
-    Free(L, regions);
+    CLEANUP;
+#undef CLEANUP
     return 0;
     }
 
@@ -337,10 +342,12 @@ static int CmdCopyBufferToImage(lua_State *L)
     VkBuffer srcBuffer = checkbuffer(L, 2, NULL);
     VkImage dstImage = checkimage(L, 3, NULL);
     VkImageLayout dstImageLayout = checkimagelayout(L, 4);
-    VkBufferImageCopy* regions = echeckbufferimagecopylist(L, 5, &count, &err);
-    if(err) return argerror(L, 5);
+#define CLEANUP zfreearrayVkBufferImageCopy(L, regions, count, 1)
+    VkBufferImageCopy* regions = zcheckarrayVkBufferImageCopy(L, 5, &count, &err);
+    if(err) { CLEANUP; return argerror(L, 5); }
     ud->ddt->CmdCopyBufferToImage(cb, srcBuffer, dstImage, dstImageLayout, count, regions);
-    Free(L, regions);
+    CLEANUP;
+#undef CLEANUP
     return 0;
     }
 
@@ -353,14 +360,14 @@ static int CmdCopyImageToBuffer(lua_State *L)
     VkImage srcImage = checkimage(L, 2, NULL);
     VkImageLayout srcImageLayout = checkimagelayout(L, 3);
     VkBuffer dstBuffer = checkbuffer(L, 4, NULL);
-    VkBufferImageCopy* regions = echeckbufferimagecopylist(L, 5, &count, &err);
-    if(err) return argerror(L, 5);
-
+#define CLEANUP zfreearrayVkBufferImageCopy(L, regions, count, 1)
+    VkBufferImageCopy* regions = zcheckarrayVkBufferImageCopy(L, 5, &count, &err);
+    if(err) { CLEANUP; return argerror(L, 5); }
     ud->ddt->CmdCopyImageToBuffer(cb, srcImage, srcImageLayout, dstBuffer, count, regions);
-    Free(L, regions);
+    CLEANUP;
+#undef CLEANUP
     return 0;
     }
-
 
 static int CmdUpdateBuffer(lua_State *L)
     {
@@ -391,18 +398,24 @@ static int CmdFillBuffer(lua_State *L)
 static int CmdClearColorImage(lua_State *L)
     {
     int err;
-    uint32_t count;
-    VkImageSubresourceRange* ranges;
-    VkClearColorValue color;
     ud_t *ud;
+    uint32_t count=0;
+    VkImageSubresourceRange* ranges=NULL;
+    VkClearColorValue* color=NULL;
     VkCommandBuffer cb = checkcommand_buffer(L, 1, &ud);
     VkImage image = checkimage(L, 2, NULL);
     VkImageLayout imageLayout = checkimagelayout(L, 3);
-    if(echeckclearcolorvalue(L, 4, &color)) return argerror(L, 4);
-    ranges = echeckimagesubresourcerangelist(L, 5, &count, &err);
-    if(err) return argerror(L, 5);
-    ud->ddt->CmdClearColorImage(cb, image, imageLayout, &color, count, ranges);
-    Free(L, ranges);
+#define CLEANUP do {                                            \
+    zfreeVkClearColorValue(L, color, 1);                        \
+    zfreearrayVkImageSubresourceRange(L, ranges, count, 1);     \
+} while(0)
+    color = zcheckVkClearColorValue(L, 4, &err);
+    if(err) { CLEANUP; return argerror(L, 4); }
+    ranges = zcheckarrayVkImageSubresourceRange(L, 5, &count, &err);
+    if(err) { CLEANUP; return argerror(L, 5); }
+    ud->ddt->CmdClearColorImage(cb, image, imageLayout, color, count, ranges);
+    CLEANUP;
+#undef CLEANUP
     return 0;
     }
 
@@ -418,38 +431,37 @@ static int CmdClearDepthStencilImage(lua_State *L)
     VkImageLayout imageLayout = checkimagelayout(L, 3);
     depthstencil.depth = luaL_checknumber(L, 4);
     depthstencil.stencil = luaL_checkinteger(L, 5);
-    ranges = echeckimagesubresourcerangelist(L, 6, &count, &err);
-    if(err) return argerror(L, 6);
+#define CLEANUP zfreearrayVkImageSubresourceRange(L, ranges, count, 1)
+    ranges = zcheckarrayVkImageSubresourceRange(L, 6, &count, &err);
+    if(err) { CLEANUP; return argerror(L, 6); }
     ud->ddt->CmdClearDepthStencilImage(cb, image, imageLayout, &depthstencil, count, ranges);
-    Free(L, ranges);
+    CLEANUP;
+#undef CLEANUP
     return 0;
     }
 
 static int CmdClearAttachments(lua_State *L)
     {
     int err;
-    uint32_t att_count, rect_count;
-    VkClearAttachment* attachments;
-    VkClearRect* rects;
     ud_t *ud;
+    uint32_t att_count=0;
+    uint32_t rect_count=0;
+    VkClearAttachment* attachments=NULL;
+    VkClearRect* rects=NULL;
     VkCommandBuffer cb = checkcommand_buffer(L, 1, &ud);
-
-    attachments = echeckclearattachmentlist(L, 2, &att_count, &err);
-    if(err) return argerror(L, 2);
-
-    rects = echeckclearrectlist(L, 3, &rect_count, &err);
-    if(err) 
-        {
-        Free(L, attachments);
-        return argerror(L, 3);
-        }
-
+#define CLEANUP do {                                            \
+    zfreearrayVkClearRect(L, rects, rect_count, 1);             \
+    zfreearrayVkClearAttachment(L, attachments, att_count, 1);  \
+} while(0)
+    attachments = zcheckarrayVkClearAttachment(L, 2, &att_count, &err);
+    if(err) { CLEANUP; return argerror(L, 2); }
+    rects = zcheckarrayVkClearRect(L, 3, &rect_count, &err);
+    if(err) { CLEANUP; return argerror(L, 3); }
     ud->ddt->CmdClearAttachments(cb, att_count, attachments, rect_count, rects);
-    Free(L, attachments);
-    Free(L, rects);
+    CLEANUP;
+#undef CLEANUP
     return 0;
     }
-
 
 static int CmdResolveImage(lua_State *L)
     {
@@ -461,13 +473,14 @@ static int CmdResolveImage(lua_State *L)
     VkImageLayout srcImageLayout = checkimagelayout(L, 3);
     VkImage dstImage = checkimage(L, 4, NULL);
     VkImageLayout dstImageLayout = checkimagelayout(L, 5);
-    VkImageResolve* regions = echeckimageresolvelist(L, 6, &count, &err);
-    if(err) return argerror(L, 6);
+#define CLEANUP zfreearrayVkImageResolve(L, regions, count, 1)
+    VkImageResolve* regions = zcheckarrayVkImageResolve(L, 6, &count, &err);
+    if(err) { CLEANUP; return argerror(L, 6); }
     ud->ddt->CmdResolveImage(cb, srcImage, srcImageLayout, dstImage, dstImageLayout, count, regions);
-    Free(L, regions);
+    CLEANUP;
+#undef CLEANUP
     return 0;
     }
-
 
 static int CmdSetEvent(lua_State *L)
     {
@@ -491,84 +504,79 @@ static int CmdResetEvent(lua_State *L)
 
 static int CmdWaitEvents(lua_State *L)
     {
-    int err, errarg = 0;
-    uint32_t eventCount, memoryBarrierCount, bufferMemoryBarrierCount, imageMemoryBarrierCount;
+    int err;
+    ud_t *ud;
+    uint32_t eventCount, mCount=0, bCount=0, iCount=0;
     VkEvent* pEvents = NULL;
     VkMemoryBarrier* pMemoryBarriers = NULL;
     VkBufferMemoryBarrier* pBufferMemoryBarriers = NULL;
     VkImageMemoryBarrier* pImageMemoryBarriers = NULL;
-
-    ud_t *ud;
     VkCommandBuffer cb = checkcommand_buffer(L, 1, &ud);
     VkPipelineStageFlags srcStageMask = checkflags(L, 2);
     VkPipelineStageFlags dstStageMask = checkflags(L, 3);
-
+#define CLEANUP do {                                                        \
+    Free(L, pEvents);                                                       \
+    zfreearrayVkMemoryBarrier(L, pMemoryBarriers, mCount, 1);               \
+    zfreearrayVkBufferMemoryBarrier(L, pBufferMemoryBarriers, bCount, 1);   \
+    zfreearrayVkImageMemoryBarrier(L, pImageMemoryBarriers, iCount, 1);     \
+} while(0)
     pEvents = checkeventlist(L, 4, &eventCount, &err, NULL);
-    if(err) { errarg = 4; lua_pushstring(L, errstring(err)); goto done; }
+    if(err) { CLEANUP; return argerrorc(L, 4, err); }
 
-    pMemoryBarriers = echeckmemorybarrierlist(L, 5, &memoryBarrierCount, &err);
-    if(err < 0) { errarg = 5; goto done; }
+    pMemoryBarriers = zcheckarrayVkMemoryBarrier(L, 5, &mCount, &err);
+    if(err < 0) { CLEANUP; return argerror(L, 5); }
     if(err) lua_pop(L, 1);
 
-    pBufferMemoryBarriers = echeckbuffermemorybarrierlist(L, 6, &bufferMemoryBarrierCount, &err);
-    if(err < 0) { errarg = 6; goto done; }
+    pBufferMemoryBarriers = zcheckarrayVkBufferMemoryBarrier(L, 6, &bCount, &err);
+    if(err < 0) { CLEANUP; return argerror(L, 6); }
     if(err) lua_pop(L, 1);
 
-    pImageMemoryBarriers = echeckimagememorybarrierlist(L, 7, &imageMemoryBarrierCount, &err);
-    if(err < 0) { errarg = 7; goto done; }
+    pImageMemoryBarriers = zcheckarrayVkImageMemoryBarrier(L, 7, &iCount, &err);
+    if(err < 0) { CLEANUP; return argerror(L, 7); }
     if(err) lua_pop(L, 1);
 
     ud->ddt->CmdWaitEvents(cb, eventCount, pEvents, srcStageMask, dstStageMask, 
-            memoryBarrierCount, pMemoryBarriers, bufferMemoryBarrierCount, pBufferMemoryBarriers, 
-            imageMemoryBarrierCount, pImageMemoryBarriers);
-
-done: /* I'm italian, I love spaghetti */
-    if(pEvents) Free(L, pEvents);
-    if(pMemoryBarriers) Free(L, pMemoryBarriers);
-    if(pBufferMemoryBarriers) Free(L, pBufferMemoryBarriers);
-    if(pImageMemoryBarriers) Free(L, pImageMemoryBarriers);
-    if(errarg)
-        return argerror(L, errarg);
+            mCount, pMemoryBarriers, bCount, pBufferMemoryBarriers, 
+            iCount, pImageMemoryBarriers);
+    CLEANUP;
+#undef CLEANUP
     return 0;
     }
 
 static int CmdPipelineBarrier(lua_State *L)
     {
-    int err, errarg = 0;
-    uint32_t memoryBarrierCount, bufferMemoryBarrierCount, imageMemoryBarrierCount;
+    int err;
+    ud_t *ud;
+    uint32_t mCount=0, bCount=0, iCount=0;
     VkMemoryBarrier* pMemoryBarriers = NULL;
     VkBufferMemoryBarrier* pBufferMemoryBarriers = NULL;
     VkImageMemoryBarrier* pImageMemoryBarriers = NULL;
-
-    ud_t *ud;
     VkCommandBuffer cb = checkcommand_buffer(L, 1, &ud);
     VkPipelineStageFlags srcStageMask = checkflags(L, 2);
     VkPipelineStageFlags dstStageMask = checkflags(L, 3);
     VkDependencyFlags dependencyFlags = checkflags(L, 4);
-
-    pMemoryBarriers = echeckmemorybarrierlist(L, 5, &memoryBarrierCount, &err);
-    if(err < 0) { errarg = 5; goto done; }
+#define CLEANUP do {                                                        \
+    zfreearrayVkMemoryBarrier(L, pMemoryBarriers, mCount, 1);               \
+    zfreearrayVkBufferMemoryBarrier(L, pBufferMemoryBarriers, bCount, 1);   \
+    zfreearrayVkImageMemoryBarrier(L, pImageMemoryBarriers, iCount, 1);     \
+} while(0)
+    pMemoryBarriers = zcheckarrayVkMemoryBarrier(L, 5, &mCount, &err);
+    if(err < 0) { CLEANUP; return argerror(L, 5); }
     if(err) lua_pop(L, 1);
 
-    pBufferMemoryBarriers = echeckbuffermemorybarrierlist(L, 6, &bufferMemoryBarrierCount, &err);
-    if(err < 0) { errarg = 6; goto done; }
+    pBufferMemoryBarriers = zcheckarrayVkBufferMemoryBarrier(L, 6, &bCount, &err);
+    if(err < 0) { CLEANUP; return argerror(L, 6); }
     if(err) lua_pop(L, 1);
 
-    pImageMemoryBarriers = echeckimagememorybarrierlist(L, 7, &imageMemoryBarrierCount, &err);
-    if(err < 0) { errarg = 7; goto done; }
+    pImageMemoryBarriers = zcheckarrayVkImageMemoryBarrier(L, 7, &iCount, &err);
+    if(err < 0) { CLEANUP; return argerror(L, 7); }
     if(err) lua_pop(L, 1);
-
 
     ud->ddt->CmdPipelineBarrier(cb, srcStageMask, dstStageMask, dependencyFlags, 
-        memoryBarrierCount, pMemoryBarriers, bufferMemoryBarrierCount, pBufferMemoryBarriers, 
-        imageMemoryBarrierCount, pImageMemoryBarriers);
-
-done: /* I'm italian, I love spaghetti */
-    if(pMemoryBarriers) Free(L, pMemoryBarriers);
-    if(pBufferMemoryBarriers) Free(L, pBufferMemoryBarriers);
-    if(pImageMemoryBarriers) Free(L, pImageMemoryBarriers);
-    if(errarg)
-        return argerror(L, errarg);
+        mCount, pMemoryBarriers, bCount, pBufferMemoryBarriers, 
+        iCount, pImageMemoryBarriers);
+    CLEANUP;
+#undef CLEANUP
     return 0;
     }
 
@@ -645,19 +653,16 @@ static int CmdPushConstants(lua_State *L)
 
 static int CmdBeginRenderPass(lua_State *L)
     {
-    VkSubpassContents contents;
-    VkRenderPassBeginInfo_CHAIN info;
+    int err;
     ud_t *ud;
     VkCommandBuffer cb = checkcommand_buffer(L, 1, &ud);
-    if(echeckrenderpassbegininfo(L, 2, &info) != 0)
-        {
-        freerenderpassbegininfo(L, &info);
-        return argerror(L, 2);
-        }
-    
-    contents = checksubpasscontents(L, 3);
-    ud->ddt->CmdBeginRenderPass(cb, &info.p1, contents);
-    freerenderpassbegininfo(L, &info);
+    VkSubpassContents contents = checksubpasscontents(L, 3);
+#define CLEANUP zfreeVkRenderPassBeginInfo(L, info, 1)
+    VkRenderPassBeginInfo* info = zcheckVkRenderPassBeginInfo(L, 2, &err);
+    if(err) { CLEANUP; return argerror(L, 2); }
+    ud->ddt->CmdBeginRenderPass(cb, info, contents);
+    CLEANUP;
+#undef CLEANUP
     return 0;
     }
 
@@ -756,18 +761,20 @@ static int CmdDebugMarkerInsert(lua_State *L)
 static int CmdPushDescriptorSet(lua_State *L)
     {
     int err;
+    ud_t *ud;
     uint32_t count;
     VkWriteDescriptorSet* writes;
-    ud_t *ud;
     VkCommandBuffer cb = checkcommand_buffer(L, 1, &ud);
     VkPipelineBindPoint pipelineBindPoint = checkpipelinebindpoint(L, 2);
     VkPipelineLayout layout = checkpipeline_layout(L, 3, NULL);
     uint32_t set = luaL_checkinteger(L, 4);
     CheckDevicePfn(L, ud, CmdPushDescriptorSetKHR);
-    writes = echeckwritedescriptorsetlist(L, 5, &count, &err);
-    if(err) return argerrorc(L, 5, err);
+#define CLEANUP zfreearrayVkWriteDescriptorSet(L, writes, count, 1)
+    writes = zcheckarrayVkWriteDescriptorSet(L, 5, &count, &err);
+    if(err) { CLEANUP; return argerror(L, 5); }
     ud->ddt->CmdPushDescriptorSetKHR(cb, pipelineBindPoint, layout, set, count, writes);
-    freewritedescriptorsetlist(L, writes, count);
+    CLEANUP;
+#undef CLEANUP
     return 0;
     }
 
@@ -790,14 +797,16 @@ static int CmdSetDiscardRectangle(lua_State *L)
     int err;
     uint32_t count;
     ud_t *ud;
-    VkRect2D *rects;
+    VkRect2D* rects;
     VkCommandBuffer cb = checkcommand_buffer(L, 1, &ud);
     uint32_t first = luaL_checkinteger(L, 2);
     CheckDevicePfn(L, ud, CmdSetDiscardRectangleEXT);
-    rects = echeckrect2dlist(L, 3, &count, &err);
-    if(err) return argerror(L, 3);
+#define CLEANUP zfreearrayVkRect2D(L, rects, count, 1)
+    rects = zcheckarrayVkRect2D(L, 3, &count, &err);
+    if(err) { CLEANUP; return argerror(L, 3); }
     ud->ddt->CmdSetDiscardRectangleEXT(cb, first, count, rects);
-    Free(L, rects);
+    CLEANUP;
+#undef CLEANUP
     return 0;
     }
 
@@ -805,13 +814,15 @@ static int CmdSetSampleLocations(lua_State *L)
     {
     int err;
     ud_t *ud;
-    VkSampleLocationsInfoEXT info;
+    VkSampleLocationsInfoEXT* info;
     VkCommandBuffer cb = checkcommand_buffer(L, 1, &ud);
     CheckDevicePfn(L, ud, CmdSetSampleLocationsEXT);
-    err = echecksamplelocationsinfo(L, 2, &info);
-    if(err) return argerror(L, 2);
-    ud->ddt->CmdSetSampleLocationsEXT(cb, &info);
-    freesamplelocationsinfo(L, &info);
+#define CLEANUP zfreeVkSampleLocationsInfoEXT(L, info, 1)
+    info = zcheckVkSampleLocationsInfoEXT(L, 2, &err);
+    if(err) { CLEANUP; return argerror(L, 2); }
+    ud->ddt->CmdSetSampleLocationsEXT(cb, info);
+    CLEANUP;
+#undef CLEANUP
     return 0;
     }
 
@@ -819,13 +830,15 @@ static int CmdBeginDebugUtilsLabel(lua_State *L)
     {
     int err;
     ud_t *ud;
-    VkDebugUtilsLabelEXT label;
+    VkDebugUtilsLabelEXT* label;
     VkCommandBuffer cb = checkcommand_buffer(L, 1, &ud);
     CheckInstancePfn(L, ud, CmdBeginDebugUtilsLabelEXT);
-    err = echeckdebugutilslabel(L, 2, &label);
-    if(err) return argerror(L, 2);
-    ud->idt->CmdBeginDebugUtilsLabelEXT(cb, &label);
-    freedebugutilslabel(L, &label);
+#define CLEANUP zfreeVkDebugUtilsLabelEXT(L, label, 1)
+    label = zcheckVkDebugUtilsLabelEXT(L, 2, &err);
+    if(err) { CLEANUP; return argerror(L, 2); }
+    ud->idt->CmdBeginDebugUtilsLabelEXT(cb, label);
+    CLEANUP;
+#undef CLEANUP
     return 0;
     }
 
@@ -842,13 +855,15 @@ static int CmdInsertDebugUtilsLabel(lua_State *L)
     {
     int err;
     ud_t *ud;
-    VkDebugUtilsLabelEXT label;
+    VkDebugUtilsLabelEXT* label;
     VkCommandBuffer cb = checkcommand_buffer(L, 1, &ud);
     CheckInstancePfn(L, ud, CmdInsertDebugUtilsLabelEXT);
-    err = echeckdebugutilslabel(L, 2, &label);
-    if(err) return argerror(L, 2);
-    ud->idt->CmdInsertDebugUtilsLabelEXT(cb, &label);
-    freedebugutilslabel(L, &label);
+#define CLEANUP zfreeVkDebugUtilsLabelEXT(L, label, 1)
+    label = zcheckVkDebugUtilsLabelEXT(L, 2, &err);
+    if(err) { CLEANUP; return argerror(L, 2); }
+    ud->idt->CmdInsertDebugUtilsLabelEXT(cb, label);
+    CLEANUP;
+#undef CLEANUP
     return 0;
     }
 
@@ -856,13 +871,15 @@ static int CmdBeginConditionalRendering(lua_State *L)
     {
     int err;
     ud_t *ud;
-    VkConditionalRenderingBeginInfoEXT info;
+    VkConditionalRenderingBeginInfoEXT* info;
     VkCommandBuffer cb = checkcommand_buffer(L, 1, &ud);
-    err = echeckconditionalrenderingbegininfo(L, 2, &info);
-    if(err) return argerror(L, 2);
+#define CLEANUP zfreeVkConditionalRenderingBeginInfoEXT(L, info, 1)
+    info = zcheckVkConditionalRenderingBeginInfoEXT(L, 2, &err);
+    if(err) { CLEANUP; return argerror(L, 2); }
     CheckDevicePfn(L, ud, CmdBeginConditionalRenderingEXT);
-    ud->ddt->CmdBeginConditionalRenderingEXT(cb, &info);
-    freeconditionalrenderingbegininfo(L, &info);
+    ud->ddt->CmdBeginConditionalRenderingEXT(cb, info);
+    CLEANUP;
+#undef CLEANUP
     return 0;
     }
 

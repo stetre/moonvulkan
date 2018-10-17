@@ -69,62 +69,61 @@ static int freedevice(lua_State *L, ud_t *ud)
 
 static int Create(lua_State *L)
     {
+    int err;
     ud_t *ud, *physdev_ud;
     VkResult ec;
     VkDevice device;
-    VkDeviceCreateInfo_CHAIN info;
-
+    VkDeviceCreateInfo* info;
     VkPhysicalDevice physical_device = checkphysical_device(L, 1, &physdev_ud);
     const VkAllocationCallbacks *allocator = optallocator(L, 3);
-
-    if(echeckdevicecreateinfo(L, 2, &info, physdev_ud)) return argerror(L, 2);
-
-    ec = physdev_ud->idt->CreateDevice(physical_device, &info.p1, allocator, &device);
-    if(ec)
-        {
-        freedevicecreateinfo(L, &info);
-        CheckError(L, ec);
-        return 0;
-        }
-
+#define CLEANUP zfreeVkDeviceCreateInfo(L, info, 1)
+    info = zcheckVkDeviceCreateInfo(L, 2, &err, physdev_ud);
+    if(err) { CLEANUP; return argerror(L, 2); }
+    ec = physdev_ud->idt->CreateDevice(physical_device, info, allocator, &device);
+    if(ec) { CLEANUP; CheckError(L, ec); return 0; }
     TRACE_CREATE(device, "device");
     ud = newuserdata_dispatchable(L, device, DEVICE_MT);
     ud->parent_ud = UD(physical_device)->parent_ud; /* instance ud */
     ud->instance = UD(physical_device)->instance;
     ud->allocator = allocator;
     ud->destructor = freedevice;
-    ud->ddt = getproc_device(L, device, &info.p1);
-    freedevicecreateinfo(L, &info);
+    ud->ddt = getproc_device(L, device, info);
+    CLEANUP;
+#undef CLEANUP
     return 1;
     }
 
 
 static int GetDeviceQueue(lua_State *L)
     {
+    int err;
     VkQueue queue;
     ud_t *ud;
-    VkDeviceQueueInfo2_CHAIN info;
+    VkDeviceQueueInfo2* info;
     VkDevice device = checkdevice(L, 1, &ud);
+#define CLEANUP zfreeVkDeviceQueueInfo2(L, info, 1)
     if(lua_istable(L, 2))
         {
-        if(echeckdevicequeueinfo2(L, 2, &info)) return argerror(L, 2);
+        info = zcheckVkDeviceQueueInfo2(L, 2, &err);
+        if(err) { CLEANUP; return argerror(L, 2); }
         }
     else
         {
-        memset(&info, 0, sizeof(info));
-        info.p1.sType = VK_STRUCTURE_TYPE_DEVICE_QUEUE_INFO_2;
-        info.p1.pNext = NULL;
-        info.p1.flags = 0;
-        info.p1.queueFamilyIndex = luaL_checkinteger(L, 2);
-        info.p1.queueIndex = luaL_checkinteger(L, 3);
-        info.p1.flags = optflags(L, 4, 0);
+        uint32_t queueFamilyIndex = luaL_checkinteger(L, 2);
+        uint32_t queueIndex = luaL_checkinteger(L, 3);
+        VkFlags flags = optflags(L, 4, 0);
+        info = znewVkDeviceQueueInfo2(L, &err);
+        if(err) { CLEANUP; return lua_error(L); }
+        info->queueFamilyIndex = queueFamilyIndex;
+        info->queueIndex = queueIndex;
+        info->flags = flags;
         }
-    if(ud->ddt->GetDeviceQueue2 && info.p1.flags != 0)
-        ud->ddt->GetDeviceQueue2(device, &info.p1, &queue);
+    if(ud->ddt->GetDeviceQueue2 && info->flags != 0)
+        ud->ddt->GetDeviceQueue2(device, info, &queue);
     else
-        ud->ddt->GetDeviceQueue(device, info.p1.queueFamilyIndex, info.p1.queueIndex, &queue);
-    
-    freedevicequeueinfo2(L, &info);
+        ud->ddt->GetDeviceQueue(device, info->queueFamilyIndex, info->queueIndex, &queue);
+    CLEANUP;
+#undef CLEANUP
     if(!queue) return luaL_error(L, "cannot retrieve queue");
     pushqueue(L, queue, device);
     return 1;

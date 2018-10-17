@@ -41,16 +41,19 @@ static int freequery_pool(lua_State *L, ud_t *ud)
 
 static int Create(lua_State *L)
     {
+    int err;
     ud_t *ud, *device_ud;
     VkResult ec;
     VkQueryPool query_pool;
-    VkQueryPoolCreateInfo info;
-
+    VkQueryPoolCreateInfo* info;
     VkDevice device = checkdevice(L, 1, &device_ud);
     const VkAllocationCallbacks *allocator = optallocator(L, 3);
-    if(echeckquerypoolcreateinfo(L, 2, &info)) return argerror(L, 2);
-
-    ec = device_ud->ddt->CreateQueryPool(device, &info, allocator, &query_pool);
+#define CLEANUP zfreeVkQueryPoolCreateInfo(L, info, 1)
+    info = zcheckVkQueryPoolCreateInfo(L, 2, &err);
+    if(err) { CLEANUP; return argerror(L, 2); }
+    ec = device_ud->ddt->CreateQueryPool(device, info, allocator, &query_pool);
+    CLEANUP;
+#undef CLEANUP
     CheckError(L, ec);
     TRACE_CREATE(query_pool, "query_pool");
     ud = newuserdata_nondispatchable(L, query_pool, QUERY_POOL_MT);

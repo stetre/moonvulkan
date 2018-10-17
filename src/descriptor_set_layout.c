@@ -44,29 +44,29 @@ static int Create(lua_State *L)
     int err;
     VkResult ec;
     VkDescriptorSetLayout descriptor_set_layout;
-    VkDescriptorSetLayoutCreateInfo info;
+    VkDescriptorSetLayoutCreateInfo *info;
     VkDevice device = checkdevice(L, 1, NULL);
     const VkAllocationCallbacks *allocator = NULL;
 
+#define CLEANUP zfreeVkDescriptorSetLayoutCreateInfo(L, info, 1)
     if(lua_istable(L, 2))
         {
         allocator = optallocator(L, 3);
-        if(echeckdescriptorsetlayoutcreateinfo(L, 2, &info)) return argerror(L, 2);
+        info = zcheckVkDescriptorSetLayoutCreateInfo(L, 2, &err);
+        if(err) { CLEANUP; return argerror(L, 2); }
         }
     else
         {
-        memset(&info, 0, sizeof(info));
-        info.sType = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_CREATE_INFO;
-        info.pNext = NULL;
-        info.flags = optflags(L, 2, 0);
-        info.pBindings = echeckdescriptorsetlayoutbindinglist(L, 3, &info.bindingCount, &err);
-        if(err < 0)
-            { freedescriptorsetlayoutcreateinfo(L, &info); return argerror(L, 3); }
-        if(err) lua_pop(L, 1);
+        info = znewVkDescriptorSetLayoutCreateInfo(L, &err);
+        info->flags = optflags(L, 2, 0);
+        info->pBindings = zcheckarrayVkDescriptorSetLayoutBinding(L, 3, &info->bindingCount, &err);
+        if(err < 0) { CLEANUP; return argerror(L, 3); }
+        if(err == ERR_NOTPRESENT) lua_pop(L, 1);
         }
 
-    ec = UD(device)->ddt->CreateDescriptorSetLayout(device, &info, allocator, &descriptor_set_layout);
-    freedescriptorsetlayoutcreateinfo(L, &info);
+    ec = UD(device)->ddt->CreateDescriptorSetLayout(device, info, allocator, &descriptor_set_layout);
+    CLEANUP;
+#undef CLEANUP
     CheckError(L, ec);
     TRACE_CREATE(descriptor_set_layout, "descriptor_set_layout");
     ud = newuserdata_nondispatchable(L, descriptor_set_layout, DESCRIPTOR_SET_LAYOUT_MT);
@@ -81,16 +81,22 @@ static int Create(lua_State *L)
 
 static int GetDescriptorSetLayoutSupport(lua_State *L)
     {
+    int err;
     ud_t *ud;
-    VkDescriptorSetLayoutCreateInfo info;
-    VkDescriptorSetLayoutSupport support;
+    VkDescriptorSetLayoutCreateInfo *info=NULL;
+    VkDescriptorSetLayoutSupportKHR *support=NULL;
     VkDevice device = checkdevice(L, 1, &ud);
+#define CLEANUP do { zfreeVkDescriptorSetLayoutCreateInfo(L, info, 1); \
+                    zfreeVkDescriptorSetLayoutSupportKHR(L, support, 1); } while(0);
     CheckDevicePfn(L, ud, GetDescriptorSetLayoutSupportKHR);
-    if(echeckdescriptorsetlayoutcreateinfo(L, 2, &info)) return argerror(L, 2);
-    memset(&support, 0, sizeof(support));
-    support.sType = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_SUPPORT_KHR;
-    ud->ddt->GetDescriptorSetLayoutSupportKHR(device, &info, &support);
-    pushdescriptorsetlayoutsupport(L, &support);
+    info = zcheckVkDescriptorSetLayoutCreateInfo(L, 2, &err);
+    if(err) { CLEANUP; return argerror(L, 2); }
+    support = znewVkDescriptorSetLayoutSupportKHR(L, &err);
+    if(err) { CLEANUP; return lua_error(L); }
+    ud->ddt->GetDescriptorSetLayoutSupportKHR(device, info, support);
+    zpushVkDescriptorSetLayoutSupportKHR(L, support);
+    CLEANUP;
+#undef CLEANUP
     return 1;
     }
 

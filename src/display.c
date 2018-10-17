@@ -50,73 +50,80 @@ static int pushdisplay(lua_State *L, VkDisplayKHR display, ud_t *parent_ud)
     return 1;
     }
 
+#define N 32
 
 static int GetPhysicalDeviceDisplayProperties(lua_State *L)
     {
+    int err;
     VkResult ec;
     uint32_t count, remaining, tot, i;
-    VkDisplayPropertiesKHR properties[32];
+    VkDisplayPropertiesKHR* properties; //[N];
     ud_t *ud;
     VkPhysicalDevice physdev = checkphysical_device(L, 1, &ud);
-
     CheckInstancePfn(L, ud, GetPhysicalDeviceDisplayPropertiesKHR);
 
+#define CLEANUP zfreearrayVkDisplayPropertiesKHR(L, properties, N, 1)
+    properties = znewarrayVkDisplayPropertiesKHR(L, N, &err);
+    if(err) { CLEANUP; lua_error(L); }
     lua_newtable(L);
     ec = ud->idt->GetPhysicalDeviceDisplayPropertiesKHR(physdev, &remaining, NULL);
-    CheckError(L, ec);
-    if(remaining==0) return 1;
+    if(ec) { CLEANUP; CheckError(L, ec); }
+    if(remaining==0) { CLEANUP; return 1; }
     tot = 0;
     do {
-        if(remaining > 32)
-            { count = 32; remaining -= 32; }
+        if(remaining > N)
+            { count = N; remaining -= N; }
         else
             { count = remaining; remaining = 0; }
 
         ec = ud->idt->GetPhysicalDeviceDisplayPropertiesKHR(physdev, &count, properties);
-        if(ec != VK_INCOMPLETE)
-            CheckError(L, ec);
+        if(ec && ec != VK_INCOMPLETE) { CLEANUP; CheckError(L, ec); }
     
         for(i = 0; i < count; i++)
             {
-            pushdisplayproperties(L, &properties[i]);
+            zpushVkDisplayPropertiesKHR(L, &properties[i]);
             pushdisplay(L, properties[i].display, ud);
             lua_setfield(L, -2, "display");
             lua_rawseti(L, -2, ++tot);
             }
         } while (remaining > 0);
 
+    CLEANUP;
+#undef CLEANUP
     return 1;
     }
 
 
 static int GetPhysicalDeviceDisplayPlaneProperties(lua_State *L)
     {
+    int err;
     VkResult ec;
     uint32_t count, remaining, tot, i;
-    VkDisplayPlanePropertiesKHR properties[32];
+    VkDisplayPlanePropertiesKHR* properties; //[N];
     ud_t *ud;
     VkPhysicalDevice physdev = checkphysical_device(L, 1, &ud);
-
     CheckInstancePfn(L, ud, GetPhysicalDeviceDisplayPlanePropertiesKHR);
 
+#define CLEANUP zfreearrayVkDisplayPlanePropertiesKHR(L, properties, N, 1)
+    properties = znewarrayVkDisplayPlanePropertiesKHR(L, N, &err);
+    if(err) { CLEANUP; lua_error(L); }
     lua_newtable(L);
     ec = ud->idt->GetPhysicalDeviceDisplayPlanePropertiesKHR(physdev, &remaining, NULL);
-    CheckError(L, ec);
-    if(remaining==0) return 1;
+    if(ec) { CLEANUP; CheckError(L, ec); }
+    if(remaining==0) { CLEANUP; return 1; }
     tot = 0;
     do {
-        if(remaining > 32)
-            { count = 32; remaining -= 32; }
+        if(remaining > N)
+            { count = N; remaining -= N; }
         else
             { count = remaining; remaining = 0; }
 
         ec = ud->idt->GetPhysicalDeviceDisplayPlanePropertiesKHR(physdev, &count, properties);
-        if(ec != VK_INCOMPLETE)
-            CheckError(L, ec);
+        if(ec && ec != VK_INCOMPLETE) { CLEANUP; CheckError(L, ec); }
     
         for(i = 0; i < count; i++)
             {
-            pushdisplayplaneproperties(L, &properties[i]);
+            zpushVkDisplayPlanePropertiesKHR(L, &properties[i]);
             if(properties[i].currentDisplay != VK_NULL_HANDLE)
                 {
                 pushdisplay(L, properties[i].currentDisplay, ud);
@@ -126,6 +133,8 @@ static int GetPhysicalDeviceDisplayPlaneProperties(lua_State *L)
             }
         } while (remaining > 0);
 
+    CLEANUP;
+#undef CLEANUP
     return 1;
     }
 
@@ -166,7 +175,6 @@ static int GetDisplayPlaneSupportedDisplays(lua_State *L)
     return 1;
     }
 
-
 static int ReleaseDisplay(lua_State *L)
     {
     VkResult ec;
@@ -181,15 +189,20 @@ static int ReleaseDisplay(lua_State *L)
 
 static int DisplayPowerControl(lua_State *L)
     {
+    int err;
     VkResult ec;
     ud_t *ud;
     VkDevice device = checkdevice(L, 1, &ud);
     VkDisplayKHR display = checkdisplay(L, 2, NULL);
-    VkDisplayPowerInfoEXT info;
+    VkDisplayPowerInfoEXT* info;
     CheckDevicePfn(L, ud, DisplayPowerControlEXT);
-    if(echeckdisplaypowerinfo(L, 3, &info)) return argerror(L, 3);
-    ec = ud->ddt->DisplayPowerControlEXT(device, display, &info);
+#define CLEANUP zfreeVkDisplayPowerInfoEXT(L, info, 1)
+    info = zcheckVkDisplayPowerInfoEXT(L, 3, &err);
+    if(err) { CLEANUP; return argerror(L, 3); }
+    ec = ud->ddt->DisplayPowerControlEXT(device, display, info);
+    CLEANUP;
     CheckError(L, ec);
+#undef CLEANUP
     return 0;
     }
 

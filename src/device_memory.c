@@ -47,36 +47,38 @@ static int freedevice_memory(lua_State *L, ud_t *ud)
 
 static int Allocate(lua_State *L)
     {
+    int err;
     VkResult ec;
     ud_info_t *ud_info;
     ud_t *ud, *device_ud;
     VkDeviceMemory device_memory;
-    VkMemoryAllocateInfo_CHAIN info;
+    VkMemoryAllocateInfo* info;
     VkDevice device = checkdevice(L, 1, &device_ud);
     const VkAllocationCallbacks *allocator = NULL;
 
+#define CLEANUP zfreeVkMemoryAllocateInfo(L, info, 1)
     if(lua_istable(L, 2))
         {
         allocator = optallocator(L, 3);
-        if(echeckmemoryallocateinfo(L, 2, &info)) return argerror(L, 2);
+        info = zcheckVkMemoryAllocateInfo(L, 2, &err);
+        if(err) { CLEANUP; return argerror(L, 2); }
         }
     else
         {
-        info.p1.sType = VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO;
-        info.p1.pNext = NULL;
-        info.p1.allocationSize = luaL_checkinteger(L, 2);
-        info.p1.memoryTypeIndex = luaL_checkinteger(L, 3);
+        VkDeviceSize allocationSize = luaL_checkinteger(L, 2);
+        uint32_t memoryTypeIndex = luaL_checkinteger(L, 3);
+        info = znewVkMemoryAllocateInfo(L, &err);
+        if(err) { CLEANUP; return lua_error(L); }
+        info->allocationSize = allocationSize;
+        info->memoryTypeIndex = memoryTypeIndex;
         }
 
     ud_info = (ud_info_t*)MallocNoErr(L, sizeof(ud_info_t));
-    if(!ud_info) return errmemory(L);
+    if(!ud_info) { CLEANUP; return errmemory(L); }
 
-    ec = device_ud->ddt->AllocateMemory(device, &info.p1, allocator, &device_memory);
-    if(ec)
-        {
-        Free(L, ud_info);
-        CheckError(L, ec);
-        }
+    ec = device_ud->ddt->AllocateMemory(device, info, allocator, &device_memory);
+    
+    if(ec) { CLEANUP; Free(L, ud_info); CheckError(L, ec); return 0; }
     TRACE_CREATE(device_memory, "device_memory");
     ud = newuserdata_nondispatchable(L, device_memory, DEVICE_MEMORY_MT);
     ud->parent_ud = device_ud;
@@ -86,7 +88,9 @@ static int Allocate(lua_State *L)
     ud->allocator = allocator;
     ud->ddt = device_ud->ddt;
     ud->info = ud_info;
-    ud_info->maxsz = info.p1.allocationSize;
+    ud_info->maxsz = info->allocationSize;
+    CLEANUP;
+#undef CLEANUP
     return 1;
     }
 
@@ -194,12 +198,13 @@ static int FlushMappedMemoryRanges(lua_State *L)
     VkResult ec;
     ud_t *ud;
     VkDevice device = checkdevice(L, 1, &ud);
-    VkMappedMemoryRange* ranges = echeckmappedmemoryrangelist(L, 2, &count, &err);
-    if(err) return argerrorc(L, 2, err);
-    
+#define CLEANUP zfreearrayVkMappedMemoryRange(L, ranges, count, 1)
+    VkMappedMemoryRange* ranges = zcheckarrayVkMappedMemoryRange(L, 2, &count, &err);
+    if(err) { CLEANUP; return argerror(L, 2); }
     ec = ud->ddt->FlushMappedMemoryRanges(device, count, ranges);
-    Free(L, ranges);
+    CLEANUP;
     CheckError(L, ec);
+#undef CLEANUP
     return 0;
     }
 
@@ -210,12 +215,13 @@ static int InvalidateMappedMemoryRanges(lua_State *L)
     VkResult ec;
     ud_t *ud;
     VkDevice device = checkdevice(L, 1, &ud);
-    VkMappedMemoryRange* ranges = echeckmappedmemoryrangelist(L, 2, &count, &err);
-    if(err) return argerrorc(L, 2, err);
-    
+#define CLEANUP zfreearrayVkMappedMemoryRange(L, ranges, count, 1)
+    VkMappedMemoryRange* ranges = zcheckarrayVkMappedMemoryRange(L, 2, &count, &err);
+    if(err) { CLEANUP; return argerror(L, 2); }
     ec = ud->ddt->InvalidateMappedMemoryRanges(device, count, ranges);
-    Free(L, ranges);
+    CLEANUP;
     CheckError(L, ec);
+#undef CLEANUP
     return 0;
     }
 
@@ -223,23 +229,35 @@ static int InvalidateMappedMemoryRanges(lua_State *L)
 
 static int GetBufferMemoryRequirements2(lua_State *L, VkBuffer buffer, ud_t *ud)
     {
-    VkMemoryRequirements2_CHAIN req;
-    VkBufferMemoryRequirementsInfo2_CHAIN info;
+    int err;
+    VkMemoryRequirements2* req=NULL;
+    VkBufferMemoryRequirementsInfo2KHR* info=NULL;
     VkDevice device = ud->device;
-
+#define CLEANUP do {                                        \
+    zfreeVkBufferMemoryRequirementsInfo2KHR(L, info, 1);    \
+    zfreeVkMemoryRequirements2(L, req, 1);                  \
+} while(0)
     if(lua_istable(L, 2))
         {
-        if(echeckbuffermemoryrequirementsinfo2(L, 2, &info)) return argerror(L, 2);
+        info = zcheckVkBufferMemoryRequirementsInfo2KHR(L, 2, &err);
+        if(err) { CLEANUP; return argerror(L, 2); }
         }
     else
         {
-        info.p1.sType = VK_STRUCTURE_TYPE_BUFFER_MEMORY_REQUIREMENTS_INFO_2;
-        info.p1.pNext = NULL;
+        info = znewVkBufferMemoryRequirementsInfo2KHR(L, &err);
+        if(err) { CLEANUP; return lua_error(L); }
         }
-    info.p1.buffer = buffer;
-    initmemoryrequirements2(L, &req);
-    ud->ddt->GetBufferMemoryRequirements2KHR(device, &info.p1, &req.p1);
-    pushmemoryrequirements2(L, &req);
+    info->buffer = buffer;
+
+    req = znewVkMemoryRequirements2(L, &err);
+    if(err) { CLEANUP; return lua_error(L); }
+    zinitVkMemoryRequirements2(L, req, &err);
+    if(err) { CLEANUP; return lua_error(L); }
+
+    ud->ddt->GetBufferMemoryRequirements2KHR(device, info, req);
+    zpushVkMemoryRequirements2(L, req);
+    CLEANUP;
+#undef CLEANUP
     return 1;
     }
 
@@ -254,30 +272,42 @@ static int GetBufferMemoryRequirements(lua_State *L)
         return GetBufferMemoryRequirements2(L, buffer, ud);
 
     ud->ddt->GetBufferMemoryRequirements(device, buffer, &req);
-    pushmemoryrequirements(L, &req);
+    zpushVkMemoryRequirements(L, &req);
     return 1;
     }
 
 static int GetImageMemoryRequirements2(lua_State *L, VkImage image, ud_t *ud)
     {
-    VkMemoryRequirements2_CHAIN req;
-    VkImageMemoryRequirementsInfo2_CHAIN info;
+    int err;
+    VkMemoryRequirements2* req = NULL;
+    VkImageMemoryRequirementsInfo2* info = NULL;
     VkDevice device = ud->device;
 
+#define CLEANUP do {                                        \
+    zfreeVkImageMemoryRequirementsInfo2KHR(L, info, 1);     \
+    zfreeVkMemoryRequirements2(L, req, 1);                  \
+} while(0)
     if(lua_istable(L, 2))
         {
-        if(echeckimagememoryrequirementsinfo2(L, 2, &info)) return argerror(L, 2);
+        info = zcheckVkImageMemoryRequirementsInfo2KHR(L, 2, &err);
+        if(err) { CLEANUP; return argerror(L, 2); }
         }
     else
         {
-        info.p1.sType = VK_STRUCTURE_TYPE_BUFFER_MEMORY_REQUIREMENTS_INFO_2;
-        info.p1.pNext = NULL;
+        info = znewVkImageMemoryRequirementsInfo2KHR(L, &err);
+        if(err) { CLEANUP; return lua_error(L); }
         }
-    info.p1.image = image;
+    info->image = image;
 
-    initmemoryrequirements2(L, &req);
-    ud->ddt->GetImageMemoryRequirements2KHR(device, &info.p1, &req.p1);
-    pushmemoryrequirements2(L, &req);
+    req = znewVkMemoryRequirements2(L, &err);
+    if(err) { CLEANUP; return lua_error(L); }
+    zinitVkMemoryRequirements2(L, req, &err);
+    if(err) { CLEANUP; return lua_error(L); }
+
+    ud->ddt->GetImageMemoryRequirements2KHR(device, info, req);
+    zpushVkMemoryRequirements2(L, req);
+    CLEANUP;
+#undef CLEANUP
     return 1;
     }
 
@@ -291,53 +321,63 @@ static int GetImageMemoryRequirements(lua_State *L)
         return GetImageMemoryRequirements2(L, image, ud);
 
     ud->ddt->GetImageMemoryRequirements(device, image, &req);
-    pushmemoryrequirements(L, &req);
+    zpushVkMemoryRequirements(L, &req);
     return 1;
     }
 
 
 static int GetImageSparseMemoryRequirements2(lua_State *L, VkImage image, ud_t *ud)
     {
+    int err;
     uint32_t count, i;
-    VkSparseImageMemoryRequirements2 *requirements;
-    VkImageSparseMemoryRequirementsInfo2_CHAIN info;
+    VkSparseImageMemoryRequirements2 *req=NULL;
+    VkImageSparseMemoryRequirementsInfo2KHR* info=NULL;
     VkDevice device = ud->device;
 
+#define CLEANUP do {                                            \
+    zfreeVkImageSparseMemoryRequirementsInfo2KHR(L, info, 1);   \
+    zfreearrayVkSparseImageMemoryRequirements2(L, req, count, 1);   \
+} while(0)
     if(lua_istable(L, 2))
         {
-        if(echeckimagesparsememoryrequirementsinfo2(L, 2, &info)) return argerror(L, 2);
+        info = zcheckVkImageSparseMemoryRequirementsInfo2KHR(L, 2, &err);
+        if(err) { CLEANUP; return argerror(L, 2); }
         }
     else
         {
-        info.p1.sType = VK_STRUCTURE_TYPE_IMAGE_SPARSE_MEMORY_REQUIREMENTS_INFO_2;
-        info.p1.pNext = NULL;
+        info = znewVkImageSparseMemoryRequirementsInfo2KHR(L, &err);
+        if(err) { CLEANUP; return lua_error(L); }
         }
-    info.p1.image = image;
+    info->image = image;
 
     lua_newtable(L);
-    ud->ddt->GetImageSparseMemoryRequirements2KHR(device, &info.p1, &count, NULL);
+    ud->ddt->GetImageSparseMemoryRequirements2KHR(device, info, &count, NULL);
+    if(count == 0) { CLEANUP; return 1; }
 
-    if(count == 0)
-        return 1;
-
-    requirements = newsparseimagememoryrequirements2(L, count);
-
-    ud->ddt->GetImageSparseMemoryRequirements2KHR(device, &info.p1, &count, requirements);
+    req = znewarrayVkSparseImageMemoryRequirements2(L, count, &err);
+    if(err) { CLEANUP; return lua_error(L); }
     for(i = 0; i <count; i++)
         {
-        pushsparseimagememoryrequirements2(L, &requirements[i]);
-        lua_rawseti(L, -2, i+1);
+        zinitVkSparseImageMemoryRequirements2(L, &req[i], &err);
+        if(err) { CLEANUP; return lua_error(L); }
         }
 
-    freesparseimagememoryrequirements2(L, requirements, count);
+    ud->ddt->GetImageSparseMemoryRequirements2KHR(device, info, &count, req);
+
+    for(i = 0; i <count; i++)
+        {
+        zpushVkSparseImageMemoryRequirements2(L, &req[i]);
+        lua_rawseti(L, -2, i+1);
+        }
+    CLEANUP;
+#undef CLEANUP
     return 1;
     }
-
 
 static int GetImageSparseMemoryRequirements(lua_State *L)
     {
     uint32_t count, i;
-    VkSparseImageMemoryRequirements *requirements;
+    VkSparseImageMemoryRequirements *req;
     ud_t *ud;
     VkImage image = checkimage(L, 1, &ud);
     VkDevice device = ud->device;
@@ -351,17 +391,16 @@ static int GetImageSparseMemoryRequirements(lua_State *L)
     if(count == 0)
         return 1;
 
-    requirements =
-        (VkSparseImageMemoryRequirements*)Malloc(L, sizeof(VkSparseImageMemoryRequirements)*count);
+    req = (VkSparseImageMemoryRequirements*)Malloc(L, sizeof(VkSparseImageMemoryRequirements)*count);
 
-    ud->ddt->GetImageSparseMemoryRequirements(device, image, &count, requirements);
+    ud->ddt->GetImageSparseMemoryRequirements(device, image, &count, req);
     for(i = 0; i <count; i++)
         {
-        pushsparseimagememoryrequirements(L, &requirements[i]);
+        zpushVkSparseImageMemoryRequirements(L, &req[i]);
         lua_rawseti(L, -2, i+1);
         }
 
-    Free(L, requirements);
+    Free(L, req);
     return 1;
     }
 
@@ -396,38 +435,41 @@ static int BindImageMemory1(lua_State *L)
 
 static int BindBufferMemory2(lua_State *L)
     {
+    int err;
     VkResult ec;
     ud_t *ud;
     uint32_t count;
-    int err;
-    VkBindBufferMemoryInfo *bind_infos;
+    VkBindBufferMemoryInfo* bind_infos;
     VkDevice device = checkdevice(L, 1, &ud);
     CheckDevicePfn(L, ud, BindBufferMemory2KHR);
-    bind_infos = echeckbindbuffermemoryinfolist(L, 2, &count, &err);
-    if(err) return argerror(L, 2);
+#define CLEANUP zfreearrayVkBindBufferMemoryInfo(L, bind_infos, count, 1)
+    bind_infos = zcheckarrayVkBindBufferMemoryInfo(L, 2, &count, &err);
+    if(err) { CLEANUP; return argerror(L, 2); }
     ec = ud->ddt->BindBufferMemory2KHR(device, count, bind_infos);
-    freebindbuffermemoryinfolist(L, bind_infos, count);
+    CLEANUP;
     CheckError(L, ec);
+#undef CLEANUP
     return 0;
     }
 
 static int BindImageMemory2(lua_State *L)
     {
+    int err;
     VkResult ec;
     ud_t *ud;
     uint32_t count;
-    int err;
-    VkBindImageMemoryInfo *bind_infos;
+    VkBindImageMemoryInfo* bind_infos;
     VkDevice device = checkdevice(L, 1, &ud);
     CheckDevicePfn(L, ud, BindImageMemory2KHR);
-    bind_infos = echeckbindimagememoryinfolist(L, 2, &count, &err);
-    if(err) return argerror(L, 2);
+#define CLEANUP zfreearrayVkBindImageMemoryInfo(L, bind_infos, count, 1)
+    bind_infos = zcheckarrayVkBindImageMemoryInfo(L, 2, &count, &err);
+    if(err) { CLEANUP; return argerror(L, 2); }
     ec = ud->ddt->BindImageMemory2KHR(device, count, bind_infos);
-    freebindimagememoryinfolist(L, bind_infos, count);
+    CLEANUP;
     CheckError(L, ec);
+#undef CLEANUP
     return 0;
     }
-
 
 static int BindBufferMemory(lua_State *L)
     {
@@ -443,21 +485,24 @@ static int BindImageMemory(lua_State *L)
     return BindImageMemory2(L);
     }
 
-
 /*--------------------------------------------------------------------------------*/
 
 static int GetMemoryFd(lua_State *L)
     {
+    int err;
     VkResult ec;
     ud_t *ud;
     int fd;
-    VkMemoryGetFdInfoKHR info;
+    VkMemoryGetFdInfoKHR* info;
     VkDeviceMemory memory = checkdevice_memory(L, 1, &ud);
     CheckDevicePfn(L, ud, GetMemoryFdKHR);
-    if(echeckmemorygetfdinfo(L, 2, &info)) return argerror(L, 2);
-    info.memory = memory;
-
-    ec = ud->ddt->GetMemoryFdKHR(ud->device, &info, &fd);
+#define CLEANUP zfreeVkMemoryGetFdInfoKHR(L, info, 1)
+    info = zcheckVkMemoryGetFdInfoKHR(L, 2, &err);
+    if(err) { CLEANUP; return argerror(L, 2); }
+    info->memory = memory;
+    ec = ud->ddt->GetMemoryFdKHR(ud->device, info, &fd);
+    CLEANUP;
+#undef CLEANUP
     CheckError(L, ec);
     lua_pushinteger(L, fd);
     return 1;
@@ -475,10 +520,9 @@ static int GetMemoryFdProperties(lua_State *L)
     CheckDevicePfn(L, ud, GetMemoryFdPropertiesKHR);
     ec = ud->ddt->GetMemoryFdPropertiesKHR(device, handleType, fd, &properties);
     CheckError(L, ec);
-    pushmemoryfdproperties(L, &properties);
+    zpushVkMemoryFdPropertiesKHR(L, &properties);
     return 1;
     }
-
 
 
 RAW_FUNC(device_memory)

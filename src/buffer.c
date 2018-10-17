@@ -40,17 +40,20 @@ static int freebuffer(lua_State *L, ud_t *ud)
 
 static int Create(lua_State *L)
     {
+    int err;
     ud_t *ud, *device_ud;
     VkResult ec;
     VkBuffer buffer;
-    VkBufferCreateInfo_CHAIN info;
+    VkBufferCreateInfo* info;
     VkDevice device = checkdevice(L, 1, &device_ud);
     const VkAllocationCallbacks *allocator = optallocator(L, 3);
-    if(echeckbuffercreateinfo(L, 2, &info)) return argerror(L, 2);
-
-    ec = device_ud->ddt->CreateBuffer(device, &info.p1, allocator, &buffer);
-    freebuffercreateinfo(L, &info);
+#define CLEANUP zfreeVkBufferCreateInfo(L, info, 1)
+    info = zcheckVkBufferCreateInfo(L, 2, &err);
+    if(err) { CLEANUP; return argerror(L, 2); }
+    ec = device_ud->ddt->CreateBuffer(device, info, allocator, &buffer);
+    CLEANUP;
     CheckError(L, ec);
+#undef CLEANUP
     TRACE_CREATE(buffer, "buffer");
     ud = newuserdata_nondispatchable(L, buffer, BUFFER_MT);
     ud->parent_ud = device_ud;

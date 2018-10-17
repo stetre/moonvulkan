@@ -40,31 +40,36 @@ static int freecommand_pool(lua_State *L, ud_t *ud)
 
 static int Create(lua_State *L)
     {
+    int err;
     ud_t *ud, *device_ud;
     VkResult ec;
     VkCommandPool command_pool;
-    VkCommandPoolCreateInfo info;
-    const VkAllocationCallbacks *allocator;
+    VkCommandPoolCreateInfo* info;
+    const VkAllocationCallbacks *allocator = NULL;
 
     VkDevice device = checkdevice(L, 1, &device_ud);
 
+#define CLEANUP zfreeVkCommandPoolCreateInfo(L, info, 1)
     if(lua_istable(L, 2))
         {
         allocator = optallocator(L, 3);
-        if(echeckcommandpoolcreateinfo(L, 2, &info)) return argerror(L, 2);
+        info = zcheckVkCommandPoolCreateInfo(L, 2, &err);
+        if(err) { CLEANUP; return argerror(L, 2); }
         }
     else
         {
-        allocator = NULL;
-        info.sType = VK_STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO;
-        info.pNext = NULL;
-        info.flags = checkflags(L, 2);
-        info.queueFamilyIndex = luaL_checkinteger(L, 3);
+        VkFlags flags = checkflags(L, 2);
+        uint32_t queueFamilyIndex = luaL_checkinteger(L, 3);
+        info = znewVkCommandPoolCreateInfo(L, &err);
+        if(err) { CLEANUP; return lua_error(L); }
+        info->flags = flags;
+        info->queueFamilyIndex = queueFamilyIndex;
         }
 
-    ec = device_ud->ddt->CreateCommandPool(device, &info, allocator, &command_pool);
-
+    ec = device_ud->ddt->CreateCommandPool(device, info, allocator, &command_pool);
+    CLEANUP;
     CheckError(L, ec);
+#undef CLEANUP
     TRACE_CREATE(command_pool, "command_pool");
     ud = newuserdata_nondispatchable(L, command_pool, COMMAND_POOL_MT);
     ud->parent_ud = device_ud;

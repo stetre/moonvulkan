@@ -43,8 +43,8 @@ local HEADER = [[
 Corrections for non-standard declarations: @@
 VkDeviceCreateInfo* zcheckVkDeviceCreateInfo(lua_State *L, int arg, int *err, ud_t *ud); //non-standard
 VkPresentInfoKHR* zcheckVkPresentInfoKHR(lua_State *L, int arg, int *err, int results); //non-standard
-int zpushVkQueueFamilyProperties(lua_State *L, VkQueueFamilyProperties *p, uint32_t index); //non-standard
-int zpushVkQueueFamilyProperties2KHR(lua_State *L, VkQueueFamilyProperties2KHR *p, uint32_t index); //non-standard
+int zpushVkQueueFamilyProperties(lua_State *L, const VkQueueFamilyProperties *p, uint32_t index); //non-standard
+int zpushVkQueueFamilyProperties2KHR(lua_State *L, const VkQueueFamilyProperties2KHR *p, uint32_t index); //non-standard
 
 #define znew moonvulkan_znew
 void* znew(lua_State *L, VkStructureType sType /* or -1 */, size_t sz, int *err);
@@ -173,7 +173,7 @@ local TYPED = {
    { "VkSparseImageMemoryRequirements2", "SPARSE_IMAGE_MEMORY_REQUIREMENTS_2" },
    { "VkSurfaceCapabilities2KHR", "SURFACE_CAPABILITIES_2_KHR" }, 
    { "VkSurfaceFormat2KHR", "SURFACE_FORMAT_2_KHR" },
-   { "VkQueueFamilyProperties2KHR", "QUEUE_FAMILY_PROPERTIES_2KHR" },
+   { "VkQueueFamilyProperties2KHR", "QUEUE_FAMILY_PROPERTIES_2_KHR" },
    { "VkImageFormatListCreateInfoKHR", "IMAGE_FORMAT_LIST_CREATE_INFO_KHR" },
    { "VkExternalMemoryImageCreateInfoKHR", "EXTERNAL_MEMORY_IMAGE_CREATE_INFO_KHR" },
    { "VkImageCreateInfo", "IMAGE_CREATE_INFO" },
@@ -234,9 +234,9 @@ local TYPED = {
    { "VkDebugUtilsLabelEXT", "DEBUG_UTILS_LABEL_EXT" },
    { "VkDebugUtilsMessengerCallbackDataEXT", "DEBUG_UTILS_MESSENGER_CALLBACK_DATA_EXT" },
    { "VkDisplayPowerInfoEXT", "DISPLAY_POWER_INFO_EXT" },
-   { "VkMultisamplePropertiesEXT", "VK_MULTISAMPLE_PROPERTIES_EXT" },
+   { "VkMultisamplePropertiesEXT", "MULTISAMPLE_PROPERTIES_EXT" },
    { "VkConditionalRenderingBeginInfoEXT", "CONDITIONAL_RENDERING_BEGIN_INFO_EXT" },
-   { "VkDescriptorSetLayoutSupportKHR", "VK_DESCRIPTOR_SET_LAYOUT_SUPPORT_KHR" },
+   { "VkDescriptorSetLayoutSupportKHR", "DESCRIPTOR_SET_LAYOUT_SUPPORT_KHR" },
    { "VkPipelineShaderStageCreateInfo", "PIPELINE_SHADER_STAGE_CREATE_INFO" },
    { "VkComputePipelineCreateInfo", "COMPUTE_PIPELINE_CREATE_INFO" },
    { "VkPipelineInputAssemblyStateCreateInfo", "PIPELINE_INPUT_ASSEMBLY_STATE_CREATE_INFO" },
@@ -273,6 +273,8 @@ local TYPED = {
    { "VkRenderPassBeginInfo", "RENDER_PASS_BEGIN_INFO" },
    { "VkPhysicalDeviceExternalImageFormatInfoKHR", "PHYSICAL_DEVICE_EXTERNAL_IMAGE_FORMAT_INFO_KHR" },
    { "VkPhysicalDeviceImageFormatInfo2KHR", "PHYSICAL_DEVICE_IMAGE_FORMAT_INFO_2_KHR" },
+   { "VkDisplayModeCreateInfoKHR", "DISPLAY_MODE_CREATE_INFO_KHR" },
+   { "VkPhysicalDeviceSurfaceInfo2KHR", "PHYSICAL_DEVICE_SURFACE_INFO_2_KHR" },
 }
 
 local TYPED_WIN32 = {
@@ -293,7 +295,7 @@ int zinitXxx(lua_State *L, Xxx* p, int *err);
 #define zfreeXxx(L, p, base) zfree((L), (p), (base))
 #define zfreearrayXxx(L, p, count, base) zfreearray((L), (p), sizeof(Xxx), (count), (base))
 #define zpushXxx moonvulkan_zpushXxx
-int zpushXxx(lua_State *L, Xxx *p);
+int zpushXxx(lua_State *L, const Xxx *p);
 ]]
 
 local function create_decl_typed(Xxx, XXX)
@@ -315,7 +317,7 @@ int zinitXxx(lua_State *L, Xxx* p, int *err);
 #define zfreeXxx(L, p, base) zfree_untyped((L), (p), (base), zclearXxx)
 #define zfreearrayXxx(L, p, count, base) zfreearray_untyped((L), (p), sizeof(Xxx), (count), (base), zclearXxx)
 #define zpushXxx moonvulkan_zpushXxx
-int zpushXxx(lua_State *L, Xxx *p);
+int zpushXxx(lua_State *L, const Xxx *p);
 ]]
 
 local template_untyped0 = [[

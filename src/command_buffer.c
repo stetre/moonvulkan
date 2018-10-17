@@ -39,40 +39,41 @@ static int freecommand_buffer(lua_State *L, ud_t *ud)
 
 static int Create(lua_State *L)
     {
+    int err;
     ud_t *ud, *command_pool_ud;
     VkResult ec;
     uint32_t i, count;
     VkCommandBuffer *command_buffer;
-    VkCommandBufferAllocateInfo info;
+    VkCommandBufferAllocateInfo* info;
     VkCommandPool command_pool = checkcommand_pool(L, 1, &command_pool_ud);
 
+#define CLEANUP zfreeVkCommandBufferAllocateInfo(L, info, 1)
     if(lua_istable(L, 2))
         {
-        if(echeckcommandbufferallocateinfo(L, 2, &info)) return argerror(L, 2);
-        info.commandPool = command_pool;
+        info = zcheckVkCommandBufferAllocateInfo(L, 2, &err);
+        if(err) { CLEANUP; return argerror(L, 2); }
         }
     else
         {
-        info.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO;
-        info.pNext = NULL;
-        info.commandPool = command_pool;
-        info.level = checkcommandbufferlevel(L, 2);
-        info.commandBufferCount = luaL_checkinteger(L, 3);
+        VkCommandBufferLevel level = checkcommandbufferlevel(L, 2);
+        uint32_t commandBufferCount = luaL_checkinteger(L, 3);
+        info = znewVkCommandBufferAllocateInfo(L, &err);
+        if(err) { CLEANUP; return lua_error(L); }
+        info->level = level;
+        info->commandBufferCount = commandBufferCount;
         }
 
-    count = info.commandBufferCount;
-    if(count == 0) return luaL_error(L, "invalid count");
+    info->commandPool = command_pool;
+    count = info->commandBufferCount;
+    if(count == 0) { CLEANUP; return luaL_error(L, "invalid count"); }
 
     command_buffer = (VkCommandBuffer*)MallocNoErr(L, sizeof(VkCommandBuffer)*count);
-    if(!command_buffer) return errmemory(L);
+    if(!command_buffer) { CLEANUP; return errmemory(L); }
 
-    ec = command_pool_ud->ddt->AllocateCommandBuffers(command_pool_ud->device, &info, command_buffer);
-    if(ec)
-        { 
-        Free(L, command_buffer);
-        CheckError(L, ec); /* raises an error */
-        return 0;
-        }
+    ec = command_pool_ud->ddt->AllocateCommandBuffers(command_pool_ud->device, info, command_buffer);
+    CLEANUP;
+#undef CLEANUP
+    if(ec) { Free(L, command_buffer); CheckError(L, ec); return 0; }
 
     lua_newtable(L);
     for(i=0; i<count; i++)
@@ -124,25 +125,29 @@ static int FreeCmdBuffers(lua_State *L)
 
 static int BeginCommandBuffer(lua_State *L)
     {
+    int err;
     VkResult ec;
     ud_t *ud;
-    VkCommandBufferBeginInfo_CHAIN info;
+    VkCommandBufferBeginInfo* info;
     VkCommandBuffer command_buffer = checkcommand_buffer(L, 1, &ud);
 
+#define CLEANUP zfreeVkCommandBufferBeginInfo(L, info, 1)
     if(lua_istable(L, 2))
         {
-        if(echeckcommandbufferbegininfo(L, 2, &info)) return argerror(L, 2);
+        info = zcheckVkCommandBufferBeginInfo(L, 2, &err);
+        if(err) { CLEANUP; return argerror(L, 2); }
         }
     else
         {
-        info.p1.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO ;
-        info.p1.pNext = NULL;
-        info.p1.flags = optflags(L, 2, 0);
-        info.p1.pInheritanceInfo = NULL;
+        info = znewVkCommandBufferBeginInfo(L, &err);
+        if(err) { CLEANUP; return lua_error(L); }
+        info->flags = optflags(L, 2, 0);
         }
 
-    ec = ud->ddt->BeginCommandBuffer(command_buffer, &info.p1);
+    ec = ud->ddt->BeginCommandBuffer(command_buffer, info);
+    CLEANUP;
     CheckError(L, ec);
+#undef CLEANUP
     return 0;
     }
 

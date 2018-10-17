@@ -106,7 +106,7 @@ static int pushfield(lua_State *L, int arg, const char *sname)
 #define ZCHECK_BEGIN(VkXxx) VkXxx* zcheck##VkXxx(lua_State *L, int arg, int *err) { VkXxx *p; 
 #define ZCHECK_END *err=0; return p; }
 
-#define ZPUSH_BEGIN(VkXxx) int zpush##VkXxx(lua_State *L, VkXxx *p) {
+#define ZPUSH_BEGIN(VkXxx) int zpush##VkXxx(lua_State *L, const VkXxx *p) {
 #define ZPUSH_END return 1; }
 
 #define ZCLEAR_BEGIN(VkXxx) void zclear##VkXxx(lua_State *L, const void *p_) { VkXxx *p =(VkXxx*)p_; 
@@ -119,7 +119,7 @@ static int pushfield(lua_State *L, int arg, const char *sname)
     if(*err) { zfree(L, p2, 1); return *err; }                          \
     addtochain(chain, p2);                                              \
 } while(0)
-#define LOCAL_PUSH_BEGIN(VkXxx) static int push##VkXxx(lua_State *L, VkXxx *p) {
+#define LOCAL_PUSH_BEGIN(VkXxx) static int push##VkXxx(lua_State *L, const VkXxx *p) {
 #define LOCAL_PUSH_END return 1; }
 #define CASEX(XXX, VkXxx) case VK_STRUCTURE_TYPE_##XXX: push##VkXxx(L, (VkXxx*)pp); break
 
@@ -1614,7 +1614,6 @@ FUNC_END
 #undef FUNC_BEGIN
 #undef FUNC_END
 
-
 ZINIT_BEGIN(VkPhysicalDeviceFeatures2)
     EXTENSIONS_BEGIN
         ADDX(PHYSICAL_DEVICE_16BIT_STORAGE_FEATURES, VkPhysicalDevice16BitStorageFeatures);
@@ -2064,7 +2063,7 @@ ZPUSH_END
  | Physical Device Memory Properties                                            |
  *------------------------------------------------------------------------------*/
 
-static int pushVkMemoryType(lua_State *L, VkMemoryType *p, uint32_t index)
+static int pushVkMemoryType(lua_State *L, const VkMemoryType *p, uint32_t index)
     {
     lua_newtable(L);
     lua_pushinteger(L, index); lua_setfield(L, -2, "memory_type_index");
@@ -2072,7 +2071,7 @@ static int pushVkMemoryType(lua_State *L, VkMemoryType *p, uint32_t index)
     SetInteger(heapIndex, "heap_index");
     return 1;
     }
-static int pushVkMemoryHeap(lua_State *L, VkMemoryHeap *p, uint32_t index)
+static int pushVkMemoryHeap(lua_State *L, const VkMemoryHeap *p, uint32_t index)
     {
     lua_newtable(L);
     lua_pushinteger(L, index); lua_setfield(L, -2, "memory_heap_index");
@@ -2083,18 +2082,19 @@ static int pushVkMemoryHeap(lua_State *L, VkMemoryHeap *p, uint32_t index)
 
 LOCAL_PUSH_BEGIN(VkPhysicalDeviceMemoryProperties)
     uint32_t i;
-    if(p->memoryTypeCount > VK_MAX_MEMORY_TYPES) p->memoryTypeCount = VK_MAX_MEMORY_TYPES;
-    if(p->memoryHeapCount > VK_MAX_MEMORY_HEAPS) p->memoryTypeCount = VK_MAX_MEMORY_HEAPS;
+    uint32_t tcount, hcount;
+    tcount = (p->memoryTypeCount > VK_MAX_MEMORY_TYPES) ? VK_MAX_MEMORY_TYPES : p->memoryTypeCount;
+    hcount = (p->memoryHeapCount > VK_MAX_MEMORY_HEAPS) ? VK_MAX_MEMORY_HEAPS : p->memoryHeapCount;
     lua_newtable(L);
     lua_newtable(L);
-    for(i = 0; i < p->memoryTypeCount; i++)
+    for(i = 0; i < tcount; i++)
         {
         pushVkMemoryType(L, &(p->memoryTypes[i]), i);
         lua_rawseti(L, -2, i+1);
         }
     lua_setfield(L, -2, "memory_types");
     lua_newtable(L);
-    for(i = 0; i < p->memoryHeapCount; i++)
+    for(i = 0; i < hcount; i++)
         {
         pushVkMemoryHeap(L, &(p->memoryHeaps[i]), i);
         lua_rawseti(L, -2, i+1);
@@ -2212,6 +2212,51 @@ ZPUSH_BEGIN(VkSparseImageFormatProperties2)
         }
 ZPUSH_END
 
+
+/*------------------------------------------------------------------------------*
+ | External Buffer/Fence/Semaphore Properties                                   |
+ *------------------------------------------------------------------------------*/
+
+ZPUSH_BEGIN(VkExternalBufferPropertiesKHR)
+    lua_newtable(L);
+    SetStruct(externalMemoryProperties, "external_memory_properties", VkExternalMemoryProperties);
+ZPUSH_END
+
+ZINIT_BEGIN(VkExternalBufferPropertiesKHR)
+    (void)L; (void)p;
+ZINIT_END
+
+ZPUSH_BEGIN(VkExternalFencePropertiesKHR)
+    lua_newtable(L);
+    SetFlags(exportFromImportedHandleTypes, "export_from_imported_handle_types");
+    SetFlags(compatibleHandleTypes, "compatible_handle_types");
+    SetFlags(externalFenceFeatures, "external_fence_features");
+ZPUSH_END
+
+ZINIT_BEGIN(VkExternalFencePropertiesKHR)
+    (void)L; (void)p;
+ZINIT_END
+
+ZPUSH_BEGIN(VkExternalSemaphorePropertiesKHR)
+    lua_newtable(L);
+    SetFlags(exportFromImportedHandleTypes, "export_from_imported_handle_types");
+    SetFlags(compatibleHandleTypes, "compatible_handle_types");
+    SetFlags(externalSemaphoreFeatures, "external_semaphore_features");
+ZPUSH_END
+
+ZINIT_BEGIN(VkExternalSemaphorePropertiesKHR)
+    (void)L; (void)p;
+ZINIT_END
+
+ZPUSH_BEGIN(VkMultisamplePropertiesEXT)
+    lua_newtable(L);
+    SetStruct(maxSampleLocationGridSize, "max_sample_location_grid_size", VkExtent2D);
+ZPUSH_END
+
+ZINIT_BEGIN(VkMultisamplePropertiesEXT)
+    (void)L; (void)p;
+ZINIT_END
+
 /*------------------------------------------------------------------------------*
  | Surface Capabilities                                                         |
  *------------------------------------------------------------------------------*/
@@ -2300,11 +2345,21 @@ ZPUSH_BEGIN(VkSurfaceFormat2KHR)
 ZPUSH_END
 
 /*------------------------------------------------------------------------------*
+ | Surface Info                                                                 |
+ *------------------------------------------------------------------------------*/
+
+ZCHECK_BEGIN(VkPhysicalDeviceSurfaceInfo2KHR)
+    checktable(arg);
+    newstruct(VkPhysicalDeviceSurfaceInfo2KHR);
+    GetSurface(surface, "surface");
+ZCHECK_END
+
+/*------------------------------------------------------------------------------*
  | Queue Family Properties                                                      |
  *------------------------------------------------------------------------------*/
 
 //LOCAL_PUSH_BEGIN(VkQueueFamilyProperties)
-static int pushVkQueueFamilyProperties(lua_State *L, VkQueueFamilyProperties *p, uint32_t index) {
+static int pushVkQueueFamilyProperties(lua_State *L, const VkQueueFamilyProperties *p, uint32_t index) {
     lua_pushinteger(L, index); lua_setfield(L, -2, "queue_family_index");
     SetFlags(queueFlags, "queue_flags");
     SetInteger(queueCount, "queue_count");
@@ -2319,13 +2374,13 @@ ZINIT_BEGIN(VkQueueFamilyProperties2KHR)
 ZINIT_END
 
 //ZPUSH_BEGIN(VkQueueFamilyProperties)
-int zpushVkQueueFamilyProperties(lua_State *L, VkQueueFamilyProperties *p, uint32_t index) {
+int zpushVkQueueFamilyProperties(lua_State *L, const VkQueueFamilyProperties *p, uint32_t index) {
     lua_newtable(L);
     pushVkQueueFamilyProperties(L, p, index);
 ZPUSH_END
 
 //ZPUSH_BEGIN(VkQueueFamilyProperties2KHR)
-int zpushVkQueueFamilyProperties2KHR(lua_State *L, VkQueueFamilyProperties2KHR *p, uint32_t index) {
+int zpushVkQueueFamilyProperties2KHR(lua_State *L, const VkQueueFamilyProperties2KHR *p, uint32_t index) {
     VkQueueFamilyProperties2KHR* pp = (VkQueueFamilyProperties2KHR*)p->pNext;
     lua_newtable(L);
     pushVkQueueFamilyProperties(L, &p->queueFamilyProperties, index);
@@ -3474,6 +3529,20 @@ ZCHECK_BEGIN(VkDisplaySurfaceCreateInfoKHR)
 ZCHECK_END
  
 /*------------------------------------------------------------------------------*
+ | Display Mode                                                                 |
+ *------------------------------------------------------------------------------*/
+
+static ZCLEAR_BEGIN(VkDisplayModeCreateInfoKHR)
+    zfreeVkDisplayModeParametersKHR(L, &p->parameters, 0);
+ZCLEAR_END
+ZCHECK_BEGIN(VkDisplayModeCreateInfoKHR)
+    checktable(arg);
+    newstruct(VkDisplayModeCreateInfoKHR);
+    GetFlags(flags, "flags");
+    GetStruct(parameters, "parameters", VkDisplayModeParametersKHR);
+ZCHECK_END
+
+/*------------------------------------------------------------------------------*
  | Descriptor Update Template                                                   |
  *------------------------------------------------------------------------------*/
 
@@ -4052,13 +4121,6 @@ ZCHECK_END
 
 /*------------------------------------------------------------------------------*/
 
-ZPUSH_BEGIN(VkMultisamplePropertiesEXT)
-    lua_newtable(L);
-    SetStruct(maxSampleLocationGridSize, "max_sample_location_grid_size", VkExtent2D);
-ZPUSH_END
-
-/*------------------------------------------------------------------------------*/
-
 ZCHECK_BEGIN(VkConditionalRenderingBeginInfoEXT)
     checktable(arg);
     newstruct(VkConditionalRenderingBeginInfoEXT);
@@ -4100,11 +4162,6 @@ ZCHECK_BEGIN(VkHdrMetadataEXT)
     GetNumber(maxFrameAverageLightLevel, "max_frame_average_light_level");
 ZCHECK_END
 
-ZPUSH_BEGIN(VkExternalBufferPropertiesKHR)
-    lua_newtable(L);
-    SetStruct(externalMemoryProperties, "external_memory_properties", VkExternalMemoryProperties);
-ZPUSH_END
-
 ZCHECK_BEGIN(VkPhysicalDeviceExternalBufferInfoKHR)
     checktable(arg);
     newstruct(VkPhysicalDeviceExternalBufferInfoKHR);
@@ -4115,12 +4172,6 @@ ZCHECK_END
 
 /*------------------------------------------------------------------------------*/
 
-ZPUSH_BEGIN(VkExternalFencePropertiesKHR)
-    lua_newtable(L);
-    SetFlags(exportFromImportedHandleTypes, "export_from_imported_handle_types");
-    SetFlags(compatibleHandleTypes, "compatible_handle_types");
-    SetFlags(externalFenceFeatures, "external_fence_features");
-ZPUSH_END
 
 ZCHECK_BEGIN(VkPhysicalDeviceExternalFenceInfoKHR)
     checktable(arg);
@@ -4129,13 +4180,6 @@ ZCHECK_BEGIN(VkPhysicalDeviceExternalFenceInfoKHR)
 ZCHECK_END
 
 /*------------------------------------------------------------------------------*/
-
-ZPUSH_BEGIN(VkExternalSemaphorePropertiesKHR)
-    lua_newtable(L);
-    SetFlags(exportFromImportedHandleTypes, "export_from_imported_handle_types");
-    SetFlags(compatibleHandleTypes, "compatible_handle_types");
-    SetFlags(externalSemaphoreFeatures, "external_semaphore_features");
-ZPUSH_END
 
 ZCHECK_BEGIN(VkPhysicalDeviceExternalSemaphoreInfoKHR)
     checktable(arg);
@@ -4648,9 +4692,8 @@ void* znewarray(lua_State *L, VkStructureType sType, size_t sz, uint32_t count, 
     if(p==NULL) { *err = ERR_MEMORY; return NULL; }
     if(sType != (VkStructureType)-1)
         {
-        uintptr_t *pp;
         uint32_t i;
-        pp = p;
+        uintptr_t *pp = p;
         for(i=0; i < count; i++)
             {
             pp = pp + i*sz;
@@ -4663,6 +4706,7 @@ void* znewarray(lua_State *L, VkStructureType sType, size_t sz, uint32_t count, 
 
 void zfree_untyped(lua_State *L, const void *p, int base, void (*clearfunc)(lua_State *L, const void *p))
     { 
+    if(!p) return;
     if(clearfunc)
         clearfunc(L, (void*)p);
     if(base) Free(L, (void*)p);
@@ -4691,7 +4735,8 @@ void zfree(lua_State *L, const void *p, int base)
     {
     if(!p) return;
     zfreeaux(L, (void*)p);
-    if(base) Free(L, (void*)p);
+    if(base)
+        Free(L, (void*)p);
     }
 
 void zfreearray(lua_State *L, const void *p, size_t sz, uint32_t count, int base)
@@ -4705,7 +4750,8 @@ void zfreearray(lua_State *L, const void *p, size_t sz, uint32_t count, int base
         pp = pp + i*sz;
         zfreeaux(L, (void*)pp);
         }
-    if(base) Free(L, (void*)p);
+    if(base) 
+        Free(L, (void*)p);
     }
 
 static void zfreeaux(lua_State *L, void *pp)
@@ -4756,6 +4802,7 @@ static void zfreeaux(lua_State *L, void *pp)
         CASE(GRAPHICS_PIPELINE_CREATE_INFO, VkGraphicsPipelineCreateInfo);
         CASE(RENDER_PASS_SAMPLE_LOCATIONS_BEGIN_INFO_EXT, VkRenderPassSampleLocationsBeginInfoEXT);
         CASE(RENDER_PASS_BEGIN_INFO, VkRenderPassBeginInfo);
+        CASE(DISPLAY_MODE_CREATE_INFO_KHR, VkDisplayModeCreateInfoKHR);
 #undef CASE
         default: 
             return;

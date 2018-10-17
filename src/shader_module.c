@@ -30,7 +30,6 @@ static int freeshader_module(lua_State *L, ud_t *ud)
     VkShaderModule shader_module = (VkShaderModule)ud->handle;
     const VkAllocationCallbacks *allocator = ud->allocator;
     VkDevice device = ud->device;
-
     if(!freeuserdata(L, ud))
         return 0; /* double call */
     TRACE_DELETE(shader_module, "shader_module");
@@ -40,38 +39,41 @@ static int freeshader_module(lua_State *L, ud_t *ud)
 
 static int Create(lua_State *L)
     {
+    int err;
     ud_t *ud, *device_ud;
     VkResult ec;
     VkShaderModule shader_module;
-    VkShaderModuleCreateInfo_CHAIN info;
+    VkShaderModuleCreateInfo* info;
     size_t size;
     const char *code;
-
     VkDevice device = checkdevice(L, 1, &device_ud);
     const VkAllocationCallbacks *allocator = NULL;
-
+#define CLEANUP zfreeVkShaderModuleCreateInfo(L, info, 1)
     if(lua_istable(L, 2))
         {
         allocator = optallocator(L, 3);
-        if(echeckshadermodulecreateinfo(L, 2, &info)) return argerror(L, 2);
+        info = zcheckVkShaderModuleCreateInfo(L, 2, &err);
+        if(err) { CLEANUP; return argerror(L, 2); }
         lua_getfield(L, 2, "code");
         code = luaL_optlstring(L, -1, NULL, &size);
         }
     else
         {
-        info.p1.sType = VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO;
-        info.p1.pNext = NULL;
-        info.p1.flags = checkflags(L, 2);
+        VkFlags flags = checkflags(L, 2);
+        info = znewVkShaderModuleCreateInfo(L, &err);
+        if(err) { CLEANUP; return lua_error(L); }
+        info->flags = flags;
         code = luaL_optlstring(L, 3, NULL, &size);
         }
 
     if(!code || (size == 0))
         return luaL_error(L, "missing shader code");
-    info.p1.codeSize = size;
-    info.p1.pCode = (uint32_t*)code;
-
-    ec = device_ud->ddt->CreateShaderModule(device, &info.p1, allocator, &shader_module);
+    info->codeSize = size;
+    info->pCode = (uint32_t*)code;
+    ec = device_ud->ddt->CreateShaderModule(device, info, allocator, &shader_module);
+    CLEANUP;
     CheckError(L, ec);
+#undef CLEANUP
     TRACE_CREATE(shader_module, "shader_module");
     ud = newuserdata_nondispatchable(L, shader_module, SHADER_MODULE_MT);
     ud->parent_ud = device_ud;

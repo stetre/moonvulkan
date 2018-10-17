@@ -57,16 +57,17 @@ static int QueueSubmit(lua_State *L)
     int err;
     uint32_t count;
     VkResult ec;
-    VkFence fence;
     ud_t *ud;
+    VkSubmitInfo* submits;
     VkQueue queue = checkqueue(L, 1, &ud);
-    VkSubmitInfo* submits = echecksubmitinfolist(L, 2, &count, &err);
-    if(err) return argerror(L, 2);
-
-    fence = testfence(L, 3, NULL);
+    VkFence fence = testfence(L, 3, NULL);
+#define CLEANUP zfreearrayVkSubmitInfo(L, submits, count, 1)
+    submits = zcheckarrayVkSubmitInfo(L, 2, &count, &err);
+    if(err) { CLEANUP; return argerror(L, 2); }
     ec = ud->ddt->QueueSubmit(queue, count, submits, fence);
-    freesubmitinfolist(L, submits, count);
+    CLEANUP;
     CheckError(L, ec);
+#undef CLEANUP
     return 0;
     }
 
@@ -75,19 +76,19 @@ static int QueueBindSparse(lua_State *L)
     int err;
     uint32_t count;
     VkResult ec;
-    VkFence fence;
     ud_t *ud;
+    VkBindSparseInfo* binds;
     VkQueue queue = checkqueue(L, 1, &ud);
-    VkBindSparseInfo* binds = echeckbindsparseinfolist(L, 2, &count, &err);
-    if(err) return argerror(L, 2);
-    
-    fence = testfence(L, 3, NULL);
+    VkFence fence = testfence(L, 3, NULL);
+#define CLEANUP zfreearrayVkBindSparseInfo(L, binds, count, 1)
+    binds = zcheckarrayVkBindSparseInfo(L, 2, &count, &err);
+    if(err) { CLEANUP; return argerror(L, 2); }
     ec = ud->ddt->QueueBindSparse(queue, count, binds, fence);
-    freebindsparseinfolist(L, binds, count);
+    CLEANUP;
     CheckError(L, ec);
+#undef CLEANUP
     return 0;
     }
-
 
 static int QueueWaitIdle(lua_State *L)
     {

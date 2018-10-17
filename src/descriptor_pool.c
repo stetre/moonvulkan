@@ -38,40 +38,38 @@ static int freedescriptor_pool(lua_State *L, ud_t *ud)
     return 0;
     }
 
-
 static int Create(lua_State *L)
     {
+    int err, free_allowed;
     ud_t *ud, *device_ud;
     VkResult ec;
     VkDescriptorPool descriptor_pool;
-    VkDescriptorPoolCreateInfo info;
-    int err, free_allowed;
-    uint32_t count;
-
+    VkDescriptorPoolCreateInfo* info = NULL;
     VkDevice device = checkdevice(L, 1, &device_ud);
     const VkAllocationCallbacks *allocator = NULL;
-
+#define CLEANUP zfreeVkDescriptorPoolCreateInfo(L, info, 1)
     if(lua_istable(L, 2))
         {
-        if(echeckdescriptorpoolcreateinfo(L, 2, &info)) return argerror(L, 2);
         allocator = optallocator(L, 3);
+        info = zcheckVkDescriptorPoolCreateInfo(L, 2, &err);
+        if(err) { CLEANUP; return argerror(L, 2); }
         }
     else
         {
-        memset(&info, 0, sizeof(info));
-        info.sType = VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO;
-        info.pNext = NULL;
-        info.flags = checkflags(L, 2);
-        info.maxSets = luaL_checkinteger(L, 3);
-        info.pPoolSizes = echeckdescriptorpoolsizelist(L, 4, &count, &err);
-        info.poolSizeCount = count;
-        if(err) { freedescriptorpoolcreateinfo(L, &info); return argerror(L, 4); }
+        VkFlags flags = checkflags(L, 2);
+        uint32_t maxSets = luaL_checkinteger(L, 3);
+        info = znewVkDescriptorPoolCreateInfo(L, &err);
+        if(err) { CLEANUP; return lua_error(L); }
+        info->flags = flags;
+        info->maxSets = maxSets;
+        info->pPoolSizes = zcheckarrayVkDescriptorPoolSize(L, 4, &info->poolSizeCount, &err);
+        if(err) { CLEANUP; return argerror(L, 4); }
         }
-
-    ec = device_ud->ddt->CreateDescriptorPool(device, &info, allocator, &descriptor_pool);
-    free_allowed = info.flags & VK_DESCRIPTOR_POOL_CREATE_FREE_DESCRIPTOR_SET_BIT;
-    freedescriptorpoolcreateinfo(L, &info);
+    ec = device_ud->ddt->CreateDescriptorPool(device, info, allocator, &descriptor_pool);
+    free_allowed = info->flags & VK_DESCRIPTOR_POOL_CREATE_FREE_DESCRIPTOR_SET_BIT;
+    CLEANUP;
     CheckError(L, ec);
+#undef CLEANUP
     TRACE_CREATE(descriptor_pool, "descriptor_pool");
     ud = newuserdata_nondispatchable(L, descriptor_pool, DESCRIPTOR_POOL_MT);
     ud->parent_ud = device_ud;

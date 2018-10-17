@@ -73,31 +73,40 @@ int pushimage_swapchain(lua_State *L, VkImage image, ud_t *swapchain_ud)
 
 static int Create(lua_State *L)
     {
+    int err;
     ud_t *ud;
     VkResult ec;
     VkImage image;
-    VkImageCreateInfo_CHAIN info;
+    VkImageCreateInfo* info;
 
     VkDevice device = checkdevice(L, 1, &ud);
     const VkAllocationCallbacks *allocator = optallocator(L, 3);
-    if(echeckimagecreateinfo(L, 2, &info)) return argerror(L, 2);
+#define CLEANUP zfreeVkImageCreateInfo(L, info, 1)
+    info = zcheckVkImageCreateInfo(L, 2, &err);
+    if(err) { CLEANUP; return argerror(L, 2); }
 
-    ec = ud->ddt->CreateImage(device, &info.p1, allocator, &image);
-    freeimagecreateinfo(L, &info);
+    ec = ud->ddt->CreateImage(device, info, allocator, &image);
+    CLEANUP;
     CheckError(L, ec);
+#undef CLEANUP
     return newimage(L, image, UD(device), device, allocator, 0);
     }
 
 static int GetImageSubresourceLayout(lua_State *L)
     {
-    VkImageSubresource subresource;
+    int err;
+    VkImageSubresource* subresource;
     VkSubresourceLayout layout;
     ud_t *ud;
     VkImage image = checkimage(L, 1, &ud);
     VkDevice device = ud->device;
-    if(echeckimagesubresource(L, 2, &subresource)) return argerror(L, 2);
-    ud->ddt->GetImageSubresourceLayout(device, image, &subresource, &layout);
-    pushsubresourcelayout(L, &layout);
+#define CLEANUP zfreeVkImageSubresource(L, subresource, 1)
+    subresource = zcheckVkImageSubresource(L, 2, &err);
+    if(err) { CLEANUP; return argerror(L, 2); }
+    ud->ddt->GetImageSubresourceLayout(device, image, subresource, &layout);
+    zpushVkSubresourceLayout(L, &layout);
+    CLEANUP;
+#undef CLEANUP
     return 1;
     }
 

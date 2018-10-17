@@ -39,17 +39,20 @@ static int freerender_pass(lua_State *L, ud_t *ud)
 
 static int Create(lua_State *L)
     {
+    int err;
     ud_t *ud, *device_ud;
     VkResult ec;
     VkRenderPass render_pass;
-    VkRenderPassCreateInfo_CHAIN info;
+    VkRenderPassCreateInfo* info;
     VkDevice device = checkdevice(L, 1, &device_ud);
     const VkAllocationCallbacks *allocator = optallocator(L, 3);
-    if(echeckrenderpasscreateinfo(L, 2, &info)) return argerror(L, 2);
-
-    ec = device_ud->ddt->CreateRenderPass(device, &info.p1, allocator, &render_pass);
-    freerenderpasscreateinfo(L, &info);
+#define CLEANUP zfreeVkRenderPassCreateInfo(L, info, 1)
+    info = zcheckVkRenderPassCreateInfo(L, 2, &err);
+    if(err) { CLEANUP; return argerror(L, 2); }
+    ec = device_ud->ddt->CreateRenderPass(device, info, allocator, &render_pass);
+    CLEANUP;
     CheckError(L, ec);
+#undef CLEANUP
     TRACE_CREATE(render_pass, "render_pass");
     ud = newuserdata_nondispatchable(L, render_pass, RENDER_PASS_MT);
     ud->parent_ud = device_ud;
@@ -69,7 +72,7 @@ static int GetRenderAreaGranularity(lua_State *L)
     VkDevice device = ud->device;
     VkExtent2D granularity;
     ud->ddt->GetRenderAreaGranularity(device, render_pass, &granularity);
-    pushextent2d(L, &granularity);
+    zpushVkExtent2D(L, &granularity);
     return 1;
     }
 

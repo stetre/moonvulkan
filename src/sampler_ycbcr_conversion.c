@@ -39,19 +39,21 @@ static int freesampler_ycbcr_conversion(lua_State *L, ud_t *ud)
 
 static int Create(lua_State *L)
     {
+    int err;
     ud_t *ud, *device_ud;
     VkResult ec;
     VkSamplerYcbcrConversion sampler_ycbcr_conversion;
-    VkSamplerYcbcrConversionCreateInfo info;
-
+    VkSamplerYcbcrConversionCreateInfoKHR* info;
     VkDevice device = checkdevice(L, 1, &device_ud);
     const VkAllocationCallbacks *allocator = optallocator(L, 3);
-
     CheckDevicePfn(L, device_ud, CreateSamplerYcbcrConversionKHR);
-
-    if(echecksamplerycbcrconversioncreateinfo(L, 2, &info)) return argerror(L, 2);
-
-    ec = device_ud->ddt->CreateSamplerYcbcrConversionKHR(device, &info, allocator, &sampler_ycbcr_conversion);
+#define CLEANUP zfreeVkSamplerYcbcrConversionCreateInfoKHR(L, info, 1)
+    info = zcheckVkSamplerYcbcrConversionCreateInfoKHR(L, 2, &err);
+    if(err) { CLEANUP; return argerror(L, 2); }
+    ec = device_ud->ddt->CreateSamplerYcbcrConversionKHR(device,
+                            info, allocator, &sampler_ycbcr_conversion);
+    CLEANUP;
+#undef CLEANUP
     CheckError(L, ec);
     TRACE_CREATE(sampler_ycbcr_conversion, "sampler_ycbcr_conversion");
     ud = newuserdata_nondispatchable(L, sampler_ycbcr_conversion, SAMPLER_YCBCR_CONVERSION_MT);

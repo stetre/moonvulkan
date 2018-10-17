@@ -40,21 +40,22 @@ static int freevalidation_cache(lua_State *L, ud_t *ud)
 
 static int Create(lua_State *L)
     {
+    int err;
     ud_t *ud, *device_ud;
     VkResult ec;
     VkValidationCacheEXT validation_cache;
-    VkValidationCacheCreateInfoEXT info;
-
+    VkValidationCacheCreateInfoEXT* info;
     VkDevice device = checkdevice(L, 1, &device_ud);
     const VkAllocationCallbacks *allocator = optallocator(L, 3);
-
     CheckDevicePfn(L, device_ud, CreateValidationCacheEXT);
-
-    if(echeckvalidationcachecreateinfo(L, 2, &info)) return argerror(L, 2);
+#define CLEANUP zfreeVkValidationCacheCreateInfoEXT(L, info, 1)
+    info = zcheckVkValidationCacheCreateInfoEXT(L, 2, &err);
+    if(err) { CLEANUP;  return argerror(L, 2); }
     lua_getfield(L, 2, "initial_data");
-    info.pInitialData = (void*)luaL_optlstring(L, -1, NULL, &info.initialDataSize);
-
-    ec = device_ud->ddt->CreateValidationCacheEXT(device, &info, allocator, &validation_cache);
+    info->pInitialData = (void*)luaL_optlstring(L, -1, NULL, &info->initialDataSize);
+    ec = device_ud->ddt->CreateValidationCacheEXT(device, info, allocator, &validation_cache);
+    CLEANUP;
+#undef CLEANUP
     CheckError(L, ec);
     TRACE_CREATE(validation_cache, "validation_cache");
     ud = newuserdata_nondispatchable(L, validation_cache, VALIDATION_CACHE_MT);

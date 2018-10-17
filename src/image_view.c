@@ -39,18 +39,22 @@ static int freeimage_view(lua_State *L, ud_t *ud)
 
 static int Create(lua_State *L)
     {
+    int err;
     ud_t *ud, *image_ud;
     VkResult ec;
     VkImageView image_view;
-    VkImageViewCreateInfo_CHAIN info;
+    VkImageViewCreateInfo* info;
     const VkAllocationCallbacks *allocator = optallocator(L, 3);
     VkImage image = checkimage(L, 1, &image_ud);
     VkDevice device = image_ud->device;
-    if(echeckimageviewcreateinfo(L, 2, &info)) return argerror(L, 2);
-    info.p1.image = image;
 
-    ec = UD(device)->ddt->CreateImageView(device, &info.p1, allocator, &image_view);
-    freeimageviewcreateinfo(L, &info);
+#define CLEANUP zfreeVkImageViewCreateInfo(L, info, 1)
+    info = zcheckVkImageViewCreateInfo(L, 2, &err);
+    if(err) { CLEANUP; return argerror(L, 2); }
+    info->image = image;
+    ec = UD(device)->ddt->CreateImageView(device, info, allocator, &image_view);
+    CLEANUP;
+#undef CLEANUP
     CheckError(L, ec);
     TRACE_CREATE(image_view, "image_view");
     ud = newuserdata_nondispatchable(L, image_view, IMAGE_VIEW_MT);

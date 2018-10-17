@@ -46,37 +46,36 @@ static int freeinstance(lua_State *L, ud_t *ud)
 
 static int Create(lua_State *L)
     {
+    int err;
     ud_t *ud;
     VkResult ec;
     VkInstance instance;
-    VkInstanceCreateInfo_CHAIN info;
+    VkInstanceCreateInfo* info;
     const VkAllocationCallbacks *allocator = optallocator(L, 2);
-
-    if(echeckinstancecreateinfo(L, 1, &info)) return argerror(L, 1);
-
-    ec = vk.CreateInstance(&info.p1, allocator, &instance);
+#define CLEANUP zfreeVkInstanceCreateInfo(L, info, 1)
+    info = zcheckVkInstanceCreateInfo(L, 1, &err);
+    if(err) { CLEANUP; return argerror(L, 1); }
+    ec = vk.CreateInstance(info, allocator, &instance);
     if(ec)
-        {
-        freeinstancecreateinfo(L, &info);
-        CheckError(L, ec);
-        return 0;
-        }
+        { CLEANUP; CheckError(L, ec); return 0; }
     TRACE_CREATE(instance, "instance");
     ud = newuserdata_dispatchable(L, instance, INSTANCE_MT);
     ud->instance = instance;
 /*  ud->parent_ud = NULL; */
     ud->destructor = freeinstance;  
     ud->allocator = allocator; /* see you later allocator */
-    ud->idt = getproc_instance(L, instance, &info.p1);
-    freeinstancecreateinfo(L, &info);
+    ud->idt = getproc_instance(L, instance, info);
+    CLEANUP;
+#undef CLEANUP
     return 1;
     }
 
+#define N 32
 static int EnumeratePhysicalDevices(lua_State *L)
     {
     uint32_t count, remaining, tot, i;
     VkResult ec;
-    VkPhysicalDevice physical_device[32];
+    VkPhysicalDevice physical_device[N];
     ud_t *ud;
     VkInstance instance = checkinstance(L, 1, &ud);
 
@@ -88,8 +87,8 @@ static int EnumeratePhysicalDevices(lua_State *L)
 
     tot = 0;
     do {
-        if(remaining > 32)
-            { count = 32; remaining -= 32; }
+        if(remaining > N)
+            { count = N; remaining -= N; }
         else
             { count = remaining; remaining = 0; }
         ec = ud->idt->EnumeratePhysicalDevices(instance, &count, physical_device);

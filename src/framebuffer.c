@@ -39,16 +39,19 @@ static int freeframebuffer(lua_State *L, ud_t *ud)
 
 static int Create(lua_State *L)
     {
+    int err;
     ud_t *ud, *device_ud;
     VkResult ec;
     VkFramebuffer framebuffer;
-    VkFramebufferCreateInfo info;
+    VkFramebufferCreateInfo* info;
     VkDevice device = checkdevice(L, 1, &device_ud);
     const VkAllocationCallbacks *allocator = optallocator(L, 3);
-    if(echeckframebuffercreateinfo(L, 2, &info)) return argerror(L, 2);
-
-    ec = device_ud->ddt->CreateFramebuffer(device, &info, allocator, &framebuffer);
-    freeframebuffercreateinfo(L, &info);
+#define CLEANUP zfreeVkFramebufferCreateInfo(L, info, 1)
+    info = zcheckVkFramebufferCreateInfo(L, 2, &err);
+    if(err) { CLEANUP; return argerror(L, 2); }
+    ec = device_ud->ddt->CreateFramebuffer(device, info, allocator, &framebuffer);
+    CLEANUP;
+#undef CLEANUP
     CheckError(L, ec);
     TRACE_CREATE(framebuffer, "framebuffer");
     ud = newuserdata_nondispatchable(L, framebuffer, FRAMEBUFFER_MT);

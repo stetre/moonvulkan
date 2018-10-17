@@ -39,20 +39,20 @@ static int freedescriptor_update_template(lua_State *L, ud_t *ud)
 
 static int Create(lua_State *L)
     {
+    int err;
     ud_t *ud, *device_ud;
     VkResult ec;
     VkDescriptorUpdateTemplate du_template;
-    VkDescriptorUpdateTemplateCreateInfo info;
-
+    VkDescriptorUpdateTemplateCreateInfoKHR* info;
     VkDevice device = checkdevice(L, 1, &device_ud);
     const VkAllocationCallbacks *allocator = optallocator(L, 3);
-
     CheckDevicePfn(L, device_ud, CreateDescriptorUpdateTemplateKHR);
-    if(echeckdescriptorupdatetemplatecreateinfo(L, 2, &info))
-        return argerror(L, 2);
-
-    ec = device_ud->ddt->CreateDescriptorUpdateTemplateKHR(device, &info, allocator, &du_template);
-    freedescriptorupdatetemplatecreateinfo(L, &info);
+#define CLEANUP zfreeVkDescriptorUpdateTemplateCreateInfoKHR(L, info, 1)
+    info = zcheckVkDescriptorUpdateTemplateCreateInfoKHR(L, 2, &err);
+    if(err) { CLEANUP; return argerror(L, 2); }
+    ec = device_ud->ddt->CreateDescriptorUpdateTemplateKHR(device, info, allocator, &du_template);
+    CLEANUP;
+#undef CLEANUP
     CheckError(L, ec);
     TRACE_CREATE(du_template, "descriptor_update_template");
     ud = newuserdata_nondispatchable(L, du_template, DESCRIPTOR_UPDATE_TEMPLATE_MT);

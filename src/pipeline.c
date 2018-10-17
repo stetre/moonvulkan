@@ -64,18 +64,16 @@ static int CreateGraphics(lua_State *L)
     VkDevice device = checkdevice(L, 1, NULL);
     VkPipelineCache cache = testpipeline_cache(L, 2, NULL);
     const VkAllocationCallbacks *allocator = optallocator(L, 4);
-    VkGraphicsPipelineCreateInfo *info = echeckgraphicspipelinecreateinfolist(L, 3, &count, &err);
-    if(err) return argerror(L, 3);
+#define CLEANUP zfreearrayVkGraphicsPipelineCreateInfo(L, info, count, 1)
+    VkGraphicsPipelineCreateInfo *info = zcheckarrayVkGraphicsPipelineCreateInfo(L, 3, &count, &err);
+    if(err) { CLEANUP; return argerror(L, 3); }
 
     pipeline = (VkPipeline*)MallocNoErr(L, count*sizeof(VkPipeline));
-    if(!pipeline)
-        {
-        freegraphicspipelinecreateinfolist(L, info, count);
-        return errmemory(L);
-        }
+    if(!pipeline) { CLEANUP; return errmemory(L); }
 
     ec = UD(device)->ddt->CreateGraphicsPipelines(device, cache, count, info, allocator, pipeline);
-    freegraphicspipelinecreateinfolist(L, info, count);
+    CLEANUP;
+#undef CLEANUP
     if(ec)
         {
         Free(L, pipeline);
@@ -101,18 +99,16 @@ static int CreateCompute(lua_State *L)
     VkDevice device = checkdevice(L, 1, NULL);
     VkPipelineCache cache = testpipeline_cache(L, 2, NULL);
     const VkAllocationCallbacks *allocator = optallocator(L, 4);
-    VkComputePipelineCreateInfo *info = echeckcomputepipelinecreateinfolist(L, 3, &count, &err);
-    if(err) return argerror(L, 3);
+#define CLEANUP zfreearrayVkComputePipelineCreateInfo(L, info, count, 1)
+    VkComputePipelineCreateInfo *info = zcheckarrayVkComputePipelineCreateInfo(L, 3, &count, &err);
+    if(err) { CLEANUP; return argerror(L, 3); }
 
     pipeline = (VkPipeline*)MallocNoErr(L, count*sizeof(VkPipeline));
-    if(!pipeline)
-        {
-        freecomputepipelinecreateinfolist(L, info, count);
-        return errmemory(L);
-        }
+    if(!pipeline) { CLEANUP; return errmemory(L); }
 
     ec = UD(device)->ddt->CreateComputePipelines(device, cache, count, info, allocator, pipeline);
-    freecomputepipelinecreateinfolist(L, info, count);
+    CLEANUP;
+#undef CLEANUP
 
     if(ec)
         {

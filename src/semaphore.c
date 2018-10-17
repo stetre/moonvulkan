@@ -40,28 +40,32 @@ static int freesemaphore(lua_State *L, ud_t *ud)
 
 static int Create(lua_State *L)
     {
+    int err;
     ud_t *ud, *device_ud;
     VkResult ec;
     VkSemaphore semaphore;
-    VkSemaphoreCreateInfo_CHAIN info;
+    VkSemaphoreCreateInfo* info;
     VkDevice device = checkdevice(L, 1, &device_ud);
     const VkAllocationCallbacks *allocator = NULL;
 
+#define CLEANUP zfreeVkSemaphoreCreateInfo(L, info, 1)
     if(lua_istable(L, 2))
         {
-        if(echecksemaphorecreateinfo(L, 2, &info)) return argerror(L, 2);
+        info = zcheckVkSemaphoreCreateInfo(L, 2, &err);
+        if(err) { CLEANUP; return argerror(L, 2); }
         allocator = optallocator(L, 3);
         }
     else
         {
-        info.p1.sType = VK_STRUCTURE_TYPE_SEMAPHORE_CREATE_INFO;
-        info.p1.pNext = NULL;
-        info.p1.flags = optflags(L, 2, 0);
+        info = znewVkSemaphoreCreateInfo(L, &err);
+        if(err) { CLEANUP; return lua_error(L); }
+        info->flags = optflags(L, 2, 0);
         }
 
-    ec = device_ud->ddt->CreateSemaphore(device, &info.p1, allocator, &semaphore);
+    ec = device_ud->ddt->CreateSemaphore(device, info, allocator, &semaphore);
+    CLEANUP;
     CheckError(L, ec);
-
+#undef CLEANUP
     TRACE_CREATE(semaphore, "semaphore");
     ud = newuserdata_nondispatchable(L, semaphore, SEMAPHORE_MT);
     ud->parent_ud = device_ud;
@@ -75,30 +79,40 @@ static int Create(lua_State *L)
 
 static int ImportSemaphoreFd(lua_State *L)
     {
+    int err;
     VkResult ec;
     ud_t *ud;
-    VkImportSemaphoreFdInfoKHR info;
+    VkImportSemaphoreFdInfoKHR* info;
     VkSemaphore semaphore = checksemaphore(L, 1, &ud);
     CheckDevicePfn(L, ud, ImportSemaphoreFdKHR);
-    if(echeckimportsemaphorefdinfo(L, 2, &info)) return argerror(L, 2);
-    info.semaphore = semaphore;
-    ec = ud->ddt->ImportSemaphoreFdKHR(ud->device, &info);
+#define CLEANUP zfreeVkImportSemaphoreFdInfoKHR(L, info, 1)
+    info = zcheckVkImportSemaphoreFdInfoKHR(L, 2, &err);
+    if(err) { CLEANUP; return argerror(L, 2); }
+    info->semaphore = semaphore;
+    ec = ud->ddt->ImportSemaphoreFdKHR(ud->device, info);
+    CLEANUP;
     CheckError(L, ec);
+#undef CLEANUP
     return 0;
     }
 
 
 static int GetSemaphoreFd(lua_State *L)
     {
+    int err;
     VkResult ec;
     ud_t *ud;
     int fd;
-    VkSemaphoreGetFdInfoKHR info;
+    VkSemaphoreGetFdInfoKHR* info;
     VkSemaphore semaphore = checksemaphore(L, 1, &ud);
     CheckDevicePfn(L, ud, GetSemaphoreFdKHR);
-    if(echecksemaphoregetfdinfo(L, 2, &info)) return argerror(L, 2);
-    info.semaphore = semaphore;
-    ec = ud->ddt->GetSemaphoreFdKHR(ud->device, &info, &fd);
+#define CLEANUP zfreeVkSemaphoreGetFdInfoKHR(L, info, 1)
+    info = zcheckVkSemaphoreGetFdInfoKHR(L, 2, &err);
+    if(err) { CLEANUP; return argerror(L, 2); }
+    info->semaphore = semaphore;
+    ec = ud->ddt->GetSemaphoreFdKHR(ud->device, info, &fd);
+    CLEANUP;
+#undef CLEANUP
     CheckError(L, ec);
     lua_pushinteger(L, fd);
     return 1;
@@ -108,29 +122,39 @@ static int GetSemaphoreFd(lua_State *L)
 
 static int ImportSemaphoreWin32Handle(lua_State *L) //@@DOC VK_KHR_external_semaphore_win32
     {
+    int err;
     VkResult ec;
     ud_t *ud;
-    VkImportSemaphoreWin32HandleInfoKHR info;
+    VkImportSemaphoreWin32HandleInfoKHR* info;
     VkSemaphore semaphore = checksemaphore(L, 1, &ud);
     CheckDevicePfn(L, ud, ImportSemaphoreWin32HandleKHR);
-    if(echeckimportsemaphorewin32handleinfo(L, 2, &info)) return argerror(L, 2);
-    info.semaphore = semaphore;
+#define CLEANUP zfreeVkImportSemaphoreWin32HandleInfoKHR(L, info, 1)
+    info = zcheckVkImportSemaphoreWin32HandleInfoKHR(L, 2, &err);
+    if(err) { CLEANUP; return argerror(L, 2); }
+    info->semaphore = semaphore;
     ec = ud->ddt->ImportSemaphoreWin32HandleKHR(ud->device, &info);
+    CLEANUP;
+#undef CLEANUP
     CheckError(L, ec);
     return 0;
     }
 
 static int GetSemaphoreWin32Handle(lua_State *L) //@@DOC VK_KHR_external_semaphore_win32
     {
+    int err;
     VkResult ec;
     ud_t *ud;
     HANDLE handle;
-    VkSemaphoreGetWin32HandleInfoKHR info;
+    VkSemaphoreGetWin32HandleInfoKHR* info;
     VkSemaphore semaphore = checksemaphore(L, 1, &ud);
     CheckDevicePfn(L, ud, GetSemaphoreWin32HandleKHR);
-    if(echecksemaphoregetwin32handleinfo(L, 2, &info)) return argerror(L, 2);
-    info.semaphore = semaphore;
-    ec = ud->ddt->GetSemaphoreWin32HandleKHR(ud->device, &info, &handle);
+#define CLEANUP zfreeVkSemaphoreGetWin32HandleInfoKHR(L, info, 1)
+    info = zcheckVkSemaphoreGetWin32HandleInfoKHR(L, 2, &err);
+    if(err) { CLEANUP; return argerror(L, 2); }
+    info->semaphore = semaphore;
+    ec = ud->ddt->GetSemaphoreWin32HandleKHR(ud->device, info, &handle);
+    CLEANUP;
+#undef CLEANUP
     CheckError(L, ec);
     lua_pushlightuserdata(L, handle);
     return 1;

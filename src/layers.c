@@ -25,35 +25,40 @@
 
 #include "internal.h"
 
+#define N 32
+
 static int EnumerateInstanceLayerProperties(lua_State *L)
     {
+    int err;
     uint32_t count, remaining, tot, i;
     VkResult ec;
-    VkLayerProperties properties[32];
+    VkLayerProperties* properties;//[N];
     int byname = optboolean(L, 1, 0);
 
+#define CLEANUP zfreearrayVkLayerProperties(L, properties, N, 1) 
+    properties = znewarrayVkLayerProperties (L, N, &err);
+    if(err) { CLEANUP; lua_error(L); }
     lua_newtable(L);
     ec = vk.EnumerateInstanceLayerProperties(&remaining, NULL);
-    CheckError(L, ec);
-    if(remaining==0) return 1;
+    if(ec) { CLEANUP; CheckError(L, ec); }
+    if(remaining==0) { CLEANUP; return 1; }
     
     tot = 0;
     do {
-        if(remaining > 32)
-            { count = 32; remaining -= 32; }
+        if(remaining > N)
+            { count = N; remaining -= N; }
         else
             { count = remaining; remaining = 0; }
 
         ec = vk.EnumerateInstanceLayerProperties(&count, properties);
-        if(ec != VK_INCOMPLETE)
-            CheckError(L, ec);
+        if(ec && ec!=VK_INCOMPLETE) { CLEANUP; CheckError(L, ec); }
         
         if(byname)
             {
             for(i = 0; i < count; i++)
                 {
                 lua_pushstring(L, properties[i].layerName);
-                pushlayerproperties(L, &properties[i]);
+                zpushVkLayerProperties(L, &properties[i]);
                 lua_rawset(L, -3);
                 }
             }
@@ -61,44 +66,50 @@ static int EnumerateInstanceLayerProperties(lua_State *L)
             {
             for(i = 0; i < count; i++)
                 {
-                pushlayerproperties(L, &properties[i]);
+                zpushVkLayerProperties(L, &properties[i]);
                 lua_rawseti(L, -2, ++tot);
                 }
             }
         } while(remaining > 0);
     
+    CLEANUP;
+#undef CLEANUP
     return 1;
     }
 
 static int EnumerateInstanceExtensionProperties(lua_State *L)
     {
+    int err;
     uint32_t count, remaining, tot, i;
     VkResult ec;
-    VkExtensionProperties properties[32];
+    VkExtensionProperties* properties;//[N];
     const char *layer_name = luaL_optstring(L, 1, NULL);
     int byname = optboolean(L, 2, 0);
 
+#define CLEANUP zfreearrayVkExtensionProperties(L, properties, N, 1) 
+    properties = znewarrayVkExtensionProperties(L, N, &err);
+    if(err) { CLEANUP; lua_error(L); }
     lua_newtable(L);
     ec = vk.EnumerateInstanceExtensionProperties(layer_name, &remaining, NULL);
-    CheckError(L, ec);
-    if(remaining==0) return 1;
+    if(ec) { CLEANUP; CheckError(L, ec); }
+    if(remaining==0) { CLEANUP; return 1; }
+
     tot = 0;
     do {
-        if(remaining > 32)
-            { count = 32; remaining -= 32; }
+        if(remaining > N)
+            { count = N; remaining -= N; }
         else
             { count = remaining; remaining = 0; }
 
         ec = vk.EnumerateInstanceExtensionProperties(layer_name, &count, properties);
-        if(ec != VK_INCOMPLETE)
-            CheckError(L, ec);
+        if(ec && ec!=VK_INCOMPLETE) { CLEANUP; CheckError(L, ec); }
         
         if(byname)
             {
             for(i = 0; i < count; i++)
                 {
                 lua_pushstring(L, properties[i].extensionName);
-                pushextensionproperties(L, &properties[i]);
+                zpushVkExtensionProperties(L, &properties[i]);
                 lua_rawset(L, -3);
                 }
             }
@@ -106,47 +117,53 @@ static int EnumerateInstanceExtensionProperties(lua_State *L)
             {
             for(i = 0; i < count; i++)
                 {
-                pushextensionproperties(L, &properties[i]);
+                zpushVkExtensionProperties(L, &properties[i]);
                 lua_rawseti(L, -2, ++tot);
                 }
             }
 
         } while(remaining > 0);
     
+    CLEANUP;
+#undef CLEANUP
     return 1;
     }
 
 
 static int EnumerateDeviceLayerProperties(lua_State *L) /* DEPRECATED */
     {
+    int err;
     uint32_t count, remaining, tot, i;
     VkResult ec;
     ud_t *ud;
-    VkLayerProperties properties[32];
+    VkLayerProperties* properties;//[N];
     VkPhysicalDevice physical_device = checkphysical_device(L, 1, &ud);
     int byname = optboolean(L, 2, 0);
 
+#define CLEANUP zfreearrayVkLayerProperties(L, properties, N, 1) 
+    properties = znewarrayVkLayerProperties(L, N, &err);
+    if(err) { CLEANUP; lua_error(L); }
     lua_newtable(L);
     ec = ud->idt->EnumerateDeviceLayerProperties(physical_device, &remaining, NULL);
-    CheckError(L, ec);
-    if(remaining==0) return 1;
+    if(ec) { CLEANUP; CheckError(L, ec); }
+    if(remaining==0) { CLEANUP; return 1; }
+
     tot = 0;
     do {
-        if(remaining > 32)
-            { count = 32; remaining -= 32; }
+        if(remaining > N)
+            { count = N; remaining -= N; }
         else
             { count = remaining; remaining = 0; }
 
         ec = ud->idt->EnumerateDeviceLayerProperties(physical_device, &count, properties);
-        if(ec != VK_INCOMPLETE)
-            CheckError(L, ec);
+        if(ec && ec!=VK_INCOMPLETE) { CLEANUP; CheckError(L, ec); }
     
         if(byname)
             {
             for(i = 0; i < count; i++)
                 {
                 lua_pushstring(L, properties[i].layerName);
-                pushlayerproperties(L, &properties[i]);
+                zpushVkLayerProperties(L, &properties[i]);
                 lua_rawset(L, -3);
                 }
             }
@@ -154,46 +171,52 @@ static int EnumerateDeviceLayerProperties(lua_State *L) /* DEPRECATED */
             {
             for(i = 0; i < count; i++)
                 {
-                pushlayerproperties(L, &properties[i]);
+                zpushVkLayerProperties(L, &properties[i]);
                 lua_rawseti(L, -2, ++tot);
                 }
             }
     } while (remaining > 0);
 
+    CLEANUP;
+#undef CLEANUP
     return 1;
     }
 
 static int EnumerateDeviceExtensionProperties(lua_State *L)
     {
+    int err;
     uint32_t count, remaining, tot, i;
     VkResult ec;
-    VkExtensionProperties properties[32];
+    VkExtensionProperties* properties; //[N];
     ud_t *ud;
     VkPhysicalDevice physical_device = checkphysical_device(L, 1, &ud);
     const char* layername = luaL_optstring(L, 2, NULL);
     int byname = optboolean(L, 3, 0);
     
+#define CLEANUP zfreearrayVkExtensionProperties(L, properties, N, 1) 
+    properties = znewarrayVkExtensionProperties(L, N, &err);
+    if(err) { CLEANUP; lua_error(L); }
     lua_newtable(L);
     ec = ud->idt->EnumerateDeviceExtensionProperties(physical_device, layername, &remaining, NULL);
-    CheckError(L, ec);
-    if(remaining==0) return 1;
+    if(ec) { CLEANUP; CheckError(L, ec); }
+    if(remaining==0) { CLEANUP; return 1; }
+
     tot = 0;
     do {
-        if(remaining > 32)
-            { count = 32; remaining -= 32; }
+        if(remaining > N)
+            { count = N; remaining -= N; }
         else
             { count = remaining; remaining = 0; }
 
         ec = ud->idt->EnumerateDeviceExtensionProperties(physical_device, layername, &count, properties);
-        if(ec != VK_INCOMPLETE)
-            CheckError(L, ec);
+        if(ec && ec!=VK_INCOMPLETE) { CLEANUP; CheckError(L, ec); }
     
         if(byname)
             {
             for(i = 0; i < count; i++)
                 {
                 lua_pushstring(L, properties[i].extensionName);
-                pushextensionproperties(L, &properties[i]);
+                zpushVkExtensionProperties(L, &properties[i]);
                 lua_rawset(L, -3);
                 }
             }
@@ -201,13 +224,15 @@ static int EnumerateDeviceExtensionProperties(lua_State *L)
             {
             for(i = 0; i < count; i++)
                 {
-                pushextensionproperties(L, &properties[i]);
+                zpushVkExtensionProperties(L, &properties[i]);
                 lua_rawseti(L, -2, ++tot);
                 }
             }
 
     } while (remaining > 0);
 
+    CLEANUP;
+#undef CLEANUP
     return 1;
     }
 
@@ -226,5 +251,4 @@ void moonvulkan_open_layers(lua_State *L)
     {
     luaL_setfuncs(L, Functions, 0);
     }
-
 

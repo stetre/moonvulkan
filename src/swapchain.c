@@ -56,49 +56,43 @@ static int newswapchain(lua_State *L, VkSwapchainKHR swapchain, VkDevice device,
 
 static int CreateSwapchain(lua_State *L)
     {
+    int err;
     ud_t *ud;
     VkResult ec;
     VkSwapchainKHR swapchain;
-    VkSwapchainCreateInfoKHR_CHAIN info;
+    VkSwapchainCreateInfoKHR *info;
     VkDevice device = checkdevice(L, 1, &ud);
     const VkAllocationCallbacks *allocator = optallocator(L, 3);
-    if(echeckswapchaincreateinfo(L, 2, &info)) return argerror(L, 2);
+#define CLEANUP zfreeVkSwapchainCreateInfoKHR(L, info, 1)
+    info = zcheckVkSwapchainCreateInfoKHR(L, 2, &err);
+    if(err) { CLEANUP; return argerror(L, 2); }
     CheckDevicePfn(L, ud, CreateSwapchainKHR);
-    ec = ud->ddt->CreateSwapchainKHR(device, &info.p1, allocator, &swapchain);
-    freeswapchaincreateinfo(L, &info);
+    ec = ud->ddt->CreateSwapchainKHR(device, info, allocator, &swapchain);
+    CLEANUP;
+#undef CLEANUP
     CheckError(L, ec);
     return newswapchain(L, swapchain, device, allocator);
     }
 
 static int CreateSharedSwapchains(lua_State *L)
     {
+    int err;
     VkResult ec;
     ud_t *ud;
     uint32_t count, i;
     VkSwapchainKHR *swapchains;
-    VkSwapchainCreateInfoKHR_ARRAY infos;
+    VkSwapchainCreateInfoKHR* infos;
     VkDevice device = checkdevice(L, 1, &ud);
     const VkAllocationCallbacks *allocator = optallocator(L, 3);
-
     CheckDevicePfn(L, ud, CreateSharedSwapchainsKHR);
-
-    if(echeckswapchaincreateinfoarray(L, 2, &infos, &count)) return argerror(L, 2);
-
+#define CLEANUP zfreearrayVkSwapchainCreateInfoKHR(L, infos, count, 1)
+    infos = zcheckarrayVkSwapchainCreateInfoKHR(L, 2, &count, &err);
     swapchains = (VkSwapchainKHR*)MallocNoErr(L, count*sizeof(VkSwapchainKHR));
-    if(!swapchains)
-        {
-        freeswapchaincreateinfoarray(L, &infos, count);
-        return errmemory(L);
-        }
-
-    ec = ud->ddt->CreateSharedSwapchainsKHR(device, count, infos.p, allocator, swapchains);
-    freeswapchaincreateinfoarray(L, &infos, count);
-
-    if(ec)
-        {
-        Free(L, swapchains);
-        CheckError(L, ec);
-        }
+    if(!swapchains) { CLEANUP; return errmemory(L); }
+    ec = ud->ddt->CreateSharedSwapchainsKHR(device, count, infos, allocator, swapchains);
+    CLEANUP;
+#undef CLEANUP
+    if(ec) { Free(L, swapchains); CheckError(L, ec); }
     
     lua_newtable(L);
     for(i = 0; i < count; i++)
@@ -123,16 +117,11 @@ static int GetSwapchainImages(lua_State *L)
     CheckError(L, ec);
     
     lua_newtable(L);
-    if(count == 0)
-        return 1;
+    if(count == 0) return 1;
     
     images = (VkImage*)Malloc(L, sizeof(VkImage)*count);
     ec = ud->ddt->GetSwapchainImagesKHR(device, swapchain, &count, images);
-    if(ec)
-        {
-        Free(L, images);
-        CheckError(L, ec);
-        }
+    if(ec) { Free(L, images); CheckError(L, ec); }
 
     for(i = 0; i < count; i++)
         {
@@ -152,11 +141,9 @@ static int GetSwapchainStatus(lua_State *L)
     VkDevice device = ud->device;
     CheckDevicePfn(L, ud, GetSwapchainStatusKHR);
     ec = ud->ddt->GetSwapchainStatusKHR(device, swapchain);
-
     pushresult(L, ec);
     return 1;
     }
-
 
 static int AcquireNextImage(lua_State *L)
     {
@@ -182,33 +169,32 @@ static int AcquireNextImage(lua_State *L)
 
 static int QueuePresent(lua_State *L)
     {
-    int per_swapchain_results;
+    int err, per_swapchain_results;
     uint32_t i, n;
     VkResult ec;
     ud_t *ud;
-    VkPresentInfoKHR_CHAIN  info;
-
+    VkPresentInfoKHR  *info;
     VkQueue queue = checkqueue(L, 1, &ud);
     per_swapchain_results = optboolean(L, 3, 0);
     CheckDevicePfn(L, ud, QueuePresentKHR);
-
-    if(echeckpresentinfo(L, 2, &info, per_swapchain_results)) return argerror(L, 2);
-    ec = ud->ddt->QueuePresentKHR(queue, &info.p1);
-
+#define CLEANUP zfreeVkPresentInfoKHR(L, info, 1)
+    info = zcheckVkPresentInfoKHR(L, 2, &err, per_swapchain_results);
+    if(err) { CLEANUP; return argerror(L, 2); }
+    ec = ud->ddt->QueuePresentKHR(queue, info);
     pushresult(L, ec);
     n = 1;
-
     if(per_swapchain_results)
         {   
         lua_newtable(L);
-        for(i = 0; i < info.p1.swapchainCount; i++)
+        for(i = 0; i < info->swapchainCount; i++)
             {
-            pushresult(L, info.p1.pResults[i]);
+            pushresult(L, info->pResults[i]);
             lua_rawseti(L, -2, i+1);
             }
         n = 2;
         }
-    freepresentinfo(L, &info);
+    CLEANUP;
+#undef CLEANUP
     return n;
     }
 
@@ -218,15 +204,17 @@ static int SetHdrMetadata(lua_State *L)
     ud_t **ud;
     int err;
     uint32_t count;
-    VkHdrMetadataEXT metadata;
-    VkSwapchainKHR *swapchains = checkswapchainlist(L, 1, &count, &err, &ud);
+    VkHdrMetadataEXT *metadata;
+    VkSwapchainKHR *swapchains;
+#define CLEANUP do { zfreeVkHdrMetadataEXT(L, metadata, 1); Free(L, swapchains); Free(L, ud); } while(0)
+    swapchains = checkswapchainlist(L, 1, &count, &err, &ud);
     if(err) return argerrorc(L, 1, err);
-    if(echeckhdrmetadata(L, 2, &metadata)) return argerror(L, 2);
-
     CheckDevicePfn(L, ud[0], SetHdrMetadataEXT);
-    ud[0]->ddt->SetHdrMetadataEXT(ud[0]->device, count, swapchains, &metadata);
-    Free(L, ud);
-
+    metadata = zcheckVkHdrMetadataEXT(L, 2, &err);
+    if(err) { CLEANUP; return argerror(L, 2); }
+    ud[0]->ddt->SetHdrMetadataEXT(ud[0]->device, count, swapchains, metadata);
+    CLEANUP;
+#undef CLEANUP
     return 0;
     }
 
@@ -236,14 +224,11 @@ static int GetSwapchainCounter(lua_State *L)
     uint64_t val;
     VkSwapchainKHR swapchain = checkswapchain(L, 1, &ud);
     VkSurfaceCounterFlagBitsEXT counter = (VkSurfaceCounterFlagBitsEXT)optflags(L, 2, 0);
-
     CheckDevicePfn(L, ud, GetSwapchainCounterEXT);
     ud->ddt->GetSwapchainCounterEXT(ud->device, swapchain, counter, &val);
     lua_pushinteger(L, val);
-
     return 1;
     }
-
 
 RAW_FUNC(swapchain)
 TYPE_FUNC(swapchain)

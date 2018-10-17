@@ -63,7 +63,7 @@ static VkBool32 Callback(
     pushinstance(L, info->ud->instance);
     pushflags(L, messageSeverity);
     pushflags(L, messageType);
-    if(pCallbackData) pushdebugutilsmessengercallbackdata(L, pCallbackData);
+    if(pCallbackData) zpushVkDebugUtilsMessengerCallbackDataEXT(L, pCallbackData);
     
     /* execute the callback */
     if(lua_pcall(L, 4, 0, 0) != LUA_OK)
@@ -77,45 +77,43 @@ static VkBool32 Callback(
 
 static int Create(lua_State *L)
     {
+    int err, ref;
     ud_t *ud, *instance_ud;
     ud_info_t *ud_info;
     VkResult ec;
     VkDebugUtilsMessengerEXT debug_utils_messenger;
-    VkDebugUtilsMessengerCreateInfo_CHAIN info;
-    int ref;
+    VkDebugUtilsMessengerCreateInfoEXT* info;
 
     VkInstance instance = checkinstance(L, 1, &instance_ud);
     const VkAllocationCallbacks *allocator = optallocator(L, 4);
     CheckInstancePfn(L, instance_ud, CreateDebugUtilsMessengerEXT);
 
-    if(echeckdebugutilsmessengercreateinfo(L, 2, &info)) return argerror(L, 2);
-    info.p1.pfnUserCallback = /*(PFN_vkDebugUtilsMessengerEXT)*/Callback;
+#define CLEANUP zfreeVkDebugUtilsMessengerCreateInfoEXT(L, info, 1)
+    info = zcheckVkDebugUtilsMessengerCreateInfoEXT(L, 2, &err);
+    if(err) { CLEANUP; return argerror(L, 2); }
+    info->pfnUserCallback = /*(PFN_vkDebugUtilsMessengerEXT)*/Callback;
 
     /* get the Lua function, arg 3 and anchor it in the Lua registry */
     if(!lua_isfunction(L, 3))
-        {
-        freedebugutilsmessengercreateinfo(L, &info);
-        return argerrorc(L, 3, ERR_TYPE);
-        }
+        { CLEANUP; return argerrorc(L, 3, ERR_TYPE); }
     lua_pushvalue(L, 3);
     ref = luaL_ref(L, LUA_REGISTRYINDEX);
 
     ud_info = (ud_info_t*)MallocNoErr(L, sizeof(ud_info_t));
     if(!ud_info)
-        { 
-        freedebugutilsmessengercreateinfo(L, &info);
+        {
+        CLEANUP;
         luaL_unref(L, LUA_REGISTRYINDEX, ref); 
         return errmemory(L);
         }
     ud_info->lua_state = L;
     ud_info->ref = ref;
 /*  ud_info->ud later */
-    info.p1.pUserData = ud_info;
+    info->pUserData = ud_info;
 
-    ec = instance_ud->idt->CreateDebugUtilsMessengerEXT(instance, &info.p1, allocator, 
-                            &debug_utils_messenger);
-    freedebugutilsmessengercreateinfo(L, &info);
-
+    ec = instance_ud->idt->CreateDebugUtilsMessengerEXT(instance,info,allocator,&debug_utils_messenger);
+    CLEANUP;
+#undef CLEANUP
     if(ec)
         {
         luaL_unref(L, LUA_REGISTRYINDEX, ref);
@@ -137,57 +135,73 @@ static int Create(lua_State *L)
 
 static int SetDebugUtilsObjectName(lua_State *L)
     {
+    int err;
     ud_t *ud;
     VkResult ec;
-    VkDebugUtilsObjectNameInfoEXT info;
+    VkDebugUtilsObjectNameInfoEXT* info;
     VkDevice device = checkdevice(L, 1, &ud);
     CheckInstancePfn(L, ud, SetDebugUtilsObjectNameEXT);
-    if(echeckdebugutilsobjectnameinfo(L, 2, &info)) return argerror(L, 2);
-    ec = ud->idt->SetDebugUtilsObjectNameEXT(device, &info);
-    freedebugutilsobjectnameinfo(L, &info);
+#define CLEANUP zfreeVkDebugUtilsObjectNameInfoEXT(L, info, 1)
+    info = zcheckVkDebugUtilsObjectNameInfoEXT(L, 2, &err);
+    if(err) { CLEANUP; return argerror(L, 2); }
+    ec = ud->idt->SetDebugUtilsObjectNameEXT(device, info);
+    CLEANUP;
     CheckError(L, ec);
+#undef CLEANUP
     return 0;
     }
 
 static int SetDebugUtilsObjectTag(lua_State *L)
     {
+    int err;
     ud_t *ud;
     VkResult ec;
-    VkDebugUtilsObjectTagInfoEXT info;
+    VkDebugUtilsObjectTagInfoEXT* info;
     VkDevice device = checkdevice(L, 1, &ud);
     CheckInstancePfn(L, ud, SetDebugUtilsObjectTagEXT);
-    if(echeckdebugutilsobjecttaginfo(L, 2, &info)) return argerror(L, 2);
-    ec = ud->idt->SetDebugUtilsObjectTagEXT(device, &info);
-    freedebugutilsobjecttaginfo(L, &info);
+#define CLEANUP zfreeVkDebugUtilsObjectTagInfoEXT(L, info, 1)
+    info = zcheckVkDebugUtilsObjectTagInfoEXT(L, 2, &err);
+    if(err) { CLEANUP; return argerror(L, 2); }
+    ec = ud->idt->SetDebugUtilsObjectTagEXT(device, info);
+    CLEANUP;
     CheckError(L, ec);
+#undef CLEANUP
     return 0;
     }
 
 static int SubmitDebugUtilsMessage(lua_State *L)
     {
+    int err;
     ud_t *ud;
     VkDebugUtilsMessageSeverityFlagBitsEXT severity;
     VkDebugUtilsMessageTypeFlagsEXT types;
-    VkDebugUtilsMessengerCallbackDataEXT cbdata;
+    VkDebugUtilsMessengerCallbackDataEXT* cbdata;
     VkInstance instance = checkinstance(L, 1, &ud);
     CheckInstancePfn(L, ud, SubmitDebugUtilsMessageEXT);
     severity = checkflags(L, 2);
     types = checkflags(L, 3);
-    if(echeckdebugutilsmessengercallbackdata(L, 4, &cbdata)) return argerror(L, 4);
-    ud->idt->SubmitDebugUtilsMessageEXT(instance, severity, types, &cbdata);
-    freedebugutilsmessengercallbackdata(L, &cbdata);
+#define CLEANUP zfreeVkDebugUtilsMessengerCallbackDataEXT(L, cbdata, 1)
+    cbdata = zcheckVkDebugUtilsMessengerCallbackDataEXT(L, 4, &err);
+    if(err) { CLEANUP; return argerror(L, 4); }
+    ud->idt->SubmitDebugUtilsMessageEXT(instance, severity, types, cbdata);
+    CLEANUP;
+#undef CLEANUP
     return 0;
     }
 
 static int QueueBeginDebugUtilsLabel(lua_State *L)
     {
+    int err;
     ud_t *ud;
-    VkDebugUtilsLabelEXT label;
+    VkDebugUtilsLabelEXT* label;
     VkQueue queue = checkqueue(L, 1, &ud);
     CheckInstancePfn(L, ud, QueueBeginDebugUtilsLabelEXT);
-    if(echeckdebugutilslabel(L, 2, &label)) return argerror(L, 2);
-    ud->idt->QueueBeginDebugUtilsLabelEXT(queue, &label);
-    freedebugutilslabel(L, &label);
+#define CLEANUP zfreeVkDebugUtilsLabelEXT(L, label, 1)
+    label = zcheckVkDebugUtilsLabelEXT(L, 2, &err);
+    if(err) { CLEANUP; return argerror(L, 2); }
+    ud->idt->QueueBeginDebugUtilsLabelEXT(queue, label);
+    CLEANUP;
+#undef CLEANUP
     return 0;
     }
 
@@ -202,13 +216,17 @@ static int QueueEndDebugUtilsLabel(lua_State *L)
 
 static int QueueInsertDebugUtilsLabel(lua_State *L)
     {
+    int err;
     ud_t *ud;
-    VkDebugUtilsLabelEXT label;
+    VkDebugUtilsLabelEXT* label;
     VkQueue queue = checkqueue(L, 1, &ud);
     CheckInstancePfn(L, ud, QueueInsertDebugUtilsLabelEXT);
-    if(echeckdebugutilslabel(L, 2, &label)) return argerror(L, 2);
-    ud->idt->QueueInsertDebugUtilsLabelEXT(queue, &label);
-    freedebugutilslabel(L, &label);
+#define CLEANUP zfreeVkDebugUtilsLabelEXT(L, label, 1)
+    label = zcheckVkDebugUtilsLabelEXT(L, 2, &err);
+    if(err) { CLEANUP; return argerror(L, 2); }
+    ud->idt->QueueInsertDebugUtilsLabelEXT(queue, label);
+    CLEANUP;
+#undef CLEANUP
     return 0;
     }
 

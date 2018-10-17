@@ -37,33 +37,35 @@ static int freepipeline_cache(lua_State *L, ud_t *ud)
     return 0;
     }
 
-
 static int Create(lua_State *L)
     {
+    int err;
     ud_t *ud, *device_ud;
     VkResult ec;
     VkPipelineCache pipeline_cache;
-    VkPipelineCacheCreateInfo info;
+    VkPipelineCacheCreateInfo* info;
     VkDevice device = checkdevice(L, 1, &device_ud);
     const VkAllocationCallbacks *allocator = NULL;
-
+#define CLEANUP zfreeVkPipelineCacheCreateInfo(L, info, 1)
     if(lua_istable(L, 2))
         {
         allocator = optallocator(L, 3);
-        if(echeckpipelinecachecreateinfo(L, 2, &info)) return argerror(L, 2);
+        info = zcheckVkPipelineCacheCreateInfo(L, 2, &err);
+        if(err) { CLEANUP; return argerror(L, 2); }
         lua_getfield(L, 2, "initial_data");
-        info.pInitialData = (void*)luaL_optlstring(L, -1, NULL, &info.initialDataSize);
+        info->pInitialData = (void*)luaL_optlstring(L, -1, NULL, &info->initialDataSize);
         }
     else
         {
-        info.sType = VK_STRUCTURE_TYPE_PIPELINE_CACHE_CREATE_INFO;
-        info.pNext = NULL;
-        info.flags = optflags(L, 2, 0);
-        info.pInitialData = (void*)luaL_optlstring(L, 3, NULL, &info.initialDataSize);
+        info = znewVkPipelineCacheCreateInfo(L, &err);
+        if(err) { CLEANUP; return lua_error(L); }
+        info->flags = optflags(L, 2, 0);
+        info->pInitialData = (void*)luaL_optlstring(L, 3, NULL, &info->initialDataSize);
         }
-
-    ec = device_ud->ddt->CreatePipelineCache(device, &info, allocator, &pipeline_cache);
+    ec = device_ud->ddt->CreatePipelineCache(device, info, allocator, &pipeline_cache);
+    CLEANUP;
     CheckError(L, ec);
+#undef CLEANUP
     TRACE_CREATE(pipeline_cache, "pipeline_cache");
     ud = newuserdata_nondispatchable(L, pipeline_cache, PIPELINE_CACHE_MT);
     ud->parent_ud = device_ud;
@@ -83,26 +85,14 @@ static int GetPipelineCacheData(lua_State *L)
     ud_t *ud;
     VkPipelineCache pipeline_cache = checkpipeline_cache(L, 1, &ud);
     VkDevice device = ud->device;
-    
     /* first, get the size */
     ec = ud->ddt->GetPipelineCacheData(device, pipeline_cache, &size, NULL);
     CheckError(L, ec);
-
     if(size == 0)
-        {
-        lua_pushstring(L, "");
-        return 1;
-        }
-    
+        { lua_pushstring(L, ""); return 1; }
     data = (char*)Malloc(L, size);
     ec = ud->ddt->GetPipelineCacheData(device, pipeline_cache, &size, data);
-    if(ec)
-        {
-        Free(L, data);
-        CheckError(L, ec); /* raises an error */
-        return 0;
-        }
-
+    if(ec) { Free(L, data); CheckError(L, ec); return 0; }
     lua_pushlstring(L, data, size);
     Free(L, data);
     return 1;
@@ -118,7 +108,6 @@ static int MergePipelineCaches(lua_State *L)
     VkDevice device = ud->device;
     VkPipelineCache *source = checkpipeline_cachelist(L, 2, &count, &err, NULL);
     if(err) return argerrorc(L, 2, err);
-
     ec = ud->ddt->MergePipelineCaches(device, destination, count, source);
     Free(L, source);
     CheckError(L, ec);
