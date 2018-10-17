@@ -220,7 +220,7 @@ static int GetPhysicalDeviceQueueFamilyProperties2
     ud->idt->GetPhysicalDeviceQueueFamilyProperties2KHR(physical_device, &count, props);
     for(i=0; i<count; i++)
         {
-        zpushVkQueueFamilyProperties2KHR(L, &(props[i]), i);
+        zpushVkQueueFamilyProperties2KHR(L, &props[i], i);
         lua_rawseti(L, -2, i+1);
         }
     CLEANUP;

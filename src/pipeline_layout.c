@@ -62,7 +62,7 @@ static int Create(lua_State *L)
         if(err) { CLEANUP; return lua_error(L); }
         info->flags = flags;
         info->pSetLayouts = checkdescriptor_set_layoutlist(L, 3, &info->setLayoutCount, &err, NULL);
-        if(err) { CLEANUP; return argerror(L, 3); }
+        if(err<0) { CLEANUP; return argerror(L, 3); }
         info->pPushConstantRanges = zcheckarrayVkPushConstantRange(L, 4,
                                         &info->pushConstantRangeCount, &err);
         if(err<0) { CLEANUP; return argerror(L, 3); }

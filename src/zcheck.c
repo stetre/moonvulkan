@@ -89,6 +89,14 @@
  * Helper functions                                                             *
  ********************************************************************************/
 
+/* Structs chaining via pNext */
+#define pnextof(p_) (void**)&((p_)->pNext)
+#define addtochain(chain_, p_) \
+    do { if(p_) { *(chain_) = (p_); (chain_) = pnextof(p_); } } while(0)
+/* addtochain() appends the struct pointed to by p_ to the chain.
+ * const void **chain_ must contains the address of the pNext field of the
+ * struct that is currently last in the chain. */
+
 static int getfield(lua_State *L, int arg, const char *sname)
 /* Pushes field 'sname' from the table at arg, and returns its type (LUA_TXXX) */
     { lua_pushstring(L, sname); return lua_rawget(L, arg); }
@@ -134,12 +142,6 @@ static int checktable_(lua_State *L, int arg)
     }
 #define newstruct(VkXxx) if((p = znew##VkXxx(L, err))==NULL) return NULL
 
-/* Structs chaining via pNext */
-#define pnextof(p_) (void**)&((p_)->pNext)
-#define addtochain(chain_, p_) do { *(chain_) = (p_); (chain_) = pnextof(p_); } while(0)
-/* addtochain() appends the struct pointed to by p_ to the chain.
- * const void **chain_ must contains the address of the pNext field of the
- * struct that is currently last in the chain. */
 #define EXTENSIONS_BEGIN do { void **chain = pnextof(p);
 #define EXTENSIONS_END } while(0);
 
@@ -463,25 +465,25 @@ static const char *GetString_(lua_State *L, int arg, const char *sname, const ch
 
 /* Structs -------------------------------------------------------------------*/
 
-#define GetStruct_(name, sname, VkXxx, opt) do {    \
-    int arg_ = pushfield(L, arg, sname);            \
-    VkXxx *tmp = zcheck##VkXxx(L, arg_, err);       \
-    if(tmp)                                         \
-        { memcpy(&(p->name), tmp, sizeof(VkXxx)); Free(L, tmp); } \
-    popfield(L, arg_);                              \
-    if(*err)                                        \
-        {                                           \
-        switch(*err)                                \
-            {                                       \
+#define GetStruct_(name, sname, VkXxx, opt) do {                    \
+    int arg_ = pushfield(L, arg, sname);                            \
+    VkXxx *tmp = zcheck##VkXxx(L, arg_, err);                       \
+    if(tmp)                                                         \
+        { memcpy(&(p->name), tmp, sizeof(VkXxx)); Free(L, tmp); }   \
+    popfield(L, arg_);                                              \
+    if(*err)                                                        \
+        {                                                           \
+        switch(*err)                                                \
+            {                                                       \
             case ERR_NOTPRESENT: if(opt) /*@@ *err=0; */ break; /* else fallthrough */\
-            case ERR_TABLE:                         \
-            case ERR_MEMORY:                        \
-            case ERR_EMPTY:                         \
-                { pushfielderror(sname); return p; } \
-            default:                                \
-                { prependfield(sname); return p; }  \
-            }                                       \
-        }                                           \
+            case ERR_TABLE:                                         \
+            case ERR_MEMORY:                                        \
+            case ERR_EMPTY:                                         \
+                { pushfielderror(sname); return p; }                \
+            default:                                                \
+                { prependfield(sname); return p; }                  \
+            }                                                       \
+        }                                                           \
 } while(0)
 
 #define GetStruct(name, sname, VkXxx) GetStruct_(name, sname, VkXxx, 0)
@@ -1637,10 +1639,7 @@ ZCHECK_BEGIN(VkPhysicalDeviceFeatures2)
     newstruct(VkPhysicalDeviceFeatures2);
     features = zcheckVkPhysicalDeviceFeatures(L, arg, err);
     if(features)
-        {
-        memcpy(&p->features, features, sizeof(p->features));
-        zfreeVkPhysicalDeviceFeatures(L, features, 1);
-        }
+        { memcpy(&p->features, features, sizeof(VkPhysicalDeviceFeatures)); Free(L, features); }
     if(*err < 0) return p;
     else if(*err == ERR_NOTPRESENT) poperror();
     EXTENSIONS_BEGIN
@@ -2382,6 +2381,7 @@ ZPUSH_END
 //ZPUSH_BEGIN(VkQueueFamilyProperties2KHR)
 int zpushVkQueueFamilyProperties2KHR(lua_State *L, const VkQueueFamilyProperties2KHR *p, uint32_t index) {
     VkQueueFamilyProperties2KHR* pp = (VkQueueFamilyProperties2KHR*)p->pNext;
+printf("@@ 0x%.16x %p\n", p->sType, (void*)pp);
     lua_newtable(L);
     pushVkQueueFamilyProperties(L, &p->queueFamilyProperties, index);
     while(pp)
@@ -2698,7 +2698,7 @@ VkDeviceCreateInfo* zcheckVkDeviceCreateInfo(lua_State *L, int arg, int *err, ud
 #undef F
     EXTENSIONS_BEGIN
 #define F "enabled_features"
-    if(!ud->idt->GetPhysicalDeviceFeatures2KHR)
+    if(ud->idt->GetPhysicalDeviceFeatures2KHR)
         {
         VkPhysicalDeviceFeatures2 *p2 = zcheckVkPhysicalDeviceFeatures2(L, arg1, err);
         popfield(L, arg1);
@@ -2916,7 +2916,8 @@ ZCHECK_BEGIN(VkImageFormatListCreateInfoKHR)
     //checktable(arg);
     newstruct(VkImageFormatListCreateInfoKHR);
     p->pViewFormats = checkformatlist(L, arg, &p->viewFormatCount, err);
-    if(*err) { zfree(L, p, 1); return NULL; }
+    if(*err==ERR_NOTPRESENT) *err=ERR_GENERIC; //@@ mah
+    if(*err<0) { pusherror(); return p; }
 ZCHECK_END
 
 ZCHECK_BEGIN(VkExternalMemoryImageCreateInfoKHR)
@@ -3728,8 +3729,10 @@ ZCHECK_BEGIN(VkRenderPassSampleLocationsBeginInfoEXT)
     if(*err < 0) { prependfield(F); return p; }
     else if(*err==ERR_NOTPRESENT) poperror();
 #undef F
+#if 0 //no: validation layer should check this:
     if((p->attachmentInitialSampleLocationsCount + p->postSubpassSampleLocationsCount) == 0)
         { zfree(L, p, 1); *err=ERR_NOTPRESENT; pusherror(); return NULL; }
+#endif
 ZCHECK_END
 
 static ZCLEAR_BEGIN(VkRenderPassBeginInfo)
@@ -4680,7 +4683,7 @@ void* znew(lua_State *L, VkStructureType sType, size_t sz, int *err)
     void *p = MallocNoErr(L, sz);
     if(p==NULL) { *err = ERR_MEMORY; return NULL; }
     if(sType != (VkStructureType)-1)
-        ((VkApplicationInfo*)p)->sType = sType;
+        ((VkBaseOutStructure*)p)->sType = sType;
     *err = 0;
     return p;
     }
@@ -4693,11 +4696,11 @@ void* znewarray(lua_State *L, VkStructureType sType, size_t sz, uint32_t count, 
     if(sType != (VkStructureType)-1)
         {
         uint32_t i;
-        uintptr_t *pp = p;
+        uintptr_t pp = (uintptr_t)p;
         for(i=0; i < count; i++)
             {
-            pp = pp + i*sz;
-            ((VkApplicationInfo*)pp)->sType = sType;
+            ((VkBaseOutStructure*)pp)->sType = sType;
+            pp = pp + sz;
             }
         }
     *err = 0;
@@ -4707,8 +4710,7 @@ void* znewarray(lua_State *L, VkStructureType sType, size_t sz, uint32_t count, 
 void zfree_untyped(lua_State *L, const void *p, int base, void (*clearfunc)(lua_State *L, const void *p))
     { 
     if(!p) return;
-    if(clearfunc)
-        clearfunc(L, (void*)p);
+    if(clearfunc) clearfunc(L, (void*)p);
     if(base) Free(L, (void*)p);
     }
 
@@ -4721,8 +4723,8 @@ void zfreearray_untyped(lua_State *L, const void *p, size_t sz, uint32_t count, 
         {
         for(i=0; i<count; i++)
             {
-            pp = pp + i*sz;
             clearfunc(L, (void*)pp);
+            pp = pp + sz;
             }
         }
     if(base) Free(L, (void*)p);
@@ -4735,8 +4737,7 @@ void zfree(lua_State *L, const void *p, int base)
     {
     if(!p) return;
     zfreeaux(L, (void*)p);
-    if(base)
-        Free(L, (void*)p);
+    if(base) Free(L, (void*)p);
     }
 
 void zfreearray(lua_State *L, const void *p, size_t sz, uint32_t count, int base)
@@ -4747,16 +4748,15 @@ void zfreearray(lua_State *L, const void *p, size_t sz, uint32_t count, int base
     if(!p) return;
     for(i=0; i<count; i++)
         {
-        pp = pp + i*sz;
         zfreeaux(L, (void*)pp);
+        pp = pp + sz;
         }
-    if(base) 
-        Free(L, (void*)p);
+    if(base) Free(L, (void*)p);
     }
 
 static void zfreeaux(lua_State *L, void *pp)
     {
-    VkApplicationInfo *p = (VkApplicationInfo*)pp;
+    VkBaseOutStructure*p = (VkBaseOutStructure*)pp;
     if(p->pNext)
         zfree(L, (void*)p->pNext, 1);
     switch(p->sType)
