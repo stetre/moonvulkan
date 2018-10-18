@@ -3560,6 +3560,8 @@ the <em>queue_family_index</em> of the <em>i-th</em> element in the table return
 <em>degenerate_lines_rasterized</em>: boolean,<br>
 <em>fully_covered_fragment_shader_input_variable</em>: boolean,<br>
 <em>conservative_rasterization_post_depth_coverage</em>: boolean,<br>
+-- EXTENSION (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT">VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT</a>, <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_vertex_attribute_divisor">VK_EXT_vertex_attribute_divisor</a>):<br>
+<em>max_vertex_attrib_divisor</em>: integer,<br>
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkPhysicalDeviceProperties2KHR.html">VkPhysicalDeviceProperties2KHR</a>)</span></p>
 </li>
 <li>
@@ -3778,6 +3780,9 @@ the <em>queue_family_index</em> of the <em>i-th</em> element in the table return
 <em>shader_draw_parameters</em>: boolean,<br>
 -- EXTENSION (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkPhysicalDeviceASTCDecodeFeaturesEXT">VkPhysicalDeviceASTCDecodeFeaturesEXT</a>, <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_astc_decode_mode">VK_EXT_astc_decode_mode</a>):<br>
 <em>decode_mode_shared_exponent</em>: boolean,<br>
+-- EXTENSION (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT">VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT</a>, <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_vertex_attribute_divisor">VK_EXT_vertex_attribute_divisor</a>):<br>
+<em>vertex_attribute_instance_rate_divisor</em>: boolean,<br>
+<em>vertex_attribute_instance_rate_zero_divisor</em>: boolean,<br>
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkPhysicalDeviceFeatures2.html">VkPhysicalDeviceFeatures2</a>)</span></p>
 </li>
 <li>
@@ -4727,6 +4732,8 @@ Note1: Requires the <a href="https://www.khronos.org/registry/vulkan/specs/1.1-e
 <em>flags</em>: <a href="#pipelinevertexinputstatecreateflags">pipelinevertexinputstatecreateflags</a>,<br>
 <em>vertex_binding_descriptions</em>: {<a href="#vertexinputbindingdescription">vertexinputbindingdescription</a>},<br>
 <em>vertex_attribute_descriptions</em>: {<a href="#vertexinputattributedescription">vertexinputattributedescription</a>},<br>
+-- EXTENSION (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkPipelineVertexInputDivisorStateCreateInfoEXT">VkPipelineVertexInputDivisorStateCreateInfoEXT</a>, <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_vertex_attribute_divisor">VK_EXT_vertex_attribute_divisor</a>):<br>
+<em>vertex_binding_divisors</em>: {<a href="#vertexinputbindingdivisordescription">vertexinputbindingdivisordescription</a>},<br>
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkPipelineVertexInputStateCreateInfo.html">VkPipelineVertexInputStateCreateInfo</a>)</span></p>
 </li>
 <li>
@@ -4745,6 +4752,13 @@ Note1: Requires the <a href="https://www.khronos.org/registry/vulkan/specs/1.1-e
 <em>format</em>: <a href="#format">format</a>,<br>
 <em>offset</em>: integer,<br>
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkVertexInputAttributeDescription.html">VkVertexInputAttributeDescription</a>)</span></p>
+</li>
+<li>
+<p><a id="vertexinputbindingdivisordescription"></a>
+<span class="small"><strong>vertexinputbindingdivisordescription</strong> = {<br>
+<em>binding</em>: integer,<br>
+<em>divisor</em>: integer,<br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkVertexInputBindingDivisorDescriptionEXT">VkVertexInputBindingDivisorDescriptionEXT</a>)</span></p>
 </li>
 <li>
 <p><a id="pipelineinputassemblystatecreateinfo"></a>

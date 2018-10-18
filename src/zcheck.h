@@ -2218,6 +2218,23 @@ int zinitVkImageViewASTCDecodeModeEXT(lua_State *L, VkImageViewASTCDecodeModeEXT
 #define zpushVkImageViewASTCDecodeModeEXT moonvulkan_zpushVkImageViewASTCDecodeModeEXT
 int zpushVkImageViewASTCDecodeModeEXT(lua_State *L, const VkImageViewASTCDecodeModeEXT *p);
 
+#define znewVkPipelineVertexInputDivisorStateCreateInfoEXT(L, err) (VkPipelineVertexInputDivisorStateCreateInfoEXT*)znew((L), VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_DIVISOR_STATE_CREATE_INFO_EXT, sizeof(VkPipelineVertexInputDivisorStateCreateInfoEXT), (err))
+#define znewarrayVkPipelineVertexInputDivisorStateCreateInfoEXT(L, count, err) (VkPipelineVertexInputDivisorStateCreateInfoEXT*)znewarray((L), VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_DIVISOR_STATE_CREATE_INFO_EXT, sizeof(VkPipelineVertexInputDivisorStateCreateInfoEXT), (count), (err))
+#define znewchainVkPipelineVertexInputDivisorStateCreateInfoEXT moonvulkan_znewchainVkPipelineVertexInputDivisorStateCreateInfoEXT
+VkPipelineVertexInputDivisorStateCreateInfoEXT* znewchainVkPipelineVertexInputDivisorStateCreateInfoEXT(lua_State *L, int *err);
+#define znewchainarrayVkPipelineVertexInputDivisorStateCreateInfoEXT moonvulkan_znewchainarrayVkPipelineVertexInputDivisorStateCreateInfoEXT
+VkPipelineVertexInputDivisorStateCreateInfoEXT* znewchainarrayVkPipelineVertexInputDivisorStateCreateInfoEXT(lua_State *L, uint32_t count, int *err);
+#define zcheckVkPipelineVertexInputDivisorStateCreateInfoEXT moonvulkan_zcheckVkPipelineVertexInputDivisorStateCreateInfoEXT
+VkPipelineVertexInputDivisorStateCreateInfoEXT* zcheckVkPipelineVertexInputDivisorStateCreateInfoEXT(lua_State *L, int arg, int *err);
+#define zcheckarrayVkPipelineVertexInputDivisorStateCreateInfoEXT moonvulkan_zcheckarrayVkPipelineVertexInputDivisorStateCreateInfoEXT
+VkPipelineVertexInputDivisorStateCreateInfoEXT* zcheckarrayVkPipelineVertexInputDivisorStateCreateInfoEXT(lua_State *L, int arg, uint32_t *count, int *err);
+#define zinitVkPipelineVertexInputDivisorStateCreateInfoEXT moonvulkan_zinitVkPipelineVertexInputDivisorStateCreateInfoEXT
+int zinitVkPipelineVertexInputDivisorStateCreateInfoEXT(lua_State *L, VkPipelineVertexInputDivisorStateCreateInfoEXT* p, int *err);
+#define zfreeVkPipelineVertexInputDivisorStateCreateInfoEXT(L, p, base) zfree((L), (p), (base))
+#define zfreearrayVkPipelineVertexInputDivisorStateCreateInfoEXT(L, p, count, base) zfreearray((L), (p), sizeof(VkPipelineVertexInputDivisorStateCreateInfoEXT), (count), (base))
+#define zpushVkPipelineVertexInputDivisorStateCreateInfoEXT moonvulkan_zpushVkPipelineVertexInputDivisorStateCreateInfoEXT
+int zpushVkPipelineVertexInputDivisorStateCreateInfoEXT(lua_State *L, const VkPipelineVertexInputDivisorStateCreateInfoEXT *p);
+
 
 #ifdef VK_USE_PLATFORM_WIN32_KHR
 
@@ -3250,6 +3267,20 @@ int zinitVkDescriptorSetLayoutBinding(lua_State *L, VkDescriptorSetLayoutBinding
 #define zfreearrayVkDescriptorSetLayoutBinding(L, p, count, base) zfreearray_untyped((L), (p), sizeof(VkDescriptorSetLayoutBinding), (count), (base), zclearVkDescriptorSetLayoutBinding)
 #define zpushVkDescriptorSetLayoutBinding moonvulkan_zpushVkDescriptorSetLayoutBinding
 int zpushVkDescriptorSetLayoutBinding(lua_State *L, const VkDescriptorSetLayoutBinding *p);
+
+#define zclearVkVertexInputBindingDivisorDescriptionEXT NULL
+#define znewVkVertexInputBindingDivisorDescriptionEXT(L, err) (VkVertexInputBindingDivisorDescriptionEXT*)znew((L), -1, sizeof(VkVertexInputBindingDivisorDescriptionEXT),(err))
+#define znewarrayVkVertexInputBindingDivisorDescriptionEXT(L, count, err) (VkVertexInputBindingDivisorDescriptionEXT*)znewarray((L),-1, sizeof(VkVertexInputBindingDivisorDescriptionEXT), (count), (err))
+#define zcheckVkVertexInputBindingDivisorDescriptionEXT moonvulkan_zcheckVkVertexInputBindingDivisorDescriptionEXT
+VkVertexInputBindingDivisorDescriptionEXT* zcheckVkVertexInputBindingDivisorDescriptionEXT(lua_State *L, int arg, int *err);
+#define zcheckarrayVkVertexInputBindingDivisorDescriptionEXT moonvulkan_zcheckarrayVkVertexInputBindingDivisorDescriptionEXT
+VkVertexInputBindingDivisorDescriptionEXT* zcheckarrayVkVertexInputBindingDivisorDescriptionEXT(lua_State *L, int arg, uint32_t *count, int *err);
+#define zinitVkVertexInputBindingDivisorDescriptionEXT moonvulkan_zinitVkVertexInputBindingDivisorDescriptionEXT
+int zinitVkVertexInputBindingDivisorDescriptionEXT(lua_State *L, VkVertexInputBindingDivisorDescriptionEXT* p, int *err);
+#define zfreeVkVertexInputBindingDivisorDescriptionEXT(L, p, base) zfree_untyped((L), (p), (base), zclearVkVertexInputBindingDivisorDescriptionEXT)
+#define zfreearrayVkVertexInputBindingDivisorDescriptionEXT(L, p, count, base) zfreearray_untyped((L), (p), sizeof(VkVertexInputBindingDivisorDescriptionEXT), (count), (base), zclearVkVertexInputBindingDivisorDescriptionEXT)
+#define zpushVkVertexInputBindingDivisorDescriptionEXT moonvulkan_zpushVkVertexInputBindingDivisorDescriptionEXT
+int zpushVkVertexInputBindingDivisorDescriptionEXT(lua_State *L, const VkVertexInputBindingDivisorDescriptionEXT *p);
 
 
 #ifdef VK_USE_PLATFORM_WIN32_KHR

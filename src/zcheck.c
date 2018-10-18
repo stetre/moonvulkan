@@ -1568,6 +1568,14 @@ ZCHECK_BEGIN(VkDescriptorSetLayoutBinding)
 ZCHECK_END
 ZCHECKARRAY(VkDescriptorSetLayoutBinding)
 
+ZCHECK_BEGIN(VkVertexInputBindingDivisorDescriptionEXT)
+    checktable(arg);
+    newstruct(VkVertexInputBindingDivisorDescriptionEXT);
+    GetInteger(binding, "binding");
+    GetInteger(divisor, "divisor");
+ZCHECK_END
+ZCHECKARRAY(VkVertexInputBindingDivisorDescriptionEXT)
+
 //££
 /********************************************************************************
  * Typed structs                                                                *
@@ -1677,6 +1685,10 @@ FUNC_END
 FUNC_BEGIN(ASTC_DECODE_FEATURES_EXT, VkPhysicalDeviceASTCDecodeFeaturesEXT)
     GetBoolean(decodeModeSharedExponent, "decode_mode_shared_exponent");
 FUNC_END
+FUNC_BEGIN(VERTEX_ATTRIBUTE_DIVISOR_FEATURES_EXT, VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT)
+    GetBoolean(vertexAttributeInstanceRateDivisor, "vertex_attribute_instance_rate_divisor");
+    GetBoolean(vertexAttributeInstanceRateZeroDivisor, "vertex_attribute_instance_rate_zero_divisor");
+FUNC_END
 #undef FUNC_BEGIN
 #undef FUNC_END
 
@@ -1694,6 +1706,7 @@ ZINIT_BEGIN(VkPhysicalDeviceFeatures2)
         ADDX(PHYSICAL_DEVICE_PROTECTED_MEMORY_FEATURES, VkPhysicalDeviceProtectedMemoryFeatures);
         ADDX(PHYSICAL_DEVICE_SHADER_DRAW_PARAMETER_FEATURES,VkPhysicalDeviceShaderDrawParameterFeatures);
         ADDX(PHYSICAL_DEVICE_ASTC_DECODE_FEATURES_EXT, VkPhysicalDeviceASTCDecodeFeaturesEXT);
+        ADDX(PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_FEATURES_EXT, VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT);
     EXTENSIONS_END
 ZINIT_END
 
@@ -1722,6 +1735,7 @@ ZCHECK_BEGIN(VkPhysicalDeviceFeatures2)
         ADD(VkPhysicalDeviceProtectedMemoryFeatures);
         ADD(VkPhysicalDeviceShaderDrawParameterFeatures);
         ADD(VkPhysicalDeviceASTCDecodeFeaturesEXT);
+        ADD(VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT);
     #undef ADD
     EXTENSIONS_END
 ZCHECK_END
@@ -1817,6 +1831,10 @@ LOCALPUSH_END
 LOCALPUSH_BEGIN(VkPhysicalDeviceASTCDecodeFeaturesEXT)
     SetBoolean(decodeModeSharedExponent, "decode_mode_shared_exponent");
 LOCALPUSH_END
+LOCALPUSH_BEGIN(VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT)
+    SetBoolean(vertexAttributeInstanceRateDivisor, "vertex_attribute_instance_rate_divisor");
+    SetBoolean(vertexAttributeInstanceRateZeroDivisor, "vertex_attribute_instance_rate_zero_divisor");
+LOCALPUSH_END
 
 ZPUSH_BEGIN(VkPhysicalDeviceFeatures)
     lua_newtable(L);
@@ -1840,6 +1858,8 @@ ZPUSH_BEGIN(VkPhysicalDeviceFeatures2)
         XCASE(PHYSICAL_DEVICE_SHADER_DRAW_PARAMETER_FEATURES,
                 VkPhysicalDeviceShaderDrawParameterFeatures);
         XCASE(PHYSICAL_DEVICE_ASTC_DECODE_FEATURES_EXT, VkPhysicalDeviceASTCDecodeFeaturesEXT);
+        XCASE(PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_FEATURES_EXT,
+                VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT);
     XPUSH_END
 ZPUSH_END
 
@@ -2037,6 +2057,9 @@ LOCALPUSH_BEGIN(VkPhysicalDeviceConservativeRasterizationPropertiesEXT)
     SetBoolean(fullyCoveredFragmentShaderInputVariable, "fully_covered_fragment_shader_input_variable");
     SetBoolean(conservativeRasterizationPostDepthCoverage, "conservative_rasterization_post_depth_coverage");
 LOCALPUSH_END
+LOCALPUSH_BEGIN(VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT)
+    SetInteger(maxVertexAttribDivisor, "max_vertex_attrib_divisor");
+LOCALPUSH_END
 
 
 ZINIT_BEGIN(VkPhysicalDeviceProperties2)
@@ -2058,6 +2081,8 @@ ZINIT_BEGIN(VkPhysicalDeviceProperties2)
         ADDX(PHYSICAL_DEVICE_PROTECTED_MEMORY_PROPERTIES, VkPhysicalDeviceProtectedMemoryProperties);
         ADDX(PHYSICAL_DEVICE_CONSERVATIVE_RASTERIZATION_PROPERTIES_EXT,
                 VkPhysicalDeviceConservativeRasterizationPropertiesEXT);
+        ADDX(PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_PROPERTIES_EXT,
+                VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT);
     EXTENSIONS_END
 ZINIT_END
 
@@ -2087,6 +2112,8 @@ ZPUSH_BEGIN(VkPhysicalDeviceProperties2)
         XCASE(PHYSICAL_DEVICE_PROTECTED_MEMORY_PROPERTIES, VkPhysicalDeviceProtectedMemoryProperties);
         XCASE(PHYSICAL_DEVICE_CONSERVATIVE_RASTERIZATION_PROPERTIES_EXT,
                 VkPhysicalDeviceConservativeRasterizationPropertiesEXT);
+        XCASE(PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_PROPERTIES_EXT,
+                VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT);
     XPUSH_END
 ZPUSH_END
 
@@ -4522,6 +4549,23 @@ ZCHECK_END
 
 /*-------------------------------------------------------------------------------------*/
 
+static ZCLEAR_BEGIN(VkPipelineVertexInputDivisorStateCreateInfoEXT)
+    if(p->pVertexBindingDivisors) zfreearrayVkVertexInputBindingDivisorDescriptionEXT(L,
+            p->pVertexBindingDivisors, p->vertexBindingDivisorCount, 1);
+ZCLEAR_END
+ZCHECK_BEGIN(VkPipelineVertexInputDivisorStateCreateInfoEXT)
+    int arg1;
+    //checktable(arg);
+    newstruct(VkPipelineVertexInputDivisorStateCreateInfoEXT);
+#define F "vertex_binding_divisors"
+    arg1 = pushfield(L, arg, F);
+    p->pVertexBindingDivisors = zcheckarrayVkVertexInputBindingDivisorDescriptionEXT(L,
+        arg1, &p->vertexBindingDivisorCount, err);
+    popfield(L, arg1);
+    if(*err) { prependfield(F); return p; }
+#undef F
+ZCHECK_END
+
 static ZCLEAR_BEGIN(VkPipelineVertexInputStateCreateInfo)
     if(p->pVertexBindingDescriptions) zfreearrayVkVertexInputBindingDescription(L,
             p->pVertexBindingDescriptions, p->vertexBindingDescriptionCount, 1);
@@ -4549,6 +4593,16 @@ ZCHECK_BEGIN(VkPipelineVertexInputStateCreateInfo)
     if(*err < 0) { prependfield(F); return p; }
     if(*err == ERR_NOTPRESENT) poperror();
 #undef F
+    EXTENSIONS_BEGIN
+    if(ispresent("vertex_binding_divisors"))
+        {
+        VkPipelineVertexInputDivisorStateCreateInfoEXT *p1 =
+            zcheckVkPipelineVertexInputDivisorStateCreateInfoEXT(L, arg, err);
+        if(*err == ERR_NOTPRESENT || *err == ERR_EMPTY) { zfree(L, p1, 1); poperror(); }
+        else if(*err < 0) { zfree(L, p1, 1); return p; }
+        else addtochain(chain, p1);
+        }
+    EXTENSIONS_END
 ZCHECK_END
 
 /*-------------------------------------------------------------------------------------*/
@@ -4840,6 +4894,7 @@ static void zfreeaux(lua_State *L, void *pp)
         CASE(PIPELINE_SAMPLE_LOCATIONS_STATE_CREATE_INFO_EXT, VkPipelineSampleLocationsStateCreateInfoEXT);
         CASE(PIPELINE_MULTISAMPLE_STATE_CREATE_INFO, VkPipelineMultisampleStateCreateInfo);
         CASE(PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO, VkPipelineVertexInputStateCreateInfo);
+        CASE(PIPELINE_VERTEX_INPUT_DIVISOR_STATE_CREATE_INFO_EXT, VkPipelineVertexInputDivisorStateCreateInfoEXT);
         CASE(PIPELINE_COLOR_BLEND_STATE_CREATE_INFO, VkPipelineColorBlendStateCreateInfo);
         CASE(PIPELINE_DYNAMIC_STATE_CREATE_INFO, VkPipelineDynamicStateCreateInfo);
         CASE(PIPELINE_DISCARD_RECTANGLE_STATE_CREATE_INFO_EXT, VkPipelineDiscardRectangleStateCreateInfoEXT);

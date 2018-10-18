@@ -156,7 +156,10 @@ _degenerate_triangles_rasterized_: boolean, +
 _degenerate_lines_rasterized_: boolean, +
 _fully_covered_fragment_shader_input_variable_: boolean, +
 _conservative_rasterization_post_depth_coverage_: boolean, +
+pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT[VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_vertex_attribute_divisor[VK_EXT_vertex_attribute_divisor]): +
+_max_vertex_attrib_divisor_: integer, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkPhysicalDeviceProperties2KHR.html[VkPhysicalDeviceProperties2KHR])#
+
 
 * [[physicaldeviceimageformatinfo]]
 [small]#*physicaldeviceimageformatinfo* = { +
@@ -370,7 +373,11 @@ pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-exte
 _shader_draw_parameters_: boolean, +
 pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkPhysicalDeviceASTCDecodeFeaturesEXT[VkPhysicalDeviceASTCDecodeFeaturesEXT], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_astc_decode_mode[VK_EXT_astc_decode_mode]): +
 _decode_mode_shared_exponent_: boolean, +
+pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT[VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_vertex_attribute_divisor[VK_EXT_vertex_attribute_divisor]): +
+_vertex_attribute_instance_rate_divisor_: boolean, +
+_vertex_attribute_instance_rate_zero_divisor_: boolean, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkPhysicalDeviceFeatures2.html[VkPhysicalDeviceFeatures2])#
+
 
 * [[queuefamilyproperties]]
 [small]#*queuefamilyproperties* = { +
@@ -1167,8 +1174,9 @@ _size_: integer, +
 _flags_: <<pipelinevertexinputstatecreateflags, pipelinevertexinputstatecreateflags>>, +
 _vertex_binding_descriptions_: {<<vertexinputbindingdescription, vertexinputbindingdescription>>}, +
 _vertex_attribute_descriptions_: {<<vertexinputattributedescription, vertexinputattributedescription>>}, +
+pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkPipelineVertexInputDivisorStateCreateInfoEXT[VkPipelineVertexInputDivisorStateCreateInfoEXT], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_vertex_attribute_divisor[VK_EXT_vertex_attribute_divisor]): +
+_vertex_binding_divisors_: {<<vertexinputbindingdivisordescription, vertexinputbindingdivisordescription>>}, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkPipelineVertexInputStateCreateInfo.html[VkPipelineVertexInputStateCreateInfo])#
-
 
 * [[vertexinputbindingdescription]]
 [small]#*vertexinputbindingdescription* = { +
@@ -1184,6 +1192,12 @@ _location_: integer, +
 _format_: <<format, format>>, +
 _offset_: integer, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkVertexInputAttributeDescription.html[VkVertexInputAttributeDescription])#
+
+* [[vertexinputbindingdivisordescription]]
+[small]#*vertexinputbindingdivisordescription* = { +
+_binding_: integer, +
+_divisor_: integer, +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkVertexInputBindingDivisorDescriptionEXT[VkVertexInputBindingDivisorDescriptionEXT])#
 
 * [[pipelineinputassemblystatecreateinfo]]
 [small]#*pipelineinputassemblystatecreateinfo* = { +

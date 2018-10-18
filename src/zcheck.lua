@@ -141,6 +141,7 @@ local UNTYPED = { -- set the second element to true if the type has a zclear fun
    { "VkDisplayPropertiesKHR" },
    { "VkDisplayPlanePropertiesKHR" },
    { "VkDescriptorSetLayoutBinding", true },
+   { "VkVertexInputBindingDivisorDescriptionEXT" },
 }
 
 local UNTYPED_WIN32 = {
@@ -278,6 +279,7 @@ local TYPED = {
    { "VkProtectedSubmitInfo", "PROTECTED_SUBMIT_INFO" },
    { "VkPipelineRasterizationConservativeStateCreateInfoEXT", "PIPELINE_RASTERIZATION_CONSERVATIVE_STATE_CREATE_INFO_EXT" },
    { "VkImageViewASTCDecodeModeEXT", "IMAGE_VIEW_ASTC_DECODE_MODE_EXT" },
+   { "VkPipelineVertexInputDivisorStateCreateInfoEXT", "PIPELINE_VERTEX_INPUT_DIVISOR_STATE_CREATE_INFO_EXT" },
 }
 
 local TYPED_WIN32 = {
