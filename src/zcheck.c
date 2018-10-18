@@ -3548,6 +3548,12 @@ ZCHECK_END
  | Submit Info                                                                  |
  *------------------------------------------------------------------------------*/
 
+ZCHECK_BEGIN(VkProtectedSubmitInfo)
+	//checktable(arg);
+    newstruct(VkProtectedSubmitInfo);
+	GetBoolean(protectedSubmit, "protected_submit");
+ZCHECK_END
+
 static ZCLEAR_BEGIN(VkSubmitInfo)
     if(p->pWaitSemaphores) Free(L, (void*)p->pWaitSemaphores);
     if(p->pWaitDstStageMask) Free(L, (void*)p->pWaitDstStageMask);
@@ -3585,6 +3591,14 @@ ZCHECK_BEGIN(VkSubmitInfo)
     popfield(L, arg1);
     if(*err < 0) { pushfielderror(F); return p; }
 #undef F
+    EXTENSIONS_BEGIN
+    if(ispresent("protected_submit"))
+        {
+        VkProtectedSubmitInfo *p1 = zcheckVkProtectedSubmitInfo(L, arg, err);
+        if(*err) { zfree(L, p1, 1); return p; }
+        addtochain(chain, p1);
+        }
+    EXTENSIONS_END
 ZCHECK_END
 ZCHECKARRAY(VkSubmitInfo)
 

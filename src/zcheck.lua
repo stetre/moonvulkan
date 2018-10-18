@@ -275,6 +275,7 @@ local TYPED = {
    { "VkPhysicalDeviceImageFormatInfo2KHR", "PHYSICAL_DEVICE_IMAGE_FORMAT_INFO_2_KHR" },
    { "VkDisplayModeCreateInfoKHR", "DISPLAY_MODE_CREATE_INFO_KHR" },
    { "VkPhysicalDeviceSurfaceInfo2KHR", "PHYSICAL_DEVICE_SURFACE_INFO_2_KHR" },
+   { "VkProtectedSubmitInfo", "PROTECTED_SUBMIT_INFO" },
 }
 
 local TYPED_WIN32 = {
@@ -295,7 +296,7 @@ Xxx* zcheckXxx(lua_State *L, int arg, int *err);
 #define zcheckarrayXxx moonvulkan_zcheckarrayXxx
 Xxx* zcheckarrayXxx(lua_State *L, int arg, uint32_t *count, int *err);
 #define zinitXxx moonvulkan_zinitXxx
-int zinitXxx(lua_State *L, Xxx* p, int *err); 
+int zinitXxx(lua_State *L, Xxx* p, int *err);
 #define zfreeXxx(L, p, base) zfree((L), (p), (base))
 #define zfreearrayXxx(L, p, count, base) zfreearray((L), (p), sizeof(Xxx), (count), (base))
 #define zpushXxx moonvulkan_zpushXxx
@@ -317,7 +318,7 @@ Xxx* zcheckXxx(lua_State *L, int arg, int *err);
 #define zcheckarrayXxx moonvulkan_zcheckarrayXxx
 Xxx* zcheckarrayXxx(lua_State *L, int arg, uint32_t *count, int *err);
 #define zinitXxx moonvulkan_zinitXxx
-int zinitXxx(lua_State *L, Xxx* p, int *err); 
+int zinitXxx(lua_State *L, Xxx* p, int *err);
 #define zfreeXxx(L, p, base) zfree_untyped((L), (p), (base), zclearXxx)
 #define zfreearrayXxx(L, p, count, base) zfreearray_untyped((L), (p), sizeof(Xxx), (count), (base), zclearXxx)
 #define zpushXxx moonvulkan_zpushXxx
