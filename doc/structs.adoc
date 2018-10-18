@@ -1110,11 +1110,9 @@ _render_pass_: <<render_pass, render_pass>> *[R]*, +
 _subpass_: integer, +
 _base_pipeline_handle_: <<pipeline, pipeline>>, +
 _base_pipeline_index_: <<index, index>>, +
-_color_blend_advanced_state_: <<pipelinecolorblendadvancedstatecreateinfo, pipelinecolorblendadvancedstatecreateinfo>> (Note1) _(DEPRECATED: will soon be moved within the color_blend_state field.)_, +
-_discard_rectangle_state_: <<pipelinediscardrectanglestatecreateinfo, pipelinediscardrectanglestatecreateinfo>> (Note2), +
+_discard_rectangle_state_: <<pipelinediscardrectanglestatecreateinfo, pipelinediscardrectanglestatecreateinfo>> (Note1), +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkGraphicsPipelineCreateInfo.html[VkGraphicsPipelineCreateInfo]) +
-Note1: Requires the https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_blend_operation_advanced[VK_EXT_blend_operation_advanced] extension and the _color_blend_state_ field. +
-Note2: Requires the https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_discard_rectangles[VK_EXT_discard_rectangles] extension.#
+Note1: Requires the https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_discard_rectangles[VK_EXT_discard_rectangles] extension.#
 
 * [[computepipelinecreateinfo]]
 [small]#*computepipelinecreateinfo* = { +
@@ -1263,6 +1261,10 @@ _logic_op_enable_: boolean, +
 _logic_op_: <<logicop, logicop>>, +
 _attachments_: {<<pipelinecolorblendattachmentstate, pipelinecolorblendattachmentstate>>}, +
 _blend_constants_: {float}[4], +
+pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkPipelineColorBlendAdvancedStateCreateInfoEXT[VkPipelineColorBlendAdvancedStateCreateInfoEXT], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_blend_operation_advanced[VK_EXT_blend_operation_advanced]): +
+_src_premultiplied_: boolean, +
+_dst_premultiplied_: boolean, +
+_blend_overlap_: <<blendoverlap, blendoverlap>>, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkPipelineColorBlendStateCreateInfo.html[VkPipelineColorBlendStateCreateInfo])#
 
 * [[pipelinecolorblendattachmentstate]]
@@ -1276,13 +1278,6 @@ _dst_alpha_blend_factor_: <<blendfactor, blendfactor>>, +
 _alpha_blend_op_: <<blendop, blendop>>, +
 _color_write_mask_: <<colorcomponentflags, colorcomponentflags>>, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkPipelineColorBlendAttachmentState.html[VkPipelineColorBlendAttachmentState])#
-
-* [[pipelinecolorblendadvancedstatecreateinfo]]
-[small]#*pipelinecolorblendadvancedstatecreateinfo* = { +
-_src_premultiplied_: boolean, +
-_dst_premultiplied_: boolean, +
-_blend_overlap_: <<blendoverlap, blendoverlap>>, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkPipelineColorBlendAdvancedStateCreateInfoEXT[VkPipelineColorBlendAdvancedStateCreateInfoEXT])#
 
 * [[pipelinediscardrectanglestatecreateinfo]]
 [small]#*pipelinediscardrectanglestatecreateinfo* = { +
@@ -1603,9 +1598,15 @@ _current_display_: <<display, display>> (may be _nil_), +
 _current_stack_index_: <<index, index>>, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkDisplayPlanePropertiesKHR[VkDisplayPlanePropertiesKHR])#
 
+* [[displaymodecreateinfo]]
+[small]#*displaymodecreateinfo* = { +
+_display_mode_: <<display_mode, display_mode>>, +
+_parameters_: <<displaymodeparameters, displaymodeparameters>>, +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkDisplayModeCreateInfoKHR[VkDisplayModeCreateInfoKHR])#
+
 * [[displaymodeproperties]]
 [small]#*displaymodeproperties* = { +
-_display_mode_: <<display_mode, display_mode>>, +
+_flags_: <<displaymodecreateinfoflags, displaymodecreateinfoflags>>, +
 _parameters_: <<displaymodeparameters, displaymodeparameters>>, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkDisplayModePropertiesKHR[VkDisplayModePropertiesKHR])#
 

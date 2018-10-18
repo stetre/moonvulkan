@@ -2980,7 +2980,8 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/
 <div id="create_display_mode" class="ulist">
 <ul>
 <li>
-<p><em>display_mode</em> = <strong>create_display_mode</strong>(<a href="#display"><em>display</em></a>, <a href="#displaymodecreateflags"><em>displaymodecreateflags</em></a>, <a href="#displaymodeparameters"><em>displaymodeparameters</em></a>, [<a href="#allocators"><em>allocator</em></a>])<br>
+<p><em>display_mode</em> = <strong>create_display_mode</strong>(<a href="#display"><em>display</em></a>, <a href="#displaymodecreateinfo"><em>displaymodecreateinfo</em></a>, [<a href="#allocators"><em>allocator</em></a>])<br>
+<em>display_mode</em> = <strong>create_display_mode</strong>(<a href="#display"><em>display</em></a>, <a href="#displaymodecreateflags"><em>displaymodecreateflags</em></a>, <a href="#displaymodeparameters"><em>displaymodeparameters</em></a>, [<a href="#allocators"><em>allocator</em></a>])<br>
 <span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkCreateDisplayModeKHR">vkCreateDisplayModeKHR</a>.</span></p>
 </li>
 </ul>
@@ -4665,11 +4666,9 @@ the <em>queue_family_index</em> of the <em>i-th</em> element in the table return
 <em>subpass</em>: integer,<br>
 <em>base_pipeline_handle</em>: <a href="#pipeline">pipeline</a>,<br>
 <em>base_pipeline_index</em>: <a href="#index">index</a>,<br>
-<em>color_blend_advanced_state</em>: <a href="#pipelinecolorblendadvancedstatecreateinfo">pipelinecolorblendadvancedstatecreateinfo</a> (Note1) <em>(DEPRECATED: will soon be moved within the color_blend_state field.)</em>,<br>
-<em>discard_rectangle_state</em>: <a href="#pipelinediscardrectanglestatecreateinfo">pipelinediscardrectanglestatecreateinfo</a> (Note2),<br>
+<em>discard_rectangle_state</em>: <a href="#pipelinediscardrectanglestatecreateinfo">pipelinediscardrectanglestatecreateinfo</a> (Note1),<br>
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkGraphicsPipelineCreateInfo.html">VkGraphicsPipelineCreateInfo</a>)<br>
-Note1: Requires the <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_blend_operation_advanced">VK_EXT_blend_operation_advanced</a> extension and the <em>color_blend_state</em> field.<br>
-Note2: Requires the <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_discard_rectangles">VK_EXT_discard_rectangles</a> extension.</span></p>
+Note1: Requires the <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_discard_rectangles">VK_EXT_discard_rectangles</a> extension.</span></p>
 </li>
 <li>
 <p><a id="computepipelinecreateinfo"></a>
@@ -4824,6 +4823,10 @@ Note2: Requires the <a href="https://www.khronos.org/registry/vulkan/specs/1.1-e
 <em>logic_op</em>: <a href="#logicop">logicop</a>,<br>
 <em>attachments</em>: {<a href="#pipelinecolorblendattachmentstate">pipelinecolorblendattachmentstate</a>},<br>
 <em>blend_constants</em>: {float}[4],<br>
+-- EXTENSION (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkPipelineColorBlendAdvancedStateCreateInfoEXT">VkPipelineColorBlendAdvancedStateCreateInfoEXT</a>, <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_blend_operation_advanced">VK_EXT_blend_operation_advanced</a>):<br>
+<em>src_premultiplied</em>: boolean,<br>
+<em>dst_premultiplied</em>: boolean,<br>
+<em>blend_overlap</em>: <a href="#blendoverlap">blendoverlap</a>,<br>
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkPipelineColorBlendStateCreateInfo.html">VkPipelineColorBlendStateCreateInfo</a>)</span></p>
 </li>
 <li>
@@ -4838,14 +4841,6 @@ Note2: Requires the <a href="https://www.khronos.org/registry/vulkan/specs/1.1-e
 <em>alpha_blend_op</em>: <a href="#blendop">blendop</a>,<br>
 <em>color_write_mask</em>: <a href="#colorcomponentflags">colorcomponentflags</a>,<br>
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkPipelineColorBlendAttachmentState.html">VkPipelineColorBlendAttachmentState</a>)</span></p>
-</li>
-<li>
-<p><a id="pipelinecolorblendadvancedstatecreateinfo"></a>
-<span class="small"><strong>pipelinecolorblendadvancedstatecreateinfo</strong> = {<br>
-<em>src_premultiplied</em>: boolean,<br>
-<em>dst_premultiplied</em>: boolean,<br>
-<em>blend_overlap</em>: <a href="#blendoverlap">blendoverlap</a>,<br>
-} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkPipelineColorBlendAdvancedStateCreateInfoEXT">VkPipelineColorBlendAdvancedStateCreateInfoEXT</a>)</span></p>
 </li>
 <li>
 <p><a id="pipelinediscardrectanglestatecreateinfo"></a>
@@ -5211,9 +5206,16 @@ Note1: The <em>current_extent</em> field is <em>nil</em> when <em>width</em> and
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkDisplayPlanePropertiesKHR">VkDisplayPlanePropertiesKHR</a>)</span></p>
 </li>
 <li>
+<p><a id="displaymodecreateinfo"></a>
+<span class="small"><strong>displaymodecreateinfo</strong> = {<br>
+<em>display_mode</em>: <a href="#display_mode">display_mode</a>,<br>
+<em>parameters</em>: <a href="#displaymodeparameters">displaymodeparameters</a>,<br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkDisplayModeCreateInfoKHR">VkDisplayModeCreateInfoKHR</a>)</span></p>
+</li>
+<li>
 <p><a id="displaymodeproperties"></a>
 <span class="small"><strong>displaymodeproperties</strong> = {<br>
-<em>display_mode</em>: <a href="#display_mode">display_mode</a>,<br>
+<em>flags</em>: <a href="#displaymodecreateinfoflags">displaymodecreateinfoflags</a>,<br>
 <em>parameters</em>: <a href="#displaymodeparameters">displaymodeparameters</a>,<br>
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkDisplayModePropertiesKHR">VkDisplayModePropertiesKHR</a>)</span></p>
 </li>
@@ -6660,7 +6662,7 @@ that the relevant header files are where <em>vulkan.h</em> expects them to be.</
 <div id="footer">
 <div id="footer-text">
 Version 0.5<br>
-Last updated 2018-10-16 07:27:11 CEST
+Last updated 2018-10-18 11:03:23 CEST
 </div>
 </div>
 </body>
