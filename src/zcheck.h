@@ -2201,6 +2201,23 @@ int zinitVkPipelineRasterizationConservativeStateCreateInfoEXT(lua_State *L, VkP
 #define zpushVkPipelineRasterizationConservativeStateCreateInfoEXT moonvulkan_zpushVkPipelineRasterizationConservativeStateCreateInfoEXT
 int zpushVkPipelineRasterizationConservativeStateCreateInfoEXT(lua_State *L, const VkPipelineRasterizationConservativeStateCreateInfoEXT *p);
 
+#define znewVkImageViewASTCDecodeModeEXT(L, err) (VkImageViewASTCDecodeModeEXT*)znew((L), VK_STRUCTURE_TYPE_IMAGE_VIEW_ASTC_DECODE_MODE_EXT, sizeof(VkImageViewASTCDecodeModeEXT), (err))
+#define znewarrayVkImageViewASTCDecodeModeEXT(L, count, err) (VkImageViewASTCDecodeModeEXT*)znewarray((L), VK_STRUCTURE_TYPE_IMAGE_VIEW_ASTC_DECODE_MODE_EXT, sizeof(VkImageViewASTCDecodeModeEXT), (count), (err))
+#define znewchainVkImageViewASTCDecodeModeEXT moonvulkan_znewchainVkImageViewASTCDecodeModeEXT
+VkImageViewASTCDecodeModeEXT* znewchainVkImageViewASTCDecodeModeEXT(lua_State *L, int *err);
+#define znewchainarrayVkImageViewASTCDecodeModeEXT moonvulkan_znewchainarrayVkImageViewASTCDecodeModeEXT
+VkImageViewASTCDecodeModeEXT* znewchainarrayVkImageViewASTCDecodeModeEXT(lua_State *L, uint32_t count, int *err);
+#define zcheckVkImageViewASTCDecodeModeEXT moonvulkan_zcheckVkImageViewASTCDecodeModeEXT
+VkImageViewASTCDecodeModeEXT* zcheckVkImageViewASTCDecodeModeEXT(lua_State *L, int arg, int *err);
+#define zcheckarrayVkImageViewASTCDecodeModeEXT moonvulkan_zcheckarrayVkImageViewASTCDecodeModeEXT
+VkImageViewASTCDecodeModeEXT* zcheckarrayVkImageViewASTCDecodeModeEXT(lua_State *L, int arg, uint32_t *count, int *err);
+#define zinitVkImageViewASTCDecodeModeEXT moonvulkan_zinitVkImageViewASTCDecodeModeEXT
+int zinitVkImageViewASTCDecodeModeEXT(lua_State *L, VkImageViewASTCDecodeModeEXT* p, int *err);
+#define zfreeVkImageViewASTCDecodeModeEXT(L, p, base) zfree((L), (p), (base))
+#define zfreearrayVkImageViewASTCDecodeModeEXT(L, p, count, base) zfreearray((L), (p), sizeof(VkImageViewASTCDecodeModeEXT), (count), (base))
+#define zpushVkImageViewASTCDecodeModeEXT moonvulkan_zpushVkImageViewASTCDecodeModeEXT
+int zpushVkImageViewASTCDecodeModeEXT(lua_State *L, const VkImageViewASTCDecodeModeEXT *p);
+
 
 #ifdef VK_USE_PLATFORM_WIN32_KHR
 

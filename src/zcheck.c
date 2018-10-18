@@ -1674,6 +1674,9 @@ FUNC_END
 FUNC_BEGIN(SHADER_DRAW_PARAMETER_FEATURES, VkPhysicalDeviceShaderDrawParameterFeatures)
     GetBoolean(shaderDrawParameters, "shader_draw_parameters");
 FUNC_END 
+FUNC_BEGIN(ASTC_DECODE_FEATURES_EXT, VkPhysicalDeviceASTCDecodeFeaturesEXT)
+    GetBoolean(decodeModeSharedExponent, "decode_mode_shared_exponent");
+FUNC_END
 #undef FUNC_BEGIN
 #undef FUNC_END
 
@@ -1689,8 +1692,8 @@ ZINIT_BEGIN(VkPhysicalDeviceFeatures2)
                 VkPhysicalDeviceConditionalRenderingFeaturesEXT);
         ADDX(PHYSICAL_DEVICE_8BIT_STORAGE_FEATURES_KHR , VkPhysicalDevice8BitStorageFeaturesKHR);
         ADDX(PHYSICAL_DEVICE_PROTECTED_MEMORY_FEATURES, VkPhysicalDeviceProtectedMemoryFeatures);
-        ADDX(PHYSICAL_DEVICE_SHADER_DRAW_PARAMETER_FEATURES,
-                VkPhysicalDeviceShaderDrawParameterFeatures);
+        ADDX(PHYSICAL_DEVICE_SHADER_DRAW_PARAMETER_FEATURES,VkPhysicalDeviceShaderDrawParameterFeatures);
+        ADDX(PHYSICAL_DEVICE_ASTC_DECODE_FEATURES_EXT, VkPhysicalDeviceASTCDecodeFeaturesEXT);
     EXTENSIONS_END
 ZINIT_END
 
@@ -1718,6 +1721,7 @@ ZCHECK_BEGIN(VkPhysicalDeviceFeatures2)
         ADD(VkPhysicalDevice8BitStorageFeaturesKHR);
         ADD(VkPhysicalDeviceProtectedMemoryFeatures);
         ADD(VkPhysicalDeviceShaderDrawParameterFeatures);
+        ADD(VkPhysicalDeviceASTCDecodeFeaturesEXT);
     #undef ADD
     EXTENSIONS_END
 ZCHECK_END
@@ -1810,6 +1814,9 @@ LOCALPUSH_END
 LOCALPUSH_BEGIN(VkPhysicalDeviceShaderDrawParameterFeatures)
     SetBoolean(shaderDrawParameters, "shader_draw_parameters");
 LOCALPUSH_END
+LOCALPUSH_BEGIN(VkPhysicalDeviceASTCDecodeFeaturesEXT)
+    SetBoolean(decodeModeSharedExponent, "decode_mode_shared_exponent");
+LOCALPUSH_END
 
 ZPUSH_BEGIN(VkPhysicalDeviceFeatures)
     lua_newtable(L);
@@ -1832,6 +1839,7 @@ ZPUSH_BEGIN(VkPhysicalDeviceFeatures2)
         XCASE(PHYSICAL_DEVICE_PROTECTED_MEMORY_FEATURES, VkPhysicalDeviceProtectedMemoryFeatures);
         XCASE(PHYSICAL_DEVICE_SHADER_DRAW_PARAMETER_FEATURES,
                 VkPhysicalDeviceShaderDrawParameterFeatures);
+        XCASE(PHYSICAL_DEVICE_ASTC_DECODE_FEATURES_EXT, VkPhysicalDeviceASTCDecodeFeaturesEXT);
     XPUSH_END
 ZPUSH_END
 
@@ -2974,6 +2982,12 @@ ZCHECK_BEGIN(VkImageViewUsageCreateInfoKHR)
     GetFlags(usage, "usage");
 ZCHECK_END
 
+ZCHECK_BEGIN(VkImageViewASTCDecodeModeEXT)
+    //checktable(arg);
+    newstruct(VkImageViewASTCDecodeModeEXT);
+    GetFormat(decodeMode, "decode_mode");
+ZCHECK_END
+
 ZCHECK_BEGIN(VkImageViewCreateInfo)
     checktable(arg);
     newstruct(VkImageViewCreateInfo);
@@ -2987,6 +3001,12 @@ ZCHECK_BEGIN(VkImageViewCreateInfo)
     if(ispresent("usage"))
         {
         VkImageViewUsageCreateInfoKHR *p1 = zcheckVkImageViewUsageCreateInfoKHR(L, arg, err);
+        if(*err) { zfree(L, p1, 1); return p; }
+        addtochain(chain, p1);
+        }
+    if(ispresent("decode_mode"))
+        {
+        VkImageViewASTCDecodeModeEXT *p1 = zcheckVkImageViewASTCDecodeModeEXT(L, arg, err);
         if(*err) { zfree(L, p1, 1); return p; }
         addtochain(chain, p1);
         }
