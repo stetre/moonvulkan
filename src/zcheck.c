@@ -522,6 +522,7 @@ static const char *GetString_(lua_State *L, int arg, const char *sname, const ch
 #define GetSamplerYcbcrModelConversion(name, sname) GetEnumOpt(name, sname, testsamplerycbcrmodelconversion, VK_SAMPLER_YCBCR_MODEL_CONVERSION_RGB_IDENTITY)
 #define GetSamplerYcbcrRange(name, sname) GetEnumOpt(name, sname, testsamplerycbcrrange, VK_SAMPLER_YCBCR_RANGE_ITU_FULL)
 #define GetChromaLocation(name, sname) GetEnumOpt(name, sname, testchromalocation, VK_CHROMA_LOCATION_COSITED_EVEN)
+#define GetConservativeRasterizationMode(name, sname) GetEnumOpt(name, sname, testconservativerasterizationmode, VK_CONSERVATIVE_RASTERIZATION_MODE_DISABLED_EXT)
 
 /* Structs -------------------------------------------------------------------*/
 
@@ -2017,6 +2018,18 @@ LOCALPUSH_END
 LOCALPUSH_BEGIN(VkPhysicalDeviceProtectedMemoryProperties)
     SetBoolean(protectedNoFault, "protected_no_fault");
 LOCALPUSH_END
+LOCALPUSH_BEGIN(VkPhysicalDeviceConservativeRasterizationPropertiesEXT)
+    SetNumber(primitiveOverestimationSize, "primitive_overestimation_size");
+    SetNumber(maxExtraPrimitiveOverestimationSize, "max_extra_primitive_overestimation_size");
+    SetNumber(extraPrimitiveOverestimationSizeGranularity, "extra_primitive_overestimation_size_granularity");
+    SetBoolean(primitiveUnderestimation, "primitive_underestimation");
+    SetBoolean(conservativePointAndLineRasterization, "conservative_point_and_line_rasterization");
+    SetBoolean(degenerateTrianglesRasterized, "degenerate_triangles_rasterized");
+    SetBoolean(degenerateLinesRasterized, "degenerate_lines_rasterized");
+    SetBoolean(fullyCoveredFragmentShaderInputVariable, "fully_covered_fragment_shader_input_variable");
+    SetBoolean(conservativeRasterizationPostDepthCoverage, "conservative_rasterization_post_depth_coverage");
+LOCALPUSH_END
+
 
 ZINIT_BEGIN(VkPhysicalDeviceProperties2)
     EXTENSIONS_BEGIN
@@ -2035,6 +2048,8 @@ ZINIT_BEGIN(VkPhysicalDeviceProperties2)
         ADDX(PHYSICAL_DEVICE_MAINTENANCE_3_PROPERTIES, VkPhysicalDeviceMaintenance3Properties);
         ADDX(PHYSICAL_DEVICE_SUBGROUP_PROPERTIES, VkPhysicalDeviceSubgroupProperties);
         ADDX(PHYSICAL_DEVICE_PROTECTED_MEMORY_PROPERTIES, VkPhysicalDeviceProtectedMemoryProperties);
+        ADDX(PHYSICAL_DEVICE_CONSERVATIVE_RASTERIZATION_PROPERTIES_EXT,
+                VkPhysicalDeviceConservativeRasterizationPropertiesEXT);
     EXTENSIONS_END
 ZINIT_END
 
@@ -2062,6 +2077,8 @@ ZPUSH_BEGIN(VkPhysicalDeviceProperties2)
         XCASE(PHYSICAL_DEVICE_MAINTENANCE_3_PROPERTIES, VkPhysicalDeviceMaintenance3Properties);
         XCASE(PHYSICAL_DEVICE_SUBGROUP_PROPERTIES, VkPhysicalDeviceSubgroupProperties);
         XCASE(PHYSICAL_DEVICE_PROTECTED_MEMORY_PROPERTIES, VkPhysicalDeviceProtectedMemoryProperties);
+        XCASE(PHYSICAL_DEVICE_CONSERVATIVE_RASTERIZATION_PROPERTIES_EXT,
+                VkPhysicalDeviceConservativeRasterizationPropertiesEXT);
     XPUSH_END
 ZPUSH_END
 
@@ -3549,9 +3566,9 @@ ZCHECK_END
  *------------------------------------------------------------------------------*/
 
 ZCHECK_BEGIN(VkProtectedSubmitInfo)
-	//checktable(arg);
+    //checktable(arg);
     newstruct(VkProtectedSubmitInfo);
-	GetBoolean(protectedSubmit, "protected_submit");
+    GetBoolean(protectedSubmit, "protected_submit");
 ZCHECK_END
 
 static ZCLEAR_BEGIN(VkSubmitInfo)
@@ -4381,6 +4398,14 @@ ZCHECK_END
 
 /*-------------------------------------------------------------------------------------*/
 
+ZCHECK_BEGIN(VkPipelineRasterizationConservativeStateCreateInfoEXT)
+    //checktable(arg);
+    newstruct(VkPipelineRasterizationConservativeStateCreateInfoEXT);
+    GetFlags(flags, "conservative_rasterization_state_create_flags");
+    GetConservativeRasterizationMode(conservativeRasterizationMode, "conservative_rasterization_mode");
+    GetNumber(extraPrimitiveOverestimationSize, "extra_primitive_overestimation_size");
+ZCHECK_END
+
 ZCHECK_BEGIN(VkPipelineRasterizationStateCreateInfo)
     checktable(arg);
     newstruct(VkPipelineRasterizationStateCreateInfo);
@@ -4395,6 +4420,18 @@ ZCHECK_BEGIN(VkPipelineRasterizationStateCreateInfo)
     GetNumber(depthBiasClamp, "depth_bias_clamp");
     GetNumber(depthBiasSlopeFactor, "depth_bias_slope_factor");
     GetNumberDef(lineWidth, "line_width", 1.0);
+    EXTENSIONS_BEGIN
+    if(ispresent("conservative_rasterization_state_create_flags") ||
+        ispresent("conservative_rasterization_mode") ||
+        ispresent("extra_primitive_overestimation_size"))
+        {
+        VkPipelineRasterizationConservativeStateCreateInfoEXT *p1 =
+            zcheckVkPipelineRasterizationConservativeStateCreateInfoEXT(L, arg, err);
+        if(*err < 0) { zfree(L, p1, 1); return p; }
+        else if(*err == ERR_NOTPRESENT) poperror();
+        else addtochain(chain, p1);
+        }
+    EXTENSIONS_END
 ZCHECK_END
 
 /*-------------------------------------------------------------------------------------*/
@@ -4457,7 +4494,7 @@ ZCHECK_BEGIN(VkPipelineMultisampleStateCreateInfo)
             zcheckVkPipelineSampleLocationsStateCreateInfoEXT(L, arg, err);
         if(*err < 0) { zfree(L, p1, 1); return p; }
         else if(*err == ERR_NOTPRESENT) poperror();
-        addtochain(chain, p1);
+        else addtochain(chain, p1);
         }
 #undef F
     EXTENSIONS_END

@@ -146,6 +146,16 @@ _supported_operations_: <<subgroupfeatureflags, subgroupfeatureflags>>, +
 _quad_operations_in_all_stages_: boolean, +
 pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkPhysicalDeviceProtectedMemoryProperties.html[VkPhysicalDeviceProtectedMemoryProperties]): +
 _protected_no_fault_: boolean, +
+pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkPhysicalDeviceConservativeRasterizationPropertiesEXT[VkPhysicalDeviceConservativeRasterizationPropertiesEXT], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_conservative_rasterization[VK_EXT_conservative_rasterization]): +
+_primitive_overestimation_size_: float, +
+_max_extra_primitive_overestimation_size_: float, +
+_extra_primitive_overestimation_size_granularity_: float, +
+_primitive_underestimation_: boolean, +
+_conservative_point_and_line_rasterization_: boolean, +
+_degenerate_triangles_rasterized_: boolean, +
+_degenerate_lines_rasterized_: boolean, +
+_fully_covered_fragment_shader_input_variable_: boolean, +
+_conservative_rasterization_post_depth_coverage_: boolean, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkPhysicalDeviceProperties2KHR.html[VkPhysicalDeviceProperties2KHR])#
 
 * [[physicaldeviceimageformatinfo]]
@@ -516,6 +526,8 @@ _wait_semaphores_: {<<semaphore, semaphore>>}, +
 _wait_dst_stage_mask_: {<<pipelinestageflags, pipelinestageflags>>}, +
 _command_buffers_: {<<command_buffer, command_buffer>>}, +
 _signal_semaphores_: {<<semaphore, semaphore>>}, +
+pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkProtectedSubmitInfo.html[VkProtectedSubmitInfo], Core 1.1): +
+_protected_submit_: boolean, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkSubmitInfo.html[VkSubmitInfo])#
 
 * [[bindsparseinfo]]
@@ -1210,6 +1222,10 @@ _depth_bias_constant_factor_: float, +
 _depth_bias_clamp_: float, +
 _depth_bias_slope_factor_: float, +
 _line_width_: float (defaults to 1.0), +
+pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkPipelineRasterizationStateCreateInfoEXT[VkPipelineRasterizationStateCreateInfoEXT], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_conservative_rasterization[VK_EXT_conservative_rasterization]): +
+_conservative_rasterization_state_create_flags_: <<pipelinerasterizationconservativestatecreateflags, pipelinerasterizationconservativestatecreateflags>>, +
+_conservative_rasterization_mode_: <<conservativerasterizationmode, conservativerasterizationmode>>, +
+_extra_primitive_overestimation_size_: float, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkPipelineRasterizationStateCreateInfo.html[VkPipelineRasterizationStateCreateInfo])#
 
 

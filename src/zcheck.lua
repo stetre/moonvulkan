@@ -276,6 +276,7 @@ local TYPED = {
    { "VkDisplayModeCreateInfoKHR", "DISPLAY_MODE_CREATE_INFO_KHR" },
    { "VkPhysicalDeviceSurfaceInfo2KHR", "PHYSICAL_DEVICE_SURFACE_INFO_2_KHR" },
    { "VkProtectedSubmitInfo", "PROTECTED_SUBMIT_INFO" },
+   { "VkPipelineRasterizationConservativeStateCreateInfoEXT", "PIPELINE_RASTERIZATION_CONSERVATIVE_STATE_CREATE_INFO_EXT" },
 }
 
 local TYPED_WIN32 = {

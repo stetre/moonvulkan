@@ -378,6 +378,9 @@ Reserved for future use (must be set to 0):
 [[pipelinecolorblendstatecreateflags]]
 [small]#*pipelinecolorblendstatecreateflags*: 0#
 
+[[pipelinerasterizationconservativestatecreateflags]]
+[small]#*pipelinerasterizationconservativestatecreateflags*: 0#
+
 [[pipelinedepthstencilstatecreateflags]]
 [small]#*pipelinedepthstencilstatecreateflags*: 0#
 

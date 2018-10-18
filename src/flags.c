@@ -3289,6 +3289,7 @@ static const struct luaL_Reg Functions[] =
         { "validationcachecreateflags", ReservedFlags }, /* VkValidationCacheCreateFlagsEXT */
         { "debugutilsmessengercallbackdataflags", ReservedFlags }, /* VkDebugUtilsMessengerCallbackDataFlagsEXT */
         { "debugutilsmessengercreateflags", ReservedFlags }, /* VkDebugUtilsMessengerCreateFlagsEXT */
+        { "pipelinerasterizationconservativestatecreateflags", ReservedFlags }, /* VkPipelineRasterizationConservativeStateCreateFlagsEXT */
 //      { "", ReservedFlags }, /*  */
         { NULL, NULL } /* sentinel */
     };
