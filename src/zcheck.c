@@ -4499,7 +4499,6 @@ ZCHECK_END
 
 /*-------------------------------------------------------------------------------------*/
 
-//@@ rimuovere "color_blend_advanced_state" nei doc e spostare i suoi campi in "color_blend_state"
 ZCHECK_BEGIN(VkPipelineColorBlendAdvancedStateCreateInfoEXT)
     //checktable(arg);
     newstruct(VkPipelineColorBlendAdvancedStateCreateInfoEXT);

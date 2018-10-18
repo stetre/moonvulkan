@@ -52,7 +52,7 @@ static int pushdisplaymode(lua_State *L, VkDisplayModeKHR display_mode, ud_t *pa
     return 1;
     }
 
-static int Create(lua_State *L) //@@DOC aggiungere versione con VkDisplayModeCreateInfoKHR
+static int Create(lua_State *L)
     {
     int err;
     ud_t *display_ud;
