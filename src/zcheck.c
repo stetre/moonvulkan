@@ -26,7 +26,17 @@
 #include "internal.h"
 
 #if 0
-/* Terminology used here:
+/* Notes for my future self
+ * ----------------------------------------------------------------------------
+ * This module replaces the original structs.* module for handling of Vulkan
+ * structs. A replacement was needed because the original module was not much
+ * consistent and too hard to extend. This new module is more consinstent, but
+ * less efficient because it dynamically allocates and deallocates every struct
+ * at need (however, the original module did so as well for most structs: I'm
+ * afraid that this is inevitable with the Vulkan extension system, if we don't
+ * know in advance how and how many structs are needed...).
+ *
+ * Terminology used here:
  * - A 'typed struct' is a vulkan struct having the sType and pNext fields.
  * - A 'untyped struct' is one lacking those two fields (and thus not extendable
  *   nor chainable).
@@ -35,74 +45,55 @@
  * - A 'fresh chain' is a pNext-chain of fresh structs.
  *
  * The following functions are declared for the generic VkXxx vulkan struct
- * (either typed or untyped), and implemented where actually needed:
+ * (either typed or untyped), and implemented where actually needed.
+ * The functions that have a 'int *err' parameter set it with ERR_SUCCESS (0)
+ * on success or with the relevant ERR_XXX code if an error occurrs (note that
+ * all error codes are <0 except for ERR_NOTPRESENT which is > 0).
  *
  * VkXxx* znewVkXxx(lua_State *L, int *err);
- * VkXxx* zcheckVkXxx(lua_State *L, int arg, int *err);
- * int    zpushVkXxx(luaState *L, VkXxx *p);
- * void   zfreeVkXxx(luaState *L, VkXxx *p, int base);
- * void   zclearVkXxx(luaState *L, VkXxx *p); (for internal use only)
  * VkXxx* znewarrayVkXxx(lua_State *L, uint32_t counter, int *err);
+ *        Allocate a fresh struct (or array of contiguous structs).
+ *        This allocates the base struct(s) only, with no pNext chain.
+ *
+ * VkXxx* znewchainVkXxx(lua_State *L, int *err);
+ * VkXxx* znewchainarrayVkXxx(lua_State *L, uint32_t count, int *err);
+ *        Allocate a fresh struct (or array of contiguous structs), together
+ *        with its full pNext chain (also fresh).
+ *        (see ZINIT for more details)
+ *
+ * VkXxx* zcheckVkXxx(lua_State *L, int arg, int *err);
  * VkXxx* zcheckarrayVkXxx(lua_State *L, int arg, uint32_t *count, int *err);
+ *        Similar to the standard luaL_checkxxx() functions: checks the
+ *        value on the Lua stack at index 'arg', allocates a fresh struct,
+ *        initializes it with the value and returns it.
+ *        (see ZCHECK for more details)
+ *
+ * int    zpushVkXxx(luaState *L, VkXxx *p);
+ *        Similar to the standard lua_pushxxx() functions: pushes the value
+ *        contained in the passed struct on top of the Lua stack.
+ *        (see ZPUSH for more details)
+ *
+ * void   zfreeVkXxx(luaState *L, VkXxx *p, int base);
  * void   zfreearrayVkXxx(lua_State *L, VkXxx *p, uint32_t count, int base);
- * int    zinitVkXxx(lua_State *L, VkXxx* p, int *err); 
- * Xxx*   znewchainVkXxx(lua_State *L, int *err);
- * Xxx*   znewchainarrayVkXxx(lua_State *L, uint32_t count, int *err);
+ *        Frees the passed struct (or array of contiguous structs), together
+ *        with any nested allocated content (either fields or pNext chain).
+ *    --> All structs returned by znew, znewchain, and zcheck and by their <--
+ *    --> array versions must be freed using zfree or zfreearray, and this <--
+ *    --> must be done also in case of error.                              <--
+ *        The 'base' parameters controls the freeing of the base struct(s):
+ *        - if base=0, the base struct is not freed (only its contents are)
+ *        - if base!=0, the base struct is freed together with its contents.
+ *        (Outside of this module always set base=1).
  *
- * - znewVkXxx() allocates a new VkXxx struct, zeroed out and with the sType
- *          field properly initialized (if VkXxx is typed).
- * - znewarrayVkXxx() does the same but for an array of contiguous VkXxx structs.
- *
- * - zcheckVkXxx() allocates a new VkXxx struct and initializes it with the
- *          value at index 'arg' on the Lua stack (this is similar to the 
- *          standard luaL_checkxxx() functions).
- * - zcheckarrayVkXxx() does the same but for an array of contiguous structs.
- *
- * - zpushVkXxx() pushes the contents of a VkXxx struct on the Lua stack
- *          (this is similar to lua_pushxxx() functions).
- *
- * - zfreeVkXxx() completely frees a VkXxx struct with its nested contents.
- *          Use this function to release the struct returned by znewVkXxx() or
- *          zcheckVkXxx() (even on failure @@!!!).
- *          If base!=0, the base struct is Free'd, if base=0 it is not (
- *          pass base=0 only for structs that are non-pointer fields of other
- *          structs, and thus must not be free'd).
- * - zfreearrayVkXxx() does the same but for an array of contiguous structs.
- *
- * - zinitVkXxx() adds to the passed VkXxx struct its pNext chain of extensions,
- *          all zeroed out and with their sType fields properly initialized.
- *          The passed VkXxx struct must be a fresh struct allocated with
- *          znewVkXxx() or znewarrayVkXxx().
- *          This function is used when empty structs must be passed to Vulkan
- *          for parameter retrieval.
- *
- * - zclearVkXxx() is auxiliary to zfree and should not be used directly outside
- *          this module. This function frees any allocated content of the VkXxx
- *          struct, excluding its pNext chain (if it has one).
- *          If the struct contains other structs, the function shall zfree them
- *          (with base=1 if they are pointers or base=0 otherwise), ie it shall
- *          free any nested chain.
- *          - For untyped structs the zclearVkXxx function must be defined as
- *          global, either as a function or as a NULL pointer (if there is no
- *          need for deallocations).
- *          For typed structs it need not be defined if there is no need for
- *          deallocations apart from the pNext chain. If there is such need it
- *          must be defined and it must be called in the switch of the zfreeaux()
- *          function, and only there (hence it should be static to this module).
+ * For internal use only:
+ * void   zclearVkXxx(luaState *L, VkXxx *p);           --> see ZCLEAR
+ * int    zinitVkXxx(lua_State *L, VkXxx* p, int *err); --> see ZINIT
  */
 #endif
 
 /********************************************************************************
  * Helper functions                                                             *
  ********************************************************************************/
-
-/* Structs chaining via pNext */
-#define pnextof(p_) (void**)&((p_)->pNext)
-#define addtochain(chain_, p_) \
-    do { if(p_) { *(chain_) = (p_); (chain_) = pnextof(p_); } } while(0)
-/* addtochain() appends the struct pointed to by p_ to the chain.
- * const void **chain_ must contains the address of the pNext field of the
- * struct that is currently last in the chain. */
 
 static int getfield(lua_State *L, int arg, const char *sname)
 /* Pushes field 'sname' from the table at arg, and returns its type (LUA_TXXX) */
@@ -111,6 +102,7 @@ static int getfield(lua_State *L, int arg, const char *sname)
 static int pushfield(lua_State *L, int arg, const char *sname)
 /* Pushes field 'sname' from the table at arg, and returns its stack index */
     { lua_pushstring(L, sname); lua_rawget(L, arg); return lua_gettop(L); }
+
 #define popfield    lua_remove
 #define poperror()  lua_pop(L, 1)
 #define pusherror() lua_pushstring(L, errstring(*err))
@@ -118,48 +110,93 @@ static int pushfield(lua_State *L, int arg, const char *sname)
 #define prependfield(name) \
     do { lua_pushfstring(L, "%s.%s", (name), lua_tostring(L, -1)); lua_remove(L, -2); } while(0)
 
+/* ZCHECK - Must be implemented for structs that must be passed from Lua to C */
 #define ZCHECK_BEGIN(VkXxx) VkXxx* zcheck##VkXxx(lua_State *L, int arg, int *err) { VkXxx *p; 
 #define ZCHECK_END *err=0; return p; }
 
+/* ZPUSH - Must be implemented for structs that must be passed from C to Lua */
 #define ZPUSH_BEGIN(VkXxx) int zpush##VkXxx(lua_State *L, const VkXxx *p) {
 #define ZPUSH_END return 1; }
 
+/* ZCLEAR - Must be implemented for structs that have allocated nested fields,
+ * other than the pNext chain. It must deallocate those fields, with any nested
+ * chain, but must not free the base struct pointed by p, or parts of it.
+ * Note that nested fields may appear as pointers or as fully embedded: if they
+ * are pointers they must be zfree()'d with base=1, otherwise with base=0).
+ * - The zclear function for a typed struct (if it need one) must be static and
+ *   an entry for it must be added to the switch in the zfreeaux function.
+ *-  The zclear function for an untyped struct must be either a global function
+ *   or globally defined as a NULL pointer (in case no deallocation is needed).
+ */
 #define ZCLEAR_BEGIN(VkXxx) void zclear##VkXxx(lua_State *L, const void *p_) { VkXxx *p =(VkXxx*)p_; 
 #define ZCLEAR_END }
 
-#define ZINIT_BEGIN(VkXxx) /* also implements the znewchain functions */\
+/* ZINIT - Must be implemented for structs that must be passed 'fresh' to Vulkan
+ * for parameters retrieval. Given a fresh struct, it must allocate fresh structs
+ * for its required extensions and add them to its pNext chain.
+ * The ZINIT_BEGIN macro also implements the znewchain functions, which are those
+ * actually used outside this module (zinit should not be used directly). */
+#define ZINIT_BEGIN(VkXxx)                                              \
 VkXxx* znewchain##VkXxx(lua_State *L, int *err)                         \
-    {                                                               \
-    VkXxx* p = znew##VkXxx(L, err);                                 \
-    if(*err) return NULL;                                           \
-    zinit##VkXxx(L, p, err);                                        \
-    if(*err) { zfree##VkXxx(L, p, 1); return NULL; }                \
-    return p;                                                       \
-    }                                                               \
+    {                                                                   \
+    VkXxx* p = znew##VkXxx(L, err);                                     \
+    if(*err) return NULL;                                               \
+    zinit##VkXxx(L, p, err);                                            \
+    if(*err) { zfree##VkXxx(L, p, 1); return NULL; }                    \
+    return p;                                                           \
+    }                                                                   \
 VkXxx* znewchainarray##VkXxx(lua_State *L, uint32_t count, int *err)    \
-    {                                                               \
-    uint32_t i;                                                     \
-    VkXxx* p = znewarray##VkXxx(L, count, err);                     \
-    if(*err) return NULL;                                           \
-    for(i=0; i<count; i++)                                          \
-        {                                                           \
-        zinit##VkXxx(L, &p[i], err);                                \
-        if(*err) { zfreearray##VkXxx(L, p, count, 1); return NULL; }\
-        }                                                           \
-    return p;                                                       \
-    }                                                               \
-int zinit##VkXxx(lua_State *L, VkXxx* p, int *err) {
+    {                                                                   \
+    uint32_t i;                                                         \
+    VkXxx* p = znewarray##VkXxx(L, count, err);                         \
+    if(*err) return NULL;                                               \
+    for(i=0; i<count; i++)                                              \
+        {                                                               \
+        zinit##VkXxx(L, &p[i], err);                                    \
+        if(*err) { zfreearray##VkXxx(L, p, count, 1); return NULL; }    \
+        }                                                               \
+    return p;                                                           \
+    }                                                                   \
+int zinit##VkXxx(lua_State *L, VkXxx* p, int *err) { (void)L; (void)(p);
 #define ZINIT_END *err=0; return *err;  }
 
+/* Structs chaining via pNext -------------------------------------------------*/
+#define pnextof(p_) (void**)&((p_)->pNext)
+#define addtochain(chain_, p_) \
+    do { if(p_) { *(chain_) = (p_); (chain_) = pnextof(p_); } } while(0)
+/* addtochain() appends the struct pointed to by p_ to the chain.
+ * const void **chain_ must contains the address of the pNext field of the
+ * struct that is currently last in the chain. */
+#define EXTENSIONS_BEGIN do { void **chain = pnextof(p);
+#define EXTENSIONS_END } while(0);
 
+/* These are for long chains of extensions like VkPhysicalDeviceFeatures2KHR,
+ * where the extensions structs are all typed, do not need a zclear, and only
+ * appear in these chains as extensions (so there is no need to define all the
+ * functions for them and we can use znew() and zfree() without wrappers).
+ * Notice that, in the Lua value, the fields of an extension struct are often
+ * promoted to the base table, so there is no lua_newtable() call in the zpush
+ * (or localpush) function, and no checktable() call in the zcheck function.
+ */
 #define ADDX(XXX, VkXxx) do {                                           \
-    VkXxx* p2 = znew(L, VK_STRUCTURE_TYPE_##XXX, sizeof(VkXxx), err);   \
-    if(*err) { zfree(L, p2, 1); return *err; }                          \
-    addtochain(chain, p2);                                              \
+    VkXxx* p1 = znew(L, VK_STRUCTURE_TYPE_##XXX, sizeof(VkXxx), err);   \
+    if(*err) { zfree(L, p1, 1); return *err; }                          \
+    addtochain(chain, p1);                                              \
 } while(0)
-#define LOCAL_PUSH_BEGIN(VkXxx) static int push##VkXxx(lua_State *L, const VkXxx *p) {
-#define LOCAL_PUSH_END return 1; }
-#define CASEX(XXX, VkXxx) case VK_STRUCTURE_TYPE_##XXX: push##VkXxx(L, (VkXxx*)pp); break
+
+/* defines a push function for local use only (localpushVkXxx). */
+#define LOCALPUSH_BEGIN(VkXxx) static int localpush##VkXxx(lua_State *L, const VkXxx *p) {
+#define LOCALPUSH_END return 1; }
+
+#define XPUSH_BEGIN do {                                                \
+    VkBaseOutStructure *pp_ = (VkBaseOutStructure*)p->pNext;            \
+        while(pp_) { switch(pp_->sType) {
+#define XCASE(XXX, VkXxx) case VK_STRUCTURE_TYPE_##XXX: localpush##VkXxx(L, (VkXxx*)pp_); break
+#define XPUSH_END                                                       \
+        default: unexpected(L); return 1; }                             \
+            pp_ = pp_->pNext; }                                         \
+} while(0);
+/*--------------------------------------------------------------------------*/
 
 static int checktable_(lua_State *L, int arg)
 #define checktable(arg) if((*err = checktable_(L, (arg)))!=0) return NULL
@@ -171,9 +208,6 @@ static int checktable_(lua_State *L, int arg)
     return 0;
     }
 #define newstruct(VkXxx) if((p = znew##VkXxx(L, err))==NULL) return NULL
-
-#define EXTENSIONS_BEGIN do { void **chain = pnextof(p);
-#define EXTENSIONS_END } while(0);
 
 static int ispresent_(lua_State *L, int arg, const char *sname)
 #define ispresent(sname) ispresent_(L, arg, (sname))
@@ -228,17 +262,19 @@ static VkFlags GetFlags_(lua_State *L, int arg, const char *sname, int *err)
     return flags;
     }
 
-#define GetFlags(name, sname)  do {             \
-    p->name = GetFlags_(L, arg, sname, err);    \
-    if(*err) return p;                          \
+#define GetFlags(name, sname)  do {                             \
+    p->name = GetFlags_(L, arg, sname, err);                    \
+    if(*err) return p;                                          \
 } while(0)
 
-#define GetBits(name, sname, T) do { /* same as GetFlags, but casts to T */ \
-    p->name = (T)GetFlags_(L, arg, sname, err); \
-    if(*err) return p;                          \
+#define GetBits(name, sname, T) do {                            \
+    /* same as GetFlags, but casts to T */                      \
+    p->name = (T)GetFlags_(L, arg, sname, err);                 \
+    if(*err) return p;                                          \
 } while(0)
 
 #define GetSamples(name, sname) do {                            \
+/* VkSampleCountFlags may be passed either as string or number (eg 1 or "1" for 1 bit) */\
     int arg_ = pushfield(L, arg, sname);                        \
     p->name = (VkSampleCountFlagBits)testflags(L, arg_, err);   \
     popfield(L, arg_);                                          \
@@ -255,13 +291,10 @@ static lua_Number GetNumberDef_(lua_State *L, int arg, const char *sname, lua_Nu
     lua_Number val = defval;
     int arg_ = pushfield(L, arg, sname);
     *err = 0;
-    if(lua_isnumber(L, arg_))
-        val = lua_tonumber(L, arg_);
-    else if(!lua_isnoneornil(L, arg_))
-        *err = ERR_TYPE;
+    if(lua_isnumber(L, arg_)) val = lua_tonumber(L, arg_);
+    else if(!lua_isnoneornil(L, arg_)) *err = ERR_TYPE;
     popfield(L, arg_);
-    if(*err)
-        pushfielderror(sname);
+    if(*err) pushfielderror(sname);
     return val;
     }
 
@@ -297,42 +330,39 @@ static lua_Integer GetInteger_(lua_State *L, int arg, const char *sname, lua_Int
 #define GetInteger(name, sname) GetIntegerOpt(name, sname, 0) /* defaults to 0 */ 
 #define GetHandle GetInteger /* uint64_t handle */
 
-#define GetNumArray_(name, sname, n, towhatx) do {          \
-    int arg2_, arg3_, t_, i_, isnum_;                       \
-    *err = 0;                                               \
-    arg2_ = pushfield(L, arg, sname);                       \
-    t_ = lua_type(L, arg2_);                                \
-    if(t_ != LUA_TTABLE)                                    \
-        {                                                   \
-        popfield(L, arg2_);                                 \
-        if(t_ == LUA_TNIL || t_ == LUA_TNONE)               \
-            *err = ERR_NOTPRESENT;                          \
-        else                                                \
-            { *err=ERR_TABLE; pushfielderror(sname); return p; }\
-        }                                                   \
-    else {                                                  \
-        for(i_=0; i_ <(n); i_++)                            \
-            {                                               \
-            lua_rawgeti(L, arg2_, i_+1);                    \
-            arg3_ = lua_gettop(L);                          \
-            p->name[i_] = towhatx(L, arg3_, &isnum_);       \
-            popfield(L, arg3_);                             \
-            if(!isnum_) { *err=ERR_TYPE; break; }           \
-            }                                               \
-        popfield(L, arg2_);                                 \
-        if(*err < 0)                                        \
-            {                                               \
-            switch(*err)                                    \
-                {                                           \
-                case ERR_TABLE:                             \
-                case ERR_MEMORY:                            \
-                case ERR_EMPTY:                             \
-                    pushfielderror(sname); return p;  \
-                default:                                    \
-                    prependfield(sname); return p;          \
-                }                                           \
-            }                                               \
-        }                                                   \
+#define GetNumArray_(name, sname, n, towhatx) do {                          \
+/* get a fixed-length n array of floats or integers */                      \
+    int arg1_, arg2_, t_, i_, isnum_;                                       \
+    *err = 0;                                                               \
+    arg1_ = pushfield(L, arg, sname);                                       \
+    t_ = lua_type(L, arg1_);                                                \
+    if(t_ != LUA_TTABLE)                                                    \
+        {                                                                   \
+        popfield(L, arg1_);                                                 \
+        if(t_ == LUA_TNIL || t_ == LUA_TNONE) { *err = ERR_NOTPRESENT; }    \
+        else { *err=ERR_TABLE; pushfielderror(sname); return p; }           \
+        }                                                                   \
+    else {                                                                  \
+        for(i_=0; i_ <(n); i_++)                                            \
+            {                                                               \
+            lua_rawgeti(L, arg1_, i_+1);                                    \
+            arg2_ = lua_gettop(L);                                          \
+            p->name[i_] = towhatx(L, arg2_, &isnum_);                       \
+            popfield(L, arg2_);                                             \
+            if(!isnum_) { *err=ERR_TYPE; break; }                           \
+            }                                                               \
+        popfield(L, arg1_);                                                 \
+        if(*err < 0)                                                        \
+            {                                                               \
+            switch(*err)                                                    \
+                {                                                           \
+                case ERR_TABLE:                                             \
+                case ERR_MEMORY:                                            \
+                case ERR_EMPTY: pushfielderror(sname); return p;            \
+                default:        prependfield(sname); return p;              \
+                }                                                           \
+            }                                                               \
+        }                                                                   \
 } while(0)
 
 #define GetIntegerArray(name, sname, n) GetNumArray_(name, sname, n, lua_tointegerx)
@@ -521,13 +551,13 @@ static const char *GetString_(lua_State *L, int arg, const char *sname, const ch
 
 #define GetStructArrayOpt(name, sname, n, VkXxx) do { /* arrays of fixed size */\
     VkXxx *tmp;                                                 \
-    int arg2_, arg3_, t_, i_;                                   \
-    arg2_ = pushfield(L, arg, sname);                           \
-    t_ = lua_type(L, arg2_);                                    \
+    int arg1_, arg2_, t_, i_;                                   \
+    arg1_ = pushfield(L, arg, sname);                           \
+    t_ = lua_type(L, arg1_);                                    \
     *err = 0;                                                   \
     if(t_ != LUA_TTABLE)                                        \
         {                                                       \
-        popfield(L, arg2_);                                     \
+        popfield(L, arg1_);                                     \
         if(t_ == LUA_TNIL || t_ == LUA_TNONE)                   \
             *err = ERR_NOTPRESENT;                              \
         else                                                    \
@@ -536,15 +566,15 @@ static const char *GetString_(lua_State *L, int arg, const char *sname, const ch
     else {                                                      \
         for(i_=0; i_ <(n); i_++)                                \
             {                                                   \
-            lua_rawgeti(L, arg2_, i_+1);                        \
-            arg3_ = lua_gettop(L);                              \
-            tmp = zcheck##VkXxx(L, arg3_, err);                 \
+            lua_rawgeti(L, arg1_, i_+1);                        \
+            arg2_ = lua_gettop(L);                              \
+            tmp = zcheck##VkXxx(L, arg2_, err);                 \
             if(tmp)                                             \
                 { memcpy(&(p->name[i_]), tmp, sizeof(VkXxx)); Free(L, tmp); } \
-            popfield(L, arg3_);                                 \
+            popfield(L, arg2_);                                 \
             if(*err < 0) break;                                 \
             }                                                   \
-        popfield(L, arg2_);                                     \
+        popfield(L, arg1_);                                     \
         if(*err < 0)                                            \
             {                                                   \
             switch(*err)                                        \
@@ -727,7 +757,7 @@ static const char *GetString_(lua_State *L, int arg, const char *sname, const ch
 #define ZCHECKARRAY(VkXxx)                                                  \
 VkXxx* zcheckarray##VkXxx(lua_State *L, int arg, uint32_t *count, int *err) \
     {                                                                       \
-    int arg1;                                                               \
+    int arg_;                                                               \
     VkXxx *list, *tmp;                                                      \
     uint32_t i;                                                             \
     *count = 0;                                                             \
@@ -745,11 +775,11 @@ VkXxx* zcheckarray##VkXxx(lua_State *L, int arg, uint32_t *count, int *err) \
     for(i=0; i<*count; i++)                                                 \
         {                                                                   \
         lua_rawgeti(L, arg, i+1);                                           \
-        arg1 = lua_gettop(L);                                               \
-        tmp = zcheck##VkXxx(L, arg1, err);                                  \
+        arg_ = lua_gettop(L);                                               \
+        tmp = zcheck##VkXxx(L, arg_, err);                                  \
         if(tmp)                                                             \
             { memcpy(&list[i], tmp, sizeof(VkXxx)); Free(L, tmp); }         \
-        lua_remove(L, arg1);                                                \
+        lua_remove(L, arg_);                                                \
         if(*err)                                                            \
             {                                                               \
             zfreearray##VkXxx(L, list, *count, 1);                          \
@@ -1674,10 +1704,10 @@ ZCHECK_BEGIN(VkPhysicalDeviceFeatures2)
     else if(*err == ERR_NOTPRESENT) poperror();
     EXTENSIONS_BEGIN
     #define ADD(VkXxx) do {                         \
-        VkXxx* p2 = zcheck##VkXxx(L, arg, err);     \
-        if(*err < 0) { zfree(L, p2, 1); return p; } \
+        VkXxx* p1 = zcheck##VkXxx(L, arg, err);     \
+        if(*err < 0) { zfree(L, p1, 1); return p; } \
         else if(*err == ERR_NOTPRESENT) poperror(); \
-        else addtochain(chain, p2);                 \
+        else addtochain(chain, p1);                 \
     } while(0)
         ADD(VkPhysicalDevice16BitStorageFeatures);
         ADD(VkPhysicalDeviceVariablePointerFeatures);
@@ -1691,7 +1721,7 @@ ZCHECK_BEGIN(VkPhysicalDeviceFeatures2)
     EXTENSIONS_END
 ZCHECK_END
 
-LOCAL_PUSH_BEGIN(VkPhysicalDeviceFeatures)
+LOCALPUSH_BEGIN(VkPhysicalDeviceFeatures)
     SetBoolean(robustBufferAccess, "robust_buffer_access");
     SetBoolean(fullDrawIndexUint32, "full_draw_index_uint_32");
     SetBoolean(imageCubeArray, "image_cube_array");
@@ -1747,68 +1777,61 @@ LOCAL_PUSH_BEGIN(VkPhysicalDeviceFeatures)
     SetBoolean(sparseResidencyAliased, "sparse_residency_aliased");
     SetBoolean(variableMultisampleRate, "variable_multisample_rate");
     SetBoolean(inheritedQueries, "inherited_queries");
-LOCAL_PUSH_END
-LOCAL_PUSH_BEGIN(VkPhysicalDevice16BitStorageFeatures)
+LOCALPUSH_END
+LOCALPUSH_BEGIN(VkPhysicalDevice16BitStorageFeatures)
     SetBoolean(storageBuffer16BitAccess, "storage_buffer_16bit_access");
     SetBoolean(uniformAndStorageBuffer16BitAccess, "uniform_and_storage_buffer_16bit_access");
     SetBoolean(storagePushConstant16, "storage_push_constant_16");
     SetBoolean(storageInputOutput16, "storage_input_output_16");
-LOCAL_PUSH_END 
-LOCAL_PUSH_BEGIN(VkPhysicalDeviceVariablePointerFeatures)
+LOCALPUSH_END
+LOCALPUSH_BEGIN(VkPhysicalDeviceVariablePointerFeatures)
     SetBoolean(variablePointersStorageBuffer, "variable_pointers_storage_buffer");
     SetBoolean(variablePointers, "variable_pointers");
-LOCAL_PUSH_END 
-LOCAL_PUSH_BEGIN(VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT)
+LOCALPUSH_END
+LOCALPUSH_BEGIN(VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT)
     SetBoolean(advancedBlendCoherentOperations, "advanced_blend_coherent_operations");
-LOCAL_PUSH_END 
-LOCAL_PUSH_BEGIN(VkPhysicalDeviceSamplerYcbcrConversionFeatures)
+LOCALPUSH_END
+LOCALPUSH_BEGIN(VkPhysicalDeviceSamplerYcbcrConversionFeatures)
     SetBoolean(samplerYcbcrConversion, "sampler_ycbcr_conversion");
-LOCAL_PUSH_END 
-LOCAL_PUSH_BEGIN(VkPhysicalDeviceConditionalRenderingFeaturesEXT)
+LOCALPUSH_END
+LOCALPUSH_BEGIN(VkPhysicalDeviceConditionalRenderingFeaturesEXT)
     SetBoolean(conditionalRendering, "conditional_rendering");
     SetBoolean(inheritedConditionalRendering, "inherited_conditional_rendering");
-LOCAL_PUSH_END 
-LOCAL_PUSH_BEGIN(VkPhysicalDevice8BitStorageFeaturesKHR)
+LOCALPUSH_END
+LOCALPUSH_BEGIN(VkPhysicalDevice8BitStorageFeaturesKHR)
     SetBoolean(storageBuffer8BitAccess, "storage_buffer_8bit_access");
     SetBoolean(uniformAndStorageBuffer8BitAccess, "uniform_and_storage_buffer_8bit_access");
     SetBoolean(storagePushConstant8, "storage_push_constant_8");
-LOCAL_PUSH_END 
-LOCAL_PUSH_BEGIN(VkPhysicalDeviceProtectedMemoryFeatures)
+LOCALPUSH_END
+LOCALPUSH_BEGIN(VkPhysicalDeviceProtectedMemoryFeatures)
     SetBoolean(protectedMemory, "protected_memory");
-LOCAL_PUSH_END 
-LOCAL_PUSH_BEGIN(VkPhysicalDeviceShaderDrawParameterFeatures)
+LOCALPUSH_END
+LOCALPUSH_BEGIN(VkPhysicalDeviceShaderDrawParameterFeatures)
     SetBoolean(shaderDrawParameters, "shader_draw_parameters");
-LOCAL_PUSH_END 
+LOCALPUSH_END
 
 ZPUSH_BEGIN(VkPhysicalDeviceFeatures)
     lua_newtable(L);
-    pushVkPhysicalDeviceFeatures(L, p);
+    localpushVkPhysicalDeviceFeatures(L, p);
 ZPUSH_END
 
 ZPUSH_BEGIN(VkPhysicalDeviceFeatures2)
-    VkPhysicalDeviceFeatures2 *pp = (VkPhysicalDeviceFeatures2*)p->pNext;
     lua_newtable(L);
-    pushVkPhysicalDeviceFeatures(L, &p->features);
-    while(pp)
-        {
-        switch(pp->sType)
-            {
-            CASEX(PHYSICAL_DEVICE_16BIT_STORAGE_FEATURES, VkPhysicalDevice16BitStorageFeatures);
-            CASEX(PHYSICAL_DEVICE_VARIABLE_POINTER_FEATURES, VkPhysicalDeviceVariablePointerFeatures);
-            CASEX(PHYSICAL_DEVICE_BLEND_OPERATION_ADVANCED_FEATURES_EXT, 
-                    VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT);
-            CASEX(PHYSICAL_DEVICE_SAMPLER_YCBCR_CONVERSION_FEATURES,
-                    VkPhysicalDeviceSamplerYcbcrConversionFeatures);
-            CASEX(PHYSICAL_DEVICE_CONDITIONAL_RENDERING_FEATURES_EXT,
-                    VkPhysicalDeviceConditionalRenderingFeaturesEXT);
-            CASEX(PHYSICAL_DEVICE_8BIT_STORAGE_FEATURES_KHR , VkPhysicalDevice8BitStorageFeaturesKHR);
-            CASEX(PHYSICAL_DEVICE_PROTECTED_MEMORY_FEATURES, VkPhysicalDeviceProtectedMemoryFeatures);
-            CASEX(PHYSICAL_DEVICE_SHADER_DRAW_PARAMETER_FEATURES,
-                    VkPhysicalDeviceShaderDrawParameterFeatures);
-            default: unexpected(L); return 1;
-            }
-        pp = (VkPhysicalDeviceFeatures2*)pp->pNext;
-        }
+    localpushVkPhysicalDeviceFeatures(L, &p->features);
+    XPUSH_BEGIN
+        XCASE(PHYSICAL_DEVICE_16BIT_STORAGE_FEATURES, VkPhysicalDevice16BitStorageFeatures);
+        XCASE(PHYSICAL_DEVICE_VARIABLE_POINTER_FEATURES, VkPhysicalDeviceVariablePointerFeatures);
+        XCASE(PHYSICAL_DEVICE_BLEND_OPERATION_ADVANCED_FEATURES_EXT,
+                VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT);
+        XCASE(PHYSICAL_DEVICE_SAMPLER_YCBCR_CONVERSION_FEATURES,
+                VkPhysicalDeviceSamplerYcbcrConversionFeatures);
+        XCASE(PHYSICAL_DEVICE_CONDITIONAL_RENDERING_FEATURES_EXT,
+                VkPhysicalDeviceConditionalRenderingFeaturesEXT);
+        XCASE(PHYSICAL_DEVICE_8BIT_STORAGE_FEATURES_KHR , VkPhysicalDevice8BitStorageFeaturesKHR);
+        XCASE(PHYSICAL_DEVICE_PROTECTED_MEMORY_FEATURES, VkPhysicalDeviceProtectedMemoryFeatures);
+        XCASE(PHYSICAL_DEVICE_SHADER_DRAW_PARAMETER_FEATURES,
+                VkPhysicalDeviceShaderDrawParameterFeatures);
+    XPUSH_END
 ZPUSH_END
 
 /*------------------------------------------------------------------------------*
@@ -1936,7 +1959,7 @@ ZPUSH_END
 
 /*------------------------------------------------------------------------------*/
 
-LOCAL_PUSH_BEGIN(VkPhysicalDeviceProperties)
+LOCALPUSH_BEGIN(VkPhysicalDeviceProperties)
     SetInteger(apiVersion, "api_version");
     SetInteger(driverVersion, "driver_version");
     SetInteger(vendorID, "vendor_id");
@@ -1946,54 +1969,54 @@ LOCAL_PUSH_BEGIN(VkPhysicalDeviceProperties)
     SetUUID(pipelineCacheUUID, "pipeline_cache_uuid", VK_UUID_SIZE);
     SetStruct(limits, "limits", VkPhysicalDeviceLimits);
     SetStruct(sparseProperties, "sparse_properties", VkPhysicalDeviceSparseProperties);
-LOCAL_PUSH_END
-LOCAL_PUSH_BEGIN(VkPhysicalDevicePushDescriptorPropertiesKHR)
+LOCALPUSH_END
+LOCALPUSH_BEGIN(VkPhysicalDevicePushDescriptorPropertiesKHR)
     SetInteger(maxPushDescriptors, "max_push_descriptors");
-LOCAL_PUSH_END
-LOCAL_PUSH_BEGIN(VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT)
+LOCALPUSH_END
+LOCALPUSH_BEGIN(VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT)
     SetInteger(advancedBlendMaxColorAttachments, "advanced_blend_max_color_attachments");
     SetBoolean(advancedBlendIndependentBlend, "advanced_blend_independent_blend");
     SetBoolean(advancedBlendNonPremultipliedSrcColor, "advanced_blend_non_premultiplied_src_color");
     SetBoolean(advancedBlendNonPremultipliedDstColor, "advanced_blend_non_premultiplied_dst_color");
     SetBoolean(advancedBlendCorrelatedOverlap, "advanced_blend_correlated_overlap");
     SetBoolean(advancedBlendAllOperations, "advanced_blend_all_operations");
-LOCAL_PUSH_END
-LOCAL_PUSH_BEGIN(VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT)
+LOCALPUSH_END
+LOCALPUSH_BEGIN(VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT)
     SetBoolean(filterMinmaxSingleComponentFormats, "filter_minmax_single_component_formats");
     SetBoolean(filterMinmaxImageComponentMapping, "filter_minmax_image_component_mapping");
-LOCAL_PUSH_END
-LOCAL_PUSH_BEGIN(VkPhysicalDeviceDiscardRectanglePropertiesEXT)
+LOCALPUSH_END
+LOCALPUSH_BEGIN(VkPhysicalDeviceDiscardRectanglePropertiesEXT)
     SetInteger(maxDiscardRectangles, "max_discard_rectangles");
-LOCAL_PUSH_END
-LOCAL_PUSH_BEGIN(VkPhysicalDeviceIDProperties)
+LOCALPUSH_END
+LOCALPUSH_BEGIN(VkPhysicalDeviceIDProperties)
     SetUUID(deviceUUID, "device_uuid", VK_UUID_SIZE);
     SetUUID(driverUUID, "driver_uuid", VK_UUID_SIZE);
     SetUUID(deviceLUID, "device_luid", VK_LUID_SIZE);
     SetInteger(deviceNodeMask, "device_node_mask");
     SetBoolean(deviceLUIDValid, "device_luid_valid");
-LOCAL_PUSH_END
-LOCAL_PUSH_BEGIN(VkPhysicalDevicePointClippingProperties)
+LOCALPUSH_END
+LOCALPUSH_BEGIN(VkPhysicalDevicePointClippingProperties)
     SetEnum(pointClippingBehavior, "point_clipping_behavior", pushpointclippingbehavior);
-LOCAL_PUSH_END
-LOCAL_PUSH_BEGIN(VkPhysicalDeviceSampleLocationsPropertiesEXT)
+LOCALPUSH_END
+LOCALPUSH_BEGIN(VkPhysicalDeviceSampleLocationsPropertiesEXT)
     SetFlags(sampleLocationSampleCounts, "sample_location_sample_counts");
     SetStruct(maxSampleLocationGridSize, "max_sample_location_grid_size", VkExtent2D);
     SetNumberArray(sampleLocationCoordinateRange, "sample_location_coordinate_range", 2);
     SetInteger(sampleLocationSubPixelBits, "sample_location_sub_pixel_bits");
     SetBoolean(variableSampleLocations, "variable_sample_locations");
-LOCAL_PUSH_END
-LOCAL_PUSH_BEGIN(VkPhysicalDeviceMaintenance3Properties)
+LOCALPUSH_END
+LOCALPUSH_BEGIN(VkPhysicalDeviceMaintenance3Properties)
     SetInteger(maxPerSetDescriptors, "max_per_set_descriptors");
     SetInteger(maxMemoryAllocationSize, "max_memory_allocation_size");
-LOCAL_PUSH_END
-LOCAL_PUSH_BEGIN(VkPhysicalDeviceSubgroupProperties)
+LOCALPUSH_END
+LOCALPUSH_BEGIN(VkPhysicalDeviceSubgroupProperties)
     SetFlags(supportedStages, "supported_stages");
     SetFlags(supportedOperations, "supported_operations");
     SetBoolean(quadOperationsInAllStages, "quad_operations_in_all_stages");
-LOCAL_PUSH_END
-LOCAL_PUSH_BEGIN(VkPhysicalDeviceProtectedMemoryProperties)
+LOCALPUSH_END
+LOCALPUSH_BEGIN(VkPhysicalDeviceProtectedMemoryProperties)
     SetBoolean(protectedNoFault, "protected_no_fault");
-LOCAL_PUSH_END
+LOCALPUSH_END
 
 ZINIT_BEGIN(VkPhysicalDeviceProperties2)
     EXTENSIONS_BEGIN
@@ -2017,82 +2040,64 @@ ZINIT_END
 
 ZPUSH_BEGIN(VkPhysicalDeviceProperties)
     lua_newtable(L);
-    pushVkPhysicalDeviceProperties(L, p);
+    localpushVkPhysicalDeviceProperties(L, p);
 ZPUSH_END
 
 ZPUSH_BEGIN(VkPhysicalDeviceProperties2)
-    VkPhysicalDeviceProperties2 *pp = (VkPhysicalDeviceProperties2*)p->pNext;
     lua_newtable(L);
-    pushVkPhysicalDeviceProperties(L, &p->properties);
-    while(pp)
-        {
-        switch(pp->sType)
-            {
-            CASEX(PHYSICAL_DEVICE_PUSH_DESCRIPTOR_PROPERTIES_KHR,
-                    VkPhysicalDevicePushDescriptorPropertiesKHR);
-            CASEX(PHYSICAL_DEVICE_BLEND_OPERATION_ADVANCED_PROPERTIES_EXT,
-                    VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT);
-            CASEX(PHYSICAL_DEVICE_SAMPLER_FILTER_MINMAX_PROPERTIES_EXT,
-                    VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT);
-            CASEX(PHYSICAL_DEVICE_DISCARD_RECTANGLE_PROPERTIES_EXT,
-                    VkPhysicalDeviceDiscardRectanglePropertiesEXT);
-            CASEX(PHYSICAL_DEVICE_ID_PROPERTIES, VkPhysicalDeviceIDProperties);
-            CASEX(PHYSICAL_DEVICE_POINT_CLIPPING_PROPERTIES,
-                    VkPhysicalDevicePointClippingProperties);
-            CASEX(PHYSICAL_DEVICE_SAMPLE_LOCATIONS_PROPERTIES_EXT,
-                    VkPhysicalDeviceSampleLocationsPropertiesEXT);
-            CASEX(PHYSICAL_DEVICE_MAINTENANCE_3_PROPERTIES,
-                    VkPhysicalDeviceMaintenance3Properties);
-            CASEX(PHYSICAL_DEVICE_SUBGROUP_PROPERTIES, VkPhysicalDeviceSubgroupProperties);
-            CASEX(PHYSICAL_DEVICE_PROTECTED_MEMORY_PROPERTIES,
-                    VkPhysicalDeviceProtectedMemoryProperties);
-            default: unexpected(L); return 1;
-            }
-        pp = (VkPhysicalDeviceProperties2*)pp->pNext;
-        }
+    localpushVkPhysicalDeviceProperties(L, &p->properties);
+    XPUSH_BEGIN
+        XCASE(PHYSICAL_DEVICE_PUSH_DESCRIPTOR_PROPERTIES_KHR,
+                 VkPhysicalDevicePushDescriptorPropertiesKHR);
+        XCASE(PHYSICAL_DEVICE_BLEND_OPERATION_ADVANCED_PROPERTIES_EXT,
+                 VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT);
+        XCASE(PHYSICAL_DEVICE_SAMPLER_FILTER_MINMAX_PROPERTIES_EXT,
+                 VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT);
+        XCASE(PHYSICAL_DEVICE_DISCARD_RECTANGLE_PROPERTIES_EXT,
+                 VkPhysicalDeviceDiscardRectanglePropertiesEXT);
+        XCASE(PHYSICAL_DEVICE_ID_PROPERTIES, VkPhysicalDeviceIDProperties);
+        XCASE(PHYSICAL_DEVICE_POINT_CLIPPING_PROPERTIES, VkPhysicalDevicePointClippingProperties);
+        XCASE(PHYSICAL_DEVICE_SAMPLE_LOCATIONS_PROPERTIES_EXT,
+                 VkPhysicalDeviceSampleLocationsPropertiesEXT);
+        XCASE(PHYSICAL_DEVICE_MAINTENANCE_3_PROPERTIES, VkPhysicalDeviceMaintenance3Properties);
+        XCASE(PHYSICAL_DEVICE_SUBGROUP_PROPERTIES, VkPhysicalDeviceSubgroupProperties);
+        XCASE(PHYSICAL_DEVICE_PROTECTED_MEMORY_PROPERTIES, VkPhysicalDeviceProtectedMemoryProperties);
+    XPUSH_END
 ZPUSH_END
 
 /*------------------------------------------------------------------------------*
  | Format Properties                                                            |
  *------------------------------------------------------------------------------*/
 
-LOCAL_PUSH_BEGIN(VkFormatProperties)
+LOCALPUSH_BEGIN(VkFormatProperties)
     SetFlags(linearTilingFeatures, "linear_tiling_features");
     SetFlags(optimalTilingFeatures, "optimal_tiling_features");
     SetFlags(bufferFeatures, "buffer_features");
-LOCAL_PUSH_END
+LOCALPUSH_END
 
 ZINIT_BEGIN(VkFormatProperties2)
-    EXTENSIONS_BEGIN
-        (void)L; (void)chain; //ADDX(XXX, Xxx);
-    EXTENSIONS_END
+    //EXTENSIONS_BEGIN
+    //  ADDX(XXX, Xxx);
+    //EXTENSIONS_END
 ZINIT_END
 
 ZPUSH_BEGIN(VkFormatProperties)
     lua_newtable(L);
-    pushVkFormatProperties(L, p);
+    localpushVkFormatProperties(L, p);
 ZPUSH_END
 
 ZPUSH_BEGIN(VkFormatProperties2)
-    VkFormatProperties2 *pp = (VkFormatProperties2*)p->pNext;
     lua_newtable(L);
-    pushVkFormatProperties(L, &p->formatProperties);
-    while(pp)
-        {
-        switch(pp->sType)
-            {
-            // CASEX(XXX, Xxx);
-            default: unexpected(L); return 1;
-            }
-        pp = (VkFormatProperties2*)pp->pNext;
-        }
+    localpushVkFormatProperties(L, &p->formatProperties);
+    //XPUSH_BEGIN
+    //XPUSH_END
 ZPUSH_END
 
 /*------------------------------------------------------------------------------*
  | Physical Device Memory Properties                                            |
  *------------------------------------------------------------------------------*/
 
-static int pushVkMemoryType(lua_State *L, const VkMemoryType *p, uint32_t index)
+static int localpushVkMemoryType(lua_State *L, const VkMemoryType *p, uint32_t index)
     {
     lua_newtable(L);
     lua_pushinteger(L, index); lua_setfield(L, -2, "memory_type_index");
@@ -2100,7 +2105,7 @@ static int pushVkMemoryType(lua_State *L, const VkMemoryType *p, uint32_t index)
     SetInteger(heapIndex, "heap_index");
     return 1;
     }
-static int pushVkMemoryHeap(lua_State *L, const VkMemoryHeap *p, uint32_t index)
+static int localpushVkMemoryHeap(lua_State *L, const VkMemoryHeap *p, uint32_t index)
     {
     lua_newtable(L);
     lua_pushinteger(L, index); lua_setfield(L, -2, "memory_heap_index");
@@ -2109,7 +2114,7 @@ static int pushVkMemoryHeap(lua_State *L, const VkMemoryHeap *p, uint32_t index)
     return 1;
     }
 
-LOCAL_PUSH_BEGIN(VkPhysicalDeviceMemoryProperties)
+LOCALPUSH_BEGIN(VkPhysicalDeviceMemoryProperties)
     uint32_t i;
     uint32_t tcount, hcount;
     tcount = (p->memoryTypeCount > VK_MAX_MEMORY_TYPES) ? VK_MAX_MEMORY_TYPES : p->memoryTypeCount;
@@ -2118,62 +2123,54 @@ LOCAL_PUSH_BEGIN(VkPhysicalDeviceMemoryProperties)
     lua_newtable(L);
     for(i = 0; i < tcount; i++)
         {
-        pushVkMemoryType(L, &(p->memoryTypes[i]), i);
+        localpushVkMemoryType(L, &(p->memoryTypes[i]), i);
         lua_rawseti(L, -2, i+1);
         }
     lua_setfield(L, -2, "memory_types");
     lua_newtable(L);
     for(i = 0; i < hcount; i++)
         {
-        pushVkMemoryHeap(L, &(p->memoryHeaps[i]), i);
+        localpushVkMemoryHeap(L, &(p->memoryHeaps[i]), i);
         lua_rawseti(L, -2, i+1);
         }
     lua_setfield(L, -2, "memory_heaps");
-LOCAL_PUSH_END
+LOCALPUSH_END
 
 ZINIT_BEGIN(VkPhysicalDeviceMemoryProperties2)
-    EXTENSIONS_BEGIN
-        (void)L; (void)chain; //ADDX(XXX, Xxx);
-    EXTENSIONS_END
+    //EXTENSIONS_BEGIN
+    //  ADDX(XXX, Xxx);
+    //EXTENSIONS_END
 ZINIT_END
 
 ZPUSH_BEGIN(VkPhysicalDeviceMemoryProperties)
     lua_newtable(L);
-    pushVkPhysicalDeviceMemoryProperties(L, p);
+    localpushVkPhysicalDeviceMemoryProperties(L, p);
 ZPUSH_END
 
 ZPUSH_BEGIN(VkPhysicalDeviceMemoryProperties2)
-    VkPhysicalDeviceMemoryProperties2 *pp = (VkPhysicalDeviceMemoryProperties2*)p->pNext;
     lua_newtable(L);
-    pushVkPhysicalDeviceMemoryProperties(L, &p->memoryProperties);
-    while(pp)
-        {
-        switch(pp->sType)
-            {
-            // CASEX(XXX, Xxx);
-            default: unexpected(L); return 1;
-            }
-        pp = (VkPhysicalDeviceMemoryProperties2*)pp->pNext;
-        }
+    localpushVkPhysicalDeviceMemoryProperties(L, &p->memoryProperties);
+    //XPUSH_BEGIN
+    //XPUSH_END
 ZPUSH_END
 
 /*------------------------------------------------------------------------------*
  | Image Format Properties                                                      |
  *------------------------------------------------------------------------------*/
 
-LOCAL_PUSH_BEGIN(VkImageFormatProperties)
+LOCALPUSH_BEGIN(VkImageFormatProperties)
     SetStruct(maxExtent, "max_extent", VkExtent3D);
     SetInteger(maxMipLevels, "max_mip_levels");
     SetInteger(maxArrayLayers, "max_array_layers");
     SetInteger(sampleCounts, "sample_counts");
     SetInteger(maxResourceSize, "max_resource_size");
-LOCAL_PUSH_END
-LOCAL_PUSH_BEGIN(VkSamplerYcbcrConversionImageFormatProperties)
+LOCALPUSH_END
+LOCALPUSH_BEGIN(VkSamplerYcbcrConversionImageFormatProperties)
     SetInteger(combinedImageSamplerDescriptorCount, "combined_image_sampler_descriptor_count");
-LOCAL_PUSH_END
-LOCAL_PUSH_BEGIN(VkExternalImageFormatProperties)
+LOCALPUSH_END
+LOCALPUSH_BEGIN(VkExternalImageFormatProperties)
     SetStruct(externalMemoryProperties, "external_memory_properties", VkExternalMemoryProperties);
-LOCAL_PUSH_END
+LOCALPUSH_END
 
 ZINIT_BEGIN(VkImageFormatProperties2)
     EXTENSIONS_BEGIN
@@ -2185,60 +2182,45 @@ ZINIT_END
 
 ZPUSH_BEGIN(VkImageFormatProperties)
     lua_newtable(L);
-    pushVkImageFormatProperties(L, p);
+    localpushVkImageFormatProperties(L, p);
 ZPUSH_END
 
 ZPUSH_BEGIN(VkImageFormatProperties2)
-    VkImageFormatProperties2 *pp = (VkImageFormatProperties2*)p->pNext;
     lua_newtable(L);
-    pushVkImageFormatProperties(L, &p->imageFormatProperties);
-    while(pp)
-        {
-        switch(pp->sType)
-            {
-            CASEX(SAMPLER_YCBCR_CONVERSION_IMAGE_FORMAT_PROPERTIES, 
-                    VkSamplerYcbcrConversionImageFormatProperties);
-            CASEX(EXTERNAL_IMAGE_FORMAT_PROPERTIES, VkExternalImageFormatProperties);
-            default: unexpected(L); return 1;
-            }
-        pp = (VkImageFormatProperties2*)pp->pNext;
-        }
+    localpushVkImageFormatProperties(L, &p->imageFormatProperties);
+    XPUSH_BEGIN
+        XCASE(SAMPLER_YCBCR_CONVERSION_IMAGE_FORMAT_PROPERTIES,
+                VkSamplerYcbcrConversionImageFormatProperties);
+        XCASE(EXTERNAL_IMAGE_FORMAT_PROPERTIES, VkExternalImageFormatProperties);
+    XPUSH_END
 ZPUSH_END
 
 /*------------------------------------------------------------------------------*
  | Sparse Image Format Properties                                               |
  *------------------------------------------------------------------------------*/
 
-LOCAL_PUSH_BEGIN(VkSparseImageFormatProperties)
+LOCALPUSH_BEGIN(VkSparseImageFormatProperties)
     SetFlags(aspectMask, "aspect_mask");
     SetStruct(imageGranularity, "image_granularity", VkExtent3D);
     SetFlags(flags, "flags");
-LOCAL_PUSH_END
+LOCALPUSH_END
 
 ZINIT_BEGIN(VkSparseImageFormatProperties2)
-    EXTENSIONS_BEGIN
-        (void)L; (void)chain; //ADDX(XXX, Xxx);
-    EXTENSIONS_END
+    //EXTENSIONS_BEGIN
+    //  ADDX(XXX, Xxx);
+    //EXTENSIONS_END
 ZINIT_END
 
 ZPUSH_BEGIN(VkSparseImageFormatProperties)
     lua_newtable(L);
-    pushVkSparseImageFormatProperties(L, p);
+    localpushVkSparseImageFormatProperties(L, p);
 ZPUSH_END
 
 ZPUSH_BEGIN(VkSparseImageFormatProperties2)
-    VkSparseImageFormatProperties2 *pp = (VkSparseImageFormatProperties2*)p->pNext;
     lua_newtable(L);
-    pushVkSparseImageFormatProperties(L, &p->properties);
-    while(pp)
-        {
-        switch(pp->sType)
-            {
-            //CASEX(XXX, Xxx);
-            default: unexpected(L); return 1;
-            }
-        pp = (VkSparseImageFormatProperties2*)pp->pNext;
-        }
+    localpushVkSparseImageFormatProperties(L, &p->properties);
+    //XPUSH_BEGIN
+    //XPUSH_END
 ZPUSH_END
 
 
@@ -2290,7 +2272,7 @@ ZINIT_END
  | Surface Capabilities                                                         |
  *------------------------------------------------------------------------------*/
 
-LOCAL_PUSH_BEGIN(VkSurfaceCapabilitiesKHR)
+LOCALPUSH_BEGIN(VkSurfaceCapabilitiesKHR)
     SetInteger(minImageCount, "min_image_count");
     SetInteger(maxImageCount, "max_image_count");
     if(p->currentExtent.width != (uint32_t)-1)
@@ -2307,10 +2289,10 @@ LOCAL_PUSH_BEGIN(VkSurfaceCapabilitiesKHR)
     SetBits(currentTransform, "current_transform");
     SetFlags(supportedCompositeAlpha, "supported_composite_alpha");
     SetFlags(supportedUsageFlags, "supported_usage_flags");
-LOCAL_PUSH_END
-LOCAL_PUSH_BEGIN(VkSharedPresentSurfaceCapabilitiesKHR)
+LOCALPUSH_END
+LOCALPUSH_BEGIN(VkSharedPresentSurfaceCapabilitiesKHR)
     SetFlags(sharedPresentSupportedUsageFlags, "shared_present_supported_usage_flags");
-LOCAL_PUSH_END
+LOCALPUSH_END
 
 ZINIT_BEGIN(VkSurfaceCapabilities2KHR)
     EXTENSIONS_BEGIN
@@ -2320,57 +2302,42 @@ ZINIT_END
 
 ZPUSH_BEGIN(VkSurfaceCapabilitiesKHR)
     lua_newtable(L);
-    pushVkSurfaceCapabilitiesKHR(L, p);
+    localpushVkSurfaceCapabilitiesKHR(L, p);
 ZPUSH_END
 
 ZPUSH_BEGIN(VkSurfaceCapabilities2KHR)
-    VkSurfaceCapabilities2KHR *pp = (VkSurfaceCapabilities2KHR*)p->pNext;
     lua_newtable(L);
-    pushVkSurfaceCapabilitiesKHR(L, &p->surfaceCapabilities);
-    while(pp)
-        {
-        switch(pp->sType)
-            {
-            CASEX(SHARED_PRESENT_SURFACE_CAPABILITIES_KHR, VkSharedPresentSurfaceCapabilitiesKHR);
-            default: unexpected(L); return 1;
-            }
-        pp = (VkSurfaceCapabilities2KHR*)pp->pNext;
-        }
+    localpushVkSurfaceCapabilitiesKHR(L, &p->surfaceCapabilities);
+    XPUSH_BEGIN
+        XCASE(SHARED_PRESENT_SURFACE_CAPABILITIES_KHR, VkSharedPresentSurfaceCapabilitiesKHR);
+    XPUSH_END
 ZPUSH_END
 
 /*------------------------------------------------------------------------------*
  | Surface Format                                                               |
  *------------------------------------------------------------------------------*/
 
-LOCAL_PUSH_BEGIN(VkSurfaceFormatKHR)
+LOCALPUSH_BEGIN(VkSurfaceFormatKHR)
     SetEnum(format, "format", pushformat);
     SetEnum(colorSpace, "color_space", pushcolorspace);
-LOCAL_PUSH_END
+LOCALPUSH_END
 
 ZINIT_BEGIN(VkSurfaceFormat2KHR)
-    EXTENSIONS_BEGIN
-        (void)L; (void)chain; //ADDX(XXX, Xxx);
-    EXTENSIONS_END
+    //EXTENSIONS_BEGIN
+    //  ADDX(XXX, Xxx);
+    //EXTENSIONS_END
 ZINIT_END
 
 ZPUSH_BEGIN(VkSurfaceFormatKHR)
     lua_newtable(L);
-    pushVkSurfaceFormatKHR(L, p);
+    localpushVkSurfaceFormatKHR(L, p);
 ZPUSH_END
 
 ZPUSH_BEGIN(VkSurfaceFormat2KHR)
-    VkSurfaceFormat2KHR *pp = (VkSurfaceFormat2KHR*)p->pNext;
     lua_newtable(L);
-    pushVkSurfaceFormatKHR(L, &p->surfaceFormat);
-    while(pp)
-        {
-        switch(pp->sType)
-            {
-            //CASEX(XXX, Xxx);
-            default: unexpected(L); return 1;
-            }
-        pp = (VkSurfaceFormat2KHR*)pp->pNext;
-        }
+    localpushVkSurfaceFormatKHR(L, &p->surfaceFormat);
+    //XPUSH_BEGIN
+    //XPUSH_END
 ZPUSH_END
 
 /*------------------------------------------------------------------------------*
@@ -2387,56 +2354,48 @@ ZCHECK_END
  | Queue Family Properties                                                      |
  *------------------------------------------------------------------------------*/
 
-//LOCAL_PUSH_BEGIN(VkQueueFamilyProperties)
-static int pushVkQueueFamilyProperties(lua_State *L, const VkQueueFamilyProperties *p, uint32_t index) {
+//LOCALPUSH_BEGIN(VkQueueFamilyProperties)
+static int localpushVkQueueFamilyProperties(lua_State *L, const VkQueueFamilyProperties *p, uint32_t index) {
     lua_pushinteger(L, index); lua_setfield(L, -2, "queue_family_index");
     SetFlags(queueFlags, "queue_flags");
     SetInteger(queueCount, "queue_count");
     SetInteger(timestampValidBits, "timestamp_valid_bits");
     SetStruct(minImageTransferGranularity, "min_image_transfer_granularity", VkExtent3D);
-LOCAL_PUSH_END
+LOCALPUSH_END
 
 ZINIT_BEGIN(VkQueueFamilyProperties2KHR)
-    EXTENSIONS_BEGIN
-        (void)L; (void)chain; //ADDX(XXX, Xxx);
-    EXTENSIONS_END
+    //EXTENSIONS_BEGIN
+    //  ADDX(XXX, Xxx);
+    //EXTENSIONS_END
 ZINIT_END
 
 //ZPUSH_BEGIN(VkQueueFamilyProperties)
 int zpushVkQueueFamilyProperties(lua_State *L, const VkQueueFamilyProperties *p, uint32_t index) {
     lua_newtable(L);
-    pushVkQueueFamilyProperties(L, p, index);
+    localpushVkQueueFamilyProperties(L, p, index);
 ZPUSH_END
 
 //ZPUSH_BEGIN(VkQueueFamilyProperties2KHR)
 int zpushVkQueueFamilyProperties2KHR(lua_State *L, const VkQueueFamilyProperties2KHR *p, uint32_t index) {
-    VkQueueFamilyProperties2KHR* pp = (VkQueueFamilyProperties2KHR*)p->pNext;
     lua_newtable(L);
-    pushVkQueueFamilyProperties(L, &p->queueFamilyProperties, index);
-    while(pp)
-        {
-        switch(pp->sType)
-            {
-            //CASEX(XXX, Xxx);
-            default: unexpected(L); return 1;
-            }
-        pp = (VkQueueFamilyProperties2KHR*)pp->pNext;
-        }
+    localpushVkQueueFamilyProperties(L, &p->queueFamilyProperties, index);
+    //XPUSH_BEGIN
+    //XPUSH_END
 ZPUSH_END
 
 /*------------------------------------------------------------------------------*
  | Memory Requirements                                                          |
  *------------------------------------------------------------------------------*/
 
-LOCAL_PUSH_BEGIN(VkMemoryRequirements)
+LOCALPUSH_BEGIN(VkMemoryRequirements)
     SetInteger(size, "size");
     SetInteger(alignment, "alignment");
     SetInteger(memoryTypeBits, "memory_type_bits");
-LOCAL_PUSH_END
-LOCAL_PUSH_BEGIN(VkMemoryDedicatedRequirements)
+LOCALPUSH_END
+LOCALPUSH_BEGIN(VkMemoryDedicatedRequirements)
     SetBoolean(prefersDedicatedAllocation, "prefers_dedicated_allocation");
     SetBoolean(requiresDedicatedAllocation, "requires_dedicated_allocation");
-LOCAL_PUSH_END
+LOCALPUSH_END
 
 ZINIT_BEGIN(VkMemoryRequirements2)
     EXTENSIONS_BEGIN
@@ -2446,23 +2405,17 @@ ZINIT_END
 
 ZPUSH_BEGIN(VkMemoryRequirements)
     lua_newtable(L);
-    pushVkMemoryRequirements(L, p);
+    localpushVkMemoryRequirements(L, p);
 ZPUSH_END
 
 ZPUSH_BEGIN(VkMemoryRequirements2)
-    VkMemoryRequirements2*pp = (VkMemoryRequirements2*)p->pNext;
     lua_newtable(L);
-    pushVkMemoryRequirements(L, &p->memoryRequirements);
-    while(pp)
-        {
-        switch(pp->sType)
-            {
-            CASEX(MEMORY_DEDICATED_REQUIREMENTS, VkMemoryDedicatedRequirements);
-            default: unexpected(L); return 1;
-            }
-        pp = (VkMemoryRequirements2*)pp->pNext;
-        }
+    localpushVkMemoryRequirements(L, &p->memoryRequirements);
+    XPUSH_BEGIN
+        XCASE(MEMORY_DEDICATED_REQUIREMENTS, VkMemoryDedicatedRequirements);
+    XPUSH_END
 ZPUSH_END
+
 
 /*------------------------------------------------------------------------------*
  | Buffer Memory Requirements                                                   |
@@ -2492,10 +2445,10 @@ ZCHECK_BEGIN(VkImageMemoryRequirementsInfo2KHR)
 #define F "plane_aspect"
     if(ispresent(F))
         {
-        VkImagePlaneMemoryRequirementsInfoKHR *p2
+        VkImagePlaneMemoryRequirementsInfoKHR *p1
             = zcheckVkImagePlaneMemoryRequirementsInfoKHR(L, arg, err);
-        if(*err) { zfree(L, p2, 1); return p; }
-        addtochain(chain, p2);
+        if(*err) { zfree(L, p1, 1); return p; }
+        addtochain(chain, p1);
         }
 #undef F
     EXTENSIONS_END
@@ -2515,38 +2468,30 @@ ZCHECK_END
  | Sparse Image Memory Requirements                                             |
  *------------------------------------------------------------------------------*/
 
-LOCAL_PUSH_BEGIN(VkSparseImageMemoryRequirements)
+LOCALPUSH_BEGIN(VkSparseImageMemoryRequirements)
     SetStruct(formatProperties, "format_properties", VkSparseImageFormatProperties);
     SetInteger(imageMipTailFirstLod, "image_mip_tail_first_lod");
     SetInteger(imageMipTailSize, "image_mip_tail_size");
     SetInteger(imageMipTailOffset, "image_mip_tail_offset");
     SetInteger(imageMipTailStride, "image_mip_tail_stride");
-LOCAL_PUSH_END
+LOCALPUSH_END
 
 ZINIT_BEGIN(VkSparseImageMemoryRequirements2)
-    EXTENSIONS_BEGIN
-        (void)L; (void)chain; //ADDX(XXX, Xxx);
-    EXTENSIONS_END
+    //EXTENSIONS_BEGIN
+    //  ADDX(XXX, Xxx);
+    //EXTENSIONS_END
 ZINIT_END
 
 ZPUSH_BEGIN(VkSparseImageMemoryRequirements)
     lua_newtable(L);
-    pushVkSparseImageMemoryRequirements(L, p);
+    localpushVkSparseImageMemoryRequirements(L, p);
 ZPUSH_END
 
 ZPUSH_BEGIN(VkSparseImageMemoryRequirements2)
-    VkSparseImageMemoryRequirements2 *pp = (VkSparseImageMemoryRequirements2*)p->pNext;
     lua_newtable(L);
-    pushVkSparseImageMemoryRequirements(L, &p->memoryRequirements);
-    while(pp)
-        {
-        switch(pp->sType)
-            {
-            //CASEX(XXX, Xxx);
-            default: unexpected(L); return 1;
-            }
-        pp = (VkSparseImageMemoryRequirements2*)pp->pNext;
-        }
+    localpushVkSparseImageMemoryRequirements(L, &p->memoryRequirements);
+    //XPUSH_BEGIN
+    //XPUSH_END
 ZPUSH_END
 
 /*------------------------------------------------------------------------------*
@@ -2622,9 +2567,9 @@ ZCHECK_BEGIN(VkInstanceCreateInfo)
     EXTENSIONS_BEGIN
     if(ispresent("disabled_validation_checks"))
         {
-        VkValidationFlagsEXT *p2 = zcheckVkValidationFlagsEXT(L, arg, err);
-        if(*err) { zfree(L, p2, 1); return p; }
-        addtochain(chain, p2);
+        VkValidationFlagsEXT *p1 = zcheckVkValidationFlagsEXT(L, arg, err);
+        if(*err) { zfree(L, p1, 1); return p; }
+        addtochain(chain, p1);
         }
     EXTENSIONS_END
 ZCHECK_END
@@ -2659,10 +2604,10 @@ ZCHECK_BEGIN(VkDeviceQueueCreateInfo)
 #define F "global_priority"
     if(ispresent(F))
         {
-        VkDeviceQueueGlobalPriorityCreateInfoEXT *p2 =
+        VkDeviceQueueGlobalPriorityCreateInfoEXT *p1 =
             zcheckVkDeviceQueueGlobalPriorityCreateInfoEXT(L, arg, err);
-        if(*err) { zfree(L, p2, 1); return p; }
-        addtochain(chain, p2);
+        if(*err) { zfree(L, p1, 1); return p; }
+        addtochain(chain, p1);
         }
 #undef F
     EXTENSIONS_END
@@ -2729,11 +2674,11 @@ VkDeviceCreateInfo* zcheckVkDeviceCreateInfo(lua_State *L, int arg, int *err, ud
 #define F "enabled_features"
     if(ud->idt->GetPhysicalDeviceFeatures2KHR)
         {
-        VkPhysicalDeviceFeatures2 *p2 = zcheckVkPhysicalDeviceFeatures2(L, arg1, err);
+        VkPhysicalDeviceFeatures2 *p1 = zcheckVkPhysicalDeviceFeatures2(L, arg1, err);
         popfield(L, arg1);
         if(*err < 0) { prependfield(F); return p; }
         else if(*err == ERR_NOTPRESENT) poperror();
-        else addtochain(chain, p2);
+        else addtochain(chain, p1);
         }
 #undef F
     EXTENSIONS_END
@@ -2787,10 +2732,10 @@ ZCHECK_BEGIN(VkCommandBufferInheritanceInfo)
     EXTENSIONS_BEGIN
     if(ispresent("conditional_rendering_enable"))
         {
-        VkCommandBufferInheritanceConditionalRenderingInfoEXT* p2 = 
+        VkCommandBufferInheritanceConditionalRenderingInfoEXT* p1 =
             zcheckVkCommandBufferInheritanceConditionalRenderingInfoEXT(L, arg, err);
-        if(*err) { zfree(L, p2, 1); return p; }
-        addtochain(chain, p2);
+        if(*err) { zfree(L, p1, 1); return p; }
+        addtochain(chain, p1);
         }
     EXTENSIONS_END
 ZCHECK_END
@@ -2842,25 +2787,25 @@ ZCHECK_BEGIN(VkMemoryAllocateInfo)
     EXTENSIONS_BEGIN
     if(ispresent("image") || ispresent("buffer"))
         {
-        VkMemoryDedicatedAllocateInfoKHR *p2 = zcheckVkMemoryDedicatedAllocateInfoKHR(L, arg, err);
-        if(*err) { zfree(L, p2, 1); return p; }
-        addtochain(chain, p2);
+        VkMemoryDedicatedAllocateInfoKHR *p1 = zcheckVkMemoryDedicatedAllocateInfoKHR(L, arg, err);
+        if(*err) { zfree(L, p1, 1); return p; }
+        addtochain(chain, p1);
         }
     if(ispresent("handle_types"))
         {
-        VkExportMemoryAllocateInfoKHR *p2 = zcheckVkExportMemoryAllocateInfoKHR(L, arg, err);
-        if(*err) { zfree(L, p2, 1); return p; }
-        addtochain(chain, p2);
+        VkExportMemoryAllocateInfoKHR *p1 = zcheckVkExportMemoryAllocateInfoKHR(L, arg, err);
+        if(*err) { zfree(L, p1, 1); return p; }
+        addtochain(chain, p1);
         }
 #define F "import_memory_fd_info"
         {
-        VkImportMemoryFdInfoKHR *p2;
+        VkImportMemoryFdInfoKHR *p1;
         arg1 = pushfield(L, arg, F);
-        p2 = zcheckVkImportMemoryFdInfoKHR(L, arg1, err);
+        p1 = zcheckVkImportMemoryFdInfoKHR(L, arg1, err);
         popfield(L, arg1);
         if(*err<0) { prependfield(F); return p; }
         else if(*err == ERR_NOTPRESENT) poperror();
-        else addtochain(chain, p2);
+        else addtochain(chain, p1);
         }
 #undef F
     EXTENSIONS_END
@@ -2912,9 +2857,9 @@ ZCHECK_BEGIN(VkBufferCreateInfo)
     EXTENSIONS_BEGIN
     if(ispresent("handle_types"))
         {
-        VkExternalMemoryBufferCreateInfo *p2 = zcheckVkExternalMemoryBufferCreateInfo(L, arg, err);
-        if(*err) { zfree(L, p2, 1); return p; }
-        addtochain(chain, p2);
+        VkExternalMemoryBufferCreateInfo *p1 = zcheckVkExternalMemoryBufferCreateInfo(L, arg, err);
+        if(*err) { zfree(L, p1, 1); return p; }
+        addtochain(chain, p1);
         }
     EXTENSIONS_END
 ZCHECK_END
@@ -2983,20 +2928,20 @@ ZCHECK_BEGIN(VkImageCreateInfo)
 #define F "handle_types"
     if(ispresent(F))
         {
-        VkExternalMemoryImageCreateInfoKHR *p2 = zcheckVkExternalMemoryImageCreateInfoKHR(L, arg, err);
-        if(*err) { zfree(L, p2, 1); return p; }
-        addtochain(chain, p2);
+        VkExternalMemoryImageCreateInfoKHR *p1 = zcheckVkExternalMemoryImageCreateInfoKHR(L, arg, err);
+        if(*err) { zfree(L, p1, 1); return p; }
+        addtochain(chain, p1);
         }
 #undef F
 #define F "view_formats"
     if(ispresent(F))
         {
-        VkImageFormatListCreateInfoKHR *p2;
+        VkImageFormatListCreateInfoKHR *p1;
         arg1 = pushfield(L, arg, F);
-        p2 = zcheckVkImageFormatListCreateInfoKHR(L, arg1, err);
+        p1 = zcheckVkImageFormatListCreateInfoKHR(L, arg1, err);
         popfield(L, arg1);
-        if(*err) { zfree(L, p2, 1);  pushfielderror(F); return p; }
-        addtochain(chain, p2);
+        if(*err) { zfree(L, p1, 1);  pushfielderror(F); return p; }
+        addtochain(chain, p1);
         }
 #undef F
     EXTENSIONS_END
@@ -3024,9 +2969,9 @@ ZCHECK_BEGIN(VkImageViewCreateInfo)
     EXTENSIONS_BEGIN
     if(ispresent("usage"))
         {
-        VkImageViewUsageCreateInfoKHR *p2 = zcheckVkImageViewUsageCreateInfoKHR(L, arg, err);
-        if(*err) { zfree(L, p2, 1); return p; }
-        addtochain(chain, p2);
+        VkImageViewUsageCreateInfoKHR *p1 = zcheckVkImageViewUsageCreateInfoKHR(L, arg, err);
+        if(*err) { zfree(L, p1, 1); return p; }
+        addtochain(chain, p1);
         }
     EXTENSIONS_END
 ZCHECK_END
@@ -3188,13 +3133,13 @@ ZCHECK_BEGIN(VkRenderPassCreateInfo)
 #undef F
     EXTENSIONS_BEGIN
 #define F "input_attachment_aspect_references"
-    VkRenderPassInputAttachmentAspectCreateInfoKHR *p2;
+    VkRenderPassInputAttachmentAspectCreateInfoKHR *p1;
     arg1 = pushfield(L, arg, F);
-    p2 = zcheckVkRenderPassInputAttachmentAspectCreateInfoKHR(L, arg1, err);
+    p1 = zcheckVkRenderPassInputAttachmentAspectCreateInfoKHR(L, arg1, err);
     popfield(L, arg1);
-    if(*err < 0) { zfree(L, p2, 1); prependfield(F); return p; }
+    if(*err < 0) { zfree(L, p1, 1); prependfield(F); return p; }
     if(*err == ERR_NOTPRESENT) poperror();
-    else addtochain(chain, p2);
+    else addtochain(chain, p1);
 #undef F
     EXTENSIONS_END
 ZCHECK_END
@@ -3243,10 +3188,10 @@ ZCHECK_BEGIN(VkShaderModuleCreateInfo)
 #define F "validation_cache"
     if(ispresent(F))
         {
-        VkShaderModuleValidationCacheCreateInfoEXT *p2 = 
+        VkShaderModuleValidationCacheCreateInfoEXT *p1 =
             zcheckVkShaderModuleValidationCacheCreateInfoEXT(L, arg, err);
-        if(*err) { zfree(L, p2, 1); return p; }
-        addtochain(chain, p2);
+        if(*err) { zfree(L, p1, 1); return p; }
+        addtochain(chain, p1);
         }
 #undef F
     EXTENSIONS_END
@@ -3292,9 +3237,9 @@ ZCHECK_BEGIN(VkSwapchainCreateInfoKHR)
     EXTENSIONS_BEGIN
     if(ispresent("surface_counters"))
         {
-        VkSwapchainCounterCreateInfoEXT *p2 = zcheckVkSwapchainCounterCreateInfoEXT(L, arg, err);
-        if(*err) { zfree(L, p2, 1); return p; }
-        addtochain(chain, p2);
+        VkSwapchainCounterCreateInfoEXT *p1 = zcheckVkSwapchainCounterCreateInfoEXT(L, arg, err);
+        if(*err) { zfree(L, p1, 1); return p; }
+        addtochain(chain, p1);
         }
     EXTENSIONS_END
 ZCHECK_END
@@ -3360,17 +3305,17 @@ ZCHECK_BEGIN(VkSamplerCreateInfo)
     EXTENSIONS_BEGIN
     if(ispresent("reduction_mode"))
         {
-        VkSamplerReductionModeCreateInfoEXT *p2 =
+        VkSamplerReductionModeCreateInfoEXT *p1 =
             zcheckVkSamplerReductionModeCreateInfoEXT(L, arg, err);
-        if(*err) { zfree(L, p2, 1); return p; }
-        addtochain(chain, p2);
+        if(*err) { zfree(L, p1, 1); return p; }
+        addtochain(chain, p1);
         }
     if(ispresent("conversion"))
         {
-        VkSamplerYcbcrConversionInfoKHR *p2 =
+        VkSamplerYcbcrConversionInfoKHR *p1 =
             zcheckVkSamplerYcbcrConversionInfoKHR(L, arg, err);
-        if(*err) { zfree(L, p2, 1); return p; }
-        addtochain(chain, p2);
+        if(*err) { zfree(L, p1, 1); return p; }
+        addtochain(chain, p1);
         }
     EXTENSIONS_END
 ZCHECK_END
@@ -3431,9 +3376,9 @@ ZCHECK_BEGIN(VkFenceCreateInfo)
     EXTENSIONS_BEGIN
     if(ispresent("handle_types"))
         {
-        VkExportFenceCreateInfoKHR *p2 = zcheckVkExportFenceCreateInfoKHR(L, arg, err);
-        if(*err) { zfree(L, p2, 1); return p; }
-        addtochain(chain, p2);
+        VkExportFenceCreateInfoKHR *p1 = zcheckVkExportFenceCreateInfoKHR(L, arg, err);
+        if(*err) { zfree(L, p1, 1); return p; }
+        addtochain(chain, p1);
         }
     EXTENSIONS_END
 ZCHECK_END
@@ -3471,9 +3416,9 @@ ZCHECK_BEGIN(VkSemaphoreCreateInfo)
     EXTENSIONS_BEGIN
     if(ispresent("handle_types"))
         {
-        VkExportSemaphoreCreateInfoKHR *p2 = zcheckVkExportSemaphoreCreateInfoKHR(L, arg, err);
-        if(*err) { zfree(L, p2, 1); return p; }
-        addtochain(chain, p2);
+        VkExportSemaphoreCreateInfoKHR *p1 = zcheckVkExportSemaphoreCreateInfoKHR(L, arg, err);
+        if(*err) { zfree(L, p1, 1); return p; }
+        addtochain(chain, p1);
         }
     EXTENSIONS_END
 ZCHECK_END
@@ -3714,15 +3659,15 @@ VkPresentInfoKHR* zcheckVkPresentInfoKHR(lua_State *L, int arg, int *err, int re
     EXTENSIONS_BEGIN
     if(ispresent("src_rect"))
         {
-        VkDisplayPresentInfoKHR *p2 = zcheckVkDisplayPresentInfoKHR(L, arg, err);
-        if(*err) { zfree(L, p2, 1); return p; }
-        addtochain(chain, p2);
+        VkDisplayPresentInfoKHR *p1 = zcheckVkDisplayPresentInfoKHR(L, arg, err);
+        if(*err) { zfree(L, p1, 1); return p; }
+        addtochain(chain, p1);
         }
     if(ispresent("regions"))
         {
-        VkPresentRegionsKHR *p2 = zcheckVkPresentRegionsKHR(L, arg, err);
-        if(*err) { zfree(L, p2, 1); return p; }
-        addtochain(chain, p2);
+        VkPresentRegionsKHR *p1 = zcheckVkPresentRegionsKHR(L, arg, err);
+        if(*err) { zfree(L, p1, 1); return p; }
+        addtochain(chain, p1);
         }
     EXTENSIONS_END
 ZCHECK_END
@@ -3782,11 +3727,11 @@ ZCHECK_BEGIN(VkRenderPassBeginInfo)
     if(*err == ERR_NOTPRESENT) poperror();
 #undef F
     EXTENSIONS_BEGIN
-    VkRenderPassSampleLocationsBeginInfoEXT *p2 =
+    VkRenderPassSampleLocationsBeginInfoEXT *p1 =
         zcheckVkRenderPassSampleLocationsBeginInfoEXT(L, arg, err);
-    if(*err < 0) { zfree(L, p2, 1); return p; }
-    else if(*err == ERR_NOTPRESENT) { zfree(L, p2, 1); poperror(); }
-    else addtochain(chain, p2);
+    if(*err < 0) { zfree(L, p1, 1); return p; }
+    else if(*err == ERR_NOTPRESENT) { zfree(L, p1, 1); poperror(); }
+    else addtochain(chain, p1);
     EXTENSIONS_END
 ZCHECK_END
 
@@ -3960,9 +3905,9 @@ ZCHECK_BEGIN(VkBindImageMemoryInfo)
 #define F "plane_aspect"
     if(ispresent(F))
         {
-        VkBindImagePlaneMemoryInfoKHR *p2 = zcheckVkBindImagePlaneMemoryInfoKHR(L, arg, err);
-        if(*err) { zfree(L, p2, 1); return p; }
-        addtochain(chain, p2);
+        VkBindImagePlaneMemoryInfoKHR *p1 = zcheckVkBindImagePlaneMemoryInfoKHR(L, arg, err);
+        if(*err) { zfree(L, p1, 1); return p; }
+        addtochain(chain, p1);
         }
 #undef F
     EXTENSIONS_END
@@ -4238,10 +4183,10 @@ ZCHECK_BEGIN(VkPhysicalDeviceImageFormatInfo2KHR)
     EXTENSIONS_BEGIN
     if(ispresent("handle_type"))
         {
-        VkPhysicalDeviceExternalImageFormatInfoKHR *p2 = 
+        VkPhysicalDeviceExternalImageFormatInfoKHR *p1 =
             zcheckVkPhysicalDeviceExternalImageFormatInfoKHR(L, arg, err);
-        if(*err) { zfree(L, p2, *err); return p; }
-        addtochain(chain, p2);
+        if(*err) { zfree(L, p1, *err); return p; }
+        addtochain(chain, p1);
         }
     EXTENSIONS_END
 ZCHECK_END
@@ -4377,10 +4322,10 @@ ZCHECK_BEGIN(VkPipelineTessellationStateCreateInfo)
 #define F   "domain_origin"
     if(ispresent(F))
         {
-        VkPipelineTessellationDomainOriginStateCreateInfoKHR *p2 =
+        VkPipelineTessellationDomainOriginStateCreateInfoKHR *p1 =
             zcheckVkPipelineTessellationDomainOriginStateCreateInfoKHR(L, arg, err);
-        if(*err) { zfree(L, p2, 1); return p; }
-        addtochain(chain, p2);
+        if(*err) { zfree(L, p1, 1); return p; }
+        addtochain(chain, p1);
         }
 #undef F
     EXTENSIONS_END
@@ -4494,11 +4439,11 @@ ZCHECK_BEGIN(VkPipelineMultisampleStateCreateInfo)
 #define F   "sample_locations_info"
     if(ispresent(F))
         {
-        VkPipelineSampleLocationsStateCreateInfoEXT *p2 =
+        VkPipelineSampleLocationsStateCreateInfoEXT *p1 =
             zcheckVkPipelineSampleLocationsStateCreateInfoEXT(L, arg, err);
-        if(*err < 0) { zfree(L, p2, 1); return p; }
+        if(*err < 0) { zfree(L, p1, 1); return p; }
         else if(*err == ERR_NOTPRESENT) poperror();
-        addtochain(chain, p2);
+        addtochain(chain, p1);
         }
 #undef F
     EXTENSIONS_END
@@ -4585,11 +4530,11 @@ ZCHECK_BEGIN(VkPipelineColorBlendStateCreateInfo)
     EXTENSIONS_BEGIN
     if(ispresent("src_premultiplied") || ispresent("dst_premultiplied") || ispresent("blend_overlap"))
         {
-        VkPipelineColorBlendAdvancedStateCreateInfoEXT *p2 =
+        VkPipelineColorBlendAdvancedStateCreateInfoEXT *p1 =
             zcheckVkPipelineColorBlendAdvancedStateCreateInfoEXT(L, arg, err);
-        if(*err < 0) { zfree(L, p2, 1); return p; }
+        if(*err < 0) { zfree(L, p1, 1); return p; }
         else if(*err == ERR_NOTPRESENT) poperror();
-        addtochain(chain, p2);
+        addtochain(chain, p1);
         }
     EXTENSIONS_END
 ZCHECK_END
@@ -4683,13 +4628,13 @@ ZCHECK_BEGIN(VkGraphicsPipelineCreateInfo)
     EXTENSIONS_BEGIN
 #define F "discard_rectangle_state"
     {
-    VkPipelineDiscardRectangleStateCreateInfoEXT *p2;
+    VkPipelineDiscardRectangleStateCreateInfoEXT *p1;
     arg1 = pushfield(L, arg, F);
-    p2 = zcheckVkPipelineDiscardRectangleStateCreateInfoEXT(L, arg1, err);
+    p1 = zcheckVkPipelineDiscardRectangleStateCreateInfoEXT(L, arg1, err);
     popfield(L, arg1);
-    if(*err<0) { zfree(L, p2, 1); prependfield(F); return p; }
+    if(*err<0) { zfree(L, p1, 1); prependfield(F); return p; }
     else if(*err==ERR_NOTPRESENT) poperror();
-    else addtochain(chain, p2);
+    else addtochain(chain, p1);
     }
 #undef F
     EXTENSIONS_END
