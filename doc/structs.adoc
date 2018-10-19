@@ -158,7 +158,13 @@ _fully_covered_fragment_shader_input_variable_: boolean, +
 _conservative_rasterization_post_depth_coverage_: boolean, +
 pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT[VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_vertex_attribute_divisor[VK_EXT_vertex_attribute_divisor]): +
 _max_vertex_attrib_divisor_: integer, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkPhysicalDeviceProperties2KHR.html[VkPhysicalDeviceProperties2KHR])#
+pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkPhysicalDeviceInlineUniformBlockPropertiesEXT[VkPhysicalDeviceInlineUniformBlockPropertiesEXT], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_inline_uniform_block[VK_EXT_inline_uniform_block]): +
+_max_inline_uniform_block_size_: integer, +
+_max_per_stage_descriptor_inline_uniform_blocks_: integer, +
+_max_per_stage_descriptor_update_after_bind_inline_uniform_blocks_: integer, +
+_max_descriptor_set_inline_uniform_blocks_: integer, +
+_max_descriptor_set_update_after_bind_inline_uniform_blocks_: integer, +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkPhysicalDeviceProperties2.html[VkPhysicalDeviceProperties2])#
 
 
 * [[physicaldeviceimageformatinfo]]
@@ -376,8 +382,10 @@ _decode_mode_shared_exponent_: boolean, +
 pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT[VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_vertex_attribute_divisor[VK_EXT_vertex_attribute_divisor]): +
 _vertex_attribute_instance_rate_divisor_: boolean, +
 _vertex_attribute_instance_rate_zero_divisor_: boolean, +
+pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkPhysicalDeviceInlineUniformBlockFeaturesEXT[VkPhysicalDeviceInlineUniformBlockFeaturesEXT], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_inline_uniform_block[VK_EXT_inline_uniform_block]): +
+_inline_uniform_block_: boolean, +
+_descriptor_binding_inline_uniform_block_update_after_bind_: boolean, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkPhysicalDeviceFeatures2.html[VkPhysicalDeviceFeatures2])#
-
 
 * [[queuefamilyproperties]]
 [small]#*queuefamilyproperties* = { +
@@ -1050,7 +1058,10 @@ _size_: integer, +
 _flags_: <<descriptorpoolcreateflags, descriptorpoolcreateflags>>, +
 _max_sets_: integer, +
 _pool_sizes_: {<<descriptorpoolsize, descriptorpoolsize>>}, *[R]* +
+pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkDescriptorPoolInlineUniformBlockCreateInfoEXT[VkDescriptorPoolInlineUniformBlockCreateInfoEXT], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_inline_uniform_block[VK_EXT_inline_uniform_block]): +
+_max_inline_uniform_block_bindings_: integer, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkDescriptorPoolCreateInfo.html[VkDescriptorPoolCreateInfo])#
+
 
 * [[descriptorpoolsize]]
 [small]#*descriptorpoolsize* = { +
@@ -1090,7 +1101,10 @@ _descriptor_type_: <<descriptortype, descriptortype>> *[R]*, +
 _image_info_: {<<descriptorimageinfo, descriptorimageinfo>>}, +
 _buffer_info_: {<<descriptorbufferinfo, descriptorbufferinfo>>}, +
 _texel_buffer_view_: {<<buffer_view, buffer_view>>}, +
+pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkWriteDescriptorSetInlineUniformBlockEXT[VkWriteDescriptorSetInlineUniformBlockEXT], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_inline_uniform_block[VK_EXT_inline_uniform_block]): +
+_inline_uniform_block_data_: binary string, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkWriteDescriptorSet.html[VkWriteDescriptorSet])#
+
 
 * [[copydescriptorset]]
 [small]#*copydescriptorset* = { +

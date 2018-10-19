@@ -1689,6 +1689,10 @@ FUNC_BEGIN(VERTEX_ATTRIBUTE_DIVISOR_FEATURES_EXT, VkPhysicalDeviceVertexAttribut
     GetBoolean(vertexAttributeInstanceRateDivisor, "vertex_attribute_instance_rate_divisor");
     GetBoolean(vertexAttributeInstanceRateZeroDivisor, "vertex_attribute_instance_rate_zero_divisor");
 FUNC_END
+FUNC_BEGIN(INLINE_UNIFORM_BLOCK_FEATURES_EXT, VkPhysicalDeviceInlineUniformBlockFeaturesEXT)
+    GetBoolean(inlineUniformBlock, "inline_uniform_block");
+    GetBoolean(descriptorBindingInlineUniformBlockUpdateAfterBind, "descriptor_binding_inline_uniform_block_update_after_bind");
+FUNC_END
 #undef FUNC_BEGIN
 #undef FUNC_END
 
@@ -1706,7 +1710,10 @@ ZINIT_BEGIN(VkPhysicalDeviceFeatures2)
         ADDX(PHYSICAL_DEVICE_PROTECTED_MEMORY_FEATURES, VkPhysicalDeviceProtectedMemoryFeatures);
         ADDX(PHYSICAL_DEVICE_SHADER_DRAW_PARAMETER_FEATURES,VkPhysicalDeviceShaderDrawParameterFeatures);
         ADDX(PHYSICAL_DEVICE_ASTC_DECODE_FEATURES_EXT, VkPhysicalDeviceASTCDecodeFeaturesEXT);
-        ADDX(PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_FEATURES_EXT, VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT);
+        ADDX(PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_FEATURES_EXT,
+                VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT);
+        ADDX(PHYSICAL_DEVICE_INLINE_UNIFORM_BLOCK_FEATURES_EXT,
+                VkPhysicalDeviceInlineUniformBlockFeaturesEXT);
     EXTENSIONS_END
 ZINIT_END
 
@@ -1736,6 +1743,7 @@ ZCHECK_BEGIN(VkPhysicalDeviceFeatures2)
         ADD(VkPhysicalDeviceShaderDrawParameterFeatures);
         ADD(VkPhysicalDeviceASTCDecodeFeaturesEXT);
         ADD(VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT);
+        ADD(VkPhysicalDeviceInlineUniformBlockFeaturesEXT);
     #undef ADD
     EXTENSIONS_END
 ZCHECK_END
@@ -1835,6 +1843,10 @@ LOCALPUSH_BEGIN(VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT)
     SetBoolean(vertexAttributeInstanceRateDivisor, "vertex_attribute_instance_rate_divisor");
     SetBoolean(vertexAttributeInstanceRateZeroDivisor, "vertex_attribute_instance_rate_zero_divisor");
 LOCALPUSH_END
+LOCALPUSH_BEGIN(VkPhysicalDeviceInlineUniformBlockFeaturesEXT)
+    SetBoolean(inlineUniformBlock, "inline_uniform_block");
+    SetBoolean(descriptorBindingInlineUniformBlockUpdateAfterBind, "descriptor_binding_inline_uniform_block_update_after_bind");
+LOCALPUSH_END
 
 ZPUSH_BEGIN(VkPhysicalDeviceFeatures)
     lua_newtable(L);
@@ -1860,6 +1872,8 @@ ZPUSH_BEGIN(VkPhysicalDeviceFeatures2)
         XCASE(PHYSICAL_DEVICE_ASTC_DECODE_FEATURES_EXT, VkPhysicalDeviceASTCDecodeFeaturesEXT);
         XCASE(PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_FEATURES_EXT,
                 VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT);
+        XCASE(PHYSICAL_DEVICE_INLINE_UNIFORM_BLOCK_FEATURES_EXT,
+                VkPhysicalDeviceInlineUniformBlockFeaturesEXT);
     XPUSH_END
 ZPUSH_END
 
@@ -2060,7 +2074,13 @@ LOCALPUSH_END
 LOCALPUSH_BEGIN(VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT)
     SetInteger(maxVertexAttribDivisor, "max_vertex_attrib_divisor");
 LOCALPUSH_END
-
+LOCALPUSH_BEGIN(VkPhysicalDeviceInlineUniformBlockPropertiesEXT)
+    SetInteger(maxInlineUniformBlockSize, "max_inline_uniform_block_size");
+    SetInteger(maxPerStageDescriptorInlineUniformBlocks, "max_per_stage_descriptor_inline_uniform_blocks");
+    SetInteger(maxPerStageDescriptorUpdateAfterBindInlineUniformBlocks, "max_per_stage_descriptor_update_after_bind_inline_uniform_blocks");
+    SetInteger(maxDescriptorSetInlineUniformBlocks, "max_descriptor_set_inline_uniform_blocks");
+    SetInteger(maxDescriptorSetUpdateAfterBindInlineUniformBlocks, "max_descriptor_set_update_after_bind_inline_uniform_blocks");
+LOCALPUSH_END
 
 ZINIT_BEGIN(VkPhysicalDeviceProperties2)
     EXTENSIONS_BEGIN
@@ -2083,6 +2103,8 @@ ZINIT_BEGIN(VkPhysicalDeviceProperties2)
                 VkPhysicalDeviceConservativeRasterizationPropertiesEXT);
         ADDX(PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_PROPERTIES_EXT,
                 VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT);
+        ADDX(PHYSICAL_DEVICE_INLINE_UNIFORM_BLOCK_PROPERTIES_EXT,
+                VkPhysicalDeviceInlineUniformBlockPropertiesEXT);
     EXTENSIONS_END
 ZINIT_END
 
@@ -2114,6 +2136,8 @@ ZPUSH_BEGIN(VkPhysicalDeviceProperties2)
                 VkPhysicalDeviceConservativeRasterizationPropertiesEXT);
         XCASE(PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_PROPERTIES_EXT,
                 VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT);
+        XCASE(PHYSICAL_DEVICE_INLINE_UNIFORM_BLOCK_PROPERTIES_EXT,
+                VkPhysicalDeviceInlineUniformBlockPropertiesEXT);
     XPUSH_END
 ZPUSH_END
 
@@ -3044,6 +3068,12 @@ ZCHECK_END
  | Descriptor Pool                                                              |
  *------------------------------------------------------------------------------*/
     
+ZCHECK_BEGIN(VkDescriptorPoolInlineUniformBlockCreateInfoEXT)
+    //checktable(arg);
+    newstruct(VkDescriptorPoolInlineUniformBlockCreateInfoEXT);
+    GetInteger(maxInlineUniformBlockBindings, "max_inline_uniform_block_bindings");
+ZCHECK_END
+
 static ZCLEAR_BEGIN(VkDescriptorPoolCreateInfo)
     if(p->pPoolSizes)
         zfreearrayVkDescriptorPoolSize(L, p->pPoolSizes, p->poolSizeCount, 1);
@@ -3060,6 +3090,15 @@ ZCHECK_BEGIN(VkDescriptorPoolCreateInfo)
     popfield(L, arg1);
     if(*err) { prependfield(F); return p; }
 #undef F
+    EXTENSIONS_BEGIN
+    if(ispresent("max_inline_uniform_block_bindings"))
+        {
+        VkDescriptorPoolInlineUniformBlockCreateInfoEXT *p1 =
+            zcheckVkDescriptorPoolInlineUniformBlockCreateInfoEXT(L, arg, err);
+        if(*err) { zfree(L, p1, 1); return p; }
+        addtochain(chain, p1);
+        }
+    EXTENSIONS_END
 ZCHECK_END
 
 /*------------------------------------------------------------------------------*
@@ -3874,6 +3913,17 @@ ZCHECKARRAY(VkBindSparseInfo)
  | Write Descriptor Set                                                         |
  *------------------------------------------------------------------------------*/
 
+static ZCLEAR_BEGIN(VkWriteDescriptorSetInlineUniformBlockEXT)
+    if(p->pData) Free(L, (char*)p->pData);
+ZCLEAR_END
+ZCHECK_BEGIN(VkWriteDescriptorSetInlineUniformBlockEXT)
+    size_t len;
+    //checktable(arg);
+    newstruct(VkWriteDescriptorSetInlineUniformBlockEXT);
+    GetLString(pData, "inline_uniform_block_data", &len);
+    p->dataSize = len;
+ZCHECK_END
+
 static ZCLEAR_BEGIN(VkWriteDescriptorSet)
     if(!p->pImageInfo) 
         zfreearrayVkDescriptorImageInfo(L, p->pImageInfo, p->descriptorCount, 1);
@@ -3927,9 +3977,21 @@ ZCHECK_BEGIN(VkWriteDescriptorSet)
             else if(*err) { pushfielderror(F); return p; }
             break;
 #undef F
+        case VK_DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK_EXT:
+            /* data goes in the pNext chain */
+            break;
         default:
             unexpected(L); /* unhandled descriptorType ? */
         }
+    EXTENSIONS_BEGIN
+    if(p->descriptorType == VK_DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK_EXT)
+        {
+        VkWriteDescriptorSetInlineUniformBlockEXT *p1 =
+            zcheckVkWriteDescriptorSetInlineUniformBlockEXT(L, arg, err);
+        if(*err) { zfree(L, p1, 1); return p; }
+        addtochain(chain, p1);
+        }
+    EXTENSIONS_END
 ZCHECK_END
 ZCHECKARRAY(VkWriteDescriptorSet)
 
@@ -4902,6 +4964,7 @@ static void zfreeaux(lua_State *L, void *pp)
         CASE(RENDER_PASS_SAMPLE_LOCATIONS_BEGIN_INFO_EXT, VkRenderPassSampleLocationsBeginInfoEXT);
         CASE(RENDER_PASS_BEGIN_INFO, VkRenderPassBeginInfo);
         CASE(DISPLAY_MODE_CREATE_INFO_KHR, VkDisplayModeCreateInfoKHR);
+        CASE(WRITE_DESCRIPTOR_SET_INLINE_UNIFORM_BLOCK_EXT, VkWriteDescriptorSetInlineUniformBlockEXT);
 #undef CASE
         default: 
             return;

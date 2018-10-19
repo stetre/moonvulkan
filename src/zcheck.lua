@@ -280,6 +280,8 @@ local TYPED = {
    { "VkPipelineRasterizationConservativeStateCreateInfoEXT", "PIPELINE_RASTERIZATION_CONSERVATIVE_STATE_CREATE_INFO_EXT" },
    { "VkImageViewASTCDecodeModeEXT", "IMAGE_VIEW_ASTC_DECODE_MODE_EXT" },
    { "VkPipelineVertexInputDivisorStateCreateInfoEXT", "PIPELINE_VERTEX_INPUT_DIVISOR_STATE_CREATE_INFO_EXT" },
+   { "VkWriteDescriptorSetInlineUniformBlockEXT", "WRITE_DESCRIPTOR_SET_INLINE_UNIFORM_BLOCK_EXT" },
+   { "VkDescriptorPoolInlineUniformBlockCreateInfoEXT", "DESCRIPTOR_POOL_INLINE_UNIFORM_BLOCK_CREATE_INFO_EXT" },
 }
 
 local TYPED_WIN32 = {

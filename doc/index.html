@@ -3562,7 +3562,13 @@ the <em>queue_family_index</em> of the <em>i-th</em> element in the table return
 <em>conservative_rasterization_post_depth_coverage</em>: boolean,<br>
 -- EXTENSION (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT">VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT</a>, <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_vertex_attribute_divisor">VK_EXT_vertex_attribute_divisor</a>):<br>
 <em>max_vertex_attrib_divisor</em>: integer,<br>
-} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkPhysicalDeviceProperties2KHR.html">VkPhysicalDeviceProperties2KHR</a>)</span></p>
+-- EXTENSION (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkPhysicalDeviceInlineUniformBlockPropertiesEXT">VkPhysicalDeviceInlineUniformBlockPropertiesEXT</a>, <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_inline_uniform_block">VK_EXT_inline_uniform_block</a>):<br>
+<em>max_inline_uniform_block_size</em>: integer,<br>
+<em>max_per_stage_descriptor_inline_uniform_blocks</em>: integer,<br>
+<em>max_per_stage_descriptor_update_after_bind_inline_uniform_blocks</em>: integer,<br>
+<em>max_descriptor_set_inline_uniform_blocks</em>: integer,<br>
+<em>max_descriptor_set_update_after_bind_inline_uniform_blocks</em>: integer,<br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkPhysicalDeviceProperties2.html">VkPhysicalDeviceProperties2</a>)</span></p>
 </li>
 <li>
 <p><a id="physicaldeviceimageformatinfo"></a>
@@ -3783,6 +3789,9 @@ the <em>queue_family_index</em> of the <em>i-th</em> element in the table return
 -- EXTENSION (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT">VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT</a>, <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_vertex_attribute_divisor">VK_EXT_vertex_attribute_divisor</a>):<br>
 <em>vertex_attribute_instance_rate_divisor</em>: boolean,<br>
 <em>vertex_attribute_instance_rate_zero_divisor</em>: boolean,<br>
+-- EXTENSION (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkPhysicalDeviceInlineUniformBlockFeaturesEXT">VkPhysicalDeviceInlineUniformBlockFeaturesEXT</a>, <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_inline_uniform_block">VK_EXT_inline_uniform_block</a>):<br>
+<em>inline_uniform_block</em>: boolean,<br>
+<em>descriptor_binding_inline_uniform_block_update_after_bind</em>: boolean,<br>
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkPhysicalDeviceFeatures2.html">VkPhysicalDeviceFeatures2</a>)</span></p>
 </li>
 <li>
@@ -4584,6 +4593,8 @@ the <em>queue_family_index</em> of the <em>i-th</em> element in the table return
 <em>flags</em>: <a href="#descriptorpoolcreateflags">descriptorpoolcreateflags</a>,<br>
 <em>max_sets</em>: integer,<br>
 <em>pool_sizes</em>: {<a href="#descriptorpoolsize">descriptorpoolsize</a>}, <strong>[R]</strong><br>
+-- EXTENSION (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkDescriptorPoolInlineUniformBlockCreateInfoEXT">VkDescriptorPoolInlineUniformBlockCreateInfoEXT</a>, <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_inline_uniform_block">VK_EXT_inline_uniform_block</a>):<br>
+<em>max_inline_uniform_block_bindings</em>: integer,<br>
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkDescriptorPoolCreateInfo.html">VkDescriptorPoolCreateInfo</a>)</span></p>
 </li>
 <li>
@@ -4635,6 +4646,8 @@ the <em>queue_family_index</em> of the <em>i-th</em> element in the table return
 <em>image_info</em>: {<a href="#descriptorimageinfo">descriptorimageinfo</a>},<br>
 <em>buffer_info</em>: {<a href="#descriptorbufferinfo">descriptorbufferinfo</a>},<br>
 <em>texel_buffer_view</em>: {<a href="#buffer_view">buffer_view</a>},<br>
+-- EXTENSION (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkWriteDescriptorSetInlineUniformBlockEXT">VkWriteDescriptorSetInlineUniformBlockEXT</a>, <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_inline_uniform_block">VK_EXT_inline_uniform_block</a>):<br>
+<em>inline_uniform_block_data</em>: binary string,<br>
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkWriteDescriptorSet.html">VkWriteDescriptorSet</a>)</span></p>
 </li>
 <li>

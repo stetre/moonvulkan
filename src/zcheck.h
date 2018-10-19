@@ -2235,6 +2235,40 @@ int zinitVkPipelineVertexInputDivisorStateCreateInfoEXT(lua_State *L, VkPipeline
 #define zpushVkPipelineVertexInputDivisorStateCreateInfoEXT moonvulkan_zpushVkPipelineVertexInputDivisorStateCreateInfoEXT
 int zpushVkPipelineVertexInputDivisorStateCreateInfoEXT(lua_State *L, const VkPipelineVertexInputDivisorStateCreateInfoEXT *p);
 
+#define znewVkWriteDescriptorSetInlineUniformBlockEXT(L, err) (VkWriteDescriptorSetInlineUniformBlockEXT*)znew((L), VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET_INLINE_UNIFORM_BLOCK_EXT, sizeof(VkWriteDescriptorSetInlineUniformBlockEXT), (err))
+#define znewarrayVkWriteDescriptorSetInlineUniformBlockEXT(L, count, err) (VkWriteDescriptorSetInlineUniformBlockEXT*)znewarray((L), VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET_INLINE_UNIFORM_BLOCK_EXT, sizeof(VkWriteDescriptorSetInlineUniformBlockEXT), (count), (err))
+#define znewchainVkWriteDescriptorSetInlineUniformBlockEXT moonvulkan_znewchainVkWriteDescriptorSetInlineUniformBlockEXT
+VkWriteDescriptorSetInlineUniformBlockEXT* znewchainVkWriteDescriptorSetInlineUniformBlockEXT(lua_State *L, int *err);
+#define znewchainarrayVkWriteDescriptorSetInlineUniformBlockEXT moonvulkan_znewchainarrayVkWriteDescriptorSetInlineUniformBlockEXT
+VkWriteDescriptorSetInlineUniformBlockEXT* znewchainarrayVkWriteDescriptorSetInlineUniformBlockEXT(lua_State *L, uint32_t count, int *err);
+#define zcheckVkWriteDescriptorSetInlineUniformBlockEXT moonvulkan_zcheckVkWriteDescriptorSetInlineUniformBlockEXT
+VkWriteDescriptorSetInlineUniformBlockEXT* zcheckVkWriteDescriptorSetInlineUniformBlockEXT(lua_State *L, int arg, int *err);
+#define zcheckarrayVkWriteDescriptorSetInlineUniformBlockEXT moonvulkan_zcheckarrayVkWriteDescriptorSetInlineUniformBlockEXT
+VkWriteDescriptorSetInlineUniformBlockEXT* zcheckarrayVkWriteDescriptorSetInlineUniformBlockEXT(lua_State *L, int arg, uint32_t *count, int *err);
+#define zinitVkWriteDescriptorSetInlineUniformBlockEXT moonvulkan_zinitVkWriteDescriptorSetInlineUniformBlockEXT
+int zinitVkWriteDescriptorSetInlineUniformBlockEXT(lua_State *L, VkWriteDescriptorSetInlineUniformBlockEXT* p, int *err);
+#define zfreeVkWriteDescriptorSetInlineUniformBlockEXT(L, p, base) zfree((L), (p), (base))
+#define zfreearrayVkWriteDescriptorSetInlineUniformBlockEXT(L, p, count, base) zfreearray((L), (p), sizeof(VkWriteDescriptorSetInlineUniformBlockEXT), (count), (base))
+#define zpushVkWriteDescriptorSetInlineUniformBlockEXT moonvulkan_zpushVkWriteDescriptorSetInlineUniformBlockEXT
+int zpushVkWriteDescriptorSetInlineUniformBlockEXT(lua_State *L, const VkWriteDescriptorSetInlineUniformBlockEXT *p);
+
+#define znewVkDescriptorPoolInlineUniformBlockCreateInfoEXT(L, err) (VkDescriptorPoolInlineUniformBlockCreateInfoEXT*)znew((L), VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_INLINE_UNIFORM_BLOCK_CREATE_INFO_EXT, sizeof(VkDescriptorPoolInlineUniformBlockCreateInfoEXT), (err))
+#define znewarrayVkDescriptorPoolInlineUniformBlockCreateInfoEXT(L, count, err) (VkDescriptorPoolInlineUniformBlockCreateInfoEXT*)znewarray((L), VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_INLINE_UNIFORM_BLOCK_CREATE_INFO_EXT, sizeof(VkDescriptorPoolInlineUniformBlockCreateInfoEXT), (count), (err))
+#define znewchainVkDescriptorPoolInlineUniformBlockCreateInfoEXT moonvulkan_znewchainVkDescriptorPoolInlineUniformBlockCreateInfoEXT
+VkDescriptorPoolInlineUniformBlockCreateInfoEXT* znewchainVkDescriptorPoolInlineUniformBlockCreateInfoEXT(lua_State *L, int *err);
+#define znewchainarrayVkDescriptorPoolInlineUniformBlockCreateInfoEXT moonvulkan_znewchainarrayVkDescriptorPoolInlineUniformBlockCreateInfoEXT
+VkDescriptorPoolInlineUniformBlockCreateInfoEXT* znewchainarrayVkDescriptorPoolInlineUniformBlockCreateInfoEXT(lua_State *L, uint32_t count, int *err);
+#define zcheckVkDescriptorPoolInlineUniformBlockCreateInfoEXT moonvulkan_zcheckVkDescriptorPoolInlineUniformBlockCreateInfoEXT
+VkDescriptorPoolInlineUniformBlockCreateInfoEXT* zcheckVkDescriptorPoolInlineUniformBlockCreateInfoEXT(lua_State *L, int arg, int *err);
+#define zcheckarrayVkDescriptorPoolInlineUniformBlockCreateInfoEXT moonvulkan_zcheckarrayVkDescriptorPoolInlineUniformBlockCreateInfoEXT
+VkDescriptorPoolInlineUniformBlockCreateInfoEXT* zcheckarrayVkDescriptorPoolInlineUniformBlockCreateInfoEXT(lua_State *L, int arg, uint32_t *count, int *err);
+#define zinitVkDescriptorPoolInlineUniformBlockCreateInfoEXT moonvulkan_zinitVkDescriptorPoolInlineUniformBlockCreateInfoEXT
+int zinitVkDescriptorPoolInlineUniformBlockCreateInfoEXT(lua_State *L, VkDescriptorPoolInlineUniformBlockCreateInfoEXT* p, int *err);
+#define zfreeVkDescriptorPoolInlineUniformBlockCreateInfoEXT(L, p, base) zfree((L), (p), (base))
+#define zfreearrayVkDescriptorPoolInlineUniformBlockCreateInfoEXT(L, p, count, base) zfreearray((L), (p), sizeof(VkDescriptorPoolInlineUniformBlockCreateInfoEXT), (count), (base))
+#define zpushVkDescriptorPoolInlineUniformBlockCreateInfoEXT moonvulkan_zpushVkDescriptorPoolInlineUniformBlockCreateInfoEXT
+int zpushVkDescriptorPoolInlineUniformBlockCreateInfoEXT(lua_State *L, const VkDescriptorPoolInlineUniformBlockCreateInfoEXT *p);
+
 
 #ifdef VK_USE_PLATFORM_WIN32_KHR
 
