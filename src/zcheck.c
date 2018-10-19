@@ -1693,6 +1693,28 @@ FUNC_BEGIN(INLINE_UNIFORM_BLOCK_FEATURES_EXT, VkPhysicalDeviceInlineUniformBlock
     GetBoolean(inlineUniformBlock, "inline_uniform_block");
     GetBoolean(descriptorBindingInlineUniformBlockUpdateAfterBind, "descriptor_binding_inline_uniform_block_update_after_bind");
 FUNC_END
+FUNC_BEGIN(DESCRIPTOR_INDEXING_FEATURES_EXT, VkPhysicalDeviceDescriptorIndexingFeaturesEXT)
+    GetBoolean(shaderInputAttachmentArrayDynamicIndexing, "shader_input_attachment_array_dynamic_indexing");
+    GetBoolean(shaderUniformTexelBufferArrayDynamicIndexing, "shader_uniform_texel_buffer_array_dynamic_indexing");
+    GetBoolean(shaderStorageTexelBufferArrayDynamicIndexing, "shader_storage_texel_buffer_array_dynamic_indexing");
+    GetBoolean(shaderUniformBufferArrayNonUniformIndexing, "shader_uniform_buffer_array_non_uniform_indexing");
+    GetBoolean(shaderSampledImageArrayNonUniformIndexing, "shader_sampled_image_array_non_uniform_indexing");
+    GetBoolean(shaderStorageBufferArrayNonUniformIndexing, "shader_storage_buffer_array_non_uniform_indexing");
+    GetBoolean(shaderStorageImageArrayNonUniformIndexing, "shader_storage_image_array_non_uniform_indexing");
+    GetBoolean(shaderInputAttachmentArrayNonUniformIndexing, "shader_input_attachment_array_non_uniform_indexing");
+    GetBoolean(shaderUniformTexelBufferArrayNonUniformIndexing, "shader_uniform_texel_buffer_array_non_uniform_indexing");
+    GetBoolean(shaderStorageTexelBufferArrayNonUniformIndexing, "shader_storage_texel_buffer_array_non_uniform_indexing");
+    GetBoolean(descriptorBindingUniformBufferUpdateAfterBind, "descriptor_binding_uniform_buffer_update_after_bind");
+    GetBoolean(descriptorBindingSampledImageUpdateAfterBind, "descriptor_binding_sampled_image_update_after_bind");
+    GetBoolean(descriptorBindingStorageImageUpdateAfterBind, "descriptor_binding_storage_image_update_after_bind");
+    GetBoolean(descriptorBindingStorageBufferUpdateAfterBind, "descriptor_binding_storage_buffer_update_after_bind");
+    GetBoolean(descriptorBindingUniformTexelBufferUpdateAfterBind, "descriptor_binding_uniform_texel_buffer_update_after_bind");
+    GetBoolean(descriptorBindingStorageTexelBufferUpdateAfterBind, "descriptor_binding_storage_texel_buffer_update_after_bind");
+    GetBoolean(descriptorBindingUpdateUnusedWhilePending, "descriptor_binding_update_unused_while_pending");
+    GetBoolean(descriptorBindingPartiallyBound, "descriptor_binding_partially_bound");
+    GetBoolean(descriptorBindingVariableDescriptorCount, "descriptor_binding_variable_descriptor_count");
+    GetBoolean(runtimeDescriptorArray, "runtime_descriptor_array");
+FUNC_END
 #undef FUNC_BEGIN
 #undef FUNC_END
 
@@ -1714,6 +1736,8 @@ ZINIT_BEGIN(VkPhysicalDeviceFeatures2)
                 VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT);
         ADDX(PHYSICAL_DEVICE_INLINE_UNIFORM_BLOCK_FEATURES_EXT,
                 VkPhysicalDeviceInlineUniformBlockFeaturesEXT);
+        ADDX(PHYSICAL_DEVICE_DESCRIPTOR_INDEXING_FEATURES_EXT,
+                VkPhysicalDeviceDescriptorIndexingFeaturesEXT);
     EXTENSIONS_END
 ZINIT_END
 
@@ -1744,6 +1768,7 @@ ZCHECK_BEGIN(VkPhysicalDeviceFeatures2)
         ADD(VkPhysicalDeviceASTCDecodeFeaturesEXT);
         ADD(VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT);
         ADD(VkPhysicalDeviceInlineUniformBlockFeaturesEXT);
+        ADD(VkPhysicalDeviceDescriptorIndexingFeaturesEXT);
     #undef ADD
     EXTENSIONS_END
 ZCHECK_END
@@ -1847,6 +1872,28 @@ LOCALPUSH_BEGIN(VkPhysicalDeviceInlineUniformBlockFeaturesEXT)
     SetBoolean(inlineUniformBlock, "inline_uniform_block");
     SetBoolean(descriptorBindingInlineUniformBlockUpdateAfterBind, "descriptor_binding_inline_uniform_block_update_after_bind");
 LOCALPUSH_END
+LOCALPUSH_BEGIN(VkPhysicalDeviceDescriptorIndexingFeaturesEXT)
+    SetBoolean(shaderInputAttachmentArrayDynamicIndexing, "shader_input_attachment_array_dynamic_indexing");
+    SetBoolean(shaderUniformTexelBufferArrayDynamicIndexing, "shader_uniform_texel_buffer_array_dynamic_indexing");
+    SetBoolean(shaderStorageTexelBufferArrayDynamicIndexing, "shader_storage_texel_buffer_array_dynamic_indexing");
+    SetBoolean(shaderUniformBufferArrayNonUniformIndexing, "shader_uniform_buffer_array_non_uniform_indexing");
+    SetBoolean(shaderSampledImageArrayNonUniformIndexing, "shader_sampled_image_array_non_uniform_indexing");
+    SetBoolean(shaderStorageBufferArrayNonUniformIndexing, "shader_storage_buffer_array_non_uniform_indexing");
+    SetBoolean(shaderStorageImageArrayNonUniformIndexing, "shader_storage_image_array_non_uniform_indexing");
+    SetBoolean(shaderInputAttachmentArrayNonUniformIndexing, "shader_input_attachment_array_non_uniform_indexing");
+    SetBoolean(shaderUniformTexelBufferArrayNonUniformIndexing, "shader_uniform_texel_buffer_array_non_uniform_indexing");
+    SetBoolean(shaderStorageTexelBufferArrayNonUniformIndexing, "shader_storage_texel_buffer_array_non_uniform_indexing");
+    SetBoolean(descriptorBindingUniformBufferUpdateAfterBind, "descriptor_binding_uniform_buffer_update_after_bind");
+    SetBoolean(descriptorBindingSampledImageUpdateAfterBind, "descriptor_binding_sampled_image_update_after_bind");
+    SetBoolean(descriptorBindingStorageImageUpdateAfterBind, "descriptor_binding_storage_image_update_after_bind");
+    SetBoolean(descriptorBindingStorageBufferUpdateAfterBind, "descriptor_binding_storage_buffer_update_after_bind");
+    SetBoolean(descriptorBindingUniformTexelBufferUpdateAfterBind, "descriptor_binding_uniform_texel_buffer_update_after_bind");
+    SetBoolean(descriptorBindingStorageTexelBufferUpdateAfterBind, "descriptor_binding_storage_texel_buffer_update_after_bind");
+    SetBoolean(descriptorBindingUpdateUnusedWhilePending, "descriptor_binding_update_unused_while_pending");
+    SetBoolean(descriptorBindingPartiallyBound, "descriptor_binding_partially_bound");
+    SetBoolean(descriptorBindingVariableDescriptorCount, "descriptor_binding_variable_descriptor_count");
+    SetBoolean(runtimeDescriptorArray, "runtime_descriptor_array");
+LOCALPUSH_END
 
 ZPUSH_BEGIN(VkPhysicalDeviceFeatures)
     lua_newtable(L);
@@ -1874,6 +1921,8 @@ ZPUSH_BEGIN(VkPhysicalDeviceFeatures2)
                 VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT);
         XCASE(PHYSICAL_DEVICE_INLINE_UNIFORM_BLOCK_FEATURES_EXT,
                 VkPhysicalDeviceInlineUniformBlockFeaturesEXT);
+        XCASE(PHYSICAL_DEVICE_DESCRIPTOR_INDEXING_FEATURES_EXT,
+                VkPhysicalDeviceDescriptorIndexingFeaturesEXT);
     XPUSH_END
 ZPUSH_END
 
@@ -2081,6 +2130,31 @@ LOCALPUSH_BEGIN(VkPhysicalDeviceInlineUniformBlockPropertiesEXT)
     SetInteger(maxDescriptorSetInlineUniformBlocks, "max_descriptor_set_inline_uniform_blocks");
     SetInteger(maxDescriptorSetUpdateAfterBindInlineUniformBlocks, "max_descriptor_set_update_after_bind_inline_uniform_blocks");
 LOCALPUSH_END
+LOCALPUSH_BEGIN(VkPhysicalDeviceDescriptorIndexingPropertiesEXT)
+    SetBoolean(shaderUniformBufferArrayNonUniformIndexingNative, "shader_uniform_buffer_array_non_uniform_indexing_native");
+    SetBoolean(shaderSampledImageArrayNonUniformIndexingNative, "shader_sampled_image_array_non_uniform_indexing_native");
+    SetBoolean(shaderStorageBufferArrayNonUniformIndexingNative, "shader_storage_buffer_array_non_uniform_indexing_native");
+    SetBoolean(shaderStorageImageArrayNonUniformIndexingNative, "shader_storage_image_array_non_uniform_indexing_native");
+    SetBoolean(shaderInputAttachmentArrayNonUniformIndexingNative, "shader_input_attachment_array_non_uniform_indexing_native");
+    SetBoolean(robustBufferAccessUpdateAfterBind, "robust_buffer_access_update_after_bind");
+    SetBoolean(quadDivergentImplicitLod, "quad_divergent_implicit_lod");
+    SetInteger(maxPerStageDescriptorUpdateAfterBindSamplers, "max_per_stage_descriptor_update_after_bind_samplers");
+    SetInteger(maxPerStageDescriptorUpdateAfterBindUniformBuffers, "max_per_stage_descriptor_update_after_bind_uniform_buffers");
+    SetInteger(maxPerStageDescriptorUpdateAfterBindStorageBuffers, "max_per_stage_descriptor_update_after_bind_storage_buffers");
+    SetInteger(maxPerStageDescriptorUpdateAfterBindSampledImages, "max_per_stage_descriptor_update_after_bind_sampled_images");
+    SetInteger(maxPerStageDescriptorUpdateAfterBindStorageImages, "max_per_stage_descriptor_update_after_bind_storage_images");
+    SetInteger(maxPerStageDescriptorUpdateAfterBindInputAttachments, "max_per_stage_descriptor_update_after_bind_input_attachments");
+    SetInteger(maxPerStageUpdateAfterBindResources, "max_per_stage_update_after_bind_resources");
+    SetInteger(maxDescriptorSetUpdateAfterBindSamplers, "max_descriptor_set_update_after_bind_samplers");
+    SetInteger(maxDescriptorSetUpdateAfterBindUniformBuffers, "max_descriptor_set_update_after_bind_uniform_buffers");
+    SetInteger(maxDescriptorSetUpdateAfterBindUniformBuffersDynamic, "max_descriptor_set_update_after_bind_uniform_buffers_dynamic");
+    SetInteger(maxDescriptorSetUpdateAfterBindStorageBuffers, "max_descriptor_set_update_after_bind_storage_buffers");
+    SetInteger(maxDescriptorSetUpdateAfterBindStorageBuffersDynamic, "max_descriptor_set_update_after_bind_storage_buffers_dynamic");
+    SetInteger(maxDescriptorSetUpdateAfterBindSampledImages, "max_descriptor_set_update_after_bind_sampled_images");
+    SetInteger(maxDescriptorSetUpdateAfterBindStorageImages, "max_descriptor_set_update_after_bind_storage_images");
+    SetInteger(maxDescriptorSetUpdateAfterBindInputAttachments, "max_descriptor_set_update_after_bind_input_attachments");
+LOCALPUSH_END
+
 
 ZINIT_BEGIN(VkPhysicalDeviceProperties2)
     EXTENSIONS_BEGIN
@@ -2105,6 +2179,8 @@ ZINIT_BEGIN(VkPhysicalDeviceProperties2)
                 VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT);
         ADDX(PHYSICAL_DEVICE_INLINE_UNIFORM_BLOCK_PROPERTIES_EXT,
                 VkPhysicalDeviceInlineUniformBlockPropertiesEXT);
+        ADDX(PHYSICAL_DEVICE_DESCRIPTOR_INDEXING_PROPERTIES_EXT,
+                VkPhysicalDeviceDescriptorIndexingPropertiesEXT);
     EXTENSIONS_END
 ZINIT_END
 
@@ -2138,6 +2214,8 @@ ZPUSH_BEGIN(VkPhysicalDeviceProperties2)
                 VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT);
         XCASE(PHYSICAL_DEVICE_INLINE_UNIFORM_BLOCK_PROPERTIES_EXT,
                 VkPhysicalDeviceInlineUniformBlockPropertiesEXT);
+        XCASE(PHYSICAL_DEVICE_DESCRIPTOR_INDEXING_PROPERTIES_EXT,
+                VkPhysicalDeviceDescriptorIndexingPropertiesEXT);
     XPUSH_END
 ZPUSH_END
 
@@ -3105,6 +3183,21 @@ ZCHECK_END
  | Descriptor Set                                                               |
  *------------------------------------------------------------------------------*/
 
+static ZCLEAR_BEGIN(VkDescriptorSetVariableDescriptorCountAllocateInfoEXT)
+    if(p->pDescriptorCounts) Free(L, (void*)p->pDescriptorCounts);
+ZCLEAR_END
+ZCHECK_BEGIN(VkDescriptorSetVariableDescriptorCountAllocateInfoEXT)
+    int arg1;
+    //checktable(arg);
+    newstruct(VkDescriptorSetVariableDescriptorCountAllocateInfoEXT);
+#define F "descriptor_counts"
+    arg1 = pushfield(L, arg, F);
+    p->pDescriptorCounts = checkuint32list(L, arg1, &p->descriptorSetCount, err);
+    popfield(L, arg1);
+    if(*err < 0) { pushfielderror(F); return p; }
+#undef F
+ZCHECK_END
+
 static ZCLEAR_BEGIN(VkDescriptorSetAllocateInfo)
     if(p->pSetLayouts) Free(L, (void*)p->pSetLayouts);
 ZCLEAR_END
@@ -3119,11 +3212,35 @@ ZCHECK_BEGIN(VkDescriptorSetAllocateInfo)
     popfield(L, arg1);
     if(*err) { pushfielderror(F); return p; }
 #undef F
+    EXTENSIONS_BEGIN
+    if(ispresent("descriptor_counts"))
+        {
+        VkDescriptorSetVariableDescriptorCountAllocateInfoEXT* p1 =
+            zcheckVkDescriptorSetVariableDescriptorCountAllocateInfoEXT(L, arg, err);
+        if(*err) { zfree(L, p1, 1); return p; }
+        addtochain(chain, p1);
+        }
+    EXTENSIONS_END
 ZCHECK_END
 
 /*------------------------------------------------------------------------------*
  | Descriptor Set Layout                                                        |
  *------------------------------------------------------------------------------*/
+
+static ZCLEAR_BEGIN(VkDescriptorSetLayoutBindingFlagsCreateInfoEXT)
+    if(p->pBindingFlags) Free(L, (void*)p->pBindingFlags);
+ZCLEAR_END
+ZCHECK_BEGIN(VkDescriptorSetLayoutBindingFlagsCreateInfoEXT)
+    int arg1;
+    //checktable(arg);
+    newstruct(VkDescriptorSetLayoutBindingFlagsCreateInfoEXT);
+#define F "binding_flags"
+    arg1 = pushfield(L, arg, F);
+    p->pBindingFlags = checkflagslist(L, arg1, &p->bindingCount, err);
+    popfield(L, arg1);
+    if(*err) { pushfielderror(F); return p; }
+#undef F
+ZCHECK_END
 
 static ZCLEAR_BEGIN(VkDescriptorSetLayoutCreateInfo)
     if(p->pBindings)
@@ -3141,6 +3258,15 @@ ZCHECK_BEGIN(VkDescriptorSetLayoutCreateInfo)
     if(*err<0) { prependfield(F); return p; }
     if(*err == ERR_NOTPRESENT) poperror();
 #undef F
+    EXTENSIONS_BEGIN
+    if(ispresent("binding_flags"))
+        {
+        VkDescriptorSetLayoutBindingFlagsCreateInfoEXT *p1 =
+            zcheckVkDescriptorSetLayoutBindingFlagsCreateInfoEXT(L, arg, err);
+        if(*err) { zfree(L, p1, 1); return p; }
+        addtochain(chain, p1);
+        }
+    EXTENSIONS_END
 ZCHECK_END
 
 /*------------------------------------------------------------------------------*
@@ -3676,7 +3802,7 @@ ZCHECK_BEGIN(VkSubmitInfo)
 #undef F
 #define F "wait_dst_stage_mask"
     arg1 = pushfield(L, arg, F);
-    p->pWaitDstStageMask = checkflaglist(L, arg1, &count, err);
+    p->pWaitDstStageMask = checkflagslist(L, arg1, &count, err);
     popfield(L, arg1);
     if(*err < 0) { pushfielderror(F); return p; }
     if(count != p->waitSemaphoreCount) 
@@ -4248,9 +4374,22 @@ ZCHECK_END
 
 /*------------------------------------------------------------------------------*/
 
+LOCALPUSH_BEGIN(VkDescriptorSetVariableDescriptorCountLayoutSupportEXT)
+    SetInteger(maxVariableDescriptorCount, "max_variable_descriptor_count");
+LOCALPUSH_END
+
+ZINIT_BEGIN(VkDescriptorSetLayoutSupportKHR)
+    EXTENSIONS_BEGIN
+      ADDX(DESCRIPTOR_SET_VARIABLE_DESCRIPTOR_COUNT_LAYOUT_SUPPORT_EXT, VkDescriptorSetVariableDescriptorCountLayoutSupportEXT);
+    EXTENSIONS_END
+ZINIT_END
+
 ZPUSH_BEGIN(VkDescriptorSetLayoutSupportKHR)
     lua_newtable(L);
     SetBoolean(supported, "supported");
+    XPUSH_BEGIN
+        XCASE(DESCRIPTOR_SET_VARIABLE_DESCRIPTOR_COUNT_LAYOUT_SUPPORT_EXT, VkDescriptorSetVariableDescriptorCountLayoutSupportEXT);
+    XPUSH_END
 ZPUSH_END
 
 /*------------------------------------------------------------------------------*/
@@ -4965,6 +5104,8 @@ static void zfreeaux(lua_State *L, void *pp)
         CASE(RENDER_PASS_BEGIN_INFO, VkRenderPassBeginInfo);
         CASE(DISPLAY_MODE_CREATE_INFO_KHR, VkDisplayModeCreateInfoKHR);
         CASE(WRITE_DESCRIPTOR_SET_INLINE_UNIFORM_BLOCK_EXT, VkWriteDescriptorSetInlineUniformBlockEXT);
+        CASE(DESCRIPTOR_SET_LAYOUT_BINDING_FLAGS_CREATE_INFO_EXT, VkDescriptorSetLayoutBindingFlagsCreateInfoEXT);
+        CASE(DESCRIPTOR_SET_VARIABLE_DESCRIPTOR_COUNT_ALLOCATE_INFO_EXT, VkDescriptorSetVariableDescriptorCountAllocateInfoEXT);
 #undef CASE
         default: 
             return;

@@ -469,6 +469,16 @@ int pushflags(lua_State *L, VkFlags value)
     return 1;
     }
 
+VkFlags* checkflagslist(lua_State *L, int arg, uint32_t *count, int *err)
+    {
+    return (VkFlags*)checkuint32list(L, arg, count, err);
+    }
+
+void pushflagslist(lua_State *L, VkFlags *list, uint32_t count)
+    {
+    pushuint32list(L, (uint32_t*)list, count);
+    }
+
 /*------------------------------------------------------------------------------*
  | Custom luaL_checkxxx() style functions                                       |
  *------------------------------------------------------------------------------*/

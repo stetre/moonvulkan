@@ -3568,6 +3568,29 @@ the <em>queue_family_index</em> of the <em>i-th</em> element in the table return
 <em>max_per_stage_descriptor_update_after_bind_inline_uniform_blocks</em>: integer,<br>
 <em>max_descriptor_set_inline_uniform_blocks</em>: integer,<br>
 <em>max_descriptor_set_update_after_bind_inline_uniform_blocks</em>: integer,<br>
+-- EXTENSION (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkPhysicalDeviceDescriptorIndexingPropertiesEXT">VkPhysicalDeviceDescriptorIndexingPropertiesEXT</a>, <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_descriptor_indexing">VK_EXT_descriptor_indexing</a>):<br>
+<em>shader_uniform_buffer_array_non_uniform_indexing_native</em>: boolean,<br>
+<em>shader_sampled_image_array_non_uniform_indexing_native</em>: boolean,<br>
+<em>shader_storage_buffer_array_non_uniform_indexing_native</em>: boolean,<br>
+<em>shader_storage_image_array_non_uniform_indexing_native</em>: boolean,<br>
+<em>shader_input_attachment_array_non_uniform_indexing_native</em>: boolean,<br>
+<em>robust_buffer_access_update_after_bind</em>: boolean,<br>
+<em>quad_divergent_implicit_lod</em>: boolean,<br>
+<em>max_per_stage_descriptor_update_after_bind_samplers</em>: integer,<br>
+<em>max_per_stage_descriptor_update_after_bind_uniform_buffers</em>: integer,<br>
+<em>max_per_stage_descriptor_update_after_bind_storage_buffers</em>: integer,<br>
+<em>max_per_stage_descriptor_update_after_bind_sampled_images</em>: integer,<br>
+<em>max_per_stage_descriptor_update_after_bind_storage_images</em>: integer,<br>
+<em>max_per_stage_descriptor_update_after_bind_input_attachments</em>: integer,<br>
+<em>max_per_stage_update_after_bind_resources</em>: integer,<br>
+<em>max_descriptor_set_update_after_bind_samplers</em>: integer,<br>
+<em>max_descriptor_set_update_after_bind_uniform_buffers</em>: integer,<br>
+<em>max_descriptor_set_update_after_bind_uniform_buffers_dynamic</em>: integer,<br>
+<em>max_descriptor_set_update_after_bind_storage_buffers</em>: integer,<br>
+<em>max_descriptor_set_update_after_bind_storage_buffers_dynamic</em>: integer,<br>
+<em>max_descriptor_set_update_after_bind_sampled_images</em>: integer,<br>
+<em>max_descriptor_set_update_after_bind_storage_images</em>: integer,<br>
+<em>max_descriptor_set_update_after_bind_input_attachments</em>: integer,<br>
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkPhysicalDeviceProperties2.html">VkPhysicalDeviceProperties2</a>)</span></p>
 </li>
 <li>
@@ -3792,6 +3815,27 @@ the <em>queue_family_index</em> of the <em>i-th</em> element in the table return
 -- EXTENSION (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkPhysicalDeviceInlineUniformBlockFeaturesEXT">VkPhysicalDeviceInlineUniformBlockFeaturesEXT</a>, <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_inline_uniform_block">VK_EXT_inline_uniform_block</a>):<br>
 <em>inline_uniform_block</em>: boolean,<br>
 <em>descriptor_binding_inline_uniform_block_update_after_bind</em>: boolean,<br>
+-- EXTENSION (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkPhysicalDeviceDescriptorIndexingFeaturesEXT">VkPhysicalDeviceDescriptorIndexingFeaturesEXT</a>, <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_descriptor_indexing">VK_EXT_descriptor_indexing</a>):<br>
+<em>shader_input_attachment_array_dynamic_indexing</em>: boolean,<br>
+<em>shader_uniform_texel_buffer_array_dynamic_indexing</em>: boolean,<br>
+<em>shader_storage_texel_buffer_array_dynamic_indexing</em>: boolean,<br>
+<em>shader_uniform_buffer_array_non_uniform_indexing</em>: boolean,<br>
+<em>shader_sampled_image_array_non_uniform_indexing</em>: boolean,<br>
+<em>shader_storage_buffer_array_non_uniform_indexing</em>: boolean,<br>
+<em>shader_storage_image_array_non_uniform_indexing</em>: boolean,<br>
+<em>shader_input_attachment_array_non_uniform_indexing</em>: boolean,<br>
+<em>shader_uniform_texel_buffer_array_non_uniform_indexing</em>: boolean,<br>
+<em>shader_storage_texel_buffer_array_non_uniform_indexing</em>: boolean,<br>
+<em>descriptor_binding_uniform_buffer_update_after_bind</em>: boolean,<br>
+<em>descriptor_binding_sampled_image_update_after_bind</em>: boolean,<br>
+<em>descriptor_binding_storage_image_update_after_bind</em>: boolean,<br>
+<em>descriptor_binding_storage_buffer_update_after_bind</em>: boolean,<br>
+<em>descriptor_binding_uniform_texel_buffer_update_after_bind</em>: boolean,<br>
+<em>descriptor_binding_storage_texel_buffer_update_after_bind</em>: boolean,<br>
+<em>descriptor_binding_update_unused_while_pending</em>: boolean,<br>
+<em>descriptor_binding_partially_bound</em>: boolean,<br>
+<em>descriptor_binding_variable_descriptor_count</em>: boolean,<br>
+<em>runtime_descriptor_array</em>: boolean,<br>
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkPhysicalDeviceFeatures2.html">VkPhysicalDeviceFeatures2</a>)</span></p>
 </li>
 <li>
@@ -4541,12 +4585,16 @@ the <em>queue_family_index</em> of the <em>i-th</em> element in the table return
 <span class="small"><strong>descriptorsetlayoutcreateinfo</strong> = {<br>
 <em>flags</em>: <a href="#descriptorsetlayoutcreateflags">descriptorsetlayoutcreateflags</a>,<br>
 <em>bindings</em>: {<a href="#descriptorsetlayoutbinding">descriptorsetlayoutbinding</a>},<br>
+-- EXTENSION (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkDescriptorSetLayoutBindingFlagsCreateInfoEXT">VkDescriptorSetLayoutBindingFlagsCreateInfoEXT</a>, <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_descriptor_indexing">VK_EXT_descriptor_indexing</a>):<br>
+<em>binding_flags</em>: {<a href="#descriptorbindingflags">descriptorbindingflags</a>},<br>
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkDescriptorSetLayoutCreateInfo.html">VkDescriptorSetLayoutCreateInfo</a>)</span></p>
 </li>
 <li>
 <p><a id="descriptorsetlayoutsupport"></a>
 <span class="small"><strong>descriptorsetlayoutsupport</strong> = {<br>
 <em>supported</em>: boolean,<br>
+-- EXTENSION (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkDescriptorSetVariableDescriptorCountLayoutSupportEXT">VkDescriptorSetVariableDescriptorCountLayoutSupportEXT</a>, <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_descriptor_indexing">VK_EXT_descriptor_indexing</a>):<br>
+<em>max_variable_descriptor_count</em>: integer,<br>
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkDescriptorSetLayoutSupportKHR">VkDescriptorSetLayoutSupportKHR</a>)</span></p>
 </li>
 <li>
@@ -4613,6 +4661,8 @@ the <em>queue_family_index</em> of the <em>i-th</em> element in the table return
 <p><a id="descriptorsetallocateinfo"></a>
 <span class="small"><strong>descriptorsetallocateinfo</strong> = {<br>
 <em>set_layouts</em>: {<a href="#descriptor_set_layout">descriptor_set_layout</a>},<br>
+-- EXTENSION (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkDescriptorSetVariableDescriptorCountAllocateInfoEXT">VkDescriptorSetVariableDescriptorCountAllocateInfoEXT</a>, <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_descriptor_indexing">VK_EXT_descriptor_indexing</a>):<br>
+<em>descriptor_counts</em>: {integer},<br>
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkDescriptorSetAllocateInfo.html">VkDescriptorSetAllocateInfo</a>)</span></p>
 </li>
 </ul>

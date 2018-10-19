@@ -132,8 +132,10 @@ VkFlags optflags(lua_State *L, int arg, VkFlags defval);
 VkFlags checkflags(lua_State *L, int arg);
 #define pushflags moonvulkan_pushflags
 int pushflags(lua_State *L, VkFlags value);
-#define checkflaglist checkuint32list
-#define pushflaglist pushuint32list
+#define checkflagslist moonvulkan_checkflagslist
+VkFlags* checkflagslist(lua_State *L, int arg, uint32_t *count, int *err);
+#define pushflagslist moonvulkan_pushflagslist
+void pushflagslist(lua_State *L, VkFlags *list, uint32_t count);
 
 #define checksizeorwholesize moonvulkan_checksizeorwholesize
 VkDeviceSize checksizeorwholesize(lua_State *L, int arg);
