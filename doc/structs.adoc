@@ -753,6 +753,15 @@ _view_offsets_: {integer}, +
 _correlation_masks_: {integer}, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkRenderPassCreateInfo.html[VkRenderPassCreateInfo])#
 
+* [[renderpasscreateinfo2]]
+[small]#*renderpasscreateinfo2* = { +
+_flags_: <<renderpasscreateflags, renderpasscreateflags>>, +
+_subpasses_: {<<subpassdescription, subpassdescription>>} *[R]*, +
+_attachments_: {<<attachmentdescription, attachmentdescription>>}, +
+_dependencies_: {<<subpassdependency, subpassdependency>>}, +
+_correlated_view_masks_: {integer}, +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkRenderPassCreateInfo2KHR[VkRenderPassCreateInfo2KHR], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_create_renderpass2[VK_KHR_create_renderpass2])#
+
 
 * [[attachmentdescription]]
 [small]#*attachmentdescription* = { +
@@ -765,8 +774,7 @@ _stencil_load_op_: <<attachmentloadop, attachmentloadop>>, +
 _stencil_store_op_: <<attachmentstoreop, attachmentstoreop>>, +
 _initial_layout_: <<imagelayout, imagelayout>>, +
 _final_layout_: <<imagelayout, imagelayout>>, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkAttachmentDescription.html[VkAttachmentDescription])#
-
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkAttachmentDescription.html[VkAttachmentDescription], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkAttachmentDescription2KHR[VkAttachmentDescription2KHR])#
 
 * [[subpassdescription]]
 [small]#*subpassdescription* = { +
@@ -777,13 +785,15 @@ _color_attachments_: {<<attachmentreference, attachmentreference>>}, +
 _resolve_attachments_: {<<attachmentreference, attachmentreference>>}, +
 _depth_stencil_attachment_: <<attachmentreference, attachmentreference>>, +
 _preserve_attachments_: {integer}, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkSubpassDescription.html[VkSubpassDescription])#
+_view_mask_: {integer} (2KHR only), +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkSubpassDescription.html[VkSubpassDescription], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkSubpassDescription2KHR[VkSubpassDescription2KHR])#
 
 * [[attachmentreference]]
 [small]#*attachmentreference* = { +
 _attachment_: integer or '_unused_' (defaults to '_unused_'), +
 _layout_: <<imagelayout, imagelayout>> *[R]*, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkAttachmentReference.html[VkAttachmentReference])#
+_aspect_mask_: <<imageaspectflags, imageaspectflags>> (2KHR only), +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkAttachmentReference.html[VkAttachmentReference], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkAttachmentReference2KHR[VkAttachmentReference2KHR])#
 
 * [[subpassdependency]]
 [small]#*subpassdependency* = { +
@@ -794,7 +804,8 @@ _dst_stage_mask_: <<pipelinestageflags, pipelinestageflags>>, +
 _src_access_mask_: <<accessflags, accessflags>>, +
 _dst_access_mask_: <<accessflags, accessflags>>, +
 _dependency_flags_: <<dependencyflags, dependencyflags>>, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkSubpassDependency.html[VkSubpassDependency])#
+_view_offset_: integer (2KHR only), +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkSubpassDependency.html[VkSubpassDependency], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkSubpassDependency2KHR[VkSubpassDependency2KHR])#
 
 * [[inputattachmentaspectreference]]
 [small]#*inputattachmentaspectreference* = { +
@@ -1568,6 +1579,16 @@ pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-exte
 _attachment_initial_sample_locations_count_: {<<attachmentsamplelocations, attachmentsamplelocations>>}, +
 _post_subpass_sample_locations_count_: {<<subpasssamplelocations, subpasssamplelocations>>}, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkRenderPassBeginInfo.html[VkRenderPassBeginInfo])#
+
+* [[subpassbegininfo]]
+[small]#*subpassbegininfo* = { +
+_contents_: <<subpasscontents, subpasscontents>> *[R}*, +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkSubpassBeginInfoKHR[VkSubpassBeginInfoKHR])#
+
+* [[subpassendinfo]]
+[small]#*subpassendinfo* = { +
+pass:[--] _for future extensions_ +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkSubpassEndInfoKHR[VkSubpassEndInfoKHR])#
 
 * [[attachmentsamplelocations]]
 [small]#*attachmentsamplelocations* = { +

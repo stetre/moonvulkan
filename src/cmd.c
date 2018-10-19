@@ -656,30 +656,83 @@ static int CmdBeginRenderPass(lua_State *L)
     int err;
     ud_t *ud;
     VkCommandBuffer cb = checkcommand_buffer(L, 1, &ud);
-    VkSubpassContents contents = checksubpasscontents(L, 3);
-#define CLEANUP zfreeVkRenderPassBeginInfo(L, info, 1)
-    VkRenderPassBeginInfo* info = zcheckVkRenderPassBeginInfo(L, 2, &err);
-    if(err) { CLEANUP; return argerror(L, 2); }
-    ud->ddt->CmdBeginRenderPass(cb, info, contents);
-    CLEANUP;
+    if(ud->ddt->CmdBeginRenderPass2KHR)
+        {
+#define CLEANUP do {                                    \
+            zfreeVkRenderPassBeginInfo(L, info, 1);     \
+            zfreeVkSubpassBeginInfoKHR(L, binfo, 1);    \
+} while(0)
+        VkRenderPassBeginInfo* info=NULL;
+        VkSubpassBeginInfoKHR* binfo=NULL;
+        info = zcheckVkRenderPassBeginInfo(L, 2, &err);
+        if(err) { CLEANUP; return argerror(L, 2); }
+        binfo = zcheckVkSubpassBeginInfoKHR(L, 3, &err);
+        if(err) { CLEANUP; return argerror(L, 3); }
+        ud->ddt->CmdBeginRenderPass2KHR(cb, info, binfo);
+        CLEANUP;
 #undef CLEANUP
+        }
+    else
+        {
+        VkSubpassContents contents = checksubpasscontents(L, 3);
+#define CLEANUP zfreeVkRenderPassBeginInfo(L, info, 1)
+        VkRenderPassBeginInfo* info = zcheckVkRenderPassBeginInfo(L, 2, &err);
+        if(err) { CLEANUP; return argerror(L, 2); }
+        ud->ddt->CmdBeginRenderPass(cb, info, contents);
+        CLEANUP;
+#undef CLEANUP
+        }
     return 0;
     }
 
 static int CmdNextSubpass(lua_State *L)
     {
+    int err;
     ud_t *ud;
     VkCommandBuffer cb = checkcommand_buffer(L, 1, &ud);
-    VkSubpassContents contents = checksubpasscontents(L, 2);
-    ud->ddt->CmdNextSubpass(cb, contents);
+    if(ud->ddt->CmdNextSubpass2KHR)
+        {
+#define CLEANUP do {                                    \
+            zfreeVkSubpassBeginInfoKHR(L, binfo, 1);    \
+            zfreeVkSubpassEndInfoKHR(L, einfo, 1);      \
+} while(0)
+        VkSubpassBeginInfoKHR* binfo = NULL;
+        VkSubpassEndInfoKHR* einfo = NULL;
+        binfo = zcheckVkSubpassBeginInfoKHR(L, 2, &err);
+        if(err) { CLEANUP; return argerror(L, 2); }
+        einfo = zcheckVkSubpassEndInfoKHR(L, 3, &err);
+        if(err) { CLEANUP; return argerror(L, 3); }
+        ud->ddt->CmdNextSubpass2KHR(cb, binfo, einfo);
+        CLEANUP;
+#undef CLEANUP
+        }
+    else
+        {
+        VkSubpassContents contents = checksubpasscontents(L, 2);
+        ud->ddt->CmdNextSubpass(cb, contents);
+        }
     return 0;
     }
 
 static int CmdEndRenderPass(lua_State *L)
     {
+    int err;
     ud_t *ud;
     VkCommandBuffer cb = checkcommand_buffer(L, 1, &ud);
-    ud->ddt->CmdEndRenderPass(cb);
+    if(ud->ddt->CmdEndRenderPass2KHR)
+        {
+#define CLEANUP zfreeVkSubpassEndInfoKHR(L, einfo, 1)
+        VkSubpassEndInfoKHR* einfo;
+        einfo = zcheckVkSubpassEndInfoKHR(L, 2, &err);
+        if(err) { CLEANUP; return argerror(L, 2); }
+        ud->ddt->CmdEndRenderPass2KHR(cb, einfo);
+        CLEANUP;
+#undef CLEANUP
+        }
+    else
+        {
+        ud->ddt->CmdEndRenderPass(cb);
+        }
     return 0;
     }
 

@@ -491,6 +491,7 @@ static const char *GetString_(lua_State *L, int arg, const char *sname, const ch
 #define GetDisplayEventType(name, sname) GetEnum(name, sname, testdisplayeventtype)
 #define GetDisplayPowerState(name, sname) GetEnum(name, sname, testdisplaypowerstate)
 #define GetTessellationDomainOrigin(name, sname) GetEnum(name, sname, testtessellationdomainorigin)
+#define GetSubpassContents(name, sname) GetEnum(name, sname, testsubpasscontents)
 #define GetObjectType(name, sname) GetEnum(name, sname, testobjecttype)
 
 /* enums with default value (ie optional) */
@@ -3430,6 +3431,158 @@ ZCHECK_BEGIN(VkRenderPassCreateInfo)
 ZCHECK_END
 
 /*------------------------------------------------------------------------------*
+ | Render Pass 2 (VK_KHR_create_renderpass2)                                    |
+ *------------------------------------------------------------------------------*/
+
+ZCHECK_BEGIN(VkAttachmentDescription2KHR)
+    checktable(arg);
+    newstruct(VkAttachmentDescription2KHR);
+    GetFlags(flags, "flags");
+    GetFormat(format, "format");
+    GetSamples(samples, "samples");
+    GetAttachmentLoadOp(loadOp, "load_op");
+    GetAttachmentStoreOp(storeOp, "store_op");
+    GetAttachmentLoadOp(stencilLoadOp, "stencil_load_op");
+    GetAttachmentStoreOp(stencilStoreOp, "stencil_store_op");
+    GetImageLayout(initialLayout, "initial_layout");
+    GetImageLayout(finalLayout, "final_layout");
+ZCHECK_END
+ZCHECKARRAY(VkAttachmentDescription2KHR)
+
+ZCHECK_BEGIN(VkAttachmentReference2KHR)
+    checktable(arg);
+    newstruct(VkAttachmentReference2KHR);
+    GetAttachment(attachment, "attachment");
+    GetImageLayout(layout, "layout");
+    GetFlags(aspectMask, "aspect_mask");
+ZCHECK_END
+ZCHECKARRAY(VkAttachmentReference2KHR)
+
+static ZCLEAR_BEGIN(VkSubpassDescription2KHR)
+    if(p->pInputAttachments) 
+        zfreearrayVkAttachmentReference2KHR(L, p->pInputAttachments, p->inputAttachmentCount, 1);
+    if(p->pColorAttachments)
+        zfreearrayVkAttachmentReference2KHR(L, p->pColorAttachments, p->colorAttachmentCount, 1);
+    if(p->pResolveAttachments)
+        zfreearrayVkAttachmentReference2KHR(L, p->pResolveAttachments, p->colorAttachmentCount, 1);
+    if(p->pPreserveAttachments) Free(L, (void*)p->pPreserveAttachments);
+    if(p->pDepthStencilAttachment ) 
+        zfreeVkAttachmentReference2KHR(L, p->pDepthStencilAttachment, 1);
+ZCLEAR_END
+ZCHECK_BEGIN(VkSubpassDescription2KHR)
+    int arg1;
+    uint32_t count;
+    checktable(arg);
+    newstruct(VkSubpassDescription2KHR);
+    GetFlags(flags, "flags");
+    GetPipelineBindPoint(pipelineBindPoint, "pipeline_bind_point");
+    GetInteger(viewMask, "view_mask");
+#define F "input_attachments"
+    arg1 = pushfield(L, arg, F);
+    p->pInputAttachments = zcheckarrayVkAttachmentReference2KHR(L, arg1, &p->inputAttachmentCount, err);
+    popfield(L, arg1);
+    if(*err < 0) { prependfield(F); return p; }
+    else if(*err == ERR_NOTPRESENT) poperror();
+#undef F
+#define F "color_attachments"
+    arg1 = pushfield(L, arg, F);
+    p->pColorAttachments = zcheckarrayVkAttachmentReference2KHR(L, arg1, &p->colorAttachmentCount, err);
+    popfield(L, arg1);
+    if(*err < 0) { prependfield(F); return p; }
+    else if(*err == ERR_NOTPRESENT) poperror();
+#undef F
+#define F "resolve_attachments"
+    arg1 = pushfield(L, arg, F);
+    p->pResolveAttachments = zcheckarrayVkAttachmentReference2KHR(L, arg1, &count, err);
+    popfield(L, arg1);
+    if(*err < 0) { prependfield(F); return p; }
+    else if(*err == ERR_NOTPRESENT) poperror();
+    else if(count != p->colorAttachmentCount)
+        {
+        if(p->pResolveAttachments)
+            {
+            zfreearrayVkAttachmentReference2KHR(L, p->pResolveAttachments, count, 1);
+            p->pResolveAttachments = NULL;
+            }
+        *err = ERR_LENGTH; lua_pushstring(L, errstring(*err));
+        return p;
+        }
+#undef F
+#define F "depth_stencil_attachment"
+    arg1 = pushfield(L, arg, F);
+    p->pDepthStencilAttachment = zcheckVkAttachmentReference2KHR(L, arg1, err);
+    popfield(L, arg1);
+    if(*err < 0) { prependfield(F); return p; }
+    else if(*err == ERR_NOTPRESENT) poperror();
+#undef F
+#define F "preserve_attachments"
+    arg1 = pushfield(L, arg, F);
+    p->pPreserveAttachments = checkuint32list(L, arg1, &p->preserveAttachmentCount, err);
+    popfield(L, arg1);
+    if(*err < 0) { pushfielderror(F); return p; }
+#undef F
+ZCHECK_END
+ZCHECKARRAY(VkSubpassDescription2KHR)
+
+ZCHECK_BEGIN(VkSubpassDependency2KHR)
+    checktable(arg);
+    newstruct(VkSubpassDependency2KHR);
+    GetSubpass(srcSubpass, "src_subpass");
+    GetSubpass(dstSubpass, "dst_subpass");
+    GetFlags(srcStageMask, "src_stage_mask");
+    GetFlags(dstStageMask, "dst_stage_mask");
+    GetFlags(srcAccessMask, "src_access_mask");
+    GetFlags(dstAccessMask, "dst_access_mask");
+    GetFlags(dependencyFlags, "dependency_flags");
+    GetInteger(viewOffset, "view_offset");
+ZCHECK_END
+ZCHECKARRAY(VkSubpassDependency2KHR)
+
+static ZCLEAR_BEGIN(VkRenderPassCreateInfo2KHR)
+    if(p->pAttachments)
+        zfreearrayVkAttachmentDescription2KHR(L, p->pAttachments, p->attachmentCount, 1);
+    if(p->pSubpasses)
+        zfreearrayVkSubpassDescription2KHR(L, p->pSubpasses, p->subpassCount, 1);
+    if(p->pDependencies) 
+        zfreearrayVkSubpassDependency2KHR(L, p->pDependencies, p->dependencyCount, 1);
+    if(p->pCorrelatedViewMasks) Free(L, (void*)p->pCorrelatedViewMasks);
+ZCLEAR_END
+ZCHECK_BEGIN(VkRenderPassCreateInfo2KHR)
+    int arg1;
+    checktable(arg);
+    newstruct(VkRenderPassCreateInfo2KHR);
+    GetFlags(flags, "flags");
+#define F "attachments"
+    arg1 = pushfield(L, arg, F);
+    p->pAttachments = zcheckarrayVkAttachmentDescription2KHR(L, arg1, &p->attachmentCount, err);
+    popfield(L, arg1);
+    if(*err < 0) { prependfield(F); return p; }
+    if(*err == ERR_NOTPRESENT) poperror();
+#undef F
+#define F "subpasses"
+    arg1 = pushfield(L, arg, F);
+    p->pSubpasses = zcheckarrayVkSubpassDescription2KHR(L, arg1, &p->subpassCount, err);
+    popfield(L, arg1);
+    if(*err < 0) { prependfield(F); return p; }
+#undef F
+#define F "dependencies"
+    arg1 = pushfield(L, arg, F);
+    p->pDependencies = zcheckarrayVkSubpassDependency2KHR(L, arg1, &p->dependencyCount, err);
+    popfield(L, arg1);
+    if(*err < 0) { prependfield(F); return p; }
+    if(*err == ERR_NOTPRESENT) poperror();
+#undef F
+#define F "correlated_view_masks"
+    arg1 = pushfield(L, arg, F);
+    p->pCorrelatedViewMasks = checkuint32list(L, arg1, &p->correlatedViewMaskCount, err);
+    popfield(L, arg1);
+    if(*err < 0 && *err != ERR_EMPTY) { pushfielderror(F); return p; }
+    if(*err == ERR_NOTPRESENT) poperror();
+#undef F
+ZCHECK_END
+
+
+/*------------------------------------------------------------------------------*
  | Framebuffer                                                                  |
  *------------------------------------------------------------------------------*/
 
@@ -4030,6 +4183,22 @@ ZCHECK_BEGIN(VkRenderPassBeginInfo)
     else if(*err == ERR_NOTPRESENT) { zfree(L, p1, 1); poperror(); }
     else addtochain(chain, p1);
     EXTENSIONS_END
+ZCHECK_END
+
+/*------------------------------------------------------------------------------*
+ | Subpass Begin/End Info                                                       |
+ *------------------------------------------------------------------------------*/
+
+ZCHECK_BEGIN(VkSubpassBeginInfoKHR)
+    checktable(arg);
+    newstruct(VkSubpassBeginInfoKHR);
+    GetSubpassContents(contents, "contents");
+ZCHECK_END
+
+
+ZCHECK_BEGIN(VkSubpassEndInfoKHR)
+    checktable(arg);
+    newstruct(VkSubpassEndInfoKHR);
 ZCHECK_END
 
 /*------------------------------------------------------------------------------*
@@ -5161,6 +5330,8 @@ static void zfreeaux(lua_State *L, void *pp)
         CASE(DESCRIPTOR_SET_LAYOUT_BINDING_FLAGS_CREATE_INFO_EXT, VkDescriptorSetLayoutBindingFlagsCreateInfoEXT);
         CASE(DESCRIPTOR_SET_VARIABLE_DESCRIPTOR_COUNT_ALLOCATE_INFO_EXT, VkDescriptorSetVariableDescriptorCountAllocateInfoEXT);
         CASE(RENDER_PASS_MULTIVIEW_CREATE_INFO_KHR, VkRenderPassMultiviewCreateInfoKHR);
+        CASE(SUBPASS_DESCRIPTION_2_KHR, VkSubpassDescription2KHR);
+        CASE(RENDER_PASS_CREATE_INFO_2_KHR, VkRenderPassCreateInfo2KHR);
 #undef CASE
         default: 
             return;

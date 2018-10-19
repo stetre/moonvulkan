@@ -4,8 +4,8 @@
 
 [[create_render_pass]]
 * _render_pass_ = *create_render_pass*(_device_, <<renderpasscreateinfo, _renderpasscreateinfo_>>, [<<allocators, _allocator_>>]) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCreateRenderPass.html[vkCreateRenderPass].#
-
+_render_pass_ = *create_render_pass*(_device_, <<renderpasscreateinfo2, _renderpasscreateinfo2_>>, [<<allocators, _allocator_>>]) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCreateRenderPass.html[vkCreateRenderPass], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkCreateRenderPass2KHR[vkCreateRenderPass2KHR] (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_create_renderpass2[VK_KHR_create_renderpass2]).#
 
 [[destroy_render_pass]]
 * *destroy_render_pass*(_render_pass_) +

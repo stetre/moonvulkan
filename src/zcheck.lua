@@ -285,6 +285,13 @@ local TYPED = {
    { "VkDescriptorSetLayoutBindingFlagsCreateInfoEXT", "DESCRIPTOR_SET_LAYOUT_BINDING_FLAGS_CREATE_INFO_EXT" },
    { "VkDescriptorSetVariableDescriptorCountAllocateInfoEXT", "DESCRIPTOR_SET_VARIABLE_DESCRIPTOR_COUNT_ALLOCATE_INFO_EXT" },
    { "VkRenderPassMultiviewCreateInfoKHR", "RENDER_PASS_MULTIVIEW_CREATE_INFO_KHR" },
+   { "VkAttachmentDescription2KHR", "ATTACHMENT_DESCRIPTION_2_KHR" },
+   { "VkAttachmentReference2KHR", "ATTACHMENT_REFERENCE_2_KHR" },
+   { "VkSubpassDescription2KHR", "SUBPASS_DESCRIPTION_2_KHR" },
+   { "VkSubpassDependency2KHR", "SUBPASS_DEPENDENCY_2_KHR" },
+   { "VkRenderPassCreateInfo2KHR", "RENDER_PASS_CREATE_INFO_2_KHR" },
+   { "VkSubpassBeginInfoKHR", "SUBPASS_BEGIN_INFO_KHR" },
+   { "VkSubpassEndInfoKHR", "SUBPASS_END_INFO_KHR" },
 }
 
 local TYPED_WIN32 = {

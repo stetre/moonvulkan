@@ -1622,7 +1622,8 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/h
 <ul>
 <li>
 <p><em>render_pass</em> = <strong>create_render_pass</strong>(<em>device</em>, <a href="#renderpasscreateinfo"><em>renderpasscreateinfo</em></a>, [<a href="#allocators"><em>allocator</em></a>])<br>
-<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCreateRenderPass.html">vkCreateRenderPass</a>.</span></p>
+<em>render_pass</em> = <strong>create_render_pass</strong>(<em>device</em>, <a href="#renderpasscreateinfo2"><em>renderpasscreateinfo2</em></a>, [<a href="#allocators"><em>allocator</em></a>])<br>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCreateRenderPass.html">vkCreateRenderPass</a>, <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkCreateRenderPass2KHR">vkCreateRenderPass2KHR</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_create_renderpass2">VK_KHR_create_renderpass2</a>).</span></p>
 </li>
 </ul>
 </div>
@@ -2225,8 +2226,13 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/h
 <ul>
 <li>
 <p><strong>cmd_begin_render_pass</strong>(<em>cb</em>, <a href="#renderpassbegininfo"><em>renderpassbegininfo</em></a>, <a href="#subpasscontents"><em>subpasscontents</em></a>)<br>
+<strong>cmd_next_subpass</strong>(<em>cb</em>, <a href="#subpasscontents"><em>subpasscontents</em></a>)<br>
 <strong>cmd_end_render_pass</strong>(<em>cb</em>)<br>
-<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdBeginRenderPass.html">vkCmdBeginRenderPass</a>, <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdEndRenderPass.html">vkCmdEndRenderPass</a>.</span></p>
+<strong>cmd_begin_render_pass</strong>(<em>cb</em>, <a href="#renderpassbegininfo"><em>renderpassbegininfo</em></a>, <a href="#subpassbegininfo"><em>subpassbegininfo</em></a>) (2KHR)<br>
+<strong>cmd_next_subpass</strong>(<em>cb</em>, <a href="#subpassbegininfo"><em>subpassbegininfo</em></a>, <a href="#subpassendinfo"><em>subpassendinfo</em></a>) (2KHR)<br>
+<strong>cmd_end_render_pass</strong>(<em>cb</em>, <a href="#subpassendinfo"><em>subpassendinfo</em></a>) (2KHR)<br>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdBeginRenderPass.html">vkCmdBeginRenderPass</a>, <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdNextSubpass.html">vkCmdNextSubpass</a>, <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdEndRenderPass.html">vkCmdEndRenderPass</a>, or<br>
+<a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkCmdBeginRenderPass2KHR">vkCmdBeginRenderPass2KHR</a>, <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkCmdNextSubpass2KHR">vkCmdNextSubpass2KHR</a>, <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkCmdEndRenderPass2KHR">vkCmdEndRenderPass2KHR</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_create_renderpass2">VK_KHR_create_renderpass2</a>).</span></p>
 </li>
 </ul>
 </div>
@@ -2444,14 +2450,6 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/
 <em>size</em>: integer (multiple of 4) or '<em>whole size</em>'<br>
 <em>data</em>: integer<br>
 Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdFillBuffer.html">vkCmdFillBuffer</a>.</span></p>
-</li>
-</ul>
-</div>
-<div id="cmd_next_subpass" class="ulist">
-<ul>
-<li>
-<p><strong>cmd_next_subpass</strong>(<em>cb</em>, <a href="#subpasscontents"><em>subpasscontents</em></a>)<br>
-<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdNextSubpass.html">vkCmdNextSubpass</a>.</span></p>
 </li>
 </ul>
 </div>
@@ -4217,6 +4215,16 @@ the <em>queue_family_index</em> of the <em>i-th</em> element in the table return
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkRenderPassCreateInfo.html">VkRenderPassCreateInfo</a>)</span></p>
 </li>
 <li>
+<p><a id="renderpasscreateinfo2"></a>
+<span class="small"><strong>renderpasscreateinfo2</strong> = {<br>
+<em>flags</em>: <a href="#renderpasscreateflags">renderpasscreateflags</a>,<br>
+<em>subpasses</em>: {<a href="#subpassdescription">subpassdescription</a>} <strong>[R]</strong>,<br>
+<em>attachments</em>: {<a href="#attachmentdescription">attachmentdescription</a>},<br>
+<em>dependencies</em>: {<a href="#subpassdependency">subpassdependency</a>},<br>
+<em>correlated_view_masks</em>: {integer},<br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkRenderPassCreateInfo2KHR">VkRenderPassCreateInfo2KHR</a>, <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_create_renderpass2">VK_KHR_create_renderpass2</a>)</span></p>
+</li>
+<li>
 <p><a id="attachmentdescription"></a>
 <span class="small"><strong>attachmentdescription</strong> = {<br>
 <em>flags</em>: <a href="#attachmentdescriptionflags">attachmentdescriptionflags</a>,<br>
@@ -4228,7 +4236,7 @@ the <em>queue_family_index</em> of the <em>i-th</em> element in the table return
 <em>stencil_store_op</em>: <a href="#attachmentstoreop">attachmentstoreop</a>,<br>
 <em>initial_layout</em>: <a href="#imagelayout">imagelayout</a>,<br>
 <em>final_layout</em>: <a href="#imagelayout">imagelayout</a>,<br>
-} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkAttachmentDescription.html">VkAttachmentDescription</a>)</span></p>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkAttachmentDescription.html">VkAttachmentDescription</a>, <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkAttachmentDescription2KHR">VkAttachmentDescription2KHR</a>)</span></p>
 </li>
 <li>
 <p><a id="subpassdescription"></a>
@@ -4240,14 +4248,16 @@ the <em>queue_family_index</em> of the <em>i-th</em> element in the table return
 <em>resolve_attachments</em>: {<a href="#attachmentreference">attachmentreference</a>},<br>
 <em>depth_stencil_attachment</em>: <a href="#attachmentreference">attachmentreference</a>,<br>
 <em>preserve_attachments</em>: {integer},<br>
-} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkSubpassDescription.html">VkSubpassDescription</a>)</span></p>
+<em>view_mask</em>: {integer} (2KHR only),<br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkSubpassDescription.html">VkSubpassDescription</a>, <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkSubpassDescription2KHR">VkSubpassDescription2KHR</a>)</span></p>
 </li>
 <li>
 <p><a id="attachmentreference"></a>
 <span class="small"><strong>attachmentreference</strong> = {<br>
 <em>attachment</em>: integer or '<em>unused</em>' (defaults to '<em>unused</em>'),<br>
 <em>layout</em>: <a href="#imagelayout">imagelayout</a> <strong>[R]</strong>,<br>
-} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkAttachmentReference.html">VkAttachmentReference</a>)</span></p>
+<em>aspect_mask</em>: <a href="#imageaspectflags">imageaspectflags</a> (2KHR only),<br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkAttachmentReference.html">VkAttachmentReference</a>, <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkAttachmentReference2KHR">VkAttachmentReference2KHR</a>)</span></p>
 </li>
 <li>
 <p><a id="subpassdependency"></a>
@@ -4259,7 +4269,8 @@ the <em>queue_family_index</em> of the <em>i-th</em> element in the table return
 <em>src_access_mask</em>: <a href="#accessflags">accessflags</a>,<br>
 <em>dst_access_mask</em>: <a href="#accessflags">accessflags</a>,<br>
 <em>dependency_flags</em>: <a href="#dependencyflags">dependencyflags</a>,<br>
-} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkSubpassDependency.html">VkSubpassDependency</a>)</span></p>
+<em>view_offset</em>: integer (2KHR only),<br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkSubpassDependency.html">VkSubpassDependency</a>, <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkSubpassDependency2KHR">VkSubpassDependency2KHR</a>)</span></p>
 </li>
 <li>
 <p><a id="inputattachmentaspectreference"></a>
@@ -5151,6 +5162,18 @@ See also the <a href="#clearcolor_snippet">example</a> in the code snippets sect
 <em>attachment_initial_sample_locations_count</em>: {<a href="#attachmentsamplelocations">attachmentsamplelocations</a>},<br>
 <em>post_subpass_sample_locations_count</em>: {<a href="#subpasssamplelocations">subpasssamplelocations</a>},<br>
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkRenderPassBeginInfo.html">VkRenderPassBeginInfo</a>)</span></p>
+</li>
+<li>
+<p><a id="subpassbegininfo"></a>
+<span class="small"><strong>subpassbegininfo</strong> = {<br>
+<em>contents</em>: <a href="#subpasscontents">subpasscontents</a> <strong>[R}</strong>,<br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkSubpassBeginInfoKHR">VkSubpassBeginInfoKHR</a>)</span></p>
+</li>
+<li>
+<p><a id="subpassendinfo"></a>
+<span class="small"><strong>subpassendinfo</strong> = {<br>
+-- <em>for future extensions</em><br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkSubpassEndInfoKHR">VkSubpassEndInfoKHR</a>)</span></p>
 </li>
 <li>
 <p><a id="attachmentsamplelocations"></a>

@@ -302,6 +302,10 @@ typedef struct {
     F(CmdDrawIndirectCountKHR);
     F(CmdDrawIndexedIndirectCountKHR);
     F(GetDescriptorSetLayoutSupportKHR);
+    F(CreateRenderPass2KHR);
+    F(CmdBeginRenderPass2KHR);
+    F(CmdNextSubpass2KHR);
+    F(CmdEndRenderPass2KHR);
 #ifdef VK_USE_PLATFORM_WIN32_KHR
     F(GetMemoryWin32HandleKHR);
     F(GetMemoryWin32HandlePropertiesKHR);
