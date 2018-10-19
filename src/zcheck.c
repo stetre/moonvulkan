@@ -1715,6 +1715,11 @@ FUNC_BEGIN(DESCRIPTOR_INDEXING_FEATURES_EXT, VkPhysicalDeviceDescriptorIndexingF
     GetBoolean(descriptorBindingVariableDescriptorCount, "descriptor_binding_variable_descriptor_count");
     GetBoolean(runtimeDescriptorArray, "runtime_descriptor_array");
 FUNC_END
+FUNC_BEGIN(MULTIVIEW_FEATURES, VkPhysicalDeviceMultiviewFeaturesKHR)
+    GetBoolean(multiview, "multiview");
+    GetBoolean(multiviewGeometryShader, "multiview_geometry_shader");
+    GetBoolean(multiviewTessellationShader, "multiview_tessellation_shader");
+FUNC_END
 #undef FUNC_BEGIN
 #undef FUNC_END
 
@@ -1738,6 +1743,7 @@ ZINIT_BEGIN(VkPhysicalDeviceFeatures2)
                 VkPhysicalDeviceInlineUniformBlockFeaturesEXT);
         ADDX(PHYSICAL_DEVICE_DESCRIPTOR_INDEXING_FEATURES_EXT,
                 VkPhysicalDeviceDescriptorIndexingFeaturesEXT);
+        ADDX(PHYSICAL_DEVICE_MULTIVIEW_FEATURES_KHR, VkPhysicalDeviceMultiviewFeaturesKHR);
     EXTENSIONS_END
 ZINIT_END
 
@@ -1769,6 +1775,7 @@ ZCHECK_BEGIN(VkPhysicalDeviceFeatures2)
         ADD(VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT);
         ADD(VkPhysicalDeviceInlineUniformBlockFeaturesEXT);
         ADD(VkPhysicalDeviceDescriptorIndexingFeaturesEXT);
+        ADD(VkPhysicalDeviceMultiviewFeaturesKHR);
     #undef ADD
     EXTENSIONS_END
 ZCHECK_END
@@ -1894,6 +1901,11 @@ LOCALPUSH_BEGIN(VkPhysicalDeviceDescriptorIndexingFeaturesEXT)
     SetBoolean(descriptorBindingVariableDescriptorCount, "descriptor_binding_variable_descriptor_count");
     SetBoolean(runtimeDescriptorArray, "runtime_descriptor_array");
 LOCALPUSH_END
+LOCALPUSH_BEGIN(VkPhysicalDeviceMultiviewFeaturesKHR)
+    SetBoolean(multiview, "multiview");
+    SetBoolean(multiviewGeometryShader, "multiview_geometry_shader");
+    SetBoolean(multiviewTessellationShader, "multiview_tessellation_shader");
+LOCALPUSH_END
 
 ZPUSH_BEGIN(VkPhysicalDeviceFeatures)
     lua_newtable(L);
@@ -1923,6 +1935,7 @@ ZPUSH_BEGIN(VkPhysicalDeviceFeatures2)
                 VkPhysicalDeviceInlineUniformBlockFeaturesEXT);
         XCASE(PHYSICAL_DEVICE_DESCRIPTOR_INDEXING_FEATURES_EXT,
                 VkPhysicalDeviceDescriptorIndexingFeaturesEXT);
+        XCASE(PHYSICAL_DEVICE_MULTIVIEW_FEATURES_KHR, VkPhysicalDeviceMultiviewFeaturesKHR);
     XPUSH_END
 ZPUSH_END
 
@@ -2154,6 +2167,10 @@ LOCALPUSH_BEGIN(VkPhysicalDeviceDescriptorIndexingPropertiesEXT)
     SetInteger(maxDescriptorSetUpdateAfterBindStorageImages, "max_descriptor_set_update_after_bind_storage_images");
     SetInteger(maxDescriptorSetUpdateAfterBindInputAttachments, "max_descriptor_set_update_after_bind_input_attachments");
 LOCALPUSH_END
+LOCALPUSH_BEGIN(VkPhysicalDeviceMultiviewPropertiesKHR)
+    SetInteger(maxMultiviewViewCount, "max_multiview_view_count");
+    SetInteger(maxMultiviewInstanceIndex, "max_multiview_instance_index");
+LOCALPUSH_END
 
 
 ZINIT_BEGIN(VkPhysicalDeviceProperties2)
@@ -2181,6 +2198,7 @@ ZINIT_BEGIN(VkPhysicalDeviceProperties2)
                 VkPhysicalDeviceInlineUniformBlockPropertiesEXT);
         ADDX(PHYSICAL_DEVICE_DESCRIPTOR_INDEXING_PROPERTIES_EXT,
                 VkPhysicalDeviceDescriptorIndexingPropertiesEXT);
+        ADDX(PHYSICAL_DEVICE_MULTIVIEW_PROPERTIES_KHR, VkPhysicalDeviceMultiviewPropertiesKHR);
     EXTENSIONS_END
 ZINIT_END
 
@@ -2216,6 +2234,7 @@ ZPUSH_BEGIN(VkPhysicalDeviceProperties2)
                 VkPhysicalDeviceInlineUniformBlockPropertiesEXT);
         XCASE(PHYSICAL_DEVICE_DESCRIPTOR_INDEXING_PROPERTIES_EXT,
                 VkPhysicalDeviceDescriptorIndexingPropertiesEXT);
+        XCASE(PHYSICAL_DEVICE_MULTIVIEW_PROPERTIES_KHR, VkPhysicalDeviceMultiviewPropertiesKHR);
     XPUSH_END
 ZPUSH_END
 
@@ -3320,11 +3339,43 @@ static ZCLEAR_BEGIN(VkRenderPassInputAttachmentAspectCreateInfoKHR)
         zfreearrayVkInputAttachmentAspectReference(L, p->pAspectReferences, p->aspectReferenceCount, 1);
 ZCLEAR_END
 ZCHECK_BEGIN(VkRenderPassInputAttachmentAspectCreateInfoKHR)
+    int arg1;
     //checktable(arg);
     newstruct(VkRenderPassInputAttachmentAspectCreateInfoKHR);
+    arg1 = pushfield(L, arg, "input_attachment_aspect_references");
     p->pAspectReferences = 
-        zcheckarrayVkInputAttachmentAspectReference(L, arg, &p->aspectReferenceCount, err);
+        zcheckarrayVkInputAttachmentAspectReference(L, arg1, &p->aspectReferenceCount, err);
+    popfield(L, arg1);
     if(*err) return p;
+ZCHECK_END
+
+static ZCLEAR_BEGIN(VkRenderPassMultiviewCreateInfoKHR)
+    if(p->pViewMasks) Free(L, (void*)p->pViewMasks);
+    if(p->pViewOffsets) Free(L, (void*)p->pViewOffsets);
+    if(p->pCorrelationMasks) Free(L, (void*)p->pCorrelationMasks);
+ZCLEAR_END
+ZCHECK_BEGIN(VkRenderPassMultiviewCreateInfoKHR)
+    int arg1;
+    //checktable(arg);
+    newstruct(VkRenderPassMultiviewCreateInfoKHR);
+#define F "view_masks"
+    arg1 = pushfield(L, arg, F);
+    p->pViewMasks = checkuint32list(L, arg1, &p->subpassCount, err);
+    popfield(L, arg1);
+    if(*err < 0 && *err != ERR_EMPTY) { pushfielderror(F); return p; }
+#undef F
+#define F "view_offsets"
+    arg1 = pushfield(L, arg, F);
+    p->pViewOffsets = checkint32list(L, arg1, &p->dependencyCount, err);
+    popfield(L, arg1);
+    if(*err < 0 && *err != ERR_EMPTY) { pushfielderror(F); return p; }
+#undef F
+#define F "correlation_masks"
+    arg1 = pushfield(L, arg, F);
+    p->pCorrelationMasks = checkuint32list(L, arg1, &p->correlationMaskCount, err);
+    popfield(L, arg1);
+    if(*err < 0 && *err != ERR_EMPTY) { pushfielderror(F); return p; }
+#undef F
 ZCHECK_END
 
 static ZCLEAR_BEGIN(VkRenderPassCreateInfo)
@@ -3361,15 +3412,20 @@ ZCHECK_BEGIN(VkRenderPassCreateInfo)
     if(*err == ERR_NOTPRESENT) poperror();
 #undef F
     EXTENSIONS_BEGIN
-#define F "input_attachment_aspect_references"
-    VkRenderPassInputAttachmentAspectCreateInfoKHR *p1;
-    arg1 = pushfield(L, arg, F);
-    p1 = zcheckVkRenderPassInputAttachmentAspectCreateInfoKHR(L, arg1, err);
-    popfield(L, arg1);
-    if(*err < 0) { zfree(L, p1, 1); prependfield(F); return p; }
-    if(*err == ERR_NOTPRESENT) poperror();
-    else addtochain(chain, p1);
-#undef F
+    if(ispresent("input_attachment_aspect_references"))
+        {
+        VkRenderPassInputAttachmentAspectCreateInfoKHR *p1;
+        p1 = zcheckVkRenderPassInputAttachmentAspectCreateInfoKHR(L, arg, err);
+        if(*err) { zfree(L, p1, 1); return p; }
+        else addtochain(chain, p1);
+        }
+    if(ispresent("view_masks") || ispresent("view_offsets") || ispresent("correlation_masks"))
+        {
+        VkRenderPassMultiviewCreateInfoKHR* p1;
+        p1 = zcheckVkRenderPassMultiviewCreateInfoKHR(L, arg, err);
+        if(*err) { zfree(L, p1, 1); return p; }
+        else addtochain(chain, p1);
+        }
     EXTENSIONS_END
 ZCHECK_END
 
@@ -3414,15 +3470,13 @@ ZCHECK_BEGIN(VkShaderModuleCreateInfo)
     GetFlags(flags, "flags");
     /* p->pCode, p->codeSize: retrieved by the caller */
     EXTENSIONS_BEGIN
-#define F "validation_cache"
-    if(ispresent(F))
+    if(ispresent("validation_cache"))
         {
         VkShaderModuleValidationCacheCreateInfoEXT *p1 =
             zcheckVkShaderModuleValidationCacheCreateInfoEXT(L, arg, err);
         if(*err) { zfree(L, p1, 1); return p; }
         addtochain(chain, p1);
         }
-#undef F
     EXTENSIONS_END
 ZCHECK_END
 
@@ -5106,6 +5160,7 @@ static void zfreeaux(lua_State *L, void *pp)
         CASE(WRITE_DESCRIPTOR_SET_INLINE_UNIFORM_BLOCK_EXT, VkWriteDescriptorSetInlineUniformBlockEXT);
         CASE(DESCRIPTOR_SET_LAYOUT_BINDING_FLAGS_CREATE_INFO_EXT, VkDescriptorSetLayoutBindingFlagsCreateInfoEXT);
         CASE(DESCRIPTOR_SET_VARIABLE_DESCRIPTOR_COUNT_ALLOCATE_INFO_EXT, VkDescriptorSetVariableDescriptorCountAllocateInfoEXT);
+        CASE(RENDER_PASS_MULTIVIEW_CREATE_INFO_KHR, VkRenderPassMultiviewCreateInfoKHR);
 #undef CASE
         default: 
             return;

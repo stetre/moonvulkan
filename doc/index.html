@@ -3591,6 +3591,9 @@ the <em>queue_family_index</em> of the <em>i-th</em> element in the table return
 <em>max_descriptor_set_update_after_bind_sampled_images</em>: integer,<br>
 <em>max_descriptor_set_update_after_bind_storage_images</em>: integer,<br>
 <em>max_descriptor_set_update_after_bind_input_attachments</em>: integer,<br>
+-- EXTENSION (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkPhysicalDeviceMultiviewPropertiesKHR">VkPhysicalDeviceMultiviewPropertiesKHR</a>, <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_multiview">VK_KHR_multiview</a>):<br>
+<em>max_multiview_view_count</em>: integer,<br>
+<em>max_multiview_instance_index</em>: integer,<br>
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkPhysicalDeviceProperties2.html">VkPhysicalDeviceProperties2</a>)</span></p>
 </li>
 <li>
@@ -3836,6 +3839,10 @@ the <em>queue_family_index</em> of the <em>i-th</em> element in the table return
 <em>descriptor_binding_partially_bound</em>: boolean,<br>
 <em>descriptor_binding_variable_descriptor_count</em>: boolean,<br>
 <em>runtime_descriptor_array</em>: boolean,<br>
+-- EXTENSION (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkPhysicalDeviceMultiviewFeaturesKHR">VkPhysicalDeviceMultiviewFeaturesKHR</a>, <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_multiview">VK_KHR_multiview</a>):<br>
+<em>multiview</em>: boolean,<br>
+<em>multiview_geometry_shader</em>: boolean,<br>
+<em>multiview_tessellation_shader</em>: boolean,<br>
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkPhysicalDeviceFeatures2.html">VkPhysicalDeviceFeatures2</a>)</span></p>
 </li>
 <li>
@@ -4203,6 +4210,10 @@ the <em>queue_family_index</em> of the <em>i-th</em> element in the table return
 <em>dependencies</em>: {<a href="#subpassdependency">subpassdependency</a>},<br>
 -- EXTENSION (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkRenderPassInputAttachmentAspectCreateInfo.html">VkRenderPassInputAttachmentAspectCreateInfo</a>, <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_maintenance2">VK_KHR_maintenance2</a>):<br>
 <em>input_attachment_aspect_references</em>: {<a href="#inputattachmentaspectreference">inputattachmentaspectreference</a>},<br>
+-- EXTENSION (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkRenderPassMultiviewCreateInfoKHR">VkRenderPassMultiviewCreateInfoKHR</a>, <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_multiview">VK_KHR_multiview</a>):<br>
+<em>view_masks</em>: {integer},<br>
+<em>view_offsets</em>: {integer},<br>
+<em>correlation_masks</em>: {integer},<br>
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkRenderPassCreateInfo.html">VkRenderPassCreateInfo</a>)</span></p>
 </li>
 <li>

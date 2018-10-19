@@ -2303,6 +2303,23 @@ int zinitVkDescriptorSetVariableDescriptorCountAllocateInfoEXT(lua_State *L, VkD
 #define zpushVkDescriptorSetVariableDescriptorCountAllocateInfoEXT moonvulkan_zpushVkDescriptorSetVariableDescriptorCountAllocateInfoEXT
 int zpushVkDescriptorSetVariableDescriptorCountAllocateInfoEXT(lua_State *L, const VkDescriptorSetVariableDescriptorCountAllocateInfoEXT *p);
 
+#define znewVkRenderPassMultiviewCreateInfoKHR(L, err) (VkRenderPassMultiviewCreateInfoKHR*)znew((L), VK_STRUCTURE_TYPE_RENDER_PASS_MULTIVIEW_CREATE_INFO_KHR, sizeof(VkRenderPassMultiviewCreateInfoKHR), (err))
+#define znewarrayVkRenderPassMultiviewCreateInfoKHR(L, count, err) (VkRenderPassMultiviewCreateInfoKHR*)znewarray((L), VK_STRUCTURE_TYPE_RENDER_PASS_MULTIVIEW_CREATE_INFO_KHR, sizeof(VkRenderPassMultiviewCreateInfoKHR), (count), (err))
+#define znewchainVkRenderPassMultiviewCreateInfoKHR moonvulkan_znewchainVkRenderPassMultiviewCreateInfoKHR
+VkRenderPassMultiviewCreateInfoKHR* znewchainVkRenderPassMultiviewCreateInfoKHR(lua_State *L, int *err);
+#define znewchainarrayVkRenderPassMultiviewCreateInfoKHR moonvulkan_znewchainarrayVkRenderPassMultiviewCreateInfoKHR
+VkRenderPassMultiviewCreateInfoKHR* znewchainarrayVkRenderPassMultiviewCreateInfoKHR(lua_State *L, uint32_t count, int *err);
+#define zcheckVkRenderPassMultiviewCreateInfoKHR moonvulkan_zcheckVkRenderPassMultiviewCreateInfoKHR
+VkRenderPassMultiviewCreateInfoKHR* zcheckVkRenderPassMultiviewCreateInfoKHR(lua_State *L, int arg, int *err);
+#define zcheckarrayVkRenderPassMultiviewCreateInfoKHR moonvulkan_zcheckarrayVkRenderPassMultiviewCreateInfoKHR
+VkRenderPassMultiviewCreateInfoKHR* zcheckarrayVkRenderPassMultiviewCreateInfoKHR(lua_State *L, int arg, uint32_t *count, int *err);
+#define zinitVkRenderPassMultiviewCreateInfoKHR moonvulkan_zinitVkRenderPassMultiviewCreateInfoKHR
+int zinitVkRenderPassMultiviewCreateInfoKHR(lua_State *L, VkRenderPassMultiviewCreateInfoKHR* p, int *err);
+#define zfreeVkRenderPassMultiviewCreateInfoKHR(L, p, base) zfree((L), (p), (base))
+#define zfreearrayVkRenderPassMultiviewCreateInfoKHR(L, p, count, base) zfreearray((L), (p), sizeof(VkRenderPassMultiviewCreateInfoKHR), (count), (base))
+#define zpushVkRenderPassMultiviewCreateInfoKHR moonvulkan_zpushVkRenderPassMultiviewCreateInfoKHR
+int zpushVkRenderPassMultiviewCreateInfoKHR(lua_State *L, const VkRenderPassMultiviewCreateInfoKHR *p);
+
 
 #ifdef VK_USE_PLATFORM_WIN32_KHR
 

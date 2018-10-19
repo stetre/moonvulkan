@@ -187,6 +187,9 @@ _max_descriptor_set_update_after_bind_storage_buffers_dynamic_: integer, +
 _max_descriptor_set_update_after_bind_sampled_images_: integer, +
 _max_descriptor_set_update_after_bind_storage_images_: integer, +
 _max_descriptor_set_update_after_bind_input_attachments_: integer, +
+pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkPhysicalDeviceMultiviewPropertiesKHR[VkPhysicalDeviceMultiviewPropertiesKHR], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_multiview[VK_KHR_multiview]): +
+_max_multiview_view_count_: integer, +
+_max_multiview_instance_index_: integer, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkPhysicalDeviceProperties2.html[VkPhysicalDeviceProperties2])#
 
 
@@ -429,6 +432,10 @@ _descriptor_binding_update_unused_while_pending_: boolean, +
 _descriptor_binding_partially_bound_: boolean, +
 _descriptor_binding_variable_descriptor_count_: boolean, +
 _runtime_descriptor_array_: boolean, +
+pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkPhysicalDeviceMultiviewFeaturesKHR[VkPhysicalDeviceMultiviewFeaturesKHR], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_multiview[VK_KHR_multiview]): +
+_multiview_: boolean, +
+_multiview_geometry_shader_: boolean, +
+_multiview_tessellation_shader_: boolean, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkPhysicalDeviceFeatures2.html[VkPhysicalDeviceFeatures2])#
 
 
@@ -740,6 +747,10 @@ _attachments_: {<<attachmentdescription, attachmentdescription>>}, +
 _dependencies_: {<<subpassdependency, subpassdependency>>}, +
 pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkRenderPassInputAttachmentAspectCreateInfo.html[VkRenderPassInputAttachmentAspectCreateInfo], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_maintenance2[VK_KHR_maintenance2]): +
 _input_attachment_aspect_references_: {<<inputattachmentaspectreference, inputattachmentaspectreference>>}, +
+pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkRenderPassMultiviewCreateInfoKHR[VkRenderPassMultiviewCreateInfoKHR], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_multiview[VK_KHR_multiview]): +
+_view_masks_: {integer}, +
+_view_offsets_: {integer}, +
+_correlation_masks_: {integer}, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkRenderPassCreateInfo.html[VkRenderPassCreateInfo])#
 
 

@@ -284,6 +284,7 @@ local TYPED = {
    { "VkDescriptorPoolInlineUniformBlockCreateInfoEXT", "DESCRIPTOR_POOL_INLINE_UNIFORM_BLOCK_CREATE_INFO_EXT" },
    { "VkDescriptorSetLayoutBindingFlagsCreateInfoEXT", "DESCRIPTOR_SET_LAYOUT_BINDING_FLAGS_CREATE_INFO_EXT" },
    { "VkDescriptorSetVariableDescriptorCountAllocateInfoEXT", "DESCRIPTOR_SET_VARIABLE_DESCRIPTOR_COUNT_ALLOCATE_INFO_EXT" },
+   { "VkRenderPassMultiviewCreateInfoKHR", "RENDER_PASS_MULTIVIEW_CREATE_INFO_KHR" },
 }
 
 local TYPED_WIN32 = {
