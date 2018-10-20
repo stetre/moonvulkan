@@ -2202,6 +2202,34 @@ ZPUSH_BEGIN(VkPhysicalDeviceProperties2)
 ZPUSH_END
 
 /*------------------------------------------------------------------------------*
+ | Group Properties                                                             |
+ *------------------------------------------------------------------------------*/
+
+ZINIT_BEGIN(VkPhysicalDeviceGroupPropertiesKHR)
+    //EXTENSIONS_BEGIN
+    //  ADDX(XXX, Xxx);
+    //EXTENSIONS_END
+ZINIT_END
+
+//ZPUSH_BEGIN(VkPhysicalDeviceGroupPropertiesKHR)
+int zpushVkPhysicalDeviceGroupPropertiesKHR(lua_State *L, const VkPhysicalDeviceGroupPropertiesKHR *p, VkInstance instance) // non-standard
+    {
+    uint32_t i;
+    lua_newtable(L);
+    lua_newtable(L);
+    for(i = 0; i < p->physicalDeviceCount; i++)
+        {
+        pushphysical_device(L, p->physicalDevices[i], instance);
+        lua_rawseti(L, -2, i+1);
+        }
+    lua_setfield(L, -2, "physical_devices");
+    SetBoolean(subsetAllocation, "subset_allocation");
+    //XPUSH_BEGIN
+    //XPUSH_END
+ZPUSH_END
+
+
+/*------------------------------------------------------------------------------*
  | Format Properties                                                            |
  *------------------------------------------------------------------------------*/
 
@@ -2891,6 +2919,22 @@ ZCHECKARRAY(VkDeviceQueueCreateInfo)
  | Device Queue                                                                 |
  *------------------------------------------------------------------------------*/
 
+static ZCLEAR_BEGIN(VkDeviceGroupDeviceCreateInfoKHR)
+    if(p->pPhysicalDevices) Free(L, (void*)p->pPhysicalDevices);
+ZCLEAR_END
+ZCHECK_BEGIN(VkDeviceGroupDeviceCreateInfoKHR)
+    int arg1;
+    //checktable(arg);
+    newstruct(VkDeviceGroupDeviceCreateInfoKHR);
+#define F "physical_devices"
+    arg1 = pushfield(L, arg, F);
+    p->pPhysicalDevices = checkphysical_devicelist(L, arg1, &p->physicalDeviceCount, err);
+    popfield(L, arg1);
+    if(*err == ERR_EMPTY) *err = ERR_NOTPRESENT;
+    if(*err) { pushfielderror(F); return p; }
+#undef F
+ZCHECK_END
+
 static ZCLEAR_BEGIN(VkDeviceCreateInfo)
     if(p->pQueueCreateInfos)
         zfreearrayVkDeviceQueueCreateInfo(L, p->pQueueCreateInfos, p->queueCreateInfoCount, 1);
@@ -2954,6 +2998,14 @@ VkDeviceCreateInfo* zcheckVkDeviceCreateInfo(lua_State *L, int arg, int *err, ud
         else addtochain(chain, p1);
         }
 #undef F
+    if(ispresent("physical_devices"))
+        {
+        VkDeviceGroupDeviceCreateInfoKHR* p1 =
+            zcheckVkDeviceGroupDeviceCreateInfoKHR(L, arg, err);
+        if(*err < 0) { zfree(L, p1, 1); return p; }
+        else if(*err == ERR_NOTPRESENT) poperror();
+        else addtochain(chain, p1);
+        }
     EXTENSIONS_END
 ZCHECK_END
 
@@ -5431,6 +5483,7 @@ static void zfreeaux(lua_State *L, void *pp)
         CASE(RENDER_PASS_MULTIVIEW_CREATE_INFO_KHR, VkRenderPassMultiviewCreateInfoKHR);
         CASE(SUBPASS_DESCRIPTION_2_KHR, VkSubpassDescription2KHR);
         CASE(RENDER_PASS_CREATE_INFO_2_KHR, VkRenderPassCreateInfo2KHR);
+        CASE(DEVICE_GROUP_DEVICE_CREATE_INFO_KHR, VkDeviceGroupDeviceCreateInfoKHR);
 #undef CASE
         default: 
             return;

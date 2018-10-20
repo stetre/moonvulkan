@@ -131,6 +131,7 @@ typedef struct {
     F(GetPhysicalDeviceDisplayPlaneProperties2KHR);
     F(GetDisplayModeProperties2KHR);
     F(GetDisplayPlaneCapabilities2KHR);
+    F(EnumeratePhysicalDeviceGroupsKHR);
 } instance_dt_t;
 
 

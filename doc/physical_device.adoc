@@ -9,6 +9,10 @@ or a return value.
 * {_physdev_} = *enumerate_physical_devices*(<<instance, _instance_>>) +
 [small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkEnumeratePhysicalDevices.html[vkEnumeratePhysicalDevices].#
 
+[[enumerate_physical_device_groups]]
+* {<<physicaldevicegroupproperties, _physicaldevicegroupproperties_>>} = *enumerate_physical_device_groups*(<<instance, _instance_>>) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkEnumeratePhysicalDeviceGroupsKHR[vkEnumeratePhysicalDeviceGroupsKHR] (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_device_group_creation[VK_KHR_device_group_creation]).#
+
 ////
 NOTE: If the
 https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_get_physical_device_properties2[VK_KHR_get_physical_device_properties2] 

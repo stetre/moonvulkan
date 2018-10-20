@@ -2524,6 +2524,40 @@ int zinitVkDisplayPlaneInfo2KHR(lua_State *L, VkDisplayPlaneInfo2KHR* p, int *er
 #define zpushVkDisplayPlaneInfo2KHR moonvulkan_zpushVkDisplayPlaneInfo2KHR
 int zpushVkDisplayPlaneInfo2KHR(lua_State *L, const VkDisplayPlaneInfo2KHR *p);
 
+#define znewVkDeviceGroupDeviceCreateInfoKHR(L, err) (VkDeviceGroupDeviceCreateInfoKHR*)znew((L), VK_STRUCTURE_TYPE_DEVICE_GROUP_DEVICE_CREATE_INFO_KHR, sizeof(VkDeviceGroupDeviceCreateInfoKHR), (err))
+#define znewarrayVkDeviceGroupDeviceCreateInfoKHR(L, count, err) (VkDeviceGroupDeviceCreateInfoKHR*)znewarray((L), VK_STRUCTURE_TYPE_DEVICE_GROUP_DEVICE_CREATE_INFO_KHR, sizeof(VkDeviceGroupDeviceCreateInfoKHR), (count), (err))
+#define znewchainVkDeviceGroupDeviceCreateInfoKHR moonvulkan_znewchainVkDeviceGroupDeviceCreateInfoKHR
+VkDeviceGroupDeviceCreateInfoKHR* znewchainVkDeviceGroupDeviceCreateInfoKHR(lua_State *L, int *err);
+#define znewchainarrayVkDeviceGroupDeviceCreateInfoKHR moonvulkan_znewchainarrayVkDeviceGroupDeviceCreateInfoKHR
+VkDeviceGroupDeviceCreateInfoKHR* znewchainarrayVkDeviceGroupDeviceCreateInfoKHR(lua_State *L, uint32_t count, int *err);
+#define zcheckVkDeviceGroupDeviceCreateInfoKHR moonvulkan_zcheckVkDeviceGroupDeviceCreateInfoKHR
+VkDeviceGroupDeviceCreateInfoKHR* zcheckVkDeviceGroupDeviceCreateInfoKHR(lua_State *L, int arg, int *err);
+#define zcheckarrayVkDeviceGroupDeviceCreateInfoKHR moonvulkan_zcheckarrayVkDeviceGroupDeviceCreateInfoKHR
+VkDeviceGroupDeviceCreateInfoKHR* zcheckarrayVkDeviceGroupDeviceCreateInfoKHR(lua_State *L, int arg, uint32_t *count, int *err);
+#define zinitVkDeviceGroupDeviceCreateInfoKHR moonvulkan_zinitVkDeviceGroupDeviceCreateInfoKHR
+int zinitVkDeviceGroupDeviceCreateInfoKHR(lua_State *L, VkDeviceGroupDeviceCreateInfoKHR* p, int *err);
+#define zfreeVkDeviceGroupDeviceCreateInfoKHR(L, p, base) zfree((L), (p), (base))
+#define zfreearrayVkDeviceGroupDeviceCreateInfoKHR(L, p, count, base) zfreearray((L), (p), sizeof(VkDeviceGroupDeviceCreateInfoKHR), (count), (base))
+#define zpushVkDeviceGroupDeviceCreateInfoKHR moonvulkan_zpushVkDeviceGroupDeviceCreateInfoKHR
+int zpushVkDeviceGroupDeviceCreateInfoKHR(lua_State *L, const VkDeviceGroupDeviceCreateInfoKHR *p);
+
+#define znewVkPhysicalDeviceGroupPropertiesKHR(L, err) (VkPhysicalDeviceGroupPropertiesKHR*)znew((L), VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_GROUP_PROPERTIES_KHR, sizeof(VkPhysicalDeviceGroupPropertiesKHR), (err))
+#define znewarrayVkPhysicalDeviceGroupPropertiesKHR(L, count, err) (VkPhysicalDeviceGroupPropertiesKHR*)znewarray((L), VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_GROUP_PROPERTIES_KHR, sizeof(VkPhysicalDeviceGroupPropertiesKHR), (count), (err))
+#define znewchainVkPhysicalDeviceGroupPropertiesKHR moonvulkan_znewchainVkPhysicalDeviceGroupPropertiesKHR
+VkPhysicalDeviceGroupPropertiesKHR* znewchainVkPhysicalDeviceGroupPropertiesKHR(lua_State *L, int *err);
+#define znewchainarrayVkPhysicalDeviceGroupPropertiesKHR moonvulkan_znewchainarrayVkPhysicalDeviceGroupPropertiesKHR
+VkPhysicalDeviceGroupPropertiesKHR* znewchainarrayVkPhysicalDeviceGroupPropertiesKHR(lua_State *L, uint32_t count, int *err);
+#define zcheckVkPhysicalDeviceGroupPropertiesKHR moonvulkan_zcheckVkPhysicalDeviceGroupPropertiesKHR
+VkPhysicalDeviceGroupPropertiesKHR* zcheckVkPhysicalDeviceGroupPropertiesKHR(lua_State *L, int arg, int *err);
+#define zcheckarrayVkPhysicalDeviceGroupPropertiesKHR moonvulkan_zcheckarrayVkPhysicalDeviceGroupPropertiesKHR
+VkPhysicalDeviceGroupPropertiesKHR* zcheckarrayVkPhysicalDeviceGroupPropertiesKHR(lua_State *L, int arg, uint32_t *count, int *err);
+#define zinitVkPhysicalDeviceGroupPropertiesKHR moonvulkan_zinitVkPhysicalDeviceGroupPropertiesKHR
+int zinitVkPhysicalDeviceGroupPropertiesKHR(lua_State *L, VkPhysicalDeviceGroupPropertiesKHR* p, int *err);
+#define zfreeVkPhysicalDeviceGroupPropertiesKHR(L, p, base) zfree((L), (p), (base))
+#define zfreearrayVkPhysicalDeviceGroupPropertiesKHR(L, p, count, base) zfreearray((L), (p), sizeof(VkPhysicalDeviceGroupPropertiesKHR), (count), (base))
+#define zpushVkPhysicalDeviceGroupPropertiesKHR moonvulkan_zpushVkPhysicalDeviceGroupPropertiesKHR
+int zpushVkPhysicalDeviceGroupPropertiesKHR(lua_State *L, const VkPhysicalDeviceGroupPropertiesKHR *p, VkInstance instance); // non-standard
+
 
 #ifdef VK_USE_PLATFORM_WIN32_KHR
 

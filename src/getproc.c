@@ -135,7 +135,6 @@ instance_dt_t * getproc_instance(lua_State *L, VkInstance instance, VkInstanceCr
     dt->fn = (PFN_vk##fn)GetInstanceProcAddr(instance, "vk"#fn); \
     /* printf(""#fn" %p\n", (void*)(dt->fn)); */                 \
 } while(0)
-
     //VK_KHR_display
     GET(GetPhysicalDeviceDisplayPropertiesKHR);
     GET(GetPhysicalDeviceDisplayPlanePropertiesKHR);
@@ -194,6 +193,8 @@ instance_dt_t * getproc_instance(lua_State *L, VkInstance instance, VkInstanceCr
     GET(GetPhysicalDeviceDisplayPlaneProperties2KHR);
     GET(GetDisplayModeProperties2KHR);
     GET(GetDisplayPlaneCapabilities2KHR);
+    //VK_KHR_device_group_creation
+    GET(EnumeratePhysicalDeviceGroupsKHR);
 #ifdef VK_USE_PLATFORM_XCB_KHR
     //VK_KHR_xcb_surface
     GET(CreateXcbSurfaceKHR);

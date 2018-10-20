@@ -45,6 +45,7 @@ VkDeviceCreateInfo* zcheckVkDeviceCreateInfo(lua_State *L, int arg, int *err, ud
 VkPresentInfoKHR* zcheckVkPresentInfoKHR(lua_State *L, int arg, int *err, int results); //non-standard
 int zpushVkQueueFamilyProperties(lua_State *L, const VkQueueFamilyProperties *p, uint32_t index); //non-standard
 int zpushVkQueueFamilyProperties2KHR(lua_State *L, const VkQueueFamilyProperties2KHR *p, uint32_t index); //non-standard
+int zpushVkPhysicalDeviceGroupPropertiesKHR(lua_State *L, const VkPhysicalDeviceGroupPropertiesKHR *p, VkInstance instance); // non-standard
 
 #define znew moonvulkan_znew
 void* znew(lua_State *L, VkStructureType sType /* or -1 */, size_t sz, int *err);
@@ -153,7 +154,7 @@ local TYPED = {
    { "VkInstanceCreateInfo", "INSTANCE_CREATE_INFO" },
    { "VkApplicationInfo", "APPLICATION_INFO" },
    { "VkValidationFlagsEXT", "VALIDATION_FLAGS_EXT" },
-   { "VkDeviceCreateInfo", "DEVICE_CREATE_INFO" }, --@@ has a non-standard zcheck (replace it)
+   { "VkDeviceCreateInfo", "DEVICE_CREATE_INFO" },
    { "VkDeviceQueueCreateInfo", "DEVICE_QUEUE_CREATE_INFO" },
    { "VkCommandPoolCreateInfo", "COMMAND_POOL_CREATE_INFO" },
    { "VkCommandBufferAllocateInfo", "COMMAND_BUFFER_ALLOCATE_INFO" },
@@ -297,6 +298,8 @@ local TYPED = {
    { "VkDisplayModeProperties2KHR", "DISPLAY_MODE_PROPERTIES_2_KHR" },
    { "VkDisplayPlaneCapabilities2KHR", "DISPLAY_PLANE_CAPABILITIES_2_KHR" },
    { "VkDisplayPlaneInfo2KHR", "DISPLAY_PLANE_INFO_2_KHR" },
+   { "VkDeviceGroupDeviceCreateInfoKHR", "DEVICE_GROUP_DEVICE_CREATE_INFO_KHR" },
+   { "VkPhysicalDeviceGroupPropertiesKHR", "PHYSICAL_DEVICE_GROUP_PROPERTIES_KHR" },
 }
 
 local TYPED_WIN32 = {

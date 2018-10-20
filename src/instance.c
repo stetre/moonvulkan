@@ -105,6 +105,45 @@ static int EnumeratePhysicalDevices(lua_State *L)
     return 1;
     }
 
+static int EnumeratePhysicalDeviceGroups(lua_State *L)
+    {
+    int err;
+    ud_t *ud;
+    uint32_t count, remaining, tot, i;
+    VkResult ec;
+    VkPhysicalDeviceGroupPropertiesKHR* props;
+    VkInstance instance = checkinstance(L, 1, &ud);
+    CheckInstancePfn(L, ud, EnumeratePhysicalDeviceGroupsKHR);
+#define CLEANUP zfreearrayVkPhysicalDeviceGroupPropertiesKHR(L, props, N, 1)
+    props = znewchainarrayVkPhysicalDeviceGroupPropertiesKHR(L, N, &err);
+    if(err) { CLEANUP; return lua_error(L); }
+    lua_newtable(L);
+    ec = ud->idt->EnumeratePhysicalDeviceGroupsKHR(instance, &remaining, NULL);
+    if(ec) { CLEANUP; CheckError(L, ec); }
+    if(remaining == 0) { CLEANUP; return 1; }
+
+    tot = 0;
+    do {
+        if(remaining > N)
+            { count = N; remaining -= N; }
+        else
+            { count = remaining; remaining = 0; }
+        ec = ud->idt->EnumeratePhysicalDeviceGroupsKHR(instance, &count, props);
+        if(ec && ec != VK_INCOMPLETE) { CLEANUP; CheckError(L, ec); }
+
+        for(i=0; i<count; i++)
+            {
+            zpushVkPhysicalDeviceGroupPropertiesKHR(L, &props[i], instance);
+            lua_rawseti(L, -2, ++tot);
+            }
+    } while(remaining > 0);
+
+    CLEANUP;
+#undef CLEANUP
+    return 1;
+    }
+
+
 RAW_FUNC_DISPATCHABLE(instance)
 TYPE_FUNC(instance)
 INSTANCE_FUNC(instance)
@@ -135,6 +174,7 @@ static const struct luaL_Reg Functions[] =
         { "create_instance", Create },
         { "destroy_instance", Destroy },
         { "enumerate_physical_devices", EnumeratePhysicalDevices },
+        { "enumerate_physical_device_groups", EnumeratePhysicalDeviceGroups },
         { NULL, NULL } /* sentinel */
     };
 

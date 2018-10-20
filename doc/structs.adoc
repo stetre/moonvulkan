@@ -98,6 +98,12 @@ _api_version_: integer, +
 
 '''
 
+* [[physicaldevicegroupproperties]]
+[small]#*physicaldevicegroupproperties* = { +
+_physical_devices_: {<<physical_device, physical_device>>}, +
+_subset_allocation_: boolean, +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkPhysicalDeviceGroupPropertiesKHR[VkPhysicalDeviceGroupPropertiesKHR], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_device_group_creation[VK_KHR_device_group_creation])#
+
 * [[physicaldeviceproperties]]
 [small]#*physicaldeviceproperties* = { +
 _api_version_: integer, +
@@ -567,8 +573,9 @@ _queue_create_infos_: {<<devicequeuecreateinfo, devicequeuecreateinfo>>} *[R]*, 
 _enabled_layer_names_: {string} _(DEPRECATED)_, +
 _enabled_extension_names_: {_string_}, +
 _enabled_features_: {<<physicaldevicefeatures, physicaldevicefeatures>>}, +
+pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkDeviceGroupDeviceCreateInfoKHR[VkDeviceGroupDeviceCreateInfoKHR], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_device_group_creation[VK_KHR_device_group_creation]): +
+_physical_devices_: {<<physical_device, physical_device>>}, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkDeviceCreateInfo.html[VkDeviceCreateInfo])#
-
 
 * [[devicequeuecreateinfo]]
 [small]#*devicequeuecreateinfo* = { +

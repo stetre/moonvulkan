@@ -179,6 +179,8 @@ int freechildren(lua_State *L,  const char *mt, ud_t *parent_ud);
 #define testphysical_device(L, arg, udp) (VkPhysicalDevice)(uintptr_t)testxxx((L), (arg), (udp), PHYSICAL_DEVICE_MT)
 #define pushphysical_device moonvulkan_pushphysical_device
 int pushphysical_device(lua_State *L, VkPhysicalDevice p, VkInstance instance);
+#define checkphysical_devicelist(L, arg, count, err) \
+    (VkPhysicalDevice*)checkxxxlist_dispatchable((L), (arg), (count), (err), PHYSICAL_DEVICE_MT)
 
 /* device.c (dispatchable) */
 #define checkdevice(L, arg, udp) (VkDevice)(uintptr_t)checkxxx((L), (arg), (udp), DEVICE_MT)
