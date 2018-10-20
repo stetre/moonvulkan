@@ -127,6 +127,10 @@ typedef struct {
     F(CreateDebugUtilsMessengerEXT);
     F(DestroyDebugUtilsMessengerEXT);
     F(SubmitDebugUtilsMessageEXT);
+    F(GetPhysicalDeviceDisplayProperties2KHR);
+    F(GetPhysicalDeviceDisplayPlaneProperties2KHR);
+    F(GetDisplayModeProperties2KHR);
+    F(GetDisplayPlaneCapabilities2KHR);
 } instance_dt_t;
 
 

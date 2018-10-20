@@ -2921,7 +2921,7 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/
 <ul>
 <li>
 <p>{<a href="#displayproperties"><em>displayproperties</em></a>} = <strong>get_physical_device_display_properties</strong>(<a href="#physical_device"><em>physdev</em></a>)<br>
-<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkGetPhysicalDeviceDisplayPropertiesKHR">vkGetPhysicalDeviceDisplayPropertiesKHR</a>.</span></p>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkGetPhysicalDeviceDisplayPropertiesKHR">vkGetPhysicalDeviceDisplayPropertiesKHR</a>, <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkGetPhysicalDeviceDisplayProperties2KHR">vkGetPhysicalDeviceDisplayProperties2KHR</a>.</span></p>
 </li>
 </ul>
 </div>
@@ -2929,7 +2929,7 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/
 <ul>
 <li>
 <p>{<a href="#displayplaneproperties"><em>displayplaneproperties</em></a>} = <strong>get_physical_device_display_plane_properties</strong>(<a href="#physical_device"><em>physdev</em></a>)<br>
-<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkGetPhysicalDeviceDisplayPlanePropertiesKHR">vkGetPhysicalDeviceDisplayPlanePropertiesKHR</a>.</span></p>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkGetPhysicalDeviceDisplayPlanePropertiesKHR">vkGetPhysicalDeviceDisplayPlanePropertiesKHR</a>, <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkGetPhysicalDeviceDisplayPlaneProperties2KHR">vkGetPhysicalDeviceDisplayPlaneProperties2KHR</a>.</span></p>
 </li>
 </ul>
 </div>
@@ -2988,7 +2988,7 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/
 <ul>
 <li>
 <p>{<a href="#displaymodeproperties"><em>displaymodeproperties</em></a>} = <strong>get_display_mode_properties</strong>(<a href="#display"><em>display</em></a>)<br>
-<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkGetDisplayModePropertiesKHR">vkGetDisplayModePropertiesKHR</a>.</span></p>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkGetDisplayModePropertiesKHR">vkGetDisplayModePropertiesKHR</a>, <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkGetDisplayModeProperties2KHR">vkGetDisplayModeProperties2KHR</a>.</span></p>
 </li>
 </ul>
 </div>
@@ -2996,7 +2996,8 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/
 <ul>
 <li>
 <p><a href="#displayplanecapabilities"><em>displayplanecapabilities</em></a> = <strong>get_display_plane_capabilities</strong>(<em>display_mode</em>, <a href="#index"><em>plane_index</em></a>)<br>
-<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkGetDisplayPlaneCapabilitiesKHR">vkGetDisplayPlaneCapabilitiesKHR</a>.</span></p>
+<a href="#displayplanecapabilities"><em>displayplanecapabilities</em></a> = <strong>get_display_plane_capabilities</strong>(<em>display_mode</em>, <a href="#displayplaneinfo"><em>displayplaneinfo</em></a>) (2KHR only)<br>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkGetDisplayPlaneCapabilitiesKHR">vkGetDisplayPlaneCapabilitiesKHR</a>, <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkGetDisplayPlaneCapabilities2KHR">vkGetDisplayPlaneCapabilities2KHR</a>.</span></p>
 </li>
 </ul>
 </div>
@@ -5327,14 +5328,14 @@ Note1: The <em>current_extent</em> field is <em>nil</em> when <em>width</em> and
 <em>supported_transforms</em>: <a href="#surfacetransformflags">surfacetransformflags</a>,<br>
 <em>plane_reorder_possible</em>: boolean,<br>
 <em>persistent_content</em>: boolean,<br>
-} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkDisplayPropertiesKHR">VkDisplayPropertiesKHR</a>)</span></p>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkDisplayProperties2KHR">VkDisplayProperties2KHR</a>)</span></p>
 </li>
 <li>
 <p><a id="displayplaneproperties"></a>
 <span class="small"><strong>displayplaneproperties</strong> = {<br>
 <em>current_display</em>: <a href="#display">display</a> (may be <em>nil</em>),<br>
 <em>current_stack_index</em>: <a href="#index">index</a>,<br>
-} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkDisplayPlanePropertiesKHR">VkDisplayPlanePropertiesKHR</a>)</span></p>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkDisplayPlaneProperties2KHR">VkDisplayPlaneProperties2KHR</a>)</span></p>
 </li>
 <li>
 <p><a id="displaymodecreateinfo"></a>
@@ -5348,7 +5349,7 @@ Note1: The <em>current_extent</em> field is <em>nil</em> when <em>width</em> and
 <span class="small"><strong>displaymodeproperties</strong> = {<br>
 <em>flags</em>: <a href="#displaymodecreateinfoflags">displaymodecreateinfoflags</a>,<br>
 <em>parameters</em>: <a href="#displaymodeparameters">displaymodeparameters</a>,<br>
-} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkDisplayModePropertiesKHR">VkDisplayModePropertiesKHR</a>)</span></p>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkDisplayModeProperties2KHR">VkDisplayModeProperties2KHR</a>)</span></p>
 </li>
 <li>
 <p><a id="displaymodeparameters"></a>
@@ -5356,6 +5357,12 @@ Note1: The <em>current_extent</em> field is <em>nil</em> when <em>width</em> and
 <em>visible_region</em>: <a href="#extent2d">extent2d</a> <strong>[R]</strong>,<br>
 <em>refresh_rate</em>: integer,<br>
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkDisplayModeParametersKHR">VkDisplayModeParametersKHR</a>)</span></p>
+</li>
+<li>
+<p><a id="displayplaneinfo"></a>
+<span class="small"><strong>displayplaneinfo</strong> = {<br>
+<em>plane_index</em>: integer,<br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkDisplayPlaneInfo2KHR">VkDisplayPlaneInfo2KHR</a>, <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_get_display_properties2">VK_KHR_get_display_properties2</a>)</span></p>
 </li>
 <li>
 <p><a id="displayplanecapabilities"></a>
@@ -5369,7 +5376,7 @@ Note1: The <em>current_extent</em> field is <em>nil</em> when <em>width</em> and
 <em>max_dst_position</em>: <a href="#offset2d">offset2d</a>,<br>
 <em>min_dst_extent</em>: <a href="#extent2d">extent2d</a>,<br>
 <em>max_dst_extent</em>: <a href="#extent2d">extent2d</a>,<br>
-} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkDisplayPlaneCapabilitiesKHR">VkDisplayPlaneCapabilitiesKHR</a>)</span></p>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkDisplayPlaneCapabilities2KHR">VkDisplayPlaneCapabilities2KHR</a>)</span></p>
 </li>
 <li>
 <p><a id="displaysurfacecreateinfo"></a>

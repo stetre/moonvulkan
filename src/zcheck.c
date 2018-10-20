@@ -1334,27 +1334,6 @@ ZPUSH_BEGIN(VkDisplayModeParametersKHR)
     SetInteger(refreshRate, "refresh_rate");
 ZPUSH_END
 
-ZPUSH_BEGIN(VkDisplayModePropertiesKHR)
-    lua_newtable(L);
-/*  p->displayMode = set by caller */
-    SetStruct(parameters, "parameters", VkDisplayModeParametersKHR);
-    return 1;
-ZPUSH_END
-
-ZPUSH_BEGIN(VkDisplayPlaneCapabilitiesKHR)
-    lua_newtable(L);
-    SetFlags(supportedAlpha, "supported_alpha");
-    SetStruct(minSrcPosition, "min_src_position", VkOffset2D);
-    SetStruct(maxSrcPosition, "max_src_position", VkOffset2D);
-    SetStruct(minSrcExtent, "min_src_extent", VkExtent2D);
-    SetStruct(maxSrcExtent, "max_src_extent", VkExtent2D);
-    SetStruct(minDstPosition, "min_dst_position", VkOffset2D);
-    SetStruct(maxDstPosition, "max_dst_position", VkOffset2D);
-    SetStruct(minDstExtent, "min_dst_extent", VkExtent2D);
-    SetStruct(maxDstExtent, "max_dst_extent", VkExtent2D);
-    return 1;
-ZPUSH_END
-
 ZCHECK_BEGIN(VkDescriptorUpdateTemplateEntry)
     checktable(arg);
     newstruct(VkDescriptorUpdateTemplateEntry);
@@ -1523,23 +1502,6 @@ ZPUSH_BEGIN(VkExternalMemoryProperties)
     SetFlags(compatibleHandleTypes, "compatible_handle_types");
 ZPUSH_END
 
-ZPUSH_BEGIN(VkDisplayPropertiesKHR)
-    lua_newtable(L);
-/*  p->display = set by caller */
-    SetString(displayName, "display_name");
-    SetStruct(physicalDimensions, "physical_dimensions", VkExtent2D);
-    SetStruct(physicalResolution, "physical_resolution", VkExtent2D);
-    SetFlags(supportedTransforms, "supported_transforms");
-    SetBoolean(planeReorderPossible, "plane_reorder_possible");
-    SetBoolean(persistentContent, "persistent_content");
-ZPUSH_END
-
-ZPUSH_BEGIN(VkDisplayPlanePropertiesKHR)
-    lua_newtable(L);
-/*  p->currentDisplay = set by caller */
-    SetInteger(currentStackIndex, "current_stack_index");
-ZPUSH_END
-    
 ZCLEAR_BEGIN(VkDescriptorSetLayoutBinding)
     if(p->pImmutableSamplers) Free(L, (void*)p->pImmutableSamplers);
 ZCLEAR_END
@@ -2665,6 +2627,143 @@ ZPUSH_BEGIN(VkSparseImageMemoryRequirements2)
     lua_newtable(L);
     localpushVkSparseImageMemoryRequirements(L, &p->memoryRequirements);
     //XPUSH_BEGIN
+    //XPUSH_END
+ZPUSH_END
+
+/*------------------------------------------------------------------------------*
+ | Display Properties                                                           |
+ *------------------------------------------------------------------------------*/
+
+LOCALPUSH_BEGIN(VkDisplayPropertiesKHR)
+/*  p->display = set by caller */
+    SetString(displayName, "display_name");
+    SetStruct(physicalDimensions, "physical_dimensions", VkExtent2D);
+    SetStruct(physicalResolution, "physical_resolution", VkExtent2D);
+    SetFlags(supportedTransforms, "supported_transforms");
+    SetBoolean(planeReorderPossible, "plane_reorder_possible");
+    SetBoolean(persistentContent, "persistent_content");
+LOCALPUSH_END
+
+ZINIT_BEGIN(VkDisplayProperties2KHR)
+    //EXTENSIONS_BEGIN
+    //  ADDX(, );
+    //EXTENSIONS_END
+ZINIT_END
+
+ZPUSH_BEGIN(VkDisplayPropertiesKHR)
+    lua_newtable(L);
+    localpushVkDisplayPropertiesKHR(L, p);
+ZPUSH_END
+
+ZPUSH_BEGIN(VkDisplayProperties2KHR)
+    lua_newtable(L);
+    localpushVkDisplayPropertiesKHR(L, &p->displayProperties);
+    //XPUSH_BEGIN
+    //XCASE(, );
+    //XPUSH_END
+ZPUSH_END
+
+/*------------------------------------------------------------------------------*
+ | Display Plane Properties                                                     |
+ *------------------------------------------------------------------------------*/
+
+LOCALPUSH_BEGIN(VkDisplayPlanePropertiesKHR)
+/*  p->currentDisplay = set by caller */
+    SetInteger(currentStackIndex, "current_stack_index");
+LOCALPUSH_END
+
+ZINIT_BEGIN(VkDisplayPlaneProperties2KHR)
+    //EXTENSIONS_BEGIN
+    //  ADDX(, );
+    //EXTENSIONS_END
+ZINIT_END
+
+ZPUSH_BEGIN(VkDisplayPlanePropertiesKHR)
+    lua_newtable(L);
+    localpushVkDisplayPlanePropertiesKHR(L, p);
+ZPUSH_END
+
+ZPUSH_BEGIN(VkDisplayPlaneProperties2KHR)
+    lua_newtable(L);
+    localpushVkDisplayPlanePropertiesKHR(L, &p->displayPlaneProperties);
+    //XPUSH_BEGIN
+    //XCASE(, );
+    //XPUSH_END
+ZPUSH_END
+
+ 
+/*------------------------------------------------------------------------------*
+ | Display Plane Capabilities                                                    |
+ *------------------------------------------------------------------------------*/
+
+LOCALPUSH_BEGIN(VkDisplayPlaneCapabilitiesKHR)
+    SetFlags(supportedAlpha, "supported_alpha");
+    SetStruct(minSrcPosition, "min_src_position", VkOffset2D);
+    SetStruct(maxSrcPosition, "max_src_position", VkOffset2D);
+    SetStruct(minSrcExtent, "min_src_extent", VkExtent2D);
+    SetStruct(maxSrcExtent, "max_src_extent", VkExtent2D);
+    SetStruct(minDstPosition, "min_dst_position", VkOffset2D);
+    SetStruct(maxDstPosition, "max_dst_position", VkOffset2D);
+    SetStruct(minDstExtent, "min_dst_extent", VkExtent2D);
+    SetStruct(maxDstExtent, "max_dst_extent", VkExtent2D);
+LOCALPUSH_END
+
+ZINIT_BEGIN(VkDisplayPlaneCapabilities2KHR)
+    //EXTENSIONS_BEGIN
+    //  ADDX(, );
+    //EXTENSIONS_END
+ZINIT_END
+
+ZPUSH_BEGIN(VkDisplayPlaneCapabilitiesKHR)
+    lua_newtable(L);
+    localpushVkDisplayPlaneCapabilitiesKHR(L, p);
+ZPUSH_END
+
+ZPUSH_BEGIN(VkDisplayPlaneCapabilities2KHR)
+    lua_newtable(L);
+    localpushVkDisplayPlaneCapabilitiesKHR(L, &p->capabilities);
+    //XPUSH_BEGIN
+    //XCASE(, );
+    //XPUSH_END
+ZPUSH_END
+
+/*------------------------------------------------------------------------------*
+ | Display Plane Info                                                           |
+ *------------------------------------------------------------------------------*/
+
+ZCHECK_BEGIN(VkDisplayPlaneInfo2KHR)
+    checktable(arg);
+    newstruct(VkDisplayPlaneInfo2KHR);
+/*  p->mode = set by caller */
+    GetInteger(planeIndex, "plane_index");
+ZCHECK_END
+
+/*------------------------------------------------------------------------------*
+ | Display Mode Properties                                                     |
+ *------------------------------------------------------------------------------*/
+
+LOCALPUSH_BEGIN(VkDisplayModePropertiesKHR)
+/*  p->displayMode = set by caller */
+    SetStruct(parameters, "parameters", VkDisplayModeParametersKHR);
+    return 1;
+LOCALPUSH_END
+
+ZINIT_BEGIN(VkDisplayModeProperties2KHR)
+    //EXTENSIONS_BEGIN
+    //  ADDX(, );
+    //EXTENSIONS_END
+ZINIT_END
+
+ZPUSH_BEGIN(VkDisplayModePropertiesKHR)
+    lua_newtable(L);
+    localpushVkDisplayModePropertiesKHR(L, p);
+ZPUSH_END
+
+ZPUSH_BEGIN(VkDisplayModeProperties2KHR)
+    lua_newtable(L);
+    localpushVkDisplayModePropertiesKHR(L, &p->displayModeProperties);
+    //XPUSH_BEGIN
+    //XCASE(, );
     //XPUSH_END
 ZPUSH_END
 

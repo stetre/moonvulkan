@@ -2439,6 +2439,91 @@ int zinitVkSubpassEndInfoKHR(lua_State *L, VkSubpassEndInfoKHR* p, int *err);
 #define zpushVkSubpassEndInfoKHR moonvulkan_zpushVkSubpassEndInfoKHR
 int zpushVkSubpassEndInfoKHR(lua_State *L, const VkSubpassEndInfoKHR *p);
 
+#define znewVkDisplayProperties2KHR(L, err) (VkDisplayProperties2KHR*)znew((L), VK_STRUCTURE_TYPE_DISPLAY_PROPERTIES_2_KHR, sizeof(VkDisplayProperties2KHR), (err))
+#define znewarrayVkDisplayProperties2KHR(L, count, err) (VkDisplayProperties2KHR*)znewarray((L), VK_STRUCTURE_TYPE_DISPLAY_PROPERTIES_2_KHR, sizeof(VkDisplayProperties2KHR), (count), (err))
+#define znewchainVkDisplayProperties2KHR moonvulkan_znewchainVkDisplayProperties2KHR
+VkDisplayProperties2KHR* znewchainVkDisplayProperties2KHR(lua_State *L, int *err);
+#define znewchainarrayVkDisplayProperties2KHR moonvulkan_znewchainarrayVkDisplayProperties2KHR
+VkDisplayProperties2KHR* znewchainarrayVkDisplayProperties2KHR(lua_State *L, uint32_t count, int *err);
+#define zcheckVkDisplayProperties2KHR moonvulkan_zcheckVkDisplayProperties2KHR
+VkDisplayProperties2KHR* zcheckVkDisplayProperties2KHR(lua_State *L, int arg, int *err);
+#define zcheckarrayVkDisplayProperties2KHR moonvulkan_zcheckarrayVkDisplayProperties2KHR
+VkDisplayProperties2KHR* zcheckarrayVkDisplayProperties2KHR(lua_State *L, int arg, uint32_t *count, int *err);
+#define zinitVkDisplayProperties2KHR moonvulkan_zinitVkDisplayProperties2KHR
+int zinitVkDisplayProperties2KHR(lua_State *L, VkDisplayProperties2KHR* p, int *err);
+#define zfreeVkDisplayProperties2KHR(L, p, base) zfree((L), (p), (base))
+#define zfreearrayVkDisplayProperties2KHR(L, p, count, base) zfreearray((L), (p), sizeof(VkDisplayProperties2KHR), (count), (base))
+#define zpushVkDisplayProperties2KHR moonvulkan_zpushVkDisplayProperties2KHR
+int zpushVkDisplayProperties2KHR(lua_State *L, const VkDisplayProperties2KHR *p);
+
+#define znewVkDisplayPlaneProperties2KHR(L, err) (VkDisplayPlaneProperties2KHR*)znew((L), VK_STRUCTURE_TYPE_DISPLAY_PLANE_PROPERTIES_2_KHR, sizeof(VkDisplayPlaneProperties2KHR), (err))
+#define znewarrayVkDisplayPlaneProperties2KHR(L, count, err) (VkDisplayPlaneProperties2KHR*)znewarray((L), VK_STRUCTURE_TYPE_DISPLAY_PLANE_PROPERTIES_2_KHR, sizeof(VkDisplayPlaneProperties2KHR), (count), (err))
+#define znewchainVkDisplayPlaneProperties2KHR moonvulkan_znewchainVkDisplayPlaneProperties2KHR
+VkDisplayPlaneProperties2KHR* znewchainVkDisplayPlaneProperties2KHR(lua_State *L, int *err);
+#define znewchainarrayVkDisplayPlaneProperties2KHR moonvulkan_znewchainarrayVkDisplayPlaneProperties2KHR
+VkDisplayPlaneProperties2KHR* znewchainarrayVkDisplayPlaneProperties2KHR(lua_State *L, uint32_t count, int *err);
+#define zcheckVkDisplayPlaneProperties2KHR moonvulkan_zcheckVkDisplayPlaneProperties2KHR
+VkDisplayPlaneProperties2KHR* zcheckVkDisplayPlaneProperties2KHR(lua_State *L, int arg, int *err);
+#define zcheckarrayVkDisplayPlaneProperties2KHR moonvulkan_zcheckarrayVkDisplayPlaneProperties2KHR
+VkDisplayPlaneProperties2KHR* zcheckarrayVkDisplayPlaneProperties2KHR(lua_State *L, int arg, uint32_t *count, int *err);
+#define zinitVkDisplayPlaneProperties2KHR moonvulkan_zinitVkDisplayPlaneProperties2KHR
+int zinitVkDisplayPlaneProperties2KHR(lua_State *L, VkDisplayPlaneProperties2KHR* p, int *err);
+#define zfreeVkDisplayPlaneProperties2KHR(L, p, base) zfree((L), (p), (base))
+#define zfreearrayVkDisplayPlaneProperties2KHR(L, p, count, base) zfreearray((L), (p), sizeof(VkDisplayPlaneProperties2KHR), (count), (base))
+#define zpushVkDisplayPlaneProperties2KHR moonvulkan_zpushVkDisplayPlaneProperties2KHR
+int zpushVkDisplayPlaneProperties2KHR(lua_State *L, const VkDisplayPlaneProperties2KHR *p);
+
+#define znewVkDisplayModeProperties2KHR(L, err) (VkDisplayModeProperties2KHR*)znew((L), VK_STRUCTURE_TYPE_DISPLAY_MODE_PROPERTIES_2_KHR, sizeof(VkDisplayModeProperties2KHR), (err))
+#define znewarrayVkDisplayModeProperties2KHR(L, count, err) (VkDisplayModeProperties2KHR*)znewarray((L), VK_STRUCTURE_TYPE_DISPLAY_MODE_PROPERTIES_2_KHR, sizeof(VkDisplayModeProperties2KHR), (count), (err))
+#define znewchainVkDisplayModeProperties2KHR moonvulkan_znewchainVkDisplayModeProperties2KHR
+VkDisplayModeProperties2KHR* znewchainVkDisplayModeProperties2KHR(lua_State *L, int *err);
+#define znewchainarrayVkDisplayModeProperties2KHR moonvulkan_znewchainarrayVkDisplayModeProperties2KHR
+VkDisplayModeProperties2KHR* znewchainarrayVkDisplayModeProperties2KHR(lua_State *L, uint32_t count, int *err);
+#define zcheckVkDisplayModeProperties2KHR moonvulkan_zcheckVkDisplayModeProperties2KHR
+VkDisplayModeProperties2KHR* zcheckVkDisplayModeProperties2KHR(lua_State *L, int arg, int *err);
+#define zcheckarrayVkDisplayModeProperties2KHR moonvulkan_zcheckarrayVkDisplayModeProperties2KHR
+VkDisplayModeProperties2KHR* zcheckarrayVkDisplayModeProperties2KHR(lua_State *L, int arg, uint32_t *count, int *err);
+#define zinitVkDisplayModeProperties2KHR moonvulkan_zinitVkDisplayModeProperties2KHR
+int zinitVkDisplayModeProperties2KHR(lua_State *L, VkDisplayModeProperties2KHR* p, int *err);
+#define zfreeVkDisplayModeProperties2KHR(L, p, base) zfree((L), (p), (base))
+#define zfreearrayVkDisplayModeProperties2KHR(L, p, count, base) zfreearray((L), (p), sizeof(VkDisplayModeProperties2KHR), (count), (base))
+#define zpushVkDisplayModeProperties2KHR moonvulkan_zpushVkDisplayModeProperties2KHR
+int zpushVkDisplayModeProperties2KHR(lua_State *L, const VkDisplayModeProperties2KHR *p);
+
+#define znewVkDisplayPlaneCapabilities2KHR(L, err) (VkDisplayPlaneCapabilities2KHR*)znew((L), VK_STRUCTURE_TYPE_DISPLAY_PLANE_CAPABILITIES_2_KHR, sizeof(VkDisplayPlaneCapabilities2KHR), (err))
+#define znewarrayVkDisplayPlaneCapabilities2KHR(L, count, err) (VkDisplayPlaneCapabilities2KHR*)znewarray((L), VK_STRUCTURE_TYPE_DISPLAY_PLANE_CAPABILITIES_2_KHR, sizeof(VkDisplayPlaneCapabilities2KHR), (count), (err))
+#define znewchainVkDisplayPlaneCapabilities2KHR moonvulkan_znewchainVkDisplayPlaneCapabilities2KHR
+VkDisplayPlaneCapabilities2KHR* znewchainVkDisplayPlaneCapabilities2KHR(lua_State *L, int *err);
+#define znewchainarrayVkDisplayPlaneCapabilities2KHR moonvulkan_znewchainarrayVkDisplayPlaneCapabilities2KHR
+VkDisplayPlaneCapabilities2KHR* znewchainarrayVkDisplayPlaneCapabilities2KHR(lua_State *L, uint32_t count, int *err);
+#define zcheckVkDisplayPlaneCapabilities2KHR moonvulkan_zcheckVkDisplayPlaneCapabilities2KHR
+VkDisplayPlaneCapabilities2KHR* zcheckVkDisplayPlaneCapabilities2KHR(lua_State *L, int arg, int *err);
+#define zcheckarrayVkDisplayPlaneCapabilities2KHR moonvulkan_zcheckarrayVkDisplayPlaneCapabilities2KHR
+VkDisplayPlaneCapabilities2KHR* zcheckarrayVkDisplayPlaneCapabilities2KHR(lua_State *L, int arg, uint32_t *count, int *err);
+#define zinitVkDisplayPlaneCapabilities2KHR moonvulkan_zinitVkDisplayPlaneCapabilities2KHR
+int zinitVkDisplayPlaneCapabilities2KHR(lua_State *L, VkDisplayPlaneCapabilities2KHR* p, int *err);
+#define zfreeVkDisplayPlaneCapabilities2KHR(L, p, base) zfree((L), (p), (base))
+#define zfreearrayVkDisplayPlaneCapabilities2KHR(L, p, count, base) zfreearray((L), (p), sizeof(VkDisplayPlaneCapabilities2KHR), (count), (base))
+#define zpushVkDisplayPlaneCapabilities2KHR moonvulkan_zpushVkDisplayPlaneCapabilities2KHR
+int zpushVkDisplayPlaneCapabilities2KHR(lua_State *L, const VkDisplayPlaneCapabilities2KHR *p);
+
+#define znewVkDisplayPlaneInfo2KHR(L, err) (VkDisplayPlaneInfo2KHR*)znew((L), VK_STRUCTURE_TYPE_DISPLAY_PLANE_INFO_2_KHR, sizeof(VkDisplayPlaneInfo2KHR), (err))
+#define znewarrayVkDisplayPlaneInfo2KHR(L, count, err) (VkDisplayPlaneInfo2KHR*)znewarray((L), VK_STRUCTURE_TYPE_DISPLAY_PLANE_INFO_2_KHR, sizeof(VkDisplayPlaneInfo2KHR), (count), (err))
+#define znewchainVkDisplayPlaneInfo2KHR moonvulkan_znewchainVkDisplayPlaneInfo2KHR
+VkDisplayPlaneInfo2KHR* znewchainVkDisplayPlaneInfo2KHR(lua_State *L, int *err);
+#define znewchainarrayVkDisplayPlaneInfo2KHR moonvulkan_znewchainarrayVkDisplayPlaneInfo2KHR
+VkDisplayPlaneInfo2KHR* znewchainarrayVkDisplayPlaneInfo2KHR(lua_State *L, uint32_t count, int *err);
+#define zcheckVkDisplayPlaneInfo2KHR moonvulkan_zcheckVkDisplayPlaneInfo2KHR
+VkDisplayPlaneInfo2KHR* zcheckVkDisplayPlaneInfo2KHR(lua_State *L, int arg, int *err);
+#define zcheckarrayVkDisplayPlaneInfo2KHR moonvulkan_zcheckarrayVkDisplayPlaneInfo2KHR
+VkDisplayPlaneInfo2KHR* zcheckarrayVkDisplayPlaneInfo2KHR(lua_State *L, int arg, uint32_t *count, int *err);
+#define zinitVkDisplayPlaneInfo2KHR moonvulkan_zinitVkDisplayPlaneInfo2KHR
+int zinitVkDisplayPlaneInfo2KHR(lua_State *L, VkDisplayPlaneInfo2KHR* p, int *err);
+#define zfreeVkDisplayPlaneInfo2KHR(L, p, base) zfree((L), (p), (base))
+#define zfreearrayVkDisplayPlaneInfo2KHR(L, p, count, base) zfreearray((L), (p), sizeof(VkDisplayPlaneInfo2KHR), (count), (base))
+#define zpushVkDisplayPlaneInfo2KHR moonvulkan_zpushVkDisplayPlaneInfo2KHR
+int zpushVkDisplayPlaneInfo2KHR(lua_State *L, const VkDisplayPlaneInfo2KHR *p);
+
 
 #ifdef VK_USE_PLATFORM_WIN32_KHR
 

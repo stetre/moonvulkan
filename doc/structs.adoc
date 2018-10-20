@@ -1721,13 +1721,13 @@ _physical_resolution_: <<extent2d, extent2d>>, +
 _supported_transforms_: <<surfacetransformflags, surfacetransformflags>>, +
 _plane_reorder_possible_: boolean, +
 _persistent_content_: boolean, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkDisplayPropertiesKHR[VkDisplayPropertiesKHR])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkDisplayProperties2KHR[VkDisplayProperties2KHR])#
 
 * [[displayplaneproperties]]
 [small]#*displayplaneproperties* = { +
 _current_display_: <<display, display>> (may be _nil_), +
 _current_stack_index_: <<index, index>>, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkDisplayPlanePropertiesKHR[VkDisplayPlanePropertiesKHR])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkDisplayPlaneProperties2KHR[VkDisplayPlaneProperties2KHR])#
 
 * [[displaymodecreateinfo]]
 [small]#*displaymodecreateinfo* = { +
@@ -1739,13 +1739,18 @@ _parameters_: <<displaymodeparameters, displaymodeparameters>>, +
 [small]#*displaymodeproperties* = { +
 _flags_: <<displaymodecreateinfoflags, displaymodecreateinfoflags>>, +
 _parameters_: <<displaymodeparameters, displaymodeparameters>>, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkDisplayModePropertiesKHR[VkDisplayModePropertiesKHR])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkDisplayModeProperties2KHR[VkDisplayModeProperties2KHR])#
 
 * [[displaymodeparameters]]
 [small]#*displaymodeparameters* = { +
 _visible_region_: <<extent2d, extent2d>> *[R]*, +
 _refresh_rate_: integer, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkDisplayModeParametersKHR[VkDisplayModeParametersKHR])#
+
+* [[displayplaneinfo]]
+[small]#*displayplaneinfo* = { +
+_plane_index_: integer, +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkDisplayPlaneInfo2KHR[VkDisplayPlaneInfo2KHR], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_get_display_properties2[VK_KHR_get_display_properties2])#
 
 * [[displayplanecapabilities]]
 [small]#*displayplanecapabilities* = { +
@@ -1758,7 +1763,7 @@ _min_dst_position_: <<offset2d, offset2d>>, +
 _max_dst_position_: <<offset2d, offset2d>>, +
 _min_dst_extent_: <<extent2d, extent2d>>, +
 _max_dst_extent_: <<extent2d, extent2d>>, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkDisplayPlaneCapabilitiesKHR[VkDisplayPlaneCapabilitiesKHR])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkDisplayPlaneCapabilities2KHR[VkDisplayPlaneCapabilities2KHR])#
 
 * [[displaysurfacecreateinfo]]
 [small]#*displaysurfacecreateinfo* = { +

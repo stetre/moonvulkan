@@ -292,6 +292,11 @@ local TYPED = {
    { "VkRenderPassCreateInfo2KHR", "RENDER_PASS_CREATE_INFO_2_KHR" },
    { "VkSubpassBeginInfoKHR", "SUBPASS_BEGIN_INFO_KHR" },
    { "VkSubpassEndInfoKHR", "SUBPASS_END_INFO_KHR" },
+   { "VkDisplayProperties2KHR", "DISPLAY_PROPERTIES_2_KHR" },
+   { "VkDisplayPlaneProperties2KHR", "DISPLAY_PLANE_PROPERTIES_2_KHR" },
+   { "VkDisplayModeProperties2KHR", "DISPLAY_MODE_PROPERTIES_2_KHR" },
+   { "VkDisplayPlaneCapabilities2KHR", "DISPLAY_PLANE_CAPABILITIES_2_KHR" },
+   { "VkDisplayPlaneInfo2KHR", "DISPLAY_PLANE_INFO_2_KHR" },
 }
 
 local TYPED_WIN32 = {

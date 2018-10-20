@@ -52,16 +52,12 @@ static int pushdisplay(lua_State *L, VkDisplayKHR display, ud_t *parent_ud)
 
 #define N 32
 
-static int GetPhysicalDeviceDisplayProperties(lua_State *L)
+static int GetPhysicalDeviceDisplayProperties1(lua_State *L, VkPhysicalDevice physdev, ud_t *ud)
     {
     int err;
     VkResult ec;
     uint32_t count, remaining, tot, i;
     VkDisplayPropertiesKHR* properties; //[N];
-    ud_t *ud;
-    VkPhysicalDevice physdev = checkphysical_device(L, 1, &ud);
-    CheckInstancePfn(L, ud, GetPhysicalDeviceDisplayPropertiesKHR);
-
 #define CLEANUP zfreearrayVkDisplayPropertiesKHR(L, properties, N, 1)
     properties = znewarrayVkDisplayPropertiesKHR(L, N, &err);
     if(err) { CLEANUP; lua_error(L); }
@@ -87,23 +83,63 @@ static int GetPhysicalDeviceDisplayProperties(lua_State *L)
             lua_rawseti(L, -2, ++tot);
             }
         } while (remaining > 0);
-
     CLEANUP;
 #undef CLEANUP
     return 1;
     }
 
+static int GetPhysicalDeviceDisplayProperties2(lua_State *L, VkPhysicalDevice physdev, ud_t *ud)
+    {
+    int err;
+    VkResult ec;
+    uint32_t count, remaining, tot, i;
+    VkDisplayProperties2KHR* properties; //[N];
+#define CLEANUP zfreearrayVkDisplayProperties2KHR(L, properties, N, 1)
+    properties = znewchainarrayVkDisplayProperties2KHR(L, N, &err);
+    if(err) { CLEANUP; lua_error(L); }
+    lua_newtable(L);
+    ec = ud->idt->GetPhysicalDeviceDisplayProperties2KHR(physdev, &remaining, NULL);
+    if(ec) { CLEANUP; CheckError(L, ec); }
+    if(remaining==0) { CLEANUP; return 1; }
+    tot = 0;
+    do {
+        if(remaining > N)
+            { count = N; remaining -= N; }
+        else
+            { count = remaining; remaining = 0; }
 
-static int GetPhysicalDeviceDisplayPlaneProperties(lua_State *L)
+        ec = ud->idt->GetPhysicalDeviceDisplayProperties2KHR(physdev, &count, properties);
+        if(ec && ec != VK_INCOMPLETE) { CLEANUP; CheckError(L, ec); }
+    
+        for(i = 0; i < count; i++)
+            {
+            zpushVkDisplayProperties2KHR(L, &properties[i]);
+            pushdisplay(L, properties[i].displayProperties.display, ud);
+            lua_setfield(L, -2, "display");
+            lua_rawseti(L, -2, ++tot);
+            }
+        } while (remaining > 0);
+    CLEANUP;
+#undef CLEANUP
+    return 1;
+    }
+
+static int GetPhysicalDeviceDisplayProperties(lua_State *L)
+    {
+    ud_t *ud;
+    VkPhysicalDevice physdev = checkphysical_device(L, 1, &ud);
+    if(ud->idt->GetPhysicalDeviceDisplayProperties2KHR)
+        return GetPhysicalDeviceDisplayProperties2(L, physdev, ud);
+    CheckInstancePfn(L, ud, GetPhysicalDeviceDisplayPropertiesKHR);
+    return GetPhysicalDeviceDisplayProperties1(L, physdev, ud);
+    }
+
+static int GetPhysicalDeviceDisplayPlaneProperties1(lua_State *L, VkPhysicalDevice physdev, ud_t *ud)
     {
     int err;
     VkResult ec;
     uint32_t count, remaining, tot, i;
     VkDisplayPlanePropertiesKHR* properties; //[N];
-    ud_t *ud;
-    VkPhysicalDevice physdev = checkphysical_device(L, 1, &ud);
-    CheckInstancePfn(L, ud, GetPhysicalDeviceDisplayPlanePropertiesKHR);
-
 #define CLEANUP zfreearrayVkDisplayPlanePropertiesKHR(L, properties, N, 1)
     properties = znewarrayVkDisplayPlanePropertiesKHR(L, N, &err);
     if(err) { CLEANUP; lua_error(L); }
@@ -138,6 +174,56 @@ static int GetPhysicalDeviceDisplayPlaneProperties(lua_State *L)
     return 1;
     }
 
+
+static int GetPhysicalDeviceDisplayPlaneProperties2(lua_State *L, VkPhysicalDevice physdev, ud_t *ud)
+    {
+    int err;
+    VkResult ec;
+    uint32_t count, remaining, tot, i;
+    VkDisplayPlaneProperties2KHR* properties; //[N];
+#define CLEANUP zfreearrayVkDisplayPlaneProperties2KHR(L, properties, N, 1)
+    properties = znewchainarrayVkDisplayPlaneProperties2KHR(L, N, &err);
+    if(err) { CLEANUP; lua_error(L); }
+    lua_newtable(L);
+    ec = ud->idt->GetPhysicalDeviceDisplayPlaneProperties2KHR(physdev, &remaining, NULL);
+    if(ec) { CLEANUP; CheckError(L, ec); }
+    if(remaining==0) { CLEANUP; return 1; }
+    tot = 0;
+    do {
+        if(remaining > N)
+            { count = N; remaining -= N; }
+        else
+            { count = remaining; remaining = 0; }
+
+        ec = ud->idt->GetPhysicalDeviceDisplayPlaneProperties2KHR(physdev, &count, properties);
+        if(ec && ec != VK_INCOMPLETE) { CLEANUP; CheckError(L, ec); }
+    
+        for(i = 0; i < count; i++)
+            {
+            zpushVkDisplayPlaneProperties2KHR(L, &properties[i]);
+            if(properties[i].displayPlaneProperties.currentDisplay != VK_NULL_HANDLE)
+                {
+                pushdisplay(L, properties[i].displayPlaneProperties.currentDisplay, ud);
+                lua_setfield(L, -2, "current_display");
+                }
+            lua_rawseti(L, -2, ++tot);
+            }
+        } while (remaining > 0);
+
+    CLEANUP;
+#undef CLEANUP
+    return 1;
+    }
+
+static int GetPhysicalDeviceDisplayPlaneProperties(lua_State *L)
+    {
+    ud_t *ud;
+    VkPhysicalDevice physdev = checkphysical_device(L, 1, &ud);
+    if(ud->idt->GetPhysicalDeviceDisplayPlaneProperties2KHR)
+        return GetPhysicalDeviceDisplayPlaneProperties2(L, physdev, ud);
+    CheckInstancePfn(L, ud, GetPhysicalDeviceDisplayPlanePropertiesKHR);
+    return GetPhysicalDeviceDisplayPlaneProperties1(L, physdev, ud);
+    }
 
 static int GetDisplayPlaneSupportedDisplays(lua_State *L)
     {

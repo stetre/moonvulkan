@@ -189,6 +189,11 @@ instance_dt_t * getproc_instance(lua_State *L, VkInstance instance, VkInstanceCr
     GET(CreateDebugUtilsMessengerEXT);
     GET(DestroyDebugUtilsMessengerEXT);
     GET(SubmitDebugUtilsMessageEXT);
+    //VK_KHR_get_display_properties2
+    GET(GetPhysicalDeviceDisplayProperties2KHR);
+    GET(GetPhysicalDeviceDisplayPlaneProperties2KHR);
+    GET(GetDisplayModeProperties2KHR);
+    GET(GetDisplayPlaneCapabilities2KHR);
 #ifdef VK_USE_PLATFORM_XCB_KHR
     //VK_KHR_xcb_surface
     GET(CreateXcbSurfaceKHR);

@@ -94,14 +94,13 @@ static int Create(lua_State *L)
     }
 
 #define N 32
-static int GetDisplayModeProperties(lua_State *L)
+
+static int GetDisplayModeProperties1(lua_State *L, VkDisplayKHR display, ud_t *ud)
     {
     int err;
     VkResult ec;
     uint32_t count, remaining, tot, i;
     VkDisplayModePropertiesKHR* properties; //[N];
-    ud_t *ud;
-    VkDisplayKHR display = checkdisplay(L, 1, &ud);
     VkPhysicalDevice physical_device = (VkPhysicalDevice)(uintptr_t)ud->parent_ud->handle;
     CheckInstancePfn(L, ud, GetDisplayModePropertiesKHR);
 #define CLEANUP zfreearrayVkDisplayModePropertiesKHR(L, properties, N, 1)
@@ -135,16 +134,63 @@ static int GetDisplayModeProperties(lua_State *L)
     return 1;
     }
 
-static int GetDisplayPlaneCapabilities(lua_State *L)
+static int GetDisplayModeProperties2(lua_State *L, VkDisplayKHR display, ud_t *ud)
+    {
+    int err;
+    VkResult ec;
+    uint32_t count, remaining, tot, i;
+    VkDisplayModeProperties2KHR* properties; //[N];
+    VkPhysicalDevice physical_device = (VkPhysicalDevice)(uintptr_t)ud->parent_ud->handle;
+    CheckInstancePfn(L, ud, GetDisplayModeProperties2KHR);
+#define CLEANUP zfreearrayVkDisplayModeProperties2KHR(L, properties, N, 1)
+    properties = znewarrayVkDisplayModeProperties2KHR(L, N, &err);
+    if(err) { CLEANUP; lua_error(L); }
+    lua_newtable(L);
+    ec = ud->idt->GetDisplayModeProperties2KHR(physical_device, display, &remaining, NULL);
+    if(ec) { CLEANUP; CheckError(L, ec); }
+    if(remaining==0) { CLEANUP; return 1; }
+    tot = 0;
+    do {
+        if(remaining > N)
+            { count = N; remaining -= N; }
+        else
+            { count = remaining; remaining = 0; }
+
+        ec = ud->idt->GetDisplayModeProperties2KHR(physical_device, display, &count, properties);
+        if(ec && ec != VK_INCOMPLETE) { CLEANUP; CheckError(L, ec); }
+    
+        for(i = 0; i < count; i++)
+            {
+            zpushVkDisplayModeProperties2KHR(L, &properties[i]);
+            pushdisplaymode(L, properties[i].displayModeProperties.displayMode, ud, NULL);
+            lua_setfield(L, -2, "display_mode");
+            lua_rawseti(L, -2, ++tot);
+            }
+        } while (remaining > 0);
+
+    CLEANUP;
+#undef CLEANUP
+    return 1;
+    }
+
+
+static int GetDisplayModeProperties(lua_State *L)
+    {
+    ud_t *ud;
+    VkDisplayKHR display = checkdisplay(L, 1, &ud);
+    if(ud->idt->GetDisplayModeProperties2KHR)
+        return GetDisplayModeProperties2(L, display, ud);
+    CheckInstancePfn(L, ud, GetDisplayModePropertiesKHR);
+    return GetDisplayModeProperties1(L, display, ud);
+    }
+
+static int GetDisplayPlaneCapabilities1(lua_State *L, VkDisplayModeKHR display_mode, ud_t *ud)
     {
     int err;
     VkResult ec;
     VkDisplayPlaneCapabilitiesKHR* capabilities;
-    ud_t *ud;
-    VkDisplayModeKHR display_mode = checkdisplay_mode(L, 1, &ud);
     VkPhysicalDevice physical_device = (VkPhysicalDevice)(uintptr_t)ud->parent_ud->parent_ud->handle;
     uint32_t planeIndex = luaL_checkinteger(L, 2);
-    CheckInstancePfn(L, ud, GetDisplayPlaneCapabilitiesKHR);
 #define CLEANUP zfreeVkDisplayPlaneCapabilitiesKHR(L, capabilities, 1)
     capabilities = znewVkDisplayPlaneCapabilitiesKHR(L, &err);
     if(err) { CLEANUP; return lua_error(L); }
@@ -154,6 +200,50 @@ static int GetDisplayPlaneCapabilities(lua_State *L)
     CLEANUP;
 #undef CLEANUP
     return 1;
+    }
+
+static int GetDisplayPlaneCapabilities2(lua_State *L, VkDisplayModeKHR display_mode, ud_t *ud)
+    {
+    int err;
+    VkResult ec;
+    VkDisplayPlaneInfo2KHR* info = NULL;
+    VkDisplayPlaneCapabilities2KHR* capabilities = NULL;
+    VkPhysicalDevice physical_device = (VkPhysicalDevice)(uintptr_t)ud->parent_ud->parent_ud->handle;
+#define CLEANUP do {                                            \
+    zfreeVkDisplayPlaneInfo2KHR(L, info, 1);                    \
+    zfreeVkDisplayPlaneCapabilities2KHR(L, capabilities, 1);    \
+} while(0)
+    if(lua_istable(L, 2))
+        {
+        info = zcheckVkDisplayPlaneInfo2KHR(L, 2, &err);
+        if(err) { CLEANUP; return argerror(L, 2); }
+        }
+    else
+        {
+        uint32_t index = luaL_checkinteger(L, 2);
+        info = znewVkDisplayPlaneInfo2KHR(L, &err);
+        if(err) { CLEANUP; return lua_error(L); }
+        info->planeIndex = index;
+        }
+    info->mode = display_mode;
+    capabilities = znewVkDisplayPlaneCapabilities2KHR(L, &err);
+    if(err) { CLEANUP; return lua_error(L); }
+    ec = ud->idt->GetDisplayPlaneCapabilities2KHR(physical_device, info, capabilities);
+    if(ec) { CLEANUP; CheckError(L, ec); }
+    zpushVkDisplayPlaneCapabilities2KHR(L, capabilities);
+    CLEANUP;
+#undef CLEANUP
+    return 1;
+    }
+
+static int GetDisplayPlaneCapabilities(lua_State *L)
+    {
+    ud_t *ud;
+    VkDisplayModeKHR display_mode = checkdisplay_mode(L, 1, &ud);
+    if(ud->idt->GetDisplayPlaneCapabilitiesKHR)
+        return GetDisplayPlaneCapabilities2(L, display_mode, ud);
+    CheckInstancePfn(L, ud, GetDisplayPlaneCapabilitiesKHR);
+    return GetDisplayPlaneCapabilities1(L, display_mode, ud);
     }
 
 
