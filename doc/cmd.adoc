@@ -147,6 +147,11 @@ https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vk
 [small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdDispatch.html[vkCmdDispatch],
 https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdDispatchIndirect.html[vkCmdDispatchIndirect].#
 
+[[cmd_dispatch_base]]
+* *cmd_dispatch_base*(_cb_, _basegroup_x_, _basegroup_y_, _basegroup_z_, _groupcount_x_, _groupcount_y_, _groupcount_z_) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkCmdDispatchBaseKHR[vkCmdDispatchBaseKHR] (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_device_group[VK_KHR_device_group]).#
+
+
 [[cmd_draw]]
 * *cmd_draw*(_cb_, _vertex_count_, _instance_count_, _first_vertex_, _first_instance_) +
 *cmd_draw_indexed*(_cb_, _index_count_, _instance_count_, _first_index_, _vertex_offset_, _first_instance_) +
@@ -237,6 +242,10 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmd
 [[cmd_set_depth_bounds]]
 * *cmd_set_depth_bounds*(_cb_, _min_, _max_) +
 [small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdSetDepthBounds.html[vkCmdSetDepthBounds].#
+
+[[cmd_set_device_mask]]
+* *cmd_set_device_mask*(_cb_, _devicemask_) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkCmdSetDeviceMaskKHR[vkCmdSetDeviceMaskKHR] (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_device_group[VK_KHR_device_group]).#
 
 [[cmd_set_discard_rectangle]]
 * *cmd_set_discard_rectangle*(_cb_, _first_, {<<rect2d, _rect2d_>>}) +

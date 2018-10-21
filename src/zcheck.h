@@ -2558,6 +2558,227 @@ int zinitVkPhysicalDeviceGroupPropertiesKHR(lua_State *L, VkPhysicalDeviceGroupP
 #define zpushVkPhysicalDeviceGroupPropertiesKHR moonvulkan_zpushVkPhysicalDeviceGroupPropertiesKHR
 int zpushVkPhysicalDeviceGroupPropertiesKHR(lua_State *L, const VkPhysicalDeviceGroupPropertiesKHR *p, VkInstance instance); // non-standard
 
+#define znewVkMemoryAllocateFlagsInfoKHR(L, err) (VkMemoryAllocateFlagsInfoKHR*)znew((L), VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_FLAGS_INFO_KHR, sizeof(VkMemoryAllocateFlagsInfoKHR), (err))
+#define znewarrayVkMemoryAllocateFlagsInfoKHR(L, count, err) (VkMemoryAllocateFlagsInfoKHR*)znewarray((L), VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_FLAGS_INFO_KHR, sizeof(VkMemoryAllocateFlagsInfoKHR), (count), (err))
+#define znewchainVkMemoryAllocateFlagsInfoKHR moonvulkan_znewchainVkMemoryAllocateFlagsInfoKHR
+VkMemoryAllocateFlagsInfoKHR* znewchainVkMemoryAllocateFlagsInfoKHR(lua_State *L, int *err);
+#define znewchainarrayVkMemoryAllocateFlagsInfoKHR moonvulkan_znewchainarrayVkMemoryAllocateFlagsInfoKHR
+VkMemoryAllocateFlagsInfoKHR* znewchainarrayVkMemoryAllocateFlagsInfoKHR(lua_State *L, uint32_t count, int *err);
+#define zcheckVkMemoryAllocateFlagsInfoKHR moonvulkan_zcheckVkMemoryAllocateFlagsInfoKHR
+VkMemoryAllocateFlagsInfoKHR* zcheckVkMemoryAllocateFlagsInfoKHR(lua_State *L, int arg, int *err);
+#define zcheckarrayVkMemoryAllocateFlagsInfoKHR moonvulkan_zcheckarrayVkMemoryAllocateFlagsInfoKHR
+VkMemoryAllocateFlagsInfoKHR* zcheckarrayVkMemoryAllocateFlagsInfoKHR(lua_State *L, int arg, uint32_t *count, int *err);
+#define zinitVkMemoryAllocateFlagsInfoKHR moonvulkan_zinitVkMemoryAllocateFlagsInfoKHR
+int zinitVkMemoryAllocateFlagsInfoKHR(lua_State *L, VkMemoryAllocateFlagsInfoKHR* p, int *err);
+#define zfreeVkMemoryAllocateFlagsInfoKHR(L, p, base) zfree((L), (p), (base))
+#define zfreearrayVkMemoryAllocateFlagsInfoKHR(L, p, count, base) zfreearray((L), (p), sizeof(VkMemoryAllocateFlagsInfoKHR), (count), (base))
+#define zpushVkMemoryAllocateFlagsInfoKHR moonvulkan_zpushVkMemoryAllocateFlagsInfoKHR
+int zpushVkMemoryAllocateFlagsInfoKHR(lua_State *L, const VkMemoryAllocateFlagsInfoKHR *p);
+
+#define znewVkDeviceGroupRenderPassBeginInfoKHR(L, err) (VkDeviceGroupRenderPassBeginInfoKHR*)znew((L), VK_STRUCTURE_TYPE_DEVICE_GROUP_RENDER_PASS_BEGIN_INFO_KHR, sizeof(VkDeviceGroupRenderPassBeginInfoKHR), (err))
+#define znewarrayVkDeviceGroupRenderPassBeginInfoKHR(L, count, err) (VkDeviceGroupRenderPassBeginInfoKHR*)znewarray((L), VK_STRUCTURE_TYPE_DEVICE_GROUP_RENDER_PASS_BEGIN_INFO_KHR, sizeof(VkDeviceGroupRenderPassBeginInfoKHR), (count), (err))
+#define znewchainVkDeviceGroupRenderPassBeginInfoKHR moonvulkan_znewchainVkDeviceGroupRenderPassBeginInfoKHR
+VkDeviceGroupRenderPassBeginInfoKHR* znewchainVkDeviceGroupRenderPassBeginInfoKHR(lua_State *L, int *err);
+#define znewchainarrayVkDeviceGroupRenderPassBeginInfoKHR moonvulkan_znewchainarrayVkDeviceGroupRenderPassBeginInfoKHR
+VkDeviceGroupRenderPassBeginInfoKHR* znewchainarrayVkDeviceGroupRenderPassBeginInfoKHR(lua_State *L, uint32_t count, int *err);
+#define zcheckVkDeviceGroupRenderPassBeginInfoKHR moonvulkan_zcheckVkDeviceGroupRenderPassBeginInfoKHR
+VkDeviceGroupRenderPassBeginInfoKHR* zcheckVkDeviceGroupRenderPassBeginInfoKHR(lua_State *L, int arg, int *err);
+#define zcheckarrayVkDeviceGroupRenderPassBeginInfoKHR moonvulkan_zcheckarrayVkDeviceGroupRenderPassBeginInfoKHR
+VkDeviceGroupRenderPassBeginInfoKHR* zcheckarrayVkDeviceGroupRenderPassBeginInfoKHR(lua_State *L, int arg, uint32_t *count, int *err);
+#define zinitVkDeviceGroupRenderPassBeginInfoKHR moonvulkan_zinitVkDeviceGroupRenderPassBeginInfoKHR
+int zinitVkDeviceGroupRenderPassBeginInfoKHR(lua_State *L, VkDeviceGroupRenderPassBeginInfoKHR* p, int *err);
+#define zfreeVkDeviceGroupRenderPassBeginInfoKHR(L, p, base) zfree((L), (p), (base))
+#define zfreearrayVkDeviceGroupRenderPassBeginInfoKHR(L, p, count, base) zfreearray((L), (p), sizeof(VkDeviceGroupRenderPassBeginInfoKHR), (count), (base))
+#define zpushVkDeviceGroupRenderPassBeginInfoKHR moonvulkan_zpushVkDeviceGroupRenderPassBeginInfoKHR
+int zpushVkDeviceGroupRenderPassBeginInfoKHR(lua_State *L, const VkDeviceGroupRenderPassBeginInfoKHR *p);
+
+#define znewVkDeviceGroupCommandBufferBeginInfoKHR(L, err) (VkDeviceGroupCommandBufferBeginInfoKHR*)znew((L), VK_STRUCTURE_TYPE_DEVICE_GROUP_COMMAND_BUFFER_BEGIN_INFO_KHR, sizeof(VkDeviceGroupCommandBufferBeginInfoKHR), (err))
+#define znewarrayVkDeviceGroupCommandBufferBeginInfoKHR(L, count, err) (VkDeviceGroupCommandBufferBeginInfoKHR*)znewarray((L), VK_STRUCTURE_TYPE_DEVICE_GROUP_COMMAND_BUFFER_BEGIN_INFO_KHR, sizeof(VkDeviceGroupCommandBufferBeginInfoKHR), (count), (err))
+#define znewchainVkDeviceGroupCommandBufferBeginInfoKHR moonvulkan_znewchainVkDeviceGroupCommandBufferBeginInfoKHR
+VkDeviceGroupCommandBufferBeginInfoKHR* znewchainVkDeviceGroupCommandBufferBeginInfoKHR(lua_State *L, int *err);
+#define znewchainarrayVkDeviceGroupCommandBufferBeginInfoKHR moonvulkan_znewchainarrayVkDeviceGroupCommandBufferBeginInfoKHR
+VkDeviceGroupCommandBufferBeginInfoKHR* znewchainarrayVkDeviceGroupCommandBufferBeginInfoKHR(lua_State *L, uint32_t count, int *err);
+#define zcheckVkDeviceGroupCommandBufferBeginInfoKHR moonvulkan_zcheckVkDeviceGroupCommandBufferBeginInfoKHR
+VkDeviceGroupCommandBufferBeginInfoKHR* zcheckVkDeviceGroupCommandBufferBeginInfoKHR(lua_State *L, int arg, int *err);
+#define zcheckarrayVkDeviceGroupCommandBufferBeginInfoKHR moonvulkan_zcheckarrayVkDeviceGroupCommandBufferBeginInfoKHR
+VkDeviceGroupCommandBufferBeginInfoKHR* zcheckarrayVkDeviceGroupCommandBufferBeginInfoKHR(lua_State *L, int arg, uint32_t *count, int *err);
+#define zinitVkDeviceGroupCommandBufferBeginInfoKHR moonvulkan_zinitVkDeviceGroupCommandBufferBeginInfoKHR
+int zinitVkDeviceGroupCommandBufferBeginInfoKHR(lua_State *L, VkDeviceGroupCommandBufferBeginInfoKHR* p, int *err);
+#define zfreeVkDeviceGroupCommandBufferBeginInfoKHR(L, p, base) zfree((L), (p), (base))
+#define zfreearrayVkDeviceGroupCommandBufferBeginInfoKHR(L, p, count, base) zfreearray((L), (p), sizeof(VkDeviceGroupCommandBufferBeginInfoKHR), (count), (base))
+#define zpushVkDeviceGroupCommandBufferBeginInfoKHR moonvulkan_zpushVkDeviceGroupCommandBufferBeginInfoKHR
+int zpushVkDeviceGroupCommandBufferBeginInfoKHR(lua_State *L, const VkDeviceGroupCommandBufferBeginInfoKHR *p);
+
+#define znewVkDeviceGroupSubmitInfoKHR(L, err) (VkDeviceGroupSubmitInfoKHR*)znew((L), VK_STRUCTURE_TYPE_DEVICE_GROUP_SUBMIT_INFO_KHR, sizeof(VkDeviceGroupSubmitInfoKHR), (err))
+#define znewarrayVkDeviceGroupSubmitInfoKHR(L, count, err) (VkDeviceGroupSubmitInfoKHR*)znewarray((L), VK_STRUCTURE_TYPE_DEVICE_GROUP_SUBMIT_INFO_KHR, sizeof(VkDeviceGroupSubmitInfoKHR), (count), (err))
+#define znewchainVkDeviceGroupSubmitInfoKHR moonvulkan_znewchainVkDeviceGroupSubmitInfoKHR
+VkDeviceGroupSubmitInfoKHR* znewchainVkDeviceGroupSubmitInfoKHR(lua_State *L, int *err);
+#define znewchainarrayVkDeviceGroupSubmitInfoKHR moonvulkan_znewchainarrayVkDeviceGroupSubmitInfoKHR
+VkDeviceGroupSubmitInfoKHR* znewchainarrayVkDeviceGroupSubmitInfoKHR(lua_State *L, uint32_t count, int *err);
+#define zcheckVkDeviceGroupSubmitInfoKHR moonvulkan_zcheckVkDeviceGroupSubmitInfoKHR
+VkDeviceGroupSubmitInfoKHR* zcheckVkDeviceGroupSubmitInfoKHR(lua_State *L, int arg, int *err);
+#define zcheckarrayVkDeviceGroupSubmitInfoKHR moonvulkan_zcheckarrayVkDeviceGroupSubmitInfoKHR
+VkDeviceGroupSubmitInfoKHR* zcheckarrayVkDeviceGroupSubmitInfoKHR(lua_State *L, int arg, uint32_t *count, int *err);
+#define zinitVkDeviceGroupSubmitInfoKHR moonvulkan_zinitVkDeviceGroupSubmitInfoKHR
+int zinitVkDeviceGroupSubmitInfoKHR(lua_State *L, VkDeviceGroupSubmitInfoKHR* p, int *err);
+#define zfreeVkDeviceGroupSubmitInfoKHR(L, p, base) zfree((L), (p), (base))
+#define zfreearrayVkDeviceGroupSubmitInfoKHR(L, p, count, base) zfreearray((L), (p), sizeof(VkDeviceGroupSubmitInfoKHR), (count), (base))
+#define zpushVkDeviceGroupSubmitInfoKHR moonvulkan_zpushVkDeviceGroupSubmitInfoKHR
+int zpushVkDeviceGroupSubmitInfoKHR(lua_State *L, const VkDeviceGroupSubmitInfoKHR *p);
+
+#define znewVkDeviceGroupBindSparseInfoKHR(L, err) (VkDeviceGroupBindSparseInfoKHR*)znew((L), VK_STRUCTURE_TYPE_DEVICE_GROUP_BIND_SPARSE_INFO_KHR, sizeof(VkDeviceGroupBindSparseInfoKHR), (err))
+#define znewarrayVkDeviceGroupBindSparseInfoKHR(L, count, err) (VkDeviceGroupBindSparseInfoKHR*)znewarray((L), VK_STRUCTURE_TYPE_DEVICE_GROUP_BIND_SPARSE_INFO_KHR, sizeof(VkDeviceGroupBindSparseInfoKHR), (count), (err))
+#define znewchainVkDeviceGroupBindSparseInfoKHR moonvulkan_znewchainVkDeviceGroupBindSparseInfoKHR
+VkDeviceGroupBindSparseInfoKHR* znewchainVkDeviceGroupBindSparseInfoKHR(lua_State *L, int *err);
+#define znewchainarrayVkDeviceGroupBindSparseInfoKHR moonvulkan_znewchainarrayVkDeviceGroupBindSparseInfoKHR
+VkDeviceGroupBindSparseInfoKHR* znewchainarrayVkDeviceGroupBindSparseInfoKHR(lua_State *L, uint32_t count, int *err);
+#define zcheckVkDeviceGroupBindSparseInfoKHR moonvulkan_zcheckVkDeviceGroupBindSparseInfoKHR
+VkDeviceGroupBindSparseInfoKHR* zcheckVkDeviceGroupBindSparseInfoKHR(lua_State *L, int arg, int *err);
+#define zcheckarrayVkDeviceGroupBindSparseInfoKHR moonvulkan_zcheckarrayVkDeviceGroupBindSparseInfoKHR
+VkDeviceGroupBindSparseInfoKHR* zcheckarrayVkDeviceGroupBindSparseInfoKHR(lua_State *L, int arg, uint32_t *count, int *err);
+#define zinitVkDeviceGroupBindSparseInfoKHR moonvulkan_zinitVkDeviceGroupBindSparseInfoKHR
+int zinitVkDeviceGroupBindSparseInfoKHR(lua_State *L, VkDeviceGroupBindSparseInfoKHR* p, int *err);
+#define zfreeVkDeviceGroupBindSparseInfoKHR(L, p, base) zfree((L), (p), (base))
+#define zfreearrayVkDeviceGroupBindSparseInfoKHR(L, p, count, base) zfreearray((L), (p), sizeof(VkDeviceGroupBindSparseInfoKHR), (count), (base))
+#define zpushVkDeviceGroupBindSparseInfoKHR moonvulkan_zpushVkDeviceGroupBindSparseInfoKHR
+int zpushVkDeviceGroupBindSparseInfoKHR(lua_State *L, const VkDeviceGroupBindSparseInfoKHR *p);
+
+#define znewVkBindImageMemoryDeviceGroupInfoKHR(L, err) (VkBindImageMemoryDeviceGroupInfoKHR*)znew((L), VK_STRUCTURE_TYPE_BIND_IMAGE_MEMORY_DEVICE_GROUP_INFO_KHR, sizeof(VkBindImageMemoryDeviceGroupInfoKHR), (err))
+#define znewarrayVkBindImageMemoryDeviceGroupInfoKHR(L, count, err) (VkBindImageMemoryDeviceGroupInfoKHR*)znewarray((L), VK_STRUCTURE_TYPE_BIND_IMAGE_MEMORY_DEVICE_GROUP_INFO_KHR, sizeof(VkBindImageMemoryDeviceGroupInfoKHR), (count), (err))
+#define znewchainVkBindImageMemoryDeviceGroupInfoKHR moonvulkan_znewchainVkBindImageMemoryDeviceGroupInfoKHR
+VkBindImageMemoryDeviceGroupInfoKHR* znewchainVkBindImageMemoryDeviceGroupInfoKHR(lua_State *L, int *err);
+#define znewchainarrayVkBindImageMemoryDeviceGroupInfoKHR moonvulkan_znewchainarrayVkBindImageMemoryDeviceGroupInfoKHR
+VkBindImageMemoryDeviceGroupInfoKHR* znewchainarrayVkBindImageMemoryDeviceGroupInfoKHR(lua_State *L, uint32_t count, int *err);
+#define zcheckVkBindImageMemoryDeviceGroupInfoKHR moonvulkan_zcheckVkBindImageMemoryDeviceGroupInfoKHR
+VkBindImageMemoryDeviceGroupInfoKHR* zcheckVkBindImageMemoryDeviceGroupInfoKHR(lua_State *L, int arg, int *err);
+#define zcheckarrayVkBindImageMemoryDeviceGroupInfoKHR moonvulkan_zcheckarrayVkBindImageMemoryDeviceGroupInfoKHR
+VkBindImageMemoryDeviceGroupInfoKHR* zcheckarrayVkBindImageMemoryDeviceGroupInfoKHR(lua_State *L, int arg, uint32_t *count, int *err);
+#define zinitVkBindImageMemoryDeviceGroupInfoKHR moonvulkan_zinitVkBindImageMemoryDeviceGroupInfoKHR
+int zinitVkBindImageMemoryDeviceGroupInfoKHR(lua_State *L, VkBindImageMemoryDeviceGroupInfoKHR* p, int *err);
+#define zfreeVkBindImageMemoryDeviceGroupInfoKHR(L, p, base) zfree((L), (p), (base))
+#define zfreearrayVkBindImageMemoryDeviceGroupInfoKHR(L, p, count, base) zfreearray((L), (p), sizeof(VkBindImageMemoryDeviceGroupInfoKHR), (count), (base))
+#define zpushVkBindImageMemoryDeviceGroupInfoKHR moonvulkan_zpushVkBindImageMemoryDeviceGroupInfoKHR
+int zpushVkBindImageMemoryDeviceGroupInfoKHR(lua_State *L, const VkBindImageMemoryDeviceGroupInfoKHR *p);
+
+#define znewVkBindBufferMemoryDeviceGroupInfoKHR(L, err) (VkBindBufferMemoryDeviceGroupInfoKHR*)znew((L), VK_STRUCTURE_TYPE_BIND_BUFFER_MEMORY_DEVICE_GROUP_INFO_KHR, sizeof(VkBindBufferMemoryDeviceGroupInfoKHR), (err))
+#define znewarrayVkBindBufferMemoryDeviceGroupInfoKHR(L, count, err) (VkBindBufferMemoryDeviceGroupInfoKHR*)znewarray((L), VK_STRUCTURE_TYPE_BIND_BUFFER_MEMORY_DEVICE_GROUP_INFO_KHR, sizeof(VkBindBufferMemoryDeviceGroupInfoKHR), (count), (err))
+#define znewchainVkBindBufferMemoryDeviceGroupInfoKHR moonvulkan_znewchainVkBindBufferMemoryDeviceGroupInfoKHR
+VkBindBufferMemoryDeviceGroupInfoKHR* znewchainVkBindBufferMemoryDeviceGroupInfoKHR(lua_State *L, int *err);
+#define znewchainarrayVkBindBufferMemoryDeviceGroupInfoKHR moonvulkan_znewchainarrayVkBindBufferMemoryDeviceGroupInfoKHR
+VkBindBufferMemoryDeviceGroupInfoKHR* znewchainarrayVkBindBufferMemoryDeviceGroupInfoKHR(lua_State *L, uint32_t count, int *err);
+#define zcheckVkBindBufferMemoryDeviceGroupInfoKHR moonvulkan_zcheckVkBindBufferMemoryDeviceGroupInfoKHR
+VkBindBufferMemoryDeviceGroupInfoKHR* zcheckVkBindBufferMemoryDeviceGroupInfoKHR(lua_State *L, int arg, int *err);
+#define zcheckarrayVkBindBufferMemoryDeviceGroupInfoKHR moonvulkan_zcheckarrayVkBindBufferMemoryDeviceGroupInfoKHR
+VkBindBufferMemoryDeviceGroupInfoKHR* zcheckarrayVkBindBufferMemoryDeviceGroupInfoKHR(lua_State *L, int arg, uint32_t *count, int *err);
+#define zinitVkBindBufferMemoryDeviceGroupInfoKHR moonvulkan_zinitVkBindBufferMemoryDeviceGroupInfoKHR
+int zinitVkBindBufferMemoryDeviceGroupInfoKHR(lua_State *L, VkBindBufferMemoryDeviceGroupInfoKHR* p, int *err);
+#define zfreeVkBindBufferMemoryDeviceGroupInfoKHR(L, p, base) zfree((L), (p), (base))
+#define zfreearrayVkBindBufferMemoryDeviceGroupInfoKHR(L, p, count, base) zfreearray((L), (p), sizeof(VkBindBufferMemoryDeviceGroupInfoKHR), (count), (base))
+#define zpushVkBindBufferMemoryDeviceGroupInfoKHR moonvulkan_zpushVkBindBufferMemoryDeviceGroupInfoKHR
+int zpushVkBindBufferMemoryDeviceGroupInfoKHR(lua_State *L, const VkBindBufferMemoryDeviceGroupInfoKHR *p);
+
+#define znewVkImageSwapchainCreateInfoKHR(L, err) (VkImageSwapchainCreateInfoKHR*)znew((L), VK_STRUCTURE_TYPE_IMAGE_SWAPCHAIN_CREATE_INFO_KHR, sizeof(VkImageSwapchainCreateInfoKHR), (err))
+#define znewarrayVkImageSwapchainCreateInfoKHR(L, count, err) (VkImageSwapchainCreateInfoKHR*)znewarray((L), VK_STRUCTURE_TYPE_IMAGE_SWAPCHAIN_CREATE_INFO_KHR, sizeof(VkImageSwapchainCreateInfoKHR), (count), (err))
+#define znewchainVkImageSwapchainCreateInfoKHR moonvulkan_znewchainVkImageSwapchainCreateInfoKHR
+VkImageSwapchainCreateInfoKHR* znewchainVkImageSwapchainCreateInfoKHR(lua_State *L, int *err);
+#define znewchainarrayVkImageSwapchainCreateInfoKHR moonvulkan_znewchainarrayVkImageSwapchainCreateInfoKHR
+VkImageSwapchainCreateInfoKHR* znewchainarrayVkImageSwapchainCreateInfoKHR(lua_State *L, uint32_t count, int *err);
+#define zcheckVkImageSwapchainCreateInfoKHR moonvulkan_zcheckVkImageSwapchainCreateInfoKHR
+VkImageSwapchainCreateInfoKHR* zcheckVkImageSwapchainCreateInfoKHR(lua_State *L, int arg, int *err);
+#define zcheckarrayVkImageSwapchainCreateInfoKHR moonvulkan_zcheckarrayVkImageSwapchainCreateInfoKHR
+VkImageSwapchainCreateInfoKHR* zcheckarrayVkImageSwapchainCreateInfoKHR(lua_State *L, int arg, uint32_t *count, int *err);
+#define zinitVkImageSwapchainCreateInfoKHR moonvulkan_zinitVkImageSwapchainCreateInfoKHR
+int zinitVkImageSwapchainCreateInfoKHR(lua_State *L, VkImageSwapchainCreateInfoKHR* p, int *err);
+#define zfreeVkImageSwapchainCreateInfoKHR(L, p, base) zfree((L), (p), (base))
+#define zfreearrayVkImageSwapchainCreateInfoKHR(L, p, count, base) zfreearray((L), (p), sizeof(VkImageSwapchainCreateInfoKHR), (count), (base))
+#define zpushVkImageSwapchainCreateInfoKHR moonvulkan_zpushVkImageSwapchainCreateInfoKHR
+int zpushVkImageSwapchainCreateInfoKHR(lua_State *L, const VkImageSwapchainCreateInfoKHR *p);
+
+#define znewVkBindImageMemorySwapchainInfoKHR(L, err) (VkBindImageMemorySwapchainInfoKHR*)znew((L), VK_STRUCTURE_TYPE_BIND_IMAGE_MEMORY_SWAPCHAIN_INFO_KHR, sizeof(VkBindImageMemorySwapchainInfoKHR), (err))
+#define znewarrayVkBindImageMemorySwapchainInfoKHR(L, count, err) (VkBindImageMemorySwapchainInfoKHR*)znewarray((L), VK_STRUCTURE_TYPE_BIND_IMAGE_MEMORY_SWAPCHAIN_INFO_KHR, sizeof(VkBindImageMemorySwapchainInfoKHR), (count), (err))
+#define znewchainVkBindImageMemorySwapchainInfoKHR moonvulkan_znewchainVkBindImageMemorySwapchainInfoKHR
+VkBindImageMemorySwapchainInfoKHR* znewchainVkBindImageMemorySwapchainInfoKHR(lua_State *L, int *err);
+#define znewchainarrayVkBindImageMemorySwapchainInfoKHR moonvulkan_znewchainarrayVkBindImageMemorySwapchainInfoKHR
+VkBindImageMemorySwapchainInfoKHR* znewchainarrayVkBindImageMemorySwapchainInfoKHR(lua_State *L, uint32_t count, int *err);
+#define zcheckVkBindImageMemorySwapchainInfoKHR moonvulkan_zcheckVkBindImageMemorySwapchainInfoKHR
+VkBindImageMemorySwapchainInfoKHR* zcheckVkBindImageMemorySwapchainInfoKHR(lua_State *L, int arg, int *err);
+#define zcheckarrayVkBindImageMemorySwapchainInfoKHR moonvulkan_zcheckarrayVkBindImageMemorySwapchainInfoKHR
+VkBindImageMemorySwapchainInfoKHR* zcheckarrayVkBindImageMemorySwapchainInfoKHR(lua_State *L, int arg, uint32_t *count, int *err);
+#define zinitVkBindImageMemorySwapchainInfoKHR moonvulkan_zinitVkBindImageMemorySwapchainInfoKHR
+int zinitVkBindImageMemorySwapchainInfoKHR(lua_State *L, VkBindImageMemorySwapchainInfoKHR* p, int *err);
+#define zfreeVkBindImageMemorySwapchainInfoKHR(L, p, base) zfree((L), (p), (base))
+#define zfreearrayVkBindImageMemorySwapchainInfoKHR(L, p, count, base) zfreearray((L), (p), sizeof(VkBindImageMemorySwapchainInfoKHR), (count), (base))
+#define zpushVkBindImageMemorySwapchainInfoKHR moonvulkan_zpushVkBindImageMemorySwapchainInfoKHR
+int zpushVkBindImageMemorySwapchainInfoKHR(lua_State *L, const VkBindImageMemorySwapchainInfoKHR *p);
+
+#define znewVkDeviceGroupSwapchainCreateInfoKHR(L, err) (VkDeviceGroupSwapchainCreateInfoKHR*)znew((L), VK_STRUCTURE_TYPE_DEVICE_GROUP_SWAPCHAIN_CREATE_INFO_KHR, sizeof(VkDeviceGroupSwapchainCreateInfoKHR), (err))
+#define znewarrayVkDeviceGroupSwapchainCreateInfoKHR(L, count, err) (VkDeviceGroupSwapchainCreateInfoKHR*)znewarray((L), VK_STRUCTURE_TYPE_DEVICE_GROUP_SWAPCHAIN_CREATE_INFO_KHR, sizeof(VkDeviceGroupSwapchainCreateInfoKHR), (count), (err))
+#define znewchainVkDeviceGroupSwapchainCreateInfoKHR moonvulkan_znewchainVkDeviceGroupSwapchainCreateInfoKHR
+VkDeviceGroupSwapchainCreateInfoKHR* znewchainVkDeviceGroupSwapchainCreateInfoKHR(lua_State *L, int *err);
+#define znewchainarrayVkDeviceGroupSwapchainCreateInfoKHR moonvulkan_znewchainarrayVkDeviceGroupSwapchainCreateInfoKHR
+VkDeviceGroupSwapchainCreateInfoKHR* znewchainarrayVkDeviceGroupSwapchainCreateInfoKHR(lua_State *L, uint32_t count, int *err);
+#define zcheckVkDeviceGroupSwapchainCreateInfoKHR moonvulkan_zcheckVkDeviceGroupSwapchainCreateInfoKHR
+VkDeviceGroupSwapchainCreateInfoKHR* zcheckVkDeviceGroupSwapchainCreateInfoKHR(lua_State *L, int arg, int *err);
+#define zcheckarrayVkDeviceGroupSwapchainCreateInfoKHR moonvulkan_zcheckarrayVkDeviceGroupSwapchainCreateInfoKHR
+VkDeviceGroupSwapchainCreateInfoKHR* zcheckarrayVkDeviceGroupSwapchainCreateInfoKHR(lua_State *L, int arg, uint32_t *count, int *err);
+#define zinitVkDeviceGroupSwapchainCreateInfoKHR moonvulkan_zinitVkDeviceGroupSwapchainCreateInfoKHR
+int zinitVkDeviceGroupSwapchainCreateInfoKHR(lua_State *L, VkDeviceGroupSwapchainCreateInfoKHR* p, int *err);
+#define zfreeVkDeviceGroupSwapchainCreateInfoKHR(L, p, base) zfree((L), (p), (base))
+#define zfreearrayVkDeviceGroupSwapchainCreateInfoKHR(L, p, count, base) zfreearray((L), (p), sizeof(VkDeviceGroupSwapchainCreateInfoKHR), (count), (base))
+#define zpushVkDeviceGroupSwapchainCreateInfoKHR moonvulkan_zpushVkDeviceGroupSwapchainCreateInfoKHR
+int zpushVkDeviceGroupSwapchainCreateInfoKHR(lua_State *L, const VkDeviceGroupSwapchainCreateInfoKHR *p);
+
+#define znewVkDeviceGroupPresentInfoKHR(L, err) (VkDeviceGroupPresentInfoKHR*)znew((L), VK_STRUCTURE_TYPE_DEVICE_GROUP_PRESENT_INFO_KHR, sizeof(VkDeviceGroupPresentInfoKHR), (err))
+#define znewarrayVkDeviceGroupPresentInfoKHR(L, count, err) (VkDeviceGroupPresentInfoKHR*)znewarray((L), VK_STRUCTURE_TYPE_DEVICE_GROUP_PRESENT_INFO_KHR, sizeof(VkDeviceGroupPresentInfoKHR), (count), (err))
+#define znewchainVkDeviceGroupPresentInfoKHR moonvulkan_znewchainVkDeviceGroupPresentInfoKHR
+VkDeviceGroupPresentInfoKHR* znewchainVkDeviceGroupPresentInfoKHR(lua_State *L, int *err);
+#define znewchainarrayVkDeviceGroupPresentInfoKHR moonvulkan_znewchainarrayVkDeviceGroupPresentInfoKHR
+VkDeviceGroupPresentInfoKHR* znewchainarrayVkDeviceGroupPresentInfoKHR(lua_State *L, uint32_t count, int *err);
+#define zcheckVkDeviceGroupPresentInfoKHR moonvulkan_zcheckVkDeviceGroupPresentInfoKHR
+VkDeviceGroupPresentInfoKHR* zcheckVkDeviceGroupPresentInfoKHR(lua_State *L, int arg, int *err);
+#define zcheckarrayVkDeviceGroupPresentInfoKHR moonvulkan_zcheckarrayVkDeviceGroupPresentInfoKHR
+VkDeviceGroupPresentInfoKHR* zcheckarrayVkDeviceGroupPresentInfoKHR(lua_State *L, int arg, uint32_t *count, int *err);
+#define zinitVkDeviceGroupPresentInfoKHR moonvulkan_zinitVkDeviceGroupPresentInfoKHR
+int zinitVkDeviceGroupPresentInfoKHR(lua_State *L, VkDeviceGroupPresentInfoKHR* p, int *err);
+#define zfreeVkDeviceGroupPresentInfoKHR(L, p, base) zfree((L), (p), (base))
+#define zfreearrayVkDeviceGroupPresentInfoKHR(L, p, count, base) zfreearray((L), (p), sizeof(VkDeviceGroupPresentInfoKHR), (count), (base))
+#define zpushVkDeviceGroupPresentInfoKHR moonvulkan_zpushVkDeviceGroupPresentInfoKHR
+int zpushVkDeviceGroupPresentInfoKHR(lua_State *L, const VkDeviceGroupPresentInfoKHR *p);
+
+#define znewVkDeviceGroupPresentCapabilitiesKHR(L, err) (VkDeviceGroupPresentCapabilitiesKHR*)znew((L), VK_STRUCTURE_TYPE_DEVICE_GROUP_PRESENT_CAPABILITIES_KHR, sizeof(VkDeviceGroupPresentCapabilitiesKHR), (err))
+#define znewarrayVkDeviceGroupPresentCapabilitiesKHR(L, count, err) (VkDeviceGroupPresentCapabilitiesKHR*)znewarray((L), VK_STRUCTURE_TYPE_DEVICE_GROUP_PRESENT_CAPABILITIES_KHR, sizeof(VkDeviceGroupPresentCapabilitiesKHR), (count), (err))
+#define znewchainVkDeviceGroupPresentCapabilitiesKHR moonvulkan_znewchainVkDeviceGroupPresentCapabilitiesKHR
+VkDeviceGroupPresentCapabilitiesKHR* znewchainVkDeviceGroupPresentCapabilitiesKHR(lua_State *L, int *err);
+#define znewchainarrayVkDeviceGroupPresentCapabilitiesKHR moonvulkan_znewchainarrayVkDeviceGroupPresentCapabilitiesKHR
+VkDeviceGroupPresentCapabilitiesKHR* znewchainarrayVkDeviceGroupPresentCapabilitiesKHR(lua_State *L, uint32_t count, int *err);
+#define zcheckVkDeviceGroupPresentCapabilitiesKHR moonvulkan_zcheckVkDeviceGroupPresentCapabilitiesKHR
+VkDeviceGroupPresentCapabilitiesKHR* zcheckVkDeviceGroupPresentCapabilitiesKHR(lua_State *L, int arg, int *err);
+#define zcheckarrayVkDeviceGroupPresentCapabilitiesKHR moonvulkan_zcheckarrayVkDeviceGroupPresentCapabilitiesKHR
+VkDeviceGroupPresentCapabilitiesKHR* zcheckarrayVkDeviceGroupPresentCapabilitiesKHR(lua_State *L, int arg, uint32_t *count, int *err);
+#define zinitVkDeviceGroupPresentCapabilitiesKHR moonvulkan_zinitVkDeviceGroupPresentCapabilitiesKHR
+int zinitVkDeviceGroupPresentCapabilitiesKHR(lua_State *L, VkDeviceGroupPresentCapabilitiesKHR* p, int *err);
+#define zfreeVkDeviceGroupPresentCapabilitiesKHR(L, p, base) zfree((L), (p), (base))
+#define zfreearrayVkDeviceGroupPresentCapabilitiesKHR(L, p, count, base) zfreearray((L), (p), sizeof(VkDeviceGroupPresentCapabilitiesKHR), (count), (base))
+#define zpushVkDeviceGroupPresentCapabilitiesKHR moonvulkan_zpushVkDeviceGroupPresentCapabilitiesKHR
+int zpushVkDeviceGroupPresentCapabilitiesKHR(lua_State *L, const VkDeviceGroupPresentCapabilitiesKHR *p);
+
+#define znewVkAcquireNextImageInfoKHR(L, err) (VkAcquireNextImageInfoKHR*)znew((L), VK_STRUCTURE_TYPE_ACQUIRE_NEXT_IMAGE_INFO_KHR, sizeof(VkAcquireNextImageInfoKHR), (err))
+#define znewarrayVkAcquireNextImageInfoKHR(L, count, err) (VkAcquireNextImageInfoKHR*)znewarray((L), VK_STRUCTURE_TYPE_ACQUIRE_NEXT_IMAGE_INFO_KHR, sizeof(VkAcquireNextImageInfoKHR), (count), (err))
+#define znewchainVkAcquireNextImageInfoKHR moonvulkan_znewchainVkAcquireNextImageInfoKHR
+VkAcquireNextImageInfoKHR* znewchainVkAcquireNextImageInfoKHR(lua_State *L, int *err);
+#define znewchainarrayVkAcquireNextImageInfoKHR moonvulkan_znewchainarrayVkAcquireNextImageInfoKHR
+VkAcquireNextImageInfoKHR* znewchainarrayVkAcquireNextImageInfoKHR(lua_State *L, uint32_t count, int *err);
+#define zcheckVkAcquireNextImageInfoKHR moonvulkan_zcheckVkAcquireNextImageInfoKHR
+VkAcquireNextImageInfoKHR* zcheckVkAcquireNextImageInfoKHR(lua_State *L, int arg, int *err);
+#define zcheckarrayVkAcquireNextImageInfoKHR moonvulkan_zcheckarrayVkAcquireNextImageInfoKHR
+VkAcquireNextImageInfoKHR* zcheckarrayVkAcquireNextImageInfoKHR(lua_State *L, int arg, uint32_t *count, int *err);
+#define zinitVkAcquireNextImageInfoKHR moonvulkan_zinitVkAcquireNextImageInfoKHR
+int zinitVkAcquireNextImageInfoKHR(lua_State *L, VkAcquireNextImageInfoKHR* p, int *err);
+#define zfreeVkAcquireNextImageInfoKHR(L, p, base) zfree((L), (p), (base))
+#define zfreearrayVkAcquireNextImageInfoKHR(L, p, count, base) zfreearray((L), (p), sizeof(VkAcquireNextImageInfoKHR), (count), (base))
+#define zpushVkAcquireNextImageInfoKHR moonvulkan_zpushVkAcquireNextImageInfoKHR
+int zpushVkAcquireNextImageInfoKHR(lua_State *L, const VkAcquireNextImageInfoKHR *p);
+
 
 #ifdef VK_USE_PLATFORM_WIN32_KHR
 

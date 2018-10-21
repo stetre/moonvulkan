@@ -300,6 +300,19 @@ local TYPED = {
    { "VkDisplayPlaneInfo2KHR", "DISPLAY_PLANE_INFO_2_KHR" },
    { "VkDeviceGroupDeviceCreateInfoKHR", "DEVICE_GROUP_DEVICE_CREATE_INFO_KHR" },
    { "VkPhysicalDeviceGroupPropertiesKHR", "PHYSICAL_DEVICE_GROUP_PROPERTIES_KHR" },
+   { "VkMemoryAllocateFlagsInfoKHR", "MEMORY_ALLOCATE_FLAGS_INFO_KHR" },
+   { "VkDeviceGroupRenderPassBeginInfoKHR", "DEVICE_GROUP_RENDER_PASS_BEGIN_INFO_KHR" },
+   { "VkDeviceGroupCommandBufferBeginInfoKHR", "DEVICE_GROUP_COMMAND_BUFFER_BEGIN_INFO_KHR" },
+   { "VkDeviceGroupSubmitInfoKHR", "DEVICE_GROUP_SUBMIT_INFO_KHR" },
+   { "VkDeviceGroupBindSparseInfoKHR", "DEVICE_GROUP_BIND_SPARSE_INFO_KHR" },
+   { "VkBindImageMemoryDeviceGroupInfoKHR", "BIND_IMAGE_MEMORY_DEVICE_GROUP_INFO_KHR" },
+   { "VkBindBufferMemoryDeviceGroupInfoKHR", "BIND_BUFFER_MEMORY_DEVICE_GROUP_INFO_KHR" },
+   { "VkImageSwapchainCreateInfoKHR", "IMAGE_SWAPCHAIN_CREATE_INFO_KHR" },
+   { "VkBindImageMemorySwapchainInfoKHR", "BIND_IMAGE_MEMORY_SWAPCHAIN_INFO_KHR" },
+   { "VkDeviceGroupSwapchainCreateInfoKHR", "DEVICE_GROUP_SWAPCHAIN_CREATE_INFO_KHR" },
+   { "VkDeviceGroupPresentInfoKHR", "DEVICE_GROUP_PRESENT_INFO_KHR" },
+   { "VkDeviceGroupPresentCapabilitiesKHR", "DEVICE_GROUP_PRESENT_CAPABILITIES_KHR" },
+   { "VkAcquireNextImageInfoKHR", "ACQUIRE_NEXT_IMAGE_INFO_KHR" },
 }
 
 local TYPED_WIN32 = {

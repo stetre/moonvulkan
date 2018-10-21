@@ -488,6 +488,14 @@ device_dt_t* getproc_device(lua_State *L, VkDevice device, VkDeviceCreateInfo *c
     GET(CmdBeginRenderPass2KHR);
     GET(CmdNextSubpass2KHR);
     GET(CmdEndRenderPass2KHR);
+    //VK_KHR_device_group
+    GETKHR(GetDeviceGroupPeerMemoryFeatures);
+    GETKHR(CmdSetDeviceMask);
+    GETKHR(CmdDispatchBase);
+    GETKHR(GetDeviceGroupPresentCapabilities);
+    GETKHR(GetDeviceGroupSurfacePresentModes);
+    GETKHR(GetPhysicalDevicePresentRectangles);
+    GETKHR(AcquireNextImage2);
 #undef GET
 #undef GETKHR
     return dt;

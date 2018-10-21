@@ -975,6 +975,33 @@ static int CmdDrawIndexedIndirectCount(lua_State *L)
     return 0;
     }
 
+static int CmdSetDeviceMask(lua_State *L)
+    {
+    ud_t *ud;
+    VkCommandBuffer cb = checkcommand_buffer(L, 1, &ud);
+    uint32_t deviceMask = luaL_checkinteger(L, 2);
+    CheckDevicePfn(L, ud, CmdSetDeviceMaskKHR);
+    ud->ddt->CmdSetDeviceMaskKHR(cb, deviceMask);
+    return 0;
+    }
+
+static int CmdDispatchBase(lua_State *L)
+    {
+    ud_t *ud;
+    VkCommandBuffer cb = checkcommand_buffer(L, 1, &ud);
+    uint32_t baseGroupX = luaL_checkinteger(L, 2);
+    uint32_t baseGroupY = luaL_checkinteger(L, 3);
+    uint32_t baseGroupZ = luaL_checkinteger(L, 4);
+    uint32_t groupCountX = luaL_checkinteger(L, 5);
+    uint32_t groupCountY = luaL_checkinteger(L, 6);
+    uint32_t groupCountZ = luaL_checkinteger(L, 7);
+    CheckDevicePfn(L, ud, CmdDispatchBaseKHR);
+    ud->ddt->CmdDispatchBaseKHR(cb, baseGroupX, baseGroupY, baseGroupZ,
+            groupCountX, groupCountY, groupCountZ);
+    return 0;
+    }
+
+
 #if 0 // 10yy
         { "",  },
 static int (lua_State *L) //@@ scaffolding
@@ -1050,6 +1077,8 @@ static const struct luaL_Reg Functions[] =
         { "cmd_end_conditional_rendering", CmdEndConditionalRendering },
         { "cmd_draw_indirect_count", CmdDrawIndirectCount },
         { "cmd_draw_indexed_indirect_count", CmdDrawIndexedIndirectCount },
+        { "cmd_set_device_mask", CmdSetDeviceMask },
+        { "cmd_dispatch_base", CmdDispatchBase },
         { NULL, NULL } /* sentinel */
     };
 

@@ -145,6 +145,8 @@ void pushflagslist(lua_State *L, VkFlags *list, uint32_t count);
 VkDeviceSize checksizeorwholesize(lua_State *L, int arg);
 #define checktimeout moonvulkan_checktimeout
 uint64_t checktimeout(lua_State *L, int arg);
+#define testtimeout moonvulkan_testtimeout
+uint64_t testtimeout(lua_State *L, int arg, int *err);
 
 #define optallocator(L, arg) (VkAllocationCallbacks*)optlightuserdata((L), (arg))
 

@@ -516,6 +516,22 @@ static int GetMemoryFdProperties(lua_State *L)
     }
 
 
+static int GetDeviceGroupPeerMemoryFeatures(lua_State *L)
+    {
+    ud_t *ud;
+    VkPeerMemoryFeatureFlags flags;
+    VkDevice device = checkdevice(L, 1, &ud);
+    uint32_t heapIndex = luaL_checkinteger(L, 2);
+    uint32_t localDeviceIndex = luaL_checkinteger(L, 3);
+    uint32_t remoteDeviceIndex = luaL_checkinteger(L, 4);
+    CheckDevicePfn(L, ud, GetDeviceGroupPeerMemoryFeaturesKHR);
+    ud->ddt->GetDeviceGroupPeerMemoryFeaturesKHR(device, 
+            heapIndex, localDeviceIndex, remoteDeviceIndex, &flags);
+    pushflags(L, flags);
+    return 1;
+    }
+
+
 RAW_FUNC(device_memory)
 TYPE_FUNC(device_memory)
 INSTANCE_FUNC(device_memory)
@@ -558,6 +574,7 @@ static const struct luaL_Reg Functions[] =
         { "bind_buffer_memory", BindBufferMemory },
         { "get_memory_fd", GetMemoryFd },
         { "get_memory_fd_properties", GetMemoryFdProperties },
+        { "get_device_group_peer_memory_features", GetDeviceGroupPeerMemoryFeatures },
         { NULL, NULL } /* sentinel */
     };
 

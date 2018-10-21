@@ -311,6 +311,13 @@ typedef struct {
     F(CmdBeginRenderPass2KHR);
     F(CmdNextSubpass2KHR);
     F(CmdEndRenderPass2KHR);
+    F(GetDeviceGroupPeerMemoryFeaturesKHR);
+    F(CmdSetDeviceMaskKHR);
+    F(CmdDispatchBaseKHR);
+    F(GetDeviceGroupPresentCapabilitiesKHR);
+    F(GetDeviceGroupSurfacePresentModesKHR);
+    F(GetPhysicalDevicePresentRectanglesKHR);
+    F(AcquireNextImage2KHR);
 #ifdef VK_USE_PLATFORM_WIN32_KHR
     F(GetMemoryWin32HandleKHR);
     F(GetMemoryWin32HandlePropertiesKHR);

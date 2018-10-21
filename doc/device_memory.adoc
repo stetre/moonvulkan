@@ -48,6 +48,10 @@ Returns _data_ as a binary string.#
 * *invalidate_mapped_memory_ranges*(_device_, {<<mappedmemoryrange, _mappedmemoryrange_>>}) +
 [small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkInvalidateMappedMemoryRanges.html[vkInvalidateMappedMemoryRanges].#
 
+[[get_device_group_peer_memory_features]]
+* <<peermemoryfeatureflags, _peermemoryfeatureflags_>> = *get_device_group_peer_memory_features*(_device_, _heap_index_, _local_device_index_, _remote_device_index_) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkGetDeviceGroupPeerMemoryFeaturesKHR[vkGetDeviceGroupPeerMemoryFeaturesKHR] (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_device_group[VK_KHR_device_group]).#
+
 '''
 
 ////

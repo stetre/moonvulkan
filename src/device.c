@@ -138,6 +138,7 @@ static int DeviceWaitIdle(lua_State *L)
     return 0;
     }
 
+
 RAW_FUNC_DISPATCHABLE(device)
 TYPE_FUNC(device)
 INSTANCE_FUNC(device)

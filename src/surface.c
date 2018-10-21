@@ -480,6 +480,68 @@ static int GetPhysicalDeviceSurfacePresentModes(lua_State *L)
     }
 
 
+static int GetDeviceGroupSurfacePresentModes(lua_State *L)
+    {
+    VkResult ec;
+    ud_t *ud;
+    VkDeviceGroupPresentModeFlagsKHR modes;
+    VkDevice device = checkdevice(L, 1, &ud);
+    VkSurfaceKHR surface = checksurface(L, 2, NULL);
+    CheckDevicePfn(L, ud, GetDeviceGroupSurfacePresentModesKHR);
+    ec = ud->ddt->GetDeviceGroupSurfacePresentModesKHR(device, surface, &modes);
+    CheckError(L, ec);
+    pushflags(L, modes);
+    return 1;
+    }
+
+static int GetPhysicalDevicePresentRectangles(lua_State *L)
+    {
+    int err;
+    VkResult ec;
+    ud_t *ud;
+    uint32_t i, count = 0;
+    VkRect2D* rects = NULL;
+    VkPhysicalDevice physdev = checkphysical_device(L, 1, &ud);
+    VkSurfaceKHR surface = checksurface(L, 2, NULL);
+    CheckDevicePfn(L, ud, GetPhysicalDevicePresentRectanglesKHR);
+    ec = ud->ddt->GetPhysicalDevicePresentRectanglesKHR(physdev, surface, &count, NULL);
+    CheckError(L, ec);
+#define CLEANUP zfreearrayVkRect2D(L, rects, count, 1)
+    rects = znewarrayVkRect2D(L, count, &err);
+    if(err) { CLEANUP; return lua_error(L); }
+    ec = ud->ddt->GetPhysicalDevicePresentRectanglesKHR(physdev, surface, &count, rects);
+    if(ec) { CLEANUP; CheckError(L, ec); return 0; }
+    lua_newtable(L);
+    for(i = 0; i < count; i++)
+        {
+        zpushVkRect2D(L, &rects[i]);
+        lua_rawseti(L, -2, i+1);
+        }
+    CLEANUP;
+#undef CLEANUP
+    return 1;
+    }
+
+static int GetDeviceGroupPresentCapabilities(lua_State *L)
+    {
+    int err;
+    VkResult ec;
+    ud_t *ud;
+    VkDeviceGroupPresentCapabilitiesKHR* capabilities;
+    VkDevice device = checkdevice(L, 1, &ud);
+    CheckDevicePfn(L, ud, GetDeviceGroupPresentCapabilitiesKHR);
+#define CLEANUP zfreeVkDeviceGroupPresentCapabilitiesKHR(L, capabilities, 1)
+    capabilities = znewchainVkDeviceGroupPresentCapabilitiesKHR(L, &err);
+    if(err) { CLEANUP; return lua_error(L); }
+    ec = ud->ddt->GetDeviceGroupPresentCapabilitiesKHR(device, capabilities);
+    if(ec) { CLEANUP; CheckError(L, ec); return 0; }
+    zpushVkDeviceGroupPresentCapabilitiesKHR(L, capabilities);
+    CLEANUP;
+#undef CLEANUP
+    return 1;
+    }
+
+
 RAW_FUNC(surface)
 TYPE_FUNC(surface)
 INSTANCE_FUNC(surface)
@@ -522,6 +584,9 @@ static const struct luaL_Reg Functions[] =
         { "create_display_plane_surface", CreateDisplayPlaneSurface },
         { "created_surface",  CreatedSurface },
         { "destroy_surface",  Destroy },
+        { "get_device_group_surface_present_modes", GetDeviceGroupSurfacePresentModes  },
+        { "get_physical_device_present_rectangles", GetPhysicalDevicePresentRectangles  },
+        { "get_device_group_present_capabilities", GetDeviceGroupPresentCapabilities  },
         { NULL, NULL } /* sentinel */
     };
 

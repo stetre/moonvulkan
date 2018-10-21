@@ -35,3 +35,19 @@ Creates and returns a _surface_ userdata (MoonVulkan object) bound to the given 
 of the {_presentmode_} array. +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkGetPhysicalDeviceSurfacePresentModesKHR[vkGetPhysicalDeviceSurfacePresentModesKHR].#
 
+'''
+
+[[get_device_group_surface_present_modes]]
+* <<devicegrouppresentmodeflags, _devicegrouppresentmodeflags_>> = *get_device_group_surface_present_modes*(<<device, _device_>>, _surface_) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkGetDeviceGroupSurfacePresentModesKHR[vkGetDeviceGroupSurfacePresentModesKHR] (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_device_group[VK_KHR_device_group]).#
+
+[[get_physical_device_present_rectangles]]
+* {<<rect2d, _rect2d_>>} = *get_physical_device_present_rectangles*(<<physical_device, _physdev_>>, _surface_) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkGetPhysicalDevicePresentRectanglesKHR[vkGetPhysicalDevicePresentRectanglesKHR] (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_device_group[VK_KHR_device_group]).#
+
+[[get_device_group_present_capabilities]]
+* <<devicegrouppresentcapabilities, _devicegrouppresentcapabilities_>> = *get_device_group_present_capabilities*(<<device, _device_>>) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkGetDeviceGroupPresentCapabilitiesKHR[vkGetDeviceGroupPresentCapabilitiesKHR] (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_device_group[VK_KHR_device_group]).#
+
+
+

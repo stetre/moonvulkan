@@ -22,9 +22,10 @@
 
 [[acquire_next_image]]
 * <<index, _image_index_>>, <<result, _result_>> = *acquire_next_image*(_swapchain_, <<timeout, _timeout_>>, [<<semaphore, _semaphore_>>], [<<fence, _fence_>>]) +
+<<index, _image_index_>>, <<result, _result_>> = *acquire_next_image*(_swapchain_, <<acquirenextimageinfo, _acquirenextimageinfo_>>) (2KHR only) +
 [small]#Returns one of the following combinations of _image_index_ and _result_: +
 1) _image_index_, '_success_' 2) _image_index_, '_suboptimal_' 3) _nil_, '_..._' (any other result) +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkAcquireNextImageKHR[vkAcquireNextImageKHR].#
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkAcquireNextImageKHR[vkAcquireNextImageKHR], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkAcquireNextImage2KHR[vkAcquireNextImage2KHR] (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_device_group[VK_KHR_device_group]).#
 
 [[queue_present]]
 * <<result, _result_>>, {<<result, _result_>>} = *queue_present*(<<queue, _queue_>>, <<presentinfo, _presentinfo_>>, [_per_swapchain_results_]) +

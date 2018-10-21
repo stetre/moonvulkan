@@ -169,6 +169,21 @@ int zinit##VkXxx(lua_State *L, VkXxx* p, int *err) { (void)L; (void)(p);
  * struct that is currently last in the chain. */
 #define EXTENSIONS_BEGIN do { void **chain = pnextof(p);
 #define EXTENSIONS_END } while(0);
+#define ADD_EXTENSION(VkXxx)    do { /* for inlined extensions only (see note below) */\
+    VkXxx *p1 = zcheck##VkXxx(L, arg, err);     \
+    if(*err) { zfree(L, p1, 1); return p; }     \
+    addtochain(chain, p1);                      \
+} while(0)
+/* note: The fields of an extension are logically fields of the struct they extend.
+ * Since C structs are not extandable, the Vulkan API defines new structs and chains
+ * them to the original one via the pNext pointer.
+ * In Lua, however, we have the luxury of tables that can be easilly extended by
+ * adding new optional fields, so we (usually) 'inline' the extensions, by adding
+ * their fields to the table to be extended, instead of adding a new table that
+ * contains them.
+ * (Note that the zcheckVkXxx function for an inlined extension does not need
+ * the checktable() call).
+ */
 
 /* These are for long chains of extensions like VkPhysicalDeviceFeatures2KHR,
  * where the extensions structs are all typed, do not need a zclear, and only
@@ -630,6 +645,7 @@ static const char *GetString_(lua_State *L, int arg, const char *sname, const ch
 #define GetPipelineLayoutOpt(name, sname) GetObjectOpt(name, sname, VkPipelineLayout, pipeline_layout)
 #define GetPipelineOpt(name, sname) GetObjectOpt(name, sname, VkPipeline, pipeline)
 #define GetSurface(name, sname) GetObject(name, sname, VkSurfaceKHR, surface)
+#define GetSwapchain(name, sname) GetObject(name, sname, VkSwapchainKHR, swapchain)
 #define GetSwapchainOpt(name, sname) GetObjectOpt(name, sname, VkSwapchainKHR, swapchain)
 #define GetSampler(name, sname) GetObject(name, sname, VkSampler, sampler)
 #define GetImageView(name, sname) GetObject(name, sname, VkImageView, image_view)
@@ -637,6 +653,10 @@ static const char *GetString_(lua_State *L, int arg, const char *sname, const ch
 #define GetDescriptorSetLayoutOpt(name, sname) GetObject(name, sname, VkDescriptorSetLayout, descriptor_set_layout)
 #define GetValidationCache(name, sname) GetObject(name, sname, VkValidationCacheEXT, validation_cache)
 #define GetSamplerYcbcrConversion(name, sname) GetObject(name, sname, VkSamplerYcbcrConversion, sampler_ycbcr_conversion)
+#define GetSemaphore(name, sname) GetObject(name, sname, VkSemaphore, semaphore)
+#define GetSemaphoreOpt(name, sname) GetObjectOpt(name, sname, VkSemaphore, semaphore)
+#define GetFence(name, sname) GetObject(name, sname, VkFence, fence)
+#define GetFenceOpt(name, sname) GetObjectOpt(name, sname, VkFence, fence)
 
 /* Integers with special values ----------------------------------------------*/
 
@@ -663,6 +683,16 @@ static const char *GetString_(lua_State *L, int arg, const char *sname, const ch
     if(*err)                                        \
         { pushfielderror(sname); return p; }  \
 } while(0)
+
+#define GetTimeout(name, sname) {   \
+    int arg_ = pushfield(L, arg, sname);            \
+    *err = 0;                                       \
+    p->name = testtimeout(L, arg_, err);            \
+    popfield(L, arg_);                              \
+    if(*err)                                        \
+        { pushfielderror(sname);  return p; }       \
+} while(0)
+
 
 
 /* 'remaining' stands for VK_REMAINING_MIP_LEVELS, VK_REMAINING_ARRAY_LAYERS, etc
@@ -2596,7 +2626,6 @@ ZCHECK_END
  *------------------------------------------------------------------------------*/
 
 ZCHECK_BEGIN(VkImagePlaneMemoryRequirementsInfoKHR)
-    //checktable(arg);
     newstruct(VkImagePlaneMemoryRequirementsInfoKHR);
     GetFlags(planeAspect, "plane_aspect");
 ZCHECK_END
@@ -2607,13 +2636,7 @@ ZCHECK_BEGIN(VkImageMemoryRequirementsInfo2KHR)
     /* p->image = set by caller */
     EXTENSIONS_BEGIN
 #define F "plane_aspect"
-    if(ispresent(F))
-        {
-        VkImagePlaneMemoryRequirementsInfoKHR *p1
-            = zcheckVkImagePlaneMemoryRequirementsInfoKHR(L, arg, err);
-        if(*err) { zfree(L, p1, 1); return p; }
-        addtochain(chain, p1);
-        }
+    if(ispresent(F)) ADD_EXTENSION(VkImagePlaneMemoryRequirementsInfoKHR);
 #undef F
     EXTENSIONS_END
 ZCHECK_END
@@ -2796,6 +2819,25 @@ ZPUSH_BEGIN(VkDisplayModeProperties2KHR)
 ZPUSH_END
 
 /*------------------------------------------------------------------------------*
+ | Device Group Present Capabilities                                            |
+ *------------------------------------------------------------------------------*/
+
+ZINIT_BEGIN(VkDeviceGroupPresentCapabilitiesKHR)
+    //EXTENSIONS_BEGIN
+    //  ADDX(, );
+    //EXTENSIONS_END
+ZINIT_END
+
+ZPUSH_BEGIN(VkDeviceGroupPresentCapabilitiesKHR)
+    lua_newtable(L);
+    SetIntegerArray(presentMask, "present_mask", VK_MAX_DEVICE_GROUP_SIZE);
+    SetFlags(modes, "modes");
+    //XPUSH_BEGIN
+    //XCASE(, );
+    //XPUSH_END
+ZPUSH_END
+
+/*------------------------------------------------------------------------------*
  | Instance                                                                     |
  *------------------------------------------------------------------------------*/
 
@@ -2866,12 +2908,7 @@ ZCHECK_BEGIN(VkInstanceCreateInfo)
         { pushfielderror(F); return p; }
 #undef F
     EXTENSIONS_BEGIN
-    if(ispresent("disabled_validation_checks"))
-        {
-        VkValidationFlagsEXT *p1 = zcheckVkValidationFlagsEXT(L, arg, err);
-        if(*err) { zfree(L, p1, 1); return p; }
-        addtochain(chain, p1);
-        }
+    if(ispresent("disabled_validation_checks")) ADD_EXTENSION(VkValidationFlagsEXT);
     EXTENSIONS_END
 ZCHECK_END
 
@@ -2904,12 +2941,7 @@ ZCHECK_BEGIN(VkDeviceQueueCreateInfo)
     EXTENSIONS_BEGIN
 #define F "global_priority"
     if(ispresent(F))
-        {
-        VkDeviceQueueGlobalPriorityCreateInfoEXT *p1 =
-            zcheckVkDeviceQueueGlobalPriorityCreateInfoEXT(L, arg, err);
-        if(*err) { zfree(L, p1, 1); return p; }
-        addtochain(chain, p1);
-        }
+        ADD_EXTENSION(VkDeviceQueueGlobalPriorityCreateInfoEXT);
 #undef F
     EXTENSIONS_END
 ZCHECK_END
@@ -2924,7 +2956,6 @@ static ZCLEAR_BEGIN(VkDeviceGroupDeviceCreateInfoKHR)
 ZCLEAR_END
 ZCHECK_BEGIN(VkDeviceGroupDeviceCreateInfoKHR)
     int arg1;
-    //checktable(arg);
     newstruct(VkDeviceGroupDeviceCreateInfoKHR);
 #define F "physical_devices"
     arg1 = pushfield(L, arg, F);
@@ -2978,9 +3009,9 @@ VkDeviceCreateInfo* zcheckVkDeviceCreateInfo(lua_State *L, int arg, int *err, ud
         { pushfielderror(F); return p; }
 #undef F
 #define F "enabled_features"
-    arg1 = pushfield(L, arg, F);
     if(!ud->idt->GetPhysicalDeviceFeatures2KHR)
         {
+        arg1 = pushfield(L, arg, F);
         p->pEnabledFeatures = zcheckVkPhysicalDeviceFeatures(L, arg1, err);
         popfield(L, arg1);
         if(*err < 0) { prependfield(F); return p; }
@@ -2991,7 +3022,9 @@ VkDeviceCreateInfo* zcheckVkDeviceCreateInfo(lua_State *L, int arg, int *err, ud
 #define F "enabled_features"
     if(ud->idt->GetPhysicalDeviceFeatures2KHR)
         {
-        VkPhysicalDeviceFeatures2 *p1 = zcheckVkPhysicalDeviceFeatures2(L, arg1, err);
+        VkPhysicalDeviceFeatures2 *p1;
+        arg1 = pushfield(L, arg, F);
+        p1 = zcheckVkPhysicalDeviceFeatures2(L, arg1, err);
         popfield(L, arg1);
         if(*err < 0) { prependfield(F); return p; }
         else if(*err == ERR_NOTPRESENT) poperror();
@@ -2999,13 +3032,7 @@ VkDeviceCreateInfo* zcheckVkDeviceCreateInfo(lua_State *L, int arg, int *err, ud
         }
 #undef F
     if(ispresent("physical_devices"))
-        {
-        VkDeviceGroupDeviceCreateInfoKHR* p1 =
-            zcheckVkDeviceGroupDeviceCreateInfoKHR(L, arg, err);
-        if(*err < 0) { zfree(L, p1, 1); return p; }
-        else if(*err == ERR_NOTPRESENT) poperror();
-        else addtochain(chain, p1);
-        }
+        ADD_EXTENSION(VkDeviceGroupDeviceCreateInfoKHR);
     EXTENSIONS_END
 ZCHECK_END
 
@@ -3040,7 +3067,6 @@ ZCHECK_END
  *------------------------------------------------------------------------------*/
 
 ZCHECK_BEGIN(VkCommandBufferInheritanceConditionalRenderingInfoEXT)
-    //checktable(arg);
     newstruct(VkCommandBufferInheritanceConditionalRenderingInfoEXT);
     GetBoolean(conditionalRenderingEnable, "conditional_rendering_enable");
 ZCHECK_END
@@ -3056,13 +3082,14 @@ ZCHECK_BEGIN(VkCommandBufferInheritanceInfo)
     GetFlags(pipelineStatistics, "pipeline_statistics");
     EXTENSIONS_BEGIN
     if(ispresent("conditional_rendering_enable"))
-        {
-        VkCommandBufferInheritanceConditionalRenderingInfoEXT* p1 =
-            zcheckVkCommandBufferInheritanceConditionalRenderingInfoEXT(L, arg, err);
-        if(*err) { zfree(L, p1, 1); return p; }
-        addtochain(chain, p1);
-        }
+        ADD_EXTENSION(VkCommandBufferInheritanceConditionalRenderingInfoEXT);
     EXTENSIONS_END
+ZCHECK_END
+
+
+ZCHECK_BEGIN(VkDeviceGroupCommandBufferBeginInfoKHR)
+    newstruct(VkDeviceGroupCommandBufferBeginInfoKHR);
+    GetInteger(deviceMask, "device_mask");
 ZCHECK_END
 
 ZCHECK_BEGIN(VkCommandBufferBeginInfo)
@@ -3077,6 +3104,10 @@ ZCHECK_BEGIN(VkCommandBufferBeginInfo)
     if(*err < 0) { prependfield(F); return p; }
     else if(*err == ERR_NOTPRESENT) poperror();
 #undef F
+    EXTENSIONS_BEGIN
+    if(ispresent("device_mask"))
+        ADD_EXTENSION(VkDeviceGroupCommandBufferBeginInfoKHR);
+    EXTENSIONS_END
 ZCHECK_END
 
 /*------------------------------------------------------------------------------*
@@ -3084,23 +3115,26 @@ ZCHECK_END
  *------------------------------------------------------------------------------*/
 
 ZCHECK_BEGIN(VkMemoryDedicatedAllocateInfoKHR)
-    //checktable(arg);
     newstruct(VkMemoryDedicatedAllocateInfoKHR);
     GetImageOpt(image, "image");
     GetBufferOpt(buffer, "buffer");
 ZCHECK_END
 
 ZCHECK_BEGIN(VkExportMemoryAllocateInfoKHR)
-    //checktable(arg);
     newstruct(VkExportMemoryAllocateInfoKHR);
     GetFlags(handleTypes, "handle_types");
 ZCHECK_END
 
 ZCHECK_BEGIN(VkImportMemoryFdInfoKHR)
-    //checktable(arg);
     newstruct(VkImportMemoryFdInfoKHR);
     GetBits(handleType, "handle_type", VkExternalMemoryHandleTypeFlagBits);
     GetInteger(fd, "fd");
+ZCHECK_END
+
+ZCHECK_BEGIN(VkMemoryAllocateFlagsInfoKHR)
+    newstruct(VkMemoryAllocateFlagsInfoKHR);
+    GetFlags(flags, "flags");
+    GetInteger(deviceMask, "device_mask");
 ZCHECK_END
 
 ZCHECK_BEGIN(VkMemoryAllocateInfo)
@@ -3111,17 +3145,9 @@ ZCHECK_BEGIN(VkMemoryAllocateInfo)
     GetInteger(memoryTypeIndex, "memory_type_index");
     EXTENSIONS_BEGIN
     if(ispresent("image") || ispresent("buffer"))
-        {
-        VkMemoryDedicatedAllocateInfoKHR *p1 = zcheckVkMemoryDedicatedAllocateInfoKHR(L, arg, err);
-        if(*err) { zfree(L, p1, 1); return p; }
-        addtochain(chain, p1);
-        }
+        ADD_EXTENSION(VkMemoryDedicatedAllocateInfoKHR);
     if(ispresent("handle_types"))
-        {
-        VkExportMemoryAllocateInfoKHR *p1 = zcheckVkExportMemoryAllocateInfoKHR(L, arg, err);
-        if(*err) { zfree(L, p1, 1); return p; }
-        addtochain(chain, p1);
-        }
+        ADD_EXTENSION(VkExportMemoryAllocateInfoKHR);
 #define F "import_memory_fd_info"
         {
         VkImportMemoryFdInfoKHR *p1;
@@ -3133,6 +3159,8 @@ ZCHECK_BEGIN(VkMemoryAllocateInfo)
         else addtochain(chain, p1);
         }
 #undef F
+    if(ispresent("flags") || ispresent("device_mask"))
+        ADD_EXTENSION(VkMemoryAllocateFlagsInfoKHR);
     EXTENSIONS_END
 ZCHECK_END
 
@@ -3156,7 +3184,6 @@ ZCHECK_END
  *------------------------------------------------------------------------------*/
 
 ZCHECK_BEGIN(VkExternalMemoryBufferCreateInfo)
-    //checktable(arg);
     newstruct(VkExternalMemoryBufferCreateInfo);
     GetFlags(handleTypes, "handle_types");
 ZCHECK_END
@@ -3181,11 +3208,7 @@ ZCHECK_BEGIN(VkBufferCreateInfo)
 #undef F
     EXTENSIONS_BEGIN
     if(ispresent("handle_types"))
-        {
-        VkExternalMemoryBufferCreateInfo *p1 = zcheckVkExternalMemoryBufferCreateInfo(L, arg, err);
-        if(*err) { zfree(L, p1, 1); return p; }
-        addtochain(chain, p1);
-        }
+        ADD_EXTENSION(VkExternalMemoryBufferCreateInfo);
     EXTENSIONS_END
 ZCHECK_END
 
@@ -3220,10 +3243,15 @@ ZCHECK_BEGIN(VkImageFormatListCreateInfoKHR)
 ZCHECK_END
 
 ZCHECK_BEGIN(VkExternalMemoryImageCreateInfoKHR)
-    //checktable(arg);
     newstruct(VkExternalMemoryImageCreateInfoKHR);
     GetFlags(handleTypes, "handle_types");
 ZCHECK_END
+
+ZCHECK_BEGIN(VkImageSwapchainCreateInfoKHR)
+    newstruct(VkImageSwapchainCreateInfoKHR);
+    GetSwapchain(swapchain, "swapchain");
+ZCHECK_END
+
 
 static ZCLEAR_BEGIN(VkImageCreateInfo)
     if(p->pQueueFamilyIndices) Free(L, (void*)p->pQueueFamilyIndices);
@@ -3250,14 +3278,8 @@ ZCHECK_BEGIN(VkImageCreateInfo)
     if(*err < 0) { pushfielderror(F); return p; }
 #undef F
     EXTENSIONS_BEGIN
-#define F "handle_types"
-    if(ispresent(F))
-        {
-        VkExternalMemoryImageCreateInfoKHR *p1 = zcheckVkExternalMemoryImageCreateInfoKHR(L, arg, err);
-        if(*err) { zfree(L, p1, 1); return p; }
-        addtochain(chain, p1);
-        }
-#undef F
+    if(ispresent("handle_types"))
+        ADD_EXTENSION(VkExternalMemoryImageCreateInfoKHR);
 #define F "view_formats"
     if(ispresent(F))
         {
@@ -3269,6 +3291,8 @@ ZCHECK_BEGIN(VkImageCreateInfo)
         addtochain(chain, p1);
         }
 #undef F
+    if(ispresent("swapchain"))
+        ADD_EXTENSION(VkImageSwapchainCreateInfoKHR);
     EXTENSIONS_END
 ZCHECK_END
 
@@ -3277,13 +3301,11 @@ ZCHECK_END
  *------------------------------------------------------------------------------*/
 
 ZCHECK_BEGIN(VkImageViewUsageCreateInfoKHR)
-    //checktable(arg);
     newstruct(VkImageViewUsageCreateInfoKHR);
     GetFlags(usage, "usage");
 ZCHECK_END
 
 ZCHECK_BEGIN(VkImageViewASTCDecodeModeEXT)
-    //checktable(arg);
     newstruct(VkImageViewASTCDecodeModeEXT);
     GetFormat(decodeMode, "decode_mode");
 ZCHECK_END
@@ -3299,17 +3321,9 @@ ZCHECK_BEGIN(VkImageViewCreateInfo)
     GetStructOpt(subresourceRange, "subresource_range", VkImageSubresourceRange);
     EXTENSIONS_BEGIN
     if(ispresent("usage"))
-        {
-        VkImageViewUsageCreateInfoKHR *p1 = zcheckVkImageViewUsageCreateInfoKHR(L, arg, err);
-        if(*err) { zfree(L, p1, 1); return p; }
-        addtochain(chain, p1);
-        }
+        ADD_EXTENSION(VkImageViewUsageCreateInfoKHR);
     if(ispresent("decode_mode"))
-        {
-        VkImageViewASTCDecodeModeEXT *p1 = zcheckVkImageViewASTCDecodeModeEXT(L, arg, err);
-        if(*err) { zfree(L, p1, 1); return p; }
-        addtochain(chain, p1);
-        }
+        ADD_EXTENSION(VkImageViewASTCDecodeModeEXT);
     EXTENSIONS_END
 ZCHECK_END
 
@@ -3318,7 +3332,6 @@ ZCHECK_END
  *------------------------------------------------------------------------------*/
     
 ZCHECK_BEGIN(VkDescriptorPoolInlineUniformBlockCreateInfoEXT)
-    //checktable(arg);
     newstruct(VkDescriptorPoolInlineUniformBlockCreateInfoEXT);
     GetInteger(maxInlineUniformBlockBindings, "max_inline_uniform_block_bindings");
 ZCHECK_END
@@ -3341,12 +3354,7 @@ ZCHECK_BEGIN(VkDescriptorPoolCreateInfo)
 #undef F
     EXTENSIONS_BEGIN
     if(ispresent("max_inline_uniform_block_bindings"))
-        {
-        VkDescriptorPoolInlineUniformBlockCreateInfoEXT *p1 =
-            zcheckVkDescriptorPoolInlineUniformBlockCreateInfoEXT(L, arg, err);
-        if(*err) { zfree(L, p1, 1); return p; }
-        addtochain(chain, p1);
-        }
+        ADD_EXTENSION(VkDescriptorPoolInlineUniformBlockCreateInfoEXT);
     EXTENSIONS_END
 ZCHECK_END
 
@@ -3359,7 +3367,6 @@ static ZCLEAR_BEGIN(VkDescriptorSetVariableDescriptorCountAllocateInfoEXT)
 ZCLEAR_END
 ZCHECK_BEGIN(VkDescriptorSetVariableDescriptorCountAllocateInfoEXT)
     int arg1;
-    //checktable(arg);
     newstruct(VkDescriptorSetVariableDescriptorCountAllocateInfoEXT);
 #define F "descriptor_counts"
     arg1 = pushfield(L, arg, F);
@@ -3385,12 +3392,7 @@ ZCHECK_BEGIN(VkDescriptorSetAllocateInfo)
 #undef F
     EXTENSIONS_BEGIN
     if(ispresent("descriptor_counts"))
-        {
-        VkDescriptorSetVariableDescriptorCountAllocateInfoEXT* p1 =
-            zcheckVkDescriptorSetVariableDescriptorCountAllocateInfoEXT(L, arg, err);
-        if(*err) { zfree(L, p1, 1); return p; }
-        addtochain(chain, p1);
-        }
+        ADD_EXTENSION(VkDescriptorSetVariableDescriptorCountAllocateInfoEXT);
     EXTENSIONS_END
 ZCHECK_END
 
@@ -3403,7 +3405,6 @@ static ZCLEAR_BEGIN(VkDescriptorSetLayoutBindingFlagsCreateInfoEXT)
 ZCLEAR_END
 ZCHECK_BEGIN(VkDescriptorSetLayoutBindingFlagsCreateInfoEXT)
     int arg1;
-    //checktable(arg);
     newstruct(VkDescriptorSetLayoutBindingFlagsCreateInfoEXT);
 #define F "binding_flags"
     arg1 = pushfield(L, arg, F);
@@ -3431,12 +3432,7 @@ ZCHECK_BEGIN(VkDescriptorSetLayoutCreateInfo)
 #undef F
     EXTENSIONS_BEGIN
     if(ispresent("binding_flags"))
-        {
-        VkDescriptorSetLayoutBindingFlagsCreateInfoEXT *p1 =
-            zcheckVkDescriptorSetLayoutBindingFlagsCreateInfoEXT(L, arg, err);
-        if(*err) { zfree(L, p1, 1); return p; }
-        addtochain(chain, p1);
-        }
+        ADD_EXTENSION(VkDescriptorSetLayoutBindingFlagsCreateInfoEXT);
     EXTENSIONS_END
 ZCHECK_END
 
@@ -3492,7 +3488,6 @@ static ZCLEAR_BEGIN(VkRenderPassInputAttachmentAspectCreateInfoKHR)
 ZCLEAR_END
 ZCHECK_BEGIN(VkRenderPassInputAttachmentAspectCreateInfoKHR)
     int arg1;
-    //checktable(arg);
     newstruct(VkRenderPassInputAttachmentAspectCreateInfoKHR);
     arg1 = pushfield(L, arg, "input_attachment_aspect_references");
     p->pAspectReferences = 
@@ -3508,7 +3503,6 @@ static ZCLEAR_BEGIN(VkRenderPassMultiviewCreateInfoKHR)
 ZCLEAR_END
 ZCHECK_BEGIN(VkRenderPassMultiviewCreateInfoKHR)
     int arg1;
-    //checktable(arg);
     newstruct(VkRenderPassMultiviewCreateInfoKHR);
 #define F "view_masks"
     arg1 = pushfield(L, arg, F);
@@ -3565,19 +3559,9 @@ ZCHECK_BEGIN(VkRenderPassCreateInfo)
 #undef F
     EXTENSIONS_BEGIN
     if(ispresent("input_attachment_aspect_references"))
-        {
-        VkRenderPassInputAttachmentAspectCreateInfoKHR *p1;
-        p1 = zcheckVkRenderPassInputAttachmentAspectCreateInfoKHR(L, arg, err);
-        if(*err) { zfree(L, p1, 1); return p; }
-        else addtochain(chain, p1);
-        }
+        ADD_EXTENSION(VkRenderPassInputAttachmentAspectCreateInfoKHR);
     if(ispresent("view_masks") || ispresent("view_offsets") || ispresent("correlation_masks"))
-        {
-        VkRenderPassMultiviewCreateInfoKHR* p1;
-        p1 = zcheckVkRenderPassMultiviewCreateInfoKHR(L, arg, err);
-        if(*err) { zfree(L, p1, 1); return p; }
-        else addtochain(chain, p1);
-        }
+        ADD_EXTENSION(VkRenderPassMultiviewCreateInfoKHR);
     EXTENSIONS_END
 ZCHECK_END
 
@@ -3763,7 +3747,6 @@ ZCHECK_END
  *------------------------------------------------------------------------------*/
 
 ZCHECK_BEGIN(VkShaderModuleValidationCacheCreateInfoEXT)
-    //checktable(arg);
     newstruct(VkShaderModuleValidationCacheCreateInfoEXT);
     GetValidationCache(validationCache, "validation_cache");
 ZCHECK_END
@@ -3775,12 +3758,7 @@ ZCHECK_BEGIN(VkShaderModuleCreateInfo)
     /* p->pCode, p->codeSize: retrieved by the caller */
     EXTENSIONS_BEGIN
     if(ispresent("validation_cache"))
-        {
-        VkShaderModuleValidationCacheCreateInfoEXT *p1 =
-            zcheckVkShaderModuleValidationCacheCreateInfoEXT(L, arg, err);
-        if(*err) { zfree(L, p1, 1); return p; }
-        addtochain(chain, p1);
-        }
+        ADD_EXTENSION(VkShaderModuleValidationCacheCreateInfoEXT);
     EXTENSIONS_END
 ZCHECK_END
 
@@ -3789,9 +3767,13 @@ ZCHECK_END
  *------------------------------------------------------------------------------*/
 
 ZCHECK_BEGIN(VkSwapchainCounterCreateInfoEXT)
-    //checktable(arg);
     newstruct(VkSwapchainCounterCreateInfoEXT);
     GetFlags(surfaceCounters, "surface_counters");
+ZCHECK_END
+
+ZCHECK_BEGIN(VkDeviceGroupSwapchainCreateInfoKHR)
+    newstruct(VkDeviceGroupSwapchainCreateInfoKHR);
+    GetFlags(modes, "modes");
 ZCHECK_END
 
 static ZCLEAR_BEGIN(VkSwapchainCreateInfoKHR)
@@ -3823,11 +3805,9 @@ ZCHECK_BEGIN(VkSwapchainCreateInfoKHR)
 #undef F
     EXTENSIONS_BEGIN
     if(ispresent("surface_counters"))
-        {
-        VkSwapchainCounterCreateInfoEXT *p1 = zcheckVkSwapchainCounterCreateInfoEXT(L, arg, err);
-        if(*err) { zfree(L, p1, 1); return p; }
-        addtochain(chain, p1);
-        }
+        ADD_EXTENSION(VkSwapchainCounterCreateInfoEXT);
+    if(ispresent("modes"))
+        ADD_EXTENSION(VkDeviceGroupSwapchainCreateInfoKHR);
     EXTENSIONS_END
 ZCHECK_END
 ZCHECKARRAY(VkSwapchainCreateInfoKHR)
@@ -3859,13 +3839,11 @@ ZCHECK_END
  *------------------------------------------------------------------------------*/
 
 ZCHECK_BEGIN(VkSamplerReductionModeCreateInfoEXT)
-    //checktable(arg);
     newstruct(VkSamplerReductionModeCreateInfoEXT);
     GetSamplerReductionMode(reductionMode, "reduction_mode");
 ZCHECK_END
 
 ZCHECK_BEGIN(VkSamplerYcbcrConversionInfoKHR)
-    //checktable(arg);
     newstruct(VkSamplerYcbcrConversionInfoKHR);
     GetSamplerYcbcrConversion(conversion, "conversion");
 ZCHECK_END
@@ -3891,19 +3869,9 @@ ZCHECK_BEGIN(VkSamplerCreateInfo)
     GetBoolean(unnormalizedCoordinates, "unnormalized_coordinates");
     EXTENSIONS_BEGIN
     if(ispresent("reduction_mode"))
-        {
-        VkSamplerReductionModeCreateInfoEXT *p1 =
-            zcheckVkSamplerReductionModeCreateInfoEXT(L, arg, err);
-        if(*err) { zfree(L, p1, 1); return p; }
-        addtochain(chain, p1);
-        }
+        ADD_EXTENSION(VkSamplerReductionModeCreateInfoEXT);
     if(ispresent("conversion"))
-        {
-        VkSamplerYcbcrConversionInfoKHR *p1 =
-            zcheckVkSamplerYcbcrConversionInfoKHR(L, arg, err);
-        if(*err) { zfree(L, p1, 1); return p; }
-        addtochain(chain, p1);
-        }
+        ADD_EXTENSION(VkSamplerYcbcrConversionInfoKHR);
     EXTENSIONS_END
 ZCHECK_END
 
@@ -3951,7 +3919,6 @@ ZCHECK_END
  *------------------------------------------------------------------------------*/
     
 ZCHECK_BEGIN(VkExportFenceCreateInfoKHR)
-    //checktable(arg);
     newstruct(VkExportFenceCreateInfoKHR);
     GetFlags(handleTypes, "handle_types");
 ZCHECK_END
@@ -3962,11 +3929,7 @@ ZCHECK_BEGIN(VkFenceCreateInfo)
     GetFlags(flags, "flags");
     EXTENSIONS_BEGIN
     if(ispresent("handle_types"))
-        {
-        VkExportFenceCreateInfoKHR *p1 = zcheckVkExportFenceCreateInfoKHR(L, arg, err);
-        if(*err) { zfree(L, p1, 1); return p; }
-        addtochain(chain, p1);
-        }
+        ADD_EXTENSION(VkExportFenceCreateInfoKHR);
     EXTENSIONS_END
 ZCHECK_END
 
@@ -3991,7 +3954,6 @@ ZCHECK_END
  *------------------------------------------------------------------------------*/
 
 ZCHECK_BEGIN(VkExportSemaphoreCreateInfoKHR)
-    //checktable(arg);
     newstruct(VkExportSemaphoreCreateInfoKHR);
     GetFlags(handleTypes, "handle_types");
 ZCHECK_END
@@ -4002,11 +3964,7 @@ ZCHECK_BEGIN(VkSemaphoreCreateInfo)
     GetFlags(flags, "flags");
     EXTENSIONS_BEGIN
     if(ispresent("handle_types"))
-        {
-        VkExportSemaphoreCreateInfoKHR *p1 = zcheckVkExportSemaphoreCreateInfoKHR(L, arg, err);
-        if(*err) { zfree(L, p1, 1); return p; }
-        addtochain(chain, p1);
-        }
+        ADD_EXTENSION(VkExportSemaphoreCreateInfoKHR);
     EXTENSIONS_END
 ZCHECK_END
 
@@ -4136,9 +4094,36 @@ ZCHECK_END
  *------------------------------------------------------------------------------*/
 
 ZCHECK_BEGIN(VkProtectedSubmitInfo)
-    //checktable(arg);
     newstruct(VkProtectedSubmitInfo);
     GetBoolean(protectedSubmit, "protected_submit");
+ZCHECK_END
+
+static ZCLEAR_BEGIN(VkDeviceGroupSubmitInfoKHR)
+    if(p->pWaitSemaphoreDeviceIndices) Free(L, (void*)p->pWaitSemaphoreDeviceIndices);
+    if(p->pCommandBufferDeviceMasks) Free(L, (void*)p->pCommandBufferDeviceMasks);
+    if(p->pSignalSemaphoreDeviceIndices) Free(L, (void*)p->pSignalSemaphoreDeviceIndices);
+ZCLEAR_END
+ZCHECK_BEGIN(VkDeviceGroupSubmitInfoKHR)
+    int arg1;
+    newstruct(VkDeviceGroupSubmitInfoKHR);
+#define F "wait_semaphore_device_indices"
+    arg1 = pushfield(L, arg, F);
+    p->pWaitSemaphoreDeviceIndices = checkuint32list(L, arg1, &p->waitSemaphoreCount, err);
+    popfield(L, arg1);
+    if(*err < 0) { pushfielderror(F); return p; }
+#undef F
+#define F "command_buffer_device_masks"
+    arg1 = pushfield(L, arg, F);
+    p->pCommandBufferDeviceMasks = checkuint32list(L, arg1, &p->commandBufferCount, err);
+    popfield(L, arg1);
+    if(*err < 0) { pushfielderror(F); return p; }
+#undef F
+#define F "signal_semaphore_device_indices"
+    arg1 = pushfield(L, arg, F);
+    p->pSignalSemaphoreDeviceIndices = checkuint32list(L, arg1, &p->signalSemaphoreCount, err);
+    popfield(L, arg1);
+    if(*err < 0) { pushfielderror(F); return p; }
+#undef F
 ZCHECK_END
 
 static ZCLEAR_BEGIN(VkSubmitInfo)
@@ -4180,11 +4165,10 @@ ZCHECK_BEGIN(VkSubmitInfo)
 #undef F
     EXTENSIONS_BEGIN
     if(ispresent("protected_submit"))
-        {
-        VkProtectedSubmitInfo *p1 = zcheckVkProtectedSubmitInfo(L, arg, err);
-        if(*err) { zfree(L, p1, 1); return p; }
-        addtochain(chain, p1);
-        }
+        ADD_EXTENSION(VkProtectedSubmitInfo);
+    if(ispresent("wait_semaphore_device_indices") ||
+        ispresent("command_buffer_device_masks") || ispresent("signal_semaphore_device_indices"))
+        ADD_EXTENSION(VkDeviceGroupSubmitInfoKHR);
     EXTENSIONS_END
 ZCHECK_END
 ZCHECKARRAY(VkSubmitInfo)
@@ -4199,7 +4183,6 @@ static ZCLEAR_BEGIN(VkPresentRegionsKHR)
 ZCLEAR_END
 ZCHECK_BEGIN(VkPresentRegionsKHR)
     int arg1;
-    checktable(arg);
     newstruct(VkPresentRegionsKHR);
 #define F "regions"
     arg1 = pushfield(L, arg, F);
@@ -4211,11 +4194,25 @@ ZCHECK_BEGIN(VkPresentRegionsKHR)
 ZCHECK_END
 
 ZCHECK_BEGIN(VkDisplayPresentInfoKHR)
-    //checktable(arg);
     newstruct(VkDisplayPresentInfoKHR);
     GetStructOpt(srcRect, "src_rect", VkRect2D);
     GetStructOpt(dstRect, "dst_rect", VkRect2D);
     GetBoolean(persistent, "persistent");
+ZCHECK_END
+
+static ZCLEAR_BEGIN(VkDeviceGroupPresentInfoKHR)
+    if(p->pDeviceMasks) Free(L, (void*)p->pDeviceMasks);
+ZCLEAR_END
+ZCHECK_BEGIN(VkDeviceGroupPresentInfoKHR)
+    int arg1;
+    newstruct(VkDeviceGroupPresentInfoKHR);
+#define F "device_masks"
+    arg1 = pushfield(L, arg, F);
+    p->pDeviceMasks = checkuint32list(L, arg1, &p->swapchainCount, err);
+    popfield(L, arg1);
+    if(*err < 0) { pushfielderror(F); return p; }
+#undef F
+    GetBits(mode, "mode", VkDeviceGroupPresentModeFlagBitsKHR);
 ZCHECK_END
 
 static ZCLEAR_BEGIN(VkPresentInfoKHR)
@@ -4259,17 +4256,11 @@ VkPresentInfoKHR* zcheckVkPresentInfoKHR(lua_State *L, int arg, int *err, int re
 #undef F
     EXTENSIONS_BEGIN
     if(ispresent("src_rect"))
-        {
-        VkDisplayPresentInfoKHR *p1 = zcheckVkDisplayPresentInfoKHR(L, arg, err);
-        if(*err) { zfree(L, p1, 1); return p; }
-        addtochain(chain, p1);
-        }
+        ADD_EXTENSION(VkDisplayPresentInfoKHR);
     if(ispresent("regions"))
-        {
-        VkPresentRegionsKHR *p1 = zcheckVkPresentRegionsKHR(L, arg, err);
-        if(*err) { zfree(L, p1, 1); return p; }
-        addtochain(chain, p1);
-        }
+        ADD_EXTENSION(VkPresentRegionsKHR);
+    if(ispresent("mode") || ispresent("device_masks"))
+        ADD_EXTENSION(VkDeviceGroupPresentInfoKHR);
     EXTENSIONS_END
 ZCHECK_END
 
@@ -4286,7 +4277,6 @@ static ZCLEAR_BEGIN(VkRenderPassSampleLocationsBeginInfoEXT)
 ZCLEAR_END
 ZCHECK_BEGIN(VkRenderPassSampleLocationsBeginInfoEXT)
     int arg1;
-    //checktable(arg);
     newstruct(VkRenderPassSampleLocationsBeginInfoEXT);
 #define F "attachment_initial_sample_locations"
     arg1 = pushfield(L, arg, F);
@@ -4310,6 +4300,24 @@ ZCHECK_BEGIN(VkRenderPassSampleLocationsBeginInfoEXT)
 #endif
 ZCHECK_END
 
+
+static ZCLEAR_BEGIN(VkDeviceGroupRenderPassBeginInfoKHR)
+    if(p->pDeviceRenderAreas)
+        zfreearrayVkRect2D(L, p->pDeviceRenderAreas, p->deviceRenderAreaCount, 1);
+ZCLEAR_END
+ZCHECK_BEGIN(VkDeviceGroupRenderPassBeginInfoKHR)
+    int arg1;
+    newstruct(VkDeviceGroupRenderPassBeginInfoKHR);
+    GetInteger(deviceMask, "device_mask");
+#define F "device_render_areas"
+    arg1 = pushfield(L, arg, F);
+    p->pDeviceRenderAreas = zcheckarrayVkRect2D(L, arg1, &p->deviceRenderAreaCount, err);
+    popfield(L, arg1);
+    if(*err < 0) { prependfield(F); return p; }
+    if(*err == ERR_NOTPRESENT) poperror();
+#undef F
+ZCHECK_END
+
 static ZCLEAR_BEGIN(VkRenderPassBeginInfo)
     if(p->pClearValues) zfreearrayVkClearValue(L, p->pClearValues, p->clearValueCount, 1);
 ZCLEAR_END
@@ -4328,11 +4336,10 @@ ZCHECK_BEGIN(VkRenderPassBeginInfo)
     if(*err == ERR_NOTPRESENT) poperror();
 #undef F
     EXTENSIONS_BEGIN
-    VkRenderPassSampleLocationsBeginInfoEXT *p1 =
-        zcheckVkRenderPassSampleLocationsBeginInfoEXT(L, arg, err);
-    if(*err < 0) { zfree(L, p1, 1); return p; }
-    else if(*err == ERR_NOTPRESENT) { zfree(L, p1, 1); poperror(); }
-    else addtochain(chain, p1);
+    if(ispresent("attachment_initial_sample_locations") || ispresent("post_subpass_sample_locations"))
+        ADD_EXTENSION(VkRenderPassSampleLocationsBeginInfoEXT);
+    if(ispresent("device_mask") || ispresent("device_render_areas"))
+        ADD_EXTENSION(VkDeviceGroupRenderPassBeginInfoKHR);
     EXTENSIONS_END
 ZCHECK_END
 
@@ -4346,7 +4353,6 @@ ZCHECK_BEGIN(VkSubpassBeginInfoKHR)
     GetSubpassContents(contents, "contents");
 ZCHECK_END
 
-
 ZCHECK_BEGIN(VkSubpassEndInfoKHR)
     checktable(arg);
     newstruct(VkSubpassEndInfoKHR);
@@ -4355,6 +4361,12 @@ ZCHECK_END
 /*------------------------------------------------------------------------------*
  | Bind Sparse Info                                                             |
  *------------------------------------------------------------------------------*/
+
+ZCHECK_BEGIN(VkDeviceGroupBindSparseInfoKHR)
+    newstruct(VkDeviceGroupBindSparseInfoKHR);
+    GetInteger(resourceDeviceIndex, "resource_device_index");
+    GetInteger(memoryDeviceIndex, "memory_device_index");
+ZCHECK_END
 
 static ZCLEAR_BEGIN(VkBindSparseInfo)
     if(p->pWaitSemaphores)
@@ -4406,6 +4418,10 @@ ZCHECK_BEGIN(VkBindSparseInfo)
     popfield(L, arg1);
     if(*err < 0) { pushfielderror(F); return p; }
 #undef F
+    EXTENSIONS_BEGIN
+    if(ispresent("resource_device_index") || ispresent("memory_device_index"))
+        ADD_EXTENSION(VkDeviceGroupBindSparseInfoKHR);
+    EXTENSIONS_END
 ZCHECK_END
 ZCHECKARRAY(VkBindSparseInfo)
 
@@ -4418,7 +4434,6 @@ static ZCLEAR_BEGIN(VkWriteDescriptorSetInlineUniformBlockEXT)
 ZCLEAR_END
 ZCHECK_BEGIN(VkWriteDescriptorSetInlineUniformBlockEXT)
     size_t len;
-    //checktable(arg);
     newstruct(VkWriteDescriptorSetInlineUniformBlockEXT);
     GetLString(pData, "inline_uniform_block_data", &len);
     p->dataSize = len;
@@ -4485,12 +4500,7 @@ ZCHECK_BEGIN(VkWriteDescriptorSet)
         }
     EXTENSIONS_BEGIN
     if(p->descriptorType == VK_DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK_EXT)
-        {
-        VkWriteDescriptorSetInlineUniformBlockEXT *p1 =
-            zcheckVkWriteDescriptorSetInlineUniformBlockEXT(L, arg, err);
-        if(*err) { zfree(L, p1, 1); return p; }
-        addtochain(chain, p1);
-        }
+        ADD_EXTENSION(VkWriteDescriptorSetInlineUniformBlockEXT);
     EXTENSIONS_END
 ZCHECK_END
 ZCHECKARRAY(VkWriteDescriptorSet)
@@ -4516,12 +4526,30 @@ ZCHECKARRAY(VkCopyDescriptorSet)
  | Bind Buffer Memory                                                           |
  *------------------------------------------------------------------------------*/
 
+static ZCLEAR_BEGIN(VkBindBufferMemoryDeviceGroupInfoKHR)
+    if(p->pDeviceIndices) Free(L, (void*)p->pDeviceIndices);
+ZCLEAR_END
+ZCHECK_BEGIN(VkBindBufferMemoryDeviceGroupInfoKHR)
+    int arg1;
+    newstruct(VkBindBufferMemoryDeviceGroupInfoKHR);
+#define F "device_indices"
+    arg1 = pushfield(L, arg, F);
+    p->pDeviceIndices = checkuint32list(L, arg1, &p->deviceIndexCount, err);
+    popfield(L, arg1);
+    if(*err < 0) { pushfielderror(F); return p; }
+#undef F
+ZCHECK_END
+
 ZCHECK_BEGIN(VkBindBufferMemoryInfo)
     checktable(arg);
     newstruct(VkBindBufferMemoryInfo);
     GetBuffer(buffer, "buffer");
     GetDeviceMemory(memory, "memory");
     GetInteger(memoryOffset, "offset");
+    EXTENSIONS_BEGIN
+    if(ispresent("device_indices"))
+        ADD_EXTENSION(VkBindBufferMemoryDeviceGroupInfoKHR);
+    EXTENSIONS_END
 ZCHECK_END
 ZCHECKARRAY(VkBindBufferMemoryInfo)
 
@@ -4530,10 +4558,39 @@ ZCHECKARRAY(VkBindBufferMemoryInfo)
  *------------------------------------------------------------------------------*/
 
 ZCHECK_BEGIN(VkBindImagePlaneMemoryInfoKHR)
-    //checktable(arg);
     newstruct(VkBindImagePlaneMemoryInfoKHR);
     GetFlags(planeAspect, "plane_aspect");
 ZCHECK_END
+
+static ZCLEAR_BEGIN(VkBindImageMemoryDeviceGroupInfoKHR)
+    if(p->pDeviceIndices) Free(L, (void*)p->pDeviceIndices);
+    if(p->pSplitInstanceBindRegions)
+        zfreearrayVkRect2D(L, p->pSplitInstanceBindRegions, p->splitInstanceBindRegionCount, 1);
+ZCLEAR_END
+ZCHECK_BEGIN(VkBindImageMemoryDeviceGroupInfoKHR)
+    int arg1;
+    newstruct(VkBindImageMemoryDeviceGroupInfoKHR);
+#define F "device_indices"
+    arg1 = pushfield(L, arg, F);
+    p->pDeviceIndices = checkuint32list(L, arg1, &p->deviceIndexCount, err);
+    popfield(L, arg1);
+    if(*err < 0) { pushfielderror(F); return p; }
+#undef F
+#define F "split_instance_bind_regions"
+    arg1 = pushfield(L, arg, F);
+    p->pSplitInstanceBindRegions = zcheckarrayVkRect2D(L, arg1, &p->splitInstanceBindRegionCount, err);
+    popfield(L, arg1);
+    if(*err < 0) { prependfield(F); return p; }
+    if(*err == ERR_NOTPRESENT) poperror();
+#undef F
+ZCHECK_END
+
+ZCHECK_BEGIN(VkBindImageMemorySwapchainInfoKHR)
+    newstruct(VkBindImageMemorySwapchainInfoKHR);
+    GetSwapchain(swapchain, "swapchain");
+    GetInteger(imageIndex, "image_index");
+ZCHECK_END
+ZCHECKARRAY(VkBindImageMemorySwapchainInfoKHR)
 
 ZCHECK_BEGIN(VkBindImageMemoryInfo)
     checktable(arg);
@@ -4542,14 +4599,12 @@ ZCHECK_BEGIN(VkBindImageMemoryInfo)
     GetDeviceMemory(memory, "memory");
     GetInteger(memoryOffset, "offset");
     EXTENSIONS_BEGIN
-#define F "plane_aspect"
-    if(ispresent(F))
-        {
-        VkBindImagePlaneMemoryInfoKHR *p1 = zcheckVkBindImagePlaneMemoryInfoKHR(L, arg, err);
-        if(*err) { zfree(L, p1, 1); return p; }
-        addtochain(chain, p1);
-        }
-#undef F
+    if(ispresent("plane_aspect"))
+        ADD_EXTENSION(VkBindImagePlaneMemoryInfoKHR);
+    if(ispresent("device_indices") || ispresent("split_instance_bind_regions"))
+        ADD_EXTENSION(VkBindImageMemoryDeviceGroupInfoKHR);
+    if(ispresent("swapchain") || ispresent("image_index"))
+        ADD_EXTENSION(VkBindImageMemorySwapchainInfoKHR);
     EXTENSIONS_END
 ZCHECK_END
 ZCHECKARRAY(VkBindImageMemoryInfo)
@@ -4820,7 +4875,6 @@ ZCHECK_END
 /*------------------------------------------------------------------------------*/
 
 ZCHECK_BEGIN(VkPhysicalDeviceExternalImageFormatInfoKHR)
-    //checktable(arg);
     newstruct(VkPhysicalDeviceExternalImageFormatInfoKHR);
     GetBits(handleType, "handle_type", VkExternalMemoryHandleTypeFlagBits);
 ZCHECK_END
@@ -4835,12 +4889,7 @@ ZCHECK_BEGIN(VkPhysicalDeviceImageFormatInfo2KHR)
     GetFlags(flags, "flags");
     EXTENSIONS_BEGIN
     if(ispresent("handle_type"))
-        {
-        VkPhysicalDeviceExternalImageFormatInfoKHR *p1 =
-            zcheckVkPhysicalDeviceExternalImageFormatInfoKHR(L, arg, err);
-        if(*err) { zfree(L, p1, *err); return p; }
-        addtochain(chain, p1);
-        }
+        ADD_EXTENSION(VkPhysicalDeviceExternalImageFormatInfoKHR);
     EXTENSIONS_END
 ZCHECK_END
 
@@ -4852,6 +4901,18 @@ ZCHECK_BEGIN(VkPhysicalDeviceSparseImageFormatInfo2KHR)
     GetSamples(samples, "samples");
     GetFlags(usage, "usage");
     GetImageTiling(tiling, "tiling");
+ZCHECK_END
+
+/*------------------------------------------------------------------------------*/
+
+ZCHECK_BEGIN(VkAcquireNextImageInfoKHR)
+    checktable(arg);
+    newstruct(VkAcquireNextImageInfoKHR);
+/*  GetSwapchain(swapchain, "swapchain"); -> set by the caller */
+    GetTimeout(timeout, "timeout");
+    GetSemaphoreOpt(semaphore, "semaphore");
+    GetFenceOpt(fence, "fence");
+    GetInteger(deviceMask, "device_mask");
 ZCHECK_END
 
 /*------------------------------------------------------------------------------*
@@ -4961,7 +5022,6 @@ ZCHECK_END
 /*-------------------------------------------------------------------------------------*/
 
 ZCHECK_BEGIN(VkPipelineTessellationDomainOriginStateCreateInfoKHR)
-    //checktable(arg);
     newstruct(VkPipelineTessellationDomainOriginStateCreateInfoKHR);
     GetTessellationDomainOrigin(domainOrigin, "domain_origin");
 ZCHECK_END
@@ -4974,12 +5034,7 @@ ZCHECK_BEGIN(VkPipelineTessellationStateCreateInfo)
     EXTENSIONS_BEGIN
 #define F   "domain_origin"
     if(ispresent(F))
-        {
-        VkPipelineTessellationDomainOriginStateCreateInfoKHR *p1 =
-            zcheckVkPipelineTessellationDomainOriginStateCreateInfoKHR(L, arg, err);
-        if(*err) { zfree(L, p1, 1); return p; }
-        addtochain(chain, p1);
-        }
+        ADD_EXTENSION(VkPipelineTessellationDomainOriginStateCreateInfoKHR);
 #undef F
     EXTENSIONS_END
 ZCHECK_END
@@ -5021,7 +5076,6 @@ ZCHECK_END
 /*-------------------------------------------------------------------------------------*/
 
 ZCHECK_BEGIN(VkPipelineRasterizationConservativeStateCreateInfoEXT)
-    //checktable(arg);
     newstruct(VkPipelineRasterizationConservativeStateCreateInfoEXT);
     GetFlags(flags, "conservative_rasterization_state_create_flags");
     GetConservativeRasterizationMode(conservativeRasterizationMode, "conservative_rasterization_mode");
@@ -5046,13 +5100,7 @@ ZCHECK_BEGIN(VkPipelineRasterizationStateCreateInfo)
     if(ispresent("conservative_rasterization_state_create_flags") ||
         ispresent("conservative_rasterization_mode") ||
         ispresent("extra_primitive_overestimation_size"))
-        {
-        VkPipelineRasterizationConservativeStateCreateInfoEXT *p1 =
-            zcheckVkPipelineRasterizationConservativeStateCreateInfoEXT(L, arg, err);
-        if(*err < 0) { zfree(L, p1, 1); return p; }
-        else if(*err == ERR_NOTPRESENT) poperror();
-        else addtochain(chain, p1);
-        }
+        ADD_EXTENSION(VkPipelineRasterizationConservativeStateCreateInfoEXT);
     EXTENSIONS_END
 ZCHECK_END
 
@@ -5080,7 +5128,6 @@ static ZCLEAR_BEGIN(VkPipelineSampleLocationsStateCreateInfoEXT)
     zfreeVkSampleLocationsInfoEXT(L, &p->sampleLocationsInfo, 0);
 ZCLEAR_END
 ZCHECK_BEGIN(VkPipelineSampleLocationsStateCreateInfoEXT)
-//  checktable(arg);
     newstruct(VkPipelineSampleLocationsStateCreateInfoEXT);
     GetBoolean(sampleLocationsEnable, "sample_locations_enable");
     GetStruct(sampleLocationsInfo, "sample_locations_info", VkSampleLocationsInfoEXT);
@@ -5109,16 +5156,8 @@ ZCHECK_BEGIN(VkPipelineMultisampleStateCreateInfo)
         { *err=ERR_LENGTH; pushfielderror(F); return p; }
 #undef F
     EXTENSIONS_BEGIN
-#define F   "sample_locations_info"
-    if(ispresent(F))
-        {
-        VkPipelineSampleLocationsStateCreateInfoEXT *p1 =
-            zcheckVkPipelineSampleLocationsStateCreateInfoEXT(L, arg, err);
-        if(*err < 0) { zfree(L, p1, 1); return p; }
-        else if(*err == ERR_NOTPRESENT) poperror();
-        else addtochain(chain, p1);
-        }
-#undef F
+    if(ispresent("sample_locations_enable") || ispresent("sample_locations_info"))
+        ADD_EXTENSION(VkPipelineSampleLocationsStateCreateInfoEXT);
     EXTENSIONS_END
 ZCHECK_END
 
@@ -5130,13 +5169,13 @@ static ZCLEAR_BEGIN(VkPipelineVertexInputDivisorStateCreateInfoEXT)
 ZCLEAR_END
 ZCHECK_BEGIN(VkPipelineVertexInputDivisorStateCreateInfoEXT)
     int arg1;
-    //checktable(arg);
     newstruct(VkPipelineVertexInputDivisorStateCreateInfoEXT);
 #define F "vertex_binding_divisors"
     arg1 = pushfield(L, arg, F);
     p->pVertexBindingDivisors = zcheckarrayVkVertexInputBindingDivisorDescriptionEXT(L,
         arg1, &p->vertexBindingDivisorCount, err);
     popfield(L, arg1);
+    if(*err==ERR_EMPTY) *err=0;
     if(*err) { prependfield(F); return p; }
 #undef F
 ZCHECK_END
@@ -5170,13 +5209,7 @@ ZCHECK_BEGIN(VkPipelineVertexInputStateCreateInfo)
 #undef F
     EXTENSIONS_BEGIN
     if(ispresent("vertex_binding_divisors"))
-        {
-        VkPipelineVertexInputDivisorStateCreateInfoEXT *p1 =
-            zcheckVkPipelineVertexInputDivisorStateCreateInfoEXT(L, arg, err);
-        if(*err == ERR_NOTPRESENT || *err == ERR_EMPTY) { zfree(L, p1, 1); poperror(); }
-        else if(*err < 0) { zfree(L, p1, 1); return p; }
-        else addtochain(chain, p1);
-        }
+        ADD_EXTENSION(VkPipelineVertexInputDivisorStateCreateInfoEXT);
     EXTENSIONS_END
 ZCHECK_END
 
@@ -5200,7 +5233,6 @@ ZCHECK_END
 /*-------------------------------------------------------------------------------------*/
 
 ZCHECK_BEGIN(VkPipelineColorBlendAdvancedStateCreateInfoEXT)
-    //checktable(arg);
     newstruct(VkPipelineColorBlendAdvancedStateCreateInfoEXT);
     GetBoolean(srcPremultiplied, "src_premultiplied");
     GetBoolean(dstPremultiplied, "dst_premultiplied");
@@ -5228,13 +5260,7 @@ ZCHECK_BEGIN(VkPipelineColorBlendStateCreateInfo)
 #undef F
     EXTENSIONS_BEGIN
     if(ispresent("src_premultiplied") || ispresent("dst_premultiplied") || ispresent("blend_overlap"))
-        {
-        VkPipelineColorBlendAdvancedStateCreateInfoEXT *p1 =
-            zcheckVkPipelineColorBlendAdvancedStateCreateInfoEXT(L, arg, err);
-        if(*err < 0) { zfree(L, p1, 1); return p; }
-        else if(*err == ERR_NOTPRESENT) poperror();
-        addtochain(chain, p1);
-        }
+        ADD_EXTENSION(VkPipelineColorBlendAdvancedStateCreateInfoEXT);
     EXTENSIONS_END
 ZCHECK_END
 
@@ -5484,6 +5510,11 @@ static void zfreeaux(lua_State *L, void *pp)
         CASE(SUBPASS_DESCRIPTION_2_KHR, VkSubpassDescription2KHR);
         CASE(RENDER_PASS_CREATE_INFO_2_KHR, VkRenderPassCreateInfo2KHR);
         CASE(DEVICE_GROUP_DEVICE_CREATE_INFO_KHR, VkDeviceGroupDeviceCreateInfoKHR);
+        CASE(DEVICE_GROUP_RENDER_PASS_BEGIN_INFO_KHR, VkDeviceGroupRenderPassBeginInfoKHR);
+        CASE(DEVICE_GROUP_SUBMIT_INFO_KHR, VkDeviceGroupSubmitInfoKHR);
+        CASE(BIND_IMAGE_MEMORY_DEVICE_GROUP_INFO_KHR, VkBindImageMemoryDeviceGroupInfoKHR);
+        CASE(BIND_BUFFER_MEMORY_DEVICE_GROUP_INFO_KHR, VkBindBufferMemoryDeviceGroupInfoKHR);
+        CASE(DEVICE_GROUP_PRESENT_INFO_KHR, VkDeviceGroupPresentInfoKHR);
 #undef CASE
         default: 
             return;

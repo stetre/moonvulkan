@@ -145,12 +145,11 @@ static int GetSwapchainStatus(lua_State *L)
     return 1;
     }
 
-static int AcquireNextImage(lua_State *L)
+
+static int AcquireNextImage1(lua_State *L, VkSwapchainKHR swapchain, ud_t *ud)
     {
-    VkResult ec; 
+    VkResult ec;
     uint32_t imageindex;
-    ud_t *ud;
-    VkSwapchainKHR swapchain =  checkswapchain(L, 1, &ud);
     VkDevice device = ud->device;
     uint64_t timeout = checktimeout(L, 2); /* = UINT64_MAX for 'blocking' */
     VkSemaphore semaphore = testsemaphore(L, 3, NULL);
@@ -161,10 +160,46 @@ static int AcquireNextImage(lua_State *L)
         {
         case VK_SUCCESS:
         case VK_SUBOPTIMAL_KHR: lua_pushinteger(L, imageindex); break;
+        //case VK_NOT_READY:
+        //case VK_TIMEOUT:
         default: lua_pushnil(L); break;
         }
     pushresult(L, ec);
     return 2;
+    }
+
+static int AcquireNextImage2(lua_State *L, VkSwapchainKHR swapchain, ud_t *ud)
+    {
+    int err;
+    VkResult ec;
+    uint32_t imageindex;
+    VkDevice device = ud->device;
+#define CLEANUP zfreeVkAcquireNextImageInfoKHR(L, info, 1)
+    VkAcquireNextImageInfoKHR* info = zcheckVkAcquireNextImageInfoKHR(L, 2, &err);
+    if(err) { CLEANUP; return argerror(L, 2); }
+    info->swapchain = swapchain;
+    ec = ud->ddt->AcquireNextImage2KHR(device, info, &imageindex);
+    switch(ec)
+        {
+        case VK_SUCCESS:
+        case VK_SUBOPTIMAL_KHR: lua_pushinteger(L, imageindex); break;
+        //case VK_NOT_READY:
+        //case VK_TIMEOUT:
+        default: lua_pushnil(L); break;
+        }
+    CLEANUP;
+#undef CLEANUP
+    pushresult(L, ec);
+    return 2;
+    }
+
+static int AcquireNextImage(lua_State *L)
+    {
+    ud_t *ud;
+    VkSwapchainKHR swapchain =  checkswapchain(L, 1, &ud);
+    if((lua_type(L, 2) == LUA_TTABLE) && ud->ddt->AcquireNextImage2KHR)
+        return AcquireNextImage2(L, swapchain, ud);
+    return AcquireNextImage1(L, swapchain, ud);
     }
 
 static int QueuePresent(lua_State *L)

@@ -604,6 +604,33 @@ VkDeviceSize checksizeorwholesize(lua_State *L, int arg)
     }
 
 
+uint64_t testtimeout(lua_State *L, int arg, int *err)
+    {
+    const char* s;
+    uint64_t val;
+    int isnum;
+    int t = lua_type(L, arg);
+    *err = 0;
+    switch(t)
+        {
+        case LUA_TNONE:
+        case LUA_TNIL:
+                return UINT64_MAX;
+        case LUA_TSTRING:   
+                s = lua_tostring(L, arg);
+                if(strcmp(s, "blocking") == 0) return UINT64_MAX;
+                break;
+        case LUA_TNUMBER:
+                val = lua_tointegerx(L, arg, &isnum);
+                if(isnum) return val;
+        default:
+            break;
+        }
+    *err = ERR_VALUE;
+    return 0;
+    }
+
+
 uint64_t checktimeout(lua_State *L, int arg)
     {
     const char* s;
@@ -611,12 +638,12 @@ uint64_t checktimeout(lua_State *L, int arg)
     switch(t)
         {
         case LUA_TNONE:
-        case LUA_TNIL:  return UINT64_MAX;
+        case LUA_TNIL:
+                return UINT64_MAX;
         case LUA_TSTRING:   
-                        s = lua_tostring(L, arg);
-                        if(strcmp(s, "blocking") == 0)
-                        return UINT64_MAX;
-                        return luaL_argerror(L, arg, badvalue(L, s));
+                s = lua_tostring(L, arg);
+                if(strcmp(s, "blocking") == 0) return UINT64_MAX;
+                return luaL_argerror(L, arg, badvalue(L, s));
         default:
             break;
         }
