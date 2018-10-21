@@ -135,6 +135,12 @@ instance_dt_t * getproc_instance(lua_State *L, VkInstance instance, VkInstanceCr
     dt->fn = (PFN_vk##fn)GetInstanceProcAddr(instance, "vk"#fn); \
     /* printf(""#fn" %p\n", (void*)(dt->fn)); */                 \
 } while(0)
+    /* promoted extensions may lack the KHR suffix, so try also without it */
+#define GETKHR(fn) do { \
+    dt->fn##KHR = (PFN_vk##fn##KHR)GetInstanceProcAddr(instance, "vk"#fn"KHR");             \
+    if(!dt->fn##KHR) dt->fn##KHR = (PFN_vk##fn##KHR)GetInstanceProcAddr(instance, "vk"#fn); \
+    /* printf(""#fn"KHR %p\n", (void*)(dt->fn##KHR)); */                                    \
+} while(0)
     //VK_KHR_display
     GET(GetPhysicalDeviceDisplayPropertiesKHR);
     GET(GetPhysicalDeviceDisplayPlanePropertiesKHR);
@@ -144,19 +150,19 @@ instance_dt_t * getproc_instance(lua_State *L, VkInstance instance, VkInstanceCr
     GET(GetDisplayPlaneCapabilitiesKHR);
     GET(CreateDisplayPlaneSurfaceKHR);
     //VK_KHR_external_fence_capabilities
-    GET(GetPhysicalDeviceExternalFencePropertiesKHR);
+    GETKHR(GetPhysicalDeviceExternalFenceProperties);
     //VK_KHR_external_memory_capabilities
-    GET(GetPhysicalDeviceExternalBufferPropertiesKHR);
+    GETKHR(GetPhysicalDeviceExternalBufferProperties);
     //VK_KHR_external_semaphore_capabilities
-    GET(GetPhysicalDeviceExternalSemaphorePropertiesKHR);
+    GETKHR(GetPhysicalDeviceExternalSemaphoreProperties);
     //VK_KHR_get_physical_device_properties2
-    GET(GetPhysicalDeviceFeatures2KHR);
-    GET(GetPhysicalDeviceProperties2KHR);
-    GET(GetPhysicalDeviceFormatProperties2KHR);
-    GET(GetPhysicalDeviceImageFormatProperties2KHR);
-    GET(GetPhysicalDeviceQueueFamilyProperties2KHR);
-    GET(GetPhysicalDeviceMemoryProperties2KHR);
-    GET(GetPhysicalDeviceSparseImageFormatProperties2KHR);
+    GETKHR(GetPhysicalDeviceFeatures2);
+    GETKHR(GetPhysicalDeviceProperties2);
+    GETKHR(GetPhysicalDeviceFormatProperties2);
+    GETKHR(GetPhysicalDeviceImageFormatProperties2);
+    GETKHR(GetPhysicalDeviceQueueFamilyProperties2);
+    GETKHR(GetPhysicalDeviceMemoryProperties2);
+    GETKHR(GetPhysicalDeviceSparseImageFormatProperties2);
     //VK_KHR_get_surface_capabilities2
     GET(GetPhysicalDeviceSurfaceCapabilities2KHR);
     GET(GetPhysicalDeviceSurfaceFormats2KHR);
@@ -194,7 +200,7 @@ instance_dt_t * getproc_instance(lua_State *L, VkInstance instance, VkInstanceCr
     GET(GetDisplayModeProperties2KHR);
     GET(GetDisplayPlaneCapabilities2KHR);
     //VK_KHR_device_group_creation
-    GET(EnumeratePhysicalDeviceGroupsKHR);
+    GETKHR(EnumeratePhysicalDeviceGroups);
 #ifdef VK_USE_PLATFORM_XCB_KHR
     //VK_KHR_xcb_surface
     GET(CreateXcbSurfaceKHR);
@@ -225,6 +231,7 @@ instance_dt_t * getproc_instance(lua_State *L, VkInstance instance, VkInstanceCr
     GET(GetPhysicalDeviceWin32PresentationSupportKHR);
 #endif
 #undef GET
+#undef GETKHR
     return dt;
     }
 
@@ -365,15 +372,20 @@ device_dt_t* getproc_device(lua_State *L, VkDevice device, VkDeviceCreateInfo *c
     dt->fn = (PFN_vk##fn)GetDeviceProcAddr(device, "vk"#fn);    \
     /* printf(""#fn" %p\n", (void*)(dt->fn)); */                \
 } while(0)
-
+    /* promoted extensions may lack the KHR suffix, so try also without it */
+#define GETKHR(fn) do { \
+    dt->fn##KHR = (PFN_vk##fn##KHR)GetDeviceProcAddr(device, "vk"#fn"KHR");             \
+    if(!dt->fn##KHR) dt->fn##KHR = (PFN_vk##fn##KHR)GetDeviceProcAddr(device, "vk"#fn); \
+    /* printf(""#fn"KHR %p\n", (void*)(dt->fn##KHR)); */                                \
+} while(0)
     GET(GetDeviceQueue2);
     //VK_KHR_8bit_storage
     //VK_KHR_16bit_storage
     //VK_KHR_descriptor_update_template
-    GET(CreateDescriptorUpdateTemplateKHR);
-    GET(DestroyDescriptorUpdateTemplateKHR);
-    GET(UpdateDescriptorSetWithTemplateKHR);
-    GET(CmdPushDescriptorSetWithTemplateKHR);
+    GETKHR(CreateDescriptorUpdateTemplate);
+    GETKHR(DestroyDescriptorUpdateTemplate);
+    GETKHR(UpdateDescriptorSetWithTemplate);
+    GETKHR(CmdPushDescriptorSetWithTemplate);
     //VK_KHR_dedicated_allocation
     //VK_KHR_display_swapchain
     GET(CreateSharedSwapchainsKHR);
@@ -390,12 +402,12 @@ device_dt_t* getproc_device(lua_State *L, VkDevice device, VkDeviceCreateInfo *c
     GET(ImportSemaphoreFdKHR);
     GET(GetSemaphoreFdKHR);
     //VK_KHR_get_memory_requirements2
-    GET(GetImageMemoryRequirements2KHR);
-    GET(GetBufferMemoryRequirements2KHR);
-    GET(GetImageSparseMemoryRequirements2KHR);
+    GETKHR(GetImageMemoryRequirements2);
+    GETKHR(GetBufferMemoryRequirements2);
+    GETKHR(GetImageSparseMemoryRequirements2);
     //VK_KHR_incremental_present
     //VK_KHR_maintenance1
-    GET(TrimCommandPoolKHR);
+    GETKHR(TrimCommandPool);
     //VK_KHR_maintenance2
     //VK_KHR_push_descriptor
     GET(CmdPushDescriptorSetKHR);
@@ -438,8 +450,8 @@ device_dt_t* getproc_device(lua_State *L, VkDevice device, VkDeviceCreateInfo *c
     //VK_EXT_global_priority
     //VK_KHR_image_format_list
     //VK_KHR_bind_memory2
-    GET(BindBufferMemory2KHR);
-    GET(BindImageMemory2KHR);
+    GETKHR(BindBufferMemory2);
+    GETKHR(BindImageMemory2);
     //VK_EXT_sample_locations
     GET(CmdSetSampleLocationsEXT);
     GET(GetPhysicalDeviceMultisamplePropertiesEXT);
@@ -461,8 +473,8 @@ device_dt_t* getproc_device(lua_State *L, VkDevice device, VkDeviceCreateInfo *c
     GET(MergeValidationCachesEXT);
     GET(GetValidationCacheDataEXT);
     //VK_KHR_sampler_ycbcr_conversion
-    GET(CreateSamplerYcbcrConversionKHR);
-    GET(DestroySamplerYcbcrConversionKHR);
+    GETKHR(CreateSamplerYcbcrConversion);
+    GETKHR(DestroySamplerYcbcrConversion);
     //VK_EXT_conditional_rendering
     GET(CmdBeginConditionalRenderingEXT);
     GET(CmdEndConditionalRenderingEXT);
@@ -470,13 +482,14 @@ device_dt_t* getproc_device(lua_State *L, VkDevice device, VkDeviceCreateInfo *c
     GET(CmdDrawIndirectCountKHR);
     GET(CmdDrawIndexedIndirectCountKHR);
     //VK_KHR_maintenance3
-    GET(GetDescriptorSetLayoutSupportKHR);
+    GETKHR(GetDescriptorSetLayoutSupport);
     //VK_KHR_create_renderpass2 
     GET(CreateRenderPass2KHR);
     GET(CmdBeginRenderPass2KHR);
     GET(CmdNextSubpass2KHR);
     GET(CmdEndRenderPass2KHR);
 #undef GET
+#undef GETKHR
     return dt;
     }
 
