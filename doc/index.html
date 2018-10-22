@@ -1935,6 +1935,16 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/
 </li>
 </ul>
 </div>
+<div id="get_memory_host_pointer_properties" class="ulist">
+<ul>
+<li>
+<p><a href="#memoryhostpointerproperties"><em>memoryhostpointerproperties</em></a> = <strong>get_memory_host_pointer_properties</strong>(<a href="#device"><em>device</em></a>, <em>handle_type</em>, <em>host_pointer</em>)<br>
+<span class="small"><em>handle_type</em>: <a href="#externalmemoryhandletypeflags">externalmemoryhandletypeflags</a>,<br>
+<em>host_pointer</em>: lightuserdata.<br>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkGetMemoryHostPointerPropertiesEXT">vkGetMemoryHostPointerPropertiesEXT</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_external_memory_host">VK_EXT_external_memory_host</a>).</span></p>
+</li>
+</ul>
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -3658,6 +3668,8 @@ the <em>queue_family_index</em> of the <em>i-th</em> element in the table return
 -- EXTENSION (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkPhysicalDeviceMultiviewPropertiesKHR">VkPhysicalDeviceMultiviewPropertiesKHR</a>, <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_multiview">VK_KHR_multiview</a>):<br>
 <em>max_multiview_view_count</em>: integer,<br>
 <em>max_multiview_instance_index</em>: integer,<br>
+-- EXTENSION (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkPhysicalDeviceExternalMemoryHostPropertiesEXT">VkPhysicalDeviceExternalMemoryHostPropertiesEXT</a>, <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_external_memory_host">VK_EXT_external_memory_host</a>):<br>
+<em>min_imported_host_pointer_alignment</em>: integer,<br>
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkPhysicalDeviceProperties2.html">VkPhysicalDeviceProperties2</a>)</span></p>
 </li>
 <li>
@@ -4551,17 +4563,14 @@ the <em>queue_family_index</em> of the <em>i-th</em> element in the table return
 -- EXTENSION (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkExportMemoryAllocateInfo.html">VkExportMemoryAllocateInfo</a>, <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_external_memory">VK_KHR_external_memory</a>):<br>
 <em>handle_types</em>: <a href="#externalmemoryhandletypeflags">externalmemoryhandletypeflags</a>,<br>
 -- EXTENSION (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkImportMemoryFdInfoKHR">VkImportMemoryFdInfoKHR</a>, <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_external_memory_fd">VK_KHR_external_memory_fd</a>):<br>
-<em>import_memory_fd_info</em>: <a href="#importmemoryfdinfo">importmemoryfdinfo</a>,<br>
+<em>fd_handle_type</em>: <a href="#externalmemoryhandletypeflags">externalmemoryhandletypeflags</a>,<br>
+<em>fd</em>: integer,<br>
+-- EXTENSION (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkImportMemoryHostPointerInfoEXT">VkImportMemoryHostPointerInfoEXT</a>, <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_external_memory_host">VK_EXT_external_memory_host</a>):<br>
+<em>host_pointer_handle_type</em>: <a href="#externalmemoryhandletypeflags">externalmemoryhandletypeflags</a>,<br>
+<em>host_pointer</em>: lightuserdata,<br>
 -- EXTENSION (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkMemoryAllocateFlagsInfoKHR">VkMemoryAllocateFlagsInfoKHR</a>, <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_device_group">VK_KHR_device_group</a>):<br>
 <em>device_mask</em> integer,<br>
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkMemoryAllocateInfo.html">VkMemoryAllocateInfo</a>)</span></p>
-</li>
-<li>
-<p><a id="importmemoryfdinfo"></a>
-<span class="small"><strong>importmemoryfdinfo</strong> = {<br>
-<em>handle_type</em>: <a href="#externalmemoryhandletypeflags">externalmemoryhandletypeflags</a>,<br>
-<em>fd</em>: integer,<br>
-} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkImportMemoryFdInfoKHR">VkImportMemoryFdInfoKHR</a>)</span></p>
 </li>
 <li>
 <p><a id="memorygetfdinfo"></a>
@@ -4574,6 +4583,12 @@ the <em>queue_family_index</em> of the <em>i-th</em> element in the table return
 <span class="small"><strong>memoryfdproperties</strong> = {<br>
 <em>memory_type_bits</em>: integer,<br>
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkMemoryFdPropertiesKHR">VkMemoryFdPropertiesKHR</a>)</span></p>
+</li>
+<li>
+<p><a id="memoryhostpointerproperties"></a>
+<span class="small"><strong>memoryhostpointerproperties</strong> = {<br>
+<em>memory_type_bits</em>: integer,<br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkMemoryHostPointerPropertiesEXT">VkMemoryHostPointerPropertiesEXT</a>)</span></p>
 </li>
 </ul>
 </div>

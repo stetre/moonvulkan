@@ -515,6 +515,21 @@ static int GetMemoryFdProperties(lua_State *L)
     return 1;
     }
 
+static int GetMemoryHostPointerProperties(lua_State *L)
+    {
+    VkResult ec;
+    ud_t *ud;
+    VkMemoryHostPointerPropertiesEXT properties;
+    VkDevice device = checkdevice(L, 1, &ud);
+    VkExternalMemoryHandleTypeFlagBits handleType = checkflags(L, 2);
+    void* ptr = checklightuserdata(L, 3);
+    CheckDevicePfn(L, ud, GetMemoryHostPointerPropertiesEXT);
+    ec = ud->ddt->GetMemoryHostPointerPropertiesEXT(device, handleType, ptr, &properties);
+    CheckError(L, ec);
+    zpushVkMemoryHostPointerPropertiesEXT(L, &properties);
+    return 1;
+    }
+
 
 static int GetDeviceGroupPeerMemoryFeatures(lua_State *L)
     {
@@ -574,6 +589,7 @@ static const struct luaL_Reg Functions[] =
         { "bind_buffer_memory", BindBufferMemory },
         { "get_memory_fd", GetMemoryFd },
         { "get_memory_fd_properties", GetMemoryFdProperties },
+        { "get_memory_host_pointer_properties", GetMemoryHostPointerProperties },
         { "get_device_group_peer_memory_features", GetDeviceGroupPeerMemoryFeatures },
         { NULL, NULL } /* sentinel */
     };

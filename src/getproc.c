@@ -496,6 +496,8 @@ device_dt_t* getproc_device(lua_State *L, VkDevice device, VkDeviceCreateInfo *c
     GETKHR(GetDeviceGroupSurfacePresentModes);
     GETKHR(GetPhysicalDevicePresentRectangles);
     GETKHR(AcquireNextImage2);
+    //VK_EXT_external_memory_host
+    GET(GetMemoryHostPointerPropertiesEXT);
 #undef GET
 #undef GETKHR
     return dt;

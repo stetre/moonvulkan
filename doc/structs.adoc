@@ -196,6 +196,8 @@ _max_descriptor_set_update_after_bind_input_attachments_: integer, +
 pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkPhysicalDeviceMultiviewPropertiesKHR[VkPhysicalDeviceMultiviewPropertiesKHR], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_multiview[VK_KHR_multiview]): +
 _max_multiview_view_count_: integer, +
 _max_multiview_instance_index_: integer, +
+pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkPhysicalDeviceExternalMemoryHostPropertiesEXT[VkPhysicalDeviceExternalMemoryHostPropertiesEXT], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_external_memory_host[VK_EXT_external_memory_host]): +
+_min_imported_host_pointer_alignment_: integer, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkPhysicalDeviceProperties2.html[VkPhysicalDeviceProperties2])#
 
 
@@ -987,16 +989,14 @@ _buffer_: <<buffer, buffer>>, +
 pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkExportMemoryAllocateInfo.html[VkExportMemoryAllocateInfo], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_external_memory[VK_KHR_external_memory]): +
 _handle_types_: <<externalmemoryhandletypeflags, externalmemoryhandletypeflags>>, +
 pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkImportMemoryFdInfoKHR[VkImportMemoryFdInfoKHR], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_external_memory_fd[VK_KHR_external_memory_fd]): +
-_import_memory_fd_info_: <<importmemoryfdinfo, importmemoryfdinfo>>, +
+_fd_handle_type_: <<externalmemoryhandletypeflags, externalmemoryhandletypeflags>>, +
+_fd_: integer, +
+pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkImportMemoryHostPointerInfoEXT[VkImportMemoryHostPointerInfoEXT], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_external_memory_host[VK_EXT_external_memory_host]): +
+_host_pointer_handle_type_: <<externalmemoryhandletypeflags, externalmemoryhandletypeflags>>, +
+_host_pointer_: lightuserdata, +
 pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkMemoryAllocateFlagsInfoKHR[VkMemoryAllocateFlagsInfoKHR], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_device_group[VK_KHR_device_group]): +
 _device_mask_ integer, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkMemoryAllocateInfo.html[VkMemoryAllocateInfo])#
-
-* [[importmemoryfdinfo]]
-[small]#*importmemoryfdinfo* = { +
-_handle_type_: <<externalmemoryhandletypeflags, externalmemoryhandletypeflags>>, +
-_fd_: integer, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkImportMemoryFdInfoKHR[VkImportMemoryFdInfoKHR])#
 
 * [[memorygetfdinfo]]
 [small]#*memorygetfdinfo* = { +
@@ -1007,6 +1007,11 @@ _handle_type_: <<externalmemoryhandletypeflags, externalmemoryhandletypeflags>>,
 [small]#*memoryfdproperties* = { +
 _memory_type_bits_: integer, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkMemoryFdPropertiesKHR[VkMemoryFdPropertiesKHR])#
+
+* [[memoryhostpointerproperties]]
+[small]#*memoryhostpointerproperties* = { +
+_memory_type_bits_: integer, +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkMemoryHostPointerPropertiesEXT[VkMemoryHostPointerPropertiesEXT])#
 
 '''
 

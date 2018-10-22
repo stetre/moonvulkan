@@ -1827,6 +1827,23 @@ int zinitVkMemoryFdPropertiesKHR(lua_State *L, VkMemoryFdPropertiesKHR* p, int *
 #define zpushVkMemoryFdPropertiesKHR moonvulkan_zpushVkMemoryFdPropertiesKHR
 int zpushVkMemoryFdPropertiesKHR(lua_State *L, const VkMemoryFdPropertiesKHR *p);
 
+#define znewVkMemoryHostPointerPropertiesEXT(L, err) (VkMemoryHostPointerPropertiesEXT*)znew((L), VK_STRUCTURE_TYPE_MEMORY_HOST_POINTER_PROPERTIES_EXT, sizeof(VkMemoryHostPointerPropertiesEXT), (err))
+#define znewarrayVkMemoryHostPointerPropertiesEXT(L, count, err) (VkMemoryHostPointerPropertiesEXT*)znewarray((L), VK_STRUCTURE_TYPE_MEMORY_HOST_POINTER_PROPERTIES_EXT, sizeof(VkMemoryHostPointerPropertiesEXT), (count), (err))
+#define znewchainVkMemoryHostPointerPropertiesEXT moonvulkan_znewchainVkMemoryHostPointerPropertiesEXT
+VkMemoryHostPointerPropertiesEXT* znewchainVkMemoryHostPointerPropertiesEXT(lua_State *L, int *err);
+#define znewchainarrayVkMemoryHostPointerPropertiesEXT moonvulkan_znewchainarrayVkMemoryHostPointerPropertiesEXT
+VkMemoryHostPointerPropertiesEXT* znewchainarrayVkMemoryHostPointerPropertiesEXT(lua_State *L, uint32_t count, int *err);
+#define zcheckVkMemoryHostPointerPropertiesEXT moonvulkan_zcheckVkMemoryHostPointerPropertiesEXT
+VkMemoryHostPointerPropertiesEXT* zcheckVkMemoryHostPointerPropertiesEXT(lua_State *L, int arg, int *err);
+#define zcheckarrayVkMemoryHostPointerPropertiesEXT moonvulkan_zcheckarrayVkMemoryHostPointerPropertiesEXT
+VkMemoryHostPointerPropertiesEXT* zcheckarrayVkMemoryHostPointerPropertiesEXT(lua_State *L, int arg, uint32_t *count, int *err);
+#define zinitVkMemoryHostPointerPropertiesEXT moonvulkan_zinitVkMemoryHostPointerPropertiesEXT
+int zinitVkMemoryHostPointerPropertiesEXT(lua_State *L, VkMemoryHostPointerPropertiesEXT* p, int *err);
+#define zfreeVkMemoryHostPointerPropertiesEXT(L, p, base) zfree((L), (p), (base))
+#define zfreearrayVkMemoryHostPointerPropertiesEXT(L, p, count, base) zfreearray((L), (p), sizeof(VkMemoryHostPointerPropertiesEXT), (count), (base))
+#define zpushVkMemoryHostPointerPropertiesEXT moonvulkan_zpushVkMemoryHostPointerPropertiesEXT
+int zpushVkMemoryHostPointerPropertiesEXT(lua_State *L, const VkMemoryHostPointerPropertiesEXT *p);
+
 #define znewVkMemoryGetFdInfoKHR(L, err) (VkMemoryGetFdInfoKHR*)znew((L), VK_STRUCTURE_TYPE_MEMORY_GET_FD_INFO_KHR, sizeof(VkMemoryGetFdInfoKHR), (err))
 #define znewarrayVkMemoryGetFdInfoKHR(L, count, err) (VkMemoryGetFdInfoKHR*)znewarray((L), VK_STRUCTURE_TYPE_MEMORY_GET_FD_INFO_KHR, sizeof(VkMemoryGetFdInfoKHR), (count), (err))
 #define znewchainVkMemoryGetFdInfoKHR moonvulkan_znewchainVkMemoryGetFdInfoKHR
@@ -2778,6 +2795,23 @@ int zinitVkAcquireNextImageInfoKHR(lua_State *L, VkAcquireNextImageInfoKHR* p, i
 #define zfreearrayVkAcquireNextImageInfoKHR(L, p, count, base) zfreearray((L), (p), sizeof(VkAcquireNextImageInfoKHR), (count), (base))
 #define zpushVkAcquireNextImageInfoKHR moonvulkan_zpushVkAcquireNextImageInfoKHR
 int zpushVkAcquireNextImageInfoKHR(lua_State *L, const VkAcquireNextImageInfoKHR *p);
+
+#define znewVkImportMemoryHostPointerInfoEXT(L, err) (VkImportMemoryHostPointerInfoEXT*)znew((L), VK_STRUCTURE_TYPE_IMPORT_MEMORY_HOST_POINTER_INFO_EXT, sizeof(VkImportMemoryHostPointerInfoEXT), (err))
+#define znewarrayVkImportMemoryHostPointerInfoEXT(L, count, err) (VkImportMemoryHostPointerInfoEXT*)znewarray((L), VK_STRUCTURE_TYPE_IMPORT_MEMORY_HOST_POINTER_INFO_EXT, sizeof(VkImportMemoryHostPointerInfoEXT), (count), (err))
+#define znewchainVkImportMemoryHostPointerInfoEXT moonvulkan_znewchainVkImportMemoryHostPointerInfoEXT
+VkImportMemoryHostPointerInfoEXT* znewchainVkImportMemoryHostPointerInfoEXT(lua_State *L, int *err);
+#define znewchainarrayVkImportMemoryHostPointerInfoEXT moonvulkan_znewchainarrayVkImportMemoryHostPointerInfoEXT
+VkImportMemoryHostPointerInfoEXT* znewchainarrayVkImportMemoryHostPointerInfoEXT(lua_State *L, uint32_t count, int *err);
+#define zcheckVkImportMemoryHostPointerInfoEXT moonvulkan_zcheckVkImportMemoryHostPointerInfoEXT
+VkImportMemoryHostPointerInfoEXT* zcheckVkImportMemoryHostPointerInfoEXT(lua_State *L, int arg, int *err);
+#define zcheckarrayVkImportMemoryHostPointerInfoEXT moonvulkan_zcheckarrayVkImportMemoryHostPointerInfoEXT
+VkImportMemoryHostPointerInfoEXT* zcheckarrayVkImportMemoryHostPointerInfoEXT(lua_State *L, int arg, uint32_t *count, int *err);
+#define zinitVkImportMemoryHostPointerInfoEXT moonvulkan_zinitVkImportMemoryHostPointerInfoEXT
+int zinitVkImportMemoryHostPointerInfoEXT(lua_State *L, VkImportMemoryHostPointerInfoEXT* p, int *err);
+#define zfreeVkImportMemoryHostPointerInfoEXT(L, p, base) zfree((L), (p), (base))
+#define zfreearrayVkImportMemoryHostPointerInfoEXT(L, p, count, base) zfreearray((L), (p), sizeof(VkImportMemoryHostPointerInfoEXT), (count), (base))
+#define zpushVkImportMemoryHostPointerInfoEXT moonvulkan_zpushVkImportMemoryHostPointerInfoEXT
+int zpushVkImportMemoryHostPointerInfoEXT(lua_State *L, const VkImportMemoryHostPointerInfoEXT *p);
 
 
 #ifdef VK_USE_PLATFORM_WIN32_KHR

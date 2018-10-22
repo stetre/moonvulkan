@@ -242,6 +242,7 @@ static int ispresent_(lua_State *L, int arg, const char *sname)
 
 #define SetInteger(name, sname) do { lua_pushinteger(L, p->name); lua_setfield(L, -2, sname); } while(0)
 #define SetHandle SetInteger /* uint64_t handle */
+#define SetLightuserdata(name, sname) do { lua_pushlightuserdata(L, p->name); lua_setfield(L, -2, sname); } while(0)
 #define SetNumber(name, sname) do { lua_pushnumber(L, p->name); lua_setfield(L, -2, sname); } while(0)
 #define SetFlags(name, sname) do { pushflags(L, p->name); lua_setfield(L, -2, sname); } while(0)
 #define SetBits SetFlags
@@ -1569,7 +1570,6 @@ ZCHECK_BEGIN(VkVertexInputBindingDivisorDescriptionEXT)
 ZCHECK_END
 ZCHECKARRAY(VkVertexInputBindingDivisorDescriptionEXT)
 
-//££
 /********************************************************************************
  * Typed structs                                                                *
  ********************************************************************************/
@@ -2164,7 +2164,9 @@ LOCALPUSH_BEGIN(VkPhysicalDeviceMultiviewPropertiesKHR)
     SetInteger(maxMultiviewViewCount, "max_multiview_view_count");
     SetInteger(maxMultiviewInstanceIndex, "max_multiview_instance_index");
 LOCALPUSH_END
-
+LOCALPUSH_BEGIN(VkPhysicalDeviceExternalMemoryHostPropertiesEXT)
+    SetInteger(minImportedHostPointerAlignment, "min_imported_host_pointer_alignment");
+LOCALPUSH_END
 
 ZINIT_BEGIN(VkPhysicalDeviceProperties2)
     EXTENSIONS_BEGIN
@@ -2192,6 +2194,8 @@ ZINIT_BEGIN(VkPhysicalDeviceProperties2)
         ADDX(PHYSICAL_DEVICE_DESCRIPTOR_INDEXING_PROPERTIES_EXT,
                 VkPhysicalDeviceDescriptorIndexingPropertiesEXT);
         ADDX(PHYSICAL_DEVICE_MULTIVIEW_PROPERTIES_KHR, VkPhysicalDeviceMultiviewPropertiesKHR);
+        ADDX(PHYSICAL_DEVICE_EXTERNAL_MEMORY_HOST_PROPERTIES_EXT,
+                VkPhysicalDeviceExternalMemoryHostPropertiesEXT);
     EXTENSIONS_END
 ZINIT_END
 
@@ -2228,6 +2232,8 @@ ZPUSH_BEGIN(VkPhysicalDeviceProperties2)
         XCASE(PHYSICAL_DEVICE_DESCRIPTOR_INDEXING_PROPERTIES_EXT,
                 VkPhysicalDeviceDescriptorIndexingPropertiesEXT);
         XCASE(PHYSICAL_DEVICE_MULTIVIEW_PROPERTIES_KHR, VkPhysicalDeviceMultiviewPropertiesKHR);
+        XCASE(PHYSICAL_DEVICE_EXTERNAL_MEMORY_HOST_PROPERTIES_EXT,
+                VkPhysicalDeviceExternalMemoryHostPropertiesEXT);
     XPUSH_END
 ZPUSH_END
 
@@ -3127,7 +3133,7 @@ ZCHECK_END
 
 ZCHECK_BEGIN(VkImportMemoryFdInfoKHR)
     newstruct(VkImportMemoryFdInfoKHR);
-    GetBits(handleType, "handle_type", VkExternalMemoryHandleTypeFlagBits);
+    GetBits(handleType, "fd_handle_type", VkExternalMemoryHandleTypeFlagBits);
     GetInteger(fd, "fd");
 ZCHECK_END
 
@@ -3137,8 +3143,14 @@ ZCHECK_BEGIN(VkMemoryAllocateFlagsInfoKHR)
     GetInteger(deviceMask, "device_mask");
 ZCHECK_END
 
+ZCHECK_BEGIN(VkImportMemoryHostPointerInfoEXT)
+    newstruct(VkImportMemoryHostPointerInfoEXT);
+    GetFlags(handleType, "host_pointer_handle_type");
+    GetLightuserdata(pHostPointer, "host_pointer", void*);
+ZCHECK_END
+
+
 ZCHECK_BEGIN(VkMemoryAllocateInfo)
-    int arg1;
     checktable(arg);
     newstruct(VkMemoryAllocateInfo);
     GetInteger(allocationSize, "allocation_size");
@@ -3148,25 +3160,23 @@ ZCHECK_BEGIN(VkMemoryAllocateInfo)
         ADD_EXTENSION(VkMemoryDedicatedAllocateInfoKHR);
     if(ispresent("handle_types"))
         ADD_EXTENSION(VkExportMemoryAllocateInfoKHR);
-#define F "import_memory_fd_info"
-        {
-        VkImportMemoryFdInfoKHR *p1;
-        arg1 = pushfield(L, arg, F);
-        p1 = zcheckVkImportMemoryFdInfoKHR(L, arg1, err);
-        popfield(L, arg1);
-        if(*err<0) { prependfield(F); return p; }
-        else if(*err == ERR_NOTPRESENT) poperror();
-        else addtochain(chain, p1);
-        }
-#undef F
+    if(ispresent("fd_handle_type") || ispresent("fd"))
+        ADD_EXTENSION(VkImportMemoryFdInfoKHR);
     if(ispresent("flags") || ispresent("device_mask"))
         ADD_EXTENSION(VkMemoryAllocateFlagsInfoKHR);
+    if(ispresent("host_pointer_handle_type") || ispresent("host_pointer"))
+        ADD_EXTENSION(VkImportMemoryHostPointerInfoEXT);
     EXTENSIONS_END
 ZCHECK_END
 
 /*------------------------------------------------------------------------------*/
 
 ZPUSH_BEGIN(VkMemoryFdPropertiesKHR)
+    lua_newtable(L);
+    SetInteger(memoryTypeBits, "memory_type_bits");
+ZPUSH_END
+
+ZPUSH_BEGIN(VkMemoryHostPointerPropertiesEXT)
     lua_newtable(L);
     SetInteger(memoryTypeBits, "memory_type_bits");
 ZPUSH_END

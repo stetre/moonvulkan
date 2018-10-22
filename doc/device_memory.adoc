@@ -104,3 +104,9 @@ https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkBindImag
 _fd_: integer. +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkGetMemoryFdPropertiesKHR[vkGetMemoryFdPropertiesKHR] (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_external_memory_fd[VK_KHR_external_memory_fd]).#
 
+[[get_memory_host_pointer_properties]]
+* <<memoryhostpointerproperties, _memoryhostpointerproperties_>> = *get_memory_host_pointer_properties*(<<device, _device_>>, _handle_type_, _host_pointer_) +
+[small]#_handle_type_: <<externalmemoryhandletypeflags, externalmemoryhandletypeflags>>, +
+_host_pointer_: lightuserdata. +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkGetMemoryHostPointerPropertiesEXT[vkGetMemoryHostPointerPropertiesEXT] (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_external_memory_host[VK_EXT_external_memory_host]).#
+

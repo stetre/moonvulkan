@@ -257,6 +257,7 @@ local TYPED = {
    { "VkPipelineDiscardRectangleStateCreateInfoEXT", "PIPELINE_DISCARD_RECTANGLE_STATE_CREATE_INFO_EXT" },
    { "VkGraphicsPipelineCreateInfo", "GRAPHICS_PIPELINE_CREATE_INFO" },
    { "VkMemoryFdPropertiesKHR", "MEMORY_FD_PROPERTIES_KHR" },
+   { "VkMemoryHostPointerPropertiesEXT", "MEMORY_HOST_POINTER_PROPERTIES_EXT" },
    { "VkMemoryGetFdInfoKHR", "MEMORY_GET_FD_INFO_KHR" },
    { "VkDeviceEventInfoEXT", "DEVICE_EVENT_INFO_EXT" },
    { "VkDisplayEventInfoEXT", "DISPLAY_EVENT_INFO_EXT" },
@@ -313,6 +314,7 @@ local TYPED = {
    { "VkDeviceGroupPresentInfoKHR", "DEVICE_GROUP_PRESENT_INFO_KHR" },
    { "VkDeviceGroupPresentCapabilitiesKHR", "DEVICE_GROUP_PRESENT_CAPABILITIES_KHR" },
    { "VkAcquireNextImageInfoKHR", "ACQUIRE_NEXT_IMAGE_INFO_KHR" },
+   { "VkImportMemoryHostPointerInfoEXT", "IMPORT_MEMORY_HOST_POINTER_INFO_EXT" },
 }
 
 local TYPED_WIN32 = {

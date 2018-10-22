@@ -318,6 +318,7 @@ typedef struct {
     F(GetDeviceGroupSurfacePresentModesKHR);
     F(GetPhysicalDevicePresentRectanglesKHR);
     F(AcquireNextImage2KHR);
+    F(GetMemoryHostPointerPropertiesEXT);
 #ifdef VK_USE_PLATFORM_WIN32_KHR
     F(GetMemoryWin32HandleKHR);
     F(GetMemoryWin32HandlePropertiesKHR);
