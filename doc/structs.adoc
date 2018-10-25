@@ -444,8 +444,10 @@ pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-exte
 _multiview_: boolean, +
 _multiview_geometry_shader_: boolean, +
 _multiview_tessellation_shader_: boolean, +
+pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkPhysicalDeviceVulkanMemoryModelFeaturesKHR[VkPhysicalDeviceVulkanMemoryModelFeaturesKHR], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_vulkan_memory_model[VK_KHR_vulkan_memory_model]): +
+_vulkan_memory_model_: boolean, +
+_vulkan_memory_model_device_scope_: boolean, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkPhysicalDeviceFeatures2.html[VkPhysicalDeviceFeatures2])#
-
 
 * [[queuefamilyproperties]]
 [small]#*queuefamilyproperties* = { +

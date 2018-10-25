@@ -1721,8 +1721,13 @@ FUNC_BEGIN(MULTIVIEW_FEATURES, VkPhysicalDeviceMultiviewFeaturesKHR)
     GetBoolean(multiviewGeometryShader, "multiview_geometry_shader");
     GetBoolean(multiviewTessellationShader, "multiview_tessellation_shader");
 FUNC_END
+FUNC_BEGIN(VULKAN_MEMORY_MODEL_FEATURES_KHR, VkPhysicalDeviceVulkanMemoryModelFeaturesKHR)
+    GetBoolean(vulkanMemoryModel, "vulkan_memory_model");
+    GetBoolean(vulkanMemoryModelDeviceScope, "vulkan_memory_model_device_scope");
+FUNC_END
 #undef FUNC_BEGIN
 #undef FUNC_END
+
 
 ZINIT_BEGIN(VkPhysicalDeviceFeatures2)
     EXTENSIONS_BEGIN
@@ -1745,6 +1750,8 @@ ZINIT_BEGIN(VkPhysicalDeviceFeatures2)
         ADDX(PHYSICAL_DEVICE_DESCRIPTOR_INDEXING_FEATURES_EXT,
                 VkPhysicalDeviceDescriptorIndexingFeaturesEXT);
         ADDX(PHYSICAL_DEVICE_MULTIVIEW_FEATURES_KHR, VkPhysicalDeviceMultiviewFeaturesKHR);
+        ADDX(PHYSICAL_DEVICE_VULKAN_MEMORY_MODEL_FEATURES_KHR,
+                VkPhysicalDeviceVulkanMemoryModelFeaturesKHR);
     EXTENSIONS_END
 ZINIT_END
 
@@ -1777,6 +1784,7 @@ ZCHECK_BEGIN(VkPhysicalDeviceFeatures2)
         ADD(VkPhysicalDeviceInlineUniformBlockFeaturesEXT);
         ADD(VkPhysicalDeviceDescriptorIndexingFeaturesEXT);
         ADD(VkPhysicalDeviceMultiviewFeaturesKHR);
+        ADD(VkPhysicalDeviceVulkanMemoryModelFeaturesKHR);
     #undef ADD
     EXTENSIONS_END
 ZCHECK_END
@@ -1907,6 +1915,10 @@ LOCALPUSH_BEGIN(VkPhysicalDeviceMultiviewFeaturesKHR)
     SetBoolean(multiviewGeometryShader, "multiview_geometry_shader");
     SetBoolean(multiviewTessellationShader, "multiview_tessellation_shader");
 LOCALPUSH_END
+LOCALPUSH_BEGIN(VkPhysicalDeviceVulkanMemoryModelFeaturesKHR)
+    SetBoolean(vulkanMemoryModel, "vulkan_memory_model");
+    SetBoolean(vulkanMemoryModelDeviceScope, "vulkan_memory_model_device_scope");
+LOCALPUSH_END
 
 ZPUSH_BEGIN(VkPhysicalDeviceFeatures)
     lua_newtable(L);
@@ -1937,6 +1949,8 @@ ZPUSH_BEGIN(VkPhysicalDeviceFeatures2)
         XCASE(PHYSICAL_DEVICE_DESCRIPTOR_INDEXING_FEATURES_EXT,
                 VkPhysicalDeviceDescriptorIndexingFeaturesEXT);
         XCASE(PHYSICAL_DEVICE_MULTIVIEW_FEATURES_KHR, VkPhysicalDeviceMultiviewFeaturesKHR);
+        XCASE(PHYSICAL_DEVICE_VULKAN_MEMORY_MODEL_FEATURES_KHR,
+                VkPhysicalDeviceVulkanMemoryModelFeaturesKHR);
     XPUSH_END
 ZPUSH_END
 
