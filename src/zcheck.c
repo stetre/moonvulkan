@@ -162,11 +162,19 @@ int zinit##VkXxx(lua_State *L, VkXxx* p, int *err) { (void)L; (void)(p);
 
 /* Structs chaining via pNext -------------------------------------------------*/
 #define pnextof(p_) (void**)&((p_)->pNext)
-#define addtochain(chain_, p_) \
-    do { if(p_) { *(chain_) = (p_); (chain_) = pnextof(p_); } } while(0)
-/* addtochain() appends the struct pointed to by p_ to the chain.
- * const void **chain_ must contains the address of the pNext field of the
- * struct that is currently last in the chain. */
+#define addtochain(chain_, p_) do {                                     \
+    VkBaseOutStructure *pp_ = (VkBaseOutStructure*)p_;                  \
+    while(pp_) {                                                        \
+        *(chain_)=(pp_);                                                \
+        (chain_)=pnextof(pp_);                                          \
+        (pp_)=(VkBaseOutStructure*)(pp_)->pNext;                        \
+    }                                                                   \
+} while(0)
+/* const void** chain_ contains the address of the pNext field of the struct that
+ * is currently last in the pNext chain.
+ * addtochain() appends to the chain the struct pointed to by p_, together with its
+ * own pNext chain.
+ */
 #define EXTENSIONS_BEGIN do { void **chain = pnextof(p);
 #define EXTENSIONS_END } while(0);
 #define ADD_EXTENSION(VkXxx)    do { /* for inlined extensions only (see note below) */\
