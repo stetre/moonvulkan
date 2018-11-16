@@ -29,21 +29,9 @@ ifeq ($(D),1)
 DEBUG=1
 endif
 
-#VULKAN?=/usr
-#INCDIR = -I$(VULKAN)/include/
-#LIBDIR = -L$(VULKAN)/lib
-
-ifdef LINUX
-#LIBS = -lvulkan
-endif
-ifdef MINGW
-LIBS = -llua
-endif
-
 Tgt	:= moonvulkan
 Src := $(wildcard *.c)
 Objs := $(Src:.c=.o)
-
  
 COPT	+= -O2
 #COPT	+= -O0 -g
@@ -55,9 +43,12 @@ COPT 	+= -DLUAVER=$(LUAVER)
 ifdef LINUX
 COPT    += -fpic
 COPT	+= -DLINUX
+INCDIR = -I/usr/include/lua$(LUAVER)
+LIBDIR =
 endif
 ifdef MINGW
 COPT	+= -DMINGW
+LIBS = -llua
 endif
 ifdef DEBUG
 COPT	+= -DDEBUG
