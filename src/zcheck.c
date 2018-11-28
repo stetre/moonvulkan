@@ -1725,9 +1725,12 @@ FUNC_BEGIN(VULKAN_MEMORY_MODEL_FEATURES_KHR, VkPhysicalDeviceVulkanMemoryModelFe
     GetBoolean(vulkanMemoryModel, "vulkan_memory_model");
     GetBoolean(vulkanMemoryModelDeviceScope, "vulkan_memory_model_device_scope");
 FUNC_END
+FUNC_BEGIN(SHADER_ATOMIC_INT64_FEATURES_KHR, VkPhysicalDeviceShaderAtomicInt64FeaturesKHR)
+    GetBoolean(shaderBufferInt64Atomics, "shader_buffer_int64_atomics");
+    GetBoolean(shaderSharedInt64Atomics, "shader_shared_int64_atomics");
+FUNC_END
 #undef FUNC_BEGIN
 #undef FUNC_END
-
 
 ZINIT_BEGIN(VkPhysicalDeviceFeatures2)
     EXTENSIONS_BEGIN
@@ -1752,6 +1755,8 @@ ZINIT_BEGIN(VkPhysicalDeviceFeatures2)
         ADDX(PHYSICAL_DEVICE_MULTIVIEW_FEATURES_KHR, VkPhysicalDeviceMultiviewFeaturesKHR);
         ADDX(PHYSICAL_DEVICE_VULKAN_MEMORY_MODEL_FEATURES_KHR,
                 VkPhysicalDeviceVulkanMemoryModelFeaturesKHR);
+        ADDX(PHYSICAL_DEVICE_SHADER_ATOMIC_INT64_FEATURES_KHR,
+                VkPhysicalDeviceShaderAtomicInt64FeaturesKHR);
     EXTENSIONS_END
 ZINIT_END
 
@@ -1785,6 +1790,7 @@ ZCHECK_BEGIN(VkPhysicalDeviceFeatures2)
         ADD(VkPhysicalDeviceDescriptorIndexingFeaturesEXT);
         ADD(VkPhysicalDeviceMultiviewFeaturesKHR);
         ADD(VkPhysicalDeviceVulkanMemoryModelFeaturesKHR);
+        ADD(VkPhysicalDeviceShaderAtomicInt64FeaturesKHR);
     #undef ADD
     EXTENSIONS_END
 ZCHECK_END
@@ -1919,6 +1925,10 @@ LOCALPUSH_BEGIN(VkPhysicalDeviceVulkanMemoryModelFeaturesKHR)
     SetBoolean(vulkanMemoryModel, "vulkan_memory_model");
     SetBoolean(vulkanMemoryModelDeviceScope, "vulkan_memory_model_device_scope");
 LOCALPUSH_END
+LOCALPUSH_BEGIN(VkPhysicalDeviceShaderAtomicInt64FeaturesKHR)
+    SetBoolean(shaderBufferInt64Atomics, "shader_buffer_int64_atomics");
+    SetBoolean(shaderSharedInt64Atomics, "shader_shared_int64_atomics");
+LOCALPUSH_END
 
 ZPUSH_BEGIN(VkPhysicalDeviceFeatures)
     lua_newtable(L);
@@ -1951,6 +1961,8 @@ ZPUSH_BEGIN(VkPhysicalDeviceFeatures2)
         XCASE(PHYSICAL_DEVICE_MULTIVIEW_FEATURES_KHR, VkPhysicalDeviceMultiviewFeaturesKHR);
         XCASE(PHYSICAL_DEVICE_VULKAN_MEMORY_MODEL_FEATURES_KHR,
                 VkPhysicalDeviceVulkanMemoryModelFeaturesKHR);
+        XCASE(PHYSICAL_DEVICE_SHADER_ATOMIC_INT64_FEATURES_KHR,
+                VkPhysicalDeviceShaderAtomicInt64FeaturesKHR);
     XPUSH_END
 ZPUSH_END
 

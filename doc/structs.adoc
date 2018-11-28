@@ -447,7 +447,11 @@ _multiview_tessellation_shader_: boolean, +
 pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkPhysicalDeviceVulkanMemoryModelFeaturesKHR[VkPhysicalDeviceVulkanMemoryModelFeaturesKHR], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_vulkan_memory_model[VK_KHR_vulkan_memory_model]): +
 _vulkan_memory_model_: boolean, +
 _vulkan_memory_model_device_scope_: boolean, +
+pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkPhysicalDeviceShaderAtomicInt64FeaturesKHR[VkPhysicalDeviceShaderAtomicInt64FeaturesKHR], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_shader_atomic_int64[VK_KHR_shader_atomic_int64]): +
+_shader_buffer_int64_atomics_: boolean, +
+_shader_shared_int64_atomics_: boolean, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkPhysicalDeviceFeatures2.html[VkPhysicalDeviceFeatures2])#
+
 
 * [[queuefamilyproperties]]
 [small]#*queuefamilyproperties* = { +
