@@ -436,6 +436,9 @@ static VkFlags checkaccessflags(lua_State *L, int arg)
     CASE(VK_ACCESS_MEMORY_WRITE_BIT, "memory write");
     CASE(VK_ACCESS_COLOR_ATTACHMENT_READ_NONCOHERENT_BIT_EXT, "color attachment read noncoherent");
     CASE(VK_ACCESS_CONDITIONAL_RENDERING_READ_BIT_EXT, "conditional rendering read");
+    CASE(VK_ACCESS_TRANSFORM_FEEDBACK_WRITE_BIT_EXT, "transform feedback write");
+    CASE(VK_ACCESS_TRANSFORM_FEEDBACK_COUNTER_READ_BIT_EXT, "transform feedback counter read");
+    CASE(VK_ACCESS_TRANSFORM_FEEDBACK_COUNTER_WRITE_BIT_EXT, "transform feedback counter write");
 #undef CASE
         return (VkFlags)luaL_argerror(L, --arg, badvalue(L,s));
         done: ;
@@ -468,8 +471,10 @@ static int pushaccessflags(lua_State *L, VkFlags flags)
     CASE(VK_ACCESS_MEMORY_WRITE_BIT, "memory write");
     CASE(VK_ACCESS_COLOR_ATTACHMENT_READ_NONCOHERENT_BIT_EXT, "color attachment read noncoherent");
     CASE(VK_ACCESS_CONDITIONAL_RENDERING_READ_BIT_EXT, "conditional rendering read");
+    CASE(VK_ACCESS_TRANSFORM_FEEDBACK_WRITE_BIT_EXT, "transform feedback write");
+    CASE(VK_ACCESS_TRANSFORM_FEEDBACK_COUNTER_READ_BIT_EXT, "transform feedback counter read");
+    CASE(VK_ACCESS_TRANSFORM_FEEDBACK_COUNTER_WRITE_BIT_EXT, "transform feedback counter write");
 #undef CASE
-
     return n;
     }
 
@@ -501,6 +506,9 @@ static int AccessFlags(lua_State *L)
     ADD(ACCESS_MEMORY_WRITE_BIT);\
     ADD(ACCESS_COLOR_ATTACHMENT_READ_NONCOHERENT_BIT_EXT);\
     ADD(ACCESS_CONDITIONAL_RENDERING_READ_BIT_EXT);\
+    ADD(ACCESS_TRANSFORM_FEEDBACK_WRITE_BIT_EXT);\
+    ADD(ACCESS_TRANSFORM_FEEDBACK_COUNTER_READ_BIT_EXT);\
+    ADD(ACCESS_TRANSFORM_FEEDBACK_COUNTER_WRITE_BIT_EXT);\
 
 
 
@@ -901,6 +909,8 @@ static VkFlags checkbufferusageflags(lua_State *L, int arg)
     CASE(VK_BUFFER_USAGE_VERTEX_BUFFER_BIT, "vertex buffer");
     CASE(VK_BUFFER_USAGE_INDIRECT_BUFFER_BIT, "indirect buffer");
     CASE(VK_BUFFER_USAGE_CONDITIONAL_RENDERING_BIT_EXT, "conditional rendering");
+    CASE(VK_BUFFER_USAGE_TRANSFORM_FEEDBACK_BUFFER_BIT_EXT, "transform feedback buffer");
+    CASE(VK_BUFFER_USAGE_TRANSFORM_FEEDBACK_COUNTER_BUFFER_BIT_EXT, "transform feedback counter buffer");
 #undef CASE
         return (VkFlags)luaL_argerror(L, --arg, badvalue(L,s));
         done: ;
@@ -924,6 +934,8 @@ static int pushbufferusageflags(lua_State *L, VkFlags flags)
     CASE(VK_BUFFER_USAGE_VERTEX_BUFFER_BIT, "vertex buffer");
     CASE(VK_BUFFER_USAGE_INDIRECT_BUFFER_BIT, "indirect buffer");
     CASE(VK_BUFFER_USAGE_CONDITIONAL_RENDERING_BIT_EXT, "conditional rendering");
+    CASE(VK_BUFFER_USAGE_TRANSFORM_FEEDBACK_BUFFER_BIT_EXT, "transform feedback buffer");
+    CASE(VK_BUFFER_USAGE_TRANSFORM_FEEDBACK_COUNTER_BUFFER_BIT_EXT, "transform feedback counter buffer");
 #undef CASE
 
     return n;
@@ -948,6 +960,8 @@ static int BufferUsageFlags(lua_State *L)
     ADD(BUFFER_USAGE_VERTEX_BUFFER_BIT);\
     ADD(BUFFER_USAGE_INDIRECT_BUFFER_BIT);\
     ADD(BUFFER_USAGE_CONDITIONAL_RENDERING_BIT_EXT);\
+    ADD(BUFFER_USAGE_TRANSFORM_FEEDBACK_BUFFER_BIT_EXT);\
+    ADD(BUFFER_USAGE_TRANSFORM_FEEDBACK_COUNTER_BUFFER_BIT_EXT);\
 
 
 /*----------------------------------------------------------------------*
@@ -1300,6 +1314,10 @@ static VkFlags checkimageaspectflags(lua_State *L, int arg)
     CASE(VK_IMAGE_ASPECT_PLANE_0_BIT, "plane 0");
     CASE(VK_IMAGE_ASPECT_PLANE_1_BIT, "plane 1");
     CASE(VK_IMAGE_ASPECT_PLANE_2_BIT, "plane 2");
+    CASE(VK_IMAGE_ASPECT_MEMORY_PLANE_0_BIT_EXT, "memory plane 0");
+    CASE(VK_IMAGE_ASPECT_MEMORY_PLANE_1_BIT_EXT, "memory plane 1");
+    CASE(VK_IMAGE_ASPECT_MEMORY_PLANE_2_BIT_EXT, "memory plane 2");
+    CASE(VK_IMAGE_ASPECT_MEMORY_PLANE_3_BIT_EXT, "memory plane 3");
 #undef CASE
         return (VkFlags)luaL_argerror(L, --arg, badvalue(L,s));
         done: ;
@@ -1320,6 +1338,10 @@ static int pushimageaspectflags(lua_State *L, VkFlags flags)
     CASE(VK_IMAGE_ASPECT_PLANE_0_BIT, "plane 0");
     CASE(VK_IMAGE_ASPECT_PLANE_1_BIT, "plane 1");
     CASE(VK_IMAGE_ASPECT_PLANE_2_BIT, "plane 2");
+    CASE(VK_IMAGE_ASPECT_MEMORY_PLANE_0_BIT_EXT, "memory plane 0");
+    CASE(VK_IMAGE_ASPECT_MEMORY_PLANE_1_BIT_EXT, "memory plane 1");
+    CASE(VK_IMAGE_ASPECT_MEMORY_PLANE_2_BIT_EXT, "memory plane 2");
+    CASE(VK_IMAGE_ASPECT_MEMORY_PLANE_3_BIT_EXT, "memory plane 3");
 #undef CASE
 
     return n;
@@ -1341,9 +1363,10 @@ static int ImageAspectFlags(lua_State *L)
     ADD(IMAGE_ASPECT_PLANE_0_BIT);\
     ADD(IMAGE_ASPECT_PLANE_1_BIT);\
     ADD(IMAGE_ASPECT_PLANE_2_BIT);\
-
-
-
+    ADD(IMAGE_ASPECT_MEMORY_PLANE_0_BIT_EXT);\
+    ADD(IMAGE_ASPECT_MEMORY_PLANE_1_BIT_EXT);\
+    ADD(IMAGE_ASPECT_MEMORY_PLANE_2_BIT_EXT);\
+    ADD(IMAGE_ASPECT_MEMORY_PLANE_3_BIT_EXT);\
 
 /*----------------------------------------------------------------------*
  | VkPipelineStageFlags
@@ -1374,6 +1397,7 @@ static VkFlags checkpipelinestageflags(lua_State *L, int arg)
         CASE(VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT, "bottom of pipe");
         CASE(VK_PIPELINE_STAGE_HOST_BIT, "host");
         CASE(VK_PIPELINE_STAGE_CONDITIONAL_RENDERING_BIT_EXT, "conditional rendering");
+        CASE(VK_PIPELINE_STAGE_TRANSFORM_FEEDBACK_BIT_EXT, "transform feedback");
     // These are not individual bits:
         CASE(VK_PIPELINE_STAGE_ALL_GRAPHICS_BIT, "all graphics");
         CASE(VK_PIPELINE_STAGE_ALL_COMMANDS_BIT, "all commands");
@@ -1406,6 +1430,7 @@ static int pushpipelinestageflags(lua_State *L, VkFlags flags)
         CASE(VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT, "bottom of pipe");
         CASE(VK_PIPELINE_STAGE_HOST_BIT, "host");
         CASE(VK_PIPELINE_STAGE_CONDITIONAL_RENDERING_BIT_EXT, "conditional rendering");
+        CASE(VK_PIPELINE_STAGE_TRANSFORM_FEEDBACK_BIT_EXT, "transform feedback");
     // These are not individual bits:
         CASE(VK_PIPELINE_STAGE_ALL_GRAPHICS_BIT, "all graphics");
         CASE(VK_PIPELINE_STAGE_ALL_COMMANDS_BIT, "all commands");
@@ -1441,6 +1466,7 @@ static int PipelineStageFlags(lua_State *L)
     ADD(PIPELINE_STAGE_ALL_GRAPHICS_BIT);\
     ADD(PIPELINE_STAGE_ALL_COMMANDS_BIT);\
     ADD(PIPELINE_STAGE_CONDITIONAL_RENDERING_BIT_EXT);\
+    ADD(PIPELINE_STAGE_TRANSFORM_FEEDBACK_BIT_EXT);\
 
 
 /*----------------------------------------------------------------------*
@@ -3290,6 +3316,7 @@ static const struct luaL_Reg Functions[] =
         { "debugutilsmessengercallbackdataflags", ReservedFlags }, /* VkDebugUtilsMessengerCallbackDataFlagsEXT */
         { "debugutilsmessengercreateflags", ReservedFlags }, /* VkDebugUtilsMessengerCreateFlagsEXT */
         { "pipelinerasterizationconservativestatecreateflags", ReservedFlags }, /* VkPipelineRasterizationConservativeStateCreateFlagsEXT */
+        { "pipelinerasterizationstatestreamcreateflags", ReservedFlags }, /* VkPipelineRasterizationStateStreamCreateFlagsEXT */
 //      { "", ReservedFlags }, /*  */
         { NULL, NULL } /* sentinel */
     };

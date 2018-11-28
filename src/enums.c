@@ -326,6 +326,8 @@ static int Enum(lua_State *L)
     CASE(queueglobalpriority);
     CASE(conservativerasterizationmode);
     CASE(vendorid);
+    CASE(driverid);
+    CASE(timedomain);
 #undef CASE
     return 0;
     }
@@ -400,6 +402,7 @@ void moonvulkan_open_enums(lua_State *L)
     ADD(ERROR_INVALID_EXTERNAL_HANDLE, "invalid external handle");
     ADD(ERROR_NOT_PERMITTED_EXT, "not permitted");
     ADD(ERROR_FRAGMENTATION_EXT, "fragmentation");
+    ADD(ERROR_INVALID_DRM_FORMAT_MODIFIER_PLANE_LAYOUT_EXT, "invalid drm format modifier plane layout");
 
     domain = DOMAIN_PIPELINE_CACHE_HEADER_VERSION; /* VkPipelineCacheHeaderVersion */
     ADD(PIPELINE_CACHE_HEADER_VERSION_ONE, "one");
@@ -643,6 +646,7 @@ void moonvulkan_open_enums(lua_State *L)
     domain = DOMAIN_IMAGE_TILING; /* VkImageTiling */
     ADD(IMAGE_TILING_OPTIMAL, "optimal");
     ADD(IMAGE_TILING_LINEAR, "linear");
+    ADD(IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT, "drm format modifier");
 
     domain = DOMAIN_PHYSICAL_DEVICE_TYPE; /* VkPhysicalDeviceType */
     ADD(PHYSICAL_DEVICE_TYPE_OTHER, "other");
@@ -655,6 +659,7 @@ void moonvulkan_open_enums(lua_State *L)
     ADD(QUERY_TYPE_OCCLUSION, "occlusion");
     ADD(QUERY_TYPE_PIPELINE_STATISTICS, "pipeline statistics");
     ADD(QUERY_TYPE_TIMESTAMP, "timestamp");
+    ADD(QUERY_TYPE_TRANSFORM_FEEDBACK_STREAM_EXT, "transform feedback stream");
 
     domain = DOMAIN_SHARING_MODE; /* VkSharingMode */
     ADD(SHARING_MODE_EXCLUSIVE, "exclusive");
@@ -1079,6 +1084,23 @@ void moonvulkan_open_enums(lua_State *L)
     ADD(VENDOR_ID_VIV, "viv");
     ADD(VENDOR_ID_VSI, "vsi");
     ADD(VENDOR_ID_KAZAN, "kazan");
+
+    domain = DOMAIN_DRIVER_ID; /* VkDriverIdKHR */
+    ADD(DRIVER_ID_AMD_PROPRIETARY_KHR, "amd proprietary");
+    ADD(DRIVER_ID_AMD_OPEN_SOURCE_KHR, "amd open source");
+    ADD(DRIVER_ID_MESA_RADV_KHR, "mesa radv");
+    ADD(DRIVER_ID_NVIDIA_PROPRIETARY_KHR, "nvidia proprietary");
+    ADD(DRIVER_ID_INTEL_PROPRIETARY_WINDOWS_KHR, "intel proprietary windows");
+    ADD(DRIVER_ID_INTEL_OPEN_SOURCE_MESA_KHR, "intel open source mesa");
+    ADD(DRIVER_ID_IMAGINATION_PROPRIETARY_KHR, "imagination proprietary");
+    ADD(DRIVER_ID_QUALCOMM_PROPRIETARY_KHR, "qualcomm proprietary");
+    ADD(DRIVER_ID_ARM_PROPRIETARY_KHR, "arm proprietary");
+
+    domain = DOMAIN_TIME_DOMAIN; /* VkTimaDomainEXT */
+    ADD(TIME_DOMAIN_DEVICE_EXT, "device");
+    ADD(TIME_DOMAIN_CLOCK_MONOTONIC_EXT, "clock monotonic");
+    ADD(TIME_DOMAIN_CLOCK_MONOTONIC_RAW_EXT, "clock monotonic raw");
+    ADD(TIME_DOMAIN_QUERY_PERFORMANCE_COUNTER_EXT, "query performance counter");
 
 #undef ADD
     }

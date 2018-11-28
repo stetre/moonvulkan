@@ -24,7 +24,7 @@ for semantic and usage information.
 
 [[result]]
 [small]#*result*: vk.XXX (results), vk.ERROR_XXX (errors) +
-Values: '_success_', '_not ready_', '_timeout_', '_event set_', '_event reset_', '_incomplete_', '_out of host memory_', '_out of device memory_', '_initialization failed_', '_device lost_', '_memory map failed_', '_layer not present_', '_extension not present_', '_feature not present_', '_incompatible driver_', '_too many objects_', '_format not supported_', '_fragmented pool_', '_surface lost_', '_native window in use_', '_suboptimal_', '_out of date_', '_incompatible display_', '_validation failed_', '_out of pool memory_', '_invalid external handle_', '_not permitted_', '_fragmentation_'. +
+Values: '_success_', '_not ready_', '_timeout_', '_event set_', '_event reset_', '_incomplete_', '_out of host memory_', '_out of device memory_', '_initialization failed_', '_device lost_', '_memory map failed_', '_layer not present_', '_extension not present_', '_feature not present_', '_incompatible driver_', '_too many objects_', '_format not supported_', '_fragmented pool_', '_surface lost_', '_native window in use_', '_suboptimal_', '_out of date_', '_incompatible display_', '_validation failed_', '_out of pool memory_', '_invalid external handle_', '_not permitted_', '_fragmentation_', '_invalid drm format modifier plane layout_'. +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkResult.html[VkResult].#
 
 [[attachmentloadop]]
@@ -132,6 +132,11 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.ht
 Values: '_off_', '_suspend_', '_on_'. +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkDisplayPowerStateEXT[VkDisplayPowerStateEXT].#
 
+[[driverid]]
+[small]#*driverid*: vk.DRIVER_ID_XXX_KHR +
+Values: '_amd proprietary_', '_amd open source_', '_mesa radv_', '_nvidia proprietary_', '_intel proprietary windows_', '_intel open source mesa_', '_imagination proprietary_', '_qualcomm proprietary_', '_arm proprietary_'. +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkDriverIdKHR.html[VkDriverIdKHR].#
+
 [[dynamicstate]]
 [small]#*dynamicstate*: vk.DYNAMIC_STATE_XXX +
 Values:
@@ -165,7 +170,7 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkIma
 [[imagetiling]]
 [small]#*imagetiling*: vk.IMAGE_TILING_XXX +
 Values:
-'_optimal_' (default), '_linear_'. +
+'_optimal_' (default), '_linear_', '_drm format modifier_'. +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkImageTiling.html[VkImageTiling].#
 
 [[imagetype]]
@@ -235,7 +240,7 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkPri
 [[querytype]]
 [small]#*querytype*: vk.QUERY_TYPE_XXX +
 Values:
-'_occlusion_', '_pipeline statistics_', '_timestamp_'. +
+'_occlusion_', '_pipeline statistics_', '_timestamp_', '_transform feedback stream_'. +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkQueryType.html[VkQueryType].#
 
 [[queueglobalpriority]]
@@ -291,6 +296,11 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkSub
 [small]#*tessellationdomainorigin*: vk.TESSELLATION_DOMAIN_ORIGIN_XXX +
 Values: '_upper left_', '_lower left_'. +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkTessellationDomainOrigin.html[VkTessellationDomainOrigin].#
+
+[[timedomain]]
+[small]#*timedomain*: vk.TIME_DOMAIN_XXX_EXT +
+Values: '_device_', '_clock monotonic_', '_clock monotonic raw_', '_query performance counter_'. +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkTimeDomainEXT.html[VkTimeDomainEXT].#
 
 [[validationcacheheaderversion]]
 [small]#*validationcacheheaderversion*: vk.VALIDATION_CACHE_HEADER_VERSION_XXX_EXT +

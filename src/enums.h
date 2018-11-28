@@ -99,6 +99,8 @@ void enums_freelist(lua_State *L, uint32_t *list);
 #define DOMAIN_QUEUE_GLOBAL_PRIORITY            52
 #define DOMAIN_CONSERVATIVE_RASTERIZATION_MODE  53
 #define DOMAIN_VENDOR_ID                        54
+#define DOMAIN_DRIVER_ID                        55
+#define DOMAIN_TIME_DOMAIN                      56
 
 /* NONVK additions */
 #define DOMAIN_NONVK_TYPE                       101
@@ -425,6 +427,20 @@ void enums_freelist(lua_State *L, uint32_t *list);
 #define valuesvendorid(L) enums_values((L), DOMAIN_VENDOR_ID)
 #define checkvendoridlist(L, arg, count, err) (VkVendorId*)enums_checklist((L), DOMAIN_VENDOR_ID, (arg), (count), (err))
 #define freevendoridlist(L, list) enums_freelist((L), (uint32_t*)(list))
+
+#define testdriverid(L, arg, err) (VkDriverIdKHR)enums_test((L), DOMAIN_DRIVER_ID, (arg), (err))
+#define checkdriverid(L, arg) (VkDriverIdKHR)enums_check((L), DOMAIN_DRIVER_ID, (arg))
+#define pushdriverid(L, val) enums_push((L), DOMAIN_DRIVER_ID, (uint32_t)(val))
+#define valuesdriverid(L) enums_values((L), DOMAIN_DRIVER_ID)
+#define checkdriveridlist(L, arg, count, err) (VkDriverIdKHR*)enums_checklist((L), DOMAIN_DRIVER_ID, (arg), (count), (err))
+#define freedriveridlist(L, list) enums_freelist((L), (uint32_t*)(list))
+
+#define testtimedomain(L, arg, err) (VkTimeDomainEXT)enums_test((L), DOMAIN_TIME_DOMAIN, (arg), (err))
+#define checktimedomain(L, arg) (VkTimeDomainEXT)enums_check((L), DOMAIN_TIME_DOMAIN, (arg))
+#define pushtimedomain(L, val) enums_push((L), DOMAIN_TIME_DOMAIN, (uint32_t)(val))
+#define valuestimedomain(L) enums_values((L), DOMAIN_TIME_DOMAIN)
+#define checktimedomainlist(L, arg, count, err) (VkTimeDomainEXT*)enums_checklist((L), DOMAIN_TIME_DOMAIN, (arg), (count), (err))
+#define freetimedomainlist(L, list) enums_freelist((L), (uint32_t*)(list))
 
 #if 0 /* scaffolding 7yy */
 #define testxxx(L, arg, err) (VkXxx)enums_test((L), DOMAIN_XXX, (arg), (err))
