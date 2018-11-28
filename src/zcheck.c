@@ -2216,6 +2216,12 @@ LOCALPUSH_BEGIN(VkPhysicalDeviceDriverPropertiesKHR)
     SetString(driverInfo, "driver_info");
     SetStruct(conformanceVersion, "conformance_version", VkConformanceVersionKHR);
 LOCALPUSH_END
+LOCALPUSH_BEGIN(VkPhysicalDevicePCIBusInfoPropertiesEXT)
+    SetInteger(pciDomain, "pci_domain");
+    SetInteger(pciBus, "pci_bus");
+    SetInteger(pciDevice, "pci_device");
+    SetInteger(pciFunction, "pci_function");
+LOCALPUSH_END
 
 ZINIT_BEGIN(VkPhysicalDeviceProperties2)
     EXTENSIONS_BEGIN
@@ -2246,6 +2252,7 @@ ZINIT_BEGIN(VkPhysicalDeviceProperties2)
         ADDX(PHYSICAL_DEVICE_EXTERNAL_MEMORY_HOST_PROPERTIES_EXT,
                 VkPhysicalDeviceExternalMemoryHostPropertiesEXT);
         ADDX(PHYSICAL_DEVICE_DRIVER_PROPERTIES_KHR, VkPhysicalDeviceDriverPropertiesKHR);
+        ADDX(PHYSICAL_DEVICE_PCI_BUS_INFO_PROPERTIES_EXT, VkPhysicalDevicePCIBusInfoPropertiesEXT);
     EXTENSIONS_END
 ZINIT_END
 
@@ -2285,6 +2292,7 @@ ZPUSH_BEGIN(VkPhysicalDeviceProperties2)
         XCASE(PHYSICAL_DEVICE_EXTERNAL_MEMORY_HOST_PROPERTIES_EXT,
                 VkPhysicalDeviceExternalMemoryHostPropertiesEXT);
         XCASE(PHYSICAL_DEVICE_DRIVER_PROPERTIES_KHR, VkPhysicalDeviceDriverPropertiesKHR);
+        XCASE(PHYSICAL_DEVICE_PCI_BUS_INFO_PROPERTIES_EXT, VkPhysicalDevicePCIBusInfoPropertiesEXT);
     XPUSH_END
 ZPUSH_END
 

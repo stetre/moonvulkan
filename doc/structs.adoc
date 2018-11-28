@@ -203,6 +203,11 @@ _driver_id_: <<driverid, driverid>>, +
 _driver_name_: string, +
 _driver_info_: string, +
 _conformance_version_: <<conformanceversion, conformanceversion>>, +
+pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkPhysicalDevicePCIBusInfoPropertiesEXT[VkPhysicalDevicePCIBusInfoPropertiesEXT], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_pci_bus_info[VK_EXT_pci_bus_info]): +
+_pci_domain_: integer, +
+_pci_bus_: integer, +
+_pci_device_: integer, +
+_pci_function_: integer, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkPhysicalDeviceProperties2.html[VkPhysicalDeviceProperties2])#
 
 * [[conformanceversion]]
