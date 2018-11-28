@@ -2091,6 +2091,15 @@ ZPUSH_END
 
 /*------------------------------------------------------------------------------*/
 
+static ZPUSH_BEGIN(VkConformanceVersionKHR)
+    lua_newtable(L);
+    SetInteger(major, "major");
+    SetInteger(minor, "minor");
+    SetInteger(subminor, "subminor");
+    SetInteger(patch, "patch");
+ZPUSH_END
+
+
 LOCALPUSH_BEGIN(VkPhysicalDeviceProperties)
     SetInteger(apiVersion, "api_version");
     SetInteger(driverVersion, "driver_version");
@@ -2201,6 +2210,12 @@ LOCALPUSH_END
 LOCALPUSH_BEGIN(VkPhysicalDeviceExternalMemoryHostPropertiesEXT)
     SetInteger(minImportedHostPointerAlignment, "min_imported_host_pointer_alignment");
 LOCALPUSH_END
+LOCALPUSH_BEGIN(VkPhysicalDeviceDriverPropertiesKHR)
+    SetEnum(driverID, "driver_id", pushdriverid);
+    SetString(driverName, "driver_name");
+    SetString(driverInfo, "driver_info");
+    SetStruct(conformanceVersion, "conformance_version", VkConformanceVersionKHR);
+LOCALPUSH_END
 
 ZINIT_BEGIN(VkPhysicalDeviceProperties2)
     EXTENSIONS_BEGIN
@@ -2230,6 +2245,7 @@ ZINIT_BEGIN(VkPhysicalDeviceProperties2)
         ADDX(PHYSICAL_DEVICE_MULTIVIEW_PROPERTIES_KHR, VkPhysicalDeviceMultiviewPropertiesKHR);
         ADDX(PHYSICAL_DEVICE_EXTERNAL_MEMORY_HOST_PROPERTIES_EXT,
                 VkPhysicalDeviceExternalMemoryHostPropertiesEXT);
+        ADDX(PHYSICAL_DEVICE_DRIVER_PROPERTIES_KHR, VkPhysicalDeviceDriverPropertiesKHR);
     EXTENSIONS_END
 ZINIT_END
 
@@ -2268,6 +2284,7 @@ ZPUSH_BEGIN(VkPhysicalDeviceProperties2)
         XCASE(PHYSICAL_DEVICE_MULTIVIEW_PROPERTIES_KHR, VkPhysicalDeviceMultiviewPropertiesKHR);
         XCASE(PHYSICAL_DEVICE_EXTERNAL_MEMORY_HOST_PROPERTIES_EXT,
                 VkPhysicalDeviceExternalMemoryHostPropertiesEXT);
+        XCASE(PHYSICAL_DEVICE_DRIVER_PROPERTIES_KHR, VkPhysicalDeviceDriverPropertiesKHR);
     XPUSH_END
 ZPUSH_END
 

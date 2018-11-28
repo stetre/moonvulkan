@@ -3670,7 +3670,21 @@ the <em>queue_family_index</em> of the <em>i-th</em> element in the table return
 <em>max_multiview_instance_index</em>: integer,<br>
 -- EXTENSION (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkPhysicalDeviceExternalMemoryHostPropertiesEXT">VkPhysicalDeviceExternalMemoryHostPropertiesEXT</a>, <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_external_memory_host">VK_EXT_external_memory_host</a>):<br>
 <em>min_imported_host_pointer_alignment</em>: integer,<br>
+-- EXTENSION (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkPhysicalDeviceDriverPropertiesKHR">VkPhysicalDeviceDriverPropertiesKHR</a>, <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_driver_properties">VK_KHR_driver_properties</a>):<br>
+<em>driver_id</em>: <a href="#driverid">driverid</a>,<br>
+<em>driver_name</em>: string,<br>
+<em>driver_info</em>: string,<br>
+<em>conformance_version</em>: <a href="#conformanceversion">conformanceversion</a>,<br>
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkPhysicalDeviceProperties2.html">VkPhysicalDeviceProperties2</a>)</span></p>
+</li>
+<li>
+<p><a id="conformanceversion"></a>
+<span class="small"><strong>conformanceversion</strong> = {<br>
+<em>major</em>: integer,<br>
+<em>minor</em>: integer,<br>
+<em>subminor</em>: integer,<br>
+<em>patch</em>: integer,<br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkConformanceVersionKHR.html">VkConformanceVersionKHR</a>)</span></p>
 </li>
 <li>
 <p><a id="physicaldeviceimageformatinfo"></a>
