@@ -9,11 +9,11 @@ _fence_ = *create_fence*(_device_, [<<fencecreateflags, _fencecreateflags_>>]) +
 
 [[register_device_event]]
 * _fence_ = *register_device_event*(_device_, <<deviceeventinfo, _deviceeventinfo_>>, [<<allocators, _allocator_>>]) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkRegisterDeviceEventEXT[vkRegisterDeviceEventEXT] (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_display_control[VK_EXT_display_control]).#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkRegisterDeviceEventEXT.html[vkRegisterDeviceEventEXT] (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_display_control[VK_EXT_display_control]).#
 
 [[register_display_event]]
 * _fence_ = *register_display_event*(_device_, <<display, _display_>>, <<displayeventinfo, _displayeventinfo_>>, [<<allocators, _allocator_>>]) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkRegisterDisplayEventEXT[vkRegisterDisplayEventEXT] (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_display_control[VK_EXT_display_control]).#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkRegisterDisplayEventEXT.html[vkRegisterDisplayEventEXT] (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_display_control[VK_EXT_display_control]).#
 
 [[destroy_fence]]
 * *destroy_fence*(_fence_) +
@@ -40,10 +40,10 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkWai
 
 [[importfencefd]]
 * *importfencefd*(_fence_, <<importfencefdinfo, _importfencefdinfo_>>) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkImportFenceFdKHR[vkImportFenceFdKHR] (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_external_fence_fd[VK_KHR_external_fence_fd]).#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkImportFenceFdKHR.html[vkImportFenceFdKHR] (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_external_fence_fd[VK_KHR_external_fence_fd]).#
 
 [[getfencefd]]
 * _fd_ = *getfencefd*(_fence_, <<fencegetfdinfo, _fencegetfdinfo_>>) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkGetFenceFdKHR[vkGetFenceFdKHR] (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_external_fence_fd[VK_KHR_external_fence_fd]).#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkGetFenceFdKHR.html[vkGetFenceFdKHR] (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_external_fence_fd[VK_KHR_external_fence_fd]).#
 
 

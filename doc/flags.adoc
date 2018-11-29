@@ -81,12 +81,12 @@ Rfr. https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkCom
 [small]#*compositealphaflags*: vk.COMPOSITE_ALPHA_XXX_BIT_KHR +
 Values: 
 '_opaque_', '_pre multiplied_', '_post multiplied_', '_inherit_'. +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkCompositeAlphaFlagBitsKHR[VkCompositeAlphaFlagBitsKHR].#
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkCompositeAlphaFlagBitsKHR.html[VkCompositeAlphaFlagBitsKHR].#
 
 [[conditionalrenderingflags]]
 [small]#*conditionalrenderingflags*: vk.CONDITIONAL_RENDERING_XXX_BIT_EXT +
 Values: '_inverted_'. +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkConditionalRenderingFlagBitsEXT[VkConditionalRenderingFlagBitsEXT].#
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkConditionalRenderingFlagBitsEXT.html[VkConditionalRenderingFlagBitsEXT].#
 
 [[cullmodeflags]]
 [small]#*cullmodeflags*: vk.CULL_MODE_XXX +
@@ -98,17 +98,17 @@ Rfr. https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkCul
 [small]#*debugreportflags*: vk.DEBUG_REPORT_XXX_BIT_EXT +
 Values: 
 '_information_', '_warning_', '_performance warning_', '_report_', '_debug_'. +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkDebugReportFlagBitsEXT[VkDebugReportFlagBitsEXT].#
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkDebugReportFlagBitsEXT.html[VkDebugReportFlagBitsEXT].#
 
 [[debugutilsmessageseverityflags]]
 [small]#*debugutilsmessageseverityflags*: vk.DEBUG_UTILS_MESSAGE_SEVERITY_XXX_BIT_EXT +
 Values: '_verbose_', '_info_', '_warning_', '_error_'. +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkDebugUtilsMessageSeverityFlagBitsEXT[VkDebugUtilsMessageSeverityFlagBitsEXT].#
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkDebugUtilsMessageSeverityFlagBitsEXT.html[VkDebugUtilsMessageSeverityFlagBitsEXT].#
 
 [[debugutilsmessagetypeflags]]
 [small]#*debugutilsmessagetypeflags*: vk.DEBUG_UTILS_MESSAGE_TYPE_XXX_BIT_EXT +
 Values: '_general_', '_validation_', '_performance_'. +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkDebugUtilsMessageTypeFlagBitsEXT[VkDebugUtilsMessageTypeFlagBitsEXT].#
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkDebugUtilsMessageTypeFlagBitsEXT.html[VkDebugUtilsMessageTypeFlagBitsEXT].#
 
 [[dependencyflags]]
 [small]#*dependencyflags*: vk.DEPENDENCY_XXX_BIT +
@@ -120,7 +120,7 @@ Rfr. https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkDep
 [small]#*descriptorbindingflags*: vk.DESCRIPTOR_BINDING_XXX_BIT_EXT +
 Values:
 '_update after bind_', '_update unused while pending_', '_partially bound_', '_variable descriptor count_'. +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkDescriptorBindingFlagBitsEXT[VkDescriptorBindingFlagBitsEXT].#
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkDescriptorBindingFlagBitsEXT.html[VkDescriptorBindingFlagBitsEXT].#
 
 [[descriptorpoolcreateflags]]
 [small]#*descriptorpoolcreateflags*: vk.DESCRIPTOR_POOL_CREATE_XXX_BIT +
@@ -137,17 +137,17 @@ Rfr. https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkDes
 [[devicegrouppresentmodeflags]]
 [small]#*devicegrouppresentmodeflags*: vk.DEVICE_GROUP_PRESENT_MODE_XXX_BIT_KHR +
 Values: '_local_', '_remote_', '_sum_', '_local multi device_'. +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkDeviceGroupPresentModeFlagBitsKHR[VkDeviceGroupPresentModeFlagBitsKHR].#
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkDeviceGroupPresentModeFlagBitsKHR.html[VkDeviceGroupPresentModeFlagBitsKHR].#
 
 [[devicequeuecreateflags]]
 [small]#*devicequeuecreateflags*: vk.DEVICE_QUEUE_CREATE_XXX_BIT +
 Values: '_protected_'. +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkDeviceQueueCreateFlagBits[VkDeviceQueueCreateFlagBits].#
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkDeviceQueueCreateFlagBits.html[VkDeviceQueueCreateFlagBits].#
 
 [[displayplanealphaflags]]
 [small]#*displayplanealphaflags*: vk.DISPLAY_PLANE_ALPHA_XXX_BIT_KHR +
 Values: '_opaque_', '_global_', '_per pixel_', '_per pixel premultiplied_'. +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkDisplayPlaneAlphaFlagBitsKHR[VkDisplayPlaneAlphaFlagBitsKHR].#
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkDisplayPlaneAlphaFlagBitsKHR.html[VkDisplayPlaneAlphaFlagBitsKHR].#
 
 [[externalfencefeatureflags]]
 [small]#*externalfencefeatureflags*: vk.EXTERNAL_FENCE_FEATURE_XXX_BIT +
@@ -217,7 +217,7 @@ Rfr. https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkIma
 [[memoryallocateflags]]
 [small]#*memoryallocateflags*: vk.MEMORY_ALLOCATE_XXX_BIT +
 Values: '_device mask_'. +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkMemoryAllocateFlagBits[VkMemoryAllocateFlagBits].#
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkMemoryAllocateFlagBits.html[VkMemoryAllocateFlagBits].#
 
 [[memoryheapflags]]
 [small]#*memoryheapflags*: vk.MEMORY_HEAP_XXX_BIT +
@@ -234,7 +234,7 @@ Rfr. https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkMem
 [[peermemoryfeatureflags]]
 [small]#*peermemoryfeatureflags*: vk.PEER_MEMORY_FEATURE_XXX_BIT +
 Values: '_copy src_', '_copy dst_', '_generic src_', '_generic dst_'. +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkPeerMemoryFeatureFlagBits[VkPeerMemoryFeatureFlagBits].#
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkPeerMemoryFeatureFlagBits.html[VkPeerMemoryFeatureFlagBits].#
 
 [[pipelinecreateflags]]
 [small]#*pipelinecreateflags*: vk.PIPELINE_CREATE_XXX_BIT +
@@ -310,7 +310,7 @@ Rfr. https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkSte
 [[subgroupfeatureflags]]
 [small]#*subgroupfeatureflags*: vk.SUBGROUP_FEATURE_XXX_BIT +
 Values: '_basic_', '_vote_', '_arithmetic_', '_ballot_', '_shuffle_', '_shuffle relative_', '_clustered_', '_quad_'. +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkSubgroupFeatureFlagBits[VkSubgroupFeatureFlagBits].#
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkSubgroupFeatureFlagBits.html[VkSubgroupFeatureFlagBits].#
 
 [[surfacecounterflags]]
 [small]#*surfacecounterflags*: vk.SURFACE_COUNTER_XXX_BIT_EXT +
@@ -321,12 +321,12 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkSur
 [small]#*surfacetransformflags*: vk.SURFACE_TRANSFORM_XXX_BIT_KHR +
 Values: 
 '_identity_', '_rotate 90_', '_rotate 180_', '_rotate 270_', '_horizontal mirror_', '_horizontal mirror rotate 90_', '_horizontal mirror rotate 180_', '_horizontal mirror rotate 270_', '_inherit_'. +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkSurfaceTransformFlagBitsKHR[VkSurfaceTransformFlagBitsKHR].#
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkSurfaceTransformFlagBitsKHR.html[VkSurfaceTransformFlagBitsKHR].#
 
 [[swapchaincreateflags]]
 [small]#*swapchaincreateflags*: vk.SWAPCHAIN_CREATE_XXX_BIT_KHR +
 Values: '_split instance bind regions_', '_protected_'. +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkSwapchainCreateFlagBitsKHR[VkSwapchainCreateFlagBitsKHR].#
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkSwapchainCreateFlagBitsKHR.html[VkSwapchainCreateFlagBitsKHR].#
 
 Reserved for future use (must be set to 0):
 
@@ -445,7 +445,7 @@ Reserved for future use (must be set to 0):
 [[zzzflags]]
 [small]#*zzzflags*: vk.ZZZ_XXX_BIT_KHR +
 Values: 
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkZzzFlagBits[VkZzzFlagBits].#
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkZzzFlagBits.html[VkZzzFlagBits].#
 
 ////
 

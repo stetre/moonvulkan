@@ -11,7 +11,7 @@ or a return value.
 
 [[enumerate_physical_device_groups]]
 * {<<physicaldevicegroupproperties, _physicaldevicegroupproperties_>>} = *enumerate_physical_device_groups*(<<instance, _instance_>>) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkEnumeratePhysicalDeviceGroupsKHR[vkEnumeratePhysicalDeviceGroupsKHR] (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_device_group_creation[VK_KHR_device_group_creation]).#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkEnumeratePhysicalDeviceGroups.html[vkEnumeratePhysicalDeviceGroups] (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_device_group_creation[VK_KHR_device_group_creation]).#
 
 ////
 NOTE: If the
@@ -67,5 +67,5 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkGet
 
 [[get_physical_device_multisample_properties]]
 * <<multisampleproperties,_multisampleproperties_>> = *get_physical_device_multisample_properties*(_physdev_, <<samplecountflags, _samplecountflags_>>) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkGetPhysicalDeviceMultisamplePropertiesEXT[vkGetPhysicalDeviceMultisamplePropertiesEXT] (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_sample_locations[VK_EXT_sample_locations]).#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkGetPhysicalDeviceMultisamplePropertiesEXT.html[vkGetPhysicalDeviceMultisamplePropertiesEXT] (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_sample_locations[VK_EXT_sample_locations]).#
 
