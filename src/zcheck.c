@@ -2225,7 +2225,7 @@ LOCALPUSH_BEGIN(VkPhysicalDeviceExternalMemoryHostPropertiesEXT)
     SetInteger(minImportedHostPointerAlignment, "min_imported_host_pointer_alignment");
 LOCALPUSH_END
 LOCALPUSH_BEGIN(VkPhysicalDeviceDriverPropertiesKHR)
-    SetEnum(driverID, "driver_id", pushdriverid);
+    if(p->driverID!=0) SetEnum(driverID, "driver_id", pushdriverid); //@@
     SetString(driverName, "driver_name");
     SetString(driverInfo, "driver_info");
     SetStruct(conformanceVersion, "conformance_version", VkConformanceVersionKHR);
