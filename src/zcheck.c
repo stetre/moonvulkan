@@ -517,6 +517,7 @@ static const char *GetString_(lua_State *L, int arg, const char *sname, const ch
 #define GetTessellationDomainOrigin(name, sname) GetEnum(name, sname, testtessellationdomainorigin)
 #define GetSubpassContents(name, sname) GetEnum(name, sname, testsubpasscontents)
 #define GetObjectType(name, sname) GetEnum(name, sname, testobjecttype)
+#define GetTimeDomain(name, sname) GetEnum(name, sname, testtimedomain)
 
 /* enums with default value (ie optional) */
 #define GetPipelineBindPoint(name, sname) GetEnumOpt(name, sname, testpipelinebindpoint, VK_PIPELINE_BIND_POINT_GRAPHICS)
@@ -2557,6 +2558,18 @@ ZPUSH_END
 ZINIT_BEGIN(VkMultisamplePropertiesEXT)
     (void)L; (void)p;
 ZINIT_END
+
+
+/*------------------------------------------------------------------------------*
+ | Calibrated Timestamps                                                        |
+ *------------------------------------------------------------------------------*/
+
+ZCHECK_BEGIN(VkCalibratedTimestampInfoEXT)
+    checktable(arg);
+    newstruct(VkCalibratedTimestampInfoEXT);
+    GetTimeDomain(timeDomain, "time_domain");
+ZCHECK_END
+ZCHECKARRAY(VkCalibratedTimestampInfoEXT)
 
 /*------------------------------------------------------------------------------*
  | Surface Capabilities                                                         |

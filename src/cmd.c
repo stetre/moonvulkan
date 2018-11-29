@@ -1095,30 +1095,30 @@ failure:
 static int CmdBeginQueryIndexed(lua_State *L)
     {
     ud_t *ud;
-	VkQueryPool query_pool;
+    VkQueryPool query_pool;
     VkQueryControlFlags flags;
-	uint32_t query, index;
+    uint32_t query, index;
     VkCommandBuffer cb = checkcommand_buffer(L, 1, &ud);
     CheckDevicePfn(L, ud, CmdBeginQueryIndexedEXT);
-	query_pool = checkquery_pool(L, 2, NULL);
-	query = luaL_checkinteger(L, 3);
+    query_pool = checkquery_pool(L, 2, NULL);
+    query = luaL_checkinteger(L, 3);
     flags = checkflags(L, 4);
-	index = luaL_checkinteger(L, 5);
-	ud->ddt->CmdBeginQueryIndexedEXT(cb, query_pool, query, flags, index);
+    index = luaL_checkinteger(L, 5);
+    ud->ddt->CmdBeginQueryIndexedEXT(cb, query_pool, query, flags, index);
     return 0;
     }
 
 static int CmdEndQueryIndexed(lua_State *L)
     {
     ud_t *ud;
-	VkQueryPool query_pool;
-	uint32_t query, index;
+    VkQueryPool query_pool;
+    uint32_t query, index;
     VkCommandBuffer cb = checkcommand_buffer(L, 1, &ud);
     CheckDevicePfn(L, ud, CmdEndQueryIndexedEXT);
-	query_pool = checkquery_pool(L, 2, NULL);
-	query = luaL_checkinteger(L, 3);
-	index = luaL_checkinteger(L, 4);
-	ud->ddt->CmdEndQueryIndexedEXT(cb, query_pool, query, index);
+    query_pool = checkquery_pool(L, 2, NULL);
+    query = luaL_checkinteger(L, 3);
+    index = luaL_checkinteger(L, 4);
+    ud->ddt->CmdEndQueryIndexedEXT(cb, query_pool, query, index);
     return 0;
     }
 
@@ -1127,15 +1127,15 @@ static int CmdDrawIndirectByteCount(lua_State *L)
     {
     ud_t *ud;
     VkCommandBuffer cb = checkcommand_buffer(L, 1, &ud);
-	uint32_t instanceCount = luaL_checkinteger(L, 2);
-	uint32_t firstInstance = luaL_checkinteger(L, 3);
-	VkBuffer counterBuffer = checkbuffer(L, 4, NULL);
-	VkDeviceSize counterBufferOffset = checkdevicesize(L, 5);
-	uint32_t counterOffset = luaL_checkinteger(L, 6);
-	uint32_t vertexStride = luaL_checkinteger(L, 7);
+    uint32_t instanceCount = luaL_checkinteger(L, 2);
+    uint32_t firstInstance = luaL_checkinteger(L, 3);
+    VkBuffer counterBuffer = checkbuffer(L, 4, NULL);
+    VkDeviceSize counterBufferOffset = checkdevicesize(L, 5);
+    uint32_t counterOffset = luaL_checkinteger(L, 6);
+    uint32_t vertexStride = luaL_checkinteger(L, 7);
     CheckDevicePfn(L, ud, CmdDrawIndirectByteCountEXT);
-	ud->ddt->CmdDrawIndirectByteCountEXT(cb, instanceCount, firstInstance,
-			counterBuffer, counterBufferOffset, counterOffset, vertexStride);
+    ud->ddt->CmdDrawIndirectByteCountEXT(cb, instanceCount, firstInstance,
+            counterBuffer, counterBufferOffset, counterOffset, vertexStride);
     return 0;
     }
 

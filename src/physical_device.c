@@ -409,14 +409,44 @@ static int GetPhysicalDeviceMultisampleProperties(lua_State *L)
     VkMultisamplePropertiesEXT* props;
     VkPhysicalDevice physical_device = checkphysical_device(L, 1, &ud);
     VkSampleCountFlagBits samples = checkflags(L, 2);
-    CheckDevicePfn(L, ud, GetPhysicalDeviceMultisamplePropertiesEXT);
+    CheckDevicePfn(L, ud, GetPhysicalDeviceMultisamplePropertiesEXT); //@@FIXME: InstancePfn
 #define CLEANUP zfreeVkMultisamplePropertiesEXT(L, props, 1)
     props = znewchainVkMultisamplePropertiesEXT(L, &err);
     if(err) { CLEANUP; return lua_error(L); }
-    ud->ddt->GetPhysicalDeviceMultisamplePropertiesEXT(physical_device, samples, props);
+    ud->ddt->GetPhysicalDeviceMultisamplePropertiesEXT(physical_device, samples, props); //@@FIXME: idt
     zpushVkMultisamplePropertiesEXT(L, props);
     CLEANUP;
 #undef CLEANUP
+    return 1;
+    }
+
+/*-----------------------------------------------------------------------------*/
+
+static int GetPhysicalDeviceCalibrateableTimeDomains(lua_State *L)
+    {
+    ud_t *ud;
+    VkResult ec;
+    uint32_t i, count = 0;
+    VkTimeDomainEXT* domains;
+    VkPhysicalDevice physical_device = checkphysical_device(L, 1, &ud);
+    CheckInstancePfn(L, ud, GetPhysicalDeviceCalibrateableTimeDomainsEXT);
+
+    ec = ud->idt->GetPhysicalDeviceCalibrateableTimeDomainsEXT(physical_device, &count, NULL);
+    CheckError(L, ec);
+
+    lua_newtable(L);
+    if(count==0) return 1;
+
+    domains = (VkTimeDomainEXT*)Malloc(L, sizeof(VkTimeDomainEXT)*count);
+    ec = ud->idt->GetPhysicalDeviceCalibrateableTimeDomainsEXT(physical_device, &count, domains);
+    if(ec)
+        { Free(L, domains); CheckError(L, ec); }
+    for(i=0; i<count; i++)
+        {
+        pushtimedomain(L, domains[i]);
+        lua_rawseti(L, -2, i+1);
+        }
+    Free(L, domains);
     return 1;
     }
 
@@ -459,6 +489,7 @@ static const struct luaL_Reg Functions[] =
         { "get_physical_device_external_fence_properties", GetPhysicalDeviceExternalFenceProperties },
         { "get_physical_device_external_semaphore_properties", GetPhysicalDeviceExternalSemaphoreProperties },
         { "get_physical_device_multisample_properties", GetPhysicalDeviceMultisampleProperties },
+        { "get_physical_device_calibrateable_time_domains", GetPhysicalDeviceCalibrateableTimeDomains },
         { NULL, NULL } /* sentinel */
     };
 

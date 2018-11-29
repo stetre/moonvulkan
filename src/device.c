@@ -138,6 +138,48 @@ static int DeviceWaitIdle(lua_State *L)
     return 0;
     }
 
+static int GetCalibratedTimestamps(lua_State *L)
+    {
+    ud_t *ud;
+    int err;
+    VkResult ec;
+    uint32_t i, count;
+    VkCalibratedTimestampInfoEXT *infos = NULL;
+    uint64_t* timestamps = NULL;
+    uint64_t* maxdeviations = NULL;
+    VkDevice device = checkdevice(L, 1, &ud);
+    CheckDevicePfn(L, ud, GetCalibratedTimestampsEXT);
+
+#define CLEANUP do {                                                        \
+    if(infos) zfreearrayVkCalibratedTimestampInfoEXT(L, infos, count, 1);   \
+    if(timestamps) Free(L, timestamps);                                     \
+    if(maxdeviations) Free(L, maxdeviations);                               \
+} while(0)
+    infos = zcheckarrayVkCalibratedTimestampInfoEXT(L, 2, &count, &err);
+    if(err) { CLEANUP; return argerror(L, 2); }
+    timestamps = (uint64_t*)MallocNoErr(L, sizeof(uint64_t)*count);
+    if(!timestamps) { CLEANUP; return errmemory(L); }
+    maxdeviations = (uint64_t*)MallocNoErr(L, sizeof(uint64_t)*count);
+    if(!maxdeviations) { CLEANUP; return errmemory(L); }
+
+    ec = ud->ddt->GetCalibratedTimestampsEXT(device, count, infos, timestamps, maxdeviations);
+    if(ec) { CLEANUP; CheckError(L, ec); return 0; }
+
+    lua_newtable(L);
+    lua_newtable(L);
+    for(i=0; i<count; i++)
+        {
+        lua_pushinteger(L, timestamps[i]);
+        lua_rawseti(L, -3, i+1);
+        lua_pushinteger(L, maxdeviations[i]);
+        lua_rawseti(L, -2, i+1);
+        }
+    CLEANUP;
+#undef CLEANUP
+    return 2;
+    }
+
+
 
 RAW_FUNC_DISPATCHABLE(device)
 TYPE_FUNC(device)
@@ -169,6 +211,7 @@ static const struct luaL_Reg Functions[] =
         { "destroy_device",  Destroy },
         { "get_device_queue", GetDeviceQueue },
         { "device_wait_idle", DeviceWaitIdle },
+        { "get_calibrated_timestamps", GetCalibratedTimestamps },
         { NULL, NULL } /* sentinel */
     };
 

@@ -316,6 +316,7 @@ local TYPED = {
    { "VkDeviceGroupPresentCapabilitiesKHR", "DEVICE_GROUP_PRESENT_CAPABILITIES_KHR" },
    { "VkAcquireNextImageInfoKHR", "ACQUIRE_NEXT_IMAGE_INFO_KHR" },
    { "VkImportMemoryHostPointerInfoEXT", "IMPORT_MEMORY_HOST_POINTER_INFO_EXT" },
+   { "VkCalibratedTimestampInfoEXT", "CALIBRATED_TIMESTAMP_INFO_EXT" },
 }
 
 local TYPED_WIN32 = {

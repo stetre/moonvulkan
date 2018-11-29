@@ -1948,6 +1948,14 @@ _offset_: integer, +
 _flags_: <<conditionalrenderingflags, conditionalrenderingflags>>, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkConditionalRenderingBeginInfoEXT.html[VkConditionalRenderingBeginInfoEXT])#
 
+'''
+
+* [[calibratedtimestampinfo]]
+[small]#*calibratedtimestampinfo* = { +
+_time_domain_: <<timedomain, timedomain>> *[R]*, +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkCalibratedTimestampInfoEXT.html[VkCalibratedTimestampInfoEXT])#
+
+
 ////
 5yy
 * [[]]

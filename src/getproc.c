@@ -201,6 +201,8 @@ instance_dt_t * getproc_instance(lua_State *L, VkInstance instance, VkInstanceCr
     GET(GetDisplayPlaneCapabilities2KHR);
     //VK_KHR_device_group_creation
     GETKHR(EnumeratePhysicalDeviceGroups);
+    //VK_EXT_calibrated_timestamps
+    GET(GetPhysicalDeviceCalibrateableTimeDomainsEXT);
 #ifdef VK_USE_PLATFORM_XCB_KHR
     //VK_KHR_xcb_surface
     GET(CreateXcbSurfaceKHR);
@@ -505,6 +507,8 @@ device_dt_t* getproc_device(lua_State *L, VkDevice device, VkDeviceCreateInfo *c
     GET(CmdBeginQueryIndexedEXT);
     GET(CmdEndQueryIndexedEXT);
     GET(CmdDrawIndirectByteCountEXT);
+    //VK_EXT_calibrated_timestamps
+    GET(GetCalibratedTimestampsEXT);
 #undef GET
 #undef GETKHR
     return dt;

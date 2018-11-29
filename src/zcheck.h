@@ -2830,6 +2830,23 @@ int zinitVkImportMemoryHostPointerInfoEXT(lua_State *L, VkImportMemoryHostPointe
 #define zpushVkImportMemoryHostPointerInfoEXT moonvulkan_zpushVkImportMemoryHostPointerInfoEXT
 int zpushVkImportMemoryHostPointerInfoEXT(lua_State *L, const VkImportMemoryHostPointerInfoEXT *p);
 
+#define znewVkCalibratedTimestampInfoEXT(L, err) (VkCalibratedTimestampInfoEXT*)znew((L), VK_STRUCTURE_TYPE_CALIBRATED_TIMESTAMP_INFO_EXT, sizeof(VkCalibratedTimestampInfoEXT), (err))
+#define znewarrayVkCalibratedTimestampInfoEXT(L, count, err) (VkCalibratedTimestampInfoEXT*)znewarray((L), VK_STRUCTURE_TYPE_CALIBRATED_TIMESTAMP_INFO_EXT, sizeof(VkCalibratedTimestampInfoEXT), (count), (err))
+#define znewchainVkCalibratedTimestampInfoEXT moonvulkan_znewchainVkCalibratedTimestampInfoEXT
+VkCalibratedTimestampInfoEXT* znewchainVkCalibratedTimestampInfoEXT(lua_State *L, int *err);
+#define znewchainarrayVkCalibratedTimestampInfoEXT moonvulkan_znewchainarrayVkCalibratedTimestampInfoEXT
+VkCalibratedTimestampInfoEXT* znewchainarrayVkCalibratedTimestampInfoEXT(lua_State *L, uint32_t count, int *err);
+#define zcheckVkCalibratedTimestampInfoEXT moonvulkan_zcheckVkCalibratedTimestampInfoEXT
+VkCalibratedTimestampInfoEXT* zcheckVkCalibratedTimestampInfoEXT(lua_State *L, int arg, int *err);
+#define zcheckarrayVkCalibratedTimestampInfoEXT moonvulkan_zcheckarrayVkCalibratedTimestampInfoEXT
+VkCalibratedTimestampInfoEXT* zcheckarrayVkCalibratedTimestampInfoEXT(lua_State *L, int arg, uint32_t *count, int *err);
+#define zinitVkCalibratedTimestampInfoEXT moonvulkan_zinitVkCalibratedTimestampInfoEXT
+int zinitVkCalibratedTimestampInfoEXT(lua_State *L, VkCalibratedTimestampInfoEXT* p, int *err);
+#define zfreeVkCalibratedTimestampInfoEXT(L, p, base) zfree((L), (p), (base))
+#define zfreearrayVkCalibratedTimestampInfoEXT(L, p, count, base) zfreearray((L), (p), sizeof(VkCalibratedTimestampInfoEXT), (count), (base))
+#define zpushVkCalibratedTimestampInfoEXT moonvulkan_zpushVkCalibratedTimestampInfoEXT
+int zpushVkCalibratedTimestampInfoEXT(lua_State *L, const VkCalibratedTimestampInfoEXT *p);
+
 
 #ifdef VK_USE_PLATFORM_WIN32_KHR
 

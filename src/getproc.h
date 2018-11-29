@@ -132,6 +132,7 @@ typedef struct {
     F(GetDisplayModeProperties2KHR);
     F(GetDisplayPlaneCapabilities2KHR);
     F(EnumeratePhysicalDeviceGroupsKHR);
+    F(GetPhysicalDeviceCalibrateableTimeDomainsEXT);
 } instance_dt_t;
 
 
@@ -325,6 +326,7 @@ typedef struct {
     F(CmdBeginQueryIndexedEXT);
     F(CmdEndQueryIndexedEXT);
     F(CmdDrawIndirectByteCountEXT);
+    F(GetCalibratedTimestampsEXT);
 #ifdef VK_USE_PLATFORM_WIN32_KHR
     F(GetMemoryWin32HandleKHR);
     F(GetMemoryWin32HandlePropertiesKHR);
