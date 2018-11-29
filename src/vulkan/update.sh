@@ -1,4 +1,4 @@
-ver=1.1.92.0
+ver=1.1.92.1
 fromdir=/home/ste/vulkan/$ver/x86_64/include/vulkan
 todir=.
 
