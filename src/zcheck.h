@@ -2218,6 +2218,23 @@ int zinitVkPipelineRasterizationConservativeStateCreateInfoEXT(lua_State *L, VkP
 #define zpushVkPipelineRasterizationConservativeStateCreateInfoEXT moonvulkan_zpushVkPipelineRasterizationConservativeStateCreateInfoEXT
 int zpushVkPipelineRasterizationConservativeStateCreateInfoEXT(lua_State *L, const VkPipelineRasterizationConservativeStateCreateInfoEXT *p);
 
+#define znewVkPipelineRasterizationStateStreamCreateInfoEXT(L, err) (VkPipelineRasterizationStateStreamCreateInfoEXT*)znew((L), VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_STREAM_CREATE_INFO_EXT, sizeof(VkPipelineRasterizationStateStreamCreateInfoEXT), (err))
+#define znewarrayVkPipelineRasterizationStateStreamCreateInfoEXT(L, count, err) (VkPipelineRasterizationStateStreamCreateInfoEXT*)znewarray((L), VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_STREAM_CREATE_INFO_EXT, sizeof(VkPipelineRasterizationStateStreamCreateInfoEXT), (count), (err))
+#define znewchainVkPipelineRasterizationStateStreamCreateInfoEXT moonvulkan_znewchainVkPipelineRasterizationStateStreamCreateInfoEXT
+VkPipelineRasterizationStateStreamCreateInfoEXT* znewchainVkPipelineRasterizationStateStreamCreateInfoEXT(lua_State *L, int *err);
+#define znewchainarrayVkPipelineRasterizationStateStreamCreateInfoEXT moonvulkan_znewchainarrayVkPipelineRasterizationStateStreamCreateInfoEXT
+VkPipelineRasterizationStateStreamCreateInfoEXT* znewchainarrayVkPipelineRasterizationStateStreamCreateInfoEXT(lua_State *L, uint32_t count, int *err);
+#define zcheckVkPipelineRasterizationStateStreamCreateInfoEXT moonvulkan_zcheckVkPipelineRasterizationStateStreamCreateInfoEXT
+VkPipelineRasterizationStateStreamCreateInfoEXT* zcheckVkPipelineRasterizationStateStreamCreateInfoEXT(lua_State *L, int arg, int *err);
+#define zcheckarrayVkPipelineRasterizationStateStreamCreateInfoEXT moonvulkan_zcheckarrayVkPipelineRasterizationStateStreamCreateInfoEXT
+VkPipelineRasterizationStateStreamCreateInfoEXT* zcheckarrayVkPipelineRasterizationStateStreamCreateInfoEXT(lua_State *L, int arg, uint32_t *count, int *err);
+#define zinitVkPipelineRasterizationStateStreamCreateInfoEXT moonvulkan_zinitVkPipelineRasterizationStateStreamCreateInfoEXT
+int zinitVkPipelineRasterizationStateStreamCreateInfoEXT(lua_State *L, VkPipelineRasterizationStateStreamCreateInfoEXT* p, int *err);
+#define zfreeVkPipelineRasterizationStateStreamCreateInfoEXT(L, p, base) zfree((L), (p), (base))
+#define zfreearrayVkPipelineRasterizationStateStreamCreateInfoEXT(L, p, count, base) zfreearray((L), (p), sizeof(VkPipelineRasterizationStateStreamCreateInfoEXT), (count), (base))
+#define zpushVkPipelineRasterizationStateStreamCreateInfoEXT moonvulkan_zpushVkPipelineRasterizationStateStreamCreateInfoEXT
+int zpushVkPipelineRasterizationStateStreamCreateInfoEXT(lua_State *L, const VkPipelineRasterizationStateStreamCreateInfoEXT *p);
+
 #define znewVkImageViewASTCDecodeModeEXT(L, err) (VkImageViewASTCDecodeModeEXT*)znew((L), VK_STRUCTURE_TYPE_IMAGE_VIEW_ASTC_DECODE_MODE_EXT, sizeof(VkImageViewASTCDecodeModeEXT), (err))
 #define znewarrayVkImageViewASTCDecodeModeEXT(L, count, err) (VkImageViewASTCDecodeModeEXT*)znewarray((L), VK_STRUCTURE_TYPE_IMAGE_VIEW_ASTC_DECODE_MODE_EXT, sizeof(VkImageViewASTCDecodeModeEXT), (count), (err))
 #define znewchainVkImageViewASTCDecodeModeEXT moonvulkan_znewchainVkImageViewASTCDecodeModeEXT

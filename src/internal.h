@@ -120,6 +120,8 @@ void pushuint32list(lua_State *L, uint32_t *list, uint32_t count);
 int32_t* checkint32list(lua_State *L, int arg, uint32_t *count, int *err);
 #define pushint32list moonvulkan_pushint32list
 void pushint32list(lua_State *L, int32_t *list, uint32_t count);
+#define checkdevicesize moonvulkan_checkdevicesize
+VkDeviceSize checkdevicesize(lua_State *L, int arg);
 #define checkdevicesizelist moonvulkan_checkdevicesizelist
 VkDeviceSize* checkdevicesizelist(lua_State *L, int arg, uint32_t *count, int *err);
 #define pushdevicesizelist moonvulkan_pushdevicesizelist

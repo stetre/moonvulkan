@@ -2248,6 +2248,16 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/h
 </li>
 </ul>
 </div>
+<div id="cmd_begin_query_indexed" class="ulist">
+<ul>
+<li>
+<p><strong>cmd_begin_query_indexed</strong>(<em>cb</em>, <a href="#query_pool"><em>query_pool</em></a>, <em>query</em>, <a href="#querycontrolflags"><em>querycontrolflags</em></a>, <em>index</em>)<br>
+<strong>cmd_end_query_indexed</strong>(<em>cb</em>, <a href="#query_pool"><em>query_pool</em></a>, <em>query</em>, <em>index</em>)<br>
+<span class="small">Rfr:
+<a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdBeginQueryIndexedEXT.html">vkCmdBeginQueryIndexedEXT</a>, <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdEndQueryIndexedEXT.html">vkCmdEndQueryIndexedEXT</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_transform_feedback">VK_EXT_transform_feedback</a>).</span></p>
+</li>
+</ul>
+</div>
 <div id="cmd_begin_render_pass" class="ulist">
 <ul>
 <li>
@@ -2259,6 +2269,18 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/h
 <strong>cmd_end_render_pass</strong>(<em>cb</em>, <a href="#subpassendinfo"><em>subpassendinfo</em></a>) (2KHR)<br>
 <span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdBeginRenderPass.html">vkCmdBeginRenderPass</a>, <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdNextSubpass.html">vkCmdNextSubpass</a>, <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdEndRenderPass.html">vkCmdEndRenderPass</a>, or<br>
 <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkCmdBeginRenderPass2KHR">vkCmdBeginRenderPass2KHR</a>, <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkCmdNextSubpass2KHR">vkCmdNextSubpass2KHR</a>, <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkCmdEndRenderPass2KHR">vkCmdEndRenderPass2KHR</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_create_renderpass2">VK_KHR_create_renderpass2</a>).</span></p>
+</li>
+</ul>
+</div>
+<div id="cmd_begin_transform_feedback" class="ulist">
+<ul>
+<li>
+<p><strong>cmd_begin_transform_feedback</strong>(<em>cb</em>, <em>first</em>, [<em>buffers</em>], [<em>offsets</em>])<br>
+<strong>cmd_end_transform_feedback</strong>(<em>cb</em>, <em>first</em>, [<em>buffers</em>], [<em>offsets</em>])<br>
+<span class="small"><em>first</em>: integer (0-based),<br>
+<em>buffers</em>: {<a href="#buffer">buffer</a>},<br>
+<em>offsets</em>: {integer},<br>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdBeginTransformFeedbackEXT.html">vkCmdBeginTransformFeedbackEXT</a>, <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdEndTransformFeedbackEXT.html">vkCmdEndTransformFeedbackEXT</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_transform_feedback">VK_EXT_transform_feedback</a>).</span></p>
 </li>
 </ul>
 </div>
@@ -2287,6 +2309,18 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/h
 <li>
 <p><strong>cmd_bind_pipeline</strong>(<em>cb</em>, <a href="#pipelinebindpoint"><em>pipelinebindpoint</em></a>, <a href="#pipeline"><em>pipeline</em></a>)<br>
 <span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdBindPipeline.html">vkCmdBindPipeline</a>.</span></p>
+</li>
+</ul>
+</div>
+<div id="cmd_bind_transform_feedback_buffers" class="ulist">
+<ul>
+<li>
+<p><strong>cmd_bind_transform_feedback_buffers</strong>(<em>cb</em>, <em>first_binding</em>, <em>buffers</em>, [<em>offsets</em>], [<em>sizes</em>])<br>
+<span class="small"><em>first_binding</em>: integer (0-based),<br>
+<em>buffers</em>: {<a href="#buffer">buffer</a>},<br>
+<em>offsets</em>: {integer},<br>
+<em>sizes</em>: {<a href="#devicesize">devicesize</a>},<br>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdBindTransformFeedbackBuffersEXT.html">vkCmdBindTransformFeedbackBuffersEXT</a> (<a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_transform_feedback">VK_EXT_transform_feedback</a>).</span></p>
 </li>
 </ul>
 </div>
@@ -2453,6 +2487,15 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/
 <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdDrawIndexed.html">vkCmdDrawIndexed</a>,
 <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdDrawIndexedIndirect.html">vkCmdDrawIndexedIndirect</a>,
 <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdDrawIndirect.html">vkCmdDrawIndirect</a>.</span></p>
+</li>
+</ul>
+</div>
+<div id="cmd_draw_indirect_byte_count" class="ulist">
+<ul>
+<li>
+<p><strong>cmd_draw_indirect_byte_count</strong>(<em>cb</em>, <em>instance_count</em>, <em>first_instance</em>, <a href="#buffer"><em>counter_buffer</em></a>, <em>counter_buffer_offset</em>, <em>counter_offset</em>, <em>vertex_stride</em>)<br>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdDrawIndirectByteCountEXT.html">vkCmdDrawIndirectByteCountEXT</a>,
+(<a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_transform_feedback">VK_EXT_transform_feedback</a>).</span></p>
 </li>
 </ul>
 </div>
@@ -3497,6 +3540,10 @@ with 1-based integer keys and no gaps, a.k.a. 'sequence' in Lua&#8217;s jargon).
 <p><a id="index"></a>
 <span class="small"><strong>index</strong> = 0-based integer index.</span></p>
 </li>
+<li>
+<p><a id="devicesize"></a>
+<span class="small"><strong>devicesize</strong>: a Lua integer or the string '<em>whole size</em>'.</span></p>
+</li>
 </ul>
 </div>
 <div class="admonitionblock note">
@@ -3680,6 +3727,17 @@ the <em>queue_family_index</em> of the <em>i-th</em> element in the table return
 <em>pci_bus</em>: integer,<br>
 <em>pci_device</em>: integer,<br>
 <em>pci_function</em>: integer,<br>
+-- EXTENSION (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkPhysicalDeviceTransformFeedbackPropertiesEXT">VkPhysicalDeviceTransformFeedbackPropertiesEXT</a>, <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_transform_feedback">VK_EXT_transform_feedback</a>):<br>
+<em>max_transform_feedback_streams</em>: integer,<br>
+<em>max_transform_feedback_buffers</em>: integer,<br>
+<em>max_transform_feedback_buffer_size</em>: integer,<br>
+<em>max_transform_feedback_stream_data_size</em>: integer,<br>
+<em>max_transform_feedback_buffer_data_size</em>: integer,<br>
+<em>max_transform_feedback_buffer_data_stride</em>: integer,<br>
+<em>transform_feedback_queries</em>: boolean ,<br>
+<em>transform_feedback_streams_lines_triangles</em>: boolean ,<br>
+<em>transform_feedback_rasterization_stream_select</em>: boolean ,<br>
+<em>transform_feedback_draw</em>: boolean ,<br>
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkPhysicalDeviceProperties2.html">VkPhysicalDeviceProperties2</a>)</span></p>
 </li>
 <li>
@@ -3944,6 +4002,9 @@ the <em>queue_family_index</em> of the <em>i-th</em> element in the table return
 -- EXTENSION (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkPhysicalDeviceShaderAtomicInt64FeaturesKHR">VkPhysicalDeviceShaderAtomicInt64FeaturesKHR</a>, <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_shader_atomic_int64">VK_KHR_shader_atomic_int64</a>):<br>
 <em>shader_buffer_int64_atomics</em>: boolean,<br>
 <em>shader_shared_int64_atomics</em>: boolean,<br>
+-- EXTENSION (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkPhysicalDeviceTransformFeedbackFeaturesEXT">VkPhysicalDeviceTransformFeedbackFeaturesEXT</a>, <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_transform_feedback">VK_EXT_transform_feedback</a>):<br>
+<em>transform_feedback</em>: boolean,<br>
+<em>geometry_streams</em>: boolean,<br>
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkPhysicalDeviceFeatures2.html">VkPhysicalDeviceFeatures2</a>)</span></p>
 </li>
 <li>
@@ -5016,9 +5077,12 @@ Note1: Requires the <a href="https://www.khronos.org/registry/vulkan/specs/1.1-e
 <em>depth_bias_slope_factor</em>: float,<br>
 <em>line_width</em>: float (defaults to 1.0),<br>
 -- EXTENSION (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkPipelineRasterizationConservativeStateCreateInfoEXT">VkPipelineRasterizationConservativeStateCreateInfoEXT</a>, <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_conservative_rasterization">VK_EXT_conservative_rasterization</a>):<br>
-<em>conservative_rasterization_state_create_flags</em>: <a href="#pipelinerasterizationconservativestatecreateflags">pipelinerasterizationconservativestatecreateflags</a>,<br>
+<em>conservative_rasterization_create_flags</em>: <a href="#pipelinerasterizationconservativestatecreateflags">pipelinerasterizationconservativestatecreateflags</a>,<br>
 <em>conservative_rasterization_mode</em>: <a href="#conservativerasterizationmode">conservativerasterizationmode</a>,<br>
 <em>extra_primitive_overestimation_size</em>: float,<br>
+-- EXTENSION (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkPipelineRasterizationStateStreamCreateInfoEXT">VkPipelineRasterizationStateStreamCreateInfoEXT</a>, <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_transform_feedback">VK_EXT_transform_feedback</a>):<br>
+<em>rasterization_stream_create_flags</em>: <a href="#pipelinerasterizationstatestreamcreateflags">pipelinerasterizationstatestreamcreateflags</a>,<br>
+<em>rasterization_stream</em>: integer,<br>
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkPipelineRasterizationStateCreateInfo.html">VkPipelineRasterizationStateCreateInfo</a>)</span></p>
 </li>
 <li>

@@ -319,6 +319,12 @@ typedef struct {
     F(GetPhysicalDevicePresentRectanglesKHR);
     F(AcquireNextImage2KHR);
     F(GetMemoryHostPointerPropertiesEXT);
+    F(CmdBindTransformFeedbackBuffersEXT);
+    F(CmdBeginTransformFeedbackEXT);
+    F(CmdEndTransformFeedbackEXT);
+    F(CmdBeginQueryIndexedEXT);
+    F(CmdEndQueryIndexedEXT);
+    F(CmdDrawIndirectByteCountEXT);
 #ifdef VK_USE_PLATFORM_WIN32_KHR
     F(GetMemoryWin32HandleKHR);
     F(GetMemoryWin32HandlePropertiesKHR);

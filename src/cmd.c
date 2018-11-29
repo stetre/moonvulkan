@@ -1001,6 +1001,143 @@ static int CmdDispatchBase(lua_State *L)
     return 0;
     }
 
+static int CmdBindTransformFeedbackBuffers(lua_State *L)
+    {
+    int err = 0, errargc=1;
+    ud_t *ud;
+    uint32_t first_binding, count, count1;
+    VkBuffer* buffers = NULL;
+    VkDeviceSize *offsets = NULL;
+    VkDeviceSize *sizes = NULL;
+    VkCommandBuffer cb = checkcommand_buffer(L, 1, &ud);
+    CheckDevicePfn(L, ud, CmdBindTransformFeedbackBuffersEXT);
+
+    first_binding = luaL_checkinteger(L, 2);
+
+    buffers = checkbufferlist(L, 3, &count, &err);
+    if(err) { errargc=3; goto failure; }
+
+    offsets = checkdevicesizelist(L, 4, &count1, &err);
+    if(err == ERR_NOTPRESENT) err = 0;
+    else if(err) { errargc=4; goto failure; }
+    if(count1 != count) { err=ERR_LENGTH; errargc=4; goto failure; }
+
+    sizes = checkdevicesizelist(L, 5, &count1, &err);
+    if(err == ERR_NOTPRESENT) err = 0;
+    else if(err) { errargc=5; goto failure; }
+    else if(count1 != count) { err=ERR_LENGTH; errargc=5; goto failure; }
+
+    ud->ddt->CmdBindTransformFeedbackBuffersEXT(cb, first_binding, count, buffers, offsets, sizes);
+failure:
+    if(buffers) Free(L, buffers);
+    if(offsets) Free(L, offsets);
+    if(sizes) Free(L, sizes);
+    return err ? argerrorc(L, errargc, err) : 0;
+    }
+
+
+static int CmdBeginTransformFeedback(lua_State *L)
+    {
+    ud_t *ud;
+    int err = 0, errargc=1;
+    uint32_t first, count, count1;
+    VkBuffer* buffers = NULL;
+    VkDeviceSize *offsets = NULL;
+    VkCommandBuffer cb = checkcommand_buffer(L, 1, &ud);
+    CheckDevicePfn(L, ud, CmdBeginTransformFeedbackEXT);
+
+    first = luaL_checkinteger(L, 2);
+
+    buffers = checkbufferlist(L, 3, &count, &err);
+    if(err == ERR_NOTPRESENT) err = 0;
+    else if(err) { errargc=3; goto failure; }
+
+    offsets = checkdevicesizelist(L, 4, &count1, &err);
+    if(err == ERR_NOTPRESENT) err = 0;
+    else if(err) { errargc=4; goto failure; }
+    if(count1 != count) { err=ERR_LENGTH; errargc=4; goto failure; }
+
+    ud->ddt->CmdBeginTransformFeedbackEXT(cb, first, count, buffers, offsets);
+failure:
+    if(buffers) Free(L, buffers);
+    if(offsets) Free(L, offsets);
+    return err ? argerrorc(L, errargc, err) : 0;
+    }
+
+static int CmdEndTransformFeedback(lua_State *L)
+    {
+    ud_t *ud;
+    int err = 0, errargc=1;
+    uint32_t first, count, count1;
+    VkBuffer* buffers = NULL;
+    VkDeviceSize *offsets = NULL;
+    VkCommandBuffer cb = checkcommand_buffer(L, 1, &ud);
+    CheckDevicePfn(L, ud, CmdEndTransformFeedbackEXT);
+
+    first = luaL_checkinteger(L, 2);
+
+    buffers = checkbufferlist(L, 3, &count, &err);
+    if(err == ERR_NOTPRESENT) err = 0;
+    else if(err) { errargc=3; goto failure; }
+
+    offsets = checkdevicesizelist(L, 4, &count1, &err);
+    if(err == ERR_NOTPRESENT) err = 0;
+    else if(err) { errargc=4; goto failure; }
+    if(count1 != count) { err=ERR_LENGTH; errargc=4; goto failure; }
+
+    ud->ddt->CmdEndTransformFeedbackEXT(cb, first, count, buffers, offsets);
+failure:
+    if(buffers) Free(L, buffers);
+    if(offsets) Free(L, offsets);
+    return err ? argerrorc(L, errargc, err) : 0;
+    }
+
+static int CmdBeginQueryIndexed(lua_State *L)
+    {
+    ud_t *ud;
+	VkQueryPool query_pool;
+    VkQueryControlFlags flags;
+	uint32_t query, index;
+    VkCommandBuffer cb = checkcommand_buffer(L, 1, &ud);
+    CheckDevicePfn(L, ud, CmdBeginQueryIndexedEXT);
+	query_pool = checkquery_pool(L, 2, NULL);
+	query = luaL_checkinteger(L, 3);
+    flags = checkflags(L, 4);
+	index = luaL_checkinteger(L, 5);
+	ud->ddt->CmdBeginQueryIndexedEXT(cb, query_pool, query, flags, index);
+    return 0;
+    }
+
+static int CmdEndQueryIndexed(lua_State *L)
+    {
+    ud_t *ud;
+	VkQueryPool query_pool;
+	uint32_t query, index;
+    VkCommandBuffer cb = checkcommand_buffer(L, 1, &ud);
+    CheckDevicePfn(L, ud, CmdEndQueryIndexedEXT);
+	query_pool = checkquery_pool(L, 2, NULL);
+	query = luaL_checkinteger(L, 3);
+	index = luaL_checkinteger(L, 4);
+	ud->ddt->CmdEndQueryIndexedEXT(cb, query_pool, query, index);
+    return 0;
+    }
+
+
+static int CmdDrawIndirectByteCount(lua_State *L)
+    {
+    ud_t *ud;
+    VkCommandBuffer cb = checkcommand_buffer(L, 1, &ud);
+	uint32_t instanceCount = luaL_checkinteger(L, 2);
+	uint32_t firstInstance = luaL_checkinteger(L, 3);
+	VkBuffer counterBuffer = checkbuffer(L, 4, NULL);
+	VkDeviceSize counterBufferOffset = checkdevicesize(L, 5);
+	uint32_t counterOffset = luaL_checkinteger(L, 6);
+	uint32_t vertexStride = luaL_checkinteger(L, 7);
+    CheckDevicePfn(L, ud, CmdDrawIndirectByteCountEXT);
+	ud->ddt->CmdDrawIndirectByteCountEXT(cb, instanceCount, firstInstance,
+			counterBuffer, counterBufferOffset, counterOffset, vertexStride);
+    return 0;
+    }
 
 #if 0 // 10yy
         { "",  },
@@ -1079,6 +1216,12 @@ static const struct luaL_Reg Functions[] =
         { "cmd_draw_indexed_indirect_count", CmdDrawIndexedIndirectCount },
         { "cmd_set_device_mask", CmdSetDeviceMask },
         { "cmd_dispatch_base", CmdDispatchBase },
+        { "cmd_bind_transform_feedback_buffers", CmdBindTransformFeedbackBuffers },
+        { "cmd_begin_transform_feedback", CmdBeginTransformFeedback },
+        { "cmd_end_transform_feedback", CmdEndTransformFeedback },
+        { "cmd_begin_query_indexed", CmdBeginQueryIndexed },
+        { "cmd_end_query_indexed", CmdEndQueryIndexed },
+        { "cmd_draw_indirect_byte_count", CmdDrawIndirectByteCount },
         { NULL, NULL } /* sentinel */
     };
 

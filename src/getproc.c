@@ -498,6 +498,13 @@ device_dt_t* getproc_device(lua_State *L, VkDevice device, VkDeviceCreateInfo *c
     GETKHR(AcquireNextImage2);
     //VK_EXT_external_memory_host
     GET(GetMemoryHostPointerPropertiesEXT);
+    //VK_EXT_transform_feedback
+    GET(CmdBindTransformFeedbackBuffersEXT);
+    GET(CmdBeginTransformFeedbackEXT);
+    GET(CmdEndTransformFeedbackEXT);
+    GET(CmdBeginQueryIndexedEXT);
+    GET(CmdEndQueryIndexedEXT);
+    GET(CmdDrawIndirectByteCountEXT);
 #undef GET
 #undef GETKHR
     return dt;

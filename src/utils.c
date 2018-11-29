@@ -398,8 +398,23 @@ void pushint32list(lua_State *L, int32_t *list, uint32_t count)
  | VkDeviceSize List                                                            |
  *------------------------------------------------------------------------------*/
 
+VkDeviceSize checkdevicesize(lua_State *L, int arg)
+    {
+    const char *s;
+    if(lua_type(L, arg) == LUA_TSTRING)
+        {
+        s = lua_tostring(L, arg);
+        if(strcmp(s, "whole size") == 0)
+            return VK_WHOLE_SIZE;
+        else
+            return argerrorc(L, arg, ERR_VALUE);
+        }
+    return (VkDeviceSize)luaL_checkinteger(L, arg);
+    }
+
 VkDeviceSize* checkdevicesizelist(lua_State *L, int arg, uint32_t *count, int *err)
     {
+    const char *s;
     VkDeviceSize* list;
     uint32_t i;
 
@@ -421,10 +436,20 @@ VkDeviceSize* checkdevicesizelist(lua_State *L, int arg, uint32_t *count, int *e
     for(i=0; i<*count; i++)
         {
         lua_rawgeti(L, arg, i+1);
-        if(!lua_isinteger(L, -1))
-            { lua_pop(L, 1); Free(L, list); *count = 0; *err = ERR_TYPE; return NULL; }
-        list[i] = lua_tointeger(L, -1);
+        if(lua_type(L, -1) == LUA_TSTRING)
+            {
+            s = lua_tostring(L, -1);
+            if(strcmp(s, "whole size") == 0)
+                list[i] = VK_WHOLE_SIZE;
+            else *err = ERR_VALUE;
+            }
+        else if(lua_isinteger(L, -1))
+            list[i] = lua_tointeger(L, -1);
+        else
+            *err = ERR_TYPE;
         lua_pop(L, 1);
+        if(*err)
+            { Free(L, list); *count = 0; return NULL; }
         }
     return list;
     }

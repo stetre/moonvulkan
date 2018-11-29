@@ -1729,6 +1729,10 @@ FUNC_BEGIN(SHADER_ATOMIC_INT64_FEATURES_KHR, VkPhysicalDeviceShaderAtomicInt64Fe
     GetBoolean(shaderBufferInt64Atomics, "shader_buffer_int64_atomics");
     GetBoolean(shaderSharedInt64Atomics, "shader_shared_int64_atomics");
 FUNC_END
+FUNC_BEGIN(TRANSFORM_FEEDBACK_FEATURES_EXT, VkPhysicalDeviceTransformFeedbackFeaturesEXT)
+    GetBoolean(transformFeedback, "transform_feedback");
+    GetBoolean(geometryStreams, "geometry_streams");
+FUNC_END
 #undef FUNC_BEGIN
 #undef FUNC_END
 
@@ -1757,6 +1761,8 @@ ZINIT_BEGIN(VkPhysicalDeviceFeatures2)
                 VkPhysicalDeviceVulkanMemoryModelFeaturesKHR);
         ADDX(PHYSICAL_DEVICE_SHADER_ATOMIC_INT64_FEATURES_KHR,
                 VkPhysicalDeviceShaderAtomicInt64FeaturesKHR);
+        ADDX(PHYSICAL_DEVICE_TRANSFORM_FEEDBACK_FEATURES_EXT,
+                VkPhysicalDeviceTransformFeedbackFeaturesEXT);
     EXTENSIONS_END
 ZINIT_END
 
@@ -1791,6 +1797,7 @@ ZCHECK_BEGIN(VkPhysicalDeviceFeatures2)
         ADD(VkPhysicalDeviceMultiviewFeaturesKHR);
         ADD(VkPhysicalDeviceVulkanMemoryModelFeaturesKHR);
         ADD(VkPhysicalDeviceShaderAtomicInt64FeaturesKHR);
+        ADD(VkPhysicalDeviceTransformFeedbackFeaturesEXT);
     #undef ADD
     EXTENSIONS_END
 ZCHECK_END
@@ -1929,11 +1936,16 @@ LOCALPUSH_BEGIN(VkPhysicalDeviceShaderAtomicInt64FeaturesKHR)
     SetBoolean(shaderBufferInt64Atomics, "shader_buffer_int64_atomics");
     SetBoolean(shaderSharedInt64Atomics, "shader_shared_int64_atomics");
 LOCALPUSH_END
+LOCALPUSH_BEGIN(VkPhysicalDeviceTransformFeedbackFeaturesEXT)
+    SetBoolean(transformFeedback, "transform_feedback");
+    SetBoolean(geometryStreams, "geometry_streams");
+LOCALPUSH_END
 
 ZPUSH_BEGIN(VkPhysicalDeviceFeatures)
     lua_newtable(L);
     localpushVkPhysicalDeviceFeatures(L, p);
 ZPUSH_END
+
 
 ZPUSH_BEGIN(VkPhysicalDeviceFeatures2)
     lua_newtable(L);
@@ -1963,6 +1975,8 @@ ZPUSH_BEGIN(VkPhysicalDeviceFeatures2)
                 VkPhysicalDeviceVulkanMemoryModelFeaturesKHR);
         XCASE(PHYSICAL_DEVICE_SHADER_ATOMIC_INT64_FEATURES_KHR,
                 VkPhysicalDeviceShaderAtomicInt64FeaturesKHR);
+        XCASE(PHYSICAL_DEVICE_TRANSFORM_FEEDBACK_FEATURES_EXT,
+                VkPhysicalDeviceTransformFeedbackFeaturesEXT);
     XPUSH_END
 ZPUSH_END
 
@@ -2222,6 +2236,19 @@ LOCALPUSH_BEGIN(VkPhysicalDevicePCIBusInfoPropertiesEXT)
     SetInteger(pciDevice, "pci_device");
     SetInteger(pciFunction, "pci_function");
 LOCALPUSH_END
+LOCALPUSH_BEGIN(VkPhysicalDeviceTransformFeedbackPropertiesEXT)
+    SetInteger(maxTransformFeedbackStreams, "max_transform_feedback_streams");
+    SetInteger(maxTransformFeedbackBuffers, "max_transform_feedback_buffers");
+    SetInteger(maxTransformFeedbackBufferSize, "max_transform_feedback_buffer_size");
+    SetInteger(maxTransformFeedbackStreamDataSize, "max_transform_feedback_stream_data_size");
+    SetInteger(maxTransformFeedbackBufferDataSize, "max_transform_feedback_buffer_data_size");
+    SetInteger(maxTransformFeedbackBufferDataStride, "max_transform_feedback_buffer_data_stride");
+    SetBoolean(transformFeedbackQueries, "transform_feedback_queries");
+    SetBoolean(transformFeedbackStreamsLinesTriangles, "transform_feedback_streams_lines_triangles");
+    SetBoolean(transformFeedbackRasterizationStreamSelect, "transform_feedback_rasterization_stream_select");
+    SetBoolean(transformFeedbackDraw, "transform_feedback_draw");
+LOCALPUSH_END
+
 
 ZINIT_BEGIN(VkPhysicalDeviceProperties2)
     EXTENSIONS_BEGIN
@@ -2253,6 +2280,8 @@ ZINIT_BEGIN(VkPhysicalDeviceProperties2)
                 VkPhysicalDeviceExternalMemoryHostPropertiesEXT);
         ADDX(PHYSICAL_DEVICE_DRIVER_PROPERTIES_KHR, VkPhysicalDeviceDriverPropertiesKHR);
         ADDX(PHYSICAL_DEVICE_PCI_BUS_INFO_PROPERTIES_EXT, VkPhysicalDevicePCIBusInfoPropertiesEXT);
+        ADDX(PHYSICAL_DEVICE_TRANSFORM_FEEDBACK_PROPERTIES_EXT,
+                VkPhysicalDeviceTransformFeedbackPropertiesEXT);
     EXTENSIONS_END
 ZINIT_END
 
@@ -2293,6 +2322,8 @@ ZPUSH_BEGIN(VkPhysicalDeviceProperties2)
                 VkPhysicalDeviceExternalMemoryHostPropertiesEXT);
         XCASE(PHYSICAL_DEVICE_DRIVER_PROPERTIES_KHR, VkPhysicalDeviceDriverPropertiesKHR);
         XCASE(PHYSICAL_DEVICE_PCI_BUS_INFO_PROPERTIES_EXT, VkPhysicalDevicePCIBusInfoPropertiesEXT);
+        XCASE(PHYSICAL_DEVICE_TRANSFORM_FEEDBACK_PROPERTIES_EXT,
+                VkPhysicalDeviceTransformFeedbackPropertiesEXT);
     XPUSH_END
 ZPUSH_END
 
@@ -5146,10 +5177,17 @@ ZCHECK_END
 
 ZCHECK_BEGIN(VkPipelineRasterizationConservativeStateCreateInfoEXT)
     newstruct(VkPipelineRasterizationConservativeStateCreateInfoEXT);
-    GetFlags(flags, "conservative_rasterization_state_create_flags");
+    GetFlags(flags, "conservative_rasterization_create_flags");
     GetConservativeRasterizationMode(conservativeRasterizationMode, "conservative_rasterization_mode");
     GetNumber(extraPrimitiveOverestimationSize, "extra_primitive_overestimation_size");
 ZCHECK_END
+
+ZCHECK_BEGIN(VkPipelineRasterizationStateStreamCreateInfoEXT)
+    newstruct(VkPipelineRasterizationStateStreamCreateInfoEXT);
+    GetFlags(flags, "rasterization_stream_create_flags");
+    GetInteger(rasterizationStream, "rasterization_stream");
+ZCHECK_END
+
 
 ZCHECK_BEGIN(VkPipelineRasterizationStateCreateInfo)
     checktable(arg);
@@ -5166,10 +5204,13 @@ ZCHECK_BEGIN(VkPipelineRasterizationStateCreateInfo)
     GetNumber(depthBiasSlopeFactor, "depth_bias_slope_factor");
     GetNumberDef(lineWidth, "line_width", 1.0);
     EXTENSIONS_BEGIN
-    if(ispresent("conservative_rasterization_state_create_flags") ||
-        ispresent("conservative_rasterization_mode") ||
+    if(ispresent("conservative_rasterization_mode") ||
+        ispresent("conservative_rasterization_create_flags") ||
         ispresent("extra_primitive_overestimation_size"))
         ADD_EXTENSION(VkPipelineRasterizationConservativeStateCreateInfoEXT);
+    if(ispresent("rasterization_stream") ||
+        ispresent("rasterization_stream_create_flags"))
+        ADD_EXTENSION(VkPipelineRasterizationStateStreamCreateInfoEXT);
     EXTENSIONS_END
 ZCHECK_END
 

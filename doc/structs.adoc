@@ -52,6 +52,9 @@ Basic types used in the table description that follow:
 * [[index]]
 [small]#*index* = 0-based integer index.#
 
+* [[devicesize]]
+[small]#*devicesize*: a Lua integer or the string '_whole size_'.#
+
 NOTE: 0-based indices that are used as identifiers in the Vulkan C API, like queue indices or queue family
 indices, are 0-based also in MoonVulkan functions and structs.
 They are not remapped to Lua-style 1-based indices to avoid confusion when using the validation layers.
@@ -208,7 +211,19 @@ _pci_domain_: integer, +
 _pci_bus_: integer, +
 _pci_device_: integer, +
 _pci_function_: integer, +
+pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkPhysicalDeviceTransformFeedbackPropertiesEXT[VkPhysicalDeviceTransformFeedbackPropertiesEXT], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_transform_feedback[VK_EXT_transform_feedback]): +
+_max_transform_feedback_streams_: integer, +
+_max_transform_feedback_buffers_: integer, +
+_max_transform_feedback_buffer_size_: integer, +
+_max_transform_feedback_stream_data_size_: integer, +
+_max_transform_feedback_buffer_data_size_: integer, +
+_max_transform_feedback_buffer_data_stride_: integer, +
+_transform_feedback_queries_: boolean , +
+_transform_feedback_streams_lines_triangles_: boolean , +
+_transform_feedback_rasterization_stream_select_: boolean , +
+_transform_feedback_draw_: boolean , +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkPhysicalDeviceProperties2.html[VkPhysicalDeviceProperties2])#
+
 
 * [[conformanceversion]]
 [small]#*conformanceversion* = { +
@@ -467,6 +482,9 @@ _vulkan_memory_model_device_scope_: boolean, +
 pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkPhysicalDeviceShaderAtomicInt64FeaturesKHR[VkPhysicalDeviceShaderAtomicInt64FeaturesKHR], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_shader_atomic_int64[VK_KHR_shader_atomic_int64]): +
 _shader_buffer_int64_atomics_: boolean, +
 _shader_shared_int64_atomics_: boolean, +
+pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkPhysicalDeviceTransformFeedbackFeaturesEXT[VkPhysicalDeviceTransformFeedbackFeaturesEXT], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_transform_feedback[VK_EXT_transform_feedback]): +
+_transform_feedback_: boolean, +
+_geometry_streams_: boolean, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkPhysicalDeviceFeatures2.html[VkPhysicalDeviceFeatures2])#
 
 
@@ -1384,9 +1402,12 @@ _depth_bias_clamp_: float, +
 _depth_bias_slope_factor_: float, +
 _line_width_: float (defaults to 1.0), +
 pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkPipelineRasterizationConservativeStateCreateInfoEXT[VkPipelineRasterizationConservativeStateCreateInfoEXT], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_conservative_rasterization[VK_EXT_conservative_rasterization]): +
-_conservative_rasterization_state_create_flags_: <<pipelinerasterizationconservativestatecreateflags, pipelinerasterizationconservativestatecreateflags>>, +
+_conservative_rasterization_create_flags_: <<pipelinerasterizationconservativestatecreateflags, pipelinerasterizationconservativestatecreateflags>>, +
 _conservative_rasterization_mode_: <<conservativerasterizationmode, conservativerasterizationmode>>, +
 _extra_primitive_overestimation_size_: float, +
+pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkPipelineRasterizationStateStreamCreateInfoEXT[VkPipelineRasterizationStateStreamCreateInfoEXT], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_transform_feedback[VK_EXT_transform_feedback]): +
+_rasterization_stream_create_flags_: <<pipelinerasterizationstatestreamcreateflags, pipelinerasterizationstatestreamcreateflags>>, +
+_rasterization_stream_: integer, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkPipelineRasterizationStateCreateInfo.html[VkPipelineRasterizationStateCreateInfo])#
 
 
