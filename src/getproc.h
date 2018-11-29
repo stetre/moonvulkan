@@ -133,6 +133,7 @@ typedef struct {
     F(GetDisplayPlaneCapabilities2KHR);
     F(EnumeratePhysicalDeviceGroupsKHR);
     F(GetPhysicalDeviceCalibrateableTimeDomainsEXT);
+    F(GetPhysicalDeviceMultisamplePropertiesEXT);
 } instance_dt_t;
 
 
@@ -296,7 +297,6 @@ typedef struct {
     F(BindBufferMemory2KHR);
     F(BindImageMemory2KHR);
     F(CmdSetSampleLocationsEXT);
-    F(GetPhysicalDeviceMultisamplePropertiesEXT);
     F(CreateValidationCacheEXT);
     F(DestroyValidationCacheEXT);
     F(MergeValidationCachesEXT);

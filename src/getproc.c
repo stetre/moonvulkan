@@ -203,6 +203,8 @@ instance_dt_t * getproc_instance(lua_State *L, VkInstance instance, VkInstanceCr
     GETKHR(EnumeratePhysicalDeviceGroups);
     //VK_EXT_calibrated_timestamps
     GET(GetPhysicalDeviceCalibrateableTimeDomainsEXT);
+    //VK_EXT_sample_locations
+    GET(GetPhysicalDeviceMultisamplePropertiesEXT);
 #ifdef VK_USE_PLATFORM_XCB_KHR
     //VK_KHR_xcb_surface
     GET(CreateXcbSurfaceKHR);
@@ -456,7 +458,6 @@ device_dt_t* getproc_device(lua_State *L, VkDevice device, VkDeviceCreateInfo *c
     GETKHR(BindImageMemory2);
     //VK_EXT_sample_locations
     GET(CmdSetSampleLocationsEXT);
-    GET(GetPhysicalDeviceMultisamplePropertiesEXT);
 #ifdef VK_USE_PLATFORM_WIN32_KHR
     //VK_KHR_win32_keyed_mutex
     //VK_KHR_external_fence_win32

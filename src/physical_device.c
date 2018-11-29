@@ -409,11 +409,11 @@ static int GetPhysicalDeviceMultisampleProperties(lua_State *L)
     VkMultisamplePropertiesEXT* props;
     VkPhysicalDevice physical_device = checkphysical_device(L, 1, &ud);
     VkSampleCountFlagBits samples = checkflags(L, 2);
-    CheckDevicePfn(L, ud, GetPhysicalDeviceMultisamplePropertiesEXT); //@@FIXME: InstancePfn
+    CheckInstancePfn(L, ud, GetPhysicalDeviceMultisamplePropertiesEXT);
 #define CLEANUP zfreeVkMultisamplePropertiesEXT(L, props, 1)
     props = znewchainVkMultisamplePropertiesEXT(L, &err);
     if(err) { CLEANUP; return lua_error(L); }
-    ud->ddt->GetPhysicalDeviceMultisamplePropertiesEXT(physical_device, samples, props); //@@FIXME: idt
+    ud->idt->GetPhysicalDeviceMultisamplePropertiesEXT(physical_device, samples, props);
     zpushVkMultisamplePropertiesEXT(L, props);
     CLEANUP;
 #undef CLEANUP
