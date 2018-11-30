@@ -38,7 +38,7 @@
 #define VK_NO_PROTOTYPES 1
 #include "vulkan/vulkan.h"  /* include locally from moonvulkan/src/vulkan/ */
 
-#define MOONVULKAN_VERSION      "0.7"
+#define MOONVULKAN_VERSION      "0.8"
 
 #endif /* moonvulkanDEFINED */
 
