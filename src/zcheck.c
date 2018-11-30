@@ -1769,7 +1769,7 @@ ZINIT_END
 
 ZCHECK_BEGIN(VkPhysicalDeviceFeatures2)
     VkPhysicalDeviceFeatures* features;
-    //checktable(L); --> in zcheckVkPhysicalDeviceFeatures()
+    checktable(arg);
     newstruct(VkPhysicalDeviceFeatures2);
     features = zcheckVkPhysicalDeviceFeatures(L, arg, err);
     if(features)
