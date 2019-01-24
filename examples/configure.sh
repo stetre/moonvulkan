@@ -11,7 +11,7 @@
 # definitions according to where the SDK is installed on your system, 
 # and to the SDK version you are using:
 VULKAN_SDK_BASE=$HOME/vulkan
-VULKAN_SDK_VERSION=1.1.92.1
+VULKAN_SDK_VERSION=1.1.97.0
 
 VULKAN_SDK=$VULKAN_SDK_BASE/$VULKAN_SDK_VERSION/x86_64
 
