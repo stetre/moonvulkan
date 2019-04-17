@@ -1,4 +1,4 @@
-ver=1.1.97.0
+ver=1.1.106.0
 fromdir=/home/ste/vulkan/$ver/x86_64/include/vulkan
 todir=.
 
@@ -8,7 +8,7 @@ cp -fpv $fromdir/vulkan_core.h $todir
 cp -fpv $fromdir/vulkan.h $todir
 cp -fpv $fromdir/vulkan_ios.h $todir
 cp -fpv $fromdir/vulkan_macos.h $todir
-cp -fpv $fromdir/vulkan_mir.h $todir
+#cp -fpv $fromdir/vulkan_mir.h $todir
 cp -fpv $fromdir/vulkan_vi.h $todir
 cp -fpv $fromdir/vulkan_wayland.h $todir
 cp -fpv $fromdir/vulkan_win32.h $todir
