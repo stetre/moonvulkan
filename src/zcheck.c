@@ -1659,7 +1659,7 @@ FUNC_BEGIN(16BIT_STORAGE_FEATURES, VkPhysicalDevice16BitStorageFeatures)
     GetBoolean(storagePushConstant16, "storage_push_constant_16");
     GetBoolean(storageInputOutput16, "storage_input_output_16");
 FUNC_END 
-FUNC_BEGIN(VARIABLE_POINTER_FEATURES, VkPhysicalDeviceVariablePointerFeatures)
+FUNC_BEGIN(VARIABLE_POINTERS_FEATURES, VkPhysicalDeviceVariablePointersFeatures)
     GetBoolean(variablePointersStorageBuffer, "variable_pointers_storage_buffer");
     GetBoolean(variablePointers, "variable_pointers");
 FUNC_END 
@@ -1681,7 +1681,7 @@ FUNC_END
 FUNC_BEGIN(PROTECTED_MEMORY_FEATURES, VkPhysicalDeviceProtectedMemoryFeatures)
     GetBoolean(protectedMemory, "protected_memory");
 FUNC_END 
-FUNC_BEGIN(SHADER_DRAW_PARAMETER_FEATURES, VkPhysicalDeviceShaderDrawParameterFeatures)
+FUNC_BEGIN(SHADER_DRAW_PARAMETERS_FEATURES, VkPhysicalDeviceShaderDrawParametersFeatures)
     GetBoolean(shaderDrawParameters, "shader_draw_parameters");
 FUNC_END 
 FUNC_BEGIN(ASTC_DECODE_FEATURES_EXT, VkPhysicalDeviceASTCDecodeFeaturesEXT)
@@ -1740,7 +1740,7 @@ FUNC_END
 ZINIT_BEGIN(VkPhysicalDeviceFeatures2)
     EXTENSIONS_BEGIN
         ADDX(PHYSICAL_DEVICE_16BIT_STORAGE_FEATURES, VkPhysicalDevice16BitStorageFeatures);
-        ADDX(PHYSICAL_DEVICE_VARIABLE_POINTER_FEATURES, VkPhysicalDeviceVariablePointerFeatures);
+        ADDX(PHYSICAL_DEVICE_VARIABLE_POINTERS_FEATURES, VkPhysicalDeviceVariablePointersFeatures);
         ADDX(PHYSICAL_DEVICE_BLEND_OPERATION_ADVANCED_FEATURES_EXT,
                 VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT);
         ADDX(PHYSICAL_DEVICE_SAMPLER_YCBCR_CONVERSION_FEATURES,
@@ -1749,7 +1749,7 @@ ZINIT_BEGIN(VkPhysicalDeviceFeatures2)
                 VkPhysicalDeviceConditionalRenderingFeaturesEXT);
         ADDX(PHYSICAL_DEVICE_8BIT_STORAGE_FEATURES_KHR , VkPhysicalDevice8BitStorageFeaturesKHR);
         ADDX(PHYSICAL_DEVICE_PROTECTED_MEMORY_FEATURES, VkPhysicalDeviceProtectedMemoryFeatures);
-        ADDX(PHYSICAL_DEVICE_SHADER_DRAW_PARAMETER_FEATURES,VkPhysicalDeviceShaderDrawParameterFeatures);
+        ADDX(PHYSICAL_DEVICE_SHADER_DRAW_PARAMETERS_FEATURES,VkPhysicalDeviceShaderDrawParametersFeatures);
         ADDX(PHYSICAL_DEVICE_ASTC_DECODE_FEATURES_EXT, VkPhysicalDeviceASTCDecodeFeaturesEXT);
         ADDX(PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_FEATURES_EXT,
                 VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT);
@@ -1784,13 +1784,13 @@ ZCHECK_BEGIN(VkPhysicalDeviceFeatures2)
         else addtochain(chain, p1);                 \
     } while(0)
         ADD(VkPhysicalDevice16BitStorageFeatures);
-        ADD(VkPhysicalDeviceVariablePointerFeatures);
+        ADD(VkPhysicalDeviceVariablePointersFeatures);
         ADD(VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT);
         ADD(VkPhysicalDeviceSamplerYcbcrConversionFeatures);
         ADD(VkPhysicalDeviceConditionalRenderingFeaturesEXT);
         ADD(VkPhysicalDevice8BitStorageFeaturesKHR);
         ADD(VkPhysicalDeviceProtectedMemoryFeatures);
-        ADD(VkPhysicalDeviceShaderDrawParameterFeatures);
+        ADD(VkPhysicalDeviceShaderDrawParametersFeatures);
         ADD(VkPhysicalDeviceASTCDecodeFeaturesEXT);
         ADD(VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT);
         ADD(VkPhysicalDeviceInlineUniformBlockFeaturesEXT);
@@ -1866,7 +1866,7 @@ LOCALPUSH_BEGIN(VkPhysicalDevice16BitStorageFeatures)
     SetBoolean(storagePushConstant16, "storage_push_constant_16");
     SetBoolean(storageInputOutput16, "storage_input_output_16");
 LOCALPUSH_END
-LOCALPUSH_BEGIN(VkPhysicalDeviceVariablePointerFeatures)
+LOCALPUSH_BEGIN(VkPhysicalDeviceVariablePointersFeatures)
     SetBoolean(variablePointersStorageBuffer, "variable_pointers_storage_buffer");
     SetBoolean(variablePointers, "variable_pointers");
 LOCALPUSH_END
@@ -1888,7 +1888,7 @@ LOCALPUSH_END
 LOCALPUSH_BEGIN(VkPhysicalDeviceProtectedMemoryFeatures)
     SetBoolean(protectedMemory, "protected_memory");
 LOCALPUSH_END
-LOCALPUSH_BEGIN(VkPhysicalDeviceShaderDrawParameterFeatures)
+LOCALPUSH_BEGIN(VkPhysicalDeviceShaderDrawParametersFeatures)
     SetBoolean(shaderDrawParameters, "shader_draw_parameters");
 LOCALPUSH_END
 LOCALPUSH_BEGIN(VkPhysicalDeviceASTCDecodeFeaturesEXT)
@@ -1953,7 +1953,7 @@ ZPUSH_BEGIN(VkPhysicalDeviceFeatures2)
     localpushVkPhysicalDeviceFeatures(L, &p->features);
     XPUSH_BEGIN
         XCASE(PHYSICAL_DEVICE_16BIT_STORAGE_FEATURES, VkPhysicalDevice16BitStorageFeatures);
-        XCASE(PHYSICAL_DEVICE_VARIABLE_POINTER_FEATURES, VkPhysicalDeviceVariablePointerFeatures);
+        XCASE(PHYSICAL_DEVICE_VARIABLE_POINTERS_FEATURES, VkPhysicalDeviceVariablePointersFeatures);
         XCASE(PHYSICAL_DEVICE_BLEND_OPERATION_ADVANCED_FEATURES_EXT,
                 VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT);
         XCASE(PHYSICAL_DEVICE_SAMPLER_YCBCR_CONVERSION_FEATURES,
@@ -1962,8 +1962,8 @@ ZPUSH_BEGIN(VkPhysicalDeviceFeatures2)
                 VkPhysicalDeviceConditionalRenderingFeaturesEXT);
         XCASE(PHYSICAL_DEVICE_8BIT_STORAGE_FEATURES_KHR , VkPhysicalDevice8BitStorageFeaturesKHR);
         XCASE(PHYSICAL_DEVICE_PROTECTED_MEMORY_FEATURES, VkPhysicalDeviceProtectedMemoryFeatures);
-        XCASE(PHYSICAL_DEVICE_SHADER_DRAW_PARAMETER_FEATURES,
-                VkPhysicalDeviceShaderDrawParameterFeatures);
+        XCASE(PHYSICAL_DEVICE_SHADER_DRAW_PARAMETERS_FEATURES,
+                VkPhysicalDeviceShaderDrawParametersFeatures);
         XCASE(PHYSICAL_DEVICE_ASTC_DECODE_FEATURES_EXT, VkPhysicalDeviceASTCDecodeFeaturesEXT);
         XCASE(PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_FEATURES_EXT,
                 VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT);
