@@ -101,6 +101,9 @@ void enums_freelist(lua_State *L, uint32_t *list);
 #define DOMAIN_VENDOR_ID                        54
 #define DOMAIN_DRIVER_ID                        55
 #define DOMAIN_TIME_DOMAIN                      56
+#define DOMAIN_VALIDATION_FEATURE_ENABLE        57
+#define DOMAIN_VALIDATION_FEATURE_DISABLE       58
+#define DOMAIN_FULL_SCREEN_EXCLUSIVE            59
 
 /* NONVK additions */
 #define DOMAIN_NONVK_TYPE                       101
@@ -441,6 +444,27 @@ void enums_freelist(lua_State *L, uint32_t *list);
 #define valuestimedomain(L) enums_values((L), DOMAIN_TIME_DOMAIN)
 #define checktimedomainlist(L, arg, count, err) (VkTimeDomainEXT*)enums_checklist((L), DOMAIN_TIME_DOMAIN, (arg), (count), (err))
 #define freetimedomainlist(L, list) enums_freelist((L), (uint32_t*)(list))
+
+#define testvalidationfeatureenable(L, arg, err) (VkValidationFeatureEnableEXT)enums_test((L), DOMAIN_VALIDATION_FEATURE_ENABLE, (arg), (err))
+#define checkvalidationfeatureenable(L, arg) (VkValidationFeatureEnableEXT)enums_check((L), DOMAIN_VALIDATION_FEATURE_ENABLE, (arg))
+#define pushvalidationfeatureenable(L, val) enums_push((L), DOMAIN_VALIDATION_FEATURE_ENABLE, (uint32_t)(val))
+#define valuesvalidationfeatureenable(L) enums_values((L), DOMAIN_VALIDATION_FEATURE_ENABLE)
+#define checkvalidationfeatureenablelist(L, arg, count, err) (VkValidationFeatureEnableEXT*)enums_checklist((L), DOMAIN_VALIDATION_FEATURE_ENABLE, (arg), (count), (err))
+#define freevalidationfeatureenablelist(L, list) enums_freelist((L), (uint32_t*)(list))
+
+#define testvalidationfeaturedisable(L, arg, err) (VkValidationFeatureDisableEXT)enums_test((L), DOMAIN_VALIDATION_FEATURE_DISABLE, (arg), (err))
+#define checkvalidationfeaturedisable(L, arg) (VkValidationFeatureDisableEXT)enums_check((L), DOMAIN_VALIDATION_FEATURE_DISABLE, (arg))
+#define pushvalidationfeaturedisable(L, val) enums_push((L), DOMAIN_VALIDATION_FEATURE_DISABLE, (uint32_t)(val))
+#define valuesvalidationfeaturedisable(L) enums_values((L), DOMAIN_VALIDATION_FEATURE_DISABLE)
+#define checkvalidationfeaturedisablelist(L, arg, count, err) (VkValidationFeatureDisableEXT*)enums_checklist((L), DOMAIN_VALIDATION_FEATURE_DISABLE, (arg), (count), (err))
+#define freevalidationfeaturedisablelist(L, list) enums_freelist((L), (uint32_t*)(list))
+
+#define testfullscreenexclusive(L, arg, err) (VkFullScreenExclusiveEXT)enums_test((L), DOMAIN_FULL_SCREEN_EXCLUSIVE, (arg), (err))
+#define checkfullscreenexclusive(L, arg) (VkFullScreenExclusiveEXT)enums_check((L), DOMAIN_FULL_SCREEN_EXCLUSIVE, (arg))
+#define pushfullscreenexclusive(L, val) enums_push((L), DOMAIN_FULL_SCREEN_EXCLUSIVE, (uint32_t)(val))
+#define valuesfullscreenexclusive(L) enums_values((L), DOMAIN_FULL_SCREEN_EXCLUSIVE)
+#define checkfullscreenexclusivelist(L, arg, count, err) (VkFullScreenExclusiveEXT*)enums_checklist((L), DOMAIN_FULL_SCREEN_EXCLUSIVE, (arg), (count), (err))
+#define freefullscreenexclusivelist(L, list) enums_freelist((L), (uint32_t*)(list))
 
 #if 0 /* scaffolding 7yy */
 #define testxxx(L, arg, err) (VkXxx)enums_test((L), DOMAIN_XXX, (arg), (err))

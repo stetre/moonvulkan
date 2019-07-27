@@ -5770,7 +5770,7 @@ for semantic and usage information.</p>
 </div>
 <div id="result" class="paragraph">
 <p><span class="small"><strong>result</strong>: vk.XXX (results), vk.ERROR_XXX (errors)<br>
-Values: '<em>success</em>', '<em>not ready</em>', '<em>timeout</em>', '<em>event set</em>', '<em>event reset</em>', '<em>incomplete</em>', '<em>out of host memory</em>', '<em>out of device memory</em>', '<em>initialization failed</em>', '<em>device lost</em>', '<em>memory map failed</em>', '<em>layer not present</em>', '<em>extension not present</em>', '<em>feature not present</em>', '<em>incompatible driver</em>', '<em>too many objects</em>', '<em>format not supported</em>', '<em>fragmented pool</em>', '<em>surface lost</em>', '<em>native window in use</em>', '<em>suboptimal</em>', '<em>out of date</em>', '<em>incompatible display</em>', '<em>validation failed</em>', '<em>out of pool memory</em>', '<em>invalid external handle</em>', '<em>not permitted</em>', '<em>fragmentation</em>', '<em>invalid drm format modifier plane layout</em>'.<br>
+Values: '<em>success</em>', '<em>not ready</em>', '<em>timeout</em>', '<em>event set</em>', '<em>event reset</em>', '<em>incomplete</em>', '<em>out of host memory</em>', '<em>out of device memory</em>', '<em>initialization failed</em>', '<em>device lost</em>', '<em>memory map failed</em>', '<em>layer not present</em>', '<em>extension not present</em>', '<em>feature not present</em>', '<em>incompatible driver</em>', '<em>too many objects</em>', '<em>format not supported</em>', '<em>fragmented pool</em>', '<em>surface lost</em>', '<em>native window in use</em>', '<em>suboptimal</em>', '<em>out of date</em>', '<em>incompatible display</em>', '<em>validation failed</em>', '<em>out of pool memory</em>', '<em>invalid external handle</em>', '<em>not permitted</em>', '<em>fragmentation</em>', '<em>invalid drm format modifier plane layout</em>', '<em>invalid device address</em>', '<em>full screen exclusive mode lost</em>'.<br>
 Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkResult.html">VkResult</a>.</span></p>
 </div>
 <div id="attachmentloadop" class="paragraph">
@@ -5880,7 +5880,7 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/h
 </div>
 <div id="driverid" class="paragraph">
 <p><span class="small"><strong>driverid</strong>: vk.DRIVER_ID_XXX_KHR<br>
-Values: '<em>amd proprietary</em>', '<em>amd open source</em>', '<em>mesa radv</em>', '<em>nvidia proprietary</em>', '<em>intel proprietary windows</em>', '<em>intel open source mesa</em>', '<em>imagination proprietary</em>', '<em>qualcomm proprietary</em>', '<em>arm proprietary</em>'.<br>
+Values: '<em>amd proprietary</em>', '<em>amd open source</em>', '<em>mesa radv</em>', '<em>nvidia proprietary</em>', '<em>intel proprietary windows</em>', '<em>intel open source mesa</em>', '<em>imagination proprietary</em>', '<em>qualcomm proprietary</em>', '<em>arm proprietary</em>', '<em>google swiftshader</em>', '<em>ggp proprietary</em>', '<em>broadcom proprietary</em>'.<br>
 Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkDriverIdKHR.html">VkDriverIdKHR</a>.</span></p>
 </div>
 <div id="dynamicstate" class="paragraph">
@@ -5892,7 +5892,7 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/h
 <div id="filter" class="paragraph">
 <p><span class="small"><strong>filter</strong>: vk.FILTER_XXX<br>
 Values:
-'<em>nearest</em>' (default), '<em>linear</em>'.<br>
+'<em>nearest</em>' (default), '<em>linear</em>', '<em>cubic</em>'.<br>
 Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkFilter.html">VkFilter</a>.</span></p>
 </div>
 <div id="format" class="paragraph">
@@ -5907,10 +5907,15 @@ Values:
 '<em>counter clockwise</em>' (default), '<em>clockwise</em>'.<br>
 Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkFrontFace.html">VkFrontFace</a>.</span></p>
 </div>
+<div id="fullscreenexclusive" class="paragraph">
+<p><span class="small"><strong>fullscreenexclusive</strong>: vk.FULL_SCREEN_EXCLUSIVE_XXX_EXT<br>
+Values: '<em>default</em>', '<em>allowed</em>', '<em>disallowed</em>', '<em>application controlled</em>'.<br>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkFullScreenExclusiveEXT.html">VkFullScreenExclusiveEXT</a>.</span></p>
+</div>
 <div id="imagelayout" class="paragraph">
 <p><span class="small"><strong>imagelayout</strong>: vk.IMAGE_LAYOUT_XXX<br>
 Values:
-'<em>undefined</em>' (default), '<em>general</em>', '<em>color attachment optimal</em>', '<em>depth stencil attachment optimal</em>', '<em>depth stencil read only optimal</em>', '<em>shader read only optimal</em>', '<em>transfer src optimal</em>', '<em>transfer dst optimal</em>', '<em>preinitialized</em>', '<em>present src</em>', '<em>shared present</em>', '<em>depth read only stencil attachment optimal</em>', '<em>depth attachment stencil read only optimal</em>'.<br>
+'<em>undefined</em>' (default), '<em>general</em>', '<em>color attachment optimal</em>', '<em>depth stencil attachment optimal</em>', '<em>depth stencil read only optimal</em>', '<em>shader read only optimal</em>', '<em>transfer src optimal</em>', '<em>transfer dst optimal</em>', '<em>preinitialized</em>', '<em>present src</em>', '<em>shared present</em>', '<em>depth read only stencil attachment optimal</em>', '<em>depth attachment stencil read only optimal</em>', '<em>fragment density map optimal</em>'.<br>
 Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkImageLayout.html">VkImageLayout</a>.</span></p>
 </div>
 <div id="imagetiling" class="paragraph">
@@ -6057,6 +6062,16 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/h
 <p><span class="small"><strong>validationcheck</strong>: vk.VALIDATION_CHECK_XXX_EXT<br>
 Values: '<em>all</em>', <em>shaders</em>'.<br>
 Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkValidationCheckEXT.html">VkValidationCheckEXT</a>.</span></p>
+</div>
+<div id="validationfeaturedisable" class="paragraph">
+<p><span class="small"><strong>validationfeaturedisable</strong>: vk.VALIDATION_FEATURE_DISABLE_XXX_EXT<br>
+Values: '<em>all</em>' ,'<em>shaders</em>' ,'<em>thread safety</em>' ,'<em>api parameters</em>' ,'<em>object lifetimes</em>' ,'<em>core checks</em>' ,'<em>unique handles</em>'.<br>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkValidationFeatureDisableEXT.html">VkValidationFeatureDisableEXT</a>.</span></p>
+</div>
+<div id="validationfeatureenable" class="paragraph">
+<p><span class="small"><strong>validationfeatureenable</strong>: vk.VALIDATION_FEATURE_ENABLE_XXX_EXT<br>
+Values: '<em>gpu assisted</em>', '<em>gpu assisted reserve binding slot</em>'.<br>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkValidationFeatureEnableEXT.html">VkValidationFeatureEnableEXT</a>.</span></p>
 </div>
 <div id="vendorid" class="paragraph">
 <p><span class="small"><strong>vendorid</strong>: vk.VENDOR_ID_XXX<br>

@@ -24,7 +24,7 @@ for semantic and usage information.
 
 [[result]]
 [small]#*result*: vk.XXX (results), vk.ERROR_XXX (errors) +
-Values: '_success_', '_not ready_', '_timeout_', '_event set_', '_event reset_', '_incomplete_', '_out of host memory_', '_out of device memory_', '_initialization failed_', '_device lost_', '_memory map failed_', '_layer not present_', '_extension not present_', '_feature not present_', '_incompatible driver_', '_too many objects_', '_format not supported_', '_fragmented pool_', '_surface lost_', '_native window in use_', '_suboptimal_', '_out of date_', '_incompatible display_', '_validation failed_', '_out of pool memory_', '_invalid external handle_', '_not permitted_', '_fragmentation_', '_invalid drm format modifier plane layout_'. +
+Values: '_success_', '_not ready_', '_timeout_', '_event set_', '_event reset_', '_incomplete_', '_out of host memory_', '_out of device memory_', '_initialization failed_', '_device lost_', '_memory map failed_', '_layer not present_', '_extension not present_', '_feature not present_', '_incompatible driver_', '_too many objects_', '_format not supported_', '_fragmented pool_', '_surface lost_', '_native window in use_', '_suboptimal_', '_out of date_', '_incompatible display_', '_validation failed_', '_out of pool memory_', '_invalid external handle_', '_not permitted_', '_fragmentation_', '_invalid drm format modifier plane layout_', '_invalid device address_', '_full screen exclusive mode lost_'. +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkResult.html[VkResult].#
 
 [[attachmentloadop]]
@@ -134,7 +134,7 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkDis
 
 [[driverid]]
 [small]#*driverid*: vk.DRIVER_ID_XXX_KHR +
-Values: '_amd proprietary_', '_amd open source_', '_mesa radv_', '_nvidia proprietary_', '_intel proprietary windows_', '_intel open source mesa_', '_imagination proprietary_', '_qualcomm proprietary_', '_arm proprietary_'. +
+Values: '_amd proprietary_', '_amd open source_', '_mesa radv_', '_nvidia proprietary_', '_intel proprietary windows_', '_intel open source mesa_', '_imagination proprietary_', '_qualcomm proprietary_', '_arm proprietary_', '_google swiftshader_', '_ggp proprietary_', '_broadcom proprietary_'. +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkDriverIdKHR.html[VkDriverIdKHR].#
 
 [[dynamicstate]]
@@ -146,7 +146,7 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkDyn
 [[filter]]
 [small]#*filter*: vk.FILTER_XXX +
 Values:
-'_nearest_' (default), '_linear_'. +
+'_nearest_' (default), '_linear_', '_cubic_'. +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkFilter.html[VkFilter].#
 
 [[format]]
@@ -161,10 +161,16 @@ Values:
 '_counter clockwise_' (default), '_clockwise_'. +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkFrontFace.html[VkFrontFace].#
 
+
+[[fullscreenexclusive]]
+[small]#*fullscreenexclusive*: vk.FULL_SCREEN_EXCLUSIVE_XXX_EXT +
+Values: '_default_', '_allowed_', '_disallowed_', '_application controlled_'. +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkFullScreenExclusiveEXT.html[VkFullScreenExclusiveEXT].#
+
 [[imagelayout]]
 [small]#*imagelayout*: vk.IMAGE_LAYOUT_XXX +
 Values:
-'_undefined_' (default), '_general_', '_color attachment optimal_', '_depth stencil attachment optimal_', '_depth stencil read only optimal_', '_shader read only optimal_', '_transfer src optimal_', '_transfer dst optimal_', '_preinitialized_', '_present src_', '_shared present_', '_depth read only stencil attachment optimal_', '_depth attachment stencil read only optimal_'. +
+'_undefined_' (default), '_general_', '_color attachment optimal_', '_depth stencil attachment optimal_', '_depth stencil read only optimal_', '_shader read only optimal_', '_transfer src optimal_', '_transfer dst optimal_', '_preinitialized_', '_present src_', '_shared present_', '_depth read only stencil attachment optimal_', '_depth attachment stencil read only optimal_', '_fragment density map optimal_'. +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkImageLayout.html[VkImageLayout].#
 
 [[imagetiling]]
@@ -311,6 +317,18 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkVal
 [small]#*validationcheck*: vk.VALIDATION_CHECK_XXX_EXT +
 Values: '_all_', _shaders_'. +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkValidationCheckEXT.html[VkValidationCheckEXT].#
+
+
+[[validationfeaturedisable]]
+[small]#*validationfeaturedisable*: vk.VALIDATION_FEATURE_DISABLE_XXX_EXT +
+Values: '_all_' ,'_shaders_' ,'_thread safety_' ,'_api parameters_' ,'_object lifetimes_' ,'_core checks_' ,'_unique handles_'. +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkValidationFeatureDisableEXT.html[VkValidationFeatureDisableEXT].#
+
+[[validationfeatureenable]]
+[small]#*validationfeatureenable*: vk.VALIDATION_FEATURE_ENABLE_XXX_EXT +
+Values: '_gpu assisted_', '_gpu assisted reserve binding slot_'. +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkValidationFeatureEnableEXT.html[VkValidationFeatureEnableEXT].#
+
 
 [[vendorid]]
 [small]#*vendorid*: vk.VENDOR_ID_XXX +

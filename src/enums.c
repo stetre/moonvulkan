@@ -328,6 +328,9 @@ static int Enum(lua_State *L)
     CASE(vendorid);
     CASE(driverid);
     CASE(timedomain);
+    CASE(validationfeatureenable);
+    CASE(validationfeaturedisable);
+    CASE(fullscreenexclusive);
 #undef CASE
     return 0;
     }
@@ -403,6 +406,8 @@ void moonvulkan_open_enums(lua_State *L)
     ADD(ERROR_NOT_PERMITTED_EXT, "not permitted");
     ADD(ERROR_FRAGMENTATION_EXT, "fragmentation");
     ADD(ERROR_INVALID_DRM_FORMAT_MODIFIER_PLANE_LAYOUT_EXT, "invalid drm format modifier plane layout");
+    ADD(ERROR_INVALID_DEVICE_ADDRESS_EXT, "invalid device address");
+    ADD(ERROR_FULL_SCREEN_EXCLUSIVE_MODE_LOST_EXT, "full screen exclusive mode lost");
 
     domain = DOMAIN_PIPELINE_CACHE_HEADER_VERSION; /* VkPipelineCacheHeaderVersion */
     ADD(PIPELINE_CACHE_HEADER_VERSION_ONE, "one");
@@ -679,6 +684,7 @@ void moonvulkan_open_enums(lua_State *L)
     ADD(IMAGE_LAYOUT_SHARED_PRESENT_KHR, "shared present");
     ADD(IMAGE_LAYOUT_DEPTH_READ_ONLY_STENCIL_ATTACHMENT_OPTIMAL, "depth read only stencil attachment optimal");
     ADD(IMAGE_LAYOUT_DEPTH_ATTACHMENT_STENCIL_READ_ONLY_OPTIMAL, "depth attachment stencil read only optimal");
+    ADD(IMAGE_LAYOUT_FRAGMENT_DENSITY_MAP_OPTIMAL_EXT, "fragment density map optimal");
 
     domain = DOMAIN_IMAGE_VIEW_TYPE; /* VkImageViewType */
     ADD(IMAGE_VIEW_TYPE_1D, "1d");
@@ -853,6 +859,7 @@ void moonvulkan_open_enums(lua_State *L)
     domain = DOMAIN_FILTER; /* VkFilter */
     ADD(FILTER_NEAREST, "nearest");
     ADD(FILTER_LINEAR, "linear");
+    ADD(FILTER_CUBIC_EXT, "cubic");
 
     domain = DOMAIN_SAMPLER_MIPMAP_MODE; /* VkSamplerMipmapMode */
     ADD(SAMPLER_MIPMAP_MODE_NEAREST, "nearest");
@@ -914,6 +921,7 @@ void moonvulkan_open_enums(lua_State *L)
 
     domain = DOMAIN_COLOR_SPACE; /* VkColorSpaceKHR */
     ADD(COLOR_SPACE_SRGB_NONLINEAR_KHR, "srgb nonlinear");
+//  ADD(COLOR_SPACE_DISPLAY_P3_LINEAR_EXT, "display p3 linear"); -> "dci p3 linear"
     ADD(COLOR_SPACE_DISPLAY_P3_NONLINEAR_EXT, "display p3 nonlinear");
     ADD(COLOR_SPACE_EXTENDED_SRGB_LINEAR_EXT, "extended srgb linear");
     ADD(COLOR_SPACE_EXTENDED_SRGB_NONLINEAR_EXT, "extended srgb nonlinear");
@@ -1095,12 +1103,36 @@ void moonvulkan_open_enums(lua_State *L)
     ADD(DRIVER_ID_IMAGINATION_PROPRIETARY_KHR, "imagination proprietary");
     ADD(DRIVER_ID_QUALCOMM_PROPRIETARY_KHR, "qualcomm proprietary");
     ADD(DRIVER_ID_ARM_PROPRIETARY_KHR, "arm proprietary");
+    ADD(DRIVER_ID_GOOGLE_SWIFTSHADER_KHR, "google swiftshader");
+    ADD(DRIVER_ID_GGP_PROPRIETARY_KHR, "ggp proprietary");
+    ADD(DRIVER_ID_BROADCOM_PROPRIETARY_KHR, "broadcom proprietary");
 
     domain = DOMAIN_TIME_DOMAIN; /* VkTimaDomainEXT */
     ADD(TIME_DOMAIN_DEVICE_EXT, "device");
     ADD(TIME_DOMAIN_CLOCK_MONOTONIC_EXT, "clock monotonic");
     ADD(TIME_DOMAIN_CLOCK_MONOTONIC_RAW_EXT, "clock monotonic raw");
     ADD(TIME_DOMAIN_QUERY_PERFORMANCE_COUNTER_EXT, "query performance counter");
+
+    domain = DOMAIN_VALIDATION_FEATURE_ENABLE; /* VkValidationFeatureEnableEXT */
+    ADD(VALIDATION_FEATURE_ENABLE_GPU_ASSISTED_EXT, "gpu assisted");
+    ADD(VALIDATION_FEATURE_ENABLE_GPU_ASSISTED_RESERVE_BINDING_SLOT_EXT, "gpu assisted reserve binding slot");
+
+    domain = DOMAIN_VALIDATION_FEATURE_DISABLE; /* VkValidationFeatureDisableEXT */
+    ADD(VALIDATION_FEATURE_DISABLE_ALL_EXT, "all");
+    ADD(VALIDATION_FEATURE_DISABLE_SHADERS_EXT, "shaders");
+    ADD(VALIDATION_FEATURE_DISABLE_THREAD_SAFETY_EXT, "thread safety");
+    ADD(VALIDATION_FEATURE_DISABLE_API_PARAMETERS_EXT, "api parameters");
+    ADD(VALIDATION_FEATURE_DISABLE_OBJECT_LIFETIMES_EXT, "object lifetimes");
+    ADD(VALIDATION_FEATURE_DISABLE_CORE_CHECKS_EXT, "core checks");
+    ADD(VALIDATION_FEATURE_DISABLE_UNIQUE_HANDLES_EXT, "unique handles");
+
+    domain = DOMAIN_FULL_SCREEN_EXCLUSIVE; /* VkFullScreenExclusiveEXT */
+#if 0 //@@ why is this extension defined in vulkan_win32.h instead of vulkan_core.h?
+    ADD(FULL_SCREEN_EXCLUSIVE_DEFAULT_EXT, "default");
+    ADD(FULL_SCREEN_EXCLUSIVE_ALLOWED_EXT, "allowed");
+    ADD(FULL_SCREEN_EXCLUSIVE_DISALLOWED_EXT, "disallowed");
+    ADD(FULL_SCREEN_EXCLUSIVE_APPLICATION_CONTROLLED_EXT, "application controlled");
+#endif
 
 #undef ADD
     }
