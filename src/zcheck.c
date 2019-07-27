@@ -1725,6 +1725,7 @@ FUNC_END
 FUNC_BEGIN(VULKAN_MEMORY_MODEL_FEATURES_KHR, VkPhysicalDeviceVulkanMemoryModelFeaturesKHR)
     GetBoolean(vulkanMemoryModel, "vulkan_memory_model");
     GetBoolean(vulkanMemoryModelDeviceScope, "vulkan_memory_model_device_scope");
+    GetBoolean(vulkanMemoryModelAvailabilityVisibilityChains, "vulkan_memory_model_availability_visibility_chains");
 FUNC_END
 FUNC_BEGIN(SHADER_ATOMIC_INT64_FEATURES_KHR, VkPhysicalDeviceShaderAtomicInt64FeaturesKHR)
     GetBoolean(shaderBufferInt64Atomics, "shader_buffer_int64_atomics");
@@ -1932,6 +1933,7 @@ LOCALPUSH_END
 LOCALPUSH_BEGIN(VkPhysicalDeviceVulkanMemoryModelFeaturesKHR)
     SetBoolean(vulkanMemoryModel, "vulkan_memory_model");
     SetBoolean(vulkanMemoryModelDeviceScope, "vulkan_memory_model_device_scope");
+    SetBoolean(vulkanMemoryModelAvailabilityVisibilityChains, "vulkan_memory_model_availability_visibility_chains");
 LOCALPUSH_END
 LOCALPUSH_BEGIN(VkPhysicalDeviceShaderAtomicInt64FeaturesKHR)
     SetBoolean(shaderBufferInt64Atomics, "shader_buffer_int64_atomics");
