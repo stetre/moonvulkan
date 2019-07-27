@@ -26,7 +26,7 @@ See also the <<flags_snippet, example>> contained in the code snippets section.
 [[accessflags]]
 [small]#*accessflags*: vk.ACCESS_XXX_BIT +
 Values: 
-'_indirect command read_', '_index read_', '_vertex attribute read_', '_uniform read_', '_input attachment read_', '_shader read_', '_shader write_', '_color attachment read_', '_color attachment write_', '_depth stencil attachment read_', '_depth stencil attachment write_', '_transfer read_', '_transfer write_', '_host read_', '_host write_', '_memory read_', '_memory write_', '_color attachment read noncoherent_', '_conditional rendering read_', '_transform feedback write_, '_transform feedback counter read_, '_transform feedback counter write_'. +
+'_indirect command read_', '_index read_', '_vertex attribute read_', '_uniform read_', '_input attachment read_', '_shader read_', '_shader write_', '_color attachment read_', '_color attachment write_', '_depth stencil attachment read_', '_depth stencil attachment write_', '_transfer read_', '_transfer write_', '_host read_', '_host write_', '_memory read_', '_memory write_', '_color attachment read noncoherent_', '_conditional rendering read_', '_transform feedback write_, '_transform feedback counter read_, '_transform feedback counter write_', '_fragment density map read_'. +
 Rfr. https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkAccessFlagBits.html[VkAccessFlagBits].#
 
 [[attachmentdescriptionflags]]
@@ -38,13 +38,13 @@ Rfr. https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkAtt
 [[buffercreateflags]]
 [small]#*buffercreateflags*: vk.BUFFER_CREATE_XXX_BIT +
 Values: 
-'_sparse binding_', '_sparse residency_', '_sparse aliased_', '_protected_'. +
+'_sparse binding_', '_sparse residency_', '_sparse aliased_', '_protected_', '_device address capture replay_'. +
 Rfr. https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkBufferCreateFlagBits.html[VkBufferCreateFlagBits].#
 
 [[bufferusageflags]]
 [small]#*bufferusageflags*: vk.BUFFER_USAGE_XXX_BIT +
 Values: 
-'_transfer src_', '_transfer dst_', '_uniform texel buffer_', '_storage texel buffer_', '_uniform buffer_', '_storage buffer_', '_index buffer_', '_vertex buffer_', '_indirect buffer_', '_conditional rendering_', '_transform feedback buffer_', '_transform feedback counter buffer_'. +
+'_transfer src_', '_transfer dst_', '_uniform texel buffer_', '_storage texel buffer_', '_uniform buffer_', '_storage buffer_', '_index buffer_', '_vertex buffer_', '_indirect buffer_', '_conditional rendering_', '_transform feedback buffer_', '_transform feedback counter buffer_', '_shader device address_'. +
 Rfr. https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkBufferUsageFlagBits.html[VkBufferUsageFlagBits].#
 
 [[colorcomponentflags]]
@@ -193,8 +193,13 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkFen
 [[formatfeatureflags]]
 [small]#*formatfeatureflags*: vk.FORMAT_FEATURE_XXX_BIT +
 Values: 
-'_sampled image_', '_storage image_', '_storage image atomic_', '_uniform texel buffer_', '_storage texel buffer_', '_storage texel buffer atomic_', '_vertex buffer_', '_color attachment_', '_color attachment blend_', '_depth stencil attachment_', '_blit src_', '_blit dst_', '_transfer src_', '_transfer dst_', '_sampled image filter linear_', '_sampled image filter minmax_', '_midpoint chroma samples_', '_sampled image ycbcr conversion linear filter_', '_sampled image ycbcr conversion separate reconstruction filter_', '_sampled image ycbcr conversion chroma reconstruction explicit_', '_sampled image ycbcr conversion chroma reconstruction explicit forceable_', '_disjoint_', '_cosited chroma samples_'. +
+'_sampled image_', '_storage image_', '_storage image atomic_', '_uniform texel buffer_', '_storage texel buffer_', '_storage texel buffer atomic_', '_vertex buffer_', '_color attachment_', '_color attachment blend_', '_depth stencil attachment_', '_blit src_', '_blit dst_', '_transfer src_', '_transfer dst_', '_sampled image filter linear_', '_sampled image filter minmax_', '_midpoint chroma samples_', '_sampled image ycbcr conversion linear filter_', '_sampled image ycbcr conversion separate reconstruction filter_', '_sampled image ycbcr conversion chroma reconstruction explicit_', '_sampled image ycbcr conversion chroma reconstruction explicit forceable_', '_disjoint_', '_cosited chroma samples_', '_fragment density map_', '_sampled image filter cubic_'. +
 Rfr. https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkFormatFeatureFlagBits.html[VkFormatFeatureFlagBits].#
+
+[[framebuffercreateflags]]
+[small]#*framebuffercreateflags*: vk.FRAMEBUFFER_CREATE_XXX_BIT +
+Values: '_imageless_'. +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkFramebufferCreateFlagBits.html[VkFramebufferCreateFlagBits].#
 
 [[imageaspectflags]]
 [small]#*imageaspectflags*: vk.IMAGE_ASPECT_XXX_BIT +
@@ -205,14 +210,19 @@ Rfr. https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkIma
 [[imagecreateflags]]
 [small]#*imagecreateflags*: vk.IMAGE_CREATE_XXX_BIT +
 Values: 
-'_sparse binding_', '_sparse residency_', '_sparse aliased_', '_mutable format_', '_cube compatible_', '_block texel view compatible_', '_extended usage_', '_sample locations compatible depth_', '_disjoint_', '_alias_','_split instance bind regions_', '_2d array compatible_', '_protected_'. +
+'_sparse binding_', '_sparse residency_', '_sparse aliased_', '_mutable format_', '_cube compatible_', '_block texel view compatible_', '_extended usage_', '_sample locations compatible depth_', '_disjoint_', '_alias_','_split instance bind regions_', '_2d array compatible_', '_protected_', '_subsampled_'. +
 Rfr. https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkImageCreateFlagBits.html[VkImageCreateFlagBits].#
 
 [[imageusageflags]]
 [small]#*imageusageflags*: vk.IMAGE_USAGE_XXX_BIT +
 Values: 
-'_transfer src_', '_transfer dst_', '_sampled_', '_storage_', '_color attachment_', '_depth stencil attachment_', '_transient attachment_', '_input attachment_'. +
+'_transfer src_', '_transfer dst_', '_sampled_', '_storage_', '_color attachment_', '_depth stencil attachment_', '_transient attachment_', '_input attachment_', '_fragment density map_'. +
 Rfr. https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkImageUsageFlagBits.html[VkImageUsageFlagBits].#
+
+[[imageviewcreateflags]]
+[small]#*imageviewcreateflags*: vk.IMAGE_VIEW_CREATE_XXX_BIT +
+Values: '_fragment density map dynamic_'. +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkImageViewCreateFlagBits.html[VkImageViewCreateFlagBits].#
 
 [[memoryallocateflags]]
 [small]#*memoryallocateflags*: vk.MEMORY_ALLOCATE_XXX_BIT +
@@ -242,10 +252,15 @@ Values:
 '_disable optimization_', '_allow derivatives_', '_derivative_', '_view index from device index_', '_dispatch base_'. +
 Rfr. https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkPipelineCreateFlagBits.html[VkPipelineCreateFlagBits].#
 
+[[pipelinecreationfeedbackflags]]
+[small]#*pipelinecreationfeedbackflags*: vk.PIPELINE_CREATION_FEEDBACK_XXX_BIT_EXT +
+Values:'_valid_', '_application pipeline cache hit_', '_base pipeline acceleration_'. +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkPipelineCreationFeedbackFlagBitsEXT.html[VkPipelineCreationFeedbackFlagBitsEXT].#
+
 [[pipelinestageflags]]
 [small]#*pipelinestageflags*: vk.PIPELINE_STAGE_XXX_BIT +
 Values: 
-'_top of pipe_', '_draw indirect_', '_vertex input_', '_vertex shader_', '_tessellation control shader_', '_tessellation evaluation shader_', '_geometry shader_', '_fragment shader_', '_early fragment tests_', '_late fragment tests_', '_color attachment output_', '_compute shader_', '_transfer_', '_bottom of pipe_', '_host_', '_all graphics_', '_all commands_', '_conditional rendering_', '_transform feedback_'. +
+'_top of pipe_', '_draw indirect_', '_vertex input_', '_vertex shader_', '_tessellation control shader_', '_tessellation evaluation shader_', '_geometry shader_', '_fragment shader_', '_early fragment tests_', '_late fragment tests_', '_color attachment output_', '_compute shader_', '_transfer_', '_bottom of pipe_', '_host_', '_all graphics_', '_all commands_', '_conditional rendering_', '_transform feedback_', '_fragment density process_'. +
 Rfr. https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkPipelineStageFlagBits.html[VkPipelineStageFlagBits].#
 
 [[querycontrolflags]]
@@ -272,11 +287,22 @@ Values:
 '_graphics_', '_compute_', '_transfer_', '_sparse binding_', '_protected_'. +
 Rfr. https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkQueueFlagBits.html[VkQueueFlagBits].#
 
+[[resolvemodeflags]]
+[small]#*resolvemodeflags*: vk.RESOLVE_MODE_XXX_BIT_KHR +
+Values: '_none_','_sample zero_','_average_','_min_','_max_'. +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkResolveModeFlagBitsKHR.html[VkResolveModeFlagBitsKHR].#
+
 [[samplecountflags]]
 [small]#*samplecountflags*: vk.SAMPLE_COUNT_XXX_BIT +
 Values: 
 '_1_', '_2_', '_4_', '_8_', '_16_', '_32_', '_64_'. +
 Rfr. https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkSampleCountFlagBits.html[VkSampleCountFlagBits].#
+
+[[samplercreateflags]]
+[small]#*samplercreateflags*: vk.SAMPLER_CREATE_XXX_BIT +
+Values: '_subsampled_', '_subsampled coarse reconstruction_'. +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkSamplerCreateFlagBits.html[VkSamplerCreateFlagBits].#
+
 
 [[semaphoreimportflags]]
 [small]#*semaphoreimportflags*: vk.SEMAPHORE_IMPORT_XXX_BIT +
@@ -325,7 +351,7 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkSur
 
 [[swapchaincreateflags]]
 [small]#*swapchaincreateflags*: vk.SWAPCHAIN_CREATE_XXX_BIT_KHR +
-Values: '_split instance bind regions_', '_protected_'. +
+Values: '_split instance bind regions_', '_protected_', '_mutable format_'. +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkSwapchainCreateFlagBitsKHR.html[VkSwapchainCreateFlagBitsKHR].#
 
 Reserved for future use (must be set to 0):
@@ -359,12 +385,6 @@ Reserved for future use (must be set to 0):
 
 [[eventcreateflags]]
 [small]#*eventcreateflags*: 0#
-
-[[framebuffercreateflags]]
-[small]#*framebuffercreateflags*: 0#
-
-[[imageviewcreateflags]]
-[small]#*imageviewcreateflags*: 0#
 
 [[instancecreateflags]]
 [small]#*instancecreateflags*: 0#
@@ -422,9 +442,6 @@ Reserved for future use (must be set to 0):
 
 [[renderpasscreateflags]]
 [small]#*renderpasscreateflags*: 0#
-
-[[samplercreateflags]]
-[small]#*samplercreateflags*: 0#
 
 [[semaphorecreateflags]]
 [small]#*semaphorecreateflags*: 0#

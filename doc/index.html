@@ -6121,7 +6121,7 @@ The generic definition of such functions is the following, where <strong>xxxflag
 <div id="accessflags" class="paragraph">
 <p><span class="small"><strong>accessflags</strong>: vk.ACCESS_XXX_BIT<br>
 Values:
-'<em>indirect command read</em>', '<em>index read</em>', '<em>vertex attribute read</em>', '<em>uniform read</em>', '<em>input attachment read</em>', '<em>shader read</em>', '<em>shader write</em>', '<em>color attachment read</em>', '<em>color attachment write</em>', '<em>depth stencil attachment read</em>', '<em>depth stencil attachment write</em>', '<em>transfer read</em>', '<em>transfer write</em>', '<em>host read</em>', '<em>host write</em>', '<em>memory read</em>', '<em>memory write</em>', '<em>color attachment read noncoherent</em>', '<em>conditional rendering read</em>', '<em>transform feedback write</em>, '<em>transform feedback counter read</em>, '<em>transform feedback counter write</em>'.<br>
+'<em>indirect command read</em>', '<em>index read</em>', '<em>vertex attribute read</em>', '<em>uniform read</em>', '<em>input attachment read</em>', '<em>shader read</em>', '<em>shader write</em>', '<em>color attachment read</em>', '<em>color attachment write</em>', '<em>depth stencil attachment read</em>', '<em>depth stencil attachment write</em>', '<em>transfer read</em>', '<em>transfer write</em>', '<em>host read</em>', '<em>host write</em>', '<em>memory read</em>', '<em>memory write</em>', '<em>color attachment read noncoherent</em>', '<em>conditional rendering read</em>', '<em>transform feedback write</em>, '<em>transform feedback counter read</em>, '<em>transform feedback counter write</em>', '<em>fragment density map read</em>'.<br>
 Rfr. <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkAccessFlagBits.html">VkAccessFlagBits</a>.</span></p>
 </div>
 <div id="attachmentdescriptionflags" class="paragraph">
@@ -6133,13 +6133,13 @@ Rfr. <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/h
 <div id="buffercreateflags" class="paragraph">
 <p><span class="small"><strong>buffercreateflags</strong>: vk.BUFFER_CREATE_XXX_BIT<br>
 Values:
-'<em>sparse binding</em>', '<em>sparse residency</em>', '<em>sparse aliased</em>', '<em>protected</em>'.<br>
+'<em>sparse binding</em>', '<em>sparse residency</em>', '<em>sparse aliased</em>', '<em>protected</em>', '<em>device address capture replay</em>'.<br>
 Rfr. <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkBufferCreateFlagBits.html">VkBufferCreateFlagBits</a>.</span></p>
 </div>
 <div id="bufferusageflags" class="paragraph">
 <p><span class="small"><strong>bufferusageflags</strong>: vk.BUFFER_USAGE_XXX_BIT<br>
 Values:
-'<em>transfer src</em>', '<em>transfer dst</em>', '<em>uniform texel buffer</em>', '<em>storage texel buffer</em>', '<em>uniform buffer</em>', '<em>storage buffer</em>', '<em>index buffer</em>', '<em>vertex buffer</em>', '<em>indirect buffer</em>', '<em>conditional rendering</em>', '<em>transform feedback buffer</em>', '<em>transform feedback counter buffer</em>'.<br>
+'<em>transfer src</em>', '<em>transfer dst</em>', '<em>uniform texel buffer</em>', '<em>storage texel buffer</em>', '<em>uniform buffer</em>', '<em>storage buffer</em>', '<em>index buffer</em>', '<em>vertex buffer</em>', '<em>indirect buffer</em>', '<em>conditional rendering</em>', '<em>transform feedback buffer</em>', '<em>transform feedback counter buffer</em>', '<em>shader device address</em>'.<br>
 Rfr. <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkBufferUsageFlagBits.html">VkBufferUsageFlagBits</a>.</span></p>
 </div>
 <div id="colorcomponentflags" class="paragraph">
@@ -6288,8 +6288,13 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/h
 <div id="formatfeatureflags" class="paragraph">
 <p><span class="small"><strong>formatfeatureflags</strong>: vk.FORMAT_FEATURE_XXX_BIT<br>
 Values:
-'<em>sampled image</em>', '<em>storage image</em>', '<em>storage image atomic</em>', '<em>uniform texel buffer</em>', '<em>storage texel buffer</em>', '<em>storage texel buffer atomic</em>', '<em>vertex buffer</em>', '<em>color attachment</em>', '<em>color attachment blend</em>', '<em>depth stencil attachment</em>', '<em>blit src</em>', '<em>blit dst</em>', '<em>transfer src</em>', '<em>transfer dst</em>', '<em>sampled image filter linear</em>', '<em>sampled image filter minmax</em>', '<em>midpoint chroma samples</em>', '<em>sampled image ycbcr conversion linear filter</em>', '<em>sampled image ycbcr conversion separate reconstruction filter</em>', '<em>sampled image ycbcr conversion chroma reconstruction explicit</em>', '<em>sampled image ycbcr conversion chroma reconstruction explicit forceable</em>', '<em>disjoint</em>', '<em>cosited chroma samples</em>'.<br>
+'<em>sampled image</em>', '<em>storage image</em>', '<em>storage image atomic</em>', '<em>uniform texel buffer</em>', '<em>storage texel buffer</em>', '<em>storage texel buffer atomic</em>', '<em>vertex buffer</em>', '<em>color attachment</em>', '<em>color attachment blend</em>', '<em>depth stencil attachment</em>', '<em>blit src</em>', '<em>blit dst</em>', '<em>transfer src</em>', '<em>transfer dst</em>', '<em>sampled image filter linear</em>', '<em>sampled image filter minmax</em>', '<em>midpoint chroma samples</em>', '<em>sampled image ycbcr conversion linear filter</em>', '<em>sampled image ycbcr conversion separate reconstruction filter</em>', '<em>sampled image ycbcr conversion chroma reconstruction explicit</em>', '<em>sampled image ycbcr conversion chroma reconstruction explicit forceable</em>', '<em>disjoint</em>', '<em>cosited chroma samples</em>', '<em>fragment density map</em>', '<em>sampled image filter cubic</em>'.<br>
 Rfr. <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkFormatFeatureFlagBits.html">VkFormatFeatureFlagBits</a>.</span></p>
+</div>
+<div id="framebuffercreateflags" class="paragraph">
+<p><span class="small"><strong>framebuffercreateflags</strong>: vk.FRAMEBUFFER_CREATE_XXX_BIT<br>
+Values: '<em>imageless</em>'.<br>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkFramebufferCreateFlagBits.html">VkFramebufferCreateFlagBits</a>.</span></p>
 </div>
 <div id="imageaspectflags" class="paragraph">
 <p><span class="small"><strong>imageaspectflags</strong>: vk.IMAGE_ASPECT_XXX_BIT<br>
@@ -6300,14 +6305,19 @@ Rfr. <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/h
 <div id="imagecreateflags" class="paragraph">
 <p><span class="small"><strong>imagecreateflags</strong>: vk.IMAGE_CREATE_XXX_BIT<br>
 Values:
-'<em>sparse binding</em>', '<em>sparse residency</em>', '<em>sparse aliased</em>', '<em>mutable format</em>', '<em>cube compatible</em>', '<em>block texel view compatible</em>', '<em>extended usage</em>', '<em>sample locations compatible depth</em>', '<em>disjoint</em>', '<em>alias</em>','<em>split instance bind regions</em>', '<em>2d array compatible</em>', '<em>protected</em>'.<br>
+'<em>sparse binding</em>', '<em>sparse residency</em>', '<em>sparse aliased</em>', '<em>mutable format</em>', '<em>cube compatible</em>', '<em>block texel view compatible</em>', '<em>extended usage</em>', '<em>sample locations compatible depth</em>', '<em>disjoint</em>', '<em>alias</em>','<em>split instance bind regions</em>', '<em>2d array compatible</em>', '<em>protected</em>', '<em>subsampled</em>'.<br>
 Rfr. <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkImageCreateFlagBits.html">VkImageCreateFlagBits</a>.</span></p>
 </div>
 <div id="imageusageflags" class="paragraph">
 <p><span class="small"><strong>imageusageflags</strong>: vk.IMAGE_USAGE_XXX_BIT<br>
 Values:
-'<em>transfer src</em>', '<em>transfer dst</em>', '<em>sampled</em>', '<em>storage</em>', '<em>color attachment</em>', '<em>depth stencil attachment</em>', '<em>transient attachment</em>', '<em>input attachment</em>'.<br>
+'<em>transfer src</em>', '<em>transfer dst</em>', '<em>sampled</em>', '<em>storage</em>', '<em>color attachment</em>', '<em>depth stencil attachment</em>', '<em>transient attachment</em>', '<em>input attachment</em>', '<em>fragment density map</em>'.<br>
 Rfr. <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkImageUsageFlagBits.html">VkImageUsageFlagBits</a>.</span></p>
+</div>
+<div id="imageviewcreateflags" class="paragraph">
+<p><span class="small"><strong>imageviewcreateflags</strong>: vk.IMAGE_VIEW_CREATE_XXX_BIT<br>
+Values: '<em>fragment density map dynamic</em>'.<br>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkImageViewCreateFlagBits.html">VkImageViewCreateFlagBits</a>.</span></p>
 </div>
 <div id="memoryallocateflags" class="paragraph">
 <p><span class="small"><strong>memoryallocateflags</strong>: vk.MEMORY_ALLOCATE_XXX_BIT<br>
@@ -6337,10 +6347,15 @@ Values:
 '<em>disable optimization</em>', '<em>allow derivatives</em>', '<em>derivative</em>', '<em>view index from device index</em>', '<em>dispatch base</em>'.<br>
 Rfr. <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkPipelineCreateFlagBits.html">VkPipelineCreateFlagBits</a>.</span></p>
 </div>
+<div id="pipelinecreationfeedbackflags" class="paragraph">
+<p><span class="small"><strong>pipelinecreationfeedbackflags</strong>: vk.PIPELINE_CREATION_FEEDBACK_XXX_BIT_EXT<br>
+Values:'<em>valid</em>', '<em>application pipeline cache hit</em>', '<em>base pipeline acceleration</em>'.<br>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkPipelineCreationFeedbackFlagBitsEXT.html">VkPipelineCreationFeedbackFlagBitsEXT</a>.</span></p>
+</div>
 <div id="pipelinestageflags" class="paragraph">
 <p><span class="small"><strong>pipelinestageflags</strong>: vk.PIPELINE_STAGE_XXX_BIT<br>
 Values:
-'<em>top of pipe</em>', '<em>draw indirect</em>', '<em>vertex input</em>', '<em>vertex shader</em>', '<em>tessellation control shader</em>', '<em>tessellation evaluation shader</em>', '<em>geometry shader</em>', '<em>fragment shader</em>', '<em>early fragment tests</em>', '<em>late fragment tests</em>', '<em>color attachment output</em>', '<em>compute shader</em>', '<em>transfer</em>', '<em>bottom of pipe</em>', '<em>host</em>', '<em>all graphics</em>', '<em>all commands</em>', '<em>conditional rendering</em>', '<em>transform feedback</em>'.<br>
+'<em>top of pipe</em>', '<em>draw indirect</em>', '<em>vertex input</em>', '<em>vertex shader</em>', '<em>tessellation control shader</em>', '<em>tessellation evaluation shader</em>', '<em>geometry shader</em>', '<em>fragment shader</em>', '<em>early fragment tests</em>', '<em>late fragment tests</em>', '<em>color attachment output</em>', '<em>compute shader</em>', '<em>transfer</em>', '<em>bottom of pipe</em>', '<em>host</em>', '<em>all graphics</em>', '<em>all commands</em>', '<em>conditional rendering</em>', '<em>transform feedback</em>', '<em>fragment density process</em>'.<br>
 Rfr. <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkPipelineStageFlagBits.html">VkPipelineStageFlagBits</a>.</span></p>
 </div>
 <div id="querycontrolflags" class="paragraph">
@@ -6367,11 +6382,21 @@ Values:
 '<em>graphics</em>', '<em>compute</em>', '<em>transfer</em>', '<em>sparse binding</em>', '<em>protected</em>'.<br>
 Rfr. <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkQueueFlagBits.html">VkQueueFlagBits</a>.</span></p>
 </div>
+<div id="resolvemodeflags" class="paragraph">
+<p><span class="small"><strong>resolvemodeflags</strong>: vk.RESOLVE_MODE_XXX_BIT_KHR<br>
+Values: '<em>none</em>','<em>sample zero</em>','<em>average</em>','<em>min</em>','<em>max</em>'.<br>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkResolveModeFlagBitsKHR.html">VkResolveModeFlagBitsKHR</a>.</span></p>
+</div>
 <div id="samplecountflags" class="paragraph">
 <p><span class="small"><strong>samplecountflags</strong>: vk.SAMPLE_COUNT_XXX_BIT<br>
 Values:
 '<em>1</em>', '<em>2</em>', '<em>4</em>', '<em>8</em>', '<em>16</em>', '<em>32</em>', '<em>64</em>'.<br>
 Rfr. <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkSampleCountFlagBits.html">VkSampleCountFlagBits</a>.</span></p>
+</div>
+<div id="samplercreateflags" class="paragraph">
+<p><span class="small"><strong>samplercreateflags</strong>: vk.SAMPLER_CREATE_XXX_BIT<br>
+Values: '<em>subsampled</em>', '<em>subsampled coarse reconstruction</em>'.<br>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkSamplerCreateFlagBits.html">VkSamplerCreateFlagBits</a>.</span></p>
 </div>
 <div id="semaphoreimportflags" class="paragraph">
 <p><span class="small"><strong>semaphoreimportflags</strong>: vk.SEMAPHORE_IMPORT_XXX_BIT<br>
@@ -6420,7 +6445,7 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/h
 </div>
 <div id="swapchaincreateflags" class="paragraph">
 <p><span class="small"><strong>swapchaincreateflags</strong>: vk.SWAPCHAIN_CREATE_XXX_BIT_KHR<br>
-Values: '<em>split instance bind regions</em>', '<em>protected</em>'.<br>
+Values: '<em>split instance bind regions</em>', '<em>protected</em>', '<em>mutable format</em>'.<br>
 Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkSwapchainCreateFlagBitsKHR.html">VkSwapchainCreateFlagBitsKHR</a>.</span></p>
 </div>
 <div class="paragraph">
@@ -6455,12 +6480,6 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/h
 </div>
 <div id="eventcreateflags" class="paragraph">
 <p><span class="small"><strong>eventcreateflags</strong>: 0</span></p>
-</div>
-<div id="framebuffercreateflags" class="paragraph">
-<p><span class="small"><strong>framebuffercreateflags</strong>: 0</span></p>
-</div>
-<div id="imageviewcreateflags" class="paragraph">
-<p><span class="small"><strong>imageviewcreateflags</strong>: 0</span></p>
 </div>
 <div id="instancecreateflags" class="paragraph">
 <p><span class="small"><strong>instancecreateflags</strong>: 0</span></p>
@@ -6518,9 +6537,6 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/h
 </div>
 <div id="renderpasscreateflags" class="paragraph">
 <p><span class="small"><strong>renderpasscreateflags</strong>: 0</span></p>
-</div>
-<div id="samplercreateflags" class="paragraph">
-<p><span class="small"><strong>samplercreateflags</strong>: 0</span></p>
 </div>
 <div id="semaphorecreateflags" class="paragraph">
 <p><span class="small"><strong>semaphorecreateflags</strong>: 0</span></p>

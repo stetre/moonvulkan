@@ -439,6 +439,7 @@ static VkFlags checkaccessflags(lua_State *L, int arg)
     CASE(VK_ACCESS_TRANSFORM_FEEDBACK_WRITE_BIT_EXT, "transform feedback write");
     CASE(VK_ACCESS_TRANSFORM_FEEDBACK_COUNTER_READ_BIT_EXT, "transform feedback counter read");
     CASE(VK_ACCESS_TRANSFORM_FEEDBACK_COUNTER_WRITE_BIT_EXT, "transform feedback counter write");
+    CASE(VK_ACCESS_FRAGMENT_DENSITY_MAP_READ_BIT_EXT, "fragment density map read");
 #undef CASE
         return (VkFlags)luaL_argerror(L, --arg, badvalue(L,s));
         done: ;
@@ -474,6 +475,7 @@ static int pushaccessflags(lua_State *L, VkFlags flags)
     CASE(VK_ACCESS_TRANSFORM_FEEDBACK_WRITE_BIT_EXT, "transform feedback write");
     CASE(VK_ACCESS_TRANSFORM_FEEDBACK_COUNTER_READ_BIT_EXT, "transform feedback counter read");
     CASE(VK_ACCESS_TRANSFORM_FEEDBACK_COUNTER_WRITE_BIT_EXT, "transform feedback counter write");
+    CASE(VK_ACCESS_FRAGMENT_DENSITY_MAP_READ_BIT_EXT, "fragment density map read");
 #undef CASE
     return n;
     }
@@ -509,8 +511,7 @@ static int AccessFlags(lua_State *L)
     ADD(ACCESS_TRANSFORM_FEEDBACK_WRITE_BIT_EXT);\
     ADD(ACCESS_TRANSFORM_FEEDBACK_COUNTER_READ_BIT_EXT);\
     ADD(ACCESS_TRANSFORM_FEEDBACK_COUNTER_WRITE_BIT_EXT);\
-
-
+    ADD(ACCESS_FRAGMENT_DENSITY_MAP_READ_BIT_EXT);\
 
 /*----------------------------------------------------------------------*
  | VkAttachmentDescriptionFlags
@@ -911,6 +912,7 @@ static VkFlags checkbufferusageflags(lua_State *L, int arg)
     CASE(VK_BUFFER_USAGE_CONDITIONAL_RENDERING_BIT_EXT, "conditional rendering");
     CASE(VK_BUFFER_USAGE_TRANSFORM_FEEDBACK_BUFFER_BIT_EXT, "transform feedback buffer");
     CASE(VK_BUFFER_USAGE_TRANSFORM_FEEDBACK_COUNTER_BUFFER_BIT_EXT, "transform feedback counter buffer");
+    CASE(VK_BUFFER_USAGE_SHADER_DEVICE_ADDRESS_BIT_EXT, "shader device address");
 #undef CASE
         return (VkFlags)luaL_argerror(L, --arg, badvalue(L,s));
         done: ;
@@ -936,6 +938,7 @@ static int pushbufferusageflags(lua_State *L, VkFlags flags)
     CASE(VK_BUFFER_USAGE_CONDITIONAL_RENDERING_BIT_EXT, "conditional rendering");
     CASE(VK_BUFFER_USAGE_TRANSFORM_FEEDBACK_BUFFER_BIT_EXT, "transform feedback buffer");
     CASE(VK_BUFFER_USAGE_TRANSFORM_FEEDBACK_COUNTER_BUFFER_BIT_EXT, "transform feedback counter buffer");
+    CASE(VK_BUFFER_USAGE_SHADER_DEVICE_ADDRESS_BIT_EXT, "shader device address");
 #undef CASE
 
     return n;
@@ -962,6 +965,7 @@ static int BufferUsageFlags(lua_State *L)
     ADD(BUFFER_USAGE_CONDITIONAL_RENDERING_BIT_EXT);\
     ADD(BUFFER_USAGE_TRANSFORM_FEEDBACK_BUFFER_BIT_EXT);\
     ADD(BUFFER_USAGE_TRANSFORM_FEEDBACK_COUNTER_BUFFER_BIT_EXT);\
+    ADD(BUFFER_USAGE_SHADER_DEVICE_ADDRESS_BIT_EXT);\
 
 
 /*----------------------------------------------------------------------*
@@ -981,6 +985,7 @@ static VkFlags checkbuffercreateflags(lua_State *L, int arg)
     CASE(VK_BUFFER_CREATE_SPARSE_RESIDENCY_BIT, "sparse residency");
     CASE(VK_BUFFER_CREATE_SPARSE_ALIASED_BIT, "sparse aliased");
     CASE(VK_BUFFER_CREATE_PROTECTED_BIT, "protected");
+    CASE(VK_BUFFER_CREATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT_EXT, "device address capture replay");
 #undef CASE
         return (VkFlags)luaL_argerror(L, --arg, badvalue(L,s));
         done: ;
@@ -998,6 +1003,7 @@ static int pushbuffercreateflags(lua_State *L, VkFlags flags)
     CASE(VK_BUFFER_CREATE_SPARSE_RESIDENCY_BIT, "sparse residency");
     CASE(VK_BUFFER_CREATE_SPARSE_ALIASED_BIT, "sparse aliased");
     CASE(VK_BUFFER_CREATE_PROTECTED_BIT, "protected");
+    CASE(VK_BUFFER_CREATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT_EXT, "device address capture replay");
 #undef CASE
 
     return n;
@@ -1016,7 +1022,7 @@ static int BufferCreateFlags(lua_State *L)
     ADD(BUFFER_CREATE_SPARSE_RESIDENCY_BIT);\
     ADD(BUFFER_CREATE_SPARSE_ALIASED_BIT);\
     ADD(BUFFER_CREATE_PROTECTED_BIT);\
-
+    ADD(BUFFER_CREATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT_EXT);\
 
 /*----------------------------------------------------------------------*
  | VkQueryResultFlags
@@ -1398,6 +1404,7 @@ static VkFlags checkpipelinestageflags(lua_State *L, int arg)
         CASE(VK_PIPELINE_STAGE_HOST_BIT, "host");
         CASE(VK_PIPELINE_STAGE_CONDITIONAL_RENDERING_BIT_EXT, "conditional rendering");
         CASE(VK_PIPELINE_STAGE_TRANSFORM_FEEDBACK_BIT_EXT, "transform feedback");
+        CASE(VK_PIPELINE_STAGE_FRAGMENT_DENSITY_PROCESS_BIT_EXT, "fragment density process");
     // These are not individual bits:
         CASE(VK_PIPELINE_STAGE_ALL_GRAPHICS_BIT, "all graphics");
         CASE(VK_PIPELINE_STAGE_ALL_COMMANDS_BIT, "all commands");
@@ -1431,6 +1438,7 @@ static int pushpipelinestageflags(lua_State *L, VkFlags flags)
         CASE(VK_PIPELINE_STAGE_HOST_BIT, "host");
         CASE(VK_PIPELINE_STAGE_CONDITIONAL_RENDERING_BIT_EXT, "conditional rendering");
         CASE(VK_PIPELINE_STAGE_TRANSFORM_FEEDBACK_BIT_EXT, "transform feedback");
+        CASE(VK_PIPELINE_STAGE_FRAGMENT_DENSITY_PROCESS_BIT_EXT, "fragment density process");
     // These are not individual bits:
         CASE(VK_PIPELINE_STAGE_ALL_GRAPHICS_BIT, "all graphics");
         CASE(VK_PIPELINE_STAGE_ALL_COMMANDS_BIT, "all commands");
@@ -1467,7 +1475,7 @@ static int PipelineStageFlags(lua_State *L)
     ADD(PIPELINE_STAGE_ALL_COMMANDS_BIT);\
     ADD(PIPELINE_STAGE_CONDITIONAL_RENDERING_BIT_EXT);\
     ADD(PIPELINE_STAGE_TRANSFORM_FEEDBACK_BIT_EXT);\
-
+    ADD(PIPELINE_STAGE_FRAGMENT_DENSITY_PROCESS_BIT_EXT);\
 
 /*----------------------------------------------------------------------*
  | VkMemoryHeapFlag
@@ -1724,6 +1732,7 @@ static VkFlags checkimagecreateflags(lua_State *L, int arg)
         CASE(VK_IMAGE_CREATE_SPLIT_INSTANCE_BIND_REGIONS_BIT,"split instance bind regions");
         CASE(VK_IMAGE_CREATE_2D_ARRAY_COMPATIBLE_BIT,"2d array compatible");
         CASE(VK_IMAGE_CREATE_PROTECTED_BIT, "protected");
+        CASE(VK_IMAGE_CREATE_SUBSAMPLED_BIT_EXT, "subsampled");
 #undef CASE
         return (VkFlags)luaL_argerror(L, --arg, badvalue(L,s));
         done: ;
@@ -1750,6 +1759,7 @@ static int pushimagecreateflags(lua_State *L, VkFlags flags)
         CASE(VK_IMAGE_CREATE_SPLIT_INSTANCE_BIND_REGIONS_BIT,"split instance bind regions");
         CASE(VK_IMAGE_CREATE_2D_ARRAY_COMPATIBLE_BIT,"2d array compatible");
         CASE(VK_IMAGE_CREATE_PROTECTED_BIT, "protected");
+        CASE(VK_IMAGE_CREATE_SUBSAMPLED_BIT_EXT, "subsampled");
 #undef CASE
 
     return n;
@@ -1777,6 +1787,7 @@ static int ImageCreateFlags(lua_State *L)
     ADD(IMAGE_CREATE_SPLIT_INSTANCE_BIND_REGIONS_BIT);\
     ADD(IMAGE_CREATE_2D_ARRAY_COMPATIBLE_BIT);\
     ADD(IMAGE_CREATE_PROTECTED_BIT);\
+    ADD(IMAGE_CREATE_SUBSAMPLED_BIT_EXT);\
 
 /*----------------------------------------------------------------------*
  | VkImageUsageFlags
@@ -1799,6 +1810,7 @@ static VkFlags checkimageusageflags(lua_State *L, int arg)
         CASE(VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT, "depth stencil attachment");
         CASE(VK_IMAGE_USAGE_TRANSIENT_ATTACHMENT_BIT, "transient attachment");
         CASE(VK_IMAGE_USAGE_INPUT_ATTACHMENT_BIT, "input attachment");
+        CASE(VK_IMAGE_USAGE_FRAGMENT_DENSITY_MAP_BIT_EXT, "fragment density map");
 #undef CASE
         return (VkFlags)luaL_argerror(L, --arg, badvalue(L,s));
         done: ;
@@ -1820,6 +1832,7 @@ static int pushimageusageflags(lua_State *L, VkFlags flags)
         CASE(VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT, "depth stencil attachment");
         CASE(VK_IMAGE_USAGE_TRANSIENT_ATTACHMENT_BIT, "transient attachment");
         CASE(VK_IMAGE_USAGE_INPUT_ATTACHMENT_BIT, "input attachment");
+        CASE(VK_IMAGE_USAGE_FRAGMENT_DENSITY_MAP_BIT_EXT, "fragment density map");
 #undef CASE
 
     return n;
@@ -1842,7 +1855,7 @@ static int ImageUsageFlags(lua_State *L)
     ADD(IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT);\
     ADD(IMAGE_USAGE_TRANSIENT_ATTACHMENT_BIT);\
     ADD(IMAGE_USAGE_INPUT_ATTACHMENT_BIT);\
-
+    ADD(IMAGE_USAGE_FRAGMENT_DENSITY_MAP_BIT_EXT);\
 
 
 /*----------------------------------------------------------------------*
@@ -1882,6 +1895,8 @@ static VkFlags checkformatfeatureflags(lua_State *L, int arg)
         CASE(VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_CHROMA_RECONSTRUCTION_EXPLICIT_FORCEABLE_BIT,"sampled image ycbcr conversion chroma reconstruction explicit forceable");
         CASE(VK_FORMAT_FEATURE_DISJOINT_BIT,"disjoint");
         CASE(VK_FORMAT_FEATURE_COSITED_CHROMA_SAMPLES_BIT,"cosited chroma samples");
+        CASE(VK_FORMAT_FEATURE_FRAGMENT_DENSITY_MAP_BIT_EXT, "fragment density map");
+        CASE(VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_EXT, "sampled image filter cubic");
 #undef CASE
         return (VkFlags)luaL_argerror(L, --arg, badvalue(L,s));
         done: ;
@@ -1919,6 +1934,8 @@ static int pushformatfeatureflags(lua_State *L, VkFlags flags)
         CASE(VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_CHROMA_RECONSTRUCTION_EXPLICIT_FORCEABLE_BIT,"sampled image ycbcr conversion chroma reconstruction explicit forceable");
         CASE(VK_FORMAT_FEATURE_DISJOINT_BIT,"disjoint");
         CASE(VK_FORMAT_FEATURE_COSITED_CHROMA_SAMPLES_BIT,"cosited chroma samples");
+        CASE(VK_FORMAT_FEATURE_FRAGMENT_DENSITY_MAP_BIT_EXT, "fragment density map");
+        CASE(VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_EXT, "sampled image filter cubic");
 #undef CASE
 
     return n;
@@ -1956,6 +1973,8 @@ static int FormatFeatureFlags(lua_State *L)
     ADD(FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_CHROMA_RECONSTRUCTION_EXPLICIT_FORCEABLE_BIT);\
     ADD(FORMAT_FEATURE_DISJOINT_BIT);\
     ADD(FORMAT_FEATURE_COSITED_CHROMA_SAMPLES_BIT);\
+    ADD(FORMAT_FEATURE_FRAGMENT_DENSITY_MAP_BIT_EXT);\
+    ADD(FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_EXT);\
 
 /*----------------------------------------------------------------------*
  | VkSurfaceTransformFlagsKHR
@@ -3022,6 +3041,7 @@ static VkFlags checkswapchaincreateflags(lua_State *L, int arg)
 #define CASE(CODE,str) if((strcmp(s, str)==0)) do { flags |= CODE; goto done; } while(0)
         CASE(VK_SWAPCHAIN_CREATE_SPLIT_INSTANCE_BIND_REGIONS_BIT_KHR, "split instance bind regions");
         CASE(VK_SWAPCHAIN_CREATE_PROTECTED_BIT_KHR, "protected");
+        CASE(VK_SWAPCHAIN_CREATE_MUTABLE_FORMAT_BIT_KHR, "mutable format");
 #undef CASE
         return (VkFlags)luaL_argerror(L, --arg, badvalue(L,s));
         done: ;
@@ -3037,6 +3057,7 @@ static int pushswapchaincreateflags(lua_State *L, VkFlags flags)
 #define CASE(CODE,str) do { if( flags & CODE) { lua_pushstring(L, str); n++; } } while(0)
         CASE(VK_SWAPCHAIN_CREATE_SPLIT_INSTANCE_BIND_REGIONS_BIT_KHR, "split instance bind regions");
         CASE(VK_SWAPCHAIN_CREATE_PROTECTED_BIT_KHR, "protected");
+        CASE(VK_SWAPCHAIN_CREATE_MUTABLE_FORMAT_BIT_KHR, "mutable format");
 #undef CASE
 
     return n;
@@ -3053,6 +3074,7 @@ static int SwapchainCreateFlags(lua_State *L)
 #define Add_SwapchainCreateFlags(L) \
     ADD(SWAPCHAIN_CREATE_SPLIT_INSTANCE_BIND_REGIONS_BIT_KHR);\
     ADD(SWAPCHAIN_CREATE_PROTECTED_BIT_KHR);\
+    ADD(SWAPCHAIN_CREATE_MUTABLE_FORMAT_BIT_KHR);\
 
 /*----------------------------------------------------------------------*
  | VkDescriptorBindingFlagsEXT
@@ -3151,6 +3173,229 @@ static int ConditionalRenderingFlags(lua_State *L)
 #define Add_ConditionalRenderingFlags(L) \
     ADD(CONDITIONAL_RENDERING_INVERTED_BIT_EXT);\
 
+/*----------------------------------------------------------------------*
+ | VkImageViewCreateFlags
+ *----------------------------------------------------------------------*/
+
+static VkFlags checkimageviewcreateflags(lua_State *L, int arg)
+    {
+    const char *s;
+    VkFlags flags = 0;
+    while(lua_isstring(L, arg))
+        {
+        s = lua_tostring(L, arg++);
+#define CASE(CODE,str) if((strcmp(s, str)==0)) do { flags |= CODE; goto done; } while(0)
+    CASE(VK_IMAGE_VIEW_CREATE_FRAGMENT_DENSITY_MAP_DYNAMIC_BIT_EXT, "fragment density map dynamic");
+#undef CASE
+        return (VkFlags)luaL_argerror(L, --arg, badvalue(L,s));
+        done: ;
+        }
+    return flags;
+    }
+
+static int pushimageviewcreateflags(lua_State *L, VkFlags flags)
+    {
+    int n = 0;
+#define CASE(CODE,str) do { if( flags & CODE) { lua_pushstring(L, str); n++; } } while(0)
+    CASE(VK_IMAGE_VIEW_CREATE_FRAGMENT_DENSITY_MAP_DYNAMIC_BIT_EXT, "fragment density map dynamic");
+#undef CASE
+    return n;
+    }
+
+static int ImageViewCreateFlags(lua_State *L)
+    {
+    if(lua_type(L, 1) == LUA_TNUMBER)
+        return pushimageviewcreateflags(L, luaL_checkinteger(L, 1));
+    lua_pushinteger(L, checkimageviewcreateflags(L, 1));
+    return 1;
+    }
+
+#define Add_ImageViewCreateFlags(L) \
+    ADD(IMAGE_VIEW_CREATE_FRAGMENT_DENSITY_MAP_DYNAMIC_BIT_EXT);\
+
+
+/*----------------------------------------------------------------------*
+ | VkSamplerCreateFlags
+ *----------------------------------------------------------------------*/
+
+static VkFlags checksamplercreateflags(lua_State *L, int arg)
+    {
+    const char *s;
+    VkFlags flags = 0;
+    while(lua_isstring(L, arg))
+        {
+        s = lua_tostring(L, arg++);
+#define CASE(CODE,str) if((strcmp(s, str)==0)) do { flags |= CODE; goto done; } while(0)
+    CASE(VK_SAMPLER_CREATE_SUBSAMPLED_BIT_EXT, "subsampled");
+    CASE(VK_SAMPLER_CREATE_SUBSAMPLED_COARSE_RECONSTRUCTION_BIT_EXT, "subsampled coarse reconstruction");
+#undef CASE
+        return (VkFlags)luaL_argerror(L, --arg, badvalue(L,s));
+        done: ;
+        }
+    return flags;
+    }
+
+static int pushsamplercreateflags(lua_State *L, VkFlags flags)
+    {
+    int n = 0;
+#define CASE(CODE,str) do { if( flags & CODE) { lua_pushstring(L, str); n++; } } while(0)
+    CASE(VK_SAMPLER_CREATE_SUBSAMPLED_BIT_EXT, "subsampled");
+    CASE(VK_SAMPLER_CREATE_SUBSAMPLED_COARSE_RECONSTRUCTION_BIT_EXT, "subsampled coarse reconstruction");
+#undef CASE
+    return n;
+    }
+
+static int SamplerCreateFlags(lua_State *L)
+    {
+    if(lua_type(L, 1) == LUA_TNUMBER)
+        return pushsamplercreateflags(L, luaL_checkinteger(L, 1));
+    lua_pushinteger(L, checksamplercreateflags(L, 1));
+    return 1;
+    }
+
+#define Add_SamplerCreateFlags(L) \
+    ADD(SAMPLER_CREATE_SUBSAMPLED_BIT_EXT);\
+    ADD(SAMPLER_CREATE_SUBSAMPLED_COARSE_RECONSTRUCTION_BIT_EXT);\
+
+
+/*----------------------------------------------------------------------*
+ | VkFramebufferCreateFlags
+ *----------------------------------------------------------------------*/
+
+static VkFlags checkframebuffercreateflags(lua_State *L, int arg)
+    {
+    const char *s;
+    VkFlags flags = 0;
+    while(lua_isstring(L, arg))
+        {
+        s = lua_tostring(L, arg++);
+#define CASE(CODE,str) if((strcmp(s, str)==0)) do { flags |= CODE; goto done; } while(0)
+    CASE(VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT_KHR, "imageless");
+#undef CASE
+        return (VkFlags)luaL_argerror(L, --arg, badvalue(L,s));
+        done: ;
+        }
+    return flags;
+    }
+
+static int pushframebuffercreateflags(lua_State *L, VkFlags flags)
+    {
+    int n = 0;
+#define CASE(CODE,str) do { if( flags & CODE) { lua_pushstring(L, str); n++; } } while(0)
+    CASE(VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT_KHR, "imageless");
+#undef CASE
+    return n;
+    }
+
+static int FramebufferCreateFlags(lua_State *L)
+    {
+    if(lua_type(L, 1) == LUA_TNUMBER)
+        return pushframebuffercreateflags(L, luaL_checkinteger(L, 1));
+    lua_pushinteger(L, checkframebuffercreateflags(L, 1));
+    return 1;
+    }
+
+#define Add_FramebufferCreateFlags(L) \
+    ADD(FRAMEBUFFER_CREATE_IMAGELESS_BIT_KHR);\
+
+/*----------------------------------------------------------------------*
+ | VkResolveModeFlagsKHR
+ *----------------------------------------------------------------------*/
+
+static VkFlags checkresolvemodeflags(lua_State *L, int arg)
+    {
+    const char *s;
+    VkFlags flags = 0;
+    while(lua_isstring(L, arg))
+        {
+        s = lua_tostring(L, arg++);
+#define CASE(CODE,str) if((strcmp(s, str)==0)) do { flags |= CODE; goto done; } while(0)
+    CASE(VK_RESOLVE_MODE_NONE_KHR, "none");
+    CASE(VK_RESOLVE_MODE_SAMPLE_ZERO_BIT_KHR, "sample zero");
+    CASE(VK_RESOLVE_MODE_AVERAGE_BIT_KHR, "average");
+    CASE(VK_RESOLVE_MODE_MIN_BIT_KHR, "min");
+    CASE(VK_RESOLVE_MODE_MAX_BIT_KHR, "max");
+#undef CASE
+        return (VkFlags)luaL_argerror(L, --arg, badvalue(L,s));
+        done: ;
+        }
+    return flags;
+    }
+
+static int pushresolvemodeflags(lua_State *L, VkFlags flags)
+    {
+    int n = 0;
+#define CASE(CODE,str) do { if( flags & CODE) { lua_pushstring(L, str); n++; } } while(0)
+    CASE(VK_RESOLVE_MODE_NONE_KHR, "none");
+    CASE(VK_RESOLVE_MODE_SAMPLE_ZERO_BIT_KHR, "sample zero");
+    CASE(VK_RESOLVE_MODE_AVERAGE_BIT_KHR, "average");
+    CASE(VK_RESOLVE_MODE_MIN_BIT_KHR, "min");
+    CASE(VK_RESOLVE_MODE_MAX_BIT_KHR, "max");
+#undef CASE
+    return n;
+    }
+
+static int ResolveModeFlagsKHR(lua_State *L)
+    {
+    if(lua_type(L, 1) == LUA_TNUMBER)
+        return pushresolvemodeflags(L, luaL_checkinteger(L, 1));
+    lua_pushinteger(L, checkresolvemodeflags(L, 1));
+    return 1;
+    }
+
+#define Add_ResolveModeFlags(L) \
+    ADD(RESOLVE_MODE_NONE_KHR);\
+    ADD(RESOLVE_MODE_SAMPLE_ZERO_BIT_KHR);\
+    ADD(RESOLVE_MODE_AVERAGE_BIT_KHR);\
+    ADD(RESOLVE_MODE_MIN_BIT_KHR);\
+    ADD(RESOLVE_MODE_MAX_BIT_KHR);\
+
+
+/*----------------------------------------------------------------------*
+ | VkPipelineCreationFeedbackFlagsEXT
+ *----------------------------------------------------------------------*/
+
+static VkFlags checkpipelinecreationfeedbackflags(lua_State *L, int arg)
+    {
+    const char *s;
+    VkFlags flags = 0;
+    while(lua_isstring(L, arg))
+        {
+        s = lua_tostring(L, arg++);
+#define CASE(CODE,str) if((strcmp(s, str)==0)) do { flags |= CODE; goto done; } while(0)
+    CASE(VK_PIPELINE_CREATION_FEEDBACK_VALID_BIT_EXT, "valid");
+    CASE(VK_PIPELINE_CREATION_FEEDBACK_APPLICATION_PIPELINE_CACHE_HIT_BIT_EXT, "application pipeline cache hit");
+    CASE(VK_PIPELINE_CREATION_FEEDBACK_BASE_PIPELINE_ACCELERATION_BIT_EXT, "base pipeline acceleration");
+#undef CASE
+        return (VkFlags)luaL_argerror(L, --arg, badvalue(L,s));
+        done: ;
+        }
+    return flags;
+    }
+
+static int pushpipelinecreationfeedbackflags(lua_State *L, VkFlags flags)
+    {
+    int n = 0;
+#define CASE(CODE,str) do { if( flags & CODE) { lua_pushstring(L, str); n++; } } while(0)
+    CASE(VK_PIPELINE_CREATION_FEEDBACK_VALID_BIT_EXT, "valid");
+    CASE(VK_PIPELINE_CREATION_FEEDBACK_APPLICATION_PIPELINE_CACHE_HIT_BIT_EXT, "application pipeline cache hit");
+    CASE(VK_PIPELINE_CREATION_FEEDBACK_BASE_PIPELINE_ACCELERATION_BIT_EXT, "base pipeline acceleration");
+#undef CASE
+    return n;
+    }
+
+static int PipelineCreationFeedbackFlagsEXT(lua_State *L)
+    {
+    if(lua_type(L, 1) == LUA_TNUMBER)
+        return pushpipelinecreationfeedbackflags(L, luaL_checkinteger(L, 1));
+    lua_pushinteger(L, checkpipelinecreationfeedbackflags(L, 1));
+    return 1;
+    }
+
+#define Add_PipelineCreationFeedbackFlags(L) \
+    ADD(PIPELINE_CREATION_FEEDBACK_VALID_BIT_EXT);\
+    ADD(PIPELINE_CREATION_FEEDBACK_APPLICATION_PIPELINE_CACHE_HIT_BIT_EXT);\
+    ADD(PIPELINE_CREATION_FEEDBACK_BASE_PIPELINE_ACCELERATION_BIT_EXT);\
 
 /*------------------------------------------------------------------------------*
  | Additional utilities                                                         |
@@ -3193,6 +3438,11 @@ static int AddConstants(lua_State *L) /* vk.XXX constants for VK_XXX values */
     Add_SubgroupFeatureFlags(L);
     Add_PeerMemoryFeatureFlags(L);
     Add_MemoryAllocateFlags(L);
+    Add_ImageViewCreateFlags(L);
+    Add_SamplerCreateFlags(L);
+    Add_FramebufferCreateFlags(L);
+    Add_ResolveModeFlags(L);
+    Add_PipelineCreationFeedbackFlags(L);
     /* extensions */
     Add_SurfaceTransformFlagsKHR(L);
     Add_CompositeAlphaFlagKHR(L);
@@ -3253,6 +3503,11 @@ static const struct luaL_Reg Functions[] =
         { "subgroupfeatureflags", SubgroupFeatureFlags },
         { "peermemoryfeatureflags", PeerMemoryFeatureFlags },
         { "memoryallocateflags", MemoryAllocateFlags },
+        { "imageviewcreateflags", ImageViewCreateFlags },
+        { "samplercreateflags", SamplerCreateFlags },
+        { "framebuffercreateflags", FramebufferCreateFlags },
+        { "resolvemodeflags", ResolveModeFlagsKHR },
+        { "pipelinecreationfeedbackflags", PipelineCreationFeedbackFlagsEXT },
         /* Reserved flags */
         { "instancecreateflags", ReservedFlags },
         { "devicecreateflags", ReservedFlags },
@@ -3261,7 +3516,6 @@ static const struct luaL_Reg Functions[] =
         { "eventcreateflags", ReservedFlags },
         { "querypoolcreateflags", ReservedFlags },
         { "bufferviewcreateflags", ReservedFlags },
-        { "imageviewcreateflags", ReservedFlags },
         { "shadermodulecreateflags", ReservedFlags },
         { "pipelinecachecreateflags", ReservedFlags },
         { "pipelinevertexinputstatecreateflags", ReservedFlags },
@@ -3275,9 +3529,7 @@ static const struct luaL_Reg Functions[] =
         { "pipelinecolorblendstatecreateflags", ReservedFlags },
         { "pipelinedynamicstatecreateflags", ReservedFlags },
         { "pipelinelayoutcreateflags", ReservedFlags },
-        { "samplercreateflags", ReservedFlags },
         { "descriptorpoolresetflags", ReservedFlags },
-        { "framebuffercreateflags", ReservedFlags },
         { "renderpasscreateflags", ReservedFlags },
         { "subpassdescriptionflags", ReservedFlags },
         /* extensions */
@@ -3380,7 +3632,7 @@ static int ZzzFlagsKHR(lua_State *L)
 [[zzzflags]]
 [small]#*zzzflags*: vk.ZZZ_XXX_BIT_KHR +
 Values:
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VkZzzFlagBitsKHR[VkZzzFlagBitsKHR].#
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkZzzFlagBitsKHR.html[VkZzzFlagBitsKHR].#
 
 #endif
 
