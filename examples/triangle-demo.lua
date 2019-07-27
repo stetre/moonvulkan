@@ -796,6 +796,7 @@ function init_vulkan(demo)
 
    -- Look for instance extensions required by GLFW
    demo.instance_extensions = glfw.get_required_instance_extensions()
+   table.insert(demo.instance_extensions, 'VK_KHR_get_physical_device_properties2')
    if demo.validate then table.insert(demo.instance_extensions, 'VK_EXT_debug_report') end
 
    local instance_extensions = vk.enumerate_instance_extension_properties(nil, true)
