@@ -121,7 +121,7 @@ _sparse_properties_: <<physicaldevicesparseproperties, physicaldevicesparseprope
 pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkPhysicalDevicePushDescriptorPropertiesKHR.html[VkPhysicalDevicePushDescriptorPropertiesKHR], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_push_descriptor[VK_KHR_push_descriptor]): +
 _max_push_descriptors_: integer, +
 pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT.html[VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_blend_operation_advanced[VK_EXT_blend_operation_advanced]): +
-_advanced_blend_max_color_attachments_: integer
+_advanced_blend_max_color_attachments_: integer, +
 _advanced_blend_independent_blend_: boolean, +
 _advanced_blend_non_premultiplied_src_color_: boolean, +
 _advanced_blend_non_premultiplied_dst_color_: boolean, +

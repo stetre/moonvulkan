@@ -193,10 +193,11 @@ int zinit##VkXxx(lua_State *L, VkXxx* p, int *err) { (void)L; (void)(p);
  * the checktable() call).
  */
 
-/* These are for long chains of extensions like VkPhysicalDeviceFeatures2KHR,
- * where the extensions structs are all typed, do not need a zclear, and only
- * appear in these chains as extensions (so there is no need to define all the
- * functions for them and we can use znew() and zfree() without wrappers).
+/* The following macros are to be used for long chains of extensions such as
+ * VkPhysicalDeviceFeatures2KHR, where the extensions structs are all typed,
+ * do not need a zclear, and only appear as extensions in these chains (so
+ * there is no need to define all the functions for them and we can use znew()
+ * and zfree() without wrappers).
  * Notice that, in the Lua value, the fields of an extension struct are often
  * promoted to the base table, so there is no lua_newtable() call in the zpush
  * (or localpush) function, and no checktable() call in the zcheck function.
@@ -210,6 +211,13 @@ int zinit##VkXxx(lua_State *L, VkXxx* p, int *err) { (void)L; (void)(p);
 /* defines a push function for local use only (localpushVkXxx). */
 #define LOCALPUSH_BEGIN(VkXxx) static int localpush##VkXxx(lua_State *L, const VkXxx *p) {
 #define LOCALPUSH_END return 1; }
+
+/* defines a check function for local use only (zcheckVkXxx). */
+#define LOCALCHECK_BEGIN(XXX, VkXxx)                                                    \
+static VkXxx* zcheck##VkXxx(lua_State *L, int arg, int *err)                            \
+    { VkXxx* p; /* checktable(arg); */                                                  \
+    if((p = znew(L, VK_STRUCTURE_TYPE_##XXX, sizeof(VkXxx), err))==NULL) return NULL;
+#define LOCALCHECK_END *err = 0; return p; }
 
 #define XPUSH_BEGIN do {                                                \
     VkBaseOutStructure *pp_ = (VkBaseOutStructure*)p->pNext;            \
@@ -480,7 +488,7 @@ static const char *GetString_(lua_State *L, int arg, const char *sname, const ch
         }                                           \
     popfield(L, arg_);                              \
     if(*err)                                        \
-        { pushfielderror(sname); return p; } \
+        { pushfielderror(sname); return p; }        \
 } while(0)
 
 #define GetLightuserdata GetLightuserdataOpt
@@ -495,7 +503,7 @@ static const char *GetString_(lua_State *L, int arg, const char *sname, const ch
     if(opt && (*err == ERR_NOTPRESENT))                     \
         { p->name = (defval); *err = 0; }                   \
     else if(*err)                                           \
-        { pushfielderror(sname); return p; }       \
+        { pushfielderror(sname); return p; }                \
 } while(0)
 
 #define GetEnum(name, sname, testfunc) GetEnum_(name, sname, testfunc, 0,  0)
@@ -1647,55 +1655,50 @@ ZCHECK_BEGIN(VkPhysicalDeviceFeatures)
     GetBoolean(inheritedQueries, "inherited_queries");
 ZCHECK_END
  
-#define FUNC_BEGIN(XXX, VkXxx)                                                              \
-static VkXxx* zcheck##VkXxx(lua_State *L, int arg, int *err)                                \
-    { VkXxx* p; /* checktable(arg); */                                                      \
-    if((p = znew(L, VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_##XXX, sizeof(VkXxx), err))==NULL)    \
-        return NULL;
-#define FUNC_END *err = 0; return p; }
-FUNC_BEGIN(16BIT_STORAGE_FEATURES, VkPhysicalDevice16BitStorageFeatures)
+
+LOCALCHECK_BEGIN(PHYSICAL_DEVICE_16BIT_STORAGE_FEATURES, VkPhysicalDevice16BitStorageFeatures)
     GetBoolean(storageBuffer16BitAccess, "storage_buffer_16bit_access");
     GetBoolean(uniformAndStorageBuffer16BitAccess, "uniform_and_storage_buffer_16bit_access");
     GetBoolean(storagePushConstant16, "storage_push_constant_16");
     GetBoolean(storageInputOutput16, "storage_input_output_16");
-FUNC_END 
-FUNC_BEGIN(VARIABLE_POINTERS_FEATURES, VkPhysicalDeviceVariablePointersFeatures)
+LOCALCHECK_END
+LOCALCHECK_BEGIN(PHYSICAL_DEVICE_VARIABLE_POINTERS_FEATURES, VkPhysicalDeviceVariablePointersFeatures)
     GetBoolean(variablePointersStorageBuffer, "variable_pointers_storage_buffer");
     GetBoolean(variablePointers, "variable_pointers");
-FUNC_END 
-FUNC_BEGIN(BLEND_OPERATION_ADVANCED_FEATURES_EXT, VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT)
+LOCALCHECK_END
+LOCALCHECK_BEGIN(PHYSICAL_DEVICE_BLEND_OPERATION_ADVANCED_FEATURES_EXT, VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT)
     GetBoolean(advancedBlendCoherentOperations, "advanced_blend_coherent_operations");
-FUNC_END 
-FUNC_BEGIN(SAMPLER_YCBCR_CONVERSION_FEATURES, VkPhysicalDeviceSamplerYcbcrConversionFeatures)
+LOCALCHECK_END
+LOCALCHECK_BEGIN(PHYSICAL_DEVICE_SAMPLER_YCBCR_CONVERSION_FEATURES, VkPhysicalDeviceSamplerYcbcrConversionFeatures)
     GetBoolean(samplerYcbcrConversion, "sampler_ycbcr_conversion");
-FUNC_END 
-FUNC_BEGIN(CONDITIONAL_RENDERING_FEATURES_EXT, VkPhysicalDeviceConditionalRenderingFeaturesEXT)
+LOCALCHECK_END
+LOCALCHECK_BEGIN(PHYSICAL_DEVICE_CONDITIONAL_RENDERING_FEATURES_EXT, VkPhysicalDeviceConditionalRenderingFeaturesEXT)
     GetBoolean(conditionalRendering, "conditional_rendering");
     GetBoolean(inheritedConditionalRendering, "inherited_conditional_rendering");
-FUNC_END 
-FUNC_BEGIN(8BIT_STORAGE_FEATURES_KHR , VkPhysicalDevice8BitStorageFeaturesKHR)
+LOCALCHECK_END
+LOCALCHECK_BEGIN(PHYSICAL_DEVICE_8BIT_STORAGE_FEATURES_KHR , VkPhysicalDevice8BitStorageFeaturesKHR)
     GetBoolean(storageBuffer8BitAccess, "storage_buffer_8bit_access");
     GetBoolean(uniformAndStorageBuffer8BitAccess, "uniform_and_storage_buffer_8bit_access");
     GetBoolean(storagePushConstant8, "storage_push_constant_8");
-FUNC_END 
-FUNC_BEGIN(PROTECTED_MEMORY_FEATURES, VkPhysicalDeviceProtectedMemoryFeatures)
+LOCALCHECK_END
+LOCALCHECK_BEGIN(PHYSICAL_DEVICE_PROTECTED_MEMORY_FEATURES, VkPhysicalDeviceProtectedMemoryFeatures)
     GetBoolean(protectedMemory, "protected_memory");
-FUNC_END 
-FUNC_BEGIN(SHADER_DRAW_PARAMETERS_FEATURES, VkPhysicalDeviceShaderDrawParametersFeatures)
+LOCALCHECK_END
+LOCALCHECK_BEGIN(PHYSICAL_DEVICE_SHADER_DRAW_PARAMETERS_FEATURES, VkPhysicalDeviceShaderDrawParametersFeatures)
     GetBoolean(shaderDrawParameters, "shader_draw_parameters");
-FUNC_END 
-FUNC_BEGIN(ASTC_DECODE_FEATURES_EXT, VkPhysicalDeviceASTCDecodeFeaturesEXT)
+LOCALCHECK_END
+LOCALCHECK_BEGIN(PHYSICAL_DEVICE_ASTC_DECODE_FEATURES_EXT, VkPhysicalDeviceASTCDecodeFeaturesEXT)
     GetBoolean(decodeModeSharedExponent, "decode_mode_shared_exponent");
-FUNC_END
-FUNC_BEGIN(VERTEX_ATTRIBUTE_DIVISOR_FEATURES_EXT, VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT)
+LOCALCHECK_END
+LOCALCHECK_BEGIN(PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_FEATURES_EXT, VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT)
     GetBoolean(vertexAttributeInstanceRateDivisor, "vertex_attribute_instance_rate_divisor");
     GetBoolean(vertexAttributeInstanceRateZeroDivisor, "vertex_attribute_instance_rate_zero_divisor");
-FUNC_END
-FUNC_BEGIN(INLINE_UNIFORM_BLOCK_FEATURES_EXT, VkPhysicalDeviceInlineUniformBlockFeaturesEXT)
+LOCALCHECK_END
+LOCALCHECK_BEGIN(PHYSICAL_DEVICE_INLINE_UNIFORM_BLOCK_FEATURES_EXT, VkPhysicalDeviceInlineUniformBlockFeaturesEXT)
     GetBoolean(inlineUniformBlock, "inline_uniform_block");
     GetBoolean(descriptorBindingInlineUniformBlockUpdateAfterBind, "descriptor_binding_inline_uniform_block_update_after_bind");
-FUNC_END
-FUNC_BEGIN(DESCRIPTOR_INDEXING_FEATURES_EXT, VkPhysicalDeviceDescriptorIndexingFeaturesEXT)
+LOCALCHECK_END
+LOCALCHECK_BEGIN(PHYSICAL_DEVICE_DESCRIPTOR_INDEXING_FEATURES_EXT, VkPhysicalDeviceDescriptorIndexingFeaturesEXT)
     GetBoolean(shaderInputAttachmentArrayDynamicIndexing, "shader_input_attachment_array_dynamic_indexing");
     GetBoolean(shaderUniformTexelBufferArrayDynamicIndexing, "shader_uniform_texel_buffer_array_dynamic_indexing");
     GetBoolean(shaderStorageTexelBufferArrayDynamicIndexing, "shader_storage_texel_buffer_array_dynamic_indexing");
@@ -1716,66 +1719,54 @@ FUNC_BEGIN(DESCRIPTOR_INDEXING_FEATURES_EXT, VkPhysicalDeviceDescriptorIndexingF
     GetBoolean(descriptorBindingPartiallyBound, "descriptor_binding_partially_bound");
     GetBoolean(descriptorBindingVariableDescriptorCount, "descriptor_binding_variable_descriptor_count");
     GetBoolean(runtimeDescriptorArray, "runtime_descriptor_array");
-FUNC_END
-FUNC_BEGIN(MULTIVIEW_FEATURES, VkPhysicalDeviceMultiviewFeaturesKHR)
+LOCALCHECK_END
+LOCALCHECK_BEGIN(PHYSICAL_DEVICE_MULTIVIEW_FEATURES, VkPhysicalDeviceMultiviewFeaturesKHR)
     GetBoolean(multiview, "multiview");
     GetBoolean(multiviewGeometryShader, "multiview_geometry_shader");
     GetBoolean(multiviewTessellationShader, "multiview_tessellation_shader");
-FUNC_END
-FUNC_BEGIN(VULKAN_MEMORY_MODEL_FEATURES_KHR, VkPhysicalDeviceVulkanMemoryModelFeaturesKHR)
+LOCALCHECK_END
+LOCALCHECK_BEGIN(PHYSICAL_DEVICE_VULKAN_MEMORY_MODEL_FEATURES_KHR, VkPhysicalDeviceVulkanMemoryModelFeaturesKHR)
     GetBoolean(vulkanMemoryModel, "vulkan_memory_model");
     GetBoolean(vulkanMemoryModelDeviceScope, "vulkan_memory_model_device_scope");
     GetBoolean(vulkanMemoryModelAvailabilityVisibilityChains, "vulkan_memory_model_availability_visibility_chains");
-FUNC_END
-FUNC_BEGIN(SHADER_ATOMIC_INT64_FEATURES_KHR, VkPhysicalDeviceShaderAtomicInt64FeaturesKHR)
+LOCALCHECK_END
+LOCALCHECK_BEGIN(PHYSICAL_DEVICE_SHADER_ATOMIC_INT64_FEATURES_KHR, VkPhysicalDeviceShaderAtomicInt64FeaturesKHR)
     GetBoolean(shaderBufferInt64Atomics, "shader_buffer_int64_atomics");
     GetBoolean(shaderSharedInt64Atomics, "shader_shared_int64_atomics");
-FUNC_END
-FUNC_BEGIN(TRANSFORM_FEEDBACK_FEATURES_EXT, VkPhysicalDeviceTransformFeedbackFeaturesEXT)
+LOCALCHECK_END
+LOCALCHECK_BEGIN(PHYSICAL_DEVICE_TRANSFORM_FEEDBACK_FEATURES_EXT, VkPhysicalDeviceTransformFeedbackFeaturesEXT)
     GetBoolean(transformFeedback, "transform_feedback");
     GetBoolean(geometryStreams, "geometry_streams");
-FUNC_END
-FUNC_BEGIN(FLOAT16_INT8_FEATURES_KHR , VkPhysicalDeviceFloat16Int8FeaturesKHR)
+LOCALCHECK_END
+LOCALCHECK_BEGIN(PHYSICAL_DEVICE_FLOAT16_INT8_FEATURES_KHR , VkPhysicalDeviceFloat16Int8FeaturesKHR)
     GetBoolean(shaderFloat16, "shader_float16");
     GetBoolean(shaderInt8, "shader_int8");
-FUNC_END
-FUNC_BEGIN(UNIFORM_BUFFER_STANDARD_LAYOUT_FEATURES_KHR, VkPhysicalDeviceUniformBufferStandardLayoutFeaturesKHR)
-	GetBoolean(uniformBufferStandardLayout, "uniform_buffer_standard_layout");
-FUNC_END
-#undef FUNC_BEGIN
-#undef FUNC_END
+LOCALCHECK_END
+LOCALCHECK_BEGIN(PHYSICAL_DEVICE_UNIFORM_BUFFER_STANDARD_LAYOUT_FEATURES_KHR, VkPhysicalDeviceUniformBufferStandardLayoutFeaturesKHR)
+    GetBoolean(uniformBufferStandardLayout, "uniform_buffer_standard_layout");
+LOCALCHECK_END
 
 
 ZINIT_BEGIN(VkPhysicalDeviceFeatures2)
     EXTENSIONS_BEGIN
         ADDX(PHYSICAL_DEVICE_16BIT_STORAGE_FEATURES, VkPhysicalDevice16BitStorageFeatures);
         ADDX(PHYSICAL_DEVICE_VARIABLE_POINTERS_FEATURES, VkPhysicalDeviceVariablePointersFeatures);
-        ADDX(PHYSICAL_DEVICE_BLEND_OPERATION_ADVANCED_FEATURES_EXT,
-                VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT);
-        ADDX(PHYSICAL_DEVICE_SAMPLER_YCBCR_CONVERSION_FEATURES,
-                VkPhysicalDeviceSamplerYcbcrConversionFeatures);
-        ADDX(PHYSICAL_DEVICE_CONDITIONAL_RENDERING_FEATURES_EXT,
-                VkPhysicalDeviceConditionalRenderingFeaturesEXT);
+        ADDX(PHYSICAL_DEVICE_BLEND_OPERATION_ADVANCED_FEATURES_EXT, VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT);
+        ADDX(PHYSICAL_DEVICE_SAMPLER_YCBCR_CONVERSION_FEATURES, VkPhysicalDeviceSamplerYcbcrConversionFeatures);
+        ADDX(PHYSICAL_DEVICE_CONDITIONAL_RENDERING_FEATURES_EXT, VkPhysicalDeviceConditionalRenderingFeaturesEXT);
         ADDX(PHYSICAL_DEVICE_8BIT_STORAGE_FEATURES_KHR , VkPhysicalDevice8BitStorageFeaturesKHR);
         ADDX(PHYSICAL_DEVICE_PROTECTED_MEMORY_FEATURES, VkPhysicalDeviceProtectedMemoryFeatures);
         ADDX(PHYSICAL_DEVICE_SHADER_DRAW_PARAMETERS_FEATURES,VkPhysicalDeviceShaderDrawParametersFeatures);
         ADDX(PHYSICAL_DEVICE_ASTC_DECODE_FEATURES_EXT, VkPhysicalDeviceASTCDecodeFeaturesEXT);
-        ADDX(PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_FEATURES_EXT,
-                VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT);
-        ADDX(PHYSICAL_DEVICE_INLINE_UNIFORM_BLOCK_FEATURES_EXT,
-                VkPhysicalDeviceInlineUniformBlockFeaturesEXT);
-        ADDX(PHYSICAL_DEVICE_DESCRIPTOR_INDEXING_FEATURES_EXT,
-                VkPhysicalDeviceDescriptorIndexingFeaturesEXT);
+        ADDX(PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_FEATURES_EXT, VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT);
+        ADDX(PHYSICAL_DEVICE_INLINE_UNIFORM_BLOCK_FEATURES_EXT, VkPhysicalDeviceInlineUniformBlockFeaturesEXT);
+        ADDX(PHYSICAL_DEVICE_DESCRIPTOR_INDEXING_FEATURES_EXT, VkPhysicalDeviceDescriptorIndexingFeaturesEXT);
         ADDX(PHYSICAL_DEVICE_MULTIVIEW_FEATURES_KHR, VkPhysicalDeviceMultiviewFeaturesKHR);
-        ADDX(PHYSICAL_DEVICE_VULKAN_MEMORY_MODEL_FEATURES_KHR,
-                VkPhysicalDeviceVulkanMemoryModelFeaturesKHR);
-        ADDX(PHYSICAL_DEVICE_SHADER_ATOMIC_INT64_FEATURES_KHR,
-                VkPhysicalDeviceShaderAtomicInt64FeaturesKHR);
-        ADDX(PHYSICAL_DEVICE_TRANSFORM_FEEDBACK_FEATURES_EXT,
-                VkPhysicalDeviceTransformFeedbackFeaturesEXT);
+        ADDX(PHYSICAL_DEVICE_VULKAN_MEMORY_MODEL_FEATURES_KHR, VkPhysicalDeviceVulkanMemoryModelFeaturesKHR);
+        ADDX(PHYSICAL_DEVICE_SHADER_ATOMIC_INT64_FEATURES_KHR, VkPhysicalDeviceShaderAtomicInt64FeaturesKHR);
+        ADDX(PHYSICAL_DEVICE_TRANSFORM_FEEDBACK_FEATURES_EXT, VkPhysicalDeviceTransformFeedbackFeaturesEXT);
         ADDX(PHYSICAL_DEVICE_FLOAT16_INT8_FEATURES_KHR, VkPhysicalDeviceFloat16Int8FeaturesKHR);
-        ADDX(PHYSICAL_DEVICE_UNIFORM_BUFFER_STANDARD_LAYOUT_FEATURES_KHR,
-				VkPhysicalDeviceUniformBufferStandardLayoutFeaturesKHR);
+        ADDX(PHYSICAL_DEVICE_UNIFORM_BUFFER_STANDARD_LAYOUT_FEATURES_KHR, VkPhysicalDeviceUniformBufferStandardLayoutFeaturesKHR);
     EXTENSIONS_END
 ZINIT_END
 
@@ -1961,7 +1952,7 @@ LOCALPUSH_BEGIN(VkPhysicalDeviceFloat16Int8FeaturesKHR)
     SetBoolean(shaderInt8, "shader_int8");
 LOCALPUSH_END
 LOCALPUSH_BEGIN(VkPhysicalDeviceUniformBufferStandardLayoutFeaturesKHR)
-	SetBoolean(uniformBufferStandardLayout, "uniform_buffer_standard_layout");
+    SetBoolean(uniformBufferStandardLayout, "uniform_buffer_standard_layout");
 LOCALPUSH_END
 
 ZPUSH_BEGIN(VkPhysicalDeviceFeatures)
@@ -1976,30 +1967,20 @@ ZPUSH_BEGIN(VkPhysicalDeviceFeatures2)
     XPUSH_BEGIN
         XCASE(PHYSICAL_DEVICE_16BIT_STORAGE_FEATURES, VkPhysicalDevice16BitStorageFeatures);
         XCASE(PHYSICAL_DEVICE_VARIABLE_POINTERS_FEATURES, VkPhysicalDeviceVariablePointersFeatures);
-        XCASE(PHYSICAL_DEVICE_BLEND_OPERATION_ADVANCED_FEATURES_EXT,
-                VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT);
-        XCASE(PHYSICAL_DEVICE_SAMPLER_YCBCR_CONVERSION_FEATURES,
-                VkPhysicalDeviceSamplerYcbcrConversionFeatures);
-        XCASE(PHYSICAL_DEVICE_CONDITIONAL_RENDERING_FEATURES_EXT,
-                VkPhysicalDeviceConditionalRenderingFeaturesEXT);
-        XCASE(PHYSICAL_DEVICE_8BIT_STORAGE_FEATURES_KHR , VkPhysicalDevice8BitStorageFeaturesKHR);
+        XCASE(PHYSICAL_DEVICE_BLEND_OPERATION_ADVANCED_FEATURES_EXT, VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT);
+        XCASE(PHYSICAL_DEVICE_SAMPLER_YCBCR_CONVERSION_FEATURES, VkPhysicalDeviceSamplerYcbcrConversionFeatures);
+        XCASE(PHYSICAL_DEVICE_CONDITIONAL_RENDERING_FEATURES_EXT, VkPhysicalDeviceConditionalRenderingFeaturesEXT);
+        XCASE(PHYSICAL_DEVICE_8BIT_STORAGE_FEATURES_KHR, VkPhysicalDevice8BitStorageFeaturesKHR);
         XCASE(PHYSICAL_DEVICE_PROTECTED_MEMORY_FEATURES, VkPhysicalDeviceProtectedMemoryFeatures);
-        XCASE(PHYSICAL_DEVICE_SHADER_DRAW_PARAMETERS_FEATURES,
-                VkPhysicalDeviceShaderDrawParametersFeatures);
+        XCASE(PHYSICAL_DEVICE_SHADER_DRAW_PARAMETERS_FEATURES, VkPhysicalDeviceShaderDrawParametersFeatures);
         XCASE(PHYSICAL_DEVICE_ASTC_DECODE_FEATURES_EXT, VkPhysicalDeviceASTCDecodeFeaturesEXT);
-        XCASE(PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_FEATURES_EXT,
-                VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT);
-        XCASE(PHYSICAL_DEVICE_INLINE_UNIFORM_BLOCK_FEATURES_EXT,
-                VkPhysicalDeviceInlineUniformBlockFeaturesEXT);
-        XCASE(PHYSICAL_DEVICE_DESCRIPTOR_INDEXING_FEATURES_EXT,
-                VkPhysicalDeviceDescriptorIndexingFeaturesEXT);
+        XCASE(PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_FEATURES_EXT, VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT);
+        XCASE(PHYSICAL_DEVICE_INLINE_UNIFORM_BLOCK_FEATURES_EXT, VkPhysicalDeviceInlineUniformBlockFeaturesEXT);
+        XCASE(PHYSICAL_DEVICE_DESCRIPTOR_INDEXING_FEATURES_EXT, VkPhysicalDeviceDescriptorIndexingFeaturesEXT);
         XCASE(PHYSICAL_DEVICE_MULTIVIEW_FEATURES_KHR, VkPhysicalDeviceMultiviewFeaturesKHR);
-        XCASE(PHYSICAL_DEVICE_VULKAN_MEMORY_MODEL_FEATURES_KHR,
-                VkPhysicalDeviceVulkanMemoryModelFeaturesKHR);
-        XCASE(PHYSICAL_DEVICE_SHADER_ATOMIC_INT64_FEATURES_KHR,
-                VkPhysicalDeviceShaderAtomicInt64FeaturesKHR);
-        XCASE(PHYSICAL_DEVICE_TRANSFORM_FEEDBACK_FEATURES_EXT,
-                VkPhysicalDeviceTransformFeedbackFeaturesEXT);
+        XCASE(PHYSICAL_DEVICE_VULKAN_MEMORY_MODEL_FEATURES_KHR, VkPhysicalDeviceVulkanMemoryModelFeaturesKHR);
+        XCASE(PHYSICAL_DEVICE_SHADER_ATOMIC_INT64_FEATURES_KHR, VkPhysicalDeviceShaderAtomicInt64FeaturesKHR);
+        XCASE(PHYSICAL_DEVICE_TRANSFORM_FEEDBACK_FEATURES_EXT, VkPhysicalDeviceTransformFeedbackFeaturesEXT);
         XCASE(PHYSICAL_DEVICE_FLOAT16_INT8_FEATURES_KHR, VkPhysicalDeviceFloat16Int8FeaturesKHR);
         XCASE(PHYSICAL_DEVICE_UNIFORM_BUFFER_STANDARD_LAYOUT_FEATURES_KHR, VkPhysicalDeviceUniformBufferStandardLayoutFeaturesKHR);
     XPUSH_END
@@ -2137,7 +2118,6 @@ static ZPUSH_BEGIN(VkConformanceVersionKHR)
     SetInteger(subminor, "subminor");
     SetInteger(patch, "patch");
 ZPUSH_END
-
 
 LOCALPUSH_BEGIN(VkPhysicalDeviceProperties)
     SetInteger(apiVersion, "api_version");
