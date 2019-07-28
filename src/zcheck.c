@@ -1591,7 +1591,7 @@ ZCHECK_BEGIN(VkPhysicalDeviceFeatures)
     checktable(arg);
     newstruct(VkPhysicalDeviceFeatures);
     GetBoolean(robustBufferAccess, "robust_buffer_access");
-    GetBoolean(fullDrawIndexUint32, "full_draw_index_uint_32");
+    GetBoolean(fullDrawIndexUint32, "full_draw_index_uint32");
     GetBoolean(imageCubeArray, "image_cube_array");
     GetBoolean(independentBlend, "independent_blend");
     GetBoolean(geometryShader, "geometry_shader");
@@ -1629,9 +1629,9 @@ ZCHECK_BEGIN(VkPhysicalDeviceFeatures)
     GetBoolean(shaderStorageImageArrayDynamicIndexing, "shader_storage_image_array_dynamic_indexing");
     GetBoolean(shaderClipDistance, "shader_clip_distance");
     GetBoolean(shaderCullDistance, "shader_cull_distance");
-    GetBoolean(shaderFloat64, "shader_float_64");
-    GetBoolean(shaderInt64, "shader_int_64");
-    GetBoolean(shaderInt16, "shader_int_16");
+    GetBoolean(shaderFloat64, "shader_float64");
+    GetBoolean(shaderInt64, "shader_int64");
+    GetBoolean(shaderInt16, "shader_int16");
     GetBoolean(shaderResourceResidency, "shader_resource_residency");
     GetBoolean(shaderResourceMinLod, "shader_resource_min_lod");
     GetBoolean(sparseBinding, "sparse_binding");
@@ -1813,7 +1813,7 @@ ZCHECK_END
 
 LOCALPUSH_BEGIN(VkPhysicalDeviceFeatures)
     SetBoolean(robustBufferAccess, "robust_buffer_access");
-    SetBoolean(fullDrawIndexUint32, "full_draw_index_uint_32");
+    SetBoolean(fullDrawIndexUint32, "full_draw_index_uint32");
     SetBoolean(imageCubeArray, "image_cube_array");
     SetBoolean(independentBlend, "independent_blend");
     SetBoolean(geometryShader, "geometry_shader");
@@ -1851,9 +1851,9 @@ LOCALPUSH_BEGIN(VkPhysicalDeviceFeatures)
     SetBoolean(shaderStorageImageArrayDynamicIndexing, "shader_storage_image_array_dynamic_indexing");
     SetBoolean(shaderClipDistance, "shader_clip_distance");
     SetBoolean(shaderCullDistance, "shader_cull_distance");
-    SetBoolean(shaderFloat64, "shader_float_64");
-    SetBoolean(shaderInt64, "shader_int_64");
-    SetBoolean(shaderInt16, "shader_int_16");
+    SetBoolean(shaderFloat64, "shader_float64");
+    SetBoolean(shaderInt64, "shader_int64");
+    SetBoolean(shaderInt16, "shader_int16");
     SetBoolean(shaderResourceResidency, "shader_resource_residency");
     SetBoolean(shaderResourceMinLod, "shader_resource_min_lod");
     SetBoolean(sparseBinding, "sparse_binding");
