@@ -1735,8 +1735,13 @@ FUNC_BEGIN(TRANSFORM_FEEDBACK_FEATURES_EXT, VkPhysicalDeviceTransformFeedbackFea
     GetBoolean(transformFeedback, "transform_feedback");
     GetBoolean(geometryStreams, "geometry_streams");
 FUNC_END
+FUNC_BEGIN(FLOAT16_INT8_FEATURES_KHR , VkPhysicalDeviceFloat16Int8FeaturesKHR)
+    GetBoolean(shaderFloat16, "shader_float16");
+    GetBoolean(shaderInt8, "shader_int8");
+FUNC_END
 #undef FUNC_BEGIN
 #undef FUNC_END
+
 
 ZINIT_BEGIN(VkPhysicalDeviceFeatures2)
     EXTENSIONS_BEGIN
@@ -1765,6 +1770,7 @@ ZINIT_BEGIN(VkPhysicalDeviceFeatures2)
                 VkPhysicalDeviceShaderAtomicInt64FeaturesKHR);
         ADDX(PHYSICAL_DEVICE_TRANSFORM_FEEDBACK_FEATURES_EXT,
                 VkPhysicalDeviceTransformFeedbackFeaturesEXT);
+        ADDX(PHYSICAL_DEVICE_FLOAT16_INT8_FEATURES_KHR, VkPhysicalDeviceFloat16Int8FeaturesKHR);
     EXTENSIONS_END
 ZINIT_END
 
@@ -1800,6 +1806,7 @@ ZCHECK_BEGIN(VkPhysicalDeviceFeatures2)
         ADD(VkPhysicalDeviceVulkanMemoryModelFeaturesKHR);
         ADD(VkPhysicalDeviceShaderAtomicInt64FeaturesKHR);
         ADD(VkPhysicalDeviceTransformFeedbackFeaturesEXT);
+        ADD(VkPhysicalDeviceFloat16Int8FeaturesKHR);
     #undef ADD
     EXTENSIONS_END
 ZCHECK_END
@@ -1943,6 +1950,10 @@ LOCALPUSH_BEGIN(VkPhysicalDeviceTransformFeedbackFeaturesEXT)
     SetBoolean(transformFeedback, "transform_feedback");
     SetBoolean(geometryStreams, "geometry_streams");
 LOCALPUSH_END
+LOCALPUSH_BEGIN(VkPhysicalDeviceFloat16Int8FeaturesKHR)
+    SetBoolean(shaderFloat16, "shader_float16");
+    SetBoolean(shaderInt8, "shader_int8");
+LOCALPUSH_END
 
 ZPUSH_BEGIN(VkPhysicalDeviceFeatures)
     lua_newtable(L);
@@ -1980,6 +1991,7 @@ ZPUSH_BEGIN(VkPhysicalDeviceFeatures2)
                 VkPhysicalDeviceShaderAtomicInt64FeaturesKHR);
         XCASE(PHYSICAL_DEVICE_TRANSFORM_FEEDBACK_FEATURES_EXT,
                 VkPhysicalDeviceTransformFeedbackFeaturesEXT);
+        XCASE(PHYSICAL_DEVICE_FLOAT16_INT8_FEATURES_KHR, VkPhysicalDeviceFloat16Int8FeaturesKHR);
     XPUSH_END
 ZPUSH_END
 

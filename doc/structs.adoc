@@ -486,6 +486,9 @@ _shader_shared_int64_atomics_: boolean, +
 pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkPhysicalDeviceTransformFeedbackFeaturesEXT.html[VkPhysicalDeviceTransformFeedbackFeaturesEXT], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_transform_feedback[VK_EXT_transform_feedback]): +
 _transform_feedback_: boolean, +
 _geometry_streams_: boolean, +
+pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkPhysicalDeviceFloat16Int8FeaturesKHR.html[VkPhysicalDeviceFloat16Int8FeaturesKHR], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_shader_float16_int8[VK_KHR_shader_float16_int8]): +
+_shader_float16_: boolean, +
+_shader_int8_: boolean, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkPhysicalDeviceFeatures2.html[VkPhysicalDeviceFeatures2])#
 
 
