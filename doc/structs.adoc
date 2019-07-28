@@ -489,6 +489,8 @@ _geometry_streams_: boolean, +
 pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkPhysicalDeviceFloat16Int8FeaturesKHR.html[VkPhysicalDeviceFloat16Int8FeaturesKHR], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_shader_float16_int8[VK_KHR_shader_float16_int8]): +
 _shader_float16_: boolean, +
 _shader_int8_: boolean, +
+pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkPhysicalDeviceUniformBufferStandardLayoutFeaturesKHR.html[VkPhysicalDeviceUniformBufferStandardLayoutFeaturesKHR], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_uniform_buffer_standard_layout[VK_KHR_uniform_buffer_standard_layout]): +
+_uniform_buffer_standard_layout_: boolean, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkPhysicalDeviceFeatures2.html[VkPhysicalDeviceFeatures2])#
 
 

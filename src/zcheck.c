@@ -1739,6 +1739,9 @@ FUNC_BEGIN(FLOAT16_INT8_FEATURES_KHR , VkPhysicalDeviceFloat16Int8FeaturesKHR)
     GetBoolean(shaderFloat16, "shader_float16");
     GetBoolean(shaderInt8, "shader_int8");
 FUNC_END
+FUNC_BEGIN(UNIFORM_BUFFER_STANDARD_LAYOUT_FEATURES_KHR, VkPhysicalDeviceUniformBufferStandardLayoutFeaturesKHR)
+	GetBoolean(uniformBufferStandardLayout, "uniform_buffer_standard_layout");
+FUNC_END
 #undef FUNC_BEGIN
 #undef FUNC_END
 
@@ -1771,6 +1774,8 @@ ZINIT_BEGIN(VkPhysicalDeviceFeatures2)
         ADDX(PHYSICAL_DEVICE_TRANSFORM_FEEDBACK_FEATURES_EXT,
                 VkPhysicalDeviceTransformFeedbackFeaturesEXT);
         ADDX(PHYSICAL_DEVICE_FLOAT16_INT8_FEATURES_KHR, VkPhysicalDeviceFloat16Int8FeaturesKHR);
+        ADDX(PHYSICAL_DEVICE_UNIFORM_BUFFER_STANDARD_LAYOUT_FEATURES_KHR,
+				VkPhysicalDeviceUniformBufferStandardLayoutFeaturesKHR);
     EXTENSIONS_END
 ZINIT_END
 
@@ -1807,6 +1812,7 @@ ZCHECK_BEGIN(VkPhysicalDeviceFeatures2)
         ADD(VkPhysicalDeviceShaderAtomicInt64FeaturesKHR);
         ADD(VkPhysicalDeviceTransformFeedbackFeaturesEXT);
         ADD(VkPhysicalDeviceFloat16Int8FeaturesKHR);
+        ADD(VkPhysicalDeviceUniformBufferStandardLayoutFeaturesKHR);
     #undef ADD
     EXTENSIONS_END
 ZCHECK_END
@@ -1954,6 +1960,9 @@ LOCALPUSH_BEGIN(VkPhysicalDeviceFloat16Int8FeaturesKHR)
     SetBoolean(shaderFloat16, "shader_float16");
     SetBoolean(shaderInt8, "shader_int8");
 LOCALPUSH_END
+LOCALPUSH_BEGIN(VkPhysicalDeviceUniformBufferStandardLayoutFeaturesKHR)
+	SetBoolean(uniformBufferStandardLayout, "uniform_buffer_standard_layout");
+LOCALPUSH_END
 
 ZPUSH_BEGIN(VkPhysicalDeviceFeatures)
     lua_newtable(L);
@@ -1992,6 +2001,7 @@ ZPUSH_BEGIN(VkPhysicalDeviceFeatures2)
         XCASE(PHYSICAL_DEVICE_TRANSFORM_FEEDBACK_FEATURES_EXT,
                 VkPhysicalDeviceTransformFeedbackFeaturesEXT);
         XCASE(PHYSICAL_DEVICE_FLOAT16_INT8_FEATURES_KHR, VkPhysicalDeviceFloat16Int8FeaturesKHR);
+        XCASE(PHYSICAL_DEVICE_UNIFORM_BUFFER_STANDARD_LAYOUT_FEATURES_KHR, VkPhysicalDeviceUniformBufferStandardLayoutFeaturesKHR);
     XPUSH_END
 ZPUSH_END
 
