@@ -1745,6 +1745,9 @@ LOCALCHECK_END
 LOCALCHECK_BEGIN(PHYSICAL_DEVICE_UNIFORM_BUFFER_STANDARD_LAYOUT_FEATURES_KHR, VkPhysicalDeviceUniformBufferStandardLayoutFeaturesKHR)
     GetBoolean(uniformBufferStandardLayout, "uniform_buffer_standard_layout");
 LOCALCHECK_END
+LOCALCHECK_BEGIN(PHYSICAL_DEVICE_SCALAR_BLOCK_LAYOUT_FEATURES_EXT, VkPhysicalDeviceScalarBlockLayoutFeaturesEXT)
+    GetBoolean(scalarBlockLayout, "scalar_block_layout");
+LOCALCHECK_END
 
 
 ZINIT_BEGIN(VkPhysicalDeviceFeatures2)
@@ -1767,6 +1770,7 @@ ZINIT_BEGIN(VkPhysicalDeviceFeatures2)
         ADDX(PHYSICAL_DEVICE_TRANSFORM_FEEDBACK_FEATURES_EXT, VkPhysicalDeviceTransformFeedbackFeaturesEXT);
         ADDX(PHYSICAL_DEVICE_FLOAT16_INT8_FEATURES_KHR, VkPhysicalDeviceFloat16Int8FeaturesKHR);
         ADDX(PHYSICAL_DEVICE_UNIFORM_BUFFER_STANDARD_LAYOUT_FEATURES_KHR, VkPhysicalDeviceUniformBufferStandardLayoutFeaturesKHR);
+        ADDX(PHYSICAL_DEVICE_SCALAR_BLOCK_LAYOUT_FEATURES_EXT, VkPhysicalDeviceScalarBlockLayoutFeaturesEXT);
     EXTENSIONS_END
 ZINIT_END
 
@@ -1804,6 +1808,7 @@ ZCHECK_BEGIN(VkPhysicalDeviceFeatures2)
         ADD(VkPhysicalDeviceTransformFeedbackFeaturesEXT);
         ADD(VkPhysicalDeviceFloat16Int8FeaturesKHR);
         ADD(VkPhysicalDeviceUniformBufferStandardLayoutFeaturesKHR);
+        ADD(VkPhysicalDeviceScalarBlockLayoutFeaturesEXT);
     #undef ADD
     EXTENSIONS_END
 ZCHECK_END
@@ -1954,6 +1959,9 @@ LOCALPUSH_END
 LOCALPUSH_BEGIN(VkPhysicalDeviceUniformBufferStandardLayoutFeaturesKHR)
     SetBoolean(uniformBufferStandardLayout, "uniform_buffer_standard_layout");
 LOCALPUSH_END
+LOCALPUSH_BEGIN(VkPhysicalDeviceScalarBlockLayoutFeaturesEXT)
+    SetBoolean(scalarBlockLayout, "scalar_block_layout");
+LOCALPUSH_END
 
 ZPUSH_BEGIN(VkPhysicalDeviceFeatures)
     lua_newtable(L);
@@ -1983,6 +1991,7 @@ ZPUSH_BEGIN(VkPhysicalDeviceFeatures2)
         XCASE(PHYSICAL_DEVICE_TRANSFORM_FEEDBACK_FEATURES_EXT, VkPhysicalDeviceTransformFeedbackFeaturesEXT);
         XCASE(PHYSICAL_DEVICE_FLOAT16_INT8_FEATURES_KHR, VkPhysicalDeviceFloat16Int8FeaturesKHR);
         XCASE(PHYSICAL_DEVICE_UNIFORM_BUFFER_STANDARD_LAYOUT_FEATURES_KHR, VkPhysicalDeviceUniformBufferStandardLayoutFeaturesKHR);
+        XCASE(PHYSICAL_DEVICE_SCALAR_BLOCK_LAYOUT_FEATURES_EXT, VkPhysicalDeviceScalarBlockLayoutFeaturesEXT);
     XPUSH_END
 ZPUSH_END
 
