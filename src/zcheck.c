@@ -1756,6 +1756,9 @@ LOCALCHECK_END
 LOCALCHECK_BEGIN(PHYSICAL_DEVICE_YCBCR_IMAGE_ARRAYS_FEATURES_EXT, VkPhysicalDeviceYcbcrImageArraysFeaturesEXT)
     GetBoolean(ycbcrImageArrays, "ycbcr_image_arrays");
 LOCALCHECK_END
+LOCALCHECK_BEGIN(PHYSICAL_DEVICE_SHADER_DEMOTE_TO_HELPER_INVOCATION_FEATURES_EXT, VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT)
+    GetBoolean(shaderDemoteToHelperInvocation, "shader_demote_to_helper_invocation");
+LOCALCHECK_END
 
 
 ZINIT_BEGIN(VkPhysicalDeviceFeatures2)
@@ -1781,6 +1784,7 @@ ZINIT_BEGIN(VkPhysicalDeviceFeatures2)
         ADDX(PHYSICAL_DEVICE_SCALAR_BLOCK_LAYOUT_FEATURES_EXT, VkPhysicalDeviceScalarBlockLayoutFeaturesEXT);
         ADDX(PHYSICAL_DEVICE_FRAGMENT_SHADER_INTERLOCK_FEATURES_EXT, VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT);
         ADDX(PHYSICAL_DEVICE_YCBCR_IMAGE_ARRAYS_FEATURES_EXT, VkPhysicalDeviceYcbcrImageArraysFeaturesEXT);
+        ADDX(PHYSICAL_DEVICE_SHADER_DEMOTE_TO_HELPER_INVOCATION_FEATURES_EXT, VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT);
     EXTENSIONS_END
 ZINIT_END
 
@@ -1821,6 +1825,7 @@ ZCHECK_BEGIN(VkPhysicalDeviceFeatures2)
         ADD(VkPhysicalDeviceScalarBlockLayoutFeaturesEXT);
         ADD(VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT);
         ADD(VkPhysicalDeviceYcbcrImageArraysFeaturesEXT);
+        ADD(VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT);
     #undef ADD
     EXTENSIONS_END
 ZCHECK_END
@@ -1982,6 +1987,9 @@ LOCALPUSH_END
 LOCALPUSH_BEGIN(VkPhysicalDeviceYcbcrImageArraysFeaturesEXT)
     SetBoolean(ycbcrImageArrays, "ycbcr_image_arrays");
 LOCALPUSH_END
+LOCALPUSH_BEGIN(VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT)
+    SetBoolean(shaderDemoteToHelperInvocation, "shader_demote_to_helper_invocation");
+LOCALPUSH_END
 
 ZPUSH_BEGIN(VkPhysicalDeviceFeatures)
     lua_newtable(L);
@@ -2014,6 +2022,7 @@ ZPUSH_BEGIN(VkPhysicalDeviceFeatures2)
         XCASE(PHYSICAL_DEVICE_SCALAR_BLOCK_LAYOUT_FEATURES_EXT, VkPhysicalDeviceScalarBlockLayoutFeaturesEXT);
         XCASE(PHYSICAL_DEVICE_FRAGMENT_SHADER_INTERLOCK_FEATURES_EXT, VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT);
         XCASE(PHYSICAL_DEVICE_YCBCR_IMAGE_ARRAYS_FEATURES_EXT, VkPhysicalDeviceYcbcrImageArraysFeaturesEXT);
+        XCASE(PHYSICAL_DEVICE_SHADER_DEMOTE_TO_HELPER_INVOCATION_FEATURES_EXT, VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT);
     XPUSH_END
 ZPUSH_END
 
