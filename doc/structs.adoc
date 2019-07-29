@@ -493,6 +493,10 @@ pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-exte
 _uniform_buffer_standard_layout_: boolean, +
 pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkPhysicalDeviceScalarBlockLayoutFeaturesEXT.html[VkPhysicalDeviceScalarBlockLayoutFeaturesEXT], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_scalar_block_layout[VK_EXT_scalar_block_layout]): +
 _scalar_block_layout_: boolean, +
+pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT.html[VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_fragment_shader_interlock[VK_EXT_fragment_shader_interlock]): +
+_fragment_shader_sample_interlock_: boolean, +
+_fragment_shader_pixel_interlock_: boolean, +
+_fragment_shader_shading_rate_interlock_: boolean, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkPhysicalDeviceFeatures2.html[VkPhysicalDeviceFeatures2])#
 
 

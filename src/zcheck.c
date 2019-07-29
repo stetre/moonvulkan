@@ -1748,6 +1748,11 @@ LOCALCHECK_END
 LOCALCHECK_BEGIN(PHYSICAL_DEVICE_SCALAR_BLOCK_LAYOUT_FEATURES_EXT, VkPhysicalDeviceScalarBlockLayoutFeaturesEXT)
     GetBoolean(scalarBlockLayout, "scalar_block_layout");
 LOCALCHECK_END
+LOCALCHECK_BEGIN(PHYSICAL_DEVICE_FRAGMENT_SHADER_INTERLOCK_FEATURES_EXT, VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT)
+    GetBoolean(fragmentShaderSampleInterlock, "fragment_shader_sample_interlock");
+    GetBoolean(fragmentShaderPixelInterlock, "fragment_shader_pixel_interlock");
+    GetBoolean(fragmentShaderShadingRateInterlock, "fragment_shader_shading_rate_interlock");
+LOCALCHECK_END
 
 
 ZINIT_BEGIN(VkPhysicalDeviceFeatures2)
@@ -1771,6 +1776,7 @@ ZINIT_BEGIN(VkPhysicalDeviceFeatures2)
         ADDX(PHYSICAL_DEVICE_FLOAT16_INT8_FEATURES_KHR, VkPhysicalDeviceFloat16Int8FeaturesKHR);
         ADDX(PHYSICAL_DEVICE_UNIFORM_BUFFER_STANDARD_LAYOUT_FEATURES_KHR, VkPhysicalDeviceUniformBufferStandardLayoutFeaturesKHR);
         ADDX(PHYSICAL_DEVICE_SCALAR_BLOCK_LAYOUT_FEATURES_EXT, VkPhysicalDeviceScalarBlockLayoutFeaturesEXT);
+        ADDX(PHYSICAL_DEVICE_FRAGMENT_SHADER_INTERLOCK_FEATURES_EXT, VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT);
     EXTENSIONS_END
 ZINIT_END
 
@@ -1809,6 +1815,7 @@ ZCHECK_BEGIN(VkPhysicalDeviceFeatures2)
         ADD(VkPhysicalDeviceFloat16Int8FeaturesKHR);
         ADD(VkPhysicalDeviceUniformBufferStandardLayoutFeaturesKHR);
         ADD(VkPhysicalDeviceScalarBlockLayoutFeaturesEXT);
+        ADD(VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT);
     #undef ADD
     EXTENSIONS_END
 ZCHECK_END
@@ -1962,6 +1969,11 @@ LOCALPUSH_END
 LOCALPUSH_BEGIN(VkPhysicalDeviceScalarBlockLayoutFeaturesEXT)
     SetBoolean(scalarBlockLayout, "scalar_block_layout");
 LOCALPUSH_END
+LOCALPUSH_BEGIN(VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT)
+    SetBoolean(fragmentShaderSampleInterlock, "fragment_shader_sample_interlock");
+    SetBoolean(fragmentShaderPixelInterlock, "fragment_shader_pixel_interlock");
+    SetBoolean(fragmentShaderShadingRateInterlock, "fragment_shader_shading_rate_interlock");
+LOCALPUSH_END
 
 ZPUSH_BEGIN(VkPhysicalDeviceFeatures)
     lua_newtable(L);
@@ -1992,6 +2004,7 @@ ZPUSH_BEGIN(VkPhysicalDeviceFeatures2)
         XCASE(PHYSICAL_DEVICE_FLOAT16_INT8_FEATURES_KHR, VkPhysicalDeviceFloat16Int8FeaturesKHR);
         XCASE(PHYSICAL_DEVICE_UNIFORM_BUFFER_STANDARD_LAYOUT_FEATURES_KHR, VkPhysicalDeviceUniformBufferStandardLayoutFeaturesKHR);
         XCASE(PHYSICAL_DEVICE_SCALAR_BLOCK_LAYOUT_FEATURES_EXT, VkPhysicalDeviceScalarBlockLayoutFeaturesEXT);
+        XCASE(PHYSICAL_DEVICE_FRAGMENT_SHADER_INTERLOCK_FEATURES_EXT, VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT);
     XPUSH_END
 ZPUSH_END
 
