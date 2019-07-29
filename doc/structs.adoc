@@ -497,6 +497,8 @@ pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-exte
 _fragment_shader_sample_interlock_: boolean, +
 _fragment_shader_pixel_interlock_: boolean, +
 _fragment_shader_shading_rate_interlock_: boolean, +
+pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkPhysicalDeviceYcbcrImageArraysFeaturesEXT.html[VkPhysicalDeviceYcbcrImageArraysFeaturesEXT], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_ycbcr_image_arrays[VK_EXT_ycbcr_image_arrays]): +
+_ycbcr_image_arrays_: boolean, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkPhysicalDeviceFeatures2.html[VkPhysicalDeviceFeatures2])#
 
 

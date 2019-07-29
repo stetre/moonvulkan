@@ -1753,6 +1753,9 @@ LOCALCHECK_BEGIN(PHYSICAL_DEVICE_FRAGMENT_SHADER_INTERLOCK_FEATURES_EXT, VkPhysi
     GetBoolean(fragmentShaderPixelInterlock, "fragment_shader_pixel_interlock");
     GetBoolean(fragmentShaderShadingRateInterlock, "fragment_shader_shading_rate_interlock");
 LOCALCHECK_END
+LOCALCHECK_BEGIN(PHYSICAL_DEVICE_YCBCR_IMAGE_ARRAYS_FEATURES_EXT, VkPhysicalDeviceYcbcrImageArraysFeaturesEXT)
+    GetBoolean(ycbcrImageArrays, "ycbcr_image_arrays");
+LOCALCHECK_END
 
 
 ZINIT_BEGIN(VkPhysicalDeviceFeatures2)
@@ -1777,6 +1780,7 @@ ZINIT_BEGIN(VkPhysicalDeviceFeatures2)
         ADDX(PHYSICAL_DEVICE_UNIFORM_BUFFER_STANDARD_LAYOUT_FEATURES_KHR, VkPhysicalDeviceUniformBufferStandardLayoutFeaturesKHR);
         ADDX(PHYSICAL_DEVICE_SCALAR_BLOCK_LAYOUT_FEATURES_EXT, VkPhysicalDeviceScalarBlockLayoutFeaturesEXT);
         ADDX(PHYSICAL_DEVICE_FRAGMENT_SHADER_INTERLOCK_FEATURES_EXT, VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT);
+        ADDX(PHYSICAL_DEVICE_YCBCR_IMAGE_ARRAYS_FEATURES_EXT, VkPhysicalDeviceYcbcrImageArraysFeaturesEXT);
     EXTENSIONS_END
 ZINIT_END
 
@@ -1816,6 +1820,7 @@ ZCHECK_BEGIN(VkPhysicalDeviceFeatures2)
         ADD(VkPhysicalDeviceUniformBufferStandardLayoutFeaturesKHR);
         ADD(VkPhysicalDeviceScalarBlockLayoutFeaturesEXT);
         ADD(VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT);
+        ADD(VkPhysicalDeviceYcbcrImageArraysFeaturesEXT);
     #undef ADD
     EXTENSIONS_END
 ZCHECK_END
@@ -1974,6 +1979,9 @@ LOCALPUSH_BEGIN(VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT)
     SetBoolean(fragmentShaderPixelInterlock, "fragment_shader_pixel_interlock");
     SetBoolean(fragmentShaderShadingRateInterlock, "fragment_shader_shading_rate_interlock");
 LOCALPUSH_END
+LOCALPUSH_BEGIN(VkPhysicalDeviceYcbcrImageArraysFeaturesEXT)
+    SetBoolean(ycbcrImageArrays, "ycbcr_image_arrays");
+LOCALPUSH_END
 
 ZPUSH_BEGIN(VkPhysicalDeviceFeatures)
     lua_newtable(L);
@@ -2005,6 +2013,7 @@ ZPUSH_BEGIN(VkPhysicalDeviceFeatures2)
         XCASE(PHYSICAL_DEVICE_UNIFORM_BUFFER_STANDARD_LAYOUT_FEATURES_KHR, VkPhysicalDeviceUniformBufferStandardLayoutFeaturesKHR);
         XCASE(PHYSICAL_DEVICE_SCALAR_BLOCK_LAYOUT_FEATURES_EXT, VkPhysicalDeviceScalarBlockLayoutFeaturesEXT);
         XCASE(PHYSICAL_DEVICE_FRAGMENT_SHADER_INTERLOCK_FEATURES_EXT, VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT);
+        XCASE(PHYSICAL_DEVICE_YCBCR_IMAGE_ARRAYS_FEATURES_EXT, VkPhysicalDeviceYcbcrImageArraysFeaturesEXT);
     XPUSH_END
 ZPUSH_END
 
