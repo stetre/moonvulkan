@@ -16,6 +16,7 @@ local FLOATSZ = vk.sizeof('float') -- or simply 4...
 local FPS = 60
 local WIDTH, HEIGHT = 800, 600
 local LAYERS, EXTENSIONS = {}, {}
+table.insert(EXTENSIONS, 'VK_KHR_get_physical_device_properties2') -- workaround for issue #3
 
 local DEBUG = arg[1] == "--debug"
 if not DEBUG then 
