@@ -33,6 +33,7 @@
 #include <lua.h>
 #include "lualib.h"
 #include "lauxlib.h"
+#include "compat-5.3.h"
 #include <stdint.h>
 
 #define VK_NO_PROTOTYPES 1
