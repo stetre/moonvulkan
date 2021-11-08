@@ -2,18 +2,18 @@
 [[debug_report_callback]]
 ==== debug_report
 
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_debug_report[VK_EXT_debug_report].#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#VK_EXT_debug_report[VK_EXT_debug_report].#
 
 [[create_debug_report_callback]]
 * _debug_report_callback_ = *create_debug_report_callback*(_instance_, <<debugreportflags, _debugreportflags_>>, _func_, [<<allocators, _allocator_>>]) +
 [small]#The _func_ callback (a Lua function) will be executed as: +
 *func(instance, flags, object_type, objectRAW, location, message_code, layer_prefix, message)*, +
 where the parameters are the same as those for the <<debug_report_message, debug_report_message>>(&nbsp;) function. +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCreateDebugReportCallbackEXT.html[vkCreateDebugReportCallbackEXT].#
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateDebugReportCallbackEXT.html[vkCreateDebugReportCallbackEXT].#
 
 [[destroy_debug_report_callback]]
 * *destroy_debug_report_callback*(_debug_report_callback_) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkDestroyDebugReportCallbackEXT.html[vkDestroyDebugReportCallbackEXT].#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkDestroyDebugReportCallbackEXT.html[vkDestroyDebugReportCallbackEXT].#
 
 [[debug_report_message]]
 * *debug_report_message*(_instance_, <<debugreportflags, _debugreportflags_>>, _object_type_, _..._) +
@@ -23,19 +23,19 @@ arg5: _location_: integer +
 arg6: _message_code_: integer +
 arg7: _layer_prefix_: string +
 arg8: _message_: string +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkDebugReportMessageEXT.html[vkDebugReportMessageEXT].#
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkDebugReportMessageEXT.html[vkDebugReportMessageEXT].#
 
 [[debug_marker]]
 ==== debug_marker
 
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_debug_marker[VK_EXT_debug_marker].#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#VK_EXT_debug_marker[VK_EXT_debug_marker].#
 
 [[debug_marker_set_object_name]]
 * *debug_marker_set_object_name*(_device_, _object_type_, _objectRAW_, _object_name_) +
 [small]#_object_type_: <<debugreportobjecttype, debugreportobjecttype>> +
 _objectRAW_: integer raw object handle (may be 0) +
 _object_name_: string +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkDebugMarkerSetObjectNameEXT.html[vkDebugMarkerSetObjectNameEXT].#
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkDebugMarkerSetObjectNameEXT.html[vkDebugMarkerSetObjectNameEXT].#
 
 [[debug_marker_set_object_tag]]
 * *debug_marker_set_object_tag*(_device_, _object_type_, _objectRAW_, _tag_name_, _object_tag_) +
@@ -43,90 +43,90 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkDeb
 _objectRAW_: integer raw object handle (may be 0) +
 _tag_name_: integer +
 _object_tag_: binary string +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkDebugMarkerSetObjectTagEXT.html[vkDebugMarkerSetObjectTagEXT].#
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkDebugMarkerSetObjectTagEXT.html[vkDebugMarkerSetObjectTagEXT].#
 
 * See also: <<cmd_debug_marker_begin, commands>>.
 
 [[debug_utils]]
 ==== debug_utils
 
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_debug_utils[VK_EXT_debug_utils].#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#VK_EXT_debug_utils[VK_EXT_debug_utils].#
 
 [[create_debug_utils_messenger]]
 * _debug_utils_messenger_ = *create_debug_utils_messenger*(_instance_, <<debugutilsmessengercreateinfo, _debugutilsmessengercreateinfo_>>, _func_, [<<allocators, _allocator_>>]) +
 [small]#The _func_ callback (a Lua function) will be executed as: +
 *func(instance, severityflags, typeflags, callbackdata)*, +
 where the parameters are the same as those for the <<submit_debug_utils_message, submit_debug_utils_message>>(&nbsp;) function. +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCreateDebugUtilsMessengerEXT.html[vkCreateDebugUtilsMessengerEXT].#
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateDebugUtilsMessengerEXT.html[vkCreateDebugUtilsMessengerEXT].#
 
 [[destroy_debug_utils_messenger]]
 * *destroy_debug_utils_messenger*(_debug_utils_messenger_) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkDestroyDebugUtilsMessengerEXT.html[vkDestroyDebugUtilsMessengerEXT].#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkDestroyDebugUtilsMessengerEXT.html[vkDestroyDebugUtilsMessengerEXT].#
 
 [[submit_debug_utils_message]]
 * *submit_debug_utils_message*(_instance_, _severityflags_, _typeflags_, _callbackdata_) +
 [small]#_severityflags_: <<debugutilsmessageseverityflags, debugutilsmessageseverityflags>>, +
 _typeflags_: <<debugutilsmessagetypeflags, debugutilsmessagetypeflags>>, +
 _callbackdata_: <<debugutilsmessengercallbackdata, debugutilsmessengercallbackdata>>. +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkSubmitDebugUtilsMessageEXT.html[vkSubmitDebugUtilsMessageEXT].#
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkSubmitDebugUtilsMessageEXT.html[vkSubmitDebugUtilsMessageEXT].#
 
 [[set_debug_utils_object_name]]
 * *set_debug_utils_object_name*(_device_, <<debugutilsobjectnameinfo, _debugutilsobjectnameinfo_>>) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkSetDebugUtilsObjectNameEXT.html[vkSetDebugUtilsObjectNameEXT].#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkSetDebugUtilsObjectNameEXT.html[vkSetDebugUtilsObjectNameEXT].#
 
 [[set_debug_utils_object_tag]]
 * *set_debug_utils_object_tag*(_device_, <<debugutilsobjecttaginfo, _debugutilsobjecttaginfo_>>) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkSetDebugUtilsObjectTagEXT.html[vkSetDebugUtilsObjectTagEXT].#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkSetDebugUtilsObjectTagEXT.html[vkSetDebugUtilsObjectTagEXT].#
 
 [[queue_begin_debug_utils_label]]
 * *queue_begin_debug_utils_label*(<<queue, _queue_>>, <<debugutilslabel, _debugutilslabel_>>) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkQueueBeginDebugUtilsLabelEXT.html[vkQueueBeginDebugUtilsLabelEXT].#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkQueueBeginDebugUtilsLabelEXT.html[vkQueueBeginDebugUtilsLabelEXT].#
 
 [[queue_end_debug_utils_label]]
 * *queue_end_debug_utils_label*(<<queue, _queue_>>) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkQueueEndDebugUtilsLabelEXT.html[vkQueueEndDebugUtilsLabelEXT].#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkQueueEndDebugUtilsLabelEXT.html[vkQueueEndDebugUtilsLabelEXT].#
 
 [[queue_insert_debug_utils_label]]
 * *queue_insert_debug_utils_label*(<<queue, _queue_>>, <<debugutilslabel, _debugutilslabel_>>) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkQueueInsertDebugUtilsLabelEXT.html[vkQueueInsertDebugUtilsLabelEXT].#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkQueueInsertDebugUtilsLabelEXT.html[vkQueueInsertDebugUtilsLabelEXT].#
 
 * See also: <<cmd_begin_debug_utils_label, commands>>.
 
 [[validation_cache]]
 ==== validation_cache
 
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_validation_cache[VK_EXT_validation_cache].#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#VK_EXT_validation_cache[VK_EXT_validation_cache].#
 
 [[create_validation_cache]]
 * _validation_cache_ = *create_validation_cache*(_device_, <<validationcachecreateinfo, _validationcachecreateinfo_>>,  [<<allocators, _allocator_>>]) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCreateValidationCacheEXT.html[vkCreateValidationCacheEXT].#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateValidationCacheEXT.html[vkCreateValidationCacheEXT].#
 
 [[destroy_validation_cache]]
 * *destroy_validation_cache*(_validation_cache_) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkDestroyValidationCacheEXT.html[vkDestroyValidationCacheEXT].#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkDestroyValidationCacheEXT.html[vkDestroyValidationCacheEXT].#
 
 [[get_validation_cache_data]]
 * _data_ = *get_validation_cache_data*(_validation_cache_) +
 [small]#Returns _data_ as a binary string. +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkGetValidationCacheDataEXT.html[vkGetValidationCacheDataEXT].#
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetValidationCacheDataEXT.html[vkGetValidationCacheDataEXT].#
 
 [[merge_validation_caches]]
 * *merge_validation_caches*(_destination_, {_source_}) +
 [small]#_destination_, _source_: _validation_cache_ +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkMergeValidationCachesEXT.html[vkMergeValidationCachesEXT].#
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkMergeValidationCachesEXT.html[vkMergeValidationCachesEXT].#
 
 [[calibrated_timestamps]]
 ==== calibrated_timestamps
 
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_calibrated_timestamps[VK_EXT_calibrated_timestamps].#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#VK_EXT_calibrated_timestamps[VK_EXT_calibrated_timestamps].#
 
 [[get_calibrated_timestamps]]
 * {_timestamp_}, {_maxdeviation_} = *get_calibrated_timestamps*(_device_, {<<calibratedtimestampinfo, _calibratedtimestampinfo_>>}) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkGetCalibratedTimestampsEXT.html[vkGetCalibratedTimestampsEXT].#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetCalibratedTimestampsEXT.html[vkGetCalibratedTimestampsEXT].#
 
 
 ////
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#[].#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#[].#
 * See also: <<, commands>>.
 ////
 

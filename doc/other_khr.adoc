@@ -3,40 +3,40 @@
 [[descriptor_update_template]]
 ==== descriptor_update_template
 
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_descriptor_update_template[VK_KHR_descriptor_update_template].#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#VK_KHR_descriptor_update_template[VK_KHR_descriptor_update_template].#
 
 [[create_descriptor_update_template]]
 * _descriptor_update_template_ = *create_descriptor_update_template*(_device_, _info_, [<<allocators, _allocator_>>]) +
 [small]#_info_: <<descriptorupdatetemplatecreateinfo, _descriptorupdatetemplatecreateinfo_>> +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCreateDescriptorUpdateTemplate.html[vkCreateDescriptorUpdateTemplate].#
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateDescriptorUpdateTemplate.html[vkCreateDescriptorUpdateTemplate].#
 
 [[destroy_descriptor_update_template]]
 * *destroy_descriptor_update_template*(_descriptor_update_template_) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkDestroyDescriptorUpdateTemplate.html[vkDestroyDescriptorUpdateTemplate].#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkDestroyDescriptorUpdateTemplate.html[vkDestroyDescriptorUpdateTemplate].#
 
 [[update_descriptor_set_with_template]]
 * *update_descriptor_set_with_template*(<<descriptor_set, _descriptor_set_>>, _descriptor_update_template_, _data_) +
 [small]#_data_: binary string +
 The _data_ parameter can be constructed using the <<pack_descriptorimageinfo, pack_descriptorimageinfo>>(&nbsp;), <<pack_descriptorbufferinfo, pack_descriptorbufferinfo>>(&nbsp;), and <<pack_bufferview, pack_bufferview>>(&nbsp;) utilities. +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkUpdateDescriptorSetWithTemplate.html[vkUpdateDescriptorSetWithTemplate].#
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkUpdateDescriptorSetWithTemplate.html[vkUpdateDescriptorSetWithTemplate].#
 
 * See also: <<cmd_push_descriptor_set_with_template, commands>>.
 
 [[sampler_ycbcr_conversion]]
 ==== sampler_ycbcr_conversion
 
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_sampler_ycbcr_conversion[VK_KHR_sampler_ycbcr_conversion].#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#VK_KHR_sampler_ycbcr_conversion[VK_KHR_sampler_ycbcr_conversion].#
 
 [[create_sampler_ycbcr_conversion]]
 * _sampler_ycbcr_conversion_ = *create_sampler_ycbcr_conversion*(_device_, <<samplerycbcrconversioncreateinfo, _samplerycbcrconversioncreateinfo_>>,  [<<allocators, _allocator_>>]) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCreateSamplerYcbcrConversion.html[vkCreateSamplerYcbcrConversion].#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateSamplerYcbcrConversion.html[vkCreateSamplerYcbcrConversion].#
 
 [[destroy_sampler_ycbcr_conversion]]
 * *destroy_sampler_ycbcr_conversion*(_sampler_ycbcr_conversion_) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkDestroySamplerYcbcrConversion.html[vkDestroySamplerYcbcrConversion].#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkDestroySamplerYcbcrConversion.html[vkDestroySamplerYcbcrConversion].#
 
 ////
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#[].#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#[].#
 * See also: <<, commands>>.
 ////
 

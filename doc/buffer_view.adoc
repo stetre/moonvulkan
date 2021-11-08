@@ -4,9 +4,9 @@
 
 [[create_buffer_view]]
 * _buffer_view_ = *create_buffer_view*(_buffer_, <<bufferviewcreateinfo, _bufferviewcreateinfo_>>, [<<allocators, _allocator_>>]) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCreateBufferView.html[vkCreateBufferView].#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateBufferView.html[vkCreateBufferView].#
 
 [[destroy_buffer_view]]
 * *destroy_buffer_view*(_buffer_view_) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkDestroyBufferView.html[vkDestroyBufferView].#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkDestroyBufferView.html[vkDestroyBufferView].#
 

@@ -11,24 +11,24 @@ For example, _cb_++++*:bind_pipeline*(_..._) is the same as *vk.cmd_bind_pipelin
 [[cmd_begin_conditional_rendering]]
 * *cmd_begin_conditional_rendering*(_cb_, <<conditionalrenderingbegininfo, _conditionalrenderingbegininfo_>>) +
 *cmd_end_conditional_rendering*(_cb_) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdBeginConditionalRenderingEXT.html[vkCmdBeginConditionalRenderingEXT], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdEndConditionalRenderingEXT.html[vkCmdEndConditionalRenderingEXT] (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_conditional_rendering[VK_EXT_conditional_rendering]).#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdBeginConditionalRenderingEXT.html[vkCmdBeginConditionalRenderingEXT], https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdEndConditionalRenderingEXT.html[vkCmdEndConditionalRenderingEXT] (https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#VK_EXT_conditional_rendering[VK_EXT_conditional_rendering]).#
 
 [[cmd_begin_debug_utils_label]]
 * *cmd_begin_debug_utils_label*(_cb_, <<debugutilslabel, _debugutilslabel_>>) +
 *cmd_end_debug_utils_label*(_cb_) +
 *cmd_insert_debug_utils_label*(_cb_, <<debugutilslabel, _debugutilslabel_>>) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdBeginDebugUtilsLabelEXT.html[vkCmdBeginDebugUtilsLabelEXT], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdEndDebugUtilsLabelEXT.html[vkCmdEndDebugUtilsLabelEXT], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdInsertDebugUtilsLabelEXT.html[vkCmdInsertDebugUtilsLabelEXT] (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_debug_utils[VK_EXT_debug_utils]).#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdBeginDebugUtilsLabelEXT.html[vkCmdBeginDebugUtilsLabelEXT], https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdEndDebugUtilsLabelEXT.html[vkCmdEndDebugUtilsLabelEXT], https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdInsertDebugUtilsLabelEXT.html[vkCmdInsertDebugUtilsLabelEXT] (https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#VK_EXT_debug_utils[VK_EXT_debug_utils]).#
 
 [[cmd_begin_query]]
 * *cmd_begin_query*(_cb_, <<query_pool, _query_pool_>>, _query_, <<querycontrolflags, _querycontrolflags_>>) +
 *cmd_end_query*(_cb_, <<query_pool, _query_pool_>>, _query_) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdBeginQuery.html[vkCmdBeginQuery], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdEndQuery.html[vkCmdEndQuery].#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdBeginQuery.html[vkCmdBeginQuery], https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdEndQuery.html[vkCmdEndQuery].#
 
 [[cmd_begin_query_indexed]]
 * *cmd_begin_query_indexed*(_cb_, <<query_pool, _query_pool_>>, _query_, <<querycontrolflags, _querycontrolflags_>>, _index_) +
 *cmd_end_query_indexed*(_cb_, <<query_pool, _query_pool_>>, _query_, _index_) +
 [small]#Rfr:
-https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdBeginQueryIndexedEXT.html[vkCmdBeginQueryIndexedEXT], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdEndQueryIndexedEXT.html[vkCmdEndQueryIndexedEXT] (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_transform_feedback[VK_EXT_transform_feedback]).#
+https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdBeginQueryIndexedEXT.html[vkCmdBeginQueryIndexedEXT], https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdEndQueryIndexedEXT.html[vkCmdEndQueryIndexedEXT] (https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#VK_EXT_transform_feedback[VK_EXT_transform_feedback]).#
 
 [[cmd_begin_render_pass]]
 * *cmd_begin_render_pass*(_cb_, <<renderpassbegininfo, _renderpassbegininfo_>>, <<subpasscontents, _subpasscontents_>>) +
@@ -37,8 +37,8 @@ https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdBegin
 *cmd_begin_render_pass*(_cb_, <<renderpassbegininfo, _renderpassbegininfo_>>, <<subpassbegininfo, _subpassbegininfo_>>) (2KHR) +
 *cmd_next_subpass*(_cb_, <<subpassbegininfo, _subpassbegininfo_>>, <<subpassendinfo, _subpassendinfo_>>) (2KHR) +
 *cmd_end_render_pass*(_cb_, <<subpassendinfo, _subpassendinfo_>>) (2KHR) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdBeginRenderPass.html[vkCmdBeginRenderPass], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdNextSubpass.html[vkCmdNextSubpass], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdEndRenderPass.html[vkCmdEndRenderPass], or +
-https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdBeginRenderPass2KHR.html[vkCmdBeginRenderPass2KHR], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdNextSubpass2KHR.html[vkCmdNextSubpass2KHR], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdEndRenderPass2KHR.html[vkCmdEndRenderPass2KHR] (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_create_renderpass2[VK_KHR_create_renderpass2]).#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdBeginRenderPass.html[vkCmdBeginRenderPass], https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdNextSubpass.html[vkCmdNextSubpass], https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdEndRenderPass.html[vkCmdEndRenderPass], or +
+https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdBeginRenderPass2KHR.html[vkCmdBeginRenderPass2KHR], https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdNextSubpass2KHR.html[vkCmdNextSubpass2KHR], https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdEndRenderPass2KHR.html[vkCmdEndRenderPass2KHR] (https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#VK_KHR_create_renderpass2[VK_KHR_create_renderpass2]).#
 
 [[cmd_begin_transform_feedback]]
 * *cmd_begin_transform_feedback*(_cb_, _first_, [_buffers_], [_offsets_]) +
@@ -46,7 +46,7 @@ https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdBegin
 [small]#_first_: integer (0-based), +
 _buffers_: {<<buffer, buffer>>}, +
 _offsets_: {integer}, +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdBeginTransformFeedbackEXT.html[vkCmdBeginTransformFeedbackEXT], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdEndTransformFeedbackEXT.html[vkCmdEndTransformFeedbackEXT] (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_transform_feedback[VK_EXT_transform_feedback]).#
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdBeginTransformFeedbackEXT.html[vkCmdBeginTransformFeedbackEXT], https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdEndTransformFeedbackEXT.html[vkCmdEndTransformFeedbackEXT] (https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#VK_EXT_transform_feedback[VK_EXT_transform_feedback]).#
 
 [[cmd_bind_descriptor_sets]]
 * *cmd_bind_descriptor_sets*(_cb_,  <<pipelinebindpoint, _pipelinebindpoint_>>, _..._) +
@@ -54,15 +54,15 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmd
 arg4 - _first_set_: integer +
 arg5 - _descriptor_sets_: {<<descriptor_set, descriptor_set>>} +
 arg6 - [_dynamic_offsets_]: {integer} +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdBindDescriptorSets.html[vkCmdBindDescriptorSets].#
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdBindDescriptorSets.html[vkCmdBindDescriptorSets].#
 
 [[cmd_bind_index_buffer]]
 * *cmd_bind_index_buffer*(_cb_, <<buffer, _buffer_>>, _offset_, <<indextype, _indextype_>>) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdBindIndexBuffer.html[vkCmdBindIndexBuffer].#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdBindIndexBuffer.html[vkCmdBindIndexBuffer].#
 
 [[cmd_bind_pipeline]]
 * *cmd_bind_pipeline*(_cb_, <<pipelinebindpoint, _pipelinebindpoint_>>, <<pipeline, _pipeline_>>) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdBindPipeline.html[vkCmdBindPipeline].#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdBindPipeline.html[vkCmdBindPipeline].#
 
 [[cmd_bind_transform_feedback_buffers]]
 * *cmd_bind_transform_feedback_buffers*(_cb_, _first_binding_, _buffers_, [_offsets_], [_sizes_]) +
@@ -70,11 +70,11 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmd
 _buffers_: {<<buffer, buffer>>}, +
 _offsets_: {integer}, +
 _sizes_: {<<devicesize, devicesize>>}, +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdBindTransformFeedbackBuffersEXT.html[vkCmdBindTransformFeedbackBuffersEXT] (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_transform_feedback[VK_EXT_transform_feedback]).#
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdBindTransformFeedbackBuffersEXT.html[vkCmdBindTransformFeedbackBuffersEXT] (https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#VK_EXT_transform_feedback[VK_EXT_transform_feedback]).#
 
 [[cmd_bind_vertex_buffers]]
 * *cmd_bind_vertex_buffers*(_cb_, _first_binding_, {<<buffer, _buffer_>>}, {_offsets_}) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdBindVertexBuffers.html[vkCmdBindVertexBuffers].#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdBindVertexBuffers.html[vkCmdBindVertexBuffers].#
 
 [[cmd_blit_image]]
 * *cmd_blit_image*(_cb_, _src_image_, _..._) +
@@ -84,13 +84,13 @@ arg4 - _dst_image_: <<image, image>> +
 arg5 - _dst_imagelayout_: <<imagelayout, imagelayout>> +
 arg6 - _regions_ : {<<imageblit, imageblit>>} +
 arg7 - _filter_: <<filter, filter>> +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdBlitImage.html[vkCmdBlitImage].#
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdBlitImage.html[vkCmdBlitImage].#
 
 [[cmd_clear_attachments]]
 * *cmd_clear_attachments*(_cb_, _attachments_, _rects_) +
 [small]#_attachments_: {<<clearattachment, clearattachment>>} +
 _rects_: {<<clearrect, clearrect>>} +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdClearAttachments.html[vkCmdClearAttachments].#
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdClearAttachments.html[vkCmdClearAttachments].#
 
 [[cmd_clear_color_image]]
 * *cmd_clear_color_image*(_cb_, _image_, _imagelayout_, _color_, _ranges_) +
@@ -98,7 +98,7 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmd
 _imagelayout_: <<imagelayout, imagelayout>> +
 _color_: <<clearcolorvalue, clearcolorvalue>> +
 _ranges_: {<<imagesubresourcerange, imagesubresourcerange>>} +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdClearColorImage.html[vkCmdClearColorImage].#
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdClearColorImage.html[vkCmdClearColorImage].#
 
 [[cmd_clear_depth_stencil_image]]
 * *cmd_clear_depth_stencil_image*(_cb_, _image_, _imagelayout_, _depth_, _stencil_, _ranges_) +
@@ -107,14 +107,14 @@ _imagelayout_: <<imagelayout, imagelayout>> +
 _depth_: _float_ +
 _stencil_: _integer_ +
 _ranges_: {<<imagesubresourcerange, imagesubresourcerange>>} +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdClearDepthStencilImage.html[vkCmdClearDepthStencilImage].#
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdClearDepthStencilImage.html[vkCmdClearDepthStencilImage].#
 
 [[cmd_copy_buffer]]
 * *cmd_copy_buffer*(_cb_, _src_buffer_, _dst_buffer_, _regions_) +
 [small]#_src_buffer_: <<buffer, buffer>> +
 _dst_buffer_: <<buffer, buffer>> +
 _regions_: {<<buffercopy, buffercopy>>} +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdCopyBuffer.html[vkCmdCopyBuffer].#
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdCopyBuffer.html[vkCmdCopyBuffer].#
 
 [[cmd_copy_buffer_to_image]]
 * *cmd_copy_buffer_to_image*(_cb_, _src_buffer_, _dst_image_, _dst_imagelayout_, _regions_) +
@@ -122,7 +122,7 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmd
 _dst_image_: <<image, image>> +
 _dst_imagelayout_: <<imagelayout, imagelayout>> +
 _regions_: {<<bufferimagecopy, bufferimagecopy>>} +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdCopyBufferToImage.html[vkCmdCopyBufferToImage].#
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdCopyBufferToImage.html[vkCmdCopyBufferToImage].#
 
 [[cmd_copy_image]]
 * *cmd_copy_image*(_cb_, _src_image_, _..._) +
@@ -131,7 +131,7 @@ arg3 - _src_imagelayout_: <<imagelayout, imagelayout>> +
 arg4 - _dst_image_: <<image, image>> +
 arg5 - _dst_imagelayout_: <<imagelayout, imagelayout>> +
 arg6 - _regions_ : {<<imagecopy, imagecopy>>} +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdCopyImage.html[vkCmdCopyImage].#
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdCopyImage.html[vkCmdCopyImage].#
 
 [[cmd_copy_image_to_buffer]]
 * *cmd_copy_image_to_buffer*(_cb_, _src_image_, _..._) +
@@ -139,7 +139,7 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmd
 arg3 - _src_imagelayout_: <<imagelayout, imagelayout>> +
 arg4 - _dst_buffer_: <<buffer, buffer>> +
 arg5 - _regions_: {<<bufferimagecopy, bufferimagecopy>>} +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdCopyImageToBuffer.html[vkCmdCopyImageToBuffer].#
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdCopyImageToBuffer.html[vkCmdCopyImageToBuffer].#
 
 [[cmd_copy_query_pool_results]]
 * *cmd_copy_query_pool_results*(_cb_, _query_pool_, _..._) +
@@ -150,7 +150,7 @@ arg5 - _dst_buffer_: <<buffer, buffer>> +
 arg6 - _dst_offset_: integer +
 arg7 - _stride_: integer +
 arg8 - _flags_: <<queryresultflags, queryresultflags>> +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdCopyQueryPoolResults.html[vkCmdCopyQueryPoolResults].#
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdCopyQueryPoolResults.html[vkCmdCopyQueryPoolResults].#
 
 [[cmd_debug_marker_begin]]
 * *cmd_debug_marker_begin*(_cb_, _marker_name_, [_color_]) +
@@ -158,19 +158,19 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmd
 *cmd_debug_marker_insert*(_cb_, _marker_name_, [_color_]) +
 [small]#_marker_name_: string +
 _color_: {float}[4] (opt.) +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdDebugMarkerBeginEXT.html[vkCmdDebugMarkerBeginEXT],
-https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdDebugMarkerEndEXT.html[vkCmdDebugMarkerEndEXT],
-https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdDebugMarkerInsertEXT.html[vkCmdDebugMarkerInsertEXT] (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_debug_marker[VK_EXT_debug_marker])#.
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdDebugMarkerBeginEXT.html[vkCmdDebugMarkerBeginEXT],
+https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdDebugMarkerEndEXT.html[vkCmdDebugMarkerEndEXT],
+https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdDebugMarkerInsertEXT.html[vkCmdDebugMarkerInsertEXT] (https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#VK_EXT_debug_marker[VK_EXT_debug_marker])#.
 
 [[cmd_dispatch]]
 * *cmd_dispatch*(_cb_, _x_, _y_, _z_) +
 *cmd_dispatch_indirect*(_cb_, <<buffer, _buffer_>>, _offset_) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdDispatch.html[vkCmdDispatch],
-https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdDispatchIndirect.html[vkCmdDispatchIndirect].#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdDispatch.html[vkCmdDispatch],
+https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdDispatchIndirect.html[vkCmdDispatchIndirect].#
 
 [[cmd_dispatch_base]]
 * *cmd_dispatch_base*(_cb_, _basegroup_x_, _basegroup_y_, _basegroup_z_, _groupcount_x_, _groupcount_y_, _groupcount_z_) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdDispatchBase.html[vkCmdDispatchBase] (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_device_group[VK_KHR_device_group]).#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdDispatchBase.html[vkCmdDispatchBase] (https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#VK_KHR_device_group[VK_KHR_device_group]).#
 
 
 [[cmd_draw]]
@@ -178,26 +178,26 @@ https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdDispa
 *cmd_draw_indexed*(_cb_, _index_count_, _instance_count_, _first_index_, _vertex_offset_, _first_instance_) +
 *cmd_draw_indexed_indirect*(_cb_, <<buffer, _buffer_>>, _offset_, _draw_count_, _stride_) +
 *cmd_draw_indirect*(_cb_, <<buffer, _buffer_>>, _offset_, _draw_count_, _stride_) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdDraw.html[vkCmdDraw],
-https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdDrawIndexed.html[vkCmdDrawIndexed],
-https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdDrawIndexedIndirect.html[vkCmdDrawIndexedIndirect],
-https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdDrawIndirect.html[vkCmdDrawIndirect].#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdDraw.html[vkCmdDraw],
+https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdDrawIndexed.html[vkCmdDrawIndexed],
+https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdDrawIndexedIndirect.html[vkCmdDrawIndexedIndirect],
+https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdDrawIndirect.html[vkCmdDrawIndirect].#
 
 [[cmd_draw_indirect_byte_count]]
 * *cmd_draw_indirect_byte_count*(_cb_, _instance_count_, _first_instance_, <<buffer, _counter_buffer_>>, _counter_buffer_offset_, _counter_offset_, _vertex_stride_) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdDrawIndirectByteCountEXT.html[vkCmdDrawIndirectByteCountEXT],
-(https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_transform_feedback[VK_EXT_transform_feedback]).#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdDrawIndirectByteCountEXT.html[vkCmdDrawIndirectByteCountEXT],
+(https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#VK_EXT_transform_feedback[VK_EXT_transform_feedback]).#
 
 [[cmd_draw_indirect_count]]
 * *cmd_draw_indirect_count*(_cb_, <<buffer, _buffer_>>, _offset_, <<buffer, _count_buffer_>>, _count_buffer_offset_, _max_draw_count_, _stride_) +
 *cmd_draw_indexed_indirect_count*(_cb_, <<buffer, _buffer_>>, _offset_, <<buffer, _count_buffer_>>, _count_buffer_offset_, _max_draw_count_, _stride_) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdDrawIndirectCountKHR.html[vkCmdDrawIndirectCountKHR],
-https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdDrawIndexedIndirectCountKHR.html[vkCmdDrawIndexedIndirectCountKHR],
-(https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_draw_indirect_count[VK_KHR_draw_indirect_count])#.
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdDrawIndirectCountKHR.html[vkCmdDrawIndirectCountKHR],
+https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdDrawIndexedIndirectCountKHR.html[vkCmdDrawIndexedIndirectCountKHR],
+(https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#VK_KHR_draw_indirect_count[VK_KHR_draw_indirect_count])#.
 
 [[cmd_execute_commands]]
 * *cmd_execute_commands*(_cb_, {<<command_buffer, _command_buffer_>>}) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdExecuteCommands.html[vkCmdExecuteCommands].#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdExecuteCommands.html[vkCmdExecuteCommands].#
 
 [[cmd_fill_buffer]]
 * *cmd_fill_buffer*(_cb_, _dst_buffer_, _dst_offset_, _size_, _data_) +
@@ -205,7 +205,7 @@ https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdDrawI
 _dst_offset_: integer +
 _size_: integer (multiple of 4) or '_whole size_' +
 _data_: integer +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdFillBuffer.html[vkCmdFillBuffer].#
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdFillBuffer.html[vkCmdFillBuffer].#
 
 [[cmd_pipeline_barrier]]
 * *cmd_pipeline_barrier*(_cb_, _src_stage_mask_, _..._) +
@@ -215,7 +215,7 @@ arg4 - _dependency_flags_: <<dependencyflags, dependencyflags>> +
 arg5 - [_memory_barriers_]: {<<memorybarrier, memorybarrier>>} +
 arg6 - [_buffer_memory_barriers_]: {<<buffermemorybarrier, buffermemorybarrier>>} +
 arg7 - [_image_memory_barriers_]: {<<imagememorybarrier, imagememorybarrier>>} +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdPipelineBarrier.html[vkCmdPipelineBarrier].#
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdPipelineBarrier.html[vkCmdPipelineBarrier].#
 
 [[cmd_push_descriptor_set]]
 * *cmd_push_descriptor_set*(_cb_, _bind_point_, _..._) +
@@ -223,14 +223,14 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmd
 arg3 - _pipeline_layout_: <<pipeline_layout, pipeline_layout>> +
 arg4 - _set_: integer +
 arg5 - _writes_: {<<writedescriptorset, writedescriptorset>>} +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdPushDescriptorSetKHR.html[vkCmdPushDescriptorSetKHR] (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_push_descriptor[VK_KHR_push_descriptor]).#
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdPushDescriptorSetKHR.html[vkCmdPushDescriptorSetKHR] (https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#VK_KHR_push_descriptor[VK_KHR_push_descriptor]).#
 
 [[cmd_push_descriptor_set_with_template]]
 * *cmd_push_descriptor_set_with_template*(_cb_, _descriptor_update_template_, _layout_, _..._) +
 [small]#arg3: _layout_: <<pipeline_layout, pipeline_layout>> +
 arg4: _set_: integer +
 arg5: _data_: binary string +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdPushDescriptorSetWithTemplate.html[vkCmdPushDescriptorSetWithTemplate] (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_descriptor_update_template[VK_KHR_descriptor_update_template]).#
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdPushDescriptorSetWithTemplate.html[vkCmdPushDescriptorSetWithTemplate] (https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#VK_KHR_descriptor_update_template[VK_KHR_descriptor_update_template]).#
 
 [[cmd_push_constants]]
 * *cmd_push_constants*(_cb_, _layout_, _flags_, _offset_, _values_) +
@@ -238,15 +238,15 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmd
 _flags_: <<shaderstageflags, shaderstageflags>> +
 _offset_: integer +
 _values_: binary string +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdPushConstants.html[vkCmdPushConstants].#
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdPushConstants.html[vkCmdPushConstants].#
 
 [[cmd_reset_event]]
 * *cmd_reset_event*(_cb_, <<event, _event_>>, <<pipelinestageflags, _pipelinestageflags_>>) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdResetEvent.html[vkCmdResetEvent].#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdResetEvent.html[vkCmdResetEvent].#
 
 [[cmd_reset_query_pool]]
 * *cmd_reset_query_pool*(_cb_, <<query_pool, _query_pool_>>, _first_query_, _query_count_) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdResetQueryPool.html[vkCmdResetQueryPool].#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdResetQueryPool.html[vkCmdResetQueryPool].#
 
 [[cmd_resolve_image]]
 * *cmd_resolve_image*(_cb_, _src_image_, _..._) +
@@ -255,72 +255,72 @@ arg3 - _src_imagelayout_: <<imagelayout, imagelayout>> +
 arg4 - _dst_image_: <<image, image>> +
 arg5 - _dst_imagelayout_: <<imagelayout, imagelayout>> +
 arg6 - _regions_: {<<imageresolve, imageresolve>>} +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdResolveImage.html[vkCmdResolveImage].#
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdResolveImage.html[vkCmdResolveImage].#
 
 [[cmd_set_blend_constants]]
 * *cmd_set_blend_constants*(_cb_, _constant~0~_, _constant~1~_, _constant~2~_, _constant~3~_) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdSetBlendConstants.html[vkCmdSetBlendConstants].#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetBlendConstants.html[vkCmdSetBlendConstants].#
 
 [[cmd_set_depth_bias]]
 * *cmd_set_depth_bias*(_cb_, _constantfactor_, _clamp_, _slopefactor_) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdSetDepthBias.html[vkCmdSetDepthBias].#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetDepthBias.html[vkCmdSetDepthBias].#
 
 [[cmd_set_depth_bounds]]
 * *cmd_set_depth_bounds*(_cb_, _min_, _max_) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdSetDepthBounds.html[vkCmdSetDepthBounds].#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetDepthBounds.html[vkCmdSetDepthBounds].#
 
 [[cmd_set_device_mask]]
 * *cmd_set_device_mask*(_cb_, _devicemask_) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdSetDeviceMask.html[vkCmdSetDeviceMask] (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_device_group[VK_KHR_device_group]).#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetDeviceMask.html[vkCmdSetDeviceMask] (https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#VK_KHR_device_group[VK_KHR_device_group]).#
 
 [[cmd_set_discard_rectangle]]
 * *cmd_set_discard_rectangle*(_cb_, _first_, {<<rect2d, _rect2d_>>}) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdSetDiscardRectangleEXT.html[vkCmdSetDiscardRectangleEXT] (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_discard_rectangles[VK_EXT_discard_rectangles]).#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetDiscardRectangleEXT.html[vkCmdSetDiscardRectangleEXT] (https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#VK_EXT_discard_rectangles[VK_EXT_discard_rectangles]).#
 
 [[cmd_set_event]]
 * *cmd_set_event*(_cb_, <<event, _event_>>, <<pipelinestageflags, _pipelinestageflags_>>) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdSetEvent.html[vkCmdSetEvent].#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetEvent.html[vkCmdSetEvent].#
 
 [[cmd_set_line_width]]
 * *cmd_set_line_width*(_cb_, [_linewidth_ = 1.0]) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdSetLineWidth.html[vkCmdSetLineWidth].#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetLineWidth.html[vkCmdSetLineWidth].#
 
 [[cmd_set_sample_locations]]
 * *cmd_set_sample_locations*(_cb_, <<samplelocationsinfo, _samplelocationsinfo_>>) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdSetSampleLocationsEXT.html[vkCmdSetSampleLocationsEXT] (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_sample_locations[VK_EXT_sample_locations]).#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetSampleLocationsEXT.html[vkCmdSetSampleLocationsEXT] (https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#VK_EXT_sample_locations[VK_EXT_sample_locations]).#
 
 [[cmd_set_scissor]]
 * *cmd_set_scissor*(_cb_, _first_, {<<rect2d, _rect2d_>>}) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdSetScissor.html[vkCmdSetScissor].#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetScissor.html[vkCmdSetScissor].#
 
 [[cmd_set_stencil_compare_mask]]
 * *cmd_set_stencil_compare_mask*(_cb_, _face_mask_, _compare_mask_) +
 [small]#_face_mask_: <<stencilfaceflags, stencilfaceflags>> +
 _compare_mask_: integer +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdSetStencilCompareMask.html[vkCmdSetStencilCompareMask].#
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetStencilCompareMask.html[vkCmdSetStencilCompareMask].#
 
 [[cmd_set_stencil_reference]]
 * *cmd_set_stencil_reference*(_cb_, _face_mask_, _reference_) +
 [small]#_face_mask_: <<stencilfaceflags, stencilfaceflags>> +
 _reference_: integer +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdSetStencilReference.html[vkCmdSetStencilReference].#
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetStencilReference.html[vkCmdSetStencilReference].#
 
 [[cmd_set_stencil_write_mask]]
 * *cmd_set_stencil_write_mask*(_cb_, _face_mask_, _write_mask_) +
 [small]#_face_mask_: <<stencilfaceflags, stencilfaceflags>> +
 _write_mask_: integer +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdSetStencilWriteMask.html[vkCmdSetStencilWriteMask].#
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetStencilWriteMask.html[vkCmdSetStencilWriteMask].#
 
 [[cmd_set_viewport]]
 * *cmd_set_viewport*(_cb_, _first_, {<<viewport, _viewport_>>}) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdSetViewport.html[vkCmdSetViewport].#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetViewport.html[vkCmdSetViewport].#
 
 [[cmd_update_buffer]]
 * *cmd_update_buffer*(_cb_, _dst_buffer_, _dst_offset_, _data_) +
 [small]#_dst_buffer_: <<buffer, buffer>> +
 _dst_offset_: integer +
 _data_: binary string (n x 4 bytes) +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdUpdateBuffer.html[vkCmdUpdateBuffer].#
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdUpdateBuffer.html[vkCmdUpdateBuffer].#
 
 [[cmd_wait_events]]
 * *cmd_wait_events*(_cb_, _src_stage_mask_, _..._) +
@@ -330,10 +330,10 @@ arg4 - _events_: {<<event, event>>} +
 arg5 - [_memory_barriers_]: {<<memorybarrier, memorybarrier>>} +
 arg6 - [_buffer_memory_barriers_]: {<<buffermemorybarrier, buffermemorybarrier>>} +
 arg7 - [_image_memory_barriers_]: {<<imagememorybarrier, imagememorybarrier>>} +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdWaitEvents.html[vkCmdWaitEvents].#
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdWaitEvents.html[vkCmdWaitEvents].#
 
 [[cmd_write_timestamp]]
 * *cmd_write_timestamp*(_cb_, <<pipelinestageflags, _pipelinestageflags_>>, <<query_pool, _query_pool_>>, _query_) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdWriteTimestamp.html[vkCmdWriteTimestamp].#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdWriteTimestamp.html[vkCmdWriteTimestamp].#
 
 

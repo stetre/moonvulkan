@@ -8,73 +8,73 @@ Platform-specific surface API are available only if MoonVulkan was <<platform_su
 
 '''
 
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_xlib_surface[VK_KHR_xlib_surface], <<platform_support, PLATFORM_XLIB>>.#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#VK_KHR_xlib_surface[VK_KHR_xlib_surface], <<platform_support, PLATFORM_XLIB>>.#
 
 [[get_physical_device_xlib_presentation_support]]
 * _boolean_ = *get_physical_device_xlib_presentation_support*(_physdev_, <<index, _queue_family_index_>>, _dpy_, _visual_id_) +
 [small]#_dpy_: lightuserdata (_Display*_) +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkGetPhysicalDeviceXlibPresentationSupportKHR.html[vkGetPhysicalDeviceXlibPresentationSupportKHR].#
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceXlibPresentationSupportKHR.html[vkGetPhysicalDeviceXlibPresentationSupportKHR].#
 
 [[create_xlib_surface]]
 * _surface_ = *create_xlib_surface*(_instance_, _flags_, _dpy_, _window_, [<<allocators, _allocator_>>]) +
 [small]#_dpy_: lightuserdata (_Display*_) +
 _window_: lightuserdata (_Window_) +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCreateXlibSurfaceKHR.html[vkCreateXlibSurfaceKHR].#
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateXlibSurfaceKHR.html[vkCreateXlibSurfaceKHR].#
 
 '''
 
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_xcb_surface[VK_KHR_xcb_surface], <<platform_support, PLATFORM_XCB>>.#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#VK_KHR_xcb_surface[VK_KHR_xcb_surface], <<platform_support, PLATFORM_XCB>>.#
 
 [[get_physical_device_xcb_presentation_support]]
 * _boolean_ = *get_physical_device_xcb_presentation_support*(_physdev_, <<index, _queue_family_index_>>, _connection_, _visual_id_) +
 [small]#_connection_: lightuserdata (_xcb_connection_t*_) +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkGetPhysicalDeviceXcbPresentationSupportKHR.html[vkGetPhysicalDeviceXcbPresentationSupportKHR].#
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceXcbPresentationSupportKHR.html[vkGetPhysicalDeviceXcbPresentationSupportKHR].#
 
 [[create_xcb_surface]]
 * _surface_ = *create_xcb_surface*(_instance_, _flags_, _connection_, _window_, [<<allocators, _allocator_>>]) +
 [small]#_connection_: lightuserdata (_xcb_connection_t*_) +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCreateXcbSurfaceKHR.html[vkCreateXcbSurfaceKHR].#
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateXcbSurfaceKHR.html[vkCreateXcbSurfaceKHR].#
 
 '''
 
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_wayland_surface[VK_KHR_wayland_surface], <<platform_support, PLATFORM_WAYLAND>>.#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#VK_KHR_wayland_surface[VK_KHR_wayland_surface], <<platform_support, PLATFORM_WAYLAND>>.#
 
 [[get_physical_device_wayland_presentation_support]]
 * _boolean_ = *get_physical_device_wayland_presentation_support*(_physdev_, <<index, _queue_family_index_>>, _wldisplay_) +
 [small]#_wldisplay_: lightuserdata (_wl_display*_) +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkGetPhysicalDeviceWaylandPresentationSupportKHR.html[vkGetPhysicalDeviceWaylandPresentationSupportKHR].#
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceWaylandPresentationSupportKHR.html[vkGetPhysicalDeviceWaylandPresentationSupportKHR].#
 
 [[create_wayland_surface]]
 * _surface_ = *create_wayland_surface*(_instance_, _flags_, _wldisplay_, _wlsurface_, [<<allocators, _allocator_>>]) +
 [small]#_wldisplay_: lightuserdata (_wl_display*_) +
 _wlsurface_: lightuserdata (_wl_surface*_) +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCreateWaylandSurfaceKHR.html[vkCreateWaylandSurfaceKHR].#
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateWaylandSurfaceKHR.html[vkCreateWaylandSurfaceKHR].#
 
 ////
 
 '''
 
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_android_surface[VK_KHR_android_surface], <<platform_support, PLATFORM_ANDROID>>.#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#VK_KHR_android_surface[VK_KHR_android_surface], <<platform_support, PLATFORM_ANDROID>>.#
 
 [[create_android_surface]]
 * _surface_ = *create_android_surface*(_instance_, _flags_, _awindow_, [<<allocators, _allocator_>>]) +
 [small]#_awindow_: lightuserdata  (_ANativeWindow*_)+
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCreateAndroidSurfaceKHR.html[vkCreateAndroidSurfaceKHR].#
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateAndroidSurfaceKHR.html[vkCreateAndroidSurfaceKHR].#
 
 ////
 
 '''
 
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_win32_surface[VK_KHR_win32_surface], <<platform_support, PLATFORM_WIN32>>.#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#VK_KHR_win32_surface[VK_KHR_win32_surface], <<platform_support, PLATFORM_WIN32>>.#
 
 [[get_physical_device_win32_presentation_support]]
 * _boolean_ = *get_physical_device_win32_presentation_support*(_physdev_, <<index, _queue_family_index_>>) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkGetPhysicalDeviceWin32PresentationSupportKHR.html[vkGetPhysicalDeviceWin32PresentationSupportKHR].#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceWin32PresentationSupportKHR.html[vkGetPhysicalDeviceWin32PresentationSupportKHR].#
 
 [[create_win32_surface]]
 * _surface_ = *create_win32_surface*(_instance_, _flags_, _hinstance_, _hwnd_, [<<allocators, _allocator_>>]) +
 [small]#_hinstance_: lightuserdata (_HINSTANCE_) +
 _hwnd_: lightuserdata (_HWND_) +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCreateWin32SurfaceKHR.html[vkCreateWin32SurfaceKHR].#
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateWin32SurfaceKHR.html[vkCreateWin32SurfaceKHR].#
 
 

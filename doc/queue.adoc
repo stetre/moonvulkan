@@ -5,19 +5,19 @@
 [[get_device_queue]]
 * _queue_ = *get_device_queue*(<<device, _device_>>, <<index, _queue_family_index_>>, <<index, _queue_index_>>, [<<devicequeuecreateflags, _devicequeuecreateflags_>>]) +
 _queue_ = *get_device_queue*(<<device, _device_>>, <<devicequeueinfo, _devicequeueinfo_>>) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkGetDeviceQueue.html[vkGetDeviceQueue], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkGetDeviceQueue2.html[vkGetDeviceQueue2].#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetDeviceQueue.html[vkGetDeviceQueue], https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetDeviceQueue2.html[vkGetDeviceQueue2].#
 
 
 [[queue_submit]]
 * *queue_submit*(_queue_, {<<submitinfo, _submitinfo_>>}, [<<fence, _fence_>>]) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkQueueSubmit.html[vkQueueSubmit].#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkQueueSubmit.html[vkQueueSubmit].#
 
 [[queue_bind_sparse]]
 * *queue_bind_sparse*(_queue_, {<<bindsparseinfo, _bindsparseinfo_>>}, [<<fence, _fence_>>]) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkQueueBindSparse.html[vkQueueBindSparse].#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkQueueBindSparse.html[vkQueueBindSparse].#
 
 [[queue_wait_idle]]
 * *queue_wait_idle*(_queue_) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkQueueWaitIdle.html[vkQueueWaitIdle].#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkQueueWaitIdle.html[vkQueueWaitIdle].#
 
 

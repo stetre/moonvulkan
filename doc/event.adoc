@@ -5,22 +5,22 @@
 [[create_event]]
 * _event_ = *create_event*(_device_, <<eventcreateinfo, _eventcreateinfo_>>, [<<allocators, _allocator_>>]) +
 _event_ = *create_event*(_device_, [<<eventcreateflags, _eventcreateflags_>>]) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCreateEvent.html[vkCreateEvent].#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateEvent.html[vkCreateEvent].#
 
 [[destroy_event]]
 * *destroy_event*(_event_) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkDestroyEvent.html[vkDestroyEvent].#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkDestroyEvent.html[vkDestroyEvent].#
 
 [[get_event_status]]
 * _boolean_ = *get_event_status*(_event_) +
 [small]#Returns _true_ if the given _event_ is set, _false_ otherwise. +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkGetEventStatus.html[vkGetEventStatus].#
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetEventStatus.html[vkGetEventStatus].#
 
 [[set_event]]
 * *set_event*(_event_) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkSetEvent.html[vkSetEvent].#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkSetEvent.html[vkSetEvent].#
 
 [[reset_event]]
 * *reset_event*(_event_) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkResetEvent.html[vkResetEvent].#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkResetEvent.html[vkResetEvent].#
 

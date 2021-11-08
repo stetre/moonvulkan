@@ -5,19 +5,19 @@
 [[create_semaphore]]
 * _semaphore_ = *create_semaphore*(_device_, <<semaphorecreateinfo, _semaphorecreateinfo_>>, [<<allocators, _allocator_>>]) +
 _semaphore_ = *create_semaphore*(_device_, [<<semaphorecreateflags, _semaphorecreateflags_>>]) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCreateSemaphore.html[vkCreateSemaphore].#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateSemaphore.html[vkCreateSemaphore].#
 
 [[destroy_semaphore]]
 * *destroy_semaphore*(_semaphore_) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkDestroySemaphore.html[vkDestroySemaphore].#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkDestroySemaphore.html[vkDestroySemaphore].#
 
 '''
 
 [[importsemaphorefd]]
 * *importsemaphorefd*(_semaphore_, <<importsemaphorefdinfo, _importsemaphorefdinfo_>>) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkImportSemaphoreFdKHR.html[vkImportSemaphoreFdKHR] (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_external_semaphore_fd[VK_KHR_external_semaphore_fd]).#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkImportSemaphoreFdKHR.html[vkImportSemaphoreFdKHR] (https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#VK_KHR_external_semaphore_fd[VK_KHR_external_semaphore_fd]).#
 
 [[getsemaphorefd]]
 * _fd_ = *getsemaphorefd*(_semaphore_, <<semaphoregetfdinfo, _semaphoregetfdinfo_>>) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkGetSemaphoreFdKHR.html[vkGetSemaphoreFdKHR] (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_external_semaphore_fd[VK_KHR_external_semaphore_fd]).#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetSemaphoreFdKHR.html[vkGetSemaphoreFdKHR] (https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#VK_KHR_external_semaphore_fd[VK_KHR_external_semaphore_fd]).#
 

@@ -4,9 +4,9 @@
 
 [[create_instance]]
 * _instance_ = *create_instance*(<<instancecreateinfo, _instancecreateinfo_>>, [<<allocators, _allocator_>>]) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCreateInstance.html[vkCreateInstance].#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateInstance.html[vkCreateInstance].#
 
 [[destroy_instance]]
 * *destroy_instance*(_instance_) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkDestroyInstance.html[vkDestroyInstance].#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkDestroyInstance.html[vkDestroyInstance].#
 

@@ -11,23 +11,23 @@ _vk.enumerate_instance_layer_properties(true)_ returns a table indexed by _layer
 
 [[enumerate_instance_layer_properties]]
 * {<<layerproperties, _layerproperties_>>} = *enumerate_instance_layer_properties*([_byname=false_]) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkEnumerateInstanceLayerProperties.html[vkEnumerateInstanceLayerProperties].#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkEnumerateInstanceLayerProperties.html[vkEnumerateInstanceLayerProperties].#
 
 [[enumerate_instance_extension_properties]]
 * {<<extensionproperties, _extensionproperties_>>} = *enumerate_instance_extension_properties*([_layer_name_], [_byname=false_]) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkEnumerateInstanceExtensionProperties.html[vkEnumerateInstanceExtensionProperties].#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkEnumerateInstanceExtensionProperties.html[vkEnumerateInstanceExtensionProperties].#
 
 [[enumerate_device_layer_properties]]
 * {<<layerproperties, _layerproperties_>>} = _enumerate_device_layer_properties_(<<physical_device, _physdev_>>, [_byname=false_]) _DEPRECATED_ +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkEnumerateDeviceLayerProperties.html[vkEnumerateDeviceLayerProperties].#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkEnumerateDeviceLayerProperties.html[vkEnumerateDeviceLayerProperties].#
 
 [[enumerate_device_extension_properties]]
 * {<<extensionproperties, _extensionproperties_>>} = *enumerate_device_extension_properties*(<<physical_device, _physdev_>>, [_layer_name_], [_byname=false_]) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkEnumerateDeviceExtensionProperties.html[vkEnumerateDeviceExtensionProperties].#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkEnumerateDeviceExtensionProperties.html[vkEnumerateDeviceExtensionProperties].#
 
 [[layer_deprecation]]
 NOTE: Device layers are deprecated (rfr: 
-https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#extended-functionality-device-layer-deprecation['Device Layer Deprecation']).
+https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#extended-functionality-device-layer-deprecation['Device Layer Deprecation']).
 As a consequence, with up to date Vulkan implementations, the 
 <<enumerate_device_layer_properties, enumerate_device_layer_properties>>(&nbsp;) function will always 
 return an empty list, and the _layer_ parameter in the 

@@ -5,19 +5,19 @@
 [[create_pipeline_cache]]
 * _pipeline_cache_ = *create_pipeline_cache*(_device_, <<pipelinecachecreateinfo, _pipelinecachecreateinfo_>>,  [<<allocators, _allocator_>>]) +
 _pipeline_cache_ = *create_pipeline_cache*(_device_, [<<pipelinecachecreateflags, _pipelinecachecreateflags_>>], [_initial_data_]) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCreatePipelineCache.html[vkCreatePipelineCache].#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreatePipelineCache.html[vkCreatePipelineCache].#
 
 [[destroy_pipeline_cache]]
 * *destroy_pipeline_cache*(_pipeline_cache_) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkDestroyPipelineCache.html[vkDestroyPipelineCache].#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkDestroyPipelineCache.html[vkDestroyPipelineCache].#
 
 [[get_pipeline_cache_data]]
 * _data_ = *get_pipeline_cache_data*(_pipeline_cache_) +
 [small]#Returns _data_ as a binary string. +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkGetPipelineCacheData.html[vkGetPipelineCacheData].#
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPipelineCacheData.html[vkGetPipelineCacheData].#
 
 [[merge_pipeline_caches]]
 * *merge_pipeline_caches*(_destination_, {_source_}) +
 [small]#_destination_, _source_: _pipeline_cache_ +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkMergePipelineCaches.html[vkMergePipelineCaches].#
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkMergePipelineCaches.html[vkMergePipelineCaches].#
 

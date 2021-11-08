@@ -5,14 +5,14 @@
 
 [[create_device]]
 * _device_ = *create_device*(<<physical_device, _physdev_>>, <<devicecreateinfo, _devicecreateinfo_>>, [<<allocators, _allocator_>>]) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCreateDevice.html[vkCreateDevice].#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateDevice.html[vkCreateDevice].#
 
 [[destroy_device]]
 * *destroy_device*(_device_) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkDestroyDevice.html[vkDestroyDevice].#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkDestroyDevice.html[vkDestroyDevice].#
 
 [[device_wait_idle]]
 * *device_wait_idle*(_device_) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkDeviceWaitIdle.html[vkDeviceWaitIdle].#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkDeviceWaitIdle.html[vkDeviceWaitIdle].#
 
 

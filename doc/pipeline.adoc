@@ -4,14 +4,14 @@
 
 [[create_graphics_pipelines]]
 * {_pipeline_} = *create_graphics_pipelines*(_device_, [<<pipeline_cache, _pipeline_cache_>>], {<<graphicspipelinecreateinfo, _graphicspipelinecreateinfo_>>}, [<<allocators, _allocator_>>]) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCreateGraphicsPipelines.html[vkCreateGraphicsPipelines].#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateGraphicsPipelines.html[vkCreateGraphicsPipelines].#
 
 [[create_compute_pipelines]]
 * {_pipeline_} = *create_compute_pipelines*(_device_, [<<pipeline_cache, _pipeline_cache_>>], {<<computepipelinecreateinfo, _computepipelinecreateinfo_>>}, [<<allocators, _allocator_>>]) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCreateComputePipelines.html[vkCreateComputePipelines].#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateComputePipelines.html[vkCreateComputePipelines].#
 
 [[destroy_pipeline]]
 * *destroy_pipeline*(_pipeline_) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkDestroyPipeline.html[vkDestroyPipeline].#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkDestroyPipeline.html[vkDestroyPipeline].#
 
 

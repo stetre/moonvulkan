@@ -5,15 +5,15 @@
 [[create_render_pass]]
 * _render_pass_ = *create_render_pass*(_device_, <<renderpasscreateinfo, _renderpasscreateinfo_>>, [<<allocators, _allocator_>>]) +
 _render_pass_ = *create_render_pass*(_device_, <<renderpasscreateinfo2, _renderpasscreateinfo2_>>, [<<allocators, _allocator_>>]) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCreateRenderPass.html[vkCreateRenderPass], https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCreateRenderPass2KHR.html[vkCreateRenderPass2KHR] (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_create_renderpass2[VK_KHR_create_renderpass2]).#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateRenderPass.html[vkCreateRenderPass], https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateRenderPass2KHR.html[vkCreateRenderPass2KHR] (https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#VK_KHR_create_renderpass2[VK_KHR_create_renderpass2]).#
 
 [[destroy_render_pass]]
 * *destroy_render_pass*(_render_pass_) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkDestroyRenderPass.html[vkDestroyRenderPass].#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkDestroyRenderPass.html[vkDestroyRenderPass].#
 
 [[get_render_area_granularity]]
 * <<extent2d,_extent2d_>> = *get_render_area_granularity*(_render_pass_) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkGetRenderAreaGranularity.html[vkGetRenderAreaGranularity].#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetRenderAreaGranularity.html[vkGetRenderAreaGranularity].#
 
 
 
