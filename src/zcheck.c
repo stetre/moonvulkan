@@ -268,7 +268,7 @@ static int ispresent_(lua_State *L, int arg, const char *sname)
 #define SetUUID(name, sname, len) do { lua_pushlstring(L, (char*)p->name,(len)); lua_setfield(L, -2, sname); } while(0)
 #define SetEnum(name, sname, pushfunc) do { pushfunc(L, p->name); lua_setfield(L, -2, sname); } while(0)
 #define SetStruct(name, sname, VkXxx) do { zpush##VkXxx(L, &(p->name)); lua_setfield(L, -2, sname); } while(0)
-#define SetIntegerArray(name, sname, n) do { int i_;                                    \
+#define SetIntegerArray(name, sname, n) do { unsigned int i_;                           \
     lua_newtable(L);                                                                    \
     for(i_=0; i_<(n); i_++) { lua_pushinteger(L, p->name[i_]); lua_seti(L, -2, i_+1); } \
     lua_setfield(L, -2, sname);                                                         \

@@ -9,4 +9,6 @@ tutorials/
 src/OLD
 src/DIFF
 src/TODO
+src/vulkan.old
+src/vulkan.new
 examples/vulkan-tutorial/resources/chalet.obj
