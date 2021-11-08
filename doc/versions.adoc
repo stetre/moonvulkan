@@ -7,13 +7,13 @@
 [small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkEnumerateInstanceVersion.html[vkEnumerateInstanceVersion].#
 
 [[version]]
-* _version_ = *make_version*(_major_, _minor_, _patch_) +
-[small]#Constructs _version_ (an integer) from _major_, _minor_ and _patch_ numbers (also integers). +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#boilerplate-versions[Vulkan Version Number Macros].#
+* _version_ = *make_version*(_major_, _minor_, _patch_, [_variant_=0]) +
+[small]#Constructs _version_ (an integer) from _major_, _minor_, _patch_, and _variant_ numbers (also integers). +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#extendingvulkan-coreversions[Version Numbers].#
 
 [[version_numbers]]
 * _major_, _minor_, _patch_ = *version_numbers*(_version_) +
-[small]#Extracts the _major_, _minor_ and _patch_ numbers (integers) from _version_ (also an integer).#
+[small]#Extracts the _major_, _minor_, _patch_, and _variant_ numbers (integers) from _version_ (also an integer).#
 
 [[version_string]]
 * _string_ = *version_string*(_version_) +

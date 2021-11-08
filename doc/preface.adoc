@@ -13,8 +13,9 @@ https://github.com/asciidoctor/asciidoctor-stylesheet-factory[AsciiDoctor Styles
 It is assumed that the reader is familiar with both Vulkan and the Lua programming language.
 
 For convenience of reference, this document contains external (deep) links to the 
-http://www.lua.org/manual/5.3/manual.html[Lua Reference Manual] and the 
-https://www.khronos.org/registry/vulkan/#refpages[Vulkan API Reference Pages].
+http://www.lua.org/manual/5.3/manual.html[Lua Reference Manual], the
+https://www.khronos.org/registry/vulkan/#refpages[Vulkan API Reference Pages], and the
+https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html[Vulkan Specification].
 
 === Getting and installing
 

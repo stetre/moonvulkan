@@ -948,8 +948,9 @@ p.tableblock.header { color: #6d6e71; }
 </div>
 <div class="paragraph">
 <p>For convenience of reference, this document contains external (deep) links to the
-<a href="http://www.lua.org/manual/5.3/manual.html">Lua Reference Manual</a> and the
-<a href="https://www.khronos.org/registry/vulkan/#refpages">Vulkan API Reference Pages</a>.</p>
+<a href="http://www.lua.org/manual/5.3/manual.html">Lua Reference Manual</a>, the
+<a href="https://www.khronos.org/registry/vulkan/#refpages">Vulkan API Reference Pages</a>, and the
+<a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html">Vulkan Specification</a>.</p>
 </div>
 <div class="sect2">
 <h3 id="_getting_and_installing">Getting and installing</h3>
@@ -6583,9 +6584,9 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/h
 <div id="version" class="ulist">
 <ul>
 <li>
-<p><em>version</em> = <strong>make_version</strong>(<em>major</em>, <em>minor</em>, <em>patch</em>)<br>
-<span class="small">Constructs <em>version</em> (an integer) from <em>major</em>, <em>minor</em> and <em>patch</em> numbers (also integers).<br>
-Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#boilerplate-versions">Vulkan Version Number Macros</a>.</span></p>
+<p><em>version</em> = <strong>make_version</strong>(<em>major</em>, <em>minor</em>, <em>patch</em>, [<em>variant</em>=0])<br>
+<span class="small">Constructs <em>version</em> (an integer) from <em>major</em>, <em>minor</em>, <em>patch</em>, and <em>variant</em> numbers (also integers).<br>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#extendingvulkan-coreversions">Version Numbers</a>.</span></p>
 </li>
 </ul>
 </div>
@@ -6593,7 +6594,7 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/
 <ul>
 <li>
 <p><em>major</em>, <em>minor</em>, <em>patch</em> = <strong>version_numbers</strong>(<em>version</em>)<br>
-<span class="small">Extracts the <em>major</em>, <em>minor</em> and <em>patch</em> numbers (integers) from <em>version</em> (also an integer).</span></p>
+<span class="small">Extracts the <em>major</em>, <em>minor</em>, <em>patch</em>, and <em>variant</em> numbers (integers) from <em>version</em> (also an integer).</span></p>
 </li>
 </ul>
 </div>

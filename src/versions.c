@@ -98,19 +98,43 @@ static int Platforms(lua_State *L) //@@DOC
 #ifdef VK_USE_PLATFORM_WIN32_KHR
     ADD("win32");
 #endif
+#ifdef VK_USE_PLATFORM_FUCHSIA
+    ADD("fuchsia");
+#endif
+#ifdef VK_USE_PLATFORM_IOS_MVK
+    ADD("ios_mvk");
+#endif
+#ifdef VK_USE_PLATFORM_MACOS_MVK
+    ADD("macos_mvk");
+#endif
+#ifdef VK_USE_PLATFORM_METAL_EXT
+    ADD("metal");
+#endif
+#ifdef VK_USE_PLATFORM_VI_NN
+    ADD("vi");
+#endif
+#ifdef VK_USE_PLATFORM_DIRECTFB_EXT
+    ADD("directfb");
+#endif
+#ifdef VK_USE_PLATFORM_GGP
+    ADD("ggp");
+#endif
+#ifdef VK_USE_PLATFORM_SCREEN_QNX
+    ADD("screen_qnx");
+#endif
 #undef ADD
     return 2;
     }
-
 
 static int VersionNumbers(lua_State *L)
 /* major, minor, patch = version_numbers(ver) */
     {
     uint32_t ver = luaL_checkinteger(L, 1);
-    lua_pushinteger(L, VK_VERSION_MAJOR(ver));
-    lua_pushinteger(L, VK_VERSION_MINOR(ver));
-    lua_pushinteger(L, VK_VERSION_PATCH(ver));
-    return 3;
+    lua_pushinteger(L, VK_API_VERSION_MAJOR(ver));
+    lua_pushinteger(L, VK_API_VERSION_MINOR(ver));
+    lua_pushinteger(L, VK_API_VERSION_PATCH(ver));
+    lua_pushinteger(L, VK_API_VERSION_VARIANT(ver));
+    return 4;
     }
 
 static int VersionString(lua_State *L)
@@ -123,12 +147,13 @@ static int VersionString(lua_State *L)
     }
 
 static int MakeVersion(lua_State *L)
-/* ver = make_version(major, minor, patch) */
+/* ver = make_version(major, minor, patch, [variant=0]) */
     {
     uint32_t major = luaL_checkinteger(L, 1);
     uint32_t minor = luaL_checkinteger(L, 2);
     uint32_t patch = luaL_checkinteger(L, 3);
-    uint32_t version = VK_MAKE_VERSION(major, minor, patch);
+    uint32_t variant = luaL_optinteger(L, 4, 0);
+    uint32_t version = VK_MAKE_API_VERSION(variant, major, minor, patch);
     lua_pushinteger(L, version);
     return 1;
     }
