@@ -18,9 +18,9 @@ TEX_FORMAT = 'b8g8r8a8 unorm'
 TEX_COLORS = {{0xffff0000, 0xff00ff00}}
 
 function dbgFunc(instance, flags, objType, objectRaw, location, code, layerPrefix, message)
-   if flags & vk.DEBUG_REPORT_ERROR_BIT_EXT ~= 0 then
+   if flags & vk.DEBUG_REPORT_ERROR_BIT ~= 0 then
         print(string.format("ERROR: [%s] Code %d : %s", layerPrefix, code, message))
-   elseif flags & vk.DEBUG_REPORT_WARNING_BIT_EXT ~= 0 then
+   elseif flags & vk.DEBUG_REPORT_WARNING_BIT ~= 0 then
         print(string.format("WARNING: [%s] Code %d : %s", layerPrefix, code, message))
    end
 end
@@ -308,7 +308,7 @@ function demo_draw(demo)
    -- engine has fully released ownership to the application, and it is
    -- okay to render to the image.
 
-   -- FIXME/TODO: DEAL WITH VK_IMAGE_LAYOUT_PRESENT_SRC_KHR
+   -- FIXME/TODO: DEAL WITH VK_IMAGE_LAYOUT_PRESENT_SRC
    demo_draw_build_cmd(demo)
 
    vk.queue_submit(demo.queue, {{
@@ -359,8 +359,8 @@ function prepare_swapchain(demo)
    end
 
    local preTransform
-   if surfCapabilities.supported_transforms & vk.SURFACE_TRANSFORM_IDENTITY_BIT_KHR ~= 0 then
-      preTransform = vk.SURFACE_TRANSFORM_IDENTITY_BIT_KHR
+   if surfCapabilities.supported_transforms & vk.SURFACE_TRANSFORM_IDENTITY_BIT ~= 0 then
+      preTransform = vk.SURFACE_TRANSFORM_IDENTITY_BIT
    else
       preTransform = surfCapabilities.current_transform
    end
@@ -373,7 +373,7 @@ function prepare_swapchain(demo)
       image_extent = { width = swapchainExtent.width, height = swapchainExtent.height },
       image_usage = vk.IMAGE_USAGE_COLOR_ATTACHMENT_BIT,
       pre_transform = preTransform,
-      compositeAlpha = vk.COMPOSITE_ALPHA_OPAQUE_BIT_KHR,
+      compositeAlpha = vk.COMPOSITE_ALPHA_OPAQUE_BIT,
       image_array_layers = 1,
       image_sharingMode = 'exclusive',
       present_mode = 'fifo',

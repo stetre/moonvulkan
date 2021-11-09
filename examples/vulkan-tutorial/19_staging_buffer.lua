@@ -56,7 +56,7 @@ local debug_callback
 if DEBUG then -- Set debug callback
    debug_callback = vk.create_debug_report_callback(
       instance,
-      vk.DEBUG_REPORT_ERROR_BIT_EXT | vk.DEBUG_REPORT_WARNING_BIT_EXT,
+      vk.DEBUG_REPORT_ERROR_BIT | vk.DEBUG_REPORT_WARNING_BIT,
       function(...) print("DEBUG", ...) end
    )
 end

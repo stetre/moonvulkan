@@ -24,6 +24,7 @@
  */
 
 #include "internal.h"
+#include "nosuffix.h"
 
 /*------------------------------------------------------------------------------*
  | Code<->string map for enumerations                                           |
@@ -414,24 +415,24 @@ void moonvulkan_open_enums(lua_State *L)
     ADD(ERROR_TOO_MANY_OBJECTS, "too many objects");
     ADD(ERROR_FORMAT_NOT_SUPPORTED, "format not supported");
     ADD(ERROR_FRAGMENTED_POOL, "fragmented pool");
-    ADD(ERROR_SURFACE_LOST_KHR, "surface lost");
-    ADD(ERROR_NATIVE_WINDOW_IN_USE_KHR, "native window in use");
-    ADD(SUBOPTIMAL_KHR, "suboptimal");
-    ADD(ERROR_OUT_OF_DATE_KHR, "out of date");
-    ADD(ERROR_INCOMPATIBLE_DISPLAY_KHR, "incompatible display");
-    ADD(ERROR_VALIDATION_FAILED_EXT, "validation failed");
+    ADD(ERROR_SURFACE_LOST, "surface lost");
+    ADD(ERROR_NATIVE_WINDOW_IN_USE, "native window in use");
+    ADD(SUBOPTIMAL, "suboptimal");
+    ADD(ERROR_OUT_OF_DATE, "out of date");
+    ADD(ERROR_INCOMPATIBLE_DISPLAY, "incompatible display");
+    ADD(ERROR_VALIDATION_FAILED, "validation failed");
     ADD(ERROR_OUT_OF_POOL_MEMORY, "out of pool memory");
     ADD(ERROR_INVALID_EXTERNAL_HANDLE, "invalid external handle");
-    ADD(ERROR_NOT_PERMITTED_EXT, "not permitted");
+    ADD(ERROR_NOT_PERMITTED, "not permitted");
     ADD(ERROR_FRAGMENTATION, "fragmentation");
-    ADD(ERROR_INVALID_DRM_FORMAT_MODIFIER_PLANE_LAYOUT_EXT, "invalid drm format modifier plane layout");
+    ADD(ERROR_INVALID_DRM_FORMAT_MODIFIER_PLANE_LAYOUT, "invalid drm format modifier plane layout");
     ADD(ERROR_INVALID_OPAQUE_CAPTURE_ADDRESS, "invalid opaque capture address");
-    ADD(ERROR_FULL_SCREEN_EXCLUSIVE_MODE_LOST_EXT, "full screen exclusive mode lost");
-    ADD(THREAD_IDLE_KHR, "thread idle");
-    ADD(THREAD_DONE_KHR, "thread done");
-    ADD(OPERATION_DEFERRED_KHR, "operation deferred");
-    ADD(OPERATION_NOT_DEFERRED_KHR, "operation not deferred");
-    ADD(PIPELINE_COMPILE_REQUIRED_EXT, "pipeline compile required");
+    ADD(ERROR_FULL_SCREEN_EXCLUSIVE_MODE_LOST, "full screen exclusive mode lost");
+    ADD(THREAD_IDLE, "thread idle");
+    ADD(THREAD_DONE, "thread done");
+    ADD(OPERATION_DEFERRED, "operation deferred");
+    ADD(OPERATION_NOT_DEFERRED, "operation not deferred");
+    ADD(PIPELINE_COMPILE_REQUIRED, "pipeline compile required");
 
     domain = DOMAIN_PIPELINE_CACHE_HEADER_VERSION; /* VkPipelineCacheHeaderVersion */
     ADD(PIPELINE_CACHE_HEADER_VERSION_ONE, "one");
@@ -675,7 +676,7 @@ void moonvulkan_open_enums(lua_State *L)
     domain = DOMAIN_IMAGE_TILING; /* VkImageTiling */
     ADD(IMAGE_TILING_OPTIMAL, "optimal");
     ADD(IMAGE_TILING_LINEAR, "linear");
-    ADD(IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT, "drm format modifier");
+    ADD(IMAGE_TILING_DRM_FORMAT_MODIFIER, "drm format modifier");
 
     domain = DOMAIN_PHYSICAL_DEVICE_TYPE; /* VkPhysicalDeviceType */
     ADD(PHYSICAL_DEVICE_TYPE_OTHER, "other");
@@ -688,7 +689,7 @@ void moonvulkan_open_enums(lua_State *L)
     ADD(QUERY_TYPE_OCCLUSION, "occlusion");
     ADD(QUERY_TYPE_PIPELINE_STATISTICS, "pipeline statistics");
     ADD(QUERY_TYPE_TIMESTAMP, "timestamp");
-    ADD(QUERY_TYPE_TRANSFORM_FEEDBACK_STREAM_EXT, "transform feedback stream");
+    ADD(QUERY_TYPE_TRANSFORM_FEEDBACK_STREAM, "transform feedback stream");
 
     domain = DOMAIN_SHARING_MODE; /* VkSharingMode */
     ADD(SHARING_MODE_EXCLUSIVE, "exclusive");
@@ -704,18 +705,18 @@ void moonvulkan_open_enums(lua_State *L)
     ADD(IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL, "transfer src optimal");
     ADD(IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL, "transfer dst optimal");
     ADD(IMAGE_LAYOUT_PREINITIALIZED, "preinitialized");
-    ADD(IMAGE_LAYOUT_PRESENT_SRC_KHR, "present src");
-    ADD(IMAGE_LAYOUT_SHARED_PRESENT_KHR, "shared present");
+    ADD(IMAGE_LAYOUT_PRESENT_SRC, "present src");
+    ADD(IMAGE_LAYOUT_SHARED_PRESENT, "shared present");
     ADD(IMAGE_LAYOUT_DEPTH_READ_ONLY_STENCIL_ATTACHMENT_OPTIMAL, "depth read only stencil attachment optimal");
     ADD(IMAGE_LAYOUT_DEPTH_ATTACHMENT_STENCIL_READ_ONLY_OPTIMAL, "depth attachment stencil read only optimal");
-    ADD(IMAGE_LAYOUT_FRAGMENT_DENSITY_MAP_OPTIMAL_EXT, "fragment density map optimal");
+    ADD(IMAGE_LAYOUT_FRAGMENT_DENSITY_MAP_OPTIMAL, "fragment density map optimal");
     ADD(IMAGE_LAYOUT_DEPTH_ATTACHMENT_OPTIMAL, "depth attachment optimal");
     ADD(IMAGE_LAYOUT_DEPTH_READ_ONLY_OPTIMAL, "depth read only optimal");
     ADD(IMAGE_LAYOUT_STENCIL_ATTACHMENT_OPTIMAL, "stencil attachment optimal");
     ADD(IMAGE_LAYOUT_STENCIL_READ_ONLY_OPTIMAL, "stencil read only optimal");
-    ADD(IMAGE_LAYOUT_FRAGMENT_SHADING_RATE_ATTACHMENT_OPTIMAL_KHR, "fragment shading rate attachment optimal");
-    ADD(IMAGE_LAYOUT_READ_ONLY_OPTIMAL_KHR, "read only optimal");
-    ADD(IMAGE_LAYOUT_ATTACHMENT_OPTIMAL_KHR, "attachment optimal");
+    ADD(IMAGE_LAYOUT_FRAGMENT_SHADING_RATE_ATTACHMENT_OPTIMAL, "fragment shading rate attachment optimal");
+    ADD(IMAGE_LAYOUT_READ_ONLY_OPTIMAL, "read only optimal");
+    ADD(IMAGE_LAYOUT_ATTACHMENT_OPTIMAL, "attachment optimal");
 
     domain = DOMAIN_IMAGE_VIEW_TYPE; /* VkImageViewType */
     ADD(IMAGE_VIEW_TYPE_1D, "1d");
@@ -826,52 +827,52 @@ void moonvulkan_open_enums(lua_State *L)
     ADD(BLEND_OP_REVERSE_SUBTRACT, "reverse subtract");
     ADD(BLEND_OP_MIN, "min");
     ADD(BLEND_OP_MAX, "max");
-    ADD(BLEND_OP_ZERO_EXT, "zero");
-    ADD(BLEND_OP_SRC_EXT, "src");
-    ADD(BLEND_OP_DST_EXT, "dst");
-    ADD(BLEND_OP_SRC_OVER_EXT, "src over");
-    ADD(BLEND_OP_DST_OVER_EXT, "dst over");
-    ADD(BLEND_OP_SRC_IN_EXT, "src in");
-    ADD(BLEND_OP_DST_IN_EXT, "dst in");
-    ADD(BLEND_OP_SRC_OUT_EXT, "src out");
-    ADD(BLEND_OP_DST_OUT_EXT, "dst out");
-    ADD(BLEND_OP_SRC_ATOP_EXT, "src atop");
-    ADD(BLEND_OP_DST_ATOP_EXT, "dst atop");
-    ADD(BLEND_OP_XOR_EXT, "xor");
-    ADD(BLEND_OP_MULTIPLY_EXT, "multiply");
-    ADD(BLEND_OP_SCREEN_EXT, "screen");
-    ADD(BLEND_OP_OVERLAY_EXT, "overlay");
-    ADD(BLEND_OP_DARKEN_EXT, "darken");
-    ADD(BLEND_OP_LIGHTEN_EXT, "lighten");
-    ADD(BLEND_OP_COLORDODGE_EXT, "colordodge");
-    ADD(BLEND_OP_COLORBURN_EXT, "colorburn");
-    ADD(BLEND_OP_HARDLIGHT_EXT, "hardlight");
-    ADD(BLEND_OP_SOFTLIGHT_EXT, "softlight");
-    ADD(BLEND_OP_DIFFERENCE_EXT, "difference");
-    ADD(BLEND_OP_EXCLUSION_EXT, "exclusion");
-    ADD(BLEND_OP_INVERT_EXT, "invert");
-    ADD(BLEND_OP_INVERT_RGB_EXT, "invert rgb");
-    ADD(BLEND_OP_LINEARDODGE_EXT, "lineardodge");
-    ADD(BLEND_OP_LINEARBURN_EXT, "linearburn");
-    ADD(BLEND_OP_VIVIDLIGHT_EXT, "vividlight");
-    ADD(BLEND_OP_LINEARLIGHT_EXT, "linearlight");
-    ADD(BLEND_OP_PINLIGHT_EXT, "pinlight");
-    ADD(BLEND_OP_HARDMIX_EXT, "hardmix");
-    ADD(BLEND_OP_HSL_HUE_EXT, "hsl hue");
-    ADD(BLEND_OP_HSL_SATURATION_EXT, "hsl saturation");
-    ADD(BLEND_OP_HSL_COLOR_EXT, "hsl color");
-    ADD(BLEND_OP_HSL_LUMINOSITY_EXT, "hsl luminosity");
-    ADD(BLEND_OP_PLUS_EXT, "plus");
-    ADD(BLEND_OP_PLUS_CLAMPED_EXT, "plus clamped");
-    ADD(BLEND_OP_PLUS_CLAMPED_ALPHA_EXT, "plus clamped alpha");
-    ADD(BLEND_OP_PLUS_DARKER_EXT, "plus darker");
-    ADD(BLEND_OP_MINUS_EXT, "minus");
-    ADD(BLEND_OP_MINUS_CLAMPED_EXT, "minus clamped");
-    ADD(BLEND_OP_CONTRAST_EXT, "contrast");
-    ADD(BLEND_OP_INVERT_OVG_EXT, "invert ovg");
-    ADD(BLEND_OP_RED_EXT, "red");
-    ADD(BLEND_OP_GREEN_EXT, "green");
-    ADD(BLEND_OP_BLUE_EXT, "blue");
+    ADD(BLEND_OP_ZERO, "zero");
+    ADD(BLEND_OP_SRC, "src");
+    ADD(BLEND_OP_DST, "dst");
+    ADD(BLEND_OP_SRC_OVER, "src over");
+    ADD(BLEND_OP_DST_OVER, "dst over");
+    ADD(BLEND_OP_SRC_IN, "src in");
+    ADD(BLEND_OP_DST_IN, "dst in");
+    ADD(BLEND_OP_SRC_OUT, "src out");
+    ADD(BLEND_OP_DST_OUT, "dst out");
+    ADD(BLEND_OP_SRC_ATOP, "src atop");
+    ADD(BLEND_OP_DST_ATOP, "dst atop");
+    ADD(BLEND_OP_XOR, "xor");
+    ADD(BLEND_OP_MULTIPLY, "multiply");
+    ADD(BLEND_OP_SCREEN, "screen");
+    ADD(BLEND_OP_OVERLAY, "overlay");
+    ADD(BLEND_OP_DARKEN, "darken");
+    ADD(BLEND_OP_LIGHTEN, "lighten");
+    ADD(BLEND_OP_COLORDODGE, "colordodge");
+    ADD(BLEND_OP_COLORBURN, "colorburn");
+    ADD(BLEND_OP_HARDLIGHT, "hardlight");
+    ADD(BLEND_OP_SOFTLIGHT, "softlight");
+    ADD(BLEND_OP_DIFFERENCE, "difference");
+    ADD(BLEND_OP_EXCLUSION, "exclusion");
+    ADD(BLEND_OP_INVERT, "invert");
+    ADD(BLEND_OP_INVERT_RGB, "invert rgb");
+    ADD(BLEND_OP_LINEARDODGE, "lineardodge");
+    ADD(BLEND_OP_LINEARBURN, "linearburn");
+    ADD(BLEND_OP_VIVIDLIGHT, "vividlight");
+    ADD(BLEND_OP_LINEARLIGHT, "linearlight");
+    ADD(BLEND_OP_PINLIGHT, "pinlight");
+    ADD(BLEND_OP_HARDMIX, "hardmix");
+    ADD(BLEND_OP_HSL_HUE, "hsl hue");
+    ADD(BLEND_OP_HSL_SATURATION, "hsl saturation");
+    ADD(BLEND_OP_HSL_COLOR, "hsl color");
+    ADD(BLEND_OP_HSL_LUMINOSITY, "hsl luminosity");
+    ADD(BLEND_OP_PLUS, "plus");
+    ADD(BLEND_OP_PLUS_CLAMPED, "plus clamped");
+    ADD(BLEND_OP_PLUS_CLAMPED_ALPHA, "plus clamped alpha");
+    ADD(BLEND_OP_PLUS_DARKER, "plus darker");
+    ADD(BLEND_OP_MINUS, "minus");
+    ADD(BLEND_OP_MINUS_CLAMPED, "minus clamped");
+    ADD(BLEND_OP_CONTRAST, "contrast");
+    ADD(BLEND_OP_INVERT_OVG, "invert ovg");
+    ADD(BLEND_OP_RED, "red");
+    ADD(BLEND_OP_GREEN, "green");
+    ADD(BLEND_OP_BLUE, "blue");
 
 
     domain = DOMAIN_DYNAMIC_STATE; /* VkDynamicState */
@@ -884,13 +885,13 @@ void moonvulkan_open_enums(lua_State *L)
     ADD(DYNAMIC_STATE_STENCIL_COMPARE_MASK, "stencil compare mask");
     ADD(DYNAMIC_STATE_STENCIL_WRITE_MASK, "stencil write mask");
     ADD(DYNAMIC_STATE_STENCIL_REFERENCE, "stencil reference");
-    ADD(DYNAMIC_STATE_DISCARD_RECTANGLE_EXT, "discard rectangle");
-    ADD(DYNAMIC_STATE_SAMPLE_LOCATIONS_EXT, "sample locations");
+    ADD(DYNAMIC_STATE_DISCARD_RECTANGLE, "discard rectangle");
+    ADD(DYNAMIC_STATE_SAMPLE_LOCATIONS, "sample locations");
 
     domain = DOMAIN_FILTER; /* VkFilter */
     ADD(FILTER_NEAREST, "nearest");
     ADD(FILTER_LINEAR, "linear");
-    ADD(FILTER_CUBIC_EXT, "cubic");
+    ADD(FILTER_CUBIC, "cubic");
 
     domain = DOMAIN_SAMPLER_MIPMAP_MODE; /* VkSamplerMipmapMode */
     ADD(SAMPLER_MIPMAP_MODE_NEAREST, "nearest");
@@ -910,8 +911,8 @@ void moonvulkan_open_enums(lua_State *L)
     ADD(BORDER_COLOR_INT_OPAQUE_BLACK, "int opaque black");
     ADD(BORDER_COLOR_FLOAT_OPAQUE_WHITE, "float opaque white");
     ADD(BORDER_COLOR_INT_OPAQUE_WHITE, "int opaque white");
-    ADD(BORDER_COLOR_FLOAT_CUSTOM_EXT, "float custom");
-    ADD(BORDER_COLOR_INT_CUSTOM_EXT, "int custom");
+    ADD(BORDER_COLOR_FLOAT_CUSTOM, "float custom");
+    ADD(BORDER_COLOR_INT_CUSTOM, "int custom");
 
     domain = DOMAIN_DESCRIPTOR_TYPE; /* VkDescriptorType */
     ADD(DESCRIPTOR_TYPE_SAMPLER, "sampler");
@@ -925,7 +926,7 @@ void moonvulkan_open_enums(lua_State *L)
     ADD(DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC, "uniform buffer dynamic");
     ADD(DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC, "storage buffer dynamic");
     ADD(DESCRIPTOR_TYPE_INPUT_ATTACHMENT, "input attachment");
-    ADD(DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK_EXT, "inline uniform block");
+    ADD(DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK, "inline uniform block");
 
     domain = DOMAIN_ATTACHMENT_LOAD_OP; /* VkAttachmentLoadOp */
     ADD(ATTACHMENT_LOAD_OP_LOAD, "load");
@@ -953,85 +954,85 @@ void moonvulkan_open_enums(lua_State *L)
     ADD(SUBPASS_CONTENTS_SECONDARY_COMMAND_BUFFERS, "secondary command buffers");
 
     domain = DOMAIN_COLOR_SPACE; /* VkColorSpaceKHR */
-    ADD(COLOR_SPACE_SRGB_NONLINEAR_KHR, "srgb nonlinear");
-//  ADD(COLOR_SPACE_DISPLAY_P3_LINEAR_EXT, "display p3 linear"); -> "dci p3 linear"
-    ADD(COLOR_SPACE_DISPLAY_P3_NONLINEAR_EXT, "display p3 nonlinear");
-    ADD(COLOR_SPACE_EXTENDED_SRGB_LINEAR_EXT, "extended srgb linear");
-    ADD(COLOR_SPACE_EXTENDED_SRGB_NONLINEAR_EXT, "extended srgb nonlinear");
-    ADD(COLOR_SPACE_DCI_P3_LINEAR_EXT, "dci p3 linear");
-    ADD(COLOR_SPACE_DCI_P3_NONLINEAR_EXT, "dci p3 nonlinear");
-    ADD(COLOR_SPACE_BT709_LINEAR_EXT, "bt709 linear");
-    ADD(COLOR_SPACE_BT709_NONLINEAR_EXT, "bt709 nonlinear");
-    ADD(COLOR_SPACE_BT2020_LINEAR_EXT, "bt2020 linear");
-    ADD(COLOR_SPACE_HDR10_ST2084_EXT, "hdr10 st2084");
-    ADD(COLOR_SPACE_DOLBYVISION_EXT, "dolbyvision");
-    ADD(COLOR_SPACE_HDR10_HLG_EXT, "hdr10 hlg");
-    ADD(COLOR_SPACE_ADOBERGB_LINEAR_EXT, "adobergb linear");
-    ADD(COLOR_SPACE_ADOBERGB_NONLINEAR_EXT, "adobergb nonlinear");
-    ADD(COLOR_SPACE_PASS_THROUGH_EXT, "pass through");
+    ADD(COLOR_SPACE_SRGB_NONLINEAR, "srgb nonlinear");
+//  ADD(COLOR_SPACE_DISPLAY_P3_LINEAR, "display p3 linear"); -> "dci p3 linear"
+    ADD(COLOR_SPACE_DISPLAY_P3_NONLINEAR, "display p3 nonlinear");
+    ADD(COLOR_SPACE_EXTENDED_SRGB_LINEAR, "extended srgb linear");
+    ADD(COLOR_SPACE_EXTENDED_SRGB_NONLINEAR, "extended srgb nonlinear");
+    ADD(COLOR_SPACE_DCI_P3_LINEAR, "dci p3 linear");
+    ADD(COLOR_SPACE_DCI_P3_NONLINEAR, "dci p3 nonlinear");
+    ADD(COLOR_SPACE_BT709_LINEAR, "bt709 linear");
+    ADD(COLOR_SPACE_BT709_NONLINEAR, "bt709 nonlinear");
+    ADD(COLOR_SPACE_BT2020_LINEAR, "bt2020 linear");
+    ADD(COLOR_SPACE_HDR10_ST2084, "hdr10 st2084");
+    ADD(COLOR_SPACE_DOLBYVISION, "dolbyvision");
+    ADD(COLOR_SPACE_HDR10_HLG, "hdr10 hlg");
+    ADD(COLOR_SPACE_ADOBERGB_LINEAR, "adobergb linear");
+    ADD(COLOR_SPACE_ADOBERGB_NONLINEAR, "adobergb nonlinear");
+    ADD(COLOR_SPACE_PASS_THROUGH, "pass through");
 
     domain = DOMAIN_PRESENT_MODE; /* VkPresentModeKHR */
-    ADD(PRESENT_MODE_IMMEDIATE_KHR, "immediate");
-    ADD(PRESENT_MODE_MAILBOX_KHR, "mailbox");
-    ADD(PRESENT_MODE_FIFO_KHR, "fifo");
-    ADD(PRESENT_MODE_FIFO_RELAXED_KHR, "fifo relaxed");
-    ADD(PRESENT_MODE_SHARED_DEMAND_REFRESH_KHR, "shared demand refresh");
-    ADD(PRESENT_MODE_SHARED_CONTINUOUS_REFRESH_KHR, "shared continuous refresh");
+    ADD(PRESENT_MODE_IMMEDIATE, "immediate");
+    ADD(PRESENT_MODE_MAILBOX, "mailbox");
+    ADD(PRESENT_MODE_FIFO, "fifo");
+    ADD(PRESENT_MODE_FIFO_RELAXED, "fifo relaxed");
+    ADD(PRESENT_MODE_SHARED_DEMAND_REFRESH, "shared demand refresh");
+    ADD(PRESENT_MODE_SHARED_CONTINUOUS_REFRESH, "shared continuous refresh");
 
     domain = DOMAIN_DEBUG_REPORT_OBJECT_TYPE; /* VkDebugReportObjectTypeEXT */
-    ADD(DEBUG_REPORT_OBJECT_TYPE_UNKNOWN_EXT, "unknown");
-    ADD(DEBUG_REPORT_OBJECT_TYPE_INSTANCE_EXT, "instance");
-    ADD(DEBUG_REPORT_OBJECT_TYPE_PHYSICAL_DEVICE_EXT, "physical device");
-    ADD(DEBUG_REPORT_OBJECT_TYPE_DEVICE_EXT, "device");
-    ADD(DEBUG_REPORT_OBJECT_TYPE_QUEUE_EXT, "queue");
-    ADD(DEBUG_REPORT_OBJECT_TYPE_SEMAPHORE_EXT, "semaphore");
-    ADD(DEBUG_REPORT_OBJECT_TYPE_COMMAND_BUFFER_EXT, "command buffer");
-    ADD(DEBUG_REPORT_OBJECT_TYPE_FENCE_EXT, "fence");
-    ADD(DEBUG_REPORT_OBJECT_TYPE_DEVICE_MEMORY_EXT, "device memory");
-    ADD(DEBUG_REPORT_OBJECT_TYPE_BUFFER_EXT, "buffer");
-    ADD(DEBUG_REPORT_OBJECT_TYPE_IMAGE_EXT, "image");
-    ADD(DEBUG_REPORT_OBJECT_TYPE_EVENT_EXT, "event");
-    ADD(DEBUG_REPORT_OBJECT_TYPE_QUERY_POOL_EXT, "query pool");
-    ADD(DEBUG_REPORT_OBJECT_TYPE_BUFFER_VIEW_EXT, "buffer view");
-    ADD(DEBUG_REPORT_OBJECT_TYPE_IMAGE_VIEW_EXT, "image view");
-    ADD(DEBUG_REPORT_OBJECT_TYPE_SHADER_MODULE_EXT, "shader module");
-    ADD(DEBUG_REPORT_OBJECT_TYPE_PIPELINE_CACHE_EXT, "pipeline cache");
-    ADD(DEBUG_REPORT_OBJECT_TYPE_PIPELINE_LAYOUT_EXT, "pipeline layout");
-    ADD(DEBUG_REPORT_OBJECT_TYPE_RENDER_PASS_EXT, "render pass");
-    ADD(DEBUG_REPORT_OBJECT_TYPE_PIPELINE_EXT, "pipeline");
-    ADD(DEBUG_REPORT_OBJECT_TYPE_DESCRIPTOR_SET_LAYOUT_EXT, "descriptor set layout");
-    ADD(DEBUG_REPORT_OBJECT_TYPE_SAMPLER_EXT, "sampler");
-    ADD(DEBUG_REPORT_OBJECT_TYPE_DESCRIPTOR_POOL_EXT, "descriptor pool");
-    ADD(DEBUG_REPORT_OBJECT_TYPE_DESCRIPTOR_SET_EXT, "descriptor set");
-    ADD(DEBUG_REPORT_OBJECT_TYPE_FRAMEBUFFER_EXT, "framebuffer");
-    ADD(DEBUG_REPORT_OBJECT_TYPE_COMMAND_POOL_EXT, "command pool");
-    ADD(DEBUG_REPORT_OBJECT_TYPE_SURFACE_KHR_EXT, "surface");
-    ADD(DEBUG_REPORT_OBJECT_TYPE_SWAPCHAIN_KHR_EXT, "swapchain");
-    ADD(DEBUG_REPORT_OBJECT_TYPE_DEBUG_REPORT_CALLBACK_EXT_EXT, "debug report callback");
-    ADD(DEBUG_REPORT_OBJECT_TYPE_DISPLAY_KHR_EXT, "display");
-    ADD(DEBUG_REPORT_OBJECT_TYPE_DISPLAY_MODE_KHR_EXT, "display mode");
-    ADD(DEBUG_REPORT_OBJECT_TYPE_VALIDATION_CACHE_EXT, "validation cache");
-    ADD(DEBUG_REPORT_OBJECT_TYPE_SAMPLER_YCBCR_CONVERSION_EXT, "sampler ycbcr conversion");
-    ADD(DEBUG_REPORT_OBJECT_TYPE_DESCRIPTOR_UPDATE_TEMPLATE_EXT , "descriptor update template");
+    ADD(DEBUG_REPORT_OBJECT_TYPE_UNKNOWN, "unknown");
+    ADD(DEBUG_REPORT_OBJECT_TYPE_INSTANCE, "instance");
+    ADD(DEBUG_REPORT_OBJECT_TYPE_PHYSICAL_DEVICE, "physical device");
+    ADD(DEBUG_REPORT_OBJECT_TYPE_DEVICE, "device");
+    ADD(DEBUG_REPORT_OBJECT_TYPE_QUEUE, "queue");
+    ADD(DEBUG_REPORT_OBJECT_TYPE_SEMAPHORE, "semaphore");
+    ADD(DEBUG_REPORT_OBJECT_TYPE_COMMAND_BUFFER, "command buffer");
+    ADD(DEBUG_REPORT_OBJECT_TYPE_FENCE, "fence");
+    ADD(DEBUG_REPORT_OBJECT_TYPE_DEVICE_MEMORY, "device memory");
+    ADD(DEBUG_REPORT_OBJECT_TYPE_BUFFER, "buffer");
+    ADD(DEBUG_REPORT_OBJECT_TYPE_IMAGE, "image");
+    ADD(DEBUG_REPORT_OBJECT_TYPE_EVENT, "event");
+    ADD(DEBUG_REPORT_OBJECT_TYPE_QUERY_POOL, "query pool");
+    ADD(DEBUG_REPORT_OBJECT_TYPE_BUFFER_VIEW, "buffer view");
+    ADD(DEBUG_REPORT_OBJECT_TYPE_IMAGE_VIEW, "image view");
+    ADD(DEBUG_REPORT_OBJECT_TYPE_SHADER_MODULE, "shader module");
+    ADD(DEBUG_REPORT_OBJECT_TYPE_PIPELINE_CACHE, "pipeline cache");
+    ADD(DEBUG_REPORT_OBJECT_TYPE_PIPELINE_LAYOUT, "pipeline layout");
+    ADD(DEBUG_REPORT_OBJECT_TYPE_RENDER_PASS, "render pass");
+    ADD(DEBUG_REPORT_OBJECT_TYPE_PIPELINE, "pipeline");
+    ADD(DEBUG_REPORT_OBJECT_TYPE_DESCRIPTOR_SET_LAYOUT, "descriptor set layout");
+    ADD(DEBUG_REPORT_OBJECT_TYPE_SAMPLER, "sampler");
+    ADD(DEBUG_REPORT_OBJECT_TYPE_DESCRIPTOR_POOL, "descriptor pool");
+    ADD(DEBUG_REPORT_OBJECT_TYPE_DESCRIPTOR_SET, "descriptor set");
+    ADD(DEBUG_REPORT_OBJECT_TYPE_FRAMEBUFFER, "framebuffer");
+    ADD(DEBUG_REPORT_OBJECT_TYPE_COMMAND_POOL, "command pool");
+    ADD(DEBUG_REPORT_OBJECT_TYPE_SURFACE, "surface");
+    ADD(DEBUG_REPORT_OBJECT_TYPE_SWAPCHAIN, "swapchain");
+    ADD(DEBUG_REPORT_OBJECT_TYPE_DEBUG_REPORT, "debug report");
+    ADD(DEBUG_REPORT_OBJECT_TYPE_DISPLAY, "display");
+    ADD(DEBUG_REPORT_OBJECT_TYPE_DISPLAY_MODE, "display mode");
+    ADD(DEBUG_REPORT_OBJECT_TYPE_VALIDATION_CACHE, "validation cache");
+    ADD(DEBUG_REPORT_OBJECT_TYPE_SAMPLER_YCBCR_CONVERSION, "sampler ycbcr conversion");
+    ADD(DEBUG_REPORT_OBJECT_TYPE_DESCRIPTOR_UPDATE_TEMPLATE, "descriptor update template");
 
     domain = DOMAIN_DESCRIPTOR_UPDATE_TEMPLATE_TYPE; /* VkDescriptorUpdateTemplateType */
     ADD(DESCRIPTOR_UPDATE_TEMPLATE_TYPE_DESCRIPTOR_SET, "descriptor set");
-    ADD(DESCRIPTOR_UPDATE_TEMPLATE_TYPE_PUSH_DESCRIPTORS_KHR, "push descriptors");
+    ADD(DESCRIPTOR_UPDATE_TEMPLATE_TYPE_PUSH_DESCRIPTORS, "push descriptors");
 
     domain = DOMAIN_VALIDATION_CHECK; /* VkValidationCheckEXT */
-    ADD(VALIDATION_CHECK_ALL_EXT, "all");
-    ADD(VALIDATION_CHECK_SHADERS_EXT, "shaders");
+    ADD(VALIDATION_CHECK_ALL, "all");
+    ADD(VALIDATION_CHECK_SHADERS, "shaders");
 
     domain = DOMAIN_DISPLAY_POWER_STATE; /* VkDisplayPowerStateEXT */
-    ADD(DISPLAY_POWER_STATE_OFF_EXT, "off");
-    ADD(DISPLAY_POWER_STATE_SUSPEND_EXT, "suspend");
-    ADD(DISPLAY_POWER_STATE_ON_EXT, "on");
+    ADD(DISPLAY_POWER_STATE_OFF, "off");
+    ADD(DISPLAY_POWER_STATE_SUSPEND, "suspend");
+    ADD(DISPLAY_POWER_STATE_ON, "on");
 
     domain = DOMAIN_DEVICE_EVENT_TYPE; /* VkDeviceEventTypeEXT */
-    ADD(DEVICE_EVENT_TYPE_DISPLAY_HOTPLUG_EXT, "display hotplug");
+    ADD(DEVICE_EVENT_TYPE_DISPLAY_HOTPLUG, "display hotplug");
 
     domain = DOMAIN_DISPLAY_EVENT_TYPE; /* VkDisplayEventTypeEXT */
-    ADD(DISPLAY_EVENT_TYPE_FIRST_PIXEL_OUT_EXT, "first pixel out");
+    ADD(DISPLAY_EVENT_TYPE_FIRST_PIXEL_OUT, "first pixel out");
 
     domain = DOMAIN_OBJECT_TYPE; /* VkObjectType */
     ADD(OBJECT_TYPE_UNKNOWN, "unknown");
@@ -1060,23 +1061,23 @@ void moonvulkan_open_enums(lua_State *L)
     ADD(OBJECT_TYPE_DESCRIPTOR_SET, "descriptor set");
     ADD(OBJECT_TYPE_FRAMEBUFFER, "framebuffer");
     ADD(OBJECT_TYPE_COMMAND_POOL, "command pool");
-    ADD(OBJECT_TYPE_SURFACE_KHR, "surface");
-    ADD(OBJECT_TYPE_SWAPCHAIN_KHR, "swapchain");
-    ADD(OBJECT_TYPE_DISPLAY_KHR, "display");
-    ADD(OBJECT_TYPE_DISPLAY_MODE_KHR, "display mode");
-    ADD(OBJECT_TYPE_DEBUG_REPORT_CALLBACK_EXT, "debug report callback");
+    ADD(OBJECT_TYPE_SURFACE, "surface");
+    ADD(OBJECT_TYPE_SWAPCHAIN, "swapchain");
+    ADD(OBJECT_TYPE_DISPLAY, "display");
+    ADD(OBJECT_TYPE_DISPLAY_MODE, "display mode");
+    ADD(OBJECT_TYPE_DEBUG_REPORT_CALLBACK, "debug report callback");
     ADD(OBJECT_TYPE_DESCRIPTOR_UPDATE_TEMPLATE, "descriptor update template");
     ADD(OBJECT_TYPE_SAMPLER_YCBCR_CONVERSION, "sampler ycbcr conversion");
-    ADD(OBJECT_TYPE_VALIDATION_CACHE_EXT, "validation cache");
-    ADD(OBJECT_TYPE_DEBUG_UTILS_MESSENGER_EXT, "debug utils messenger");
-    ADD(OBJECT_TYPE_ACCELERATION_STRUCTURE_KHR, "acceleration structure");
-    ADD(OBJECT_TYPE_DEFERRED_OPERATION_KHR, "deferred operation");
-    ADD(OBJECT_TYPE_PRIVATE_DATA_SLOT_EXT, "private data slot");
+    ADD(OBJECT_TYPE_VALIDATION_CACHE, "validation cache");
+    ADD(OBJECT_TYPE_DEBUG_UTILS_MESSENGER, "debug utils messenger");
+    ADD(OBJECT_TYPE_ACCELERATION_STRUCTURE, "acceleration structure");
+    ADD(OBJECT_TYPE_DEFERRED_OPERATION, "deferred operation");
+    ADD(OBJECT_TYPE_PRIVATE_DATA_SLOT, "private data slot");
 
     domain = DOMAIN_BLEND_OVERLAP; /* VkBlendOverlapEXT */
-    ADD(BLEND_OVERLAP_UNCORRELATED_EXT, "uncorrelated");
-    ADD(BLEND_OVERLAP_DISJOINT_EXT, "disjoint");
-    ADD(BLEND_OVERLAP_CONJOINT_EXT, "conjoint");
+    ADD(BLEND_OVERLAP_UNCORRELATED, "uncorrelated");
+    ADD(BLEND_OVERLAP_DISJOINT, "disjoint");
+    ADD(BLEND_OVERLAP_CONJOINT, "conjoint");
 
     domain = DOMAIN_SAMPLER_REDUCTION_MODE; /* VkSamplerReductionMode */
     ADD(SAMPLER_REDUCTION_MODE_WEIGHTED_AVERAGE, "weighted average");
@@ -1084,8 +1085,8 @@ void moonvulkan_open_enums(lua_State *L)
     ADD(SAMPLER_REDUCTION_MODE_MAX, "max");
 
     domain = DOMAIN_DISCARD_RECTANGLE_MODE; /* VkDiscardRectangleModeEXT */
-    ADD(DISCARD_RECTANGLE_MODE_INCLUSIVE_EXT, "inclusive");
-    ADD(DISCARD_RECTANGLE_MODE_EXCLUSIVE_EXT, "exclusive");
+    ADD(DISCARD_RECTANGLE_MODE_INCLUSIVE, "inclusive");
+    ADD(DISCARD_RECTANGLE_MODE_EXCLUSIVE, "exclusive");
 
     domain = DOMAIN_POINT_CLIPPING_BEHAVIOR; /* VkPointClippingBehavior */
     ADD(POINT_CLIPPING_BEHAVIOR_ALL_CLIP_PLANES, "all clip planes");
@@ -1111,18 +1112,18 @@ void moonvulkan_open_enums(lua_State *L)
     ADD(CHROMA_LOCATION_MIDPOINT, "midpoint");
 
     domain = DOMAIN_VALIDATION_CACHE_HEADER_VERSION; /* VkValidationCacheHeaderVersionKHR */
-    ADD(VALIDATION_CACHE_HEADER_VERSION_ONE_EXT, "one");
+    ADD(VALIDATION_CACHE_HEADER_VERSION_ONE, "one");
 
     domain = DOMAIN_QUEUE_GLOBAL_PRIORITY; /* VkQueueGlobalPriorityEXT */
-    ADD(QUEUE_GLOBAL_PRIORITY_LOW_EXT, "low");
-    ADD(QUEUE_GLOBAL_PRIORITY_MEDIUM_EXT, "medium");
-    ADD(QUEUE_GLOBAL_PRIORITY_HIGH_EXT, "high");
-    ADD(QUEUE_GLOBAL_PRIORITY_REALTIME_EXT, "realtime");
+    ADD(QUEUE_GLOBAL_PRIORITY_LOW, "low");
+    ADD(QUEUE_GLOBAL_PRIORITY_MEDIUM, "medium");
+    ADD(QUEUE_GLOBAL_PRIORITY_HIGH, "high");
+    ADD(QUEUE_GLOBAL_PRIORITY_REALTIME, "realtime");
 
     domain = DOMAIN_CONSERVATIVE_RASTERIZATION_MODE; /* VkConservativeRasterizationModeEXT */
-    ADD(CONSERVATIVE_RASTERIZATION_MODE_DISABLED_EXT, "disabled");
-    ADD(CONSERVATIVE_RASTERIZATION_MODE_OVERESTIMATE_EXT, "overestimate");
-    ADD(CONSERVATIVE_RASTERIZATION_MODE_UNDERESTIMATE_EXT, "underestimate");
+    ADD(CONSERVATIVE_RASTERIZATION_MODE_DISABLED, "disabled");
+    ADD(CONSERVATIVE_RASTERIZATION_MODE_OVERESTIMATE, "overestimate");
+    ADD(CONSERVATIVE_RASTERIZATION_MODE_UNDERESTIMATE, "underestimate");
 
     domain = DOMAIN_VENDOR_ID; /* VkVendorId */
     ADD(VENDOR_ID_VIV, "viv");
@@ -1152,30 +1153,30 @@ void moonvulkan_open_enums(lua_State *L)
     ADD(DRIVER_ID_VERISILICON_PROPRIETARY, "verisilicon proprietary");
  
     domain = DOMAIN_TIME_DOMAIN; /* VkTimaDomainEXT */
-    ADD(TIME_DOMAIN_DEVICE_EXT, "device");
-    ADD(TIME_DOMAIN_CLOCK_MONOTONIC_EXT, "clock monotonic");
-    ADD(TIME_DOMAIN_CLOCK_MONOTONIC_RAW_EXT, "clock monotonic raw");
-    ADD(TIME_DOMAIN_QUERY_PERFORMANCE_COUNTER_EXT, "query performance counter");
+    ADD(TIME_DOMAIN_DEVICE, "device");
+    ADD(TIME_DOMAIN_CLOCK_MONOTONIC, "clock monotonic");
+    ADD(TIME_DOMAIN_CLOCK_MONOTONIC_RAW, "clock monotonic raw");
+    ADD(TIME_DOMAIN_QUERY_PERFORMANCE_COUNTER, "query performance counter");
 
     domain = DOMAIN_VALIDATION_FEATURE_ENABLE; /* VkValidationFeatureEnableEXT */
-    ADD(VALIDATION_FEATURE_ENABLE_GPU_ASSISTED_EXT, "gpu assisted");
-    ADD(VALIDATION_FEATURE_ENABLE_GPU_ASSISTED_RESERVE_BINDING_SLOT_EXT, "gpu assisted reserve binding slot");
+    ADD(VALIDATION_FEATURE_ENABLE_GPU_ASSISTED, "gpu assisted");
+    ADD(VALIDATION_FEATURE_ENABLE_GPU_ASSISTED_RESERVE_BINDING_SLOT, "gpu assisted reserve binding slot");
 
     domain = DOMAIN_VALIDATION_FEATURE_DISABLE; /* VkValidationFeatureDisableEXT */
-    ADD(VALIDATION_FEATURE_DISABLE_ALL_EXT, "all");
-    ADD(VALIDATION_FEATURE_DISABLE_SHADERS_EXT, "shaders");
-    ADD(VALIDATION_FEATURE_DISABLE_THREAD_SAFETY_EXT, "thread safety");
-    ADD(VALIDATION_FEATURE_DISABLE_API_PARAMETERS_EXT, "api parameters");
-    ADD(VALIDATION_FEATURE_DISABLE_OBJECT_LIFETIMES_EXT, "object lifetimes");
-    ADD(VALIDATION_FEATURE_DISABLE_CORE_CHECKS_EXT, "core checks");
-    ADD(VALIDATION_FEATURE_DISABLE_UNIQUE_HANDLES_EXT, "unique handles");
+    ADD(VALIDATION_FEATURE_DISABLE_ALL, "all");
+    ADD(VALIDATION_FEATURE_DISABLE_SHADERS, "shaders");
+    ADD(VALIDATION_FEATURE_DISABLE_THREAD_SAFETY, "thread safety");
+    ADD(VALIDATION_FEATURE_DISABLE_API_PARAMETERS, "api parameters");
+    ADD(VALIDATION_FEATURE_DISABLE_OBJECT_LIFETIMES, "object lifetimes");
+    ADD(VALIDATION_FEATURE_DISABLE_CORE_CHECKS, "core checks");
+    ADD(VALIDATION_FEATURE_DISABLE_UNIQUE_HANDLES, "unique handles");
 
     domain = DOMAIN_FULL_SCREEN_EXCLUSIVE; /* VkFullScreenExclusiveEXT */
 #if 0 //@@ why is this extension defined in vulkan_win32.h instead of vulkan_core.h?
-    ADD(FULL_SCREEN_EXCLUSIVE_DEFAULT_EXT, "default");
-    ADD(FULL_SCREEN_EXCLUSIVE_ALLOWED_EXT, "allowed");
-    ADD(FULL_SCREEN_EXCLUSIVE_DISALLOWED_EXT, "disallowed");
-    ADD(FULL_SCREEN_EXCLUSIVE_APPLICATION_CONTROLLED_EXT, "application controlled");
+    ADD(FULL_SCREEN_EXCLUSIVE_DEFAULT, "default");
+    ADD(FULL_SCREEN_EXCLUSIVE_ALLOWED, "allowed");
+    ADD(FULL_SCREEN_EXCLUSIVE_DISALLOWED, "disallowed");
+    ADD(FULL_SCREEN_EXCLUSIVE_APPLICATION_CONTROLLED, "application controlled");
 #endif
 
     domain = DOMAIN_SHADER_FLOAT_CONTROLS_INDEPENDENCE; /* VkShaderFloatControlsIndependence */
@@ -1188,100 +1189,100 @@ void moonvulkan_open_enums(lua_State *L)
     ADD(SEMAPHORE_TYPE_TIMELINE, "timeline");
 
     domain = DOMAIN_PERFORMANCE_COUNTER_UNIT; /* VkPerformanceCounterUnitKHR */
-    ADD(PERFORMANCE_COUNTER_UNIT_GENERIC_KHR, "generic");
-    ADD(PERFORMANCE_COUNTER_UNIT_PERCENTAGE_KHR, "percentage");
-    ADD(PERFORMANCE_COUNTER_UNIT_NANOSECONDS_KHR, "nanoseconds");
-    ADD(PERFORMANCE_COUNTER_UNIT_BYTES_KHR, "bytes");
-    ADD(PERFORMANCE_COUNTER_UNIT_BYTES_PER_SECOND_KHR, "bytes per second");
-    ADD(PERFORMANCE_COUNTER_UNIT_KELVIN_KHR, "kelvin");
-    ADD(PERFORMANCE_COUNTER_UNIT_WATTS_KHR, "watts");
-    ADD(PERFORMANCE_COUNTER_UNIT_VOLTS_KHR, "volts");
-    ADD(PERFORMANCE_COUNTER_UNIT_AMPS_KHR, "amps");
-    ADD(PERFORMANCE_COUNTER_UNIT_HERTZ_KHR, "hertz");
-    ADD(PERFORMANCE_COUNTER_UNIT_CYCLES_KHR, "cycles");
+    ADD(PERFORMANCE_COUNTER_UNIT_GENERIC, "generic");
+    ADD(PERFORMANCE_COUNTER_UNIT_PERCENTAGE, "percentage");
+    ADD(PERFORMANCE_COUNTER_UNIT_NANOSECONDS, "nanoseconds");
+    ADD(PERFORMANCE_COUNTER_UNIT_BYTES, "bytes");
+    ADD(PERFORMANCE_COUNTER_UNIT_BYTES_PER_SECOND, "bytes per second");
+    ADD(PERFORMANCE_COUNTER_UNIT_KELVIN, "kelvin");
+    ADD(PERFORMANCE_COUNTER_UNIT_WATTS, "watts");
+    ADD(PERFORMANCE_COUNTER_UNIT_VOLTS, "volts");
+    ADD(PERFORMANCE_COUNTER_UNIT_AMPS, "amps");
+    ADD(PERFORMANCE_COUNTER_UNIT_HERTZ, "hertz");
+    ADD(PERFORMANCE_COUNTER_UNIT_CYCLES, "cycles");
 
     domain = DOMAIN_PERFORMANCE_COUNTER_SCOPE; /* VkPerformanceCounterScopeKHR */
-    ADD(PERFORMANCE_COUNTER_SCOPE_COMMAND_BUFFER_KHR, "command buffer");
-    ADD(PERFORMANCE_COUNTER_SCOPE_RENDER_PASS_KHR, "render pass");
-    ADD(PERFORMANCE_COUNTER_SCOPE_COMMAND_KHR, "command");
+    ADD(PERFORMANCE_COUNTER_SCOPE_COMMAND_BUFFER, "command buffer");
+    ADD(PERFORMANCE_COUNTER_SCOPE_RENDER_PASS, "render pass");
+    ADD(PERFORMANCE_COUNTER_SCOPE_COMMAND, "command");
 
     domain = DOMAIN_PERFORMANCE_COUNTER_STORAGE; /* VkPerformanceCounterStorageKHR */
-    ADD(PERFORMANCE_COUNTER_STORAGE_INT32_KHR, "int32");
-    ADD(PERFORMANCE_COUNTER_STORAGE_INT64_KHR, "int64");
-    ADD(PERFORMANCE_COUNTER_STORAGE_UINT32_KHR, "uint32");
-    ADD(PERFORMANCE_COUNTER_STORAGE_UINT64_KHR, "uint64");
-    ADD(PERFORMANCE_COUNTER_STORAGE_FLOAT32_KHR, "float32");
-    ADD(PERFORMANCE_COUNTER_STORAGE_FLOAT64_KHR, "float64");
+    ADD(PERFORMANCE_COUNTER_STORAGE_INT32, "int32");
+    ADD(PERFORMANCE_COUNTER_STORAGE_INT64, "int64");
+    ADD(PERFORMANCE_COUNTER_STORAGE_UINT32, "uint32");
+    ADD(PERFORMANCE_COUNTER_STORAGE_UINT64, "uint64");
+    ADD(PERFORMANCE_COUNTER_STORAGE_FLOAT32, "float32");
+    ADD(PERFORMANCE_COUNTER_STORAGE_FLOAT64, "float64");
 
     domain = DOMAIN_FRAGMENT_SHADING_RATE_COMBINER_OP; /* VkFragmentShadingRateCombinerOpKHR */
-    ADD(FRAGMENT_SHADING_RATE_COMBINER_OP_KEEP_KHR, "keep");
-    ADD(FRAGMENT_SHADING_RATE_COMBINER_OP_REPLACE_KHR, "replace");
-    ADD(FRAGMENT_SHADING_RATE_COMBINER_OP_MIN_KHR, "min");
-    ADD(FRAGMENT_SHADING_RATE_COMBINER_OP_MAX_KHR, "max");
-    ADD(FRAGMENT_SHADING_RATE_COMBINER_OP_MUL_KHR, "mul");
+    ADD(FRAGMENT_SHADING_RATE_COMBINER_OP_KEEP, "keep");
+    ADD(FRAGMENT_SHADING_RATE_COMBINER_OP_REPLACE, "replace");
+    ADD(FRAGMENT_SHADING_RATE_COMBINER_OP_MIN, "min");
+    ADD(FRAGMENT_SHADING_RATE_COMBINER_OP_MAX, "max");
+    ADD(FRAGMENT_SHADING_RATE_COMBINER_OP_MUL, "mul");
 
     domain = DOMAIN_PIPELINE_EXECUTABLE_STATISTICS_FORMAT; /* VkPipelineExecutableStatisticsFormatKHR */
-    ADD(PIPELINE_EXECUTABLE_STATISTIC_FORMAT_BOOL32_KHR, "bool32");
-    ADD(PIPELINE_EXECUTABLE_STATISTIC_FORMAT_INT64_KHR, "int64");
-    ADD(PIPELINE_EXECUTABLE_STATISTIC_FORMAT_UINT64_KHR, "uint64");
-    ADD(PIPELINE_EXECUTABLE_STATISTIC_FORMAT_FLOAT64_KHR, "float64");
+    ADD(PIPELINE_EXECUTABLE_STATISTIC_FORMAT_BOOL32, "bool32");
+    ADD(PIPELINE_EXECUTABLE_STATISTIC_FORMAT_INT64, "int64");
+    ADD(PIPELINE_EXECUTABLE_STATISTIC_FORMAT_UINT64, "uint64");
+    ADD(PIPELINE_EXECUTABLE_STATISTIC_FORMAT_FLOAT64, "float64");
 
     domain = DOMAIN_RAY_TRACING_SHADER_GROUP_TYPE; /* VkRayTracingShaderGroupTypeKHR */
-    ADD(RAY_TRACING_SHADER_GROUP_TYPE_GENERAL_KHR, "general");
-    ADD(RAY_TRACING_SHADER_GROUP_TYPE_TRIANGLES_HIT_GROUP_KHR, "triangles hit group");
-    ADD(RAY_TRACING_SHADER_GROUP_TYPE_PROCEDURAL_HIT_GROUP_KHR, "procedural hit group");
+    ADD(RAY_TRACING_SHADER_GROUP_TYPE_GENERAL, "general");
+    ADD(RAY_TRACING_SHADER_GROUP_TYPE_TRIANGLES_HIT_GROUP, "triangles hit group");
+    ADD(RAY_TRACING_SHADER_GROUP_TYPE_PROCEDURAL_HIT_GROUP, "procedural hit group");
 
     domain = DOMAIN_GEOMETRY_TYPE; /* VkGeometryTypeKHR */
-    ADD(GEOMETRY_TYPE_TRIANGLES_KHR, "triangles");
-    ADD(GEOMETRY_TYPE_AABBS_KHR, "aabbs");
-    ADD(GEOMETRY_TYPE_INSTANCES_KHR, "instances");
+    ADD(GEOMETRY_TYPE_TRIANGLES, "triangles");
+    ADD(GEOMETRY_TYPE_AABBS, "aabbs");
+    ADD(GEOMETRY_TYPE_INSTANCES, "instances");
 
     domain = DOMAIN_ACCELERATION_STRUCTURE_TYPE; /* VkAccelerationStructureTypeKHR */
-    ADD(ACCELERATION_STRUCTURE_TYPE_TOP_LEVEL_KHR, "top level");
-    ADD(ACCELERATION_STRUCTURE_TYPE_BOTTOM_LEVEL_KHR, "bottom level");
-    ADD(ACCELERATION_STRUCTURE_TYPE_GENERIC_KHR, "generic");
+    ADD(ACCELERATION_STRUCTURE_TYPE_TOP_LEVEL, "top level");
+    ADD(ACCELERATION_STRUCTURE_TYPE_BOTTOM_LEVEL, "bottom level");
+    ADD(ACCELERATION_STRUCTURE_TYPE_GENERIC, "generic");
 
     domain = DOMAIN_COPY_ACCELERATION_STRUCTURE_MODE; /* VkCopyAccelerationStructureModeKHR */
-    ADD(COPY_ACCELERATION_STRUCTURE_MODE_CLONE_KHR, "clone");
-    ADD(COPY_ACCELERATION_STRUCTURE_MODE_COMPACT_KHR, "compact");
-    ADD(COPY_ACCELERATION_STRUCTURE_MODE_SERIALIZE_KHR, "serialize");
-    ADD(COPY_ACCELERATION_STRUCTURE_MODE_DESERIALIZE_KHR, "deserialize");
+    ADD(COPY_ACCELERATION_STRUCTURE_MODE_CLONE, "clone");
+    ADD(COPY_ACCELERATION_STRUCTURE_MODE_COMPACT, "compact");
+    ADD(COPY_ACCELERATION_STRUCTURE_MODE_SERIALIZE, "serialize");
+    ADD(COPY_ACCELERATION_STRUCTURE_MODE_DESERIALIZE, "deserialize");
 
     domain = DOMAIN_PROVOKING_VERTEX_MODE; /* VkProvokingVertexModeEXT */
-    ADD(PROVOKING_VERTEX_MODE_FIRST_VERTEX_EXT, "first vertex");
-    ADD(PROVOKING_VERTEX_MODE_LAST_VERTEX_EXT, "last vertex");
+    ADD(PROVOKING_VERTEX_MODE_FIRST_VERTEX, "first vertex");
+    ADD(PROVOKING_VERTEX_MODE_LAST_VERTEX, "last vertex");
 
     domain = DOMAIN_LINE_RASTERIZATION_MODE; /* VkLineRasterizationModeEXT */
-    ADD(LINE_RASTERIZATION_MODE_DEFAULT_EXT, "default");
-    ADD(LINE_RASTERIZATION_MODE_RECTANGULAR_EXT, "rectangular");
-    ADD(LINE_RASTERIZATION_MODE_BRESENHAM_EXT, "bresenham");
-    ADD(LINE_RASTERIZATION_MODE_RECTANGULAR_SMOOTH_EXT, "rectangular smooth");
+    ADD(LINE_RASTERIZATION_MODE_DEFAULT, "default");
+    ADD(LINE_RASTERIZATION_MODE_RECTANGULAR, "rectangular");
+    ADD(LINE_RASTERIZATION_MODE_BRESENHAM, "bresenham");
+    ADD(LINE_RASTERIZATION_MODE_RECTANGULAR_SMOOTH, "rectangular smooth");
 
     domain = DOMAIN_DEVICE_MEMORY_REPORT_EVENT_TYPE; /* VkDeviceMemoryReportEventTypeEXT */
-    ADD(DEVICE_MEMORY_REPORT_EVENT_TYPE_ALLOCATE_EXT, "allocate");
-    ADD(DEVICE_MEMORY_REPORT_EVENT_TYPE_FREE_EXT, "free");
-    ADD(DEVICE_MEMORY_REPORT_EVENT_TYPE_IMPORT_EXT, "import");
-    ADD(DEVICE_MEMORY_REPORT_EVENT_TYPE_UNIMPORT_EXT, "unimport");
-    ADD(DEVICE_MEMORY_REPORT_EVENT_TYPE_ALLOCATION_FAILED_EXT, "allocation failed");
+    ADD(DEVICE_MEMORY_REPORT_EVENT_TYPE_ALLOCATE, "allocate");
+    ADD(DEVICE_MEMORY_REPORT_EVENT_TYPE_FREE, "free");
+    ADD(DEVICE_MEMORY_REPORT_EVENT_TYPE_IMPORT, "import");
+    ADD(DEVICE_MEMORY_REPORT_EVENT_TYPE_UNIMPORT, "unimport");
+    ADD(DEVICE_MEMORY_REPORT_EVENT_TYPE_ALLOCATION_FAILED, "allocation failed");
 
     domain = DOMAIN_BUILD_ACCELERATION_STRUCTURE_MODE; /* VkBuildAccelerationStructureModeKHR */
-    ADD(BUILD_ACCELERATION_STRUCTURE_MODE_BUILD_KHR, "build");
-    ADD(BUILD_ACCELERATION_STRUCTURE_MODE_UPDATE_KHR, "update");
+    ADD(BUILD_ACCELERATION_STRUCTURE_MODE_BUILD, "build");
+    ADD(BUILD_ACCELERATION_STRUCTURE_MODE_UPDATE, "update");
 
     domain = DOMAIN_ACCELERATION_STRUCTURE_BUILD_TYPE; /* VkAccelerationStructureBuildTypeKHR */
-    ADD(ACCELERATION_STRUCTURE_BUILD_TYPE_HOST_KHR, "host");
-    ADD(ACCELERATION_STRUCTURE_BUILD_TYPE_DEVICE_KHR, "device");
-    ADD(ACCELERATION_STRUCTURE_BUILD_TYPE_HOST_OR_DEVICE_KHR, "host or device");
+    ADD(ACCELERATION_STRUCTURE_BUILD_TYPE_HOST, "host");
+    ADD(ACCELERATION_STRUCTURE_BUILD_TYPE_DEVICE, "device");
+    ADD(ACCELERATION_STRUCTURE_BUILD_TYPE_HOST_OR_DEVICE, "host or device");
 
     domain = DOMAIN_ACCELERATION_STRUCTURE_COMPATIBILITY; /* VkAccelerationStructureCompatibilityKHR */
-    ADD(ACCELERATION_STRUCTURE_COMPATIBILITY_COMPATIBLE_KHR, "compatible");
-    ADD(ACCELERATION_STRUCTURE_COMPATIBILITY_INCOMPATIBLE_KHR, "incompatible");
+    ADD(ACCELERATION_STRUCTURE_COMPATIBILITY_COMPATIBLE, "compatible");
+    ADD(ACCELERATION_STRUCTURE_COMPATIBILITY_INCOMPATIBLE, "incompatible");
 
     domain = DOMAIN_SHADER_GROUP_SHADER; /* VkShaderGroupShaderKHR */
-    ADD(SHADER_GROUP_SHADER_GENERAL_KHR, "general");
-    ADD(SHADER_GROUP_SHADER_CLOSEST_HIT_KHR, "closest hit");
-    ADD(SHADER_GROUP_SHADER_ANY_HIT_KHR, "any hit");
-    ADD(SHADER_GROUP_SHADER_INTERSECTION_KHR, "intersection");
+    ADD(SHADER_GROUP_SHADER_GENERAL, "general");
+    ADD(SHADER_GROUP_SHADER_CLOSEST_HIT, "closest hit");
+    ADD(SHADER_GROUP_SHADER_ANY_HIT, "any hit");
+    ADD(SHADER_GROUP_SHADER_INTERSECTION, "intersection");
 #undef ADD
     }
 

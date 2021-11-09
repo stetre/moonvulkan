@@ -28,17 +28,17 @@ Values: '_success_', '_not ready_', '_timeout_', '_unknown_', '_event set_', '_e
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkResult.html[VkResult].#
 
 [[accelerationstructurebuildtype]]
-[small]#*accelerationstructurebuildtype*: vk.ACCELERATION_STRUCTURE_BUILD_TYPE_XXX_KHR +
+[small]#*accelerationstructurebuildtype*: vk.ACCELERATION_STRUCTURE_BUILD_TYPE_XXX +
 Values: '_host_', '_device_', '_host or device_'. +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkAccelerationStructureBuildTypeKHR.html[VkAccelerationStructureBuildTypeKHR].#
 
 [[accelerationstructurecompatibility]]
-[small]#*accelerationstructurecompatibility*: vk.VK_ACCELERATION_STRUCTURE_COMPATIBILITY_XXX_KHR +
+[small]#*accelerationstructurecompatibility*: vk.VK_ACCELERATION_STRUCTURE_COMPATIBILITY_XXX +
 Values: '_compatible_', '_incompatible_'. +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkAccelerationStructureCompatibilityKHR.html[VkAccelerationStructureCompatibilityKHR].#
 
 [[accelerationstructuretype]]
-[small]#*accelerationstructuretype*: vk.ACCELERATION_STRUCTURE_TYPE_XXX_KHR +
+[small]#*accelerationstructuretype*: vk.ACCELERATION_STRUCTURE_TYPE_XXX +
 Values: '_top level_', '_bottom level_', '_generic_'. +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkAccelerationStructureTypeKHR.html[VkAccelerationStructureTypeKHR].#
 
@@ -61,13 +61,13 @@ Values:
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkBlendFactor.html[VkBlendFactor].#
 
 [[blendop]]
-[small]#*blendop*: vk.BLEND_OP_XXX,  vk.BLEND_OP_XXX_EXT +
+[small]#*blendop*: vk.BLEND_OP_XXX,  vk.BLEND_OP_XXX +
 Values:
 '_add_' (default), '_subtract_', '_reverse subtract_', '_min_', '_max_', '_zero_', '_src_', '_dst_', '_src over_', '_dst over_', '_src in_', '_dst in_', '_src out_', '_dst out_', '_src atop_', '_dst atop_', '_xor_', '_multiply_', '_screen_', '_overlay_', '_darken_', '_lighten_', '_colordodge_', '_colorburn_', '_hardlight_', '_softlight_', '_difference_', '_exclusion_', '_invert_', '_invert rgb_', '_lineardodge_', '_linearburn_', '_vividlight_', '_linearlight_', '_pinlight_', '_hardmix_', '_hsl hue_', '_hsl saturation_', '_hsl color_', '_hsl luminosity_', '_plus_', '_plus clamped_', '_plus clamped alpha_', '_plus darker_', '_minus_', '_minus clamped_', '_contrast_', '_invert ovg_', '_red_', '_green_', '_blue_'. +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkBlendOp.html[VkBlendOp].#
 
 [[blendoverlap]]
-[small]#*blendoverlap*: vk.BLEND_OVERLAP_XXX_EXT +
+[small]#*blendoverlap*: vk.BLEND_OVERLAP_XXX +
 Values: '_uncorrelated_' (default), '_disjoint_', '_conjoint_'. +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkBlendOverlapEXT.html[VkBlendOverlapEXT].#
 
@@ -78,7 +78,7 @@ Values:
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkBorderColor.html[VkBorderColor].#
 
 [[buildaccelerationstructuremode]]
-[small]#*buildaccelerationstructuremode*: vk.BUILD_ACCELERATION_STRUCTURE_MODE_XXX_KHR +
+[small]#*buildaccelerationstructuremode*: vk.BUILD_ACCELERATION_STRUCTURE_MODE_XXX +
 Values: '_build_', '_update_'. +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkBuildAccelerationStructureModeKHR.html[VkBuildAccelerationStructureModeKHR].#
 
@@ -88,7 +88,7 @@ Values: '_cosited even_' (default), '_midpoint_'. +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkChromaLocation.html[VkChromaLocation].#
 
 [[colorspace]]
-[small]#*colorspace*: vk.COLOR_SPACE_XXX_KHR, vk.COLOR_SPACE_XXX_EXT +
+[small]#*colorspace*: vk.COLOR_SPACE_XXX, vk.COLOR_SPACE_XXX +
 Values:
 '_srgb nonlinear_' (default), '_display p3 nonlinear_', '_extended srgb linear_', '_extended srgb nonlinear_', '_dci p3 linear_', '_dci p3 nonlinear_', '_bt709 linear_', '_bt709 nonlinear_', '_bt2020 linear_', '_hdr10 st2084_', '_dolbyvision_', '_hdr10 hlg_', '_adobergb linear_', '_adobergb nonlinear_', '_pass through_'. +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkColorSpaceKHR.html[VkColorSpaceKHR].#
@@ -112,18 +112,18 @@ Values:
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkComponentSwizzle.html[VkComponentSwizzle].#
 
 [[conservativerasterizationmode]]
-[small]#*conservativerasterizationmode*: vk.CONSERVATIVE_RASTERIZATION_MODE_XXX_EXT +
+[small]#*conservativerasterizationmode*: vk.CONSERVATIVE_RASTERIZATION_MODE_XXX +
 Values: '_disabled_', '_overestimate_', '_underestimate_'. +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkConservativeRasterizationModeEXT.html[VkConservativeRasterizationModeEXT].#
 
 [[copyaccelerationstructuremode]]
-[small]#*copyaccelerationstructuremode*: vk.COPY_ACCELERATION_STRUCTURE_MODE_XXX_KHR  +
+[small]#*copyaccelerationstructuremode*: vk.COPY_ACCELERATION_STRUCTURE_MODE_XXX  +
 Values: '_clone_', '_compact_', '_serialize_', '_deserialize_'. +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkCopyAccelerationStructureModeKHR.html[VkCopyAccelerationStructureModeKHR].#
 
 [[debugreportobjecttype]]
-[small]#*debugreportobjecttype*: vk.DEBUG_REPORT_OBJECT_TYPE_XXX_EXT +
-Values: '_unknown_', '_instance_', '_physical device_', '_device_', '_queue_', '_semaphore_', '_command buffer_', '_fence_', '_device memory_', '_buffer_', '_image_', '_event_', '_query pool_', '_buffer view_', '_image view_', '_shader module_', '_pipeline cache_', '_pipeline layout_', '_render pass_', '_pipeline_', '_descriptor set layout_', '_sampler_', '_descriptor pool_', '_descriptor set_', '_framebuffer_', '_command pool_', '_surface_', '_swapchain_', '_debug report callback_', '_display_', '_display mode_', '_validation cache_', '_sampler ycbcr conversion_', '_descriptor update template_'. +
+[small]#*debugreportobjecttype*: vk.DEBUG_REPORT_OBJECT_TYPE_XXX +
+Values: '_unknown_', '_instance_', '_physical device_', '_device_', '_queue_', '_semaphore_', '_command buffer_', '_fence_', '_device memory_', '_buffer_', '_image_', '_event_', '_query pool_', '_buffer view_', '_image view_', '_shader module_', '_pipeline cache_', '_pipeline layout_', '_render pass_', '_pipeline_', '_descriptor set layout_', '_sampler_', '_descriptor pool_', '_descriptor set_', '_framebuffer_', '_command pool_', '_surface_', '_swapchain_', '_debug report_', '_display_', '_display mode_', '_validation cache_', '_sampler ycbcr conversion_', '_descriptor update template_'. +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkDebugReportObjectTypeEXT.html[VkDebugReportObjectTypeEXT].#
 
 [[descriptortype]]
@@ -138,27 +138,27 @@ Values: '_descriptor set_', '_push descriptors_'. +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkDescriptorUpdateTemplateType.html[VkDescriptorUpdateTemplateType].#
 
 [[deviceeventtype]]
-[small]#*deviceeventtype*: vk.DEVICE_EVENT_TYPE_XXX_EXT +
+[small]#*deviceeventtype*: vk.DEVICE_EVENT_TYPE_XXX +
 Values: '_display hotplug_'. +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkDeviceEventTypeEXT.html[VkDeviceEventTypeEXT].#
 
 [[devicememoryreporteventtype]]
-[small]#*devicememoryreporteventtype*: vk.VK_DEVICE_MEMORY_REPORT_EVENT_TYPE_XXX_EXT +
+[small]#*devicememoryreporteventtype*: vk.VK_DEVICE_MEMORY_REPORT_EVENT_TYPE_XXX +
 Values: '_allocate_', '_free_', '_import_', '_unimport_', '_allocation failed_'. +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkDeviceMemoryReportEventTypeEXT.html[VkDeviceMemoryReportEventTypeEXT].#
 
 [[discardrectanglemode]]
-[small]#*discardrectanglemode*: vk.DISCARD_RECTANGLE_MODE_XXX_EXT +
+[small]#*discardrectanglemode*: vk.DISCARD_RECTANGLE_MODE_XXX +
 Values: '_inclusive_', '_exclusive_'. +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkDiscardRectangleModeEXT.html[VkDiscardRectangleModeEXT].#
 
 [[displayeventtype]]
-[small]#*displayeventtype*: vk.DISPLAY_EVENT_TYPE_XXX_EXT +
+[small]#*displayeventtype*: vk.DISPLAY_EVENT_TYPE_XXX +
 Values: '_first pixel out_'. +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkDisplayEventTypeEXT.html[VkDisplayEventTypeEXT].#
 
 [[displaypowerstate]]
-[small]#*displaypowerstate*: vk.DISPLAY_POWER_STATE_XXX_EXT +
+[small]#*displaypowerstate*: vk.DISPLAY_POWER_STATE_XXX +
 Values: '_off_', '_suspend_', '_on_'. +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkDisplayPowerStateEXT.html[VkDisplayPowerStateEXT].#
 
@@ -186,7 +186,7 @@ Values:
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkFormat.html[VkFormat].#
 
 [[fragmentshadingratecombinerop]]
-[small]#*fragmentshadingratecombinerop*: vk.VK_FRAGMENT_SHADING_RATE_COMBINER_OP_XXX_KHR +
+[small]#*fragmentshadingratecombinerop*: vk.VK_FRAGMENT_SHADING_RATE_COMBINER_OP_XXX +
 Values: '_keep_', '_replace_', '_min_', '_max_', '_mul_'. +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkFragmentShadingRateCombinerOpKHR.html[VkFragmentShadingRateCombinerOpKHR].#
 
@@ -198,12 +198,12 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkFro
 
 
 [[fullscreenexclusive]]
-[small]#*fullscreenexclusive*: vk.FULL_SCREEN_EXCLUSIVE_XXX_EXT +
+[small]#*fullscreenexclusive*: vk.FULL_SCREEN_EXCLUSIVE_XXX +
 Values: '_default_', '_allowed_', '_disallowed_', '_application controlled_'. +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkFullScreenExclusiveEXT.html[VkFullScreenExclusiveEXT].#
 
 [[geometrytype]]
-[small]#*geometrytype*: vk.GEOMETRY_TYPE_XXX_KHR +
+[small]#*geometrytype*: vk.GEOMETRY_TYPE_XXX +
 Values: '_triangles_', '_aabbs_', '_instances_'. +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkGeometryTypeKHR.html[VkGeometryTypeKHR].#
 
@@ -238,7 +238,7 @@ Values:
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkIndexType.html[VkIndexType].#
 
 [[linerasterizationmode]]
-[small]#*linerasterizationmode*: vk.LINE_RASTERIZATION_MODE_XXX_EXT +
+[small]#*linerasterizationmode*: vk.LINE_RASTERIZATION_MODE_XXX +
 Values: '_default_', '_rectangular_', '_bresenham_', '_rectangular smooth_'. +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkLineRasterizationModeEXT.html[VkLineRasterizationModeEXT].#
 
@@ -254,17 +254,17 @@ Values: '_unknown_', '_instance_', '_physical device_', '_device_', '_queue_', '
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkObjectType.html[VkObjectType].#
 
 [[performancecounterscope]]
-[small]#*performancecounterscope*: vk.PERFORMANCE_COUNTER_SCOPE_XXX_KHR +
+[small]#*performancecounterscope*: vk.PERFORMANCE_COUNTER_SCOPE_XXX +
 Values: '_command buffer_', '_render pass_', '_command_'. +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPerformanceCounterScopeKHR.html[VkPerformanceCounterScopeKHR].#
 
 [[performancecounterstorage]]
-[small]#*performancecounterstorage*: vk.PERFORMANCE_COUNTER_STORAGE_XXX_KHR +
+[small]#*performancecounterstorage*: vk.PERFORMANCE_COUNTER_STORAGE_XXX +
 Values: '_int32_', '_int64_', '_uint32_', '_uint64_', '_float32_', '_float64_'. +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPerformanceCounterStorageKHR.html[VkPerformanceCounterStorageKHR].#
 
 [[performancecounterunit]]
-[small]#*performancecounterunit*: vk.PERFORMANCE_COUNTER_UNIT_XXX_KHR +
+[small]#*performancecounterunit*: vk.PERFORMANCE_COUNTER_UNIT_XXX +
 Values: '_generic_', '_percentage_', '_nanoseconds_', '_bytes_', '_bytes per second_', '_kelvin_', '_watts_', '_volts_', '_amps_', '_hertz_', '_cycles_'. +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPerformanceCounterUnitKHR.html[VkPerformanceCounterUnitKHR].#
 
@@ -281,7 +281,7 @@ Values:
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPipelineBindPoint.html[VkPipelineBindPoint].#
 
 [[pipelineexecutablestatisticformat]]
-[small]#*pipelineexecutablestatisticformat*: vk.PIPELINE_EXECUTABLE_STATISTIC_FORMAT_XXX_KHR +
+[small]#*pipelineexecutablestatisticformat*: vk.PIPELINE_EXECUTABLE_STATISTIC_FORMAT_XXX +
 Values: '_bool32_', '_int64_', '_uint64_', '_float64_'. +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPipelineExecutableStatisticFormatKHR.html[VkPipelineExecutableStatisticFormatKHR].#
 
@@ -297,7 +297,7 @@ Values:
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPolygonMode.html[VkPolygonMode].#
 
 [[presentmode]]
-[small]#*presentmode*: vk.PRESENT_MODE_XXX_KHR +
+[small]#*presentmode*: vk.PRESENT_MODE_XXX +
 Values:
 '_immediate_', '_mailbox_', '_fifo_' (default), '_fifo relaxed_', '_shared demand refresh_', '_shared continuous refresh_'. +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPresentModeKHR.html[VkPresentModeKHR].#
@@ -309,7 +309,7 @@ Values:
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPrimitiveTopology.html[VkPrimitiveTopology].#
 
 [[provokingvertexmode]]
-[small]#*provokingvertexmode*: vk.PROVOKING_VERTEX_MODE_XXX_EXT +
+[small]#*provokingvertexmode*: vk.PROVOKING_VERTEX_MODE_XXX +
 Values: '_first vertex_', '_last vertex_'. +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkProvokingVertexModeEXT.html[VkProvokingVertexModeEXT].#
 
@@ -320,12 +320,12 @@ Values:
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkQueryType.html[VkQueryType].#
 
 [[queueglobalpriority]]
-[small]#*queueglobalpriority*: vk.QUEUE_GLOBAL_PRIORITY_XXX_EXT +
+[small]#*queueglobalpriority*: vk.QUEUE_GLOBAL_PRIORITY_XXX +
 Values: '_low_', '_medium_', '_high_', '_realtime_'. +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkQueueGlobalPriorityEXT.html[VkQueueGlobalPriorityEXT].#
 
 [[raytracingshadergrouptype]]
-[small]#*raytracingshadergrouptype*: vk.RAY_TRACING_SHADER_GROUP_TYPE_XXX_KHR +
+[small]#*raytracingshadergrouptype*: vk.RAY_TRACING_SHADER_GROUP_TYPE_XXX +
 Values: '_general_', '_triangles hit group_', '_procedural hit group_'. +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkRayTracingShaderGroupTypeKHR.html[VkRayTracingShaderGroupTypeKHR].#
 
@@ -367,7 +367,7 @@ Values: '_32 bit only_', '_all_', '_none_'. +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkShaderFloatControlsIndependence.html[VkShaderFloatControlsIndependence].#
 
 [[shadergroupshader]]
-[small]#*shadergroupshader*: vk.SHADER_GROUP_SHADER_XXX_KHR +
+[small]#*shadergroupshader*: vk.SHADER_GROUP_SHADER_XXX +
 Values: '_general_', '_closest hit_', '_any hit_', '_intersection_'. +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkShaderGroupShaderKHR.html[VkShaderGroupShaderKHR].#
 
@@ -394,28 +394,28 @@ Values: '_upper left_', '_lower left_'. +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkTessellationDomainOrigin.html[VkTessellationDomainOrigin].#
 
 [[timedomain]]
-[small]#*timedomain*: vk.TIME_DOMAIN_XXX_EXT +
+[small]#*timedomain*: vk.TIME_DOMAIN_XXX +
 Values: '_device_', '_clock monotonic_', '_clock monotonic raw_', '_query performance counter_'. +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkTimeDomainEXT.html[VkTimeDomainEXT].#
 
 [[validationcacheheaderversion]]
-[small]#*validationcacheheaderversion*: vk.VALIDATION_CACHE_HEADER_VERSION_XXX_EXT +
+[small]#*validationcacheheaderversion*: vk.VALIDATION_CACHE_HEADER_VERSION_XXX +
 Values: '_one_'. +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkValidationCacheHeaderVersionEXT.html[VkValidationCacheHeaderVersionEXT].#
 
 [[validationcheck]]
-[small]#*validationcheck*: vk.VALIDATION_CHECK_XXX_EXT +
+[small]#*validationcheck*: vk.VALIDATION_CHECK_XXX +
 Values: '_all_', _shaders_'. +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkValidationCheckEXT.html[VkValidationCheckEXT].#
 
 
 [[validationfeaturedisable]]
-[small]#*validationfeaturedisable*: vk.VALIDATION_FEATURE_DISABLE_XXX_EXT +
+[small]#*validationfeaturedisable*: vk.VALIDATION_FEATURE_DISABLE_XXX +
 Values: '_all_' ,'_shaders_' ,'_thread safety_' ,'_api parameters_' ,'_object lifetimes_' ,'_core checks_' ,'_unique handles_'. +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkValidationFeatureDisableEXT.html[VkValidationFeatureDisableEXT].#
 
 [[validationfeatureenable]]
-[small]#*validationfeatureenable*: vk.VALIDATION_FEATURE_ENABLE_XXX_EXT +
+[small]#*validationfeatureenable*: vk.VALIDATION_FEATURE_ENABLE_XXX +
 Values: '_gpu assisted_', '_gpu assisted reserve binding slot_'. +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkValidationFeatureEnableEXT.html[VkValidationFeatureEnableEXT].#
 
