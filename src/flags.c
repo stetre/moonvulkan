@@ -79,7 +79,7 @@ static VkFlags checkstencilfaceflags(lua_State *L, int arg)
 #define CASE(CODE,str) if((strcmp(s, str)==0)) do { flags |= CODE; goto done; } while(0)
     CASE(VK_STENCIL_FACE_FRONT_BIT, "front");
     CASE(VK_STENCIL_FACE_BACK_BIT, "back");
-//  CASE(VK_STENCIL_FRONT_AND_BACK, "front and back");
+    CASE(VK_STENCIL_FACE_FRONT_AND_BACK, "front and back");
 #undef CASE
         return (VkFlags)luaL_argerror(L, --arg, badvalue(L,s));
         done: ;
@@ -95,7 +95,7 @@ static int pushstencilfaceflags(lua_State *L, VkFlags flags)
 #define CASE(CODE,str) do { if( flags & CODE) { lua_pushstring(L, str); n++; } } while(0)
     CASE(VK_STENCIL_FACE_FRONT_BIT, "front");
     CASE(VK_STENCIL_FACE_BACK_BIT, "back");
-//  CASE(VK_STENCIL_FRONT_AND_BACK, "front and back");
+    CASE(VK_STENCIL_FACE_FRONT_AND_BACK, "front and back");
 #undef CASE
 
     return n;
@@ -256,6 +256,7 @@ static int CommandBufferUsageFlags(lua_State *L)
     ADD(COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT);\
     ADD(COMMAND_BUFFER_USAGE_RENDER_PASS_CONTINUE_BIT);\
     ADD(COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT);\
+
 
 
 /*----------------------------------------------------------------------*
@@ -794,6 +795,12 @@ static VkFlags checkshaderstageflags(lua_State *L, int arg)
     CASE(VK_SHADER_STAGE_GEOMETRY_BIT, "geometry");
     CASE(VK_SHADER_STAGE_FRAGMENT_BIT, "fragment");
     CASE(VK_SHADER_STAGE_COMPUTE_BIT, "compute");
+    CASE(VK_SHADER_STAGE_RAYGEN_BIT, "raygen");
+    CASE(VK_SHADER_STAGE_ANY_HIT_BIT, "any hit");
+    CASE(VK_SHADER_STAGE_CLOSEST_HIT_BIT, "closest hit");
+    CASE(VK_SHADER_STAGE_MISS_BIT, "miss");
+    CASE(VK_SHADER_STAGE_INTERSECTION_BIT, "intersection");
+    CASE(VK_SHADER_STAGE_CALLABLE_BIT, "callable");
     // These are not individual bits:
     CASE(VK_SHADER_STAGE_ALL_GRAPHICS, "all graphics");
     CASE(VK_SHADER_STAGE_ALL, "all");
@@ -816,6 +823,12 @@ static int pushshaderstageflags(lua_State *L, VkFlags flags)
     CASE(VK_SHADER_STAGE_GEOMETRY_BIT, "geometry");
     CASE(VK_SHADER_STAGE_FRAGMENT_BIT, "fragment");
     CASE(VK_SHADER_STAGE_COMPUTE_BIT, "compute");
+    CASE(VK_SHADER_STAGE_RAYGEN_BIT, "raygen");
+    CASE(VK_SHADER_STAGE_ANY_HIT_BIT, "any hit");
+    CASE(VK_SHADER_STAGE_CLOSEST_HIT_BIT, "closest hit");
+    CASE(VK_SHADER_STAGE_MISS_BIT, "miss");
+    CASE(VK_SHADER_STAGE_INTERSECTION_BIT, "intersection");
+    CASE(VK_SHADER_STAGE_CALLABLE_BIT, "callable");
     // These are not individual bits:
     CASE(VK_SHADER_STAGE_ALL_GRAPHICS, "all graphics"); 
     CASE(VK_SHADER_STAGE_ALL, "all");
@@ -841,7 +854,12 @@ static int ShaderStageFlags(lua_State *L)
     ADD(SHADER_STAGE_COMPUTE_BIT);\
     ADD(SHADER_STAGE_ALL_GRAPHICS);\
     ADD(SHADER_STAGE_ALL);\
-
+    ADD(SHADER_STAGE_RAYGEN_BIT);\
+    ADD(SHADER_STAGE_ANY_HIT_BIT);\
+    ADD(SHADER_STAGE_CLOSEST_HIT_BIT);\
+    ADD(SHADER_STAGE_MISS_BIT);\
+    ADD(SHADER_STAGE_INTERSECTION_BIT);\
+    ADD(SHADER_STAGE_CALLABLE_BIT);\
 
 
 /*----------------------------------------------------------------------*
@@ -862,6 +880,18 @@ static VkFlags checkpipelinecreateflags(lua_State *L, int arg)
     CASE(VK_PIPELINE_CREATE_DERIVATIVE_BIT, "derivative");
     CASE(VK_PIPELINE_CREATE_VIEW_INDEX_FROM_DEVICE_INDEX_BIT, "view index from device index");
     CASE(VK_PIPELINE_CREATE_DISPATCH_BASE, "dispatch base");
+    CASE(VK_PIPELINE_CREATE_RAY_TRACING_NO_NULL_ANY_HIT_SHADERS_BIT, "ray tracing no null any hit shaders");
+    CASE(VK_PIPELINE_CREATE_RAY_TRACING_NO_NULL_CLOSEST_HIT_SHADERS_BIT, "ray tracing no null closest hit shaders");
+    CASE(VK_PIPELINE_CREATE_RAY_TRACING_NO_NULL_MISS_SHADERS_BIT, "ray tracing no null miss shaders");
+    CASE(VK_PIPELINE_CREATE_RAY_TRACING_NO_NULL_INTERSECTION_SHADERS_BIT, "ray tracing no null intersection shaders");
+    CASE(VK_PIPELINE_CREATE_RAY_TRACING_SKIP_TRIANGLES_BIT, "ray tracing skip triangles");
+    CASE(VK_PIPELINE_CREATE_RAY_TRACING_SKIP_AABBS_BIT, "ray tracing skip aabbs");
+    CASE(VK_PIPELINE_CREATE_RAY_TRACING_SHADER_GROUP_HANDLE_CAPTURE_REPLAY_BIT, "ray tracing shader group handle capture replay");
+    CASE(VK_PIPELINE_CREATE_CAPTURE_STATISTICS_BIT, "capture statistics");
+    CASE(VK_PIPELINE_CREATE_CAPTURE_INTERNAL_REPRESENTATIONS_BIT, "capture internal representations");
+    CASE(VK_PIPELINE_CREATE_LIBRARY_BIT, "library");
+    CASE(VK_PIPELINE_CREATE_FAIL_ON_PIPELINE_COMPILE_REQUIRED_BIT, "fail on pipeline compile required");
+    CASE(VK_PIPELINE_CREATE_EARLY_RETURN_ON_FAILURE_BIT, "early return on failure");
 #undef CASE
         return (VkFlags)luaL_argerror(L, --arg, badvalue(L,s));
         done: ;
@@ -880,6 +910,18 @@ static int pushpipelinecreateflags(lua_State *L, VkFlags flags)
     CASE(VK_PIPELINE_CREATE_DERIVATIVE_BIT, "derivative");
     CASE(VK_PIPELINE_CREATE_VIEW_INDEX_FROM_DEVICE_INDEX_BIT, "view index from device index");
     CASE(VK_PIPELINE_CREATE_DISPATCH_BASE, "dispatch base");
+    CASE(VK_PIPELINE_CREATE_RAY_TRACING_NO_NULL_ANY_HIT_SHADERS_BIT, "ray tracing no null any hit shaders");
+    CASE(VK_PIPELINE_CREATE_RAY_TRACING_NO_NULL_CLOSEST_HIT_SHADERS_BIT, "ray tracing no null closest hit shaders");
+    CASE(VK_PIPELINE_CREATE_RAY_TRACING_NO_NULL_MISS_SHADERS_BIT, "ray tracing no null miss shaders");
+    CASE(VK_PIPELINE_CREATE_RAY_TRACING_NO_NULL_INTERSECTION_SHADERS_BIT, "ray tracing no null intersection shaders");
+    CASE(VK_PIPELINE_CREATE_RAY_TRACING_SKIP_TRIANGLES_BIT, "ray tracing skip triangles");
+    CASE(VK_PIPELINE_CREATE_RAY_TRACING_SKIP_AABBS_BIT, "ray tracing skip aabbs");
+    CASE(VK_PIPELINE_CREATE_RAY_TRACING_SHADER_GROUP_HANDLE_CAPTURE_REPLAY_BIT, "ray tracing shader group handle capture replay");
+    CASE(VK_PIPELINE_CREATE_CAPTURE_STATISTICS_BIT, "capture statistics");
+    CASE(VK_PIPELINE_CREATE_CAPTURE_INTERNAL_REPRESENTATIONS_BIT, "capture internal representations");
+    CASE(VK_PIPELINE_CREATE_LIBRARY_BIT, "library");
+    CASE(VK_PIPELINE_CREATE_FAIL_ON_PIPELINE_COMPILE_REQUIRED_BIT, "fail on pipeline compile required");
+    CASE(VK_PIPELINE_CREATE_EARLY_RETURN_ON_FAILURE_BIT, "early return on failure");
 #undef CASE
 
     return n;
@@ -900,7 +942,18 @@ static int PipelineCreateFlags(lua_State *L)
     ADD(PIPELINE_CREATE_DERIVATIVE_BIT);\
     ADD(PIPELINE_CREATE_VIEW_INDEX_FROM_DEVICE_INDEX_BIT);\
     ADD(PIPELINE_CREATE_DISPATCH_BASE_BIT);\
-
+    ADD(PIPELINE_CREATE_RAY_TRACING_NO_NULL_ANY_HIT_SHADERS_BIT);\
+    ADD(PIPELINE_CREATE_RAY_TRACING_NO_NULL_CLOSEST_HIT_SHADERS_BIT);\
+    ADD(PIPELINE_CREATE_RAY_TRACING_NO_NULL_MISS_SHADERS_BIT);\
+    ADD(PIPELINE_CREATE_RAY_TRACING_NO_NULL_INTERSECTION_SHADERS_BIT);\
+    ADD(PIPELINE_CREATE_RAY_TRACING_SKIP_TRIANGLES_BIT);\
+    ADD(PIPELINE_CREATE_RAY_TRACING_SKIP_AABBS_BIT);\
+    ADD(PIPELINE_CREATE_RAY_TRACING_SHADER_GROUP_HANDLE_CAPTURE_REPLAY_BIT);\
+    ADD(PIPELINE_CREATE_CAPTURE_STATISTICS_BIT);\
+    ADD(PIPELINE_CREATE_CAPTURE_INTERNAL_REPRESENTATIONS_BIT);\
+    ADD(PIPELINE_CREATE_LIBRARY_BIT);\
+    ADD(PIPELINE_CREATE_FAIL_ON_PIPELINE_COMPILE_REQUIRED_BIT);\
+    ADD(PIPELINE_CREATE_EARLY_RETURN_ON_FAILURE_BIT);\
 
 /*----------------------------------------------------------------------*
  | VkBufferUsageFlags
@@ -928,6 +981,9 @@ static VkFlags checkbufferusageflags(lua_State *L, int arg)
     CASE(VK_BUFFER_USAGE_TRANSFORM_FEEDBACK_BUFFER_BIT, "transform feedback buffer");
     CASE(VK_BUFFER_USAGE_TRANSFORM_FEEDBACK_COUNTER_BUFFER_BIT, "transform feedback counter buffer");
     CASE(VK_BUFFER_USAGE_SHADER_DEVICE_ADDRESS_BIT, "shader device address");
+    CASE(VK_BUFFER_USAGE_ACCELERATION_STRUCTURE_BUILD_INPUT_READ_ONLY_BIT, "acceleration structure build input read only");
+    CASE(VK_BUFFER_USAGE_ACCELERATION_STRUCTURE_STORAGE_BIT, "acceleration structure storage");
+    CASE(VK_BUFFER_USAGE_SHADER_BINDING_TABLE_BIT, "shader binding table");
 #undef CASE
         return (VkFlags)luaL_argerror(L, --arg, badvalue(L,s));
         done: ;
@@ -954,6 +1010,9 @@ static int pushbufferusageflags(lua_State *L, VkFlags flags)
     CASE(VK_BUFFER_USAGE_TRANSFORM_FEEDBACK_BUFFER_BIT, "transform feedback buffer");
     CASE(VK_BUFFER_USAGE_TRANSFORM_FEEDBACK_COUNTER_BUFFER_BIT, "transform feedback counter buffer");
     CASE(VK_BUFFER_USAGE_SHADER_DEVICE_ADDRESS_BIT, "shader device address");
+    CASE(VK_BUFFER_USAGE_ACCELERATION_STRUCTURE_BUILD_INPUT_READ_ONLY_BIT, "acceleration structure build input read only");
+    CASE(VK_BUFFER_USAGE_ACCELERATION_STRUCTURE_STORAGE_BIT, "acceleration structure storage");
+    CASE(VK_BUFFER_USAGE_SHADER_BINDING_TABLE_BIT, "shader binding table");
 #undef CASE
 
     return n;
@@ -981,6 +1040,9 @@ static int BufferUsageFlags(lua_State *L)
     ADD(BUFFER_USAGE_TRANSFORM_FEEDBACK_BUFFER_BIT);\
     ADD(BUFFER_USAGE_TRANSFORM_FEEDBACK_COUNTER_BUFFER_BIT);\
     ADD(BUFFER_USAGE_SHADER_DEVICE_ADDRESS_BIT);\
+    ADD(BUFFER_USAGE_ACCELERATION_STRUCTURE_BUILD_INPUT_READ_ONLY_BIT);\
+    ADD(BUFFER_USAGE_ACCELERATION_STRUCTURE_STORAGE_BIT);\
+    ADD(BUFFER_USAGE_SHADER_BINDING_TABLE_BIT);\
 
 
 /*----------------------------------------------------------------------*
@@ -1420,6 +1482,10 @@ static VkFlags checkpipelinestageflags(lua_State *L, int arg)
         CASE(VK_PIPELINE_STAGE_CONDITIONAL_RENDERING_BIT, "conditional rendering");
         CASE(VK_PIPELINE_STAGE_TRANSFORM_FEEDBACK_BIT, "transform feedback");
         CASE(VK_PIPELINE_STAGE_FRAGMENT_DENSITY_PROCESS_BIT, "fragment density process");
+        CASE(VK_PIPELINE_STAGE_ACCELERATION_STRUCTURE_BUILD_BIT, "acceleration structure build");
+        CASE(VK_PIPELINE_STAGE_RAY_TRACING_SHADER_BIT, "ray tracing shader");
+        CASE(VK_PIPELINE_STAGE_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT, "fragment shading rate attachment");
+        CASE(VK_PIPELINE_STAGE_NONE, "none");
     // These are not individual bits:
         CASE(VK_PIPELINE_STAGE_ALL_GRAPHICS_BIT, "all graphics");
         CASE(VK_PIPELINE_STAGE_ALL_COMMANDS_BIT, "all commands");
@@ -1454,6 +1520,10 @@ static int pushpipelinestageflags(lua_State *L, VkFlags flags)
         CASE(VK_PIPELINE_STAGE_CONDITIONAL_RENDERING_BIT, "conditional rendering");
         CASE(VK_PIPELINE_STAGE_TRANSFORM_FEEDBACK_BIT, "transform feedback");
         CASE(VK_PIPELINE_STAGE_FRAGMENT_DENSITY_PROCESS_BIT, "fragment density process");
+        CASE(VK_PIPELINE_STAGE_ACCELERATION_STRUCTURE_BUILD_BIT, "acceleration structure build");
+        CASE(VK_PIPELINE_STAGE_RAY_TRACING_SHADER_BIT, "ray tracing shader");
+        CASE(VK_PIPELINE_STAGE_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT, "fragment shading rate attachment");
+        CASE(VK_PIPELINE_STAGE_NONE, "none");
     // These are not individual bits:
         CASE(VK_PIPELINE_STAGE_ALL_GRAPHICS_BIT, "all graphics");
         CASE(VK_PIPELINE_STAGE_ALL_COMMANDS_BIT, "all commands");
@@ -1491,6 +1561,10 @@ static int PipelineStageFlags(lua_State *L)
     ADD(PIPELINE_STAGE_CONDITIONAL_RENDERING_BIT);\
     ADD(PIPELINE_STAGE_TRANSFORM_FEEDBACK_BIT);\
     ADD(PIPELINE_STAGE_FRAGMENT_DENSITY_PROCESS_BIT);\
+    ADD(PIPELINE_STAGE_ACCELERATION_STRUCTURE_BUILD_BIT);\
+    ADD(PIPELINE_STAGE_RAY_TRACING_SHADER_BIT);\
+    ADD(PIPELINE_STAGE_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT);\
+    ADD(PIPELINE_STAGE_NONE);\
 
 /*----------------------------------------------------------------------*
  | VkMemoryHeapFlag
@@ -1902,7 +1976,7 @@ static VkFlags checkformatfeatureflags(lua_State *L, int arg)
         CASE(VK_FORMAT_FEATURE_TRANSFER_SRC_BIT, "transfer src");
         CASE(VK_FORMAT_FEATURE_TRANSFER_DST_BIT, "transfer dst");
         CASE(VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT, "sampled image filter linear");
-        CASE(VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_MINMAX_BIT_EXT , "sampled image filter minmax");
+        CASE(VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_MINMAX_BIT, "sampled image filter minmax");
         CASE(VK_FORMAT_FEATURE_MIDPOINT_CHROMA_SAMPLES_BIT,"midpoint chroma samples");
         CASE(VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_LINEAR_FILTER_BIT,"sampled image ycbcr conversion linear filter");
         CASE(VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_SEPARATE_RECONSTRUCTION_FILTER_BIT,"sampled image ycbcr conversion separate reconstruction filter");
@@ -1912,6 +1986,8 @@ static VkFlags checkformatfeatureflags(lua_State *L, int arg)
         CASE(VK_FORMAT_FEATURE_COSITED_CHROMA_SAMPLES_BIT,"cosited chroma samples");
         CASE(VK_FORMAT_FEATURE_FRAGMENT_DENSITY_MAP_BIT, "fragment density map");
         CASE(VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT, "sampled image filter cubic");
+        CASE(VK_FORMAT_FEATURE_ACCELERATION_STRUCTURE_VERTEX_BUFFER_BIT, "acceleration structure vertex buffer");
+        CASE(VK_FORMAT_FEATURE_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT, "fragment shading rate attachment");
 #undef CASE
         return (VkFlags)luaL_argerror(L, --arg, badvalue(L,s));
         done: ;
@@ -1941,7 +2017,7 @@ static int pushformatfeatureflags(lua_State *L, VkFlags flags)
         CASE(VK_FORMAT_FEATURE_TRANSFER_SRC_BIT, "transfer src");
         CASE(VK_FORMAT_FEATURE_TRANSFER_DST_BIT, "transfer dst");
         CASE(VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT, "sampled image filter linear");
-        CASE(VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_MINMAX_BIT_EXT , "sampled image filter minmax");
+        CASE(VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_MINMAX_BIT, "sampled image filter minmax");
         CASE(VK_FORMAT_FEATURE_MIDPOINT_CHROMA_SAMPLES_BIT,"midpoint chroma samples");
         CASE(VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_LINEAR_FILTER_BIT,"sampled image ycbcr conversion linear filter");
         CASE(VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_SEPARATE_RECONSTRUCTION_FILTER_BIT,"sampled image ycbcr conversion separate reconstruction filter");
@@ -1951,6 +2027,8 @@ static int pushformatfeatureflags(lua_State *L, VkFlags flags)
         CASE(VK_FORMAT_FEATURE_COSITED_CHROMA_SAMPLES_BIT,"cosited chroma samples");
         CASE(VK_FORMAT_FEATURE_FRAGMENT_DENSITY_MAP_BIT, "fragment density map");
         CASE(VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT, "sampled image filter cubic");
+        CASE(VK_FORMAT_FEATURE_ACCELERATION_STRUCTURE_VERTEX_BUFFER_BIT, "acceleration structure vertex buffer");
+        CASE(VK_FORMAT_FEATURE_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT, "fragment shading rate attachment");
 #undef CASE
 
     return n;
@@ -1990,6 +2068,8 @@ static int FormatFeatureFlags(lua_State *L)
     ADD(FORMAT_FEATURE_COSITED_CHROMA_SAMPLES_BIT);\
     ADD(FORMAT_FEATURE_FRAGMENT_DENSITY_MAP_BIT);\
     ADD(FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT);\
+    ADD(FORMAT_FEATURE_ACCELERATION_STRUCTURE_VERTEX_BUFFER_BIT);\
+    ADD(FORMAT_FEATURE_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT);\
 
 /*----------------------------------------------------------------------*
  | VkSurfaceTransformFlagsKHR
@@ -2237,7 +2317,7 @@ static VkFlags checksurfacecounterflags(lua_State *L, int arg)
         {
         s = lua_tostring(L, arg++);
 #define CASE(CODE,str) if((strcmp(s, str)==0)) do { flags |= CODE; goto done; } while(0)
-    CASE(VK_SURFACE_COUNTER_VBLANK, "vblank");
+    CASE(VK_SURFACE_COUNTER_VBLANK_BIT, "vblank");
 #undef CASE
         return (VkFlags)luaL_argerror(L, --arg, badvalue(L,s));
         done: ;
@@ -2251,7 +2331,7 @@ static int pushsurfacecounterflags(lua_State *L, VkFlags flags)
     int n = 0;
 
 #define CASE(CODE,str) do { if( flags & CODE) { lua_pushstring(L, str); n++; } } while(0)
-    CASE(VK_SURFACE_COUNTER_VBLANK, "vblank");
+    CASE(VK_SURFACE_COUNTER_VBLANK_BIT, "vblank");
 #undef CASE
 
     return n;
@@ -2854,6 +2934,8 @@ static VkFlags checkmemoryallocateflags(lua_State *L, int arg)
         s = lua_tostring(L, arg++);
 #define CASE(CODE,str) if((strcmp(s, str)==0)) do { flags |= CODE; goto done; } while(0)
         CASE(VK_MEMORY_ALLOCATE_DEVICE_MASK_BIT, "device mask");
+        CASE(VK_MEMORY_ALLOCATE_DEVICE_ADDRESS_BIT, "device address");
+        CASE(VK_MEMORY_ALLOCATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT, "device address capture replay");
 #undef CASE
         return (VkFlags)luaL_argerror(L, --arg, badvalue(L,s));
         done: ;
@@ -2868,6 +2950,8 @@ static int pushmemoryallocateflags(lua_State *L, VkFlags flags)
 
 #define CASE(CODE,str) do { if( flags & CODE) { lua_pushstring(L, str); n++; } } while(0)
         CASE(VK_MEMORY_ALLOCATE_DEVICE_MASK_BIT, "device mask");
+        CASE(VK_MEMORY_ALLOCATE_DEVICE_ADDRESS_BIT, "device address");
+        CASE(VK_MEMORY_ALLOCATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT, "device address capture replay");
 #undef CASE
 
     return n;
@@ -2883,6 +2967,8 @@ static int MemoryAllocateFlags(lua_State *L)
 
 #define Add_MemoryAllocateFlags(L) \
     ADD(MEMORY_ALLOCATE_DEVICE_MASK_BIT);\
+    ADD(MEMORY_ALLOCATE_DEVICE_ADDRESS_BIT);\
+    ADD(MEMORY_ALLOCATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT);\
 
 /*----------------------------------------------------------------------*
  | VkDebugUtilsMessageSeverityFlagsEXT
@@ -3201,6 +3287,7 @@ static VkFlags checkimageviewcreateflags(lua_State *L, int arg)
         s = lua_tostring(L, arg++);
 #define CASE(CODE,str) if((strcmp(s, str)==0)) do { flags |= CODE; goto done; } while(0)
     CASE(VK_IMAGE_VIEW_CREATE_FRAGMENT_DENSITY_MAP_DYNAMIC_BIT, "fragment density map dynamic");
+    CASE(VK_IMAGE_VIEW_CREATE_FRAGMENT_DENSITY_MAP_DEFERRED_BIT, "fragment density map deferred");
 #undef CASE
         return (VkFlags)luaL_argerror(L, --arg, badvalue(L,s));
         done: ;
@@ -3213,6 +3300,7 @@ static int pushimageviewcreateflags(lua_State *L, VkFlags flags)
     int n = 0;
 #define CASE(CODE,str) do { if( flags & CODE) { lua_pushstring(L, str); n++; } } while(0)
     CASE(VK_IMAGE_VIEW_CREATE_FRAGMENT_DENSITY_MAP_DYNAMIC_BIT, "fragment density map dynamic");
+    CASE(VK_IMAGE_VIEW_CREATE_FRAGMENT_DENSITY_MAP_DEFERRED_BIT, "fragment density map deferred");
 #undef CASE
     return n;
     }
@@ -3227,6 +3315,7 @@ static int ImageViewCreateFlags(lua_State *L)
 
 #define Add_ImageViewCreateFlags(L) \
     ADD(IMAGE_VIEW_CREATE_FRAGMENT_DENSITY_MAP_DYNAMIC_BIT);\
+    ADD(IMAGE_VIEW_CREATE_FRAGMENT_DENSITY_MAP_DEFERRED_BIT);\
 
 
 /*----------------------------------------------------------------------*

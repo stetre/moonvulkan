@@ -48,8 +48,7 @@ Rfr. https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkBuf
 
 [[bufferusageflags]]
 [small]#*bufferusageflags*: vk.BUFFER_USAGE_XXX_BIT +
-Values: 
-'_transfer src_', '_transfer dst_', '_uniform texel buffer_', '_storage texel buffer_', '_uniform buffer_', '_storage buffer_', '_index buffer_', '_vertex buffer_', '_indirect buffer_', '_conditional rendering_', '_transform feedback buffer_', '_transform feedback counter buffer_', '_shader device address_'. +
+Values:  '_transfer src_', '_transfer dst_', '_uniform texel buffer_', '_storage texel buffer_', '_uniform buffer_', '_storage buffer_', '_index buffer_', '_vertex buffer_', '_indirect buffer_', '_conditional rendering_', '_transform feedback buffer_', '_transform feedback counter buffer_', '_shader device address_', '_acceleration structure build input read only_', '_acceleration structure storage_', '_shader binding table_'. +
 Rfr. https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkBufferUsageFlagBits.html[VkBufferUsageFlagBits].#
 
 [[buildaccelerationstructureflags]]
@@ -208,7 +207,7 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkFen
 [[formatfeatureflags]]
 [small]#*formatfeatureflags*: vk.FORMAT_FEATURE_XXX_BIT +
 Values: 
-'_sampled image_', '_storage image_', '_storage image atomic_', '_uniform texel buffer_', '_storage texel buffer_', '_storage texel buffer atomic_', '_vertex buffer_', '_color attachment_', '_color attachment blend_', '_depth stencil attachment_', '_blit src_', '_blit dst_', '_transfer src_', '_transfer dst_', '_sampled image filter linear_', '_sampled image filter minmax_', '_midpoint chroma samples_', '_sampled image ycbcr conversion linear filter_', '_sampled image ycbcr conversion separate reconstruction filter_', '_sampled image ycbcr conversion chroma reconstruction explicit_', '_sampled image ycbcr conversion chroma reconstruction explicit forceable_', '_disjoint_', '_cosited chroma samples_', '_fragment density map_', '_sampled image filter cubic_'. +
+'_sampled image_', '_storage image_', '_storage image atomic_', '_uniform texel buffer_', '_storage texel buffer_', '_storage texel buffer atomic_', '_vertex buffer_', '_color attachment_', '_color attachment blend_', '_depth stencil attachment_', '_blit src_', '_blit dst_', '_transfer src_', '_transfer dst_', '_sampled image filter linear_', '_sampled image filter minmax_', '_midpoint chroma samples_', '_sampled image ycbcr conversion linear filter_', '_sampled image ycbcr conversion separate reconstruction filter_', '_sampled image ycbcr conversion chroma reconstruction explicit_', '_sampled image ycbcr conversion chroma reconstruction explicit forceable_', '_disjoint_', '_cosited chroma samples_', '_fragment density map_', '_sampled image filter cubic_', '_acceleration structure vertex buffer_', '_fragment shading rate attachment_'. +
 Rfr. https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkFormatFeatureFlagBits.html[VkFormatFeatureFlagBits].#
 
 [[framebuffercreateflags]]
@@ -246,12 +245,12 @@ Rfr. https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkIma
 
 [[imageviewcreateflags]]
 [small]#*imageviewcreateflags*: vk.IMAGE_VIEW_CREATE_XXX_BIT +
-Values: '_fragment density map dynamic_'. +
+Values: '_fragment density map dynamic_', '_fragment density map deferred_'. +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkImageViewCreateFlagBits.html[VkImageViewCreateFlagBits].#
 
 [[memoryallocateflags]]
 [small]#*memoryallocateflags*: vk.MEMORY_ALLOCATE_XXX_BIT +
-Values: '_device mask_'. +
+Values: '_device mask_', '_device address_', '_device address capture replay_'. +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkMemoryAllocateFlagBits.html[VkMemoryAllocateFlagBits].#
 
 [[memoryheapflags]]
@@ -284,7 +283,7 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkPip
 [[pipelinecreateflags]]
 [small]#*pipelinecreateflags*: vk.PIPELINE_CREATE_XXX_BIT +
 Values: 
-'_disable optimization_', '_allow derivatives_', '_derivative_', '_view index from device index_', '_dispatch base_'. +
+'_disable optimization_', '_allow derivatives_', '_derivative_', '_view index from device index_', '_dispatch base_', '_ray tracing no null any hit shaders_', '_ray tracing no null closest hit shaders_', '_ray tracing no null miss shaders_', '_ray tracing no null intersection shaders_', '_ray tracing skip triangles_', '_ray tracing skip aabbs_', '_ray tracing shader group handle capture replay_', '_capture statistics_', '_capture internal representations_', '_library_', '_fail on pipeline compile required_', '_early return on failure_'. +
 Rfr. https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPipelineCreateFlagBits.html[VkPipelineCreateFlagBits].#
 
 [[pipelinecreationfeedbackflags]]
@@ -300,7 +299,7 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkPip
 [[pipelinestageflags]]
 [small]#*pipelinestageflags*: vk.PIPELINE_STAGE_XXX_BIT +
 Values: 
-'_top of pipe_', '_draw indirect_', '_vertex input_', '_vertex shader_', '_tessellation control shader_', '_tessellation evaluation shader_', '_geometry shader_', '_fragment shader_', '_early fragment tests_', '_late fragment tests_', '_color attachment output_', '_compute shader_', '_transfer_', '_bottom of pipe_', '_host_', '_all graphics_', '_all commands_', '_conditional rendering_', '_transform feedback_', '_fragment density process_'. +
+'_top of pipe_', '_draw indirect_', '_vertex input_', '_vertex shader_', '_tessellation control shader_', '_tessellation evaluation shader_', '_geometry shader_', '_fragment shader_', '_early fragment tests_', '_late fragment tests_', '_color attachment output_', '_compute shader_', '_transfer_', '_bottom of pipe_', '_host_', '_all graphics_', '_all commands_', '_conditional rendering_', '_transform feedback_', '_fragment density process_', '_acceleration structure build_', '_ray tracing shader_', '_fragment shading rate attachment_', '_none_'. +
 Rfr. https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPipelineStageFlagBits.html[VkPipelineStageFlagBits].#
 
 [[querycontrolflags]]
@@ -356,7 +355,7 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkSem
 [[shaderstageflags]]
 [small]#*shaderstageflags*: vk.SHADER_STAGE_XXX_BIT +
 Values: 
-'_vertex_', '_tessellation control_', '_tessellation evaluation_', '_geometry_', '_fragment_', '_compute_', '_all graphics_', '_all_'. +
+'_vertex_', '_tessellation control_', '_tessellation evaluation_', '_geometry_', '_fragment_', '_compute_', '_all graphics_', '_all_', '_raygen_', '_any hit_', '_closest hit_', '_miss_', '_intersection_', '_callable_'. +
 Rfr. https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkShaderStageFlagBits.html[VkShaderStageFlagBits].#
 
 [[sparseimageformatflags]]
@@ -374,7 +373,7 @@ Rfr. https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkSpa
 [[stencilfaceflags]]
 [small]#*stencilfaceflags*: vk.STENCIL_FACE_XXX_BIT +
 Values: 
-'_front_', '_back_'. +
+'_front_', '_back_', '_front and back_'. +
 Rfr. https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkStencilFaceFlagBits.html[VkStencilFaceFlagBits].#
 
 [[subgroupfeatureflags]]

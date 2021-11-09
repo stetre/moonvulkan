@@ -33,7 +33,7 @@ Values: '_host_', '_device_', '_host or device_'. +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkAccelerationStructureBuildTypeKHR.html[VkAccelerationStructureBuildTypeKHR].#
 
 [[accelerationstructurecompatibility]]
-[small]#*accelerationstructurecompatibility*: vk.VK_ACCELERATION_STRUCTURE_COMPATIBILITY_XXX +
+[small]#*accelerationstructurecompatibility*: vk.ACCELERATION_STRUCTURE_COMPATIBILITY_XXX +
 Values: '_compatible_', '_incompatible_'. +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkAccelerationStructureCompatibilityKHR.html[VkAccelerationStructureCompatibilityKHR].#
 
@@ -45,13 +45,13 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkAcc
 [[attachmentloadop]]
 [small]#*attachmentloadop*: vk.ATTACHMENT_LOAD_OP_XXX +
 Values:
-'_load_', '_clear_', '_dont care_' (default). +
+'_load_', '_clear_', '_dont care_' (default), '_none_'. +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkAttachmentLoadOp.html[VkAttachmentLoadOp].#
 
 [[attachmentstoreop]]
 [small]#*attachmentstoreop*: vk.ATTACHMENT_STORE_OP_XXX +
 Values:
-'_store_', '_dont care_' (default). +
+'_store_', '_dont care_' (default), '_none_'. +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkAttachmentStoreOp.html[VkAttachmentStoreOp].#
 
 [[blendfactor]]
@@ -129,7 +129,7 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkDeb
 [[descriptortype]]
 [small]#*descriptortype*: vk.DESCRIPTOR_TYPE_XXX +
 Values:
-'_sampler_', '_combined image sampler_', '_sampled image_', '_storage image_', '_uniform texel buffer_', '_storage texel buffer_', '_uniform buffer_', '_storage buffer_', '_uniform buffer dynamic_', '_storage buffer dynamic_', '_input attachment_', '_inline uniform block_'. +
+'_sampler_', '_combined image sampler_', '_sampled image_', '_storage image_', '_uniform texel buffer_', '_storage texel buffer_', '_uniform buffer_', '_storage buffer_', '_uniform buffer dynamic_', '_storage buffer dynamic_', '_input attachment_', '_inline uniform block_', '_acceleration structure_'. +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkDescriptorType.html[VkDescriptorType].#
 
 [[descriptorupdatetemplatetype]]
@@ -143,7 +143,7 @@ Values: '_display hotplug_'. +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkDeviceEventTypeEXT.html[VkDeviceEventTypeEXT].#
 
 [[devicememoryreporteventtype]]
-[small]#*devicememoryreporteventtype*: vk.VK_DEVICE_MEMORY_REPORT_EVENT_TYPE_XXX +
+[small]#*devicememoryreporteventtype*: vk.DEVICE_MEMORY_REPORT_EVENT_TYPE_XXX +
 Values: '_allocate_', '_free_', '_import_', '_unimport_', '_allocation failed_'. +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkDeviceMemoryReportEventTypeEXT.html[VkDeviceMemoryReportEventTypeEXT].#
 
@@ -169,8 +169,7 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkDri
 
 [[dynamicstate]]
 [small]#*dynamicstate*: vk.DYNAMIC_STATE_XXX +
-Values:
-'_viewport_', '_scissor_', '_line width_', '_depth bias_', '_blend constants_', '_depth bounds_', '_stencil compare mask_', '_stencil write mask_', '_stencil reference_', '_discard rectangle_', '_sample locations_'. +
+Values: '_viewport_', '_scissor_', '_line width_', '_depth bias_', '_blend constants_', '_depth bounds_', '_stencil compare mask_', '_stencil write mask_', '_stencil reference_', '_discard rectangle_', '_sample locations_', '_ray tracing pipeline stack size_', '_fragment shading rate_', '_line stipple_', '_cull mode_', '_front face_', '_primitive topology_', '_viewport with count_', '_scissor with count_', '_vertex input binding stride_', '_depth test enable_', '_depth write enable_', '_depth compare op_', '_depth bounds test enable_', '_stencil test enable_', '_stencil op_', '_vertex input_', '_patch control points_', '_rasterizer discard enable_', '_depth bias enable_', '_logic op_', '_primitive restart enable_', '_color write enable_'. +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkDynamicState.html[VkDynamicState].#
 
 [[filter]]
@@ -186,7 +185,7 @@ Values:
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkFormat.html[VkFormat].#
 
 [[fragmentshadingratecombinerop]]
-[small]#*fragmentshadingratecombinerop*: vk.VK_FRAGMENT_SHADING_RATE_COMBINER_OP_XXX +
+[small]#*fragmentshadingratecombinerop*: vk.FRAGMENT_SHADING_RATE_COMBINER_OP_XXX +
 Values: '_keep_', '_replace_', '_min_', '_max_', '_mul_'. +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkFragmentShadingRateCombinerOpKHR.html[VkFragmentShadingRateCombinerOpKHR].#
 
@@ -234,7 +233,7 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkIma
 [[indextype]]
 [small]#*indextype*: vk.INDEX_TYPE_XXX +
 Values:
-'_uint16_', '_uint32_'. +
+'_uint16_', '_uint32_', '_none_', '_uint8_'. +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkIndexType.html[VkIndexType].#
 
 [[linerasterizationmode]]
@@ -277,7 +276,7 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhy
 [[pipelinebindpoint]]
 [small]#*pipelinebindpoint*: vk.PIPELINE_BIND_POINT_XXX +
 Values:
-'_graphics_' (default), '_compute_'. +
+'_graphics_' (default), '_compute_', '_ray tracing_'. +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPipelineBindPoint.html[VkPipelineBindPoint].#
 
 [[pipelineexecutablestatisticformat]]
@@ -316,7 +315,7 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPro
 [[querytype]]
 [small]#*querytype*: vk.QUERY_TYPE_XXX +
 Values:
-'_occlusion_', '_pipeline statistics_', '_timestamp_', '_transform feedback stream_'. +
+'_occlusion_', '_pipeline statistics_', '_timestamp_', '_transform feedback stream_', '_performance query_', '_acceleration structure compacted size_', '_acceleration structure serialization size_'. +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkQueryType.html[VkQueryType].#
 
 [[queueglobalpriority]]

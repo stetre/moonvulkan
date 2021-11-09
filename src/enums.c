@@ -667,6 +667,27 @@ void moonvulkan_open_enums(lua_State *L)
     ADD(FORMAT_G16_B16_R16_3PLANE_422_UNORM, "g16 b16 r16 3plane 422 unorm");
     ADD(FORMAT_G16_B16R16_2PLANE_422_UNORM, "g16 b16r16 2plane 422 unorm");
     ADD(FORMAT_G16_B16_R16_3PLANE_444_UNORM, "g16 b16 r16 3plane 444 unorm");
+    ADD(FORMAT_ASTC_4x4_SFLOAT_BLOCK, "astc 4x4 sfloat block");
+    ADD(FORMAT_ASTC_5x4_SFLOAT_BLOCK, "astc 5x4 sfloat block");
+    ADD(FORMAT_ASTC_5x5_SFLOAT_BLOCK, "astc 5x5 sfloat block");
+    ADD(FORMAT_ASTC_6x5_SFLOAT_BLOCK, "astc 6x5 sfloat block");
+    ADD(FORMAT_ASTC_6x6_SFLOAT_BLOCK, "astc 6x6 sfloat block");
+    ADD(FORMAT_ASTC_8x5_SFLOAT_BLOCK, "astc 8x5 sfloat block");
+    ADD(FORMAT_ASTC_8x6_SFLOAT_BLOCK, "astc 8x6 sfloat block");
+    ADD(FORMAT_ASTC_8x8_SFLOAT_BLOCK, "astc 8x8 sfloat block");
+    ADD(FORMAT_ASTC_10x5_SFLOAT_BLOCK, "astc 10x5 sfloat block");
+    ADD(FORMAT_ASTC_10x6_SFLOAT_BLOCK, "astc 10x6 sfloat block");
+    ADD(FORMAT_ASTC_10x8_SFLOAT_BLOCK, "astc 10x8 sfloat block");
+    ADD(FORMAT_ASTC_10x10_SFLOAT_BLOCK, "astc 10x10 sfloat block");
+    ADD(FORMAT_ASTC_12x10_SFLOAT_BLOCK, "astc 12x10 sfloat block");
+    ADD(FORMAT_ASTC_12x12_SFLOAT_BLOCK, "astc 12x12 sfloat block");
+    ADD(FORMAT_G8_B8R8_2PLANE_444_UNORM, "g8 b8r8 2plane 444 unorm");
+    ADD(FORMAT_G10X6_B10X6R10X6_2PLANE_444_UNORM_3PACK16, "g10x6 b10x6r10x6 2plane 444 unorm 3pack16");
+    ADD(FORMAT_G12X4_B12X4R12X4_2PLANE_444_UNORM_3PACK16, "g12x4 b12x4r12x4 2plane 444 unorm 3pack16");
+    ADD(FORMAT_G16_B16R16_2PLANE_444_UNORM, "g16 b16r16 2plane 444 unorm");
+    ADD(FORMAT_A4R4G4B4_UNORM_PACK16, "a4r4g4b4 unorm pack16");
+    ADD(FORMAT_A4B4G4R4_UNORM_PACK16, "a4b4g4r4 unorm pack16");
+
 
     domain = DOMAIN_IMAGE_TYPE; /* VkImageType */
     ADD(IMAGE_TYPE_1D, "1d");
@@ -690,6 +711,9 @@ void moonvulkan_open_enums(lua_State *L)
     ADD(QUERY_TYPE_PIPELINE_STATISTICS, "pipeline statistics");
     ADD(QUERY_TYPE_TIMESTAMP, "timestamp");
     ADD(QUERY_TYPE_TRANSFORM_FEEDBACK_STREAM, "transform feedback stream");
+    ADD(QUERY_TYPE_PERFORMANCE_QUERY, "performance query");
+    ADD(QUERY_TYPE_ACCELERATION_STRUCTURE_COMPACTED_SIZE, "acceleration structure compacted size");
+    ADD(QUERY_TYPE_ACCELERATION_STRUCTURE_SERIALIZATION_SIZE, "acceleration structure serialization size");
 
     domain = DOMAIN_SHARING_MODE; /* VkSharingMode */
     ADD(SHARING_MODE_EXCLUSIVE, "exclusive");
@@ -874,7 +898,6 @@ void moonvulkan_open_enums(lua_State *L)
     ADD(BLEND_OP_GREEN, "green");
     ADD(BLEND_OP_BLUE, "blue");
 
-
     domain = DOMAIN_DYNAMIC_STATE; /* VkDynamicState */
     ADD(DYNAMIC_STATE_VIEWPORT, "viewport");
     ADD(DYNAMIC_STATE_SCISSOR, "scissor");
@@ -887,6 +910,28 @@ void moonvulkan_open_enums(lua_State *L)
     ADD(DYNAMIC_STATE_STENCIL_REFERENCE, "stencil reference");
     ADD(DYNAMIC_STATE_DISCARD_RECTANGLE, "discard rectangle");
     ADD(DYNAMIC_STATE_SAMPLE_LOCATIONS, "sample locations");
+    ADD(DYNAMIC_STATE_RAY_TRACING_PIPELINE_STACK_SIZE, "ray tracing pipeline stack size");
+    ADD(DYNAMIC_STATE_FRAGMENT_SHADING_RATE, "fragment shading rate");
+    ADD(DYNAMIC_STATE_LINE_STIPPLE, "line stipple");
+    ADD(DYNAMIC_STATE_CULL_MODE, "cull mode");
+    ADD(DYNAMIC_STATE_FRONT_FACE, "front face");
+    ADD(DYNAMIC_STATE_PRIMITIVE_TOPOLOGY, "primitive topology");
+    ADD(DYNAMIC_STATE_VIEWPORT_WITH_COUNT, "viewport with count");
+    ADD(DYNAMIC_STATE_SCISSOR_WITH_COUNT, "scissor with count");
+    ADD(DYNAMIC_STATE_VERTEX_INPUT_BINDING_STRIDE, "vertex input binding stride");
+    ADD(DYNAMIC_STATE_DEPTH_TEST_ENABLE, "depth test enable");
+    ADD(DYNAMIC_STATE_DEPTH_WRITE_ENABLE, "depth write enable");
+    ADD(DYNAMIC_STATE_DEPTH_COMPARE_OP, "depth compare op");
+    ADD(DYNAMIC_STATE_DEPTH_BOUNDS_TEST_ENABLE, "depth bounds test enable");
+    ADD(DYNAMIC_STATE_STENCIL_TEST_ENABLE, "stencil test enable");
+    ADD(DYNAMIC_STATE_STENCIL_OP, "stencil op");
+    ADD(DYNAMIC_STATE_VERTEX_INPUT, "vertex input");
+    ADD(DYNAMIC_STATE_PATCH_CONTROL_POINTS, "patch control points");
+    ADD(DYNAMIC_STATE_RASTERIZER_DISCARD_ENABLE, "rasterizer discard enable");
+    ADD(DYNAMIC_STATE_DEPTH_BIAS_ENABLE, "depth bias enable");
+    ADD(DYNAMIC_STATE_LOGIC_OP, "logic op");
+    ADD(DYNAMIC_STATE_PRIMITIVE_RESTART_ENABLE, "primitive restart enable");
+    ADD(DYNAMIC_STATE_COLOR_WRITE_ENABLE, "color write enable");
 
     domain = DOMAIN_FILTER; /* VkFilter */
     ADD(FILTER_NEAREST, "nearest");
@@ -927,19 +972,23 @@ void moonvulkan_open_enums(lua_State *L)
     ADD(DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC, "storage buffer dynamic");
     ADD(DESCRIPTOR_TYPE_INPUT_ATTACHMENT, "input attachment");
     ADD(DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK, "inline uniform block");
+    ADD(DESCRIPTOR_TYPE_ACCELERATION_STRUCTURE, "acceleration structure");
 
     domain = DOMAIN_ATTACHMENT_LOAD_OP; /* VkAttachmentLoadOp */
     ADD(ATTACHMENT_LOAD_OP_LOAD, "load");
     ADD(ATTACHMENT_LOAD_OP_CLEAR, "clear");
     ADD(ATTACHMENT_LOAD_OP_DONT_CARE, "dont care");
+    ADD(ATTACHMENT_LOAD_OP_NONE, "none");
 
     domain = DOMAIN_ATTACHMENT_STORE_OP; /* VkAttachmentStoreOp */
     ADD(ATTACHMENT_STORE_OP_STORE, "store");
     ADD(ATTACHMENT_STORE_OP_DONT_CARE, "dont care");
+    ADD(ATTACHMENT_STORE_OP_NONE, "none");
 
     domain = DOMAIN_PIPELINE_BIND_POINT; /* VkPipelineBindPoint */
     ADD(PIPELINE_BIND_POINT_GRAPHICS, "graphics");
     ADD(PIPELINE_BIND_POINT_COMPUTE, "compute");
+    ADD(PIPELINE_BIND_POINT_RAY_TRACING, "ray tracing");
 
     domain = DOMAIN_COMMAND_BUFFER_LEVEL; /* VkCommandBufferLevel */
     ADD(COMMAND_BUFFER_LEVEL_PRIMARY, "primary");
@@ -948,6 +997,8 @@ void moonvulkan_open_enums(lua_State *L)
     domain = DOMAIN_INDEX_TYPE; /* VkIndexType */
     ADD(INDEX_TYPE_UINT16, "uint16");
     ADD(INDEX_TYPE_UINT32, "uint32");
+    ADD(INDEX_TYPE_NONE, "none");
+    ADD(INDEX_TYPE_UINT8, "uint8");
 
     domain = DOMAIN_SUBPASS_CONTENTS; /* VkSubpassContents */
     ADD(SUBPASS_CONTENTS_INLINE, "inline");
