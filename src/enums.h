@@ -104,6 +104,24 @@ void enums_freelist(lua_State *L, uint32_t *list);
 #define DOMAIN_VALIDATION_FEATURE_ENABLE        57
 #define DOMAIN_VALIDATION_FEATURE_DISABLE       58
 #define DOMAIN_FULL_SCREEN_EXCLUSIVE            59
+#define DOMAIN_SHADER_FLOAT_CONTROLS_INDEPENDENCE 60
+#define DOMAIN_SEMAPHORE_TYPE                   61
+#define DOMAIN_PERFORMANCE_COUNTER_UNIT         62
+#define DOMAIN_PERFORMANCE_COUNTER_SCOPE        63
+#define DOMAIN_PERFORMANCE_COUNTER_STORAGE      64
+#define DOMAIN_FRAGMENT_SHADING_RATE_COMBINER_OP 65
+#define DOMAIN_PIPELINE_EXECUTABLE_STATISTICS_FORMAT 66
+#define DOMAIN_RAY_TRACING_SHADER_GROUP_TYPE    67
+#define DOMAIN_GEOMETRY_TYPE                    68
+#define DOMAIN_ACCELERATION_STRUCTURE_TYPE      69
+#define DOMAIN_COPY_ACCELERATION_STRUCTURE_MODE 70
+#define DOMAIN_PROVOKING_VERTEX_MODE            71
+#define DOMAIN_LINE_RASTERIZATION_MODE          72
+#define DOMAIN_DEVICE_MEMORY_REPORT_EVENT_TYPE  73
+#define DOMAIN_BUILD_ACCELERATION_STRUCTURE_MODE 74
+#define DOMAIN_ACCELERATION_STRUCTURE_BUILD_TYPE 75
+#define DOMAIN_ACCELERATION_STRUCTURE_COMPATIBILITY 76
+#define DOMAIN_SHADER_GROUP_SHADER              77
 
 /* NONVK additions */
 #define DOMAIN_NONVK_TYPE                       101
@@ -466,7 +484,133 @@ void enums_freelist(lua_State *L, uint32_t *list);
 #define checkfullscreenexclusivelist(L, arg, count, err) (VkFullScreenExclusiveEXT*)enums_checklist((L), DOMAIN_FULL_SCREEN_EXCLUSIVE, (arg), (count), (err))
 #define freefullscreenexclusivelist(L, list) enums_freelist((L), (uint32_t*)(list))
 
-#if 0 /* scaffolding 7yy */
+#define testshaderfloatcontrolsindependence(L, arg, err) (VkShaderFloatControlsIndependence)enums_test((L), DOMAIN_SHADER_FLOAT_CONTROLS_INDEPENDENCE, (arg), (err))
+#define checkshaderfloatcontrolsindependence(L, arg) (VkShaderFloatControlsIndependence)enums_check((L), DOMAIN_SHADER_FLOAT_CONTROLS_INDEPENDENCE, (arg))
+#define pushshaderfloatcontrolsindependence(L, val) enums_push((L), DOMAIN_SHADER_FLOAT_CONTROLS_INDEPENDENCE, (uint32_t)(val))
+#define valuesshaderfloatcontrolsindependence(L) enums_values((L), DOMAIN_SHADER_FLOAT_CONTROLS_INDEPENDENCE)
+#define checkshaderfloatcontrolsindependencelist(L, arg, count, err) (VkShaderFloatControlsIndependence*)enums_checklist((L), DOMAIN_SHADER_FLOAT_CONTROLS_INDEPENDENCE, (arg), (count), (err))
+#define freeshaderfloatcontrolsindependencelist(L, list) enums_freelist((L), (uint32_t*)(list))
+
+#define testsemaphoretype(L, arg, err) (VkSemaphoreType)enums_test((L), DOMAIN_SEMAPHORE_TYPE, (arg), (err))
+#define checksemaphoretype(L, arg) (VkSemaphoreType)enums_check((L), DOMAIN_SEMAPHORE_TYPE, (arg))
+#define pushsemaphoretype(L, val) enums_push((L), DOMAIN_SEMAPHORE_TYPE, (uint32_t)(val))
+#define valuessemaphoretype(L) enums_values((L), DOMAIN_SEMAPHORE_TYPE)
+#define checksemaphoretypelist(L, arg, count, err) (VkSemaphoreType*)enums_checklist((L), DOMAIN_SEMAPHORE_TYPE, (arg), (count), (err))
+#define freesemaphoretypelist(L, list) enums_freelist((L), (uint32_t*)(list))
+
+#define testperformancecounterunit(L, arg, err) (VkPerformanceCounterUnitKHR)enums_test((L), DOMAIN_PERFORMANCE_COUNTER_UNIT, (arg), (err))
+#define checkperformancecounterunit(L, arg) (VkPerformanceCounterUnitKHR)enums_check((L), DOMAIN_PERFORMANCE_COUNTER_UNIT, (arg))
+#define pushperformancecounterunit(L, val) enums_push((L), DOMAIN_PERFORMANCE_COUNTER_UNIT, (uint32_t)(val))
+#define valuesperformancecounterunit(L) enums_values((L), DOMAIN_PERFORMANCE_COUNTER_UNIT)
+#define checkperformancecounterunitlist(L, arg, count, err) (VkPerformanceCounterUnitKHR*)enums_checklist((L), DOMAIN_PERFORMANCE_COUNTER_UNIT, (arg), (count), (err))
+#define freeperformancecounterunitlist(L, list) enums_freelist((L), (uint32_t*)(list))
+
+#define testperformancecounterscope(L, arg, err) (VkPerformanceCounterScopeKHR)enums_test((L), DOMAIN_PERFORMANCE_COUNTER_SCOPE, (arg), (err))
+#define checkperformancecounterscope(L, arg) (VkPerformanceCounterScopeKHR)enums_check((L), DOMAIN_PERFORMANCE_COUNTER_SCOPE, (arg))
+#define pushperformancecounterscope(L, val) enums_push((L), DOMAIN_PERFORMANCE_COUNTER_SCOPE, (uint32_t)(val))
+#define valuesperformancecounterscope(L) enums_values((L), DOMAIN_PERFORMANCE_COUNTER_SCOPE)
+#define checkperformancecounterscopelist(L, arg, count, err) (VkPerformanceCounterScopeKHR*)enums_checklist((L), DOMAIN_PERFORMANCE_COUNTER_SCOPE, (arg), (count), (err))
+#define freeperformancecounterscopelist(L, list) enums_freelist((L), (uint32_t*)(list))
+
+#define testperformancecounterstorage(L, arg, err) (VkPerformanceCounterStorageKHR)enums_test((L), DOMAIN_PERFORMANCE_COUNTER_STORAGE, (arg), (err))
+#define checkperformancecounterstorage(L, arg) (VkPerformanceCounterStorageKHR)enums_check((L), DOMAIN_PERFORMANCE_COUNTER_STORAGE, (arg))
+#define pushperformancecounterstorage(L, val) enums_push((L), DOMAIN_PERFORMANCE_COUNTER_STORAGE, (uint32_t)(val))
+#define valuesperformancecounterstorage(L) enums_values((L), DOMAIN_PERFORMANCE_COUNTER_STORAGE)
+#define checkperformancecounterstoragelist(L, arg, count, err) (VkPerformanceCounterStorageKHR*)enums_checklist((L), DOMAIN_PERFORMANCE_COUNTER_STORAGE, (arg), (count), (err))
+#define freeperformancecounterstoragelist(L, list) enums_freelist((L), (uint32_t*)(list))
+
+#define testfragmentshadingratecombinerop(L, arg, err) (VkFragmentShadingRateCombinerOpKHR)enums_test((L), DOMAIN_FRAGMENT_SHADING_RATE_COMBINER_OP, (arg), (err))
+#define checkfragmentshadingratecombinerop(L, arg) (VkFragmentShadingRateCombinerOpKHR)enums_check((L), DOMAIN_FRAGMENT_SHADING_RATE_COMBINER_OP, (arg))
+#define pushfragmentshadingratecombinerop(L, val) enums_push((L), DOMAIN_FRAGMENT_SHADING_RATE_COMBINER_OP, (uint32_t)(val))
+#define valuesfragmentshadingratecombinerop(L) enums_values((L), DOMAIN_FRAGMENT_SHADING_RATE_COMBINER_OP)
+#define checkfragmentshadingratecombineroplist(L, arg, count, err) (VkFragmentShadingRateCombinerOpKHR*)enums_checklist((L), DOMAIN_FRAGMENT_SHADING_RATE_COMBINER_OP, (arg), (count), (err))
+#define freefragmentshadingratecombineroplist(L, list) enums_freelist((L), (uint32_t*)(list))
+
+#define testpipelineexecutablestatisticsformat(L, arg, err) (VkPipelineExecutableStatisticsFormatKHR)enums_test((L), DOMAIN_PIPELINE_EXECUTABLE_STATISTICS_FORMAT, (arg), (err))
+#define checkpipelineexecutablestatisticsformat(L, arg) (VkPipelineExecutableStatisticsFormatKHR)enums_check((L), DOMAIN_PIPELINE_EXECUTABLE_STATISTICS_FORMAT, (arg))
+#define pushpipelineexecutablestatisticsformat(L, val) enums_push((L), DOMAIN_PIPELINE_EXECUTABLE_STATISTICS_FORMAT, (uint32_t)(val))
+#define valuespipelineexecutablestatisticsformat(L) enums_values((L), DOMAIN_PIPELINE_EXECUTABLE_STATISTICS_FORMAT)
+#define checkpipelineexecutablestatisticsformatlist(L, arg, count, err) (VkPipelineExecutableStatisticsFormatKHR*)enums_checklist((L), DOMAIN_PIPELINE_EXECUTABLE_STATISTICS_FORMAT, (arg), (count), (err))
+#define freepipelineexecutablestatisticsformatlist(L, list) enums_freelist((L), (uint32_t*)(list))
+
+#define testraytracingshadergrouptype(L, arg, err) (VkRayTracingShaderGroupTypeKHR)enums_test((L), DOMAIN_RAY_TRACING_SHADER_GROUP_TYPE, (arg), (err))
+#define checkraytracingshadergrouptype(L, arg) (VkRayTracingShaderGroupTypeKHR)enums_check((L), DOMAIN_RAY_TRACING_SHADER_GROUP_TYPE, (arg))
+#define pushraytracingshadergrouptype(L, val) enums_push((L), DOMAIN_RAY_TRACING_SHADER_GROUP_TYPE, (uint32_t)(val))
+#define valuesraytracingshadergrouptype(L) enums_values((L), DOMAIN_RAY_TRACING_SHADER_GROUP_TYPE)
+#define checkraytracingshadergrouptypelist(L, arg, count, err) (VkRayTracingShaderGroupTypeKHR*)enums_checklist((L), DOMAIN_RAY_TRACING_SHADER_GROUP_TYPE, (arg), (count), (err))
+#define freeraytracingshadergrouptypelist(L, list) enums_freelist((L), (uint32_t*)(list))
+
+#define testgeometrytype(L, arg, err) (VkGeometryTypeKHR)enums_test((L), DOMAIN_GEOMETRY_TYPE, (arg), (err))
+#define checkgeometrytype(L, arg) (VkGeometryTypeKHR)enums_check((L), DOMAIN_GEOMETRY_TYPE, (arg))
+#define pushgeometrytype(L, val) enums_push((L), DOMAIN_GEOMETRY_TYPE, (uint32_t)(val))
+#define valuesgeometrytype(L) enums_values((L), DOMAIN_GEOMETRY_TYPE)
+#define checkgeometrytypelist(L, arg, count, err) (VkGeometryTypeKHR*)enums_checklist((L), DOMAIN_GEOMETRY_TYPE, (arg), (count), (err))
+#define freegeometrytypelist(L, list) enums_freelist((L), (uint32_t*)(list))
+
+#define testaccelerationstructuretype(L, arg, err) (VkAccelerationStructureTypeKHR)enums_test((L), DOMAIN_ACCELERATION_STRUCTURE_TYPE, (arg), (err))
+#define checkaccelerationstructuretype(L, arg) (VkAccelerationStructureTypeKHR)enums_check((L), DOMAIN_ACCELERATION_STRUCTURE_TYPE, (arg))
+#define pushaccelerationstructuretype(L, val) enums_push((L), DOMAIN_ACCELERATION_STRUCTURE_TYPE, (uint32_t)(val))
+#define valuesaccelerationstructuretype(L) enums_values((L), DOMAIN_ACCELERATION_STRUCTURE_TYPE)
+#define checkaccelerationstructuretypelist(L, arg, count, err) (VkAccelerationStructureTypeKHR*)enums_checklist((L), DOMAIN_ACCELERATION_STRUCTURE_TYPE, (arg), (count), (err))
+#define freeaccelerationstructuretypelist(L, list) enums_freelist((L), (uint32_t*)(list))
+
+#define testcopyaccelerationstructuremode(L, arg, err) (VkCopyAccelerationStructureModeKHR)enums_test((L), DOMAIN_COPY_ACCELERATION_STRUCTURE_MODE, (arg), (err))
+#define checkcopyaccelerationstructuremode(L, arg) (VkCopyAccelerationStructureModeKHR)enums_check((L), DOMAIN_COPY_ACCELERATION_STRUCTURE_MODE, (arg))
+#define pushcopyaccelerationstructuremode(L, val) enums_push((L), DOMAIN_COPY_ACCELERATION_STRUCTURE_MODE, (uint32_t)(val))
+#define valuescopyaccelerationstructuremode(L) enums_values((L), DOMAIN_COPY_ACCELERATION_STRUCTURE_MODE)
+#define checkcopyaccelerationstructuremodelist(L, arg, count, err) (VkCopyAccelerationStructureModeKHR*)enums_checklist((L), DOMAIN_COPY_ACCELERATION_STRUCTURE_MODE, (arg), (count), (err))
+#define freecopyaccelerationstructuremodelist(L, list) enums_freelist((L), (uint32_t*)(list))
+
+#define testprovokingvertexmode(L, arg, err) (VkProvokingVertexModeEXT)enums_test((L), DOMAIN_PROVOKING_VERTEX_MODE, (arg), (err))
+#define checkprovokingvertexmode(L, arg) (VkProvokingVertexModeEXT)enums_check((L), DOMAIN_PROVOKING_VERTEX_MODE, (arg))
+#define pushprovokingvertexmode(L, val) enums_push((L), DOMAIN_PROVOKING_VERTEX_MODE, (uint32_t)(val))
+#define valuesprovokingvertexmode(L) enums_values((L), DOMAIN_PROVOKING_VERTEX_MODE)
+#define checkprovokingvertexmodelist(L, arg, count, err) (VkProvokingVertexModeEXT*)enums_checklist((L), DOMAIN_PROVOKING_VERTEX_MODE, (arg), (count), (err))
+#define freeprovokingvertexmodelist(L, list) enums_freelist((L), (uint32_t*)(list))
+
+#define testlinerasterizationmode(L, arg, err) (VkLineRasterizationModeEXT)enums_test((L), DOMAIN_LINE_RASTERIZATION_MODE, (arg), (err))
+#define checklinerasterizationmode(L, arg) (VkLineRasterizationModeEXT)enums_check((L), DOMAIN_LINE_RASTERIZATION_MODE, (arg))
+#define pushlinerasterizationmode(L, val) enums_push((L), DOMAIN_LINE_RASTERIZATION_MODE, (uint32_t)(val))
+#define valueslinerasterizationmode(L) enums_values((L), DOMAIN_LINE_RASTERIZATION_MODE)
+#define checklinerasterizationmodelist(L, arg, count, err) (VkLineRasterizationModeEXT*)enums_checklist((L), DOMAIN_LINE_RASTERIZATION_MODE, (arg), (count), (err))
+#define freelinerasterizationmodelist(L, list) enums_freelist((L), (uint32_t*)(list))
+
+#define testdevicememoryreporteventtype(L, arg, err) (VkDeviceMemoryReportEventTypeEXT)enums_test((L), DOMAIN_DEVICE_MEMORY_REPORT_EVENT_TYPE, (arg), (err))
+#define checkdevicememoryreporteventtype(L, arg) (VkDeviceMemoryReportEventTypeEXT)enums_check((L), DOMAIN_DEVICE_MEMORY_REPORT_EVENT_TYPE, (arg))
+#define pushdevicememoryreporteventtype(L, val) enums_push((L), DOMAIN_DEVICE_MEMORY_REPORT_EVENT_TYPE, (uint32_t)(val))
+#define valuesdevicememoryreporteventtype(L) enums_values((L), DOMAIN_DEVICE_MEMORY_REPORT_EVENT_TYPE)
+#define checkdevicememoryreporteventtypelist(L, arg, count, err) (VkDeviceMemoryReportEventTypeEXT*)enums_checklist((L), DOMAIN_DEVICE_MEMORY_REPORT_EVENT_TYPE, (arg), (count), (err))
+#define freedevicememoryreporteventtypelist(L, list) enums_freelist((L), (uint32_t*)(list))
+
+#define testbuildaccelerationstructuremode(L, arg, err) (VkBuildAccelerationStructureModeKHR)enums_test((L), DOMAIN_BUILD_ACCELERATION_STRUCTURE_MODE, (arg), (err))
+#define checkbuildaccelerationstructuremode(L, arg) (VkBuildAccelerationStructureModeKHR)enums_check((L), DOMAIN_BUILD_ACCELERATION_STRUCTURE_MODE, (arg))
+#define pushbuildaccelerationstructuremode(L, val) enums_push((L), DOMAIN_BUILD_ACCELERATION_STRUCTURE_MODE, (uint32_t)(val))
+#define valuesbuildaccelerationstructuremode(L) enums_values((L), DOMAIN_BUILD_ACCELERATION_STRUCTURE_MODE)
+#define checkbuildaccelerationstructuremodelist(L, arg, count, err) (VkBuildAccelerationStructureModeKHR*)enums_checklist((L), DOMAIN_BUILD_ACCELERATION_STRUCTURE_MODE, (arg), (count), (err))
+#define freebuildaccelerationstructuremodelist(L, list) enums_freelist((L), (uint32_t*)(list))
+
+#define testaccelerationstructurebuildtype(L, arg, err) (VkAccelerationStructureBuildTypeKHR)enums_test((L), DOMAIN_ACCELERATION_STRUCTURE_BUILD_TYPE, (arg), (err))
+#define checkaccelerationstructurebuildtype(L, arg) (VkAccelerationStructureBuildTypeKHR)enums_check((L), DOMAIN_ACCELERATION_STRUCTURE_BUILD_TYPE, (arg))
+#define pushaccelerationstructurebuildtype(L, val) enums_push((L), DOMAIN_ACCELERATION_STRUCTURE_BUILD_TYPE, (uint32_t)(val))
+#define valuesaccelerationstructurebuildtype(L) enums_values((L), DOMAIN_ACCELERATION_STRUCTURE_BUILD_TYPE)
+#define checkaccelerationstructurebuildtypelist(L, arg, count, err) (VkAccelerationStructureBuildTypeKHR*)enums_checklist((L), DOMAIN_ACCELERATION_STRUCTURE_BUILD_TYPE, (arg), (count), (err))
+#define freeaccelerationstructurebuildtypelist(L, list) enums_freelist((L), (uint32_t*)(list))
+
+#define testaccelerationstructurecompatibility(L, arg, err) (VkAccelerationStructureCompatibilityKHR)enums_test((L), DOMAIN_ACCELERATION_STRUCTURE_COMPATIBILITY, (arg), (err))
+#define checkaccelerationstructurecompatibility(L, arg) (VkAccelerationStructureCompatibilityKHR)enums_check((L), DOMAIN_ACCELERATION_STRUCTURE_COMPATIBILITY, (arg))
+#define pushaccelerationstructurecompatibility(L, val) enums_push((L), DOMAIN_ACCELERATION_STRUCTURE_COMPATIBILITY, (uint32_t)(val))
+#define valuesaccelerationstructurecompatibility(L) enums_values((L), DOMAIN_ACCELERATION_STRUCTURE_COMPATIBILITY)
+#define checkaccelerationstructurecompatibilitylist(L, arg, count, err) (VkAccelerationStructureCompatibilityKHR*)enums_checklist((L), DOMAIN_ACCELERATION_STRUCTURE_COMPATIBILITY, (arg), (count), (err))
+#define freeaccelerationstructurecompatibilitylist(L, list) enums_freelist((L), (uint32_t*)(list))
+
+#define testshadergroupshader(L, arg, err) (VkShaderGroupShaderKHR)enums_test((L), DOMAIN_SHADER_GROUP_SHADER, (arg), (err))
+#define checkshadergroupshader(L, arg) (VkShaderGroupShaderKHR)enums_check((L), DOMAIN_SHADER_GROUP_SHADER, (arg))
+#define pushshadergroupshader(L, val) enums_push((L), DOMAIN_SHADER_GROUP_SHADER, (uint32_t)(val))
+#define valuesshadergroupshader(L) enums_values((L), DOMAIN_SHADER_GROUP_SHADER)
+#define checkshadergroupshaderlist(L, arg, count, err) (VkShaderGroupShaderKHR*)enums_checklist((L), DOMAIN_SHADER_GROUP_SHADER, (arg), (count), (err))
+#define freeshadergroupshaderlist(L, list) enums_freelist((L), (uint32_t*)(list))
+
+#if 0 /* scaffolding 9yy */
 #define testxxx(L, arg, err) (VkXxx)enums_test((L), DOMAIN_XXX, (arg), (err))
 #define checkxxx(L, arg) (VkXxx)enums_check((L), DOMAIN_XXX, (arg))
 #define pushxxx(L, val) enums_push((L), DOMAIN_XXX, (uint32_t)(val))
@@ -474,6 +618,8 @@ void enums_freelist(lua_State *L, uint32_t *list);
 #define checkxxxlist(L, arg, count, err) (VkXxx*)enums_checklist((L), DOMAIN_XXX, (arg), (count), (err))
 #define freexxxlist(L, list) enums_freelist((L), (uint32_t*)(list))
     CASE(xxx);
+    domain = DOMAIN_XXX; /* VkXxx */
+#define DOMAIN_XXX
 #endif
 
 #endif /* enumsDEFINED */

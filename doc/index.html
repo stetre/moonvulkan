@@ -5787,8 +5787,23 @@ for semantic and usage information.</p>
 </div>
 <div id="result" class="paragraph">
 <p><span class="small"><strong>result</strong>: vk.XXX (results), vk.ERROR_XXX (errors)<br>
-Values: '<em>success</em>', '<em>not ready</em>', '<em>timeout</em>', '<em>event set</em>', '<em>event reset</em>', '<em>incomplete</em>', '<em>out of host memory</em>', '<em>out of device memory</em>', '<em>initialization failed</em>', '<em>device lost</em>', '<em>memory map failed</em>', '<em>layer not present</em>', '<em>extension not present</em>', '<em>feature not present</em>', '<em>incompatible driver</em>', '<em>too many objects</em>', '<em>format not supported</em>', '<em>fragmented pool</em>', '<em>surface lost</em>', '<em>native window in use</em>', '<em>suboptimal</em>', '<em>out of date</em>', '<em>incompatible display</em>', '<em>validation failed</em>', '<em>out of pool memory</em>', '<em>invalid external handle</em>', '<em>not permitted</em>', '<em>fragmentation</em>', '<em>invalid drm format modifier plane layout</em>', '<em>invalid device address</em>', '<em>full screen exclusive mode lost</em>'.<br>
+Values: '<em>success</em>', '<em>not ready</em>', '<em>timeout</em>', '<em>unknown</em>', '<em>event set</em>', '<em>event reset</em>', '<em>incomplete</em>', '<em>out of host memory</em>', '<em>out of device memory</em>', '<em>initialization failed</em>', '<em>device lost</em>', '<em>memory map failed</em>', '<em>layer not present</em>', '<em>extension not present</em>', '<em>feature not present</em>', '<em>incompatible driver</em>', '<em>too many objects</em>', '<em>format not supported</em>', '<em>fragmented pool</em>', '<em>surface lost</em>', '<em>native window in use</em>', '<em>suboptimal</em>', '<em>out of date</em>', '<em>incompatible display</em>', '<em>validation failed</em>', '<em>out of pool memory</em>', '<em>invalid external handle</em>', '<em>not permitted</em>', '<em>fragmentation</em>', '<em>invalid drm format modifier plane layout</em>', '<em>invalid opaque capture address</em>', '<em>full screen exclusive mode lost</em>', '<em>thread idle</em>', '<em>thread done</em>', '<em>operation deferred</em>', '<em>operation not deferred</em>', '<em>pipeline compile required</em>'.<br>
 Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkResult.html">VkResult</a>.</span></p>
+</div>
+<div id="accelerationstructurebuildtype" class="paragraph">
+<p><span class="small"><strong>accelerationstructurebuildtype</strong>: vk.ACCELERATION_STRUCTURE_BUILD_TYPE_XXX_KHR<br>
+Values: '<em>host</em>', '<em>device</em>', '<em>host or device</em>'.<br>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkAccelerationStructureBuildTypeKHR.html">VkAccelerationStructureBuildTypeKHR</a>.</span></p>
+</div>
+<div id="accelerationstructurecompatibility" class="paragraph">
+<p><span class="small"><strong>accelerationstructurecompatibility</strong>: vk.VK_ACCELERATION_STRUCTURE_COMPATIBILITY_XXX_KHR<br>
+Values: '<em>compatible</em>', '<em>incompatible</em>'.<br>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkAccelerationStructureCompatibilityKHR.html">VkAccelerationStructureCompatibilityKHR</a>.</span></p>
+</div>
+<div id="accelerationstructuretype" class="paragraph">
+<p><span class="small"><strong>accelerationstructuretype</strong>: vk.ACCELERATION_STRUCTURE_TYPE_XXX_KHR<br>
+Values: '<em>top level</em>', '<em>bottom level</em>', '<em>generic</em>'.<br>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkAccelerationStructureTypeKHR.html">VkAccelerationStructureTypeKHR</a>.</span></p>
 </div>
 <div id="attachmentloadop" class="paragraph">
 <p><span class="small"><strong>attachmentloadop</strong>: vk.ATTACHMENT_LOAD_OP_XXX<br>
@@ -5822,8 +5837,13 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/h
 <div id="bordercolor" class="paragraph">
 <p><span class="small"><strong>bordercolor</strong>: vk.BORDER_COLOR_XXX<br>
 Values:
-'<em>float transparent black</em>' (default), '<em>int transparent black</em>', '<em>float opaque black</em>', '<em>int opaque black</em>', '<em>float opaque white</em>', '<em>int opaque white</em>'.<br>
+'<em>float transparent black</em>' (default), '<em>int transparent black</em>', '<em>float opaque black</em>', '<em>int opaque black</em>', '<em>float opaque white</em>', '<em>int opaque white</em>', '<em>float custom</em>', '<em>int custom</em>'.<br>
 Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkBorderColor.html">VkBorderColor</a>.</span></p>
+</div>
+<div id="buildaccelerationstructuremode" class="paragraph">
+<p><span class="small"><strong>buildaccelerationstructuremode</strong>: vk.BUILD_ACCELERATION_STRUCTURE_MODE_XXX_KHR<br>
+Values: '<em>build</em>', '<em>update</em>'.<br>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkBuildAccelerationStructureModeKHR.html">VkBuildAccelerationStructureModeKHR</a>.</span></p>
 </div>
 <div id="chromalocation" class="paragraph">
 <p><span class="small"><strong>chromalocation</strong>: vk.CHROMA_LOCATION_XXX<br>
@@ -5859,6 +5879,11 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/h
 Values: '<em>disabled</em>', '<em>overestimate</em>', '<em>underestimate</em>'.<br>
 Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkConservativeRasterizationModeEXT.html">VkConservativeRasterizationModeEXT</a>.</span></p>
 </div>
+<div id="copyaccelerationstructuremode" class="paragraph">
+<p><span class="small"><strong>copyaccelerationstructuremode</strong>: vk.COPY_ACCELERATION_STRUCTURE_MODE_XXX_KHR <br>
+Values: '<em>clone</em>', '<em>compact</em>', '<em>serialize</em>', '<em>deserialize</em>'.<br>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkCopyAccelerationStructureModeKHR.html">VkCopyAccelerationStructureModeKHR</a>.</span></p>
+</div>
 <div id="debugreportobjecttype" class="paragraph">
 <p><span class="small"><strong>debugreportobjecttype</strong>: vk.DEBUG_REPORT_OBJECT_TYPE_XXX_EXT<br>
 Values: '<em>unknown</em>', '<em>instance</em>', '<em>physical device</em>', '<em>device</em>', '<em>queue</em>', '<em>semaphore</em>', '<em>command buffer</em>', '<em>fence</em>', '<em>device memory</em>', '<em>buffer</em>', '<em>image</em>', '<em>event</em>', '<em>query pool</em>', '<em>buffer view</em>', '<em>image view</em>', '<em>shader module</em>', '<em>pipeline cache</em>', '<em>pipeline layout</em>', '<em>render pass</em>', '<em>pipeline</em>', '<em>descriptor set layout</em>', '<em>sampler</em>', '<em>descriptor pool</em>', '<em>descriptor set</em>', '<em>framebuffer</em>', '<em>command pool</em>', '<em>surface</em>', '<em>swapchain</em>', '<em>debug report callback</em>', '<em>display</em>', '<em>display mode</em>', '<em>validation cache</em>', '<em>sampler ycbcr conversion</em>', '<em>descriptor update template</em>'.<br>
@@ -5880,6 +5905,11 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/h
 Values: '<em>display hotplug</em>'.<br>
 Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkDeviceEventTypeEXT.html">VkDeviceEventTypeEXT</a>.</span></p>
 </div>
+<div id="devicememoryreporteventtype" class="paragraph">
+<p><span class="small"><strong>devicememoryreporteventtype</strong>: vk.VK_DEVICE_MEMORY_REPORT_EVENT_TYPE_XXX_EXT<br>
+Values: '<em>allocate</em>', '<em>free</em>', '<em>import</em>', '<em>unimport</em>', '<em>allocation failed</em>'.<br>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkDeviceMemoryReportEventTypeEXT.html">VkDeviceMemoryReportEventTypeEXT</a>.</span></p>
+</div>
 <div id="discardrectanglemode" class="paragraph">
 <p><span class="small"><strong>discardrectanglemode</strong>: vk.DISCARD_RECTANGLE_MODE_XXX_EXT<br>
 Values: '<em>inclusive</em>', '<em>exclusive</em>'.<br>
@@ -5896,9 +5926,9 @@ Values: '<em>off</em>', '<em>suspend</em>', '<em>on</em>'.<br>
 Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkDisplayPowerStateEXT.html">VkDisplayPowerStateEXT</a>.</span></p>
 </div>
 <div id="driverid" class="paragraph">
-<p><span class="small"><strong>driverid</strong>: vk.DRIVER_ID_XXX_KHR<br>
-Values: '<em>amd proprietary</em>', '<em>amd open source</em>', '<em>mesa radv</em>', '<em>nvidia proprietary</em>', '<em>intel proprietary windows</em>', '<em>intel open source mesa</em>', '<em>imagination proprietary</em>', '<em>qualcomm proprietary</em>', '<em>arm proprietary</em>', '<em>google swiftshader</em>', '<em>ggp proprietary</em>', '<em>broadcom proprietary</em>'.<br>
-Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkDriverIdKHR.html">VkDriverIdKHR</a>.</span></p>
+<p><span class="small"><strong>driverid</strong>: vk.DRIVER_ID_XXX<br>
+Values: '<em>amd proprietary</em>', '<em>amd open source</em>', '<em>mesa radv</em>', '<em>nvidia proprietary</em>', '<em>intel proprietary windows</em>', '<em>intel open source mesa</em>', '<em>imagination proprietary</em>', '<em>qualcomm proprietary</em>', '<em>arm proprietary</em>', '<em>google swiftshader</em>', '<em>ggp proprietary</em>', '<em>broadcom proprietary</em>', '<em>mesa llvmpipe</em>', '<em>moltenvk</em>', '<em>coreavi proprietary</em>', '<em>juice proprietary</em>', '<em>verisilicon proprietary</em>'.<br>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkDriverId.html">VkDriverId</a>.</span></p>
 </div>
 <div id="dynamicstate" class="paragraph">
 <p><span class="small"><strong>dynamicstate</strong>: vk.DYNAMIC_STATE_XXX<br>
@@ -5918,6 +5948,11 @@ Values:
 '<em>undefined</em>' (default), '<em>r4g4 unorm pack8</em>', '<em>r4g4b4a4 unorm pack16</em>', etc.<br>
 Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkFormat.html">VkFormat</a>.</span></p>
 </div>
+<div id="fragmentshadingratecombinerop" class="paragraph">
+<p><span class="small"><strong>fragmentshadingratecombinerop</strong>: vk.VK_FRAGMENT_SHADING_RATE_COMBINER_OP_XXX_KHR<br>
+Values: '<em>keep</em>', '<em>replace</em>', '<em>min</em>', '<em>max</em>', '<em>mul</em>'.<br>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkFragmentShadingRateCombinerOpKHR.html">VkFragmentShadingRateCombinerOpKHR</a>.</span></p>
+</div>
 <div id="frontface" class="paragraph">
 <p><span class="small"><strong>frontface</strong>: vk.FRONT_FACE_XXX<br>
 Values:
@@ -5929,10 +5964,15 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/h
 Values: '<em>default</em>', '<em>allowed</em>', '<em>disallowed</em>', '<em>application controlled</em>'.<br>
 Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkFullScreenExclusiveEXT.html">VkFullScreenExclusiveEXT</a>.</span></p>
 </div>
+<div id="geometrytype" class="paragraph">
+<p><span class="small"><strong>geometrytype</strong>: vk.GEOMETRY_TYPE_XXX_KHR<br>
+Values: '<em>triangles</em>', '<em>aabbs</em>', '<em>instances</em>'.<br>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkGeometryTypeKHR.html">VkGeometryTypeKHR</a>.</span></p>
+</div>
 <div id="imagelayout" class="paragraph">
 <p><span class="small"><strong>imagelayout</strong>: vk.IMAGE_LAYOUT_XXX<br>
 Values:
-'<em>undefined</em>' (default), '<em>general</em>', '<em>color attachment optimal</em>', '<em>depth stencil attachment optimal</em>', '<em>depth stencil read only optimal</em>', '<em>shader read only optimal</em>', '<em>transfer src optimal</em>', '<em>transfer dst optimal</em>', '<em>preinitialized</em>', '<em>present src</em>', '<em>shared present</em>', '<em>depth read only stencil attachment optimal</em>', '<em>depth attachment stencil read only optimal</em>', '<em>fragment density map optimal</em>'.<br>
+'<em>undefined</em>' (default), '<em>general</em>', '<em>color attachment optimal</em>', '<em>depth stencil attachment optimal</em>', '<em>depth stencil read only optimal</em>', '<em>shader read only optimal</em>', '<em>transfer src optimal</em>', '<em>transfer dst optimal</em>', '<em>preinitialized</em>', '<em>present src</em>', '<em>shared present</em>', '<em>depth read only stencil attachment optimal</em>', '<em>depth attachment stencil read only optimal</em>', '<em>fragment density map optimal</em>', '<em>depth attachment optimal</em>', '<em>depth read only optimal</em>', '<em>stencil attachment optimal</em>', '<em>stencil read only optimal</em>', '<em>fragment shading rate attachment optimal</em>', '<em>read only optimal</em>', '<em>attachment optimal</em>'.<br>
 Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkImageLayout.html">VkImageLayout</a>.</span></p>
 </div>
 <div id="imagetiling" class="paragraph">
@@ -5959,6 +5999,11 @@ Values:
 '<em>uint16</em>', '<em>uint32</em>'.<br>
 Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkIndexType.html">VkIndexType</a>.</span></p>
 </div>
+<div id="linerasterizationmode" class="paragraph">
+<p><span class="small"><strong>linerasterizationmode</strong>: vk.LINE_RASTERIZATION_MODE_XXX_EXT<br>
+Values: '<em>default</em>', '<em>rectangular</em>', '<em>bresenham</em>', '<em>rectangular smooth</em>'.<br>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkLineRasterizationModeEXT.html">VkLineRasterizationModeEXT</a>.</span></p>
+</div>
 <div id="logicop" class="paragraph">
 <p><span class="small"><strong>logicop</strong>: vk.LOGIC_OP_XXX<br>
 Values:
@@ -5967,8 +6012,23 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/h
 </div>
 <div id="objecttype" class="paragraph">
 <p><span class="small"><strong>objecttype</strong>: vk.OBJECT_TYPE_XXX<br>
-Values: '<em>unknown</em>', '<em>instance</em>', '<em>physical device</em>', '<em>device</em>', '<em>queue</em>', '<em>semaphore</em>', '<em>command buffer</em>', '<em>fence</em>', '<em>device memory</em>', '<em>buffer</em>', '<em>image</em>', '<em>event</em>', '<em>query pool</em>', '<em>buffer view</em>', '<em>image view</em>', '<em>shader module</em>', '<em>pipeline cache</em>', '<em>pipeline layout</em>', '<em>render pass</em>', '<em>pipeline</em>', '<em>descriptor set layout</em>', '<em>sampler</em>', '<em>descriptor pool</em>', '<em>descriptor set</em>', '<em>framebuffer</em>', '<em>command pool</em>', '<em>surface</em>', '<em>swapchain</em>', '<em>display</em>', '<em>display mode</em>', '<em>debug report callback</em>', '<em>descriptor update template</em>', '<em>sampler ycbcr conversion</em>', '<em>validation cache</em>', '<em>debug utils messenger</em>'.<br>
+Values: '<em>unknown</em>', '<em>instance</em>', '<em>physical device</em>', '<em>device</em>', '<em>queue</em>', '<em>semaphore</em>', '<em>command buffer</em>', '<em>fence</em>', '<em>device memory</em>', '<em>buffer</em>', '<em>image</em>', '<em>event</em>', '<em>query pool</em>', '<em>buffer view</em>', '<em>image view</em>', '<em>shader module</em>', '<em>pipeline cache</em>', '<em>pipeline layout</em>', '<em>render pass</em>', '<em>pipeline</em>', '<em>descriptor set layout</em>', '<em>sampler</em>', '<em>descriptor pool</em>', '<em>descriptor set</em>', '<em>framebuffer</em>', '<em>command pool</em>', '<em>surface</em>', '<em>swapchain</em>', '<em>display</em>', '<em>display mode</em>', '<em>debug report callback</em>', '<em>descriptor update template</em>', '<em>sampler ycbcr conversion</em>', '<em>validation cache</em>', '<em>debug utils messenger</em>', '<em>acceleration structure</em>', '<em>deferred operation</em>', '<em>private data slot</em>'.<br>
 Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkObjectType.html">VkObjectType</a>.</span></p>
+</div>
+<div id="performancecounterscope" class="paragraph">
+<p><span class="small"><strong>performancecounterscope</strong>: vk.PERFORMANCE_COUNTER_SCOPE_XXX_KHR<br>
+Values: '<em>command buffer</em>', '<em>render pass</em>', '<em>command</em>'.<br>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPerformanceCounterScopeKHR.html">VkPerformanceCounterScopeKHR</a>.</span></p>
+</div>
+<div id="performancecounterstorage" class="paragraph">
+<p><span class="small"><strong>performancecounterstorage</strong>: vk.PERFORMANCE_COUNTER_STORAGE_XXX_KHR<br>
+Values: '<em>int32</em>', '<em>int64</em>', '<em>uint32</em>', '<em>uint64</em>', '<em>float32</em>', '<em>float64</em>'.<br>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPerformanceCounterStorageKHR.html">VkPerformanceCounterStorageKHR</a>.</span></p>
+</div>
+<div id="performancecounterunit" class="paragraph">
+<p><span class="small"><strong>performancecounterunit</strong>: vk.PERFORMANCE_COUNTER_UNIT_XXX_KHR<br>
+Values: '<em>generic</em>', '<em>percentage</em>', '<em>nanoseconds</em>', '<em>bytes</em>', '<em>bytes per second</em>', '<em>kelvin</em>', '<em>watts</em>', '<em>volts</em>', '<em>amps</em>', '<em>hertz</em>', '<em>cycles</em>'.<br>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPerformanceCounterUnitKHR.html">VkPerformanceCounterUnitKHR</a>.</span></p>
 </div>
 <div id="physicaldevicetype" class="paragraph">
 <p><span class="small"><strong>physicaldevicetype</strong>: vk.PHYSICAL_DEVICE_TYPE_XXX<br>
@@ -5981,6 +6041,11 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/h
 Values:
 '<em>graphics</em>' (default), '<em>compute</em>'.<br>
 Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPipelineBindPoint.html">VkPipelineBindPoint</a>.</span></p>
+</div>
+<div id="pipelineexecutablestatisticformat" class="paragraph">
+<p><span class="small"><strong>pipelineexecutablestatisticformat</strong>: vk.PIPELINE_EXECUTABLE_STATISTIC_FORMAT_XXX_KHR<br>
+Values: '<em>bool32</em>', '<em>int64</em>', '<em>uint64</em>', '<em>float64</em>'.<br>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPipelineExecutableStatisticFormatKHR.html">VkPipelineExecutableStatisticFormatKHR</a>.</span></p>
 </div>
 <div id="pointclippingbehavior" class="paragraph">
 <p><span class="small"><strong>pointclippingbehavior</strong>: vk.POINT_CLIPPING_BEHAVIOR_XXX<br>
@@ -6005,6 +6070,11 @@ Values:
 '<em>point list</em>' (default), '<em>line list</em>', '<em>line strip</em>', '<em>triangle list</em>', '<em>triangle strip</em>', '<em>triangle fan</em>', '<em>line list with adjacency</em>', '<em>line strip with adjacency</em>', '<em>triangle list with adjacency</em>', '<em>triangle strip with adjacency</em>', '<em>patch list</em>'.<br>
 Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPrimitiveTopology.html">VkPrimitiveTopology</a>.</span></p>
 </div>
+<div id="provokingvertexmode" class="paragraph">
+<p><span class="small"><strong>provokingvertexmode</strong>: vk.PROVOKING_VERTEX_MODE_XXX_EXT<br>
+Values: '<em>first vertex</em>', '<em>last vertex</em>'.<br>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkProvokingVertexModeEXT.html">VkProvokingVertexModeEXT</a>.</span></p>
+</div>
 <div id="querytype" class="paragraph">
 <p><span class="small"><strong>querytype</strong>: vk.QUERY_TYPE_XXX<br>
 Values:
@@ -6015,6 +6085,11 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/h
 <p><span class="small"><strong>queueglobalpriority</strong>: vk.QUEUE_GLOBAL_PRIORITY_XXX_EXT<br>
 Values: '<em>low</em>', '<em>medium</em>', '<em>high</em>', '<em>realtime</em>'.<br>
 Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkQueueGlobalPriorityEXT.html">VkQueueGlobalPriorityEXT</a>.</span></p>
+</div>
+<div id="raytracingshadergrouptype" class="paragraph">
+<p><span class="small"><strong>raytracingshadergrouptype</strong>: vk.RAY_TRACING_SHADER_GROUP_TYPE_XXX_KHR<br>
+Values: '<em>general</em>', '<em>triangles hit group</em>', '<em>procedural hit group</em>'.<br>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkRayTracingShaderGroupTypeKHR.html">VkRayTracingShaderGroupTypeKHR</a>.</span></p>
 </div>
 <div id="sampleraddressmode" class="paragraph">
 <p><span class="small"><strong>sampleraddressmode</strong>: vk.SAMPLER_ADDRESS_MODE_XXX<br>
@@ -6029,9 +6104,9 @@ Values:
 Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkSamplerMipmapMode.html">VkSamplerMipmapMode</a>.</span></p>
 </div>
 <div id="samplerreductionmode" class="paragraph">
-<p><span class="small"><strong>samplerreductionmode</strong>: vk.SAMPLER_REDUCTION_MODE_XXX_EXT<br>
+<p><span class="small"><strong>samplerreductionmode</strong>: vk.SAMPLER_REDUCTION_MODE_XXX<br>
 Values: '<em>weighted average</em>' (default), '<em>min</em>', '<em>max</em>'.<br>
-Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkSamplerReductionModeEXT.html">VkSamplerReductionModeEXT</a>.</span></p>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkSamplerReductionMode.html">VkSamplerReductionMode</a>.</span></p>
 </div>
 <div id="samplerycbcrmodelconversion" class="paragraph">
 <p><span class="small"><strong>samplerycbcrmodelconversion</strong>: vk.SAMPLER_YCBCR_MODEL_CONVERSION_XXX<br>
@@ -6042,6 +6117,21 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/h
 <p><span class="small"><strong>samplerycbcrrange</strong>: vk.SAMPLER_YCBCR_RANGE_XXX<br>
 Values: '<em>itu full</em>' (default), '<em>itu narrow</em>'.<br>
 Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkSamplerYcbcrRange.html">VkSamplerYcbcrRange</a>.</span></p>
+</div>
+<div id="semaphoretype" class="paragraph">
+<p><span class="small"><strong>semaphoretype</strong>: vk.SEMAPHORE_TYPE_XXX<br>
+Values: '<em>binary</em>', '<em>timeline</em>'.<br>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkSemaphoreType.html">VkSemaphoreType</a>.</span></p>
+</div>
+<div id="shaderfloatcontrolsindependence" class="paragraph">
+<p><span class="small"><strong>shaderfloatcontrolsindependence</strong>: vk.SHADER_FLOAT_CONTROLS_INDEPENDENCE_XXX<br>
+Values: '<em>32 bit only</em>', '<em>all</em>', '<em>none</em>'.<br>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkShaderFloatControlsIndependence.html">VkShaderFloatControlsIndependence</a>.</span></p>
+</div>
+<div id="shadergroupshader" class="paragraph">
+<p><span class="small"><strong>shadergroupshader</strong>: vk.SHADER_GROUP_SHADER_XXX_KHR<br>
+Values: '<em>general</em>', '<em>closest hit</em>', '<em>any hit</em>', '<em>intersection</em>'.<br>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkShaderGroupShaderKHR.html">VkShaderGroupShaderKHR</a>.</span></p>
 </div>
 <div id="sharingmode" class="paragraph">
 <p><span class="small"><strong>sharingmode</strong>: vk.SHARING_MODE_XXX<br>
@@ -6092,7 +6182,7 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/h
 </div>
 <div id="vendorid" class="paragraph">
 <p><span class="small"><strong>vendorid</strong>: vk.VENDOR_ID_XXX<br>
-Values: '<em>viv</em>', '<em>vsi</em>', '<em>kazan</em>'.<br>
+Values: '<em>viv</em>', '<em>vsi</em>', '<em>kazan</em>', '<em>codeplay</em>', '<em>mesa</em>', '<em>pocl</em>'.<br>
 Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkVendorId.html">VkVendorId</a>.</span></p>
 </div>
 <div id="vertexinputrate" class="paragraph">
@@ -7118,7 +7208,7 @@ that the relevant header files are where <em>vulkan.h</em> expects them to be.</
 <div id="footer">
 <div id="footer-text">
 Version 0.8<br>
-Last updated 2021-11-08 18:54:55 CET
+Last updated 2021-11-08 20:06:29 CET
 </div>
 </div>
 </body>
