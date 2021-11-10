@@ -830,12 +830,14 @@ function init_vulkan(demo)
       'VK_KHR_swapchain' 
    }
 
+   --[[
    local device_extensions = vk.enumerate_device_extension_properties(demo.gpu, nil, true)
    for _, name in ipairs(demo.device_extensions) do
       if not device_extensions[name] then 
          error("failed to find required device extension '"..name.."'")
       end
    end
+   --]]
 
    if demo.validate then -- register the debug report callback
       demo.msg_callback = vk.create_debug_report_callback(demo.inst, 
