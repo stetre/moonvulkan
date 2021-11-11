@@ -6,7 +6,8 @@ Vulkan enums are mapped in MoonVulkan to sets of string literals (as is customar
 Admitted literals are available in the *vk* table (e.g. *vk.BLEND_OP_XXX* for VK_BLEND_OP_XXX),
 and can also be inferred from the corresponding C enum names. For example, given the 
 vk.BLEND_OP_XXX hint for the <<blendop, blendop>> enum type, the literals it admits
-are obtained by lowercasing the XXX part of the name and replacing any underscore with a space.
+are obtained by lowercasing the XXX part of the name and replacing any underscore with a space. Any
+extension suffix such as *_KHR* or *_EXT* is removed.
 
 The <<enums_snippet, example>> contained in the code snippets section should hopefully be clear enough.
 

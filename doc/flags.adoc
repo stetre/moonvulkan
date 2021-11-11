@@ -6,7 +6,7 @@ Flags in MoonVulkan functions and structs are always represented as plain intege
 and encoded in the same way as the corresponding flags in the C Vulkan API.
 
 The *vk* table contains the VK_XXX_BIT values, renamed as *vk.XXX_BIT*
-(e.g. vk.STENCIL_FACE_FRONT_BIT, vk.STENCIL_FACE_BACK_BIT, etc.).
+(e.g. vk.STENCIL_FACE_FRONT_BIT, vk.STENCIL_FACE_BACK_BIT, etc.), without any extension suffix such as *_KHR* or *_EXT*.
 
 For each flags type (see the list below), a utility function is also available to map
 an integer code to a list of string literals, each corresponding to an individual bit set 

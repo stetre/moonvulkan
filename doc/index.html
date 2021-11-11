@@ -5762,7 +5762,8 @@ Note1: The <em>current_extent</em> field is <em>nil</em> when <em>width</em> and
 Admitted literals are available in the <strong>vk</strong> table (e.g. <strong>vk.BLEND_OP_XXX</strong> for VK_BLEND_OP_XXX),
 and can also be inferred from the corresponding C enum names. For example, given the
 vk.BLEND_OP_XXX hint for the <a href="#blendop">blendop</a> enum type, the literals it admits
-are obtained by lowercasing the XXX part of the name and replacing any underscore with a space.</p>
+are obtained by lowercasing the XXX part of the name and replacing any underscore with a space. Any
+extension suffix such as <strong>_KHR</strong> or <strong>_EXT</strong> is removed.</p>
 </div>
 <div class="paragraph">
 <p>The <a href="#enums_snippet">example</a> contained in the code snippets section should hopefully be clear enough.</p>
@@ -6201,7 +6202,7 @@ and encoded in the same way as the corresponding flags in the C Vulkan API.</p>
 </div>
 <div class="paragraph">
 <p>The <strong>vk</strong> table contains the VK_XXX_BIT values, renamed as <strong>vk.XXX_BIT</strong>
-(e.g. vk.STENCIL_FACE_FRONT_BIT, vk.STENCIL_FACE_BACK_BIT, etc.).</p>
+(e.g. vk.STENCIL_FACE_FRONT_BIT, vk.STENCIL_FACE_BACK_BIT, etc.), without any extension suffix such as <strong>_KHR</strong> or <strong>_EXT</strong>.</p>
 </div>
 <div class="paragraph">
 <p>For each flags type (see the list below), a utility function is also available to map
