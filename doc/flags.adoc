@@ -25,8 +25,7 @@ See also the <<flags_snippet, example>> contained in the code snippets section.
 
 [[accessflags]]
 [small]#*accessflags*: vk.ACCESS_XXX_BIT +
-Values: 
-'_indirect command read_', '_index read_', '_vertex attribute read_', '_uniform read_', '_input attachment read_', '_shader read_', '_shader write_', '_color attachment read_', '_color attachment write_', '_depth stencil attachment read_', '_depth stencil attachment write_', '_transfer read_', '_transfer write_', '_host read_', '_host write_', '_memory read_', '_memory write_', '_color attachment read noncoherent_', '_conditional rendering read_', '_transform feedback write_, '_transform feedback counter read_, '_transform feedback counter write_', '_fragment density map read_', '_acceleration structure read_', '_acceleration structure write_', '_fragment shading rate attachment read_', '_none_'. +
+Values: '_none_', '_indirect command read_', '_index read_', '_vertex attribute read_', '_uniform read_', '_input attachment read_', '_shader read_', '_shader write_', '_color attachment read_', '_color attachment write_', '_depth stencil attachment read_', '_depth stencil attachment write_', '_transfer read_', '_transfer write_', '_host read_', '_host write_', '_memory read_', '_memory write_', '_color attachment read noncoherent_', '_conditional rendering read_', '_transform feedback write_, '_transform feedback counter read_, '_transform feedback counter write_', '_fragment density map read_', '_acceleration structure read_', '_acceleration structure write_', '_fragment shading rate attachment read_', '_shader sampled read_', '_shader storage read_', '_shader storage write_'. +
 Rfr. https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkAccessFlagBits.html[VkAccessFlagBits].#
 
 [[accelerationstructurecreateflags]]
@@ -298,8 +297,7 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkPip
 
 [[pipelinestageflags]]
 [small]#*pipelinestageflags*: vk.PIPELINE_STAGE_XXX_BIT +
-Values: 
-'_top of pipe_', '_draw indirect_', '_vertex input_', '_vertex shader_', '_tessellation control shader_', '_tessellation evaluation shader_', '_geometry shader_', '_fragment shader_', '_early fragment tests_', '_late fragment tests_', '_color attachment output_', '_compute shader_', '_transfer_', '_bottom of pipe_', '_host_', '_all graphics_', '_all commands_', '_conditional rendering_', '_transform feedback_', '_fragment density process_', '_acceleration structure build_', '_ray tracing shader_', '_fragment shading rate attachment_', '_none_'. +
+Values:  '_none_', '_top of pipe_', '_draw indirect_', '_vertex input_', '_vertex shader_', '_tessellation control shader_', '_tessellation evaluation shader_', '_geometry shader_', '_fragment shader_', '_early fragment tests_', '_late fragment tests_', '_color attachment output_', '_compute shader_', '_transfer_', '_bottom of pipe_', '_host_', '_all graphics_', '_all commands_', '_conditional rendering_', '_transform feedback_', '_fragment density process_', '_acceleration structure build_', '_ray tracing shader_', '_fragment shading rate attachment_', '_copy_', '_resolve_', '_blit_', '_clear_', '_index input_', '_vertex attribute input_', '_pre rasterization shaders_'. +
 Rfr. https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPipelineStageFlagBits.html[VkPipelineStageFlagBits].#
 
 [[querycontrolflags]]

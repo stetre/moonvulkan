@@ -446,6 +446,9 @@ static VkFlags64 checkaccessflags(lua_State *L, int arg)
     CASE(VK_ACCESS_ACCELERATION_STRUCTURE_WRITE_BIT, "acceleration structure write");
     CASE(VK_ACCESS_FRAGMENT_SHADING_RATE_ATTACHMENT_READ_BIT, "fragment shading rate attachment read");
     CASE(VK_ACCESS_NONE, "none");
+    CASE(VK_ACCESS_SHADER_SAMPLED_READ_BIT, "shader sampled read");
+    CASE(VK_ACCESS_SHADER_STORAGE_READ_BIT, "shader storage read");
+    CASE(VK_ACCESS_SHADER_STORAGE_WRITE_BIT, "shader storage write");
 #undef CASE
         return (VkFlags64)luaL_argerror(L, --arg, badvalue(L,s));
         done: ;
@@ -486,6 +489,9 @@ static int pushaccessflags(lua_State *L, VkFlags64 flags)
     CASE(VK_ACCESS_ACCELERATION_STRUCTURE_WRITE_BIT, "acceleration structure write");
     CASE(VK_ACCESS_FRAGMENT_SHADING_RATE_ATTACHMENT_READ_BIT, "fragment shading rate attachment read");
     CASE(VK_ACCESS_NONE, "none");
+    CASE(VK_ACCESS_SHADER_SAMPLED_READ_BIT, "shader sampled read");
+    CASE(VK_ACCESS_SHADER_STORAGE_READ_BIT, "shader storage read");
+    CASE(VK_ACCESS_SHADER_STORAGE_WRITE_BIT, "shader storage write");
 #undef CASE
     return n;
     }
@@ -526,7 +532,9 @@ static int AccessFlags(lua_State *L)
     ADD(ACCESS_ACCELERATION_STRUCTURE_WRITE_BIT);\
     ADD(ACCESS_FRAGMENT_SHADING_RATE_ATTACHMENT_READ_BIT);\
     ADD(ACCESS_NONE);\
-
+    ADD(ACCESS_SHADER_SAMPLED_READ_BIT);\
+    ADD(ACCESS_SHADER_STORAGE_READ_BIT);\
+    ADD(ACCESS_SHADER_STORAGE_WRITE_BIT);\
 
 
 /*----------------------------------------------------------------------*
@@ -1486,6 +1494,13 @@ static VkFlags64 checkpipelinestageflags(lua_State *L, int arg)
         CASE(VK_PIPELINE_STAGE_RAY_TRACING_SHADER_BIT, "ray tracing shader");
         CASE(VK_PIPELINE_STAGE_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT, "fragment shading rate attachment");
         CASE(VK_PIPELINE_STAGE_NONE, "none");
+        CASE(VK_PIPELINE_STAGE_COPY_BIT, "copy");
+        CASE(VK_PIPELINE_STAGE_RESOLVE_BIT, "resolve");
+        CASE(VK_PIPELINE_STAGE_BLIT_BIT, "blit");
+        CASE(VK_PIPELINE_STAGE_CLEAR_BIT, "clear");
+        CASE(VK_PIPELINE_STAGE_INDEX_INPUT_BIT, "index input");
+        CASE(VK_PIPELINE_STAGE_VERTEX_ATTRIBUTE_INPUT_BIT, "vertex attribute input");
+        CASE(VK_PIPELINE_STAGE_PRE_RASTERIZATION_SHADERS_BIT, "pre rasterization shaders");
     // These are not individual bits:
         CASE(VK_PIPELINE_STAGE_ALL_GRAPHICS_BIT, "all graphics");
         CASE(VK_PIPELINE_STAGE_ALL_COMMANDS_BIT, "all commands");
@@ -1524,6 +1539,13 @@ static int pushpipelinestageflags(lua_State *L, VkFlags64 flags)
         CASE(VK_PIPELINE_STAGE_RAY_TRACING_SHADER_BIT, "ray tracing shader");
         CASE(VK_PIPELINE_STAGE_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT, "fragment shading rate attachment");
         CASE(VK_PIPELINE_STAGE_NONE, "none");
+        CASE(VK_PIPELINE_STAGE_COPY_BIT, "copy");
+        CASE(VK_PIPELINE_STAGE_RESOLVE_BIT, "resolve");
+        CASE(VK_PIPELINE_STAGE_BLIT_BIT, "blit");
+        CASE(VK_PIPELINE_STAGE_CLEAR_BIT, "clear");
+        CASE(VK_PIPELINE_STAGE_INDEX_INPUT_BIT, "index input");
+        CASE(VK_PIPELINE_STAGE_VERTEX_ATTRIBUTE_INPUT_BIT, "vertex attribute input");
+        CASE(VK_PIPELINE_STAGE_PRE_RASTERIZATION_SHADERS_BIT, "pre rasterization shaders");
     // These are not individual bits:
         CASE(VK_PIPELINE_STAGE_ALL_GRAPHICS_BIT, "all graphics");
         CASE(VK_PIPELINE_STAGE_ALL_COMMANDS_BIT, "all commands");
@@ -1565,6 +1587,13 @@ static int PipelineStageFlags(lua_State *L)
     ADD(PIPELINE_STAGE_RAY_TRACING_SHADER_BIT);\
     ADD(PIPELINE_STAGE_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT);\
     ADD(PIPELINE_STAGE_NONE);\
+    ADD(PIPELINE_STAGE_COPY_BIT);\
+    ADD(PIPELINE_STAGE_RESOLVE_BIT);\
+    ADD(PIPELINE_STAGE_BLIT_BIT);\
+    ADD(PIPELINE_STAGE_CLEAR_BIT);\
+    ADD(PIPELINE_STAGE_INDEX_INPUT_BIT);\
+    ADD(PIPELINE_STAGE_VERTEX_ATTRIBUTE_INPUT_BIT);\
+    ADD(PIPELINE_STAGE_PRE_RASTERIZATION_SHADERS_BIT);\
 
 /*----------------------------------------------------------------------*
  | VkMemoryHeapFlag
