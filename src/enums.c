@@ -1065,6 +1065,7 @@ void moonvulkan_open_enums(lua_State *L)
     ADD(DEBUG_REPORT_OBJECT_TYPE_VALIDATION_CACHE, "validation cache");
     ADD(DEBUG_REPORT_OBJECT_TYPE_SAMPLER_YCBCR_CONVERSION, "sampler ycbcr conversion");
     ADD(DEBUG_REPORT_OBJECT_TYPE_DESCRIPTOR_UPDATE_TEMPLATE, "descriptor update template");
+    ADD(DEBUG_REPORT_OBJECT_TYPE_ACCELERATION_STRUCTURE, "acceleration structure");
 
     domain = DOMAIN_DESCRIPTOR_UPDATE_TEMPLATE_TYPE; /* VkDescriptorUpdateTemplateType */
     ADD(DESCRIPTOR_UPDATE_TEMPLATE_TYPE_DESCRIPTOR_SET, "descriptor set");
@@ -1212,6 +1213,9 @@ void moonvulkan_open_enums(lua_State *L)
     domain = DOMAIN_VALIDATION_FEATURE_ENABLE; /* VkValidationFeatureEnableEXT */
     ADD(VALIDATION_FEATURE_ENABLE_GPU_ASSISTED, "gpu assisted");
     ADD(VALIDATION_FEATURE_ENABLE_GPU_ASSISTED_RESERVE_BINDING_SLOT, "gpu assisted reserve binding slot");
+    ADD(VALIDATION_FEATURE_ENABLE_BEST_PRACTICES, "best practices");
+    ADD(VALIDATION_FEATURE_ENABLE_DEBUG_PRINTF, "debug printf");
+    ADD(VALIDATION_FEATURE_ENABLE_SYNCHRONIZATION_VALIDATION, "synchronization validation");
 
     domain = DOMAIN_VALIDATION_FEATURE_DISABLE; /* VkValidationFeatureDisableEXT */
     ADD(VALIDATION_FEATURE_DISABLE_ALL, "all");
@@ -1221,6 +1225,7 @@ void moonvulkan_open_enums(lua_State *L)
     ADD(VALIDATION_FEATURE_DISABLE_OBJECT_LIFETIMES, "object lifetimes");
     ADD(VALIDATION_FEATURE_DISABLE_CORE_CHECKS, "core checks");
     ADD(VALIDATION_FEATURE_DISABLE_UNIQUE_HANDLES, "unique handles");
+    ADD(VALIDATION_FEATURE_DISABLE_SHADER_VALIDATION_CACHE, "shader validation cache");
 
     domain = DOMAIN_FULL_SCREEN_EXCLUSIVE; /* VkFullScreenExclusiveEXT */
 #if 0 //@@ why is this extension defined in vulkan_win32.h instead of vulkan_core.h?

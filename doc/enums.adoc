@@ -124,7 +124,7 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkCop
 
 [[debugreportobjecttype]]
 [small]#*debugreportobjecttype*: vk.DEBUG_REPORT_OBJECT_TYPE_XXX +
-Values: '_unknown_', '_instance_', '_physical device_', '_device_', '_queue_', '_semaphore_', '_command buffer_', '_fence_', '_device memory_', '_buffer_', '_image_', '_event_', '_query pool_', '_buffer view_', '_image view_', '_shader module_', '_pipeline cache_', '_pipeline layout_', '_render pass_', '_pipeline_', '_descriptor set layout_', '_sampler_', '_descriptor pool_', '_descriptor set_', '_framebuffer_', '_command pool_', '_surface_', '_swapchain_', '_debug report_', '_display_', '_display mode_', '_validation cache_', '_sampler ycbcr conversion_', '_descriptor update template_'. +
+Values: '_unknown_', '_instance_', '_physical device_', '_device_', '_queue_', '_semaphore_', '_command buffer_', '_fence_', '_device memory_', '_buffer_', '_image_', '_event_', '_query pool_', '_buffer view_', '_image view_', '_shader module_', '_pipeline cache_', '_pipeline layout_', '_render pass_', '_pipeline_', '_descriptor set layout_', '_sampler_', '_descriptor pool_', '_descriptor set_', '_framebuffer_', '_command pool_', '_surface_', '_swapchain_', '_debug report_', '_display_', '_display mode_', '_validation cache_', '_sampler ycbcr conversion_', '_descriptor update template_', '_acceleration structure_'. +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkDebugReportObjectTypeEXT.html[VkDebugReportObjectTypeEXT].#
 
 [[descriptortype]]
@@ -411,12 +411,12 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkVal
 
 [[validationfeaturedisable]]
 [small]#*validationfeaturedisable*: vk.VALIDATION_FEATURE_DISABLE_XXX +
-Values: '_all_' ,'_shaders_' ,'_thread safety_' ,'_api parameters_' ,'_object lifetimes_' ,'_core checks_' ,'_unique handles_'. +
+Values: '_all_' ,'_shaders_' ,'_thread safety_' ,'_api parameters_' ,'_object lifetimes_' ,'_core checks_' ,'_unique handles_', '_shader validation cache_'. +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkValidationFeatureDisableEXT.html[VkValidationFeatureDisableEXT].#
 
 [[validationfeatureenable]]
 [small]#*validationfeatureenable*: vk.VALIDATION_FEATURE_ENABLE_XXX +
-Values: '_gpu assisted_', '_gpu assisted reserve binding slot_'. +
+Values: '_gpu assisted_', '_gpu assisted reserve binding slot_', '_best practices_', '_debug printf_', '_synchronization validation_'. +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkValidationFeatureEnableEXT.html[VkValidationFeatureEnableEXT].#
 
 

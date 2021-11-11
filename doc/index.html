@@ -5887,7 +5887,7 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/h
 </div>
 <div id="debugreportobjecttype" class="paragraph">
 <p><span class="small"><strong>debugreportobjecttype</strong>: vk.DEBUG_REPORT_OBJECT_TYPE_XXX<br>
-Values: '<em>unknown</em>', '<em>instance</em>', '<em>physical device</em>', '<em>device</em>', '<em>queue</em>', '<em>semaphore</em>', '<em>command buffer</em>', '<em>fence</em>', '<em>device memory</em>', '<em>buffer</em>', '<em>image</em>', '<em>event</em>', '<em>query pool</em>', '<em>buffer view</em>', '<em>image view</em>', '<em>shader module</em>', '<em>pipeline cache</em>', '<em>pipeline layout</em>', '<em>render pass</em>', '<em>pipeline</em>', '<em>descriptor set layout</em>', '<em>sampler</em>', '<em>descriptor pool</em>', '<em>descriptor set</em>', '<em>framebuffer</em>', '<em>command pool</em>', '<em>surface</em>', '<em>swapchain</em>', '<em>debug report</em>', '<em>display</em>', '<em>display mode</em>', '<em>validation cache</em>', '<em>sampler ycbcr conversion</em>', '<em>descriptor update template</em>'.<br>
+Values: '<em>unknown</em>', '<em>instance</em>', '<em>physical device</em>', '<em>device</em>', '<em>queue</em>', '<em>semaphore</em>', '<em>command buffer</em>', '<em>fence</em>', '<em>device memory</em>', '<em>buffer</em>', '<em>image</em>', '<em>event</em>', '<em>query pool</em>', '<em>buffer view</em>', '<em>image view</em>', '<em>shader module</em>', '<em>pipeline cache</em>', '<em>pipeline layout</em>', '<em>render pass</em>', '<em>pipeline</em>', '<em>descriptor set layout</em>', '<em>sampler</em>', '<em>descriptor pool</em>', '<em>descriptor set</em>', '<em>framebuffer</em>', '<em>command pool</em>', '<em>surface</em>', '<em>swapchain</em>', '<em>debug report</em>', '<em>display</em>', '<em>display mode</em>', '<em>validation cache</em>', '<em>sampler ycbcr conversion</em>', '<em>descriptor update template</em>', '<em>acceleration structure</em>'.<br>
 Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkDebugReportObjectTypeEXT.html">VkDebugReportObjectTypeEXT</a>.</span></p>
 </div>
 <div id="descriptortype" class="paragraph">
@@ -6172,12 +6172,12 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/h
 </div>
 <div id="validationfeaturedisable" class="paragraph">
 <p><span class="small"><strong>validationfeaturedisable</strong>: vk.VALIDATION_FEATURE_DISABLE_XXX<br>
-Values: '<em>all</em>' ,'<em>shaders</em>' ,'<em>thread safety</em>' ,'<em>api parameters</em>' ,'<em>object lifetimes</em>' ,'<em>core checks</em>' ,'<em>unique handles</em>'.<br>
+Values: '<em>all</em>' ,'<em>shaders</em>' ,'<em>thread safety</em>' ,'<em>api parameters</em>' ,'<em>object lifetimes</em>' ,'<em>core checks</em>' ,'<em>unique handles</em>', '<em>shader validation cache</em>'.<br>
 Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkValidationFeatureDisableEXT.html">VkValidationFeatureDisableEXT</a>.</span></p>
 </div>
 <div id="validationfeatureenable" class="paragraph">
 <p><span class="small"><strong>validationfeatureenable</strong>: vk.VALIDATION_FEATURE_ENABLE_XXX<br>
-Values: '<em>gpu assisted</em>', '<em>gpu assisted reserve binding slot</em>'.<br>
+Values: '<em>gpu assisted</em>', '<em>gpu assisted reserve binding slot</em>', '<em>best practices</em>', '<em>debug printf</em>', '<em>synchronization validation</em>'.<br>
 Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkValidationFeatureEnableEXT.html">VkValidationFeatureEnableEXT</a>.</span></p>
 </div>
 <div id="vendorid" class="paragraph">
@@ -6498,8 +6498,7 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/h
 </div>
 <div id="pipelinestageflags" class="paragraph">
 <p><span class="small"><strong>pipelinestageflags</strong>: vk.PIPELINE_STAGE_XXX_BIT<br>
-Values:
-'<em>top of pipe</em>', '<em>draw indirect</em>', '<em>vertex input</em>', '<em>vertex shader</em>', '<em>tessellation control shader</em>', '<em>tessellation evaluation shader</em>', '<em>geometry shader</em>', '<em>fragment shader</em>', '<em>early fragment tests</em>', '<em>late fragment tests</em>', '<em>color attachment output</em>', '<em>compute shader</em>', '<em>transfer</em>', '<em>bottom of pipe</em>', '<em>host</em>', '<em>all graphics</em>', '<em>all commands</em>', '<em>conditional rendering</em>', '<em>transform feedback</em>', '<em>fragment density process</em>', '<em>acceleration structure build</em>', '<em>ray tracing shader</em>', '<em>fragment shading rate attachment</em>', '<em>none</em>'.<br>
+Values:  '<em>none</em>', '<em>top of pipe</em>', '<em>draw indirect</em>', '<em>vertex input</em>', '<em>vertex shader</em>', '<em>tessellation control shader</em>', '<em>tessellation evaluation shader</em>', '<em>geometry shader</em>', '<em>fragment shader</em>', '<em>early fragment tests</em>', '<em>late fragment tests</em>', '<em>color attachment output</em>', '<em>compute shader</em>', '<em>transfer</em>', '<em>bottom of pipe</em>', '<em>host</em>', '<em>all graphics</em>', '<em>all commands</em>', '<em>conditional rendering</em>', '<em>transform feedback</em>', '<em>fragment density process</em>', '<em>acceleration structure build</em>', '<em>ray tracing shader</em>', '<em>fragment shading rate attachment</em>', '<em>copy</em>', '<em>resolve</em>', '<em>blit</em>', '<em>clear</em>', '<em>index input</em>', '<em>vertex attribute input</em>', '<em>pre rasterization shaders</em>'.<br>
 Rfr. <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPipelineStageFlagBits.html">VkPipelineStageFlagBits</a>.</span></p>
 </div>
 <div id="querycontrolflags" class="paragraph">
