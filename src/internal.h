@@ -131,13 +131,13 @@ float* checkfloatlist(lua_State *L, int arg, uint32_t *count, int *err);
 #define pushfloatlist moonvulkan_pushfloatlist
 void pushfloatlist(lua_State *L, float *list, uint32_t count);
 #define testflags moonvulkan_testflags
-VkFlags testflags(lua_State *L, int arg, int *err);
+VkFlags64 testflags(lua_State *L, int arg, int *err);
 #define optflags moonvulkan_optflags
-VkFlags optflags(lua_State *L, int arg, VkFlags defval);
+VkFlags64 optflags(lua_State *L, int arg, VkFlags64 defval);
 #define checkflags moonvulkan_checkflags
-VkFlags checkflags(lua_State *L, int arg);
+VkFlags64 checkflags(lua_State *L, int arg);
 #define pushflags moonvulkan_pushflags
-int pushflags(lua_State *L, VkFlags value);
+int pushflags(lua_State *L, VkFlags64 value);
 #define checkflagslist moonvulkan_checkflagslist
 VkFlags* checkflagslist(lua_State *L, int arg, uint32_t *count, int *err);
 #define pushflagslist moonvulkan_pushflagslist

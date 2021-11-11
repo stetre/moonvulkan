@@ -516,31 +516,31 @@ void pushfloatlist(lua_State *L, float *list, uint32_t count)
  | VkFlags                                                                      |
  *------------------------------------------------------------------------------*/
 
-
-VkFlags testflags(lua_State *L, int arg, int *err)
+VkFlags64 testflags(lua_State *L, int arg, int *err)
     {
     if(lua_isinteger(L, arg))
-        { *err = 0; return (VkFlags)lua_tointeger(L, arg); }
+        { *err = 0; return (VkFlags64)lua_tointeger(L, arg); }
     *err = lua_isnoneornil(L, arg) ? ERR_NOTPRESENT : ERR_TYPE;
-    return (VkFlags)0;
+    return (VkFlags64)0;
     }
 
-VkFlags optflags(lua_State *L, int arg, VkFlags defval)
+VkFlags64 optflags(lua_State *L, int arg, VkFlags64 defval)
     {
-    return (VkFlags)luaL_optinteger(L, arg, defval);
+    return (VkFlags64)luaL_optinteger(L, arg, defval);
     }
 
-VkFlags checkflags(lua_State *L, int arg)
+VkFlags64 checkflags(lua_State *L, int arg)
     {
-    return (VkFlags)luaL_checkinteger(L, arg);
+    return (VkFlags64)luaL_checkinteger(L, arg);
     }
 
-int pushflags(lua_State *L, VkFlags value)
+int pushflags(lua_State *L, VkFlags64 value)
     {
     lua_pushinteger(L, value);
     return 1;
     }
 
+// 32 bit flags only:
 VkFlags* checkflagslist(lua_State *L, int arg, uint32_t *count, int *err)
     {
     return (VkFlags*)checkuint32list(L, arg, count, err);

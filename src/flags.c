@@ -410,10 +410,10 @@ static int DependencyFlags(lua_State *L)
  | VkAccessFlags
  *----------------------------------------------------------------------*/
 
-static VkFlags checkaccessflags(lua_State *L, int arg)
+static VkFlags64 checkaccessflags(lua_State *L, int arg)
     {
     const char *s;
-    VkFlags flags = 0;
+    VkFlags64 flags = 0;
 
     while(lua_isstring(L, arg))
         {
@@ -447,14 +447,14 @@ static VkFlags checkaccessflags(lua_State *L, int arg)
     CASE(VK_ACCESS_FRAGMENT_SHADING_RATE_ATTACHMENT_READ_BIT, "fragment shading rate attachment read");
     CASE(VK_ACCESS_NONE, "none");
 #undef CASE
-        return (VkFlags)luaL_argerror(L, --arg, badvalue(L,s));
+        return (VkFlags64)luaL_argerror(L, --arg, badvalue(L,s));
         done: ;
         }
 
     return flags;
     }
 
-static int pushaccessflags(lua_State *L, VkFlags flags)
+static int pushaccessflags(lua_State *L, VkFlags64 flags)
     {
     int n = 0;
 
@@ -1455,10 +1455,10 @@ static int ImageAspectFlags(lua_State *L)
  | VkPipelineStageFlags
  *----------------------------------------------------------------------*/
 
-static VkFlags checkpipelinestageflags(lua_State *L, int arg)
+static VkFlags64 checkpipelinestageflags(lua_State *L, int arg)
     {
     const char *s;
-    VkFlags flags = 0;
+    VkFlags64 flags = 0;
 
     while(lua_isstring(L, arg))
         {
@@ -1490,14 +1490,14 @@ static VkFlags checkpipelinestageflags(lua_State *L, int arg)
         CASE(VK_PIPELINE_STAGE_ALL_GRAPHICS_BIT, "all graphics");
         CASE(VK_PIPELINE_STAGE_ALL_COMMANDS_BIT, "all commands");
 #undef CASE
-        return (VkFlags)luaL_argerror(L, --arg, badvalue(L,s));
+        return (VkFlags64)luaL_argerror(L, --arg, badvalue(L,s));
         done: ;
         }
 
     return flags;
     }
 
-static int pushpipelinestageflags(lua_State *L, VkFlags flags)
+static int pushpipelinestageflags(lua_State *L, VkFlags64 flags)
     {
     int n = 0;
 
