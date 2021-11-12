@@ -2,7 +2,7 @@
 [[debug_report_callback]]
 ==== debug_report
 
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#VK_EXT_debug_report[VK_EXT_debug_report].#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_debug_report.html[VK_EXT_debug_report].#
 
 [[create_debug_report_callback]]
 * _debug_report_callback_ = *create_debug_report_callback*(_instance_, <<debugreportflags, _debugreportflags_>>, _func_, [<<allocators, _allocator_>>]) +
@@ -28,7 +28,7 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkDeb
 [[debug_marker]]
 ==== debug_marker
 
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#VK_EXT_debug_marker[VK_EXT_debug_marker].#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_debug_marker.html[VK_EXT_debug_marker].#
 
 [[debug_marker_set_object_name]]
 * *debug_marker_set_object_name*(_device_, _object_type_, _objectRAW_, _object_name_) +
@@ -50,7 +50,7 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkDeb
 [[debug_utils]]
 ==== debug_utils
 
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#VK_EXT_debug_utils[VK_EXT_debug_utils].#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_debug_utils.html[VK_EXT_debug_utils].#
 
 [[create_debug_utils_messenger]]
 * _debug_utils_messenger_ = *create_debug_utils_messenger*(_instance_, <<debugutilsmessengercreateinfo, _debugutilsmessengercreateinfo_>>, _func_, [<<allocators, _allocator_>>]) +
@@ -95,7 +95,7 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkSub
 [[validation_cache]]
 ==== validation_cache
 
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#VK_EXT_validation_cache[VK_EXT_validation_cache].#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_validation_cache.html[VK_EXT_validation_cache].#
 
 [[create_validation_cache]]
 * _validation_cache_ = *create_validation_cache*(_device_, <<validationcachecreateinfo, _validationcachecreateinfo_>>,  [<<allocators, _allocator_>>]) +
@@ -118,7 +118,7 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkMer
 [[calibrated_timestamps]]
 ==== calibrated_timestamps
 
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#VK_EXT_calibrated_timestamps[VK_EXT_calibrated_timestamps].#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_calibrated_timestamps.html[VK_EXT_calibrated_timestamps].#
 
 [[get_calibrated_timestamps]]
 * {_timestamp_}, {_maxdeviation_} = *get_calibrated_timestamps*(_device_, {<<calibratedtimestampinfo, _calibratedtimestampinfo_>>}) +
@@ -126,7 +126,7 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkMer
 
 
 ////
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#[].#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/[].#.html
 * See also: <<, commands>>.
 ////
 

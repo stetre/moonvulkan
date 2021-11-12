@@ -11,11 +11,11 @@ or a return value.
 
 [[enumerate_physical_device_groups]]
 * {<<physicaldevicegroupproperties, _physicaldevicegroupproperties_>>} = *enumerate_physical_device_groups*(<<instance, _instance_>>) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkEnumeratePhysicalDeviceGroups.html[vkEnumeratePhysicalDeviceGroups] (https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#VK_KHR_device_group_creation[VK_KHR_device_group_creation]).#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkEnumeratePhysicalDeviceGroups.html[vkEnumeratePhysicalDeviceGroups] (https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_device_group_creation.html[VK_KHR_device_group_creation]).#
 
 ////
 NOTE: If the
-https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#VK_KHR_get_physical_device_properties2[VK_KHR_get_physical_device_properties2] 
+https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_get_physical_device_properties2.html[VK_KHR_get_physical_device_properties2] 
 instance extension is enabled for the affected _physdev_,
 then the functions it provides are used by the bindings described in this section.
 ////
@@ -53,23 +53,23 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGet
 [[get_physical_device_external_buffer_properties]]
 * <<externalbufferproperties,_externalbufferproperties_>> = *get_physical_device_external_buffer_properties*(_physdev_, _info_) +
 [small]#_info_: <<physicaldeviceexternalbufferinfo, physicaldeviceexternalbufferinfo>>. +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceExternalBufferProperties.html[vkGetPhysicalDeviceExternalBufferProperties] (https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#VK_KHR_external_memory_capabilities[VK_KHR_external_memory_capabilities]).#
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceExternalBufferProperties.html[vkGetPhysicalDeviceExternalBufferProperties] (https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_external_memory_capabilities.html[VK_KHR_external_memory_capabilities]).#
 
 [[get_physical_device_external_fence_properties]]
 * <<externalfenceproperties,_externalfenceproperties_>> = *get_physical_device_external_fence_properties*(_physdev_, _info_) +
 [small]#_info_: <<physicaldeviceexternalfenceinfo, physicaldeviceexternalfenceinfo>>. +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceExternalFenceProperties.html[vkGetPhysicalDeviceExternalFenceProperties] (https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#VK_KHR_external_fence_capabilities[VK_KHR_external_fence_capabilities]).#
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceExternalFenceProperties.html[vkGetPhysicalDeviceExternalFenceProperties] (https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_external_fence_capabilities.html[VK_KHR_external_fence_capabilities]).#
 
 [[get_physical_device_external_semaphore_properties]]
 * <<externalsemaphoreproperties,_externalsemaphoreproperties_>> = *get_physical_device_external_semaphore_properties*(_physdev_, _info_) +
 [small]#_info_: <<physicaldeviceexternalsemaphoreinfo, physicaldeviceexternalsemaphoreinfo>>. +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceExternalSemaphoreProperties.html[vkGetPhysicalDeviceExternalSemaphoreProperties] (https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#VK_KHR_external_semaphore_capabilities[VK_KHR_external_semaphore_capabilities]).#
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceExternalSemaphoreProperties.html[vkGetPhysicalDeviceExternalSemaphoreProperties] (https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_external_semaphore_capabilities.html[VK_KHR_external_semaphore_capabilities]).#
 
 [[get_physical_device_multisample_properties]]
 * <<multisampleproperties,_multisampleproperties_>> = *get_physical_device_multisample_properties*(_physdev_, <<samplecountflags, _samplecountflags_>>) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceMultisamplePropertiesEXT.html[vkGetPhysicalDeviceMultisamplePropertiesEXT] (https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#VK_EXT_sample_locations[VK_EXT_sample_locations]).#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceMultisamplePropertiesEXT.html[vkGetPhysicalDeviceMultisamplePropertiesEXT] (https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_sample_locations.html[VK_EXT_sample_locations]).#
 
 [[get_physical_device_calibrateable_time_domains]]
 * {<<timedomain, _timedomain_>>} = *get_physical_device_calibrateable_time_domains*(_physdev_) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceCalibrateableTimeDomainsEXT.html[vkGetPhysicalDeviceCalibrateableTimeDomainsEXT] (https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#VK_EXT_calibrated_timestamps[VK_EXT_calibrated_timestamps]).#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceCalibrateableTimeDomainsEXT.html[vkGetPhysicalDeviceCalibrateableTimeDomainsEXT] (https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_calibrated_timestamps.html[VK_EXT_calibrated_timestamps]).#
 

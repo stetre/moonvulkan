@@ -17,5 +17,5 @@ _command_pool_ = *create_command_pool*(_device_, <<commandpoolcreateflags, _comm
 
 [[trim_command_pool]]
 * *trim_command_pool*(_command_pool_, [<<commandpooltrimflags, _commandpooltrimflags_>>]) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkTrimCommandPool.html[vkTrimCommandPool] (https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#VK_KHR_maintenance1[VK_KHR_maintenance1]).#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkTrimCommandPool.html[vkTrimCommandPool] (https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_maintenance1.html[VK_KHR_maintenance1]).#
 

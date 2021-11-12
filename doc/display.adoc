@@ -2,7 +2,7 @@
 [[display]]
 ==== display
 
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#VK_KHR_display[VK_KHR_display].#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_display.html[VK_KHR_display].#
 
 [[get_physical_device_display_properties]]
 * {<<displayproperties, _displayproperties_>>} = *get_physical_device_display_properties*(<<physical_device, _physdev_>>) +
@@ -18,11 +18,11 @@
 
 [[release_display]]
 * *release_display*(_display_) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkReleaseDisplayEXT.html[vkReleaseDisplayEXT] (https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#VK_EXT_direct_mode_display[VK_EXT_direct_mode_display]).#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkReleaseDisplayEXT.html[vkReleaseDisplayEXT] (https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_direct_mode_display.html[VK_EXT_direct_mode_display]).#
 
 [[display_power_control]]
 * *display_power_control*(<<device, _device_>>, _display_, <<displaypowerinfo, _displaypowerinfo_>>) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkDisplayPowerControlEXT.html[vkDisplayPowerControlEXT] (https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#VK_EXT_display_control[VK_EXT_display_control]).#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkDisplayPowerControlEXT.html[vkDisplayPowerControlEXT] (https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_display_control.html[VK_EXT_display_control]).#
 
 
 '''
@@ -32,12 +32,12 @@
 _display_ = *get_randr_output_display*(<<physical_device, _physdev_>>, _dpy_, _rroutput_) +
 [small]#_dpy_: lightuserdata (_Display*_), +
 _rroutput_: integer (_RROutput_). +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkAcquireXlibDisplayEXT.html[vkAcquireXlibDisplayEXT], https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetRandROutputDisplayEXT.html[vkGetRandROutputDisplayEXT] (https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#VK_EXT_acquire_xlib_display[VK_EXT_acquire_xlib_display], <<platform_support, PLATFORM_XLIB_XRANDR>>).#
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkAcquireXlibDisplayEXT.html[vkAcquireXlibDisplayEXT], https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetRandROutputDisplayEXT.html[vkGetRandROutputDisplayEXT] (https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_acquire_xlib_display.html[VK_EXT_acquire_xlib_display], <<platform_support, PLATFORM_XLIB_XRANDR>>).#
 
 [[display_mode]]
 ==== display_mode
 
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#VK_KHR_display[VK_KHR_display].#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_display.html[VK_KHR_display].#
 
 [[create_display_mode]]
 * _display_mode_ = *create_display_mode*(<<display, _display_>>, <<displaymodecreateinfo, _displaymodecreateinfo_>>, [<<allocators, _allocator_>>]) +

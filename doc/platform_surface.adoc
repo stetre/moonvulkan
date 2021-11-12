@@ -8,7 +8,7 @@ Platform-specific surface API are available only if MoonVulkan was <<platform_su
 
 '''
 
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#VK_KHR_xlib_surface[VK_KHR_xlib_surface], <<platform_support, PLATFORM_XLIB>>.#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_xlib_surface.html[VK_KHR_xlib_surface], <<platform_support, PLATFORM_XLIB>>.#
 
 [[get_physical_device_xlib_presentation_support]]
 * _boolean_ = *get_physical_device_xlib_presentation_support*(_physdev_, <<index, _queue_family_index_>>, _dpy_, _visual_id_) +
@@ -23,7 +23,7 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCre
 
 '''
 
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#VK_KHR_xcb_surface[VK_KHR_xcb_surface], <<platform_support, PLATFORM_XCB>>.#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_xcb_surface.html[VK_KHR_xcb_surface], <<platform_support, PLATFORM_XCB>>.#
 
 [[get_physical_device_xcb_presentation_support]]
 * _boolean_ = *get_physical_device_xcb_presentation_support*(_physdev_, <<index, _queue_family_index_>>, _connection_, _visual_id_) +
@@ -37,7 +37,7 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCre
 
 '''
 
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#VK_KHR_wayland_surface[VK_KHR_wayland_surface], <<platform_support, PLATFORM_WAYLAND>>.#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_wayland_surface.html[VK_KHR_wayland_surface], <<platform_support, PLATFORM_WAYLAND>>.#
 
 [[get_physical_device_wayland_presentation_support]]
 * _boolean_ = *get_physical_device_wayland_presentation_support*(_physdev_, <<index, _queue_family_index_>>, _wldisplay_) +
@@ -54,7 +54,7 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCre
 
 '''
 
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#VK_KHR_android_surface[VK_KHR_android_surface], <<platform_support, PLATFORM_ANDROID>>.#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_android_surface.html[VK_KHR_android_surface], <<platform_support, PLATFORM_ANDROID>>.#
 
 [[create_android_surface]]
 * _surface_ = *create_android_surface*(_instance_, _flags_, _awindow_, [<<allocators, _allocator_>>]) +
@@ -65,7 +65,7 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCre
 
 '''
 
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#VK_KHR_win32_surface[VK_KHR_win32_surface], <<platform_support, PLATFORM_WIN32>>.#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_win32_surface.html[VK_KHR_win32_surface], <<platform_support, PLATFORM_WIN32>>.#
 
 [[get_physical_device_win32_presentation_support]]
 * _boolean_ = *get_physical_device_win32_presentation_support*(_physdev_, <<index, _queue_family_index_>>) +

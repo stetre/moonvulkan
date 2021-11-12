@@ -15,9 +15,9 @@ _semaphore_ = *create_semaphore*(_device_, [<<semaphorecreateflags, _semaphorecr
 
 [[importsemaphorefd]]
 * *importsemaphorefd*(_semaphore_, <<importsemaphorefdinfo, _importsemaphorefdinfo_>>) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkImportSemaphoreFdKHR.html[vkImportSemaphoreFdKHR] (https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#VK_KHR_external_semaphore_fd[VK_KHR_external_semaphore_fd]).#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkImportSemaphoreFdKHR.html[vkImportSemaphoreFdKHR] (https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_external_semaphore_fd.html[VK_KHR_external_semaphore_fd]).#
 
 [[getsemaphorefd]]
 * _fd_ = *getsemaphorefd*(_semaphore_, <<semaphoregetfdinfo, _semaphoregetfdinfo_>>) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetSemaphoreFdKHR.html[vkGetSemaphoreFdKHR] (https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#VK_KHR_external_semaphore_fd[VK_KHR_external_semaphore_fd]).#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetSemaphoreFdKHR.html[vkGetSemaphoreFdKHR] (https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_external_semaphore_fd.html[VK_KHR_external_semaphore_fd]).#
 
