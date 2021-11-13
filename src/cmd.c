@@ -656,7 +656,7 @@ static int CmdBeginRenderPass(lua_State *L)
     int err;
     ud_t *ud;
     VkCommandBuffer cb = checkcommand_buffer(L, 1, &ud);
-    if(ud->ddt->CmdBeginRenderPass2KHR)
+    if(ud->ddt->CmdBeginRenderPass2 && lua_type(L, 3) == LUA_TTABLE)
         {
 #define CLEANUP do {                                    \
             zfreeVkRenderPassBeginInfo(L, info, 1);     \
@@ -668,7 +668,7 @@ static int CmdBeginRenderPass(lua_State *L)
         if(err) { CLEANUP; return argerror(L, 2); }
         binfo = zcheckVkSubpassBeginInfoKHR(L, 3, &err);
         if(err) { CLEANUP; return argerror(L, 3); }
-        ud->ddt->CmdBeginRenderPass2KHR(cb, info, binfo);
+        ud->ddt->CmdBeginRenderPass2(cb, info, binfo);
         CLEANUP;
 #undef CLEANUP
         }
@@ -690,7 +690,7 @@ static int CmdNextSubpass(lua_State *L)
     int err;
     ud_t *ud;
     VkCommandBuffer cb = checkcommand_buffer(L, 1, &ud);
-    if(ud->ddt->CmdNextSubpass2KHR)
+    if(ud->ddt->CmdNextSubpass2 && lua_type(L, 2) == LUA_TTABLE)
         {
 #define CLEANUP do {                                    \
             zfreeVkSubpassBeginInfoKHR(L, binfo, 1);    \
@@ -702,7 +702,7 @@ static int CmdNextSubpass(lua_State *L)
         if(err) { CLEANUP; return argerror(L, 2); }
         einfo = zcheckVkSubpassEndInfoKHR(L, 3, &err);
         if(err) { CLEANUP; return argerror(L, 3); }
-        ud->ddt->CmdNextSubpass2KHR(cb, binfo, einfo);
+        ud->ddt->CmdNextSubpass2(cb, binfo, einfo);
         CLEANUP;
 #undef CLEANUP
         }
@@ -719,13 +719,13 @@ static int CmdEndRenderPass(lua_State *L)
     int err;
     ud_t *ud;
     VkCommandBuffer cb = checkcommand_buffer(L, 1, &ud);
-    if(ud->ddt->CmdEndRenderPass2KHR)
+    if(ud->ddt->CmdEndRenderPass2 && lua_type(L, 2) == LUA_TTABLE)
         {
 #define CLEANUP zfreeVkSubpassEndInfoKHR(L, einfo, 1)
         VkSubpassEndInfoKHR* einfo;
         einfo = zcheckVkSubpassEndInfoKHR(L, 2, &err);
         if(err) { CLEANUP; return argerror(L, 2); }
-        ud->ddt->CmdEndRenderPass2KHR(cb, einfo);
+        ud->ddt->CmdEndRenderPass2(cb, einfo);
         CLEANUP;
 #undef CLEANUP
         }
@@ -955,8 +955,8 @@ static int CmdDrawIndirectCount(lua_State *L)
     VkDeviceSize countBufferOffset = luaL_checkinteger(L, 5);
     uint32_t maxDrawCount = luaL_checkinteger(L, 6);
     uint32_t stride = luaL_checkinteger(L, 7);
-    CheckDevicePfn(L, ud, CmdDrawIndirectCountKHR);
-    ud->ddt->CmdDrawIndirectCountKHR(cb, buffer, offset, countBuffer, countBufferOffset, maxDrawCount, stride);
+    CheckDevicePfn(L, ud, CmdDrawIndirectCount);
+    ud->ddt->CmdDrawIndirectCount(cb, buffer, offset, countBuffer, countBufferOffset, maxDrawCount, stride);
     return 0;
     }
 
@@ -970,8 +970,8 @@ static int CmdDrawIndexedIndirectCount(lua_State *L)
     VkDeviceSize countBufferOffset = luaL_checkinteger(L, 5);
     uint32_t maxDrawCount = luaL_checkinteger(L, 6);
     uint32_t stride = luaL_checkinteger(L, 7);
-    CheckDevicePfn(L, ud, CmdDrawIndexedIndirectCountKHR);
-    ud->ddt->CmdDrawIndexedIndirectCountKHR(cb, buffer, offset, countBuffer, countBufferOffset, maxDrawCount, stride);
+    CheckDevicePfn(L, ud, CmdDrawIndexedIndirectCount);
+    ud->ddt->CmdDrawIndexedIndirectCount(cb, buffer, offset, countBuffer, countBufferOffset, maxDrawCount, stride);
     return 0;
     }
 

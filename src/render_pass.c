@@ -48,12 +48,12 @@ static int Create(lua_State *L)
     VkDevice device = checkdevice(L, 1, &device_ud);
     const VkAllocationCallbacks *allocator = optallocator(L, 3);
 
-    if(device_ud->ddt->CreateRenderPass2KHR)
+    if(device_ud->ddt->CreateRenderPass2)
         {
 #define CLEANUP zfreeVkRenderPassCreateInfo2KHR(L, info2, 1)
         info2 = zcheckVkRenderPassCreateInfo2KHR(L, 2, &err);
         if(err) { CLEANUP; return argerror(L, 2); }
-        ec = device_ud->ddt->CreateRenderPass2KHR(device, info2, allocator, &render_pass);
+        ec = device_ud->ddt->CreateRenderPass2(device, info2, allocator, &render_pass);
         CLEANUP;
         CheckError(L, ec);
 #undef CLEANUP

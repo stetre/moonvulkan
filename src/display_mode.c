@@ -240,7 +240,7 @@ static int GetDisplayPlaneCapabilities(lua_State *L)
     {
     ud_t *ud;
     VkDisplayModeKHR display_mode = checkdisplay_mode(L, 1, &ud);
-    if(ud->idt->GetDisplayPlaneCapabilitiesKHR)
+    if(ud->idt->GetDisplayPlaneCapabilitiesKHR && lua_type(L, 2) == LUA_TTABLE)
         return GetDisplayPlaneCapabilities2(L, display_mode, ud);
     CheckInstancePfn(L, ud, GetDisplayPlaneCapabilitiesKHR);
     return GetDisplayPlaneCapabilities1(L, display_mode, ud);
