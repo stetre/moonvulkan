@@ -88,12 +88,12 @@ static int GetDescriptorSetLayoutSupport(lua_State *L)
     VkDevice device = checkdevice(L, 1, &ud);
 #define CLEANUP do { zfreeVkDescriptorSetLayoutCreateInfo(L, info, 1); \
                     zfreeVkDescriptorSetLayoutSupportKHR(L, support, 1); } while(0);
-    CheckDevicePfn(L, ud, GetDescriptorSetLayoutSupportKHR);
+    CheckDevicePfn(L, ud, GetDescriptorSetLayoutSupport);
     info = zcheckVkDescriptorSetLayoutCreateInfo(L, 2, &err);
     if(err) { CLEANUP; return argerror(L, 2); }
     support = znewchainVkDescriptorSetLayoutSupportKHR(L, &err);
     if(err) { CLEANUP; return lua_error(L); }
-    ud->ddt->GetDescriptorSetLayoutSupportKHR(device, info, support);
+    ud->ddt->GetDescriptorSetLayoutSupport(device, info, support);
     zpushVkDescriptorSetLayoutSupportKHR(L, support);
     CLEANUP;
 #undef CLEANUP

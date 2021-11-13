@@ -33,7 +33,7 @@ static int freesampler_ycbcr_conversion(lua_State *L, ud_t *ud)
     if(!freeuserdata(L, ud))
         return 0; /* double call */
     TRACE_DELETE(sampler_ycbcr_conversion, "sampler_ycbcr_conversion");
-    UD(device)->ddt->DestroySamplerYcbcrConversionKHR(device, sampler_ycbcr_conversion, allocator);
+    UD(device)->ddt->DestroySamplerYcbcrConversion(device, sampler_ycbcr_conversion, allocator);
     return 0;
     }
 
@@ -46,11 +46,11 @@ static int Create(lua_State *L)
     VkSamplerYcbcrConversionCreateInfoKHR* info;
     VkDevice device = checkdevice(L, 1, &device_ud);
     const VkAllocationCallbacks *allocator = optallocator(L, 3);
-    CheckDevicePfn(L, device_ud, CreateSamplerYcbcrConversionKHR);
+    CheckDevicePfn(L, device_ud, CreateSamplerYcbcrConversion);
 #define CLEANUP zfreeVkSamplerYcbcrConversionCreateInfoKHR(L, info, 1)
     info = zcheckVkSamplerYcbcrConversionCreateInfoKHR(L, 2, &err);
     if(err) { CLEANUP; return argerror(L, 2); }
-    ec = device_ud->ddt->CreateSamplerYcbcrConversionKHR(device,
+    ec = device_ud->ddt->CreateSamplerYcbcrConversion(device,
                             info, allocator, &sampler_ycbcr_conversion);
     CLEANUP;
 #undef CLEANUP

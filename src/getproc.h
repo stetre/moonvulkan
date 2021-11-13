@@ -104,16 +104,16 @@ typedef struct {
     F(CreateDebugReportCallbackEXT);
     F(DestroyDebugReportCallbackEXT);
     F(DebugReportMessageEXT);
-    F(GetPhysicalDeviceFeatures2KHR);
-    F(GetPhysicalDeviceProperties2KHR);
-    F(GetPhysicalDeviceFormatProperties2KHR);
-    F(GetPhysicalDeviceImageFormatProperties2KHR);
-    F(GetPhysicalDeviceQueueFamilyProperties2KHR);
-    F(GetPhysicalDeviceMemoryProperties2KHR);
-    F(GetPhysicalDeviceSparseImageFormatProperties2KHR);
-    F(GetPhysicalDeviceExternalBufferPropertiesKHR);
-    F(GetPhysicalDeviceExternalSemaphorePropertiesKHR);
-    F(GetPhysicalDeviceExternalFencePropertiesKHR);
+    F(GetPhysicalDeviceFeatures2);
+    F(GetPhysicalDeviceProperties2);
+    F(GetPhysicalDeviceFormatProperties2);
+    F(GetPhysicalDeviceImageFormatProperties2);
+    F(GetPhysicalDeviceQueueFamilyProperties2);
+    F(GetPhysicalDeviceMemoryProperties2);
+    F(GetPhysicalDeviceSparseImageFormatProperties2);
+    F(GetPhysicalDeviceExternalBufferProperties);
+    F(GetPhysicalDeviceExternalSemaphoreProperties);
+    F(GetPhysicalDeviceExternalFenceProperties);
     F(ReleaseDisplayEXT);
     F(GetPhysicalDeviceSurfaceCapabilities2EXT);
     F(SetDebugUtilsObjectNameEXT);
@@ -131,7 +131,7 @@ typedef struct {
     F(GetPhysicalDeviceDisplayPlaneProperties2KHR);
     F(GetDisplayModeProperties2KHR);
     F(GetDisplayPlaneCapabilities2KHR);
-    F(EnumeratePhysicalDeviceGroupsKHR);
+    F(EnumeratePhysicalDeviceGroups);
     F(GetPhysicalDeviceCalibrateableTimeDomainsEXT);
     F(GetPhysicalDeviceMultisamplePropertiesEXT);
 } instance_dt_t;
@@ -220,7 +220,7 @@ typedef struct {
     F(AcquireNextImageKHR);
     F(QueuePresentKHR);
     F(CreateSharedSwapchainsKHR);
-    F(TrimCommandPoolKHR);
+    F(TrimCommandPool);
     F(DebugMarkerSetObjectTagEXT);
     F(DebugMarkerSetObjectNameEXT);
     F(DisplayPowerControlEXT);
@@ -279,9 +279,9 @@ typedef struct {
     F(CmdDebugMarkerInsertEXT);
     F(CmdPushDescriptorSetKHR);
     F(GetDeviceQueue2);
-    F(CreateDescriptorUpdateTemplateKHR);
-    F(DestroyDescriptorUpdateTemplateKHR);
-    F(UpdateDescriptorSetWithTemplateKHR);
+    F(CreateDescriptorUpdateTemplate);
+    F(DestroyDescriptorUpdateTemplate);
+    F(UpdateDescriptorSetWithTemplate);
     F(CmdPushDescriptorSetWithTemplateKHR);
     F(GetMemoryFdKHR);
     F(GetMemoryFdPropertiesKHR);
@@ -289,32 +289,32 @@ typedef struct {
     F(GetSemaphoreFdKHR);
     F(ImportFenceFdKHR);
     F(GetFenceFdKHR);
-    F(GetImageMemoryRequirements2KHR);
-    F(GetBufferMemoryRequirements2KHR);
-    F(GetImageSparseMemoryRequirements2KHR);
+    F(GetImageMemoryRequirements2);
+    F(GetBufferMemoryRequirements2);
+    F(GetImageSparseMemoryRequirements2);
     F(CmdSetDiscardRectangleEXT);
     F(SetHdrMetadataEXT);
-    F(BindBufferMemory2KHR);
-    F(BindImageMemory2KHR);
+    F(BindBufferMemory2);
+    F(BindImageMemory2);
     F(CmdSetSampleLocationsEXT);
     F(CreateValidationCacheEXT);
     F(DestroyValidationCacheEXT);
     F(MergeValidationCachesEXT);
     F(GetValidationCacheDataEXT);
-    F(CreateSamplerYcbcrConversionKHR);
-    F(DestroySamplerYcbcrConversionKHR);
+    F(CreateSamplerYcbcrConversion);
+    F(DestroySamplerYcbcrConversion);
     F(CmdBeginConditionalRenderingEXT);
     F(CmdEndConditionalRenderingEXT);
     F(CmdDrawIndirectCountKHR);
     F(CmdDrawIndexedIndirectCountKHR);
-    F(GetDescriptorSetLayoutSupportKHR);
+    F(GetDescriptorSetLayoutSupport);
     F(CreateRenderPass2KHR);
     F(CmdBeginRenderPass2KHR);
     F(CmdNextSubpass2KHR);
     F(CmdEndRenderPass2KHR);
-    F(GetDeviceGroupPeerMemoryFeaturesKHR);
-    F(CmdSetDeviceMaskKHR);
-    F(CmdDispatchBaseKHR);
+    F(GetDeviceGroupPeerMemoryFeatures);
+    F(CmdSetDeviceMask);
+    F(CmdDispatchBase);
     F(GetDeviceGroupPresentCapabilitiesKHR);
     F(GetDeviceGroupSurfacePresentModesKHR);
     F(GetPhysicalDevicePresentRectanglesKHR);
@@ -348,5 +348,3 @@ instance_dt_t * getproc_instance(lua_State *L, VkInstance instance, VkInstanceCr
 device_dt_t* getproc_device(lua_State *L, VkDevice device, VkDeviceCreateInfo *createinfo);
 
 #endif /* getprocDEFINED */
-
-

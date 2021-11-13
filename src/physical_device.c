@@ -67,7 +67,7 @@ static int GetPhysicalDeviceProperties2(lua_State *L, VkPhysicalDevice physical_
 #define CLEANUP zfreeVkPhysicalDeviceProperties2(L, props, 1)
     props = znewchainVkPhysicalDeviceProperties2(L, &err);
     if(err) { CLEANUP; return lua_error(L); }
-    ud->idt->GetPhysicalDeviceProperties2KHR(physical_device, props);
+    ud->idt->GetPhysicalDeviceProperties2(physical_device, props);
     zpushVkPhysicalDeviceProperties2(L, props);
     CLEANUP;
 #undef CLEANUP
@@ -79,7 +79,7 @@ static int GetPhysicalDeviceProperties(lua_State *L)
     ud_t *ud;
     VkPhysicalDeviceProperties props;
     VkPhysicalDevice physical_device = checkphysical_device(L, 1, &ud);
-    if(ud->idt->GetPhysicalDeviceProperties2KHR)
+    if(ud->idt->GetPhysicalDeviceProperties2)
         return GetPhysicalDeviceProperties2(L, physical_device, ud);
     ud->idt->GetPhysicalDeviceProperties(physical_device, &props);
     zpushVkPhysicalDeviceProperties(L, &props);
@@ -96,7 +96,7 @@ static int GetPhysicalDeviceFeatures2(lua_State *L, VkPhysicalDevice physical_de
 #define CLEANUP zfreeVkPhysicalDeviceFeatures2(L, features, 1)
     features = znewchainVkPhysicalDeviceFeatures2(L, &err);
     if(err) { CLEANUP; return lua_error(L); }
-    ud->idt->GetPhysicalDeviceFeatures2KHR(physical_device, features);
+    ud->idt->GetPhysicalDeviceFeatures2(physical_device, features);
     zpushVkPhysicalDeviceFeatures2(L, features);
     CLEANUP;
 #undef CLEANUP
@@ -108,7 +108,7 @@ static int GetPhysicalDeviceFeatures(lua_State *L)
     ud_t *ud;
     VkPhysicalDeviceFeatures features;
     VkPhysicalDevice physical_device = checkphysical_device(L, 1, &ud);
-    if(ud->idt->GetPhysicalDeviceFeatures2KHR)
+    if(ud->idt->GetPhysicalDeviceFeatures2)
         return GetPhysicalDeviceFeatures2(L, physical_device, ud);
     ud->idt->GetPhysicalDeviceFeatures(physical_device, &features);
     zpushVkPhysicalDeviceFeatures(L, &features);
@@ -124,7 +124,7 @@ static int GetPhysicalDeviceFormatProperties2(lua_State *L, VkPhysicalDevice phy
 #define CLEANUP zfreeVkFormatProperties2(L, props, 1)
     props = znewchainVkFormatProperties2(L, &err);
     if(err) { CLEANUP; return lua_error(L); }
-    ud->idt->GetPhysicalDeviceFormatProperties2KHR(physical_device, format, props);
+    ud->idt->GetPhysicalDeviceFormatProperties2(physical_device, format, props);
     zpushVkFormatProperties2(L, props);
     CLEANUP;
 #undef CLEANUP
@@ -137,7 +137,7 @@ static int GetPhysicalDeviceFormatProperties(lua_State *L)
     VkFormat format;
     ud_t *ud;
     VkPhysicalDevice physical_device = checkphysical_device(L, 1, &ud);
-    if(ud->idt->GetPhysicalDeviceFormatProperties2KHR)
+    if(ud->idt->GetPhysicalDeviceFormatProperties2)
         return GetPhysicalDeviceFormatProperties2(L, physical_device, ud);
     format = checkformat(L, 2);
     ud->idt->GetPhysicalDeviceFormatProperties(physical_device, format, &props);
@@ -160,7 +160,7 @@ static int GetPhysicalDeviceImageFormatProperties2(lua_State *L, VkPhysicalDevic
     if(err) { CLEANUP; return argerror(L, 2); }
     props = znewchainVkImageFormatProperties2(L, &err);
     if(err) { CLEANUP; return lua_error(L); }
-    ec = ud->idt->GetPhysicalDeviceImageFormatProperties2KHR(physical_device, info, props);
+    ec = ud->idt->GetPhysicalDeviceImageFormatProperties2(physical_device, info, props);
     if(ec) { CLEANUP; CheckError(L, ec); return 0; }
     zpushVkImageFormatProperties2(L, props);
     CLEANUP;
@@ -176,7 +176,7 @@ static int GetPhysicalDeviceImageFormatProperties(lua_State *L)
     VkPhysicalDeviceImageFormatInfo2KHR* info;
     VkImageFormatProperties props;
     VkPhysicalDevice physical_device = checkphysical_device(L, 1, &ud);
-    if(ud->idt->GetPhysicalDeviceImageFormatProperties2KHR)
+    if(ud->idt->GetPhysicalDeviceImageFormatProperties2)
         return GetPhysicalDeviceImageFormatProperties2(L, physical_device, ud);
 #define CLEANUP zfreeVkPhysicalDeviceImageFormatInfo2KHR(L, info, 1)
     info = zcheckVkPhysicalDeviceImageFormatInfo2KHR(L, 2, &err);
@@ -198,12 +198,12 @@ static int GetPhysicalDeviceQueueFamilyProperties2
     uint32_t i, count = 0;
     VkQueueFamilyProperties2KHR* props;
     lua_newtable(L);
-    ud->idt->GetPhysicalDeviceQueueFamilyProperties2KHR(physical_device, &count, NULL);
+    ud->idt->GetPhysicalDeviceQueueFamilyProperties2(physical_device, &count, NULL);
     if(count == 0) return 1;
 #define CLEANUP zfreearrayVkQueueFamilyProperties2KHR(L, props, count, 1)
     props = znewchainarrayVkQueueFamilyProperties2KHR(L, count, &err);
     if(err) { CLEANUP; return lua_error(L); }
-    ud->idt->GetPhysicalDeviceQueueFamilyProperties2KHR(physical_device, &count, props);
+    ud->idt->GetPhysicalDeviceQueueFamilyProperties2(physical_device, &count, props);
     for(i=0; i<count; i++)
         {
         zpushVkQueueFamilyProperties2KHR(L, &props[i], i);
@@ -221,7 +221,7 @@ static int GetPhysicalDeviceQueueFamilyProperties(lua_State *L)
     ud_t *ud;
     VkPhysicalDevice physical_device = checkphysical_device(L, 1, &ud);
     
-    if(ud->idt->GetPhysicalDeviceQueueFamilyProperties2KHR)
+    if(ud->idt->GetPhysicalDeviceQueueFamilyProperties2)
         return GetPhysicalDeviceQueueFamilyProperties2(L, physical_device, ud);
 
     lua_newtable(L);
@@ -246,7 +246,7 @@ static int GetPhysicalDeviceMemoryProperties2(lua_State *L, VkPhysicalDevice phy
 #define CLEANUP zfreeVkPhysicalDeviceMemoryProperties2(L, props, 1)
     props = znewchainVkPhysicalDeviceMemoryProperties2(L, &err);
     if(err) { CLEANUP; return lua_error(L); }
-    ud->idt->GetPhysicalDeviceMemoryProperties2KHR(physical_device, props);
+    ud->idt->GetPhysicalDeviceMemoryProperties2(physical_device, props);
     zpushVkPhysicalDeviceMemoryProperties2(L, props);
     CLEANUP;
 #undef CLEANUP
@@ -258,7 +258,7 @@ static int GetPhysicalDeviceMemoryProperties(lua_State *L)
     VkPhysicalDeviceMemoryProperties props;
     ud_t *ud;
     VkPhysicalDevice physical_device = checkphysical_device(L, 1, &ud);
-    if(ud->idt->GetPhysicalDeviceMemoryProperties2KHR)
+    if(ud->idt->GetPhysicalDeviceMemoryProperties2)
         return GetPhysicalDeviceMemoryProperties2(L, physical_device, ud);
     ud->idt->GetPhysicalDeviceMemoryProperties(physical_device, &props);
     zpushVkPhysicalDeviceMemoryProperties(L, &props);
@@ -281,11 +281,11 @@ static int GetPhysicalDeviceSparseImageFormatProperties2(lua_State *L, VkPhysica
     info = zcheckVkPhysicalDeviceSparseImageFormatInfo2KHR(L, 2, &err);
     if(err) { CLEANUP; return argerror(L, 2); }
     lua_newtable(L);
-    ud->idt->GetPhysicalDeviceSparseImageFormatProperties2KHR(physical_device, info, &count, NULL);
+    ud->idt->GetPhysicalDeviceSparseImageFormatProperties2(physical_device, info, &count, NULL);
     if(count == 0) { CLEANUP; return 1; }
     props = znewchainarrayVkSparseImageFormatProperties2(L, count, &err);
     if(err) { CLEANUP; return lua_error(L); }
-    ud->idt->GetPhysicalDeviceSparseImageFormatProperties2KHR(physical_device, info, &count, props);
+    ud->idt->GetPhysicalDeviceSparseImageFormatProperties2(physical_device, info, &count, props);
     for(i=0; i<count; i++)
         {
         zpushVkSparseImageFormatProperties2(L, &props[i]);
@@ -304,7 +304,7 @@ static int GetPhysicalDeviceSparseImageFormatProperties(lua_State *L)
     VkPhysicalDeviceSparseImageFormatInfo2KHR* info;
     VkSparseImageFormatProperties* props;
     VkPhysicalDevice physical_device = checkphysical_device(L, 1, &ud);
-    if(ud->idt->GetPhysicalDeviceSparseImageFormatProperties2KHR)
+    if(ud->idt->GetPhysicalDeviceSparseImageFormatProperties2)
         return GetPhysicalDeviceSparseImageFormatProperties2(L, physical_device, ud);
 #define CLEANUP zfreeVkPhysicalDeviceSparseImageFormatInfo2KHR(L, info, 1)
     info = zcheckVkPhysicalDeviceSparseImageFormatInfo2KHR(L, 2, &err);
@@ -337,7 +337,7 @@ static int GetPhysicalDeviceExternalBufferProperties(lua_State *L)
     VkPhysicalDeviceExternalBufferInfoKHR* info = NULL;
     VkExternalBufferPropertiesKHR* props = NULL;
     VkPhysicalDevice physical_device = checkphysical_device(L, 1, &ud);
-    CheckInstancePfn(L, ud, GetPhysicalDeviceExternalBufferPropertiesKHR);
+    CheckInstancePfn(L, ud, GetPhysicalDeviceExternalBufferProperties);
 #define CLEANUP do {                                        \
     zfreeVkPhysicalDeviceExternalBufferInfoKHR(L, info, 1); \
     zfreeVkExternalBufferPropertiesKHR(L, props, 1);        \
@@ -346,7 +346,7 @@ static int GetPhysicalDeviceExternalBufferProperties(lua_State *L)
     if(err) { CLEANUP; return argerror(L, 2); }
     props = znewchainVkExternalBufferPropertiesKHR(L, &err);
     if(err) { CLEANUP; return lua_error(L); }
-    ud->idt->GetPhysicalDeviceExternalBufferPropertiesKHR(physical_device, info, props);
+    ud->idt->GetPhysicalDeviceExternalBufferProperties(physical_device, info, props);
     zpushVkExternalBufferPropertiesKHR(L, props);
     CLEANUP;
 #undef CLEANUP
@@ -360,7 +360,7 @@ static int GetPhysicalDeviceExternalFenceProperties(lua_State *L)
     VkPhysicalDeviceExternalFenceInfoKHR* info = NULL;
     VkExternalFencePropertiesKHR* props = NULL;
     VkPhysicalDevice physical_device = checkphysical_device(L, 1, &ud);
-    CheckInstancePfn(L, ud, GetPhysicalDeviceExternalFencePropertiesKHR);
+    CheckInstancePfn(L, ud, GetPhysicalDeviceExternalFenceProperties);
 #define CLEANUP do {                                        \
     zfreeVkPhysicalDeviceExternalFenceInfoKHR(L, info, 1);  \
     zfreeVkExternalFencePropertiesKHR(L, props, 1);     \
@@ -369,7 +369,7 @@ static int GetPhysicalDeviceExternalFenceProperties(lua_State *L)
     if(err) { CLEANUP; return argerror(L, 2); }
     props = znewchainVkExternalFencePropertiesKHR(L, &err);
     if(err) { CLEANUP; return lua_error(L); }
-    ud->idt->GetPhysicalDeviceExternalFencePropertiesKHR(physical_device, info, props);
+    ud->idt->GetPhysicalDeviceExternalFenceProperties(physical_device, info, props);
     zpushVkExternalFencePropertiesKHR(L, props);
     CLEANUP;
 #undef CLEANUP
@@ -384,7 +384,7 @@ static int GetPhysicalDeviceExternalSemaphoreProperties(lua_State *L)
     VkPhysicalDeviceExternalSemaphoreInfoKHR* info = NULL;
     VkExternalSemaphorePropertiesKHR* props = NULL;
     VkPhysicalDevice physical_device = checkphysical_device(L, 1, &ud);
-    CheckInstancePfn(L, ud, GetPhysicalDeviceExternalSemaphorePropertiesKHR);
+    CheckInstancePfn(L, ud, GetPhysicalDeviceExternalSemaphoreProperties);
 #define CLEANUP do {                                        \
     zfreeVkPhysicalDeviceExternalSemaphoreInfoKHR(L, info, 1);  \
     zfreeVkExternalSemaphorePropertiesKHR(L, props, 1);     \
@@ -393,7 +393,7 @@ static int GetPhysicalDeviceExternalSemaphoreProperties(lua_State *L)
     if(err) { CLEANUP; return argerror(L, 2); }
     props = znewchainVkExternalSemaphorePropertiesKHR(L, &err);
     if(err) { CLEANUP; return lua_error(L); }
-    ud->idt->GetPhysicalDeviceExternalSemaphorePropertiesKHR(physical_device, info, props);
+    ud->idt->GetPhysicalDeviceExternalSemaphoreProperties(physical_device, info, props);
     zpushVkExternalSemaphorePropertiesKHR(L, props);
     CLEANUP;
 #undef CLEANUP

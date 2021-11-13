@@ -113,12 +113,12 @@ static int EnumeratePhysicalDeviceGroups(lua_State *L)
     VkResult ec;
     VkPhysicalDeviceGroupPropertiesKHR* props;
     VkInstance instance = checkinstance(L, 1, &ud);
-    CheckInstancePfn(L, ud, EnumeratePhysicalDeviceGroupsKHR);
+    CheckInstancePfn(L, ud, EnumeratePhysicalDeviceGroups);
 #define CLEANUP zfreearrayVkPhysicalDeviceGroupPropertiesKHR(L, props, N, 1)
     props = znewchainarrayVkPhysicalDeviceGroupPropertiesKHR(L, N, &err);
     if(err) { CLEANUP; return lua_error(L); }
     lua_newtable(L);
-    ec = ud->idt->EnumeratePhysicalDeviceGroupsKHR(instance, &remaining, NULL);
+    ec = ud->idt->EnumeratePhysicalDeviceGroups(instance, &remaining, NULL);
     if(ec) { CLEANUP; CheckError(L, ec); }
     if(remaining == 0) { CLEANUP; return 1; }
 
@@ -128,7 +128,7 @@ static int EnumeratePhysicalDeviceGroups(lua_State *L)
             { count = N; remaining -= N; }
         else
             { count = remaining; remaining = 0; }
-        ec = ud->idt->EnumeratePhysicalDeviceGroupsKHR(instance, &count, props);
+        ec = ud->idt->EnumeratePhysicalDeviceGroups(instance, &count, props);
         if(ec && ec != VK_INCOMPLETE) { CLEANUP; CheckError(L, ec); }
 
         for(i=0; i<count; i++)

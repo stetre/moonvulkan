@@ -3166,7 +3166,7 @@ VkDeviceCreateInfo* zcheckVkDeviceCreateInfo(lua_State *L, int arg, int *err, ud
         { pushfielderror(F); return p; }
 #undef F
 #define F "enabled_features"
-    if(!ud->idt->GetPhysicalDeviceFeatures2KHR)
+    if(!ud->idt->GetPhysicalDeviceFeatures2)
         {
         arg1 = pushfield(L, arg, F);
         p->pEnabledFeatures = zcheckVkPhysicalDeviceFeatures(L, arg1, err);
@@ -3177,7 +3177,7 @@ VkDeviceCreateInfo* zcheckVkDeviceCreateInfo(lua_State *L, int arg, int *err, ud
 #undef F
     EXTENSIONS_BEGIN
 #define F "enabled_features"
-    if(ud->idt->GetPhysicalDeviceFeatures2KHR)
+    if(ud->idt->GetPhysicalDeviceFeatures2)
         {
         VkPhysicalDeviceFeatures2 *p1;
         arg1 = pushfield(L, arg, F);

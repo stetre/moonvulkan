@@ -252,7 +252,7 @@ static int GetBufferMemoryRequirements2(lua_State *L, VkBuffer buffer, ud_t *ud)
     req = znewchainVkMemoryRequirements2(L, &err);
     if(err) { CLEANUP; return lua_error(L); }
 
-    ud->ddt->GetBufferMemoryRequirements2KHR(device, info, req);
+    ud->ddt->GetBufferMemoryRequirements2(device, info, req);
     zpushVkMemoryRequirements2(L, req);
     CLEANUP;
 #undef CLEANUP
@@ -266,7 +266,7 @@ static int GetBufferMemoryRequirements(lua_State *L)
     VkDevice device = ud->device;
     VkMemoryRequirements req;
 
-    if(ud->ddt->GetBufferMemoryRequirements2KHR)
+    if(ud->ddt->GetBufferMemoryRequirements2)
         return GetBufferMemoryRequirements2(L, buffer, ud);
 
     ud->ddt->GetBufferMemoryRequirements(device, buffer, &req);
@@ -300,7 +300,7 @@ static int GetImageMemoryRequirements2(lua_State *L, VkImage image, ud_t *ud)
     req = znewchainVkMemoryRequirements2(L, &err);
     if(err) { CLEANUP; return lua_error(L); }
 
-    ud->ddt->GetImageMemoryRequirements2KHR(device, info, req);
+    ud->ddt->GetImageMemoryRequirements2(device, info, req);
     zpushVkMemoryRequirements2(L, req);
     CLEANUP;
 #undef CLEANUP
@@ -313,7 +313,7 @@ static int GetImageMemoryRequirements(lua_State *L)
     VkImage image = checkimage(L, 1, &ud);
     VkDevice device = ud->device;
     VkMemoryRequirements req;
-    if(ud->ddt->GetImageMemoryRequirements2KHR)
+    if(ud->ddt->GetImageMemoryRequirements2)
         return GetImageMemoryRequirements2(L, image, ud);
 
     ud->ddt->GetImageMemoryRequirements(device, image, &req);
@@ -347,13 +347,13 @@ static int GetImageSparseMemoryRequirements2(lua_State *L, VkImage image, ud_t *
     info->image = image;
 
     lua_newtable(L);
-    ud->ddt->GetImageSparseMemoryRequirements2KHR(device, info, &count, NULL);
+    ud->ddt->GetImageSparseMemoryRequirements2(device, info, &count, NULL);
     if(count == 0) { CLEANUP; return 1; }
 
     req = znewchainarrayVkSparseImageMemoryRequirements2(L, count, &err);
     if(err) { CLEANUP; return lua_error(L); }
 
-    ud->ddt->GetImageSparseMemoryRequirements2KHR(device, info, &count, req);
+    ud->ddt->GetImageSparseMemoryRequirements2(device, info, &count, req);
 
     for(i = 0; i <count; i++)
         {
@@ -373,7 +373,7 @@ static int GetImageSparseMemoryRequirements(lua_State *L)
     VkImage image = checkimage(L, 1, &ud);
     VkDevice device = ud->device;
 
-    if(ud->ddt->GetImageSparseMemoryRequirements2KHR)
+    if(ud->ddt->GetImageSparseMemoryRequirements2)
         return GetImageSparseMemoryRequirements2(L, image, ud);
 
     lua_newtable(L);
@@ -432,11 +432,11 @@ static int BindBufferMemory2(lua_State *L)
     uint32_t count;
     VkBindBufferMemoryInfo* bind_infos;
     VkDevice device = checkdevice(L, 1, &ud);
-    CheckDevicePfn(L, ud, BindBufferMemory2KHR);
+    CheckDevicePfn(L, ud, BindBufferMemory2);
 #define CLEANUP zfreearrayVkBindBufferMemoryInfo(L, bind_infos, count, 1)
     bind_infos = zcheckarrayVkBindBufferMemoryInfo(L, 2, &count, &err);
     if(err) { CLEANUP; return argerror(L, 2); }
-    ec = ud->ddt->BindBufferMemory2KHR(device, count, bind_infos);
+    ec = ud->ddt->BindBufferMemory2(device, count, bind_infos);
     CLEANUP;
     CheckError(L, ec);
 #undef CLEANUP
@@ -451,11 +451,11 @@ static int BindImageMemory2(lua_State *L)
     uint32_t count;
     VkBindImageMemoryInfo* bind_infos;
     VkDevice device = checkdevice(L, 1, &ud);
-    CheckDevicePfn(L, ud, BindImageMemory2KHR);
+    CheckDevicePfn(L, ud, BindImageMemory2);
 #define CLEANUP zfreearrayVkBindImageMemoryInfo(L, bind_infos, count, 1)
     bind_infos = zcheckarrayVkBindImageMemoryInfo(L, 2, &count, &err);
     if(err) { CLEANUP; return argerror(L, 2); }
-    ec = ud->ddt->BindImageMemory2KHR(device, count, bind_infos);
+    ec = ud->ddt->BindImageMemory2(device, count, bind_infos);
     CLEANUP;
     CheckError(L, ec);
 #undef CLEANUP
@@ -539,8 +539,8 @@ static int GetDeviceGroupPeerMemoryFeatures(lua_State *L)
     uint32_t heapIndex = luaL_checkinteger(L, 2);
     uint32_t localDeviceIndex = luaL_checkinteger(L, 3);
     uint32_t remoteDeviceIndex = luaL_checkinteger(L, 4);
-    CheckDevicePfn(L, ud, GetDeviceGroupPeerMemoryFeaturesKHR);
-    ud->ddt->GetDeviceGroupPeerMemoryFeaturesKHR(device, 
+    CheckDevicePfn(L, ud, GetDeviceGroupPeerMemoryFeatures);
+    ud->ddt->GetDeviceGroupPeerMemoryFeatures(device,
             heapIndex, localDeviceIndex, remoteDeviceIndex, &flags);
     pushflags(L, flags);
     return 1;

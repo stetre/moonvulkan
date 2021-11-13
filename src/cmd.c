@@ -980,8 +980,8 @@ static int CmdSetDeviceMask(lua_State *L)
     ud_t *ud;
     VkCommandBuffer cb = checkcommand_buffer(L, 1, &ud);
     uint32_t deviceMask = luaL_checkinteger(L, 2);
-    CheckDevicePfn(L, ud, CmdSetDeviceMaskKHR);
-    ud->ddt->CmdSetDeviceMaskKHR(cb, deviceMask);
+    CheckDevicePfn(L, ud, CmdSetDeviceMask);
+    ud->ddt->CmdSetDeviceMask(cb, deviceMask);
     return 0;
     }
 
@@ -995,8 +995,8 @@ static int CmdDispatchBase(lua_State *L)
     uint32_t groupCountX = luaL_checkinteger(L, 5);
     uint32_t groupCountY = luaL_checkinteger(L, 6);
     uint32_t groupCountZ = luaL_checkinteger(L, 7);
-    CheckDevicePfn(L, ud, CmdDispatchBaseKHR);
-    ud->ddt->CmdDispatchBaseKHR(cb, baseGroupX, baseGroupY, baseGroupZ,
+    CheckDevicePfn(L, ud, CmdDispatchBase);
+    ud->ddt->CmdDispatchBase(cb, baseGroupX, baseGroupY, baseGroupZ,
             groupCountX, groupCountY, groupCountZ);
     return 0;
     }
