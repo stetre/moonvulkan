@@ -11,7 +11,7 @@ Creates and returns a _surface_ userdata (MoonVulkan object) bound to the given 
 
 [[create_display_plane_surface]]
 * _surface_ = *create_display_plane_surface*(<<display_mode, _display_mode_>>, <<displaysurfacecreateinfo, _displaysurfacecreateinfo_>>, [<<allocators, _allocator_>>]) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateDisplayPlaneSurfaceKHR.html[vkCreateDisplayPlaneSurfaceKHR] (https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_display.html[VK_KHR_display]).#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateDisplayPlaneSurfaceKHR.html[vkCreateDisplayPlaneSurfaceKHR].#
 
 [[destroy_surface]]
 * *destroy_surface*(_surface_) +
@@ -39,15 +39,15 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGet
 
 [[get_device_group_surface_present_modes]]
 * <<devicegrouppresentmodeflags, _devicegrouppresentmodeflags_>> = *get_device_group_surface_present_modes*(<<device, _device_>>, _surface_) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetDeviceGroupSurfacePresentModesKHR.html[vkGetDeviceGroupSurfacePresentModesKHR] (https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_device_group.html[VK_KHR_device_group]).#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetDeviceGroupSurfacePresentModesKHR.html[vkGetDeviceGroupSurfacePresentModesKHR].#
 
 [[get_physical_device_present_rectangles]]
 * {<<rect2d, _rect2d_>>} = *get_physical_device_present_rectangles*(<<physical_device, _physdev_>>, _surface_) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDevicePresentRectanglesKHR.html[vkGetPhysicalDevicePresentRectanglesKHR] (https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_device_group.html[VK_KHR_device_group]).#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDevicePresentRectanglesKHR.html[vkGetPhysicalDevicePresentRectanglesKHR].#
 
 [[get_device_group_present_capabilities]]
 * <<devicegrouppresentcapabilities, _devicegrouppresentcapabilities_>> = *get_device_group_present_capabilities*(<<device, _device_>>) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetDeviceGroupPresentCapabilitiesKHR.html[vkGetDeviceGroupPresentCapabilitiesKHR] (https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_device_group.html[VK_KHR_device_group]).#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetDeviceGroupPresentCapabilitiesKHR.html[vkGetDeviceGroupPresentCapabilitiesKHR].#
 
 
 
