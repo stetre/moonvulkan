@@ -228,7 +228,7 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmd
 [small]#arg3: _layout_: <<pipeline_layout, pipeline_layout>> +
 arg4: _set_: integer +
 arg5: _data_: binary string +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdPushDescriptorSetWithTemplate.html[vkCmdPushDescriptorSetWithTemplate].#
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdPushDescriptorSetWithTemplateKHR.html[vkCmdPushDescriptorSetWithTemplateKHR].#
 
 [[cmd_push_constants]]
 * *cmd_push_constants*(_cb_, _layout_, _flags_, _offset_, _values_) +
