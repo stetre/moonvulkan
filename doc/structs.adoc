@@ -222,6 +222,110 @@ _transform_feedback_queries_: boolean , +
 _transform_feedback_streams_lines_triangles_: boolean , +
 _transform_feedback_rasterization_stream_select_: boolean , +
 _transform_feedback_draw_: boolean , +
+pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDeviceFloatControlsPropertiesKHR.html[VkPhysicalDeviceFloatControlsPropertiesKHR]): +
+_denorm_behavior_independence_: <<shaderfloatcontrolsindependence, shaderfloatcontrolsindependence>>, +
+_rounding_mode_independence_: <<shaderfloatcontrolsindependence, shaderfloatcontrolsindependence>>, +
+_shader_signed_zero_inf_nan_preserve_float16_: boolean, +
+_shader_signed_zero_inf_nan_preserve_float32_: boolean, +
+_shader_signed_zero_inf_nan_preserve_float64_: boolean, +
+_shader_denorm_preserve_float16_: boolean, +
+_shader_denorm_preserve_float32_: boolean, +
+_shader_denorm_preserve_float64_: boolean, +
+_shader_denorm_flush_to_zero_float16_: boolean, +
+_shader_denorm_flush_to_zero_float32_: boolean, +
+_shader_denorm_flush_to_zero_float64_: boolean, +
+_shader_rounding_mode_rte_float16_: boolean, +
+_shader_rounding_mode_rte_float32_: boolean, +
+_shader_rounding_mode_rte_float64_: boolean, +
+_shader_rounding_mode_rtz_float16_: boolean, +
+_shader_rounding_mode_rtz_float32_: boolean, +
+_shader_rounding_mode_rtz_float64_: boolean, +
+pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDeviceDepthStencilResolvePropertiesKHR.html[VkPhysicalDeviceDepthStencilResolvePropertiesKHR]): +
+_supported_depth_resolve_modes_: <<resolvemodeflags, resolvemodeflags>>, +
+_supported_stencil_resolve_modes_: <<resolvemodeflags, resolvemodeflags>>, +
+_independent_resolve_none_: boolean, +
+_independent_resolve_: boolean, +
+pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDeviceFragmentDensityMapPropertiesEXT.html[VkPhysicalDeviceFragmentDensityMapPropertiesEXT]): +
+_min_fragment_density_texel_size_: <<extent2d, extent2d>>, +
+_max_fragment_density_texel_size_: <<extent2d, extent2d>>, +
+_fragment_density_invocations_: boolean, +
+pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDeviceMemoryBudgetPropertiesEXT.html[VkPhysicalDeviceMemoryBudgetPropertiesEXT]): +
+_heap_budget_: {integer}[16], +
+_heap_usage_: {integer}[16], +
+pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT.html[VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT]): +
+_storage_texel_buffer_offset_alignment_bytes_: integer, +
+_storage_texel_buffer_offset_single_texel_alignment_: boolean, +
+_uniform_texel_buffer_offset_alignment_bytes_: integer, +
+_uniform_texel_buffer_offset_single_texel_alignment_: boolean, +
+pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDevicePerformanceQueryPropertiesKHR.html[VkPhysicalDevicePerformanceQueryPropertiesKHR]): +
+_allow_command_buffer_query_copies_: boolean, +
+pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDeviceTimelineSemaphoreProperties.html[VkPhysicalDeviceTimelineSemaphoreProperties]): +
+_max_timeline_semaphore_value_difference_: integer, +
+pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDeviceFragmentShadingRatePropertiesKHR.html[VkPhysicalDeviceFragmentShadingRatePropertiesKHR]): +
+_min_fragment_shading_rate_attachment_texel_size_: <<extent2d, extent2d>>, +
+_max_fragment_shading_rate_attachment_texel_size_: <<extent2d, extent2d>>, +
+_max_fragment_shading_rate_attachment_texel_size_aspect_ratio_: integer, +
+_primitive_fragment_shading_rate_with_multiple_viewports_: boolean, +
+_layered_shading_rate_attachments_: boolean, +
+_fragment_shading_rate_non_trivial_combiner_ops_: boolean, +
+_max_fragment_size_: <<extent2d, extent2d>>, +
+_max_fragment_size_aspect_ratio_: integer, +
+_max_fragment_shading_rate_coverage_samples_: integer, +
+_max_fragment_shading_rate_rasterization_samples_: <<samplecountflags, samplecountflags>>, +
+_fragment_shading_rate_with_shader_depth_stencil_writes_: boolean, +
+_fragment_shading_rate_with_sample_mask_: boolean, +
+_fragment_shading_rate_with_shader_sample_mask_: boolean, +
+_fragment_shading_rate_with_conservative_rasterization_: boolean, +
+_fragment_shading_rate_with_fragment_shader_interlock_: boolean, +
+_fragment_shading_rate_with_custom_sample_locations_: boolean, +
+_fragment_shading_rate_strict_multiply_combiner_: boolean, +
+pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDeviceAccelerationStructurePropertiesKHR.html[VkPhysicalDeviceAccelerationStructurePropertiesKHR]): +
+_max_geometry_count_: integer, +
+_max_instance_count_: integer, +
+_max_primitive_count_: integer, +
+_max_per_stage_descriptor_acceleration_structures_: integer, +
+_max_per_stage_descriptor_update_after_bind_acceleration_structures_: integer, +
+_max_descriptor_set_acceleration_structures_: integer, +
+_max_descriptor_set_update_after_bind_acceleration_structures_: integer, +
+_min_acceleration_structure_scratch_offset_alignment_: integer, +
+pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDeviceRayTracingPipelinePropertiesKHR.html[VkPhysicalDeviceRayTracingPipelinePropertiesKHR]): +
+_shader_group_handle_size_: integer, +
+_max_ray_recursion_depth_: integer, +
+_max_shader_group_stride_: integer, +
+_shader_group_base_alignment_: integer, +
+_shader_group_handle_capture_replay_size_: integer, +
+_max_ray_dispatch_invocation_count_: integer, +
+_shader_group_handle_alignment_: integer, +
+_max_ray_hit_attribute_size_: integer, +
+pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDeviceSubgroupSizeControlPropertiesEXT.html[VkPhysicalDeviceSubgroupSizeControlPropertiesEXT]): +
+_min_subgroup_size_: integer, +
+_max_subgroup_size_: integer, +
+_max_compute_workgroup_subgroups_: integer, +
+_required_subgroup_size_stages_: <<shaderstageflags, shaderstageflags>>, +
+pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDeviceProvokingVertexPropertiesEXT.html[VkPhysicalDeviceProvokingVertexPropertiesEXT]): +
+_provoking_vertex_mode_per_pipeline_: boolean, +
+_transform_feedback_preserves_triangle_fan_provoking_vertex_: boolean, +
+pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDeviceLineRasterizationPropertiesEXT.html[VkPhysicalDeviceLineRasterizationPropertiesEXT]): +
+_line_sub_pixel_precision_bits_: integer, +
+pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDeviceRobustness2PropertiesEXT.html[VkPhysicalDeviceRobustness2PropertiesEXT]): +
+_robust_storage_buffer_access_size_alignment_: integer, +
+_robust_uniform_buffer_access_size_alignment_: integer, +
+pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDeviceCustomBorderColorPropertiesEXT.html[VkPhysicalDeviceCustomBorderColorPropertiesEXT]): +
+_max_custom_border_color_samplers_: integer, +
+pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDeviceFragmentDensityMap2PropertiesEXT.html[VkPhysicalDeviceFragmentDensityMap2PropertiesEXT]): +
+_subsampled_loads_: boolean, +
+_subsampled_coarse_reconstruction_early_access_: boolean, +
+_max_subsampled_array_layers_: integer, +
+_max_descriptor_set_subsampled_samplers_: integer, +
+pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDeviceDrmPropertiesEXT.html[VkPhysicalDeviceDrmPropertiesEXT]): +
+_has_primary_: boolean, +
+_has_render_: boolean, +
+_primary_major_: integer, +
+_primary_minor_: integer, +
+_render_major_: integer, +
+_render_minor_: integer, +
+pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDeviceMultiDrawPropertiesEXT.html[VkPhysicalDeviceMultiDrawPropertiesEXT]): +
+_max_multi_draw_count_: integer, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDeviceProperties2.html[VkPhysicalDeviceProperties2])#
 
 

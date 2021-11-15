@@ -2297,40 +2297,169 @@ LOCALPUSH_BEGIN(VkPhysicalDeviceTransformFeedbackPropertiesEXT)
     SetBoolean(transformFeedbackRasterizationStreamSelect, "transform_feedback_rasterization_stream_select");
     SetBoolean(transformFeedbackDraw, "transform_feedback_draw");
 LOCALPUSH_END
-
+LOCALPUSH_BEGIN(VkPhysicalDeviceFloatControlsPropertiesKHR)
+    SetEnum(denormBehaviorIndependence, "denorm_behavior_independence", pushshaderfloatcontrolsindependence);
+    SetEnum(roundingModeIndependence, "rounding_mode_independence", pushshaderfloatcontrolsindependence);
+    SetBoolean(shaderSignedZeroInfNanPreserveFloat16, "shader_signed_zero_inf_nan_preserve_float16");
+    SetBoolean(shaderSignedZeroInfNanPreserveFloat32, "shader_signed_zero_inf_nan_preserve_float32");
+    SetBoolean(shaderSignedZeroInfNanPreserveFloat64, "shader_signed_zero_inf_nan_preserve_float64");
+    SetBoolean(shaderDenormPreserveFloat16, "shader_denorm_preserve_float16");
+    SetBoolean(shaderDenormPreserveFloat32, "shader_denorm_preserve_float32");
+    SetBoolean(shaderDenormPreserveFloat64, "shader_denorm_preserve_float64");
+    SetBoolean(shaderDenormFlushToZeroFloat16, "shader_denorm_flush_to_zero_float16");
+    SetBoolean(shaderDenormFlushToZeroFloat32, "shader_denorm_flush_to_zero_float32");
+    SetBoolean(shaderDenormFlushToZeroFloat64, "shader_denorm_flush_to_zero_float64");
+    SetBoolean(shaderRoundingModeRTEFloat16, "shader_rounding_mode_rte_float16");
+    SetBoolean(shaderRoundingModeRTEFloat32, "shader_rounding_mode_rte_float32");
+    SetBoolean(shaderRoundingModeRTEFloat64, "shader_rounding_mode_rte_float64");
+    SetBoolean(shaderRoundingModeRTZFloat16, "shader_rounding_mode_rtz_float16");
+    SetBoolean(shaderRoundingModeRTZFloat32, "shader_rounding_mode_rtz_float32");
+    SetBoolean(shaderRoundingModeRTZFloat64, "shader_rounding_mode_rtz_float64");
+LOCALPUSH_END
+LOCALPUSH_BEGIN(VkPhysicalDeviceDepthStencilResolvePropertiesKHR)
+    SetFlags(supportedDepthResolveModes, "supported_depth_resolve_modes");
+    SetFlags(supportedStencilResolveModes, "supported_stencil_resolve_modes");
+    SetBoolean(independentResolveNone, "independent_resolve_none");
+    SetBoolean(independentResolve, "independent_resolve");
+LOCALPUSH_END
+LOCALPUSH_BEGIN(VkPhysicalDeviceFragmentDensityMapPropertiesEXT)
+    SetStruct(minFragmentDensityTexelSize, "min_fragment_density_texel_size", VkExtent2D);
+    SetStruct(maxFragmentDensityTexelSize, "max_fragment_density_texel_size", VkExtent2D);
+    SetBoolean(fragmentDensityInvocations, "fragment_density_invocations");
+LOCALPUSH_END
+LOCALPUSH_BEGIN(VkPhysicalDeviceMemoryBudgetPropertiesEXT)
+    SetIntegerArray(heapBudget, "heap_budget", VK_MAX_MEMORY_HEAPS);
+    SetIntegerArray(heapUsage, "heap_usage", VK_MAX_MEMORY_HEAPS);
+LOCALPUSH_END
+LOCALPUSH_BEGIN(VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT)
+    SetInteger(storageTexelBufferOffsetAlignmentBytes, "storage_texel_buffer_offset_alignment_bytes");
+    SetBoolean(storageTexelBufferOffsetSingleTexelAlignment, "storage_texel_buffer_offset_single_texel_alignment");
+    SetInteger(uniformTexelBufferOffsetAlignmentBytes, "uniform_texel_buffer_offset_alignment_bytes");
+    SetBoolean(uniformTexelBufferOffsetSingleTexelAlignment, "uniform_texel_buffer_offset_single_texel_alignment");
+LOCALPUSH_END
+LOCALPUSH_BEGIN(VkPhysicalDevicePerformanceQueryPropertiesKHR)
+    SetBoolean(allowCommandBufferQueryCopies, "allow_command_buffer_query_copies");
+LOCALPUSH_END
+LOCALPUSH_BEGIN(VkPhysicalDeviceTimelineSemaphoreProperties)
+    SetInteger(maxTimelineSemaphoreValueDifference, "max_timeline_semaphore_value_difference");
+LOCALPUSH_END
+LOCALPUSH_BEGIN(VkPhysicalDeviceFragmentShadingRatePropertiesKHR)
+    SetStruct(minFragmentShadingRateAttachmentTexelSize, "min_fragment_shading_rate_attachment_texel_size", VkExtent2D);
+    SetStruct(maxFragmentShadingRateAttachmentTexelSize, "max_fragment_shading_rate_attachment_texel_size", VkExtent2D);
+    SetInteger(maxFragmentShadingRateAttachmentTexelSizeAspectRatio, "max_fragment_shading_rate_attachment_texel_size_aspect_ratio");
+    SetBoolean(primitiveFragmentShadingRateWithMultipleViewports, "primitive_fragment_shading_rate_with_multiple_viewports");
+    SetBoolean(layeredShadingRateAttachments, "layered_shading_rate_attachments");
+    SetBoolean(fragmentShadingRateNonTrivialCombinerOps, "fragment_shading_rate_non_trivial_combiner_ops");
+    SetStruct(maxFragmentSize, "max_fragment_size", VkExtent2D);
+    SetInteger(maxFragmentSizeAspectRatio, "max_fragment_size_aspect_ratio");
+    SetInteger(maxFragmentShadingRateCoverageSamples, "max_fragment_shading_rate_coverage_samples");
+    SetFlags(maxFragmentShadingRateRasterizationSamples, "max_fragment_shading_rate_rasterization_samples");
+    SetBoolean(fragmentShadingRateWithShaderDepthStencilWrites, "fragment_shading_rate_with_shader_depth_stencil_writes");
+    SetBoolean(fragmentShadingRateWithSampleMask, "fragment_shading_rate_with_sample_mask");
+    SetBoolean(fragmentShadingRateWithShaderSampleMask, "fragment_shading_rate_with_shader_sample_mask");
+    SetBoolean(fragmentShadingRateWithConservativeRasterization, "fragment_shading_rate_with_conservative_rasterization");
+    SetBoolean(fragmentShadingRateWithFragmentShaderInterlock, "fragment_shading_rate_with_fragment_shader_interlock");
+    SetBoolean(fragmentShadingRateWithCustomSampleLocations, "fragment_shading_rate_with_custom_sample_locations");
+    SetBoolean(fragmentShadingRateStrictMultiplyCombiner, "fragment_shading_rate_strict_multiply_combiner");
+LOCALPUSH_END
+LOCALPUSH_BEGIN(VkPhysicalDeviceAccelerationStructurePropertiesKHR)
+    SetInteger(maxGeometryCount, "max_geometry_count");
+    SetInteger(maxInstanceCount, "max_instance_count");
+    SetInteger(maxPrimitiveCount, "max_primitive_count");
+    SetInteger(maxPerStageDescriptorAccelerationStructures, "max_per_stage_descriptor_acceleration_structures");
+    SetInteger(maxPerStageDescriptorUpdateAfterBindAccelerationStructures, "max_per_stage_descriptor_update_after_bind_acceleration_structures");
+    SetInteger(maxDescriptorSetAccelerationStructures, "max_descriptor_set_acceleration_structures");
+    SetInteger(maxDescriptorSetUpdateAfterBindAccelerationStructures, "max_descriptor_set_update_after_bind_acceleration_structures");
+    SetInteger(minAccelerationStructureScratchOffsetAlignment, "min_acceleration_structure_scratch_offset_alignment");
+LOCALPUSH_END
+LOCALPUSH_BEGIN(VkPhysicalDeviceRayTracingPipelinePropertiesKHR)
+    SetInteger(shaderGroupHandleSize, "shader_group_handle_size");
+    SetInteger(maxRayRecursionDepth, "max_ray_recursion_depth");
+    SetInteger(maxShaderGroupStride, "max_shader_group_stride");
+    SetInteger(shaderGroupBaseAlignment, "shader_group_base_alignment");
+    SetInteger(shaderGroupHandleCaptureReplaySize, "shader_group_handle_capture_replay_size");
+    SetInteger(maxRayDispatchInvocationCount, "max_ray_dispatch_invocation_count");
+    SetInteger(shaderGroupHandleAlignment, "shader_group_handle_alignment");
+    SetInteger(maxRayHitAttributeSize, "max_ray_hit_attribute_size");
+LOCALPUSH_END
+LOCALPUSH_BEGIN(VkPhysicalDeviceSubgroupSizeControlPropertiesEXT)
+    SetInteger(minSubgroupSize, "min_subgroup_size");
+    SetInteger(maxSubgroupSize, "max_subgroup_size");
+    SetInteger(maxComputeWorkgroupSubgroups, "max_compute_workgroup_subgroups");
+    SetFlags(requiredSubgroupSizeStages, "required_subgroup_size_stages");
+LOCALPUSH_END
+LOCALPUSH_BEGIN(VkPhysicalDeviceProvokingVertexPropertiesEXT)
+    SetBoolean(provokingVertexModePerPipeline, "provoking_vertex_mode_per_pipeline");
+    SetBoolean(transformFeedbackPreservesTriangleFanProvokingVertex, "transform_feedback_preserves_triangle_fan_provoking_vertex");
+LOCALPUSH_END
+LOCALPUSH_BEGIN(VkPhysicalDeviceLineRasterizationPropertiesEXT)
+    SetInteger(lineSubPixelPrecisionBits, "line_sub_pixel_precision_bits");
+LOCALPUSH_END
+LOCALPUSH_BEGIN(VkPhysicalDeviceRobustness2PropertiesEXT)
+    SetInteger(robustStorageBufferAccessSizeAlignment, "robust_storage_buffer_access_size_alignment");
+    SetInteger(robustUniformBufferAccessSizeAlignment, "robust_uniform_buffer_access_size_alignment");
+LOCALPUSH_END
+LOCALPUSH_BEGIN(VkPhysicalDeviceCustomBorderColorPropertiesEXT)
+    SetInteger(maxCustomBorderColorSamplers, "max_custom_border_color_samplers");
+LOCALPUSH_END
+LOCALPUSH_BEGIN(VkPhysicalDeviceFragmentDensityMap2PropertiesEXT)
+    SetBoolean(subsampledLoads, "subsampled_loads");
+    SetBoolean(subsampledCoarseReconstructionEarlyAccess, "subsampled_coarse_reconstruction_early_access");
+    SetInteger(maxSubsampledArrayLayers, "max_subsampled_array_layers");
+    SetInteger(maxDescriptorSetSubsampledSamplers, "max_descriptor_set_subsampled_samplers");
+LOCALPUSH_END
+LOCALPUSH_BEGIN(VkPhysicalDeviceDrmPropertiesEXT)
+    SetBoolean(hasPrimary, "has_primary");
+    SetBoolean(hasRender, "has_render");
+    SetInteger(primaryMajor, "primary_major");
+    SetInteger(primaryMinor, "primary_minor");
+    SetInteger(renderMajor, "render_major");
+    SetInteger(renderMinor, "render_minor");
+LOCALPUSH_END
+LOCALPUSH_BEGIN(VkPhysicalDeviceMultiDrawPropertiesEXT)
+    SetInteger(maxMultiDrawCount, "max_multi_draw_count");
+LOCALPUSH_END
 
 ZINIT_BEGIN(VkPhysicalDeviceProperties2)
     EXTENSIONS_BEGIN
-        ADDX(PHYSICAL_DEVICE_PUSH_DESCRIPTOR_PROPERTIES_KHR,
-                VkPhysicalDevicePushDescriptorPropertiesKHR);
-        ADDX(PHYSICAL_DEVICE_BLEND_OPERATION_ADVANCED_PROPERTIES_EXT,
-                VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT);
-        ADDX(PHYSICAL_DEVICE_SAMPLER_FILTER_MINMAX_PROPERTIES_EXT,
-                VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT);
-        ADDX(PHYSICAL_DEVICE_DISCARD_RECTANGLE_PROPERTIES_EXT,
-                VkPhysicalDeviceDiscardRectanglePropertiesEXT);
+        ADDX(PHYSICAL_DEVICE_PUSH_DESCRIPTOR_PROPERTIES_KHR, VkPhysicalDevicePushDescriptorPropertiesKHR);
+        ADDX(PHYSICAL_DEVICE_BLEND_OPERATION_ADVANCED_PROPERTIES_EXT, VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT);
+        ADDX(PHYSICAL_DEVICE_SAMPLER_FILTER_MINMAX_PROPERTIES_EXT, VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT);
+        ADDX(PHYSICAL_DEVICE_DISCARD_RECTANGLE_PROPERTIES_EXT, VkPhysicalDeviceDiscardRectanglePropertiesEXT);
         ADDX(PHYSICAL_DEVICE_ID_PROPERTIES, VkPhysicalDeviceIDProperties);
         ADDX(PHYSICAL_DEVICE_POINT_CLIPPING_PROPERTIES, VkPhysicalDevicePointClippingProperties);
-        ADDX(PHYSICAL_DEVICE_SAMPLE_LOCATIONS_PROPERTIES_EXT,
-                VkPhysicalDeviceSampleLocationsPropertiesEXT);
+        ADDX(PHYSICAL_DEVICE_SAMPLE_LOCATIONS_PROPERTIES_EXT, VkPhysicalDeviceSampleLocationsPropertiesEXT);
         ADDX(PHYSICAL_DEVICE_MAINTENANCE_3_PROPERTIES, VkPhysicalDeviceMaintenance3Properties);
         ADDX(PHYSICAL_DEVICE_SUBGROUP_PROPERTIES, VkPhysicalDeviceSubgroupProperties);
         ADDX(PHYSICAL_DEVICE_PROTECTED_MEMORY_PROPERTIES, VkPhysicalDeviceProtectedMemoryProperties);
-        ADDX(PHYSICAL_DEVICE_CONSERVATIVE_RASTERIZATION_PROPERTIES_EXT,
-                VkPhysicalDeviceConservativeRasterizationPropertiesEXT);
-        ADDX(PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_PROPERTIES_EXT,
-                VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT);
-        ADDX(PHYSICAL_DEVICE_INLINE_UNIFORM_BLOCK_PROPERTIES_EXT,
-                VkPhysicalDeviceInlineUniformBlockPropertiesEXT);
-        ADDX(PHYSICAL_DEVICE_DESCRIPTOR_INDEXING_PROPERTIES_EXT,
-                VkPhysicalDeviceDescriptorIndexingPropertiesEXT);
+        ADDX(PHYSICAL_DEVICE_CONSERVATIVE_RASTERIZATION_PROPERTIES_EXT, VkPhysicalDeviceConservativeRasterizationPropertiesEXT);
+        ADDX(PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_PROPERTIES_EXT, VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT);
+        ADDX(PHYSICAL_DEVICE_INLINE_UNIFORM_BLOCK_PROPERTIES_EXT, VkPhysicalDeviceInlineUniformBlockPropertiesEXT);
+        ADDX(PHYSICAL_DEVICE_DESCRIPTOR_INDEXING_PROPERTIES_EXT, VkPhysicalDeviceDescriptorIndexingPropertiesEXT);
         ADDX(PHYSICAL_DEVICE_MULTIVIEW_PROPERTIES_KHR, VkPhysicalDeviceMultiviewPropertiesKHR);
-        ADDX(PHYSICAL_DEVICE_EXTERNAL_MEMORY_HOST_PROPERTIES_EXT,
-                VkPhysicalDeviceExternalMemoryHostPropertiesEXT);
+        ADDX(PHYSICAL_DEVICE_EXTERNAL_MEMORY_HOST_PROPERTIES_EXT, VkPhysicalDeviceExternalMemoryHostPropertiesEXT);
         ADDX(PHYSICAL_DEVICE_DRIVER_PROPERTIES_KHR, VkPhysicalDeviceDriverPropertiesKHR);
         ADDX(PHYSICAL_DEVICE_PCI_BUS_INFO_PROPERTIES_EXT, VkPhysicalDevicePCIBusInfoPropertiesEXT);
-        ADDX(PHYSICAL_DEVICE_TRANSFORM_FEEDBACK_PROPERTIES_EXT,
-                VkPhysicalDeviceTransformFeedbackPropertiesEXT);
+        ADDX(PHYSICAL_DEVICE_TRANSFORM_FEEDBACK_PROPERTIES_EXT, VkPhysicalDeviceTransformFeedbackPropertiesEXT);
+
+        ADDX(PHYSICAL_DEVICE_FLOAT_CONTROLS_PROPERTIES_KHR, VkPhysicalDeviceFloatControlsPropertiesKHR);
+        ADDX(PHYSICAL_DEVICE_DEPTH_STENCIL_RESOLVE_PROPERTIES_KHR, VkPhysicalDeviceDepthStencilResolvePropertiesKHR);
+        ADDX(PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_PROPERTIES_EXT, VkPhysicalDeviceFragmentDensityMapPropertiesEXT);
+        ADDX(PHYSICAL_DEVICE_MEMORY_BUDGET_PROPERTIES_EXT, VkPhysicalDeviceMemoryBudgetPropertiesEXT);
+        ADDX(PHYSICAL_DEVICE_TEXEL_BUFFER_ALIGNMENT_PROPERTIES_EXT, VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT);
+        ADDX(PHYSICAL_DEVICE_PERFORMANCE_QUERY_PROPERTIES_KHR, VkPhysicalDevicePerformanceQueryPropertiesKHR);
+        ADDX(PHYSICAL_DEVICE_TIMELINE_SEMAPHORE_PROPERTIES, VkPhysicalDeviceTimelineSemaphoreProperties);
+        ADDX(PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_PROPERTIES_KHR, VkPhysicalDeviceFragmentShadingRatePropertiesKHR);
+        ADDX(PHYSICAL_DEVICE_ACCELERATION_STRUCTURE_PROPERTIES_KHR, VkPhysicalDeviceAccelerationStructurePropertiesKHR);
+        ADDX(PHYSICAL_DEVICE_RAY_TRACING_PIPELINE_PROPERTIES_KHR, VkPhysicalDeviceRayTracingPipelinePropertiesKHR);
+        ADDX(PHYSICAL_DEVICE_SUBGROUP_SIZE_CONTROL_PROPERTIES_EXT, VkPhysicalDeviceSubgroupSizeControlPropertiesEXT);
+        ADDX(PHYSICAL_DEVICE_PROVOKING_VERTEX_PROPERTIES_EXT, VkPhysicalDeviceProvokingVertexPropertiesEXT);
+        ADDX(PHYSICAL_DEVICE_LINE_RASTERIZATION_PROPERTIES_EXT, VkPhysicalDeviceLineRasterizationPropertiesEXT);
+        ADDX(PHYSICAL_DEVICE_ROBUSTNESS_2_PROPERTIES_EXT, VkPhysicalDeviceRobustness2PropertiesEXT);
+        ADDX(PHYSICAL_DEVICE_CUSTOM_BORDER_COLOR_PROPERTIES_EXT, VkPhysicalDeviceCustomBorderColorPropertiesEXT);
+        ADDX(PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_2_PROPERTIES_EXT, VkPhysicalDeviceFragmentDensityMap2PropertiesEXT);
+        ADDX(PHYSICAL_DEVICE_DRM_PROPERTIES_EXT, VkPhysicalDeviceDrmPropertiesEXT);
+        ADDX(PHYSICAL_DEVICE_MULTI_DRAW_PROPERTIES_EXT, VkPhysicalDeviceMultiDrawPropertiesEXT);
     EXTENSIONS_END
 ZINIT_END
 
@@ -2343,36 +2472,44 @@ ZPUSH_BEGIN(VkPhysicalDeviceProperties2)
     lua_newtable(L);
     localpushVkPhysicalDeviceProperties(L, &p->properties);
     XPUSH_BEGIN
-        XCASE(PHYSICAL_DEVICE_PUSH_DESCRIPTOR_PROPERTIES_KHR,
-                 VkPhysicalDevicePushDescriptorPropertiesKHR);
-        XCASE(PHYSICAL_DEVICE_BLEND_OPERATION_ADVANCED_PROPERTIES_EXT,
-                 VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT);
-        XCASE(PHYSICAL_DEVICE_SAMPLER_FILTER_MINMAX_PROPERTIES_EXT,
-                 VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT);
-        XCASE(PHYSICAL_DEVICE_DISCARD_RECTANGLE_PROPERTIES_EXT,
-                 VkPhysicalDeviceDiscardRectanglePropertiesEXT);
+        XCASE(PHYSICAL_DEVICE_PUSH_DESCRIPTOR_PROPERTIES_KHR, VkPhysicalDevicePushDescriptorPropertiesKHR);
+        XCASE(PHYSICAL_DEVICE_BLEND_OPERATION_ADVANCED_PROPERTIES_EXT, VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT);
+        XCASE(PHYSICAL_DEVICE_SAMPLER_FILTER_MINMAX_PROPERTIES_EXT, VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT);
+        XCASE(PHYSICAL_DEVICE_DISCARD_RECTANGLE_PROPERTIES_EXT, VkPhysicalDeviceDiscardRectanglePropertiesEXT);
         XCASE(PHYSICAL_DEVICE_ID_PROPERTIES, VkPhysicalDeviceIDProperties);
         XCASE(PHYSICAL_DEVICE_POINT_CLIPPING_PROPERTIES, VkPhysicalDevicePointClippingProperties);
-        XCASE(PHYSICAL_DEVICE_SAMPLE_LOCATIONS_PROPERTIES_EXT,
-                 VkPhysicalDeviceSampleLocationsPropertiesEXT);
+        XCASE(PHYSICAL_DEVICE_SAMPLE_LOCATIONS_PROPERTIES_EXT, VkPhysicalDeviceSampleLocationsPropertiesEXT);
         XCASE(PHYSICAL_DEVICE_MAINTENANCE_3_PROPERTIES, VkPhysicalDeviceMaintenance3Properties);
         XCASE(PHYSICAL_DEVICE_SUBGROUP_PROPERTIES, VkPhysicalDeviceSubgroupProperties);
         XCASE(PHYSICAL_DEVICE_PROTECTED_MEMORY_PROPERTIES, VkPhysicalDeviceProtectedMemoryProperties);
-        XCASE(PHYSICAL_DEVICE_CONSERVATIVE_RASTERIZATION_PROPERTIES_EXT,
-                VkPhysicalDeviceConservativeRasterizationPropertiesEXT);
-        XCASE(PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_PROPERTIES_EXT,
-                VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT);
-        XCASE(PHYSICAL_DEVICE_INLINE_UNIFORM_BLOCK_PROPERTIES_EXT,
-                VkPhysicalDeviceInlineUniformBlockPropertiesEXT);
-        XCASE(PHYSICAL_DEVICE_DESCRIPTOR_INDEXING_PROPERTIES_EXT,
-                VkPhysicalDeviceDescriptorIndexingPropertiesEXT);
+        XCASE(PHYSICAL_DEVICE_CONSERVATIVE_RASTERIZATION_PROPERTIES_EXT, VkPhysicalDeviceConservativeRasterizationPropertiesEXT);
+        XCASE(PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_PROPERTIES_EXT, VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT);
+        XCASE(PHYSICAL_DEVICE_INLINE_UNIFORM_BLOCK_PROPERTIES_EXT, VkPhysicalDeviceInlineUniformBlockPropertiesEXT);
+        XCASE(PHYSICAL_DEVICE_DESCRIPTOR_INDEXING_PROPERTIES_EXT, VkPhysicalDeviceDescriptorIndexingPropertiesEXT);
         XCASE(PHYSICAL_DEVICE_MULTIVIEW_PROPERTIES_KHR, VkPhysicalDeviceMultiviewPropertiesKHR);
-        XCASE(PHYSICAL_DEVICE_EXTERNAL_MEMORY_HOST_PROPERTIES_EXT,
-                VkPhysicalDeviceExternalMemoryHostPropertiesEXT);
+        XCASE(PHYSICAL_DEVICE_EXTERNAL_MEMORY_HOST_PROPERTIES_EXT, VkPhysicalDeviceExternalMemoryHostPropertiesEXT);
         XCASE(PHYSICAL_DEVICE_DRIVER_PROPERTIES_KHR, VkPhysicalDeviceDriverPropertiesKHR);
         XCASE(PHYSICAL_DEVICE_PCI_BUS_INFO_PROPERTIES_EXT, VkPhysicalDevicePCIBusInfoPropertiesEXT);
-        XCASE(PHYSICAL_DEVICE_TRANSFORM_FEEDBACK_PROPERTIES_EXT,
-                VkPhysicalDeviceTransformFeedbackPropertiesEXT);
+        XCASE(PHYSICAL_DEVICE_TRANSFORM_FEEDBACK_PROPERTIES_EXT, VkPhysicalDeviceTransformFeedbackPropertiesEXT);
+        XCASE(PHYSICAL_DEVICE_FLOAT_CONTROLS_PROPERTIES_KHR, VkPhysicalDeviceFloatControlsPropertiesKHR);
+        XCASE(PHYSICAL_DEVICE_DEPTH_STENCIL_RESOLVE_PROPERTIES_KHR, VkPhysicalDeviceDepthStencilResolvePropertiesKHR);
+        XCASE(PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_PROPERTIES_EXT, VkPhysicalDeviceFragmentDensityMapPropertiesEXT);
+        XCASE(PHYSICAL_DEVICE_MEMORY_BUDGET_PROPERTIES_EXT, VkPhysicalDeviceMemoryBudgetPropertiesEXT);
+        XCASE(PHYSICAL_DEVICE_TEXEL_BUFFER_ALIGNMENT_PROPERTIES_EXT, VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT);
+        XCASE(PHYSICAL_DEVICE_PERFORMANCE_QUERY_PROPERTIES_KHR, VkPhysicalDevicePerformanceQueryPropertiesKHR);
+        XCASE(PHYSICAL_DEVICE_TIMELINE_SEMAPHORE_PROPERTIES, VkPhysicalDeviceTimelineSemaphoreProperties);
+        XCASE(PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_PROPERTIES_KHR, VkPhysicalDeviceFragmentShadingRatePropertiesKHR);
+        XCASE(PHYSICAL_DEVICE_ACCELERATION_STRUCTURE_PROPERTIES_KHR, VkPhysicalDeviceAccelerationStructurePropertiesKHR);
+        XCASE(PHYSICAL_DEVICE_RAY_TRACING_PIPELINE_PROPERTIES_KHR, VkPhysicalDeviceRayTracingPipelinePropertiesKHR);
+        XCASE(PHYSICAL_DEVICE_SUBGROUP_SIZE_CONTROL_PROPERTIES_EXT, VkPhysicalDeviceSubgroupSizeControlPropertiesEXT);
+        XCASE(PHYSICAL_DEVICE_PROVOKING_VERTEX_PROPERTIES_EXT, VkPhysicalDeviceProvokingVertexPropertiesEXT);
+        XCASE(PHYSICAL_DEVICE_LINE_RASTERIZATION_PROPERTIES_EXT, VkPhysicalDeviceLineRasterizationPropertiesEXT);
+        XCASE(PHYSICAL_DEVICE_ROBUSTNESS_2_PROPERTIES_EXT, VkPhysicalDeviceRobustness2PropertiesEXT);
+        XCASE(PHYSICAL_DEVICE_CUSTOM_BORDER_COLOR_PROPERTIES_EXT, VkPhysicalDeviceCustomBorderColorPropertiesEXT);
+        XCASE(PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_2_PROPERTIES_EXT, VkPhysicalDeviceFragmentDensityMap2PropertiesEXT);
+        XCASE(PHYSICAL_DEVICE_DRM_PROPERTIES_EXT, VkPhysicalDeviceDrmPropertiesEXT);
+        XCASE(PHYSICAL_DEVICE_MULTI_DRAW_PROPERTIES_EXT, VkPhysicalDeviceMultiDrawPropertiesEXT);
+
     XPUSH_END
 ZPUSH_END
 
