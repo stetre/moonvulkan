@@ -199,7 +199,7 @@ int zinit##VkXxx(lua_State *L, VkXxx* p, int *err) { (void)L; (void)(p);
  */
 
 /* The following macros are meant to be used for long chains of extensions such as
- * VkPhysicalDeviceFeatures2KHR, where the extensions structs are all typed, do not need
+ * VkPhysicalDeviceFeatures2, where the extensions structs are all typed, do not need
  * a zclear, and only appear as extensions in these chains (so there is no need to define
  * all the functions for them and we can use znew() and zfree() without wrappers).
  * Notice that in the Lua value the fields of an extension struct are often promoted to the
@@ -1763,6 +1763,207 @@ LOCALCHECK_END
 LOCALCHECK_BEGIN(PHYSICAL_DEVICE_SHADER_DEMOTE_TO_HELPER_INVOCATION_FEATURES_EXT, VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT)
     GetBoolean(shaderDemoteToHelperInvocation, "shader_demote_to_helper_invocation");
 LOCALCHECK_END
+LOCALCHECK_BEGIN(PHYSICAL_DEVICE_IMAGELESS_FRAMEBUFFER_FEATURES_KHR, VkPhysicalDeviceImagelessFramebufferFeaturesKHR)
+    GetBoolean(imagelessFramebuffer, "imageless_framebuffer");
+LOCALCHECK_END
+LOCALCHECK_BEGIN(PHYSICAL_DEVICE_DEPTH_CLIP_ENABLE_FEATURES_EXT, VkPhysicalDeviceDepthClipEnableFeaturesEXT)
+    GetBoolean(depthClipEnable, "depth_clip_enable");
+LOCALCHECK_END
+LOCALCHECK_BEGIN(PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_FEATURES_EXT, VkPhysicalDeviceFragmentDensityMapFeaturesEXT)
+    GetBoolean(fragmentDensityMap, "fragment_density_map");
+    GetBoolean(fragmentDensityMapDynamic, "fragment_density_map_dynamic");
+    GetBoolean(fragmentDensityMapNonSubsampledImages, "fragment_density_map_non_subsampled_images");
+LOCALCHECK_END
+LOCALCHECK_BEGIN(PHYSICAL_DEVICE_MEMORY_PRIORITY_FEATURES_EXT, VkPhysicalDeviceMemoryPriorityFeaturesEXT)
+    GetBoolean(memoryPriority, "memory_priority");
+LOCALCHECK_END
+LOCALCHECK_BEGIN(PHYSICAL_DEVICE_BUFFER_DEVICE_ADDRESS_FEATURES_EXT, VkPhysicalDeviceBufferDeviceAddressFeaturesEXT)
+    GetBoolean(bufferDeviceAddress, "buffer_device_address");
+    GetBoolean(bufferDeviceAddressCaptureReplay, "buffer_device_address_capture_replay");
+    GetBoolean(bufferDeviceAddressMultiDevice, "buffer_device_address_multi_device");
+LOCALCHECK_END
+LOCALCHECK_BEGIN(PHYSICAL_DEVICE_HOST_QUERY_RESET_FEATURES_EXT, VkPhysicalDeviceHostQueryResetFeaturesEXT)
+    GetBoolean(hostQueryReset, "host_query_reset");
+LOCALCHECK_END
+LOCALCHECK_BEGIN(PHYSICAL_DEVICE_TEXEL_BUFFER_ALIGNMENT_FEATURES_EXT, VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT)
+    GetBoolean(texelBufferAlignment, "texel_buffer_alignment");
+LOCALCHECK_END
+LOCALCHECK_BEGIN(PHYSICAL_DEVICE_PERFORMANCE_QUERY_FEATURES_KHR, VkPhysicalDevicePerformanceQueryFeaturesKHR)
+    GetBoolean(performanceCounterQueryPools, "performance_counter_query_pools");
+    GetBoolean(performanceCounterMultipleQueryPools, "performance_counter_multiple_query_pools");
+LOCALCHECK_END
+LOCALCHECK_BEGIN(PHYSICAL_DEVICE_SHADER_SUBGROUP_EXTENDED_TYPES_FEATURES, VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures)
+    GetBoolean(shaderSubgroupExtendedTypes, "shader_subgroup_extended_types");
+LOCALCHECK_END
+LOCALCHECK_BEGIN(PHYSICAL_DEVICE_SHADER_CLOCK_FEATURES_KHR, VkPhysicalDeviceShaderClockFeaturesKHR)
+    GetBoolean(shaderSubgroupClock, "shader_subgroup_clock");
+    GetBoolean(shaderDeviceClock, "shader_device_clock");
+LOCALCHECK_END
+LOCALCHECK_BEGIN(PHYSICAL_DEVICE_TIMELINE_SEMAPHORE_FEATURES, VkPhysicalDeviceTimelineSemaphoreFeatures)
+    GetBoolean(timelineSemaphore, "timeline_semaphore");
+LOCALCHECK_END
+LOCALCHECK_BEGIN(PHYSICAL_DEVICE_SHADER_TERMINATE_INVOCATION_FEATURES_KHR, VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR)
+    GetBoolean(shaderTerminateInvocation, "shader_terminate_invocation");
+LOCALCHECK_END
+LOCALCHECK_BEGIN(PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_FEATURES_KHR, VkPhysicalDeviceFragmentShadingRateFeaturesKHR)
+    GetBoolean(pipelineFragmentShadingRate, "pipeline_fragment_shading_rate");
+    GetBoolean(primitiveFragmentShadingRate, "primitive_fragment_shading_rate");
+    GetBoolean(attachmentFragmentShadingRate, "attachment_fragment_shading_rate");
+LOCALCHECK_END
+LOCALCHECK_BEGIN(PHYSICAL_DEVICE_SEPARATE_DEPTH_STENCIL_LAYOUTS_FEATURES, VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures)
+    GetBoolean(separateDepthStencilLayouts, "separate_depth_stencil_layouts");
+LOCALCHECK_END
+LOCALCHECK_BEGIN(PHYSICAL_DEVICE_PRESENT_WAIT_FEATURES_KHR, VkPhysicalDevicePresentWaitFeaturesKHR)
+    GetBoolean(presentWait, "present_wait");
+LOCALCHECK_END
+LOCALCHECK_BEGIN(PHYSICAL_DEVICE_BUFFER_DEVICE_ADDRESS_FEATURES, VkPhysicalDeviceBufferDeviceAddressFeatures)
+    GetBoolean(bufferDeviceAddress, "buffer_device_address");
+    GetBoolean(bufferDeviceAddressCaptureReplay, "buffer_device_address_capture_replay");
+    GetBoolean(bufferDeviceAddressMultiDevice, "buffer_device_address_multi_device");
+LOCALCHECK_END
+LOCALCHECK_BEGIN(PHYSICAL_DEVICE_PIPELINE_EXECUTABLE_PROPERTIES_FEATURES_KHR, VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR)
+    GetBoolean(pipelineExecutableInfo, "pipeline_executable_info");
+LOCALCHECK_END
+LOCALCHECK_BEGIN(PHYSICAL_DEVICE_PRESENT_ID_FEATURES_KHR, VkPhysicalDevicePresentIdFeaturesKHR)
+    GetBoolean(presentId, "present_id");
+LOCALCHECK_END
+LOCALCHECK_BEGIN(PHYSICAL_DEVICE_SYNCHRONIZATION_2_FEATURES_KHR, VkPhysicalDeviceSynchronization2FeaturesKHR)
+    GetBoolean(synchronization2, "synchronization2");
+LOCALCHECK_END
+LOCALCHECK_BEGIN(PHYSICAL_DEVICE_SHADER_SUBGROUP_UNIFORM_CONTROL_FLOW_FEATURES_KHR, VkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR)
+    GetBoolean(shaderSubgroupUniformControlFlow, "shader_subgroup_uniform_control_flow");
+LOCALCHECK_END
+LOCALCHECK_BEGIN(PHYSICAL_DEVICE_ZERO_INITIALIZE_WORKGROUP_MEMORY_FEATURES_KHR, VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR)
+    GetBoolean(shaderZeroInitializeWorkgroupMemory, "shader_zero_initialize_workgroup_memory");
+LOCALCHECK_END
+LOCALCHECK_BEGIN(PHYSICAL_DEVICE_WORKGROUP_MEMORY_EXPLICIT_LAYOUT_FEATURES_KHR, VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR)
+    GetBoolean(workgroupMemoryExplicitLayout, "workgroup_memory_explicit_layout");
+    GetBoolean(workgroupMemoryExplicitLayoutScalarBlockLayout, "workgroup_memory_explicit_layout_scalar_block_layout");
+    GetBoolean(workgroupMemoryExplicitLayout8BitAccess, "workgroup_memory_explicit_layout_8bit_access");
+    GetBoolean(workgroupMemoryExplicitLayout16BitAccess, "workgroup_memory_explicit_layout_16bit_access");
+LOCALCHECK_END
+LOCALCHECK_BEGIN(PHYSICAL_DEVICE_ACCELERATION_STRUCTURE_FEATURES_KHR, VkPhysicalDeviceAccelerationStructureFeaturesKHR)
+    GetBoolean(accelerationStructure, "acceleration_structure");
+    GetBoolean(accelerationStructureCaptureReplay, "acceleration_structure_capture_replay");
+    GetBoolean(accelerationStructureIndirectBuild, "acceleration_structure_indirect_build");
+    GetBoolean(accelerationStructureHostCommands, "acceleration_structure_host_commands");
+    GetBoolean(descriptorBindingAccelerationStructureUpdateAfterBind, "descriptor_binding_acceleration_structure_update_after_bind");
+LOCALCHECK_END
+LOCALCHECK_BEGIN(PHYSICAL_DEVICE_RAY_TRACING_PIPELINE_FEATURES_KHR, VkPhysicalDeviceRayTracingPipelineFeaturesKHR)
+    GetBoolean(rayTracingPipeline, "ray_tracing_pipeline");
+    GetBoolean(rayTracingPipelineShaderGroupHandleCaptureReplay, "ray_tracing_pipeline_shader_group_handle_capture_replay");
+    GetBoolean(rayTracingPipelineShaderGroupHandleCaptureReplayMixed, "ray_tracing_pipeline_shader_group_handle_capture_replay_mixed");
+    GetBoolean(rayTracingPipelineTraceRaysIndirect, "ray_tracing_pipeline_trace_rays_indirect");
+    GetBoolean(rayTraversalPrimitiveCulling, "ray_traversal_primitive_culling");
+LOCALCHECK_END
+LOCALCHECK_BEGIN(PHYSICAL_DEVICE_RAY_QUERY_FEATURES_KHR, VkPhysicalDeviceRayQueryFeaturesKHR)
+    GetBoolean(rayQuery, "ray_query");
+LOCALCHECK_END
+LOCALCHECK_BEGIN(PHYSICAL_DEVICE_TEXTURE_COMPRESSION_ASTC_HDR_FEATURES_EXT, VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT)
+    GetBoolean(textureCompressionASTC_HDR, "texture_compression_astc_hdr");
+LOCALCHECK_END
+LOCALCHECK_BEGIN(PHYSICAL_DEVICE_SUBGROUP_SIZE_CONTROL_FEATURES_EXT, VkPhysicalDeviceSubgroupSizeControlFeaturesEXT)
+    GetBoolean(subgroupSizeControl, "subgroup_size_control");
+    GetBoolean(computeFullSubgroups, "compute_full_subgroups");
+LOCALCHECK_END
+LOCALCHECK_BEGIN(PHYSICAL_DEVICE_SHADER_IMAGE_ATOMIC_INT64_FEATURES_EXT, VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT)
+    GetBoolean(shaderImageInt64Atomics, "shader_image_int64_atomics");
+    GetBoolean(sparseImageInt64Atomics, "sparse_image_int64_atomics");
+LOCALCHECK_END
+LOCALCHECK_BEGIN(PHYSICAL_DEVICE_PROVOKING_VERTEX_FEATURES_EXT, VkPhysicalDeviceProvokingVertexFeaturesEXT)
+    GetBoolean(provokingVertexLast, "provoking_vertex_last");
+    GetBoolean(transformFeedbackPreservesProvokingVertex, "transform_feedback_preserves_provoking_vertex");
+LOCALCHECK_END
+LOCALCHECK_BEGIN(PHYSICAL_DEVICE_LINE_RASTERIZATION_FEATURES_EXT, VkPhysicalDeviceLineRasterizationFeaturesEXT)
+    GetBoolean(rectangularLines, "rectangular_lines");
+    GetBoolean(bresenhamLines, "bresenham_lines");
+    GetBoolean(smoothLines, "smooth_lines");
+    GetBoolean(stippledRectangularLines, "stippled_rectangular_lines");
+    GetBoolean(stippledBresenhamLines, "stippled_bresenham_lines");
+    GetBoolean(stippledSmoothLines, "stippled_smooth_lines");
+LOCALCHECK_END
+LOCALCHECK_BEGIN(PHYSICAL_DEVICE_SHADER_ATOMIC_FLOAT_FEATURES_EXT, VkPhysicalDeviceShaderAtomicFloatFeaturesEXT)
+    GetBoolean(shaderBufferFloat32Atomics, "shader_buffer_float32_atomics");
+    GetBoolean(shaderBufferFloat32AtomicAdd, "shader_buffer_float32_atomic_add");
+    GetBoolean(shaderBufferFloat64Atomics, "shader_buffer_float64_atomics");
+    GetBoolean(shaderBufferFloat64AtomicAdd, "shader_buffer_float64_atomic_add");
+    GetBoolean(shaderSharedFloat32Atomics, "shader_shared_float32_atomics");
+    GetBoolean(shaderSharedFloat32AtomicAdd, "shader_shared_float32_atomic_add");
+    GetBoolean(shaderSharedFloat64Atomics, "shader_shared_float64_atomics");
+    GetBoolean(shaderSharedFloat64AtomicAdd, "shader_shared_float64_atomic_add");
+    GetBoolean(shaderImageFloat32Atomics, "shader_image_float32_atomics");
+    GetBoolean(shaderImageFloat32AtomicAdd, "shader_image_float32_atomic_add");
+    GetBoolean(sparseImageFloat32Atomics, "sparse_image_float32_atomics");
+    GetBoolean(sparseImageFloat32AtomicAdd, "sparse_image_float32_atomic_add");
+LOCALCHECK_END
+LOCALCHECK_BEGIN(PHYSICAL_DEVICE_INDEX_TYPE_UINT8_FEATURES_EXT, VkPhysicalDeviceIndexTypeUint8FeaturesEXT)
+    GetBoolean(indexTypeUint8, "index_type_uint8");
+LOCALCHECK_END
+LOCALCHECK_BEGIN(PHYSICAL_DEVICE_EXTENDED_DYNAMIC_STATE_FEATURES_EXT, VkPhysicalDeviceExtendedDynamicStateFeaturesEXT)
+    GetBoolean(extendedDynamicState, "extended_dynamic_state");
+LOCALCHECK_END
+LOCALCHECK_BEGIN(PHYSICAL_DEVICE_SHADER_ATOMIC_FLOAT_2_FEATURES_EXT, VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT)
+    GetBoolean(shaderBufferFloat16Atomics, "shader_buffer_float16_atomics");
+    GetBoolean(shaderBufferFloat16AtomicAdd, "shader_buffer_float16_atomicAdd");
+    GetBoolean(shaderBufferFloat16AtomicMinMax, "shader_buffer_float16_atomic_min_max");
+    GetBoolean(shaderBufferFloat32AtomicMinMax, "shader_buffer_float32_atomic_min_max");
+    GetBoolean(shaderBufferFloat64AtomicMinMax, "shader_buffer_float64_atomic_min_max");
+    GetBoolean(shaderSharedFloat16Atomics, "shader_shared_float16_atomics");
+    GetBoolean(shaderSharedFloat16AtomicAdd, "shader_shared_float16_atomic_add");
+    GetBoolean(shaderSharedFloat16AtomicMinMax, "shader_shared_float16_atomic_min_max");
+    GetBoolean(shaderSharedFloat32AtomicMinMax, "shader_shared_float32_atomic_min_max");
+    GetBoolean(shaderSharedFloat64AtomicMinMax, "shader_shared_float64_atomic_min_max");
+    GetBoolean(shaderImageFloat32AtomicMinMax, "shader_image_float32_atomic_min_max");
+    GetBoolean(sparseImageFloat32AtomicMinMax, "sparse_image_float32_atomic_min_max");
+LOCALCHECK_END
+LOCALCHECK_BEGIN(PHYSICAL_DEVICE_DEVICE_MEMORY_REPORT_FEATURES_EXT, VkPhysicalDeviceDeviceMemoryReportFeaturesEXT)
+    GetBoolean(deviceMemoryReport, "device_memory_report");
+LOCALCHECK_END
+LOCALCHECK_BEGIN(PHYSICAL_DEVICE_ROBUSTNESS_2_FEATURES_EXT, VkPhysicalDeviceRobustness2FeaturesEXT)
+    GetBoolean(robustBufferAccess2, "robust_buffer_access2");
+    GetBoolean(robustImageAccess2, "robust_image_access2");
+    GetBoolean(nullDescriptor, "null_descriptor");
+LOCALCHECK_END
+LOCALCHECK_BEGIN(PHYSICAL_DEVICE_CUSTOM_BORDER_COLOR_FEATURES_EXT, VkPhysicalDeviceCustomBorderColorFeaturesEXT)
+    GetBoolean(customBorderColors, "custom_border_colors");
+    GetBoolean(customBorderColorWithoutFormat, "custom_border_color_without_format");
+LOCALCHECK_END
+LOCALCHECK_BEGIN(PHYSICAL_DEVICE_PRIVATE_DATA_FEATURES_EXT, VkPhysicalDevicePrivateDataFeaturesEXT)
+    GetBoolean(privateData, "private_data");
+LOCALCHECK_END
+LOCALCHECK_BEGIN(PHYSICAL_DEVICE_PIPELINE_CREATION_CACHE_CONTROL_FEATURES_EXT, VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT)
+    GetBoolean(pipelineCreationCacheControl, "pipeline_creation_cache_control");
+LOCALCHECK_END
+LOCALCHECK_BEGIN(PHYSICAL_DEVICE_YCBCR_2_PLANE_444_FORMATS_FEATURES_EXT, VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT)
+    GetBoolean(ycbcr2plane444Formats, "ycbcr_2plane_444_formats");
+LOCALCHECK_END
+LOCALCHECK_BEGIN(PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_2_FEATURES_EXT, VkPhysicalDeviceFragmentDensityMap2FeaturesEXT)
+    GetBoolean(fragmentDensityMapDeferred, "fragment_density_map_deferred");
+LOCALCHECK_END
+LOCALCHECK_BEGIN(PHYSICAL_DEVICE_IMAGE_ROBUSTNESS_FEATURES_EXT, VkPhysicalDeviceImageRobustnessFeaturesEXT)
+    GetBoolean(robustImageAccess, "robust_image_access");
+LOCALCHECK_END
+LOCALCHECK_BEGIN(PHYSICAL_DEVICE_4444_FORMATS_FEATURES_EXT, VkPhysicalDevice4444FormatsFeaturesEXT)
+    GetBoolean(formatA4R4G4B4, "format_a4r4g4b4");
+    GetBoolean(formatA4B4G4R4, "format_a4b4g4r4");
+LOCALCHECK_END
+LOCALCHECK_BEGIN(PHYSICAL_DEVICE_VERTEX_INPUT_DYNAMIC_STATE_FEATURES_EXT, VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT)
+    GetBoolean(vertexInputDynamicState, "vertex_input_dynamic_state");
+LOCALCHECK_END
+LOCALCHECK_BEGIN(PHYSICAL_DEVICE_EXTENDED_DYNAMIC_STATE_2_FEATURES_EXT, VkPhysicalDeviceExtendedDynamicState2FeaturesEXT)
+    GetBoolean(extendedDynamicState2, "extended_dynamic_state2");
+    GetBoolean(extendedDynamicState2LogicOp, "extended_dynamic_state2_logic_op");
+    GetBoolean(extendedDynamicState2PatchControlPoints, "extended_dynamic_state2_patch_control_points");
+LOCALCHECK_END
+LOCALCHECK_BEGIN(PHYSICAL_DEVICE_COLOR_WRITE_ENABLE_FEATURES_EXT, VkPhysicalDeviceColorWriteEnableFeaturesEXT)
+    GetBoolean(colorWriteEnable, "color_write_enable");
+LOCALCHECK_END
+LOCALCHECK_BEGIN(PHYSICAL_DEVICE_GLOBAL_PRIORITY_QUERY_FEATURES_EXT, VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT)
+    GetBoolean(globalPriorityQuery, "global_priority_query");
+LOCALCHECK_END
+LOCALCHECK_BEGIN(PHYSICAL_DEVICE_MULTI_DRAW_FEATURES_EXT, VkPhysicalDeviceMultiDrawFeaturesEXT)
+    GetBoolean(multiDraw, "multi_draw");
+LOCALCHECK_END
 
 
 ZINIT_BEGIN(VkPhysicalDeviceFeatures2)
@@ -1789,6 +1990,54 @@ ZINIT_BEGIN(VkPhysicalDeviceFeatures2)
         ADDX(PHYSICAL_DEVICE_FRAGMENT_SHADER_INTERLOCK_FEATURES_EXT, VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT);
         ADDX(PHYSICAL_DEVICE_YCBCR_IMAGE_ARRAYS_FEATURES_EXT, VkPhysicalDeviceYcbcrImageArraysFeaturesEXT);
         ADDX(PHYSICAL_DEVICE_SHADER_DEMOTE_TO_HELPER_INVOCATION_FEATURES_EXT, VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT);
+        ADDX(PHYSICAL_DEVICE_IMAGELESS_FRAMEBUFFER_FEATURES_KHR, VkPhysicalDeviceImagelessFramebufferFeaturesKHR);
+        ADDX(PHYSICAL_DEVICE_DEPTH_CLIP_ENABLE_FEATURES_EXT, VkPhysicalDeviceDepthClipEnableFeaturesEXT);
+        ADDX(PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_FEATURES_EXT, VkPhysicalDeviceFragmentDensityMapFeaturesEXT);
+        ADDX(PHYSICAL_DEVICE_MEMORY_PRIORITY_FEATURES_EXT, VkPhysicalDeviceMemoryPriorityFeaturesEXT);
+        ADDX(PHYSICAL_DEVICE_BUFFER_DEVICE_ADDRESS_FEATURES_EXT, VkPhysicalDeviceBufferDeviceAddressFeaturesEXT);
+        ADDX(PHYSICAL_DEVICE_HOST_QUERY_RESET_FEATURES_EXT, VkPhysicalDeviceHostQueryResetFeaturesEXT);
+        ADDX(PHYSICAL_DEVICE_TEXEL_BUFFER_ALIGNMENT_FEATURES_EXT, VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT);
+        ADDX(PHYSICAL_DEVICE_PERFORMANCE_QUERY_FEATURES_KHR, VkPhysicalDevicePerformanceQueryFeaturesKHR);
+        ADDX(PHYSICAL_DEVICE_SHADER_SUBGROUP_EXTENDED_TYPES_FEATURES, VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures);
+        ADDX(PHYSICAL_DEVICE_SHADER_CLOCK_FEATURES_KHR, VkPhysicalDeviceShaderClockFeaturesKHR);
+        ADDX(PHYSICAL_DEVICE_TIMELINE_SEMAPHORE_FEATURES, VkPhysicalDeviceTimelineSemaphoreFeatures);
+        ADDX(PHYSICAL_DEVICE_SHADER_TERMINATE_INVOCATION_FEATURES_KHR, VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR);
+        ADDX(PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_FEATURES_KHR, VkPhysicalDeviceFragmentShadingRateFeaturesKHR);
+        ADDX(PHYSICAL_DEVICE_SEPARATE_DEPTH_STENCIL_LAYOUTS_FEATURES, VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures);
+        ADDX(PHYSICAL_DEVICE_PRESENT_WAIT_FEATURES_KHR, VkPhysicalDevicePresentWaitFeaturesKHR);
+        ADDX(PHYSICAL_DEVICE_BUFFER_DEVICE_ADDRESS_FEATURES, VkPhysicalDeviceBufferDeviceAddressFeatures);
+        ADDX(PHYSICAL_DEVICE_PIPELINE_EXECUTABLE_PROPERTIES_FEATURES_KHR, VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR);
+        ADDX(PHYSICAL_DEVICE_PRESENT_ID_FEATURES_KHR, VkPhysicalDevicePresentIdFeaturesKHR);
+        ADDX(PHYSICAL_DEVICE_SYNCHRONIZATION_2_FEATURES_KHR, VkPhysicalDeviceSynchronization2FeaturesKHR);
+        ADDX(PHYSICAL_DEVICE_SHADER_SUBGROUP_UNIFORM_CONTROL_FLOW_FEATURES_KHR, VkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR);
+        ADDX(PHYSICAL_DEVICE_ZERO_INITIALIZE_WORKGROUP_MEMORY_FEATURES_KHR, VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR);
+        ADDX(PHYSICAL_DEVICE_WORKGROUP_MEMORY_EXPLICIT_LAYOUT_FEATURES_KHR, VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR);
+        ADDX(PHYSICAL_DEVICE_ACCELERATION_STRUCTURE_FEATURES_KHR, VkPhysicalDeviceAccelerationStructureFeaturesKHR);
+        ADDX(PHYSICAL_DEVICE_RAY_TRACING_PIPELINE_FEATURES_KHR, VkPhysicalDeviceRayTracingPipelineFeaturesKHR);
+        ADDX(PHYSICAL_DEVICE_RAY_QUERY_FEATURES_KHR, VkPhysicalDeviceRayQueryFeaturesKHR);
+        ADDX(PHYSICAL_DEVICE_TEXTURE_COMPRESSION_ASTC_HDR_FEATURES_EXT, VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT);
+        ADDX(PHYSICAL_DEVICE_SUBGROUP_SIZE_CONTROL_FEATURES_EXT, VkPhysicalDeviceSubgroupSizeControlFeaturesEXT);
+        ADDX(PHYSICAL_DEVICE_SHADER_IMAGE_ATOMIC_INT64_FEATURES_EXT, VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT);
+        ADDX(PHYSICAL_DEVICE_PROVOKING_VERTEX_FEATURES_EXT, VkPhysicalDeviceProvokingVertexFeaturesEXT);
+        ADDX(PHYSICAL_DEVICE_LINE_RASTERIZATION_FEATURES_EXT, VkPhysicalDeviceLineRasterizationFeaturesEXT);
+        ADDX(PHYSICAL_DEVICE_SHADER_ATOMIC_FLOAT_FEATURES_EXT, VkPhysicalDeviceShaderAtomicFloatFeaturesEXT);
+        ADDX(PHYSICAL_DEVICE_INDEX_TYPE_UINT8_FEATURES_EXT, VkPhysicalDeviceIndexTypeUint8FeaturesEXT);
+        ADDX(PHYSICAL_DEVICE_EXTENDED_DYNAMIC_STATE_FEATURES_EXT, VkPhysicalDeviceExtendedDynamicStateFeaturesEXT);
+        ADDX(PHYSICAL_DEVICE_SHADER_ATOMIC_FLOAT_2_FEATURES_EXT, VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT);
+        ADDX(PHYSICAL_DEVICE_DEVICE_MEMORY_REPORT_FEATURES_EXT, VkPhysicalDeviceDeviceMemoryReportFeaturesEXT);
+        ADDX(PHYSICAL_DEVICE_ROBUSTNESS_2_FEATURES_EXT, VkPhysicalDeviceRobustness2FeaturesEXT);
+        ADDX(PHYSICAL_DEVICE_CUSTOM_BORDER_COLOR_FEATURES_EXT, VkPhysicalDeviceCustomBorderColorFeaturesEXT);
+        ADDX(PHYSICAL_DEVICE_PRIVATE_DATA_FEATURES_EXT, VkPhysicalDevicePrivateDataFeaturesEXT);
+        ADDX(PHYSICAL_DEVICE_PIPELINE_CREATION_CACHE_CONTROL_FEATURES_EXT, VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT);
+        ADDX(PHYSICAL_DEVICE_YCBCR_2_PLANE_444_FORMATS_FEATURES_EXT, VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT);
+        ADDX(PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_2_FEATURES_EXT, VkPhysicalDeviceFragmentDensityMap2FeaturesEXT);
+        ADDX(PHYSICAL_DEVICE_IMAGE_ROBUSTNESS_FEATURES_EXT, VkPhysicalDeviceImageRobustnessFeaturesEXT);
+        ADDX(PHYSICAL_DEVICE_4444_FORMATS_FEATURES_EXT, VkPhysicalDevice4444FormatsFeaturesEXT);
+        ADDX(PHYSICAL_DEVICE_VERTEX_INPUT_DYNAMIC_STATE_FEATURES_EXT, VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT);
+        ADDX(PHYSICAL_DEVICE_EXTENDED_DYNAMIC_STATE_2_FEATURES_EXT, VkPhysicalDeviceExtendedDynamicState2FeaturesEXT);
+        ADDX(PHYSICAL_DEVICE_COLOR_WRITE_ENABLE_FEATURES_EXT, VkPhysicalDeviceColorWriteEnableFeaturesEXT);
+        ADDX(PHYSICAL_DEVICE_GLOBAL_PRIORITY_QUERY_FEATURES_EXT, VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT);
+        ADDX(PHYSICAL_DEVICE_MULTI_DRAW_FEATURES_EXT, VkPhysicalDeviceMultiDrawFeaturesEXT);
     EXTENSIONS_END
 ZINIT_END
 
@@ -1830,6 +2079,54 @@ ZCHECK_BEGIN(VkPhysicalDeviceFeatures2)
         ADD(VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT);
         ADD(VkPhysicalDeviceYcbcrImageArraysFeaturesEXT);
         ADD(VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT);
+        ADD(VkPhysicalDeviceImagelessFramebufferFeaturesKHR);
+        ADD(VkPhysicalDeviceDepthClipEnableFeaturesEXT);
+        ADD(VkPhysicalDeviceFragmentDensityMapFeaturesEXT);
+        ADD(VkPhysicalDeviceMemoryPriorityFeaturesEXT);
+        ADD(VkPhysicalDeviceBufferDeviceAddressFeaturesEXT);
+        ADD(VkPhysicalDeviceHostQueryResetFeaturesEXT);
+        ADD(VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT);
+        ADD(VkPhysicalDevicePerformanceQueryFeaturesKHR);
+        ADD(VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures);
+        ADD(VkPhysicalDeviceShaderClockFeaturesKHR);
+        ADD(VkPhysicalDeviceTimelineSemaphoreFeatures);
+        ADD(VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR);
+        ADD(VkPhysicalDeviceFragmentShadingRateFeaturesKHR);
+        ADD(VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures);
+        ADD(VkPhysicalDevicePresentWaitFeaturesKHR);
+        ADD(VkPhysicalDeviceBufferDeviceAddressFeatures);
+        ADD(VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR);
+        ADD(VkPhysicalDevicePresentIdFeaturesKHR);
+        ADD(VkPhysicalDeviceSynchronization2FeaturesKHR);
+        ADD(VkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR);
+        ADD(VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR);
+        ADD(VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR);
+        ADD(VkPhysicalDeviceAccelerationStructureFeaturesKHR);
+        ADD(VkPhysicalDeviceRayTracingPipelineFeaturesKHR);
+        ADD(VkPhysicalDeviceRayQueryFeaturesKHR);
+        ADD(VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT);
+        ADD(VkPhysicalDeviceSubgroupSizeControlFeaturesEXT);
+        ADD(VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT);
+        ADD(VkPhysicalDeviceProvokingVertexFeaturesEXT);
+        ADD(VkPhysicalDeviceLineRasterizationFeaturesEXT);
+        ADD(VkPhysicalDeviceShaderAtomicFloatFeaturesEXT);
+        ADD(VkPhysicalDeviceIndexTypeUint8FeaturesEXT);
+        ADD(VkPhysicalDeviceExtendedDynamicStateFeaturesEXT);
+        ADD(VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT);
+        ADD(VkPhysicalDeviceDeviceMemoryReportFeaturesEXT);
+        ADD(VkPhysicalDeviceRobustness2FeaturesEXT);
+        ADD(VkPhysicalDeviceCustomBorderColorFeaturesEXT);
+        ADD(VkPhysicalDevicePrivateDataFeaturesEXT);
+        ADD(VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT);
+        ADD(VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT);
+        ADD(VkPhysicalDeviceFragmentDensityMap2FeaturesEXT);
+        ADD(VkPhysicalDeviceImageRobustnessFeaturesEXT);
+        ADD(VkPhysicalDevice4444FormatsFeaturesEXT);
+        ADD(VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT);
+        ADD(VkPhysicalDeviceExtendedDynamicState2FeaturesEXT);
+        ADD(VkPhysicalDeviceColorWriteEnableFeaturesEXT);
+        ADD(VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT);
+        ADD(VkPhysicalDeviceMultiDrawFeaturesEXT);
     #undef ADD
     EXTENSIONS_END
 ZCHECK_END
@@ -1994,6 +2291,207 @@ LOCALPUSH_END
 LOCALPUSH_BEGIN(VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT)
     SetBoolean(shaderDemoteToHelperInvocation, "shader_demote_to_helper_invocation");
 LOCALPUSH_END
+LOCALPUSH_BEGIN(VkPhysicalDeviceImagelessFramebufferFeaturesKHR)
+    SetBoolean(imagelessFramebuffer, "imageless_framebuffer");
+LOCALPUSH_END
+LOCALPUSH_BEGIN(VkPhysicalDeviceDepthClipEnableFeaturesEXT)
+    SetBoolean(depthClipEnable, "depth_clip_enable");
+LOCALPUSH_END
+LOCALPUSH_BEGIN(VkPhysicalDeviceFragmentDensityMapFeaturesEXT)
+    SetBoolean(fragmentDensityMap, "fragment_density_map");
+    SetBoolean(fragmentDensityMapDynamic, "fragment_density_map_dynamic");
+    SetBoolean(fragmentDensityMapNonSubsampledImages, "fragment_density_map_non_subsampled_images");
+LOCALPUSH_END
+LOCALPUSH_BEGIN(VkPhysicalDeviceMemoryPriorityFeaturesEXT)
+    SetBoolean(memoryPriority, "memory_priority");
+LOCALPUSH_END
+LOCALPUSH_BEGIN(VkPhysicalDeviceBufferDeviceAddressFeaturesEXT)
+    SetBoolean(bufferDeviceAddress, "buffer_device_address");
+    SetBoolean(bufferDeviceAddressCaptureReplay, "buffer_device_address_capture_replay");
+    SetBoolean(bufferDeviceAddressMultiDevice, "buffer_device_address_multi_device");
+LOCALPUSH_END
+LOCALPUSH_BEGIN(VkPhysicalDeviceHostQueryResetFeaturesEXT)
+    SetBoolean(hostQueryReset, "host_query_reset");
+LOCALPUSH_END
+LOCALPUSH_BEGIN(VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT)
+    SetBoolean(texelBufferAlignment, "texel_buffer_alignment");
+LOCALPUSH_END
+LOCALPUSH_BEGIN(VkPhysicalDevicePerformanceQueryFeaturesKHR)
+    SetBoolean(performanceCounterQueryPools, "performance_counter_query_pools");
+    SetBoolean(performanceCounterMultipleQueryPools, "performance_counter_multiple_query_pools");
+LOCALPUSH_END
+LOCALPUSH_BEGIN(VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures)
+    SetBoolean(shaderSubgroupExtendedTypes, "shader_subgroup_extended_types");
+LOCALPUSH_END
+LOCALPUSH_BEGIN(VkPhysicalDeviceShaderClockFeaturesKHR)
+    SetBoolean(shaderSubgroupClock, "shader_subgroup_clock");
+    SetBoolean(shaderDeviceClock, "shader_device_clock");
+LOCALPUSH_END
+LOCALPUSH_BEGIN(VkPhysicalDeviceTimelineSemaphoreFeatures)
+    SetBoolean(timelineSemaphore, "timeline_semaphore");
+LOCALPUSH_END
+LOCALPUSH_BEGIN(VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR)
+    SetBoolean(shaderTerminateInvocation, "shader_terminate_invocation");
+LOCALPUSH_END
+LOCALPUSH_BEGIN(VkPhysicalDeviceFragmentShadingRateFeaturesKHR)
+    SetBoolean(pipelineFragmentShadingRate, "pipeline_fragment_shading_rate");
+    SetBoolean(primitiveFragmentShadingRate, "primitive_fragment_shading_rate");
+    SetBoolean(attachmentFragmentShadingRate, "attachment_fragment_shading_rate");
+LOCALPUSH_END
+LOCALPUSH_BEGIN(VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures)
+    SetBoolean(separateDepthStencilLayouts, "separate_depth_stencil_layouts");
+LOCALPUSH_END
+LOCALPUSH_BEGIN(VkPhysicalDevicePresentWaitFeaturesKHR)
+    SetBoolean(presentWait, "present_wait");
+LOCALPUSH_END
+LOCALPUSH_BEGIN(VkPhysicalDeviceBufferDeviceAddressFeatures)
+    SetBoolean(bufferDeviceAddress, "buffer_device_address");
+    SetBoolean(bufferDeviceAddressCaptureReplay, "buffer_device_address_capture_replay");
+    SetBoolean(bufferDeviceAddressMultiDevice, "buffer_device_address_multi_device");
+LOCALPUSH_END
+LOCALPUSH_BEGIN(VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR)
+    SetBoolean(pipelineExecutableInfo, "pipeline_executable_info");
+LOCALPUSH_END
+LOCALPUSH_BEGIN(VkPhysicalDevicePresentIdFeaturesKHR)
+    SetBoolean(presentId, "present_id");
+LOCALPUSH_END
+LOCALPUSH_BEGIN(VkPhysicalDeviceSynchronization2FeaturesKHR)
+    SetBoolean(synchronization2, "synchronization2");
+LOCALPUSH_END
+LOCALPUSH_BEGIN(VkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR)
+    SetBoolean(shaderSubgroupUniformControlFlow, "shader_subgroup_uniform_control_flow");
+LOCALPUSH_END
+LOCALPUSH_BEGIN(VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR)
+    SetBoolean(shaderZeroInitializeWorkgroupMemory, "shader_zero_initialize_workgroup_memory");
+LOCALPUSH_END
+LOCALPUSH_BEGIN(VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR)
+    SetBoolean(workgroupMemoryExplicitLayout, "workgroup_memory_explicit_layout");
+    SetBoolean(workgroupMemoryExplicitLayoutScalarBlockLayout, "workgroup_memory_explicit_layout_scalar_block_layout");
+    SetBoolean(workgroupMemoryExplicitLayout8BitAccess, "workgroup_memory_explicit_layout_8bit_access");
+    SetBoolean(workgroupMemoryExplicitLayout16BitAccess, "workgroup_memory_explicit_layout_16bit_access");
+LOCALPUSH_END
+LOCALPUSH_BEGIN(VkPhysicalDeviceAccelerationStructureFeaturesKHR)
+    SetBoolean(accelerationStructure, "acceleration_structure");
+    SetBoolean(accelerationStructureCaptureReplay, "acceleration_structure_capture_replay");
+    SetBoolean(accelerationStructureIndirectBuild, "acceleration_structure_indirect_build");
+    SetBoolean(accelerationStructureHostCommands, "acceleration_structure_host_commands");
+    SetBoolean(descriptorBindingAccelerationStructureUpdateAfterBind, "descriptor_binding_acceleration_structure_update_after_bind");
+LOCALPUSH_END
+LOCALPUSH_BEGIN(VkPhysicalDeviceRayTracingPipelineFeaturesKHR)
+    SetBoolean(rayTracingPipeline, "ray_tracing_pipeline");
+    SetBoolean(rayTracingPipelineShaderGroupHandleCaptureReplay, "ray_tracing_pipeline_shader_group_handle_capture_replay");
+    SetBoolean(rayTracingPipelineShaderGroupHandleCaptureReplayMixed, "ray_tracing_pipeline_shader_group_handle_capture_replay_mixed");
+    SetBoolean(rayTracingPipelineTraceRaysIndirect, "ray_tracing_pipeline_trace_rays_indirect");
+    SetBoolean(rayTraversalPrimitiveCulling, "ray_traversal_primitive_culling");
+LOCALPUSH_END
+LOCALPUSH_BEGIN(VkPhysicalDeviceRayQueryFeaturesKHR)
+    SetBoolean(rayQuery, "ray_query");
+LOCALPUSH_END
+LOCALPUSH_BEGIN(VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT)
+    SetBoolean(textureCompressionASTC_HDR, "texture_compression_astc_hdr");
+LOCALPUSH_END
+LOCALPUSH_BEGIN(VkPhysicalDeviceSubgroupSizeControlFeaturesEXT)
+    SetBoolean(subgroupSizeControl, "subgroup_size_control");
+    SetBoolean(computeFullSubgroups, "compute_full_subgroups");
+LOCALPUSH_END
+LOCALPUSH_BEGIN(VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT)
+    SetBoolean(shaderImageInt64Atomics, "shader_image_int64_atomics");
+    SetBoolean(sparseImageInt64Atomics, "sparse_image_int64_atomics");
+LOCALPUSH_END
+LOCALPUSH_BEGIN(VkPhysicalDeviceProvokingVertexFeaturesEXT)
+    SetBoolean(provokingVertexLast, "provoking_vertex_last");
+    SetBoolean(transformFeedbackPreservesProvokingVertex, "transform_feedback_preserves_provoking_vertex");
+LOCALPUSH_END
+LOCALPUSH_BEGIN(VkPhysicalDeviceLineRasterizationFeaturesEXT)
+    SetBoolean(rectangularLines, "rectangular_lines");
+    SetBoolean(bresenhamLines, "bresenham_lines");
+    SetBoolean(smoothLines, "smooth_lines");
+    SetBoolean(stippledRectangularLines, "stippled_rectangular_lines");
+    SetBoolean(stippledBresenhamLines, "stippled_bresenham_lines");
+    SetBoolean(stippledSmoothLines, "stippled_smooth_lines");
+LOCALPUSH_END
+LOCALPUSH_BEGIN(VkPhysicalDeviceShaderAtomicFloatFeaturesEXT)
+    SetBoolean(shaderBufferFloat32Atomics, "shader_buffer_float32_atomics");
+    SetBoolean(shaderBufferFloat32AtomicAdd, "shader_buffer_float32_atomic_add");
+    SetBoolean(shaderBufferFloat64Atomics, "shader_buffer_float64_atomics");
+    SetBoolean(shaderBufferFloat64AtomicAdd, "shader_buffer_float64_atomic_add");
+    SetBoolean(shaderSharedFloat32Atomics, "shader_shared_float32_atomics");
+    SetBoolean(shaderSharedFloat32AtomicAdd, "shader_shared_float32_atomic_add");
+    SetBoolean(shaderSharedFloat64Atomics, "shader_shared_float64_atomics");
+    SetBoolean(shaderSharedFloat64AtomicAdd, "shader_shared_float64_atomic_add");
+    SetBoolean(shaderImageFloat32Atomics, "shader_image_float32_atomics");
+    SetBoolean(shaderImageFloat32AtomicAdd, "shader_image_float32_atomic_add");
+    SetBoolean(sparseImageFloat32Atomics, "sparse_image_float32_atomics");
+    SetBoolean(sparseImageFloat32AtomicAdd, "sparse_image_float32_atomic_add");
+LOCALPUSH_END
+LOCALPUSH_BEGIN(VkPhysicalDeviceIndexTypeUint8FeaturesEXT)
+    SetBoolean(indexTypeUint8, "index_type_uint8");
+LOCALPUSH_END
+LOCALPUSH_BEGIN(VkPhysicalDeviceExtendedDynamicStateFeaturesEXT)
+    SetBoolean(extendedDynamicState, "extended_dynamic_state");
+LOCALPUSH_END
+LOCALPUSH_BEGIN(VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT)
+    SetBoolean(shaderBufferFloat16Atomics, "shader_buffer_float16_atomics");
+    SetBoolean(shaderBufferFloat16AtomicAdd, "shader_buffer_float16_atomicAdd");
+    SetBoolean(shaderBufferFloat16AtomicMinMax, "shader_buffer_float16_atomic_min_max");
+    SetBoolean(shaderBufferFloat32AtomicMinMax, "shader_buffer_float32_atomic_min_max");
+    SetBoolean(shaderBufferFloat64AtomicMinMax, "shader_buffer_float64_atomic_min_max");
+    SetBoolean(shaderSharedFloat16Atomics, "shader_shared_float16_atomics");
+    SetBoolean(shaderSharedFloat16AtomicAdd, "shader_shared_float16_atomic_add");
+    SetBoolean(shaderSharedFloat16AtomicMinMax, "shader_shared_float16_atomic_min_max");
+    SetBoolean(shaderSharedFloat32AtomicMinMax, "shader_shared_float32_atomic_min_max");
+    SetBoolean(shaderSharedFloat64AtomicMinMax, "shader_shared_float64_atomic_min_max");
+    SetBoolean(shaderImageFloat32AtomicMinMax, "shader_image_float32_atomic_min_max");
+    SetBoolean(sparseImageFloat32AtomicMinMax, "sparse_image_float32_atomic_min_max");
+LOCALPUSH_END
+LOCALPUSH_BEGIN(VkPhysicalDeviceDeviceMemoryReportFeaturesEXT)
+    SetBoolean(deviceMemoryReport, "device_memory_report");
+LOCALPUSH_END
+LOCALPUSH_BEGIN(VkPhysicalDeviceRobustness2FeaturesEXT)
+    SetBoolean(robustBufferAccess2, "robust_buffer_access2");
+    SetBoolean(robustImageAccess2, "robust_image_access2");
+    SetBoolean(nullDescriptor, "null_descriptor");
+LOCALPUSH_END
+LOCALPUSH_BEGIN(VkPhysicalDeviceCustomBorderColorFeaturesEXT)
+    SetBoolean(customBorderColors, "custom_border_colors");
+    SetBoolean(customBorderColorWithoutFormat, "custom_border_color_without_format");
+LOCALPUSH_END
+LOCALPUSH_BEGIN(VkPhysicalDevicePrivateDataFeaturesEXT)
+    SetBoolean(privateData, "private_data");
+LOCALPUSH_END
+LOCALPUSH_BEGIN(VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT)
+    SetBoolean(pipelineCreationCacheControl, "pipeline_creation_cache_control");
+LOCALPUSH_END
+LOCALPUSH_BEGIN(VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT)
+    SetBoolean(ycbcr2plane444Formats, "ycbcr_2plane_444_formats");
+LOCALPUSH_END
+LOCALPUSH_BEGIN(VkPhysicalDeviceFragmentDensityMap2FeaturesEXT)
+    SetBoolean(fragmentDensityMapDeferred, "fragment_density_map_deferred");
+LOCALPUSH_END
+LOCALPUSH_BEGIN(VkPhysicalDeviceImageRobustnessFeaturesEXT)
+    SetBoolean(robustImageAccess, "robust_image_access");
+LOCALPUSH_END
+LOCALPUSH_BEGIN(VkPhysicalDevice4444FormatsFeaturesEXT)
+    SetBoolean(formatA4R4G4B4, "format_a4r4g4b4");
+    SetBoolean(formatA4B4G4R4, "format_a4b4g4r4");
+LOCALPUSH_END
+LOCALPUSH_BEGIN(VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT)
+    SetBoolean(vertexInputDynamicState, "vertex_input_dynamic_state");
+LOCALPUSH_END
+LOCALPUSH_BEGIN(VkPhysicalDeviceExtendedDynamicState2FeaturesEXT)
+    SetBoolean(extendedDynamicState2, "extended_dynamic_state2");
+    SetBoolean(extendedDynamicState2LogicOp, "extended_dynamic_state2_logic_op");
+    SetBoolean(extendedDynamicState2PatchControlPoints, "extended_dynamic_state2_patch_control_points");
+LOCALPUSH_END
+LOCALPUSH_BEGIN(VkPhysicalDeviceColorWriteEnableFeaturesEXT)
+    SetBoolean(colorWriteEnable, "color_write_enable");
+LOCALPUSH_END
+LOCALPUSH_BEGIN(VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT)
+    SetBoolean(globalPriorityQuery, "global_priority_query");
+LOCALPUSH_END
+LOCALPUSH_BEGIN(VkPhysicalDeviceMultiDrawFeaturesEXT)
+    SetBoolean(multiDraw, "multi_draw");
+LOCALPUSH_END
 
 ZPUSH_BEGIN(VkPhysicalDeviceFeatures)
     lua_newtable(L);
@@ -2027,6 +2525,54 @@ ZPUSH_BEGIN(VkPhysicalDeviceFeatures2)
         XCASE(PHYSICAL_DEVICE_FRAGMENT_SHADER_INTERLOCK_FEATURES_EXT, VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT);
         XCASE(PHYSICAL_DEVICE_YCBCR_IMAGE_ARRAYS_FEATURES_EXT, VkPhysicalDeviceYcbcrImageArraysFeaturesEXT);
         XCASE(PHYSICAL_DEVICE_SHADER_DEMOTE_TO_HELPER_INVOCATION_FEATURES_EXT, VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT);
+        XCASE(PHYSICAL_DEVICE_IMAGELESS_FRAMEBUFFER_FEATURES_KHR, VkPhysicalDeviceImagelessFramebufferFeaturesKHR);
+        XCASE(PHYSICAL_DEVICE_DEPTH_CLIP_ENABLE_FEATURES_EXT, VkPhysicalDeviceDepthClipEnableFeaturesEXT);
+        XCASE(PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_FEATURES_EXT, VkPhysicalDeviceFragmentDensityMapFeaturesEXT);
+        XCASE(PHYSICAL_DEVICE_MEMORY_PRIORITY_FEATURES_EXT, VkPhysicalDeviceMemoryPriorityFeaturesEXT);
+        XCASE(PHYSICAL_DEVICE_BUFFER_DEVICE_ADDRESS_FEATURES_EXT, VkPhysicalDeviceBufferDeviceAddressFeaturesEXT);
+        XCASE(PHYSICAL_DEVICE_HOST_QUERY_RESET_FEATURES_EXT, VkPhysicalDeviceHostQueryResetFeaturesEXT);
+        XCASE(PHYSICAL_DEVICE_TEXEL_BUFFER_ALIGNMENT_FEATURES_EXT, VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT);
+        XCASE(PHYSICAL_DEVICE_PERFORMANCE_QUERY_FEATURES_KHR, VkPhysicalDevicePerformanceQueryFeaturesKHR);
+        XCASE(PHYSICAL_DEVICE_SHADER_SUBGROUP_EXTENDED_TYPES_FEATURES, VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures);
+        XCASE(PHYSICAL_DEVICE_SHADER_CLOCK_FEATURES_KHR, VkPhysicalDeviceShaderClockFeaturesKHR);
+        XCASE(PHYSICAL_DEVICE_TIMELINE_SEMAPHORE_FEATURES, VkPhysicalDeviceTimelineSemaphoreFeatures);
+        XCASE(PHYSICAL_DEVICE_SHADER_TERMINATE_INVOCATION_FEATURES_KHR, VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR);
+        XCASE(PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_FEATURES_KHR, VkPhysicalDeviceFragmentShadingRateFeaturesKHR);
+        XCASE(PHYSICAL_DEVICE_SEPARATE_DEPTH_STENCIL_LAYOUTS_FEATURES, VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures);
+        XCASE(PHYSICAL_DEVICE_PRESENT_WAIT_FEATURES_KHR, VkPhysicalDevicePresentWaitFeaturesKHR);
+        XCASE(PHYSICAL_DEVICE_BUFFER_DEVICE_ADDRESS_FEATURES, VkPhysicalDeviceBufferDeviceAddressFeatures);
+        XCASE(PHYSICAL_DEVICE_PIPELINE_EXECUTABLE_PROPERTIES_FEATURES_KHR, VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR);
+        XCASE(PHYSICAL_DEVICE_PRESENT_ID_FEATURES_KHR, VkPhysicalDevicePresentIdFeaturesKHR);
+        XCASE(PHYSICAL_DEVICE_SYNCHRONIZATION_2_FEATURES_KHR, VkPhysicalDeviceSynchronization2FeaturesKHR);
+        XCASE(PHYSICAL_DEVICE_SHADER_SUBGROUP_UNIFORM_CONTROL_FLOW_FEATURES_KHR, VkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR);
+        XCASE(PHYSICAL_DEVICE_ZERO_INITIALIZE_WORKGROUP_MEMORY_FEATURES_KHR, VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR);
+        XCASE(PHYSICAL_DEVICE_WORKGROUP_MEMORY_EXPLICIT_LAYOUT_FEATURES_KHR, VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR);
+        XCASE(PHYSICAL_DEVICE_ACCELERATION_STRUCTURE_FEATURES_KHR, VkPhysicalDeviceAccelerationStructureFeaturesKHR);
+        XCASE(PHYSICAL_DEVICE_RAY_TRACING_PIPELINE_FEATURES_KHR, VkPhysicalDeviceRayTracingPipelineFeaturesKHR);
+        XCASE(PHYSICAL_DEVICE_RAY_QUERY_FEATURES_KHR, VkPhysicalDeviceRayQueryFeaturesKHR);
+        XCASE(PHYSICAL_DEVICE_TEXTURE_COMPRESSION_ASTC_HDR_FEATURES_EXT, VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT);
+        XCASE(PHYSICAL_DEVICE_SUBGROUP_SIZE_CONTROL_FEATURES_EXT, VkPhysicalDeviceSubgroupSizeControlFeaturesEXT);
+        XCASE(PHYSICAL_DEVICE_SHADER_IMAGE_ATOMIC_INT64_FEATURES_EXT, VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT);
+        XCASE(PHYSICAL_DEVICE_PROVOKING_VERTEX_FEATURES_EXT, VkPhysicalDeviceProvokingVertexFeaturesEXT);
+        XCASE(PHYSICAL_DEVICE_LINE_RASTERIZATION_FEATURES_EXT, VkPhysicalDeviceLineRasterizationFeaturesEXT);
+        XCASE(PHYSICAL_DEVICE_SHADER_ATOMIC_FLOAT_FEATURES_EXT, VkPhysicalDeviceShaderAtomicFloatFeaturesEXT);
+        XCASE(PHYSICAL_DEVICE_INDEX_TYPE_UINT8_FEATURES_EXT, VkPhysicalDeviceIndexTypeUint8FeaturesEXT);
+        XCASE(PHYSICAL_DEVICE_EXTENDED_DYNAMIC_STATE_FEATURES_EXT, VkPhysicalDeviceExtendedDynamicStateFeaturesEXT);
+        XCASE(PHYSICAL_DEVICE_SHADER_ATOMIC_FLOAT_2_FEATURES_EXT, VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT);
+        XCASE(PHYSICAL_DEVICE_DEVICE_MEMORY_REPORT_FEATURES_EXT, VkPhysicalDeviceDeviceMemoryReportFeaturesEXT);
+        XCASE(PHYSICAL_DEVICE_ROBUSTNESS_2_FEATURES_EXT, VkPhysicalDeviceRobustness2FeaturesEXT);
+        XCASE(PHYSICAL_DEVICE_CUSTOM_BORDER_COLOR_FEATURES_EXT, VkPhysicalDeviceCustomBorderColorFeaturesEXT);
+        XCASE(PHYSICAL_DEVICE_PRIVATE_DATA_FEATURES_EXT, VkPhysicalDevicePrivateDataFeaturesEXT);
+        XCASE(PHYSICAL_DEVICE_PIPELINE_CREATION_CACHE_CONTROL_FEATURES_EXT, VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT);
+        XCASE(PHYSICAL_DEVICE_YCBCR_2_PLANE_444_FORMATS_FEATURES_EXT, VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT);
+        XCASE(PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_2_FEATURES_EXT, VkPhysicalDeviceFragmentDensityMap2FeaturesEXT);
+        XCASE(PHYSICAL_DEVICE_IMAGE_ROBUSTNESS_FEATURES_EXT, VkPhysicalDeviceImageRobustnessFeaturesEXT);
+        XCASE(PHYSICAL_DEVICE_4444_FORMATS_FEATURES_EXT, VkPhysicalDevice4444FormatsFeaturesEXT);
+        XCASE(PHYSICAL_DEVICE_VERTEX_INPUT_DYNAMIC_STATE_FEATURES_EXT, VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT);
+        XCASE(PHYSICAL_DEVICE_EXTENDED_DYNAMIC_STATE_2_FEATURES_EXT, VkPhysicalDeviceExtendedDynamicState2FeaturesEXT);
+        XCASE(PHYSICAL_DEVICE_COLOR_WRITE_ENABLE_FEATURES_EXT, VkPhysicalDeviceColorWriteEnableFeaturesEXT);
+        XCASE(PHYSICAL_DEVICE_GLOBAL_PRIORITY_QUERY_FEATURES_EXT, VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT);
+        XCASE(PHYSICAL_DEVICE_MULTI_DRAW_FEATURES_EXT, VkPhysicalDeviceMultiDrawFeaturesEXT);
     XPUSH_END
 ZPUSH_END
 

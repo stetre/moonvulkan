@@ -2931,23 +2931,6 @@ int zinitVkImageDrmFormatModifierPropertiesEXT(lua_State *L, VkImageDrmFormatMod
 #define zpushVkImageDrmFormatModifierPropertiesEXT moonvulkan_zpushVkImageDrmFormatModifierPropertiesEXT
 int zpushVkImageDrmFormatModifierPropertiesEXT(lua_State *L, const VkImageDrmFormatModifierPropertiesEXT *p);
 
-#define znewVkPhysicalDeviceImagelessFramebufferFeaturesKHR(L, err) (VkPhysicalDeviceImagelessFramebufferFeaturesKHR*)znew((L), VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGELESS_FRAMEBUFFER_FEATURES_KHR, sizeof(VkPhysicalDeviceImagelessFramebufferFeaturesKHR), (err))
-#define znewarrayVkPhysicalDeviceImagelessFramebufferFeaturesKHR(L, count, err) (VkPhysicalDeviceImagelessFramebufferFeaturesKHR*)znewarray((L), VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGELESS_FRAMEBUFFER_FEATURES_KHR, sizeof(VkPhysicalDeviceImagelessFramebufferFeaturesKHR), (count), (err))
-#define znewchainVkPhysicalDeviceImagelessFramebufferFeaturesKHR moonvulkan_znewchainVkPhysicalDeviceImagelessFramebufferFeaturesKHR
-VkPhysicalDeviceImagelessFramebufferFeaturesKHR* znewchainVkPhysicalDeviceImagelessFramebufferFeaturesKHR(lua_State *L, int *err);
-#define znewchainarrayVkPhysicalDeviceImagelessFramebufferFeaturesKHR moonvulkan_znewchainarrayVkPhysicalDeviceImagelessFramebufferFeaturesKHR
-VkPhysicalDeviceImagelessFramebufferFeaturesKHR* znewchainarrayVkPhysicalDeviceImagelessFramebufferFeaturesKHR(lua_State *L, uint32_t count, int *err);
-#define zcheckVkPhysicalDeviceImagelessFramebufferFeaturesKHR moonvulkan_zcheckVkPhysicalDeviceImagelessFramebufferFeaturesKHR
-VkPhysicalDeviceImagelessFramebufferFeaturesKHR* zcheckVkPhysicalDeviceImagelessFramebufferFeaturesKHR(lua_State *L, int arg, int *err);
-#define zcheckarrayVkPhysicalDeviceImagelessFramebufferFeaturesKHR moonvulkan_zcheckarrayVkPhysicalDeviceImagelessFramebufferFeaturesKHR
-VkPhysicalDeviceImagelessFramebufferFeaturesKHR* zcheckarrayVkPhysicalDeviceImagelessFramebufferFeaturesKHR(lua_State *L, int arg, uint32_t *count, int *err);
-#define zinitVkPhysicalDeviceImagelessFramebufferFeaturesKHR moonvulkan_zinitVkPhysicalDeviceImagelessFramebufferFeaturesKHR
-int zinitVkPhysicalDeviceImagelessFramebufferFeaturesKHR(lua_State *L, VkPhysicalDeviceImagelessFramebufferFeaturesKHR* p, int *err);
-#define zfreeVkPhysicalDeviceImagelessFramebufferFeaturesKHR(L, p, base) zfree((L), (p), (base))
-#define zfreearrayVkPhysicalDeviceImagelessFramebufferFeaturesKHR(L, p, count, base) zfreearray((L), (p), sizeof(VkPhysicalDeviceImagelessFramebufferFeaturesKHR), (count), (base))
-#define zpushVkPhysicalDeviceImagelessFramebufferFeaturesKHR moonvulkan_zpushVkPhysicalDeviceImagelessFramebufferFeaturesKHR
-int zpushVkPhysicalDeviceImagelessFramebufferFeaturesKHR(lua_State *L, const VkPhysicalDeviceImagelessFramebufferFeaturesKHR *p);
-
 #define znewVkFramebufferAttachmentImageInfoKHR(L, err) (VkFramebufferAttachmentImageInfoKHR*)znew((L), VK_STRUCTURE_TYPE_FRAMEBUFFER_ATTACHMENT_IMAGE_INFO_KHR, sizeof(VkFramebufferAttachmentImageInfoKHR), (err))
 #define znewarrayVkFramebufferAttachmentImageInfoKHR(L, count, err) (VkFramebufferAttachmentImageInfoKHR*)znewarray((L), VK_STRUCTURE_TYPE_FRAMEBUFFER_ATTACHMENT_IMAGE_INFO_KHR, sizeof(VkFramebufferAttachmentImageInfoKHR), (count), (err))
 #define znewchainVkFramebufferAttachmentImageInfoKHR moonvulkan_znewchainVkFramebufferAttachmentImageInfoKHR
@@ -3033,23 +3016,6 @@ int zinitVkSurfaceProtectedCapabilitiesKHR(lua_State *L, VkSurfaceProtectedCapab
 #define zpushVkSurfaceProtectedCapabilitiesKHR moonvulkan_zpushVkSurfaceProtectedCapabilitiesKHR
 int zpushVkSurfaceProtectedCapabilitiesKHR(lua_State *L, const VkSurfaceProtectedCapabilitiesKHR *p);
 
-#define znewVkPhysicalDeviceDepthClipEnableFeaturesEXT(L, err) (VkPhysicalDeviceDepthClipEnableFeaturesEXT*)znew((L), VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_CLIP_ENABLE_FEATURES_EXT, sizeof(VkPhysicalDeviceDepthClipEnableFeaturesEXT), (err))
-#define znewarrayVkPhysicalDeviceDepthClipEnableFeaturesEXT(L, count, err) (VkPhysicalDeviceDepthClipEnableFeaturesEXT*)znewarray((L), VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_CLIP_ENABLE_FEATURES_EXT, sizeof(VkPhysicalDeviceDepthClipEnableFeaturesEXT), (count), (err))
-#define znewchainVkPhysicalDeviceDepthClipEnableFeaturesEXT moonvulkan_znewchainVkPhysicalDeviceDepthClipEnableFeaturesEXT
-VkPhysicalDeviceDepthClipEnableFeaturesEXT* znewchainVkPhysicalDeviceDepthClipEnableFeaturesEXT(lua_State *L, int *err);
-#define znewchainarrayVkPhysicalDeviceDepthClipEnableFeaturesEXT moonvulkan_znewchainarrayVkPhysicalDeviceDepthClipEnableFeaturesEXT
-VkPhysicalDeviceDepthClipEnableFeaturesEXT* znewchainarrayVkPhysicalDeviceDepthClipEnableFeaturesEXT(lua_State *L, uint32_t count, int *err);
-#define zcheckVkPhysicalDeviceDepthClipEnableFeaturesEXT moonvulkan_zcheckVkPhysicalDeviceDepthClipEnableFeaturesEXT
-VkPhysicalDeviceDepthClipEnableFeaturesEXT* zcheckVkPhysicalDeviceDepthClipEnableFeaturesEXT(lua_State *L, int arg, int *err);
-#define zcheckarrayVkPhysicalDeviceDepthClipEnableFeaturesEXT moonvulkan_zcheckarrayVkPhysicalDeviceDepthClipEnableFeaturesEXT
-VkPhysicalDeviceDepthClipEnableFeaturesEXT* zcheckarrayVkPhysicalDeviceDepthClipEnableFeaturesEXT(lua_State *L, int arg, uint32_t *count, int *err);
-#define zinitVkPhysicalDeviceDepthClipEnableFeaturesEXT moonvulkan_zinitVkPhysicalDeviceDepthClipEnableFeaturesEXT
-int zinitVkPhysicalDeviceDepthClipEnableFeaturesEXT(lua_State *L, VkPhysicalDeviceDepthClipEnableFeaturesEXT* p, int *err);
-#define zfreeVkPhysicalDeviceDepthClipEnableFeaturesEXT(L, p, base) zfree((L), (p), (base))
-#define zfreearrayVkPhysicalDeviceDepthClipEnableFeaturesEXT(L, p, count, base) zfreearray((L), (p), sizeof(VkPhysicalDeviceDepthClipEnableFeaturesEXT), (count), (base))
-#define zpushVkPhysicalDeviceDepthClipEnableFeaturesEXT moonvulkan_zpushVkPhysicalDeviceDepthClipEnableFeaturesEXT
-int zpushVkPhysicalDeviceDepthClipEnableFeaturesEXT(lua_State *L, const VkPhysicalDeviceDepthClipEnableFeaturesEXT *p);
-
 #define znewVkPipelineRasterizationDepthClipStateCreateInfoEXT(L, err) (VkPipelineRasterizationDepthClipStateCreateInfoEXT*)znew((L), VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_DEPTH_CLIP_STATE_CREATE_INFO_EXT, sizeof(VkPipelineRasterizationDepthClipStateCreateInfoEXT), (err))
 #define znewarrayVkPipelineRasterizationDepthClipStateCreateInfoEXT(L, count, err) (VkPipelineRasterizationDepthClipStateCreateInfoEXT*)znewarray((L), VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_DEPTH_CLIP_STATE_CREATE_INFO_EXT, sizeof(VkPipelineRasterizationDepthClipStateCreateInfoEXT), (count), (err))
 #define znewchainVkPipelineRasterizationDepthClipStateCreateInfoEXT moonvulkan_znewchainVkPipelineRasterizationDepthClipStateCreateInfoEXT
@@ -3118,23 +3084,6 @@ int zinitVkPipelineCreationFeedbackCreateInfoEXT(lua_State *L, VkPipelineCreatio
 #define zpushVkPipelineCreationFeedbackCreateInfoEXT moonvulkan_zpushVkPipelineCreationFeedbackCreateInfoEXT
 int zpushVkPipelineCreationFeedbackCreateInfoEXT(lua_State *L, const VkPipelineCreationFeedbackCreateInfoEXT *p);
 
-#define znewVkPhysicalDeviceFragmentDensityMapFeaturesEXT(L, err) (VkPhysicalDeviceFragmentDensityMapFeaturesEXT*)znew((L), VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_FEATURES_EXT, sizeof(VkPhysicalDeviceFragmentDensityMapFeaturesEXT), (err))
-#define znewarrayVkPhysicalDeviceFragmentDensityMapFeaturesEXT(L, count, err) (VkPhysicalDeviceFragmentDensityMapFeaturesEXT*)znewarray((L), VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_FEATURES_EXT, sizeof(VkPhysicalDeviceFragmentDensityMapFeaturesEXT), (count), (err))
-#define znewchainVkPhysicalDeviceFragmentDensityMapFeaturesEXT moonvulkan_znewchainVkPhysicalDeviceFragmentDensityMapFeaturesEXT
-VkPhysicalDeviceFragmentDensityMapFeaturesEXT* znewchainVkPhysicalDeviceFragmentDensityMapFeaturesEXT(lua_State *L, int *err);
-#define znewchainarrayVkPhysicalDeviceFragmentDensityMapFeaturesEXT moonvulkan_znewchainarrayVkPhysicalDeviceFragmentDensityMapFeaturesEXT
-VkPhysicalDeviceFragmentDensityMapFeaturesEXT* znewchainarrayVkPhysicalDeviceFragmentDensityMapFeaturesEXT(lua_State *L, uint32_t count, int *err);
-#define zcheckVkPhysicalDeviceFragmentDensityMapFeaturesEXT moonvulkan_zcheckVkPhysicalDeviceFragmentDensityMapFeaturesEXT
-VkPhysicalDeviceFragmentDensityMapFeaturesEXT* zcheckVkPhysicalDeviceFragmentDensityMapFeaturesEXT(lua_State *L, int arg, int *err);
-#define zcheckarrayVkPhysicalDeviceFragmentDensityMapFeaturesEXT moonvulkan_zcheckarrayVkPhysicalDeviceFragmentDensityMapFeaturesEXT
-VkPhysicalDeviceFragmentDensityMapFeaturesEXT* zcheckarrayVkPhysicalDeviceFragmentDensityMapFeaturesEXT(lua_State *L, int arg, uint32_t *count, int *err);
-#define zinitVkPhysicalDeviceFragmentDensityMapFeaturesEXT moonvulkan_zinitVkPhysicalDeviceFragmentDensityMapFeaturesEXT
-int zinitVkPhysicalDeviceFragmentDensityMapFeaturesEXT(lua_State *L, VkPhysicalDeviceFragmentDensityMapFeaturesEXT* p, int *err);
-#define zfreeVkPhysicalDeviceFragmentDensityMapFeaturesEXT(L, p, base) zfree((L), (p), (base))
-#define zfreearrayVkPhysicalDeviceFragmentDensityMapFeaturesEXT(L, p, count, base) zfreearray((L), (p), sizeof(VkPhysicalDeviceFragmentDensityMapFeaturesEXT), (count), (base))
-#define zpushVkPhysicalDeviceFragmentDensityMapFeaturesEXT moonvulkan_zpushVkPhysicalDeviceFragmentDensityMapFeaturesEXT
-int zpushVkPhysicalDeviceFragmentDensityMapFeaturesEXT(lua_State *L, const VkPhysicalDeviceFragmentDensityMapFeaturesEXT *p);
-
 #define znewVkRenderPassFragmentDensityMapCreateInfoEXT(L, err) (VkRenderPassFragmentDensityMapCreateInfoEXT*)znew((L), VK_STRUCTURE_TYPE_RENDER_PASS_FRAGMENT_DENSITY_MAP_CREATE_INFO_EXT, sizeof(VkRenderPassFragmentDensityMapCreateInfoEXT), (err))
 #define znewarrayVkRenderPassFragmentDensityMapCreateInfoEXT(L, count, err) (VkRenderPassFragmentDensityMapCreateInfoEXT*)znewarray((L), VK_STRUCTURE_TYPE_RENDER_PASS_FRAGMENT_DENSITY_MAP_CREATE_INFO_EXT, sizeof(VkRenderPassFragmentDensityMapCreateInfoEXT), (count), (err))
 #define znewchainVkRenderPassFragmentDensityMapCreateInfoEXT moonvulkan_znewchainVkRenderPassFragmentDensityMapCreateInfoEXT
@@ -3152,23 +3101,6 @@ int zinitVkRenderPassFragmentDensityMapCreateInfoEXT(lua_State *L, VkRenderPassF
 #define zpushVkRenderPassFragmentDensityMapCreateInfoEXT moonvulkan_zpushVkRenderPassFragmentDensityMapCreateInfoEXT
 int zpushVkRenderPassFragmentDensityMapCreateInfoEXT(lua_State *L, const VkRenderPassFragmentDensityMapCreateInfoEXT *p);
 
-#define znewVkPhysicalDeviceMemoryPriorityFeaturesEXT(L, err) (VkPhysicalDeviceMemoryPriorityFeaturesEXT*)znew((L), VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_PRIORITY_FEATURES_EXT, sizeof(VkPhysicalDeviceMemoryPriorityFeaturesEXT), (err))
-#define znewarrayVkPhysicalDeviceMemoryPriorityFeaturesEXT(L, count, err) (VkPhysicalDeviceMemoryPriorityFeaturesEXT*)znewarray((L), VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_PRIORITY_FEATURES_EXT, sizeof(VkPhysicalDeviceMemoryPriorityFeaturesEXT), (count), (err))
-#define znewchainVkPhysicalDeviceMemoryPriorityFeaturesEXT moonvulkan_znewchainVkPhysicalDeviceMemoryPriorityFeaturesEXT
-VkPhysicalDeviceMemoryPriorityFeaturesEXT* znewchainVkPhysicalDeviceMemoryPriorityFeaturesEXT(lua_State *L, int *err);
-#define znewchainarrayVkPhysicalDeviceMemoryPriorityFeaturesEXT moonvulkan_znewchainarrayVkPhysicalDeviceMemoryPriorityFeaturesEXT
-VkPhysicalDeviceMemoryPriorityFeaturesEXT* znewchainarrayVkPhysicalDeviceMemoryPriorityFeaturesEXT(lua_State *L, uint32_t count, int *err);
-#define zcheckVkPhysicalDeviceMemoryPriorityFeaturesEXT moonvulkan_zcheckVkPhysicalDeviceMemoryPriorityFeaturesEXT
-VkPhysicalDeviceMemoryPriorityFeaturesEXT* zcheckVkPhysicalDeviceMemoryPriorityFeaturesEXT(lua_State *L, int arg, int *err);
-#define zcheckarrayVkPhysicalDeviceMemoryPriorityFeaturesEXT moonvulkan_zcheckarrayVkPhysicalDeviceMemoryPriorityFeaturesEXT
-VkPhysicalDeviceMemoryPriorityFeaturesEXT* zcheckarrayVkPhysicalDeviceMemoryPriorityFeaturesEXT(lua_State *L, int arg, uint32_t *count, int *err);
-#define zinitVkPhysicalDeviceMemoryPriorityFeaturesEXT moonvulkan_zinitVkPhysicalDeviceMemoryPriorityFeaturesEXT
-int zinitVkPhysicalDeviceMemoryPriorityFeaturesEXT(lua_State *L, VkPhysicalDeviceMemoryPriorityFeaturesEXT* p, int *err);
-#define zfreeVkPhysicalDeviceMemoryPriorityFeaturesEXT(L, p, base) zfree((L), (p), (base))
-#define zfreearrayVkPhysicalDeviceMemoryPriorityFeaturesEXT(L, p, count, base) zfreearray((L), (p), sizeof(VkPhysicalDeviceMemoryPriorityFeaturesEXT), (count), (base))
-#define zpushVkPhysicalDeviceMemoryPriorityFeaturesEXT moonvulkan_zpushVkPhysicalDeviceMemoryPriorityFeaturesEXT
-int zpushVkPhysicalDeviceMemoryPriorityFeaturesEXT(lua_State *L, const VkPhysicalDeviceMemoryPriorityFeaturesEXT *p);
-
 #define znewVkMemoryPriorityAllocateInfoEXT(L, err) (VkMemoryPriorityAllocateInfoEXT*)znew((L), VK_STRUCTURE_TYPE_MEMORY_PRIORITY_ALLOCATE_INFO_EXT, sizeof(VkMemoryPriorityAllocateInfoEXT), (err))
 #define znewarrayVkMemoryPriorityAllocateInfoEXT(L, count, err) (VkMemoryPriorityAllocateInfoEXT*)znewarray((L), VK_STRUCTURE_TYPE_MEMORY_PRIORITY_ALLOCATE_INFO_EXT, sizeof(VkMemoryPriorityAllocateInfoEXT), (count), (err))
 #define znewchainVkMemoryPriorityAllocateInfoEXT moonvulkan_znewchainVkMemoryPriorityAllocateInfoEXT
@@ -3185,23 +3117,6 @@ int zinitVkMemoryPriorityAllocateInfoEXT(lua_State *L, VkMemoryPriorityAllocateI
 #define zfreearrayVkMemoryPriorityAllocateInfoEXT(L, p, count, base) zfreearray((L), (p), sizeof(VkMemoryPriorityAllocateInfoEXT), (count), (base))
 #define zpushVkMemoryPriorityAllocateInfoEXT moonvulkan_zpushVkMemoryPriorityAllocateInfoEXT
 int zpushVkMemoryPriorityAllocateInfoEXT(lua_State *L, const VkMemoryPriorityAllocateInfoEXT *p);
-
-#define znewVkPhysicalDeviceBufferDeviceAddressFeaturesEXT(L, err) (VkPhysicalDeviceBufferDeviceAddressFeaturesEXT*)znew((L), VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_BUFFER_DEVICE_ADDRESS_FEATURES_EXT, sizeof(VkPhysicalDeviceBufferDeviceAddressFeaturesEXT), (err))
-#define znewarrayVkPhysicalDeviceBufferDeviceAddressFeaturesEXT(L, count, err) (VkPhysicalDeviceBufferDeviceAddressFeaturesEXT*)znewarray((L), VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_BUFFER_DEVICE_ADDRESS_FEATURES_EXT, sizeof(VkPhysicalDeviceBufferDeviceAddressFeaturesEXT), (count), (err))
-#define znewchainVkPhysicalDeviceBufferDeviceAddressFeaturesEXT moonvulkan_znewchainVkPhysicalDeviceBufferDeviceAddressFeaturesEXT
-VkPhysicalDeviceBufferDeviceAddressFeaturesEXT* znewchainVkPhysicalDeviceBufferDeviceAddressFeaturesEXT(lua_State *L, int *err);
-#define znewchainarrayVkPhysicalDeviceBufferDeviceAddressFeaturesEXT moonvulkan_znewchainarrayVkPhysicalDeviceBufferDeviceAddressFeaturesEXT
-VkPhysicalDeviceBufferDeviceAddressFeaturesEXT* znewchainarrayVkPhysicalDeviceBufferDeviceAddressFeaturesEXT(lua_State *L, uint32_t count, int *err);
-#define zcheckVkPhysicalDeviceBufferDeviceAddressFeaturesEXT moonvulkan_zcheckVkPhysicalDeviceBufferDeviceAddressFeaturesEXT
-VkPhysicalDeviceBufferDeviceAddressFeaturesEXT* zcheckVkPhysicalDeviceBufferDeviceAddressFeaturesEXT(lua_State *L, int arg, int *err);
-#define zcheckarrayVkPhysicalDeviceBufferDeviceAddressFeaturesEXT moonvulkan_zcheckarrayVkPhysicalDeviceBufferDeviceAddressFeaturesEXT
-VkPhysicalDeviceBufferDeviceAddressFeaturesEXT* zcheckarrayVkPhysicalDeviceBufferDeviceAddressFeaturesEXT(lua_State *L, int arg, uint32_t *count, int *err);
-#define zinitVkPhysicalDeviceBufferDeviceAddressFeaturesEXT moonvulkan_zinitVkPhysicalDeviceBufferDeviceAddressFeaturesEXT
-int zinitVkPhysicalDeviceBufferDeviceAddressFeaturesEXT(lua_State *L, VkPhysicalDeviceBufferDeviceAddressFeaturesEXT* p, int *err);
-#define zfreeVkPhysicalDeviceBufferDeviceAddressFeaturesEXT(L, p, base) zfree((L), (p), (base))
-#define zfreearrayVkPhysicalDeviceBufferDeviceAddressFeaturesEXT(L, p, count, base) zfreearray((L), (p), sizeof(VkPhysicalDeviceBufferDeviceAddressFeaturesEXT), (count), (base))
-#define zpushVkPhysicalDeviceBufferDeviceAddressFeaturesEXT moonvulkan_zpushVkPhysicalDeviceBufferDeviceAddressFeaturesEXT
-int zpushVkPhysicalDeviceBufferDeviceAddressFeaturesEXT(lua_State *L, const VkPhysicalDeviceBufferDeviceAddressFeaturesEXT *p);
 
 #define znewVkBufferDeviceAddressInfoEXT(L, err) (VkBufferDeviceAddressInfoEXT*)znew((L), VK_STRUCTURE_TYPE_BUFFER_DEVICE_ADDRESS_INFO_EXT, sizeof(VkBufferDeviceAddressInfoEXT), (err))
 #define znewarrayVkBufferDeviceAddressInfoEXT(L, count, err) (VkBufferDeviceAddressInfoEXT*)znewarray((L), VK_STRUCTURE_TYPE_BUFFER_DEVICE_ADDRESS_INFO_EXT, sizeof(VkBufferDeviceAddressInfoEXT), (count), (err))
@@ -3288,57 +3203,6 @@ int zinitVkHeadlessSurfaceCreateInfoEXT(lua_State *L, VkHeadlessSurfaceCreateInf
 #define zpushVkHeadlessSurfaceCreateInfoEXT moonvulkan_zpushVkHeadlessSurfaceCreateInfoEXT
 int zpushVkHeadlessSurfaceCreateInfoEXT(lua_State *L, const VkHeadlessSurfaceCreateInfoEXT *p);
 
-#define znewVkPhysicalDeviceHostQueryResetFeaturesEXT(L, err) (VkPhysicalDeviceHostQueryResetFeaturesEXT*)znew((L), VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_HOST_QUERY_RESET_FEATURES_EXT, sizeof(VkPhysicalDeviceHostQueryResetFeaturesEXT), (err))
-#define znewarrayVkPhysicalDeviceHostQueryResetFeaturesEXT(L, count, err) (VkPhysicalDeviceHostQueryResetFeaturesEXT*)znewarray((L), VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_HOST_QUERY_RESET_FEATURES_EXT, sizeof(VkPhysicalDeviceHostQueryResetFeaturesEXT), (count), (err))
-#define znewchainVkPhysicalDeviceHostQueryResetFeaturesEXT moonvulkan_znewchainVkPhysicalDeviceHostQueryResetFeaturesEXT
-VkPhysicalDeviceHostQueryResetFeaturesEXT* znewchainVkPhysicalDeviceHostQueryResetFeaturesEXT(lua_State *L, int *err);
-#define znewchainarrayVkPhysicalDeviceHostQueryResetFeaturesEXT moonvulkan_znewchainarrayVkPhysicalDeviceHostQueryResetFeaturesEXT
-VkPhysicalDeviceHostQueryResetFeaturesEXT* znewchainarrayVkPhysicalDeviceHostQueryResetFeaturesEXT(lua_State *L, uint32_t count, int *err);
-#define zcheckVkPhysicalDeviceHostQueryResetFeaturesEXT moonvulkan_zcheckVkPhysicalDeviceHostQueryResetFeaturesEXT
-VkPhysicalDeviceHostQueryResetFeaturesEXT* zcheckVkPhysicalDeviceHostQueryResetFeaturesEXT(lua_State *L, int arg, int *err);
-#define zcheckarrayVkPhysicalDeviceHostQueryResetFeaturesEXT moonvulkan_zcheckarrayVkPhysicalDeviceHostQueryResetFeaturesEXT
-VkPhysicalDeviceHostQueryResetFeaturesEXT* zcheckarrayVkPhysicalDeviceHostQueryResetFeaturesEXT(lua_State *L, int arg, uint32_t *count, int *err);
-#define zinitVkPhysicalDeviceHostQueryResetFeaturesEXT moonvulkan_zinitVkPhysicalDeviceHostQueryResetFeaturesEXT
-int zinitVkPhysicalDeviceHostQueryResetFeaturesEXT(lua_State *L, VkPhysicalDeviceHostQueryResetFeaturesEXT* p, int *err);
-#define zfreeVkPhysicalDeviceHostQueryResetFeaturesEXT(L, p, base) zfree((L), (p), (base))
-#define zfreearrayVkPhysicalDeviceHostQueryResetFeaturesEXT(L, p, count, base) zfreearray((L), (p), sizeof(VkPhysicalDeviceHostQueryResetFeaturesEXT), (count), (base))
-#define zpushVkPhysicalDeviceHostQueryResetFeaturesEXT moonvulkan_zpushVkPhysicalDeviceHostQueryResetFeaturesEXT
-int zpushVkPhysicalDeviceHostQueryResetFeaturesEXT(lua_State *L, const VkPhysicalDeviceHostQueryResetFeaturesEXT *p);
-
-#define znewVkPhysicalDeviceTexelBufferAlignmentFeaturesEXT(L, err) (VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT*)znew((L), VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TEXEL_BUFFER_ALIGNMENT_FEATURES_EXT, sizeof(VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT), (err))
-#define znewarrayVkPhysicalDeviceTexelBufferAlignmentFeaturesEXT(L, count, err) (VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT*)znewarray((L), VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TEXEL_BUFFER_ALIGNMENT_FEATURES_EXT, sizeof(VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT), (count), (err))
-#define znewchainVkPhysicalDeviceTexelBufferAlignmentFeaturesEXT moonvulkan_znewchainVkPhysicalDeviceTexelBufferAlignmentFeaturesEXT
-VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT* znewchainVkPhysicalDeviceTexelBufferAlignmentFeaturesEXT(lua_State *L, int *err);
-#define znewchainarrayVkPhysicalDeviceTexelBufferAlignmentFeaturesEXT moonvulkan_znewchainarrayVkPhysicalDeviceTexelBufferAlignmentFeaturesEXT
-VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT* znewchainarrayVkPhysicalDeviceTexelBufferAlignmentFeaturesEXT(lua_State *L, uint32_t count, int *err);
-#define zcheckVkPhysicalDeviceTexelBufferAlignmentFeaturesEXT moonvulkan_zcheckVkPhysicalDeviceTexelBufferAlignmentFeaturesEXT
-VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT* zcheckVkPhysicalDeviceTexelBufferAlignmentFeaturesEXT(lua_State *L, int arg, int *err);
-#define zcheckarrayVkPhysicalDeviceTexelBufferAlignmentFeaturesEXT moonvulkan_zcheckarrayVkPhysicalDeviceTexelBufferAlignmentFeaturesEXT
-VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT* zcheckarrayVkPhysicalDeviceTexelBufferAlignmentFeaturesEXT(lua_State *L, int arg, uint32_t *count, int *err);
-#define zinitVkPhysicalDeviceTexelBufferAlignmentFeaturesEXT moonvulkan_zinitVkPhysicalDeviceTexelBufferAlignmentFeaturesEXT
-int zinitVkPhysicalDeviceTexelBufferAlignmentFeaturesEXT(lua_State *L, VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT* p, int *err);
-#define zfreeVkPhysicalDeviceTexelBufferAlignmentFeaturesEXT(L, p, base) zfree((L), (p), (base))
-#define zfreearrayVkPhysicalDeviceTexelBufferAlignmentFeaturesEXT(L, p, count, base) zfreearray((L), (p), sizeof(VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT), (count), (base))
-#define zpushVkPhysicalDeviceTexelBufferAlignmentFeaturesEXT moonvulkan_zpushVkPhysicalDeviceTexelBufferAlignmentFeaturesEXT
-int zpushVkPhysicalDeviceTexelBufferAlignmentFeaturesEXT(lua_State *L, const VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT *p);
-
-#define znewVkPhysicalDevicePerformanceQueryFeaturesKHR(L, err) (VkPhysicalDevicePerformanceQueryFeaturesKHR*)znew((L), VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PERFORMANCE_QUERY_FEATURES_KHR, sizeof(VkPhysicalDevicePerformanceQueryFeaturesKHR), (err))
-#define znewarrayVkPhysicalDevicePerformanceQueryFeaturesKHR(L, count, err) (VkPhysicalDevicePerformanceQueryFeaturesKHR*)znewarray((L), VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PERFORMANCE_QUERY_FEATURES_KHR, sizeof(VkPhysicalDevicePerformanceQueryFeaturesKHR), (count), (err))
-#define znewchainVkPhysicalDevicePerformanceQueryFeaturesKHR moonvulkan_znewchainVkPhysicalDevicePerformanceQueryFeaturesKHR
-VkPhysicalDevicePerformanceQueryFeaturesKHR* znewchainVkPhysicalDevicePerformanceQueryFeaturesKHR(lua_State *L, int *err);
-#define znewchainarrayVkPhysicalDevicePerformanceQueryFeaturesKHR moonvulkan_znewchainarrayVkPhysicalDevicePerformanceQueryFeaturesKHR
-VkPhysicalDevicePerformanceQueryFeaturesKHR* znewchainarrayVkPhysicalDevicePerformanceQueryFeaturesKHR(lua_State *L, uint32_t count, int *err);
-#define zcheckVkPhysicalDevicePerformanceQueryFeaturesKHR moonvulkan_zcheckVkPhysicalDevicePerformanceQueryFeaturesKHR
-VkPhysicalDevicePerformanceQueryFeaturesKHR* zcheckVkPhysicalDevicePerformanceQueryFeaturesKHR(lua_State *L, int arg, int *err);
-#define zcheckarrayVkPhysicalDevicePerformanceQueryFeaturesKHR moonvulkan_zcheckarrayVkPhysicalDevicePerformanceQueryFeaturesKHR
-VkPhysicalDevicePerformanceQueryFeaturesKHR* zcheckarrayVkPhysicalDevicePerformanceQueryFeaturesKHR(lua_State *L, int arg, uint32_t *count, int *err);
-#define zinitVkPhysicalDevicePerformanceQueryFeaturesKHR moonvulkan_zinitVkPhysicalDevicePerformanceQueryFeaturesKHR
-int zinitVkPhysicalDevicePerformanceQueryFeaturesKHR(lua_State *L, VkPhysicalDevicePerformanceQueryFeaturesKHR* p, int *err);
-#define zfreeVkPhysicalDevicePerformanceQueryFeaturesKHR(L, p, base) zfree((L), (p), (base))
-#define zfreearrayVkPhysicalDevicePerformanceQueryFeaturesKHR(L, p, count, base) zfreearray((L), (p), sizeof(VkPhysicalDevicePerformanceQueryFeaturesKHR), (count), (base))
-#define zpushVkPhysicalDevicePerformanceQueryFeaturesKHR moonvulkan_zpushVkPhysicalDevicePerformanceQueryFeaturesKHR
-int zpushVkPhysicalDevicePerformanceQueryFeaturesKHR(lua_State *L, const VkPhysicalDevicePerformanceQueryFeaturesKHR *p);
-
 #define znewVkPerformanceCounterKHR(L, err) (VkPerformanceCounterKHR*)znew((L), VK_STRUCTURE_TYPE_PERFORMANCE_COUNTER_KHR, sizeof(VkPerformanceCounterKHR), (err))
 #define znewarrayVkPerformanceCounterKHR(L, count, err) (VkPerformanceCounterKHR*)znewarray((L), VK_STRUCTURE_TYPE_PERFORMANCE_COUNTER_KHR, sizeof(VkPerformanceCounterKHR), (count), (err))
 #define znewchainVkPerformanceCounterKHR moonvulkan_znewchainVkPerformanceCounterKHR
@@ -3424,57 +3288,6 @@ int zinitVkPerformanceQuerySubmitInfoKHR(lua_State *L, VkPerformanceQuerySubmitI
 #define zpushVkPerformanceQuerySubmitInfoKHR moonvulkan_zpushVkPerformanceQuerySubmitInfoKHR
 int zpushVkPerformanceQuerySubmitInfoKHR(lua_State *L, const VkPerformanceQuerySubmitInfoKHR *p);
 
-#define znewVkPhysicalDeviceShaderSubgroupExtendedTypesFeatures(L, err) (VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures*)znew((L), VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SUBGROUP_EXTENDED_TYPES_FEATURES, sizeof(VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures), (err))
-#define znewarrayVkPhysicalDeviceShaderSubgroupExtendedTypesFeatures(L, count, err) (VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures*)znewarray((L), VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SUBGROUP_EXTENDED_TYPES_FEATURES, sizeof(VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures), (count), (err))
-#define znewchainVkPhysicalDeviceShaderSubgroupExtendedTypesFeatures moonvulkan_znewchainVkPhysicalDeviceShaderSubgroupExtendedTypesFeatures
-VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures* znewchainVkPhysicalDeviceShaderSubgroupExtendedTypesFeatures(lua_State *L, int *err);
-#define znewchainarrayVkPhysicalDeviceShaderSubgroupExtendedTypesFeatures moonvulkan_znewchainarrayVkPhysicalDeviceShaderSubgroupExtendedTypesFeatures
-VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures* znewchainarrayVkPhysicalDeviceShaderSubgroupExtendedTypesFeatures(lua_State *L, uint32_t count, int *err);
-#define zcheckVkPhysicalDeviceShaderSubgroupExtendedTypesFeatures moonvulkan_zcheckVkPhysicalDeviceShaderSubgroupExtendedTypesFeatures
-VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures* zcheckVkPhysicalDeviceShaderSubgroupExtendedTypesFeatures(lua_State *L, int arg, int *err);
-#define zcheckarrayVkPhysicalDeviceShaderSubgroupExtendedTypesFeatures moonvulkan_zcheckarrayVkPhysicalDeviceShaderSubgroupExtendedTypesFeatures
-VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures* zcheckarrayVkPhysicalDeviceShaderSubgroupExtendedTypesFeatures(lua_State *L, int arg, uint32_t *count, int *err);
-#define zinitVkPhysicalDeviceShaderSubgroupExtendedTypesFeatures moonvulkan_zinitVkPhysicalDeviceShaderSubgroupExtendedTypesFeatures
-int zinitVkPhysicalDeviceShaderSubgroupExtendedTypesFeatures(lua_State *L, VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures* p, int *err);
-#define zfreeVkPhysicalDeviceShaderSubgroupExtendedTypesFeatures(L, p, base) zfree((L), (p), (base))
-#define zfreearrayVkPhysicalDeviceShaderSubgroupExtendedTypesFeatures(L, p, count, base) zfreearray((L), (p), sizeof(VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures), (count), (base))
-#define zpushVkPhysicalDeviceShaderSubgroupExtendedTypesFeatures moonvulkan_zpushVkPhysicalDeviceShaderSubgroupExtendedTypesFeatures
-int zpushVkPhysicalDeviceShaderSubgroupExtendedTypesFeatures(lua_State *L, const VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures *p);
-
-#define znewVkPhysicalDeviceShaderClockFeaturesKHR(L, err) (VkPhysicalDeviceShaderClockFeaturesKHR*)znew((L), VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_CLOCK_FEATURES_KHR, sizeof(VkPhysicalDeviceShaderClockFeaturesKHR), (err))
-#define znewarrayVkPhysicalDeviceShaderClockFeaturesKHR(L, count, err) (VkPhysicalDeviceShaderClockFeaturesKHR*)znewarray((L), VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_CLOCK_FEATURES_KHR, sizeof(VkPhysicalDeviceShaderClockFeaturesKHR), (count), (err))
-#define znewchainVkPhysicalDeviceShaderClockFeaturesKHR moonvulkan_znewchainVkPhysicalDeviceShaderClockFeaturesKHR
-VkPhysicalDeviceShaderClockFeaturesKHR* znewchainVkPhysicalDeviceShaderClockFeaturesKHR(lua_State *L, int *err);
-#define znewchainarrayVkPhysicalDeviceShaderClockFeaturesKHR moonvulkan_znewchainarrayVkPhysicalDeviceShaderClockFeaturesKHR
-VkPhysicalDeviceShaderClockFeaturesKHR* znewchainarrayVkPhysicalDeviceShaderClockFeaturesKHR(lua_State *L, uint32_t count, int *err);
-#define zcheckVkPhysicalDeviceShaderClockFeaturesKHR moonvulkan_zcheckVkPhysicalDeviceShaderClockFeaturesKHR
-VkPhysicalDeviceShaderClockFeaturesKHR* zcheckVkPhysicalDeviceShaderClockFeaturesKHR(lua_State *L, int arg, int *err);
-#define zcheckarrayVkPhysicalDeviceShaderClockFeaturesKHR moonvulkan_zcheckarrayVkPhysicalDeviceShaderClockFeaturesKHR
-VkPhysicalDeviceShaderClockFeaturesKHR* zcheckarrayVkPhysicalDeviceShaderClockFeaturesKHR(lua_State *L, int arg, uint32_t *count, int *err);
-#define zinitVkPhysicalDeviceShaderClockFeaturesKHR moonvulkan_zinitVkPhysicalDeviceShaderClockFeaturesKHR
-int zinitVkPhysicalDeviceShaderClockFeaturesKHR(lua_State *L, VkPhysicalDeviceShaderClockFeaturesKHR* p, int *err);
-#define zfreeVkPhysicalDeviceShaderClockFeaturesKHR(L, p, base) zfree((L), (p), (base))
-#define zfreearrayVkPhysicalDeviceShaderClockFeaturesKHR(L, p, count, base) zfreearray((L), (p), sizeof(VkPhysicalDeviceShaderClockFeaturesKHR), (count), (base))
-#define zpushVkPhysicalDeviceShaderClockFeaturesKHR moonvulkan_zpushVkPhysicalDeviceShaderClockFeaturesKHR
-int zpushVkPhysicalDeviceShaderClockFeaturesKHR(lua_State *L, const VkPhysicalDeviceShaderClockFeaturesKHR *p);
-
-#define znewVkPhysicalDeviceTimelineSemaphoreFeatures(L, err) (VkPhysicalDeviceTimelineSemaphoreFeatures*)znew((L), VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TIMELINE_SEMAPHORE_FEATURES, sizeof(VkPhysicalDeviceTimelineSemaphoreFeatures), (err))
-#define znewarrayVkPhysicalDeviceTimelineSemaphoreFeatures(L, count, err) (VkPhysicalDeviceTimelineSemaphoreFeatures*)znewarray((L), VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TIMELINE_SEMAPHORE_FEATURES, sizeof(VkPhysicalDeviceTimelineSemaphoreFeatures), (count), (err))
-#define znewchainVkPhysicalDeviceTimelineSemaphoreFeatures moonvulkan_znewchainVkPhysicalDeviceTimelineSemaphoreFeatures
-VkPhysicalDeviceTimelineSemaphoreFeatures* znewchainVkPhysicalDeviceTimelineSemaphoreFeatures(lua_State *L, int *err);
-#define znewchainarrayVkPhysicalDeviceTimelineSemaphoreFeatures moonvulkan_znewchainarrayVkPhysicalDeviceTimelineSemaphoreFeatures
-VkPhysicalDeviceTimelineSemaphoreFeatures* znewchainarrayVkPhysicalDeviceTimelineSemaphoreFeatures(lua_State *L, uint32_t count, int *err);
-#define zcheckVkPhysicalDeviceTimelineSemaphoreFeatures moonvulkan_zcheckVkPhysicalDeviceTimelineSemaphoreFeatures
-VkPhysicalDeviceTimelineSemaphoreFeatures* zcheckVkPhysicalDeviceTimelineSemaphoreFeatures(lua_State *L, int arg, int *err);
-#define zcheckarrayVkPhysicalDeviceTimelineSemaphoreFeatures moonvulkan_zcheckarrayVkPhysicalDeviceTimelineSemaphoreFeatures
-VkPhysicalDeviceTimelineSemaphoreFeatures* zcheckarrayVkPhysicalDeviceTimelineSemaphoreFeatures(lua_State *L, int arg, uint32_t *count, int *err);
-#define zinitVkPhysicalDeviceTimelineSemaphoreFeatures moonvulkan_zinitVkPhysicalDeviceTimelineSemaphoreFeatures
-int zinitVkPhysicalDeviceTimelineSemaphoreFeatures(lua_State *L, VkPhysicalDeviceTimelineSemaphoreFeatures* p, int *err);
-#define zfreeVkPhysicalDeviceTimelineSemaphoreFeatures(L, p, base) zfree((L), (p), (base))
-#define zfreearrayVkPhysicalDeviceTimelineSemaphoreFeatures(L, p, count, base) zfreearray((L), (p), sizeof(VkPhysicalDeviceTimelineSemaphoreFeatures), (count), (base))
-#define zpushVkPhysicalDeviceTimelineSemaphoreFeatures moonvulkan_zpushVkPhysicalDeviceTimelineSemaphoreFeatures
-int zpushVkPhysicalDeviceTimelineSemaphoreFeatures(lua_State *L, const VkPhysicalDeviceTimelineSemaphoreFeatures *p);
-
 #define znewVkSemaphoreTypeCreateInfo(L, err) (VkSemaphoreTypeCreateInfo*)znew((L), VK_STRUCTURE_TYPE_SEMAPHORE_TYPE_CREATE_INFO, sizeof(VkSemaphoreTypeCreateInfo), (err))
 #define znewarrayVkSemaphoreTypeCreateInfo(L, count, err) (VkSemaphoreTypeCreateInfo*)znewarray((L), VK_STRUCTURE_TYPE_SEMAPHORE_TYPE_CREATE_INFO, sizeof(VkSemaphoreTypeCreateInfo), (count), (err))
 #define znewchainVkSemaphoreTypeCreateInfo moonvulkan_znewchainVkSemaphoreTypeCreateInfo
@@ -3543,23 +3356,6 @@ int zinitVkSemaphoreSignalInfo(lua_State *L, VkSemaphoreSignalInfo* p, int *err)
 #define zpushVkSemaphoreSignalInfo moonvulkan_zpushVkSemaphoreSignalInfo
 int zpushVkSemaphoreSignalInfo(lua_State *L, const VkSemaphoreSignalInfo *p);
 
-#define znewVkPhysicalDeviceShaderTerminateInvocationFeaturesKHR(L, err) (VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR*)znew((L), VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_TERMINATE_INVOCATION_FEATURES_KHR, sizeof(VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR), (err))
-#define znewarrayVkPhysicalDeviceShaderTerminateInvocationFeaturesKHR(L, count, err) (VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR*)znewarray((L), VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_TERMINATE_INVOCATION_FEATURES_KHR, sizeof(VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR), (count), (err))
-#define znewchainVkPhysicalDeviceShaderTerminateInvocationFeaturesKHR moonvulkan_znewchainVkPhysicalDeviceShaderTerminateInvocationFeaturesKHR
-VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR* znewchainVkPhysicalDeviceShaderTerminateInvocationFeaturesKHR(lua_State *L, int *err);
-#define znewchainarrayVkPhysicalDeviceShaderTerminateInvocationFeaturesKHR moonvulkan_znewchainarrayVkPhysicalDeviceShaderTerminateInvocationFeaturesKHR
-VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR* znewchainarrayVkPhysicalDeviceShaderTerminateInvocationFeaturesKHR(lua_State *L, uint32_t count, int *err);
-#define zcheckVkPhysicalDeviceShaderTerminateInvocationFeaturesKHR moonvulkan_zcheckVkPhysicalDeviceShaderTerminateInvocationFeaturesKHR
-VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR* zcheckVkPhysicalDeviceShaderTerminateInvocationFeaturesKHR(lua_State *L, int arg, int *err);
-#define zcheckarrayVkPhysicalDeviceShaderTerminateInvocationFeaturesKHR moonvulkan_zcheckarrayVkPhysicalDeviceShaderTerminateInvocationFeaturesKHR
-VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR* zcheckarrayVkPhysicalDeviceShaderTerminateInvocationFeaturesKHR(lua_State *L, int arg, uint32_t *count, int *err);
-#define zinitVkPhysicalDeviceShaderTerminateInvocationFeaturesKHR moonvulkan_zinitVkPhysicalDeviceShaderTerminateInvocationFeaturesKHR
-int zinitVkPhysicalDeviceShaderTerminateInvocationFeaturesKHR(lua_State *L, VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR* p, int *err);
-#define zfreeVkPhysicalDeviceShaderTerminateInvocationFeaturesKHR(L, p, base) zfree((L), (p), (base))
-#define zfreearrayVkPhysicalDeviceShaderTerminateInvocationFeaturesKHR(L, p, count, base) zfreearray((L), (p), sizeof(VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR), (count), (base))
-#define zpushVkPhysicalDeviceShaderTerminateInvocationFeaturesKHR moonvulkan_zpushVkPhysicalDeviceShaderTerminateInvocationFeaturesKHR
-int zpushVkPhysicalDeviceShaderTerminateInvocationFeaturesKHR(lua_State *L, const VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR *p);
-
 #define znewVkFragmentShadingRateAttachmentInfoKHR(L, err) (VkFragmentShadingRateAttachmentInfoKHR*)znew((L), VK_STRUCTURE_TYPE_FRAGMENT_SHADING_RATE_ATTACHMENT_INFO_KHR, sizeof(VkFragmentShadingRateAttachmentInfoKHR), (err))
 #define znewarrayVkFragmentShadingRateAttachmentInfoKHR(L, count, err) (VkFragmentShadingRateAttachmentInfoKHR*)znewarray((L), VK_STRUCTURE_TYPE_FRAGMENT_SHADING_RATE_ATTACHMENT_INFO_KHR, sizeof(VkFragmentShadingRateAttachmentInfoKHR), (count), (err))
 #define znewchainVkFragmentShadingRateAttachmentInfoKHR moonvulkan_znewchainVkFragmentShadingRateAttachmentInfoKHR
@@ -3594,23 +3390,6 @@ int zinitVkPipelineFragmentShadingRateStateCreateInfoKHR(lua_State *L, VkPipelin
 #define zpushVkPipelineFragmentShadingRateStateCreateInfoKHR moonvulkan_zpushVkPipelineFragmentShadingRateStateCreateInfoKHR
 int zpushVkPipelineFragmentShadingRateStateCreateInfoKHR(lua_State *L, const VkPipelineFragmentShadingRateStateCreateInfoKHR *p);
 
-#define znewVkPhysicalDeviceFragmentShadingRateFeaturesKHR(L, err) (VkPhysicalDeviceFragmentShadingRateFeaturesKHR*)znew((L), VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_FEATURES_KHR, sizeof(VkPhysicalDeviceFragmentShadingRateFeaturesKHR), (err))
-#define znewarrayVkPhysicalDeviceFragmentShadingRateFeaturesKHR(L, count, err) (VkPhysicalDeviceFragmentShadingRateFeaturesKHR*)znewarray((L), VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_FEATURES_KHR, sizeof(VkPhysicalDeviceFragmentShadingRateFeaturesKHR), (count), (err))
-#define znewchainVkPhysicalDeviceFragmentShadingRateFeaturesKHR moonvulkan_znewchainVkPhysicalDeviceFragmentShadingRateFeaturesKHR
-VkPhysicalDeviceFragmentShadingRateFeaturesKHR* znewchainVkPhysicalDeviceFragmentShadingRateFeaturesKHR(lua_State *L, int *err);
-#define znewchainarrayVkPhysicalDeviceFragmentShadingRateFeaturesKHR moonvulkan_znewchainarrayVkPhysicalDeviceFragmentShadingRateFeaturesKHR
-VkPhysicalDeviceFragmentShadingRateFeaturesKHR* znewchainarrayVkPhysicalDeviceFragmentShadingRateFeaturesKHR(lua_State *L, uint32_t count, int *err);
-#define zcheckVkPhysicalDeviceFragmentShadingRateFeaturesKHR moonvulkan_zcheckVkPhysicalDeviceFragmentShadingRateFeaturesKHR
-VkPhysicalDeviceFragmentShadingRateFeaturesKHR* zcheckVkPhysicalDeviceFragmentShadingRateFeaturesKHR(lua_State *L, int arg, int *err);
-#define zcheckarrayVkPhysicalDeviceFragmentShadingRateFeaturesKHR moonvulkan_zcheckarrayVkPhysicalDeviceFragmentShadingRateFeaturesKHR
-VkPhysicalDeviceFragmentShadingRateFeaturesKHR* zcheckarrayVkPhysicalDeviceFragmentShadingRateFeaturesKHR(lua_State *L, int arg, uint32_t *count, int *err);
-#define zinitVkPhysicalDeviceFragmentShadingRateFeaturesKHR moonvulkan_zinitVkPhysicalDeviceFragmentShadingRateFeaturesKHR
-int zinitVkPhysicalDeviceFragmentShadingRateFeaturesKHR(lua_State *L, VkPhysicalDeviceFragmentShadingRateFeaturesKHR* p, int *err);
-#define zfreeVkPhysicalDeviceFragmentShadingRateFeaturesKHR(L, p, base) zfree((L), (p), (base))
-#define zfreearrayVkPhysicalDeviceFragmentShadingRateFeaturesKHR(L, p, count, base) zfreearray((L), (p), sizeof(VkPhysicalDeviceFragmentShadingRateFeaturesKHR), (count), (base))
-#define zpushVkPhysicalDeviceFragmentShadingRateFeaturesKHR moonvulkan_zpushVkPhysicalDeviceFragmentShadingRateFeaturesKHR
-int zpushVkPhysicalDeviceFragmentShadingRateFeaturesKHR(lua_State *L, const VkPhysicalDeviceFragmentShadingRateFeaturesKHR *p);
-
 #define znewVkPhysicalDeviceFragmentShadingRateKHR(L, err) (VkPhysicalDeviceFragmentShadingRateKHR*)znew((L), VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_KHR, sizeof(VkPhysicalDeviceFragmentShadingRateKHR), (err))
 #define znewarrayVkPhysicalDeviceFragmentShadingRateKHR(L, count, err) (VkPhysicalDeviceFragmentShadingRateKHR*)znewarray((L), VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_KHR, sizeof(VkPhysicalDeviceFragmentShadingRateKHR), (count), (err))
 #define znewchainVkPhysicalDeviceFragmentShadingRateKHR moonvulkan_znewchainVkPhysicalDeviceFragmentShadingRateKHR
@@ -3627,23 +3406,6 @@ int zinitVkPhysicalDeviceFragmentShadingRateKHR(lua_State *L, VkPhysicalDeviceFr
 #define zfreearrayVkPhysicalDeviceFragmentShadingRateKHR(L, p, count, base) zfreearray((L), (p), sizeof(VkPhysicalDeviceFragmentShadingRateKHR), (count), (base))
 #define zpushVkPhysicalDeviceFragmentShadingRateKHR moonvulkan_zpushVkPhysicalDeviceFragmentShadingRateKHR
 int zpushVkPhysicalDeviceFragmentShadingRateKHR(lua_State *L, const VkPhysicalDeviceFragmentShadingRateKHR *p);
-
-#define znewVkPhysicalDeviceSeparateDepthStencilLayoutsFeatures(L, err) (VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures*)znew((L), VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SEPARATE_DEPTH_STENCIL_LAYOUTS_FEATURES, sizeof(VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures), (err))
-#define znewarrayVkPhysicalDeviceSeparateDepthStencilLayoutsFeatures(L, count, err) (VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures*)znewarray((L), VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SEPARATE_DEPTH_STENCIL_LAYOUTS_FEATURES, sizeof(VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures), (count), (err))
-#define znewchainVkPhysicalDeviceSeparateDepthStencilLayoutsFeatures moonvulkan_znewchainVkPhysicalDeviceSeparateDepthStencilLayoutsFeatures
-VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures* znewchainVkPhysicalDeviceSeparateDepthStencilLayoutsFeatures(lua_State *L, int *err);
-#define znewchainarrayVkPhysicalDeviceSeparateDepthStencilLayoutsFeatures moonvulkan_znewchainarrayVkPhysicalDeviceSeparateDepthStencilLayoutsFeatures
-VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures* znewchainarrayVkPhysicalDeviceSeparateDepthStencilLayoutsFeatures(lua_State *L, uint32_t count, int *err);
-#define zcheckVkPhysicalDeviceSeparateDepthStencilLayoutsFeatures moonvulkan_zcheckVkPhysicalDeviceSeparateDepthStencilLayoutsFeatures
-VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures* zcheckVkPhysicalDeviceSeparateDepthStencilLayoutsFeatures(lua_State *L, int arg, int *err);
-#define zcheckarrayVkPhysicalDeviceSeparateDepthStencilLayoutsFeatures moonvulkan_zcheckarrayVkPhysicalDeviceSeparateDepthStencilLayoutsFeatures
-VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures* zcheckarrayVkPhysicalDeviceSeparateDepthStencilLayoutsFeatures(lua_State *L, int arg, uint32_t *count, int *err);
-#define zinitVkPhysicalDeviceSeparateDepthStencilLayoutsFeatures moonvulkan_zinitVkPhysicalDeviceSeparateDepthStencilLayoutsFeatures
-int zinitVkPhysicalDeviceSeparateDepthStencilLayoutsFeatures(lua_State *L, VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures* p, int *err);
-#define zfreeVkPhysicalDeviceSeparateDepthStencilLayoutsFeatures(L, p, base) zfree((L), (p), (base))
-#define zfreearrayVkPhysicalDeviceSeparateDepthStencilLayoutsFeatures(L, p, count, base) zfreearray((L), (p), sizeof(VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures), (count), (base))
-#define zpushVkPhysicalDeviceSeparateDepthStencilLayoutsFeatures moonvulkan_zpushVkPhysicalDeviceSeparateDepthStencilLayoutsFeatures
-int zpushVkPhysicalDeviceSeparateDepthStencilLayoutsFeatures(lua_State *L, const VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures *p);
 
 #define znewVkAttachmentReferenceStencilLayout(L, err) (VkAttachmentReferenceStencilLayout*)znew((L), VK_STRUCTURE_TYPE_ATTACHMENT_REFERENCE_STENCIL_LAYOUT, sizeof(VkAttachmentReferenceStencilLayout), (err))
 #define znewarrayVkAttachmentReferenceStencilLayout(L, count, err) (VkAttachmentReferenceStencilLayout*)znewarray((L), VK_STRUCTURE_TYPE_ATTACHMENT_REFERENCE_STENCIL_LAYOUT, sizeof(VkAttachmentReferenceStencilLayout), (count), (err))
@@ -3678,23 +3440,6 @@ int zinitVkAttachmentDescriptionStencilLayout(lua_State *L, VkAttachmentDescript
 #define zfreearrayVkAttachmentDescriptionStencilLayout(L, p, count, base) zfreearray((L), (p), sizeof(VkAttachmentDescriptionStencilLayout), (count), (base))
 #define zpushVkAttachmentDescriptionStencilLayout moonvulkan_zpushVkAttachmentDescriptionStencilLayout
 int zpushVkAttachmentDescriptionStencilLayout(lua_State *L, const VkAttachmentDescriptionStencilLayout *p);
-
-#define znewVkPhysicalDevicePresentWaitFeaturesKHR(L, err) (VkPhysicalDevicePresentWaitFeaturesKHR*)znew((L), VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PRESENT_WAIT_FEATURES_KHR, sizeof(VkPhysicalDevicePresentWaitFeaturesKHR), (err))
-#define znewarrayVkPhysicalDevicePresentWaitFeaturesKHR(L, count, err) (VkPhysicalDevicePresentWaitFeaturesKHR*)znewarray((L), VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PRESENT_WAIT_FEATURES_KHR, sizeof(VkPhysicalDevicePresentWaitFeaturesKHR), (count), (err))
-#define znewchainVkPhysicalDevicePresentWaitFeaturesKHR moonvulkan_znewchainVkPhysicalDevicePresentWaitFeaturesKHR
-VkPhysicalDevicePresentWaitFeaturesKHR* znewchainVkPhysicalDevicePresentWaitFeaturesKHR(lua_State *L, int *err);
-#define znewchainarrayVkPhysicalDevicePresentWaitFeaturesKHR moonvulkan_znewchainarrayVkPhysicalDevicePresentWaitFeaturesKHR
-VkPhysicalDevicePresentWaitFeaturesKHR* znewchainarrayVkPhysicalDevicePresentWaitFeaturesKHR(lua_State *L, uint32_t count, int *err);
-#define zcheckVkPhysicalDevicePresentWaitFeaturesKHR moonvulkan_zcheckVkPhysicalDevicePresentWaitFeaturesKHR
-VkPhysicalDevicePresentWaitFeaturesKHR* zcheckVkPhysicalDevicePresentWaitFeaturesKHR(lua_State *L, int arg, int *err);
-#define zcheckarrayVkPhysicalDevicePresentWaitFeaturesKHR moonvulkan_zcheckarrayVkPhysicalDevicePresentWaitFeaturesKHR
-VkPhysicalDevicePresentWaitFeaturesKHR* zcheckarrayVkPhysicalDevicePresentWaitFeaturesKHR(lua_State *L, int arg, uint32_t *count, int *err);
-#define zinitVkPhysicalDevicePresentWaitFeaturesKHR moonvulkan_zinitVkPhysicalDevicePresentWaitFeaturesKHR
-int zinitVkPhysicalDevicePresentWaitFeaturesKHR(lua_State *L, VkPhysicalDevicePresentWaitFeaturesKHR* p, int *err);
-#define zfreeVkPhysicalDevicePresentWaitFeaturesKHR(L, p, base) zfree((L), (p), (base))
-#define zfreearrayVkPhysicalDevicePresentWaitFeaturesKHR(L, p, count, base) zfreearray((L), (p), sizeof(VkPhysicalDevicePresentWaitFeaturesKHR), (count), (base))
-#define zpushVkPhysicalDevicePresentWaitFeaturesKHR moonvulkan_zpushVkPhysicalDevicePresentWaitFeaturesKHR
-int zpushVkPhysicalDevicePresentWaitFeaturesKHR(lua_State *L, const VkPhysicalDevicePresentWaitFeaturesKHR *p);
 
 #define znewVkBufferOpaqueCaptureAddressCreateInfo(L, err) (VkBufferOpaqueCaptureAddressCreateInfo*)znew((L), VK_STRUCTURE_TYPE_BUFFER_OPAQUE_CAPTURE_ADDRESS_CREATE_INFO, sizeof(VkBufferOpaqueCaptureAddressCreateInfo), (err))
 #define znewarrayVkBufferOpaqueCaptureAddressCreateInfo(L, count, err) (VkBufferOpaqueCaptureAddressCreateInfo*)znewarray((L), VK_STRUCTURE_TYPE_BUFFER_OPAQUE_CAPTURE_ADDRESS_CREATE_INFO, sizeof(VkBufferOpaqueCaptureAddressCreateInfo), (count), (err))
@@ -3746,23 +3491,6 @@ int zinitVkDeviceMemoryOpaqueCaptureAddressInfo(lua_State *L, VkDeviceMemoryOpaq
 #define zfreearrayVkDeviceMemoryOpaqueCaptureAddressInfo(L, p, count, base) zfreearray((L), (p), sizeof(VkDeviceMemoryOpaqueCaptureAddressInfo), (count), (base))
 #define zpushVkDeviceMemoryOpaqueCaptureAddressInfo moonvulkan_zpushVkDeviceMemoryOpaqueCaptureAddressInfo
 int zpushVkDeviceMemoryOpaqueCaptureAddressInfo(lua_State *L, const VkDeviceMemoryOpaqueCaptureAddressInfo *p);
-
-#define znewVkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR(L, err) (VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR*)znew((L), VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_EXECUTABLE_PROPERTIES_FEATURES_KHR, sizeof(VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR), (err))
-#define znewarrayVkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR(L, count, err) (VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR*)znewarray((L), VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_EXECUTABLE_PROPERTIES_FEATURES_KHR, sizeof(VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR), (count), (err))
-#define znewchainVkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR moonvulkan_znewchainVkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR
-VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR* znewchainVkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR(lua_State *L, int *err);
-#define znewchainarrayVkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR moonvulkan_znewchainarrayVkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR
-VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR* znewchainarrayVkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR(lua_State *L, uint32_t count, int *err);
-#define zcheckVkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR moonvulkan_zcheckVkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR
-VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR* zcheckVkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR(lua_State *L, int arg, int *err);
-#define zcheckarrayVkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR moonvulkan_zcheckarrayVkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR
-VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR* zcheckarrayVkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR(lua_State *L, int arg, uint32_t *count, int *err);
-#define zinitVkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR moonvulkan_zinitVkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR
-int zinitVkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR(lua_State *L, VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR* p, int *err);
-#define zfreeVkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR(L, p, base) zfree((L), (p), (base))
-#define zfreearrayVkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR(L, p, count, base) zfreearray((L), (p), sizeof(VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR), (count), (base))
-#define zpushVkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR moonvulkan_zpushVkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR
-int zpushVkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR(lua_State *L, const VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR *p);
 
 #define znewVkPipelineInfoKHR(L, err) (VkPipelineInfoKHR*)znew((L), VK_STRUCTURE_TYPE_PIPELINE_INFO_KHR, sizeof(VkPipelineInfoKHR), (err))
 #define znewarrayVkPipelineInfoKHR(L, count, err) (VkPipelineInfoKHR*)znewarray((L), VK_STRUCTURE_TYPE_PIPELINE_INFO_KHR, sizeof(VkPipelineInfoKHR), (count), (err))
@@ -3883,23 +3611,6 @@ int zinitVkPresentIdKHR(lua_State *L, VkPresentIdKHR* p, int *err);
 #define zpushVkPresentIdKHR moonvulkan_zpushVkPresentIdKHR
 int zpushVkPresentIdKHR(lua_State *L, const VkPresentIdKHR *p);
 
-#define znewVkPhysicalDevicePresentIdFeaturesKHR(L, err) (VkPhysicalDevicePresentIdFeaturesKHR*)znew((L), VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PRESENT_ID_FEATURES_KHR, sizeof(VkPhysicalDevicePresentIdFeaturesKHR), (err))
-#define znewarrayVkPhysicalDevicePresentIdFeaturesKHR(L, count, err) (VkPhysicalDevicePresentIdFeaturesKHR*)znewarray((L), VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PRESENT_ID_FEATURES_KHR, sizeof(VkPhysicalDevicePresentIdFeaturesKHR), (count), (err))
-#define znewchainVkPhysicalDevicePresentIdFeaturesKHR moonvulkan_znewchainVkPhysicalDevicePresentIdFeaturesKHR
-VkPhysicalDevicePresentIdFeaturesKHR* znewchainVkPhysicalDevicePresentIdFeaturesKHR(lua_State *L, int *err);
-#define znewchainarrayVkPhysicalDevicePresentIdFeaturesKHR moonvulkan_znewchainarrayVkPhysicalDevicePresentIdFeaturesKHR
-VkPhysicalDevicePresentIdFeaturesKHR* znewchainarrayVkPhysicalDevicePresentIdFeaturesKHR(lua_State *L, uint32_t count, int *err);
-#define zcheckVkPhysicalDevicePresentIdFeaturesKHR moonvulkan_zcheckVkPhysicalDevicePresentIdFeaturesKHR
-VkPhysicalDevicePresentIdFeaturesKHR* zcheckVkPhysicalDevicePresentIdFeaturesKHR(lua_State *L, int arg, int *err);
-#define zcheckarrayVkPhysicalDevicePresentIdFeaturesKHR moonvulkan_zcheckarrayVkPhysicalDevicePresentIdFeaturesKHR
-VkPhysicalDevicePresentIdFeaturesKHR* zcheckarrayVkPhysicalDevicePresentIdFeaturesKHR(lua_State *L, int arg, uint32_t *count, int *err);
-#define zinitVkPhysicalDevicePresentIdFeaturesKHR moonvulkan_zinitVkPhysicalDevicePresentIdFeaturesKHR
-int zinitVkPhysicalDevicePresentIdFeaturesKHR(lua_State *L, VkPhysicalDevicePresentIdFeaturesKHR* p, int *err);
-#define zfreeVkPhysicalDevicePresentIdFeaturesKHR(L, p, base) zfree((L), (p), (base))
-#define zfreearrayVkPhysicalDevicePresentIdFeaturesKHR(L, p, count, base) zfreearray((L), (p), sizeof(VkPhysicalDevicePresentIdFeaturesKHR), (count), (base))
-#define zpushVkPhysicalDevicePresentIdFeaturesKHR moonvulkan_zpushVkPhysicalDevicePresentIdFeaturesKHR
-int zpushVkPhysicalDevicePresentIdFeaturesKHR(lua_State *L, const VkPhysicalDevicePresentIdFeaturesKHR *p);
-
 #define znewVkMemoryBarrier2KHR(L, err) (VkMemoryBarrier2KHR*)znew((L), VK_STRUCTURE_TYPE_MEMORY_BARRIER_2_KHR, sizeof(VkMemoryBarrier2KHR), (err))
 #define znewarrayVkMemoryBarrier2KHR(L, count, err) (VkMemoryBarrier2KHR*)znewarray((L), VK_STRUCTURE_TYPE_MEMORY_BARRIER_2_KHR, sizeof(VkMemoryBarrier2KHR), (count), (err))
 #define znewchainVkMemoryBarrier2KHR moonvulkan_znewchainVkMemoryBarrier2KHR
@@ -4018,74 +3729,6 @@ int zinitVkSubmitInfo2KHR(lua_State *L, VkSubmitInfo2KHR* p, int *err);
 #define zfreearrayVkSubmitInfo2KHR(L, p, count, base) zfreearray((L), (p), sizeof(VkSubmitInfo2KHR), (count), (base))
 #define zpushVkSubmitInfo2KHR moonvulkan_zpushVkSubmitInfo2KHR
 int zpushVkSubmitInfo2KHR(lua_State *L, const VkSubmitInfo2KHR *p);
-
-#define znewVkPhysicalDeviceSynchronization2FeaturesKHR(L, err) (VkPhysicalDeviceSynchronization2FeaturesKHR*)znew((L), VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SYNCHRONIZATION_2_FEATURES_KHR, sizeof(VkPhysicalDeviceSynchronization2FeaturesKHR), (err))
-#define znewarrayVkPhysicalDeviceSynchronization2FeaturesKHR(L, count, err) (VkPhysicalDeviceSynchronization2FeaturesKHR*)znewarray((L), VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SYNCHRONIZATION_2_FEATURES_KHR, sizeof(VkPhysicalDeviceSynchronization2FeaturesKHR), (count), (err))
-#define znewchainVkPhysicalDeviceSynchronization2FeaturesKHR moonvulkan_znewchainVkPhysicalDeviceSynchronization2FeaturesKHR
-VkPhysicalDeviceSynchronization2FeaturesKHR* znewchainVkPhysicalDeviceSynchronization2FeaturesKHR(lua_State *L, int *err);
-#define znewchainarrayVkPhysicalDeviceSynchronization2FeaturesKHR moonvulkan_znewchainarrayVkPhysicalDeviceSynchronization2FeaturesKHR
-VkPhysicalDeviceSynchronization2FeaturesKHR* znewchainarrayVkPhysicalDeviceSynchronization2FeaturesKHR(lua_State *L, uint32_t count, int *err);
-#define zcheckVkPhysicalDeviceSynchronization2FeaturesKHR moonvulkan_zcheckVkPhysicalDeviceSynchronization2FeaturesKHR
-VkPhysicalDeviceSynchronization2FeaturesKHR* zcheckVkPhysicalDeviceSynchronization2FeaturesKHR(lua_State *L, int arg, int *err);
-#define zcheckarrayVkPhysicalDeviceSynchronization2FeaturesKHR moonvulkan_zcheckarrayVkPhysicalDeviceSynchronization2FeaturesKHR
-VkPhysicalDeviceSynchronization2FeaturesKHR* zcheckarrayVkPhysicalDeviceSynchronization2FeaturesKHR(lua_State *L, int arg, uint32_t *count, int *err);
-#define zinitVkPhysicalDeviceSynchronization2FeaturesKHR moonvulkan_zinitVkPhysicalDeviceSynchronization2FeaturesKHR
-int zinitVkPhysicalDeviceSynchronization2FeaturesKHR(lua_State *L, VkPhysicalDeviceSynchronization2FeaturesKHR* p, int *err);
-#define zfreeVkPhysicalDeviceSynchronization2FeaturesKHR(L, p, base) zfree((L), (p), (base))
-#define zfreearrayVkPhysicalDeviceSynchronization2FeaturesKHR(L, p, count, base) zfreearray((L), (p), sizeof(VkPhysicalDeviceSynchronization2FeaturesKHR), (count), (base))
-#define zpushVkPhysicalDeviceSynchronization2FeaturesKHR moonvulkan_zpushVkPhysicalDeviceSynchronization2FeaturesKHR
-int zpushVkPhysicalDeviceSynchronization2FeaturesKHR(lua_State *L, const VkPhysicalDeviceSynchronization2FeaturesKHR *p);
-
-#define znewVkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR(L, err) (VkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR*)znew((L), VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SUBGROUP_UNIFORM_CONTROL_FLOW_FEATURES_KHR, sizeof(VkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR), (err))
-#define znewarrayVkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR(L, count, err) (VkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR*)znewarray((L), VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SUBGROUP_UNIFORM_CONTROL_FLOW_FEATURES_KHR, sizeof(VkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR), (count), (err))
-#define znewchainVkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR moonvulkan_znewchainVkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR
-VkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR* znewchainVkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR(lua_State *L, int *err);
-#define znewchainarrayVkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR moonvulkan_znewchainarrayVkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR
-VkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR* znewchainarrayVkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR(lua_State *L, uint32_t count, int *err);
-#define zcheckVkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR moonvulkan_zcheckVkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR
-VkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR* zcheckVkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR(lua_State *L, int arg, int *err);
-#define zcheckarrayVkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR moonvulkan_zcheckarrayVkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR
-VkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR* zcheckarrayVkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR(lua_State *L, int arg, uint32_t *count, int *err);
-#define zinitVkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR moonvulkan_zinitVkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR
-int zinitVkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR(lua_State *L, VkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR* p, int *err);
-#define zfreeVkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR(L, p, base) zfree((L), (p), (base))
-#define zfreearrayVkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR(L, p, count, base) zfreearray((L), (p), sizeof(VkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR), (count), (base))
-#define zpushVkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR moonvulkan_zpushVkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR
-int zpushVkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR(lua_State *L, const VkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR *p);
-
-#define znewVkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR(L, err) (VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR*)znew((L), VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ZERO_INITIALIZE_WORKGROUP_MEMORY_FEATURES_KHR, sizeof(VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR), (err))
-#define znewarrayVkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR(L, count, err) (VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR*)znewarray((L), VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ZERO_INITIALIZE_WORKGROUP_MEMORY_FEATURES_KHR, sizeof(VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR), (count), (err))
-#define znewchainVkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR moonvulkan_znewchainVkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR
-VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR* znewchainVkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR(lua_State *L, int *err);
-#define znewchainarrayVkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR moonvulkan_znewchainarrayVkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR
-VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR* znewchainarrayVkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR(lua_State *L, uint32_t count, int *err);
-#define zcheckVkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR moonvulkan_zcheckVkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR
-VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR* zcheckVkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR(lua_State *L, int arg, int *err);
-#define zcheckarrayVkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR moonvulkan_zcheckarrayVkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR
-VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR* zcheckarrayVkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR(lua_State *L, int arg, uint32_t *count, int *err);
-#define zinitVkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR moonvulkan_zinitVkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR
-int zinitVkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR(lua_State *L, VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR* p, int *err);
-#define zfreeVkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR(L, p, base) zfree((L), (p), (base))
-#define zfreearrayVkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR(L, p, count, base) zfreearray((L), (p), sizeof(VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR), (count), (base))
-#define zpushVkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR moonvulkan_zpushVkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR
-int zpushVkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR(lua_State *L, const VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR *p);
-
-#define znewVkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR(L, err) (VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR*)znew((L), VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_WORKGROUP_MEMORY_EXPLICIT_LAYOUT_FEATURES_KHR, sizeof(VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR), (err))
-#define znewarrayVkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR(L, count, err) (VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR*)znewarray((L), VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_WORKGROUP_MEMORY_EXPLICIT_LAYOUT_FEATURES_KHR, sizeof(VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR), (count), (err))
-#define znewchainVkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR moonvulkan_znewchainVkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR
-VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR* znewchainVkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR(lua_State *L, int *err);
-#define znewchainarrayVkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR moonvulkan_znewchainarrayVkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR
-VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR* znewchainarrayVkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR(lua_State *L, uint32_t count, int *err);
-#define zcheckVkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR moonvulkan_zcheckVkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR
-VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR* zcheckVkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR(lua_State *L, int arg, int *err);
-#define zcheckarrayVkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR moonvulkan_zcheckarrayVkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR
-VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR* zcheckarrayVkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR(lua_State *L, int arg, uint32_t *count, int *err);
-#define zinitVkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR moonvulkan_zinitVkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR
-int zinitVkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR(lua_State *L, VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR* p, int *err);
-#define zfreeVkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR(L, p, base) zfree((L), (p), (base))
-#define zfreearrayVkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR(L, p, count, base) zfreearray((L), (p), sizeof(VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR), (count), (base))
-#define zpushVkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR moonvulkan_zpushVkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR
-int zpushVkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR(lua_State *L, const VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR *p);
 
 #define znewVkBufferCopy2KHR(L, err) (VkBufferCopy2KHR*)znew((L), VK_STRUCTURE_TYPE_BUFFER_COPY_2_KHR, sizeof(VkBufferCopy2KHR), (err))
 #define znewarrayVkBufferCopy2KHR(L, count, err) (VkBufferCopy2KHR*)znewarray((L), VK_STRUCTURE_TYPE_BUFFER_COPY_2_KHR, sizeof(VkBufferCopy2KHR), (count), (err))
@@ -4393,23 +4036,6 @@ int zinitVkWriteDescriptorSetAccelerationStructureKHR(lua_State *L, VkWriteDescr
 #define zpushVkWriteDescriptorSetAccelerationStructureKHR moonvulkan_zpushVkWriteDescriptorSetAccelerationStructureKHR
 int zpushVkWriteDescriptorSetAccelerationStructureKHR(lua_State *L, const VkWriteDescriptorSetAccelerationStructureKHR *p);
 
-#define znewVkPhysicalDeviceAccelerationStructureFeaturesKHR(L, err) (VkPhysicalDeviceAccelerationStructureFeaturesKHR*)znew((L), VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ACCELERATION_STRUCTURE_FEATURES_KHR, sizeof(VkPhysicalDeviceAccelerationStructureFeaturesKHR), (err))
-#define znewarrayVkPhysicalDeviceAccelerationStructureFeaturesKHR(L, count, err) (VkPhysicalDeviceAccelerationStructureFeaturesKHR*)znewarray((L), VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ACCELERATION_STRUCTURE_FEATURES_KHR, sizeof(VkPhysicalDeviceAccelerationStructureFeaturesKHR), (count), (err))
-#define znewchainVkPhysicalDeviceAccelerationStructureFeaturesKHR moonvulkan_znewchainVkPhysicalDeviceAccelerationStructureFeaturesKHR
-VkPhysicalDeviceAccelerationStructureFeaturesKHR* znewchainVkPhysicalDeviceAccelerationStructureFeaturesKHR(lua_State *L, int *err);
-#define znewchainarrayVkPhysicalDeviceAccelerationStructureFeaturesKHR moonvulkan_znewchainarrayVkPhysicalDeviceAccelerationStructureFeaturesKHR
-VkPhysicalDeviceAccelerationStructureFeaturesKHR* znewchainarrayVkPhysicalDeviceAccelerationStructureFeaturesKHR(lua_State *L, uint32_t count, int *err);
-#define zcheckVkPhysicalDeviceAccelerationStructureFeaturesKHR moonvulkan_zcheckVkPhysicalDeviceAccelerationStructureFeaturesKHR
-VkPhysicalDeviceAccelerationStructureFeaturesKHR* zcheckVkPhysicalDeviceAccelerationStructureFeaturesKHR(lua_State *L, int arg, int *err);
-#define zcheckarrayVkPhysicalDeviceAccelerationStructureFeaturesKHR moonvulkan_zcheckarrayVkPhysicalDeviceAccelerationStructureFeaturesKHR
-VkPhysicalDeviceAccelerationStructureFeaturesKHR* zcheckarrayVkPhysicalDeviceAccelerationStructureFeaturesKHR(lua_State *L, int arg, uint32_t *count, int *err);
-#define zinitVkPhysicalDeviceAccelerationStructureFeaturesKHR moonvulkan_zinitVkPhysicalDeviceAccelerationStructureFeaturesKHR
-int zinitVkPhysicalDeviceAccelerationStructureFeaturesKHR(lua_State *L, VkPhysicalDeviceAccelerationStructureFeaturesKHR* p, int *err);
-#define zfreeVkPhysicalDeviceAccelerationStructureFeaturesKHR(L, p, base) zfree((L), (p), (base))
-#define zfreearrayVkPhysicalDeviceAccelerationStructureFeaturesKHR(L, p, count, base) zfreearray((L), (p), sizeof(VkPhysicalDeviceAccelerationStructureFeaturesKHR), (count), (base))
-#define zpushVkPhysicalDeviceAccelerationStructureFeaturesKHR moonvulkan_zpushVkPhysicalDeviceAccelerationStructureFeaturesKHR
-int zpushVkPhysicalDeviceAccelerationStructureFeaturesKHR(lua_State *L, const VkPhysicalDeviceAccelerationStructureFeaturesKHR *p);
-
 #define znewVkAccelerationStructureDeviceAddressInfoKHR(L, err) (VkAccelerationStructureDeviceAddressInfoKHR*)znew((L), VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_DEVICE_ADDRESS_INFO_KHR, sizeof(VkAccelerationStructureDeviceAddressInfoKHR), (err))
 #define znewarrayVkAccelerationStructureDeviceAddressInfoKHR(L, count, err) (VkAccelerationStructureDeviceAddressInfoKHR*)znewarray((L), VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_DEVICE_ADDRESS_INFO_KHR, sizeof(VkAccelerationStructureDeviceAddressInfoKHR), (count), (err))
 #define znewchainVkAccelerationStructureDeviceAddressInfoKHR moonvulkan_znewchainVkAccelerationStructureDeviceAddressInfoKHR
@@ -4563,23 +4189,6 @@ int zinitVkRayTracingPipelineCreateInfoKHR(lua_State *L, VkRayTracingPipelineCre
 #define zpushVkRayTracingPipelineCreateInfoKHR moonvulkan_zpushVkRayTracingPipelineCreateInfoKHR
 int zpushVkRayTracingPipelineCreateInfoKHR(lua_State *L, const VkRayTracingPipelineCreateInfoKHR *p);
 
-#define znewVkPhysicalDeviceRayTracingPipelineFeaturesKHR(L, err) (VkPhysicalDeviceRayTracingPipelineFeaturesKHR*)znew((L), VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_TRACING_PIPELINE_FEATURES_KHR, sizeof(VkPhysicalDeviceRayTracingPipelineFeaturesKHR), (err))
-#define znewarrayVkPhysicalDeviceRayTracingPipelineFeaturesKHR(L, count, err) (VkPhysicalDeviceRayTracingPipelineFeaturesKHR*)znewarray((L), VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_TRACING_PIPELINE_FEATURES_KHR, sizeof(VkPhysicalDeviceRayTracingPipelineFeaturesKHR), (count), (err))
-#define znewchainVkPhysicalDeviceRayTracingPipelineFeaturesKHR moonvulkan_znewchainVkPhysicalDeviceRayTracingPipelineFeaturesKHR
-VkPhysicalDeviceRayTracingPipelineFeaturesKHR* znewchainVkPhysicalDeviceRayTracingPipelineFeaturesKHR(lua_State *L, int *err);
-#define znewchainarrayVkPhysicalDeviceRayTracingPipelineFeaturesKHR moonvulkan_znewchainarrayVkPhysicalDeviceRayTracingPipelineFeaturesKHR
-VkPhysicalDeviceRayTracingPipelineFeaturesKHR* znewchainarrayVkPhysicalDeviceRayTracingPipelineFeaturesKHR(lua_State *L, uint32_t count, int *err);
-#define zcheckVkPhysicalDeviceRayTracingPipelineFeaturesKHR moonvulkan_zcheckVkPhysicalDeviceRayTracingPipelineFeaturesKHR
-VkPhysicalDeviceRayTracingPipelineFeaturesKHR* zcheckVkPhysicalDeviceRayTracingPipelineFeaturesKHR(lua_State *L, int arg, int *err);
-#define zcheckarrayVkPhysicalDeviceRayTracingPipelineFeaturesKHR moonvulkan_zcheckarrayVkPhysicalDeviceRayTracingPipelineFeaturesKHR
-VkPhysicalDeviceRayTracingPipelineFeaturesKHR* zcheckarrayVkPhysicalDeviceRayTracingPipelineFeaturesKHR(lua_State *L, int arg, uint32_t *count, int *err);
-#define zinitVkPhysicalDeviceRayTracingPipelineFeaturesKHR moonvulkan_zinitVkPhysicalDeviceRayTracingPipelineFeaturesKHR
-int zinitVkPhysicalDeviceRayTracingPipelineFeaturesKHR(lua_State *L, VkPhysicalDeviceRayTracingPipelineFeaturesKHR* p, int *err);
-#define zfreeVkPhysicalDeviceRayTracingPipelineFeaturesKHR(L, p, base) zfree((L), (p), (base))
-#define zfreearrayVkPhysicalDeviceRayTracingPipelineFeaturesKHR(L, p, count, base) zfreearray((L), (p), sizeof(VkPhysicalDeviceRayTracingPipelineFeaturesKHR), (count), (base))
-#define zpushVkPhysicalDeviceRayTracingPipelineFeaturesKHR moonvulkan_zpushVkPhysicalDeviceRayTracingPipelineFeaturesKHR
-int zpushVkPhysicalDeviceRayTracingPipelineFeaturesKHR(lua_State *L, const VkPhysicalDeviceRayTracingPipelineFeaturesKHR *p);
-
 #define znewVkTraceRaysIndirectCommandKHR(L, err) (VkTraceRaysIndirectCommandKHR*)znew((L), VK_STRUCTURE_TYPE_TRACE_RAYS_INDIRECT_COMMAND_KHR, sizeof(VkTraceRaysIndirectCommandKHR), (err))
 #define znewarrayVkTraceRaysIndirectCommandKHR(L, count, err) (VkTraceRaysIndirectCommandKHR*)znewarray((L), VK_STRUCTURE_TYPE_TRACE_RAYS_INDIRECT_COMMAND_KHR, sizeof(VkTraceRaysIndirectCommandKHR), (count), (err))
 #define znewchainVkTraceRaysIndirectCommandKHR moonvulkan_znewchainVkTraceRaysIndirectCommandKHR
@@ -4596,57 +4205,6 @@ int zinitVkTraceRaysIndirectCommandKHR(lua_State *L, VkTraceRaysIndirectCommandK
 #define zfreearrayVkTraceRaysIndirectCommandKHR(L, p, count, base) zfreearray((L), (p), sizeof(VkTraceRaysIndirectCommandKHR), (count), (base))
 #define zpushVkTraceRaysIndirectCommandKHR moonvulkan_zpushVkTraceRaysIndirectCommandKHR
 int zpushVkTraceRaysIndirectCommandKHR(lua_State *L, const VkTraceRaysIndirectCommandKHR *p);
-
-#define znewVkPhysicalDeviceRayQueryFeaturesKHR(L, err) (VkPhysicalDeviceRayQueryFeaturesKHR*)znew((L), VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_QUERY_FEATURES_KHR, sizeof(VkPhysicalDeviceRayQueryFeaturesKHR), (err))
-#define znewarrayVkPhysicalDeviceRayQueryFeaturesKHR(L, count, err) (VkPhysicalDeviceRayQueryFeaturesKHR*)znewarray((L), VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_QUERY_FEATURES_KHR, sizeof(VkPhysicalDeviceRayQueryFeaturesKHR), (count), (err))
-#define znewchainVkPhysicalDeviceRayQueryFeaturesKHR moonvulkan_znewchainVkPhysicalDeviceRayQueryFeaturesKHR
-VkPhysicalDeviceRayQueryFeaturesKHR* znewchainVkPhysicalDeviceRayQueryFeaturesKHR(lua_State *L, int *err);
-#define znewchainarrayVkPhysicalDeviceRayQueryFeaturesKHR moonvulkan_znewchainarrayVkPhysicalDeviceRayQueryFeaturesKHR
-VkPhysicalDeviceRayQueryFeaturesKHR* znewchainarrayVkPhysicalDeviceRayQueryFeaturesKHR(lua_State *L, uint32_t count, int *err);
-#define zcheckVkPhysicalDeviceRayQueryFeaturesKHR moonvulkan_zcheckVkPhysicalDeviceRayQueryFeaturesKHR
-VkPhysicalDeviceRayQueryFeaturesKHR* zcheckVkPhysicalDeviceRayQueryFeaturesKHR(lua_State *L, int arg, int *err);
-#define zcheckarrayVkPhysicalDeviceRayQueryFeaturesKHR moonvulkan_zcheckarrayVkPhysicalDeviceRayQueryFeaturesKHR
-VkPhysicalDeviceRayQueryFeaturesKHR* zcheckarrayVkPhysicalDeviceRayQueryFeaturesKHR(lua_State *L, int arg, uint32_t *count, int *err);
-#define zinitVkPhysicalDeviceRayQueryFeaturesKHR moonvulkan_zinitVkPhysicalDeviceRayQueryFeaturesKHR
-int zinitVkPhysicalDeviceRayQueryFeaturesKHR(lua_State *L, VkPhysicalDeviceRayQueryFeaturesKHR* p, int *err);
-#define zfreeVkPhysicalDeviceRayQueryFeaturesKHR(L, p, base) zfree((L), (p), (base))
-#define zfreearrayVkPhysicalDeviceRayQueryFeaturesKHR(L, p, count, base) zfreearray((L), (p), sizeof(VkPhysicalDeviceRayQueryFeaturesKHR), (count), (base))
-#define zpushVkPhysicalDeviceRayQueryFeaturesKHR moonvulkan_zpushVkPhysicalDeviceRayQueryFeaturesKHR
-int zpushVkPhysicalDeviceRayQueryFeaturesKHR(lua_State *L, const VkPhysicalDeviceRayQueryFeaturesKHR *p);
-
-#define znewVkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT(L, err) (VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT*)znew((L), VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TEXTURE_COMPRESSION_ASTC_HDR_FEATURES_EXT, sizeof(VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT), (err))
-#define znewarrayVkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT(L, count, err) (VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT*)znewarray((L), VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TEXTURE_COMPRESSION_ASTC_HDR_FEATURES_EXT, sizeof(VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT), (count), (err))
-#define znewchainVkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT moonvulkan_znewchainVkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT
-VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT* znewchainVkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT(lua_State *L, int *err);
-#define znewchainarrayVkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT moonvulkan_znewchainarrayVkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT
-VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT* znewchainarrayVkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT(lua_State *L, uint32_t count, int *err);
-#define zcheckVkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT moonvulkan_zcheckVkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT
-VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT* zcheckVkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT(lua_State *L, int arg, int *err);
-#define zcheckarrayVkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT moonvulkan_zcheckarrayVkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT
-VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT* zcheckarrayVkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT(lua_State *L, int arg, uint32_t *count, int *err);
-#define zinitVkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT moonvulkan_zinitVkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT
-int zinitVkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT(lua_State *L, VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT* p, int *err);
-#define zfreeVkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT(L, p, base) zfree((L), (p), (base))
-#define zfreearrayVkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT(L, p, count, base) zfreearray((L), (p), sizeof(VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT), (count), (base))
-#define zpushVkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT moonvulkan_zpushVkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT
-int zpushVkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT(lua_State *L, const VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT *p);
-
-#define znewVkPhysicalDeviceSubgroupSizeControlFeaturesEXT(L, err) (VkPhysicalDeviceSubgroupSizeControlFeaturesEXT*)znew((L), VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_SIZE_CONTROL_FEATURES_EXT, sizeof(VkPhysicalDeviceSubgroupSizeControlFeaturesEXT), (err))
-#define znewarrayVkPhysicalDeviceSubgroupSizeControlFeaturesEXT(L, count, err) (VkPhysicalDeviceSubgroupSizeControlFeaturesEXT*)znewarray((L), VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_SIZE_CONTROL_FEATURES_EXT, sizeof(VkPhysicalDeviceSubgroupSizeControlFeaturesEXT), (count), (err))
-#define znewchainVkPhysicalDeviceSubgroupSizeControlFeaturesEXT moonvulkan_znewchainVkPhysicalDeviceSubgroupSizeControlFeaturesEXT
-VkPhysicalDeviceSubgroupSizeControlFeaturesEXT* znewchainVkPhysicalDeviceSubgroupSizeControlFeaturesEXT(lua_State *L, int *err);
-#define znewchainarrayVkPhysicalDeviceSubgroupSizeControlFeaturesEXT moonvulkan_znewchainarrayVkPhysicalDeviceSubgroupSizeControlFeaturesEXT
-VkPhysicalDeviceSubgroupSizeControlFeaturesEXT* znewchainarrayVkPhysicalDeviceSubgroupSizeControlFeaturesEXT(lua_State *L, uint32_t count, int *err);
-#define zcheckVkPhysicalDeviceSubgroupSizeControlFeaturesEXT moonvulkan_zcheckVkPhysicalDeviceSubgroupSizeControlFeaturesEXT
-VkPhysicalDeviceSubgroupSizeControlFeaturesEXT* zcheckVkPhysicalDeviceSubgroupSizeControlFeaturesEXT(lua_State *L, int arg, int *err);
-#define zcheckarrayVkPhysicalDeviceSubgroupSizeControlFeaturesEXT moonvulkan_zcheckarrayVkPhysicalDeviceSubgroupSizeControlFeaturesEXT
-VkPhysicalDeviceSubgroupSizeControlFeaturesEXT* zcheckarrayVkPhysicalDeviceSubgroupSizeControlFeaturesEXT(lua_State *L, int arg, uint32_t *count, int *err);
-#define zinitVkPhysicalDeviceSubgroupSizeControlFeaturesEXT moonvulkan_zinitVkPhysicalDeviceSubgroupSizeControlFeaturesEXT
-int zinitVkPhysicalDeviceSubgroupSizeControlFeaturesEXT(lua_State *L, VkPhysicalDeviceSubgroupSizeControlFeaturesEXT* p, int *err);
-#define zfreeVkPhysicalDeviceSubgroupSizeControlFeaturesEXT(L, p, base) zfree((L), (p), (base))
-#define zfreearrayVkPhysicalDeviceSubgroupSizeControlFeaturesEXT(L, p, count, base) zfreearray((L), (p), sizeof(VkPhysicalDeviceSubgroupSizeControlFeaturesEXT), (count), (base))
-#define zpushVkPhysicalDeviceSubgroupSizeControlFeaturesEXT moonvulkan_zpushVkPhysicalDeviceSubgroupSizeControlFeaturesEXT
-int zpushVkPhysicalDeviceSubgroupSizeControlFeaturesEXT(lua_State *L, const VkPhysicalDeviceSubgroupSizeControlFeaturesEXT *p);
 
 #define znewVkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT(L, err) (VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT*)znew((L), VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_REQUIRED_SUBGROUP_SIZE_CREATE_INFO_EXT, sizeof(VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT), (err))
 #define znewarrayVkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT(L, count, err) (VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT*)znewarray((L), VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_REQUIRED_SUBGROUP_SIZE_CREATE_INFO_EXT, sizeof(VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT), (count), (err))
@@ -4665,23 +4223,6 @@ int zinitVkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT(lua_State *L, Vk
 #define zpushVkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT moonvulkan_zpushVkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT
 int zpushVkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT(lua_State *L, const VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT *p);
 
-#define znewVkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT(L, err) (VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT*)znew((L), VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_IMAGE_ATOMIC_INT64_FEATURES_EXT, sizeof(VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT), (err))
-#define znewarrayVkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT(L, count, err) (VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT*)znewarray((L), VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_IMAGE_ATOMIC_INT64_FEATURES_EXT, sizeof(VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT), (count), (err))
-#define znewchainVkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT moonvulkan_znewchainVkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT
-VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT* znewchainVkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT(lua_State *L, int *err);
-#define znewchainarrayVkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT moonvulkan_znewchainarrayVkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT
-VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT* znewchainarrayVkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT(lua_State *L, uint32_t count, int *err);
-#define zcheckVkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT moonvulkan_zcheckVkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT
-VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT* zcheckVkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT(lua_State *L, int arg, int *err);
-#define zcheckarrayVkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT moonvulkan_zcheckarrayVkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT
-VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT* zcheckarrayVkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT(lua_State *L, int arg, uint32_t *count, int *err);
-#define zinitVkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT moonvulkan_zinitVkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT
-int zinitVkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT(lua_State *L, VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT* p, int *err);
-#define zfreeVkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT(L, p, base) zfree((L), (p), (base))
-#define zfreearrayVkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT(L, p, count, base) zfreearray((L), (p), sizeof(VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT), (count), (base))
-#define zpushVkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT moonvulkan_zpushVkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT
-int zpushVkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT(lua_State *L, const VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT *p);
-
 #define znewVkPhysicalDeviceToolPropertiesEXT(L, err) (VkPhysicalDeviceToolPropertiesEXT*)znew((L), VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TOOL_PROPERTIES_EXT, sizeof(VkPhysicalDeviceToolPropertiesEXT), (err))
 #define znewarrayVkPhysicalDeviceToolPropertiesEXT(L, count, err) (VkPhysicalDeviceToolPropertiesEXT*)znewarray((L), VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TOOL_PROPERTIES_EXT, sizeof(VkPhysicalDeviceToolPropertiesEXT), (count), (err))
 #define znewchainVkPhysicalDeviceToolPropertiesEXT moonvulkan_znewchainVkPhysicalDeviceToolPropertiesEXT
@@ -4698,23 +4239,6 @@ int zinitVkPhysicalDeviceToolPropertiesEXT(lua_State *L, VkPhysicalDeviceToolPro
 #define zfreearrayVkPhysicalDeviceToolPropertiesEXT(L, p, count, base) zfreearray((L), (p), sizeof(VkPhysicalDeviceToolPropertiesEXT), (count), (base))
 #define zpushVkPhysicalDeviceToolPropertiesEXT moonvulkan_zpushVkPhysicalDeviceToolPropertiesEXT
 int zpushVkPhysicalDeviceToolPropertiesEXT(lua_State *L, const VkPhysicalDeviceToolPropertiesEXT *p);
-
-#define znewVkPhysicalDeviceProvokingVertexFeaturesEXT(L, err) (VkPhysicalDeviceProvokingVertexFeaturesEXT*)znew((L), VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROVOKING_VERTEX_FEATURES_EXT, sizeof(VkPhysicalDeviceProvokingVertexFeaturesEXT), (err))
-#define znewarrayVkPhysicalDeviceProvokingVertexFeaturesEXT(L, count, err) (VkPhysicalDeviceProvokingVertexFeaturesEXT*)znewarray((L), VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROVOKING_VERTEX_FEATURES_EXT, sizeof(VkPhysicalDeviceProvokingVertexFeaturesEXT), (count), (err))
-#define znewchainVkPhysicalDeviceProvokingVertexFeaturesEXT moonvulkan_znewchainVkPhysicalDeviceProvokingVertexFeaturesEXT
-VkPhysicalDeviceProvokingVertexFeaturesEXT* znewchainVkPhysicalDeviceProvokingVertexFeaturesEXT(lua_State *L, int *err);
-#define znewchainarrayVkPhysicalDeviceProvokingVertexFeaturesEXT moonvulkan_znewchainarrayVkPhysicalDeviceProvokingVertexFeaturesEXT
-VkPhysicalDeviceProvokingVertexFeaturesEXT* znewchainarrayVkPhysicalDeviceProvokingVertexFeaturesEXT(lua_State *L, uint32_t count, int *err);
-#define zcheckVkPhysicalDeviceProvokingVertexFeaturesEXT moonvulkan_zcheckVkPhysicalDeviceProvokingVertexFeaturesEXT
-VkPhysicalDeviceProvokingVertexFeaturesEXT* zcheckVkPhysicalDeviceProvokingVertexFeaturesEXT(lua_State *L, int arg, int *err);
-#define zcheckarrayVkPhysicalDeviceProvokingVertexFeaturesEXT moonvulkan_zcheckarrayVkPhysicalDeviceProvokingVertexFeaturesEXT
-VkPhysicalDeviceProvokingVertexFeaturesEXT* zcheckarrayVkPhysicalDeviceProvokingVertexFeaturesEXT(lua_State *L, int arg, uint32_t *count, int *err);
-#define zinitVkPhysicalDeviceProvokingVertexFeaturesEXT moonvulkan_zinitVkPhysicalDeviceProvokingVertexFeaturesEXT
-int zinitVkPhysicalDeviceProvokingVertexFeaturesEXT(lua_State *L, VkPhysicalDeviceProvokingVertexFeaturesEXT* p, int *err);
-#define zfreeVkPhysicalDeviceProvokingVertexFeaturesEXT(L, p, base) zfree((L), (p), (base))
-#define zfreearrayVkPhysicalDeviceProvokingVertexFeaturesEXT(L, p, count, base) zfreearray((L), (p), sizeof(VkPhysicalDeviceProvokingVertexFeaturesEXT), (count), (base))
-#define zpushVkPhysicalDeviceProvokingVertexFeaturesEXT moonvulkan_zpushVkPhysicalDeviceProvokingVertexFeaturesEXT
-int zpushVkPhysicalDeviceProvokingVertexFeaturesEXT(lua_State *L, const VkPhysicalDeviceProvokingVertexFeaturesEXT *p);
 
 #define znewVkPipelineRasterizationProvokingVertexStateCreateInfoEXT(L, err) (VkPipelineRasterizationProvokingVertexStateCreateInfoEXT*)znew((L), VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_PROVOKING_VERTEX_STATE_CREATE_INFO_EXT, sizeof(VkPipelineRasterizationProvokingVertexStateCreateInfoEXT), (err))
 #define znewarrayVkPipelineRasterizationProvokingVertexStateCreateInfoEXT(L, count, err) (VkPipelineRasterizationProvokingVertexStateCreateInfoEXT*)znewarray((L), VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_PROVOKING_VERTEX_STATE_CREATE_INFO_EXT, sizeof(VkPipelineRasterizationProvokingVertexStateCreateInfoEXT), (count), (err))
@@ -4733,23 +4257,6 @@ int zinitVkPipelineRasterizationProvokingVertexStateCreateInfoEXT(lua_State *L, 
 #define zpushVkPipelineRasterizationProvokingVertexStateCreateInfoEXT moonvulkan_zpushVkPipelineRasterizationProvokingVertexStateCreateInfoEXT
 int zpushVkPipelineRasterizationProvokingVertexStateCreateInfoEXT(lua_State *L, const VkPipelineRasterizationProvokingVertexStateCreateInfoEXT *p);
 
-#define znewVkPhysicalDeviceLineRasterizationFeaturesEXT(L, err) (VkPhysicalDeviceLineRasterizationFeaturesEXT*)znew((L), VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LINE_RASTERIZATION_FEATURES_EXT, sizeof(VkPhysicalDeviceLineRasterizationFeaturesEXT), (err))
-#define znewarrayVkPhysicalDeviceLineRasterizationFeaturesEXT(L, count, err) (VkPhysicalDeviceLineRasterizationFeaturesEXT*)znewarray((L), VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LINE_RASTERIZATION_FEATURES_EXT, sizeof(VkPhysicalDeviceLineRasterizationFeaturesEXT), (count), (err))
-#define znewchainVkPhysicalDeviceLineRasterizationFeaturesEXT moonvulkan_znewchainVkPhysicalDeviceLineRasterizationFeaturesEXT
-VkPhysicalDeviceLineRasterizationFeaturesEXT* znewchainVkPhysicalDeviceLineRasterizationFeaturesEXT(lua_State *L, int *err);
-#define znewchainarrayVkPhysicalDeviceLineRasterizationFeaturesEXT moonvulkan_znewchainarrayVkPhysicalDeviceLineRasterizationFeaturesEXT
-VkPhysicalDeviceLineRasterizationFeaturesEXT* znewchainarrayVkPhysicalDeviceLineRasterizationFeaturesEXT(lua_State *L, uint32_t count, int *err);
-#define zcheckVkPhysicalDeviceLineRasterizationFeaturesEXT moonvulkan_zcheckVkPhysicalDeviceLineRasterizationFeaturesEXT
-VkPhysicalDeviceLineRasterizationFeaturesEXT* zcheckVkPhysicalDeviceLineRasterizationFeaturesEXT(lua_State *L, int arg, int *err);
-#define zcheckarrayVkPhysicalDeviceLineRasterizationFeaturesEXT moonvulkan_zcheckarrayVkPhysicalDeviceLineRasterizationFeaturesEXT
-VkPhysicalDeviceLineRasterizationFeaturesEXT* zcheckarrayVkPhysicalDeviceLineRasterizationFeaturesEXT(lua_State *L, int arg, uint32_t *count, int *err);
-#define zinitVkPhysicalDeviceLineRasterizationFeaturesEXT moonvulkan_zinitVkPhysicalDeviceLineRasterizationFeaturesEXT
-int zinitVkPhysicalDeviceLineRasterizationFeaturesEXT(lua_State *L, VkPhysicalDeviceLineRasterizationFeaturesEXT* p, int *err);
-#define zfreeVkPhysicalDeviceLineRasterizationFeaturesEXT(L, p, base) zfree((L), (p), (base))
-#define zfreearrayVkPhysicalDeviceLineRasterizationFeaturesEXT(L, p, count, base) zfreearray((L), (p), sizeof(VkPhysicalDeviceLineRasterizationFeaturesEXT), (count), (base))
-#define zpushVkPhysicalDeviceLineRasterizationFeaturesEXT moonvulkan_zpushVkPhysicalDeviceLineRasterizationFeaturesEXT
-int zpushVkPhysicalDeviceLineRasterizationFeaturesEXT(lua_State *L, const VkPhysicalDeviceLineRasterizationFeaturesEXT *p);
-
 #define znewVkPipelineRasterizationLineStateCreateInfoEXT(L, err) (VkPipelineRasterizationLineStateCreateInfoEXT*)znew((L), VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_LINE_STATE_CREATE_INFO_EXT, sizeof(VkPipelineRasterizationLineStateCreateInfoEXT), (err))
 #define znewarrayVkPipelineRasterizationLineStateCreateInfoEXT(L, count, err) (VkPipelineRasterizationLineStateCreateInfoEXT*)znewarray((L), VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_LINE_STATE_CREATE_INFO_EXT, sizeof(VkPipelineRasterizationLineStateCreateInfoEXT), (count), (err))
 #define znewchainVkPipelineRasterizationLineStateCreateInfoEXT moonvulkan_znewchainVkPipelineRasterizationLineStateCreateInfoEXT
@@ -4766,91 +4273,6 @@ int zinitVkPipelineRasterizationLineStateCreateInfoEXT(lua_State *L, VkPipelineR
 #define zfreearrayVkPipelineRasterizationLineStateCreateInfoEXT(L, p, count, base) zfreearray((L), (p), sizeof(VkPipelineRasterizationLineStateCreateInfoEXT), (count), (base))
 #define zpushVkPipelineRasterizationLineStateCreateInfoEXT moonvulkan_zpushVkPipelineRasterizationLineStateCreateInfoEXT
 int zpushVkPipelineRasterizationLineStateCreateInfoEXT(lua_State *L, const VkPipelineRasterizationLineStateCreateInfoEXT *p);
-
-#define znewVkPhysicalDeviceShaderAtomicFloatFeaturesEXT(L, err) (VkPhysicalDeviceShaderAtomicFloatFeaturesEXT*)znew((L), VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_ATOMIC_FLOAT_FEATURES_EXT, sizeof(VkPhysicalDeviceShaderAtomicFloatFeaturesEXT), (err))
-#define znewarrayVkPhysicalDeviceShaderAtomicFloatFeaturesEXT(L, count, err) (VkPhysicalDeviceShaderAtomicFloatFeaturesEXT*)znewarray((L), VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_ATOMIC_FLOAT_FEATURES_EXT, sizeof(VkPhysicalDeviceShaderAtomicFloatFeaturesEXT), (count), (err))
-#define znewchainVkPhysicalDeviceShaderAtomicFloatFeaturesEXT moonvulkan_znewchainVkPhysicalDeviceShaderAtomicFloatFeaturesEXT
-VkPhysicalDeviceShaderAtomicFloatFeaturesEXT* znewchainVkPhysicalDeviceShaderAtomicFloatFeaturesEXT(lua_State *L, int *err);
-#define znewchainarrayVkPhysicalDeviceShaderAtomicFloatFeaturesEXT moonvulkan_znewchainarrayVkPhysicalDeviceShaderAtomicFloatFeaturesEXT
-VkPhysicalDeviceShaderAtomicFloatFeaturesEXT* znewchainarrayVkPhysicalDeviceShaderAtomicFloatFeaturesEXT(lua_State *L, uint32_t count, int *err);
-#define zcheckVkPhysicalDeviceShaderAtomicFloatFeaturesEXT moonvulkan_zcheckVkPhysicalDeviceShaderAtomicFloatFeaturesEXT
-VkPhysicalDeviceShaderAtomicFloatFeaturesEXT* zcheckVkPhysicalDeviceShaderAtomicFloatFeaturesEXT(lua_State *L, int arg, int *err);
-#define zcheckarrayVkPhysicalDeviceShaderAtomicFloatFeaturesEXT moonvulkan_zcheckarrayVkPhysicalDeviceShaderAtomicFloatFeaturesEXT
-VkPhysicalDeviceShaderAtomicFloatFeaturesEXT* zcheckarrayVkPhysicalDeviceShaderAtomicFloatFeaturesEXT(lua_State *L, int arg, uint32_t *count, int *err);
-#define zinitVkPhysicalDeviceShaderAtomicFloatFeaturesEXT moonvulkan_zinitVkPhysicalDeviceShaderAtomicFloatFeaturesEXT
-int zinitVkPhysicalDeviceShaderAtomicFloatFeaturesEXT(lua_State *L, VkPhysicalDeviceShaderAtomicFloatFeaturesEXT* p, int *err);
-#define zfreeVkPhysicalDeviceShaderAtomicFloatFeaturesEXT(L, p, base) zfree((L), (p), (base))
-#define zfreearrayVkPhysicalDeviceShaderAtomicFloatFeaturesEXT(L, p, count, base) zfreearray((L), (p), sizeof(VkPhysicalDeviceShaderAtomicFloatFeaturesEXT), (count), (base))
-#define zpushVkPhysicalDeviceShaderAtomicFloatFeaturesEXT moonvulkan_zpushVkPhysicalDeviceShaderAtomicFloatFeaturesEXT
-int zpushVkPhysicalDeviceShaderAtomicFloatFeaturesEXT(lua_State *L, const VkPhysicalDeviceShaderAtomicFloatFeaturesEXT *p);
-
-#define znewVkPhysicalDeviceIndexTypeUint8FeaturesEXT(L, err) (VkPhysicalDeviceIndexTypeUint8FeaturesEXT*)znew((L), VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INDEX_TYPE_UINT8_FEATURES_EXT, sizeof(VkPhysicalDeviceIndexTypeUint8FeaturesEXT), (err))
-#define znewarrayVkPhysicalDeviceIndexTypeUint8FeaturesEXT(L, count, err) (VkPhysicalDeviceIndexTypeUint8FeaturesEXT*)znewarray((L), VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INDEX_TYPE_UINT8_FEATURES_EXT, sizeof(VkPhysicalDeviceIndexTypeUint8FeaturesEXT), (count), (err))
-#define znewchainVkPhysicalDeviceIndexTypeUint8FeaturesEXT moonvulkan_znewchainVkPhysicalDeviceIndexTypeUint8FeaturesEXT
-VkPhysicalDeviceIndexTypeUint8FeaturesEXT* znewchainVkPhysicalDeviceIndexTypeUint8FeaturesEXT(lua_State *L, int *err);
-#define znewchainarrayVkPhysicalDeviceIndexTypeUint8FeaturesEXT moonvulkan_znewchainarrayVkPhysicalDeviceIndexTypeUint8FeaturesEXT
-VkPhysicalDeviceIndexTypeUint8FeaturesEXT* znewchainarrayVkPhysicalDeviceIndexTypeUint8FeaturesEXT(lua_State *L, uint32_t count, int *err);
-#define zcheckVkPhysicalDeviceIndexTypeUint8FeaturesEXT moonvulkan_zcheckVkPhysicalDeviceIndexTypeUint8FeaturesEXT
-VkPhysicalDeviceIndexTypeUint8FeaturesEXT* zcheckVkPhysicalDeviceIndexTypeUint8FeaturesEXT(lua_State *L, int arg, int *err);
-#define zcheckarrayVkPhysicalDeviceIndexTypeUint8FeaturesEXT moonvulkan_zcheckarrayVkPhysicalDeviceIndexTypeUint8FeaturesEXT
-VkPhysicalDeviceIndexTypeUint8FeaturesEXT* zcheckarrayVkPhysicalDeviceIndexTypeUint8FeaturesEXT(lua_State *L, int arg, uint32_t *count, int *err);
-#define zinitVkPhysicalDeviceIndexTypeUint8FeaturesEXT moonvulkan_zinitVkPhysicalDeviceIndexTypeUint8FeaturesEXT
-int zinitVkPhysicalDeviceIndexTypeUint8FeaturesEXT(lua_State *L, VkPhysicalDeviceIndexTypeUint8FeaturesEXT* p, int *err);
-#define zfreeVkPhysicalDeviceIndexTypeUint8FeaturesEXT(L, p, base) zfree((L), (p), (base))
-#define zfreearrayVkPhysicalDeviceIndexTypeUint8FeaturesEXT(L, p, count, base) zfreearray((L), (p), sizeof(VkPhysicalDeviceIndexTypeUint8FeaturesEXT), (count), (base))
-#define zpushVkPhysicalDeviceIndexTypeUint8FeaturesEXT moonvulkan_zpushVkPhysicalDeviceIndexTypeUint8FeaturesEXT
-int zpushVkPhysicalDeviceIndexTypeUint8FeaturesEXT(lua_State *L, const VkPhysicalDeviceIndexTypeUint8FeaturesEXT *p);
-
-#define znewVkPhysicalDeviceExtendedDynamicStateFeaturesEXT(L, err) (VkPhysicalDeviceExtendedDynamicStateFeaturesEXT*)znew((L), VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTENDED_DYNAMIC_STATE_FEATURES_EXT, sizeof(VkPhysicalDeviceExtendedDynamicStateFeaturesEXT), (err))
-#define znewarrayVkPhysicalDeviceExtendedDynamicStateFeaturesEXT(L, count, err) (VkPhysicalDeviceExtendedDynamicStateFeaturesEXT*)znewarray((L), VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTENDED_DYNAMIC_STATE_FEATURES_EXT, sizeof(VkPhysicalDeviceExtendedDynamicStateFeaturesEXT), (count), (err))
-#define znewchainVkPhysicalDeviceExtendedDynamicStateFeaturesEXT moonvulkan_znewchainVkPhysicalDeviceExtendedDynamicStateFeaturesEXT
-VkPhysicalDeviceExtendedDynamicStateFeaturesEXT* znewchainVkPhysicalDeviceExtendedDynamicStateFeaturesEXT(lua_State *L, int *err);
-#define znewchainarrayVkPhysicalDeviceExtendedDynamicStateFeaturesEXT moonvulkan_znewchainarrayVkPhysicalDeviceExtendedDynamicStateFeaturesEXT
-VkPhysicalDeviceExtendedDynamicStateFeaturesEXT* znewchainarrayVkPhysicalDeviceExtendedDynamicStateFeaturesEXT(lua_State *L, uint32_t count, int *err);
-#define zcheckVkPhysicalDeviceExtendedDynamicStateFeaturesEXT moonvulkan_zcheckVkPhysicalDeviceExtendedDynamicStateFeaturesEXT
-VkPhysicalDeviceExtendedDynamicStateFeaturesEXT* zcheckVkPhysicalDeviceExtendedDynamicStateFeaturesEXT(lua_State *L, int arg, int *err);
-#define zcheckarrayVkPhysicalDeviceExtendedDynamicStateFeaturesEXT moonvulkan_zcheckarrayVkPhysicalDeviceExtendedDynamicStateFeaturesEXT
-VkPhysicalDeviceExtendedDynamicStateFeaturesEXT* zcheckarrayVkPhysicalDeviceExtendedDynamicStateFeaturesEXT(lua_State *L, int arg, uint32_t *count, int *err);
-#define zinitVkPhysicalDeviceExtendedDynamicStateFeaturesEXT moonvulkan_zinitVkPhysicalDeviceExtendedDynamicStateFeaturesEXT
-int zinitVkPhysicalDeviceExtendedDynamicStateFeaturesEXT(lua_State *L, VkPhysicalDeviceExtendedDynamicStateFeaturesEXT* p, int *err);
-#define zfreeVkPhysicalDeviceExtendedDynamicStateFeaturesEXT(L, p, base) zfree((L), (p), (base))
-#define zfreearrayVkPhysicalDeviceExtendedDynamicStateFeaturesEXT(L, p, count, base) zfreearray((L), (p), sizeof(VkPhysicalDeviceExtendedDynamicStateFeaturesEXT), (count), (base))
-#define zpushVkPhysicalDeviceExtendedDynamicStateFeaturesEXT moonvulkan_zpushVkPhysicalDeviceExtendedDynamicStateFeaturesEXT
-int zpushVkPhysicalDeviceExtendedDynamicStateFeaturesEXT(lua_State *L, const VkPhysicalDeviceExtendedDynamicStateFeaturesEXT *p);
-
-#define znewVkPhysicalDeviceShaderAtomicFloat2FeaturesEXT(L, err) (VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT*)znew((L), VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_ATOMIC_FLOAT_2_FEATURES_EXT, sizeof(VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT), (err))
-#define znewarrayVkPhysicalDeviceShaderAtomicFloat2FeaturesEXT(L, count, err) (VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT*)znewarray((L), VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_ATOMIC_FLOAT_2_FEATURES_EXT, sizeof(VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT), (count), (err))
-#define znewchainVkPhysicalDeviceShaderAtomicFloat2FeaturesEXT moonvulkan_znewchainVkPhysicalDeviceShaderAtomicFloat2FeaturesEXT
-VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT* znewchainVkPhysicalDeviceShaderAtomicFloat2FeaturesEXT(lua_State *L, int *err);
-#define znewchainarrayVkPhysicalDeviceShaderAtomicFloat2FeaturesEXT moonvulkan_znewchainarrayVkPhysicalDeviceShaderAtomicFloat2FeaturesEXT
-VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT* znewchainarrayVkPhysicalDeviceShaderAtomicFloat2FeaturesEXT(lua_State *L, uint32_t count, int *err);
-#define zcheckVkPhysicalDeviceShaderAtomicFloat2FeaturesEXT moonvulkan_zcheckVkPhysicalDeviceShaderAtomicFloat2FeaturesEXT
-VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT* zcheckVkPhysicalDeviceShaderAtomicFloat2FeaturesEXT(lua_State *L, int arg, int *err);
-#define zcheckarrayVkPhysicalDeviceShaderAtomicFloat2FeaturesEXT moonvulkan_zcheckarrayVkPhysicalDeviceShaderAtomicFloat2FeaturesEXT
-VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT* zcheckarrayVkPhysicalDeviceShaderAtomicFloat2FeaturesEXT(lua_State *L, int arg, uint32_t *count, int *err);
-#define zinitVkPhysicalDeviceShaderAtomicFloat2FeaturesEXT moonvulkan_zinitVkPhysicalDeviceShaderAtomicFloat2FeaturesEXT
-int zinitVkPhysicalDeviceShaderAtomicFloat2FeaturesEXT(lua_State *L, VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT* p, int *err);
-#define zfreeVkPhysicalDeviceShaderAtomicFloat2FeaturesEXT(L, p, base) zfree((L), (p), (base))
-#define zfreearrayVkPhysicalDeviceShaderAtomicFloat2FeaturesEXT(L, p, count, base) zfreearray((L), (p), sizeof(VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT), (count), (base))
-#define zpushVkPhysicalDeviceShaderAtomicFloat2FeaturesEXT moonvulkan_zpushVkPhysicalDeviceShaderAtomicFloat2FeaturesEXT
-int zpushVkPhysicalDeviceShaderAtomicFloat2FeaturesEXT(lua_State *L, const VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT *p);
-
-#define znewVkPhysicalDeviceDeviceMemoryReportFeaturesEXT(L, err) (VkPhysicalDeviceDeviceMemoryReportFeaturesEXT*)znew((L), VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEVICE_MEMORY_REPORT_FEATURES_EXT, sizeof(VkPhysicalDeviceDeviceMemoryReportFeaturesEXT), (err))
-#define znewarrayVkPhysicalDeviceDeviceMemoryReportFeaturesEXT(L, count, err) (VkPhysicalDeviceDeviceMemoryReportFeaturesEXT*)znewarray((L), VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEVICE_MEMORY_REPORT_FEATURES_EXT, sizeof(VkPhysicalDeviceDeviceMemoryReportFeaturesEXT), (count), (err))
-#define znewchainVkPhysicalDeviceDeviceMemoryReportFeaturesEXT moonvulkan_znewchainVkPhysicalDeviceDeviceMemoryReportFeaturesEXT
-VkPhysicalDeviceDeviceMemoryReportFeaturesEXT* znewchainVkPhysicalDeviceDeviceMemoryReportFeaturesEXT(lua_State *L, int *err);
-#define znewchainarrayVkPhysicalDeviceDeviceMemoryReportFeaturesEXT moonvulkan_znewchainarrayVkPhysicalDeviceDeviceMemoryReportFeaturesEXT
-VkPhysicalDeviceDeviceMemoryReportFeaturesEXT* znewchainarrayVkPhysicalDeviceDeviceMemoryReportFeaturesEXT(lua_State *L, uint32_t count, int *err);
-#define zcheckVkPhysicalDeviceDeviceMemoryReportFeaturesEXT moonvulkan_zcheckVkPhysicalDeviceDeviceMemoryReportFeaturesEXT
-VkPhysicalDeviceDeviceMemoryReportFeaturesEXT* zcheckVkPhysicalDeviceDeviceMemoryReportFeaturesEXT(lua_State *L, int arg, int *err);
-#define zcheckarrayVkPhysicalDeviceDeviceMemoryReportFeaturesEXT moonvulkan_zcheckarrayVkPhysicalDeviceDeviceMemoryReportFeaturesEXT
-VkPhysicalDeviceDeviceMemoryReportFeaturesEXT* zcheckarrayVkPhysicalDeviceDeviceMemoryReportFeaturesEXT(lua_State *L, int arg, uint32_t *count, int *err);
-#define zinitVkPhysicalDeviceDeviceMemoryReportFeaturesEXT moonvulkan_zinitVkPhysicalDeviceDeviceMemoryReportFeaturesEXT
-int zinitVkPhysicalDeviceDeviceMemoryReportFeaturesEXT(lua_State *L, VkPhysicalDeviceDeviceMemoryReportFeaturesEXT* p, int *err);
-#define zfreeVkPhysicalDeviceDeviceMemoryReportFeaturesEXT(L, p, base) zfree((L), (p), (base))
-#define zfreearrayVkPhysicalDeviceDeviceMemoryReportFeaturesEXT(L, p, count, base) zfreearray((L), (p), sizeof(VkPhysicalDeviceDeviceMemoryReportFeaturesEXT), (count), (base))
-#define zpushVkPhysicalDeviceDeviceMemoryReportFeaturesEXT moonvulkan_zpushVkPhysicalDeviceDeviceMemoryReportFeaturesEXT
-int zpushVkPhysicalDeviceDeviceMemoryReportFeaturesEXT(lua_State *L, const VkPhysicalDeviceDeviceMemoryReportFeaturesEXT *p);
 
 #define znewVkDeviceMemoryReportCallbackDataEXT(L, err) (VkDeviceMemoryReportCallbackDataEXT*)znew((L), VK_STRUCTURE_TYPE_DEVICE_MEMORY_REPORT_CALLBACK_DATA_EXT, sizeof(VkDeviceMemoryReportCallbackDataEXT), (err))
 #define znewarrayVkDeviceMemoryReportCallbackDataEXT(L, count, err) (VkDeviceMemoryReportCallbackDataEXT*)znewarray((L), VK_STRUCTURE_TYPE_DEVICE_MEMORY_REPORT_CALLBACK_DATA_EXT, sizeof(VkDeviceMemoryReportCallbackDataEXT), (count), (err))
@@ -4886,23 +4308,6 @@ int zinitVkDeviceDeviceMemoryReportCreateInfoEXT(lua_State *L, VkDeviceDeviceMem
 #define zpushVkDeviceDeviceMemoryReportCreateInfoEXT moonvulkan_zpushVkDeviceDeviceMemoryReportCreateInfoEXT
 int zpushVkDeviceDeviceMemoryReportCreateInfoEXT(lua_State *L, const VkDeviceDeviceMemoryReportCreateInfoEXT *p);
 
-#define znewVkPhysicalDeviceRobustness2FeaturesEXT(L, err) (VkPhysicalDeviceRobustness2FeaturesEXT*)znew((L), VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ROBUSTNESS_2_FEATURES_EXT, sizeof(VkPhysicalDeviceRobustness2FeaturesEXT), (err))
-#define znewarrayVkPhysicalDeviceRobustness2FeaturesEXT(L, count, err) (VkPhysicalDeviceRobustness2FeaturesEXT*)znewarray((L), VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ROBUSTNESS_2_FEATURES_EXT, sizeof(VkPhysicalDeviceRobustness2FeaturesEXT), (count), (err))
-#define znewchainVkPhysicalDeviceRobustness2FeaturesEXT moonvulkan_znewchainVkPhysicalDeviceRobustness2FeaturesEXT
-VkPhysicalDeviceRobustness2FeaturesEXT* znewchainVkPhysicalDeviceRobustness2FeaturesEXT(lua_State *L, int *err);
-#define znewchainarrayVkPhysicalDeviceRobustness2FeaturesEXT moonvulkan_znewchainarrayVkPhysicalDeviceRobustness2FeaturesEXT
-VkPhysicalDeviceRobustness2FeaturesEXT* znewchainarrayVkPhysicalDeviceRobustness2FeaturesEXT(lua_State *L, uint32_t count, int *err);
-#define zcheckVkPhysicalDeviceRobustness2FeaturesEXT moonvulkan_zcheckVkPhysicalDeviceRobustness2FeaturesEXT
-VkPhysicalDeviceRobustness2FeaturesEXT* zcheckVkPhysicalDeviceRobustness2FeaturesEXT(lua_State *L, int arg, int *err);
-#define zcheckarrayVkPhysicalDeviceRobustness2FeaturesEXT moonvulkan_zcheckarrayVkPhysicalDeviceRobustness2FeaturesEXT
-VkPhysicalDeviceRobustness2FeaturesEXT* zcheckarrayVkPhysicalDeviceRobustness2FeaturesEXT(lua_State *L, int arg, uint32_t *count, int *err);
-#define zinitVkPhysicalDeviceRobustness2FeaturesEXT moonvulkan_zinitVkPhysicalDeviceRobustness2FeaturesEXT
-int zinitVkPhysicalDeviceRobustness2FeaturesEXT(lua_State *L, VkPhysicalDeviceRobustness2FeaturesEXT* p, int *err);
-#define zfreeVkPhysicalDeviceRobustness2FeaturesEXT(L, p, base) zfree((L), (p), (base))
-#define zfreearrayVkPhysicalDeviceRobustness2FeaturesEXT(L, p, count, base) zfreearray((L), (p), sizeof(VkPhysicalDeviceRobustness2FeaturesEXT), (count), (base))
-#define zpushVkPhysicalDeviceRobustness2FeaturesEXT moonvulkan_zpushVkPhysicalDeviceRobustness2FeaturesEXT
-int zpushVkPhysicalDeviceRobustness2FeaturesEXT(lua_State *L, const VkPhysicalDeviceRobustness2FeaturesEXT *p);
-
 #define znewVkSamplerCustomBorderColorCreateInfoEXT(L, err) (VkSamplerCustomBorderColorCreateInfoEXT*)znew((L), VK_STRUCTURE_TYPE_SAMPLER_CUSTOM_BORDER_COLOR_CREATE_INFO_EXT, sizeof(VkSamplerCustomBorderColorCreateInfoEXT), (err))
 #define znewarrayVkSamplerCustomBorderColorCreateInfoEXT(L, count, err) (VkSamplerCustomBorderColorCreateInfoEXT*)znewarray((L), VK_STRUCTURE_TYPE_SAMPLER_CUSTOM_BORDER_COLOR_CREATE_INFO_EXT, sizeof(VkSamplerCustomBorderColorCreateInfoEXT), (count), (err))
 #define znewchainVkSamplerCustomBorderColorCreateInfoEXT moonvulkan_znewchainVkSamplerCustomBorderColorCreateInfoEXT
@@ -4919,40 +4324,6 @@ int zinitVkSamplerCustomBorderColorCreateInfoEXT(lua_State *L, VkSamplerCustomBo
 #define zfreearrayVkSamplerCustomBorderColorCreateInfoEXT(L, p, count, base) zfreearray((L), (p), sizeof(VkSamplerCustomBorderColorCreateInfoEXT), (count), (base))
 #define zpushVkSamplerCustomBorderColorCreateInfoEXT moonvulkan_zpushVkSamplerCustomBorderColorCreateInfoEXT
 int zpushVkSamplerCustomBorderColorCreateInfoEXT(lua_State *L, const VkSamplerCustomBorderColorCreateInfoEXT *p);
-
-#define znewVkPhysicalDeviceCustomBorderColorFeaturesEXT(L, err) (VkPhysicalDeviceCustomBorderColorFeaturesEXT*)znew((L), VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CUSTOM_BORDER_COLOR_FEATURES_EXT, sizeof(VkPhysicalDeviceCustomBorderColorFeaturesEXT), (err))
-#define znewarrayVkPhysicalDeviceCustomBorderColorFeaturesEXT(L, count, err) (VkPhysicalDeviceCustomBorderColorFeaturesEXT*)znewarray((L), VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CUSTOM_BORDER_COLOR_FEATURES_EXT, sizeof(VkPhysicalDeviceCustomBorderColorFeaturesEXT), (count), (err))
-#define znewchainVkPhysicalDeviceCustomBorderColorFeaturesEXT moonvulkan_znewchainVkPhysicalDeviceCustomBorderColorFeaturesEXT
-VkPhysicalDeviceCustomBorderColorFeaturesEXT* znewchainVkPhysicalDeviceCustomBorderColorFeaturesEXT(lua_State *L, int *err);
-#define znewchainarrayVkPhysicalDeviceCustomBorderColorFeaturesEXT moonvulkan_znewchainarrayVkPhysicalDeviceCustomBorderColorFeaturesEXT
-VkPhysicalDeviceCustomBorderColorFeaturesEXT* znewchainarrayVkPhysicalDeviceCustomBorderColorFeaturesEXT(lua_State *L, uint32_t count, int *err);
-#define zcheckVkPhysicalDeviceCustomBorderColorFeaturesEXT moonvulkan_zcheckVkPhysicalDeviceCustomBorderColorFeaturesEXT
-VkPhysicalDeviceCustomBorderColorFeaturesEXT* zcheckVkPhysicalDeviceCustomBorderColorFeaturesEXT(lua_State *L, int arg, int *err);
-#define zcheckarrayVkPhysicalDeviceCustomBorderColorFeaturesEXT moonvulkan_zcheckarrayVkPhysicalDeviceCustomBorderColorFeaturesEXT
-VkPhysicalDeviceCustomBorderColorFeaturesEXT* zcheckarrayVkPhysicalDeviceCustomBorderColorFeaturesEXT(lua_State *L, int arg, uint32_t *count, int *err);
-#define zinitVkPhysicalDeviceCustomBorderColorFeaturesEXT moonvulkan_zinitVkPhysicalDeviceCustomBorderColorFeaturesEXT
-int zinitVkPhysicalDeviceCustomBorderColorFeaturesEXT(lua_State *L, VkPhysicalDeviceCustomBorderColorFeaturesEXT* p, int *err);
-#define zfreeVkPhysicalDeviceCustomBorderColorFeaturesEXT(L, p, base) zfree((L), (p), (base))
-#define zfreearrayVkPhysicalDeviceCustomBorderColorFeaturesEXT(L, p, count, base) zfreearray((L), (p), sizeof(VkPhysicalDeviceCustomBorderColorFeaturesEXT), (count), (base))
-#define zpushVkPhysicalDeviceCustomBorderColorFeaturesEXT moonvulkan_zpushVkPhysicalDeviceCustomBorderColorFeaturesEXT
-int zpushVkPhysicalDeviceCustomBorderColorFeaturesEXT(lua_State *L, const VkPhysicalDeviceCustomBorderColorFeaturesEXT *p);
-
-#define znewVkPhysicalDevicePrivateDataFeaturesEXT(L, err) (VkPhysicalDevicePrivateDataFeaturesEXT*)znew((L), VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PRIVATE_DATA_FEATURES_EXT, sizeof(VkPhysicalDevicePrivateDataFeaturesEXT), (err))
-#define znewarrayVkPhysicalDevicePrivateDataFeaturesEXT(L, count, err) (VkPhysicalDevicePrivateDataFeaturesEXT*)znewarray((L), VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PRIVATE_DATA_FEATURES_EXT, sizeof(VkPhysicalDevicePrivateDataFeaturesEXT), (count), (err))
-#define znewchainVkPhysicalDevicePrivateDataFeaturesEXT moonvulkan_znewchainVkPhysicalDevicePrivateDataFeaturesEXT
-VkPhysicalDevicePrivateDataFeaturesEXT* znewchainVkPhysicalDevicePrivateDataFeaturesEXT(lua_State *L, int *err);
-#define znewchainarrayVkPhysicalDevicePrivateDataFeaturesEXT moonvulkan_znewchainarrayVkPhysicalDevicePrivateDataFeaturesEXT
-VkPhysicalDevicePrivateDataFeaturesEXT* znewchainarrayVkPhysicalDevicePrivateDataFeaturesEXT(lua_State *L, uint32_t count, int *err);
-#define zcheckVkPhysicalDevicePrivateDataFeaturesEXT moonvulkan_zcheckVkPhysicalDevicePrivateDataFeaturesEXT
-VkPhysicalDevicePrivateDataFeaturesEXT* zcheckVkPhysicalDevicePrivateDataFeaturesEXT(lua_State *L, int arg, int *err);
-#define zcheckarrayVkPhysicalDevicePrivateDataFeaturesEXT moonvulkan_zcheckarrayVkPhysicalDevicePrivateDataFeaturesEXT
-VkPhysicalDevicePrivateDataFeaturesEXT* zcheckarrayVkPhysicalDevicePrivateDataFeaturesEXT(lua_State *L, int arg, uint32_t *count, int *err);
-#define zinitVkPhysicalDevicePrivateDataFeaturesEXT moonvulkan_zinitVkPhysicalDevicePrivateDataFeaturesEXT
-int zinitVkPhysicalDevicePrivateDataFeaturesEXT(lua_State *L, VkPhysicalDevicePrivateDataFeaturesEXT* p, int *err);
-#define zfreeVkPhysicalDevicePrivateDataFeaturesEXT(L, p, base) zfree((L), (p), (base))
-#define zfreearrayVkPhysicalDevicePrivateDataFeaturesEXT(L, p, count, base) zfreearray((L), (p), sizeof(VkPhysicalDevicePrivateDataFeaturesEXT), (count), (base))
-#define zpushVkPhysicalDevicePrivateDataFeaturesEXT moonvulkan_zpushVkPhysicalDevicePrivateDataFeaturesEXT
-int zpushVkPhysicalDevicePrivateDataFeaturesEXT(lua_State *L, const VkPhysicalDevicePrivateDataFeaturesEXT *p);
 
 #define znewVkDevicePrivateDataCreateInfoEXT(L, err) (VkDevicePrivateDataCreateInfoEXT*)znew((L), VK_STRUCTURE_TYPE_DEVICE_PRIVATE_DATA_CREATE_INFO_EXT, sizeof(VkDevicePrivateDataCreateInfoEXT), (err))
 #define znewarrayVkDevicePrivateDataCreateInfoEXT(L, count, err) (VkDevicePrivateDataCreateInfoEXT*)znewarray((L), VK_STRUCTURE_TYPE_DEVICE_PRIVATE_DATA_CREATE_INFO_EXT, sizeof(VkDevicePrivateDataCreateInfoEXT), (count), (err))
@@ -4988,108 +4359,6 @@ int zinitVkPrivateDataSlotCreateInfoEXT(lua_State *L, VkPrivateDataSlotCreateInf
 #define zpushVkPrivateDataSlotCreateInfoEXT moonvulkan_zpushVkPrivateDataSlotCreateInfoEXT
 int zpushVkPrivateDataSlotCreateInfoEXT(lua_State *L, const VkPrivateDataSlotCreateInfoEXT *p);
 
-#define znewVkPhysicalDevicePipelineCreationCacheControlFeaturesEXT(L, err) (VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT*)znew((L), VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_CREATION_CACHE_CONTROL_FEATURES_EXT, sizeof(VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT), (err))
-#define znewarrayVkPhysicalDevicePipelineCreationCacheControlFeaturesEXT(L, count, err) (VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT*)znewarray((L), VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_CREATION_CACHE_CONTROL_FEATURES_EXT, sizeof(VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT), (count), (err))
-#define znewchainVkPhysicalDevicePipelineCreationCacheControlFeaturesEXT moonvulkan_znewchainVkPhysicalDevicePipelineCreationCacheControlFeaturesEXT
-VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT* znewchainVkPhysicalDevicePipelineCreationCacheControlFeaturesEXT(lua_State *L, int *err);
-#define znewchainarrayVkPhysicalDevicePipelineCreationCacheControlFeaturesEXT moonvulkan_znewchainarrayVkPhysicalDevicePipelineCreationCacheControlFeaturesEXT
-VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT* znewchainarrayVkPhysicalDevicePipelineCreationCacheControlFeaturesEXT(lua_State *L, uint32_t count, int *err);
-#define zcheckVkPhysicalDevicePipelineCreationCacheControlFeaturesEXT moonvulkan_zcheckVkPhysicalDevicePipelineCreationCacheControlFeaturesEXT
-VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT* zcheckVkPhysicalDevicePipelineCreationCacheControlFeaturesEXT(lua_State *L, int arg, int *err);
-#define zcheckarrayVkPhysicalDevicePipelineCreationCacheControlFeaturesEXT moonvulkan_zcheckarrayVkPhysicalDevicePipelineCreationCacheControlFeaturesEXT
-VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT* zcheckarrayVkPhysicalDevicePipelineCreationCacheControlFeaturesEXT(lua_State *L, int arg, uint32_t *count, int *err);
-#define zinitVkPhysicalDevicePipelineCreationCacheControlFeaturesEXT moonvulkan_zinitVkPhysicalDevicePipelineCreationCacheControlFeaturesEXT
-int zinitVkPhysicalDevicePipelineCreationCacheControlFeaturesEXT(lua_State *L, VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT* p, int *err);
-#define zfreeVkPhysicalDevicePipelineCreationCacheControlFeaturesEXT(L, p, base) zfree((L), (p), (base))
-#define zfreearrayVkPhysicalDevicePipelineCreationCacheControlFeaturesEXT(L, p, count, base) zfreearray((L), (p), sizeof(VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT), (count), (base))
-#define zpushVkPhysicalDevicePipelineCreationCacheControlFeaturesEXT moonvulkan_zpushVkPhysicalDevicePipelineCreationCacheControlFeaturesEXT
-int zpushVkPhysicalDevicePipelineCreationCacheControlFeaturesEXT(lua_State *L, const VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT *p);
-
-#define znewVkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT(L, err) (VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT*)znew((L), VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_YCBCR_2_PLANE_444_FORMATS_FEATURES_EXT, sizeof(VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT), (err))
-#define znewarrayVkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT(L, count, err) (VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT*)znewarray((L), VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_YCBCR_2_PLANE_444_FORMATS_FEATURES_EXT, sizeof(VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT), (count), (err))
-#define znewchainVkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT moonvulkan_znewchainVkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT
-VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT* znewchainVkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT(lua_State *L, int *err);
-#define znewchainarrayVkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT moonvulkan_znewchainarrayVkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT
-VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT* znewchainarrayVkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT(lua_State *L, uint32_t count, int *err);
-#define zcheckVkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT moonvulkan_zcheckVkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT
-VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT* zcheckVkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT(lua_State *L, int arg, int *err);
-#define zcheckarrayVkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT moonvulkan_zcheckarrayVkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT
-VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT* zcheckarrayVkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT(lua_State *L, int arg, uint32_t *count, int *err);
-#define zinitVkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT moonvulkan_zinitVkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT
-int zinitVkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT(lua_State *L, VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT* p, int *err);
-#define zfreeVkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT(L, p, base) zfree((L), (p), (base))
-#define zfreearrayVkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT(L, p, count, base) zfreearray((L), (p), sizeof(VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT), (count), (base))
-#define zpushVkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT moonvulkan_zpushVkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT
-int zpushVkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT(lua_State *L, const VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT *p);
-
-#define znewVkPhysicalDeviceFragmentDensityMap2FeaturesEXT(L, err) (VkPhysicalDeviceFragmentDensityMap2FeaturesEXT*)znew((L), VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_2_FEATURES_EXT, sizeof(VkPhysicalDeviceFragmentDensityMap2FeaturesEXT), (err))
-#define znewarrayVkPhysicalDeviceFragmentDensityMap2FeaturesEXT(L, count, err) (VkPhysicalDeviceFragmentDensityMap2FeaturesEXT*)znewarray((L), VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_2_FEATURES_EXT, sizeof(VkPhysicalDeviceFragmentDensityMap2FeaturesEXT), (count), (err))
-#define znewchainVkPhysicalDeviceFragmentDensityMap2FeaturesEXT moonvulkan_znewchainVkPhysicalDeviceFragmentDensityMap2FeaturesEXT
-VkPhysicalDeviceFragmentDensityMap2FeaturesEXT* znewchainVkPhysicalDeviceFragmentDensityMap2FeaturesEXT(lua_State *L, int *err);
-#define znewchainarrayVkPhysicalDeviceFragmentDensityMap2FeaturesEXT moonvulkan_znewchainarrayVkPhysicalDeviceFragmentDensityMap2FeaturesEXT
-VkPhysicalDeviceFragmentDensityMap2FeaturesEXT* znewchainarrayVkPhysicalDeviceFragmentDensityMap2FeaturesEXT(lua_State *L, uint32_t count, int *err);
-#define zcheckVkPhysicalDeviceFragmentDensityMap2FeaturesEXT moonvulkan_zcheckVkPhysicalDeviceFragmentDensityMap2FeaturesEXT
-VkPhysicalDeviceFragmentDensityMap2FeaturesEXT* zcheckVkPhysicalDeviceFragmentDensityMap2FeaturesEXT(lua_State *L, int arg, int *err);
-#define zcheckarrayVkPhysicalDeviceFragmentDensityMap2FeaturesEXT moonvulkan_zcheckarrayVkPhysicalDeviceFragmentDensityMap2FeaturesEXT
-VkPhysicalDeviceFragmentDensityMap2FeaturesEXT* zcheckarrayVkPhysicalDeviceFragmentDensityMap2FeaturesEXT(lua_State *L, int arg, uint32_t *count, int *err);
-#define zinitVkPhysicalDeviceFragmentDensityMap2FeaturesEXT moonvulkan_zinitVkPhysicalDeviceFragmentDensityMap2FeaturesEXT
-int zinitVkPhysicalDeviceFragmentDensityMap2FeaturesEXT(lua_State *L, VkPhysicalDeviceFragmentDensityMap2FeaturesEXT* p, int *err);
-#define zfreeVkPhysicalDeviceFragmentDensityMap2FeaturesEXT(L, p, base) zfree((L), (p), (base))
-#define zfreearrayVkPhysicalDeviceFragmentDensityMap2FeaturesEXT(L, p, count, base) zfreearray((L), (p), sizeof(VkPhysicalDeviceFragmentDensityMap2FeaturesEXT), (count), (base))
-#define zpushVkPhysicalDeviceFragmentDensityMap2FeaturesEXT moonvulkan_zpushVkPhysicalDeviceFragmentDensityMap2FeaturesEXT
-int zpushVkPhysicalDeviceFragmentDensityMap2FeaturesEXT(lua_State *L, const VkPhysicalDeviceFragmentDensityMap2FeaturesEXT *p);
-
-#define znewVkPhysicalDeviceImageRobustnessFeaturesEXT(L, err) (VkPhysicalDeviceImageRobustnessFeaturesEXT*)znew((L), VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_ROBUSTNESS_FEATURES_EXT, sizeof(VkPhysicalDeviceImageRobustnessFeaturesEXT), (err))
-#define znewarrayVkPhysicalDeviceImageRobustnessFeaturesEXT(L, count, err) (VkPhysicalDeviceImageRobustnessFeaturesEXT*)znewarray((L), VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_ROBUSTNESS_FEATURES_EXT, sizeof(VkPhysicalDeviceImageRobustnessFeaturesEXT), (count), (err))
-#define znewchainVkPhysicalDeviceImageRobustnessFeaturesEXT moonvulkan_znewchainVkPhysicalDeviceImageRobustnessFeaturesEXT
-VkPhysicalDeviceImageRobustnessFeaturesEXT* znewchainVkPhysicalDeviceImageRobustnessFeaturesEXT(lua_State *L, int *err);
-#define znewchainarrayVkPhysicalDeviceImageRobustnessFeaturesEXT moonvulkan_znewchainarrayVkPhysicalDeviceImageRobustnessFeaturesEXT
-VkPhysicalDeviceImageRobustnessFeaturesEXT* znewchainarrayVkPhysicalDeviceImageRobustnessFeaturesEXT(lua_State *L, uint32_t count, int *err);
-#define zcheckVkPhysicalDeviceImageRobustnessFeaturesEXT moonvulkan_zcheckVkPhysicalDeviceImageRobustnessFeaturesEXT
-VkPhysicalDeviceImageRobustnessFeaturesEXT* zcheckVkPhysicalDeviceImageRobustnessFeaturesEXT(lua_State *L, int arg, int *err);
-#define zcheckarrayVkPhysicalDeviceImageRobustnessFeaturesEXT moonvulkan_zcheckarrayVkPhysicalDeviceImageRobustnessFeaturesEXT
-VkPhysicalDeviceImageRobustnessFeaturesEXT* zcheckarrayVkPhysicalDeviceImageRobustnessFeaturesEXT(lua_State *L, int arg, uint32_t *count, int *err);
-#define zinitVkPhysicalDeviceImageRobustnessFeaturesEXT moonvulkan_zinitVkPhysicalDeviceImageRobustnessFeaturesEXT
-int zinitVkPhysicalDeviceImageRobustnessFeaturesEXT(lua_State *L, VkPhysicalDeviceImageRobustnessFeaturesEXT* p, int *err);
-#define zfreeVkPhysicalDeviceImageRobustnessFeaturesEXT(L, p, base) zfree((L), (p), (base))
-#define zfreearrayVkPhysicalDeviceImageRobustnessFeaturesEXT(L, p, count, base) zfreearray((L), (p), sizeof(VkPhysicalDeviceImageRobustnessFeaturesEXT), (count), (base))
-#define zpushVkPhysicalDeviceImageRobustnessFeaturesEXT moonvulkan_zpushVkPhysicalDeviceImageRobustnessFeaturesEXT
-int zpushVkPhysicalDeviceImageRobustnessFeaturesEXT(lua_State *L, const VkPhysicalDeviceImageRobustnessFeaturesEXT *p);
-
-#define znewVkPhysicalDevice4444FormatsFeaturesEXT(L, err) (VkPhysicalDevice4444FormatsFeaturesEXT*)znew((L), VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_4444_FORMATS_FEATURES_EXT, sizeof(VkPhysicalDevice4444FormatsFeaturesEXT), (err))
-#define znewarrayVkPhysicalDevice4444FormatsFeaturesEXT(L, count, err) (VkPhysicalDevice4444FormatsFeaturesEXT*)znewarray((L), VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_4444_FORMATS_FEATURES_EXT, sizeof(VkPhysicalDevice4444FormatsFeaturesEXT), (count), (err))
-#define znewchainVkPhysicalDevice4444FormatsFeaturesEXT moonvulkan_znewchainVkPhysicalDevice4444FormatsFeaturesEXT
-VkPhysicalDevice4444FormatsFeaturesEXT* znewchainVkPhysicalDevice4444FormatsFeaturesEXT(lua_State *L, int *err);
-#define znewchainarrayVkPhysicalDevice4444FormatsFeaturesEXT moonvulkan_znewchainarrayVkPhysicalDevice4444FormatsFeaturesEXT
-VkPhysicalDevice4444FormatsFeaturesEXT* znewchainarrayVkPhysicalDevice4444FormatsFeaturesEXT(lua_State *L, uint32_t count, int *err);
-#define zcheckVkPhysicalDevice4444FormatsFeaturesEXT moonvulkan_zcheckVkPhysicalDevice4444FormatsFeaturesEXT
-VkPhysicalDevice4444FormatsFeaturesEXT* zcheckVkPhysicalDevice4444FormatsFeaturesEXT(lua_State *L, int arg, int *err);
-#define zcheckarrayVkPhysicalDevice4444FormatsFeaturesEXT moonvulkan_zcheckarrayVkPhysicalDevice4444FormatsFeaturesEXT
-VkPhysicalDevice4444FormatsFeaturesEXT* zcheckarrayVkPhysicalDevice4444FormatsFeaturesEXT(lua_State *L, int arg, uint32_t *count, int *err);
-#define zinitVkPhysicalDevice4444FormatsFeaturesEXT moonvulkan_zinitVkPhysicalDevice4444FormatsFeaturesEXT
-int zinitVkPhysicalDevice4444FormatsFeaturesEXT(lua_State *L, VkPhysicalDevice4444FormatsFeaturesEXT* p, int *err);
-#define zfreeVkPhysicalDevice4444FormatsFeaturesEXT(L, p, base) zfree((L), (p), (base))
-#define zfreearrayVkPhysicalDevice4444FormatsFeaturesEXT(L, p, count, base) zfreearray((L), (p), sizeof(VkPhysicalDevice4444FormatsFeaturesEXT), (count), (base))
-#define zpushVkPhysicalDevice4444FormatsFeaturesEXT moonvulkan_zpushVkPhysicalDevice4444FormatsFeaturesEXT
-int zpushVkPhysicalDevice4444FormatsFeaturesEXT(lua_State *L, const VkPhysicalDevice4444FormatsFeaturesEXT *p);
-
-#define znewVkPhysicalDeviceVertexInputDynamicStateFeaturesEXT(L, err) (VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT*)znew((L), VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VERTEX_INPUT_DYNAMIC_STATE_FEATURES_EXT, sizeof(VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT), (err))
-#define znewarrayVkPhysicalDeviceVertexInputDynamicStateFeaturesEXT(L, count, err) (VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT*)znewarray((L), VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VERTEX_INPUT_DYNAMIC_STATE_FEATURES_EXT, sizeof(VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT), (count), (err))
-#define znewchainVkPhysicalDeviceVertexInputDynamicStateFeaturesEXT moonvulkan_znewchainVkPhysicalDeviceVertexInputDynamicStateFeaturesEXT
-VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT* znewchainVkPhysicalDeviceVertexInputDynamicStateFeaturesEXT(lua_State *L, int *err);
-#define znewchainarrayVkPhysicalDeviceVertexInputDynamicStateFeaturesEXT moonvulkan_znewchainarrayVkPhysicalDeviceVertexInputDynamicStateFeaturesEXT
-VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT* znewchainarrayVkPhysicalDeviceVertexInputDynamicStateFeaturesEXT(lua_State *L, uint32_t count, int *err);
-#define zcheckVkPhysicalDeviceVertexInputDynamicStateFeaturesEXT moonvulkan_zcheckVkPhysicalDeviceVertexInputDynamicStateFeaturesEXT
-VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT* zcheckVkPhysicalDeviceVertexInputDynamicStateFeaturesEXT(lua_State *L, int arg, int *err);
-#define zcheckarrayVkPhysicalDeviceVertexInputDynamicStateFeaturesEXT moonvulkan_zcheckarrayVkPhysicalDeviceVertexInputDynamicStateFeaturesEXT
-VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT* zcheckarrayVkPhysicalDeviceVertexInputDynamicStateFeaturesEXT(lua_State *L, int arg, uint32_t *count, int *err);
-#define zinitVkPhysicalDeviceVertexInputDynamicStateFeaturesEXT moonvulkan_zinitVkPhysicalDeviceVertexInputDynamicStateFeaturesEXT
-int zinitVkPhysicalDeviceVertexInputDynamicStateFeaturesEXT(lua_State *L, VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT* p, int *err);
-#define zfreeVkPhysicalDeviceVertexInputDynamicStateFeaturesEXT(L, p, base) zfree((L), (p), (base))
-#define zfreearrayVkPhysicalDeviceVertexInputDynamicStateFeaturesEXT(L, p, count, base) zfreearray((L), (p), sizeof(VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT), (count), (base))
-#define zpushVkPhysicalDeviceVertexInputDynamicStateFeaturesEXT moonvulkan_zpushVkPhysicalDeviceVertexInputDynamicStateFeaturesEXT
-int zpushVkPhysicalDeviceVertexInputDynamicStateFeaturesEXT(lua_State *L, const VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT *p);
-
 #define znewVkVertexInputBindingDescription2EXT(L, err) (VkVertexInputBindingDescription2EXT*)znew((L), VK_STRUCTURE_TYPE_VERTEX_INPUT_BINDING_DESCRIPTION_2_EXT, sizeof(VkVertexInputBindingDescription2EXT), (err))
 #define znewarrayVkVertexInputBindingDescription2EXT(L, count, err) (VkVertexInputBindingDescription2EXT*)znewarray((L), VK_STRUCTURE_TYPE_VERTEX_INPUT_BINDING_DESCRIPTION_2_EXT, sizeof(VkVertexInputBindingDescription2EXT), (count), (err))
 #define znewchainVkVertexInputBindingDescription2EXT moonvulkan_znewchainVkVertexInputBindingDescription2EXT
@@ -5124,40 +4393,6 @@ int zinitVkVertexInputAttributeDescription2EXT(lua_State *L, VkVertexInputAttrib
 #define zpushVkVertexInputAttributeDescription2EXT moonvulkan_zpushVkVertexInputAttributeDescription2EXT
 int zpushVkVertexInputAttributeDescription2EXT(lua_State *L, const VkVertexInputAttributeDescription2EXT *p);
 
-#define znewVkPhysicalDeviceExtendedDynamicState2FeaturesEXT(L, err) (VkPhysicalDeviceExtendedDynamicState2FeaturesEXT*)znew((L), VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTENDED_DYNAMIC_STATE_2_FEATURES_EXT, sizeof(VkPhysicalDeviceExtendedDynamicState2FeaturesEXT), (err))
-#define znewarrayVkPhysicalDeviceExtendedDynamicState2FeaturesEXT(L, count, err) (VkPhysicalDeviceExtendedDynamicState2FeaturesEXT*)znewarray((L), VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTENDED_DYNAMIC_STATE_2_FEATURES_EXT, sizeof(VkPhysicalDeviceExtendedDynamicState2FeaturesEXT), (count), (err))
-#define znewchainVkPhysicalDeviceExtendedDynamicState2FeaturesEXT moonvulkan_znewchainVkPhysicalDeviceExtendedDynamicState2FeaturesEXT
-VkPhysicalDeviceExtendedDynamicState2FeaturesEXT* znewchainVkPhysicalDeviceExtendedDynamicState2FeaturesEXT(lua_State *L, int *err);
-#define znewchainarrayVkPhysicalDeviceExtendedDynamicState2FeaturesEXT moonvulkan_znewchainarrayVkPhysicalDeviceExtendedDynamicState2FeaturesEXT
-VkPhysicalDeviceExtendedDynamicState2FeaturesEXT* znewchainarrayVkPhysicalDeviceExtendedDynamicState2FeaturesEXT(lua_State *L, uint32_t count, int *err);
-#define zcheckVkPhysicalDeviceExtendedDynamicState2FeaturesEXT moonvulkan_zcheckVkPhysicalDeviceExtendedDynamicState2FeaturesEXT
-VkPhysicalDeviceExtendedDynamicState2FeaturesEXT* zcheckVkPhysicalDeviceExtendedDynamicState2FeaturesEXT(lua_State *L, int arg, int *err);
-#define zcheckarrayVkPhysicalDeviceExtendedDynamicState2FeaturesEXT moonvulkan_zcheckarrayVkPhysicalDeviceExtendedDynamicState2FeaturesEXT
-VkPhysicalDeviceExtendedDynamicState2FeaturesEXT* zcheckarrayVkPhysicalDeviceExtendedDynamicState2FeaturesEXT(lua_State *L, int arg, uint32_t *count, int *err);
-#define zinitVkPhysicalDeviceExtendedDynamicState2FeaturesEXT moonvulkan_zinitVkPhysicalDeviceExtendedDynamicState2FeaturesEXT
-int zinitVkPhysicalDeviceExtendedDynamicState2FeaturesEXT(lua_State *L, VkPhysicalDeviceExtendedDynamicState2FeaturesEXT* p, int *err);
-#define zfreeVkPhysicalDeviceExtendedDynamicState2FeaturesEXT(L, p, base) zfree((L), (p), (base))
-#define zfreearrayVkPhysicalDeviceExtendedDynamicState2FeaturesEXT(L, p, count, base) zfreearray((L), (p), sizeof(VkPhysicalDeviceExtendedDynamicState2FeaturesEXT), (count), (base))
-#define zpushVkPhysicalDeviceExtendedDynamicState2FeaturesEXT moonvulkan_zpushVkPhysicalDeviceExtendedDynamicState2FeaturesEXT
-int zpushVkPhysicalDeviceExtendedDynamicState2FeaturesEXT(lua_State *L, const VkPhysicalDeviceExtendedDynamicState2FeaturesEXT *p);
-
-#define znewVkPhysicalDeviceColorWriteEnableFeaturesEXT(L, err) (VkPhysicalDeviceColorWriteEnableFeaturesEXT*)znew((L), VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COLOR_WRITE_ENABLE_FEATURES_EXT, sizeof(VkPhysicalDeviceColorWriteEnableFeaturesEXT), (err))
-#define znewarrayVkPhysicalDeviceColorWriteEnableFeaturesEXT(L, count, err) (VkPhysicalDeviceColorWriteEnableFeaturesEXT*)znewarray((L), VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COLOR_WRITE_ENABLE_FEATURES_EXT, sizeof(VkPhysicalDeviceColorWriteEnableFeaturesEXT), (count), (err))
-#define znewchainVkPhysicalDeviceColorWriteEnableFeaturesEXT moonvulkan_znewchainVkPhysicalDeviceColorWriteEnableFeaturesEXT
-VkPhysicalDeviceColorWriteEnableFeaturesEXT* znewchainVkPhysicalDeviceColorWriteEnableFeaturesEXT(lua_State *L, int *err);
-#define znewchainarrayVkPhysicalDeviceColorWriteEnableFeaturesEXT moonvulkan_znewchainarrayVkPhysicalDeviceColorWriteEnableFeaturesEXT
-VkPhysicalDeviceColorWriteEnableFeaturesEXT* znewchainarrayVkPhysicalDeviceColorWriteEnableFeaturesEXT(lua_State *L, uint32_t count, int *err);
-#define zcheckVkPhysicalDeviceColorWriteEnableFeaturesEXT moonvulkan_zcheckVkPhysicalDeviceColorWriteEnableFeaturesEXT
-VkPhysicalDeviceColorWriteEnableFeaturesEXT* zcheckVkPhysicalDeviceColorWriteEnableFeaturesEXT(lua_State *L, int arg, int *err);
-#define zcheckarrayVkPhysicalDeviceColorWriteEnableFeaturesEXT moonvulkan_zcheckarrayVkPhysicalDeviceColorWriteEnableFeaturesEXT
-VkPhysicalDeviceColorWriteEnableFeaturesEXT* zcheckarrayVkPhysicalDeviceColorWriteEnableFeaturesEXT(lua_State *L, int arg, uint32_t *count, int *err);
-#define zinitVkPhysicalDeviceColorWriteEnableFeaturesEXT moonvulkan_zinitVkPhysicalDeviceColorWriteEnableFeaturesEXT
-int zinitVkPhysicalDeviceColorWriteEnableFeaturesEXT(lua_State *L, VkPhysicalDeviceColorWriteEnableFeaturesEXT* p, int *err);
-#define zfreeVkPhysicalDeviceColorWriteEnableFeaturesEXT(L, p, base) zfree((L), (p), (base))
-#define zfreearrayVkPhysicalDeviceColorWriteEnableFeaturesEXT(L, p, count, base) zfreearray((L), (p), sizeof(VkPhysicalDeviceColorWriteEnableFeaturesEXT), (count), (base))
-#define zpushVkPhysicalDeviceColorWriteEnableFeaturesEXT moonvulkan_zpushVkPhysicalDeviceColorWriteEnableFeaturesEXT
-int zpushVkPhysicalDeviceColorWriteEnableFeaturesEXT(lua_State *L, const VkPhysicalDeviceColorWriteEnableFeaturesEXT *p);
-
 #define znewVkPipelineColorWriteCreateInfoEXT(L, err) (VkPipelineColorWriteCreateInfoEXT*)znew((L), VK_STRUCTURE_TYPE_PIPELINE_COLOR_WRITE_CREATE_INFO_EXT, sizeof(VkPipelineColorWriteCreateInfoEXT), (err))
 #define znewarrayVkPipelineColorWriteCreateInfoEXT(L, count, err) (VkPipelineColorWriteCreateInfoEXT*)znewarray((L), VK_STRUCTURE_TYPE_PIPELINE_COLOR_WRITE_CREATE_INFO_EXT, sizeof(VkPipelineColorWriteCreateInfoEXT), (count), (err))
 #define znewchainVkPipelineColorWriteCreateInfoEXT moonvulkan_znewchainVkPipelineColorWriteCreateInfoEXT
@@ -5175,23 +4410,6 @@ int zinitVkPipelineColorWriteCreateInfoEXT(lua_State *L, VkPipelineColorWriteCre
 #define zpushVkPipelineColorWriteCreateInfoEXT moonvulkan_zpushVkPipelineColorWriteCreateInfoEXT
 int zpushVkPipelineColorWriteCreateInfoEXT(lua_State *L, const VkPipelineColorWriteCreateInfoEXT *p);
 
-#define znewVkPhysicalDeviceGlobalPriorityQueryFeaturesEXT(L, err) (VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT*)znew((L), VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_GLOBAL_PRIORITY_QUERY_FEATURES_EXT, sizeof(VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT), (err))
-#define znewarrayVkPhysicalDeviceGlobalPriorityQueryFeaturesEXT(L, count, err) (VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT*)znewarray((L), VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_GLOBAL_PRIORITY_QUERY_FEATURES_EXT, sizeof(VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT), (count), (err))
-#define znewchainVkPhysicalDeviceGlobalPriorityQueryFeaturesEXT moonvulkan_znewchainVkPhysicalDeviceGlobalPriorityQueryFeaturesEXT
-VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT* znewchainVkPhysicalDeviceGlobalPriorityQueryFeaturesEXT(lua_State *L, int *err);
-#define znewchainarrayVkPhysicalDeviceGlobalPriorityQueryFeaturesEXT moonvulkan_znewchainarrayVkPhysicalDeviceGlobalPriorityQueryFeaturesEXT
-VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT* znewchainarrayVkPhysicalDeviceGlobalPriorityQueryFeaturesEXT(lua_State *L, uint32_t count, int *err);
-#define zcheckVkPhysicalDeviceGlobalPriorityQueryFeaturesEXT moonvulkan_zcheckVkPhysicalDeviceGlobalPriorityQueryFeaturesEXT
-VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT* zcheckVkPhysicalDeviceGlobalPriorityQueryFeaturesEXT(lua_State *L, int arg, int *err);
-#define zcheckarrayVkPhysicalDeviceGlobalPriorityQueryFeaturesEXT moonvulkan_zcheckarrayVkPhysicalDeviceGlobalPriorityQueryFeaturesEXT
-VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT* zcheckarrayVkPhysicalDeviceGlobalPriorityQueryFeaturesEXT(lua_State *L, int arg, uint32_t *count, int *err);
-#define zinitVkPhysicalDeviceGlobalPriorityQueryFeaturesEXT moonvulkan_zinitVkPhysicalDeviceGlobalPriorityQueryFeaturesEXT
-int zinitVkPhysicalDeviceGlobalPriorityQueryFeaturesEXT(lua_State *L, VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT* p, int *err);
-#define zfreeVkPhysicalDeviceGlobalPriorityQueryFeaturesEXT(L, p, base) zfree((L), (p), (base))
-#define zfreearrayVkPhysicalDeviceGlobalPriorityQueryFeaturesEXT(L, p, count, base) zfreearray((L), (p), sizeof(VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT), (count), (base))
-#define zpushVkPhysicalDeviceGlobalPriorityQueryFeaturesEXT moonvulkan_zpushVkPhysicalDeviceGlobalPriorityQueryFeaturesEXT
-int zpushVkPhysicalDeviceGlobalPriorityQueryFeaturesEXT(lua_State *L, const VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT *p);
-
 #define znewVkQueueFamilyGlobalPriorityPropertiesEXT(L, err) (VkQueueFamilyGlobalPriorityPropertiesEXT*)znew((L), VK_STRUCTURE_TYPE_QUEUE_FAMILY_GLOBAL_PRIORITY_PROPERTIES_EXT, sizeof(VkQueueFamilyGlobalPriorityPropertiesEXT), (err))
 #define znewarrayVkQueueFamilyGlobalPriorityPropertiesEXT(L, count, err) (VkQueueFamilyGlobalPriorityPropertiesEXT*)znewarray((L), VK_STRUCTURE_TYPE_QUEUE_FAMILY_GLOBAL_PRIORITY_PROPERTIES_EXT, sizeof(VkQueueFamilyGlobalPriorityPropertiesEXT), (count), (err))
 #define znewchainVkQueueFamilyGlobalPriorityPropertiesEXT moonvulkan_znewchainVkQueueFamilyGlobalPriorityPropertiesEXT
@@ -5208,23 +4426,6 @@ int zinitVkQueueFamilyGlobalPriorityPropertiesEXT(lua_State *L, VkQueueFamilyGlo
 #define zfreearrayVkQueueFamilyGlobalPriorityPropertiesEXT(L, p, count, base) zfreearray((L), (p), sizeof(VkQueueFamilyGlobalPriorityPropertiesEXT), (count), (base))
 #define zpushVkQueueFamilyGlobalPriorityPropertiesEXT moonvulkan_zpushVkQueueFamilyGlobalPriorityPropertiesEXT
 int zpushVkQueueFamilyGlobalPriorityPropertiesEXT(lua_State *L, const VkQueueFamilyGlobalPriorityPropertiesEXT *p);
-
-#define znewVkPhysicalDeviceMultiDrawFeaturesEXT(L, err) (VkPhysicalDeviceMultiDrawFeaturesEXT*)znew((L), VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTI_DRAW_FEATURES_EXT, sizeof(VkPhysicalDeviceMultiDrawFeaturesEXT), (err))
-#define znewarrayVkPhysicalDeviceMultiDrawFeaturesEXT(L, count, err) (VkPhysicalDeviceMultiDrawFeaturesEXT*)znewarray((L), VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTI_DRAW_FEATURES_EXT, sizeof(VkPhysicalDeviceMultiDrawFeaturesEXT), (count), (err))
-#define znewchainVkPhysicalDeviceMultiDrawFeaturesEXT moonvulkan_znewchainVkPhysicalDeviceMultiDrawFeaturesEXT
-VkPhysicalDeviceMultiDrawFeaturesEXT* znewchainVkPhysicalDeviceMultiDrawFeaturesEXT(lua_State *L, int *err);
-#define znewchainarrayVkPhysicalDeviceMultiDrawFeaturesEXT moonvulkan_znewchainarrayVkPhysicalDeviceMultiDrawFeaturesEXT
-VkPhysicalDeviceMultiDrawFeaturesEXT* znewchainarrayVkPhysicalDeviceMultiDrawFeaturesEXT(lua_State *L, uint32_t count, int *err);
-#define zcheckVkPhysicalDeviceMultiDrawFeaturesEXT moonvulkan_zcheckVkPhysicalDeviceMultiDrawFeaturesEXT
-VkPhysicalDeviceMultiDrawFeaturesEXT* zcheckVkPhysicalDeviceMultiDrawFeaturesEXT(lua_State *L, int arg, int *err);
-#define zcheckarrayVkPhysicalDeviceMultiDrawFeaturesEXT moonvulkan_zcheckarrayVkPhysicalDeviceMultiDrawFeaturesEXT
-VkPhysicalDeviceMultiDrawFeaturesEXT* zcheckarrayVkPhysicalDeviceMultiDrawFeaturesEXT(lua_State *L, int arg, uint32_t *count, int *err);
-#define zinitVkPhysicalDeviceMultiDrawFeaturesEXT moonvulkan_zinitVkPhysicalDeviceMultiDrawFeaturesEXT
-int zinitVkPhysicalDeviceMultiDrawFeaturesEXT(lua_State *L, VkPhysicalDeviceMultiDrawFeaturesEXT* p, int *err);
-#define zfreeVkPhysicalDeviceMultiDrawFeaturesEXT(L, p, base) zfree((L), (p), (base))
-#define zfreearrayVkPhysicalDeviceMultiDrawFeaturesEXT(L, p, count, base) zfreearray((L), (p), sizeof(VkPhysicalDeviceMultiDrawFeaturesEXT), (count), (base))
-#define zpushVkPhysicalDeviceMultiDrawFeaturesEXT moonvulkan_zpushVkPhysicalDeviceMultiDrawFeaturesEXT
-int zpushVkPhysicalDeviceMultiDrawFeaturesEXT(lua_State *L, const VkPhysicalDeviceMultiDrawFeaturesEXT *p);
 
 
 #ifdef VK_USE_PLATFORM_WIN32_KHR
