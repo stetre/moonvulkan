@@ -1680,7 +1680,7 @@ LOCALCHECK_BEGIN(PHYSICAL_DEVICE_CONDITIONAL_RENDERING_FEATURES_EXT, VkPhysicalD
     GetBoolean(conditionalRendering, "conditional_rendering");
     GetBoolean(inheritedConditionalRendering, "inherited_conditional_rendering");
 LOCALCHECK_END
-LOCALCHECK_BEGIN(PHYSICAL_DEVICE_8BIT_STORAGE_FEATURES_KHR , VkPhysicalDevice8BitStorageFeaturesKHR)
+LOCALCHECK_BEGIN(PHYSICAL_DEVICE_8BIT_STORAGE_FEATURES, VkPhysicalDevice8BitStorageFeatures)
     GetBoolean(storageBuffer8BitAccess, "storage_buffer_8bit_access");
     GetBoolean(uniformAndStorageBuffer8BitAccess, "uniform_and_storage_buffer_8bit_access");
     GetBoolean(storagePushConstant8, "storage_push_constant_8");
@@ -1729,12 +1729,12 @@ LOCALCHECK_BEGIN(PHYSICAL_DEVICE_MULTIVIEW_FEATURES, VkPhysicalDeviceMultiviewFe
     GetBoolean(multiviewGeometryShader, "multiview_geometry_shader");
     GetBoolean(multiviewTessellationShader, "multiview_tessellation_shader");
 LOCALCHECK_END
-LOCALCHECK_BEGIN(PHYSICAL_DEVICE_VULKAN_MEMORY_MODEL_FEATURES_KHR, VkPhysicalDeviceVulkanMemoryModelFeaturesKHR)
+LOCALCHECK_BEGIN(PHYSICAL_DEVICE_VULKAN_MEMORY_MODEL_FEATURES, VkPhysicalDeviceVulkanMemoryModelFeatures)
     GetBoolean(vulkanMemoryModel, "vulkan_memory_model");
     GetBoolean(vulkanMemoryModelDeviceScope, "vulkan_memory_model_device_scope");
     GetBoolean(vulkanMemoryModelAvailabilityVisibilityChains, "vulkan_memory_model_availability_visibility_chains");
 LOCALCHECK_END
-LOCALCHECK_BEGIN(PHYSICAL_DEVICE_SHADER_ATOMIC_INT64_FEATURES_KHR, VkPhysicalDeviceShaderAtomicInt64FeaturesKHR)
+LOCALCHECK_BEGIN(PHYSICAL_DEVICE_SHADER_ATOMIC_INT64_FEATURES, VkPhysicalDeviceShaderAtomicInt64Features)
     GetBoolean(shaderBufferInt64Atomics, "shader_buffer_int64_atomics");
     GetBoolean(shaderSharedInt64Atomics, "shader_shared_int64_atomics");
 LOCALCHECK_END
@@ -1742,14 +1742,14 @@ LOCALCHECK_BEGIN(PHYSICAL_DEVICE_TRANSFORM_FEEDBACK_FEATURES_EXT, VkPhysicalDevi
     GetBoolean(transformFeedback, "transform_feedback");
     GetBoolean(geometryStreams, "geometry_streams");
 LOCALCHECK_END
-LOCALCHECK_BEGIN(PHYSICAL_DEVICE_FLOAT16_INT8_FEATURES_KHR , VkPhysicalDeviceFloat16Int8FeaturesKHR)
+LOCALCHECK_BEGIN(PHYSICAL_DEVICE_SHADER_FLOAT16_INT8_FEATURES, VkPhysicalDeviceShaderFloat16Int8Features)
     GetBoolean(shaderFloat16, "shader_float16");
     GetBoolean(shaderInt8, "shader_int8");
 LOCALCHECK_END
-LOCALCHECK_BEGIN(PHYSICAL_DEVICE_UNIFORM_BUFFER_STANDARD_LAYOUT_FEATURES_KHR, VkPhysicalDeviceUniformBufferStandardLayoutFeaturesKHR)
+LOCALCHECK_BEGIN(PHYSICAL_DEVICE_UNIFORM_BUFFER_STANDARD_LAYOUT_FEATURES, VkPhysicalDeviceUniformBufferStandardLayoutFeatures)
     GetBoolean(uniformBufferStandardLayout, "uniform_buffer_standard_layout");
 LOCALCHECK_END
-LOCALCHECK_BEGIN(PHYSICAL_DEVICE_SCALAR_BLOCK_LAYOUT_FEATURES_EXT, VkPhysicalDeviceScalarBlockLayoutFeaturesEXT)
+LOCALCHECK_BEGIN(PHYSICAL_DEVICE_SCALAR_BLOCK_LAYOUT_FEATURES, VkPhysicalDeviceScalarBlockLayoutFeatures)
     GetBoolean(scalarBlockLayout, "scalar_block_layout");
 LOCALCHECK_END
 LOCALCHECK_BEGIN(PHYSICAL_DEVICE_FRAGMENT_SHADER_INTERLOCK_FEATURES_EXT, VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT)
@@ -1763,7 +1763,7 @@ LOCALCHECK_END
 LOCALCHECK_BEGIN(PHYSICAL_DEVICE_SHADER_DEMOTE_TO_HELPER_INVOCATION_FEATURES_EXT, VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT)
     GetBoolean(shaderDemoteToHelperInvocation, "shader_demote_to_helper_invocation");
 LOCALCHECK_END
-LOCALCHECK_BEGIN(PHYSICAL_DEVICE_IMAGELESS_FRAMEBUFFER_FEATURES_KHR, VkPhysicalDeviceImagelessFramebufferFeaturesKHR)
+LOCALCHECK_BEGIN(PHYSICAL_DEVICE_IMAGELESS_FRAMEBUFFER_FEATURES, VkPhysicalDeviceImagelessFramebufferFeatures)
     GetBoolean(imagelessFramebuffer, "imageless_framebuffer");
 LOCALCHECK_END
 LOCALCHECK_BEGIN(PHYSICAL_DEVICE_DEPTH_CLIP_ENABLE_FEATURES_EXT, VkPhysicalDeviceDepthClipEnableFeaturesEXT)
@@ -1782,7 +1782,7 @@ LOCALCHECK_BEGIN(PHYSICAL_DEVICE_BUFFER_DEVICE_ADDRESS_FEATURES_EXT, VkPhysicalD
     GetBoolean(bufferDeviceAddressCaptureReplay, "buffer_device_address_capture_replay");
     GetBoolean(bufferDeviceAddressMultiDevice, "buffer_device_address_multi_device");
 LOCALCHECK_END
-LOCALCHECK_BEGIN(PHYSICAL_DEVICE_HOST_QUERY_RESET_FEATURES_EXT, VkPhysicalDeviceHostQueryResetFeaturesEXT)
+LOCALCHECK_BEGIN(PHYSICAL_DEVICE_HOST_QUERY_RESET_FEATURES, VkPhysicalDeviceHostQueryResetFeatures)
     GetBoolean(hostQueryReset, "host_query_reset");
 LOCALCHECK_END
 LOCALCHECK_BEGIN(PHYSICAL_DEVICE_TEXEL_BUFFER_ALIGNMENT_FEATURES_EXT, VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT)
@@ -1973,7 +1973,7 @@ ZINIT_BEGIN(VkPhysicalDeviceFeatures2)
         ADDX(PHYSICAL_DEVICE_BLEND_OPERATION_ADVANCED_FEATURES_EXT, VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT);
         ADDX(PHYSICAL_DEVICE_SAMPLER_YCBCR_CONVERSION_FEATURES, VkPhysicalDeviceSamplerYcbcrConversionFeatures);
         ADDX(PHYSICAL_DEVICE_CONDITIONAL_RENDERING_FEATURES_EXT, VkPhysicalDeviceConditionalRenderingFeaturesEXT);
-        ADDX(PHYSICAL_DEVICE_8BIT_STORAGE_FEATURES_KHR , VkPhysicalDevice8BitStorageFeaturesKHR);
+        ADDX(PHYSICAL_DEVICE_8BIT_STORAGE_FEATURES_KHR , VkPhysicalDevice8BitStorageFeatures);
         ADDX(PHYSICAL_DEVICE_PROTECTED_MEMORY_FEATURES, VkPhysicalDeviceProtectedMemoryFeatures);
         ADDX(PHYSICAL_DEVICE_SHADER_DRAW_PARAMETERS_FEATURES,VkPhysicalDeviceShaderDrawParametersFeatures);
         ADDX(PHYSICAL_DEVICE_ASTC_DECODE_FEATURES_EXT, VkPhysicalDeviceASTCDecodeFeaturesEXT);
@@ -1981,21 +1981,21 @@ ZINIT_BEGIN(VkPhysicalDeviceFeatures2)
         ADDX(PHYSICAL_DEVICE_INLINE_UNIFORM_BLOCK_FEATURES_EXT, VkPhysicalDeviceInlineUniformBlockFeaturesEXT);
         ADDX(PHYSICAL_DEVICE_DESCRIPTOR_INDEXING_FEATURES_EXT, VkPhysicalDeviceDescriptorIndexingFeaturesEXT);
         ADDX(PHYSICAL_DEVICE_MULTIVIEW_FEATURES_KHR, VkPhysicalDeviceMultiviewFeaturesKHR);
-        ADDX(PHYSICAL_DEVICE_VULKAN_MEMORY_MODEL_FEATURES_KHR, VkPhysicalDeviceVulkanMemoryModelFeaturesKHR);
-        ADDX(PHYSICAL_DEVICE_SHADER_ATOMIC_INT64_FEATURES_KHR, VkPhysicalDeviceShaderAtomicInt64FeaturesKHR);
+        ADDX(PHYSICAL_DEVICE_VULKAN_MEMORY_MODEL_FEATURES, VkPhysicalDeviceVulkanMemoryModelFeatures);
+        ADDX(PHYSICAL_DEVICE_SHADER_ATOMIC_INT64_FEATURES, VkPhysicalDeviceShaderAtomicInt64Features);
         ADDX(PHYSICAL_DEVICE_TRANSFORM_FEEDBACK_FEATURES_EXT, VkPhysicalDeviceTransformFeedbackFeaturesEXT);
-        ADDX(PHYSICAL_DEVICE_FLOAT16_INT8_FEATURES_KHR, VkPhysicalDeviceFloat16Int8FeaturesKHR);
-        ADDX(PHYSICAL_DEVICE_UNIFORM_BUFFER_STANDARD_LAYOUT_FEATURES_KHR, VkPhysicalDeviceUniformBufferStandardLayoutFeaturesKHR);
-        ADDX(PHYSICAL_DEVICE_SCALAR_BLOCK_LAYOUT_FEATURES_EXT, VkPhysicalDeviceScalarBlockLayoutFeaturesEXT);
+        ADDX(PHYSICAL_DEVICE_SHADER_FLOAT16_INT8_FEATURES, VkPhysicalDeviceShaderFloat16Int8Features);
+        ADDX(PHYSICAL_DEVICE_UNIFORM_BUFFER_STANDARD_LAYOUT_FEATURES, VkPhysicalDeviceUniformBufferStandardLayoutFeatures);
+        ADDX(PHYSICAL_DEVICE_SCALAR_BLOCK_LAYOUT_FEATURES, VkPhysicalDeviceScalarBlockLayoutFeatures);
         ADDX(PHYSICAL_DEVICE_FRAGMENT_SHADER_INTERLOCK_FEATURES_EXT, VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT);
         ADDX(PHYSICAL_DEVICE_YCBCR_IMAGE_ARRAYS_FEATURES_EXT, VkPhysicalDeviceYcbcrImageArraysFeaturesEXT);
         ADDX(PHYSICAL_DEVICE_SHADER_DEMOTE_TO_HELPER_INVOCATION_FEATURES_EXT, VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT);
-        ADDX(PHYSICAL_DEVICE_IMAGELESS_FRAMEBUFFER_FEATURES_KHR, VkPhysicalDeviceImagelessFramebufferFeaturesKHR);
+        ADDX(PHYSICAL_DEVICE_IMAGELESS_FRAMEBUFFER_FEATURES, VkPhysicalDeviceImagelessFramebufferFeatures);
         ADDX(PHYSICAL_DEVICE_DEPTH_CLIP_ENABLE_FEATURES_EXT, VkPhysicalDeviceDepthClipEnableFeaturesEXT);
         ADDX(PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_FEATURES_EXT, VkPhysicalDeviceFragmentDensityMapFeaturesEXT);
         ADDX(PHYSICAL_DEVICE_MEMORY_PRIORITY_FEATURES_EXT, VkPhysicalDeviceMemoryPriorityFeaturesEXT);
         ADDX(PHYSICAL_DEVICE_BUFFER_DEVICE_ADDRESS_FEATURES_EXT, VkPhysicalDeviceBufferDeviceAddressFeaturesEXT);
-        ADDX(PHYSICAL_DEVICE_HOST_QUERY_RESET_FEATURES_EXT, VkPhysicalDeviceHostQueryResetFeaturesEXT);
+        ADDX(PHYSICAL_DEVICE_HOST_QUERY_RESET_FEATURES, VkPhysicalDeviceHostQueryResetFeatures);
         ADDX(PHYSICAL_DEVICE_TEXEL_BUFFER_ALIGNMENT_FEATURES_EXT, VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT);
         ADDX(PHYSICAL_DEVICE_PERFORMANCE_QUERY_FEATURES_KHR, VkPhysicalDevicePerformanceQueryFeaturesKHR);
         ADDX(PHYSICAL_DEVICE_SHADER_SUBGROUP_EXTENDED_TYPES_FEATURES, VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures);
@@ -2062,7 +2062,7 @@ ZCHECK_BEGIN(VkPhysicalDeviceFeatures2)
         ADD(VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT);
         ADD(VkPhysicalDeviceSamplerYcbcrConversionFeatures);
         ADD(VkPhysicalDeviceConditionalRenderingFeaturesEXT);
-        ADD(VkPhysicalDevice8BitStorageFeaturesKHR);
+        ADD(VkPhysicalDevice8BitStorageFeatures);
         ADD(VkPhysicalDeviceProtectedMemoryFeatures);
         ADD(VkPhysicalDeviceShaderDrawParametersFeatures);
         ADD(VkPhysicalDeviceASTCDecodeFeaturesEXT);
@@ -2070,21 +2070,21 @@ ZCHECK_BEGIN(VkPhysicalDeviceFeatures2)
         ADD(VkPhysicalDeviceInlineUniformBlockFeaturesEXT);
         ADD(VkPhysicalDeviceDescriptorIndexingFeaturesEXT);
         ADD(VkPhysicalDeviceMultiviewFeaturesKHR);
-        ADD(VkPhysicalDeviceVulkanMemoryModelFeaturesKHR);
-        ADD(VkPhysicalDeviceShaderAtomicInt64FeaturesKHR);
+        ADD(VkPhysicalDeviceVulkanMemoryModelFeatures);
+        ADD(VkPhysicalDeviceShaderAtomicInt64Features);
         ADD(VkPhysicalDeviceTransformFeedbackFeaturesEXT);
-        ADD(VkPhysicalDeviceFloat16Int8FeaturesKHR);
-        ADD(VkPhysicalDeviceUniformBufferStandardLayoutFeaturesKHR);
-        ADD(VkPhysicalDeviceScalarBlockLayoutFeaturesEXT);
+        ADD(VkPhysicalDeviceShaderFloat16Int8Features);
+        ADD(VkPhysicalDeviceUniformBufferStandardLayoutFeatures);
+        ADD(VkPhysicalDeviceScalarBlockLayoutFeatures);
         ADD(VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT);
         ADD(VkPhysicalDeviceYcbcrImageArraysFeaturesEXT);
         ADD(VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT);
-        ADD(VkPhysicalDeviceImagelessFramebufferFeaturesKHR);
+        ADD(VkPhysicalDeviceImagelessFramebufferFeatures);
         ADD(VkPhysicalDeviceDepthClipEnableFeaturesEXT);
         ADD(VkPhysicalDeviceFragmentDensityMapFeaturesEXT);
         ADD(VkPhysicalDeviceMemoryPriorityFeaturesEXT);
         ADD(VkPhysicalDeviceBufferDeviceAddressFeaturesEXT);
-        ADD(VkPhysicalDeviceHostQueryResetFeaturesEXT);
+        ADD(VkPhysicalDeviceHostQueryResetFeatures);
         ADD(VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT);
         ADD(VkPhysicalDevicePerformanceQueryFeaturesKHR);
         ADD(VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures);
@@ -2208,7 +2208,7 @@ LOCALPUSH_BEGIN(VkPhysicalDeviceConditionalRenderingFeaturesEXT)
     SetBoolean(conditionalRendering, "conditional_rendering");
     SetBoolean(inheritedConditionalRendering, "inherited_conditional_rendering");
 LOCALPUSH_END
-LOCALPUSH_BEGIN(VkPhysicalDevice8BitStorageFeaturesKHR)
+LOCALPUSH_BEGIN(VkPhysicalDevice8BitStorageFeatures)
     SetBoolean(storageBuffer8BitAccess, "storage_buffer_8bit_access");
     SetBoolean(uniformAndStorageBuffer8BitAccess, "uniform_and_storage_buffer_8bit_access");
     SetBoolean(storagePushConstant8, "storage_push_constant_8");
@@ -2257,12 +2257,12 @@ LOCALPUSH_BEGIN(VkPhysicalDeviceMultiviewFeaturesKHR)
     SetBoolean(multiviewGeometryShader, "multiview_geometry_shader");
     SetBoolean(multiviewTessellationShader, "multiview_tessellation_shader");
 LOCALPUSH_END
-LOCALPUSH_BEGIN(VkPhysicalDeviceVulkanMemoryModelFeaturesKHR)
+LOCALPUSH_BEGIN(VkPhysicalDeviceVulkanMemoryModelFeatures)
     SetBoolean(vulkanMemoryModel, "vulkan_memory_model");
     SetBoolean(vulkanMemoryModelDeviceScope, "vulkan_memory_model_device_scope");
     SetBoolean(vulkanMemoryModelAvailabilityVisibilityChains, "vulkan_memory_model_availability_visibility_chains");
 LOCALPUSH_END
-LOCALPUSH_BEGIN(VkPhysicalDeviceShaderAtomicInt64FeaturesKHR)
+LOCALPUSH_BEGIN(VkPhysicalDeviceShaderAtomicInt64Features)
     SetBoolean(shaderBufferInt64Atomics, "shader_buffer_int64_atomics");
     SetBoolean(shaderSharedInt64Atomics, "shader_shared_int64_atomics");
 LOCALPUSH_END
@@ -2270,14 +2270,14 @@ LOCALPUSH_BEGIN(VkPhysicalDeviceTransformFeedbackFeaturesEXT)
     SetBoolean(transformFeedback, "transform_feedback");
     SetBoolean(geometryStreams, "geometry_streams");
 LOCALPUSH_END
-LOCALPUSH_BEGIN(VkPhysicalDeviceFloat16Int8FeaturesKHR)
+LOCALPUSH_BEGIN(VkPhysicalDeviceShaderFloat16Int8Features)
     SetBoolean(shaderFloat16, "shader_float16");
     SetBoolean(shaderInt8, "shader_int8");
 LOCALPUSH_END
-LOCALPUSH_BEGIN(VkPhysicalDeviceUniformBufferStandardLayoutFeaturesKHR)
+LOCALPUSH_BEGIN(VkPhysicalDeviceUniformBufferStandardLayoutFeatures)
     SetBoolean(uniformBufferStandardLayout, "uniform_buffer_standard_layout");
 LOCALPUSH_END
-LOCALPUSH_BEGIN(VkPhysicalDeviceScalarBlockLayoutFeaturesEXT)
+LOCALPUSH_BEGIN(VkPhysicalDeviceScalarBlockLayoutFeatures)
     SetBoolean(scalarBlockLayout, "scalar_block_layout");
 LOCALPUSH_END
 LOCALPUSH_BEGIN(VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT)
@@ -2291,7 +2291,7 @@ LOCALPUSH_END
 LOCALPUSH_BEGIN(VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT)
     SetBoolean(shaderDemoteToHelperInvocation, "shader_demote_to_helper_invocation");
 LOCALPUSH_END
-LOCALPUSH_BEGIN(VkPhysicalDeviceImagelessFramebufferFeaturesKHR)
+LOCALPUSH_BEGIN(VkPhysicalDeviceImagelessFramebufferFeatures)
     SetBoolean(imagelessFramebuffer, "imageless_framebuffer");
 LOCALPUSH_END
 LOCALPUSH_BEGIN(VkPhysicalDeviceDepthClipEnableFeaturesEXT)
@@ -2310,7 +2310,7 @@ LOCALPUSH_BEGIN(VkPhysicalDeviceBufferDeviceAddressFeaturesEXT)
     SetBoolean(bufferDeviceAddressCaptureReplay, "buffer_device_address_capture_replay");
     SetBoolean(bufferDeviceAddressMultiDevice, "buffer_device_address_multi_device");
 LOCALPUSH_END
-LOCALPUSH_BEGIN(VkPhysicalDeviceHostQueryResetFeaturesEXT)
+LOCALPUSH_BEGIN(VkPhysicalDeviceHostQueryResetFeatures)
     SetBoolean(hostQueryReset, "host_query_reset");
 LOCALPUSH_END
 LOCALPUSH_BEGIN(VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT)
@@ -2508,7 +2508,7 @@ ZPUSH_BEGIN(VkPhysicalDeviceFeatures2)
         XCASE(PHYSICAL_DEVICE_BLEND_OPERATION_ADVANCED_FEATURES_EXT, VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT);
         XCASE(PHYSICAL_DEVICE_SAMPLER_YCBCR_CONVERSION_FEATURES, VkPhysicalDeviceSamplerYcbcrConversionFeatures);
         XCASE(PHYSICAL_DEVICE_CONDITIONAL_RENDERING_FEATURES_EXT, VkPhysicalDeviceConditionalRenderingFeaturesEXT);
-        XCASE(PHYSICAL_DEVICE_8BIT_STORAGE_FEATURES_KHR, VkPhysicalDevice8BitStorageFeaturesKHR);
+        XCASE(PHYSICAL_DEVICE_8BIT_STORAGE_FEATURES, VkPhysicalDevice8BitStorageFeatures);
         XCASE(PHYSICAL_DEVICE_PROTECTED_MEMORY_FEATURES, VkPhysicalDeviceProtectedMemoryFeatures);
         XCASE(PHYSICAL_DEVICE_SHADER_DRAW_PARAMETERS_FEATURES, VkPhysicalDeviceShaderDrawParametersFeatures);
         XCASE(PHYSICAL_DEVICE_ASTC_DECODE_FEATURES_EXT, VkPhysicalDeviceASTCDecodeFeaturesEXT);
@@ -2516,21 +2516,21 @@ ZPUSH_BEGIN(VkPhysicalDeviceFeatures2)
         XCASE(PHYSICAL_DEVICE_INLINE_UNIFORM_BLOCK_FEATURES_EXT, VkPhysicalDeviceInlineUniformBlockFeaturesEXT);
         XCASE(PHYSICAL_DEVICE_DESCRIPTOR_INDEXING_FEATURES_EXT, VkPhysicalDeviceDescriptorIndexingFeaturesEXT);
         XCASE(PHYSICAL_DEVICE_MULTIVIEW_FEATURES_KHR, VkPhysicalDeviceMultiviewFeaturesKHR);
-        XCASE(PHYSICAL_DEVICE_VULKAN_MEMORY_MODEL_FEATURES_KHR, VkPhysicalDeviceVulkanMemoryModelFeaturesKHR);
-        XCASE(PHYSICAL_DEVICE_SHADER_ATOMIC_INT64_FEATURES_KHR, VkPhysicalDeviceShaderAtomicInt64FeaturesKHR);
+        XCASE(PHYSICAL_DEVICE_VULKAN_MEMORY_MODEL_FEATURES, VkPhysicalDeviceVulkanMemoryModelFeatures);
+        XCASE(PHYSICAL_DEVICE_SHADER_ATOMIC_INT64_FEATURES, VkPhysicalDeviceShaderAtomicInt64Features);
         XCASE(PHYSICAL_DEVICE_TRANSFORM_FEEDBACK_FEATURES_EXT, VkPhysicalDeviceTransformFeedbackFeaturesEXT);
-        XCASE(PHYSICAL_DEVICE_FLOAT16_INT8_FEATURES_KHR, VkPhysicalDeviceFloat16Int8FeaturesKHR);
-        XCASE(PHYSICAL_DEVICE_UNIFORM_BUFFER_STANDARD_LAYOUT_FEATURES_KHR, VkPhysicalDeviceUniformBufferStandardLayoutFeaturesKHR);
-        XCASE(PHYSICAL_DEVICE_SCALAR_BLOCK_LAYOUT_FEATURES_EXT, VkPhysicalDeviceScalarBlockLayoutFeaturesEXT);
+        XCASE(PHYSICAL_DEVICE_SHADER_FLOAT16_INT8_FEATURES, VkPhysicalDeviceShaderFloat16Int8Features);
+        XCASE(PHYSICAL_DEVICE_UNIFORM_BUFFER_STANDARD_LAYOUT_FEATURES, VkPhysicalDeviceUniformBufferStandardLayoutFeatures);
+        XCASE(PHYSICAL_DEVICE_SCALAR_BLOCK_LAYOUT_FEATURES, VkPhysicalDeviceScalarBlockLayoutFeatures);
         XCASE(PHYSICAL_DEVICE_FRAGMENT_SHADER_INTERLOCK_FEATURES_EXT, VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT);
         XCASE(PHYSICAL_DEVICE_YCBCR_IMAGE_ARRAYS_FEATURES_EXT, VkPhysicalDeviceYcbcrImageArraysFeaturesEXT);
         XCASE(PHYSICAL_DEVICE_SHADER_DEMOTE_TO_HELPER_INVOCATION_FEATURES_EXT, VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT);
-        XCASE(PHYSICAL_DEVICE_IMAGELESS_FRAMEBUFFER_FEATURES_KHR, VkPhysicalDeviceImagelessFramebufferFeaturesKHR);
+        XCASE(PHYSICAL_DEVICE_IMAGELESS_FRAMEBUFFER_FEATURES, VkPhysicalDeviceImagelessFramebufferFeatures);
         XCASE(PHYSICAL_DEVICE_DEPTH_CLIP_ENABLE_FEATURES_EXT, VkPhysicalDeviceDepthClipEnableFeaturesEXT);
         XCASE(PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_FEATURES_EXT, VkPhysicalDeviceFragmentDensityMapFeaturesEXT);
         XCASE(PHYSICAL_DEVICE_MEMORY_PRIORITY_FEATURES_EXT, VkPhysicalDeviceMemoryPriorityFeaturesEXT);
         XCASE(PHYSICAL_DEVICE_BUFFER_DEVICE_ADDRESS_FEATURES_EXT, VkPhysicalDeviceBufferDeviceAddressFeaturesEXT);
-        XCASE(PHYSICAL_DEVICE_HOST_QUERY_RESET_FEATURES_EXT, VkPhysicalDeviceHostQueryResetFeaturesEXT);
+        XCASE(PHYSICAL_DEVICE_HOST_QUERY_RESET_FEATURES, VkPhysicalDeviceHostQueryResetFeatures);
         XCASE(PHYSICAL_DEVICE_TEXEL_BUFFER_ALIGNMENT_FEATURES_EXT, VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT);
         XCASE(PHYSICAL_DEVICE_PERFORMANCE_QUERY_FEATURES_KHR, VkPhysicalDevicePerformanceQueryFeaturesKHR);
         XCASE(PHYSICAL_DEVICE_SHADER_SUBGROUP_EXTENDED_TYPES_FEATURES, VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures);
@@ -2701,7 +2701,7 @@ ZPUSH_END
 
 /*------------------------------------------------------------------------------*/
 
-static ZPUSH_BEGIN(VkConformanceVersionKHR)
+static ZPUSH_BEGIN(VkConformanceVersion)
     lua_newtable(L);
     SetInteger(major, "major");
     SetInteger(minor, "minor");
@@ -2731,7 +2731,7 @@ LOCALPUSH_BEGIN(VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT)
     SetBoolean(advancedBlendCorrelatedOverlap, "advanced_blend_correlated_overlap");
     SetBoolean(advancedBlendAllOperations, "advanced_blend_all_operations");
 LOCALPUSH_END
-LOCALPUSH_BEGIN(VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT)
+LOCALPUSH_BEGIN(VkPhysicalDeviceSamplerFilterMinmaxProperties)
     SetBoolean(filterMinmaxSingleComponentFormats, "filter_minmax_single_component_formats");
     SetBoolean(filterMinmaxImageComponentMapping, "filter_minmax_image_component_mapping");
 LOCALPUSH_END
@@ -2788,7 +2788,7 @@ LOCALPUSH_BEGIN(VkPhysicalDeviceInlineUniformBlockPropertiesEXT)
     SetInteger(maxDescriptorSetInlineUniformBlocks, "max_descriptor_set_inline_uniform_blocks");
     SetInteger(maxDescriptorSetUpdateAfterBindInlineUniformBlocks, "max_descriptor_set_update_after_bind_inline_uniform_blocks");
 LOCALPUSH_END
-LOCALPUSH_BEGIN(VkPhysicalDeviceDescriptorIndexingPropertiesEXT)
+LOCALPUSH_BEGIN(VkPhysicalDeviceDescriptorIndexingProperties)
     SetBoolean(shaderUniformBufferArrayNonUniformIndexingNative, "shader_uniform_buffer_array_non_uniform_indexing_native");
     SetBoolean(shaderSampledImageArrayNonUniformIndexingNative, "shader_sampled_image_array_non_uniform_indexing_native");
     SetBoolean(shaderStorageBufferArrayNonUniformIndexingNative, "shader_storage_buffer_array_non_uniform_indexing_native");
@@ -2819,11 +2819,11 @@ LOCALPUSH_END
 LOCALPUSH_BEGIN(VkPhysicalDeviceExternalMemoryHostPropertiesEXT)
     SetInteger(minImportedHostPointerAlignment, "min_imported_host_pointer_alignment");
 LOCALPUSH_END
-LOCALPUSH_BEGIN(VkPhysicalDeviceDriverPropertiesKHR)
+LOCALPUSH_BEGIN(VkPhysicalDeviceDriverProperties)
     if(p->driverID!=0) SetEnum(driverID, "driver_id", pushdriverid); //@@
     SetString(driverName, "driver_name");
     SetString(driverInfo, "driver_info");
-    SetStruct(conformanceVersion, "conformance_version", VkConformanceVersionKHR);
+    SetStruct(conformanceVersion, "conformance_version", VkConformanceVersion);
 LOCALPUSH_END
 LOCALPUSH_BEGIN(VkPhysicalDevicePCIBusInfoPropertiesEXT)
     SetInteger(pciDomain, "pci_domain");
@@ -2843,7 +2843,7 @@ LOCALPUSH_BEGIN(VkPhysicalDeviceTransformFeedbackPropertiesEXT)
     SetBoolean(transformFeedbackRasterizationStreamSelect, "transform_feedback_rasterization_stream_select");
     SetBoolean(transformFeedbackDraw, "transform_feedback_draw");
 LOCALPUSH_END
-LOCALPUSH_BEGIN(VkPhysicalDeviceFloatControlsPropertiesKHR)
+LOCALPUSH_BEGIN(VkPhysicalDeviceFloatControlsProperties)
     SetEnum(denormBehaviorIndependence, "denorm_behavior_independence", pushshaderfloatcontrolsindependence);
     SetEnum(roundingModeIndependence, "rounding_mode_independence", pushshaderfloatcontrolsindependence);
     SetBoolean(shaderSignedZeroInfNanPreserveFloat16, "shader_signed_zero_inf_nan_preserve_float16");
@@ -2862,7 +2862,7 @@ LOCALPUSH_BEGIN(VkPhysicalDeviceFloatControlsPropertiesKHR)
     SetBoolean(shaderRoundingModeRTZFloat32, "shader_rounding_mode_rtz_float32");
     SetBoolean(shaderRoundingModeRTZFloat64, "shader_rounding_mode_rtz_float64");
 LOCALPUSH_END
-LOCALPUSH_BEGIN(VkPhysicalDeviceDepthStencilResolvePropertiesKHR)
+LOCALPUSH_BEGIN(VkPhysicalDeviceDepthStencilResolveProperties)
     SetFlags(supportedDepthResolveModes, "supported_depth_resolve_modes");
     SetFlags(supportedStencilResolveModes, "supported_stencil_resolve_modes");
     SetBoolean(independentResolveNone, "independent_resolve_none");
@@ -2970,7 +2970,7 @@ ZINIT_BEGIN(VkPhysicalDeviceProperties2)
     EXTENSIONS_BEGIN
         ADDX(PHYSICAL_DEVICE_PUSH_DESCRIPTOR_PROPERTIES_KHR, VkPhysicalDevicePushDescriptorPropertiesKHR);
         ADDX(PHYSICAL_DEVICE_BLEND_OPERATION_ADVANCED_PROPERTIES_EXT, VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT);
-        ADDX(PHYSICAL_DEVICE_SAMPLER_FILTER_MINMAX_PROPERTIES_EXT, VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT);
+        ADDX(PHYSICAL_DEVICE_SAMPLER_FILTER_MINMAX_PROPERTIES, VkPhysicalDeviceSamplerFilterMinmaxProperties);
         ADDX(PHYSICAL_DEVICE_DISCARD_RECTANGLE_PROPERTIES_EXT, VkPhysicalDeviceDiscardRectanglePropertiesEXT);
         ADDX(PHYSICAL_DEVICE_ID_PROPERTIES, VkPhysicalDeviceIDProperties);
         ADDX(PHYSICAL_DEVICE_POINT_CLIPPING_PROPERTIES, VkPhysicalDevicePointClippingProperties);
@@ -2981,15 +2981,15 @@ ZINIT_BEGIN(VkPhysicalDeviceProperties2)
         ADDX(PHYSICAL_DEVICE_CONSERVATIVE_RASTERIZATION_PROPERTIES_EXT, VkPhysicalDeviceConservativeRasterizationPropertiesEXT);
         ADDX(PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_PROPERTIES_EXT, VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT);
         ADDX(PHYSICAL_DEVICE_INLINE_UNIFORM_BLOCK_PROPERTIES_EXT, VkPhysicalDeviceInlineUniformBlockPropertiesEXT);
-        ADDX(PHYSICAL_DEVICE_DESCRIPTOR_INDEXING_PROPERTIES_EXT, VkPhysicalDeviceDescriptorIndexingPropertiesEXT);
+        ADDX(PHYSICAL_DEVICE_DESCRIPTOR_INDEXING_PROPERTIES, VkPhysicalDeviceDescriptorIndexingProperties);
         ADDX(PHYSICAL_DEVICE_MULTIVIEW_PROPERTIES_KHR, VkPhysicalDeviceMultiviewPropertiesKHR);
         ADDX(PHYSICAL_DEVICE_EXTERNAL_MEMORY_HOST_PROPERTIES_EXT, VkPhysicalDeviceExternalMemoryHostPropertiesEXT);
-        ADDX(PHYSICAL_DEVICE_DRIVER_PROPERTIES_KHR, VkPhysicalDeviceDriverPropertiesKHR);
+        ADDX(PHYSICAL_DEVICE_DRIVER_PROPERTIES_KHR, VkPhysicalDeviceDriverProperties);
         ADDX(PHYSICAL_DEVICE_PCI_BUS_INFO_PROPERTIES_EXT, VkPhysicalDevicePCIBusInfoPropertiesEXT);
         ADDX(PHYSICAL_DEVICE_TRANSFORM_FEEDBACK_PROPERTIES_EXT, VkPhysicalDeviceTransformFeedbackPropertiesEXT);
 
-        ADDX(PHYSICAL_DEVICE_FLOAT_CONTROLS_PROPERTIES_KHR, VkPhysicalDeviceFloatControlsPropertiesKHR);
-        ADDX(PHYSICAL_DEVICE_DEPTH_STENCIL_RESOLVE_PROPERTIES_KHR, VkPhysicalDeviceDepthStencilResolvePropertiesKHR);
+        ADDX(PHYSICAL_DEVICE_FLOAT_CONTROLS_PROPERTIES, VkPhysicalDeviceFloatControlsProperties);
+        ADDX(PHYSICAL_DEVICE_DEPTH_STENCIL_RESOLVE_PROPERTIES, VkPhysicalDeviceDepthStencilResolveProperties);
         ADDX(PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_PROPERTIES_EXT, VkPhysicalDeviceFragmentDensityMapPropertiesEXT);
         ADDX(PHYSICAL_DEVICE_MEMORY_BUDGET_PROPERTIES_EXT, VkPhysicalDeviceMemoryBudgetPropertiesEXT);
         ADDX(PHYSICAL_DEVICE_TEXEL_BUFFER_ALIGNMENT_PROPERTIES_EXT, VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT);
@@ -3020,7 +3020,7 @@ ZPUSH_BEGIN(VkPhysicalDeviceProperties2)
     XPUSH_BEGIN
         XCASE(PHYSICAL_DEVICE_PUSH_DESCRIPTOR_PROPERTIES_KHR, VkPhysicalDevicePushDescriptorPropertiesKHR);
         XCASE(PHYSICAL_DEVICE_BLEND_OPERATION_ADVANCED_PROPERTIES_EXT, VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT);
-        XCASE(PHYSICAL_DEVICE_SAMPLER_FILTER_MINMAX_PROPERTIES_EXT, VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT);
+        XCASE(PHYSICAL_DEVICE_SAMPLER_FILTER_MINMAX_PROPERTIES, VkPhysicalDeviceSamplerFilterMinmaxProperties);
         XCASE(PHYSICAL_DEVICE_DISCARD_RECTANGLE_PROPERTIES_EXT, VkPhysicalDeviceDiscardRectanglePropertiesEXT);
         XCASE(PHYSICAL_DEVICE_ID_PROPERTIES, VkPhysicalDeviceIDProperties);
         XCASE(PHYSICAL_DEVICE_POINT_CLIPPING_PROPERTIES, VkPhysicalDevicePointClippingProperties);
@@ -3031,14 +3031,14 @@ ZPUSH_BEGIN(VkPhysicalDeviceProperties2)
         XCASE(PHYSICAL_DEVICE_CONSERVATIVE_RASTERIZATION_PROPERTIES_EXT, VkPhysicalDeviceConservativeRasterizationPropertiesEXT);
         XCASE(PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_PROPERTIES_EXT, VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT);
         XCASE(PHYSICAL_DEVICE_INLINE_UNIFORM_BLOCK_PROPERTIES_EXT, VkPhysicalDeviceInlineUniformBlockPropertiesEXT);
-        XCASE(PHYSICAL_DEVICE_DESCRIPTOR_INDEXING_PROPERTIES_EXT, VkPhysicalDeviceDescriptorIndexingPropertiesEXT);
+        XCASE(PHYSICAL_DEVICE_DESCRIPTOR_INDEXING_PROPERTIES, VkPhysicalDeviceDescriptorIndexingProperties);
         XCASE(PHYSICAL_DEVICE_MULTIVIEW_PROPERTIES_KHR, VkPhysicalDeviceMultiviewPropertiesKHR);
         XCASE(PHYSICAL_DEVICE_EXTERNAL_MEMORY_HOST_PROPERTIES_EXT, VkPhysicalDeviceExternalMemoryHostPropertiesEXT);
-        XCASE(PHYSICAL_DEVICE_DRIVER_PROPERTIES_KHR, VkPhysicalDeviceDriverPropertiesKHR);
+        XCASE(PHYSICAL_DEVICE_DRIVER_PROPERTIES_KHR, VkPhysicalDeviceDriverProperties);
         XCASE(PHYSICAL_DEVICE_PCI_BUS_INFO_PROPERTIES_EXT, VkPhysicalDevicePCIBusInfoPropertiesEXT);
         XCASE(PHYSICAL_DEVICE_TRANSFORM_FEEDBACK_PROPERTIES_EXT, VkPhysicalDeviceTransformFeedbackPropertiesEXT);
-        XCASE(PHYSICAL_DEVICE_FLOAT_CONTROLS_PROPERTIES_KHR, VkPhysicalDeviceFloatControlsPropertiesKHR);
-        XCASE(PHYSICAL_DEVICE_DEPTH_STENCIL_RESOLVE_PROPERTIES_KHR, VkPhysicalDeviceDepthStencilResolvePropertiesKHR);
+        XCASE(PHYSICAL_DEVICE_FLOAT_CONTROLS_PROPERTIES, VkPhysicalDeviceFloatControlsProperties);
+        XCASE(PHYSICAL_DEVICE_DEPTH_STENCIL_RESOLVE_PROPERTIES, VkPhysicalDeviceDepthStencilResolveProperties);
         XCASE(PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_PROPERTIES_EXT, VkPhysicalDeviceFragmentDensityMapPropertiesEXT);
         XCASE(PHYSICAL_DEVICE_MEMORY_BUDGET_PROPERTIES_EXT, VkPhysicalDeviceMemoryBudgetPropertiesEXT);
         XCASE(PHYSICAL_DEVICE_TEXEL_BUFFER_ALIGNMENT_PROPERTIES_EXT, VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT);
@@ -4074,13 +4074,13 @@ ZCHECK_END
  | Image                                                                        |
  *------------------------------------------------------------------------------*/
     
-static ZCLEAR_BEGIN(VkImageFormatListCreateInfoKHR)
+static ZCLEAR_BEGIN(VkImageFormatListCreateInfo)
     if(p->pViewFormats)
         if(p->pViewFormats) freeformatlist(L, p->pViewFormats);
 ZCLEAR_END
-ZCHECK_BEGIN(VkImageFormatListCreateInfoKHR)
+ZCHECK_BEGIN(VkImageFormatListCreateInfo)
     //checktable(arg);
-    newstruct(VkImageFormatListCreateInfoKHR);
+    newstruct(VkImageFormatListCreateInfo);
     p->pViewFormats = checkformatlist(L, arg, &p->viewFormatCount, err);
     if(*err==ERR_NOTPRESENT) *err=ERR_GENERIC; //@@ mah
     if(*err<0) { pusherror(); return p; }
@@ -4127,9 +4127,9 @@ ZCHECK_BEGIN(VkImageCreateInfo)
 #define F "view_formats"
     if(ispresent(F))
         {
-        VkImageFormatListCreateInfoKHR *p1;
+        VkImageFormatListCreateInfo *p1;
         arg1 = pushfield(L, arg, F);
-        p1 = zcheckVkImageFormatListCreateInfoKHR(L, arg1, err);
+        p1 = zcheckVkImageFormatListCreateInfo(L, arg1, err);
         popfield(L, arg1);
         if(*err) { zfree(L, p1, 1);  pushfielderror(F); return p; }
         addtochain(chain, p1);
@@ -4206,12 +4206,12 @@ ZCHECK_END
  | Descriptor Set                                                               |
  *------------------------------------------------------------------------------*/
 
-static ZCLEAR_BEGIN(VkDescriptorSetVariableDescriptorCountAllocateInfoEXT)
+static ZCLEAR_BEGIN(VkDescriptorSetVariableDescriptorCountAllocateInfo)
     if(p->pDescriptorCounts) Free(L, (void*)p->pDescriptorCounts);
 ZCLEAR_END
-ZCHECK_BEGIN(VkDescriptorSetVariableDescriptorCountAllocateInfoEXT)
+ZCHECK_BEGIN(VkDescriptorSetVariableDescriptorCountAllocateInfo)
     int arg1;
-    newstruct(VkDescriptorSetVariableDescriptorCountAllocateInfoEXT);
+    newstruct(VkDescriptorSetVariableDescriptorCountAllocateInfo);
 #define F "descriptor_counts"
     arg1 = pushfield(L, arg, F);
     p->pDescriptorCounts = checkuint32list(L, arg1, &p->descriptorSetCount, err);
@@ -4236,7 +4236,7 @@ ZCHECK_BEGIN(VkDescriptorSetAllocateInfo)
 #undef F
     EXTENSIONS_BEGIN
     if(ispresent("descriptor_counts"))
-        ADD_EXTENSION(VkDescriptorSetVariableDescriptorCountAllocateInfoEXT);
+        ADD_EXTENSION(VkDescriptorSetVariableDescriptorCountAllocateInfo);
     EXTENSIONS_END
 ZCHECK_END
 
@@ -4244,12 +4244,12 @@ ZCHECK_END
  | Descriptor Set Layout                                                        |
  *------------------------------------------------------------------------------*/
 
-static ZCLEAR_BEGIN(VkDescriptorSetLayoutBindingFlagsCreateInfoEXT)
+static ZCLEAR_BEGIN(VkDescriptorSetLayoutBindingFlagsCreateInfo)
     if(p->pBindingFlags) Free(L, (void*)p->pBindingFlags);
 ZCLEAR_END
-ZCHECK_BEGIN(VkDescriptorSetLayoutBindingFlagsCreateInfoEXT)
+ZCHECK_BEGIN(VkDescriptorSetLayoutBindingFlagsCreateInfo)
     int arg1;
-    newstruct(VkDescriptorSetLayoutBindingFlagsCreateInfoEXT);
+    newstruct(VkDescriptorSetLayoutBindingFlagsCreateInfo);
 #define F "binding_flags"
     arg1 = pushfield(L, arg, F);
     p->pBindingFlags = checkflagslist(L, arg1, &p->bindingCount, err);
@@ -4276,7 +4276,7 @@ ZCHECK_BEGIN(VkDescriptorSetLayoutCreateInfo)
 #undef F
     EXTENSIONS_BEGIN
     if(ispresent("binding_flags"))
-        ADD_EXTENSION(VkDescriptorSetLayoutBindingFlagsCreateInfoEXT);
+        ADD_EXTENSION(VkDescriptorSetLayoutBindingFlagsCreateInfo);
     EXTENSIONS_END
 ZCHECK_END
 
@@ -4413,9 +4413,9 @@ ZCHECK_END
  | Render Pass 2 (VK_KHR_create_renderpass2)                                    |
  *------------------------------------------------------------------------------*/
 
-ZCHECK_BEGIN(VkAttachmentDescription2KHR)
+ZCHECK_BEGIN(VkAttachmentDescription2)
     checktable(arg);
-    newstruct(VkAttachmentDescription2KHR);
+    newstruct(VkAttachmentDescription2);
     GetFlags(flags, "flags");
     GetFormat(format, "format");
     GetSamples(samples, "samples");
@@ -4426,53 +4426,71 @@ ZCHECK_BEGIN(VkAttachmentDescription2KHR)
     GetImageLayout(initialLayout, "initial_layout");
     GetImageLayout(finalLayout, "final_layout");
 ZCHECK_END
-ZCHECKARRAY(VkAttachmentDescription2KHR)
+ZCHECKARRAY(VkAttachmentDescription2)
 
-ZCHECK_BEGIN(VkAttachmentReference2KHR)
+ZCHECK_BEGIN(VkAttachmentReference2)
     checktable(arg);
-    newstruct(VkAttachmentReference2KHR);
+    newstruct(VkAttachmentReference2);
     GetAttachment(attachment, "attachment");
     GetImageLayout(layout, "layout");
     GetFlags(aspectMask, "aspect_mask");
 ZCHECK_END
-ZCHECKARRAY(VkAttachmentReference2KHR)
+ZCHECKARRAY(VkAttachmentReference2)
 
-static ZCLEAR_BEGIN(VkSubpassDescription2KHR)
+static ZCLEAR_BEGIN(VkSubpassDescriptionDepthStencilResolve)
+    if(p->pDepthStencilResolveAttachment)
+        zfreeVkAttachmentReference2(L, p->pDepthStencilResolveAttachment, 1);
+ZCLEAR_END
+ZCHECK_BEGIN(VkSubpassDescriptionDepthStencilResolve)
+    int arg1;
+    newstruct(VkSubpassDescriptionDepthStencilResolve);
+    GetFlags(depthResolveMode, "depth_resolve_mode");
+    GetFlags(stencilResolveMode, "stencil_resolve_mode");
+#define F "depth_stencil_resolve_attachment"
+    arg1 = pushfield(L, arg, F);
+    p->pDepthStencilResolveAttachment = zcheckVkAttachmentReference2(L, arg1, err);
+    popfield(L, arg1);
+    if(*err < 0) { prependfield(F); return p; }
+    else if(*err == ERR_NOTPRESENT) poperror();
+#undef F
+ZCHECK_END
+
+static ZCLEAR_BEGIN(VkSubpassDescription2)
     if(p->pInputAttachments) 
-        zfreearrayVkAttachmentReference2KHR(L, p->pInputAttachments, p->inputAttachmentCount, 1);
+        zfreearrayVkAttachmentReference2(L, p->pInputAttachments, p->inputAttachmentCount, 1);
     if(p->pColorAttachments)
-        zfreearrayVkAttachmentReference2KHR(L, p->pColorAttachments, p->colorAttachmentCount, 1);
+        zfreearrayVkAttachmentReference2(L, p->pColorAttachments, p->colorAttachmentCount, 1);
     if(p->pResolveAttachments)
-        zfreearrayVkAttachmentReference2KHR(L, p->pResolveAttachments, p->colorAttachmentCount, 1);
+        zfreearrayVkAttachmentReference2(L, p->pResolveAttachments, p->colorAttachmentCount, 1);
     if(p->pPreserveAttachments) Free(L, (void*)p->pPreserveAttachments);
     if(p->pDepthStencilAttachment ) 
-        zfreeVkAttachmentReference2KHR(L, p->pDepthStencilAttachment, 1);
+        zfreeVkAttachmentReference2(L, p->pDepthStencilAttachment, 1);
 ZCLEAR_END
-ZCHECK_BEGIN(VkSubpassDescription2KHR)
+ZCHECK_BEGIN(VkSubpassDescription2)
     int arg1;
     uint32_t count;
     checktable(arg);
-    newstruct(VkSubpassDescription2KHR);
+    newstruct(VkSubpassDescription2);
     GetFlags(flags, "flags");
     GetPipelineBindPoint(pipelineBindPoint, "pipeline_bind_point");
     GetInteger(viewMask, "view_mask");
 #define F "input_attachments"
     arg1 = pushfield(L, arg, F);
-    p->pInputAttachments = zcheckarrayVkAttachmentReference2KHR(L, arg1, &p->inputAttachmentCount, err);
+    p->pInputAttachments = zcheckarrayVkAttachmentReference2(L, arg1, &p->inputAttachmentCount, err);
     popfield(L, arg1);
     if(*err < 0) { prependfield(F); return p; }
     else if(*err == ERR_NOTPRESENT) poperror();
 #undef F
 #define F "color_attachments"
     arg1 = pushfield(L, arg, F);
-    p->pColorAttachments = zcheckarrayVkAttachmentReference2KHR(L, arg1, &p->colorAttachmentCount, err);
+    p->pColorAttachments = zcheckarrayVkAttachmentReference2(L, arg1, &p->colorAttachmentCount, err);
     popfield(L, arg1);
     if(*err < 0) { prependfield(F); return p; }
     else if(*err == ERR_NOTPRESENT) poperror();
 #undef F
 #define F "resolve_attachments"
     arg1 = pushfield(L, arg, F);
-    p->pResolveAttachments = zcheckarrayVkAttachmentReference2KHR(L, arg1, &count, err);
+    p->pResolveAttachments = zcheckarrayVkAttachmentReference2(L, arg1, &count, err);
     popfield(L, arg1);
     if(*err < 0) { prependfield(F); return p; }
     else if(*err == ERR_NOTPRESENT) poperror();
@@ -4480,7 +4498,7 @@ ZCHECK_BEGIN(VkSubpassDescription2KHR)
         {
         if(p->pResolveAttachments)
             {
-            zfreearrayVkAttachmentReference2KHR(L, p->pResolveAttachments, count, 1);
+            zfreearrayVkAttachmentReference2(L, p->pResolveAttachments, count, 1);
             p->pResolveAttachments = NULL;
             }
         *err = ERR_LENGTH; lua_pushstring(L, errstring(*err));
@@ -4489,7 +4507,7 @@ ZCHECK_BEGIN(VkSubpassDescription2KHR)
 #undef F
 #define F "depth_stencil_attachment"
     arg1 = pushfield(L, arg, F);
-    p->pDepthStencilAttachment = zcheckVkAttachmentReference2KHR(L, arg1, err);
+    p->pDepthStencilAttachment = zcheckVkAttachmentReference2(L, arg1, err);
     popfield(L, arg1);
     if(*err < 0) { prependfield(F); return p; }
     else if(*err == ERR_NOTPRESENT) poperror();
@@ -4500,12 +4518,17 @@ ZCHECK_BEGIN(VkSubpassDescription2KHR)
     popfield(L, arg1);
     if(*err < 0) { pushfielderror(F); return p; }
 #undef F
+    EXTENSIONS_BEGIN
+    if(ispresent("depth_resolve_mode") || ispresent("stencil_resolve_mode") ||
+            ispresent("depth_stencil_resolve_attachment"))
+        ADD_EXTENSION(VkSubpassDescriptionDepthStencilResolve);
+    EXTENSIONS_END
 ZCHECK_END
-ZCHECKARRAY(VkSubpassDescription2KHR)
+ZCHECKARRAY(VkSubpassDescription2)
 
-ZCHECK_BEGIN(VkSubpassDependency2KHR)
+ZCHECK_BEGIN(VkSubpassDependency2)
     checktable(arg);
-    newstruct(VkSubpassDependency2KHR);
+    newstruct(VkSubpassDependency2);
     GetSubpass(srcSubpass, "src_subpass");
     GetSubpass(dstSubpass, "dst_subpass");
     GetFlags(srcStageMask, "src_stage_mask");
@@ -4515,38 +4538,38 @@ ZCHECK_BEGIN(VkSubpassDependency2KHR)
     GetFlags(dependencyFlags, "dependency_flags");
     GetInteger(viewOffset, "view_offset");
 ZCHECK_END
-ZCHECKARRAY(VkSubpassDependency2KHR)
+ZCHECKARRAY(VkSubpassDependency2)
 
-static ZCLEAR_BEGIN(VkRenderPassCreateInfo2KHR)
+static ZCLEAR_BEGIN(VkRenderPassCreateInfo2)
     if(p->pAttachments)
-        zfreearrayVkAttachmentDescription2KHR(L, p->pAttachments, p->attachmentCount, 1);
+        zfreearrayVkAttachmentDescription2(L, p->pAttachments, p->attachmentCount, 1);
     if(p->pSubpasses)
-        zfreearrayVkSubpassDescription2KHR(L, p->pSubpasses, p->subpassCount, 1);
+        zfreearrayVkSubpassDescription2(L, p->pSubpasses, p->subpassCount, 1);
     if(p->pDependencies) 
-        zfreearrayVkSubpassDependency2KHR(L, p->pDependencies, p->dependencyCount, 1);
+        zfreearrayVkSubpassDependency2(L, p->pDependencies, p->dependencyCount, 1);
     if(p->pCorrelatedViewMasks) Free(L, (void*)p->pCorrelatedViewMasks);
 ZCLEAR_END
-ZCHECK_BEGIN(VkRenderPassCreateInfo2KHR)
+ZCHECK_BEGIN(VkRenderPassCreateInfo2)
     int arg1;
     checktable(arg);
-    newstruct(VkRenderPassCreateInfo2KHR);
+    newstruct(VkRenderPassCreateInfo2);
     GetFlags(flags, "flags");
 #define F "attachments"
     arg1 = pushfield(L, arg, F);
-    p->pAttachments = zcheckarrayVkAttachmentDescription2KHR(L, arg1, &p->attachmentCount, err);
+    p->pAttachments = zcheckarrayVkAttachmentDescription2(L, arg1, &p->attachmentCount, err);
     popfield(L, arg1);
     if(*err < 0) { prependfield(F); return p; }
     if(*err == ERR_NOTPRESENT) poperror();
 #undef F
 #define F "subpasses"
     arg1 = pushfield(L, arg, F);
-    p->pSubpasses = zcheckarrayVkSubpassDescription2KHR(L, arg1, &p->subpassCount, err);
+    p->pSubpasses = zcheckarrayVkSubpassDescription2(L, arg1, &p->subpassCount, err);
     popfield(L, arg1);
     if(*err < 0) { prependfield(F); return p; }
 #undef F
 #define F "dependencies"
     arg1 = pushfield(L, arg, F);
-    p->pDependencies = zcheckarrayVkSubpassDependency2KHR(L, arg1, &p->dependencyCount, err);
+    p->pDependencies = zcheckarrayVkSubpassDependency2(L, arg1, &p->dependencyCount, err);
     popfield(L, arg1);
     if(*err < 0) { prependfield(F); return p; }
     if(*err == ERR_NOTPRESENT) poperror();
@@ -4682,8 +4705,8 @@ ZCHECK_END
  | Sampler                                                                      |
  *------------------------------------------------------------------------------*/
 
-ZCHECK_BEGIN(VkSamplerReductionModeCreateInfoEXT)
-    newstruct(VkSamplerReductionModeCreateInfoEXT);
+ZCHECK_BEGIN(VkSamplerReductionModeCreateInfo)
+    newstruct(VkSamplerReductionModeCreateInfo);
     GetSamplerReductionMode(reductionMode, "reduction_mode");
 ZCHECK_END
 
@@ -4713,7 +4736,7 @@ ZCHECK_BEGIN(VkSamplerCreateInfo)
     GetBoolean(unnormalizedCoordinates, "unnormalized_coordinates");
     EXTENSIONS_BEGIN
     if(ispresent("reduction_mode"))
-        ADD_EXTENSION(VkSamplerReductionModeCreateInfoEXT);
+        ADD_EXTENSION(VkSamplerReductionModeCreateInfo);
     if(ispresent("conversion"))
         ADD_EXTENSION(VkSamplerYcbcrConversionInfoKHR);
     EXTENSIONS_END
@@ -5191,15 +5214,15 @@ ZCHECK_END
  | Subpass Begin/End Info                                                       |
  *------------------------------------------------------------------------------*/
 
-ZCHECK_BEGIN(VkSubpassBeginInfoKHR)
+ZCHECK_BEGIN(VkSubpassBeginInfo)
     checktable(arg);
-    newstruct(VkSubpassBeginInfoKHR);
+    newstruct(VkSubpassBeginInfo);
     GetSubpassContents(contents, "contents");
 ZCHECK_END
 
-ZCHECK_BEGIN(VkSubpassEndInfoKHR)
+ZCHECK_BEGIN(VkSubpassEndInfo)
     checktable(arg);
-    newstruct(VkSubpassEndInfoKHR);
+    newstruct(VkSubpassEndInfo);
 ZCHECK_END
 
 /*------------------------------------------------------------------------------*
@@ -5647,21 +5670,21 @@ ZCHECK_END
 
 /*------------------------------------------------------------------------------*/
 
-LOCALPUSH_BEGIN(VkDescriptorSetVariableDescriptorCountLayoutSupportEXT)
+LOCALPUSH_BEGIN(VkDescriptorSetVariableDescriptorCountLayoutSupport)
     SetInteger(maxVariableDescriptorCount, "max_variable_descriptor_count");
 LOCALPUSH_END
 
-ZINIT_BEGIN(VkDescriptorSetLayoutSupportKHR)
+ZINIT_BEGIN(VkDescriptorSetLayoutSupport)
     EXTENSIONS_BEGIN
-      ADDX(DESCRIPTOR_SET_VARIABLE_DESCRIPTOR_COUNT_LAYOUT_SUPPORT_EXT, VkDescriptorSetVariableDescriptorCountLayoutSupportEXT);
+      ADDX(DESCRIPTOR_SET_VARIABLE_DESCRIPTOR_COUNT_LAYOUT_SUPPORT, VkDescriptorSetVariableDescriptorCountLayoutSupport);
     EXTENSIONS_END
 ZINIT_END
 
-ZPUSH_BEGIN(VkDescriptorSetLayoutSupportKHR)
+ZPUSH_BEGIN(VkDescriptorSetLayoutSupport)
     lua_newtable(L);
     SetBoolean(supported, "supported");
     XPUSH_BEGIN
-        XCASE(DESCRIPTOR_SET_VARIABLE_DESCRIPTOR_COUNT_LAYOUT_SUPPORT_EXT, VkDescriptorSetVariableDescriptorCountLayoutSupportEXT);
+        XCASE(DESCRIPTOR_SET_VARIABLE_DESCRIPTOR_COUNT_LAYOUT_SUPPORT, VkDescriptorSetVariableDescriptorCountLayoutSupport);
     XPUSH_END
 ZPUSH_END
 
@@ -6322,7 +6345,7 @@ static void zfreeaux(lua_State *L, void *pp)
         CASE(BUFFER_CREATE_INFO, VkBufferCreateInfo);
         CASE(DEVICE_CREATE_INFO, VkDeviceCreateInfo);
         CASE(DEVICE_QUEUE_CREATE_INFO, VkDeviceQueueCreateInfo);
-        CASE(IMAGE_FORMAT_LIST_CREATE_INFO_KHR, VkImageFormatListCreateInfoKHR);
+        CASE(IMAGE_FORMAT_LIST_CREATE_INFO, VkImageFormatListCreateInfo);
         CASE(IMAGE_CREATE_INFO, VkImageCreateInfo);
         CASE(DESCRIPTOR_POOL_CREATE_INFO, VkDescriptorPoolCreateInfo);
         CASE(DESCRIPTOR_SET_ALLOCATE_INFO, VkDescriptorSetAllocateInfo);
@@ -6358,24 +6381,25 @@ static void zfreeaux(lua_State *L, void *pp)
         CASE(RENDER_PASS_BEGIN_INFO, VkRenderPassBeginInfo);
         CASE(DISPLAY_MODE_CREATE_INFO_KHR, VkDisplayModeCreateInfoKHR);
         CASE(WRITE_DESCRIPTOR_SET_INLINE_UNIFORM_BLOCK_EXT, VkWriteDescriptorSetInlineUniformBlockEXT);
-        CASE(DESCRIPTOR_SET_LAYOUT_BINDING_FLAGS_CREATE_INFO_EXT, VkDescriptorSetLayoutBindingFlagsCreateInfoEXT);
-        CASE(DESCRIPTOR_SET_VARIABLE_DESCRIPTOR_COUNT_ALLOCATE_INFO_EXT, VkDescriptorSetVariableDescriptorCountAllocateInfoEXT);
+        CASE(DESCRIPTOR_SET_LAYOUT_BINDING_FLAGS_CREATE_INFO, VkDescriptorSetLayoutBindingFlagsCreateInfo);
+        CASE(DESCRIPTOR_SET_VARIABLE_DESCRIPTOR_COUNT_ALLOCATE_INFO, VkDescriptorSetVariableDescriptorCountAllocateInfo);
         CASE(RENDER_PASS_MULTIVIEW_CREATE_INFO_KHR, VkRenderPassMultiviewCreateInfoKHR);
-        CASE(SUBPASS_DESCRIPTION_2_KHR, VkSubpassDescription2KHR);
-        CASE(RENDER_PASS_CREATE_INFO_2_KHR, VkRenderPassCreateInfo2KHR);
+        CASE(SUBPASS_DESCRIPTION_2_KHR, VkSubpassDescription2);
+        CASE(RENDER_PASS_CREATE_INFO_2_KHR, VkRenderPassCreateInfo2);
         CASE(DEVICE_GROUP_DEVICE_CREATE_INFO_KHR, VkDeviceGroupDeviceCreateInfoKHR);
         CASE(DEVICE_GROUP_RENDER_PASS_BEGIN_INFO_KHR, VkDeviceGroupRenderPassBeginInfoKHR);
         CASE(DEVICE_GROUP_SUBMIT_INFO_KHR, VkDeviceGroupSubmitInfoKHR);
         CASE(BIND_IMAGE_MEMORY_DEVICE_GROUP_INFO_KHR, VkBindImageMemoryDeviceGroupInfoKHR);
         CASE(BIND_BUFFER_MEMORY_DEVICE_GROUP_INFO_KHR, VkBindBufferMemoryDeviceGroupInfoKHR);
         CASE(DEVICE_GROUP_PRESENT_INFO_KHR, VkDeviceGroupPresentInfoKHR);
+        CASE(SUBPASS_DESCRIPTION_DEPTH_STENCIL_RESOLVE, VkSubpassDescriptionDepthStencilResolve);
 #undef CASE
         default: 
             return;
         }
     }
 
-#if 0 //@@scaffolding 10yy
+#if 0 //@@scaffolding 9yy
 static ZCLEAR_BEGIN()
 ZCLEAR_END
 ZCHECK_BEGIN()
@@ -6383,9 +6407,8 @@ ZCHECK_BEGIN()
     newstruct();
 ZCHECK_END
 ZCHECKARRAY()
-   { "", "" },
         CASE(, );
 
+pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/.html[]): +
 #endif
-
 

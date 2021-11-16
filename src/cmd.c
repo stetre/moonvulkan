@@ -660,13 +660,13 @@ static int CmdBeginRenderPass(lua_State *L)
         {
 #define CLEANUP do {                                    \
             zfreeVkRenderPassBeginInfo(L, info, 1);     \
-            zfreeVkSubpassBeginInfoKHR(L, binfo, 1);    \
+            zfreeVkSubpassBeginInfo(L, binfo, 1);    \
 } while(0)
         VkRenderPassBeginInfo* info=NULL;
-        VkSubpassBeginInfoKHR* binfo=NULL;
+        VkSubpassBeginInfo* binfo=NULL;
         info = zcheckVkRenderPassBeginInfo(L, 2, &err);
         if(err) { CLEANUP; return argerror(L, 2); }
-        binfo = zcheckVkSubpassBeginInfoKHR(L, 3, &err);
+        binfo = zcheckVkSubpassBeginInfo(L, 3, &err);
         if(err) { CLEANUP; return argerror(L, 3); }
         ud->ddt->CmdBeginRenderPass2(cb, info, binfo);
         CLEANUP;
@@ -693,14 +693,14 @@ static int CmdNextSubpass(lua_State *L)
     if(ud->ddt->CmdNextSubpass2 && lua_type(L, 2) == LUA_TTABLE)
         {
 #define CLEANUP do {                                    \
-            zfreeVkSubpassBeginInfoKHR(L, binfo, 1);    \
-            zfreeVkSubpassEndInfoKHR(L, einfo, 1);      \
+            zfreeVkSubpassBeginInfo(L, binfo, 1);    \
+            zfreeVkSubpassEndInfo(L, einfo, 1);      \
 } while(0)
-        VkSubpassBeginInfoKHR* binfo = NULL;
-        VkSubpassEndInfoKHR* einfo = NULL;
-        binfo = zcheckVkSubpassBeginInfoKHR(L, 2, &err);
+        VkSubpassBeginInfo* binfo = NULL;
+        VkSubpassEndInfo* einfo = NULL;
+        binfo = zcheckVkSubpassBeginInfo(L, 2, &err);
         if(err) { CLEANUP; return argerror(L, 2); }
-        einfo = zcheckVkSubpassEndInfoKHR(L, 3, &err);
+        einfo = zcheckVkSubpassEndInfo(L, 3, &err);
         if(err) { CLEANUP; return argerror(L, 3); }
         ud->ddt->CmdNextSubpass2(cb, binfo, einfo);
         CLEANUP;
@@ -721,9 +721,9 @@ static int CmdEndRenderPass(lua_State *L)
     VkCommandBuffer cb = checkcommand_buffer(L, 1, &ud);
     if(ud->ddt->CmdEndRenderPass2 && lua_type(L, 2) == LUA_TTABLE)
         {
-#define CLEANUP zfreeVkSubpassEndInfoKHR(L, einfo, 1)
-        VkSubpassEndInfoKHR* einfo;
-        einfo = zcheckVkSubpassEndInfoKHR(L, 2, &err);
+#define CLEANUP zfreeVkSubpassEndInfo(L, einfo, 1)
+        VkSubpassEndInfo* einfo;
+        einfo = zcheckVkSubpassEndInfo(L, 2, &err);
         if(err) { CLEANUP; return argerror(L, 2); }
         ud->ddt->CmdEndRenderPass2(cb, einfo);
         CLEANUP;
