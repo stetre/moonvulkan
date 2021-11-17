@@ -85,6 +85,20 @@ https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkBindImag
 
 '''
 
+[[get_buffer_device_address]]
+* _address_ = *get_buffer_device_address*(<<buffer, _buffer_>>) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetBufferDeviceAddress.html[vkGetBufferDeviceAddress].#
+
+[[get_buffer_opaque_capture_address]]
+* _address_ = *get_buffer_opaque_capture_address*(<<buffer, _buffer_>>) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetBufferOpaqueCaptureAddress.html[vkGetBufferOpaqueCaptureAddress].#
+
+[[get_device_memory_opaque_capture_address]]
+* _address_ = *get_device_memory_opaque_capture_address*(_devmem_) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetDeviceMemoryOpaqueCaptureAddress.html[vkGetDeviceMemoryOpaqueCaptureAddress].#
+
+'''
+
 [[get_memory_fd]]
 * _fd_ = *get_memory_fd*(_devmem_, <<memorygetfdinfo, _memorygetfdinfo_>>) +
 [small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetMemoryFdKHR.html[vkGetMemoryFdKHR].#

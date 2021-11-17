@@ -1148,7 +1148,7 @@ basically the same as for the underlying Vulkan API.</p>
 </div>
 <div class="paragraph">
 <p>The structure of this section purposedly reflects the structure of the
-<a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/Vulkan.html" class="bare">https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/Vulkan.html</a> Specification],
+<a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/">Vulkan Specification</a>,
 from chapter 3 onward.</p>
 </div>
 <div class="sect2">
@@ -1500,7 +1500,6 @@ or a return value.</p>
 </li>
 </ul>
 </div>
-<hr>
 <div id="reset_fences" class="ulist">
 <ul>
 <li>
@@ -1528,19 +1527,18 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/h
 </li>
 </ul>
 </div>
-<hr>
-<div id="importfencefd" class="ulist">
+<div id="import_fence_fd" class="ulist">
 <ul>
 <li>
-<p><strong>importfencefd</strong>(<em>fence</em>, <a href="#importfencefdinfo"><em>importfencefdinfo</em></a>)<br>
+<p><strong>import_fence_fd</strong>(<em>fence</em>, <a href="#importfencefdinfo"><em>importfencefdinfo</em></a>)<br>
 <span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkImportFenceFdKHR.html">vkImportFenceFdKHR</a>.</span></p>
 </li>
 </ul>
 </div>
-<div id="getfencefd" class="ulist">
+<div id="get_fence_fd" class="ulist">
 <ul>
 <li>
-<p><em>fd</em> = <strong>getfencefd</strong>(<em>fence</em>, <a href="#fencegetfdinfo"><em>fencegetfdinfo</em></a>)<br>
+<p><em>fd</em> = <strong>get_fence_fd</strong>(<em>fence</em>, <a href="#fencegetfdinfo"><em>fencegetfdinfo</em></a>)<br>
 <span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetFenceFdKHR.html">vkGetFenceFdKHR</a>.</span></p>
 </li>
 </ul>
@@ -1565,19 +1563,42 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/h
 </li>
 </ul>
 </div>
-<hr>
-<div id="importsemaphorefd" class="ulist">
+<div id="get_semaphore_counter_value" class="ulist">
 <ul>
 <li>
-<p><strong>importsemaphorefd</strong>(<em>semaphore</em>, <a href="#importsemaphorefdinfo"><em>importsemaphorefdinfo</em></a>)<br>
+<p><em>value</em> = <strong>get_semaphore_counter_value</strong>(<em>semaphore</em>)<br>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetSemaphoreCounterValue.html">vkGetSemaphoreCounterValue</a>.</span></p>
+</li>
+</ul>
+</div>
+<div id="wait_semaphores" class="ulist">
+<ul>
+<li>
+<p><strong>wait_semaphores</strong>(<em>device</em>, <a href="#semaphorewaitinfo"><em>semaphorewaitinfo</em></a>, <em>timeout</em>)<br>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkWaitSemaphores.html">vkWaitSemaphores</a>.</span></p>
+</li>
+</ul>
+</div>
+<div id="signal_semaphore" class="ulist">
+<ul>
+<li>
+<p><strong>signal_semaphore</strong>(<em>device</em>, <a href="#semaphoresignalinfo"><em>semaphoresignalinfo</em></a>)<br>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkSignalSemaphore.html">vkSignalSemaphore</a>.</span></p>
+</li>
+</ul>
+</div>
+<div id="import_semaphore_fd" class="ulist">
+<ul>
+<li>
+<p><strong>import_semaphore_fd</strong>(<em>semaphore</em>, <a href="#importsemaphorefdinfo"><em>importsemaphorefdinfo</em></a>)<br>
 <span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkImportSemaphoreFdKHR.html">vkImportSemaphoreFdKHR</a>.</span></p>
 </li>
 </ul>
 </div>
-<div id="getsemaphorefd" class="ulist">
+<div id="get_semaphore_fd" class="ulist">
 <ul>
 <li>
-<p><em>fd</em> = <strong>getsemaphorefd</strong>(<em>semaphore</em>, <a href="#semaphoregetfdinfo"><em>semaphoregetfdinfo</em></a>)<br>
+<p><em>fd</em> = <strong>get_semaphore_fd</strong>(<em>semaphore</em>, <a href="#semaphoregetfdinfo"><em>semaphoregetfdinfo</em></a>)<br>
 <span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetSemaphoreFdKHR.html">vkGetSemaphoreFdKHR</a>.</span></p>
 </li>
 </ul>
@@ -1927,6 +1948,31 @@ Returns <em>data</em> as a binary string.</span></p>
 </ul>
 </div>
 <hr>
+<div id="get_buffer_device_address" class="ulist">
+<ul>
+<li>
+<p><em>address</em> = <strong>get_buffer_device_address</strong>(<a href="#buffer"><em>buffer</em></a>)<br>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetBufferDeviceAddress.html">vkGetBufferDeviceAddress</a>.</span></p>
+</li>
+</ul>
+</div>
+<div id="get_buffer_opaque_capture_address" class="ulist">
+<ul>
+<li>
+<p><em>address</em> = <strong>get_buffer_opaque_capture_address</strong>(<a href="#buffer"><em>buffer</em></a>)<br>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetBufferOpaqueCaptureAddress.html">vkGetBufferOpaqueCaptureAddress</a>.</span></p>
+</li>
+</ul>
+</div>
+<div id="get_device_memory_opaque_capture_address" class="ulist">
+<ul>
+<li>
+<p><em>address</em> = <strong>get_device_memory_opaque_capture_address</strong>(<em>devmem</em>)<br>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetDeviceMemoryOpaqueCaptureAddress.html">vkGetDeviceMemoryOpaqueCaptureAddress</a>.</span></p>
+</li>
+</ul>
+</div>
+<hr>
 <div id="get_memory_fd" class="ulist">
 <ul>
 <li>
@@ -2220,6 +2266,14 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/h
 </li>
 </ul>
 </div>
+<div id="reset_query_pool" class="ulist">
+<ul>
+<li>
+<p><strong>reset_query_pool</strong>(<em>query_pool</em>, <em>first_query</em>, <em>query_count</em>)<br>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkResetQueryPool.html">vkResetQueryPool</a>.</span></p>
+</li>
+</ul>
+</div>
 </div>
 </div>
 </div>
@@ -2272,13 +2326,26 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/h
 <ul>
 <li>
 <p><strong>cmd_begin_render_pass</strong>(<em>cb</em>, <a href="#renderpassbegininfo"><em>renderpassbegininfo</em></a>, <a href="#subpasscontents"><em>subpasscontents</em></a>)<br>
-<strong>cmd_next_subpass</strong>(<em>cb</em>, <a href="#subpasscontents"><em>subpasscontents</em></a>)<br>
-<strong>cmd_end_render_pass</strong>(<em>cb</em>)<br>
 <strong>cmd_begin_render_pass</strong>(<em>cb</em>, <a href="#renderpassbegininfo"><em>renderpassbegininfo</em></a>, <a href="#subpassbegininfo"><em>subpassbegininfo</em></a>) (2KHR)<br>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdBeginRenderPass.html">vkCmdBeginRenderPass</a>, <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdBeginRenderPass2.html">vkCmdBeginRenderPass2</a>.</span></p>
+</li>
+</ul>
+</div>
+<div id="cmd_next_subpass" class="ulist">
+<ul>
+<li>
+<p><strong>cmd_next_subpass</strong>(<em>cb</em>, <a href="#subpasscontents"><em>subpasscontents</em></a>)<br>
 <strong>cmd_next_subpass</strong>(<em>cb</em>, <a href="#subpassbegininfo"><em>subpassbegininfo</em></a>, <a href="#subpassendinfo"><em>subpassendinfo</em></a>) (2KHR)<br>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdNextSubpass.html">vkCmdNextSubpass</a>, <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdNextSubpass2.html">vkCmdNextSubpass2</a>.</span></p>
+</li>
+</ul>
+</div>
+<div id="cmd_end_render_pass" class="ulist">
+<ul>
+<li>
+<p><strong>cmd_end_render_pass</strong>(<em>cb</em>)<br>
 <strong>cmd_end_render_pass</strong>(<em>cb</em>, <a href="#subpassendinfo"><em>subpassendinfo</em></a>) (2KHR)<br>
-<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdBeginRenderPass.html">vkCmdBeginRenderPass</a>, <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdNextSubpass.html">vkCmdNextSubpass</a>, <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdEndRenderPass.html">vkCmdEndRenderPass</a>,<br>
-or <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdBeginRenderPass2.html">vkCmdBeginRenderPass2</a>, <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdNextSubpass2.html">vkCmdNextSubpass2</a>, <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdEndRenderPass2.html">vkCmdEndRenderPass2</a>.</span></p>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdEndRenderPass.html">vkCmdEndRenderPass</a>, <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdEndRenderPass2.html">vkCmdEndRenderPass2</a>.</span></p>
 </li>
 </ul>
 </div>
@@ -3885,6 +3952,8 @@ the <em>queue_family_index</em> of the <em>i-th</em> element in the table return
 <em>flags</em>: <a href="#imagecreateflags">imagecreateflags</a>,<br>
 -- EXTENSION (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDeviceExternalImageFormatInfo.html">VkPhysicalDeviceExternalImageFormatInfo</a>):<br>
 <em>handle_type</em>: <a href="#externalmemoryhandletypeflags">externalmemoryhandletypeflags</a>,<br>
+-- EXTENSION (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkImageStencilUsageCreateInfo.html">VkImageStencilUsageCreateInfo</a>):<br>
+<em>stencil_usage</em>: <a href="#imageusageflags">imageusageflags</a>,<br>
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDeviceImageFormatInfo2.html">VkPhysicalDeviceImageFormatInfo2</a>)</span></p>
 </li>
 <li>
@@ -4415,6 +4484,9 @@ the <em>queue_family_index</em> of the <em>i-th</em> element in the table return
 <p><a id="physicaldeviceexternalsemaphoreinfo"></a>
 <span class="small"><strong>physicaldeviceexternalsemaphoreinfo</strong> = {<br>
 <em>handle_type</em>: <a href="#externalsemaphorehandletypeflags">externalsemaphorehandletypeflags</a>,<br>
+-- EXTENSION (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkSemaphoreTypeCreateInfo.html">VkSemaphoreTypeCreateInfo</a>):<br>
+<em>semaphore_type</em>: <a href="#semaphoretype">semaphoretype</a>,<br>
+<em>initial_value</em>: integer,<br>
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDeviceExternalSemaphoreInfo.html">VkPhysicalDeviceExternalSemaphoreInfo</a>)</span></p>
 </li>
 <li>
@@ -4489,6 +4561,9 @@ the <em>queue_family_index</em> of the <em>i-th</em> element in the table return
 <em>wait_semaphore_device_indices</em>: {integer},<br>
 <em>command_buffer_device_masks</em>: {integer},<br>
 <em>signal_semaphore_device_indices</em>: {integer},<br>
+-- EXTENSION (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkTimelineSemaphoreSubmitInfo.html">VkTimelineSemaphoreSubmitInfo</a>):<br>
+<em>wait_semaphore_values</em>: {integer},<br>
+<em>signal_semaphore_values</em>: {integer},<br>
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkSubmitInfo.html">VkSubmitInfo</a>)</span></p>
 </li>
 <li>
@@ -4502,6 +4577,9 @@ the <em>queue_family_index</em> of the <em>i-th</em> element in the table return
 -- EXTENSION (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkDeviceGroupBindSparseInfo.html">VkDeviceGroupBindSparseInfo</a>):<br>
 <em>resource_device_index</em>: integer,<br>
 <em>memory_device_index</em>: integer,<br>
+-- EXTENSION (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkTimelineSemaphoreSubmitInfo.html">VkTimelineSemaphoreSubmitInfo</a>):<br>
+<em>wait_semaphore_values</em>: {integer},<br>
+<em>signal_semaphore_values</em>: {integer},<br>
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkBindSparseInfo.html">VkBindSparseInfo</a>)</span></p>
 </li>
 <li>
@@ -4637,7 +4715,25 @@ the <em>queue_family_index</em> of the <em>i-th</em> element in the table return
 <em>flags</em>: <a href="#semaphorecreateflags">semaphorecreateflags</a>,<br>
 -- EXTENSION (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkExportSemaphoreCreateInfo.html">VkExportSemaphoreCreateInfo</a>):<br>
 <em>handle_types</em>: <a href="#externalsemaphorehandletypeflags">externalsemaphorehandletypeflags</a>,<br>
+-- EXTENSION (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkSemaphoreTypeCreateInfo.html">VkSemaphoreTypeCreateInfo</a>):<br>
+<em>semaphore_type</em>: <a href="#semaphoretype">semaphoretype</a>,<br>
+<em>initial_value</em>: integer,<br>
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkSemaphoreCreateInfo.html">VkSemaphoreCreateInfo</a>)</span></p>
+</li>
+<li>
+<p><a id="semaphorewaitinfo"></a>
+<span class="small"><strong>semaphorewaitinfo</strong> = {<br>
+<em>flags</em>: <a href="#semaphorewaitflags">semaphorewaitflags</a>,<br>
+<em>semaphores</em>: {<a href="#semaphore">semaphore</a>},<br>
+<em>values</em>: {integer},<br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkSemaphoreWaitInfo.html">VkSemaphoreWaitInfo</a>)</span></p>
+</li>
+<li>
+<p><a id="semaphoresignalinfo"></a>
+<span class="small"><strong>semaphoresignalinfo</strong> = {<br>
+<em>semaphore</em>: <a href="#semaphore">semaphore</a>,<br>
+<em>value</em>: integer,<br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkSemaphoreSignalInfo.html">VkSemaphoreSignalInfo</a>)</span></p>
 </li>
 <li>
 <p><a id="importsemaphorefdinfo"></a>
@@ -4706,6 +4802,9 @@ the <em>queue_family_index</em> of the <em>i-th</em> element in the table return
 <em>stencil_store_op</em>: <a href="#attachmentstoreop">attachmentstoreop</a>,<br>
 <em>initial_layout</em>: <a href="#imagelayout">imagelayout</a>,<br>
 <em>final_layout</em>: <a href="#imagelayout">imagelayout</a>,<br>
+-- EXTENSION (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkAttachmentDescriptionStencilLayout.html">VkAttachmentDescriptionStencilLayout</a>):<br>
+<em>stencil_initial_layout</em>: <a href="#imagelayout">imagelayout</a>,<br>
+<em>stencil_final_layout</em>: <a href="#imagelayout">imagelayout</a>,<br>
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkAttachmentDescription.html">VkAttachmentDescription</a>, <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkAttachmentDescription2.html">VkAttachmentDescription2</a>)</span></p>
 </li>
 <li>
@@ -4731,6 +4830,8 @@ the <em>queue_family_index</em> of the <em>i-th</em> element in the table return
 <em>attachment</em>: integer or '<em>unused</em>' (defaults to '<em>unused</em>'),<br>
 <em>layout</em>: <a href="#imagelayout">imagelayout</a> <strong>[R]</strong>,<br>
 <em>aspect_mask</em>: <a href="#imageaspectflags">imageaspectflags</a> (2KHR only),<br>
+-- EXTENSION (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkAttachmentReferenceStencilLayout.html">VkAttachmentReferenceStencilLayout</a>):<br>
+<em>stencil_layout</em>: <a href="#imagelayout">imagelayout</a>,<br>
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkAttachmentReference.html">VkAttachmentReference</a>, <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkAttachmentReference2.html">VkAttachmentReference2</a>)</span></p>
 </li>
 <li>
@@ -4768,7 +4869,20 @@ the <em>queue_family_index</em> of the <em>i-th</em> element in the table return
 <em>height</em>: integer,<br>
 <em>layers</em>: integer (defaults to 1),<br>
 <em>attachments</em>: {<a href="#image_view">image_view</a>},<br>
+-- EXTENSION (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkFramebufferAttachmentsCreateInfo.html">VkFramebufferAttachmentsCreateInfo</a>):<br>
+<em>attachment_image_infos</em>: {<a href="#framebufferattachmentimageinfo">framebufferattachmentimageinfo</a>},<br>
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkFramebufferCreateInfo.html">VkFramebufferCreateInfo</a>)</span></p>
+</li>
+<li>
+<p><a id="framebufferattachmentimageinfo"></a>
+<span class="small"><strong>framebufferattachmentimageinfo</strong> = {<br>
+<em>flags</em>: <a href="#imagecreateflags">imagecreateflags</a>,<br>
+<em>usage</em>: <a href="#imageusageflags">imageusageflags</a>,<br>
+<em>width</em>: integer,<br>
+<em>height</em>: integer,<br>
+<em>layer_count</em>: integer,<br>
+<em>view_formats</em>: {<a href="#format">format</a>},<br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkFramebufferAttachmentImageInfo.html">VkFramebufferAttachmentImageInfo</a>)</span></p>
 </li>
 </ul>
 </div>
@@ -4823,6 +4937,8 @@ the <em>queue_family_index</em> of the <em>i-th</em> element in the table return
 <em>queue_family_indices</em>: {<a href="#index">index</a>},<br>
 -- EXTENSION (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkExternalMemoryBufferCreateInfo.html">VkExternalMemoryBufferCreateInfo</a>):<br>
 <em>handle_types</em>: <a href="#externalmemoryhandletypeflags">externalmemoryhandletypeflags</a>,<br>
+-- EXTENSION (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkBufferOpaqueCaptureAddressCreateInfo.html">VkBufferOpaqueCaptureAddressCreateInfo</a>):<br>
+<em>opaque_capture_address</em>: integer,<br>
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkBufferCreateInfo.html">VkBufferCreateInfo</a>)</span></p>
 </li>
 <li>
@@ -4860,6 +4976,8 @@ the <em>queue_family_index</em> of the <em>i-th</em> element in the table return
 <em>view_formats</em>: {<a href="#format">format</a>},<br>
 -- EXTENSION (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkImageSwapchainCreateInfoKHR.html">VkImageSwapchainCreateInfoKHR</a>):<br>
 <em>swapchain</em>: <a href="#swapchain">swapchain</a>,<br>
+-- EXTENSION (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkImageStencilUsageCreateInfo.html">VkImageStencilUsageCreateInfo</a>):<br>
+<em>stencil_usage</em>: <a href="#imageusageflags">imageusageflags</a>,<br>
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkImageCreateInfo.html">VkImageCreateInfo</a>)</span></p>
 </li>
 <li>
@@ -4955,6 +5073,8 @@ the <em>queue_family_index</em> of the <em>i-th</em> element in the table return
 <em>host_pointer</em>: lightuserdata,<br>
 -- EXTENSION (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkMemoryAllocateFlagsInfo.html">VkMemoryAllocateFlagsInfo</a>):<br>
 <em>device_mask</em> integer,<br>
+-- EXTENSION (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkMemoryOpaqueCaptureAddressAllocateInfo.html">VkMemoryOpaqueCaptureAddressAllocateInfo</a>):<br>
+<em>opaque_capture_address</em>: integer,<br>
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkMemoryAllocateInfo.html">VkMemoryAllocateInfo</a>)</span></p>
 </li>
 <li>
@@ -5656,6 +5776,8 @@ See also the <a href="#clearcolor_snippet">example</a> in the code snippets sect
 -- EXTENSION (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkDeviceGroupRenderPassBeginInfo.html">VkDeviceGroupRenderPassBeginInfo</a>):<br>
 <em>device_mask</em>: integer,<br>
 <em>device_render_areas</em>: {<a href="#rect2d">rect2d</a>},<br>
+-- EXTENSION (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkRenderPassAttachmentBeginInfo.html">VkRenderPassAttachmentBeginInfo</a>):<br>
+<em>attachments</em>: {<a href="#image_view">image_view</a>},<br>
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkRenderPassBeginInfo.html">VkRenderPassBeginInfo</a>)</span></p>
 </li>
 <li>
@@ -7516,7 +7638,7 @@ that the relevant header files are where <em>vulkan.h</em> expects them to be.</
 <div id="footer">
 <div id="footer-text">
 Version 0.8<br>
-Last updated 2021-11-16 12:51:57 CET
+Last updated 2021-11-17 12:58:19 CET
 </div>
 </div>
 </body>

@@ -92,6 +92,17 @@ static int GetQueryPoolResults(lua_State *L)
     return 1;
     }
 
+static int ResetQueryPool(lua_State *L)
+    {
+    ud_t *ud;
+    VkQueryPool query_pool  = checkquery_pool(L, 1, &ud);
+    VkDevice device = ud->device;
+    uint32_t first = luaL_checkinteger(L, 2);
+    uint32_t count = luaL_checkinteger(L, 3);
+    CheckDevicePfn(L, ud, ResetQueryPool);
+    ud->ddt->ResetQueryPool(device, query_pool, first, count);
+    return 0;
+    }
 
 RAW_FUNC(query_pool)
 TYPE_FUNC(query_pool)
@@ -122,6 +133,7 @@ static const struct luaL_Reg Functions[] =
         { "create_query_pool",  Create },
         { "destroy_query_pool",  Destroy },
         { "get_query_pool_results", GetQueryPoolResults },
+        { "reset_query_pool", ResetQueryPool },
         { NULL, NULL } /* sentinel */
     };
 

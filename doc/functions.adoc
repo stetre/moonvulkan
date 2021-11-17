@@ -9,6 +9,6 @@ The functionalities, usages, and meanings of parameters and return values are
 basically the same as for the underlying Vulkan API.
 
 The structure of this section purposedly reflects the structure of the 
-https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/Vulkan.html Specification],
+https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/[Vulkan Specification],
 from chapter 3 onward.
 

@@ -393,6 +393,51 @@ void pushint32list(lua_State *L, int32_t *list, uint32_t count)
     }
 
 
+/*------------------------------------------------------------------------------*
+ | uint64_t List                                                                |
+ *------------------------------------------------------------------------------*/
+
+uint64_t* checkuint64list(lua_State *L, int arg, uint32_t *count, int *err)
+    {
+    uint64_t* list;
+    uint32_t i;
+
+    *count = 0;
+    *err = 0;
+    if(lua_isnoneornil(L, arg))
+        { *err = ERR_NOTPRESENT; return NULL; }
+    if(lua_type(L, arg) != LUA_TTABLE)
+        { *err = ERR_TABLE; return NULL; }
+
+    *count = luaL_len(L, arg);
+    if(*count == 0)
+        { *err = ERR_EMPTY; return NULL; }
+
+    list = (uint64_t*)MallocNoErr(L, sizeof(uint64_t) * (*count));
+    if(!list)
+        { *count = 0; *err = ERR_MEMORY; return NULL; }
+
+    for(i=0; i<*count; i++)
+        {
+        lua_rawgeti(L, arg, i+1);
+        if(!lua_isinteger(L, -1))
+            { lua_pop(L, 1); Free(L, list); *count = 0; *err = ERR_TYPE; return NULL; }
+        list[i] = lua_tointeger(L, -1);
+        lua_pop(L, 1);
+        }
+    return list;
+    }
+
+void pushuint64list(lua_State *L, uint64_t *list, uint32_t count)
+    {
+    uint32_t i;
+    lua_newtable(L);
+    for(i=0; i<count; i++)
+        {
+        lua_pushinteger(L, list[i]);
+        lua_rawseti(L, -2, i+1);
+        }
+    }
 
 /*------------------------------------------------------------------------------*
  | VkDeviceSize List                                                            |

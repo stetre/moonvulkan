@@ -150,13 +150,13 @@ static int GetPhysicalDeviceImageFormatProperties2(lua_State *L, VkPhysicalDevic
     {
     int err;
     VkResult ec;
-    VkPhysicalDeviceImageFormatInfo2KHR* info = NULL;
+    VkPhysicalDeviceImageFormatInfo2* info = NULL;
     VkImageFormatProperties2* props = NULL;
 #define CLEANUP do {            \
-    zfreeVkPhysicalDeviceImageFormatInfo2KHR(L, info, 1);           \
-    zfreeVkImageFormatProperties2(L, props, 1);                     \
+    zfreeVkPhysicalDeviceImageFormatInfo2(L, info, 1);           \
+    zfreeVkImageFormatProperties2(L, props, 1);                  \
 } while(0)
-    info = zcheckVkPhysicalDeviceImageFormatInfo2KHR(L, 2, &err);
+    info = zcheckVkPhysicalDeviceImageFormatInfo2(L, 2, &err);
     if(err) { CLEANUP; return argerror(L, 2); }
     props = znewchainVkImageFormatProperties2(L, &err);
     if(err) { CLEANUP; return lua_error(L); }
@@ -173,13 +173,13 @@ static int GetPhysicalDeviceImageFormatProperties(lua_State *L)
     int err;
     ud_t *ud;
     VkResult ec;
-    VkPhysicalDeviceImageFormatInfo2KHR* info;
+    VkPhysicalDeviceImageFormatInfo2* info;
     VkImageFormatProperties props;
     VkPhysicalDevice physical_device = checkphysical_device(L, 1, &ud);
     if(ud->idt->GetPhysicalDeviceImageFormatProperties2)
         return GetPhysicalDeviceImageFormatProperties2(L, physical_device, ud);
-#define CLEANUP zfreeVkPhysicalDeviceImageFormatInfo2KHR(L, info, 1)
-    info = zcheckVkPhysicalDeviceImageFormatInfo2KHR(L, 2, &err);
+#define CLEANUP zfreeVkPhysicalDeviceImageFormatInfo2(L, info, 1)
+    info = zcheckVkPhysicalDeviceImageFormatInfo2(L, 2, &err);
     if(err) { CLEANUP; return argerror(L, 2); }
     ec = ud->idt->GetPhysicalDeviceImageFormatProperties(physical_device, 
             info->format, info->type, info->tiling, info->usage, info->flags, &props);
@@ -271,14 +271,14 @@ static int GetPhysicalDeviceSparseImageFormatProperties2(lua_State *L, VkPhysica
     {
     int err;
     uint32_t i, count = 0;
-    VkPhysicalDeviceSparseImageFormatInfo2KHR* info = NULL;
+    VkPhysicalDeviceSparseImageFormatInfo2* info = NULL;
     VkSparseImageFormatProperties2* props = NULL;
 
 #define CLEANUP do {                                                \
-    zfreeVkPhysicalDeviceSparseImageFormatInfo2KHR(L, info, 1);     \
+    zfreeVkPhysicalDeviceSparseImageFormatInfo2(L, info, 1);        \
     zfreearrayVkSparseImageFormatProperties2(L, props, count, 1);   \
 } while(0)
-    info = zcheckVkPhysicalDeviceSparseImageFormatInfo2KHR(L, 2, &err);
+    info = zcheckVkPhysicalDeviceSparseImageFormatInfo2(L, 2, &err);
     if(err) { CLEANUP; return argerror(L, 2); }
     lua_newtable(L);
     ud->idt->GetPhysicalDeviceSparseImageFormatProperties2(physical_device, info, &count, NULL);
@@ -301,13 +301,13 @@ static int GetPhysicalDeviceSparseImageFormatProperties(lua_State *L)
     int err;
     ud_t *ud;
     uint32_t i, count = 0;
-    VkPhysicalDeviceSparseImageFormatInfo2KHR* info;
+    VkPhysicalDeviceSparseImageFormatInfo2* info;
     VkSparseImageFormatProperties* props;
     VkPhysicalDevice physical_device = checkphysical_device(L, 1, &ud);
     if(ud->idt->GetPhysicalDeviceSparseImageFormatProperties2)
         return GetPhysicalDeviceSparseImageFormatProperties2(L, physical_device, ud);
-#define CLEANUP zfreeVkPhysicalDeviceSparseImageFormatInfo2KHR(L, info, 1)
-    info = zcheckVkPhysicalDeviceSparseImageFormatInfo2KHR(L, 2, &err);
+#define CLEANUP zfreeVkPhysicalDeviceSparseImageFormatInfo2(L, info, 1)
+    info = zcheckVkPhysicalDeviceSparseImageFormatInfo2(L, 2, &err);
     if(err) { CLEANUP; return argerror(L, 2); }
 
     lua_newtable(L);
@@ -381,15 +381,15 @@ static int GetPhysicalDeviceExternalSemaphoreProperties(lua_State *L)
     {
     int err;
     ud_t *ud;
-    VkPhysicalDeviceExternalSemaphoreInfoKHR* info = NULL;
+    VkPhysicalDeviceExternalSemaphoreInfo* info = NULL;
     VkExternalSemaphorePropertiesKHR* props = NULL;
     VkPhysicalDevice physical_device = checkphysical_device(L, 1, &ud);
     CheckInstancePfn(L, ud, GetPhysicalDeviceExternalSemaphoreProperties);
 #define CLEANUP do {                                        \
-    zfreeVkPhysicalDeviceExternalSemaphoreInfoKHR(L, info, 1);  \
+    zfreeVkPhysicalDeviceExternalSemaphoreInfo(L, info, 1);  \
     zfreeVkExternalSemaphorePropertiesKHR(L, props, 1);     \
 } while(0)
-    info = zcheckVkPhysicalDeviceExternalSemaphoreInfoKHR(L, 2, &err);
+    info = zcheckVkPhysicalDeviceExternalSemaphoreInfo(L, 2, &err);
     if(err) { CLEANUP; return argerror(L, 2); }
     props = znewchainVkExternalSemaphorePropertiesKHR(L, &err);
     if(err) { CLEANUP; return lua_error(L); }

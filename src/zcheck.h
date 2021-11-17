@@ -2047,39 +2047,39 @@ int zinitVkExternalSemaphorePropertiesKHR(lua_State *L, VkExternalSemaphorePrope
 #define zpushVkExternalSemaphorePropertiesKHR moonvulkan_zpushVkExternalSemaphorePropertiesKHR
 int zpushVkExternalSemaphorePropertiesKHR(lua_State *L, const VkExternalSemaphorePropertiesKHR *p);
 
-#define znewVkPhysicalDeviceExternalSemaphoreInfoKHR(L, err) (VkPhysicalDeviceExternalSemaphoreInfoKHR*)znew((L), VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_SEMAPHORE_INFO_KHR, sizeof(VkPhysicalDeviceExternalSemaphoreInfoKHR), (err))
-#define znewarrayVkPhysicalDeviceExternalSemaphoreInfoKHR(L, count, err) (VkPhysicalDeviceExternalSemaphoreInfoKHR*)znewarray((L), VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_SEMAPHORE_INFO_KHR, sizeof(VkPhysicalDeviceExternalSemaphoreInfoKHR), (count), (err))
-#define znewchainVkPhysicalDeviceExternalSemaphoreInfoKHR moonvulkan_znewchainVkPhysicalDeviceExternalSemaphoreInfoKHR
-VkPhysicalDeviceExternalSemaphoreInfoKHR* znewchainVkPhysicalDeviceExternalSemaphoreInfoKHR(lua_State *L, int *err);
-#define znewchainarrayVkPhysicalDeviceExternalSemaphoreInfoKHR moonvulkan_znewchainarrayVkPhysicalDeviceExternalSemaphoreInfoKHR
-VkPhysicalDeviceExternalSemaphoreInfoKHR* znewchainarrayVkPhysicalDeviceExternalSemaphoreInfoKHR(lua_State *L, uint32_t count, int *err);
-#define zcheckVkPhysicalDeviceExternalSemaphoreInfoKHR moonvulkan_zcheckVkPhysicalDeviceExternalSemaphoreInfoKHR
-VkPhysicalDeviceExternalSemaphoreInfoKHR* zcheckVkPhysicalDeviceExternalSemaphoreInfoKHR(lua_State *L, int arg, int *err);
-#define zcheckarrayVkPhysicalDeviceExternalSemaphoreInfoKHR moonvulkan_zcheckarrayVkPhysicalDeviceExternalSemaphoreInfoKHR
-VkPhysicalDeviceExternalSemaphoreInfoKHR* zcheckarrayVkPhysicalDeviceExternalSemaphoreInfoKHR(lua_State *L, int arg, uint32_t *count, int *err);
-#define zinitVkPhysicalDeviceExternalSemaphoreInfoKHR moonvulkan_zinitVkPhysicalDeviceExternalSemaphoreInfoKHR
-int zinitVkPhysicalDeviceExternalSemaphoreInfoKHR(lua_State *L, VkPhysicalDeviceExternalSemaphoreInfoKHR* p, int *err);
-#define zfreeVkPhysicalDeviceExternalSemaphoreInfoKHR(L, p, base) zfree((L), (p), (base))
-#define zfreearrayVkPhysicalDeviceExternalSemaphoreInfoKHR(L, p, count, base) zfreearray((L), (p), sizeof(VkPhysicalDeviceExternalSemaphoreInfoKHR), (count), (base))
-#define zpushVkPhysicalDeviceExternalSemaphoreInfoKHR moonvulkan_zpushVkPhysicalDeviceExternalSemaphoreInfoKHR
-int zpushVkPhysicalDeviceExternalSemaphoreInfoKHR(lua_State *L, const VkPhysicalDeviceExternalSemaphoreInfoKHR *p);
+#define znewVkPhysicalDeviceExternalSemaphoreInfo(L, err) (VkPhysicalDeviceExternalSemaphoreInfo*)znew((L), VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_SEMAPHORE_INFO, sizeof(VkPhysicalDeviceExternalSemaphoreInfo), (err))
+#define znewarrayVkPhysicalDeviceExternalSemaphoreInfo(L, count, err) (VkPhysicalDeviceExternalSemaphoreInfo*)znewarray((L), VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_SEMAPHORE_INFO, sizeof(VkPhysicalDeviceExternalSemaphoreInfo), (count), (err))
+#define znewchainVkPhysicalDeviceExternalSemaphoreInfo moonvulkan_znewchainVkPhysicalDeviceExternalSemaphoreInfo
+VkPhysicalDeviceExternalSemaphoreInfo* znewchainVkPhysicalDeviceExternalSemaphoreInfo(lua_State *L, int *err);
+#define znewchainarrayVkPhysicalDeviceExternalSemaphoreInfo moonvulkan_znewchainarrayVkPhysicalDeviceExternalSemaphoreInfo
+VkPhysicalDeviceExternalSemaphoreInfo* znewchainarrayVkPhysicalDeviceExternalSemaphoreInfo(lua_State *L, uint32_t count, int *err);
+#define zcheckVkPhysicalDeviceExternalSemaphoreInfo moonvulkan_zcheckVkPhysicalDeviceExternalSemaphoreInfo
+VkPhysicalDeviceExternalSemaphoreInfo* zcheckVkPhysicalDeviceExternalSemaphoreInfo(lua_State *L, int arg, int *err);
+#define zcheckarrayVkPhysicalDeviceExternalSemaphoreInfo moonvulkan_zcheckarrayVkPhysicalDeviceExternalSemaphoreInfo
+VkPhysicalDeviceExternalSemaphoreInfo* zcheckarrayVkPhysicalDeviceExternalSemaphoreInfo(lua_State *L, int arg, uint32_t *count, int *err);
+#define zinitVkPhysicalDeviceExternalSemaphoreInfo moonvulkan_zinitVkPhysicalDeviceExternalSemaphoreInfo
+int zinitVkPhysicalDeviceExternalSemaphoreInfo(lua_State *L, VkPhysicalDeviceExternalSemaphoreInfo* p, int *err);
+#define zfreeVkPhysicalDeviceExternalSemaphoreInfo(L, p, base) zfree((L), (p), (base))
+#define zfreearrayVkPhysicalDeviceExternalSemaphoreInfo(L, p, count, base) zfreearray((L), (p), sizeof(VkPhysicalDeviceExternalSemaphoreInfo), (count), (base))
+#define zpushVkPhysicalDeviceExternalSemaphoreInfo moonvulkan_zpushVkPhysicalDeviceExternalSemaphoreInfo
+int zpushVkPhysicalDeviceExternalSemaphoreInfo(lua_State *L, const VkPhysicalDeviceExternalSemaphoreInfo *p);
 
-#define znewVkPhysicalDeviceSparseImageFormatInfo2KHR(L, err) (VkPhysicalDeviceSparseImageFormatInfo2KHR*)znew((L), VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SPARSE_IMAGE_FORMAT_INFO_2_KHR, sizeof(VkPhysicalDeviceSparseImageFormatInfo2KHR), (err))
-#define znewarrayVkPhysicalDeviceSparseImageFormatInfo2KHR(L, count, err) (VkPhysicalDeviceSparseImageFormatInfo2KHR*)znewarray((L), VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SPARSE_IMAGE_FORMAT_INFO_2_KHR, sizeof(VkPhysicalDeviceSparseImageFormatInfo2KHR), (count), (err))
-#define znewchainVkPhysicalDeviceSparseImageFormatInfo2KHR moonvulkan_znewchainVkPhysicalDeviceSparseImageFormatInfo2KHR
-VkPhysicalDeviceSparseImageFormatInfo2KHR* znewchainVkPhysicalDeviceSparseImageFormatInfo2KHR(lua_State *L, int *err);
-#define znewchainarrayVkPhysicalDeviceSparseImageFormatInfo2KHR moonvulkan_znewchainarrayVkPhysicalDeviceSparseImageFormatInfo2KHR
-VkPhysicalDeviceSparseImageFormatInfo2KHR* znewchainarrayVkPhysicalDeviceSparseImageFormatInfo2KHR(lua_State *L, uint32_t count, int *err);
-#define zcheckVkPhysicalDeviceSparseImageFormatInfo2KHR moonvulkan_zcheckVkPhysicalDeviceSparseImageFormatInfo2KHR
-VkPhysicalDeviceSparseImageFormatInfo2KHR* zcheckVkPhysicalDeviceSparseImageFormatInfo2KHR(lua_State *L, int arg, int *err);
-#define zcheckarrayVkPhysicalDeviceSparseImageFormatInfo2KHR moonvulkan_zcheckarrayVkPhysicalDeviceSparseImageFormatInfo2KHR
-VkPhysicalDeviceSparseImageFormatInfo2KHR* zcheckarrayVkPhysicalDeviceSparseImageFormatInfo2KHR(lua_State *L, int arg, uint32_t *count, int *err);
-#define zinitVkPhysicalDeviceSparseImageFormatInfo2KHR moonvulkan_zinitVkPhysicalDeviceSparseImageFormatInfo2KHR
-int zinitVkPhysicalDeviceSparseImageFormatInfo2KHR(lua_State *L, VkPhysicalDeviceSparseImageFormatInfo2KHR* p, int *err);
-#define zfreeVkPhysicalDeviceSparseImageFormatInfo2KHR(L, p, base) zfree((L), (p), (base))
-#define zfreearrayVkPhysicalDeviceSparseImageFormatInfo2KHR(L, p, count, base) zfreearray((L), (p), sizeof(VkPhysicalDeviceSparseImageFormatInfo2KHR), (count), (base))
-#define zpushVkPhysicalDeviceSparseImageFormatInfo2KHR moonvulkan_zpushVkPhysicalDeviceSparseImageFormatInfo2KHR
-int zpushVkPhysicalDeviceSparseImageFormatInfo2KHR(lua_State *L, const VkPhysicalDeviceSparseImageFormatInfo2KHR *p);
+#define znewVkPhysicalDeviceSparseImageFormatInfo2(L, err) (VkPhysicalDeviceSparseImageFormatInfo2*)znew((L), VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SPARSE_IMAGE_FORMAT_INFO_2, sizeof(VkPhysicalDeviceSparseImageFormatInfo2), (err))
+#define znewarrayVkPhysicalDeviceSparseImageFormatInfo2(L, count, err) (VkPhysicalDeviceSparseImageFormatInfo2*)znewarray((L), VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SPARSE_IMAGE_FORMAT_INFO_2, sizeof(VkPhysicalDeviceSparseImageFormatInfo2), (count), (err))
+#define znewchainVkPhysicalDeviceSparseImageFormatInfo2 moonvulkan_znewchainVkPhysicalDeviceSparseImageFormatInfo2
+VkPhysicalDeviceSparseImageFormatInfo2* znewchainVkPhysicalDeviceSparseImageFormatInfo2(lua_State *L, int *err);
+#define znewchainarrayVkPhysicalDeviceSparseImageFormatInfo2 moonvulkan_znewchainarrayVkPhysicalDeviceSparseImageFormatInfo2
+VkPhysicalDeviceSparseImageFormatInfo2* znewchainarrayVkPhysicalDeviceSparseImageFormatInfo2(lua_State *L, uint32_t count, int *err);
+#define zcheckVkPhysicalDeviceSparseImageFormatInfo2 moonvulkan_zcheckVkPhysicalDeviceSparseImageFormatInfo2
+VkPhysicalDeviceSparseImageFormatInfo2* zcheckVkPhysicalDeviceSparseImageFormatInfo2(lua_State *L, int arg, int *err);
+#define zcheckarrayVkPhysicalDeviceSparseImageFormatInfo2 moonvulkan_zcheckarrayVkPhysicalDeviceSparseImageFormatInfo2
+VkPhysicalDeviceSparseImageFormatInfo2* zcheckarrayVkPhysicalDeviceSparseImageFormatInfo2(lua_State *L, int arg, uint32_t *count, int *err);
+#define zinitVkPhysicalDeviceSparseImageFormatInfo2 moonvulkan_zinitVkPhysicalDeviceSparseImageFormatInfo2
+int zinitVkPhysicalDeviceSparseImageFormatInfo2(lua_State *L, VkPhysicalDeviceSparseImageFormatInfo2* p, int *err);
+#define zfreeVkPhysicalDeviceSparseImageFormatInfo2(L, p, base) zfree((L), (p), (base))
+#define zfreearrayVkPhysicalDeviceSparseImageFormatInfo2(L, p, count, base) zfreearray((L), (p), sizeof(VkPhysicalDeviceSparseImageFormatInfo2), (count), (base))
+#define zpushVkPhysicalDeviceSparseImageFormatInfo2 moonvulkan_zpushVkPhysicalDeviceSparseImageFormatInfo2
+int zpushVkPhysicalDeviceSparseImageFormatInfo2(lua_State *L, const VkPhysicalDeviceSparseImageFormatInfo2 *p);
 
 #define znewVkRenderPassSampleLocationsBeginInfoEXT(L, err) (VkRenderPassSampleLocationsBeginInfoEXT*)znew((L), VK_STRUCTURE_TYPE_RENDER_PASS_SAMPLE_LOCATIONS_BEGIN_INFO_EXT, sizeof(VkRenderPassSampleLocationsBeginInfoEXT), (err))
 #define znewarrayVkRenderPassSampleLocationsBeginInfoEXT(L, count, err) (VkRenderPassSampleLocationsBeginInfoEXT*)znewarray((L), VK_STRUCTURE_TYPE_RENDER_PASS_SAMPLE_LOCATIONS_BEGIN_INFO_EXT, sizeof(VkRenderPassSampleLocationsBeginInfoEXT), (count), (err))
@@ -2132,22 +2132,22 @@ int zinitVkPhysicalDeviceExternalImageFormatInfoKHR(lua_State *L, VkPhysicalDevi
 #define zpushVkPhysicalDeviceExternalImageFormatInfoKHR moonvulkan_zpushVkPhysicalDeviceExternalImageFormatInfoKHR
 int zpushVkPhysicalDeviceExternalImageFormatInfoKHR(lua_State *L, const VkPhysicalDeviceExternalImageFormatInfoKHR *p);
 
-#define znewVkPhysicalDeviceImageFormatInfo2KHR(L, err) (VkPhysicalDeviceImageFormatInfo2KHR*)znew((L), VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_FORMAT_INFO_2_KHR, sizeof(VkPhysicalDeviceImageFormatInfo2KHR), (err))
-#define znewarrayVkPhysicalDeviceImageFormatInfo2KHR(L, count, err) (VkPhysicalDeviceImageFormatInfo2KHR*)znewarray((L), VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_FORMAT_INFO_2_KHR, sizeof(VkPhysicalDeviceImageFormatInfo2KHR), (count), (err))
-#define znewchainVkPhysicalDeviceImageFormatInfo2KHR moonvulkan_znewchainVkPhysicalDeviceImageFormatInfo2KHR
-VkPhysicalDeviceImageFormatInfo2KHR* znewchainVkPhysicalDeviceImageFormatInfo2KHR(lua_State *L, int *err);
-#define znewchainarrayVkPhysicalDeviceImageFormatInfo2KHR moonvulkan_znewchainarrayVkPhysicalDeviceImageFormatInfo2KHR
-VkPhysicalDeviceImageFormatInfo2KHR* znewchainarrayVkPhysicalDeviceImageFormatInfo2KHR(lua_State *L, uint32_t count, int *err);
-#define zcheckVkPhysicalDeviceImageFormatInfo2KHR moonvulkan_zcheckVkPhysicalDeviceImageFormatInfo2KHR
-VkPhysicalDeviceImageFormatInfo2KHR* zcheckVkPhysicalDeviceImageFormatInfo2KHR(lua_State *L, int arg, int *err);
-#define zcheckarrayVkPhysicalDeviceImageFormatInfo2KHR moonvulkan_zcheckarrayVkPhysicalDeviceImageFormatInfo2KHR
-VkPhysicalDeviceImageFormatInfo2KHR* zcheckarrayVkPhysicalDeviceImageFormatInfo2KHR(lua_State *L, int arg, uint32_t *count, int *err);
-#define zinitVkPhysicalDeviceImageFormatInfo2KHR moonvulkan_zinitVkPhysicalDeviceImageFormatInfo2KHR
-int zinitVkPhysicalDeviceImageFormatInfo2KHR(lua_State *L, VkPhysicalDeviceImageFormatInfo2KHR* p, int *err);
-#define zfreeVkPhysicalDeviceImageFormatInfo2KHR(L, p, base) zfree((L), (p), (base))
-#define zfreearrayVkPhysicalDeviceImageFormatInfo2KHR(L, p, count, base) zfreearray((L), (p), sizeof(VkPhysicalDeviceImageFormatInfo2KHR), (count), (base))
-#define zpushVkPhysicalDeviceImageFormatInfo2KHR moonvulkan_zpushVkPhysicalDeviceImageFormatInfo2KHR
-int zpushVkPhysicalDeviceImageFormatInfo2KHR(lua_State *L, const VkPhysicalDeviceImageFormatInfo2KHR *p);
+#define znewVkPhysicalDeviceImageFormatInfo2(L, err) (VkPhysicalDeviceImageFormatInfo2*)znew((L), VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_FORMAT_INFO_2, sizeof(VkPhysicalDeviceImageFormatInfo2), (err))
+#define znewarrayVkPhysicalDeviceImageFormatInfo2(L, count, err) (VkPhysicalDeviceImageFormatInfo2*)znewarray((L), VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_FORMAT_INFO_2, sizeof(VkPhysicalDeviceImageFormatInfo2), (count), (err))
+#define znewchainVkPhysicalDeviceImageFormatInfo2 moonvulkan_znewchainVkPhysicalDeviceImageFormatInfo2
+VkPhysicalDeviceImageFormatInfo2* znewchainVkPhysicalDeviceImageFormatInfo2(lua_State *L, int *err);
+#define znewchainarrayVkPhysicalDeviceImageFormatInfo2 moonvulkan_znewchainarrayVkPhysicalDeviceImageFormatInfo2
+VkPhysicalDeviceImageFormatInfo2* znewchainarrayVkPhysicalDeviceImageFormatInfo2(lua_State *L, uint32_t count, int *err);
+#define zcheckVkPhysicalDeviceImageFormatInfo2 moonvulkan_zcheckVkPhysicalDeviceImageFormatInfo2
+VkPhysicalDeviceImageFormatInfo2* zcheckVkPhysicalDeviceImageFormatInfo2(lua_State *L, int arg, int *err);
+#define zcheckarrayVkPhysicalDeviceImageFormatInfo2 moonvulkan_zcheckarrayVkPhysicalDeviceImageFormatInfo2
+VkPhysicalDeviceImageFormatInfo2* zcheckarrayVkPhysicalDeviceImageFormatInfo2(lua_State *L, int arg, uint32_t *count, int *err);
+#define zinitVkPhysicalDeviceImageFormatInfo2 moonvulkan_zinitVkPhysicalDeviceImageFormatInfo2
+int zinitVkPhysicalDeviceImageFormatInfo2(lua_State *L, VkPhysicalDeviceImageFormatInfo2* p, int *err);
+#define zfreeVkPhysicalDeviceImageFormatInfo2(L, p, base) zfree((L), (p), (base))
+#define zfreearrayVkPhysicalDeviceImageFormatInfo2(L, p, count, base) zfreearray((L), (p), sizeof(VkPhysicalDeviceImageFormatInfo2), (count), (base))
+#define zpushVkPhysicalDeviceImageFormatInfo2 moonvulkan_zpushVkPhysicalDeviceImageFormatInfo2
+int zpushVkPhysicalDeviceImageFormatInfo2(lua_State *L, const VkPhysicalDeviceImageFormatInfo2 *p);
 
 #define znewVkDisplayModeCreateInfoKHR(L, err) (VkDisplayModeCreateInfoKHR*)znew((L), VK_STRUCTURE_TYPE_DISPLAY_MODE_CREATE_INFO_KHR, sizeof(VkDisplayModeCreateInfoKHR), (err))
 #define znewarrayVkDisplayModeCreateInfoKHR(L, count, err) (VkDisplayModeCreateInfoKHR*)znewarray((L), VK_STRUCTURE_TYPE_DISPLAY_MODE_CREATE_INFO_KHR, sizeof(VkDisplayModeCreateInfoKHR), (count), (err))
@@ -2931,56 +2931,56 @@ int zinitVkImageDrmFormatModifierPropertiesEXT(lua_State *L, VkImageDrmFormatMod
 #define zpushVkImageDrmFormatModifierPropertiesEXT moonvulkan_zpushVkImageDrmFormatModifierPropertiesEXT
 int zpushVkImageDrmFormatModifierPropertiesEXT(lua_State *L, const VkImageDrmFormatModifierPropertiesEXT *p);
 
-#define znewVkFramebufferAttachmentImageInfoKHR(L, err) (VkFramebufferAttachmentImageInfoKHR*)znew((L), VK_STRUCTURE_TYPE_FRAMEBUFFER_ATTACHMENT_IMAGE_INFO_KHR, sizeof(VkFramebufferAttachmentImageInfoKHR), (err))
-#define znewarrayVkFramebufferAttachmentImageInfoKHR(L, count, err) (VkFramebufferAttachmentImageInfoKHR*)znewarray((L), VK_STRUCTURE_TYPE_FRAMEBUFFER_ATTACHMENT_IMAGE_INFO_KHR, sizeof(VkFramebufferAttachmentImageInfoKHR), (count), (err))
-#define znewchainVkFramebufferAttachmentImageInfoKHR moonvulkan_znewchainVkFramebufferAttachmentImageInfoKHR
-VkFramebufferAttachmentImageInfoKHR* znewchainVkFramebufferAttachmentImageInfoKHR(lua_State *L, int *err);
-#define znewchainarrayVkFramebufferAttachmentImageInfoKHR moonvulkan_znewchainarrayVkFramebufferAttachmentImageInfoKHR
-VkFramebufferAttachmentImageInfoKHR* znewchainarrayVkFramebufferAttachmentImageInfoKHR(lua_State *L, uint32_t count, int *err);
-#define zcheckVkFramebufferAttachmentImageInfoKHR moonvulkan_zcheckVkFramebufferAttachmentImageInfoKHR
-VkFramebufferAttachmentImageInfoKHR* zcheckVkFramebufferAttachmentImageInfoKHR(lua_State *L, int arg, int *err);
-#define zcheckarrayVkFramebufferAttachmentImageInfoKHR moonvulkan_zcheckarrayVkFramebufferAttachmentImageInfoKHR
-VkFramebufferAttachmentImageInfoKHR* zcheckarrayVkFramebufferAttachmentImageInfoKHR(lua_State *L, int arg, uint32_t *count, int *err);
-#define zinitVkFramebufferAttachmentImageInfoKHR moonvulkan_zinitVkFramebufferAttachmentImageInfoKHR
-int zinitVkFramebufferAttachmentImageInfoKHR(lua_State *L, VkFramebufferAttachmentImageInfoKHR* p, int *err);
-#define zfreeVkFramebufferAttachmentImageInfoKHR(L, p, base) zfree((L), (p), (base))
-#define zfreearrayVkFramebufferAttachmentImageInfoKHR(L, p, count, base) zfreearray((L), (p), sizeof(VkFramebufferAttachmentImageInfoKHR), (count), (base))
-#define zpushVkFramebufferAttachmentImageInfoKHR moonvulkan_zpushVkFramebufferAttachmentImageInfoKHR
-int zpushVkFramebufferAttachmentImageInfoKHR(lua_State *L, const VkFramebufferAttachmentImageInfoKHR *p);
+#define znewVkFramebufferAttachmentImageInfo(L, err) (VkFramebufferAttachmentImageInfo*)znew((L), VK_STRUCTURE_TYPE_FRAMEBUFFER_ATTACHMENT_IMAGE_INFO, sizeof(VkFramebufferAttachmentImageInfo), (err))
+#define znewarrayVkFramebufferAttachmentImageInfo(L, count, err) (VkFramebufferAttachmentImageInfo*)znewarray((L), VK_STRUCTURE_TYPE_FRAMEBUFFER_ATTACHMENT_IMAGE_INFO, sizeof(VkFramebufferAttachmentImageInfo), (count), (err))
+#define znewchainVkFramebufferAttachmentImageInfo moonvulkan_znewchainVkFramebufferAttachmentImageInfo
+VkFramebufferAttachmentImageInfo* znewchainVkFramebufferAttachmentImageInfo(lua_State *L, int *err);
+#define znewchainarrayVkFramebufferAttachmentImageInfo moonvulkan_znewchainarrayVkFramebufferAttachmentImageInfo
+VkFramebufferAttachmentImageInfo* znewchainarrayVkFramebufferAttachmentImageInfo(lua_State *L, uint32_t count, int *err);
+#define zcheckVkFramebufferAttachmentImageInfo moonvulkan_zcheckVkFramebufferAttachmentImageInfo
+VkFramebufferAttachmentImageInfo* zcheckVkFramebufferAttachmentImageInfo(lua_State *L, int arg, int *err);
+#define zcheckarrayVkFramebufferAttachmentImageInfo moonvulkan_zcheckarrayVkFramebufferAttachmentImageInfo
+VkFramebufferAttachmentImageInfo* zcheckarrayVkFramebufferAttachmentImageInfo(lua_State *L, int arg, uint32_t *count, int *err);
+#define zinitVkFramebufferAttachmentImageInfo moonvulkan_zinitVkFramebufferAttachmentImageInfo
+int zinitVkFramebufferAttachmentImageInfo(lua_State *L, VkFramebufferAttachmentImageInfo* p, int *err);
+#define zfreeVkFramebufferAttachmentImageInfo(L, p, base) zfree((L), (p), (base))
+#define zfreearrayVkFramebufferAttachmentImageInfo(L, p, count, base) zfreearray((L), (p), sizeof(VkFramebufferAttachmentImageInfo), (count), (base))
+#define zpushVkFramebufferAttachmentImageInfo moonvulkan_zpushVkFramebufferAttachmentImageInfo
+int zpushVkFramebufferAttachmentImageInfo(lua_State *L, const VkFramebufferAttachmentImageInfo *p);
 
-#define znewVkFramebufferAttachmentsCreateInfoKHR(L, err) (VkFramebufferAttachmentsCreateInfoKHR*)znew((L), VK_STRUCTURE_TYPE_FRAMEBUFFER_ATTACHMENTS_CREATE_INFO_KHR, sizeof(VkFramebufferAttachmentsCreateInfoKHR), (err))
-#define znewarrayVkFramebufferAttachmentsCreateInfoKHR(L, count, err) (VkFramebufferAttachmentsCreateInfoKHR*)znewarray((L), VK_STRUCTURE_TYPE_FRAMEBUFFER_ATTACHMENTS_CREATE_INFO_KHR, sizeof(VkFramebufferAttachmentsCreateInfoKHR), (count), (err))
-#define znewchainVkFramebufferAttachmentsCreateInfoKHR moonvulkan_znewchainVkFramebufferAttachmentsCreateInfoKHR
-VkFramebufferAttachmentsCreateInfoKHR* znewchainVkFramebufferAttachmentsCreateInfoKHR(lua_State *L, int *err);
-#define znewchainarrayVkFramebufferAttachmentsCreateInfoKHR moonvulkan_znewchainarrayVkFramebufferAttachmentsCreateInfoKHR
-VkFramebufferAttachmentsCreateInfoKHR* znewchainarrayVkFramebufferAttachmentsCreateInfoKHR(lua_State *L, uint32_t count, int *err);
-#define zcheckVkFramebufferAttachmentsCreateInfoKHR moonvulkan_zcheckVkFramebufferAttachmentsCreateInfoKHR
-VkFramebufferAttachmentsCreateInfoKHR* zcheckVkFramebufferAttachmentsCreateInfoKHR(lua_State *L, int arg, int *err);
-#define zcheckarrayVkFramebufferAttachmentsCreateInfoKHR moonvulkan_zcheckarrayVkFramebufferAttachmentsCreateInfoKHR
-VkFramebufferAttachmentsCreateInfoKHR* zcheckarrayVkFramebufferAttachmentsCreateInfoKHR(lua_State *L, int arg, uint32_t *count, int *err);
-#define zinitVkFramebufferAttachmentsCreateInfoKHR moonvulkan_zinitVkFramebufferAttachmentsCreateInfoKHR
-int zinitVkFramebufferAttachmentsCreateInfoKHR(lua_State *L, VkFramebufferAttachmentsCreateInfoKHR* p, int *err);
-#define zfreeVkFramebufferAttachmentsCreateInfoKHR(L, p, base) zfree((L), (p), (base))
-#define zfreearrayVkFramebufferAttachmentsCreateInfoKHR(L, p, count, base) zfreearray((L), (p), sizeof(VkFramebufferAttachmentsCreateInfoKHR), (count), (base))
-#define zpushVkFramebufferAttachmentsCreateInfoKHR moonvulkan_zpushVkFramebufferAttachmentsCreateInfoKHR
-int zpushVkFramebufferAttachmentsCreateInfoKHR(lua_State *L, const VkFramebufferAttachmentsCreateInfoKHR *p);
+#define znewVkFramebufferAttachmentsCreateInfo(L, err) (VkFramebufferAttachmentsCreateInfo*)znew((L), VK_STRUCTURE_TYPE_FRAMEBUFFER_ATTACHMENTS_CREATE_INFO, sizeof(VkFramebufferAttachmentsCreateInfo), (err))
+#define znewarrayVkFramebufferAttachmentsCreateInfo(L, count, err) (VkFramebufferAttachmentsCreateInfo*)znewarray((L), VK_STRUCTURE_TYPE_FRAMEBUFFER_ATTACHMENTS_CREATE_INFO, sizeof(VkFramebufferAttachmentsCreateInfo), (count), (err))
+#define znewchainVkFramebufferAttachmentsCreateInfo moonvulkan_znewchainVkFramebufferAttachmentsCreateInfo
+VkFramebufferAttachmentsCreateInfo* znewchainVkFramebufferAttachmentsCreateInfo(lua_State *L, int *err);
+#define znewchainarrayVkFramebufferAttachmentsCreateInfo moonvulkan_znewchainarrayVkFramebufferAttachmentsCreateInfo
+VkFramebufferAttachmentsCreateInfo* znewchainarrayVkFramebufferAttachmentsCreateInfo(lua_State *L, uint32_t count, int *err);
+#define zcheckVkFramebufferAttachmentsCreateInfo moonvulkan_zcheckVkFramebufferAttachmentsCreateInfo
+VkFramebufferAttachmentsCreateInfo* zcheckVkFramebufferAttachmentsCreateInfo(lua_State *L, int arg, int *err);
+#define zcheckarrayVkFramebufferAttachmentsCreateInfo moonvulkan_zcheckarrayVkFramebufferAttachmentsCreateInfo
+VkFramebufferAttachmentsCreateInfo* zcheckarrayVkFramebufferAttachmentsCreateInfo(lua_State *L, int arg, uint32_t *count, int *err);
+#define zinitVkFramebufferAttachmentsCreateInfo moonvulkan_zinitVkFramebufferAttachmentsCreateInfo
+int zinitVkFramebufferAttachmentsCreateInfo(lua_State *L, VkFramebufferAttachmentsCreateInfo* p, int *err);
+#define zfreeVkFramebufferAttachmentsCreateInfo(L, p, base) zfree((L), (p), (base))
+#define zfreearrayVkFramebufferAttachmentsCreateInfo(L, p, count, base) zfreearray((L), (p), sizeof(VkFramebufferAttachmentsCreateInfo), (count), (base))
+#define zpushVkFramebufferAttachmentsCreateInfo moonvulkan_zpushVkFramebufferAttachmentsCreateInfo
+int zpushVkFramebufferAttachmentsCreateInfo(lua_State *L, const VkFramebufferAttachmentsCreateInfo *p);
 
-#define znewVkRenderPassAttachmentBeginInfoKHR(L, err) (VkRenderPassAttachmentBeginInfoKHR*)znew((L), VK_STRUCTURE_TYPE_RENDER_PASS_ATTACHMENT_BEGIN_INFO_KHR, sizeof(VkRenderPassAttachmentBeginInfoKHR), (err))
-#define znewarrayVkRenderPassAttachmentBeginInfoKHR(L, count, err) (VkRenderPassAttachmentBeginInfoKHR*)znewarray((L), VK_STRUCTURE_TYPE_RENDER_PASS_ATTACHMENT_BEGIN_INFO_KHR, sizeof(VkRenderPassAttachmentBeginInfoKHR), (count), (err))
-#define znewchainVkRenderPassAttachmentBeginInfoKHR moonvulkan_znewchainVkRenderPassAttachmentBeginInfoKHR
-VkRenderPassAttachmentBeginInfoKHR* znewchainVkRenderPassAttachmentBeginInfoKHR(lua_State *L, int *err);
-#define znewchainarrayVkRenderPassAttachmentBeginInfoKHR moonvulkan_znewchainarrayVkRenderPassAttachmentBeginInfoKHR
-VkRenderPassAttachmentBeginInfoKHR* znewchainarrayVkRenderPassAttachmentBeginInfoKHR(lua_State *L, uint32_t count, int *err);
-#define zcheckVkRenderPassAttachmentBeginInfoKHR moonvulkan_zcheckVkRenderPassAttachmentBeginInfoKHR
-VkRenderPassAttachmentBeginInfoKHR* zcheckVkRenderPassAttachmentBeginInfoKHR(lua_State *L, int arg, int *err);
-#define zcheckarrayVkRenderPassAttachmentBeginInfoKHR moonvulkan_zcheckarrayVkRenderPassAttachmentBeginInfoKHR
-VkRenderPassAttachmentBeginInfoKHR* zcheckarrayVkRenderPassAttachmentBeginInfoKHR(lua_State *L, int arg, uint32_t *count, int *err);
-#define zinitVkRenderPassAttachmentBeginInfoKHR moonvulkan_zinitVkRenderPassAttachmentBeginInfoKHR
-int zinitVkRenderPassAttachmentBeginInfoKHR(lua_State *L, VkRenderPassAttachmentBeginInfoKHR* p, int *err);
-#define zfreeVkRenderPassAttachmentBeginInfoKHR(L, p, base) zfree((L), (p), (base))
-#define zfreearrayVkRenderPassAttachmentBeginInfoKHR(L, p, count, base) zfreearray((L), (p), sizeof(VkRenderPassAttachmentBeginInfoKHR), (count), (base))
-#define zpushVkRenderPassAttachmentBeginInfoKHR moonvulkan_zpushVkRenderPassAttachmentBeginInfoKHR
-int zpushVkRenderPassAttachmentBeginInfoKHR(lua_State *L, const VkRenderPassAttachmentBeginInfoKHR *p);
+#define znewVkRenderPassAttachmentBeginInfo(L, err) (VkRenderPassAttachmentBeginInfo*)znew((L), VK_STRUCTURE_TYPE_RENDER_PASS_ATTACHMENT_BEGIN_INFO, sizeof(VkRenderPassAttachmentBeginInfo), (err))
+#define znewarrayVkRenderPassAttachmentBeginInfo(L, count, err) (VkRenderPassAttachmentBeginInfo*)znewarray((L), VK_STRUCTURE_TYPE_RENDER_PASS_ATTACHMENT_BEGIN_INFO, sizeof(VkRenderPassAttachmentBeginInfo), (count), (err))
+#define znewchainVkRenderPassAttachmentBeginInfo moonvulkan_znewchainVkRenderPassAttachmentBeginInfo
+VkRenderPassAttachmentBeginInfo* znewchainVkRenderPassAttachmentBeginInfo(lua_State *L, int *err);
+#define znewchainarrayVkRenderPassAttachmentBeginInfo moonvulkan_znewchainarrayVkRenderPassAttachmentBeginInfo
+VkRenderPassAttachmentBeginInfo* znewchainarrayVkRenderPassAttachmentBeginInfo(lua_State *L, uint32_t count, int *err);
+#define zcheckVkRenderPassAttachmentBeginInfo moonvulkan_zcheckVkRenderPassAttachmentBeginInfo
+VkRenderPassAttachmentBeginInfo* zcheckVkRenderPassAttachmentBeginInfo(lua_State *L, int arg, int *err);
+#define zcheckarrayVkRenderPassAttachmentBeginInfo moonvulkan_zcheckarrayVkRenderPassAttachmentBeginInfo
+VkRenderPassAttachmentBeginInfo* zcheckarrayVkRenderPassAttachmentBeginInfo(lua_State *L, int arg, uint32_t *count, int *err);
+#define zinitVkRenderPassAttachmentBeginInfo moonvulkan_zinitVkRenderPassAttachmentBeginInfo
+int zinitVkRenderPassAttachmentBeginInfo(lua_State *L, VkRenderPassAttachmentBeginInfo* p, int *err);
+#define zfreeVkRenderPassAttachmentBeginInfo(L, p, base) zfree((L), (p), (base))
+#define zfreearrayVkRenderPassAttachmentBeginInfo(L, p, count, base) zfreearray((L), (p), sizeof(VkRenderPassAttachmentBeginInfo), (count), (base))
+#define zpushVkRenderPassAttachmentBeginInfo moonvulkan_zpushVkRenderPassAttachmentBeginInfo
+int zpushVkRenderPassAttachmentBeginInfo(lua_State *L, const VkRenderPassAttachmentBeginInfo *p);
 
 #define znewVkSubpassDescriptionDepthStencilResolve(L, err) (VkSubpassDescriptionDepthStencilResolve*)znew((L), VK_STRUCTURE_TYPE_SUBPASS_DESCRIPTION_DEPTH_STENCIL_RESOLVE, sizeof(VkSubpassDescriptionDepthStencilResolve), (err))
 #define znewarrayVkSubpassDescriptionDepthStencilResolve(L, count, err) (VkSubpassDescriptionDepthStencilResolve*)znewarray((L), VK_STRUCTURE_TYPE_SUBPASS_DESCRIPTION_DEPTH_STENCIL_RESOLVE, sizeof(VkSubpassDescriptionDepthStencilResolve), (count), (err))
@@ -3118,56 +3118,39 @@ int zinitVkMemoryPriorityAllocateInfoEXT(lua_State *L, VkMemoryPriorityAllocateI
 #define zpushVkMemoryPriorityAllocateInfoEXT moonvulkan_zpushVkMemoryPriorityAllocateInfoEXT
 int zpushVkMemoryPriorityAllocateInfoEXT(lua_State *L, const VkMemoryPriorityAllocateInfoEXT *p);
 
-#define znewVkBufferDeviceAddressInfoEXT(L, err) (VkBufferDeviceAddressInfoEXT*)znew((L), VK_STRUCTURE_TYPE_BUFFER_DEVICE_ADDRESS_INFO_EXT, sizeof(VkBufferDeviceAddressInfoEXT), (err))
-#define znewarrayVkBufferDeviceAddressInfoEXT(L, count, err) (VkBufferDeviceAddressInfoEXT*)znewarray((L), VK_STRUCTURE_TYPE_BUFFER_DEVICE_ADDRESS_INFO_EXT, sizeof(VkBufferDeviceAddressInfoEXT), (count), (err))
-#define znewchainVkBufferDeviceAddressInfoEXT moonvulkan_znewchainVkBufferDeviceAddressInfoEXT
-VkBufferDeviceAddressInfoEXT* znewchainVkBufferDeviceAddressInfoEXT(lua_State *L, int *err);
-#define znewchainarrayVkBufferDeviceAddressInfoEXT moonvulkan_znewchainarrayVkBufferDeviceAddressInfoEXT
-VkBufferDeviceAddressInfoEXT* znewchainarrayVkBufferDeviceAddressInfoEXT(lua_State *L, uint32_t count, int *err);
-#define zcheckVkBufferDeviceAddressInfoEXT moonvulkan_zcheckVkBufferDeviceAddressInfoEXT
-VkBufferDeviceAddressInfoEXT* zcheckVkBufferDeviceAddressInfoEXT(lua_State *L, int arg, int *err);
-#define zcheckarrayVkBufferDeviceAddressInfoEXT moonvulkan_zcheckarrayVkBufferDeviceAddressInfoEXT
-VkBufferDeviceAddressInfoEXT* zcheckarrayVkBufferDeviceAddressInfoEXT(lua_State *L, int arg, uint32_t *count, int *err);
-#define zinitVkBufferDeviceAddressInfoEXT moonvulkan_zinitVkBufferDeviceAddressInfoEXT
-int zinitVkBufferDeviceAddressInfoEXT(lua_State *L, VkBufferDeviceAddressInfoEXT* p, int *err);
-#define zfreeVkBufferDeviceAddressInfoEXT(L, p, base) zfree((L), (p), (base))
-#define zfreearrayVkBufferDeviceAddressInfoEXT(L, p, count, base) zfreearray((L), (p), sizeof(VkBufferDeviceAddressInfoEXT), (count), (base))
-#define zpushVkBufferDeviceAddressInfoEXT moonvulkan_zpushVkBufferDeviceAddressInfoEXT
-int zpushVkBufferDeviceAddressInfoEXT(lua_State *L, const VkBufferDeviceAddressInfoEXT *p);
+#define znewVkBufferDeviceAddressInfo(L, err) (VkBufferDeviceAddressInfo*)znew((L), VK_STRUCTURE_TYPE_BUFFER_DEVICE_ADDRESS_INFO, sizeof(VkBufferDeviceAddressInfo), (err))
+#define znewarrayVkBufferDeviceAddressInfo(L, count, err) (VkBufferDeviceAddressInfo*)znewarray((L), VK_STRUCTURE_TYPE_BUFFER_DEVICE_ADDRESS_INFO, sizeof(VkBufferDeviceAddressInfo), (count), (err))
+#define znewchainVkBufferDeviceAddressInfo moonvulkan_znewchainVkBufferDeviceAddressInfo
+VkBufferDeviceAddressInfo* znewchainVkBufferDeviceAddressInfo(lua_State *L, int *err);
+#define znewchainarrayVkBufferDeviceAddressInfo moonvulkan_znewchainarrayVkBufferDeviceAddressInfo
+VkBufferDeviceAddressInfo* znewchainarrayVkBufferDeviceAddressInfo(lua_State *L, uint32_t count, int *err);
+#define zcheckVkBufferDeviceAddressInfo moonvulkan_zcheckVkBufferDeviceAddressInfo
+VkBufferDeviceAddressInfo* zcheckVkBufferDeviceAddressInfo(lua_State *L, int arg, int *err);
+#define zcheckarrayVkBufferDeviceAddressInfo moonvulkan_zcheckarrayVkBufferDeviceAddressInfo
+VkBufferDeviceAddressInfo* zcheckarrayVkBufferDeviceAddressInfo(lua_State *L, int arg, uint32_t *count, int *err);
+#define zinitVkBufferDeviceAddressInfo moonvulkan_zinitVkBufferDeviceAddressInfo
+int zinitVkBufferDeviceAddressInfo(lua_State *L, VkBufferDeviceAddressInfo* p, int *err);
+#define zfreeVkBufferDeviceAddressInfo(L, p, base) zfree((L), (p), (base))
+#define zfreearrayVkBufferDeviceAddressInfo(L, p, count, base) zfreearray((L), (p), sizeof(VkBufferDeviceAddressInfo), (count), (base))
+#define zpushVkBufferDeviceAddressInfo moonvulkan_zpushVkBufferDeviceAddressInfo
+int zpushVkBufferDeviceAddressInfo(lua_State *L, const VkBufferDeviceAddressInfo *p);
 
-#define znewVkBufferDeviceAddressCreateInfoEXT(L, err) (VkBufferDeviceAddressCreateInfoEXT*)znew((L), VK_STRUCTURE_TYPE_BUFFER_DEVICE_ADDRESS_CREATE_INFO_EXT, sizeof(VkBufferDeviceAddressCreateInfoEXT), (err))
-#define znewarrayVkBufferDeviceAddressCreateInfoEXT(L, count, err) (VkBufferDeviceAddressCreateInfoEXT*)znewarray((L), VK_STRUCTURE_TYPE_BUFFER_DEVICE_ADDRESS_CREATE_INFO_EXT, sizeof(VkBufferDeviceAddressCreateInfoEXT), (count), (err))
-#define znewchainVkBufferDeviceAddressCreateInfoEXT moonvulkan_znewchainVkBufferDeviceAddressCreateInfoEXT
-VkBufferDeviceAddressCreateInfoEXT* znewchainVkBufferDeviceAddressCreateInfoEXT(lua_State *L, int *err);
-#define znewchainarrayVkBufferDeviceAddressCreateInfoEXT moonvulkan_znewchainarrayVkBufferDeviceAddressCreateInfoEXT
-VkBufferDeviceAddressCreateInfoEXT* znewchainarrayVkBufferDeviceAddressCreateInfoEXT(lua_State *L, uint32_t count, int *err);
-#define zcheckVkBufferDeviceAddressCreateInfoEXT moonvulkan_zcheckVkBufferDeviceAddressCreateInfoEXT
-VkBufferDeviceAddressCreateInfoEXT* zcheckVkBufferDeviceAddressCreateInfoEXT(lua_State *L, int arg, int *err);
-#define zcheckarrayVkBufferDeviceAddressCreateInfoEXT moonvulkan_zcheckarrayVkBufferDeviceAddressCreateInfoEXT
-VkBufferDeviceAddressCreateInfoEXT* zcheckarrayVkBufferDeviceAddressCreateInfoEXT(lua_State *L, int arg, uint32_t *count, int *err);
-#define zinitVkBufferDeviceAddressCreateInfoEXT moonvulkan_zinitVkBufferDeviceAddressCreateInfoEXT
-int zinitVkBufferDeviceAddressCreateInfoEXT(lua_State *L, VkBufferDeviceAddressCreateInfoEXT* p, int *err);
-#define zfreeVkBufferDeviceAddressCreateInfoEXT(L, p, base) zfree((L), (p), (base))
-#define zfreearrayVkBufferDeviceAddressCreateInfoEXT(L, p, count, base) zfreearray((L), (p), sizeof(VkBufferDeviceAddressCreateInfoEXT), (count), (base))
-#define zpushVkBufferDeviceAddressCreateInfoEXT moonvulkan_zpushVkBufferDeviceAddressCreateInfoEXT
-int zpushVkBufferDeviceAddressCreateInfoEXT(lua_State *L, const VkBufferDeviceAddressCreateInfoEXT *p);
-
-#define znewVkImageStencilUsageCreateInfoEXT(L, err) (VkImageStencilUsageCreateInfoEXT*)znew((L), VK_STRUCTURE_TYPE_IMAGE_STENCIL_USAGE_CREATE_INFO_EXT, sizeof(VkImageStencilUsageCreateInfoEXT), (err))
-#define znewarrayVkImageStencilUsageCreateInfoEXT(L, count, err) (VkImageStencilUsageCreateInfoEXT*)znewarray((L), VK_STRUCTURE_TYPE_IMAGE_STENCIL_USAGE_CREATE_INFO_EXT, sizeof(VkImageStencilUsageCreateInfoEXT), (count), (err))
-#define znewchainVkImageStencilUsageCreateInfoEXT moonvulkan_znewchainVkImageStencilUsageCreateInfoEXT
-VkImageStencilUsageCreateInfoEXT* znewchainVkImageStencilUsageCreateInfoEXT(lua_State *L, int *err);
-#define znewchainarrayVkImageStencilUsageCreateInfoEXT moonvulkan_znewchainarrayVkImageStencilUsageCreateInfoEXT
-VkImageStencilUsageCreateInfoEXT* znewchainarrayVkImageStencilUsageCreateInfoEXT(lua_State *L, uint32_t count, int *err);
-#define zcheckVkImageStencilUsageCreateInfoEXT moonvulkan_zcheckVkImageStencilUsageCreateInfoEXT
-VkImageStencilUsageCreateInfoEXT* zcheckVkImageStencilUsageCreateInfoEXT(lua_State *L, int arg, int *err);
-#define zcheckarrayVkImageStencilUsageCreateInfoEXT moonvulkan_zcheckarrayVkImageStencilUsageCreateInfoEXT
-VkImageStencilUsageCreateInfoEXT* zcheckarrayVkImageStencilUsageCreateInfoEXT(lua_State *L, int arg, uint32_t *count, int *err);
-#define zinitVkImageStencilUsageCreateInfoEXT moonvulkan_zinitVkImageStencilUsageCreateInfoEXT
-int zinitVkImageStencilUsageCreateInfoEXT(lua_State *L, VkImageStencilUsageCreateInfoEXT* p, int *err);
-#define zfreeVkImageStencilUsageCreateInfoEXT(L, p, base) zfree((L), (p), (base))
-#define zfreearrayVkImageStencilUsageCreateInfoEXT(L, p, count, base) zfreearray((L), (p), sizeof(VkImageStencilUsageCreateInfoEXT), (count), (base))
-#define zpushVkImageStencilUsageCreateInfoEXT moonvulkan_zpushVkImageStencilUsageCreateInfoEXT
-int zpushVkImageStencilUsageCreateInfoEXT(lua_State *L, const VkImageStencilUsageCreateInfoEXT *p);
+#define znewVkImageStencilUsageCreateInfo(L, err) (VkImageStencilUsageCreateInfo*)znew((L), VK_STRUCTURE_TYPE_IMAGE_STENCIL_USAGE_CREATE_INFO, sizeof(VkImageStencilUsageCreateInfo), (err))
+#define znewarrayVkImageStencilUsageCreateInfo(L, count, err) (VkImageStencilUsageCreateInfo*)znewarray((L), VK_STRUCTURE_TYPE_IMAGE_STENCIL_USAGE_CREATE_INFO, sizeof(VkImageStencilUsageCreateInfo), (count), (err))
+#define znewchainVkImageStencilUsageCreateInfo moonvulkan_znewchainVkImageStencilUsageCreateInfo
+VkImageStencilUsageCreateInfo* znewchainVkImageStencilUsageCreateInfo(lua_State *L, int *err);
+#define znewchainarrayVkImageStencilUsageCreateInfo moonvulkan_znewchainarrayVkImageStencilUsageCreateInfo
+VkImageStencilUsageCreateInfo* znewchainarrayVkImageStencilUsageCreateInfo(lua_State *L, uint32_t count, int *err);
+#define zcheckVkImageStencilUsageCreateInfo moonvulkan_zcheckVkImageStencilUsageCreateInfo
+VkImageStencilUsageCreateInfo* zcheckVkImageStencilUsageCreateInfo(lua_State *L, int arg, int *err);
+#define zcheckarrayVkImageStencilUsageCreateInfo moonvulkan_zcheckarrayVkImageStencilUsageCreateInfo
+VkImageStencilUsageCreateInfo* zcheckarrayVkImageStencilUsageCreateInfo(lua_State *L, int arg, uint32_t *count, int *err);
+#define zinitVkImageStencilUsageCreateInfo moonvulkan_zinitVkImageStencilUsageCreateInfo
+int zinitVkImageStencilUsageCreateInfo(lua_State *L, VkImageStencilUsageCreateInfo* p, int *err);
+#define zfreeVkImageStencilUsageCreateInfo(L, p, base) zfree((L), (p), (base))
+#define zfreearrayVkImageStencilUsageCreateInfo(L, p, count, base) zfreearray((L), (p), sizeof(VkImageStencilUsageCreateInfo), (count), (base))
+#define zpushVkImageStencilUsageCreateInfo moonvulkan_zpushVkImageStencilUsageCreateInfo
+int zpushVkImageStencilUsageCreateInfo(lua_State *L, const VkImageStencilUsageCreateInfo *p);
 
 #define znewVkValidationFeaturesEXT(L, err) (VkValidationFeaturesEXT*)znew((L), VK_STRUCTURE_TYPE_VALIDATION_FEATURES_EXT, sizeof(VkValidationFeaturesEXT), (err))
 #define znewarrayVkValidationFeaturesEXT(L, count, err) (VkValidationFeaturesEXT*)znewarray((L), VK_STRUCTURE_TYPE_VALIDATION_FEATURES_EXT, sizeof(VkValidationFeaturesEXT), (count), (err))

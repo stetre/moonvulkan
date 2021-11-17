@@ -21,4 +21,7 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkDes
 * *get_query_pool_results*(_query_pool_) +
 [small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetQueryPoolResults.html[vkGetQueryPoolResults].#
 
+[[reset_query_pool]]
+* *reset_query_pool*(_query_pool_, _first_query_, _query_count_) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkResetQueryPool.html[vkResetQueryPool].#
 

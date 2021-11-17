@@ -546,6 +546,50 @@ static int GetDeviceGroupPeerMemoryFeatures(lua_State *L)
     return 1;
     }
 
+static int GetBufferDeviceAddress(lua_State *L)
+    {
+    VkBufferDeviceAddressInfo info;
+    VkDeviceAddress address;
+    ud_t *ud;
+    VkBuffer buffer = checkbuffer(L, 1, &ud);
+    CheckDevicePfn(L, ud, GetBufferDeviceAddress);
+    info.sType = VK_STRUCTURE_TYPE_BUFFER_DEVICE_ADDRESS_INFO;
+    info.pNext = NULL;
+    info.buffer = buffer;
+    address = ud->ddt->GetBufferDeviceAddress(ud->device, &info);
+    lua_pushinteger(L, address);
+    return 1;
+    }
+
+static int GetBufferOpaqueCaptureAddress(lua_State *L)
+    {
+    VkBufferDeviceAddressInfo info;
+    uint64_t address;
+    ud_t *ud;
+    VkBuffer buffer = checkbuffer(L, 1, &ud);
+    CheckDevicePfn(L, ud, GetBufferOpaqueCaptureAddress);
+    info.sType = VK_STRUCTURE_TYPE_BUFFER_DEVICE_ADDRESS_INFO;
+    info.pNext = NULL;
+    info.buffer = buffer;
+    address = ud->ddt->GetBufferOpaqueCaptureAddress(ud->device, &info);
+    lua_pushinteger(L, address);
+    return 1;
+    }
+
+static int GetDeviceMemoryOpaqueCaptureAddress(lua_State *L)
+    {
+    VkDeviceMemoryOpaqueCaptureAddressInfo info;
+    uint64_t address;
+    ud_t *ud;
+    VkDeviceMemory device_memory = checkdevice_memory(L, 1, &ud);
+    CheckDevicePfn(L, ud, GetDeviceMemoryOpaqueCaptureAddress);
+    info.sType = VK_STRUCTURE_TYPE_DEVICE_MEMORY_OPAQUE_CAPTURE_ADDRESS_INFO;
+    info.pNext = NULL;
+    info.memory = device_memory;
+    address = ud->ddt->GetDeviceMemoryOpaqueCaptureAddress(ud->device, &info);
+    lua_pushinteger(L, address);
+    return 1;
+    }
 
 RAW_FUNC(device_memory)
 TYPE_FUNC(device_memory)
@@ -591,6 +635,9 @@ static const struct luaL_Reg Functions[] =
         { "get_memory_fd_properties", GetMemoryFdProperties },
         { "get_memory_host_pointer_properties", GetMemoryHostPointerProperties },
         { "get_device_group_peer_memory_features", GetDeviceGroupPeerMemoryFeatures },
+        { "get_buffer_device_address", GetBufferDeviceAddress },
+        { "get_buffer_opaque_capture_address", GetBufferOpaqueCaptureAddress },
+        { "get_device_memory_opaque_capture_address", GetDeviceMemoryOpaqueCaptureAddress },
         { NULL, NULL } /* sentinel */
     };
 

@@ -11,13 +11,23 @@ _semaphore_ = *create_semaphore*(_device_, [<<semaphorecreateflags, _semaphorecr
 * *destroy_semaphore*(_semaphore_) +
 [small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkDestroySemaphore.html[vkDestroySemaphore].#
 
-'''
+[[get_semaphore_counter_value]]
+* _value_ = *get_semaphore_counter_value*(_semaphore_) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetSemaphoreCounterValue.html[vkGetSemaphoreCounterValue].#
 
-[[importsemaphorefd]]
-* *importsemaphorefd*(_semaphore_, <<importsemaphorefdinfo, _importsemaphorefdinfo_>>) +
+[[wait_semaphores]]
+* *wait_semaphores*(_device_, <<semaphorewaitinfo, _semaphorewaitinfo_>>, _timeout_) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkWaitSemaphores.html[vkWaitSemaphores].#
+
+[[signal_semaphore]]
+* *signal_semaphore*(_device_, <<semaphoresignalinfo, _semaphoresignalinfo_>>) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkSignalSemaphore.html[vkSignalSemaphore].#
+
+[[import_semaphore_fd]]
+* *import_semaphore_fd*(_semaphore_, <<importsemaphorefdinfo, _importsemaphorefdinfo_>>) +
 [small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkImportSemaphoreFdKHR.html[vkImportSemaphoreFdKHR].#
 
-[[getsemaphorefd]]
-* _fd_ = *getsemaphorefd*(_semaphore_, <<semaphoregetfdinfo, _semaphoregetfdinfo_>>) +
+[[get_semaphore_fd]]
+* _fd_ = *get_semaphore_fd*(_semaphore_, <<semaphoregetfdinfo, _semaphoregetfdinfo_>>) +
 [small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetSemaphoreFdKHR.html[vkGetSemaphoreFdKHR].#
 

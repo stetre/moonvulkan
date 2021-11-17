@@ -118,6 +118,56 @@ static int GetSemaphoreFd(lua_State *L)
     return 1;
     }
 
+static int GetSemaphoreCounterValue(lua_State *L)
+    {
+    VkResult ec;
+    uint64_t value;
+    ud_t *ud;
+    VkSemaphore semaphore = checksemaphore(L, 1, &ud);
+    CheckDevicePfn(L, ud, GetSemaphoreCounterValue);
+    ec = ud->ddt->GetSemaphoreCounterValue(ud->device, semaphore, &value);
+    CheckError(L, ec);
+    lua_pushinteger(L, value);
+    return 1;
+    }
+
+static int WaitSemaphores(lua_State *L)
+    {
+    int err;
+    VkResult ec;
+    ud_t *ud;
+    VkSemaphoreWaitInfo* info;
+    VkDevice device = checkdevice(L, 1, &ud);
+    uint64_t timeout = luaL_checkinteger(L, 3);
+    CheckDevicePfn(L, ud, WaitSemaphores);
+#define CLEANUP zfreeVkSemaphoreWaitInfo(L, info, 1)
+    info = zcheckVkSemaphoreWaitInfo(L, 2, &err);
+    if(err) { CLEANUP; return argerror(L, 2); }
+    ec = ud->ddt->WaitSemaphores(device, info, timeout);
+    CLEANUP;
+#undef CLEANUP
+    CheckError(L, ec);
+    return 0;
+    }
+
+static int SignalSemaphore(lua_State *L)
+    {
+    int err;
+    VkResult ec;
+    ud_t *ud;
+    VkSemaphoreSignalInfo* info;
+    VkDevice device = checkdevice(L, 1, &ud);
+    CheckDevicePfn(L, ud, SignalSemaphore);
+#define CLEANUP zfreeVkSemaphoreSignalInfo(L, info, 1)
+    info = zcheckVkSemaphoreSignalInfo(L, 2, &err);
+    if(err) { CLEANUP; return argerror(L, 2); }
+    ec = ud->ddt->SignalSemaphore(device, info);
+    CLEANUP;
+#undef CLEANUP
+    CheckError(L, ec);
+    return 0;
+    }
+
 #ifdef VK_USE_PLATFORM_WIN32_KHR
 
 static int ImportSemaphoreWin32Handle(lua_State *L) //@@DOC VK_KHR_external_semaphore_win32
@@ -193,6 +243,9 @@ static const struct luaL_Reg Functions[] =
         { "destroy_semaphore",  Destroy },
         { "import_semaphore_fd", ImportSemaphoreFd },
         { "get_semaphore_fd", GetSemaphoreFd },
+        { "get_semaphore_counter_value", GetSemaphoreCounterValue },
+        { "wait_semaphores", WaitSemaphores },
+        { "signal_semaphore", SignalSemaphore },
 #ifdef VK_USE_PLATFORM_WIN32_KHR
         { "import_semaphore_win32_handle", ImportSemaphoreWin32Handle },
         { "get_semaphore_win32_handle", GetSemaphoreWin32Handle },

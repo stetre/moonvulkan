@@ -346,6 +346,8 @@ _usage_: <<imageusageflags, imageusageflags>>, +
 _flags_: <<imagecreateflags, imagecreateflags>>, +
 pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDeviceExternalImageFormatInfo.html[VkPhysicalDeviceExternalImageFormatInfo]): +
 _handle_type_: <<externalmemoryhandletypeflags, externalmemoryhandletypeflags>>, +
+pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkImageStencilUsageCreateInfo.html[VkImageStencilUsageCreateInfo]): +
+_stencil_usage_: <<imageusageflags, imageusageflags>>, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDeviceImageFormatInfo2.html[VkPhysicalDeviceImageFormatInfo2])#
 
 * [[physicaldevicelimits]]
@@ -864,6 +866,9 @@ _external_fence_features_: <<externalfencefeatureflags, externalfencefeatureflag
 * [[physicaldeviceexternalsemaphoreinfo]]
 [small]#*physicaldeviceexternalsemaphoreinfo* = { +
 _handle_type_: <<externalsemaphorehandletypeflags, externalsemaphorehandletypeflags>>, +
+pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkSemaphoreTypeCreateInfo.html[VkSemaphoreTypeCreateInfo]): +
+_semaphore_type_: <<semaphoretype, semaphoretype>>, +
+_initial_value_: integer, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDeviceExternalSemaphoreInfo.html[VkPhysicalDeviceExternalSemaphoreInfo])#
 
 * [[externalsemaphoreproperties]]
@@ -923,6 +928,9 @@ pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-exte
 _wait_semaphore_device_indices_: {integer}, +
 _command_buffer_device_masks_: {integer}, +
 _signal_semaphore_device_indices_: {integer}, +
+pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkTimelineSemaphoreSubmitInfo.html[VkTimelineSemaphoreSubmitInfo]): +
+_wait_semaphore_values_: {integer}, +
+_signal_semaphore_values_: {integer}, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkSubmitInfo.html[VkSubmitInfo])#
 
 * [[bindsparseinfo]]
@@ -935,6 +943,9 @@ _signal_semaphores_: {<<semaphore, semaphore>>}, +
 pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkDeviceGroupBindSparseInfo.html[VkDeviceGroupBindSparseInfo]): +
 _resource_device_index_: integer, +
 _memory_device_index_: integer, +
+pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkTimelineSemaphoreSubmitInfo.html[VkTimelineSemaphoreSubmitInfo]): +
+_wait_semaphore_values_: {integer}, +
+_signal_semaphore_values_: {integer}, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkBindSparseInfo.html[VkBindSparseInfo])#
 
 
@@ -1048,7 +1059,23 @@ _handle_type_: <<externalfencehandletypeflagbits, externalfencehandletypeflagbit
 _flags_: <<semaphorecreateflags, semaphorecreateflags>>, +
 pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkExportSemaphoreCreateInfo.html[VkExportSemaphoreCreateInfo]): +
 _handle_types_: <<externalsemaphorehandletypeflags, externalsemaphorehandletypeflags>>, +
+pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkSemaphoreTypeCreateInfo.html[VkSemaphoreTypeCreateInfo]): +
+_semaphore_type_: <<semaphoretype, semaphoretype>>, +
+_initial_value_: integer, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkSemaphoreCreateInfo.html[VkSemaphoreCreateInfo])#
+
+* [[semaphorewaitinfo]]
+[small]#*semaphorewaitinfo* = { +
+_flags_: <<semaphorewaitflags, semaphorewaitflags>>, +
+_semaphores_: {<<semaphore, semaphore>>}, +
+_values_: {integer}, +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkSemaphoreWaitInfo.html[VkSemaphoreWaitInfo])#
+
+* [[semaphoresignalinfo]]
+[small]#*semaphoresignalinfo* = { +
+_semaphore_: <<semaphore, semaphore>>, +
+_value_: integer, +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkSemaphoreSignalInfo.html[VkSemaphoreSignalInfo])#
 
 * [[importsemaphorefdinfo]]
 [small]#*importsemaphorefdinfo* = { +
@@ -1106,6 +1133,9 @@ _stencil_load_op_: <<attachmentloadop, attachmentloadop>>, +
 _stencil_store_op_: <<attachmentstoreop, attachmentstoreop>>, +
 _initial_layout_: <<imagelayout, imagelayout>>, +
 _final_layout_: <<imagelayout, imagelayout>>, +
+pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkAttachmentDescriptionStencilLayout.html[VkAttachmentDescriptionStencilLayout]): +
+_stencil_initial_layout_: <<imagelayout, imagelayout>>, +
+_stencil_final_layout_: <<imagelayout, imagelayout>>, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkAttachmentDescription.html[VkAttachmentDescription], https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkAttachmentDescription2.html[VkAttachmentDescription2])#
 
 * [[subpassdescription]]
@@ -1129,6 +1159,8 @@ _depth_stencil_resolve_attachment_: <<attachmentreference, attachmentreference>>
 _attachment_: integer or '_unused_' (defaults to '_unused_'), +
 _layout_: <<imagelayout, imagelayout>> *[R]*, +
 _aspect_mask_: <<imageaspectflags, imageaspectflags>> (2KHR only), +
+pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkAttachmentReferenceStencilLayout.html[VkAttachmentReferenceStencilLayout]): +
+_stencil_layout_: <<imagelayout, imagelayout>>, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkAttachmentReference.html[VkAttachmentReference], https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkAttachmentReference2.html[VkAttachmentReference2])#
 
 * [[subpassdependency]]
@@ -1160,7 +1192,19 @@ _width_: integer, +
 _height_: integer, +
 _layers_: integer (defaults to 1), +
 _attachments_: {<<image_view, image_view>>}, +
+pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkFramebufferAttachmentsCreateInfo.html[VkFramebufferAttachmentsCreateInfo]): +
+_attachment_image_infos_: {<<framebufferattachmentimageinfo, framebufferattachmentimageinfo>>}, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkFramebufferCreateInfo.html[VkFramebufferCreateInfo])#
+
+* [[framebufferattachmentimageinfo]]
+[small]#*framebufferattachmentimageinfo* = { +
+_flags_: <<imagecreateflags, imagecreateflags>>, +
+_usage_: <<imageusageflags, imageusageflags>>, +
+_width_: integer, +
+_height_: integer, +
+_layer_count_: integer, +
+_view_formats_: {<<format, format>>}, +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkFramebufferAttachmentImageInfo.html[VkFramebufferAttachmentImageInfo])#
 
 '''
 
@@ -1199,6 +1243,8 @@ _sharing_mode_: <<sharingmode, sharingmode>>, +
 _queue_family_indices_: {<<index, index>>}, +
 pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkExternalMemoryBufferCreateInfo.html[VkExternalMemoryBufferCreateInfo]): +
 _handle_types_: <<externalmemoryhandletypeflags, externalmemoryhandletypeflags>>, +
+pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkBufferOpaqueCaptureAddressCreateInfo.html[VkBufferOpaqueCaptureAddressCreateInfo]): +
+_opaque_capture_address_: integer, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkBufferCreateInfo.html[VkBufferCreateInfo])#
 
 * [[bufferviewcreateinfo]]
@@ -1231,6 +1277,8 @@ pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-exte
 _view_formats_: {<<format, format>>}, +
 pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkImageSwapchainCreateInfoKHR.html[VkImageSwapchainCreateInfoKHR]): +
 _swapchain_: <<swapchain, swapchain>>, +
+pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkImageStencilUsageCreateInfo.html[VkImageStencilUsageCreateInfo]): +
+_stencil_usage_: <<imageusageflags, imageusageflags>>, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkImageCreateInfo.html[VkImageCreateInfo])#
 
 * [[imageviewcreateinfo]]
@@ -1314,6 +1362,8 @@ _host_pointer_handle_type_: <<externalmemoryhandletypeflags, externalmemoryhandl
 _host_pointer_: lightuserdata, +
 pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkMemoryAllocateFlagsInfo.html[VkMemoryAllocateFlagsInfo]): +
 _device_mask_ integer, +
+pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkMemoryOpaqueCaptureAddressAllocateInfo.html[VkMemoryOpaqueCaptureAddressAllocateInfo]): +
+_opaque_capture_address_: integer, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkMemoryAllocateInfo.html[VkMemoryAllocateInfo])#
 
 * [[memorygetfdinfo]]
@@ -1922,7 +1972,6 @@ _base_array_layer_: integer, +
 _layer_count_: integer, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkClearRect.html[VkClearRect])#
 
-
 * [[renderpassbegininfo]]
 [small]#*renderpassbegininfo* = { +
 _render_pass_: <<render_pass, render_pass>> *[R]*, +
@@ -1935,8 +1984,9 @@ _post_subpass_sample_locations_count_: {<<subpasssamplelocations, subpasssamplel
 pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkDeviceGroupRenderPassBeginInfo.html[VkDeviceGroupRenderPassBeginInfo]): +
 _device_mask_: integer, +
 _device_render_areas_: {<<rect2d, rect2d>>}, +
+pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkRenderPassAttachmentBeginInfo.html[VkRenderPassAttachmentBeginInfo]): +
+_attachments_: {<<image_view, image_view>>}, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkRenderPassBeginInfo.html[VkRenderPassBeginInfo])#
-
 
 * [[subpassbegininfo]]
 [small]#*subpassbegininfo* = { +

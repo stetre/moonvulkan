@@ -117,7 +117,8 @@ static int pushfield(lua_State *L, int arg, const char *sname)
     do { lua_pushfstring(L, "%s.%s", (name), lua_tostring(L, -1)); lua_remove(L, -2); } while(0)
 
 /* ZCHECK - Must be implemented for structs that have to be passed from Lua to C */
-#define ZCHECK_BEGIN(VkXxx) VkXxx* zcheck##VkXxx(lua_State *L, int arg, int *err) { VkXxx *p; 
+#define ZCHECK_BEGIN(VkXxx) \
+    VkXxx* zcheck##VkXxx(lua_State *L, int arg, int *err) { VkXxx *p; int arg1; (void)arg1;
 #define ZCHECK_END *err=0; return p; }
 
 /* ZPUSH - Must be implemented for structs that have to be passed from C to Lua */
@@ -242,7 +243,7 @@ static int checktable_(lua_State *L, int arg)
         { lua_pushstring(L, errstring(ERR_TABLE)); return ERR_TABLE; }
     return 0;
     }
-#define newstruct(VkXxx) if((p = znew##VkXxx(L, err))==NULL) return NULL
+#define newstruct(VkXxx) if((p = znew##VkXxx(L, err))==NULL) return NULL /* also sets sType */
 
 static int ispresent_(lua_State *L, int arg, const char *sname)
 #define ispresent(sname) ispresent_(L, arg, (sname))
@@ -262,6 +263,7 @@ static int ispresent_(lua_State *L, int arg, const char *sname)
 
 #define SetInteger(name, sname) do { lua_pushinteger(L, p->name); lua_setfield(L, -2, sname); } while(0)
 #define SetHandle SetInteger /* uint64_t handle */
+#define SetDeviceAddress SetInteger /* uint64_t */
 #define SetLightuserdata(name, sname) do { lua_pushlightuserdata(L, p->name); lua_setfield(L, -2, sname); } while(0)
 #define SetNumber(name, sname) do { lua_pushnumber(L, p->name); lua_setfield(L, -2, sname); } while(0)
 #define SetFlags(name, sname) do { pushflags(L, p->name); lua_setfield(L, -2, sname); } while(0)
@@ -365,6 +367,7 @@ static lua_Integer GetInteger_(lua_State *L, int arg, const char *sname, lua_Int
 
 #define GetInteger(name, sname) GetIntegerOpt(name, sname, 0) /* defaults to 0 */ 
 #define GetHandle GetInteger /* uint64_t handle */
+#define GetDeviceAddress /* uint64_t */
 
 #define GetNumArray_(name, sname, n, towhatx) do {                          \
 /* get a fixed-length n array of floats or integers */                      \
@@ -530,6 +533,7 @@ static const char *GetString_(lua_State *L, int arg, const char *sname, const ch
 #define GetSubpassContents(name, sname) GetEnum(name, sname, testsubpasscontents)
 #define GetObjectType(name, sname) GetEnum(name, sname, testobjecttype)
 #define GetTimeDomain(name, sname) GetEnum(name, sname, testtimedomain)
+#define GetSemaphoreType(name, sname) GetEnum(name, sname, testsemaphoretype)
 
 /* enums with default value (ie optional) */
 #define GetPipelineBindPoint(name, sname) GetEnumOpt(name, sname, testpipelinebindpoint, VK_PIPELINE_BIND_POINT_GRAPHICS)
@@ -1187,7 +1191,6 @@ ZCLEAR_BEGIN(VkSparseBufferMemoryBindInfo)
     if(p->pBinds) zfreearrayVkSparseMemoryBind(L, p->pBinds, p->bindCount, 1);
 ZCLEAR_END
 ZCHECK_BEGIN(VkSparseBufferMemoryBindInfo)
-    int arg1;
     checktable(arg);
     newstruct(VkSparseBufferMemoryBindInfo);
     GetBuffer(buffer, "buffer");
@@ -1204,7 +1207,6 @@ ZCLEAR_BEGIN(VkSparseImageOpaqueMemoryBindInfo)
     if(p->pBinds) zfreearrayVkSparseMemoryBind(L, p->pBinds, p->bindCount, 1);
 ZCLEAR_END
 ZCHECK_BEGIN(VkSparseImageOpaqueMemoryBindInfo)
-    int arg1;
     checktable(arg);
     newstruct(VkSparseImageOpaqueMemoryBindInfo);
     GetImage(image, "image");
@@ -1221,7 +1223,6 @@ ZCLEAR_BEGIN(VkSparseImageMemoryBindInfo)
     if(p->pBinds) zfreearrayVkSparseImageMemoryBind(L, p->pBinds, p->bindCount, 1);
 ZCLEAR_END
 ZCHECK_BEGIN(VkSparseImageMemoryBindInfo)
-    int arg1;
     checktable(arg);
     newstruct(VkSparseImageMemoryBindInfo);
     GetImage(image, "image");
@@ -1259,7 +1260,6 @@ ZCLEAR_BEGIN(VkSpecializationInfo)
 ZCLEAR_END
 ZCHECK_BEGIN(VkSpecializationInfo)
     size_t size;
-    int arg1;
     const char* data;
     checktable(arg);
     newstruct(VkSpecializationInfo);
@@ -1343,7 +1343,6 @@ ZCLEAR_BEGIN(VkPresentRegionKHR)
         zfreearrayVkRectLayerKHR(L, p->pRectangles, p->rectangleCount, 1);
 ZCLEAR_END
 ZCHECK_BEGIN(VkPresentRegionKHR)
-    int arg1;
     checktable(arg);
     newstruct(VkPresentRegionKHR);
 #define F "rectangles"
@@ -1463,7 +1462,6 @@ ZCLEAR_BEGIN(VkSubpassDescription)
         zfreeVkAttachmentReference(L, p->pDepthStencilAttachment, 1);
 ZCLEAR_END
 ZCHECK_BEGIN(VkSubpassDescription)
-    int arg1;
     uint32_t count;
     checktable(arg);
     newstruct(VkSubpassDescription);
@@ -1558,7 +1556,6 @@ ZCLEAR_BEGIN(VkDescriptorSetLayoutBinding)
     if(p->pImmutableSamplers) Free(L, (void*)p->pImmutableSamplers);
 ZCLEAR_END
 ZCHECK_BEGIN(VkDescriptorSetLayoutBinding)
-    int arg1;
     uint32_t count;
     checktable(arg);
     newstruct(VkDescriptorSetLayoutBinding);
@@ -3685,7 +3682,6 @@ static ZCLEAR_BEGIN(VkValidationFlagsEXT)
     if(p->pDisabledValidationChecks) freevalidationchecklist(L, p->pDisabledValidationChecks);
 ZCLEAR_END
 ZCHECK_BEGIN(VkValidationFlagsEXT)
-    int arg1;
     newstruct(VkValidationFlagsEXT);
 #define F "disabled_validation_checks"
     arg1 = pushfield(L, arg, F);
@@ -3720,7 +3716,6 @@ static ZCLEAR_BEGIN(VkInstanceCreateInfo)
 ZCLEAR_END
 
 ZCHECK_BEGIN(VkInstanceCreateInfo)
-    int arg1;
     checktable(arg);
     newstruct(VkInstanceCreateInfo);
     GetFlags(flags, "flags");
@@ -3765,7 +3760,6 @@ static ZCLEAR_BEGIN(VkDeviceQueueCreateInfo)
     if(p->pQueuePriorities) Free(L, (void*)(p->pQueuePriorities));
 ZCLEAR_END
 ZCHECK_BEGIN(VkDeviceQueueCreateInfo)
-    int arg1;
     uint32_t count;
     checktable(arg);
     newstruct(VkDeviceQueueCreateInfo);
@@ -3795,7 +3789,6 @@ static ZCLEAR_BEGIN(VkDeviceGroupDeviceCreateInfoKHR)
     if(p->pPhysicalDevices) Free(L, (void*)p->pPhysicalDevices);
 ZCLEAR_END
 ZCHECK_BEGIN(VkDeviceGroupDeviceCreateInfoKHR)
-    int arg1;
     newstruct(VkDeviceGroupDeviceCreateInfoKHR);
 #define F "physical_devices"
     arg1 = pushfield(L, arg, F);
@@ -3933,7 +3926,6 @@ ZCHECK_BEGIN(VkDeviceGroupCommandBufferBeginInfoKHR)
 ZCHECK_END
 
 ZCHECK_BEGIN(VkCommandBufferBeginInfo)
-    int arg1;
     checktable(arg);
     newstruct(VkCommandBufferBeginInfo);
     GetFlags(flags, "flags");
@@ -3983,6 +3975,10 @@ ZCHECK_BEGIN(VkImportMemoryHostPointerInfoEXT)
     GetLightuserdata(pHostPointer, "host_pointer", void*);
 ZCHECK_END
 
+ZCHECK_BEGIN(VkMemoryOpaqueCaptureAddressAllocateInfo)
+    newstruct(VkMemoryOpaqueCaptureAddressAllocateInfo);
+    GetInteger(opaqueCaptureAddress, "opaque_capture_address");
+ZCHECK_END
 
 ZCHECK_BEGIN(VkMemoryAllocateInfo)
     checktable(arg);
@@ -4000,6 +3996,8 @@ ZCHECK_BEGIN(VkMemoryAllocateInfo)
         ADD_EXTENSION(VkMemoryAllocateFlagsInfoKHR);
     if(ispresent("host_pointer_handle_type") || ispresent("host_pointer"))
         ADD_EXTENSION(VkImportMemoryHostPointerInfoEXT);
+    if(ispresent("opaque_capture_address"))
+        ADD_EXTENSION(VkMemoryOpaqueCaptureAddressAllocateInfo);
     EXTENSIONS_END
 ZCHECK_END
 
@@ -4032,12 +4030,16 @@ ZCHECK_BEGIN(VkExternalMemoryBufferCreateInfo)
     GetFlags(handleTypes, "handle_types");
 ZCHECK_END
 
+ZCHECK_BEGIN(VkBufferOpaqueCaptureAddressCreateInfo)
+    newstruct(VkBufferOpaqueCaptureAddressCreateInfo);
+    GetInteger(opaqueCaptureAddress, "opaque_capture_address");
+ZCHECK_END
+
 static ZCLEAR_BEGIN(VkBufferCreateInfo)
     if(p->pQueueFamilyIndices) Free(L, (void*)p->pQueueFamilyIndices);
 ZCLEAR_END
 
 ZCHECK_BEGIN(VkBufferCreateInfo)
-    int arg1;
     checktable(arg);
     newstruct(VkBufferCreateInfo);
     GetFlags(flags, "flags");
@@ -4053,6 +4055,8 @@ ZCHECK_BEGIN(VkBufferCreateInfo)
     EXTENSIONS_BEGIN
     if(ispresent("handle_types"))
         ADD_EXTENSION(VkExternalMemoryBufferCreateInfo);
+    if(ispresent("opaque_capture_address"))
+        ADD_EXTENSION(VkBufferOpaqueCaptureAddressCreateInfo);
     EXTENSIONS_END
 ZCHECK_END
 
@@ -4096,12 +4100,15 @@ ZCHECK_BEGIN(VkImageSwapchainCreateInfoKHR)
     GetSwapchain(swapchain, "swapchain");
 ZCHECK_END
 
+ZCHECK_BEGIN(VkImageStencilUsageCreateInfo)
+    newstruct(VkImageStencilUsageCreateInfo);
+    GetFlags(stencilUsage, "stencil_usage");
+ZCHECK_END
 
 static ZCLEAR_BEGIN(VkImageCreateInfo)
     if(p->pQueueFamilyIndices) Free(L, (void*)p->pQueueFamilyIndices);
 ZCLEAR_END
 ZCHECK_BEGIN(VkImageCreateInfo)
-    int arg1;
     checktable(arg);
     newstruct(VkImageCreateInfo);
     GetFlags(flags, "flags");
@@ -4137,6 +4144,8 @@ ZCHECK_BEGIN(VkImageCreateInfo)
 #undef F
     if(ispresent("swapchain"))
         ADD_EXTENSION(VkImageSwapchainCreateInfoKHR);
+    if(ispresent("stencil_usage"))
+        ADD_EXTENSION(VkImageStencilUsageCreateInfo);
     EXTENSIONS_END
 ZCHECK_END
 
@@ -4185,7 +4194,6 @@ static ZCLEAR_BEGIN(VkDescriptorPoolCreateInfo)
         zfreearrayVkDescriptorPoolSize(L, p->pPoolSizes, p->poolSizeCount, 1);
 ZCLEAR_END
 ZCHECK_BEGIN(VkDescriptorPoolCreateInfo)
-    int arg1;
     checktable(arg);
     newstruct(VkDescriptorPoolCreateInfo);
     GetFlags(flags, "flags");
@@ -4210,7 +4218,6 @@ static ZCLEAR_BEGIN(VkDescriptorSetVariableDescriptorCountAllocateInfo)
     if(p->pDescriptorCounts) Free(L, (void*)p->pDescriptorCounts);
 ZCLEAR_END
 ZCHECK_BEGIN(VkDescriptorSetVariableDescriptorCountAllocateInfo)
-    int arg1;
     newstruct(VkDescriptorSetVariableDescriptorCountAllocateInfo);
 #define F "descriptor_counts"
     arg1 = pushfield(L, arg, F);
@@ -4224,7 +4231,6 @@ static ZCLEAR_BEGIN(VkDescriptorSetAllocateInfo)
     if(p->pSetLayouts) Free(L, (void*)p->pSetLayouts);
 ZCLEAR_END
 ZCHECK_BEGIN(VkDescriptorSetAllocateInfo)
-    int arg1;
     checktable(arg);
     newstruct(VkDescriptorSetAllocateInfo);
     /* p->descriptorPool = set by caller */
@@ -4248,7 +4254,6 @@ static ZCLEAR_BEGIN(VkDescriptorSetLayoutBindingFlagsCreateInfo)
     if(p->pBindingFlags) Free(L, (void*)p->pBindingFlags);
 ZCLEAR_END
 ZCHECK_BEGIN(VkDescriptorSetLayoutBindingFlagsCreateInfo)
-    int arg1;
     newstruct(VkDescriptorSetLayoutBindingFlagsCreateInfo);
 #define F "binding_flags"
     arg1 = pushfield(L, arg, F);
@@ -4263,7 +4268,6 @@ static ZCLEAR_BEGIN(VkDescriptorSetLayoutCreateInfo)
         zfreearrayVkDescriptorSetLayoutBinding(L, p->pBindings, p->bindingCount, 1);
 ZCLEAR_END
 ZCHECK_BEGIN(VkDescriptorSetLayoutCreateInfo)
-    int arg1;
     checktable(arg);
     newstruct(VkDescriptorSetLayoutCreateInfo);
     GetFlags(flags, "flags");
@@ -4290,7 +4294,6 @@ static ZCLEAR_BEGIN(VkPipelineLayoutCreateInfo)
         zfreearrayVkPushConstantRange(L, p->pPushConstantRanges, p->pushConstantRangeCount, 1);
 ZCLEAR_END
 ZCHECK_BEGIN(VkPipelineLayoutCreateInfo)
-    int arg1;
     checktable(arg);
     newstruct(VkPipelineLayoutCreateInfo);
     GetFlags(flags, "flags");
@@ -4331,7 +4334,6 @@ static ZCLEAR_BEGIN(VkRenderPassInputAttachmentAspectCreateInfoKHR)
         zfreearrayVkInputAttachmentAspectReference(L, p->pAspectReferences, p->aspectReferenceCount, 1);
 ZCLEAR_END
 ZCHECK_BEGIN(VkRenderPassInputAttachmentAspectCreateInfoKHR)
-    int arg1;
     newstruct(VkRenderPassInputAttachmentAspectCreateInfoKHR);
     arg1 = pushfield(L, arg, "input_attachment_aspect_references");
     p->pAspectReferences = 
@@ -4346,7 +4348,6 @@ static ZCLEAR_BEGIN(VkRenderPassMultiviewCreateInfoKHR)
     if(p->pCorrelationMasks) Free(L, (void*)p->pCorrelationMasks);
 ZCLEAR_END
 ZCHECK_BEGIN(VkRenderPassMultiviewCreateInfoKHR)
-    int arg1;
     newstruct(VkRenderPassMultiviewCreateInfoKHR);
 #define F "view_masks"
     arg1 = pushfield(L, arg, F);
@@ -4377,7 +4378,6 @@ static ZCLEAR_BEGIN(VkRenderPassCreateInfo)
         zfreearrayVkSubpassDependency(L, p->pDependencies, p->dependencyCount, 1);
 ZCLEAR_END
 ZCHECK_BEGIN(VkRenderPassCreateInfo)
-    int arg1;
     checktable(arg);
     newstruct(VkRenderPassCreateInfo);
     GetFlags(flags, "flags");
@@ -4413,6 +4413,12 @@ ZCHECK_END
  | Render Pass 2 (VK_KHR_create_renderpass2)                                    |
  *------------------------------------------------------------------------------*/
 
+ZCHECK_BEGIN(VkAttachmentDescriptionStencilLayout)
+    newstruct(VkAttachmentDescriptionStencilLayout);
+    GetImageLayout(stencilInitialLayout, "stencil_initial_layout");
+    GetImageLayout(stencilFinalLayout, "stencil_final_layout");
+ZCHECK_END
+
 ZCHECK_BEGIN(VkAttachmentDescription2)
     checktable(arg);
     newstruct(VkAttachmentDescription2);
@@ -4425,8 +4431,17 @@ ZCHECK_BEGIN(VkAttachmentDescription2)
     GetAttachmentStoreOp(stencilStoreOp, "stencil_store_op");
     GetImageLayout(initialLayout, "initial_layout");
     GetImageLayout(finalLayout, "final_layout");
+    EXTENSIONS_BEGIN
+    if(ispresent("stencil_initial_layout") || ispresent("stencil_final_layout"))
+        ADD_EXTENSION(VkAttachmentDescriptionStencilLayout);
+    EXTENSIONS_END
 ZCHECK_END
 ZCHECKARRAY(VkAttachmentDescription2)
+
+ZCHECK_BEGIN(VkAttachmentReferenceStencilLayout)
+    newstruct(VkAttachmentReferenceStencilLayout);
+    GetImageLayout(stencilLayout, "stencil_layout");
+ZCHECK_END
 
 ZCHECK_BEGIN(VkAttachmentReference2)
     checktable(arg);
@@ -4434,6 +4449,10 @@ ZCHECK_BEGIN(VkAttachmentReference2)
     GetAttachment(attachment, "attachment");
     GetImageLayout(layout, "layout");
     GetFlags(aspectMask, "aspect_mask");
+    EXTENSIONS_BEGIN
+    if(ispresent("stencil_layout"))
+        ADD_EXTENSION(VkAttachmentReferenceStencilLayout);
+    EXTENSIONS_END
 ZCHECK_END
 ZCHECKARRAY(VkAttachmentReference2)
 
@@ -4442,7 +4461,6 @@ static ZCLEAR_BEGIN(VkSubpassDescriptionDepthStencilResolve)
         zfreeVkAttachmentReference2(L, p->pDepthStencilResolveAttachment, 1);
 ZCLEAR_END
 ZCHECK_BEGIN(VkSubpassDescriptionDepthStencilResolve)
-    int arg1;
     newstruct(VkSubpassDescriptionDepthStencilResolve);
     GetFlags(depthResolveMode, "depth_resolve_mode");
     GetFlags(stencilResolveMode, "stencil_resolve_mode");
@@ -4467,7 +4485,6 @@ static ZCLEAR_BEGIN(VkSubpassDescription2)
         zfreeVkAttachmentReference2(L, p->pDepthStencilAttachment, 1);
 ZCLEAR_END
 ZCHECK_BEGIN(VkSubpassDescription2)
-    int arg1;
     uint32_t count;
     checktable(arg);
     newstruct(VkSubpassDescription2);
@@ -4550,7 +4567,6 @@ static ZCLEAR_BEGIN(VkRenderPassCreateInfo2)
     if(p->pCorrelatedViewMasks) Free(L, (void*)p->pCorrelatedViewMasks);
 ZCLEAR_END
 ZCHECK_BEGIN(VkRenderPassCreateInfo2)
-    int arg1;
     checktable(arg);
     newstruct(VkRenderPassCreateInfo2);
     GetFlags(flags, "flags");
@@ -4588,11 +4604,45 @@ ZCHECK_END
  | Framebuffer                                                                  |
  *------------------------------------------------------------------------------*/
 
+static ZCLEAR_BEGIN(VkFramebufferAttachmentImageInfo)
+    if(p->pViewFormats)
+        if(p->pViewFormats) freeformatlist(L, p->pViewFormats);
+ZCLEAR_END
+ZCHECK_BEGIN(VkFramebufferAttachmentImageInfo)
+    checktable(arg);
+    newstruct(VkFramebufferAttachmentImageInfo);
+    GetFlags(flags, "flags");
+    GetFlags(usage, "usage");
+    GetInteger(width, "width");
+    GetInteger(height, "height");
+    GetInteger(layerCount, "layer_count");
+#define F "view_formats"
+    arg1 = pushfield(L, arg, F);
+    p->pViewFormats = checkformatlist(L, arg1, &p->viewFormatCount, err);
+    if(*err<0) { prependfield(F); return p; }
+#undef F
+ZCHECK_END
+ZCHECKARRAY(VkFramebufferAttachmentImageInfo)
+
+static ZCLEAR_BEGIN(VkFramebufferAttachmentsCreateInfo)
+    if(p->pAttachmentImageInfos)
+        zfreearrayVkFramebufferAttachmentImageInfo(L, p->pAttachmentImageInfos, p->attachmentImageInfoCount, 1);
+ZCLEAR_END
+ZCHECK_BEGIN(VkFramebufferAttachmentsCreateInfo)
+    newstruct(VkFramebufferAttachmentsCreateInfo);
+#define F "attachment_image_infos"
+    arg1 = pushfield(L, arg, F);
+    p->pAttachmentImageInfos = zcheckarrayVkFramebufferAttachmentImageInfo(L, arg1, &p->attachmentImageInfoCount, err);
+    popfield(L, arg1);
+    if(*err < 0) { prependfield(F); return p; }
+    if(*err == ERR_NOTPRESENT) poperror();
+#undef F
+ZCHECK_END
+
 static ZCLEAR_BEGIN(VkFramebufferCreateInfo)
     if(p->pAttachments) Free(L, (void*)p->pAttachments);
 ZCLEAR_END
 ZCHECK_BEGIN(VkFramebufferCreateInfo)
-    int arg1;
     checktable(arg);
     newstruct(VkFramebufferCreateInfo);
     GetFlags(flags, "flags");
@@ -4607,6 +4657,10 @@ ZCHECK_BEGIN(VkFramebufferCreateInfo)
     if(*err < 0) { pushfielderror(F); return p; }
     if(*err == ERR_NOTPRESENT) poperror();
 #undef F
+    EXTENSIONS_BEGIN
+    if(ispresent("attachment_image_infos"))
+        ADD_EXTENSION(VkFramebufferAttachmentsCreateInfo);
+    EXTENSIONS_END
 ZCHECK_END
 
 /*------------------------------------------------------------------------------*
@@ -4647,7 +4701,6 @@ static ZCLEAR_BEGIN(VkSwapchainCreateInfoKHR)
     if(p->pQueueFamilyIndices) Free(L, (void*)p->pQueueFamilyIndices);
 ZCLEAR_END
 ZCHECK_BEGIN(VkSwapchainCreateInfoKHR)
-    int arg1;
     checktable(arg);
     newstruct(VkSwapchainCreateInfoKHR);
     GetFlags(flags, "flags");
@@ -4825,6 +4878,12 @@ ZCHECK_BEGIN(VkExportSemaphoreCreateInfoKHR)
     GetFlags(handleTypes, "handle_types");
 ZCHECK_END
 
+ZCHECK_BEGIN(VkSemaphoreTypeCreateInfo)
+    newstruct(VkSemaphoreTypeCreateInfo);
+    GetSemaphoreType(semaphoreType, "semaphore_type");
+    GetInteger(initialValue, "initial_value");
+ZCHECK_END
+
 ZCHECK_BEGIN(VkSemaphoreCreateInfo)
     checktable(arg);
     newstruct(VkSemaphoreCreateInfo);
@@ -4832,6 +4891,8 @@ ZCHECK_BEGIN(VkSemaphoreCreateInfo)
     EXTENSIONS_BEGIN
     if(ispresent("handle_types"))
         ADD_EXTENSION(VkExportSemaphoreCreateInfoKHR);
+    if(ispresent("semaphore_type"))
+        ADD_EXTENSION(VkSemaphoreTypeCreateInfo);
     EXTENSIONS_END
 ZCHECK_END
 
@@ -4849,6 +4910,38 @@ ZCHECK_BEGIN(VkSemaphoreGetFdInfoKHR)
     newstruct(VkSemaphoreGetFdInfoKHR);
     /* p->semaphore is set by the caller */
     GetBits(handleType, "handle_type", VkExternalSemaphoreHandleTypeFlagBits);
+ZCHECK_END
+
+static ZCLEAR_BEGIN(VkSemaphoreWaitInfo)
+    if(p->pSemaphores) Free(L, (void*)p->pSemaphores);
+    if(p->pValues) Free(L, (void*)p->pValues);
+ZCLEAR_END
+ZCHECK_BEGIN(VkSemaphoreWaitInfo)
+    uint32_t count;
+    checktable(arg);
+    newstruct(VkSemaphoreWaitInfo);
+    GetFlags(flags, "flags");
+#define F "semaphores"
+    arg1 = pushfield(L, arg, F);
+    p->pSemaphores = checksemaphorelist(L, arg1, &p->semaphoreCount, err, NULL);
+    popfield(L, arg1);
+    if(*err < 0) { pushfielderror(F); return p; }
+#undef F
+#define F "values"
+    arg1 = pushfield(L, arg, F);
+    p->pValues = checkuint64list(L, arg1, &count, err);
+    popfield(L, arg1);
+    if(*err < 0) { pushfielderror(F); return p; }
+    if(count != p->semaphoreCount)
+        { *err=ERR_LENGTH; pushfielderror(F); return p; }
+#undef F
+ZCHECK_END
+
+ZCHECK_BEGIN(VkSemaphoreSignalInfo)
+    checktable(arg);
+    newstruct(VkSemaphoreSignalInfo);
+    GetSemaphore(semaphore, "semaphore");
+    GetInteger(value, "value");
 ZCHECK_END
 
 /*------------------------------------------------------------------------------*
@@ -4938,7 +5031,6 @@ static ZCLEAR_BEGIN(VkDescriptorUpdateTemplateCreateInfoKHR)
         zfreearrayVkDescriptorUpdateTemplateEntry(L, p->pDescriptorUpdateEntries, p->descriptorUpdateEntryCount, 1);
 ZCLEAR_END
 ZCHECK_BEGIN(VkDescriptorUpdateTemplateCreateInfoKHR)
-    int arg1;
     checktable(arg);
     newstruct(VkDescriptorUpdateTemplateCreateInfoKHR);
     GetFlags(flags, "flags");
@@ -4971,7 +5063,6 @@ static ZCLEAR_BEGIN(VkDeviceGroupSubmitInfoKHR)
     if(p->pSignalSemaphoreDeviceIndices) Free(L, (void*)p->pSignalSemaphoreDeviceIndices);
 ZCLEAR_END
 ZCHECK_BEGIN(VkDeviceGroupSubmitInfoKHR)
-    int arg1;
     newstruct(VkDeviceGroupSubmitInfoKHR);
 #define F "wait_semaphore_device_indices"
     arg1 = pushfield(L, arg, F);
@@ -4993,6 +5084,26 @@ ZCHECK_BEGIN(VkDeviceGroupSubmitInfoKHR)
 #undef F
 ZCHECK_END
 
+static ZCLEAR_BEGIN(VkTimelineSemaphoreSubmitInfo)
+    if(p->pWaitSemaphoreValues) Free(L, (void*)p->pWaitSemaphoreValues);
+    if(p->pSignalSemaphoreValues) Free(L, (void*)p->pSignalSemaphoreValues);
+ZCLEAR_END
+ZCHECK_BEGIN(VkTimelineSemaphoreSubmitInfo)
+    newstruct(VkTimelineSemaphoreSubmitInfo);
+#define F "wait_semaphore_values"
+    arg1 = pushfield(L, arg, F);
+    p->pWaitSemaphoreValues = checkuint64list(L, arg1, &p->waitSemaphoreValueCount, err);
+    popfield(L, arg1);
+    if(*err < 0) { pushfielderror(F); return p; }
+#undef F
+#define F "signal_semaphore_values"
+    arg1 = pushfield(L, arg, F);
+    p->pSignalSemaphoreValues = checkuint64list(L, arg1, &p->signalSemaphoreValueCount, err);
+    popfield(L, arg1);
+    if(*err < 0) { pushfielderror(F); return p; }
+#undef F
+ZCHECK_END
+
 static ZCLEAR_BEGIN(VkSubmitInfo)
     if(p->pWaitSemaphores) Free(L, (void*)p->pWaitSemaphores);
     if(p->pWaitDstStageMask) Free(L, (void*)p->pWaitDstStageMask);
@@ -5000,7 +5111,6 @@ static ZCLEAR_BEGIN(VkSubmitInfo)
     if(p->pSignalSemaphores) Free(L, (void*)p->pSignalSemaphores);
 ZCLEAR_END
 ZCHECK_BEGIN(VkSubmitInfo)
-    int arg1;
     uint32_t count;
     checktable(arg);
     newstruct(VkSubmitInfo);
@@ -5036,6 +5146,8 @@ ZCHECK_BEGIN(VkSubmitInfo)
     if(ispresent("wait_semaphore_device_indices") ||
         ispresent("command_buffer_device_masks") || ispresent("signal_semaphore_device_indices"))
         ADD_EXTENSION(VkDeviceGroupSubmitInfoKHR);
+    if(ispresent("wait_semaphore_values") || ispresent("signal_semaphore_values"))
+        ADD_EXTENSION(VkTimelineSemaphoreSubmitInfo);
     EXTENSIONS_END
 ZCHECK_END
 ZCHECKARRAY(VkSubmitInfo)
@@ -5049,7 +5161,6 @@ static ZCLEAR_BEGIN(VkPresentRegionsKHR)
         zfreearrayVkPresentRegionKHR(L, p->pRegions, p->swapchainCount, 1);
 ZCLEAR_END
 ZCHECK_BEGIN(VkPresentRegionsKHR)
-    int arg1;
     newstruct(VkPresentRegionsKHR);
 #define F "regions"
     arg1 = pushfield(L, arg, F);
@@ -5071,7 +5182,6 @@ static ZCLEAR_BEGIN(VkDeviceGroupPresentInfoKHR)
     if(p->pDeviceMasks) Free(L, (void*)p->pDeviceMasks);
 ZCLEAR_END
 ZCHECK_BEGIN(VkDeviceGroupPresentInfoKHR)
-    int arg1;
     newstruct(VkDeviceGroupPresentInfoKHR);
 #define F "device_masks"
     arg1 = pushfield(L, arg, F);
@@ -5143,7 +5253,6 @@ static ZCLEAR_BEGIN(VkRenderPassSampleLocationsBeginInfoEXT)
             p->pPostSubpassSampleLocations, p->postSubpassSampleLocationsCount, 1);
 ZCLEAR_END
 ZCHECK_BEGIN(VkRenderPassSampleLocationsBeginInfoEXT)
-    int arg1;
     newstruct(VkRenderPassSampleLocationsBeginInfoEXT);
 #define F "attachment_initial_sample_locations"
     arg1 = pushfield(L, arg, F);
@@ -5173,7 +5282,6 @@ static ZCLEAR_BEGIN(VkDeviceGroupRenderPassBeginInfoKHR)
         zfreearrayVkRect2D(L, p->pDeviceRenderAreas, p->deviceRenderAreaCount, 1);
 ZCLEAR_END
 ZCHECK_BEGIN(VkDeviceGroupRenderPassBeginInfoKHR)
-    int arg1;
     newstruct(VkDeviceGroupRenderPassBeginInfoKHR);
     GetInteger(deviceMask, "device_mask");
 #define F "device_render_areas"
@@ -5185,11 +5293,24 @@ ZCHECK_BEGIN(VkDeviceGroupRenderPassBeginInfoKHR)
 #undef F
 ZCHECK_END
 
+static ZCLEAR_BEGIN(VkRenderPassAttachmentBeginInfo)
+    if(p->pAttachments) Free(L, (void*)p->pAttachments);
+ZCLEAR_END
+ZCHECK_BEGIN(VkRenderPassAttachmentBeginInfo)
+    newstruct(VkRenderPassAttachmentBeginInfo);
+#define F "attachments"
+    arg1 = pushfield(L, arg, F);
+    p->pAttachments = checkimage_viewlist(L, arg1, &p->attachmentCount, err, NULL);
+    popfield(L, arg1);
+    if(*err < 0) { pushfielderror(F); return p; }
+    if(*err == ERR_NOTPRESENT) poperror();
+#undef F
+ZCHECK_END
+
 static ZCLEAR_BEGIN(VkRenderPassBeginInfo)
     if(p->pClearValues) zfreearrayVkClearValue(L, p->pClearValues, p->clearValueCount, 1);
 ZCLEAR_END
 ZCHECK_BEGIN(VkRenderPassBeginInfo)
-    int arg1;
     checktable(arg);
     newstruct(VkRenderPassBeginInfo);
     GetRenderPass(renderPass, "render_pass");
@@ -5207,6 +5328,8 @@ ZCHECK_BEGIN(VkRenderPassBeginInfo)
         ADD_EXTENSION(VkRenderPassSampleLocationsBeginInfoEXT);
     if(ispresent("device_mask") || ispresent("device_render_areas"))
         ADD_EXTENSION(VkDeviceGroupRenderPassBeginInfoKHR);
+    if(ispresent("attachments"))
+        ADD_EXTENSION(VkRenderPassAttachmentBeginInfo);
     EXTENSIONS_END
 ZCHECK_END
 
@@ -5248,7 +5371,6 @@ static ZCLEAR_BEGIN(VkBindSparseInfo)
         Free(L, (void*)p->pSignalSemaphores);
 ZCLEAR_END
 ZCHECK_BEGIN(VkBindSparseInfo)
-    int arg1;
     checktable(arg);
     newstruct(VkBindSparseInfo);
 #define F "wait_semaphores"
@@ -5288,6 +5410,8 @@ ZCHECK_BEGIN(VkBindSparseInfo)
     EXTENSIONS_BEGIN
     if(ispresent("resource_device_index") || ispresent("memory_device_index"))
         ADD_EXTENSION(VkDeviceGroupBindSparseInfoKHR);
+    if(ispresent("wait_semaphore_values") || ispresent("signal_semaphore_values"))
+        ADD_EXTENSION(VkTimelineSemaphoreSubmitInfo);
     EXTENSIONS_END
 ZCHECK_END
 ZCHECKARRAY(VkBindSparseInfo)
@@ -5315,7 +5439,6 @@ static ZCLEAR_BEGIN(VkWriteDescriptorSet)
         Free(L, (void*)p->pTexelBufferView);
 ZCLEAR_END
 ZCHECK_BEGIN(VkWriteDescriptorSet)
-    int arg1;
     checktable(arg);
     newstruct(VkWriteDescriptorSet);
     GetDescriptorSet(dstSet, "dst_set");
@@ -5397,7 +5520,6 @@ static ZCLEAR_BEGIN(VkBindBufferMemoryDeviceGroupInfoKHR)
     if(p->pDeviceIndices) Free(L, (void*)p->pDeviceIndices);
 ZCLEAR_END
 ZCHECK_BEGIN(VkBindBufferMemoryDeviceGroupInfoKHR)
-    int arg1;
     newstruct(VkBindBufferMemoryDeviceGroupInfoKHR);
 #define F "device_indices"
     arg1 = pushfield(L, arg, F);
@@ -5435,7 +5557,6 @@ static ZCLEAR_BEGIN(VkBindImageMemoryDeviceGroupInfoKHR)
         zfreearrayVkRect2D(L, p->pSplitInstanceBindRegions, p->splitInstanceBindRegionCount, 1);
 ZCLEAR_END
 ZCHECK_BEGIN(VkBindImageMemoryDeviceGroupInfoKHR)
-    int arg1;
     newstruct(VkBindImageMemoryDeviceGroupInfoKHR);
 #define F "device_indices"
     arg1 = pushfield(L, arg, F);
@@ -5564,7 +5685,6 @@ static ZCLEAR_BEGIN(VkDebugUtilsMessengerCallbackDataEXT)
         zfreearrayVkDebugUtilsObjectNameInfoEXT(L, p->pObjects, p->objectCount, 1);
 ZCLEAR_END
 ZCHECK_BEGIN(VkDebugUtilsMessengerCallbackDataEXT)
-    int arg1;
     checktable(arg);
     newstruct(VkDebugUtilsMessengerCallbackDataEXT);
     GetFlags(flags, "flags");
@@ -5733,10 +5853,14 @@ ZCHECK_END
 
 /*------------------------------------------------------------------------------*/
 
-ZCHECK_BEGIN(VkPhysicalDeviceExternalSemaphoreInfoKHR)
+ZCHECK_BEGIN(VkPhysicalDeviceExternalSemaphoreInfo)
     checktable(arg);
-    newstruct(VkPhysicalDeviceExternalSemaphoreInfoKHR);
+    newstruct(VkPhysicalDeviceExternalSemaphoreInfo);
     GetBits(handleType, "handle_type", VkExternalSemaphoreHandleTypeFlagBits);
+    EXTENSIONS_BEGIN
+    if(ispresent("semaphore_type"))
+        ADD_EXTENSION(VkSemaphoreTypeCreateInfo);
+    EXTENSIONS_END
 ZCHECK_END
 
 /*------------------------------------------------------------------------------*/
@@ -5746,9 +5870,9 @@ ZCHECK_BEGIN(VkPhysicalDeviceExternalImageFormatInfoKHR)
     GetBits(handleType, "handle_type", VkExternalMemoryHandleTypeFlagBits);
 ZCHECK_END
 
-ZCHECK_BEGIN(VkPhysicalDeviceImageFormatInfo2KHR)
+ZCHECK_BEGIN(VkPhysicalDeviceImageFormatInfo2)
     checktable(arg);
-    newstruct(VkPhysicalDeviceImageFormatInfo2KHR);
+    newstruct(VkPhysicalDeviceImageFormatInfo2);
     GetFormat(format, "format");
     GetImageType(type, "type");
     GetImageTiling(tiling, "tiling");
@@ -5757,12 +5881,14 @@ ZCHECK_BEGIN(VkPhysicalDeviceImageFormatInfo2KHR)
     EXTENSIONS_BEGIN
     if(ispresent("handle_type"))
         ADD_EXTENSION(VkPhysicalDeviceExternalImageFormatInfoKHR);
+    if(ispresent("stencil_usage"))
+        ADD_EXTENSION(VkImageStencilUsageCreateInfo);
     EXTENSIONS_END
 ZCHECK_END
 
-ZCHECK_BEGIN(VkPhysicalDeviceSparseImageFormatInfo2KHR)
+ZCHECK_BEGIN(VkPhysicalDeviceSparseImageFormatInfo2)
     checktable(arg);
-    newstruct(VkPhysicalDeviceSparseImageFormatInfo2KHR);
+    newstruct(VkPhysicalDeviceSparseImageFormatInfo2);
     GetFormat(format, "format");
     GetImageType(type, "type");
     GetSamples(samples, "samples");
@@ -5839,7 +5965,6 @@ static ZCLEAR_BEGIN(VkPipelineShaderStageCreateInfo)
         zfreeVkSpecializationInfo(L, p->pSpecializationInfo, 1);
 ZCLEAR_END
 ZCHECK_BEGIN(VkPipelineShaderStageCreateInfo)
-    int arg1;
     checktable(arg);
     newstruct(VkPipelineShaderStageCreateInfo);
     GetFlags(flags, "flags");
@@ -5913,7 +6038,6 @@ static ZCLEAR_BEGIN(VkPipelineViewportStateCreateInfo)
     if(p->pScissors) zfreearrayVkRect2D(L, p->pScissors, p->scissorCount, 1);
 ZCLEAR_END
 ZCHECK_BEGIN(VkPipelineViewportStateCreateInfo)
-    int arg1;
     uint32_t count;
     checktable(arg);
     newstruct(VkPipelineViewportStateCreateInfo);
@@ -5988,7 +6112,6 @@ static ZCLEAR_BEGIN(VkSampleLocationsInfoEXT)
         zfreearrayVkSampleLocationEXT(L, p->pSampleLocations, p->sampleLocationsCount, 1);
 ZCLEAR_END
 ZCHECK_BEGIN(VkSampleLocationsInfoEXT)
-    int arg1;
     checktable(arg);
     newstruct(VkSampleLocationsInfoEXT);
     GetBits(sampleLocationsPerPixel, "sample_locations_per_pixel", VkSampleCountFlagBits);
@@ -6014,7 +6137,6 @@ static ZCLEAR_BEGIN(VkPipelineMultisampleStateCreateInfo)
     if(p->pSampleMask) Free(L, (void*)p->pSampleMask);
 ZCLEAR_END
 ZCHECK_BEGIN(VkPipelineMultisampleStateCreateInfo)
-    int arg1;
     uint32_t count;
     checktable(arg);
     newstruct(VkPipelineMultisampleStateCreateInfo);
@@ -6045,7 +6167,6 @@ static ZCLEAR_BEGIN(VkPipelineVertexInputDivisorStateCreateInfoEXT)
             p->pVertexBindingDivisors, p->vertexBindingDivisorCount, 1);
 ZCLEAR_END
 ZCHECK_BEGIN(VkPipelineVertexInputDivisorStateCreateInfoEXT)
-    int arg1;
     newstruct(VkPipelineVertexInputDivisorStateCreateInfoEXT);
 #define F "vertex_binding_divisors"
     arg1 = pushfield(L, arg, F);
@@ -6064,7 +6185,6 @@ static ZCLEAR_BEGIN(VkPipelineVertexInputStateCreateInfo)
             p->pVertexAttributeDescriptions, p->vertexAttributeDescriptionCount, 1);
 ZCLEAR_END
 ZCHECK_BEGIN(VkPipelineVertexInputStateCreateInfo)
-    int arg1;
     checktable(arg);
     newstruct(VkPipelineVertexInputStateCreateInfo);
     GetFlags(flags, "flags");
@@ -6121,7 +6241,6 @@ static ZCLEAR_BEGIN(VkPipelineColorBlendStateCreateInfo)
         zfreearrayVkPipelineColorBlendAttachmentState(L, p->pAttachments, p->attachmentCount, 1);
 ZCLEAR_END
 ZCHECK_BEGIN(VkPipelineColorBlendStateCreateInfo)
-    int arg1;
     checktable(arg);
     newstruct(VkPipelineColorBlendStateCreateInfo);
     GetFlags(flags, "flags");
@@ -6147,7 +6266,6 @@ static ZCLEAR_BEGIN(VkPipelineDynamicStateCreateInfo)
     if(p->pDynamicStates) freedynamicstatelist(L, (VkDynamicState*)p->pDynamicStates);
 ZCLEAR_END
 ZCHECK_BEGIN(VkPipelineDynamicStateCreateInfo)
-    int arg1;
     checktable(arg);
     newstruct(VkPipelineDynamicStateCreateInfo);
     GetFlags(flags, "flags");
@@ -6166,7 +6284,6 @@ static ZCLEAR_BEGIN(VkPipelineDiscardRectangleStateCreateInfoEXT)
         zfreearrayVkRect2D(L, p->pDiscardRectangles, p->discardRectangleCount, 1);
 ZCLEAR_END
 ZCHECK_BEGIN(VkPipelineDiscardRectangleStateCreateInfoEXT)
-    int arg1;
     checktable(arg);
     newstruct(VkPipelineDiscardRectangleStateCreateInfoEXT);
     GetFlags(flags, "flags");
@@ -6195,7 +6312,6 @@ static ZCLEAR_BEGIN(VkGraphicsPipelineCreateInfo)
     if(p->pDynamicState) zfreeVkPipelineDynamicStateCreateInfo(L, p->pDynamicState, 1);
 ZCLEAR_END
 ZCHECK_BEGIN(VkGraphicsPipelineCreateInfo)
-    int arg1;
     checktable(arg);
     newstruct(VkGraphicsPipelineCreateInfo);
     GetFlags(flags, "flags");
@@ -6393,6 +6509,11 @@ static void zfreeaux(lua_State *L, void *pp)
         CASE(BIND_BUFFER_MEMORY_DEVICE_GROUP_INFO_KHR, VkBindBufferMemoryDeviceGroupInfoKHR);
         CASE(DEVICE_GROUP_PRESENT_INFO_KHR, VkDeviceGroupPresentInfoKHR);
         CASE(SUBPASS_DESCRIPTION_DEPTH_STENCIL_RESOLVE, VkSubpassDescriptionDepthStencilResolve);
+        CASE(FRAMEBUFFER_ATTACHMENTS_CREATE_INFO, VkFramebufferAttachmentsCreateInfo);
+        CASE(FRAMEBUFFER_ATTACHMENT_IMAGE_INFO, VkFramebufferAttachmentImageInfo);
+        CASE(RENDER_PASS_ATTACHMENT_BEGIN_INFO, VkRenderPassAttachmentBeginInfo);
+        CASE(TIMELINE_SEMAPHORE_SUBMIT_INFO, VkTimelineSemaphoreSubmitInfo);
+        CASE(SEMAPHORE_WAIT_INFO, VkSemaphoreWaitInfo);
 #undef CASE
         default: 
             return;
