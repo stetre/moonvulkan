@@ -348,6 +348,8 @@ pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-exte
 _handle_type_: <<externalmemoryhandletypeflags, externalmemoryhandletypeflags>>, +
 pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkImageStencilUsageCreateInfo.html[VkImageStencilUsageCreateInfo]): +
 _stencil_usage_: <<imageusageflags, imageusageflags>>, +
+pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDeviceImageViewImageFormatInfoEXT.html[VkPhysicalDeviceImageViewImageFormatInfoEXT]): +
+_image_view_type_, <<imageviewtype, imageviewtype>>, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDeviceImageFormatInfo2.html[VkPhysicalDeviceImageFormatInfo2])#
 
 * [[physicaldevicelimits]]
@@ -812,7 +814,10 @@ pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-exte
 _external_memory_properties_: <<externalmemoryproperties, externalmemoryproperties>>, +
 pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkSamplerYcbcrConversionImageFormatProperties.html[VkSamplerYcbcrConversionImageFormatProperties]): +
 _combined_image_sampler_descriptor_count_: integer, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkImageFormatProperties.html[VkImageFormatProperties])#
+pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkFilterCubicImageViewImageFormatPropertiesEXT.html[VkFilterCubicImageViewImageFormatPropertiesEXT]): +
+_filter_cubic_: boolean, +
+_filter_cubic_minmax_: boolean, +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkImageFormatProperties.html[VkImageFormatProperties], https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkImageFormatProperties2.html[VkImageFormatProperties2])#
 
 
 * [[physicaldevicesparseimageformatinfo]]
@@ -1621,9 +1626,10 @@ _render_pass_: <<render_pass, render_pass>> *[R]*, +
 _subpass_: integer, +
 _base_pipeline_handle_: <<pipeline, pipeline>>, +
 _base_pipeline_index_: <<index, index>>, +
-_discard_rectangle_state_: <<pipelinediscardrectanglestatecreateinfo, pipelinediscardrectanglestatecreateinfo>> (Note1), +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkGraphicsPipelineCreateInfo.html[VkGraphicsPipelineCreateInfo]) +
-Note1: Requires th extension.#
+pass:[--] EXTENSIONS: +
+_discard_rectangle_state_ <<pipelinediscardrectanglestatecreateinfo, pipelinediscardrectanglestatecreateinfo>>, +
+_creation_feedback_state_ <<pipelinecreationfeedbackcreateinfo, pipelinecreationfeedbackcreateinfo>>, +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkGraphicsPipelineCreateInfo.html[VkGraphicsPipelineCreateInfo]).#
 
 * [[computepipelinecreateinfo]]
 [small]#*computepipelinecreateinfo* = { +
@@ -1632,8 +1638,9 @@ _stage_: <<pipelineshaderstagecreateinfo, pipelineshaderstagecreateinfo>> *[R]*,
 _layout_: <<pipeline_layout, pipeline_layout>> *[R]*, +
 _base_pipeline_handle_: <<pipeline, pipeline>>, +
 _base_pipeline_index_: <<index, index>>, +
+pass:[--] EXTENSIONS: +
+_creation_feedback_state_ <<pipelinecreationfeedbackcreateinfo, pipelinecreationfeedbackcreateinfo>>, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkComputePipelineCreateInfo.html[VkComputePipelineCreateInfo])#
-
 
 * [[pipelineshaderstagecreateinfo]]
 [small]#*pipelineshaderstagecreateinfo* = { +
@@ -1656,7 +1663,6 @@ _constant_id_: integer, +
 _offset_: integer, +
 _size_: integer, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkSpecializationMapEntry.html[VkSpecializationMapEntry])#
-
 
 * [[pipelinevertexinputstatecreateinfo]]
 [small]#*pipelinevertexinputstatecreateinfo* = { +
@@ -1735,6 +1741,16 @@ _extra_primitive_overestimation_size_: float, +
 pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPipelineRasterizationStateStreamCreateInfoEXT.html[VkPipelineRasterizationStateStreamCreateInfoEXT]): +
 _rasterization_stream_create_flags_: <<pipelinerasterizationstatestreamcreateflags, pipelinerasterizationstatestreamcreateflags>>, +
 _rasterization_stream_: integer, +
+pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPipelineRasterizationDepthClipStateCreateInfoEXT.html[VkPipelineRasterizationDepthClipStateCreateInfoEXT]): +
+_depth_clip_create_flags_: <<pipelinerasterizationdepthclipstatecreateflags, pipelinerasterizationdepthclipstatecreateflags>>, +
+_depth_clip_enable_: boolean, +
+pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPipelineRasterizationProvokingVertexStateCreateInfoEXT.html[VkPipelineRasterizationProvokingVertexStateCreateInfoEXT]): +
+_provoking_vertex_mode_: <<provokingvertexmode, provokingvertexmode>>, +
+pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPipelineRasterizationLineStateCreateInfoEXT.html[VkPipelineRasterizationLineStateCreateInfoEXT]): +
+_line_rasterization_mode_: <<linerasterizationmode, linerasterizationmode>>, +
+_stippled_line_enable_: boolean, +
+_line_stipple_factor_: integer, +
+_line_stipple_pattern_: integer, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPipelineRasterizationStateCreateInfo.html[VkPipelineRasterizationStateCreateInfo])#
 
 
@@ -1804,19 +1820,30 @@ _alpha_blend_op_: <<blendop, blendop>>, +
 _color_write_mask_: <<colorcomponentflags, colorcomponentflags>>, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPipelineColorBlendAttachmentState.html[VkPipelineColorBlendAttachmentState])#
 
-* [[pipelinediscardrectanglestatecreateinfo]]
-[small]#*pipelinediscardrectanglestatecreateinfo* = { +
-_flags_: <<discardrectangleflags, discardrectangleflags>>, +
-_discard_rectangle_mode_: <<discardrectanglemode, discardrectanglemode>> *[R]*, +
-_discard_rectangles_: {<<rect2d, rect2d>>}, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPipelineDiscardRectangleStateCreateInfoEXT.html[VkPipelineDiscardRectangleStateCreateInfoEXT])#
-
 * [[pipelinedynamicstatecreateinfo]]
 [small]#*pipelinedynamicstatecreateinfo* = { +
 _flags_: <<pipelinedynamicstatecreateflags, pipelinedynamicstatecreateflags>>, +
 _dynamic_states_: {<<dynamicstate, dynamicstate>>} *[R]*, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPipelineDynamicStateCreateInfo.html[VkPipelineDynamicStateCreateInfo])#
 
+* [[pipelinediscardrectanglestatecreateinfo]]
+[small]#*pipelinediscardrectanglestatecreateinfo* = { +
+_flags_: <<discardrectangleflags, discardrectanglestatecreateflags>>, +
+_discard_rectangle_mode_: <<discardrectanglemode, discardrectanglemode>> *[R]*, +
+_discard_rectangles_: {<<rect2d, rect2d>>}, +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPipelineDiscardRectangleStateCreateInfoEXT.html[VkPipelineDiscardRectangleStateCreateInfoEXT])#
+
+* [[pipelinecreationfeedbackcreateinfo]]
+[small]#*pipelinecreationfeedbackcreateinfo* = { +
+_pipeline_creation_feedback_: <<pipelinecreationfeedback, pipelinecreationfeedback>>, +
+_pipeline_stage_creation_feedbacks_: {<<pipelinecreationfeedback, pipelinecreationfeedback>>}, +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPipelineCreationFeedbackCreateInfoEXT.html[VkPipelineCreationFeedbackCreateInfoEXT])#
+
+* [[pipelinecreationfeedback]]
+[small]#*pipelinecreationfeedback* = { +
+_flags_: <<pipelinecreationfeedbackflags, pipelinecreationfeedbackflags>>, +
+_duration_: integer, +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPipelineCreationFeedbackEXT.html[VkPipelineCreationFeedbackEXT])#
 
 * [[buffercopy]]
 [small]#*buffercopy* = { +
@@ -2035,6 +2062,8 @@ pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-exte
 _shared_present_supported_usage_flags_: <<imageusageflags, imageusageflags>>, +
 pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDeviceSurfaceCapabilities2EXT.html[VkPhysicalDeviceSurfaceCapabilities2EXT]): +
 _supported_surface_counters_: <<surfacecounterflags, _surfacecounterflags_>>, +
+pass:[--] EXTENSION (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkSurfaceProtectedCapabilitiesKHR.html[VkSurfaceProtectedCapabilitiesKHR]): +
+_supports_protected_: boolean, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkSurfaceCapabilities2KHR.html[VkSurfaceCapabilities2KHR]) +
 Note1: The _current_extent_ field is _nil_ when _width_ and _height_ in the underlying C struct have the special value 0xFFFFFFFF.#
 

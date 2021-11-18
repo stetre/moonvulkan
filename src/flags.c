@@ -4253,6 +4253,7 @@ static const struct luaL_Reg Functions[] =
         { "debugutilsmessengercreateflags", ReservedFlags },
         { "pipelinerasterizationconservativestatecreateflags", ReservedFlags },
         { "pipelinerasterizationstatestreamcreateflags", ReservedFlags },
+        { "pipelinerasterizationdepthclipstatecreateflags", ReservedFlags },
         { "acquireprofilinglockflags", ReservedFlags },
         { "privatedataslotcreateflags", ReservedFlags },
 //      { "", ReservedFlags }, /*  */

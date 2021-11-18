@@ -288,6 +288,10 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmd
 * *cmd_set_line_width*(_cb_, [_linewidth_ = 1.0]) +
 [small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetLineWidth.html[vkCmdSetLineWidth].#
 
+[[cmd_set_line_stipple]]
+* *cmd_set_line_stipple*(_cb_, _factor_, _pattern_) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetLineStippleEXT.html[vkCmdSetLineStippleEXT].#
+
 [[cmd_set_sample_locations]]
 * *cmd_set_sample_locations*(_cb_, <<samplelocationsinfo, _samplelocationsinfo_>>) +
 [small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetSampleLocationsEXT.html[vkCmdSetSampleLocationsEXT].#

@@ -2739,6 +2739,14 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/h
 </li>
 </ul>
 </div>
+<div id="cmd_set_line_stipple" class="ulist">
+<ul>
+<li>
+<p><strong>cmd_set_line_stipple</strong>(<em>cb</em>, <em>factor</em>, <em>pattern</em>)<br>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetLineStippleEXT.html">vkCmdSetLineStippleEXT</a>.</span></p>
+</li>
+</ul>
+</div>
 <div id="cmd_set_sample_locations" class="ulist">
 <ul>
 <li>
@@ -3954,6 +3962,8 @@ the <em>queue_family_index</em> of the <em>i-th</em> element in the table return
 <em>handle_type</em>: <a href="#externalmemoryhandletypeflags">externalmemoryhandletypeflags</a>,<br>
 -- EXTENSION (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkImageStencilUsageCreateInfo.html">VkImageStencilUsageCreateInfo</a>):<br>
 <em>stencil_usage</em>: <a href="#imageusageflags">imageusageflags</a>,<br>
+-- EXTENSION (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDeviceImageViewImageFormatInfoEXT.html">VkPhysicalDeviceImageViewImageFormatInfoEXT</a>):<br>
+<em>image_view_type</em>, <a href="#imageviewtype">imageviewtype</a>,<br>
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDeviceImageFormatInfo2.html">VkPhysicalDeviceImageFormatInfo2</a>)</span></p>
 </li>
 <li>
@@ -4424,7 +4434,10 @@ the <em>queue_family_index</em> of the <em>i-th</em> element in the table return
 <em>external_memory_properties</em>: <a href="#externalmemoryproperties">externalmemoryproperties</a>,<br>
 -- EXTENSION (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkSamplerYcbcrConversionImageFormatProperties.html">VkSamplerYcbcrConversionImageFormatProperties</a>):<br>
 <em>combined_image_sampler_descriptor_count</em>: integer,<br>
-} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkImageFormatProperties.html">VkImageFormatProperties</a>)</span></p>
+-- EXTENSION (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkFilterCubicImageViewImageFormatPropertiesEXT.html">VkFilterCubicImageViewImageFormatPropertiesEXT</a>):<br>
+<em>filter_cubic</em>: boolean,<br>
+<em>filter_cubic_minmax</em>: boolean,<br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkImageFormatProperties.html">VkImageFormatProperties</a>, <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkImageFormatProperties2.html">VkImageFormatProperties2</a>)</span></p>
 </li>
 <li>
 <p><a id="physicaldevicesparseimageformatinfo"></a>
@@ -5381,9 +5394,10 @@ the <em>queue_family_index</em> of the <em>i-th</em> element in the table return
 <em>subpass</em>: integer,<br>
 <em>base_pipeline_handle</em>: <a href="#pipeline">pipeline</a>,<br>
 <em>base_pipeline_index</em>: <a href="#index">index</a>,<br>
-<em>discard_rectangle_state</em>: <a href="#pipelinediscardrectanglestatecreateinfo">pipelinediscardrectanglestatecreateinfo</a> (Note1),<br>
-} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkGraphicsPipelineCreateInfo.html">VkGraphicsPipelineCreateInfo</a>)<br>
-Note1: Requires th extension.</span></p>
+-- EXTENSIONS:<br>
+<em>discard_rectangle_state</em> <a href="#pipelinediscardrectanglestatecreateinfo">pipelinediscardrectanglestatecreateinfo</a>,<br>
+<em>creation_feedback_state</em> <a href="#pipelinecreationfeedbackcreateinfo">pipelinecreationfeedbackcreateinfo</a>,<br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkGraphicsPipelineCreateInfo.html">VkGraphicsPipelineCreateInfo</a>).</span></p>
 </li>
 <li>
 <p><a id="computepipelinecreateinfo"></a>
@@ -5393,6 +5407,8 @@ Note1: Requires th extension.</span></p>
 <em>layout</em>: <a href="#pipeline_layout">pipeline_layout</a> <strong>[R]</strong>,<br>
 <em>base_pipeline_handle</em>: <a href="#pipeline">pipeline</a>,<br>
 <em>base_pipeline_index</em>: <a href="#index">index</a>,<br>
+-- EXTENSIONS:<br>
+<em>creation_feedback_state</em> <a href="#pipelinecreationfeedbackcreateinfo">pipelinecreationfeedbackcreateinfo</a>,<br>
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkComputePipelineCreateInfo.html">VkComputePipelineCreateInfo</a>)</span></p>
 </li>
 <li>
@@ -5502,6 +5518,16 @@ Note1: Requires th extension.</span></p>
 -- EXTENSION (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPipelineRasterizationStateStreamCreateInfoEXT.html">VkPipelineRasterizationStateStreamCreateInfoEXT</a>):<br>
 <em>rasterization_stream_create_flags</em>: <a href="#pipelinerasterizationstatestreamcreateflags">pipelinerasterizationstatestreamcreateflags</a>,<br>
 <em>rasterization_stream</em>: integer,<br>
+-- EXTENSION (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPipelineRasterizationDepthClipStateCreateInfoEXT.html">VkPipelineRasterizationDepthClipStateCreateInfoEXT</a>):<br>
+<em>depth_clip_create_flags</em>: <a href="#pipelinerasterizationdepthclipstatecreateflags">pipelinerasterizationdepthclipstatecreateflags</a>,<br>
+<em>depth_clip_enable</em>: boolean,<br>
+-- EXTENSION (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPipelineRasterizationProvokingVertexStateCreateInfoEXT.html">VkPipelineRasterizationProvokingVertexStateCreateInfoEXT</a>):<br>
+<em>provoking_vertex_mode</em>: <a href="#provokingvertexmode">provokingvertexmode</a>,<br>
+-- EXTENSION (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPipelineRasterizationLineStateCreateInfoEXT.html">VkPipelineRasterizationLineStateCreateInfoEXT</a>):<br>
+<em>line_rasterization_mode</em>: <a href="#linerasterizationmode">linerasterizationmode</a>,<br>
+<em>stippled_line_enable</em>: boolean,<br>
+<em>line_stipple_factor</em>: integer,<br>
+<em>line_stipple_pattern</em>: integer,<br>
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPipelineRasterizationStateCreateInfo.html">VkPipelineRasterizationStateCreateInfo</a>)</span></p>
 </li>
 <li>
@@ -5574,19 +5600,33 @@ Note1: Requires th extension.</span></p>
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPipelineColorBlendAttachmentState.html">VkPipelineColorBlendAttachmentState</a>)</span></p>
 </li>
 <li>
-<p><a id="pipelinediscardrectanglestatecreateinfo"></a>
-<span class="small"><strong>pipelinediscardrectanglestatecreateinfo</strong> = {<br>
-<em>flags</em>: <a href="#discardrectangleflags">discardrectangleflags</a>,<br>
-<em>discard_rectangle_mode</em>: <a href="#discardrectanglemode">discardrectanglemode</a> <strong>[R]</strong>,<br>
-<em>discard_rectangles</em>: {<a href="#rect2d">rect2d</a>},<br>
-} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPipelineDiscardRectangleStateCreateInfoEXT.html">VkPipelineDiscardRectangleStateCreateInfoEXT</a>)</span></p>
-</li>
-<li>
 <p><a id="pipelinedynamicstatecreateinfo"></a>
 <span class="small"><strong>pipelinedynamicstatecreateinfo</strong> = {<br>
 <em>flags</em>: <a href="#pipelinedynamicstatecreateflags">pipelinedynamicstatecreateflags</a>,<br>
 <em>dynamic_states</em>: {<a href="#dynamicstate">dynamicstate</a>} <strong>[R]</strong>,<br>
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPipelineDynamicStateCreateInfo.html">VkPipelineDynamicStateCreateInfo</a>)</span></p>
+</li>
+<li>
+<p><a id="pipelinediscardrectanglestatecreateinfo"></a>
+<span class="small"><strong>pipelinediscardrectanglestatecreateinfo</strong> = {<br>
+<em>flags</em>: <a href="#discardrectangleflags">discardrectanglestatecreateflags</a>,<br>
+<em>discard_rectangle_mode</em>: <a href="#discardrectanglemode">discardrectanglemode</a> <strong>[R]</strong>,<br>
+<em>discard_rectangles</em>: {<a href="#rect2d">rect2d</a>},<br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPipelineDiscardRectangleStateCreateInfoEXT.html">VkPipelineDiscardRectangleStateCreateInfoEXT</a>)</span></p>
+</li>
+<li>
+<p><a id="pipelinecreationfeedbackcreateinfo"></a>
+<span class="small"><strong>pipelinecreationfeedbackcreateinfo</strong> = {<br>
+<em>pipeline_creation_feedback</em>: <a href="#pipelinecreationfeedback">pipelinecreationfeedback</a>,<br>
+<em>pipeline_stage_creation_feedbacks</em>: {<a href="#pipelinecreationfeedback">pipelinecreationfeedback</a>},<br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPipelineCreationFeedbackCreateInfoEXT.html">VkPipelineCreationFeedbackCreateInfoEXT</a>)</span></p>
+</li>
+<li>
+<p><a id="pipelinecreationfeedback"></a>
+<span class="small"><strong>pipelinecreationfeedback</strong> = {<br>
+<em>flags</em>: <a href="#pipelinecreationfeedbackflags">pipelinecreationfeedbackflags</a>,<br>
+<em>duration</em>: integer,<br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPipelineCreationFeedbackEXT.html">VkPipelineCreationFeedbackEXT</a>)</span></p>
 </li>
 <li>
 <p><a id="buffercopy"></a>
@@ -5836,6 +5876,8 @@ See also the <a href="#clearcolor_snippet">example</a> in the code snippets sect
 <em>shared_present_supported_usage_flags</em>: <a href="#imageusageflags">imageusageflags</a>,<br>
 -- EXTENSION (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDeviceSurfaceCapabilities2EXT.html">VkPhysicalDeviceSurfaceCapabilities2EXT</a>):<br>
 <em>supported_surface_counters</em>: <a href="#surfacecounterflags"><em>surfacecounterflags</em></a>,<br>
+-- EXTENSION (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkSurfaceProtectedCapabilitiesKHR.html">VkSurfaceProtectedCapabilitiesKHR</a>):<br>
+<em>supports_protected</em>: boolean,<br>
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkSurfaceCapabilities2KHR.html">VkSurfaceCapabilities2KHR</a>)<br>
 Note1: The <em>current_extent</em> field is <em>nil</em> when <em>width</em> and <em>height</em> in the underlying C struct have the special value 0xFFFFFFFF.</span></p>
 </li>
@@ -7034,6 +7076,9 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/h
 </div>
 <div id="pipelinerasterizationstatestreamcreateflags" class="paragraph">
 <p><span class="small"><strong>pipelinerasterizationstatestreamcreateflags</strong>: 0</span></p>
+</div>
+<div id="pipelinerasterizationdepthclipstatecreateflags" class="paragraph">
+<p><span class="small"><strong>pipelinerasterizationdepthclipstatecreateflags</strong>: 0</span></p>
 </div>
 <div id="pipelinedepthstencilstatecreateflags" class="paragraph">
 <p><span class="small"><strong>pipelinedepthstencilstatecreateflags</strong>: 0</span></p>

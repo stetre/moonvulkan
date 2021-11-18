@@ -1139,6 +1139,17 @@ static int CmdDrawIndirectByteCount(lua_State *L)
     return 0;
     }
 
+static int CmdSetLineStipple(lua_State *L)
+    {
+    ud_t *ud;
+    VkCommandBuffer cb = checkcommand_buffer(L, 1, &ud);
+    uint32_t lineStippleFactor = luaL_checkinteger(L, 2);
+    uint16_t lineStipplePattern = luaL_checkinteger(L, 3);
+    CheckDevicePfn(L, ud, CmdSetLineStippleEXT);
+    ud->ddt->CmdSetLineStippleEXT(cb, lineStippleFactor, lineStipplePattern);
+    return 0;
+    }
+
 #if 0 // 10yy
         { "",  },
 static int (lua_State *L) //@@ scaffolding
@@ -1222,6 +1233,7 @@ static const struct luaL_Reg Functions[] =
         { "cmd_begin_query_indexed", CmdBeginQueryIndexed },
         { "cmd_end_query_indexed", CmdEndQueryIndexed },
         { "cmd_draw_indirect_byte_count", CmdDrawIndirectByteCount },
+        { "cmd_set_line_stipple", CmdSetLineStipple },
         { NULL, NULL } /* sentinel */
     };
 

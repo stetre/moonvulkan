@@ -184,14 +184,23 @@ int zinit##VkXxx(lua_State *L, VkXxx* p, int *err) { (void)L; (void)(p);
  */
 #define EXTENSIONS_BEGIN do { void **chain = pnextof(p);
 #define EXTENSIONS_END } while(0);
-#define ADD_EXTENSION(VkXxx)    do { /* for INLINED_EXTENSIONS only (see below) */\
+#define ADD_EXTENSION_STRUCT(sname, VkXxx)  do { /* regular extension struct */ \
+    VkXxx *p1;                                                                  \
+    arg1 = pushfield(L, arg, sname);                                            \
+    p1 = zcheck##VkXxx(L, arg1, err);                                           \
+    popfield(L, arg1);                                                          \
+    if(*err<0) { zfree(L, p1, 1); prependfield(sname); return p; }              \
+    else if(*err==ERR_NOTPRESENT) poperror();                                   \
+    else addtochain(chain, p1);                                                 \
+} while(0)
+#define ADD_EXTENSION_INLINE(VkXxx)    do { /* for INLINED_EXTENSIONS only (see below) */\
     VkXxx *p1 = zcheck##VkXxx(L, arg, err);     \
     if(*err) { zfree(L, p1, 1); return p; }     \
     addtochain(chain, p1);                      \
 } while(0)
-/* INLINED_EXTENSIONS: The fields of an extension are logically fields of the struct
- * they extend, but since C structs are not extandable, the Vulkan API defines extension
- * structs to hold the new fields and chains them to the original one via the pNext pointer.
+/* INLINED_EXTENSIONS: The fields of an extension are logically fields of the struct they
+ * extend, but since C structs are not extandable, the Vulkan API defines extension structs
+ * to hold the new fields and chains them to the original one via the pNext pointer.
  * In Lua, however, we have the luxury of tables that can be easilly extended by adding new
  * optional fields without breaking backward compatibility, so we (usually) 'inline' the
  * extensions by just adding the new fields to the table to be extended instead of adding
@@ -534,6 +543,8 @@ static const char *GetString_(lua_State *L, int arg, const char *sname, const ch
 #define GetObjectType(name, sname) GetEnum(name, sname, testobjecttype)
 #define GetTimeDomain(name, sname) GetEnum(name, sname, testtimedomain)
 #define GetSemaphoreType(name, sname) GetEnum(name, sname, testsemaphoretype)
+#define GetProvokingVertexMode(name, sname) GetEnum(name, sname, testprovokingvertexmode)
+#define GetLineRasterizationMode(name, sname) GetEnum(name, sname, testlinerasterizationmode)
 
 /* enums with default value (ie optional) */
 #define GetPipelineBindPoint(name, sname) GetEnumOpt(name, sname, testpipelinebindpoint, VK_PIPELINE_BIND_POINT_GRAPHICS)
@@ -1587,6 +1598,14 @@ ZCHECK_BEGIN(VkVertexInputBindingDivisorDescriptionEXT)
     GetInteger(divisor, "divisor");
 ZCHECK_END
 ZCHECKARRAY(VkVertexInputBindingDivisorDescriptionEXT)
+
+ZCHECK_BEGIN(VkPipelineCreationFeedbackEXT)
+    checktable(arg);
+    newstruct(VkPipelineCreationFeedbackEXT);
+    GetFlags(flags, "flags");
+    GetInteger(duration, "duration");
+ZCHECK_END
+ZCHECKARRAY(VkPipelineCreationFeedbackEXT)
 
 /********************************************************************************
  * Typed structs                                                                *
@@ -3190,12 +3209,16 @@ LOCALPUSH_END
 LOCALPUSH_BEGIN(VkExternalImageFormatProperties)
     SetStruct(externalMemoryProperties, "external_memory_properties", VkExternalMemoryProperties);
 LOCALPUSH_END
+LOCALPUSH_BEGIN(VkFilterCubicImageViewImageFormatPropertiesEXT)
+    SetBoolean(filterCubic, "filter_cubic");
+    SetBoolean(filterCubicMinmax , "filter_cubic_minmax ");
+LOCALPUSH_END
 
 ZINIT_BEGIN(VkImageFormatProperties2)
     EXTENSIONS_BEGIN
-        ADDX(SAMPLER_YCBCR_CONVERSION_IMAGE_FORMAT_PROPERTIES,
-                    VkSamplerYcbcrConversionImageFormatProperties);
+        ADDX(SAMPLER_YCBCR_CONVERSION_IMAGE_FORMAT_PROPERTIES, VkSamplerYcbcrConversionImageFormatProperties);
         ADDX(EXTERNAL_IMAGE_FORMAT_PROPERTIES, VkExternalImageFormatProperties);
+        ADDX(FILTER_CUBIC_IMAGE_VIEW_IMAGE_FORMAT_PROPERTIES_EXT, VkFilterCubicImageViewImageFormatPropertiesEXT);
     EXTENSIONS_END
 ZINIT_END
 
@@ -3208,9 +3231,9 @@ ZPUSH_BEGIN(VkImageFormatProperties2)
     lua_newtable(L);
     localpushVkImageFormatProperties(L, &p->imageFormatProperties);
     XPUSH_BEGIN
-        XCASE(SAMPLER_YCBCR_CONVERSION_IMAGE_FORMAT_PROPERTIES,
-                VkSamplerYcbcrConversionImageFormatProperties);
+        XCASE(SAMPLER_YCBCR_CONVERSION_IMAGE_FORMAT_PROPERTIES, VkSamplerYcbcrConversionImageFormatProperties);
         XCASE(EXTERNAL_IMAGE_FORMAT_PROPERTIES, VkExternalImageFormatProperties);
+        XCASE(FILTER_CUBIC_IMAGE_VIEW_IMAGE_FORMAT_PROPERTIES_EXT, VkFilterCubicImageViewImageFormatPropertiesEXT);
     XPUSH_END
 ZPUSH_END
 
@@ -3324,10 +3347,14 @@ LOCALPUSH_END
 LOCALPUSH_BEGIN(VkSharedPresentSurfaceCapabilitiesKHR)
     SetFlags(sharedPresentSupportedUsageFlags, "shared_present_supported_usage_flags");
 LOCALPUSH_END
+LOCALPUSH_BEGIN(VkSurfaceProtectedCapabilitiesKHR)
+    SetFlags(supportsProtected, "supports_protected");
+LOCALPUSH_END
 
 ZINIT_BEGIN(VkSurfaceCapabilities2KHR)
     EXTENSIONS_BEGIN
         ADDX(SHARED_PRESENT_SURFACE_CAPABILITIES_KHR, VkSharedPresentSurfaceCapabilitiesKHR);
+        ADDX(SURFACE_PROTECTED_CAPABILITIES_KHR, VkSurfaceProtectedCapabilitiesKHR);
     EXTENSIONS_END
 ZINIT_END
 
@@ -3341,6 +3368,7 @@ ZPUSH_BEGIN(VkSurfaceCapabilities2KHR)
     localpushVkSurfaceCapabilitiesKHR(L, &p->surfaceCapabilities);
     XPUSH_BEGIN
         XCASE(SHARED_PRESENT_SURFACE_CAPABILITIES_KHR, VkSharedPresentSurfaceCapabilitiesKHR);
+        XCASE(SURFACE_PROTECTED_CAPABILITIES_KHR, VkSurfaceProtectedCapabilitiesKHR);
     XPUSH_END
 ZPUSH_END
 
@@ -3472,9 +3500,8 @@ ZCHECK_BEGIN(VkImageMemoryRequirementsInfo2KHR)
     newstruct(VkImageMemoryRequirementsInfo2KHR);
     /* p->image = set by caller */
     EXTENSIONS_BEGIN
-#define F "plane_aspect"
-    if(ispresent(F)) ADD_EXTENSION(VkImagePlaneMemoryRequirementsInfoKHR);
-#undef F
+    if(ispresent("plane_aspect"))
+        ADD_EXTENSION_INLINE(VkImagePlaneMemoryRequirementsInfoKHR);
     EXTENSIONS_END
 ZCHECK_END
 
@@ -3743,7 +3770,8 @@ ZCHECK_BEGIN(VkInstanceCreateInfo)
         { pushfielderror(F); return p; }
 #undef F
     EXTENSIONS_BEGIN
-    if(ispresent("disabled_validation_checks")) ADD_EXTENSION(VkValidationFlagsEXT);
+    if(ispresent("disabled_validation_checks"))
+        ADD_EXTENSION_INLINE(VkValidationFlagsEXT);
     EXTENSIONS_END
 ZCHECK_END
 
@@ -3773,10 +3801,8 @@ ZCHECK_BEGIN(VkDeviceQueueCreateInfo)
     if(*err) { pushfielderror(F); return p; }
 #undef F
     EXTENSIONS_BEGIN
-#define F "global_priority"
-    if(ispresent(F))
-        ADD_EXTENSION(VkDeviceQueueGlobalPriorityCreateInfoEXT);
-#undef F
+    if(ispresent("global_priority"))
+        ADD_EXTENSION_INLINE(VkDeviceQueueGlobalPriorityCreateInfoEXT);
     EXTENSIONS_END
 ZCHECK_END
 ZCHECKARRAY(VkDeviceQueueCreateInfo) 
@@ -3852,20 +3878,10 @@ VkDeviceCreateInfo* zcheckVkDeviceCreateInfo(lua_State *L, int arg, int *err, ud
         }
 #undef F
     EXTENSIONS_BEGIN
-#define F "enabled_features"
     if(ud->idt->GetPhysicalDeviceFeatures2)
-        {
-        VkPhysicalDeviceFeatures2 *p1;
-        arg1 = pushfield(L, arg, F);
-        p1 = zcheckVkPhysicalDeviceFeatures2(L, arg1, err);
-        popfield(L, arg1);
-        if(*err < 0) { prependfield(F); return p; }
-        else if(*err == ERR_NOTPRESENT) poperror();
-        else addtochain(chain, p1);
-        }
-#undef F
+        ADD_EXTENSION_STRUCT("enabled_features", VkPhysicalDeviceFeatures2);
     if(ispresent("physical_devices"))
-        ADD_EXTENSION(VkDeviceGroupDeviceCreateInfoKHR);
+        ADD_EXTENSION_INLINE(VkDeviceGroupDeviceCreateInfoKHR);
     EXTENSIONS_END
 ZCHECK_END
 
@@ -3915,7 +3931,7 @@ ZCHECK_BEGIN(VkCommandBufferInheritanceInfo)
     GetFlags(pipelineStatistics, "pipeline_statistics");
     EXTENSIONS_BEGIN
     if(ispresent("conditional_rendering_enable"))
-        ADD_EXTENSION(VkCommandBufferInheritanceConditionalRenderingInfoEXT);
+        ADD_EXTENSION_INLINE(VkCommandBufferInheritanceConditionalRenderingInfoEXT);
     EXTENSIONS_END
 ZCHECK_END
 
@@ -3938,7 +3954,7 @@ ZCHECK_BEGIN(VkCommandBufferBeginInfo)
 #undef F
     EXTENSIONS_BEGIN
     if(ispresent("device_mask"))
-        ADD_EXTENSION(VkDeviceGroupCommandBufferBeginInfoKHR);
+        ADD_EXTENSION_INLINE(VkDeviceGroupCommandBufferBeginInfoKHR);
     EXTENSIONS_END
 ZCHECK_END
 
@@ -3987,17 +4003,17 @@ ZCHECK_BEGIN(VkMemoryAllocateInfo)
     GetInteger(memoryTypeIndex, "memory_type_index");
     EXTENSIONS_BEGIN
     if(ispresent("image") || ispresent("buffer"))
-        ADD_EXTENSION(VkMemoryDedicatedAllocateInfoKHR);
+        ADD_EXTENSION_INLINE(VkMemoryDedicatedAllocateInfoKHR);
     if(ispresent("handle_types"))
-        ADD_EXTENSION(VkExportMemoryAllocateInfoKHR);
+        ADD_EXTENSION_INLINE(VkExportMemoryAllocateInfoKHR);
     if(ispresent("fd_handle_type") || ispresent("fd"))
-        ADD_EXTENSION(VkImportMemoryFdInfoKHR);
+        ADD_EXTENSION_INLINE(VkImportMemoryFdInfoKHR);
     if(ispresent("flags") || ispresent("device_mask"))
-        ADD_EXTENSION(VkMemoryAllocateFlagsInfoKHR);
+        ADD_EXTENSION_INLINE(VkMemoryAllocateFlagsInfoKHR);
     if(ispresent("host_pointer_handle_type") || ispresent("host_pointer"))
-        ADD_EXTENSION(VkImportMemoryHostPointerInfoEXT);
+        ADD_EXTENSION_INLINE(VkImportMemoryHostPointerInfoEXT);
     if(ispresent("opaque_capture_address"))
-        ADD_EXTENSION(VkMemoryOpaqueCaptureAddressAllocateInfo);
+        ADD_EXTENSION_INLINE(VkMemoryOpaqueCaptureAddressAllocateInfo);
     EXTENSIONS_END
 ZCHECK_END
 
@@ -4054,9 +4070,9 @@ ZCHECK_BEGIN(VkBufferCreateInfo)
 #undef F
     EXTENSIONS_BEGIN
     if(ispresent("handle_types"))
-        ADD_EXTENSION(VkExternalMemoryBufferCreateInfo);
+        ADD_EXTENSION_INLINE(VkExternalMemoryBufferCreateInfo);
     if(ispresent("opaque_capture_address"))
-        ADD_EXTENSION(VkBufferOpaqueCaptureAddressCreateInfo);
+        ADD_EXTENSION_INLINE(VkBufferOpaqueCaptureAddressCreateInfo);
     EXTENSIONS_END
 ZCHECK_END
 
@@ -4082,9 +4098,9 @@ static ZCLEAR_BEGIN(VkImageFormatListCreateInfo)
     if(p->pViewFormats)
         if(p->pViewFormats) freeformatlist(L, p->pViewFormats);
 ZCLEAR_END
-ZCHECK_BEGIN(VkImageFormatListCreateInfo)
-    //checktable(arg);
+ZCHECK_BEGIN(VkImageFormatListCreateInfo) //££
     newstruct(VkImageFormatListCreateInfo);
+    arg1 = pushfield(L, arg, "view_formats");
     p->pViewFormats = checkformatlist(L, arg, &p->viewFormatCount, err);
     if(*err==ERR_NOTPRESENT) *err=ERR_GENERIC; //@@ mah
     if(*err<0) { pusherror(); return p; }
@@ -4130,22 +4146,13 @@ ZCHECK_BEGIN(VkImageCreateInfo)
 #undef F
     EXTENSIONS_BEGIN
     if(ispresent("handle_types"))
-        ADD_EXTENSION(VkExternalMemoryImageCreateInfoKHR);
-#define F "view_formats"
-    if(ispresent(F))
-        {
-        VkImageFormatListCreateInfo *p1;
-        arg1 = pushfield(L, arg, F);
-        p1 = zcheckVkImageFormatListCreateInfo(L, arg1, err);
-        popfield(L, arg1);
-        if(*err) { zfree(L, p1, 1);  pushfielderror(F); return p; }
-        addtochain(chain, p1);
-        }
-#undef F
+        ADD_EXTENSION_INLINE(VkExternalMemoryImageCreateInfoKHR);
+    if(ispresent("view_formats"))
+        ADD_EXTENSION_INLINE(VkImageFormatListCreateInfo);
     if(ispresent("swapchain"))
-        ADD_EXTENSION(VkImageSwapchainCreateInfoKHR);
+        ADD_EXTENSION_INLINE(VkImageSwapchainCreateInfoKHR);
     if(ispresent("stencil_usage"))
-        ADD_EXTENSION(VkImageStencilUsageCreateInfo);
+        ADD_EXTENSION_INLINE(VkImageStencilUsageCreateInfo);
     EXTENSIONS_END
 ZCHECK_END
 
@@ -4174,9 +4181,9 @@ ZCHECK_BEGIN(VkImageViewCreateInfo)
     GetStructOpt(subresourceRange, "subresource_range", VkImageSubresourceRange);
     EXTENSIONS_BEGIN
     if(ispresent("usage"))
-        ADD_EXTENSION(VkImageViewUsageCreateInfoKHR);
+        ADD_EXTENSION_INLINE(VkImageViewUsageCreateInfoKHR);
     if(ispresent("decode_mode"))
-        ADD_EXTENSION(VkImageViewASTCDecodeModeEXT);
+        ADD_EXTENSION_INLINE(VkImageViewASTCDecodeModeEXT);
     EXTENSIONS_END
 ZCHECK_END
 
@@ -4206,7 +4213,7 @@ ZCHECK_BEGIN(VkDescriptorPoolCreateInfo)
 #undef F
     EXTENSIONS_BEGIN
     if(ispresent("max_inline_uniform_block_bindings"))
-        ADD_EXTENSION(VkDescriptorPoolInlineUniformBlockCreateInfoEXT);
+        ADD_EXTENSION_INLINE(VkDescriptorPoolInlineUniformBlockCreateInfoEXT);
     EXTENSIONS_END
 ZCHECK_END
 
@@ -4242,7 +4249,7 @@ ZCHECK_BEGIN(VkDescriptorSetAllocateInfo)
 #undef F
     EXTENSIONS_BEGIN
     if(ispresent("descriptor_counts"))
-        ADD_EXTENSION(VkDescriptorSetVariableDescriptorCountAllocateInfo);
+        ADD_EXTENSION_INLINE(VkDescriptorSetVariableDescriptorCountAllocateInfo);
     EXTENSIONS_END
 ZCHECK_END
 
@@ -4280,7 +4287,7 @@ ZCHECK_BEGIN(VkDescriptorSetLayoutCreateInfo)
 #undef F
     EXTENSIONS_BEGIN
     if(ispresent("binding_flags"))
-        ADD_EXTENSION(VkDescriptorSetLayoutBindingFlagsCreateInfo);
+        ADD_EXTENSION_INLINE(VkDescriptorSetLayoutBindingFlagsCreateInfo);
     EXTENSIONS_END
 ZCHECK_END
 
@@ -4403,9 +4410,9 @@ ZCHECK_BEGIN(VkRenderPassCreateInfo)
 #undef F
     EXTENSIONS_BEGIN
     if(ispresent("input_attachment_aspect_references"))
-        ADD_EXTENSION(VkRenderPassInputAttachmentAspectCreateInfoKHR);
+        ADD_EXTENSION_INLINE(VkRenderPassInputAttachmentAspectCreateInfoKHR);
     if(ispresent("view_masks") || ispresent("view_offsets") || ispresent("correlation_masks"))
-        ADD_EXTENSION(VkRenderPassMultiviewCreateInfoKHR);
+        ADD_EXTENSION_INLINE(VkRenderPassMultiviewCreateInfoKHR);
     EXTENSIONS_END
 ZCHECK_END
 
@@ -4433,7 +4440,7 @@ ZCHECK_BEGIN(VkAttachmentDescription2)
     GetImageLayout(finalLayout, "final_layout");
     EXTENSIONS_BEGIN
     if(ispresent("stencil_initial_layout") || ispresent("stencil_final_layout"))
-        ADD_EXTENSION(VkAttachmentDescriptionStencilLayout);
+        ADD_EXTENSION_INLINE(VkAttachmentDescriptionStencilLayout);
     EXTENSIONS_END
 ZCHECK_END
 ZCHECKARRAY(VkAttachmentDescription2)
@@ -4451,7 +4458,7 @@ ZCHECK_BEGIN(VkAttachmentReference2)
     GetFlags(aspectMask, "aspect_mask");
     EXTENSIONS_BEGIN
     if(ispresent("stencil_layout"))
-        ADD_EXTENSION(VkAttachmentReferenceStencilLayout);
+        ADD_EXTENSION_INLINE(VkAttachmentReferenceStencilLayout);
     EXTENSIONS_END
 ZCHECK_END
 ZCHECKARRAY(VkAttachmentReference2)
@@ -4536,9 +4543,8 @@ ZCHECK_BEGIN(VkSubpassDescription2)
     if(*err < 0) { pushfielderror(F); return p; }
 #undef F
     EXTENSIONS_BEGIN
-    if(ispresent("depth_resolve_mode") || ispresent("stencil_resolve_mode") ||
-            ispresent("depth_stencil_resolve_attachment"))
-        ADD_EXTENSION(VkSubpassDescriptionDepthStencilResolve);
+    if(ispresent("depth_resolve_mode") || ispresent("stencil_resolve_mode") || ispresent("depth_stencil_resolve_attachment"))
+        ADD_EXTENSION_INLINE(VkSubpassDescriptionDepthStencilResolve);
     EXTENSIONS_END
 ZCHECK_END
 ZCHECKARRAY(VkSubpassDescription2)
@@ -4659,7 +4665,7 @@ ZCHECK_BEGIN(VkFramebufferCreateInfo)
 #undef F
     EXTENSIONS_BEGIN
     if(ispresent("attachment_image_infos"))
-        ADD_EXTENSION(VkFramebufferAttachmentsCreateInfo);
+        ADD_EXTENSION_INLINE(VkFramebufferAttachmentsCreateInfo);
     EXTENSIONS_END
 ZCHECK_END
 
@@ -4679,7 +4685,7 @@ ZCHECK_BEGIN(VkShaderModuleCreateInfo)
     /* p->pCode, p->codeSize: retrieved by the caller */
     EXTENSIONS_BEGIN
     if(ispresent("validation_cache"))
-        ADD_EXTENSION(VkShaderModuleValidationCacheCreateInfoEXT);
+        ADD_EXTENSION_INLINE(VkShaderModuleValidationCacheCreateInfoEXT);
     EXTENSIONS_END
 ZCHECK_END
 
@@ -4725,9 +4731,9 @@ ZCHECK_BEGIN(VkSwapchainCreateInfoKHR)
 #undef F
     EXTENSIONS_BEGIN
     if(ispresent("surface_counters"))
-        ADD_EXTENSION(VkSwapchainCounterCreateInfoEXT);
+        ADD_EXTENSION_INLINE(VkSwapchainCounterCreateInfoEXT);
     if(ispresent("modes"))
-        ADD_EXTENSION(VkDeviceGroupSwapchainCreateInfoKHR);
+        ADD_EXTENSION_INLINE(VkDeviceGroupSwapchainCreateInfoKHR);
     EXTENSIONS_END
 ZCHECK_END
 ZCHECKARRAY(VkSwapchainCreateInfoKHR)
@@ -4789,9 +4795,9 @@ ZCHECK_BEGIN(VkSamplerCreateInfo)
     GetBoolean(unnormalizedCoordinates, "unnormalized_coordinates");
     EXTENSIONS_BEGIN
     if(ispresent("reduction_mode"))
-        ADD_EXTENSION(VkSamplerReductionModeCreateInfo);
+        ADD_EXTENSION_INLINE(VkSamplerReductionModeCreateInfo);
     if(ispresent("conversion"))
-        ADD_EXTENSION(VkSamplerYcbcrConversionInfoKHR);
+        ADD_EXTENSION_INLINE(VkSamplerYcbcrConversionInfoKHR);
     EXTENSIONS_END
 ZCHECK_END
 
@@ -4849,7 +4855,7 @@ ZCHECK_BEGIN(VkFenceCreateInfo)
     GetFlags(flags, "flags");
     EXTENSIONS_BEGIN
     if(ispresent("handle_types"))
-        ADD_EXTENSION(VkExportFenceCreateInfoKHR);
+        ADD_EXTENSION_INLINE(VkExportFenceCreateInfoKHR);
     EXTENSIONS_END
 ZCHECK_END
 
@@ -4890,9 +4896,9 @@ ZCHECK_BEGIN(VkSemaphoreCreateInfo)
     GetFlags(flags, "flags");
     EXTENSIONS_BEGIN
     if(ispresent("handle_types"))
-        ADD_EXTENSION(VkExportSemaphoreCreateInfoKHR);
+        ADD_EXTENSION_INLINE(VkExportSemaphoreCreateInfoKHR);
     if(ispresent("semaphore_type"))
-        ADD_EXTENSION(VkSemaphoreTypeCreateInfo);
+        ADD_EXTENSION_INLINE(VkSemaphoreTypeCreateInfo);
     EXTENSIONS_END
 ZCHECK_END
 
@@ -5142,12 +5148,12 @@ ZCHECK_BEGIN(VkSubmitInfo)
 #undef F
     EXTENSIONS_BEGIN
     if(ispresent("protected_submit"))
-        ADD_EXTENSION(VkProtectedSubmitInfo);
+        ADD_EXTENSION_INLINE(VkProtectedSubmitInfo);
     if(ispresent("wait_semaphore_device_indices") ||
         ispresent("command_buffer_device_masks") || ispresent("signal_semaphore_device_indices"))
-        ADD_EXTENSION(VkDeviceGroupSubmitInfoKHR);
+        ADD_EXTENSION_INLINE(VkDeviceGroupSubmitInfoKHR);
     if(ispresent("wait_semaphore_values") || ispresent("signal_semaphore_values"))
-        ADD_EXTENSION(VkTimelineSemaphoreSubmitInfo);
+        ADD_EXTENSION_INLINE(VkTimelineSemaphoreSubmitInfo);
     EXTENSIONS_END
 ZCHECK_END
 ZCHECKARRAY(VkSubmitInfo)
@@ -5233,11 +5239,11 @@ VkPresentInfoKHR* zcheckVkPresentInfoKHR(lua_State *L, int arg, int *err, int re
 #undef F
     EXTENSIONS_BEGIN
     if(ispresent("src_rect"))
-        ADD_EXTENSION(VkDisplayPresentInfoKHR);
+        ADD_EXTENSION_INLINE(VkDisplayPresentInfoKHR);
     if(ispresent("regions"))
-        ADD_EXTENSION(VkPresentRegionsKHR);
+        ADD_EXTENSION_INLINE(VkPresentRegionsKHR);
     if(ispresent("mode") || ispresent("device_masks"))
-        ADD_EXTENSION(VkDeviceGroupPresentInfoKHR);
+        ADD_EXTENSION_INLINE(VkDeviceGroupPresentInfoKHR);
     EXTENSIONS_END
 ZCHECK_END
 
@@ -5325,11 +5331,11 @@ ZCHECK_BEGIN(VkRenderPassBeginInfo)
 #undef F
     EXTENSIONS_BEGIN
     if(ispresent("attachment_initial_sample_locations") || ispresent("post_subpass_sample_locations"))
-        ADD_EXTENSION(VkRenderPassSampleLocationsBeginInfoEXT);
+        ADD_EXTENSION_INLINE(VkRenderPassSampleLocationsBeginInfoEXT);
     if(ispresent("device_mask") || ispresent("device_render_areas"))
-        ADD_EXTENSION(VkDeviceGroupRenderPassBeginInfoKHR);
+        ADD_EXTENSION_INLINE(VkDeviceGroupRenderPassBeginInfoKHR);
     if(ispresent("attachments"))
-        ADD_EXTENSION(VkRenderPassAttachmentBeginInfo);
+        ADD_EXTENSION_INLINE(VkRenderPassAttachmentBeginInfo);
     EXTENSIONS_END
 ZCHECK_END
 
@@ -5409,9 +5415,9 @@ ZCHECK_BEGIN(VkBindSparseInfo)
 #undef F
     EXTENSIONS_BEGIN
     if(ispresent("resource_device_index") || ispresent("memory_device_index"))
-        ADD_EXTENSION(VkDeviceGroupBindSparseInfoKHR);
+        ADD_EXTENSION_INLINE(VkDeviceGroupBindSparseInfoKHR);
     if(ispresent("wait_semaphore_values") || ispresent("signal_semaphore_values"))
-        ADD_EXTENSION(VkTimelineSemaphoreSubmitInfo);
+        ADD_EXTENSION_INLINE(VkTimelineSemaphoreSubmitInfo);
     EXTENSIONS_END
 ZCHECK_END
 ZCHECKARRAY(VkBindSparseInfo)
@@ -5490,7 +5496,7 @@ ZCHECK_BEGIN(VkWriteDescriptorSet)
         }
     EXTENSIONS_BEGIN
     if(p->descriptorType == VK_DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK_EXT)
-        ADD_EXTENSION(VkWriteDescriptorSetInlineUniformBlockEXT);
+        ADD_EXTENSION_INLINE(VkWriteDescriptorSetInlineUniformBlockEXT);
     EXTENSIONS_END
 ZCHECK_END
 ZCHECKARRAY(VkWriteDescriptorSet)
@@ -5537,7 +5543,7 @@ ZCHECK_BEGIN(VkBindBufferMemoryInfo)
     GetInteger(memoryOffset, "offset");
     EXTENSIONS_BEGIN
     if(ispresent("device_indices"))
-        ADD_EXTENSION(VkBindBufferMemoryDeviceGroupInfoKHR);
+        ADD_EXTENSION_INLINE(VkBindBufferMemoryDeviceGroupInfoKHR);
     EXTENSIONS_END
 ZCHECK_END
 ZCHECKARRAY(VkBindBufferMemoryInfo)
@@ -5588,11 +5594,11 @@ ZCHECK_BEGIN(VkBindImageMemoryInfo)
     GetInteger(memoryOffset, "offset");
     EXTENSIONS_BEGIN
     if(ispresent("plane_aspect"))
-        ADD_EXTENSION(VkBindImagePlaneMemoryInfoKHR);
+        ADD_EXTENSION_INLINE(VkBindImagePlaneMemoryInfoKHR);
     if(ispresent("device_indices") || ispresent("split_instance_bind_regions"))
-        ADD_EXTENSION(VkBindImageMemoryDeviceGroupInfoKHR);
+        ADD_EXTENSION_INLINE(VkBindImageMemoryDeviceGroupInfoKHR);
     if(ispresent("swapchain") || ispresent("image_index"))
-        ADD_EXTENSION(VkBindImageMemorySwapchainInfoKHR);
+        ADD_EXTENSION_INLINE(VkBindImageMemorySwapchainInfoKHR);
     EXTENSIONS_END
 ZCHECK_END
 ZCHECKARRAY(VkBindImageMemoryInfo)
@@ -5859,7 +5865,7 @@ ZCHECK_BEGIN(VkPhysicalDeviceExternalSemaphoreInfo)
     GetBits(handleType, "handle_type", VkExternalSemaphoreHandleTypeFlagBits);
     EXTENSIONS_BEGIN
     if(ispresent("semaphore_type"))
-        ADD_EXTENSION(VkSemaphoreTypeCreateInfo);
+        ADD_EXTENSION_INLINE(VkSemaphoreTypeCreateInfo);
     EXTENSIONS_END
 ZCHECK_END
 
@@ -5868,6 +5874,11 @@ ZCHECK_END
 ZCHECK_BEGIN(VkPhysicalDeviceExternalImageFormatInfoKHR)
     newstruct(VkPhysicalDeviceExternalImageFormatInfoKHR);
     GetBits(handleType, "handle_type", VkExternalMemoryHandleTypeFlagBits);
+ZCHECK_END
+
+ZCHECK_BEGIN(VkPhysicalDeviceImageViewImageFormatInfoEXT)
+    newstruct(VkPhysicalDeviceImageViewImageFormatInfoEXT);
+    GetImageViewType(imageViewType, "image_view_type");
 ZCHECK_END
 
 ZCHECK_BEGIN(VkPhysicalDeviceImageFormatInfo2)
@@ -5880,9 +5891,11 @@ ZCHECK_BEGIN(VkPhysicalDeviceImageFormatInfo2)
     GetFlags(flags, "flags");
     EXTENSIONS_BEGIN
     if(ispresent("handle_type"))
-        ADD_EXTENSION(VkPhysicalDeviceExternalImageFormatInfoKHR);
+        ADD_EXTENSION_INLINE(VkPhysicalDeviceExternalImageFormatInfoKHR);
     if(ispresent("stencil_usage"))
-        ADD_EXTENSION(VkImageStencilUsageCreateInfo);
+        ADD_EXTENSION_INLINE(VkImageStencilUsageCreateInfo);
+    if(ispresent("image_view_type"))
+        ADD_EXTENSION_INLINE(VkPhysicalDeviceImageViewImageFormatInfoEXT);
     EXTENSIONS_END
 ZCHECK_END
 
@@ -5996,6 +6009,9 @@ ZCHECK_BEGIN(VkComputePipelineCreateInfo)
     GetPipelineOpt(basePipelineHandle, "base_pipeline_handle");
     GetIntegerOpt(basePipelineIndex, "base_pipeline_index", -1);
     GetStruct(stage, "stage", VkPipelineShaderStageCreateInfo);
+    EXTENSIONS_BEGIN
+        ADD_EXTENSION_STRUCT("creation_feedback_state", VkPipelineCreationFeedbackCreateInfoEXT);
+    EXTENSIONS_END
 ZCHECK_END
 ZCHECKARRAY(VkComputePipelineCreateInfo)
 
@@ -6024,10 +6040,8 @@ ZCHECK_BEGIN(VkPipelineTessellationStateCreateInfo)
     GetFlags(flags, "flags");
     GetInteger(patchControlPoints, "patch_control_points");
     EXTENSIONS_BEGIN
-#define F   "domain_origin"
-    if(ispresent(F))
-        ADD_EXTENSION(VkPipelineTessellationDomainOriginStateCreateInfoKHR);
-#undef F
+    if(ispresent("domain_origin"))
+        ADD_EXTENSION_INLINE(VkPipelineTessellationDomainOriginStateCreateInfoKHR);
     EXTENSIONS_END
 ZCHECK_END
 
@@ -6079,6 +6093,24 @@ ZCHECK_BEGIN(VkPipelineRasterizationStateStreamCreateInfoEXT)
     GetInteger(rasterizationStream, "rasterization_stream");
 ZCHECK_END
 
+ZCHECK_BEGIN(VkPipelineRasterizationDepthClipStateCreateInfoEXT)
+    newstruct(VkPipelineRasterizationDepthClipStateCreateInfoEXT);
+    GetFlags(flags, "depth_clip_create_flags");
+    GetBoolean(depthClipEnable, "depth_clip_enable");
+ZCHECK_END
+
+ZCHECK_BEGIN(VkPipelineRasterizationProvokingVertexStateCreateInfoEXT)
+    newstruct(VkPipelineRasterizationProvokingVertexStateCreateInfoEXT);
+    GetProvokingVertexMode(provokingVertexMode, "provoking_vertex_mode");
+ZCHECK_END
+
+ZCHECK_BEGIN(VkPipelineRasterizationLineStateCreateInfoEXT)
+    newstruct(VkPipelineRasterizationLineStateCreateInfoEXT);
+    GetLineRasterizationMode(lineRasterizationMode, "line_rasterization_mode");
+    GetBoolean(stippledLineEnable, "stippled_line_enable");
+    GetInteger(lineStippleFactor, "line_stipple_factor");
+    GetInteger(lineStipplePattern, "line_stipple_pattern");
+ZCHECK_END
 
 ZCHECK_BEGIN(VkPipelineRasterizationStateCreateInfo)
     checktable(arg);
@@ -6095,13 +6127,16 @@ ZCHECK_BEGIN(VkPipelineRasterizationStateCreateInfo)
     GetNumber(depthBiasSlopeFactor, "depth_bias_slope_factor");
     GetNumberDef(lineWidth, "line_width", 1.0);
     EXTENSIONS_BEGIN
-    if(ispresent("conservative_rasterization_mode") ||
-        ispresent("conservative_rasterization_create_flags") ||
-        ispresent("extra_primitive_overestimation_size"))
-        ADD_EXTENSION(VkPipelineRasterizationConservativeStateCreateInfoEXT);
-    if(ispresent("rasterization_stream") ||
-        ispresent("rasterization_stream_create_flags"))
-        ADD_EXTENSION(VkPipelineRasterizationStateStreamCreateInfoEXT);
+    if(ispresent("conservative_rasterization_mode") || ispresent("conservative_rasterization_create_flags") || ispresent("extra_primitive_overestimation_size"))
+        ADD_EXTENSION_INLINE(VkPipelineRasterizationConservativeStateCreateInfoEXT);
+    if(ispresent("rasterization_stream") || ispresent("rasterization_stream_create_flags"))
+        ADD_EXTENSION_INLINE(VkPipelineRasterizationStateStreamCreateInfoEXT);
+    if(ispresent("depth_clip_enable") || ispresent("depth_clip_create_flags"))
+        ADD_EXTENSION_INLINE(VkPipelineRasterizationDepthClipStateCreateInfoEXT);
+    if(ispresent("provoking_vertex_mode"))
+        ADD_EXTENSION_INLINE(VkPipelineRasterizationProvokingVertexStateCreateInfoEXT);
+    if(ispresent("line_rasterization_mode") || ispresent("stippled_line_enable") || ispresent("line_stipple_factor") || ispresent(""))
+        ADD_EXTENSION_INLINE(VkPipelineRasterizationLineStateCreateInfoEXT);
     EXTENSIONS_END
 ZCHECK_END
 
@@ -6156,7 +6191,7 @@ ZCHECK_BEGIN(VkPipelineMultisampleStateCreateInfo)
 #undef F
     EXTENSIONS_BEGIN
     if(ispresent("sample_locations_enable") || ispresent("sample_locations_info"))
-        ADD_EXTENSION(VkPipelineSampleLocationsStateCreateInfoEXT);
+        ADD_EXTENSION_INLINE(VkPipelineSampleLocationsStateCreateInfoEXT);
     EXTENSIONS_END
 ZCHECK_END
 
@@ -6206,7 +6241,7 @@ ZCHECK_BEGIN(VkPipelineVertexInputStateCreateInfo)
 #undef F
     EXTENSIONS_BEGIN
     if(ispresent("vertex_binding_divisors"))
-        ADD_EXTENSION(VkPipelineVertexInputDivisorStateCreateInfoEXT);
+        ADD_EXTENSION_INLINE(VkPipelineVertexInputDivisorStateCreateInfoEXT);
     EXTENSIONS_END
 ZCHECK_END
 
@@ -6256,7 +6291,7 @@ ZCHECK_BEGIN(VkPipelineColorBlendStateCreateInfo)
 #undef F
     EXTENSIONS_BEGIN
     if(ispresent("src_premultiplied") || ispresent("dst_premultiplied") || ispresent("blend_overlap"))
-        ADD_EXTENSION(VkPipelineColorBlendAdvancedStateCreateInfoEXT);
+        ADD_EXTENSION_INLINE(VkPipelineColorBlendAdvancedStateCreateInfoEXT);
     EXTENSIONS_END
 ZCHECK_END
 
@@ -6294,6 +6329,32 @@ ZCHECK_BEGIN(VkPipelineDiscardRectangleStateCreateInfoEXT)
     popfield(L, arg1);
     if(*err < 0) { prependfield(F); return p; }
     if(*err == ERR_NOTPRESENT) poperror();
+#undef F
+ZCHECK_END
+
+/*-------------------------------------------------------------------------------------*/
+
+static ZCLEAR_BEGIN(VkPipelineCreationFeedbackCreateInfoEXT)
+    if(p->pPipelineCreationFeedback)
+        zfreeVkPipelineCreationFeedbackEXT(L, p->pPipelineCreationFeedback, 1);
+    if(p->pPipelineStageCreationFeedbacks) zfreearrayVkPipelineCreationFeedbackEXT(L,
+            p->pPipelineStageCreationFeedbacks, p->pipelineStageCreationFeedbackCount, 1);
+ZCLEAR_END
+ZCHECK_BEGIN(VkPipelineCreationFeedbackCreateInfoEXT)
+    checktable(arg);
+    newstruct(VkPipelineCreationFeedbackCreateInfoEXT);
+#define F "pipeline_creation_feedback"
+    arg1 = pushfield(L, arg, F);
+    p->pPipelineCreationFeedback = zcheckVkPipelineCreationFeedbackEXT(L, arg1, err);
+    popfield(L, arg1);
+    if(*err) { prependfield(F); return p; }
+#undef F
+#define F "pipeline_stage_creation_feedbacks"
+    arg1 = pushfield(L, arg, F);
+    p->pPipelineStageCreationFeedbacks = zcheckarrayVkPipelineCreationFeedbackEXT(L,
+        arg1, &p->pipelineStageCreationFeedbackCount, err);
+    popfield(L, arg1);
+    if(*err) { prependfield(F); return p; }
 #undef F
 ZCHECK_END
 
@@ -6344,17 +6405,8 @@ ZCHECK_BEGIN(VkGraphicsPipelineCreateInfo)
     GET(pDynamicState, "dynamic_state", VkPipelineDynamicStateCreateInfo, 0);
 #undef GET
     EXTENSIONS_BEGIN
-#define F "discard_rectangle_state"
-    {
-    VkPipelineDiscardRectangleStateCreateInfoEXT *p1;
-    arg1 = pushfield(L, arg, F);
-    p1 = zcheckVkPipelineDiscardRectangleStateCreateInfoEXT(L, arg1, err);
-    popfield(L, arg1);
-    if(*err<0) { zfree(L, p1, 1); prependfield(F); return p; }
-    else if(*err==ERR_NOTPRESENT) poperror();
-    else addtochain(chain, p1);
-    }
-#undef F
+        ADD_EXTENSION_STRUCT("discard_rectangle_state", VkPipelineDiscardRectangleStateCreateInfoEXT);
+        ADD_EXTENSION_STRUCT("creation_feedback_state", VkPipelineCreationFeedbackCreateInfoEXT);
     EXTENSIONS_END
 ZCHECK_END
 ZCHECKARRAY(VkGraphicsPipelineCreateInfo)
@@ -6514,6 +6566,7 @@ static void zfreeaux(lua_State *L, void *pp)
         CASE(RENDER_PASS_ATTACHMENT_BEGIN_INFO, VkRenderPassAttachmentBeginInfo);
         CASE(TIMELINE_SEMAPHORE_SUBMIT_INFO, VkTimelineSemaphoreSubmitInfo);
         CASE(SEMAPHORE_WAIT_INFO, VkSemaphoreWaitInfo);
+        CASE(PIPELINE_CREATION_FEEDBACK_CREATE_INFO_EXT, VkPipelineCreationFeedbackCreateInfoEXT);
 #undef CASE
         default: 
             return;

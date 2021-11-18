@@ -452,6 +452,9 @@ Reserved for future use (must be set to 0):
 [[pipelinerasterizationstatestreamcreateflags]]
 [small]#*pipelinerasterizationstatestreamcreateflags*: 0#
 
+[[pipelinerasterizationdepthclipstatecreateflags]]
+[small]#*pipelinerasterizationdepthclipstatecreateflags*: 0#
+
 [[pipelinedepthstencilstatecreateflags]]
 [small]#*pipelinedepthstencilstatecreateflags*: 0#
 
