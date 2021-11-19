@@ -112,9 +112,9 @@ static int pushfield(lua_State *L, int arg, const char *sname)
 #define popfield    lua_remove
 #define poperror()  lua_pop(L, 1)
 #define pusherror() lua_pushstring(L, errstring(*err))
-#define pushfielderror(name) lua_pushfstring(L, "%s: %s", (name), errstring(*err))
-#define prependfield(name) \
-    do { lua_pushfstring(L, "%s.%s", (name), lua_tostring(L, -1)); lua_remove(L, -2); } while(0)
+#define pushfielderror(name_) lua_pushfstring(L, "%s: %s", (name_), errstring(*err))
+#define prependfield(name_) \
+    do { lua_pushfstring(L, "%s.%s", (name_), lua_tostring(L, -1)); lua_remove(L, -2); } while(0)
 
 /* ZCHECK - Must be implemented for structs that have to be passed from Lua to C */
 #define ZCHECK_BEGIN(VkXxx) \
@@ -184,14 +184,14 @@ int zinit##VkXxx(lua_State *L, VkXxx* p, int *err) { (void)L; (void)(p);
  */
 #define EXTENSIONS_BEGIN do { void **chain = pnextof(p);
 #define EXTENSIONS_END } while(0);
-#define ADD_EXTENSION_STRUCT(sname, VkXxx)  do { /* regular extension struct */ \
-    VkXxx *p1;                                                                  \
-    arg1 = pushfield(L, arg, sname);                                            \
-    p1 = zcheck##VkXxx(L, arg1, err);                                           \
-    popfield(L, arg1);                                                          \
-    if(*err<0) { zfree(L, p1, 1); prependfield(sname); return p; }              \
-    else if(*err==ERR_NOTPRESENT) poperror();                                   \
-    else addtochain(chain, p1);                                                 \
+#define ADD_EXTENSION_STRUCT(sname_, VkXxx)  do { /* regular extension struct */    \
+    VkXxx *p1;                                                                      \
+    arg1 = pushfield(L, arg, sname_);                                               \
+    p1 = zcheck##VkXxx(L, arg1, err);                                               \
+    popfield(L, arg1);                                                              \
+    if(*err<0) { zfree(L, p1, 1); prependfield(sname_); return p; }                 \
+    else if(*err==ERR_NOTPRESENT) poperror();                                       \
+    else addtochain(chain, p1);                                                     \
 } while(0)
 #define ADD_EXTENSION_INLINE(VkXxx)    do { /* for INLINED_EXTENSIONS only (see below) */\
     VkXxx *p1 = zcheck##VkXxx(L, arg, err);     \
@@ -255,7 +255,7 @@ static int checktable_(lua_State *L, int arg)
 #define newstruct(VkXxx) if((p = znew##VkXxx(L, err))==NULL) return NULL /* also sets sType */
 
 static int ispresent_(lua_State *L, int arg, const char *sname)
-#define ispresent(sname) ispresent_(L, arg, (sname))
+#define ispresent(sname_) ispresent_(L, arg, (sname_))
 /* Checks if field 'sname' is present in the table at arg */
     {
     int rc;
@@ -270,28 +270,28 @@ static int ispresent_(lua_State *L, int arg, const char *sname)
  | Set macros (for push functions)                                              |
  *------------------------------------------------------------------------------*/
 
-#define SetInteger(name, sname) do { lua_pushinteger(L, p->name); lua_setfield(L, -2, sname); } while(0)
+#define SetInteger(name_, sname_) do { lua_pushinteger(L, p->name_); lua_setfield(L, -2, sname_); } while(0)
 #define SetHandle SetInteger /* uint64_t handle */
 #define SetDeviceAddress SetInteger /* uint64_t */
-#define SetLightuserdata(name, sname) do { lua_pushlightuserdata(L, p->name); lua_setfield(L, -2, sname); } while(0)
-#define SetNumber(name, sname) do { lua_pushnumber(L, p->name); lua_setfield(L, -2, sname); } while(0)
-#define SetFlags(name, sname) do { pushflags(L, p->name); lua_setfield(L, -2, sname); } while(0)
+#define SetLightuserdata(name_, sname_) do { lua_pushlightuserdata(L, p->name_); lua_setfield(L, -2, sname_); } while(0)
+#define SetNumber(name_, sname_) do { lua_pushnumber(L, p->name_); lua_setfield(L, -2, sname_); } while(0)
+#define SetFlags(name_, sname_) do { pushflags(L, p->name_); lua_setfield(L, -2, sname_); } while(0)
 #define SetBits SetFlags
-#define SetBoolean(name, sname) do { lua_pushboolean(L, p->name); lua_setfield(L, -2, sname); } while(0)
-#define SetString(name, sname) do { lua_pushstring(L, p->name); lua_setfield(L, -2, sname); } while(0)
-#define SetLString(name, sname, len) do { lua_pushlstring(L, p->name, len); lua_setfield(L, -2, sname); } while(0)
-#define SetUUID(name, sname, len) do { lua_pushlstring(L, (char*)p->name,(len)); lua_setfield(L, -2, sname); } while(0)
-#define SetEnum(name, sname, pushfunc) do { pushfunc(L, p->name); lua_setfield(L, -2, sname); } while(0)
-#define SetStruct(name, sname, VkXxx) do { zpush##VkXxx(L, &(p->name)); lua_setfield(L, -2, sname); } while(0)
-#define SetIntegerArray(name, sname, n) do { unsigned int i_;                           \
-    lua_newtable(L);                                                                    \
-    for(i_=0; i_<(n); i_++) { lua_pushinteger(L, p->name[i_]); lua_seti(L, -2, i_+1); } \
-    lua_setfield(L, -2, sname);                                                         \
+#define SetBoolean(name_, sname_) do { lua_pushboolean(L, p->name_); lua_setfield(L, -2, sname_); } while(0)
+#define SetString(name_, sname_) do { lua_pushstring(L, p->name_); lua_setfield(L, -2, sname_); } while(0)
+#define SetLString(name_, sname_, len) do { lua_pushlstring(L, p->name_, len); lua_setfield(L, -2, sname_); } while(0)
+#define SetUUID(name_, sname_, len) do { lua_pushlstring(L, (char*)p->name_,(len)); lua_setfield(L, -2, sname_); } while(0)
+#define SetEnum(name_, sname_, pushfunc) do { pushfunc(L, p->name_); lua_setfield(L, -2, sname_); } while(0)
+#define SetStruct(name_, sname_, VkXxx) do { zpush##VkXxx(L, &(p->name_)); lua_setfield(L, -2, sname_); } while(0)
+#define SetIntegerArray(name_, sname_, n_) do { unsigned int i_;                            \
+    lua_newtable(L);                                                                        \
+    for(i_=0; i_<(n_); i_++) { lua_pushinteger(L, p->name_[i_]); lua_seti(L, -2, i_+1); }   \
+    lua_setfield(L, -2, sname_);                                                            \
 } while(0)
-#define SetNumberArray(name, sname, n) do { int i_;                                     \
-    lua_newtable(L);                                                                    \
-    for(i_=0; i_<(n); i_++) { lua_pushnumber(L, p->name[i_]); lua_seti(L, -2, i_+1); }  \
-    lua_setfield(L, -2, sname);                                                         \
+#define SetNumberArray(name_, sname_, n_) do { int i_;                                      \
+    lua_newtable(L);                                                                        \
+    for(i_=0; i_<(n_); i_++) { lua_pushnumber(L, p->name_[i_]); lua_seti(L, -2, i_+1); }    \
+    lua_setfield(L, -2, sname_);                                                            \
 } while(0)
 
 /*------------------------------------------------------------------------------*
@@ -309,26 +309,26 @@ static VkFlags64 GetFlags_(lua_State *L, int arg, const char *sname, int *err)
     return flags;
     }
 
-#define GetFlags(name, sname)  do {                             \
-    p->name = GetFlags_(L, arg, sname, err);                    \
+#define GetFlags(name_, sname_)  do {                           \
+    p->name_ = GetFlags_(L, arg, sname_, err);                  \
     if(*err) return p;                                          \
 } while(0)
 
-#define GetBits(name, sname, T) do {                            \
+#define GetBits(name_, sname_, T) do {                          \
     /* same as GetFlags, but casts to T */                      \
-    p->name = (T)GetFlags_(L, arg, sname, err);                 \
+    p->name_ = (T)GetFlags_(L, arg, sname_, err);               \
     if(*err) return p;                                          \
 } while(0)
 
-#define GetSamples(name, sname) do {                            \
+#define GetSamples(name_, sname_) do {                          \
 /* VkSampleCountFlags may be passed either as string or number (eg 1 or "1" for 1 bit) */\
-    int arg_ = pushfield(L, arg, sname);                        \
-    p->name = (VkSampleCountFlagBits)testflags(L, arg_, err);   \
+    int arg_ = pushfield(L, arg, sname_);                       \
+    p->name_ = (VkSampleCountFlagBits)testflags(L, arg_, err);  \
     popfield(L, arg_);                                          \
     if(*err == ERR_NOTPRESENT)                                  \
-        { p->name = VK_SAMPLE_COUNT_1_BIT; *err = 0; }          \
+        { p->name_ = VK_SAMPLE_COUNT_1_BIT; *err = 0; }         \
     else if(*err)                                               \
-        { pushfielderror(sname); return p; }                    \
+        { pushfielderror(sname_); return p; }                   \
 } while(0)
 
 /* Numbers -------------------------------------------------------------------*/
@@ -345,12 +345,12 @@ static lua_Number GetNumberDef_(lua_State *L, int arg, const char *sname, lua_Nu
     return val;
     }
 
-#define GetNumberDef(name, sname, defval) /* defaults to defval */ do { \
-    p->name = GetNumberDef_(L, arg, sname, defval, err);                \
+#define GetNumberDef(name_, sname_, defval) /* defaults to defval */ do { \
+    p->name_ = GetNumberDef_(L, arg, sname_, defval, err);                \
     if(*err) return p;                                                  \
 } while(0)
 
-#define GetNumber(name, sname) GetNumberDef(name, sname, 0) /* defaults to 0 */
+#define GetNumber(name_, sname_) GetNumberDef(name_, sname_, 0) /* defaults to 0 */
 
 static lua_Integer GetInteger_(lua_State *L, int arg, const char *sname, lua_Integer defval, int *err)
     {
@@ -369,33 +369,33 @@ static lua_Integer GetInteger_(lua_State *L, int arg, const char *sname, lua_Int
     return val;
     }
 
-#define GetIntegerOpt(name, sname, defval)  /* defaults to defval */ do {   \
-    p->name = GetInteger_(L, arg, sname, defval, err);                      \
-    if(*err) return p;                                                      \
+#define GetIntegerOpt(name_, sname_, defval_)  /* defaults to defval_ */ do {   \
+    p->name_ = GetInteger_(L, arg, sname_, defval_, err);                       \
+    if(*err) return p;                                                          \
 } while(0)
 
-#define GetInteger(name, sname) GetIntegerOpt(name, sname, 0) /* defaults to 0 */ 
+#define GetInteger(name_, sname_) GetIntegerOpt(name_, sname_, 0) /* defaults to 0 */
 #define GetHandle GetInteger /* uint64_t handle */
 #define GetDeviceAddress /* uint64_t */
 
-#define GetNumArray_(name, sname, n, towhatx) do {                          \
-/* get a fixed-length n array of floats or integers */                      \
+#define GetNumArray_(name_, sname_, n_, towhatx_) do {                      \
+/* get a fixed-length n_ array of floats or integers */                     \
     int arg1_, arg2_, t_, i_, isnum_;                                       \
     *err = 0;                                                               \
-    arg1_ = pushfield(L, arg, sname);                                       \
+    arg1_ = pushfield(L, arg, sname_);                                      \
     t_ = lua_type(L, arg1_);                                                \
     if(t_ != LUA_TTABLE)                                                    \
         {                                                                   \
         popfield(L, arg1_);                                                 \
         if(t_ == LUA_TNIL || t_ == LUA_TNONE) { *err = ERR_NOTPRESENT; }    \
-        else { *err=ERR_TABLE; pushfielderror(sname); return p; }           \
+        else { *err=ERR_TABLE; pushfielderror(sname_); return p; }          \
         }                                                                   \
     else {                                                                  \
-        for(i_=0; i_ <(n); i_++)                                            \
+        for(i_=0; i_ <(n_); i_++)                                           \
             {                                                               \
             lua_rawgeti(L, arg1_, i_+1);                                    \
             arg2_ = lua_gettop(L);                                          \
-            p->name[i_] = towhatx(L, arg2_, &isnum_);                       \
+            p->name_[i_] = towhatx_(L, arg2_, &isnum_);                     \
             popfield(L, arg2_);                                             \
             if(!isnum_) { *err=ERR_TYPE; break; }                           \
             }                                                               \
@@ -406,15 +406,15 @@ static lua_Integer GetInteger_(lua_State *L, int arg, const char *sname, lua_Int
                 {                                                           \
                 case ERR_TABLE:                                             \
                 case ERR_MEMORY:                                            \
-                case ERR_EMPTY: pushfielderror(sname); return p;            \
-                default:        prependfield(sname); return p;              \
+                case ERR_EMPTY: pushfielderror(sname_); return p;           \
+                default:        prependfield(sname_); return p;             \
                 }                                                           \
             }                                                               \
         }                                                                   \
 } while(0)
 
-#define GetIntegerArray(name, sname, n) GetNumArray_(name, sname, n, lua_tointegerx)
-#define GetNumberArray(name, sname, n) GetNumArray_(name, sname, n, lua_tonumberx)
+#define GetIntegerArray(name_, sname_, n_) GetNumArray_(name_, sname_, n_, lua_tointegerx)
+#define GetNumberArray(name_, sname_, n_) GetNumArray_(name_, sname_, n_, lua_tonumberx)
 
 /* Booleans ------------------------------------------------------------------*/
 
@@ -434,9 +434,9 @@ static int GetBoolean_(lua_State *L, int arg, const char *sname, int *err)
     return val;
     }
 
-#define GetBoolean(name, sname) do {                \
-    p->name = GetBoolean_(L, arg, sname, err);      \
-    if(*err) return p;                              \
+#define GetBoolean(name_, sname_) do {                  \
+    p->name_ = GetBoolean_(L, arg, sname_, err);        \
+    if(*err) return p;                                  \
 } while(0)
 
 /* Strings -------------------------------------------------------------------*/
@@ -467,350 +467,368 @@ static const char *GetString_(lua_State *L, int arg, const char *sname, const ch
     return val;
     }
 
-#define GetString(name, sname) do {                             \
-    p->name =  GetString_(L, arg, sname, NULL, err, NULL);      \
+#define GetString(name_, sname_) do {                           \
+    p->name_ =  GetString_(L, arg, sname_, NULL, err, NULL);    \
     if(*err) return p;                                          \
 } while(0)
 
-#define GetStringOpt(name, sname) do {                          \
-    p->name =  GetString_(L, arg, sname, NULL, err, NULL);      \
+#define GetStringOpt(name_, sname_) do {                        \
+    p->name_ =  GetString_(L, arg, sname_, NULL, err, NULL);    \
     if(*err < 0) return p;                                      \
     if(*err == ERR_NOTPRESENT) { *err = 0; poperror(); }        \
 } while(0)
 
-#define GetStringDef(name, sname, defval) do {                  \
-    p->name =  GetString_(L, arg, sname, defval, err, NULL);    \
+#define GetStringDef(name_, sname_, defval) do {                \
+    p->name_ =  GetString_(L, arg, sname_, defval, err, NULL);  \
     if(*err) return p;                                          \
 } while(0)
 
-#define GetLString(name, sname, len) /* size_t* */ do {         \
-    p->name =  GetString_(L, arg, sname, NULL, err, len);       \
+#define GetLString(name_, sname_, len_) /* size_t* */ do {      \
+    p->name_ =  GetString_(L, arg, sname_, NULL, err, len_);    \
     if(*err) return p;                                          \
 } while(0)
 
 /* Lightuserdata -------------------------------------------------------------*/
 
-#define GetLightuserdataOpt(name, sname, TTT) do {  \
-    int arg_ = pushfield(L, arg, sname);            \
-    *err = 0;                                       \
-    if(lua_isnoneornil(L, arg_))                    \
-        p->name = NULL;                             \
-    else                                            \
-        {                                           \
-        if(lua_type(L, arg_) != LUA_TLIGHTUSERDATA) \
-            *err = ERR_TYPE;                        \
-        else                                        \
-            p->name = (TTT)lua_touserdata(L, arg_); \
-        }                                           \
-    popfield(L, arg_);                              \
-    if(*err)                                        \
-        { pushfielderror(sname); return p; }        \
+#define GetLightuserdataOpt(name_, sname_, TTT) do {    \
+    int arg_ = pushfield(L, arg, sname_);               \
+    *err = 0;                                           \
+    if(lua_isnoneornil(L, arg_))                        \
+        p->name_ = NULL;                                \
+    else                                                \
+        {                                               \
+        if(lua_type(L, arg_) != LUA_TLIGHTUSERDATA)     \
+            *err = ERR_TYPE;                            \
+        else                                            \
+            p->name_ = (TTT)lua_touserdata(L, arg_);    \
+        }                                               \
+    popfield(L, arg_);                                  \
+    if(*err)                                            \
+        { pushfielderror(sname_); return p; }           \
 } while(0)
 
 #define GetLightuserdata GetLightuserdataOpt
 
 /* Enums ---------------------------------------------------------------------*/
 
-#define GetEnum_(name, sname, testfunc, defval, opt) do {   \
-    int arg_ = pushfield(L, arg, sname);                    \
-    *err = 0;                                               \
-    p->name = testfunc(L, arg_, err);                       \
-    popfield(L, arg_);                                      \
-    if(opt && (*err == ERR_NOTPRESENT))                     \
-        { p->name = (defval); *err = 0; }                   \
-    else if(*err)                                           \
-        { pushfielderror(sname); return p; }                \
+#define GetEnum_(name_, sname_, testfunc_, defval_, opt_) do {      \
+    int arg_ = pushfield(L, arg, sname_);                           \
+    *err = 0;                                                       \
+    p->name_ = testfunc_(L, arg_, err);                             \
+    popfield(L, arg_);                                              \
+    if(opt_ && (*err == ERR_NOTPRESENT))                            \
+        { p->name_ = (defval_); *err = 0; }                         \
+    else if(*err)                                                   \
+        { pushfielderror(sname_); return p; }                       \
 } while(0)
 
-#define GetEnum(name, sname, testfunc) GetEnum_(name, sname, testfunc, 0,  0)
-#define GetEnumOpt(name, sname, testfunc, defval) GetEnum_(name, sname, testfunc, defval, 1)
+#define GetEnum(name_, sname_, testfunc_) GetEnum_(name_, sname_, testfunc_, 0,  0)
+#define GetEnumOpt(name_, sname_, testfunc_, defval_) GetEnum_(name_, sname_, testfunc_, defval_, 1)
 
 /* enums without default value (ie required) */
-#define GetDescriptorType(name, sname) GetEnum(name, sname, testdescriptortype)
-#define GetImageType(name, sname) GetEnum(name, sname, testimagetype)
-#define GetImageViewType(name, sname) GetEnum(name, sname, testimageviewtype)
-#define GetDescriptorUpdateTemplateType(name, sname) GetEnum(name, sname, testdescriptorupdatetemplatetype)
-#define GetQueueGlobalPriority(name, sname) GetEnum(name, sname, testqueueglobalpriority)
+#define GetDescriptorType(name_, sname_) GetEnum(name_, sname_, testdescriptortype)
+#define GetImageType(name_, sname_) GetEnum(name_, sname_, testimagetype)
+#define GetImageViewType(name_, sname_) GetEnum(name_, sname_, testimageviewtype)
+#define GetDescriptorUpdateTemplateType(name_, sname_) GetEnum(name_, sname_, testdescriptorupdatetemplatetype)
+#define GetQueueGlobalPriority(name_, sname_) GetEnum(name_, sname_, testqueueglobalpriority)
 
-#define GetCommandBufferLevel(name, sname) GetEnum(name, sname, testcommandbufferlevel)
-#define GetQueryType(name, sname) GetEnum(name, sname, testquerytype)
-#define GetDiscardRectangleMode(name, sname) GetEnum(name, sname, testdiscardrectanglemode)
-#define GetDeviceEventType(name, sname) GetEnum(name, sname, testdeviceeventtype)
-#define GetDisplayEventType(name, sname) GetEnum(name, sname, testdisplayeventtype)
-#define GetDisplayPowerState(name, sname) GetEnum(name, sname, testdisplaypowerstate)
-#define GetTessellationDomainOrigin(name, sname) GetEnum(name, sname, testtessellationdomainorigin)
-#define GetSubpassContents(name, sname) GetEnum(name, sname, testsubpasscontents)
-#define GetObjectType(name, sname) GetEnum(name, sname, testobjecttype)
-#define GetTimeDomain(name, sname) GetEnum(name, sname, testtimedomain)
-#define GetSemaphoreType(name, sname) GetEnum(name, sname, testsemaphoretype)
-#define GetProvokingVertexMode(name, sname) GetEnum(name, sname, testprovokingvertexmode)
-#define GetLineRasterizationMode(name, sname) GetEnum(name, sname, testlinerasterizationmode)
+#define GetCommandBufferLevel(name_, sname_) GetEnum(name_, sname_, testcommandbufferlevel)
+#define GetQueryType(name_, sname_) GetEnum(name_, sname_, testquerytype)
+#define GetDiscardRectangleMode(name_, sname_) GetEnum(name_, sname_, testdiscardrectanglemode)
+#define GetDeviceEventType(name_, sname_) GetEnum(name_, sname_, testdeviceeventtype)
+#define GetDisplayEventType(name_, sname_) GetEnum(name_, sname_, testdisplayeventtype)
+#define GetDisplayPowerState(name_, sname_) GetEnum(name_, sname_, testdisplaypowerstate)
+#define GetTessellationDomainOrigin(name_, sname_) GetEnum(name_, sname_, testtessellationdomainorigin)
+#define GetSubpassContents(name_, sname_) GetEnum(name_, sname_, testsubpasscontents)
+#define GetObjectType(name_, sname_) GetEnum(name_, sname_, testobjecttype)
+#define GetTimeDomain(name_, sname_) GetEnum(name_, sname_, testtimedomain)
+#define GetSemaphoreType(name_, sname_) GetEnum(name_, sname_, testsemaphoretype)
+#define GetProvokingVertexMode(name_, sname_) GetEnum(name_, sname_, testprovokingvertexmode)
+#define GetLineRasterizationMode(name_, sname_) GetEnum(name_, sname_, testlinerasterizationmode)
 
 /* enums with default value (ie optional) */
-#define GetPipelineBindPoint(name, sname) GetEnumOpt(name, sname, testpipelinebindpoint, VK_PIPELINE_BIND_POINT_GRAPHICS)
-#define GetSharingMode(name, sname) GetEnumOpt(name, sname, testsharingmode, VK_SHARING_MODE_EXCLUSIVE)
-#define GetImageLayout(name, sname) GetEnumOpt(name, sname, testimagelayout, VK_IMAGE_LAYOUT_UNDEFINED)
-#define GetCompareOp(name, sname) GetEnumOpt(name, sname, testcompareop, VK_COMPARE_OP_NEVER)
-#define GetBlendFactor(name, sname) GetEnumOpt(name, sname, testblendfactor, VK_BLEND_FACTOR_ZERO)
-#define GetBlendOp(name, sname) GetEnumOpt(name, sname, testblendop, VK_BLEND_OP_ADD)
-#define GetStencilOp(name, sname) GetEnumOpt(name, sname, teststencilop, VK_STENCIL_OP_KEEP)
-#define GetFormat(name, sname) GetEnumOpt(name, sname, testformat, VK_FORMAT_UNDEFINED)
-#define GetAttachmentLoadOp(name, sname) GetEnumOpt(name, sname, testattachmentloadop, VK_ATTACHMENT_LOAD_OP_DONT_CARE)
-#define GetAttachmentStoreOp(name, sname) GetEnumOpt(name, sname, testattachmentstoreop, VK_ATTACHMENT_STORE_OP_DONT_CARE)
-#define GetFilter(name, sname) GetEnumOpt(name, sname, testfilter, VK_FILTER_NEAREST)
-#define GetSamplerMipmapMode(name, sname) GetEnumOpt(name, sname, testsamplermipmapmode, VK_SAMPLER_MIPMAP_MODE_NEAREST)
-#define GetSamplerAddressMode(name, sname) GetEnumOpt(name, sname, testsampleraddressmode, VK_SAMPLER_ADDRESS_MODE_REPEAT)
-#define GetBorderColor(name, sname) GetEnumOpt(name, sname, testbordercolor, VK_BORDER_COLOR_FLOAT_TRANSPARENT_BLACK)
-#define GetComponentSwizzle(name, sname) GetEnumOpt(name, sname, testcomponentswizzle, VK_COMPONENT_SWIZZLE_IDENTITY)
-#define GetImageTiling(name, sname) GetEnumOpt(name, sname, testimagetiling, VK_IMAGE_TILING_OPTIMAL)
-#define GetTopology(name, sname) GetEnumOpt(name, sname, testprimitivetopology, VK_PRIMITIVE_TOPOLOGY_POINT_LIST)
-#define GetPolygonMode(name, sname) GetEnumOpt(name, sname, testpolygonmode, VK_POLYGON_MODE_FILL)
-#define GetFrontFace(name, sname) GetEnumOpt(name, sname, testfrontface, VK_FRONT_FACE_COUNTER_CLOCKWISE)
-#define GetVertexInputRate(name, sname) GetEnumOpt(name, sname, testvertexinputrate, VK_VERTEX_INPUT_RATE_VERTEX)
-#define GetLogicOp(name, sname) GetEnumOpt(name, sname, testlogicop, VK_LOGIC_OP_CLEAR)
-#define GetColorSpace(name, sname) GetEnumOpt(name, sname, testcolorspace, VK_COLOR_SPACE_SRGB_NONLINEAR_KHR)
-#define GetPresentMode(name, sname) GetEnumOpt(name, sname, testpresentmode, VK_PRESENT_MODE_FIFO_KHR)
-#define GetBlendOverlap(name, sname) GetEnumOpt(name, sname, testblendoverlap, VK_BLEND_OVERLAP_UNCORRELATED_EXT)
-#define GetSamplerReductionMode(name, sname) GetEnumOpt(name, sname, testsamplerreductionmode, VK_SAMPLER_REDUCTION_MODE_WEIGHTED_AVERAGE_EXT)
-#define GetSamplerYcbcrModelConversion(name, sname) GetEnumOpt(name, sname, testsamplerycbcrmodelconversion, VK_SAMPLER_YCBCR_MODEL_CONVERSION_RGB_IDENTITY)
-#define GetSamplerYcbcrRange(name, sname) GetEnumOpt(name, sname, testsamplerycbcrrange, VK_SAMPLER_YCBCR_RANGE_ITU_FULL)
-#define GetChromaLocation(name, sname) GetEnumOpt(name, sname, testchromalocation, VK_CHROMA_LOCATION_COSITED_EVEN)
-#define GetConservativeRasterizationMode(name, sname) GetEnumOpt(name, sname, testconservativerasterizationmode, VK_CONSERVATIVE_RASTERIZATION_MODE_DISABLED_EXT)
+#define GetPipelineBindPoint(name_, sname_) GetEnumOpt(name_, sname_, testpipelinebindpoint, VK_PIPELINE_BIND_POINT_GRAPHICS)
+#define GetSharingMode(name_, sname_) GetEnumOpt(name_, sname_, testsharingmode, VK_SHARING_MODE_EXCLUSIVE)
+#define GetImageLayout(name_, sname_) GetEnumOpt(name_, sname_, testimagelayout, VK_IMAGE_LAYOUT_UNDEFINED)
+#define GetCompareOp(name_, sname_) GetEnumOpt(name_, sname_, testcompareop, VK_COMPARE_OP_NEVER)
+#define GetBlendFactor(name_, sname_) GetEnumOpt(name_, sname_, testblendfactor, VK_BLEND_FACTOR_ZERO)
+#define GetBlendOp(name_, sname_) GetEnumOpt(name_, sname_, testblendop, VK_BLEND_OP_ADD)
+#define GetStencilOp(name_, sname_) GetEnumOpt(name_, sname_, teststencilop, VK_STENCIL_OP_KEEP)
+#define GetFormat(name_, sname_) GetEnumOpt(name_, sname_, testformat, VK_FORMAT_UNDEFINED)
+#define GetAttachmentLoadOp(name_, sname_) GetEnumOpt(name_, sname_, testattachmentloadop, VK_ATTACHMENT_LOAD_OP_DONT_CARE)
+#define GetAttachmentStoreOp(name_, sname_) GetEnumOpt(name_, sname_, testattachmentstoreop, VK_ATTACHMENT_STORE_OP_DONT_CARE)
+#define GetFilter(name_, sname_) GetEnumOpt(name_, sname_, testfilter, VK_FILTER_NEAREST)
+#define GetSamplerMipmapMode(name_, sname_) GetEnumOpt(name_, sname_, testsamplermipmapmode, VK_SAMPLER_MIPMAP_MODE_NEAREST)
+#define GetSamplerAddressMode(name_, sname_) GetEnumOpt(name_, sname_, testsampleraddressmode, VK_SAMPLER_ADDRESS_MODE_REPEAT)
+#define GetBorderColor(name_, sname_) GetEnumOpt(name_, sname_, testbordercolor, VK_BORDER_COLOR_FLOAT_TRANSPARENT_BLACK)
+#define GetComponentSwizzle(name_, sname_) GetEnumOpt(name_, sname_, testcomponentswizzle, VK_COMPONENT_SWIZZLE_IDENTITY)
+#define GetImageTiling(name_, sname_) GetEnumOpt(name_, sname_, testimagetiling, VK_IMAGE_TILING_OPTIMAL)
+#define GetTopology(name_, sname_) GetEnumOpt(name_, sname_, testprimitivetopology, VK_PRIMITIVE_TOPOLOGY_POINT_LIST)
+#define GetPolygonMode(name_, sname_) GetEnumOpt(name_, sname_, testpolygonmode, VK_POLYGON_MODE_FILL)
+#define GetFrontFace(name_, sname_) GetEnumOpt(name_, sname_, testfrontface, VK_FRONT_FACE_COUNTER_CLOCKWISE)
+#define GetVertexInputRate(name_, sname_) GetEnumOpt(name_, sname_, testvertexinputrate, VK_VERTEX_INPUT_RATE_VERTEX)
+#define GetLogicOp(name_, sname_) GetEnumOpt(name_, sname_, testlogicop, VK_LOGIC_OP_CLEAR)
+#define GetColorSpace(name_, sname_) GetEnumOpt(name_, sname_, testcolorspace, VK_COLOR_SPACE_SRGB_NONLINEAR_KHR)
+#define GetPresentMode(name_, sname_) GetEnumOpt(name_, sname_, testpresentmode, VK_PRESENT_MODE_FIFO_KHR)
+#define GetBlendOverlap(name_, sname_) GetEnumOpt(name_, sname_, testblendoverlap, VK_BLEND_OVERLAP_UNCORRELATED_EXT)
+#define GetSamplerReductionMode(name_, sname_) GetEnumOpt(name_, sname_, testsamplerreductionmode, VK_SAMPLER_REDUCTION_MODE_WEIGHTED_AVERAGE_EXT)
+#define GetSamplerYcbcrModelConversion(name_, sname_) GetEnumOpt(name_, sname_, testsamplerycbcrmodelconversion, VK_SAMPLER_YCBCR_MODEL_CONVERSION_RGB_IDENTITY)
+#define GetSamplerYcbcrRange(name_, sname_) GetEnumOpt(name_, sname_, testsamplerycbcrrange, VK_SAMPLER_YCBCR_RANGE_ITU_FULL)
+#define GetChromaLocation(name_, sname_) GetEnumOpt(name_, sname_, testchromalocation, VK_CHROMA_LOCATION_COSITED_EVEN)
+#define GetConservativeRasterizationMode(name_, sname_) GetEnumOpt(name_, sname_, testconservativerasterizationmode, VK_CONSERVATIVE_RASTERIZATION_MODE_DISABLED_EXT)
 
 /* Structs -------------------------------------------------------------------*/
 
 /* For fields defined as:
+ * VkXxx *name;
+ */
+#define GetStructp(name_, VkXxx, sname_)    do {                \
+    arg1 = pushfield(L, arg, sname_);                           \
+    p->name_ = zcheck##VkXxx(L, arg1, err);                     \
+    popfield(L, arg1);                                          \
+    if(*err < 0) { prependfield(sname_); return p; }            \
+    else if(*err == ERR_NOTPRESENT) poperror();                 \
+} while(0)
+#define FreeStructp(name_, VkXxx) do {                          \
+    if(p->name_) zfree##VkXxx(L, p->name_, 1);                  \
+} while(0)
+
+#if 0 //££ scaffolding
+    GetStructp(, , "");
+    FreeStructp(, );
+#endif
+
+/* For fields defined as:
  * VkXxx name;
  */
-#define GetStruct_(name, sname, VkXxx, opt) do {                    \
-    int arg_ = pushfield(L, arg, sname);                            \
+#define GetStruct_(name_, sname_, VkXxx, opt_) do {                 \
+    int arg_ = pushfield(L, arg, sname_);                           \
     VkXxx *tmp = zcheck##VkXxx(L, arg_, err);                       \
     if(tmp)                                                         \
-        { memcpy(&(p->name), tmp, sizeof(VkXxx)); Free(L, tmp); }   \
+        { memcpy(&(p->name_), tmp, sizeof(VkXxx)); Free(L, tmp); }  \
     popfield(L, arg_);                                              \
     if(*err)                                                        \
         {                                                           \
         switch(*err)                                                \
             {                                                       \
-            case ERR_NOTPRESENT: if(opt) /*@@ *err=0; */ break; /* else fallthrough */\
+            case ERR_NOTPRESENT: if(opt_) /*@@ *err=0; */ break; /* else fallthrough */\
             case ERR_TABLE:                                         \
             case ERR_MEMORY:                                        \
             case ERR_EMPTY:                                         \
-                { pushfielderror(sname); return p; }                \
+                { pushfielderror(sname_); return p; }               \
             default:                                                \
-                { prependfield(sname); return p; }                  \
+                { prependfield(sname_); return p; }                 \
             }                                                       \
         }                                                           \
 } while(0)
 
-#define GetStruct(name, sname, VkXxx) GetStruct_(name, sname, VkXxx, 0)
-#define GetStructOpt(name, sname, VkXxx) GetStruct_(name, sname, VkXxx, 1)
-#define FreeStruct(name, VkXxx) zfree##VkXxx(L, &p->name, /*base=*/ 0)
+#define GetStruct(name_, sname_, VkXxx) GetStruct_(name_, sname_, VkXxx, 0)
+#define GetStructOpt(name_, sname_, VkXxx) GetStruct_(name_, sname_, VkXxx, 1)
+#define FreeStruct(name_, VkXxx) zfree##VkXxx(L, &p->name_, /*base=*/ 0)
 
 /* For arrays of fixed size defined as
  * VkXxx name[n];
  */
-#define GetStructArrayOpt(name, sname, n, VkXxx) do { /* arrays of fixed size */\
-    VkXxx *tmp;                                                 \
-    int arg1_, arg2_, t_, i_;                                   \
-    arg1_ = pushfield(L, arg, sname);                           \
-    t_ = lua_type(L, arg1_);                                    \
-    *err = 0;                                                   \
-    if(t_ != LUA_TTABLE)                                        \
-        {                                                       \
-        popfield(L, arg1_);                                     \
-        if(t_ == LUA_TNIL || t_ == LUA_TNONE)                   \
-            *err = ERR_NOTPRESENT;                              \
-        else                                                    \
-            { *err=ERR_TABLE; pushfielderror(sname); return p; }   \
-        }                                                       \
-    else {                                                      \
-        for(i_=0; i_ <(n); i_++)                                \
-            {                                                   \
-            lua_rawgeti(L, arg1_, i_+1);                        \
-            arg2_ = lua_gettop(L);                              \
-            tmp = zcheck##VkXxx(L, arg2_, err);                 \
-            if(tmp)                                             \
-                { memcpy(&(p->name[i_]), tmp, sizeof(VkXxx)); Free(L, tmp); } \
-            popfield(L, arg2_);                                 \
-            if(*err < 0) break;                                 \
-            }                                                   \
-        popfield(L, arg1_);                                     \
-        if(*err < 0)                                            \
-            {                                                   \
-            switch(*err)                                        \
-                {                                               \
-                case ERR_TABLE:                                 \
-                case ERR_MEMORY:                                \
-                case ERR_EMPTY:                                 \
-                    pushfielderror(sname); return p;   \
-                default:                                        \
-                    prependfield(sname); return p;              \
-                }                                               \
-            }                                                   \
-        }                                                       \
+#define GetStructArrayOpt(name_, sname_, n_, VkXxx) do { /* arrays of fixed size */\
+    VkXxx *tmp;                                                     \
+    int arg1_, arg2_, t_, i_;                                       \
+    arg1_ = pushfield(L, arg, sname_);                              \
+    t_ = lua_type(L, arg1_);                                        \
+    *err = 0;                                                       \
+    if(t_ != LUA_TTABLE)                                            \
+        {                                                           \
+        popfield(L, arg1_);                                         \
+        if(t_ == LUA_TNIL || t_ == LUA_TNONE)                       \
+            *err = ERR_NOTPRESENT;                                  \
+        else                                                        \
+            { *err=ERR_TABLE; pushfielderror(sname_); return p; }   \
+        }                                                           \
+    else {                                                          \
+        for(i_=0; i_ <(n_); i_++)                                   \
+            {                                                       \
+            lua_rawgeti(L, arg1_, i_+1);                            \
+            arg2_ = lua_gettop(L);                                  \
+            tmp = zcheck##VkXxx(L, arg2_, err);                     \
+            if(tmp)                                                 \
+                { memcpy(&(p->name_[i_]), tmp, sizeof(VkXxx)); Free(L, tmp); } \
+            popfield(L, arg2_);                                     \
+            if(*err < 0) break;                                     \
+            }                                                       \
+        popfield(L, arg1_);                                         \
+        if(*err < 0)                                                \
+            {                                                       \
+            switch(*err)                                            \
+                {                                                   \
+                case ERR_TABLE:                                     \
+                case ERR_MEMORY:                                    \
+                case ERR_EMPTY:                                     \
+                    pushfielderror(sname_); return p;               \
+                default:                                            \
+                    prependfield(sname_); return p;                 \
+                }                                                   \
+            }                                                       \
+        }                                                           \
 } while(0)
 
 /* Objects -------------------------------------------------------------------*/
 
-#define GetObject_(name, sname, TTT, ttt, opt) do { \
-/* eg: TTT = VkRenderPass, ttt = render_pass */     \
-    int arg_ = pushfield(L, arg, sname);            \
-    *err = 0;                                       \
-    if(lua_isnoneornil(L, arg_))                    \
-        {                                           \
-        p->name = 0;                                \
-        if(!opt) *err = ERR_NOTPRESENT;             \
-        }                                           \
-    else                                            \
-        {                                           \
-        p->name = test##ttt(L, arg_, NULL);         \
-        if(!p->name) *err = ERR_TYPE;               \
-        }                                           \
-    popfield(L, arg_);                              \
-    if(*err)                                        \
-        { pushfielderror(sname);  return p; }    \
+#define GetObject_(name_, sname_, TTT, ttt, opt_) do {  \
+/* eg: TTT = VkRenderPass, ttt = render_pass */         \
+    int arg_ = pushfield(L, arg, sname_);               \
+    *err = 0;                                           \
+    if(lua_isnoneornil(L, arg_))                        \
+        {                                               \
+        p->name_ = 0;                                   \
+        if(!opt_) *err = ERR_NOTPRESENT;                \
+        }                                               \
+    else                                                \
+        {                                               \
+        p->name_ = test##ttt(L, arg_, NULL);            \
+        if(!p->name_) *err = ERR_TYPE;                  \
+        }                                               \
+    popfield(L, arg_);                                  \
+    if(*err)                                            \
+        { pushfielderror(sname_);  return p; }          \
 } while(0)
 
-#define GetObject(name, sname, TTT, ttt) GetObject_(name, sname, TTT, ttt, 0)
-#define GetObjectOpt(name, sname, TTT, ttt) GetObject_(name, sname, TTT, ttt, 1)
-
-#define GetRenderPass(name, sname) GetObject(name, sname, VkRenderPass, render_pass)
-#define GetRenderPassOpt(name, sname) GetObjectOpt(name, sname, VkRenderPass, render_pass)
-#define GetFramebuffer(name, sname) GetObject(name, sname, VkFramebuffer, framebuffer)
-#define GetFramebufferOpt(name, sname) GetObjectOpt(name, sname, VkFramebuffer, framebuffer)
-#define GetBuffer(name, sname) GetObject(name, sname, VkBuffer, buffer)
-#define GetBufferOpt(name, sname) GetObjectOpt(name, sname, VkBuffer, buffer)
-#define GetImage(name, sname) GetObject(name, sname, VkImage, image)
-#define GetImageOpt(name, sname) GetObjectOpt(name, sname, VkImage, image)
-#define GetDeviceMemory(name, sname) GetObject(name, sname, VkDeviceMemory, device_memory)
-#define GetShaderModule(name, sname) GetObject(name, sname, VkShaderModule, shader_module)
-#define GetPipelineLayout(name, sname) GetObject(name, sname, VkPipelineLayout, pipeline_layout)
-#define GetPipelineLayoutOpt(name, sname) GetObjectOpt(name, sname, VkPipelineLayout, pipeline_layout)
-#define GetPipelineOpt(name, sname) GetObjectOpt(name, sname, VkPipeline, pipeline)
-#define GetSurface(name, sname) GetObject(name, sname, VkSurfaceKHR, surface)
-#define GetSwapchain(name, sname) GetObject(name, sname, VkSwapchainKHR, swapchain)
-#define GetSwapchainOpt(name, sname) GetObjectOpt(name, sname, VkSwapchainKHR, swapchain)
-#define GetSampler(name, sname) GetObject(name, sname, VkSampler, sampler)
-#define GetImageView(name, sname) GetObject(name, sname, VkImageView, image_view)
-#define GetDescriptorSet(name, sname) GetObject(name, sname, VkDescriptorSet, descriptor_set)
-#define GetDescriptorSetLayoutOpt(name, sname) GetObject(name, sname, VkDescriptorSetLayout, descriptor_set_layout)
-#define GetValidationCache(name, sname) GetObject(name, sname, VkValidationCacheEXT, validation_cache)
-#define GetSamplerYcbcrConversion(name, sname) GetObject(name, sname, VkSamplerYcbcrConversion, sampler_ycbcr_conversion)
-#define GetSemaphore(name, sname) GetObject(name, sname, VkSemaphore, semaphore)
-#define GetSemaphoreOpt(name, sname) GetObjectOpt(name, sname, VkSemaphore, semaphore)
-#define GetFence(name, sname) GetObject(name, sname, VkFence, fence)
-#define GetFenceOpt(name, sname) GetObjectOpt(name, sname, VkFence, fence)
+#define GetObject(name_, sname_, TTT, ttt) GetObject_(name_, sname_, TTT, ttt, 0)
+#define GetObjectOpt(name_, sname_, TTT, ttt) GetObject_(name_, sname_, TTT, ttt, 1)
+#define GetRenderPass(name_, sname_) GetObject(name_, sname_, VkRenderPass, render_pass)
+#define GetRenderPassOpt(name_, sname_) GetObjectOpt(name_, sname_, VkRenderPass, render_pass)
+#define GetFramebuffer(name_, sname_) GetObject(name_, sname_, VkFramebuffer, framebuffer)
+#define GetFramebufferOpt(name_, sname_) GetObjectOpt(name_, sname_, VkFramebuffer, framebuffer)
+#define GetBuffer(name_, sname_) GetObject(name_, sname_, VkBuffer, buffer)
+#define GetBufferOpt(name_, sname_) GetObjectOpt(name_, sname_, VkBuffer, buffer)
+#define GetImage(name_, sname_) GetObject(name_, sname_, VkImage, image)
+#define GetImageOpt(name_, sname_) GetObjectOpt(name_, sname_, VkImage, image)
+#define GetDeviceMemory(name_, sname_) GetObject(name_, sname_, VkDeviceMemory, device_memory)
+#define GetShaderModule(name_, sname_) GetObject(name_, sname_, VkShaderModule, shader_module)
+#define GetPipelineLayout(name_, sname_) GetObject(name_, sname_, VkPipelineLayout, pipeline_layout)
+#define GetPipelineLayoutOpt(name_, sname_) GetObjectOpt(name_, sname_, VkPipelineLayout, pipeline_layout)
+#define GetPipelineOpt(name_, sname_) GetObjectOpt(name_, sname_, VkPipeline, pipeline)
+#define GetSurface(name_, sname_) GetObject(name_, sname_, VkSurfaceKHR, surface)
+#define GetSwapchain(name_, sname_) GetObject(name_, sname_, VkSwapchainKHR, swapchain)
+#define GetSwapchainOpt(name_, sname_) GetObjectOpt(name_, sname_, VkSwapchainKHR, swapchain)
+#define GetSampler(name_, sname_) GetObject(name_, sname_, VkSampler, sampler)
+#define GetImageView(name_, sname_) GetObject(name_, sname_, VkImageView, image_view)
+#define GetDescriptorSet(name_, sname_) GetObject(name_, sname_, VkDescriptorSet, descriptor_set)
+#define GetDescriptorSetLayoutOpt(name_, sname_) GetObject(name_, sname_, VkDescriptorSetLayout, descriptor_set_layout)
+#define GetValidationCache(name_, sname_) GetObject(name_, sname_, VkValidationCacheEXT, validation_cache)
+#define GetSamplerYcbcrConversion(name_, sname_) GetObject(name_, sname_, VkSamplerYcbcrConversion, sampler_ycbcr_conversion)
+#define GetSemaphore(name_, sname_) GetObject(name_, sname_, VkSemaphore, semaphore)
+#define GetSemaphoreOpt(name_, sname_) GetObjectOpt(name_, sname_, VkSemaphore, semaphore)
+#define GetFence(name_, sname_) GetObject(name_, sname_, VkFence, fence)
+#define GetFenceOpt(name_, sname_) GetObjectOpt(name_, sname_, VkFence, fence)
 
 /* Integers with special values ----------------------------------------------*/
 
-#define GetSubpass(name, sname) /* integer or 'external' */ do {\
+#define GetSubpass(name_, sname_) /* integer or 'external' */ do {\
     const char *s_;                                 \
-    int arg_ = pushfield(L, arg, sname);            \
+    int arg_ = pushfield(L, arg, sname_);            \
     int t_ = lua_type(L, arg_);                     \
     *err = 0;                                       \
     if(t_ == LUA_TSTRING)                           \
         {                                           \
         s_ = lua_tostring(L, arg_);                 \
         if(strcmp(s_, "external") == 0)             \
-            p->name = VK_SUBPASS_EXTERNAL;          \
+            p->name_ = VK_SUBPASS_EXTERNAL;          \
         else                                        \
             *err = ERR_VALUE;                       \
         }                                           \
     else if(t_ == LUA_TNONE || t_ == LUA_TNIL)      \
-        p->name = 0;                                \
+        p->name_ = 0;                                \
     else if(lua_isinteger(L, arg_))                 \
-        p->name = lua_tointeger(L, arg_);           \
+        p->name_ = lua_tointeger(L, arg_);           \
     else                                            \
         *err = ERR_TYPE;                            \
     popfield(L, arg_);                              \
     if(*err)                                        \
-        { pushfielderror(sname); return p; }  \
+        { pushfielderror(sname_); return p; }  \
 } while(0)
 
-#define GetTimeout(name, sname) {   \
-    int arg_ = pushfield(L, arg, sname);            \
+#define GetTimeout(name_, sname_) {   \
+    int arg_ = pushfield(L, arg, sname_);            \
     *err = 0;                                       \
-    p->name = testtimeout(L, arg_, err);            \
+    p->name_ = testtimeout(L, arg_, err);            \
     popfield(L, arg_);                              \
     if(*err)                                        \
-        { pushfielderror(sname);  return p; }       \
+        { pushfielderror(sname_);  return p; }       \
 } while(0)
 
 
 
 /* 'remaining' stands for VK_REMAINING_MIP_LEVELS, VK_REMAINING_ARRAY_LAYERS, etc
  * (provided it has a value of ~0U) */
-#define GetIntegerOrRemaining(name, sname, defval) /* integer or 'remaining' */ do {\
+#define GetIntegerOrRemaining(name_, sname_, defval) /* integer or 'remaining' */ do {\
     const char *s_;                                 \
-    int arg_ = pushfield(L, arg, sname);            \
+    int arg_ = pushfield(L, arg, sname_);            \
     int t_ = lua_type(L, arg_);                     \
     *err = 0;                                       \
     if(t_ == LUA_TSTRING)                           \
         {                                           \
         s_ = lua_tostring(L, arg_);                 \
         if(strcmp(s_, "remaining") == 0)            \
-            p->name = ~0U; /* VK_REMAINING_XXX */   \
+            p->name_ = ~0U; /* VK_REMAINING_XXX */   \
         else                                        \
             *err = ERR_VALUE;                       \
         }                                           \
     else if(t_ == LUA_TNONE || t_ == LUA_TNIL)      \
-        p->name = defval;                           \
+        p->name_ = defval;                           \
     else if(lua_isinteger(L, arg_))                 \
-        p->name = lua_tointeger(L, arg_);           \
+        p->name_ = lua_tointeger(L, arg_);           \
     else                                            \
         *err = ERR_TYPE;                            \
     popfield(L, arg_);                              \
     if(*err)                                        \
-        { pushfielderror(sname); return p; }  \
+        { pushfielderror(sname_); return p; }  \
 } while(0)
 
-#define GetIntegerOrWholeSize(name, sname) /* integer or 'whole size' */ do {\
+#define GetIntegerOrWholeSize(name_, sname_) /* integer or 'whole size' */ do {\
     const char *s_;                                 \
-    int arg_ = pushfield(L, arg, sname);            \
+    int arg_ = pushfield(L, arg, sname_);            \
     int t_ = lua_type(L, arg_);                     \
     *err = 0;                                       \
     if(t_ == LUA_TSTRING)                           \
         {                                           \
         s_ = lua_tostring(L, arg_);                 \
         if(strcmp(s_, "whole size") == 0)           \
-            p->name = VK_WHOLE_SIZE;                \
+            p->name_ = VK_WHOLE_SIZE;                \
         else                                        \
             *err = ERR_VALUE;                       \
         }                                           \
     else if(t_ == LUA_TNONE || t_ == LUA_TNIL)      \
-        p->name = VK_WHOLE_SIZE;                    \
+        p->name_ = VK_WHOLE_SIZE;                    \
     else if(lua_isinteger(L, arg_))                 \
-        p->name = lua_tointeger(L, arg_);           \
+        p->name_ = lua_tointeger(L, arg_);           \
     else                                            \
         *err = ERR_TYPE;                            \
     popfield(L, arg_);                              \
     if(*err)                                        \
-        { pushfielderror(sname); return p; }  \
+        { pushfielderror(sname_); return p; }  \
 } while(0)
 
-#define GetAttachment(name, sname) /* integer or 'unused', defval = 'unused' */ do {\
+#define GetAttachment(name_, sname_) /* integer or 'unused', defval = 'unused' */ do {\
     const char *s_;                                 \
-    int arg_ = pushfield(L, arg, sname);            \
+    int arg_ = pushfield(L, arg, sname_);            \
     int t_ = lua_type(L, arg_);                     \
     *err = 0;                                       \
     if(t_ == LUA_TSTRING)                           \
         {                                           \
         s_ = lua_tostring(L, arg_);                 \
         if(strcmp(s_, "unused") == 0)               \
-            p->name = VK_ATTACHMENT_UNUSED;         \
+            p->name_ = VK_ATTACHMENT_UNUSED;         \
         else                                        \
             *err = ERR_VALUE;                       \
         }                                           \
     else if(t_ == LUA_TNONE || t_ == LUA_TNIL)      \
-        p->name = VK_ATTACHMENT_UNUSED;             \
+        p->name_ = VK_ATTACHMENT_UNUSED;             \
     else if(lua_isinteger(L, arg_))                 \
-        p->name = lua_tointeger(L, arg_);           \
+        p->name_ = lua_tointeger(L, arg_);           \
     else                                            \
         *err = ERR_TYPE;                            \
     popfield(L, arg_);                              \
     if(*err)                                        \
-        { pushfielderror(sname); return p; }  \
+        { pushfielderror(sname_); return p; }  \
 } while(0)
 
 /*------------------------------------------------------------------------------*
@@ -968,10 +986,16 @@ VkXxx* zcheckarray##VkXxx(lua_State *L, int arg, uint32_t *count, int *err) \
     if(p->name_) Free(L, (void*)p->name_);                                  \
 } while(0)
 
-#if 0 //££ scaffolding
-    GetFlagsList(, , "");
-    FreeFlagsList();
-#endif
+#define GetEnumList(name_, nameCount_, etype_, sname_) do {                 \
+    arg1 = pushfield(L, arg, sname_);                                       \
+    p->name_ = check##etype_##list(L, arg1, &p->nameCount_, err);           \
+    popfield(L, arg1);                                                      \
+    if(*err == ERR_NOTPRESENT || *err == ERR_EMPTY) { *err=0; }             \
+    else if(*err < 0) { pushfielderror(sname_); return p; }                 \
+} while(0)
+#define FreeEnumList(name_, etype_) do { /* to be used in the zclear of the parent struct */\
+    if(p->name_) free##etype_##list(L, p->name_);                           \
+} while(0)
 
 /********************************************************************************
  * Untyped structs                                                              *
@@ -1547,8 +1571,7 @@ ZCLEAR_BEGIN(VkSubpassDescription)
     FreeList(pColorAttachments, colorAttachmentCount, VkAttachmentReference);
     FreeList(pResolveAttachments, colorAttachmentCount, VkAttachmentReference);
     FreeUint32List(pPreserveAttachments);
-    if(p->pDepthStencilAttachment ) 
-        zfreeVkAttachmentReference(L, p->pDepthStencilAttachment, 1);
+    FreeStructp(pDepthStencilAttachment, VkAttachmentReference);
 ZCLEAR_END
 ZCHECK_BEGIN(VkSubpassDescription)
     uint32_t count;
@@ -1558,30 +1581,18 @@ ZCHECK_BEGIN(VkSubpassDescription)
     GetPipelineBindPoint(pipelineBindPoint, "pipeline_bind_point");
     GetListOpt(pInputAttachments, inputAttachmentCount, VkAttachmentReference, "input_attachments");
     GetListOpt(pColorAttachments, colorAttachmentCount, VkAttachmentReference, "color_attachments");
-#define F "resolve_attachments"
-    arg1 = pushfield(L, arg, F);
-    p->pResolveAttachments = zcheckarrayVkAttachmentReference(L, arg1, &count, err);
-    popfield(L, arg1);
-    if(*err < 0) { prependfield(F); return p; }
-    else if(*err == ERR_NOTPRESENT) poperror();
-    else if(count != p->colorAttachmentCount)
+    count = p->colorAttachmentCount;
+    GetListOpt(pResolveAttachments, colorAttachmentCount, VkAttachmentReference, "resolve_attachments");
+    if(p->pResolveAttachments && count != p->colorAttachmentCount)
         {
-        if(p->pResolveAttachments)
-            {
-            zfreearrayVkAttachmentReference(L, p->pResolveAttachments, count, 1);
-            p->pResolveAttachments = NULL;
-            }
+        FreeList(pResolveAttachments, colorAttachmentCount, VkAttachmentReference);
+        p->pResolveAttachments = NULL;
+        p->colorAttachmentCount = count;
         *err = ERR_LENGTH; lua_pushstring(L, errstring(*err));
         return p;
         }
-#undef F
-#define F "depth_stencil_attachment" //@@TODO GetStructp() for fields defined as VkXxx *p;
-    arg1 = pushfield(L, arg, F);
-    p->pDepthStencilAttachment = zcheckVkAttachmentReference(L, arg1, err);
-    popfield(L, arg1);
-    if(*err < 0) { prependfield(F); return p; }
-    else if(*err == ERR_NOTPRESENT) poperror();
-#undef F
+    p->colorAttachmentCount = count;
+    GetStructp(pDepthStencilAttachment , VkAttachmentReference, "depth_stencil_attachment");
     GetUint32List(pPreserveAttachments, preserveAttachmentCount, "preserve_attachments");
 ZCHECK_END
 ZCHECKARRAY(VkSubpassDescription)
@@ -1625,7 +1636,7 @@ ZPUSH_BEGIN(VkExternalMemoryProperties)
 ZPUSH_END
 
 ZCLEAR_BEGIN(VkDescriptorSetLayoutBinding)
-    if(p->pImmutableSamplers) Free(L, (void*)p->pImmutableSamplers);
+    FreeObjectList(pImmutableSamplers);
 ZCLEAR_END
 ZCHECK_BEGIN(VkDescriptorSetLayoutBinding)
     uint32_t count;
@@ -1639,15 +1650,11 @@ ZCHECK_BEGIN(VkDescriptorSetLayoutBinding)
         p->descriptorType == VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER) &&
         p->descriptorCount != 0)
         {
-#define F   "immutable_samplers"
-        arg1 = pushfield(L, arg, F);
-        p->pImmutableSamplers = checksamplerlist(L, arg1, &count, err, NULL);
-        popfield(L, arg1);
-        if(*err < 0)
-            { pushfielderror(F); return p; }
-        if(*err != ERR_NOTPRESENT && count != p->descriptorCount)
-            { *err=ERR_LENGTH; pushfielderror(F); return p; }
-#undef F
+        count = p->descriptorCount;
+        GetObjectList(pImmutableSamplers, descriptorCount, sampler, "immutable_samplers");
+        if(p->pImmutableSamplers && (p->descriptorCount != count))
+            { *err=ERR_LENGTH; pushfielderror("immutable_samplers"); return p; }
+        p->descriptorCount = count;
         }
 ZCHECK_END
 ZCHECKARRAY(VkDescriptorSetLayoutBinding)
@@ -3766,17 +3773,11 @@ ZPUSH_END
  *------------------------------------------------------------------------------*/
 
 static ZCLEAR_BEGIN(VkValidationFlagsEXT)
-    if(p->pDisabledValidationChecks) freevalidationchecklist(L, p->pDisabledValidationChecks);
+    FreeEnumList(pDisabledValidationChecks, validationcheck);
 ZCLEAR_END
 ZCHECK_BEGIN(VkValidationFlagsEXT)
     newstruct(VkValidationFlagsEXT);
-#define F "disabled_validation_checks"
-    arg1 = pushfield(L, arg, F);
-    p->pDisabledValidationChecks = 
-        checkvalidationchecklist(L, arg1, &p->disabledValidationCheckCount, err);
-    popfield(L, arg1);
-    if(*err<0) { pushfielderror(F); return p; }
-#undef F
+    GetEnumList(pDisabledValidationChecks, disabledValidationCheckCount, validationcheck, "disabled_validation_checks");
 ZCHECK_END
 
 static ZCLEAR_BEGIN(VkApplicationInfo)
@@ -3794,8 +3795,7 @@ ZCHECK_BEGIN(VkApplicationInfo)
 ZCHECK_END
 
 static ZCLEAR_BEGIN(VkInstanceCreateInfo)
-    if(p->pApplicationInfo)
-        zfreeVkApplicationInfo(L, p->pApplicationInfo, 1);
+    FreeStructp(pApplicationInfo, VkApplicationInfo);
     FreeStringList(ppEnabledLayerNames, enabledLayerCount);
     FreeStringList(ppEnabledExtensionNames, enabledExtensionCount);
 ZCLEAR_END
@@ -3804,13 +3804,7 @@ ZCHECK_BEGIN(VkInstanceCreateInfo)
     checktable(arg);
     newstruct(VkInstanceCreateInfo);
     GetFlags(flags, "flags");
-#define F "application_info"
-    arg1 = pushfield(L, arg, F);
-    p->pApplicationInfo = zcheckVkApplicationInfo(L, arg1, err);
-    popfield(L, arg1);
-    if(*err < 0) { prependfield(F); return p; }
-    if(*err == ERR_NOTPRESENT) poperror();
-#undef F
+    GetStructp(pApplicationInfo, VkApplicationInfo, "application_info");
     GetStringList(ppEnabledLayerNames, enabledLayerCount, "enabled_layer_names");
     GetStringList(ppEnabledExtensionNames, enabledExtensionCount, "enabled_extension_names");
     EXTENSIONS_BEGIN
@@ -3860,8 +3854,7 @@ static ZCLEAR_BEGIN(VkDeviceCreateInfo)
     FreeList(pQueueCreateInfos, queueCreateInfoCount, VkDeviceQueueCreateInfo);
     FreeStringList(ppEnabledLayerNames, enabledLayerCount);
     FreeStringList(ppEnabledExtensionNames, enabledExtensionCount);
-    if(p->pEnabledFeatures) 
-        zfreeVkPhysicalDeviceFeatures(L, p->pEnabledFeatures, 1);
+    FreeStructp(pEnabledFeatures, VkPhysicalDeviceFeatures);
 ZCLEAR_END
 
 //ZCHECK_BEGIN(VkDeviceCreateInfo)
@@ -3874,16 +3867,8 @@ VkDeviceCreateInfo* zcheckVkDeviceCreateInfo(lua_State *L, int arg, int *err, ud
     GetList(pQueueCreateInfos, queueCreateInfoCount, VkDeviceQueueCreateInfo, "queue_create_infos");
     GetStringList(ppEnabledLayerNames, enabledLayerCount, "enabled_layer_names");/* deprecated */
     GetStringList(ppEnabledExtensionNames, enabledExtensionCount, "enabled_extension_names");
-#define F "enabled_features"
     if(!ud->idt->GetPhysicalDeviceFeatures2)
-        {
-        arg1 = pushfield(L, arg, F);
-        p->pEnabledFeatures = zcheckVkPhysicalDeviceFeatures(L, arg1, err);
-        popfield(L, arg1);
-        if(*err < 0) { prependfield(F); return p; }
-        else if(*err == ERR_NOTPRESENT) poperror();
-        }
-#undef F
+        GetStructp(pEnabledFeatures, VkPhysicalDeviceFeatures, "enabled_features");
     EXTENSIONS_BEGIN
     if(ud->idt->GetPhysicalDeviceFeatures2)
         ADD_EXTENSION_STRUCT("enabled_features", VkPhysicalDeviceFeatures2);
@@ -3947,18 +3932,15 @@ ZCHECK_BEGIN(VkDeviceGroupCommandBufferBeginInfoKHR)
     newstruct(VkDeviceGroupCommandBufferBeginInfoKHR);
     GetInteger(deviceMask, "device_mask");
 ZCHECK_END
-
+ 
+ZCLEAR_BEGIN(VkCommandBufferBeginInfo)
+    FreeStructp(pInheritanceInfo, VkCommandBufferInheritanceInfo);
+ZCLEAR_END
 ZCHECK_BEGIN(VkCommandBufferBeginInfo)
     checktable(arg);
     newstruct(VkCommandBufferBeginInfo);
     GetFlags(flags, "flags");
-#define F "inheritance_info"
-    arg1 = pushfield(L, arg, F);
-    p->pInheritanceInfo = zcheckVkCommandBufferInheritanceInfo(L, arg1, err);
-    popfield(L, arg1);
-    if(*err < 0) { prependfield(F); return p; }
-    else if(*err == ERR_NOTPRESENT) poperror();
-#undef F
+    GetStructp(pInheritanceInfo, VkCommandBufferInheritanceInfo, "inheritance_info");
     EXTENSIONS_BEGIN
     if(ispresent("device_mask"))
         ADD_EXTENSION_INLINE(VkDeviceGroupCommandBufferBeginInfoKHR);
@@ -4097,15 +4079,11 @@ ZCHECK_END
  *------------------------------------------------------------------------------*/
     
 static ZCLEAR_BEGIN(VkImageFormatListCreateInfo)
-    if(p->pViewFormats)
-        if(p->pViewFormats) freeformatlist(L, p->pViewFormats);
+    FreeEnumList(pViewFormats, format);
 ZCLEAR_END
 ZCHECK_BEGIN(VkImageFormatListCreateInfo)
     newstruct(VkImageFormatListCreateInfo);
-    arg1 = pushfield(L, arg, "view_formats");
-    p->pViewFormats = checkformatlist(L, arg, &p->viewFormatCount, err);
-    if(*err==ERR_NOTPRESENT) *err=ERR_GENERIC; //@@ mah
-    if(*err<0) { pusherror(); return p; }
+    GetEnumList(pViewFormats, viewFormatCount, format, "view_formats");
 ZCHECK_END
 
 ZCHECK_BEGIN(VkExternalMemoryImageCreateInfoKHR)
@@ -4381,20 +4359,13 @@ ZCHECK_END
 ZCHECKARRAY(VkAttachmentReference2)
 
 static ZCLEAR_BEGIN(VkSubpassDescriptionDepthStencilResolve)
-    if(p->pDepthStencilResolveAttachment)
-        zfreeVkAttachmentReference2(L, p->pDepthStencilResolveAttachment, 1);
+    FreeStructp(pDepthStencilResolveAttachment, VkAttachmentReference2);
 ZCLEAR_END
 ZCHECK_BEGIN(VkSubpassDescriptionDepthStencilResolve)
     newstruct(VkSubpassDescriptionDepthStencilResolve);
     GetFlags(depthResolveMode, "depth_resolve_mode");
     GetFlags(stencilResolveMode, "stencil_resolve_mode");
-#define F "depth_stencil_resolve_attachment"
-    arg1 = pushfield(L, arg, F);
-    p->pDepthStencilResolveAttachment = zcheckVkAttachmentReference2(L, arg1, err);
-    popfield(L, arg1);
-    if(*err < 0) { prependfield(F); return p; }
-    else if(*err == ERR_NOTPRESENT) poperror();
-#undef F
+    GetStructp(pDepthStencilResolveAttachment, VkAttachmentReference2, "depth_stencil_resolve_attachment");
 ZCHECK_END
 
 static ZCLEAR_BEGIN(VkSubpassDescription2)
@@ -4402,8 +4373,7 @@ static ZCLEAR_BEGIN(VkSubpassDescription2)
     FreeList(pColorAttachments, colorAttachmentCount, VkAttachmentReference2);
     FreeList(pResolveAttachments, colorAttachmentCount, VkAttachmentReference2);
     FreeUint32List(pPreserveAttachments);
-    if(p->pDepthStencilAttachment ) 
-        zfreeVkAttachmentReference2(L, p->pDepthStencilAttachment, 1);
+    FreeStructp(pDepthStencilAttachment, VkAttachmentReference2);
 ZCLEAR_END
 ZCHECK_BEGIN(VkSubpassDescription2)
     uint32_t count;
@@ -4414,30 +4384,18 @@ ZCHECK_BEGIN(VkSubpassDescription2)
     GetInteger(viewMask, "view_mask");
     GetListOpt(pInputAttachments, inputAttachmentCount, VkAttachmentReference2, "input_attachments");
     GetListOpt(pColorAttachments, colorAttachmentCount, VkAttachmentReference2, "color_attachments");
-#define F "resolve_attachments"
-    arg1 = pushfield(L, arg, F);
-    p->pResolveAttachments = zcheckarrayVkAttachmentReference2(L, arg1, &count, err);
-    popfield(L, arg1);
-    if(*err < 0) { prependfield(F); return p; }
-    else if(*err == ERR_NOTPRESENT) poperror();
-    else if(count != p->colorAttachmentCount)
+    count = p->colorAttachmentCount;
+    GetListOpt(pResolveAttachments, colorAttachmentCount, VkAttachmentReference2, "resolve_attachments");
+    if(p->pResolveAttachments && count != p->colorAttachmentCount)
         {
-        if(p->pResolveAttachments)
-            {
-            zfreearrayVkAttachmentReference2(L, p->pResolveAttachments, count, 1);
-            p->pResolveAttachments = NULL;
-            }
+        FreeList(pResolveAttachments, colorAttachmentCount, VkAttachmentReference2);
+        p->pResolveAttachments = NULL;
+        p->colorAttachmentCount = count;
         *err = ERR_LENGTH; lua_pushstring(L, errstring(*err));
         return p;
         }
-#undef F
-#define F "depth_stencil_attachment"
-    arg1 = pushfield(L, arg, F);
-    p->pDepthStencilAttachment = zcheckVkAttachmentReference2(L, arg1, err);
-    popfield(L, arg1);
-    if(*err < 0) { prependfield(F); return p; }
-    else if(*err == ERR_NOTPRESENT) poperror();
-#undef F
+    p->colorAttachmentCount = count;
+    GetStructp(pDepthStencilAttachment, VkAttachmentReference2, "depth_stencil_attachment");
     GetUint32List(pPreserveAttachments, preserveAttachmentCount, "preserve_attachments");
     EXTENSIONS_BEGIN
     if(ispresent("depth_resolve_mode") || ispresent("stencil_resolve_mode") || ispresent("depth_stencil_resolve_attachment"))
@@ -4481,8 +4439,7 @@ ZCHECK_END
  *------------------------------------------------------------------------------*/
 
 static ZCLEAR_BEGIN(VkFramebufferAttachmentImageInfo)
-    if(p->pViewFormats)
-        if(p->pViewFormats) freeformatlist(L, p->pViewFormats);
+    FreeEnumList(pViewFormats, format);
 ZCLEAR_END
 ZCHECK_BEGIN(VkFramebufferAttachmentImageInfo)
     checktable(arg);
@@ -4492,11 +4449,7 @@ ZCHECK_BEGIN(VkFramebufferAttachmentImageInfo)
     GetInteger(width, "width");
     GetInteger(height, "height");
     GetInteger(layerCount, "layer_count");
-#define F "view_formats"
-    arg1 = pushfield(L, arg, F);
-    p->pViewFormats = checkformatlist(L, arg1, &p->viewFormatCount, err);
-    if(*err<0) { prependfield(F); return p; }
-#undef F
+    GetEnumList(pViewFormats, viewFormatCount, format, "view_formats");
 ZCHECK_END
 ZCHECKARRAY(VkFramebufferAttachmentImageInfo)
 
@@ -4772,7 +4725,7 @@ ZCHECK_END
 
 static ZCLEAR_BEGIN(VkSemaphoreWaitInfo)
     FreeObjectList(pSemaphores);
-    if(p->pValues) Free(L, (void*)p->pValues);
+    FreeUint64List(pValues);
 ZCLEAR_END
 ZCHECK_BEGIN(VkSemaphoreWaitInfo)
     uint32_t count;
@@ -4780,14 +4733,10 @@ ZCHECK_BEGIN(VkSemaphoreWaitInfo)
     newstruct(VkSemaphoreWaitInfo);
     GetFlags(flags, "flags");
     GetObjectList(pSemaphores, semaphoreCount, semaphore, "semaphores");
-#define F "values"
-    arg1 = pushfield(L, arg, F);
-    p->pValues = checkuint64list(L, arg1, &count, err);
-    popfield(L, arg1);
-    if(*err < 0) { pushfielderror(F); return p; }
+    count = p->semaphoreCount;
+    GetUint64List(pValues, semaphoreCount, "values");
     if(count != p->semaphoreCount)
-        { *err=ERR_LENGTH; pushfielderror(F); return p; }
-#undef F
+        { *err=ERR_LENGTH; pushfielderror("values"); return p; }
 ZCHECK_END
 
 ZCHECK_BEGIN(VkSemaphoreSignalInfo)
@@ -5002,13 +4951,10 @@ VkPresentInfoKHR* zcheckVkPresentInfoKHR(lua_State *L, int arg, int *err, int re
         p->pResults = (VkResult*)MallocNoErr(L, sizeof(VkResult)*(p->swapchainCount));
         if(!p->pResults) { *err=ERR_MEMORY; pusherror(); return p; }
         }
-#define F "image_indices"
-    arg1 = pushfield(L, arg, F);
-    p->pImageIndices = checkuint32list(L, arg1, &count, err);
-    popfield(L, arg1);
-    if(*err) { pushfielderror(F); return p; }
-    if(p->swapchainCount != count) { *err=ERR_LENGTH; pushfielderror(F); return p; }
-#undef F
+    count = p->swapchainCount;
+    GetUint32List(pImageIndices, swapchainCount, "image_indices");
+    if(count != p->swapchainCount)
+        { *err=ERR_LENGTH; pushfielderror("image_indices"); return p; }
     EXTENSIONS_BEGIN
     if(ispresent("src_rect"))
         ADD_EXTENSION_INLINE(VkDisplayPresentInfoKHR);
@@ -5645,8 +5591,7 @@ ZCHECK_END
 
 static ZCLEAR_BEGIN(VkPipelineShaderStageCreateInfo)
     if(p->pName) Free(L, (void*)p->pName);
-    if(p->pSpecializationInfo)
-        zfreeVkSpecializationInfo(L, p->pSpecializationInfo, 1);
+    FreeStructp(pSpecializationInfo, VkSpecializationInfo);
 ZCLEAR_END
 ZCHECK_BEGIN(VkPipelineShaderStageCreateInfo)
     checktable(arg);
@@ -5655,13 +5600,7 @@ ZCHECK_BEGIN(VkPipelineShaderStageCreateInfo)
     GetBits(stage, "stage", VkShaderStageFlagBits);
     GetShaderModule(module, "module");
     GetStringDef(pName, "name", "main");
-#define F "specialization_info"
-    arg1 = pushfield(L, arg, F);
-    p->pSpecializationInfo = zcheckVkSpecializationInfo(L, arg1, err);
-    popfield(L, arg1);
-    if(*err == ERR_NOTPRESENT) poperror();
-    else if(*err) { prependfield(F); return p; }
-#undef F
+    GetStructp(pSpecializationInfo, VkSpecializationInfo, "specialization_info");
 ZCHECK_END
 ZCHECKARRAY(VkPipelineShaderStageCreateInfo)
 
@@ -5923,18 +5862,13 @@ ZCHECK_END
 /*-------------------------------------------------------------------------------------*/
 
 static ZCLEAR_BEGIN(VkPipelineDynamicStateCreateInfo)
-    if(p->pDynamicStates) freedynamicstatelist(L, (VkDynamicState*)p->pDynamicStates);
+    FreeEnumList(pDynamicStates, dynamicstate);
 ZCLEAR_END
 ZCHECK_BEGIN(VkPipelineDynamicStateCreateInfo)
     checktable(arg);
     newstruct(VkPipelineDynamicStateCreateInfo);
     GetFlags(flags, "flags");
-#define F "dynamic_states"
-    arg1 = pushfield(L, arg, F);
-    p->pDynamicStates = checkdynamicstatelist(L, arg1, &p->dynamicStateCount, err);
-    popfield(L, arg1);
-    if(*err) { pushfielderror(F); return p; }
-#undef F
+    GetEnumList(pDynamicStates, dynamicStateCount, dynamicstate, "dynamic_states");
 ZCHECK_END
 
 /*-------------------------------------------------------------------------------------*/
@@ -5953,19 +5887,13 @@ ZCHECK_END
 /*-------------------------------------------------------------------------------------*/
 
 static ZCLEAR_BEGIN(VkPipelineCreationFeedbackCreateInfoEXT)
-    if(p->pPipelineCreationFeedback)
-        zfreeVkPipelineCreationFeedbackEXT(L, p->pPipelineCreationFeedback, 1);
+    FreeStructp(pPipelineCreationFeedback, VkPipelineCreationFeedbackEXT);
     FreeList(pPipelineStageCreationFeedbacks, pipelineStageCreationFeedbackCount, VkPipelineCreationFeedbackEXT);
 ZCLEAR_END
 ZCHECK_BEGIN(VkPipelineCreationFeedbackCreateInfoEXT)
     checktable(arg);
     newstruct(VkPipelineCreationFeedbackCreateInfoEXT);
-#define F "pipeline_creation_feedback"
-    arg1 = pushfield(L, arg, F);
-    p->pPipelineCreationFeedback = zcheckVkPipelineCreationFeedbackEXT(L, arg1, err);
-    popfield(L, arg1);
-    if(*err) { prependfield(F); return p; }
-#undef F
+    GetStructp(pPipelineCreationFeedback, VkPipelineCreationFeedbackEXT, "pipeline_creation_feedback");
     GetList(pPipelineStageCreationFeedbacks, pipelineStageCreationFeedbackCount, VkPipelineCreationFeedbackEXT, "pipeline_stage_creation_feedbacks");
 ZCHECK_END
 
@@ -5993,12 +5921,12 @@ ZCHECK_BEGIN(VkGraphicsPipelineCreateInfo)
     GetPipelineOpt(basePipelineHandle, "base_pipeline_handle");
     GetIntegerOpt(basePipelineIndex, "base_pipeline_index", -1);
     GetList(pStages, stageCount, VkPipelineShaderStageCreateInfo, "stages");
-#define GET(name, sname, VkXxx, mandatory)  do {            \
-    arg1 = pushfield(L, arg, sname);                        \
-    p->name = zcheck##VkXxx(L, arg1, err);                  \
+#define GET(name_, sname_, VkXxx, mandatory_)  do {            \
+    arg1 = pushfield(L, arg, sname_);                        \
+    p->name_ = zcheck##VkXxx(L, arg1, err);                  \
     popfield(L, arg1);                                      \
-    if(*err<0) { prependfield(sname); return p; }           \
-    else if((mandatory) && *err==ERR_NOTPRESENT) poperror();\
+    if(*err<0) { prependfield(sname_); return p; }           \
+    else if((mandatory_) && *err==ERR_NOTPRESENT) poperror();\
 } while(0)
     GET(pVertexInputState, "vertex_input_state", VkPipelineVertexInputStateCreateInfo, 1);
     GET(pInputAssemblyState, "input_assembly_state", VkPipelineInputAssemblyStateCreateInfo, 1);
@@ -6174,6 +6102,7 @@ static void zfreeaux(lua_State *L, void *pp)
         CASE(SEMAPHORE_WAIT_INFO, VkSemaphoreWaitInfo);
         CASE(PIPELINE_CREATION_FEEDBACK_CREATE_INFO_EXT, VkPipelineCreationFeedbackCreateInfoEXT);
         CASE(COPY_BUFFER_INFO_2_KHR, VkCopyBufferInfo2KHR);
+        CASE(COMMAND_BUFFER_BEGIN_INFO, VkCommandBufferBeginInfo);
 #undef CASE
         default: 
             return;
