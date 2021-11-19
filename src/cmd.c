@@ -277,7 +277,8 @@ static int CmdDispatchIndirect(lua_State *L)
     return 0;
     }
 
-static int CmdCopyBuffer(lua_State *L)
+
+static int CmdCopyBuffer(lua_State *L) //@@ --> CmdCopyBuffer1
     {
     int err;
     uint32_t count;
@@ -293,6 +294,30 @@ static int CmdCopyBuffer(lua_State *L)
 #undef CLEANUP
     return 0;
     }
+
+#if 0
+//@@void vkCmdCopyBuffer2KHR(VkCommandBuffer cb, const VkCopyBufferInfo2KHR* pCopyBufferInfo);
+//@@void vkCmdCopyImage2KHR(VkCommandBuffer cb, const VkCopyImageInfo2KHR* pCopyImageInfo);
+//@@void vkCmdCopyBufferToImage2KHR(VkCommandBuffer cb, const VkCopyBufferToImageInfo2KHR* pCopyBufferToImageInfo);
+//@@void vkCmdCopyImageToBuffer2KHR(VkCommandBuffer cb, const VkCopyImageToBufferInfo2KHR* pCopyImageToBufferInfo);
+//@@void vkCmdBlitImage2KHR(VkCommandBuffer cb, const VkBlitImageInfo2KHR* pBlitImageInfo);
+//@@void vkCmdResolveImage2KHR(VkCommandBuffer cb, const VkResolveImageInfo2KHR* pResolveImageInfo);
+
+static int CmdCopyBuffer2(lua_State *L) //@@
+    {
+    ud_t *ud;
+    VkCommandBuffer cb = checkcommand_buffer(L, 1, &ud);
+    //ud->ddt->(cb, );
+    return 0;
+    }
+
+static int CmdCopyBuffer(lua_State *L)
+    {
+    if(ud->ddt->CmdCopyBuffer2KHR && lua_type(L, 2)==LUA_TTABLE)
+        return CmdCopyBuffer2(L);
+    return CmdCopyBuffer1(L);
+    }
+#endif
 
 static int CmdCopyImage(lua_State *L)
     {
@@ -742,7 +767,7 @@ static int CmdExecuteCommands(lua_State *L)
     uint32_t count;
     ud_t *ud;
     VkCommandBuffer cb = checkcommand_buffer(L, 1, &ud);
-    VkCommandBuffer *buffers = checkcommand_bufferlist(L, 2, &count, &err);
+    VkCommandBuffer *buffers = checkcommand_bufferlist(L, 2, &count, &err, NULL);
     if(err) return argerrorc(L, 2, err);
 
     ud->ddt->CmdExecuteCommands(cb, count, buffers);

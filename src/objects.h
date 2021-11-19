@@ -179,7 +179,7 @@ int freechildren(lua_State *L,  const char *mt, ud_t *parent_ud);
 #define testphysical_device(L, arg, udp) (VkPhysicalDevice)(uintptr_t)testxxx((L), (arg), (udp), PHYSICAL_DEVICE_MT)
 #define pushphysical_device moonvulkan_pushphysical_device
 int pushphysical_device(lua_State *L, VkPhysicalDevice p, VkInstance instance);
-#define checkphysical_devicelist(L, arg, count, err) \
+#define checkphysical_devicelist(L, arg, count, err, notused) \
     (VkPhysicalDevice*)checkxxxlist_dispatchable((L), (arg), (count), (err), PHYSICAL_DEVICE_MT)
 
 /* device.c (dispatchable) */
@@ -191,7 +191,7 @@ int pushphysical_device(lua_State *L, VkPhysicalDevice p, VkInstance instance);
 #define checkcommand_buffer(L, arg, udp) (VkCommandBuffer)(uintptr_t)checkxxx((L), (arg), (udp), COMMAND_BUFFER_MT)
 #define testcommand_buffer(L, arg, udp) (VkCommandBuffer)(uintptr_t)testxxx((L), (arg), (udp), COMMAND_BUFFER_MT)
 #define pushcommand_buffer(L, handle) pushxxx((L), (uint64_t)(uintptr_t)(handle))
-#define checkcommand_bufferlist(L, arg, count, err) \
+#define checkcommand_bufferlist(L, arg, count, err, notused) \
     (VkCommandBuffer*)checkxxxlist_dispatchable((L), (arg), (count), (err), COMMAND_BUFFER_MT)
 
 /* command_pool.c (nondispatchable) */

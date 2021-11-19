@@ -1518,7 +1518,7 @@ _immutable_samplers_: {<<sampler, sampler>>}, +
 _flags_: <<pipelinelayoutcreateflags, pipelinelayoutcreateflags>>, +
 _set_layouts_: {<<descriptor_set_layout, descriptor_set_layout>>}, +
 _push_constant_ranges_: {<<pushconstantrange, pushconstantrange>>}, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPipelineLayoutCreateInfo.html[PipelineLayoutCreateInfo])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPipelineLayoutCreateInfo.html[VkPipelineLayoutCreateInfo])#
 
 
 * [[pushconstantrange]]

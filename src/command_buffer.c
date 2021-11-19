@@ -97,7 +97,7 @@ static int FreeCmdBuffers(lua_State *L)
     ud_t *ud;
     VkDevice device;
     VkCommandPool command_pool;
-    VkCommandBuffer *command_buffer = checkcommand_bufferlist(L, 1, &count, &err);
+    VkCommandBuffer *command_buffer = checkcommand_bufferlist(L, 1, &count, &err, NULL);
     if(err) return argerrorc(L, 1, err);
     
     ud = UD(command_buffer[0]);
