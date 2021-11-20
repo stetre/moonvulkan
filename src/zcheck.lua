@@ -382,7 +382,7 @@ local TYPED = {
    { "VkCopyImageInfo2KHR", "COPY_IMAGE_INFO_2_KHR" },
    { "VkBufferImageCopy2KHR", "BUFFER_IMAGE_COPY_2_KHR" },
    { "VkCopyBufferToImageInfo2KHR", "COPY_BUFFER_TO_IMAGE_INFO_2_KHR" },
-   { "VkCopyImageToBufferInfo2KHR", "COPY_IMAGE_TO_BUFFERINFO_2_KHR" },
+   { "VkCopyImageToBufferInfo2KHR", "COPY_IMAGE_TO_BUFFER_INFO_2_KHR" },
    { "VkImageBlit2KHR", "IMAGE_BLIT_2_KHR" },
    { "VkBlitImageInfo2KHR", "BLIT_IMAGE_INFO_2_KHR" },
    { "VkImageResolve2KHR", "IMAGE_RESOLVE_2_KHR" },

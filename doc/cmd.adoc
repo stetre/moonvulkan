@@ -83,13 +83,14 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmd
 
 [[cmd_blit_image]]
 * *cmd_blit_image*(_cb_, _src_image_, _..._) +
+*cmd_blit_image*(_cb_, <<blitimageinfo, _blitimageinfo_>>) (2KHR) +
 [small]#arg2 - _src_image_: <<image, image>> +
 arg3 - _src_imagelayout_: <<imagelayout, imagelayout>> +
 arg4 - _dst_image_: <<image, image>> +
 arg5 - _dst_imagelayout_: <<imagelayout, imagelayout>> +
 arg6 - _regions_ : {<<imageblit, imageblit>>} +
 arg7 - _filter_: <<filter, filter>> +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdBlitImage.html[vkCmdBlitImage].#
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdBlitImage.html[vkCmdBlitImage], https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdBlitImage2KHR.html[vkCmdBlitImage 2KHR].#
 
 [[cmd_clear_attachments]]
 * *cmd_clear_attachments*(_cb_, _attachments_, _rects_) +
@@ -116,35 +117,40 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmd
 
 [[cmd_copy_buffer]]
 * *cmd_copy_buffer*(_cb_, _src_buffer_, _dst_buffer_, _regions_) +
+*cmd_copy_buffer*(_cb_, <<copybufferinfo, _copybufferinfo_>>) (2KHR) +
 [small]#_src_buffer_: <<buffer, buffer>> +
 _dst_buffer_: <<buffer, buffer>> +
 _regions_: {<<buffercopy, buffercopy>>} +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdCopyBuffer.html[vkCmdCopyBuffer].#
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdCopyBuffer.html[vkCmdCopyBuffer], https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdCopyBuffer2KHR.html[vkCmdCopyBuffer2KHR].#
 
 [[cmd_copy_buffer_to_image]]
 * *cmd_copy_buffer_to_image*(_cb_, _src_buffer_, _dst_image_, _dst_imagelayout_, _regions_) +
+*cmd_copy_buffer_to_image*(_cb_, <<copybuffertoimageinfo, _copybuffertoimageinfo_>>) (2KHR) +
 [small]#_src_buffer_: <<buffer, buffer>> +
 _dst_image_: <<image, image>> +
 _dst_imagelayout_: <<imagelayout, imagelayout>> +
 _regions_: {<<bufferimagecopy, bufferimagecopy>>} +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdCopyBufferToImage.html[vkCmdCopyBufferToImage].#
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdCopyBufferToImage.html[vkCmdCopyBufferToImage], https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdCopyBufferToImage2KHR.html[vkCmdCopyBufferToImage 2KHR].#
 
 [[cmd_copy_image]]
 * *cmd_copy_image*(_cb_, _src_image_, _..._) +
+*cmd_copy_image*(_cb_, <<copyimageinfo, _copyimageinfo_>>) (2KHR) +
 [small]#arg2 - _src_image_: <<image, image>> +
 arg3 - _src_imagelayout_: <<imagelayout, imagelayout>> +
 arg4 - _dst_image_: <<image, image>> +
 arg5 - _dst_imagelayout_: <<imagelayout, imagelayout>> +
 arg6 - _regions_ : {<<imagecopy, imagecopy>>} +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdCopyImage.html[vkCmdCopyImage].#
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdCopyImage.html[vkCmdCopyImage], https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdCopyImage2KHR.html[vkCmdCopyImage2KHR].#
+
 
 [[cmd_copy_image_to_buffer]]
 * *cmd_copy_image_to_buffer*(_cb_, _src_image_, _..._) +
+*cmd_copy_image_to_buffer*(_cb_, <<copyimagetobufferinfo, _copyimagetobufferinfo_>>) (2KHR) +
 [small]#arg2 - _src_image_: <<image, image>> +
 arg3 - _src_imagelayout_: <<imagelayout, imagelayout>> +
 arg4 - _dst_buffer_: <<buffer, buffer>> +
 arg5 - _regions_: {<<bufferimagecopy, bufferimagecopy>>} +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdCopyImageToBuffer.html[vkCmdCopyImageToBuffer].#
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdCopyImageToBuffer.html[vkCmdCopyImageToBuffer], https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdCopyImageToBuffer2KHR.html[vkCmdCopyImageToBuffer2KHR].#
 
 [[cmd_copy_query_pool_results]]
 * *cmd_copy_query_pool_results*(_cb_, _query_pool_, _..._) +
@@ -253,12 +259,13 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmd
 
 [[cmd_resolve_image]]
 * *cmd_resolve_image*(_cb_, _src_image_, _..._) +
+*cmd_resolve_image*(_cb_, <<resolveimageinfo, _resolveimageinfo_>>) (2KHR) +
 [small]#arg2 - _src_image_: <<image, image>> +
 arg3 - _src_imagelayout_: <<imagelayout, imagelayout>> +
 arg4 - _dst_image_: <<image, image>> +
 arg5 - _dst_imagelayout_: <<imagelayout, imagelayout>> +
 arg6 - _regions_: {<<imageresolve, imageresolve>>} +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdResolveImage.html[vkCmdResolveImage].#
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdResolveImage.html[vkCmdResolveImage], https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdResolveImage2KHR.html[vkCmdResolveImage2KHR].#
 
 [[cmd_set_blend_constants]]
 * *cmd_set_blend_constants*(_cb_, _constant~0~_, _constant~1~_, _constant~2~_, _constant~3~_) +

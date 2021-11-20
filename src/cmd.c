@@ -277,47 +277,34 @@ static int CmdDispatchIndirect(lua_State *L)
     return 0;
     }
 
-
-static int CmdCopyBuffer(lua_State *L) //@@ --> CmdCopyBuffer1
+static int CmdCopyBuffer(lua_State *L)
     {
     int err;
     uint32_t count;
     ud_t *ud;
     VkCommandBuffer cb = checkcommand_buffer(L, 1, &ud);
-    VkBuffer srcBuffer = checkbuffer(L, 2, NULL);
-    VkBuffer dstBuffer = checkbuffer(L, 3, NULL);
-#define CLEANUP zfreearrayVkBufferCopy(L, regions, count, 1)
-    VkBufferCopy* regions = zcheckarrayVkBufferCopy(L, 4, &count, &err);
-    if(err) { CLEANUP; return argerror(L, 4); }
-    ud->ddt->CmdCopyBuffer(cb, srcBuffer, dstBuffer, count, regions);
-    CLEANUP;
-#undef CLEANUP
-    return 0;
-    }
-
-#if 0
-//@@void vkCmdCopyBuffer2KHR(VkCommandBuffer cb, const VkCopyBufferInfo2KHR* pCopyBufferInfo);
-//@@void vkCmdCopyImage2KHR(VkCommandBuffer cb, const VkCopyImageInfo2KHR* pCopyImageInfo);
-//@@void vkCmdCopyBufferToImage2KHR(VkCommandBuffer cb, const VkCopyBufferToImageInfo2KHR* pCopyBufferToImageInfo);
-//@@void vkCmdCopyImageToBuffer2KHR(VkCommandBuffer cb, const VkCopyImageToBufferInfo2KHR* pCopyImageToBufferInfo);
-//@@void vkCmdBlitImage2KHR(VkCommandBuffer cb, const VkBlitImageInfo2KHR* pBlitImageInfo);
-//@@void vkCmdResolveImage2KHR(VkCommandBuffer cb, const VkResolveImageInfo2KHR* pResolveImageInfo);
-
-static int CmdCopyBuffer2(lua_State *L) //@@
-    {
-    ud_t *ud;
-    VkCommandBuffer cb = checkcommand_buffer(L, 1, &ud);
-    //ud->ddt->(cb, );
-    return 0;
-    }
-
-static int CmdCopyBuffer(lua_State *L)
-    {
     if(ud->ddt->CmdCopyBuffer2KHR && lua_type(L, 2)==LUA_TTABLE)
-        return CmdCopyBuffer2(L);
-    return CmdCopyBuffer1(L);
+        {
+        VkCopyBufferInfo2KHR *info = zcheckVkCopyBufferInfo2KHR(L, 2, &err);
+#define CLEANUP zfreeVkCopyBufferInfo2KHR(L, info, 1)
+        if(err) { CLEANUP; return argerror(L, 2); }
+        ud->ddt->CmdCopyBuffer2KHR(cb, info);
+        CLEANUP;
+#undef CLEANUP
+        }
+    else
+        {
+        VkBuffer srcBuffer = checkbuffer(L, 2, NULL);
+        VkBuffer dstBuffer = checkbuffer(L, 3, NULL);
+#define CLEANUP zfreearrayVkBufferCopy(L, regions, count, 1)
+        VkBufferCopy* regions = zcheckarrayVkBufferCopy(L, 4, &count, &err);
+        if(err) { CLEANUP; return argerror(L, 4); }
+        ud->ddt->CmdCopyBuffer(cb, srcBuffer, dstBuffer, count, regions);
+        CLEANUP;
+#undef CLEANUP
+        }
+    return 0;
     }
-#endif
 
 static int CmdCopyImage(lua_State *L)
     {
@@ -325,18 +312,31 @@ static int CmdCopyImage(lua_State *L)
     uint32_t count;
     ud_t *ud;
     VkCommandBuffer cb = checkcommand_buffer(L, 1, &ud);
-    VkImage srcImage = checkimage(L, 2, NULL);
-    VkImageLayout srcImageLayout = checkimagelayout(L, 3);
-    VkImage dstImage = checkimage(L, 4, NULL);
-    VkImageLayout dstImageLayout = checkimagelayout(L, 5);
-#define CLEANUP zfreearrayVkImageCopy(L, regions, count, 1)
-    VkImageCopy* regions = zcheckarrayVkImageCopy(L, 6, &count, &err);
-    if(err) { CLEANUP; return argerror(L, 6); }
-    ud->ddt->CmdCopyImage(cb, srcImage, srcImageLayout, dstImage, dstImageLayout, count, regions);
-    CLEANUP;
+    if(ud->ddt->CmdCopyImage2KHR && lua_type(L, 2)==LUA_TTABLE)
+        {
+        VkCopyImageInfo2KHR *info = zcheckVkCopyImageInfo2KHR(L, 2, &err);
+#define CLEANUP zfreeVkCopyImageInfo2KHR(L, info, 1)
+        if(err) { CLEANUP; return argerror(L, 2); }
+        ud->ddt->CmdCopyImage2KHR(cb, info);
+        CLEANUP;
 #undef CLEANUP
+        }
+    else
+        {
+        VkImage srcImage = checkimage(L, 2, NULL);
+        VkImageLayout srcImageLayout = checkimagelayout(L, 3);
+        VkImage dstImage = checkimage(L, 4, NULL);
+        VkImageLayout dstImageLayout = checkimagelayout(L, 5);
+#define CLEANUP zfreearrayVkImageCopy(L, regions, count, 1)
+        VkImageCopy* regions = zcheckarrayVkImageCopy(L, 6, &count, &err);
+        if(err) { CLEANUP; return argerror(L, 6); }
+        ud->ddt->CmdCopyImage(cb, srcImage, srcImageLayout, dstImage, dstImageLayout, count, regions);
+        CLEANUP;
+#undef CLEANUP
+        }
     return 0;
     }
+
 
 static int CmdBlitImage(lua_State *L)
     {
@@ -344,17 +344,29 @@ static int CmdBlitImage(lua_State *L)
     uint32_t count;
     ud_t *ud;
     VkCommandBuffer cb = checkcommand_buffer(L, 1, &ud);
-    VkImage srcImage = checkimage(L, 2, NULL);
-    VkImageLayout srcImageLayout = checkimagelayout(L, 3);
-    VkImage dstImage = checkimage(L, 4, NULL);
-    VkImageLayout dstImageLayout = checkimagelayout(L, 5);
-    VkFilter filter = checkfilter(L, 7); /* before regions so there is no need to free them on error */
-#define CLEANUP zfreearrayVkImageBlit(L, regions, count, 1)
-    VkImageBlit* regions = zcheckarrayVkImageBlit(L, 6, &count, &err);
-    if(err) { CLEANUP; return argerror(L, 6); }
-    ud->ddt->CmdBlitImage(cb, srcImage, srcImageLayout, dstImage, dstImageLayout, count, regions, filter);
-    CLEANUP;
+    if(ud->ddt->CmdBlitImage2KHR && lua_type(L, 2)==LUA_TTABLE)
+        {
+        VkBlitImageInfo2KHR *info = zcheckVkBlitImageInfo2KHR(L, 2, &err);
+#define CLEANUP zfreeVkBlitImageInfo2KHR(L, info, 1)
+        if(err) { CLEANUP; return argerror(L, 2); }
+        ud->ddt->CmdBlitImage2KHR(cb, info);
+        CLEANUP;
 #undef CLEANUP
+        }
+    else
+        {
+        VkImage srcImage = checkimage(L, 2, NULL);
+        VkImageLayout srcImageLayout = checkimagelayout(L, 3);
+        VkImage dstImage = checkimage(L, 4, NULL);
+        VkImageLayout dstImageLayout = checkimagelayout(L, 5);
+        VkFilter filter = checkfilter(L, 7); /* before regions so there is no need to free them on error */
+#define CLEANUP zfreearrayVkImageBlit(L, regions, count, 1)
+        VkImageBlit* regions = zcheckarrayVkImageBlit(L, 6, &count, &err);
+        if(err) { CLEANUP; return argerror(L, 6); }
+        ud->ddt->CmdBlitImage(cb, srcImage, srcImageLayout, dstImage, dstImageLayout, count, regions, filter);
+        CLEANUP;
+#undef CLEANUP
+        }
     return 0;
     }
 
@@ -364,15 +376,27 @@ static int CmdCopyBufferToImage(lua_State *L)
     uint32_t count;
     ud_t *ud;
     VkCommandBuffer cb = checkcommand_buffer(L, 1, &ud);
-    VkBuffer srcBuffer = checkbuffer(L, 2, NULL);
-    VkImage dstImage = checkimage(L, 3, NULL);
-    VkImageLayout dstImageLayout = checkimagelayout(L, 4);
-#define CLEANUP zfreearrayVkBufferImageCopy(L, regions, count, 1)
-    VkBufferImageCopy* regions = zcheckarrayVkBufferImageCopy(L, 5, &count, &err);
-    if(err) { CLEANUP; return argerror(L, 5); }
-    ud->ddt->CmdCopyBufferToImage(cb, srcBuffer, dstImage, dstImageLayout, count, regions);
-    CLEANUP;
+    if(ud->ddt->CmdCopyBufferToImage2KHR && lua_type(L, 2)==LUA_TTABLE)
+        {
+        VkCopyBufferToImageInfo2KHR *info = zcheckVkCopyBufferToImageInfo2KHR(L, 2, &err);
+#define CLEANUP zfreeVkCopyBufferToImageInfo2KHR(L, info, 1)
+        if(err) { CLEANUP; return argerror(L, 2); }
+        ud->ddt->CmdCopyBufferToImage2KHR(cb, info);
+        CLEANUP;
 #undef CLEANUP
+        }
+    else
+        {
+        VkBuffer srcBuffer = checkbuffer(L, 2, NULL);
+        VkImage dstImage = checkimage(L, 3, NULL);
+        VkImageLayout dstImageLayout = checkimagelayout(L, 4);
+#define CLEANUP zfreearrayVkBufferImageCopy(L, regions, count, 1)
+        VkBufferImageCopy* regions = zcheckarrayVkBufferImageCopy(L, 5, &count, &err);
+        if(err) { CLEANUP; return argerror(L, 5); }
+        ud->ddt->CmdCopyBufferToImage(cb, srcBuffer, dstImage, dstImageLayout, count, regions);
+        CLEANUP;
+#undef CLEANUP
+        }
     return 0;
     }
 
@@ -382,15 +406,27 @@ static int CmdCopyImageToBuffer(lua_State *L)
     uint32_t count;
     ud_t *ud;
     VkCommandBuffer cb = checkcommand_buffer(L, 1, &ud);
-    VkImage srcImage = checkimage(L, 2, NULL);
-    VkImageLayout srcImageLayout = checkimagelayout(L, 3);
-    VkBuffer dstBuffer = checkbuffer(L, 4, NULL);
-#define CLEANUP zfreearrayVkBufferImageCopy(L, regions, count, 1)
-    VkBufferImageCopy* regions = zcheckarrayVkBufferImageCopy(L, 5, &count, &err);
-    if(err) { CLEANUP; return argerror(L, 5); }
-    ud->ddt->CmdCopyImageToBuffer(cb, srcImage, srcImageLayout, dstBuffer, count, regions);
-    CLEANUP;
+    if(ud->ddt->CmdCopyImageToBuffer2KHR && lua_type(L, 2)==LUA_TTABLE)
+        {
+        VkCopyImageToBufferInfo2KHR *info = zcheckVkCopyImageToBufferInfo2KHR(L, 2, &err);
+#define CLEANUP zfreeVkCopyImageToBufferInfo2KHR(L, info, 1)
+        if(err) { CLEANUP; return argerror(L, 2); }
+        ud->ddt->CmdCopyImageToBuffer2KHR(cb, info);
+        CLEANUP;
 #undef CLEANUP
+        }
+    else
+        {
+        VkImage srcImage = checkimage(L, 2, NULL);
+        VkImageLayout srcImageLayout = checkimagelayout(L, 3);
+        VkBuffer dstBuffer = checkbuffer(L, 4, NULL);
+#define CLEANUP zfreearrayVkBufferImageCopy(L, regions, count, 1)
+        VkBufferImageCopy* regions = zcheckarrayVkBufferImageCopy(L, 5, &count, &err);
+        if(err) { CLEANUP; return argerror(L, 5); }
+        ud->ddt->CmdCopyImageToBuffer(cb, srcImage, srcImageLayout, dstBuffer, count, regions);
+        CLEANUP;
+#undef CLEANUP
+        }
     return 0;
     }
 
@@ -494,16 +530,28 @@ static int CmdResolveImage(lua_State *L)
     uint32_t count;
     ud_t *ud;
     VkCommandBuffer cb = checkcommand_buffer(L, 1, &ud);
-    VkImage srcImage = checkimage(L, 2, NULL);
-    VkImageLayout srcImageLayout = checkimagelayout(L, 3);
-    VkImage dstImage = checkimage(L, 4, NULL);
-    VkImageLayout dstImageLayout = checkimagelayout(L, 5);
-#define CLEANUP zfreearrayVkImageResolve(L, regions, count, 1)
-    VkImageResolve* regions = zcheckarrayVkImageResolve(L, 6, &count, &err);
-    if(err) { CLEANUP; return argerror(L, 6); }
-    ud->ddt->CmdResolveImage(cb, srcImage, srcImageLayout, dstImage, dstImageLayout, count, regions);
-    CLEANUP;
+    if(ud->ddt->CmdResolveImage2KHR && lua_type(L, 2)==LUA_TTABLE)
+        {
+        VkResolveImageInfo2KHR *info = zcheckVkResolveImageInfo2KHR(L, 2, &err);
+#define CLEANUP zfreeVkResolveImageInfo2KHR(L, info, 1)
+        if(err) { CLEANUP; return argerror(L, 2); }
+        ud->ddt->CmdResolveImage2KHR(cb, info);
+        CLEANUP;
 #undef CLEANUP
+        }
+    else
+        {
+        VkImage srcImage = checkimage(L, 2, NULL);
+        VkImageLayout srcImageLayout = checkimagelayout(L, 3);
+        VkImage dstImage = checkimage(L, 4, NULL);
+        VkImageLayout dstImageLayout = checkimagelayout(L, 5);
+#define CLEANUP zfreearrayVkImageResolve(L, regions, count, 1)
+        VkImageResolve* regions = zcheckarrayVkImageResolve(L, 6, &count, &err);
+        if(err) { CLEANUP; return argerror(L, 6); }
+        ud->ddt->CmdResolveImage(cb, srcImage, srcImageLayout, dstImage, dstImageLayout, count, regions);
+        CLEANUP;
+#undef CLEANUP
+        }
     return 0;
     }
 

@@ -1845,12 +1845,30 @@ _flags_: <<pipelinecreationfeedbackflags, pipelinecreationfeedbackflags>>, +
 _duration_: integer, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPipelineCreationFeedbackEXT.html[VkPipelineCreationFeedbackEXT])#
 
+'''
+
+* [[copybufferinfo]]
+[small]#*copybufferinfo* = { +
+_src_buffer_: <<buffer, buffer>>, +
+_dst_buffer_: <<buffer, buffer>>, +
+_regions_: {<<buffercopy, buffercopy>>}, +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkCopyBufferInfo2KHR.html[VkCopyBufferInfo2KHR])#
+
 * [[buffercopy]]
 [small]#*buffercopy* = { +
 _src_offset_: integer, +
 _dst_offset_: integer, +
 _size_: integer, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkBufferCopy.html[VkBufferCopy])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkBufferCopy2KHR.html[VkBufferCopy2KHR])#
+
+* [[copyimageinfo]]
+[small]#*copyimageinfo* = { +
+_src_image_: <<image, image>>, +
+_src_image_layout_: <<imagelayout, imagelayout>>, +
+_dst_image_: <<image, image>>, +
+_dst_image_layout_: <<imagelayout, imagelayout>>, +
+_regions_: {<<imagecopy, imagecopy>>}, +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkCopyImageInfo2KHR.html[VkCopyImageInfo2KHR])#
 
 * [[imagecopy]]
 [small]#*imagecopy* = { +
@@ -1859,8 +1877,43 @@ _dst_subresource_: <<imagesubresourcelayers, imagesubresourcelayers>> *[R]*, +
 _src_offset_: <<offset3d, offset3d>>, +
 _dst_offset_: <<offset3d, offset3d>>, +
 _extent_: <<extent3d, extent3d>>, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkImageCopy.html[VkImageCopy])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkImageCopy2KHR.html[VkImageCopy2KHR])#
 
+* [[copybuffertoimageinfo]]
+[small]#*copybuffertoimageinfo* = { +
+_src_buffer_: <<buffer, buffer>>, +
+_dst_image_: <<image, image>>, +
+_dst_image_layout_: <<imagelayout, imagelayout>>, +
+_regions_: {<<bufferimagecopy, bufferimagecopy>>}, +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkCopyBufferToImageInfo2KHR.html[VkCopyBufferToImageInfo2KHR])#
+
+* [[copyimagetobufferinfo]]
+[small]#*copyimagetobufferinfo* = { +
+_src_image_: <<image, image>>, +
+_src_image_layout_: <<imagelayout, imagelayout>>, +
+_dst_buffer_: <<buffer, buffer>>, +
+_regions_: {<<bufferimagecopy, bufferimagecopy>>}, +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkCopyImageToBufferInfo2KHR.html[VkCopyImageToBufferInfo2KHR])#
+
+* [[bufferimagecopy]]
+[small]#*bufferimagecopy* = { +
+_buffer_offset_: integer, +
+_buffer_row_length_: integer, +
+_buffer_image_height_: integer, +
+_image_subresource_: <<imagesubresourcelayers, imagesubresourcelayers>> *[R]*, +
+_image_offset_: <<offset3d, offset3d>>, +
+_image_extent_: <<extent3d, extent3d>>, +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkBufferImageCopy2KHR.html[VkBufferImageCopy2KHR])#
+
+* [[blitimageinfo]]
+[small]#*blitimageinfo* = { +
+_src_image_: <<image, image>>, +
+_src_image_layout_: <<imagelayout, imagelayout>>, +
+_dst_image_: <<image, image>>, +
+_dst_image_layout_: <<imagelayout, imagelayout>>, +
+_regions_: {<<imageblit, imageblit>>}, +
+_filter_: <<filter, filter>>, +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkBlitImageInfo2KHR.html[VkBlitImageInfo2KHR])#
 
 * [[imageblit]]
 [small]#*imageblit* = { +
@@ -1868,7 +1921,7 @@ _src_subresource_: <<imagesubresourcelayers, imagesubresourcelayers>> *[R]*, +
 _dst_subresource_: <<imagesubresourcelayers, imagesubresourcelayers>> *[R]*, +
 _src_offsets_: {<<offset3d, offset3d>>}[2], +
 _dst_offsets_: {<<offset3d, offset3d>>}[2], +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkImageBlit.html[VkImageBlit])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkImageBlit2KHR.html[VkImageBlit2KHR])#
 
 * [[imagesubresourcelayers]]
 [small]#*imagesubresourcelayers* = { +
@@ -1879,15 +1932,14 @@ _layer_count_: integer, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkImageSubresourceLayers.html[VkImageSubresourceLayers]) +
 <<constructors, Constructor>>: *imagesubresourcelayers*(_aspect_mask_, _mip_level_, _base_array_layer_, _layer_count_)#
 
-* [[bufferimagecopy]]
-[small]#*bufferimagecopy* = { +
-_buffer_offset_: integer, +
-_buffer_row_length_: integer, +
-_buffer_image_height_: integer, +
-_image_subresource_: <<imagesubresourcelayers, imagesubresourcelayers>> *[R]*, +
-_image_offset_: <<offset3d, offset3d>>, +
-_image_extent_: <<extent3d, extent3d>>, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkBufferImageCopy.html[VkBufferImageCopy])#
+* [[resolveimageinfo]]
+[small]#*resolveimageinfo* = { +
+_src_image_: <<image, image>>, +
+_src_image_layout_: <<imagelayout, imagelayout>>, +
+_dst_image_: <<image, image>>, +
+_dst_image_layout_: <<imagelayout, imagelayout>>, +
+_regions_: {<<imageresolve, imageresolve>>}, +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkResolveImageInfo2KHR.html[VkResolveImageInfo2KHR])#
 
 * [[imageresolve]]
 [small]#*imageresolve* = { +
@@ -1896,7 +1948,9 @@ _dst_subresource_: <<imagesubresourcelayers, imagesubresourcelayers>> *[R]*, +
 _src_offset_: <<offset3d, offset3d>>, +
 _dst_offset_: <<offset3d, offset3d>>, +
 _extent_: <<extent3d, extent3d>>, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkImageResolve.html[VkImageResolve])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkImageResolve2KHR.html[VkImageResolve2KHR])#
+
+'''
 
 * [[memorybarrier]]
 [small]#*memorybarrier* = { +

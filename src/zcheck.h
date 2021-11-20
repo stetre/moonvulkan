@@ -3815,8 +3815,8 @@ int zinitVkCopyBufferToImageInfo2KHR(lua_State *L, VkCopyBufferToImageInfo2KHR* 
 #define zpushVkCopyBufferToImageInfo2KHR moonvulkan_zpushVkCopyBufferToImageInfo2KHR
 int zpushVkCopyBufferToImageInfo2KHR(lua_State *L, const VkCopyBufferToImageInfo2KHR *p);
 
-#define znewVkCopyImageToBufferInfo2KHR(L, err) (VkCopyImageToBufferInfo2KHR*)znew((L), VK_STRUCTURE_TYPE_COPY_IMAGE_TO_BUFFERINFO_2_KHR, sizeof(VkCopyImageToBufferInfo2KHR), (err))
-#define znewarrayVkCopyImageToBufferInfo2KHR(L, count, err) (VkCopyImageToBufferInfo2KHR*)znewarray((L), VK_STRUCTURE_TYPE_COPY_IMAGE_TO_BUFFERINFO_2_KHR, sizeof(VkCopyImageToBufferInfo2KHR), (count), (err))
+#define znewVkCopyImageToBufferInfo2KHR(L, err) (VkCopyImageToBufferInfo2KHR*)znew((L), VK_STRUCTURE_TYPE_COPY_IMAGE_TO_BUFFER_INFO_2_KHR, sizeof(VkCopyImageToBufferInfo2KHR), (err))
+#define znewarrayVkCopyImageToBufferInfo2KHR(L, count, err) (VkCopyImageToBufferInfo2KHR*)znewarray((L), VK_STRUCTURE_TYPE_COPY_IMAGE_TO_BUFFER_INFO_2_KHR, sizeof(VkCopyImageToBufferInfo2KHR), (count), (err))
 #define znewchainVkCopyImageToBufferInfo2KHR moonvulkan_znewchainVkCopyImageToBufferInfo2KHR
 VkCopyImageToBufferInfo2KHR* znewchainVkCopyImageToBufferInfo2KHR(lua_State *L, int *err);
 #define znewchainarrayVkCopyImageToBufferInfo2KHR moonvulkan_znewchainarrayVkCopyImageToBufferInfo2KHR
