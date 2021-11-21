@@ -149,6 +149,10 @@ local UNTYPED = { -- set the second element to true if the type has a zclear fun
    { "VkStridedDeviceAddressRegionKHR" },
    { "VkMultiDrawInfoEXT" },
    { "VkMultiDrawIndexedInfoEXT" },
+   { "VkPerformanceCounterResultKHR" },
+   { "VkPipelineExecutableStatisticValueKHR" },
+   { "VkDeviceOrHostAddressKHR" },
+   { "VkAccelerationStructureGeometryDataKHR" },
 }
 
 local UNTYPED_WIN32 = {

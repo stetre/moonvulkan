@@ -1847,6 +1847,43 @@ _duration_: integer, +
 
 '''
 
+* [[pipelineinfo]]
+[small]#*pipelineinfo* = { +
+pass:[--] for future use, +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPipelineInfoKHR.html[VkPipelineInfoKHR])#
+
+* [[pipelineexecutableinfo]]
+[small]#*pipelineexecutableinfo* = { +
+_executable_index_: integer, +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPipelineExecutableInfoKHR.html[VkPipelineExecutableInfoKHR])#
+
+* [[pipelineexecutableproperties]]
+[small]#*pipelineexecutableproperties* = { +
+_stages_: <<shaderstageflags, shaderstageflags>>, +
+_name_: string, +
+_description_: string, +
+_subgroup_size_: integer, +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPipelineExecutablePropertiesKHR.html[VkPipelineExecutablePropertiesKHR])#
+
+* [[pipelineexecutablestatistic]]
+[small]#*pipelineexecutablestatistic* = { +
+_name_: string, +
+_description_: string, +
+_format_: <<pipelineexecutablestatisticformat, pipelineexecutablestatisticformat>>, +
+_value_: boolean | integer | float, +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPipelineExecutableStatisticKHR.html[VkPipelineExecutableStatisticKHR])#
+
+* [[pipelineexecutableinternalrepresentation]]
+[small]#*pipelineexecutableinternalrepresentation* = { +
+_name_: string, +
+_description_: string, +
+_is_text_: boolean, +
+_data_: string | binary string, +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPipelineExecutableInternalRepresentationKHR.html[VkPipelineExecutableInternalRepresentationKHR])#
+
+
+'''
+
 * [[copybufferinfo]]
 [small]#*copybufferinfo* = { +
 _src_buffer_: <<buffer, buffer>>, +

@@ -1760,6 +1760,30 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/h
 </li>
 </ul>
 </div>
+<div id="get_pipeline_executable_properties" class="ulist">
+<ul>
+<li>
+<p>{<a href="#pipelineexecutableproperties"><em>pipelineexecutableproperties</em></a>} = <strong>get_pipeline_executable_properties</strong>(<em>pipeline</em>, [<a href="#pipelineinfo"><em>pipelineinfo</em></a>])<br>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPipelineExecutablePropertiesKHR.html">vkGetPipelineExecutablePropertiesKHR</a>.</span></p>
+</li>
+</ul>
+</div>
+<div id="get_pipeline_executable_statistics" class="ulist">
+<ul>
+<li>
+<p>{<a href="#pipelineexecutablestatistic"><em>pipelineexecutablestatistic</em></a>} = <strong>get_pipeline_executable_statistics</strong>(<em>pipeline</em>, <a href="#pipelineexecutableinfo"><em>pipelineexecutableinfo</em></a>)<br>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPipelineExecutableStatisticsKHR.html">vkGetPipelineExecutableStatisticsKHR</a>.</span></p>
+</li>
+</ul>
+</div>
+<div id="get_pipeline_executable_internal_representations" class="ulist">
+<ul>
+<li>
+<p>{<a href="#pipelineexecutableinternalrepresentation"><em>pipelineexecutableinternalrepresentation</em></a>} = <strong>get_pipeline_executable_internal_representations</strong>(<em>pipeline</em>, <a href="#pipelineexecutableinfo"><em>pipelineexecutableinfo</em></a>)<br>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPipelineExecutableInternalRepresentationsKHR.html">vkGetPipelineExecutableInternalRepresentationsKHR</a>.</span></p>
+</li>
+</ul>
+</div>
 </div>
 <div class="sect3">
 <h4 id="pipeline_cache">pipeline_cache</h4>
@@ -5633,6 +5657,50 @@ the <em>queue_family_index</em> of the <em>i-th</em> element in the table return
 <em>flags</em>: <a href="#pipelinecreationfeedbackflags">pipelinecreationfeedbackflags</a>,<br>
 <em>duration</em>: integer,<br>
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPipelineCreationFeedbackEXT.html">VkPipelineCreationFeedbackEXT</a>)</span></p>
+</li>
+</ul>
+</div>
+<hr>
+<div class="ulist">
+<ul>
+<li>
+<p><a id="pipelineinfo"></a>
+<span class="small"><strong>pipelineinfo</strong> = {<br>
+-- for future use,<br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPipelineInfoKHR.html">VkPipelineInfoKHR</a>)</span></p>
+</li>
+<li>
+<p><a id="pipelineexecutableinfo"></a>
+<span class="small"><strong>pipelineexecutableinfo</strong> = {<br>
+<em>executable_index</em>: integer,<br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPipelineExecutableInfoKHR.html">VkPipelineExecutableInfoKHR</a>)</span></p>
+</li>
+<li>
+<p><a id="pipelineexecutableproperties"></a>
+<span class="small"><strong>pipelineexecutableproperties</strong> = {<br>
+<em>stages</em>: <a href="#shaderstageflags">shaderstageflags</a>,<br>
+<em>name</em>: string,<br>
+<em>description</em>: string,<br>
+<em>subgroup_size</em>: integer,<br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPipelineExecutablePropertiesKHR.html">VkPipelineExecutablePropertiesKHR</a>)</span></p>
+</li>
+<li>
+<p><a id="pipelineexecutablestatistic"></a>
+<span class="small"><strong>pipelineexecutablestatistic</strong> = {<br>
+<em>name</em>: string,<br>
+<em>description</em>: string,<br>
+<em>format</em>: <a href="#pipelineexecutablestatisticformat">pipelineexecutablestatisticformat</a>,<br>
+<em>value</em>: boolean | integer | float,<br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPipelineExecutableStatisticKHR.html">VkPipelineExecutableStatisticKHR</a>)</span></p>
+</li>
+<li>
+<p><a id="pipelineexecutableinternalrepresentation"></a>
+<span class="small"><strong>pipelineexecutableinternalrepresentation</strong> = {<br>
+<em>name</em>: string,<br>
+<em>description</em>: string,<br>
+<em>is_text</em>: boolean,<br>
+<em>data</em>: string | binary string,<br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPipelineExecutableInternalRepresentationKHR.html">VkPipelineExecutableInternalRepresentationKHR</a>)</span></p>
 </li>
 </ul>
 </div>

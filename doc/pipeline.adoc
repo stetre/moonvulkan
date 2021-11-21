@@ -14,4 +14,16 @@
 * *destroy_pipeline*(_pipeline_) +
 [small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkDestroyPipeline.html[vkDestroyPipeline].#
 
+[[get_pipeline_executable_properties]]
+* {<<pipelineexecutableproperties, _pipelineexecutableproperties_>>} = *get_pipeline_executable_properties*(_pipeline_, [<<pipelineinfo, _pipelineinfo_>>]) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPipelineExecutablePropertiesKHR.html[vkGetPipelineExecutablePropertiesKHR].#
+
+[[get_pipeline_executable_statistics]]
+* {<<pipelineexecutablestatistic, _pipelineexecutablestatistic_>>} = *get_pipeline_executable_statistics*(_pipeline_, <<pipelineexecutableinfo, _pipelineexecutableinfo_>>) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPipelineExecutableStatisticsKHR.html[vkGetPipelineExecutableStatisticsKHR].#
+
+[[get_pipeline_executable_internal_representations]]
+* {<<pipelineexecutableinternalrepresentation, _pipelineexecutableinternalrepresentation_>>} = *get_pipeline_executable_internal_representations*(_pipeline_, <<pipelineexecutableinfo, _pipelineexecutableinfo_>>) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPipelineExecutableInternalRepresentationsKHR.html[vkGetPipelineExecutableInternalRepresentationsKHR].#
+
 

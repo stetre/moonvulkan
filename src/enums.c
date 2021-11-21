@@ -338,7 +338,7 @@ static int Enum(lua_State *L)
     CASE(performancecounterscope);
     CASE(performancecounterstorage);
     CASE(fragmentshadingratecombinerop);
-    CASE(pipelineexecutablestatisticsformat);
+    CASE(pipelineexecutablestatisticformat);
     CASE(raytracingshadergrouptype);
     CASE(geometrytype);
     CASE(accelerationstructuretype);
@@ -1277,7 +1277,7 @@ void moonvulkan_open_enums(lua_State *L)
     ADD(FRAGMENT_SHADING_RATE_COMBINER_OP_MAX, "max");
     ADD(FRAGMENT_SHADING_RATE_COMBINER_OP_MUL, "mul");
 
-    domain = DOMAIN_PIPELINE_EXECUTABLE_STATISTICS_FORMAT; /* VkPipelineExecutableStatisticsFormatKHR */
+    domain = DOMAIN_PIPELINE_EXECUTABLE_STATISTIC_FORMAT; /* VkPipelineExecutableStatisticFormatKHR */
     ADD(PIPELINE_EXECUTABLE_STATISTIC_FORMAT_BOOL32, "bool32");
     ADD(PIPELINE_EXECUTABLE_STATISTIC_FORMAT_INT64, "int64");
     ADD(PIPELINE_EXECUTABLE_STATISTIC_FORMAT_UINT64, "uint64");

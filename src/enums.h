@@ -110,7 +110,7 @@ void enums_freelist(lua_State *L, uint32_t *list);
 #define DOMAIN_PERFORMANCE_COUNTER_SCOPE        63
 #define DOMAIN_PERFORMANCE_COUNTER_STORAGE      64
 #define DOMAIN_FRAGMENT_SHADING_RATE_COMBINER_OP 65
-#define DOMAIN_PIPELINE_EXECUTABLE_STATISTICS_FORMAT 66
+#define DOMAIN_PIPELINE_EXECUTABLE_STATISTIC_FORMAT 66
 #define DOMAIN_RAY_TRACING_SHADER_GROUP_TYPE    67
 #define DOMAIN_GEOMETRY_TYPE                    68
 #define DOMAIN_ACCELERATION_STRUCTURE_TYPE      69
@@ -526,12 +526,12 @@ void enums_freelist(lua_State *L, uint32_t *list);
 #define checkfragmentshadingratecombineroplist(L, arg, count, err) (VkFragmentShadingRateCombinerOpKHR*)enums_checklist((L), DOMAIN_FRAGMENT_SHADING_RATE_COMBINER_OP, (arg), (count), (err))
 #define freefragmentshadingratecombineroplist(L, list) enums_freelist((L), (uint32_t*)(list))
 
-#define testpipelineexecutablestatisticsformat(L, arg, err) (VkPipelineExecutableStatisticsFormatKHR)enums_test((L), DOMAIN_PIPELINE_EXECUTABLE_STATISTICS_FORMAT, (arg), (err))
-#define checkpipelineexecutablestatisticsformat(L, arg) (VkPipelineExecutableStatisticsFormatKHR)enums_check((L), DOMAIN_PIPELINE_EXECUTABLE_STATISTICS_FORMAT, (arg))
-#define pushpipelineexecutablestatisticsformat(L, val) enums_push((L), DOMAIN_PIPELINE_EXECUTABLE_STATISTICS_FORMAT, (uint32_t)(val))
-#define valuespipelineexecutablestatisticsformat(L) enums_values((L), DOMAIN_PIPELINE_EXECUTABLE_STATISTICS_FORMAT)
-#define checkpipelineexecutablestatisticsformatlist(L, arg, count, err) (VkPipelineExecutableStatisticsFormatKHR*)enums_checklist((L), DOMAIN_PIPELINE_EXECUTABLE_STATISTICS_FORMAT, (arg), (count), (err))
-#define freepipelineexecutablestatisticsformatlist(L, list) enums_freelist((L), (uint32_t*)(list))
+#define testpipelineexecutablestatisticformat(L, arg, err) (VkPipelineExecutableStatisticsFormatKHR)enums_test((L), DOMAIN_PIPELINE_EXECUTABLE_STATISTIC_FORMAT, (arg), (err))
+#define checkpipelineexecutablestatisticformat(L, arg) (VkPipelineExecutableStatisticsFormatKHR)enums_check((L), DOMAIN_PIPELINE_EXECUTABLE_STATISTIC_FORMAT, (arg))
+#define pushpipelineexecutablestatisticformat(L, val) enums_push((L), DOMAIN_PIPELINE_EXECUTABLE_STATISTIC_FORMAT, (uint32_t)(val))
+#define valuespipelineexecutablestatisticformat(L) enums_values((L), DOMAIN_PIPELINE_EXECUTABLE_STATISTIC_FORMAT)
+#define checkpipelineexecutablestatisticformatlist(L, arg, count, err) (VkPipelineExecutableStatisticsFormatKHR*)enums_checklist((L), DOMAIN_PIPELINE_EXECUTABLE_STATISTIC_FORMAT, (arg), (count), (err))
+#define freepipelineexecutablestatisticformatlist(L, list) enums_freelist((L), (uint32_t*)(list))
 
 #define testraytracingshadergrouptype(L, arg, err) (VkRayTracingShaderGroupTypeKHR)enums_test((L), DOMAIN_RAY_TRACING_SHADER_GROUP_TYPE, (arg), (err))
 #define checkraytracingshadergrouptype(L, arg) (VkRayTracingShaderGroupTypeKHR)enums_check((L), DOMAIN_RAY_TRACING_SHADER_GROUP_TYPE, (arg))

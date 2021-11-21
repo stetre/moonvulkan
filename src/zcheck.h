@@ -5694,6 +5694,62 @@ int zinitVkMultiDrawIndexedInfoEXT(lua_State *L, VkMultiDrawIndexedInfoEXT* p, i
 #define zpushVkMultiDrawIndexedInfoEXT moonvulkan_zpushVkMultiDrawIndexedInfoEXT
 int zpushVkMultiDrawIndexedInfoEXT(lua_State *L, const VkMultiDrawIndexedInfoEXT *p);
 
+#define zclearVkPerformanceCounterResultKHR NULL
+#define znewVkPerformanceCounterResultKHR(L, err) (VkPerformanceCounterResultKHR*)znew((L), -1, sizeof(VkPerformanceCounterResultKHR),(err))
+#define znewarrayVkPerformanceCounterResultKHR(L, count, err) (VkPerformanceCounterResultKHR*)znewarray((L),-1, sizeof(VkPerformanceCounterResultKHR), (count), (err))
+#define zcheckVkPerformanceCounterResultKHR moonvulkan_zcheckVkPerformanceCounterResultKHR
+VkPerformanceCounterResultKHR* zcheckVkPerformanceCounterResultKHR(lua_State *L, int arg, int *err);
+#define zcheckarrayVkPerformanceCounterResultKHR moonvulkan_zcheckarrayVkPerformanceCounterResultKHR
+VkPerformanceCounterResultKHR* zcheckarrayVkPerformanceCounterResultKHR(lua_State *L, int arg, uint32_t *count, int *err);
+#define zinitVkPerformanceCounterResultKHR moonvulkan_zinitVkPerformanceCounterResultKHR
+int zinitVkPerformanceCounterResultKHR(lua_State *L, VkPerformanceCounterResultKHR* p, int *err);
+#define zfreeVkPerformanceCounterResultKHR(L, p, base) zfree_untyped((L), (p), (base), zclearVkPerformanceCounterResultKHR)
+#define zfreearrayVkPerformanceCounterResultKHR(L, p, count, base) zfreearray_untyped((L), (p), sizeof(VkPerformanceCounterResultKHR), (count), (base), zclearVkPerformanceCounterResultKHR)
+#define zpushVkPerformanceCounterResultKHR moonvulkan_zpushVkPerformanceCounterResultKHR
+int zpushVkPerformanceCounterResultKHR(lua_State *L, const VkPerformanceCounterResultKHR *p);
+
+#define zclearVkPipelineExecutableStatisticValueKHR NULL
+#define znewVkPipelineExecutableStatisticValueKHR(L, err) (VkPipelineExecutableStatisticValueKHR*)znew((L), -1, sizeof(VkPipelineExecutableStatisticValueKHR),(err))
+#define znewarrayVkPipelineExecutableStatisticValueKHR(L, count, err) (VkPipelineExecutableStatisticValueKHR*)znewarray((L),-1, sizeof(VkPipelineExecutableStatisticValueKHR), (count), (err))
+#define zcheckVkPipelineExecutableStatisticValueKHR moonvulkan_zcheckVkPipelineExecutableStatisticValueKHR
+VkPipelineExecutableStatisticValueKHR* zcheckVkPipelineExecutableStatisticValueKHR(lua_State *L, int arg, int *err);
+#define zcheckarrayVkPipelineExecutableStatisticValueKHR moonvulkan_zcheckarrayVkPipelineExecutableStatisticValueKHR
+VkPipelineExecutableStatisticValueKHR* zcheckarrayVkPipelineExecutableStatisticValueKHR(lua_State *L, int arg, uint32_t *count, int *err);
+#define zinitVkPipelineExecutableStatisticValueKHR moonvulkan_zinitVkPipelineExecutableStatisticValueKHR
+int zinitVkPipelineExecutableStatisticValueKHR(lua_State *L, VkPipelineExecutableStatisticValueKHR* p, int *err);
+#define zfreeVkPipelineExecutableStatisticValueKHR(L, p, base) zfree_untyped((L), (p), (base), zclearVkPipelineExecutableStatisticValueKHR)
+#define zfreearrayVkPipelineExecutableStatisticValueKHR(L, p, count, base) zfreearray_untyped((L), (p), sizeof(VkPipelineExecutableStatisticValueKHR), (count), (base), zclearVkPipelineExecutableStatisticValueKHR)
+#define zpushVkPipelineExecutableStatisticValueKHR moonvulkan_zpushVkPipelineExecutableStatisticValueKHR
+int zpushVkPipelineExecutableStatisticValueKHR(lua_State *L, const VkPipelineExecutableStatisticValueKHR *p);
+
+#define zclearVkDeviceOrHostAddressKHR NULL
+#define znewVkDeviceOrHostAddressKHR(L, err) (VkDeviceOrHostAddressKHR*)znew((L), -1, sizeof(VkDeviceOrHostAddressKHR),(err))
+#define znewarrayVkDeviceOrHostAddressKHR(L, count, err) (VkDeviceOrHostAddressKHR*)znewarray((L),-1, sizeof(VkDeviceOrHostAddressKHR), (count), (err))
+#define zcheckVkDeviceOrHostAddressKHR moonvulkan_zcheckVkDeviceOrHostAddressKHR
+VkDeviceOrHostAddressKHR* zcheckVkDeviceOrHostAddressKHR(lua_State *L, int arg, int *err);
+#define zcheckarrayVkDeviceOrHostAddressKHR moonvulkan_zcheckarrayVkDeviceOrHostAddressKHR
+VkDeviceOrHostAddressKHR* zcheckarrayVkDeviceOrHostAddressKHR(lua_State *L, int arg, uint32_t *count, int *err);
+#define zinitVkDeviceOrHostAddressKHR moonvulkan_zinitVkDeviceOrHostAddressKHR
+int zinitVkDeviceOrHostAddressKHR(lua_State *L, VkDeviceOrHostAddressKHR* p, int *err);
+#define zfreeVkDeviceOrHostAddressKHR(L, p, base) zfree_untyped((L), (p), (base), zclearVkDeviceOrHostAddressKHR)
+#define zfreearrayVkDeviceOrHostAddressKHR(L, p, count, base) zfreearray_untyped((L), (p), sizeof(VkDeviceOrHostAddressKHR), (count), (base), zclearVkDeviceOrHostAddressKHR)
+#define zpushVkDeviceOrHostAddressKHR moonvulkan_zpushVkDeviceOrHostAddressKHR
+int zpushVkDeviceOrHostAddressKHR(lua_State *L, const VkDeviceOrHostAddressKHR *p);
+
+#define zclearVkAccelerationStructureGeometryDataKHR NULL
+#define znewVkAccelerationStructureGeometryDataKHR(L, err) (VkAccelerationStructureGeometryDataKHR*)znew((L), -1, sizeof(VkAccelerationStructureGeometryDataKHR),(err))
+#define znewarrayVkAccelerationStructureGeometryDataKHR(L, count, err) (VkAccelerationStructureGeometryDataKHR*)znewarray((L),-1, sizeof(VkAccelerationStructureGeometryDataKHR), (count), (err))
+#define zcheckVkAccelerationStructureGeometryDataKHR moonvulkan_zcheckVkAccelerationStructureGeometryDataKHR
+VkAccelerationStructureGeometryDataKHR* zcheckVkAccelerationStructureGeometryDataKHR(lua_State *L, int arg, int *err);
+#define zcheckarrayVkAccelerationStructureGeometryDataKHR moonvulkan_zcheckarrayVkAccelerationStructureGeometryDataKHR
+VkAccelerationStructureGeometryDataKHR* zcheckarrayVkAccelerationStructureGeometryDataKHR(lua_State *L, int arg, uint32_t *count, int *err);
+#define zinitVkAccelerationStructureGeometryDataKHR moonvulkan_zinitVkAccelerationStructureGeometryDataKHR
+int zinitVkAccelerationStructureGeometryDataKHR(lua_State *L, VkAccelerationStructureGeometryDataKHR* p, int *err);
+#define zfreeVkAccelerationStructureGeometryDataKHR(L, p, base) zfree_untyped((L), (p), (base), zclearVkAccelerationStructureGeometryDataKHR)
+#define zfreearrayVkAccelerationStructureGeometryDataKHR(L, p, count, base) zfreearray_untyped((L), (p), sizeof(VkAccelerationStructureGeometryDataKHR), (count), (base), zclearVkAccelerationStructureGeometryDataKHR)
+#define zpushVkAccelerationStructureGeometryDataKHR moonvulkan_zpushVkAccelerationStructureGeometryDataKHR
+int zpushVkAccelerationStructureGeometryDataKHR(lua_State *L, const VkAccelerationStructureGeometryDataKHR *p);
+
 
 #ifdef VK_USE_PLATFORM_WIN32_KHR
 

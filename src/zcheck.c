@@ -712,6 +712,7 @@ static const char *GetString_(lua_State *L, int arg, const char *sname, const ch
 #define GetShaderModule(name_, sname_) GetObject(name_, sname_, VkShaderModule, shader_module)
 #define GetPipelineLayout(name_, sname_) GetObject(name_, sname_, VkPipelineLayout, pipeline_layout)
 #define GetPipelineLayoutOpt(name_, sname_) GetObjectOpt(name_, sname_, VkPipelineLayout, pipeline_layout)
+#define GetPipeline(name_, sname_) GetObject(name_, sname_, VkPipeline, pipeline)
 #define GetPipelineOpt(name_, sname_) GetObjectOpt(name_, sname_, VkPipeline, pipeline)
 #define GetSurface(name_, sname_) GetObject(name_, sname_, VkSurfaceKHR, surface)
 #define GetSwapchain(name_, sname_) GetObject(name_, sname_, VkSwapchainKHR, swapchain)
@@ -5503,6 +5504,85 @@ ZPUSH_BEGIN(VkDebugUtilsMessengerCallbackDataEXT)
     lua_setfield(L, -1, F);
 #undef F
 ZPUSH_END
+
+/*------------------------------------------------------------------------------*/
+
+ZCHECK_BEGIN(VkPipelineInfoKHR)
+    checktable(arg);
+    newstruct(VkPipelineInfoKHR);
+    /* p->pipeline is set by the caller */
+ZCHECK_END
+
+ZCHECK_BEGIN(VkPipelineExecutableInfoKHR)
+    checktable(arg);
+    newstruct(VkPipelineExecutableInfoKHR);
+    /* p->pipeline is set by the caller */
+    GetInteger(executableIndex, "executable_index");
+ZCHECK_END
+
+ZPUSH_BEGIN(VkPipelineExecutablePropertiesKHR)
+    lua_newtable(L);
+    SetFlags(stages, "stages");
+    SetString(name, "name");
+    SetString(description, "description");
+    SetInteger(subgroupSize, "subgroup_size");
+    //XPUSH_BEGIN
+    //  XCASE(, );
+    //XPUSH_END
+ZPUSH_END
+
+ZINIT_BEGIN(VkPipelineExecutablePropertiesKHR)
+    //EXTENSIONS_BEGIN
+    //  ADDX(XXX, Xxx);
+    //EXTENSIONS_END
+ZINIT_END
+
+ZPUSH_BEGIN(VkPipelineExecutableStatisticKHR)
+    lua_newtable(L);
+    SetString(name, "name");
+    SetString(description, "description");
+    SetEnum(format, "format", pushpipelineexecutablestatisticformat);
+    switch(p->format)
+        {
+        case VK_PIPELINE_EXECUTABLE_STATISTIC_FORMAT_BOOL32_KHR:
+            lua_pushboolean(L, p->value.b32); break;
+        case VK_PIPELINE_EXECUTABLE_STATISTIC_FORMAT_FLOAT64_KHR:
+            lua_pushnumber(L, p->value.f64); break;
+        case VK_PIPELINE_EXECUTABLE_STATISTIC_FORMAT_INT64_KHR:
+            lua_pushnumber(L, p->value.i64); break;
+        case VK_PIPELINE_EXECUTABLE_STATISTIC_FORMAT_UINT64_KHR:
+        default:
+            lua_pushnumber(L, p->value.u64); break;
+        }
+    lua_setfield(L, -2, "value");
+    //XPUSH_BEGIN
+    //  XCASE(, );
+    //XPUSH_END
+ZPUSH_END
+
+ZINIT_BEGIN(VkPipelineExecutableStatisticKHR)
+    //EXTENSIONS_BEGIN
+    //  ADDX(XXX, Xxx);
+    //EXTENSIONS_END
+ZINIT_END
+
+
+ZPUSH_BEGIN(VkPipelineExecutableInternalRepresentationKHR)
+    lua_newtable(L);
+    SetString(name, "name");
+    SetString(description, "description");
+    SetBoolean(isText, "is_text");
+    SetLString(pData, "data", p->dataSize);
+    //XPUSH_BEGIN
+    //  XCASE(, );
+    //XPUSH_END
+ZPUSH_END
+
+ZINIT_BEGIN(VkPipelineExecutableInternalRepresentationKHR)
+    //EXTENSIONS_BEGIN
+    //  ADDX(XXX, Xxx);
+    //EXTENSIONS_END
+ZINIT_END
 
 /*------------------------------------------------------------------------------*
  | Miscellanea                                                                  |

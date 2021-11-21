@@ -125,6 +125,142 @@ static int CreateCompute(lua_State *L)
     return 1;
     }
 
+
+
+#define N 32
+
+static int GetPipelineExecutableProperties(lua_State *L)
+    {
+    ud_t *ud;
+    int err;
+    VkResult ec;
+    uint32_t count, remaining, tot, i;
+    VkPipelineInfoKHR* info=NULL;
+    VkPipelineExecutablePropertiesKHR* properties = NULL; //[N]
+    VkPipeline pipeline = checkpipeline(L, 1, &ud);
+    CheckDevicePfn(L, ud, GetPipelineExecutablePropertiesKHR);
+#define CLEANUP do {                                                    \
+    zfreeVkPipelineInfoKHR(L, info, 1);                                 \
+    zfreearrayVkPipelineExecutablePropertiesKHR(L, properties, N, 1);   \
+} while(0)
+    if(lua_istable(L, 2))
+        {
+        info = zcheckVkPipelineInfoKHR(L, 2, &err);
+        if(err) { CLEANUP; return argerror(L, 2); }
+        }
+    else
+        {
+        info = znewVkPipelineInfoKHR(L, &err);
+        if(err) { CLEANUP; return lua_error(L); }
+        }
+    info->pipeline = pipeline;
+    properties = znewchainarrayVkPipelineExecutablePropertiesKHR(L, N, &err);
+    if(err) { CLEANUP; lua_error(L); }
+    ec = ud->ddt->GetPipelineExecutablePropertiesKHR(ud->device, info, &remaining, NULL);
+    if(ec) { CLEANUP; CheckError(L, ec); }
+    lua_newtable(L);
+    if(remaining==0) { CLEANUP; return 1; }
+    tot = 0;
+    do {
+        if(remaining > N)
+            { count = N; remaining -= N; }
+        else
+            { count = remaining; remaining = 0; }
+        ec = ud->ddt->GetPipelineExecutablePropertiesKHR(ud->device, info, &count, properties);
+        if(ec && ec != VK_INCOMPLETE) { CLEANUP; CheckError(L, ec); }
+        for(i = 0; i < count; i++)
+            {
+            zpushVkPipelineExecutablePropertiesKHR(L, &properties[i]);
+            lua_rawseti(L, -2, ++tot);
+            }
+        } while (remaining > 0);
+    CLEANUP;
+#undef CLEANUP
+    return 1;
+    }
+
+static int GetPipelineExecutableStatistics(lua_State *L)
+    {
+    ud_t *ud;
+    int err;
+    VkResult ec;
+    uint32_t count, remaining, tot, i;
+    VkPipelineExecutableInfoKHR* info=NULL;
+    VkPipelineExecutableStatisticKHR* statistics = NULL; //[N]
+    VkPipeline pipeline = checkpipeline(L, 1, &ud);
+    CheckDevicePfn(L, ud, GetPipelineExecutableStatisticsKHR);
+#define CLEANUP do {                                                    \
+    zfreeVkPipelineExecutableInfoKHR(L, info, 1);                       \
+    zfreearrayVkPipelineExecutableStatisticKHR(L, statistics, N, 1);    \
+} while(0)
+    info = zcheckVkPipelineExecutableInfoKHR(L, 2, &err);
+    info->pipeline = pipeline;
+    statistics = znewchainarrayVkPipelineExecutableStatisticKHR(L, N, &err);
+    if(err) { CLEANUP; lua_error(L); }
+    ec = ud->ddt->GetPipelineExecutableStatisticsKHR(ud->device, info, &remaining, NULL);
+    if(ec) { CLEANUP; CheckError(L, ec); }
+    lua_newtable(L);
+    if(remaining==0) { CLEANUP; return 1; }
+    tot = 0;
+    do {
+        if(remaining > N)
+            { count = N; remaining -= N; }
+        else
+            { count = remaining; remaining = 0; }
+        ec = ud->ddt->GetPipelineExecutableStatisticsKHR(ud->device, info, &count, statistics);
+        if(ec && ec != VK_INCOMPLETE) { CLEANUP; CheckError(L, ec); }
+        for(i = 0; i < count; i++)
+            {
+            zpushVkPipelineExecutableStatisticKHR(L, &statistics[i]);
+            lua_rawseti(L, -2, ++tot);
+            }
+        } while (remaining > 0);
+    CLEANUP;
+#undef CLEANUP
+    return 1;
+    }
+
+static int GetPipelineExecutableInternalRepresentations(lua_State *L)
+    {
+    ud_t *ud;
+    int err;
+    VkResult ec;
+    uint32_t count, remaining, tot, i;
+    VkPipelineExecutableInfoKHR* info=NULL;
+    VkPipelineExecutableInternalRepresentationKHR* representations = NULL; //[N]
+    VkPipeline pipeline = checkpipeline(L, 1, &ud);
+    CheckDevicePfn(L, ud, GetPipelineExecutableInternalRepresentationsKHR);
+#define CLEANUP do {                                                                    \
+    zfreeVkPipelineExecutableInfoKHR(L, info, 1);                                       \
+    zfreearrayVkPipelineExecutableInternalRepresentationKHR(L, representations, N, 1);  \
+} while(0)
+    info = zcheckVkPipelineExecutableInfoKHR(L, 2, &err);
+    info->pipeline = pipeline;
+    representations = znewchainarrayVkPipelineExecutableInternalRepresentationKHR(L, N, &err);
+    if(err) { CLEANUP; lua_error(L); }
+    ec = ud->ddt->GetPipelineExecutableInternalRepresentationsKHR(ud->device, info, &remaining, NULL);
+    if(ec) { CLEANUP; CheckError(L, ec); }
+    lua_newtable(L);
+    if(remaining==0) { CLEANUP; return 1; }
+    tot = 0;
+    do {
+        if(remaining > N)
+            { count = N; remaining -= N; }
+        else
+            { count = remaining; remaining = 0; }
+        ec = ud->ddt->GetPipelineExecutableInternalRepresentationsKHR(ud->device, info, &count, representations);
+        if(ec && ec != VK_INCOMPLETE) { CLEANUP; CheckError(L, ec); }
+        for(i = 0; i < count; i++)
+            {
+            zpushVkPipelineExecutableInternalRepresentationKHR(L, &representations[i]);
+            lua_rawseti(L, -2, ++tot);
+            }
+        } while (remaining > 0);
+    CLEANUP;
+#undef CLEANUP
+    return 1;
+    }
+
 RAW_FUNC(pipeline)
 TYPE_FUNC(pipeline)
 INSTANCE_FUNC(pipeline)
@@ -153,6 +289,9 @@ static const struct luaL_Reg Functions[] =
     {
         { "create_graphics_pipelines",  CreateGraphics },
         { "create_compute_pipelines",  CreateCompute },
+        { "get_pipeline_executable_properties", GetPipelineExecutableProperties },
+        { "get_pipeline_executable_statistics", GetPipelineExecutableStatistics },
+        { "get_pipeline_executable_internal_representations", GetPipelineExecutableInternalRepresentations },
         { "destroy_pipeline",  Destroy },
         { NULL, NULL } /* sentinel */
     };
