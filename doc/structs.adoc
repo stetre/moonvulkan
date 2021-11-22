@@ -775,7 +775,9 @@ _queue_flags_: <<queueflags, queueflags>>, +
 _queue_count_: integer, +
 _timestamp_valid_bits_: integer, +
 _min_image_transfer_granularity_: <<extent3d, extent3d>>, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkQueueFamilyProperties.html[VkQueueFamilyProperties])#
+pass:[--] EXTENSION https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkQueueFamilyGlobalPriorityPropertiesEXT.html[VkQueueFamilyGlobalPriorityPropertiesEXT]: +
+_priorities_: {<<queueglobalpriority, queueglobalpriority>>}, +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkQueueFamilyProperties.html[VkQueueFamilyProperties], https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkQueueFamilyProperties2.html[VkQueueFamilyProperties2])#
 
 * [[physicaldevicememoryproperties]]
 [small]#*physicaldevicememoryproperties* = { +
@@ -1661,6 +1663,8 @@ _stage_: <<shaderstageflags, shaderstageflags>>, +
 _module_: <<shader_module, shader_module>> *[R]*, +
 _name_: string (defaults to '_main_'), +
 _specialization_info_: <<specializationinfo, specializationinfo>>, +
+pass:[--] EXTENSION https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT.html[VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT]: +
+_required_subgroup_size_: integer, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPipelineShaderStageCreateInfo.html[VkPipelineShaderStageCreateInfo])#
 
 * [[specializationinfo]]

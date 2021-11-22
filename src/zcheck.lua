@@ -44,7 +44,7 @@ Corrections for non-standard declarations: @@
 VkDeviceCreateInfo* zcheckVkDeviceCreateInfo(lua_State *L, int arg, int *err, ud_t *ud); //non-standard
 VkPresentInfoKHR* zcheckVkPresentInfoKHR(lua_State *L, int arg, int *err, int results); //non-standard
 int zpushVkQueueFamilyProperties(lua_State *L, const VkQueueFamilyProperties *p, uint32_t index); //non-standard
-int zpushVkQueueFamilyProperties2KHR(lua_State *L, const VkQueueFamilyProperties2KHR *p, uint32_t index); //non-standard
+int zpushVkQueueFamilyProperties2(lua_State *L, const VkQueueFamilyProperties2 *p, uint32_t index); //non-standard
 int zpushVkPhysicalDeviceGroupPropertiesKHR(lua_State *L, const VkPhysicalDeviceGroupPropertiesKHR *p, VkInstance instance); // non-standard
 
 #define znew moonvulkan_znew
@@ -185,7 +185,7 @@ local TYPED = {
    { "VkSparseImageMemoryRequirements2", "SPARSE_IMAGE_MEMORY_REQUIREMENTS_2" },
    { "VkSurfaceCapabilities2KHR", "SURFACE_CAPABILITIES_2_KHR" }, 
    { "VkSurfaceFormat2KHR", "SURFACE_FORMAT_2_KHR" },
-   { "VkQueueFamilyProperties2KHR", "QUEUE_FAMILY_PROPERTIES_2_KHR" },
+   { "VkQueueFamilyProperties2", "QUEUE_FAMILY_PROPERTIES_2" },
    { "VkImageFormatListCreateInfo", "IMAGE_FORMAT_LIST_CREATE_INFO" },
    { "VkExternalMemoryImageCreateInfoKHR", "EXTERNAL_MEMORY_IMAGE_CREATE_INFO_KHR" },
    { "VkImageCreateInfo", "IMAGE_CREATE_INFO" },

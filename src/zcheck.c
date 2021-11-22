@@ -305,6 +305,11 @@ static int ispresent_(lua_State *L, int arg, const char *sname)
     for(i_=0; i_<(n_); i_++) { lua_pushnumber(L, p->name_[i_]); lua_seti(L, -2, i_+1); }    \
     lua_setfield(L, -2, sname_);                                                            \
 } while(0)
+#define SetEnumList(name_, sname_, pushfunc, n_) do { uint32_t i_;                          \
+    lua_newtable(L);                                                                        \
+    for(i_=0; i_<(n_); i_++) { pushfunc(L, p->name_[i_]); lua_seti(L, -2, i_+1); }          \
+    lua_setfield(L, -2, sname_);                                                            \
+} while(0)
 
 /*------------------------------------------------------------------------------*
  | Get macros (for check functions)                                             |
@@ -3508,10 +3513,14 @@ static int localpushVkQueueFamilyProperties(lua_State *L, const VkQueueFamilyPro
     SetStruct(minImageTransferGranularity, "min_image_transfer_granularity", VkExtent3D);
 LOCALPUSH_END
 
-ZINIT_BEGIN(VkQueueFamilyProperties2KHR)
-    //EXTENSIONS_BEGIN
-    //  ADDX(XXX, Xxx);
-    //EXTENSIONS_END
+LOCALPUSH_BEGIN(VkQueueFamilyGlobalPriorityPropertiesEXT)
+    SetEnumList(priorities, "priorities", pushqueueglobalpriority, p->priorityCount);
+LOCALPUSH_END
+
+ZINIT_BEGIN(VkQueueFamilyProperties2)
+    EXTENSIONS_BEGIN
+        ADDX(QUEUE_FAMILY_GLOBAL_PRIORITY_PROPERTIES_EXT, VkQueueFamilyGlobalPriorityPropertiesEXT);
+    EXTENSIONS_END
 ZINIT_END
 
 //ZPUSH_BEGIN(VkQueueFamilyProperties)
@@ -3520,12 +3529,13 @@ int zpushVkQueueFamilyProperties(lua_State *L, const VkQueueFamilyProperties *p,
     localpushVkQueueFamilyProperties(L, p, index);
 ZPUSH_END
 
-//ZPUSH_BEGIN(VkQueueFamilyProperties2KHR)
-int zpushVkQueueFamilyProperties2KHR(lua_State *L, const VkQueueFamilyProperties2KHR *p, uint32_t index) {
+//ZPUSH_BEGIN(VkQueueFamilyProperties2)
+int zpushVkQueueFamilyProperties2(lua_State *L, const VkQueueFamilyProperties2 *p, uint32_t index) {
     lua_newtable(L);
     localpushVkQueueFamilyProperties(L, &p->queueFamilyProperties, index);
-    //XPUSH_BEGIN
-    //XPUSH_END
+    XPUSH_BEGIN
+        XCASE(QUEUE_FAMILY_GLOBAL_PRIORITY_PROPERTIES_EXT, VkQueueFamilyGlobalPriorityPropertiesEXT);
+    XPUSH_END
 ZPUSH_END
 
 /*------------------------------------------------------------------------------*
@@ -5850,6 +5860,11 @@ ZCHECK_END
  | Pipeline Shader Stage                                                        |
  *------------------------------------------------------------------------------*/
 
+ZCHECK_BEGIN(VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT)
+    newstruct(VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT);
+    GetInteger(requiredSubgroupSize, "required_subgroup_size");
+ZCHECK_END
+
 static ZCLEAR_BEGIN(VkPipelineShaderStageCreateInfo)
     if(p->pName) Free(L, (void*)p->pName);
     FreeStructp(pSpecializationInfo, VkSpecializationInfo);
@@ -5862,6 +5877,10 @@ ZCHECK_BEGIN(VkPipelineShaderStageCreateInfo)
     GetShaderModule(module, "module");
     GetStringDef(pName, "name", "main");
     GetStructp(pSpecializationInfo, VkSpecializationInfo, "specialization_info");
+    EXTENSIONS_BEGIN
+    if(ispresent("required_subgroup_size"))
+        ADD_EXTENSION_INLINE(VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT);
+    EXTENSIONS_END
 ZCHECK_END
 ZCHECKARRAY(VkPipelineShaderStageCreateInfo)
 

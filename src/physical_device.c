@@ -196,17 +196,17 @@ static int GetPhysicalDeviceQueueFamilyProperties2
     {
     int err;
     uint32_t i, count = 0;
-    VkQueueFamilyProperties2KHR* props;
+    VkQueueFamilyProperties2* props;
     lua_newtable(L);
     ud->idt->GetPhysicalDeviceQueueFamilyProperties2(physical_device, &count, NULL);
     if(count == 0) return 1;
-#define CLEANUP zfreearrayVkQueueFamilyProperties2KHR(L, props, count, 1)
-    props = znewchainarrayVkQueueFamilyProperties2KHR(L, count, &err);
+#define CLEANUP zfreearrayVkQueueFamilyProperties2(L, props, count, 1)
+    props = znewchainarrayVkQueueFamilyProperties2(L, count, &err);
     if(err) { CLEANUP; return lua_error(L); }
     ud->idt->GetPhysicalDeviceQueueFamilyProperties2(physical_device, &count, props);
     for(i=0; i<count; i++)
         {
-        zpushVkQueueFamilyProperties2KHR(L, &props[i], i);
+        zpushVkQueueFamilyProperties2(L, &props[i], i);
         lua_rawseti(L, -2, i+1);
         }
     CLEANUP;

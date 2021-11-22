@@ -4450,7 +4450,9 @@ the <em>queue_family_index</em> of the <em>i-th</em> element in the table return
 <em>queue_count</em>: integer,<br>
 <em>timestamp_valid_bits</em>: integer,<br>
 <em>min_image_transfer_granularity</em>: <a href="#extent3d">extent3d</a>,<br>
-} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkQueueFamilyProperties.html">VkQueueFamilyProperties</a>)</span></p>
+-- EXTENSION <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkQueueFamilyGlobalPriorityPropertiesEXT.html">VkQueueFamilyGlobalPriorityPropertiesEXT</a>:<br>
+<em>priorities</em>: {<a href="#queueglobalpriority">queueglobalpriority</a>},<br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkQueueFamilyProperties.html">VkQueueFamilyProperties</a>, <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkQueueFamilyProperties2.html">VkQueueFamilyProperties2</a>)</span></p>
 </li>
 <li>
 <p><a id="physicaldevicememoryproperties"></a>
@@ -5489,6 +5491,8 @@ the <em>queue_family_index</em> of the <em>i-th</em> element in the table return
 <em>module</em>: <a href="#shader_module">shader_module</a> <strong>[R]</strong>,<br>
 <em>name</em>: string (defaults to '<em>main</em>'),<br>
 <em>specialization_info</em>: <a href="#specializationinfo">specializationinfo</a>,<br>
+-- EXTENSION <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT.html">VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT</a>:<br>
+<em>required_subgroup_size</em>: integer,<br>
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPipelineShaderStageCreateInfo.html">VkPipelineShaderStageCreateInfo</a>)</span></p>
 </li>
 <li>

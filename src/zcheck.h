@@ -432,22 +432,22 @@ int zinitVkSurfaceFormat2KHR(lua_State *L, VkSurfaceFormat2KHR* p, int *err);
 #define zpushVkSurfaceFormat2KHR moonvulkan_zpushVkSurfaceFormat2KHR
 int zpushVkSurfaceFormat2KHR(lua_State *L, const VkSurfaceFormat2KHR *p);
 
-#define znewVkQueueFamilyProperties2KHR(L, err) (VkQueueFamilyProperties2KHR*)znew((L), VK_STRUCTURE_TYPE_QUEUE_FAMILY_PROPERTIES_2_KHR, sizeof(VkQueueFamilyProperties2KHR), (err))
-#define znewarrayVkQueueFamilyProperties2KHR(L, count, err) (VkQueueFamilyProperties2KHR*)znewarray((L), VK_STRUCTURE_TYPE_QUEUE_FAMILY_PROPERTIES_2_KHR, sizeof(VkQueueFamilyProperties2KHR), (count), (err))
-#define znewchainVkQueueFamilyProperties2KHR moonvulkan_znewchainVkQueueFamilyProperties2KHR
-VkQueueFamilyProperties2KHR* znewchainVkQueueFamilyProperties2KHR(lua_State *L, int *err);
-#define znewchainarrayVkQueueFamilyProperties2KHR moonvulkan_znewchainarrayVkQueueFamilyProperties2KHR
-VkQueueFamilyProperties2KHR* znewchainarrayVkQueueFamilyProperties2KHR(lua_State *L, uint32_t count, int *err);
-#define zcheckVkQueueFamilyProperties2KHR moonvulkan_zcheckVkQueueFamilyProperties2KHR
-VkQueueFamilyProperties2KHR* zcheckVkQueueFamilyProperties2KHR(lua_State *L, int arg, int *err);
-#define zcheckarrayVkQueueFamilyProperties2KHR moonvulkan_zcheckarrayVkQueueFamilyProperties2KHR
-VkQueueFamilyProperties2KHR* zcheckarrayVkQueueFamilyProperties2KHR(lua_State *L, int arg, uint32_t *count, int *err);
-#define zinitVkQueueFamilyProperties2KHR moonvulkan_zinitVkQueueFamilyProperties2KHR
-int zinitVkQueueFamilyProperties2KHR(lua_State *L, VkQueueFamilyProperties2KHR* p, int *err);
-#define zfreeVkQueueFamilyProperties2KHR(L, p, base) zfree((L), (p), (base))
-#define zfreearrayVkQueueFamilyProperties2KHR(L, p, count, base) zfreearray((L), (p), sizeof(VkQueueFamilyProperties2KHR), (count), (base))
-#define zpushVkQueueFamilyProperties2KHR moonvulkan_zpushVkQueueFamilyProperties2KHR
-int zpushVkQueueFamilyProperties2KHR(lua_State *L, const VkQueueFamilyProperties2KHR *p, uint32_t index); //non-standard
+#define znewVkQueueFamilyProperties2(L, err) (VkQueueFamilyProperties2*)znew((L), VK_STRUCTURE_TYPE_QUEUE_FAMILY_PROPERTIES_2, sizeof(VkQueueFamilyProperties2), (err))
+#define znewarrayVkQueueFamilyProperties2(L, count, err) (VkQueueFamilyProperties2*)znewarray((L), VK_STRUCTURE_TYPE_QUEUE_FAMILY_PROPERTIES_2, sizeof(VkQueueFamilyProperties2), (count), (err))
+#define znewchainVkQueueFamilyProperties2 moonvulkan_znewchainVkQueueFamilyProperties2
+VkQueueFamilyProperties2* znewchainVkQueueFamilyProperties2(lua_State *L, int *err);
+#define znewchainarrayVkQueueFamilyProperties2 moonvulkan_znewchainarrayVkQueueFamilyProperties2
+VkQueueFamilyProperties2* znewchainarrayVkQueueFamilyProperties2(lua_State *L, uint32_t count, int *err);
+#define zcheckVkQueueFamilyProperties2 moonvulkan_zcheckVkQueueFamilyProperties2
+VkQueueFamilyProperties2* zcheckVkQueueFamilyProperties2(lua_State *L, int arg, int *err);
+#define zcheckarrayVkQueueFamilyProperties2 moonvulkan_zcheckarrayVkQueueFamilyProperties2
+VkQueueFamilyProperties2* zcheckarrayVkQueueFamilyProperties2(lua_State *L, int arg, uint32_t *count, int *err);
+#define zinitVkQueueFamilyProperties2 moonvulkan_zinitVkQueueFamilyProperties2
+int zinitVkQueueFamilyProperties2(lua_State *L, VkQueueFamilyProperties2* p, int *err);
+#define zfreeVkQueueFamilyProperties2(L, p, base) zfree((L), (p), (base))
+#define zfreearrayVkQueueFamilyProperties2(L, p, count, base) zfreearray((L), (p), sizeof(VkQueueFamilyProperties2), (count), (base))
+#define zpushVkQueueFamilyProperties2 moonvulkan_zpushVkQueueFamilyProperties2
+int zpushVkQueueFamilyProperties2(lua_State *L, const VkQueueFamilyProperties2 *p, uint32_t index); //non-standard
 
 #define znewVkImageFormatListCreateInfo(L, err) (VkImageFormatListCreateInfo*)znew((L), VK_STRUCTURE_TYPE_IMAGE_FORMAT_LIST_CREATE_INFO, sizeof(VkImageFormatListCreateInfo), (err))
 #define znewarrayVkImageFormatListCreateInfo(L, count, err) (VkImageFormatListCreateInfo*)znewarray((L), VK_STRUCTURE_TYPE_IMAGE_FORMAT_LIST_CREATE_INFO, sizeof(VkImageFormatListCreateInfo), (count), (err))
