@@ -3802,12 +3802,21 @@ ZCHECK_BEGIN(VkApplicationInfo)
     GetInteger(apiVersion, "api_version");
 ZCHECK_END
 
+static ZCLEAR_BEGIN(VkValidationFeaturesEXT)
+    FreeEnumList(pEnabledValidationFeatures, validationfeatureenable);
+    FreeEnumList(pDisabledValidationFeatures, validationfeaturedisable);
+ZCLEAR_END
+ZCHECK_BEGIN(VkValidationFeaturesEXT)
+    newstruct(VkValidationFeaturesEXT);
+    GetEnumList(pEnabledValidationFeatures, enabledValidationFeatureCount, validationfeatureenable, "enabled_validation_features");
+    GetEnumList(pDisabledValidationFeatures, disabledValidationFeatureCount, validationfeaturedisable, "disabled_validation_features");
+ZCHECK_END
+
 static ZCLEAR_BEGIN(VkInstanceCreateInfo)
     FreeStructp(pApplicationInfo, VkApplicationInfo);
     FreeStringList(ppEnabledLayerNames, enabledLayerCount);
     FreeStringList(ppEnabledExtensionNames, enabledExtensionCount);
 ZCLEAR_END
-
 ZCHECK_BEGIN(VkInstanceCreateInfo)
     checktable(arg);
     newstruct(VkInstanceCreateInfo);
@@ -3818,6 +3827,8 @@ ZCHECK_BEGIN(VkInstanceCreateInfo)
     EXTENSIONS_BEGIN
     if(ispresent("disabled_validation_checks"))
         ADD_EXTENSION_INLINE(VkValidationFlagsEXT);
+    if(ispresent("enabled_validation_features") || ispresent("disabled_validation_features"))
+        ADD_EXTENSION_INLINE(VkValidationFeaturesEXT);
     EXTENSIONS_END
 ZCHECK_END
 
@@ -3993,6 +4004,11 @@ ZCHECK_BEGIN(VkMemoryOpaqueCaptureAddressAllocateInfo)
     GetInteger(opaqueCaptureAddress, "opaque_capture_address");
 ZCHECK_END
 
+ZCHECK_BEGIN(VkMemoryPriorityAllocateInfoEXT)
+    newstruct(VkMemoryPriorityAllocateInfoEXT);
+    GetNumber(priority, "priority");
+ZCHECK_END
+
 ZCHECK_BEGIN(VkMemoryAllocateInfo)
     checktable(arg);
     newstruct(VkMemoryAllocateInfo);
@@ -4011,6 +4027,8 @@ ZCHECK_BEGIN(VkMemoryAllocateInfo)
         ADD_EXTENSION_INLINE(VkImportMemoryHostPointerInfoEXT);
     if(ispresent("opaque_capture_address"))
         ADD_EXTENSION_INLINE(VkMemoryOpaqueCaptureAddressAllocateInfo);
+    if(ispresent("priority"))
+        ADD_EXTENSION_INLINE(VkMemoryPriorityAllocateInfoEXT);
     EXTENSIONS_END
 ZCHECK_END
 
@@ -4299,6 +4317,11 @@ ZCHECK_BEGIN(VkRenderPassMultiviewCreateInfoKHR)
     GetUint32List(pCorrelationMasks, correlationMaskCount, "correlation_masks");
 ZCHECK_END
 
+ZCHECK_BEGIN(VkRenderPassFragmentDensityMapCreateInfoEXT)
+    newstruct(VkRenderPassFragmentDensityMapCreateInfoEXT);
+    GetStruct(fragmentDensityMapAttachment, "fragment_density_map_attachment", VkAttachmentReference);
+ZCHECK_END
+
 static ZCLEAR_BEGIN(VkRenderPassCreateInfo)
     FreeList(pAttachments, attachmentCount, VkAttachmentDescription);
     FreeList(pSubpasses, subpassCount, VkSubpassDescription);
@@ -4316,6 +4339,8 @@ ZCHECK_BEGIN(VkRenderPassCreateInfo)
         ADD_EXTENSION_INLINE(VkRenderPassInputAttachmentAspectCreateInfoKHR);
     if(ispresent("view_masks") || ispresent("view_offsets") || ispresent("correlation_masks"))
         ADD_EXTENSION_INLINE(VkRenderPassMultiviewCreateInfoKHR);
+    if(ispresent("fragment_density_map_attachment"))
+        ADD_EXTENSION_INLINE(VkRenderPassFragmentDensityMapCreateInfoEXT);
     EXTENSIONS_END
 ZCHECK_END
 
@@ -4440,6 +4465,10 @@ ZCHECK_BEGIN(VkRenderPassCreateInfo2)
     GetList(pSubpasses, subpassCount, VkSubpassDescription2, "subpasses");
     GetListOpt(pDependencies, dependencyCount, VkSubpassDependency2, "dependencies");
     GetUint32List(pCorrelatedViewMasks, correlatedViewMaskCount, "correlated_view_masks");
+    EXTENSIONS_BEGIN
+    if(ispresent("fragment_density_map_attachment"))
+        ADD_EXTENSION_INLINE(VkRenderPassFragmentDensityMapCreateInfoEXT);
+    EXTENSIONS_END
 ZCHECK_END
 
 /*------------------------------------------------------------------------------*
@@ -6301,6 +6330,7 @@ static void zfreeaux(lua_State *L, void *pp)
         CASE(COPY_IMAGE_TO_BUFFER_INFO_2_KHR, VkCopyImageToBufferInfo2KHR);
         CASE(BLIT_IMAGE_INFO_2_KHR, VkBlitImageInfo2KHR);
         CASE(RESOLVE_IMAGE_INFO_2_KHR, VkResolveImageInfo2KHR);
+        CASE(VALIDATION_FEATURES_EXT, VkValidationFeaturesEXT);
 #undef CASE
         default: 
             return;
