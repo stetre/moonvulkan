@@ -3130,6 +3130,18 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/h
 </li>
 </ul>
 </div>
+<hr>
+<div class="paragraph">
+<p><span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_headless_surface.html">VK_EXT_headless_surface</a>.</span></p>
+</div>
+<div id="create_headless_surface" class="ulist">
+<ul>
+<li>
+<p><em>surface</em> = <strong>create_headless_surface</strong>(<em>instance</em>, <a href="#headlesssurfacecreateflags">headlesssurfacecreateflags</a>, [<a href="#allocators"><em>allocator</em></a>])<br>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateHeadlessSurfaceEXT.html">vkCreateHeadlessSurfaceEXT</a>.</span></p>
+</li>
+</ul>
+</div>
 </div>
 </div>
 </div>
@@ -3285,6 +3297,14 @@ Returns the global <em>result</em> for the operation, optionally followed by a t
 with the individual results for each of the given swapchains.<br>
 The individual results table is returned only if <em>per_swapchain_results</em> is <em>true</em>.<br>
 Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkQueuePresentKHR.html">vkQueuePresentKHR</a>.</span></p>
+</li>
+</ul>
+</div>
+<div id="wait_for_present" class="ulist">
+<ul>
+<li>
+<p><a href="#result"><em>result</em></a> = <strong>wait_for_present</strong>(<em>swapchain</em>, <em>present_id</em>, <em>timeout</em>)<br>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkWaitForPresentKHR.html">vkWaitForPresentKHR</a>.</span></p>
 </li>
 </ul>
 </div>
@@ -6091,6 +6111,8 @@ Note1: The <em>current_extent</em> field is <em>nil</em> when <em>width</em> and
 -- EXTENSION <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkDeviceGroupPresentInfoKHR.html">VkDeviceGroupPresentInfoKHR</a>:<br>
 <em>device_masks</em>: {integer},<br>
 <em>mode</em>: <a href="#devicegrouppresentmodeflags">devicegrouppresentmodeflags</a>,<br>
+-- EXTENSION <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPresentIdKHR.html">VkPresentIdKHR</a>:<br>
+<em>present_ids</em>: {integer},<br>
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPresentInfoKHR.html">VkPresentInfoKHR</a>)</span></p>
 </li>
 <li>
@@ -7211,6 +7233,9 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/h
 </div>
 <div id="displaysurfacecreateflags" class="paragraph">
 <p><span class="small"><strong>displaysurfacecreateflags</strong>: 0</span></p>
+</div>
+<div id="headlesssurfacecreateflags" class="paragraph">
+<p><span class="small"><strong>headlesssurfacecreateflags</strong>: 0</span></p>
 </div>
 <div id="instancecreateflags" class="paragraph">
 <p><span class="small"><strong>instancecreateflags</strong>: 0</span></p>

@@ -255,6 +255,28 @@ static int GetPhysicalDeviceWin32PresentationSupport(lua_State *L)
 #endif
     }
 
+/*- Headless ---------------------------------------------------------------*/
+
+static int CreateHeadlessSurface(lua_State *L)
+    {
+    int err;
+    VkResult ec;
+    VkSurfaceKHR surface;
+    ud_t *ud;
+    VkHeadlessSurfaceCreateInfoEXT* info;
+    VkInstance instance = checkinstance(L, 1, &ud);
+    const VkAllocationCallbacks *allocator = optallocator(L, 3);
+    CheckInstancePfn(L, ud, CreateHeadlessSurfaceEXT);
+#define CLEANUP zfreeVkHeadlessSurfaceCreateInfoEXT(L, info, 1)
+    info = zcheckVkHeadlessSurfaceCreateInfoEXT(L, 2, &err);
+    if(err) { CLEANUP; return argerror(L, 2); }
+    ec = ud->idt->CreateHeadlessSurfaceEXT(instance, info, allocator, &surface);
+    CLEANUP;
+    CheckError(L, ec);
+#undef CLEANUP
+    return newsurface(L, instance, surface, allocator);
+    }
+
 /*- Display ----------------------------------------------------------------*/
 
 static int CreateDisplayPlaneSurface(lua_State *L)
@@ -266,11 +288,11 @@ static int CreateDisplayPlaneSurface(lua_State *L)
     VkDisplaySurfaceCreateInfoKHR* info;
     VkDisplayModeKHR display_mode = checkdisplay_mode(L, 1, &ud);
     const VkAllocationCallbacks *allocator = optallocator(L, 3);
+    CheckInstancePfn(L, ud, CreateDisplayPlaneSurfaceKHR);
 #define CLEANUP zfreeVkDisplaySurfaceCreateInfoKHR(L, info, 1)
     info = zcheckVkDisplaySurfaceCreateInfoKHR(L, 2, &err);
     if(err) { CLEANUP; return argerror(L, 2); }
     info->displayMode = display_mode;
-    CheckInstancePfn(L, ud, CreateDisplayPlaneSurfaceKHR);
     ec = ud->idt->CreateDisplayPlaneSurfaceKHR(ud->instance, info, allocator, &surface);
     CLEANUP;
     CheckError(L, ec);
@@ -581,6 +603,7 @@ static const struct luaL_Reg Functions[] =
         { "create_wayland_surface", CreateWaylandSurface },
         { "create_android_surface", CreateAndroidSurface },
         { "create_win32_surface", CreateWin32Surface },
+        { "create_headless_surface", CreateHeadlessSurface },
         { "create_display_plane_surface", CreateDisplayPlaneSurface },
         { "created_surface",  CreatedSurface },
         { "destroy_surface",  Destroy },

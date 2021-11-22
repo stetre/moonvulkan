@@ -77,4 +77,11 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCre
 _hwnd_: lightuserdata (_HWND_) +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateWin32SurfaceKHR.html[vkCreateWin32SurfaceKHR].#
 
+'''
+
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_headless_surface.html[VK_EXT_headless_surface].#
+
+[[create_headless_surface]]
+* _surface_ = *create_headless_surface*(_instance_, <<headlesssurfacecreateflags, headlesssurfacecreateflags>>, [<<allocators, _allocator_>>]) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateHeadlessSurfaceEXT.html[vkCreateHeadlessSurfaceEXT].#
 

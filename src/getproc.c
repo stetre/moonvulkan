@@ -194,6 +194,7 @@ instance_dt_t * getproc_instance(lua_State *L, VkInstance instance, VkInstanceCr
     GET(GetPhysicalDeviceToolPropertiesEXT);
     GET(AcquireDrmDisplayEXT);
     GET(GetDrmDisplayEXT);
+    GET(CreateHeadlessSurfaceEXT);
 #ifdef VK_USE_PLATFORM_XCB_KHR
     GET(CreateXcbSurfaceKHR);
     GET(GetPhysicalDeviceXcbPresentationSupportKHR);

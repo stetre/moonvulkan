@@ -140,6 +140,7 @@ typedef struct {
     F(GetPhysicalDeviceToolPropertiesEXT);
     F(AcquireDrmDisplayEXT);
     F(GetDrmDisplayEXT);
+    F(CreateHeadlessSurfaceEXT);
 } instance_dt_t;
 
 

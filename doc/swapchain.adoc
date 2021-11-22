@@ -35,6 +35,10 @@ with the individual results for each of the given swapchains. +
 The individual results table is returned only if _per_swapchain_results_ is _true_. +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkQueuePresentKHR.html[vkQueuePresentKHR].#
 
+[[wait_for_present]]
+* <<result, _result_>> = *wait_for_present*(_swapchain_, _present_id_, _timeout_) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkWaitForPresentKHR.html[vkWaitForPresentKHR].#
+
 [[get_swapchain_status]]
 * <<result, _result_>> = *get_swapchain_status*(_swapchain_) +
 [small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetSwapchainStatusKHR.html[vkGetSwapchainStatusKHR].#

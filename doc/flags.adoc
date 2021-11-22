@@ -437,6 +437,9 @@ Reserved for future use (must be set to 0):
 [[displaysurfacecreateflags]]
 [small]#*displaysurfacecreateflags*: 0#
 
+[[headlesssurfacecreateflags]]
+[small]#*headlesssurfacecreateflags*: 0#
+
 [[instancecreateflags]]
 [small]#*instancecreateflags*: 0#
 

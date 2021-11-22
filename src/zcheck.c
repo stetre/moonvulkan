@@ -4831,6 +4831,16 @@ ZCHECK_END
 ZCHECKARRAY(VkImageMemoryBarrier)
 
 /*------------------------------------------------------------------------------*
+ | Headless Surface                                                             |
+ *------------------------------------------------------------------------------*/
+
+ZCHECK_BEGIN(VkHeadlessSurfaceCreateInfoEXT)
+    checktable(arg);
+    newstruct(VkHeadlessSurfaceCreateInfoEXT);
+    GetFlags(flags, "flags");
+ZCHECK_END
+
+/*------------------------------------------------------------------------------*
  | Display Surface                                                              |
  *------------------------------------------------------------------------------*/
 
@@ -4846,7 +4856,7 @@ ZCHECK_BEGIN(VkDisplaySurfaceCreateInfoKHR)
     GetBits(alphaMode, "alpha_mode", VkDisplayPlaneAlphaFlagBitsKHR);
     GetStruct(imageExtent, "image_extent", VkExtent2D);
 ZCHECK_END
- 
+
 /*------------------------------------------------------------------------------*
  | Display Mode                                                                 |
  *------------------------------------------------------------------------------*/
@@ -4968,6 +4978,14 @@ ZCHECK_BEGIN(VkDeviceGroupPresentInfoKHR)
     GetBits(mode, "mode", VkDeviceGroupPresentModeFlagBitsKHR);
 ZCHECK_END
 
+static ZCLEAR_BEGIN(VkPresentIdKHR)
+    FreeUint64List(pPresentIds);
+ZCLEAR_END
+ZCHECK_BEGIN(VkPresentIdKHR)
+    newstruct(VkPresentIdKHR);
+    GetUint64List(pPresentIds, swapchainCount, "present_ids");
+ZCHECK_END
+
 static ZCLEAR_BEGIN(VkPresentInfoKHR)
     FreeObjectList(pWaitSemaphores);
     FreeObjectList(pSwapchains);
@@ -4999,6 +5017,8 @@ VkPresentInfoKHR* zcheckVkPresentInfoKHR(lua_State *L, int arg, int *err, int re
         ADD_EXTENSION_INLINE(VkPresentRegionsKHR);
     if(ispresent("mode") || ispresent("device_masks"))
         ADD_EXTENSION_INLINE(VkDeviceGroupPresentInfoKHR);
+    if(ispresent("present_ids"))
+        ADD_EXTENSION_INLINE(VkPresentIdKHR);
     EXTENSIONS_END
 ZCHECK_END
 
@@ -6331,6 +6351,7 @@ static void zfreeaux(lua_State *L, void *pp)
         CASE(BLIT_IMAGE_INFO_2_KHR, VkBlitImageInfo2KHR);
         CASE(RESOLVE_IMAGE_INFO_2_KHR, VkResolveImageInfo2KHR);
         CASE(VALIDATION_FEATURES_EXT, VkValidationFeaturesEXT);
+        CASE(PRESENT_ID_KHR, VkPresentIdKHR);
 #undef CASE
         default: 
             return;

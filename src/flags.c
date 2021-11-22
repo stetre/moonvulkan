@@ -4256,6 +4256,7 @@ static const struct luaL_Reg Functions[] =
         { "pipelinerasterizationdepthclipstatecreateflags", ReservedFlags },
         { "acquireprofilinglockflags", ReservedFlags },
         { "privatedataslotcreateflags", ReservedFlags },
+        { "headlesssurfacecreateflags", ReservedFlags },
 //      { "", ReservedFlags }, /*  */
         { NULL, NULL } /* sentinel */
     };

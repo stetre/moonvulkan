@@ -202,6 +202,19 @@ static int AcquireNextImage(lua_State *L)
     return AcquireNextImage1(L, swapchain, ud);
     }
 
+static int WaitForPresent(lua_State *L)
+    {
+    VkResult ec;
+    ud_t *ud;
+    VkSwapchainKHR swapchain =  checkswapchain(L, 1, &ud);
+    uint64_t presentId = luaL_checkinteger(L, 2);
+    uint64_t timeout = luaL_checkinteger(L, 3);
+    CheckDevicePfn(L, ud, WaitForPresentKHR);
+    ec = ud->ddt->WaitForPresentKHR(ud->device, swapchain, presentId, timeout);
+    pushresult(L, ec);
+    return 1;
+    }
+
 static int QueuePresent(lua_State *L)
     {
     int err, per_swapchain_results;
@@ -232,7 +245,6 @@ static int QueuePresent(lua_State *L)
 #undef CLEANUP
     return n;
     }
-
 
 static int SetHdrMetadata(lua_State *L)
     {
@@ -296,6 +308,7 @@ static const struct luaL_Reg Functions[] =
         { "destroy_swapchain",  Destroy },
         { "get_swapchain_images", GetSwapchainImages },
         { "acquire_next_image", AcquireNextImage },
+        { "wait_for_present", WaitForPresent },
         { "queue_present", QueuePresent },
         { "get_swapchain_status", GetSwapchainStatus },
         { "set_hdr_metadata", SetHdrMetadata },
