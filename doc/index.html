@@ -2721,6 +2721,14 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/h
 </li>
 </ul>
 </div>
+<div id="cmd_set_color_write_enable" class="ulist">
+<ul>
+<li>
+<p><strong>cmd_set_color_write_enable</strong>(<em>cb</em>, {<em>boolean</em>})<br>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetColorWriteEnableEXT.html">vkCmdSetColorWriteEnableEXT</a>.</span></p>
+</li>
+</ul>
+</div>
 <div id="cmd_set_depth_bias" class="ulist">
 <ul>
 <li>
@@ -5092,6 +5100,9 @@ the <em>queue_family_index</em> of the <em>i-th</em> element in the table return
 <em>reduction_mode</em>: <a href="#samplerreductionmode">samplerreductionmode</a>,<br>
 -- EXTENSION <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkSamplerYcbcrConversionInfo.html">VkSamplerYcbcrConversionInfo</a>:<br>
 <em>conversion</em>: <a href="#sampler_ycbcr_conversion">sampler_ycbcr_conversion</a>,<br>
+-- EXTENSION <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkSamplerCustomBorderColorCreateInfoEXT.html">VkSamplerCustomBorderColorCreateInfoEXT</a>:<br>
+<em>custom_border_color</em>: <a href="#clearcolorvalue">clearcolorvalue</a>,<br>
+<em>custom_border_color_format</em>: <a href="#format">format</a>,<br>
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkSamplerCreateInfo.html">VkSamplerCreateInfo</a>)</span></p>
 </li>
 <li>
@@ -5643,6 +5654,8 @@ the <em>queue_family_index</em> of the <em>i-th</em> element in the table return
 <em>src_premultiplied</em>: boolean,<br>
 <em>dst_premultiplied</em>: boolean,<br>
 <em>blend_overlap</em>: <a href="#blendoverlap">blendoverlap</a>,<br>
+-- EXTENSION <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPipelineColorWriteCreateInfoEXT.html">VkPipelineColorWriteCreateInfoEXT</a>:<br>
+<em>color_write_enables</em>: {boolean},<br>
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPipelineColorBlendStateCreateInfo.html">VkPipelineColorBlendStateCreateInfo</a>)</span></p>
 </li>
 <li>

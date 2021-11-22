@@ -1223,6 +1223,23 @@ static int CmdSetLineStipple(lua_State *L)
     return 0;
     }
 
+static int CmdSetColorWriteEnable(lua_State *L)
+    {
+    int err;
+    ud_t *ud;
+    uint32_t count;
+    VkBool32 *enables;
+    VkCommandBuffer cb = checkcommand_buffer(L, 1, &ud);
+    CheckDevicePfn(L, ud, CmdSetColorWriteEnableEXT);
+#define CLEANUP Free(L, enables)
+    enables = checkbooleanlist(L, 2, &count, &err);
+    if(err) { CLEANUP; return argerror(L, 2); }
+    ud->ddt->CmdSetColorWriteEnableEXT(cb, count, enables);
+    CLEANUP;
+#undef CLEANUP
+    return 0;
+    }
+
 #if 0 // 10yy
         { "",  },
 static int (lua_State *L) //@@ scaffolding
@@ -1307,6 +1324,7 @@ static const struct luaL_Reg Functions[] =
         { "cmd_end_query_indexed", CmdEndQueryIndexed },
         { "cmd_draw_indirect_byte_count", CmdDrawIndirectByteCount },
         { "cmd_set_line_stipple", CmdSetLineStipple },
+        { "cmd_set_color_write_enable", CmdSetColorWriteEnable },
         { NULL, NULL } /* sentinel */
     };
 

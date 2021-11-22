@@ -1330,6 +1330,9 @@ pass:[--] EXTENSION https://www.khronos.org/registry/vulkan/specs/1.2-extensions
 _reduction_mode_: <<samplerreductionmode, samplerreductionmode>>, +
 pass:[--] EXTENSION https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkSamplerYcbcrConversionInfo.html[VkSamplerYcbcrConversionInfo]: +
 _conversion_: <<sampler_ycbcr_conversion, sampler_ycbcr_conversion>>, +
+pass:[--] EXTENSION https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkSamplerCustomBorderColorCreateInfoEXT.html[VkSamplerCustomBorderColorCreateInfoEXT]: +
+_custom_border_color_: <<clearcolorvalue, clearcolorvalue>>, +
+_custom_border_color_format_: <<format, format>>, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkSamplerCreateInfo.html[VkSamplerCreateInfo])#
 
 
@@ -1815,6 +1818,8 @@ pass:[--] EXTENSION https://www.khronos.org/registry/vulkan/specs/1.2-extensions
 _src_premultiplied_: boolean, +
 _dst_premultiplied_: boolean, +
 _blend_overlap_: <<blendoverlap, blendoverlap>>, +
+pass:[--] EXTENSION https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPipelineColorWriteCreateInfoEXT.html[VkPipelineColorWriteCreateInfoEXT]: +
+_color_write_enables_: {boolean}, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPipelineColorBlendStateCreateInfo.html[VkPipelineColorBlendStateCreateInfo])#
 
 * [[pipelinecolorblendattachmentstate]]

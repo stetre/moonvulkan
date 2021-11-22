@@ -112,6 +112,10 @@ char** checkstringlist(lua_State *L, int arg, uint32_t *count, int *err);
 void freestringlist(lua_State *L, char** list, uint32_t count);
 #define pushstringlist moonvulkan_pushstringlist
 void pushstringlist(lua_State *L, char** list, uint32_t count);
+#define checkbooleanlist moonvulkan_checkbooleanlist
+VkBool32* checkbooleanlist(lua_State *L, int arg, uint32_t *count, int *err);
+#define pushbooleanlist moonvulkan_pushbooleanlist
+void pushbooleanlist(lua_State *L, VkBool32 *list, uint32_t count);
 #define checkuint32list moonvulkan_checkuint32list
 uint32_t* checkuint32list(lua_State *L, int arg, uint32_t *count, int *err);
 #define pushuint32list moonvulkan_pushuint32list

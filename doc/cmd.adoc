@@ -271,6 +271,10 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmd
 * *cmd_set_blend_constants*(_cb_, _constant~0~_, _constant~1~_, _constant~2~_, _constant~3~_) +
 [small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetBlendConstants.html[vkCmdSetBlendConstants].#
 
+[[cmd_set_color_write_enable]]
+* *cmd_set_color_write_enable*(_cb_, {_boolean_}) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetColorWriteEnableEXT.html[vkCmdSetColorWriteEnableEXT].#
+
 [[cmd_set_depth_bias]]
 * *cmd_set_depth_bias*(_cb_, _constantfactor_, _clamp_, _slopefactor_) +
 [small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetDepthBias.html[vkCmdSetDepthBias].#

@@ -917,6 +917,17 @@ VkXxx* zcheckarray##VkXxx(lua_State *L, int arg, uint32_t *count, int *err) \
     if(p->name_) zfreearray##VkXxx(L, p->name_, p->nameCount_, 1);          \
 } while(0)
 
+#define GetBooleanList(name_, nameCount_, sname_) do {                      \
+    arg1 = pushfield(L, arg, sname_);                                       \
+    p->name_ = checkbooleanlist(L, arg1, &p->nameCount_, err);              \
+    popfield(L, arg1);                                                      \
+    if(*err == ERR_NOTPRESENT || *err == ERR_EMPTY) { *err=0; }             \
+    else if(*err < 0) { pushfielderror(sname_); return p; }                 \
+} while(0)
+#define FreeBooleanList(name_) do { /* to be used in the zclear of the parent struct */\
+    if(p->name_) Free(L, (void*)p->name_);                                  \
+} while(0)
+
 #define GetUint32List(name_, nameCount_, sname_)    do {                    \
     arg1 = pushfield(L, arg, sname_);                                       \
     p->name_ = checkuint32list(L, arg1, &p->nameCount_, err);               \
@@ -4616,6 +4627,12 @@ ZCHECK_BEGIN(VkSamplerYcbcrConversionInfoKHR)
     GetSamplerYcbcrConversion(conversion, "conversion");
 ZCHECK_END
 
+ZCHECK_BEGIN(VkSamplerCustomBorderColorCreateInfoEXT)
+    newstruct(VkSamplerCustomBorderColorCreateInfoEXT);
+    GetStruct(customBorderColor, "custom_border_color", VkClearColorValue);
+    GetFormat(format, "custom_border_color_format");
+ZCHECK_END
+
 ZCHECK_BEGIN(VkSamplerCreateInfo)
     checktable(arg);
     newstruct(VkSamplerCreateInfo);
@@ -4640,6 +4657,8 @@ ZCHECK_BEGIN(VkSamplerCreateInfo)
         ADD_EXTENSION_INLINE(VkSamplerReductionModeCreateInfo);
     if(ispresent("conversion"))
         ADD_EXTENSION_INLINE(VkSamplerYcbcrConversionInfoKHR);
+    if(ispresent("custom_border_color") || ispresent("custom_border_color_format"))
+        ADD_EXTENSION_INLINE(VkSamplerCustomBorderColorCreateInfoEXT);
     EXTENSIONS_END
 ZCHECK_END
 
@@ -6084,6 +6103,14 @@ ZCHECK_BEGIN(VkPipelineColorBlendAdvancedStateCreateInfoEXT)
     GetBlendOverlap(blendOverlap, "blend_overlap");
 ZCHECK_END
 
+static ZCLEAR_BEGIN(VkPipelineColorWriteCreateInfoEXT)
+    FreeBooleanList(pColorWriteEnables);
+ZCLEAR_END
+ZCHECK_BEGIN(VkPipelineColorWriteCreateInfoEXT)
+    newstruct(VkPipelineColorWriteCreateInfoEXT);
+    GetBooleanList(pColorWriteEnables, attachmentCount, "color_write_enables");
+ZCHECK_END
+
 static ZCLEAR_BEGIN(VkPipelineColorBlendStateCreateInfo)
     FreeList(pAttachments, attachmentCount, VkPipelineColorBlendAttachmentState);
 ZCLEAR_END
@@ -6098,6 +6125,8 @@ ZCHECK_BEGIN(VkPipelineColorBlendStateCreateInfo)
     EXTENSIONS_BEGIN
     if(ispresent("src_premultiplied") || ispresent("dst_premultiplied") || ispresent("blend_overlap"))
         ADD_EXTENSION_INLINE(VkPipelineColorBlendAdvancedStateCreateInfoEXT);
+    if(ispresent("color_write_enables"))
+        ADD_EXTENSION_INLINE(VkPipelineColorWriteCreateInfoEXT);
     EXTENSIONS_END
 ZCHECK_END
 
@@ -6352,6 +6381,7 @@ static void zfreeaux(lua_State *L, void *pp)
         CASE(RESOLVE_IMAGE_INFO_2_KHR, VkResolveImageInfo2KHR);
         CASE(VALIDATION_FEATURES_EXT, VkValidationFeaturesEXT);
         CASE(PRESENT_ID_KHR, VkPresentIdKHR);
+        CASE(PIPELINE_COLOR_WRITE_CREATE_INFO_EXT, VkPipelineColorWriteCreateInfoEXT);
 #undef CASE
         default: 
             return;
