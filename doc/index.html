@@ -2429,7 +2429,8 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/h
 <ul>
 <li>
 <p><strong>cmd_bind_vertex_buffers</strong>(<em>cb</em>, <em>first_binding</em>, {<a href="#buffer"><em>buffer</em></a>}, {<em>offsets</em>})<br>
-<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdBindVertexBuffers.html">vkCmdBindVertexBuffers</a>.</span></p>
+<strong>cmd_bind_vertex_buffers</strong>(<em>cb</em>, <em>first_binding</em>, {<a href="#buffer"><em>buffer</em></a>}, {<em>offsets</em>}, [{<em>sizes</em>}], [{<em>strides</em>}])<br>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdBindVertexBuffers.html">vkCmdBindVertexBuffers</a>, <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdBindVertexBuffers2EXT.html">vkCmdBindVertexBuffers2EXT</a>.</span></p>
 </li>
 </ul>
 </div>
@@ -2729,11 +2730,20 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/h
 </li>
 </ul>
 </div>
+<div id="cmd_set_cull_mode" class="ulist">
+<ul>
+<li>
+<p><strong>cmd_set_cull_mode</strong>(<em>cb</em>, <a href="#cullmodeflags"><em>cullmodeflags</em></a>)<br>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetCullModeEXT.html">vkCmdSetCullModeEXT</a>.</span></p>
+</li>
+</ul>
+</div>
 <div id="cmd_set_depth_bias" class="ulist">
 <ul>
 <li>
 <p><strong>cmd_set_depth_bias</strong>(<em>cb</em>, <em>constantfactor</em>, <em>clamp</em>, <em>slopefactor</em>)<br>
-<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetDepthBias.html">vkCmdSetDepthBias</a>.</span></p>
+<strong>cmd_set_depth_bias_enable</strong>(<em>cb</em>, <em>boolean</em>)<br>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetDepthBias.html">vkCmdSetDepthBias</a>, <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetDepthBiasEnableEXT.html">vkCmdSetDepthBiasEnableEXT</a>.</span></p>
 </li>
 </ul>
 </div>
@@ -2741,7 +2751,32 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/h
 <ul>
 <li>
 <p><strong>cmd_set_depth_bounds</strong>(<em>cb</em>, <em>min</em>, <em>max</em>)<br>
-<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetDepthBounds.html">vkCmdSetDepthBounds</a>.</span></p>
+<strong>cmd_set_depth_bounds_test_enable</strong>(<em>cb</em>, <em>boolean</em>)<br>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetDepthBounds.html">vkCmdSetDepthBounds</a>, <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetDepthBoundsTestEnableEXT.html">vkCmdSetDepthBoundsTestEnableEXT</a>.</span></p>
+</li>
+</ul>
+</div>
+<div id="cmd_set_depth_compare_op" class="ulist">
+<ul>
+<li>
+<p><strong>cmd_set_depth_compare_op</strong>(<em>cb</em>, <a href="#compareop"><em>compareop</em></a>)<br>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetDepthCompareOpEXT.html">vkCmdSetDepthCompareOpEXT</a>.</span></p>
+</li>
+</ul>
+</div>
+<div id="cmd_set_depth_test_enable" class="ulist">
+<ul>
+<li>
+<p><strong>cmd_set_depth_test_enable</strong>(<em>cb</em>, <em>boolean</em>)<br>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetDepthTestEnableEXT.html">vkCmdSetDepthTestEnableEXT</a>.</span></p>
+</li>
+</ul>
+</div>
+<div id="cmd_set_depth_write_enable" class="ulist">
+<ul>
+<li>
+<p><strong>cmd_set_depth_write_enable</strong>(<em>cb</em>, <em>boolean</em>)<br>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetDepthWriteEnableEXT.html">vkCmdSetDepthWriteEnableEXT</a>.</span></p>
 </li>
 </ul>
 </div>
@@ -2769,6 +2804,14 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/h
 </li>
 </ul>
 </div>
+<div id="cmd_set_front_face" class="ulist">
+<ul>
+<li>
+<p><strong>cmd_set_front_face</strong>(<em>cb</em>, <a href="#frontface"><em>frontface</em></a>)<br>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetFrontFaceEXT.html">vkCmdSetFrontFaceEXT</a>.</span></p>
+</li>
+</ul>
+</div>
 <div id="cmd_set_line_width" class="ulist">
 <ul>
 <li>
@@ -2785,6 +2828,46 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/h
 </li>
 </ul>
 </div>
+<div id="cmd_set_logic_op" class="ulist">
+<ul>
+<li>
+<p><strong>cmd_set_logic_op</strong>(<em>cb</em>, <a href="#logicop"><em>logicop</em></a>)<br>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetLogicOpEXT.html">vkCmdSetLogicOpEXT</a>.</span></p>
+</li>
+</ul>
+</div>
+<div id="cmd_set_patch_control_points" class="ulist">
+<ul>
+<li>
+<p><strong>cmd_set_patch_control_points</strong>(<em>cb</em>, <em>integer</em>&gt;&gt;)<br>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetPatchControlPointsEXT.html">vkCmdSetPatchControlPointsEXT</a>.</span></p>
+</li>
+</ul>
+</div>
+<div id="cmd_set_primitive_restart_enable" class="ulist">
+<ul>
+<li>
+<p><strong>cmd_set_primitive_restart_enable</strong>(<em>cb</em>, <em>boolean</em>)<br>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetPrimitiveRestartEnableEXT.html">vkCmdSetPrimitiveRestartEnableEXT</a>.</span></p>
+</li>
+</ul>
+</div>
+<div id="cmd_set_primitive_topology" class="ulist">
+<ul>
+<li>
+<p><strong>cmd_set_primitive_topology</strong>(<em>cb</em>, <a href="#primitivetopology"><em>primitivetopology</em></a>)<br>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetPrimitiveTopologyEXT.html">vkCmdSetPrimitiveTopologyEXT</a>.</span></p>
+</li>
+</ul>
+</div>
+<div id="cmd_set_rasterizer_discard_enable" class="ulist">
+<ul>
+<li>
+<p><strong>cmd_set_rasterizer_discard_enable</strong>(<em>cb</em>, <em>boolean</em>)<br>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetRasterizerDiscardEnableEXT.html">vkCmdSetRasterizerDiscardEnableEXT</a>.</span></p>
+</li>
+</ul>
+</div>
 <div id="cmd_set_sample_locations" class="ulist">
 <ul>
 <li>
@@ -2797,7 +2880,8 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/h
 <ul>
 <li>
 <p><strong>cmd_set_scissor</strong>(<em>cb</em>, <em>first</em>, {<a href="#rect2d"><em>rect2d</em></a>})<br>
-<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetScissor.html">vkCmdSetScissor</a>.</span></p>
+<strong>cmd_set_scissor_with_count</strong>(<em>cb</em>, {<a href="#rect2d"><em>rect2d</em></a>})<br>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetScissor.html">vkCmdSetScissor</a>, <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetScissorWithCountEXT.html">vkCmdSetScissorWithCountEXT</a>.</span></p>
 </li>
 </ul>
 </div>
@@ -2811,6 +2895,19 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/h
 </li>
 </ul>
 </div>
+<div id="cmd_set_stencil_op" class="ulist">
+<ul>
+<li>
+<p><strong>cmd_set_stencil_op</strong>(<em>cb</em>, <em>face_mask</em>, <em>&#8230;&#8203;</em>)<br>
+arg2 - <em>face_mask</em>: <a href="#stencilfaceflags">stencilfaceflags</a><br>
+arg3 - <em>fail_op</em>: <a href="#stencilop">stencilop</a><br>
+arg4 - <em>pass_op</em>: <a href="#stencilop">stencilop</a><br>
+arg5 - <em>depth_fail_op</em>: <a href="#stencilop">stencilop</a><br>
+arg6 - <em>compare_op</em>: <a href="#compareop">compareop</a><br>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetStencilOpEXT.html">vkCmdSetStencilOpEXT</a>.</span></p>
+</li>
+</ul>
+</div>
 <div id="cmd_set_stencil_reference" class="ulist">
 <ul>
 <li>
@@ -2818,6 +2915,14 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/h
 <span class="small"><em>face_mask</em>: <a href="#stencilfaceflags">stencilfaceflags</a><br>
 <em>reference</em>: integer<br>
 Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetStencilReference.html">vkCmdSetStencilReference</a>.</span></p>
+</li>
+</ul>
+</div>
+<div id="cmd_set_stencil_test_enable" class="ulist">
+<ul>
+<li>
+<p><strong>cmd_set_stencil_test_enable</strong>(<em>cb</em>, <em>boolean</em>)<br>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetStencilTestEnableEXT.html">vkCmdSetStencilTestEnableEXT</a>.</span></p>
 </li>
 </ul>
 </div>
@@ -2835,7 +2940,8 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/h
 <ul>
 <li>
 <p><strong>cmd_set_viewport</strong>(<em>cb</em>, <em>first</em>, {<a href="#viewport"><em>viewport</em></a>})<br>
-<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetViewport.html">vkCmdSetViewport</a>.</span></p>
+<strong>cmd_set_viewport_with_count</strong>(<em>cb</em>, {<a href="#viewport"><em>viewport</em></a>})<br>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetViewport.html">vkCmdSetViewport</a>, <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetViewportWithCountEXT.html">vkCmdSetViewportWithCountEXT</a>.</span></p>
 </li>
 </ul>
 </div>

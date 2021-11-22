@@ -175,35 +175,55 @@ static int CmdBindIndexBuffer(lua_State *L)
     return 0;
     }
 
+
 static int CmdBindVertexBuffers(lua_State *L)
     {
     int err;
-    uint32_t count, offsets_count;
-    VkBuffer* buffers;
-    VkDeviceSize* offsets;
+    uint32_t count, count1;
+    VkBuffer *buffers = NULL;
+    VkDeviceSize *offsets = NULL;
+    VkDeviceSize *sizes = NULL;
+    VkDeviceSize *strides = NULL;
     ud_t *ud;
     VkCommandBuffer cb = checkcommand_buffer(L, 1, &ud);
     uint32_t first = luaL_checkinteger(L, 2);
+#define CLEANUP do {                    \
+        if(buffers) Free(L, buffers);   \
+        if(offsets) Free(L, offsets);   \
+        if(sizes) Free(L, sizes);       \
+        if(strides) Free(L, strides);   \
+} while(0)
 
     buffers = checkbufferlist(L, 3, &count, &err);
-    if(err) return argerrorc(L, 3, err);
+    if(err) { CLEANUP; return argerrorc(L, 3, err); }
     
-    offsets = checkdevicesizelist(L, 4, &offsets_count, &err);
-    if(err)
-        { 
-        Free(L, buffers); 
-        return argerrorc(L, 4, err);
-        }
-    if(offsets_count != count)
-        { 
-        Free(L, buffers); 
-        Free(L, offsets); 
-        return argerrorc(L, 4, ERR_LENGTH);
-        }
+    offsets = checkdevicesizelist(L, 4, &count1, &err);
+    if(err) { CLEANUP; return argerrorc(L, 4, err); }
+    if(count1 != count) { CLEANUP; return argerrorc(L, 4, ERR_LENGTH); }
 
-    ud->ddt->CmdBindVertexBuffers(cb, first, count, buffers, offsets);
-    Free(L, buffers);
-    Free(L, offsets);
+    if(lua_isnoneornil(L, 5) && lua_isnoneornil(L, 6))
+        ud->ddt->CmdBindVertexBuffers(cb, first, count, buffers, offsets);
+    else
+        {
+        if(!TestDevicePfn(L, ud, CmdBindVertexBuffers2EXT))
+            {
+            CLEANUP;
+            CheckDevicePfn(L, ud, CmdBindVertexBuffers2EXT); // to raise an error
+            return 0;
+            }
+        else
+            {
+            sizes = checkdevicesizelist(L, 5, &count1, &err);
+            if(err < 0) { CLEANUP; return argerrorc(L, 5, err); }
+            if((count1 != 0) && (count1 != count)) { CLEANUP; return argerrorc(L, 5, ERR_LENGTH); }
+            strides = checkdevicesizelist(L, 6, &count1, &err);
+            if(err < 0) { CLEANUP; return argerrorc(L, 6, err); }
+            if((count1 != 0) && (count1 != count)) { CLEANUP; return argerrorc(L, 6, ERR_LENGTH); }
+            ud->ddt->CmdBindVertexBuffers2EXT(cb, first, count, buffers, offsets, sizes, strides);
+            }
+        }
+    CLEANUP;
+#undef CLEANUP
     return 0;
     }
 
@@ -1240,6 +1260,185 @@ static int CmdSetColorWriteEnable(lua_State *L)
     return 0;
     }
 
+static int CmdSetCullMode(lua_State *L)
+    {
+    ud_t *ud;
+    VkCommandBuffer cb = checkcommand_buffer(L, 1, &ud);
+    VkCullModeFlags cullMode = checkflags(L, 2);
+    CheckDevicePfn(L, ud, CmdSetCullModeEXT);
+    ud->ddt->CmdSetCullModeEXT(cb, cullMode);
+    return 0;
+    }
+
+static int CmdSetFrontFace(lua_State *L)
+    {
+    ud_t *ud;
+    VkCommandBuffer cb = checkcommand_buffer(L, 1, &ud);
+    VkFrontFace frontFace = checkfrontface(L, 2);
+    CheckDevicePfn(L, ud, CmdSetFrontFaceEXT);
+    ud->ddt->CmdSetFrontFaceEXT(cb, frontFace);
+    return 0;
+    }
+
+static int CmdSetPrimitiveTopology(lua_State *L)
+    {
+    ud_t *ud;
+    VkCommandBuffer cb = checkcommand_buffer(L, 1, &ud);
+    VkPrimitiveTopology primitiveTopology = checkprimitivetopology(L, 2);
+    CheckDevicePfn(L, ud, CmdSetPrimitiveTopologyEXT);
+    ud->ddt->CmdSetPrimitiveTopologyEXT(cb, primitiveTopology);
+    return 0;
+    }
+
+static int CmdSetViewportWithCount(lua_State *L)
+    {
+    int err;
+    ud_t *ud;
+    uint32_t count;
+    VkViewport *viewports;
+    VkCommandBuffer cb = checkcommand_buffer(L, 1, &ud);
+    CheckDevicePfn(L, ud, CmdSetViewportWithCountEXT);
+#define CLEANUP zfreearrayVkViewport (L, viewports, count, 1)
+    viewports = zcheckarrayVkViewport(L, 2, &count, &err);
+    if(err) { CLEANUP; return argerror(L, 2); }
+    ud->ddt->CmdSetViewportWithCountEXT(cb, count, viewports);
+    CLEANUP;
+#undef CLEANUP
+    return 0;
+    }
+
+static int CmdSetScissorWithCount(lua_State *L)
+    {
+    int err;
+    ud_t *ud;
+    uint32_t count;
+    VkRect2D* scissors;
+    VkCommandBuffer cb = checkcommand_buffer(L, 1, &ud);
+    CheckDevicePfn(L, ud, CmdSetScissorWithCountEXT);
+#define CLEANUP zfreearrayVkRect2D(L, scissors, count, 1)
+    scissors = zcheckarrayVkRect2D(L, 2, &count, &err);
+    if(err) { CLEANUP; return argerror(L, 2); }
+    ud->ddt->CmdSetScissorWithCountEXT(cb, count, scissors);
+    CLEANUP;
+#undef CLEANUP
+    return 0;
+    }
+
+static int CmdSetDepthTestEnable(lua_State *L)
+    {
+    ud_t *ud;
+    VkCommandBuffer cb = checkcommand_buffer(L, 1, &ud);
+    VkBool32 depthTestEnable = checkboolean(L, 2);
+    CheckDevicePfn(L, ud, CmdSetDepthTestEnableEXT);
+    ud->ddt->CmdSetDepthTestEnableEXT(cb, depthTestEnable);
+    return 0;
+    }
+
+static int CmdSetDepthWriteEnable(lua_State *L)
+    {
+    ud_t *ud;
+    VkCommandBuffer cb = checkcommand_buffer(L, 1, &ud);
+    VkBool32 depthWriteEnable = checkboolean(L, 2);
+    CheckDevicePfn(L, ud, CmdSetDepthWriteEnableEXT);
+    ud->ddt->CmdSetDepthWriteEnableEXT(cb, depthWriteEnable);
+    return 0;
+    }
+
+static int CmdSetDepthCompareOp(lua_State *L)
+    {
+    ud_t *ud;
+    VkCommandBuffer cb = checkcommand_buffer(L, 1, &ud);
+    VkCompareOp depthCompareOp = checkcompareop(L, 2);
+    CheckDevicePfn(L, ud, CmdSetDepthCompareOpEXT);
+    ud->ddt->CmdSetDepthCompareOpEXT(cb, depthCompareOp);
+    return 0;
+    }
+
+static int CmdSetDepthBoundsTestEnable(lua_State *L)
+    {
+    ud_t *ud;
+    VkCommandBuffer cb = checkcommand_buffer(L, 1, &ud);
+    VkBool32 depthBoundsTestEnable = checkboolean(L, 2);
+    CheckDevicePfn(L, ud, CmdSetDepthBoundsTestEnableEXT);
+    ud->ddt->CmdSetDepthBoundsTestEnableEXT(cb, depthBoundsTestEnable);
+    return 0;
+    }
+
+static int CmdSetStencilTestEnable(lua_State *L)
+    {
+    ud_t *ud;
+    VkCommandBuffer cb = checkcommand_buffer(L, 1, &ud);
+    VkBool32 stencilTestEnable = checkboolean(L, 2);
+    CheckDevicePfn(L, ud, CmdSetStencilTestEnableEXT);
+    ud->ddt->CmdSetStencilTestEnableEXT(cb, stencilTestEnable);
+    return 0;
+    }
+
+static int CmdSetStencilOp(lua_State *L)
+    {
+    ud_t *ud;
+    VkCommandBuffer cb = checkcommand_buffer(L, 1, &ud);
+    VkStencilFaceFlags faceMask = checkflags(L, 2);
+    VkStencilOp failOp = checkstencilop(L, 3);
+    VkStencilOp passOp = checkstencilop(L, 4);
+    VkStencilOp depthFailOp = checkstencilop(L, 5);
+    VkCompareOp compareOp = checkcompareop(L, 6);
+    CheckDevicePfn(L, ud, CmdSetStencilOpEXT);
+    ud->ddt->CmdSetStencilOpEXT(cb, faceMask, failOp, passOp, depthFailOp, compareOp);
+    return 0;
+    }
+
+static int CmdSetPatchControlPoints(lua_State *L)
+    {
+    ud_t *ud;
+    VkCommandBuffer cb = checkcommand_buffer(L, 1, &ud);
+    uint32_t patchControlPoints = luaL_checkinteger(L, 2);
+    CheckDevicePfn(L, ud, CmdSetPatchControlPointsEXT);
+    ud->ddt->CmdSetPatchControlPointsEXT(cb, patchControlPoints);
+    return 0;
+    }
+
+static int CmdSetRasterizerDiscardEnable(lua_State *L)
+    {
+    ud_t *ud;
+    VkCommandBuffer cb = checkcommand_buffer(L, 1, &ud);
+    VkBool32 rasterizerDiscardEnable = checkboolean(L, 2);
+    CheckDevicePfn(L, ud, CmdSetRasterizerDiscardEnableEXT);
+    ud->ddt->CmdSetRasterizerDiscardEnableEXT(cb, rasterizerDiscardEnable);
+    return 0;
+    }
+
+static int CmdSetDepthBiasEnable(lua_State *L)
+    {
+    ud_t *ud;
+    VkCommandBuffer cb = checkcommand_buffer(L, 1, &ud);
+    VkBool32 depthBiasEnable = checkboolean(L, 2);
+    CheckDevicePfn(L, ud, CmdSetDepthBiasEnableEXT);
+    ud->ddt->CmdSetDepthBiasEnableEXT(cb, depthBiasEnable);
+    return 0;
+    }
+
+static int CmdSetLogicOp(lua_State *L)
+    {
+    ud_t *ud;
+    VkCommandBuffer cb = checkcommand_buffer(L, 1, &ud);
+    VkLogicOp logicOp = checklogicop(L, 2);
+    CheckDevicePfn(L, ud, CmdSetLogicOpEXT);
+    ud->ddt->CmdSetLogicOpEXT(cb, logicOp);
+    return 0;
+    }
+
+static int CmdSetPrimitiveRestartEnable(lua_State *L)
+    {
+    ud_t *ud;
+    VkCommandBuffer cb = checkcommand_buffer(L, 1, &ud);
+    VkBool32 primitiveRestartEnable = checkboolean(L, 2);
+    CheckDevicePfn(L, ud, CmdSetPrimitiveRestartEnableEXT);
+    ud->ddt->CmdSetPrimitiveRestartEnableEXT(cb, primitiveRestartEnable);
+    return 0;
+    }
+
+
 #if 0 // 10yy
         { "",  },
 static int (lua_State *L) //@@ scaffolding
@@ -1325,6 +1524,22 @@ static const struct luaL_Reg Functions[] =
         { "cmd_draw_indirect_byte_count", CmdDrawIndirectByteCount },
         { "cmd_set_line_stipple", CmdSetLineStipple },
         { "cmd_set_color_write_enable", CmdSetColorWriteEnable },
+        { "cmd_set_cull_mode", CmdSetCullMode },
+        { "cmd_set_front_face", CmdSetFrontFace },
+        { "cmd_set_primitive_topology", CmdSetPrimitiveTopology },
+        { "cmd_set_viewport_with_count", CmdSetViewportWithCount },
+        { "cmd_set_scissor_with_count", CmdSetScissorWithCount },
+        { "cmd_set_depth_test_enable", CmdSetDepthTestEnable },
+        { "cmd_set_depth_write_enable", CmdSetDepthWriteEnable },
+        { "cmd_set_depth_compare_op", CmdSetDepthCompareOp },
+        { "cmd_set_depth_bounds_test_enable", CmdSetDepthBoundsTestEnable },
+        { "cmd_set_stencil_test_enable", CmdSetStencilTestEnable },
+        { "cmd_set_stencil_op", CmdSetStencilOp },
+        { "cmd_set_patch_control_points", CmdSetPatchControlPoints },
+        { "cmd_set_rasterizer_discard_enable", CmdSetRasterizerDiscardEnable },
+        { "cmd_set_depth_bias_enable", CmdSetDepthBiasEnable },
+        { "cmd_set_logic_op", CmdSetLogicOp },
+        { "cmd_set_primitive_restart_enable", CmdSetPrimitiveRestartEnable },
         { NULL, NULL } /* sentinel */
     };
 
