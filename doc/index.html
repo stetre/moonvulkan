@@ -7972,7 +7972,7 @@ that the relevant header files are where <em>vulkan.h</em> expects them to be.</
 <a href="#_footnoteref_3">3</a>. It is good practice to not leave invalid references to objects around, because they prevent the GC to collect the memory associated with the userdata.
 </div>
 <div class="footnote" id="_footnote_4">
-<a href="#_footnoteref_4">4</a>. With respect to C structs, Lua tables don&#8217;t have fields whose values can be inferred from other field values (for example counts, sizes and lengths), and in general all those fields that can be dealt with by MoonVulkan in C without passing them to/from Lua, like 'sType' and 'pNext' fields.
+<a href="#_footnoteref_4">4</a>. With respect to C structs, Lua tables don&#8217;t include those fields whose values can be inferred from the values of other fields (for example counts, sizes and lengths), and in general all those fields that can be dealt with by MoonVulkan in C without passing them to/from Lua, like 'sType' and 'pNext' fields.
 </div>
 <div class="footnote" id="_footnote_5">
 <a href="#_footnoteref_5">5</a>. Note that MoonGLFW is used here only as example, but MoonVulkan is not tied to it in any way. MoonGLFW can be replaced by &#8230;&#8203; whatever, as long as 'whatever' provides the needed functionalities and is able to exchange raw Vulkan handles in the form of Lua integers.

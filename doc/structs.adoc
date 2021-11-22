@@ -6,8 +6,8 @@ This section describes the tables used in MoonVulkan to pass Vulkan API structur
 from Lua to C and viceversa. 
 
 The correspondence between the tables and the underlying C structs is almost one-to-one
-footnote:[With respect to C structs, Lua tables don't have fields whose values can be inferred 
-from other field values (for example counts, sizes and lengths), and in general all those
+footnote:[With respect to C structs, Lua tables don't include those fields whose values can be inferred
+from the values of other fields (for example counts, sizes and lengths), and in general all those
 fields that can be dealt with by MoonVulkan in C without passing them to/from Lua, like
 'sType' and 'pNext' fields.].
 Fields in tables are named with https://en.wikipedia.org/wiki/Snake_case[snake_case] versions of their C equivalents 
