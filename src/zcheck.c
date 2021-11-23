@@ -3204,11 +3204,16 @@ LOCALPUSH_BEGIN(VkFormatProperties)
     SetFlags(optimalTilingFeatures, "optimal_tiling_features");
     SetFlags(bufferFeatures, "buffer_features");
 LOCALPUSH_END
+LOCALPUSH_BEGIN(VkFormatProperties3KHR)
+    SetFlags(linearTilingFeatures, "linear_tiling_features");
+    SetFlags(optimalTilingFeatures, "optimal_tiling_features");
+    SetFlags(bufferFeatures, "buffer_features");
+LOCALPUSH_END
 
 ZINIT_BEGIN(VkFormatProperties2)
-    //EXTENSIONS_BEGIN
-    //  ADDX(XXX, Xxx);
-    //EXTENSIONS_END
+    EXTENSIONS_BEGIN
+      ADDX(FORMAT_PROPERTIES_3_KHR, VkFormatProperties3KHR); // must stay first
+    EXTENSIONS_END
 ZINIT_END
 
 ZPUSH_BEGIN(VkFormatProperties)
@@ -3217,10 +3222,21 @@ ZPUSH_BEGIN(VkFormatProperties)
 ZPUSH_END
 
 ZPUSH_BEGIN(VkFormatProperties2)
+    /* Ensure that the VkFormatProperties3KHR extension contains the flag values.
+     * We must do this because the extension may not be supported, thus ignored, in
+     * which case the driver would (or at least should) write only the fields of
+     * p->formatProperties, and the extension flags would remain zero. */
+    VkFormatProperties3KHR *prop = (VkFormatProperties3KHR*)p->pNext;
+    if(prop->sType != VK_STRUCTURE_TYPE_FORMAT_PROPERTIES_3_KHR) /* paranoia */
+        { unexpected(L); return 1; }
+    prop->linearTilingFeatures |= (VkFlags64)p->formatProperties.linearTilingFeatures;
+    prop->optimalTilingFeatures |= (VkFlags64)p->formatProperties.optimalTilingFeatures;
+    prop->bufferFeatures |= (VkFlags64)p->formatProperties.bufferFeatures;
     lua_newtable(L);
-    localpushVkFormatProperties(L, &p->formatProperties);
-    //XPUSH_BEGIN
-    //XPUSH_END
+    //localpushVkFormatProperties(L, &p->formatProperties);
+    XPUSH_BEGIN
+        XCASE(FORMAT_PROPERTIES_3_KHR, VkFormatProperties3KHR); // must stay first
+    XPUSH_END
 ZPUSH_END
 
 /*------------------------------------------------------------------------------*

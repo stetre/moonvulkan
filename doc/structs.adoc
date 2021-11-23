@@ -805,7 +805,7 @@ _flags_: <<memoryheapflags, memoryheapflags>>, +
 _linear_tiling_features_: <<formatfeatureflags, formatfeatureflags>>, +
 _optimal_tiling_features_: <<formatfeatureflags, formatfeatureflags>>, +
 _buffer_features_: <<formatfeatureflags, formatfeatureflags>>, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkFormatProperties.html[VkFormatProperties])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkFormatProperties2.html[VkFormatProperties2], https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkFormatProperties3KHR.html[VkFormatProperties3KHR])#
 
 
 * [[imageformatproperties]]

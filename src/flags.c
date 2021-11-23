@@ -1980,11 +1980,10 @@ static int ImageUsageFlags(lua_State *L)
  | VkFormatFeatureFlags                                                 |
  *----------------------------------------------------------------------*/
 
-
-static VkFlags checkformatfeatureflags(lua_State *L, int arg)
+static VkFlags64 checkformatfeatureflags(lua_State *L, int arg)
     {
     const char *s;
-    VkFlags flags = 0;
+    VkFlags64 flags = 0;
 
     while(lua_isstring(L, arg))
         {
@@ -2017,8 +2016,11 @@ static VkFlags checkformatfeatureflags(lua_State *L, int arg)
         CASE(VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT, "sampled image filter cubic");
         CASE(VK_FORMAT_FEATURE_ACCELERATION_STRUCTURE_VERTEX_BUFFER_BIT, "acceleration structure vertex buffer");
         CASE(VK_FORMAT_FEATURE_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT, "fragment shading rate attachment");
+        CASE(VK_FORMAT_FEATURE_STORAGE_READ_WITHOUT_FORMAT_BIT, "storage read without format");
+        CASE(VK_FORMAT_FEATURE_STORAGE_WRITE_WITHOUT_FORMAT_BIT, "storage write without format");
+        CASE(VK_FORMAT_FEATURE_SAMPLED_IMAGE_DEPTH_COMPARISON_BIT, "sampled image depth comparison");
 #undef CASE
-        return (VkFlags)luaL_argerror(L, --arg, badvalue(L,s));
+        return (VkFlags64)luaL_argerror(L, --arg, badvalue(L,s));
         done: ;
         }
 
@@ -2026,7 +2028,7 @@ static VkFlags checkformatfeatureflags(lua_State *L, int arg)
     }
 
 
-static int pushformatfeatureflags(lua_State *L, VkFlags flags)
+static int pushformatfeatureflags(lua_State *L, VkFlags64 flags)
     {
     int n = 0;
 
@@ -2058,6 +2060,9 @@ static int pushformatfeatureflags(lua_State *L, VkFlags flags)
         CASE(VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT, "sampled image filter cubic");
         CASE(VK_FORMAT_FEATURE_ACCELERATION_STRUCTURE_VERTEX_BUFFER_BIT, "acceleration structure vertex buffer");
         CASE(VK_FORMAT_FEATURE_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT, "fragment shading rate attachment");
+        CASE(VK_FORMAT_FEATURE_STORAGE_READ_WITHOUT_FORMAT_BIT, "storage read without format");
+        CASE(VK_FORMAT_FEATURE_STORAGE_WRITE_WITHOUT_FORMAT_BIT, "storage write without format");
+        CASE(VK_FORMAT_FEATURE_SAMPLED_IMAGE_DEPTH_COMPARISON_BIT, "sampled image depth comparison");
 #undef CASE
 
     return n;
@@ -2099,6 +2104,9 @@ static int FormatFeatureFlags(lua_State *L)
     ADD(FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT);\
     ADD(FORMAT_FEATURE_ACCELERATION_STRUCTURE_VERTEX_BUFFER_BIT);\
     ADD(FORMAT_FEATURE_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT);\
+    ADD(FORMAT_FEATURE_STORAGE_READ_WITHOUT_FORMAT_BIT);\
+    ADD(FORMAT_FEATURE_STORAGE_WRITE_WITHOUT_FORMAT_BIT);\
+    ADD(FORMAT_FEATURE_SAMPLED_IMAGE_DEPTH_COMPARISON_BIT);\
 
 /*----------------------------------------------------------------------*
  | VkSurfaceTransformFlagsKHR

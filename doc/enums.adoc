@@ -165,7 +165,7 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkDis
 
 [[driverid]]
 [small]#*driverid*: vk.DRIVER_ID_XXX +
-Values: '_amd proprietary_', '_amd open source_', '_mesa radv_', '_nvidia proprietary_', '_intel proprietary windows_', '_intel open source mesa_', '_imagination proprietary_', '_qualcomm proprietary_', '_arm proprietary_', '_google swiftshader_', '_ggp proprietary_', '_broadcom proprietary_', '_mesa llvmpipe_', '_moltenvk_', '_coreavi proprietary_', '_juice proprietary_', '_verisilicon proprietary_'. +
+Values: '_amd proprietary_', '_amd open source_', '_mesa radv_', '_nvidia proprietary_', '_intel proprietary windows_', '_intel open source mesa_', '_imagination proprietary_', '_qualcomm proprietary_', '_arm proprietary_', '_google swiftshader_', '_ggp proprietary_', '_broadcom proprietary_', '_mesa llvmpipe_', '_moltenvk_', '_coreavi proprietary_', '_juice proprietary_', '_verisilicon proprietary_', '_mesa turnip_', '_mesa v3dv_', '_mesa panvk_'. +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkDriverId.html[VkDriverId].#
 
 [[dynamicstate]]

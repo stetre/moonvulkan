@@ -435,8 +435,8 @@ local TYPED_WIN32 = {
    { "VkMemoryGetWin32HandleInfoKHR", "MEMORY_GET_WIN32_HANDLE_INFO_KHR" },
    { "VkWin32KeyedMutexAcquireReleaseInfoKHR", "WIN32_KEYED_MUTEX_ACQUIRE_RELEASE_INFO_KHR" },
    { "VkSurfaceFullScreenExclusiveWin32InfoEXT", "SURFACE_FULL_SCREEN_EXCLUSIVE_WIN32_INFO_EXT" },
-}
-
+   { "VkFormatProperties3KHR", "FORMAT_PROPERTIES_3_KHR" },
+} ;
 
 -----------------------------------------------------------------------------
 local template_typed =[[

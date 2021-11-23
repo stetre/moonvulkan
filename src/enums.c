@@ -1203,6 +1203,9 @@ void moonvulkan_open_enums(lua_State *L)
     ADD(DRIVER_ID_COREAVI_PROPRIETARY, "coreavi proprietary");
     ADD(DRIVER_ID_JUICE_PROPRIETARY, "juice proprietary");
     ADD(DRIVER_ID_VERISILICON_PROPRIETARY, "verisilicon proprietary");
+    ADD(DRIVER_ID_MESA_TURNIP, "mesa turnip");
+    ADD(DRIVER_ID_MESA_V3DV, "mesa v3dv");
+    ADD(DRIVER_ID_MESA_PANVK, "mesa panvk");
  
     domain = DOMAIN_TIME_DOMAIN; /* VkTimaDomainEXT */
     ADD(TIME_DOMAIN_DEVICE, "device");

@@ -4600,6 +4600,23 @@ int zinitVkSurfaceFullScreenExclusiveWin32InfoEXT(lua_State *L, VkSurfaceFullScr
 #define zpushVkSurfaceFullScreenExclusiveWin32InfoEXT moonvulkan_zpushVkSurfaceFullScreenExclusiveWin32InfoEXT
 int zpushVkSurfaceFullScreenExclusiveWin32InfoEXT(lua_State *L, const VkSurfaceFullScreenExclusiveWin32InfoEXT *p);
 
+#define znewVkFormatProperties3KHR(L, err) (VkFormatProperties3KHR*)znew((L), VK_STRUCTURE_TYPE_FORMAT_PROPERTIES_3_KHR, sizeof(VkFormatProperties3KHR), (err))
+#define znewarrayVkFormatProperties3KHR(L, count, err) (VkFormatProperties3KHR*)znewarray((L), VK_STRUCTURE_TYPE_FORMAT_PROPERTIES_3_KHR, sizeof(VkFormatProperties3KHR), (count), (err))
+#define znewchainVkFormatProperties3KHR moonvulkan_znewchainVkFormatProperties3KHR
+VkFormatProperties3KHR* znewchainVkFormatProperties3KHR(lua_State *L, int *err);
+#define znewchainarrayVkFormatProperties3KHR moonvulkan_znewchainarrayVkFormatProperties3KHR
+VkFormatProperties3KHR* znewchainarrayVkFormatProperties3KHR(lua_State *L, uint32_t count, int *err);
+#define zcheckVkFormatProperties3KHR moonvulkan_zcheckVkFormatProperties3KHR
+VkFormatProperties3KHR* zcheckVkFormatProperties3KHR(lua_State *L, int arg, int *err);
+#define zcheckarrayVkFormatProperties3KHR moonvulkan_zcheckarrayVkFormatProperties3KHR
+VkFormatProperties3KHR* zcheckarrayVkFormatProperties3KHR(lua_State *L, int arg, uint32_t *count, int *err);
+#define zinitVkFormatProperties3KHR moonvulkan_zinitVkFormatProperties3KHR
+int zinitVkFormatProperties3KHR(lua_State *L, VkFormatProperties3KHR* p, int *err);
+#define zfreeVkFormatProperties3KHR(L, p, base) zfree((L), (p), (base))
+#define zfreearrayVkFormatProperties3KHR(L, p, count, base) zfreearray((L), (p), sizeof(VkFormatProperties3KHR), (count), (base))
+#define zpushVkFormatProperties3KHR moonvulkan_zpushVkFormatProperties3KHR
+int zpushVkFormatProperties3KHR(lua_State *L, const VkFormatProperties3KHR *p);
+
 
 #endif /* VK_USE_PLATFORM_WIN32_KHR */
 
