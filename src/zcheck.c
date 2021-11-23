@@ -4776,6 +4776,12 @@ ZCHECK_BEGIN(VkSamplerCustomBorderColorCreateInfoEXT)
     GetFormat(format, "custom_border_color_format");
 ZCHECK_END
 
+ZCHECK_BEGIN(VkSamplerBorderColorComponentMappingCreateInfoEXT)
+    newstruct(VkSamplerBorderColorComponentMappingCreateInfoEXT);
+    GetStruct(components, "components", VkComponentMapping);
+    GetBoolean(srgb, "srgb");
+ZCHECK_END
+
 ZCHECK_BEGIN(VkSamplerCreateInfo)
     checktable(arg);
     newstruct(VkSamplerCreateInfo);
@@ -4802,6 +4808,8 @@ ZCHECK_BEGIN(VkSamplerCreateInfo)
         ADD_EXTENSION_INLINE(VkSamplerYcbcrConversionInfoKHR);
     if(ispresent("custom_border_color") || ispresent("custom_border_color_format"))
         ADD_EXTENSION_INLINE(VkSamplerCustomBorderColorCreateInfoEXT);
+    if(ispresent("components"))
+        ADD_EXTENSION_INLINE(VkSamplerBorderColorComponentMappingCreateInfoEXT);
     EXTENSIONS_END
 ZCHECK_END
 

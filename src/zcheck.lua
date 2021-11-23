@@ -421,6 +421,7 @@ local TYPED = {
    { "VkVertexInputAttributeDescription2EXT", "VERTEX_INPUT_ATTRIBUTE_DESCRIPTION_2_EXT" },
    { "VkPipelineColorWriteCreateInfoEXT", "PIPELINE_COLOR_WRITE_CREATE_INFO_EXT" },
    { "VkQueueFamilyGlobalPriorityPropertiesEXT", "QUEUE_FAMILY_GLOBAL_PRIORITY_PROPERTIES_EXT" },
+   { "VkSamplerBorderColorComponentMappingCreateInfoEXT", "SAMPLER_BORDER_COLOR_COMPONENT_MAPPING_CREATE_INFO_EXT" },
 }
 
 local TYPED_WIN32 = {

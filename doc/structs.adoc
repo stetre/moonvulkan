@@ -1384,6 +1384,9 @@ _conversion_: <<sampler_ycbcr_conversion, sampler_ycbcr_conversion>>, +
 pass:[--] EXTENSION https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkSamplerCustomBorderColorCreateInfoEXT.html[VkSamplerCustomBorderColorCreateInfoEXT]: +
 _custom_border_color_: <<clearcolorvalue, clearcolorvalue>>, +
 _custom_border_color_format_: <<format, format>>, +
+pass:[--] EXTENSION https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkSamplerBorderColorComponentMappingCreateInfoEXT.html[VkSamplerBorderColorComponentMappingCreateInfoEXT]: +
+_components_: <<componentmapping, componentmapping>>, +
+_srgb_: boolean, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkSamplerCreateInfo.html[VkSamplerCreateInfo])#
 
 

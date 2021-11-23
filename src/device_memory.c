@@ -591,6 +591,18 @@ static int GetDeviceMemoryOpaqueCaptureAddress(lua_State *L)
     return 1;
     }
 
+static int SetDeviceMemoryPriority(lua_State *L)
+    {
+    ud_t *ud;
+    VkDeviceMemory device_memory = checkdevice_memory(L, 1, &ud);
+    float priority = luaL_checknumber(L, 2);
+    CheckDevicePfn(L, ud, SetDeviceMemoryPriorityEXT);
+    ud->ddt->SetDeviceMemoryPriorityEXT(ud->device, device_memory, priority);
+    return 0;
+    }
+
+
+
 RAW_FUNC(device_memory)
 TYPE_FUNC(device_memory)
 INSTANCE_FUNC(device_memory)
@@ -638,6 +650,7 @@ static const struct luaL_Reg Functions[] =
         { "get_buffer_device_address", GetBufferDeviceAddress },
         { "get_buffer_opaque_capture_address", GetBufferOpaqueCaptureAddress },
         { "get_device_memory_opaque_capture_address", GetDeviceMemoryOpaqueCaptureAddress },
+        { "set_device_memory_priority", SetDeviceMemoryPriority },
         { NULL, NULL } /* sentinel */
     };
 

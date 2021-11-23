@@ -40,6 +40,10 @@ Returns _data_ as a binary string.#
 * _bytes_ = *get_device_memory_commitment*(_devmem_) +
 [small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetDeviceMemoryCommitment.html[vkGetDeviceMemoryCommitment].#
 
+[[set_device_memory_priority]]
+* *set_device_memory_priority*(_devmem_, _priority_) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkSetDeviceMemoryPriorityEXT.html[vkSetDeviceMemoryPriorityEXT].#
+
 [[flush_mapped_memory_ranges]]
 * *flush_mapped_memory_ranges*(_device_, {<<mappedmemoryrange, _mappedmemoryrange_>>}) +
 [small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkFlushMappedMemoryRanges.html[vkFlushMappedMemoryRanges].#
