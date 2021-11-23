@@ -414,6 +414,12 @@ typedef struct {
     F(CmdSetColorWriteEnableEXT);
     F(CmdDrawMultiEXT);
     F(CmdDrawMultiIndexedEXT);
+    F(CmdBeginRenderingKHR);
+    F(CmdEndRenderingKHR);
+    F(GetDeviceBufferMemoryRequirementsKHR);
+    F(GetDeviceImageMemoryRequirementsKHR);
+    F(GetDeviceImageSparseMemoryRequirementsKHR);
+    F(SetDeviceMemoryPriorityEXT);
 #ifdef VK_USE_PLATFORM_WIN32_KHR
     F(GetMemoryWin32HandleKHR);
     F(GetMemoryWin32HandlePropertiesKHR);

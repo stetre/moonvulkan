@@ -2663,10 +2663,10 @@ static VkFlags checkexternalfencehandletypeflags(lua_State *L, int arg)
         {
         s = lua_tostring(L, arg++);
 #define CASE(CODE,str) if((strcmp(s, str)==0)) do { flags |= CODE; goto done; } while(0)
-    CASE(VK_EXTERNAL_FENCE_HANDLE_TYPE_OPAQUE_FD_BIT, "opaque_fd");
-    CASE(VK_EXTERNAL_FENCE_HANDLE_TYPE_OPAQUE_WIN32_BIT, "opaque_win32");
-    CASE(VK_EXTERNAL_FENCE_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT, "opaque_win32_kmt");
-    CASE(VK_EXTERNAL_FENCE_HANDLE_TYPE_SYNC_FD_BIT, "sync_fd");
+    CASE(VK_EXTERNAL_FENCE_HANDLE_TYPE_OPAQUE_FD_BIT, "opaque fd");
+    CASE(VK_EXTERNAL_FENCE_HANDLE_TYPE_OPAQUE_WIN32_BIT, "opaque win32");
+    CASE(VK_EXTERNAL_FENCE_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT, "opaque win32 kmt");
+    CASE(VK_EXTERNAL_FENCE_HANDLE_TYPE_SYNC_FD_BIT, "sync fd");
 #undef CASE
         return (VkFlags)luaL_argerror(L, --arg, badvalue(L,s));
         done: ;
@@ -2680,10 +2680,10 @@ static int pushexternalfencehandletypeflags(lua_State *L, VkFlags flags)
     int n = 0;
 
 #define CASE(CODE,str) do { if( flags & CODE) { lua_pushstring(L, str); n++; } } while(0)
-    CASE(VK_EXTERNAL_FENCE_HANDLE_TYPE_OPAQUE_FD_BIT, "opaque_fd");
-    CASE(VK_EXTERNAL_FENCE_HANDLE_TYPE_OPAQUE_WIN32_BIT, "opaque_win32");
-    CASE(VK_EXTERNAL_FENCE_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT, "opaque_win32_kmt");
-    CASE(VK_EXTERNAL_FENCE_HANDLE_TYPE_SYNC_FD_BIT, "sync_fd");
+    CASE(VK_EXTERNAL_FENCE_HANDLE_TYPE_OPAQUE_FD_BIT, "opaque fd");
+    CASE(VK_EXTERNAL_FENCE_HANDLE_TYPE_OPAQUE_WIN32_BIT, "opaque win32");
+    CASE(VK_EXTERNAL_FENCE_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT, "opaque win32 kmt");
+    CASE(VK_EXTERNAL_FENCE_HANDLE_TYPE_SYNC_FD_BIT, "sync fd");
 #undef CASE
 
     return n;

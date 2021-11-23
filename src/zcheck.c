@@ -2072,7 +2072,41 @@ LOCALCHECK_END
 LOCALCHECK_BEGIN(PHYSICAL_DEVICE_MULTI_DRAW_FEATURES_EXT, VkPhysicalDeviceMultiDrawFeaturesEXT)
     GetBoolean(multiDraw, "multi_draw");
 LOCALCHECK_END
+LOCALCHECK_BEGIN(PHYSICAL_DEVICE_DYNAMIC_RENDERING_FEATURES_KHR, VkPhysicalDeviceDynamicRenderingFeaturesKHR)
+    GetBoolean(dynamicRendering, "dynamic_rendering");
+LOCALCHECK_END
+LOCALCHECK_BEGIN(PHYSICAL_DEVICE_SHADER_INTEGER_DOT_PRODUCT_FEATURES_KHR, VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR)
+    GetBoolean(shaderIntegerDotProduct, "shader_integer_dot_product");
+LOCALCHECK_END
+LOCALCHECK_BEGIN(PHYSICAL_DEVICE_MAINTENANCE_4_FEATURES_KHR, VkPhysicalDeviceMaintenance4FeaturesKHR)
+    GetBoolean(maintenance4, "maintenance4");
+LOCALCHECK_END
+LOCALCHECK_BEGIN(PHYSICAL_DEVICE_RGBA10X6_FORMATS_FEATURES_EXT, VkPhysicalDeviceRGBA10X6FormatsFeaturesEXT)
+    GetBoolean(formatRgba10x6WithoutYCbCrSampler, "format_rgba10x6_without_ycbcr_sampler");
+LOCALCHECK_END
+LOCALCHECK_BEGIN(PHYSICAL_DEVICE_PRIMITIVE_TOPOLOGY_LIST_RESTART_FEATURES_EXT, VkPhysicalDevicePrimitiveTopologyListRestartFeaturesEXT)
+    GetBoolean(primitiveTopologyListRestart, "primitive_topology_list_restart");
+    GetBoolean(primitiveTopologyPatchListRestart, "primitive_topology_patch_list_restart");
+LOCALCHECK_END
+LOCALCHECK_BEGIN(PHYSICAL_DEVICE_BORDER_COLOR_SWIZZLE_FEATURES_EXT, VkPhysicalDeviceBorderColorSwizzleFeaturesEXT)
+    GetBoolean(borderColorSwizzle, "border_color_swizzle");
+    GetBoolean(borderColorSwizzleFromImage, "border_color_swizzle_from_image");
+LOCALCHECK_END
+LOCALCHECK_BEGIN(PHYSICAL_DEVICE_PAGEABLE_DEVICE_LOCAL_MEMORY_FEATURES_EXT, VkPhysicalDevicePageableDeviceLocalMemoryFeaturesEXT)
+    GetBoolean(pageableDeviceLocalMemory, "pageable_device_local_memory");
+LOCALCHECK_END
 
+#if 0 //££ 9yy scaffolding
+LOCALCHECK_BEGIN(, )
+    GetBoolean(, "");
+LOCALCHECK_END
+        ADDX(, );
+        ADD();
+LOCALPUSH_BEGIN()
+    SetBoolean(, "");
+LOCALPUSH_END
+        XCASE(, );
+#endif
 
 ZINIT_BEGIN(VkPhysicalDeviceFeatures2)
     EXTENSIONS_BEGIN
@@ -2146,6 +2180,13 @@ ZINIT_BEGIN(VkPhysicalDeviceFeatures2)
         ADDX(PHYSICAL_DEVICE_COLOR_WRITE_ENABLE_FEATURES_EXT, VkPhysicalDeviceColorWriteEnableFeaturesEXT);
         ADDX(PHYSICAL_DEVICE_GLOBAL_PRIORITY_QUERY_FEATURES_EXT, VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT);
         ADDX(PHYSICAL_DEVICE_MULTI_DRAW_FEATURES_EXT, VkPhysicalDeviceMultiDrawFeaturesEXT);
+        ADDX(PHYSICAL_DEVICE_DYNAMIC_RENDERING_FEATURES_KHR, VkPhysicalDeviceDynamicRenderingFeaturesKHR);
+        ADDX(PHYSICAL_DEVICE_SHADER_INTEGER_DOT_PRODUCT_FEATURES_KHR, VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR);
+        ADDX(PHYSICAL_DEVICE_MAINTENANCE_4_FEATURES_KHR, VkPhysicalDeviceMaintenance4FeaturesKHR);
+        ADDX(PHYSICAL_DEVICE_RGBA10X6_FORMATS_FEATURES_EXT, VkPhysicalDeviceRGBA10X6FormatsFeaturesEXT);
+        ADDX(PHYSICAL_DEVICE_PRIMITIVE_TOPOLOGY_LIST_RESTART_FEATURES_EXT, VkPhysicalDevicePrimitiveTopologyListRestartFeaturesEXT);
+        ADDX(PHYSICAL_DEVICE_BORDER_COLOR_SWIZZLE_FEATURES_EXT, VkPhysicalDeviceBorderColorSwizzleFeaturesEXT);
+        ADDX(PHYSICAL_DEVICE_PAGEABLE_DEVICE_LOCAL_MEMORY_FEATURES_EXT, VkPhysicalDevicePageableDeviceLocalMemoryFeaturesEXT);
     EXTENSIONS_END
 ZINIT_END
 
@@ -2235,6 +2276,13 @@ ZCHECK_BEGIN(VkPhysicalDeviceFeatures2)
         ADD(VkPhysicalDeviceColorWriteEnableFeaturesEXT);
         ADD(VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT);
         ADD(VkPhysicalDeviceMultiDrawFeaturesEXT);
+        ADD(VkPhysicalDeviceDynamicRenderingFeaturesKHR);
+        ADD(VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR);
+        ADD(VkPhysicalDeviceMaintenance4FeaturesKHR);
+        ADD(VkPhysicalDeviceRGBA10X6FormatsFeaturesEXT);
+        ADD(VkPhysicalDevicePrimitiveTopologyListRestartFeaturesEXT);
+        ADD(VkPhysicalDeviceBorderColorSwizzleFeaturesEXT);
+        ADD(VkPhysicalDevicePageableDeviceLocalMemoryFeaturesEXT);
     #undef ADD
     EXTENSIONS_END
 ZCHECK_END
@@ -2600,6 +2648,29 @@ LOCALPUSH_END
 LOCALPUSH_BEGIN(VkPhysicalDeviceMultiDrawFeaturesEXT)
     SetBoolean(multiDraw, "multi_draw");
 LOCALPUSH_END
+LOCALPUSH_BEGIN(VkPhysicalDeviceDynamicRenderingFeaturesKHR)
+    SetBoolean(dynamicRendering, "dynamic_rendering");
+LOCALPUSH_END
+LOCALPUSH_BEGIN(VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR)
+    SetBoolean(shaderIntegerDotProduct, "shader_integer_dot_product");
+LOCALPUSH_END
+LOCALPUSH_BEGIN(VkPhysicalDeviceMaintenance4FeaturesKHR)
+    SetBoolean(maintenance4, "maintenance4");
+LOCALPUSH_END
+LOCALPUSH_BEGIN(VkPhysicalDeviceRGBA10X6FormatsFeaturesEXT)
+    SetBoolean(formatRgba10x6WithoutYCbCrSampler, "format_rgba10x6_without_ycbcr_sampler");
+LOCALPUSH_END
+LOCALPUSH_BEGIN(VkPhysicalDevicePrimitiveTopologyListRestartFeaturesEXT)
+    SetBoolean(primitiveTopologyListRestart, "primitive_topology_list_restart");
+    SetBoolean(primitiveTopologyPatchListRestart, "primitive_topology_patch_list_restart");
+LOCALPUSH_END
+LOCALPUSH_BEGIN(VkPhysicalDeviceBorderColorSwizzleFeaturesEXT)
+    SetBoolean(borderColorSwizzle, "border_color_swizzle");
+    SetBoolean(borderColorSwizzleFromImage, "border_color_swizzle_from_image");
+LOCALPUSH_END
+LOCALPUSH_BEGIN(VkPhysicalDevicePageableDeviceLocalMemoryFeaturesEXT)
+    SetBoolean(pageableDeviceLocalMemory, "pageable_device_local_memory");
+LOCALPUSH_END
 
 ZPUSH_BEGIN(VkPhysicalDeviceFeatures)
     lua_newtable(L);
@@ -2681,6 +2752,13 @@ ZPUSH_BEGIN(VkPhysicalDeviceFeatures2)
         XCASE(PHYSICAL_DEVICE_COLOR_WRITE_ENABLE_FEATURES_EXT, VkPhysicalDeviceColorWriteEnableFeaturesEXT);
         XCASE(PHYSICAL_DEVICE_GLOBAL_PRIORITY_QUERY_FEATURES_EXT, VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT);
         XCASE(PHYSICAL_DEVICE_MULTI_DRAW_FEATURES_EXT, VkPhysicalDeviceMultiDrawFeaturesEXT);
+        XCASE(PHYSICAL_DEVICE_DYNAMIC_RENDERING_FEATURES_KHR, VkPhysicalDeviceDynamicRenderingFeaturesKHR);
+        XCASE(PHYSICAL_DEVICE_SHADER_INTEGER_DOT_PRODUCT_FEATURES_KHR, VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR);
+        XCASE(PHYSICAL_DEVICE_MAINTENANCE_4_FEATURES_KHR, VkPhysicalDeviceMaintenance4FeaturesKHR);
+        XCASE(PHYSICAL_DEVICE_RGBA10X6_FORMATS_FEATURES_EXT, VkPhysicalDeviceRGBA10X6FormatsFeaturesEXT);
+        XCASE(PHYSICAL_DEVICE_PRIMITIVE_TOPOLOGY_LIST_RESTART_FEATURES_EXT, VkPhysicalDevicePrimitiveTopologyListRestartFeaturesEXT);
+        XCASE(PHYSICAL_DEVICE_BORDER_COLOR_SWIZZLE_FEATURES_EXT, VkPhysicalDeviceBorderColorSwizzleFeaturesEXT);
+        XCASE(PHYSICAL_DEVICE_PAGEABLE_DEVICE_LOCAL_MEMORY_FEATURES_EXT, VkPhysicalDevicePageableDeviceLocalMemoryFeaturesEXT);
     XPUSH_END
 ZPUSH_END
 
@@ -3073,6 +3151,42 @@ LOCALPUSH_END
 LOCALPUSH_BEGIN(VkPhysicalDeviceMultiDrawPropertiesEXT)
     SetInteger(maxMultiDrawCount, "max_multi_draw_count");
 LOCALPUSH_END
+LOCALPUSH_BEGIN(VkPhysicalDeviceMaintenance4PropertiesKHR)
+    SetInteger(maxBufferSize, "max_buffer_size");
+LOCALPUSH_END
+LOCALPUSH_BEGIN(VkPhysicalDeviceShaderIntegerDotProductPropertiesKHR)
+    SetBoolean(integerDotProduct8BitUnsignedAccelerated, "integer_dot_product_8bit_unsigned_accelerated");
+    SetBoolean(integerDotProduct8BitSignedAccelerated, "integer_dot_product_8bit_signed_accelerated");
+    SetBoolean(integerDotProduct8BitMixedSignednessAccelerated, "integer_dot_product_8bit_mixed_signedness_accelerated");
+    SetBoolean(integerDotProduct4x8BitPackedUnsignedAccelerated, "integer_dot_product_4x8bit_packed_unsigned_accelerated");
+    SetBoolean(integerDotProduct4x8BitPackedSignedAccelerated, "integer_dot_product_4x8bit_packed_signed_accelerated");
+    SetBoolean(integerDotProduct4x8BitPackedMixedSignednessAccelerated, "integer_dot_product_4x8bit_packed_mixed_signedness_accelerated");
+    SetBoolean(integerDotProduct16BitUnsignedAccelerated, "integer_dot_product_16bit_unsigned_accelerated");
+    SetBoolean(integerDotProduct16BitSignedAccelerated, "integer_dot_product_16bit_signed_accelerated");
+    SetBoolean(integerDotProduct16BitMixedSignednessAccelerated, "integer_dot_product_16bit_mixed_signedness_accelerated");
+    SetBoolean(integerDotProduct32BitUnsignedAccelerated, "integer_dot_product_32bit_unsigned_accelerated");
+    SetBoolean(integerDotProduct32BitSignedAccelerated, "integer_dot_product_32bit_signed_accelerated");
+    SetBoolean(integerDotProduct32BitMixedSignednessAccelerated, "integer_dot_product_32bit_mixed_signedness_accelerated");
+    SetBoolean(integerDotProduct64BitUnsignedAccelerated, "integer_dot_product_64bit_unsigned_accelerated");
+    SetBoolean(integerDotProduct64BitSignedAccelerated, "integer_dot_product_64bit_signed_accelerated");
+    SetBoolean(integerDotProduct64BitMixedSignednessAccelerated, "integer_dot_product_64bit_mixed_signedness_accelerated");
+    SetBoolean(integerDotProductAccumulatingSaturating8BitUnsignedAccelerated, "integer_dot_product_accumulating_saturating_8bit_unsigned_accelerated");
+    SetBoolean(integerDotProductAccumulatingSaturating8BitSignedAccelerated, "integer_dot_product_accumulating_saturating_8bit_signed_accelerated");
+    SetBoolean(integerDotProductAccumulatingSaturating8BitMixedSignednessAccelerated, "integer_dot_product_accumulating_saturating_8bit_mixed_signedness_accelerated");
+    SetBoolean(integerDotProductAccumulatingSaturating4x8BitPackedUnsignedAccelerated, "integer_dot_product_accumulating_saturating_4x8bit_packed_unsigned_accelerated");
+    SetBoolean(integerDotProductAccumulatingSaturating4x8BitPackedSignedAccelerated, "integer_dot_product_accumulating_saturating_4x8bit_packed_signed_accelerated");
+    SetBoolean(integerDotProductAccumulatingSaturating4x8BitPackedMixedSignednessAccelerated, "integer_dot_product_accumulating_saturating_4x8bit_packed_mixed_signedness_accelerated");
+    SetBoolean(integerDotProductAccumulatingSaturating16BitUnsignedAccelerated, "integer_dot_product_accumulating_saturating_16bit_unsigned_accelerated");
+    SetBoolean(integerDotProductAccumulatingSaturating16BitSignedAccelerated, "integer_dot_product_accumulating_saturating_16bit_signed_accelerated");
+    SetBoolean(integerDotProductAccumulatingSaturating16BitMixedSignednessAccelerated, "integer_dot_product_accumulating_saturating_16bit_mixed_signedness_accelerated");
+    SetBoolean(integerDotProductAccumulatingSaturating32BitUnsignedAccelerated, "integer_dot_product_accumulating_saturating_32bit_unsigned_accelerated");
+    SetBoolean(integerDotProductAccumulatingSaturating32BitSignedAccelerated, "integer_dot_product_accumulating_saturating_32bit_signed_accelerated");
+    SetBoolean(integerDotProductAccumulatingSaturating32BitMixedSignednessAccelerated, "integer_dot_product_accumulating_saturating_32bit_mixed_signedness_accelerated");
+    SetBoolean(integerDotProductAccumulatingSaturating64BitUnsignedAccelerated, "integer_dot_product_accumulating_saturating_64bit_unsigned_accelerated");
+    SetBoolean(integerDotProductAccumulatingSaturating64BitSignedAccelerated, "integer_dot_product_accumulating_saturating_64bit_signed_accelerated");
+    SetBoolean(integerDotProductAccumulatingSaturating64BitMixedSignednessAccelerated, "integer_dot_product_accumulating_saturating_64bit_mixed_signedness_accelerated");
+LOCALPUSH_END
+
 
 ZINIT_BEGIN(VkPhysicalDeviceProperties2)
     EXTENSIONS_BEGIN
@@ -3114,6 +3228,8 @@ ZINIT_BEGIN(VkPhysicalDeviceProperties2)
         ADDX(PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_2_PROPERTIES_EXT, VkPhysicalDeviceFragmentDensityMap2PropertiesEXT);
         ADDX(PHYSICAL_DEVICE_DRM_PROPERTIES_EXT, VkPhysicalDeviceDrmPropertiesEXT);
         ADDX(PHYSICAL_DEVICE_MULTI_DRAW_PROPERTIES_EXT, VkPhysicalDeviceMultiDrawPropertiesEXT);
+        ADDX(PHYSICAL_DEVICE_MAINTENANCE_4_PROPERTIES_KHR, VkPhysicalDeviceMaintenance4PropertiesKHR);
+        ADDX(PHYSICAL_DEVICE_SHADER_INTEGER_DOT_PRODUCT_PROPERTIES_KHR, VkPhysicalDeviceShaderIntegerDotProductPropertiesKHR);
     EXTENSIONS_END
 ZINIT_END
 
@@ -3163,7 +3279,8 @@ ZPUSH_BEGIN(VkPhysicalDeviceProperties2)
         XCASE(PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_2_PROPERTIES_EXT, VkPhysicalDeviceFragmentDensityMap2PropertiesEXT);
         XCASE(PHYSICAL_DEVICE_DRM_PROPERTIES_EXT, VkPhysicalDeviceDrmPropertiesEXT);
         XCASE(PHYSICAL_DEVICE_MULTI_DRAW_PROPERTIES_EXT, VkPhysicalDeviceMultiDrawPropertiesEXT);
-
+        XCASE(PHYSICAL_DEVICE_MAINTENANCE_4_PROPERTIES_KHR, VkPhysicalDeviceMaintenance4PropertiesKHR);
+        XCASE(PHYSICAL_DEVICE_SHADER_INTEGER_DOT_PRODUCT_PROPERTIES_KHR, VkPhysicalDeviceShaderIntegerDotProductPropertiesKHR);
     XPUSH_END
 ZPUSH_END
 

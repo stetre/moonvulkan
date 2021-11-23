@@ -521,7 +521,12 @@ device_dt_t* getproc_device(lua_State *L, VkDevice device, VkDeviceCreateInfo *c
     GET(CmdSetColorWriteEnableEXT);
     GET(CmdDrawMultiEXT);
     GET(CmdDrawMultiIndexedEXT);
-
+    GET(CmdBeginRenderingKHR);
+    GET(CmdEndRenderingKHR);
+    GET(GetDeviceBufferMemoryRequirementsKHR);
+    GET(GetDeviceImageMemoryRequirementsKHR);
+    GET(GetDeviceImageSparseMemoryRequirementsKHR);
+    GET(SetDeviceMemoryPriorityEXT);
 #undef GET
 #undef PGET
     return dt;

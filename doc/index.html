@@ -4106,6 +4106,39 @@ the <em>queue_family_index</em> of the <em>i-th</em> element in the table return
 <em>render_minor</em>: integer,<br>
 -- EXTENSION <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDeviceMultiDrawPropertiesEXT.html">VkPhysicalDeviceMultiDrawPropertiesEXT</a>:<br>
 <em>max_multi_draw_count</em>: integer,<br>
+-- EXTENSION <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDeviceMaintenance4PropertiesKHR.html">VkPhysicalDeviceMaintenance4PropertiesKHR</a>:<br>
+<em>max_buffer_size</em>: integer,<br>
+-- EXTENSION <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDeviceShaderIntegerDotProductPropertiesKHR.html">VkPhysicalDeviceShaderIntegerDotProductPropertiesKHR</a>:<br>
+<em>integer_dot_product_8bit_unsigned_accelerated</em>: boolean,<br>
+<em>integer_dot_product_8bit_signed_accelerated</em>: boolean,<br>
+<em>integer_dot_product_8bit_mixed_signedness_accelerated</em>: boolean,<br>
+<em>integer_dot_product_4x8bit_packed_unsigned_accelerated</em>: boolean,<br>
+<em>integer_dot_product_4x8bit_packed_signed_accelerated</em>: boolean,<br>
+<em>integer_dot_product_4x8bit_packed_mixed_signedness_accelerated</em>: boolean,<br>
+<em>integer_dot_product_16bit_unsigned_accelerated</em>: boolean,<br>
+<em>integer_dot_product_16bit_signed_accelerated</em>: boolean,<br>
+<em>integer_dot_product_16bit_mixed_signedness_accelerated</em>: boolean,<br>
+<em>integer_dot_product_32bit_unsigned_accelerated</em>: boolean,<br>
+<em>integer_dot_product_32bit_signed_accelerated</em>: boolean,<br>
+<em>integer_dot_product_32bit_mixed_signedness_accelerated</em>: boolean,<br>
+<em>integer_dot_product_64bit_unsigned_accelerated</em>: boolean,<br>
+<em>integer_dot_product_64bit_signed_accelerated</em>: boolean,<br>
+<em>integer_dot_product_64bit_mixed_signedness_accelerated</em>: boolean,<br>
+<em>integer_dot_product_accumulating_saturating_8bit_unsigned_accelerated</em>: boolean,<br>
+<em>integer_dot_product_accumulating_saturating_8bit_signed_accelerated</em>: boolean,<br>
+<em>integer_dot_product_accumulating_saturating_8bit_mixed_signedness_accelerated</em>: boolean,<br>
+<em>integer_dot_product_accumulating_saturating_4x8bit_packed_unsigned_accelerated</em>: boolean,<br>
+<em>integer_dot_product_accumulating_saturating_4x8bit_packed_signed_accelerated</em>: boolean,<br>
+<em>integer_dot_product_accumulating_saturating_4x8bit_packed_mixed_signedness_accelerated</em>: boolean,<br>
+<em>integer_dot_product_accumulating_saturating_16bit_unsigned_accelerated</em>: boolean,<br>
+<em>integer_dot_product_accumulating_saturating_16bit_signed_accelerated</em>: boolean,<br>
+<em>integer_dot_product_accumulating_saturating_16bit_mixed_signedness_accelerated</em>: boolean,<br>
+<em>integer_dot_product_accumulating_saturating_32bit_unsigned_accelerated</em>: boolean,<br>
+<em>integer_dot_product_accumulating_saturating_32bit_signed_accelerated</em>: boolean,<br>
+<em>integer_dot_product_accumulating_saturating_32bit_mixed_signedness_accelerated</em>: boolean,<br>
+<em>integer_dot_product_accumulating_saturating_64bit_unsigned_accelerated</em>: boolean,<br>
+<em>integer_dot_product_accumulating_saturating_64bit_signed_accelerated</em>: boolean,<br>
+<em>integer_dot_product_accumulating_saturating_64bit_mixed_signedness_accelerated</em>: boolean,<br>
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDeviceProperties2.html">VkPhysicalDeviceProperties2</a>)</span></p>
 </li>
 <li>
@@ -4546,6 +4579,22 @@ the <em>queue_family_index</em> of the <em>i-th</em> element in the table return
 <em>global_priority_query</em>: boolean,<br>
 -- EXTENSION <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDeviceMultiDrawFeaturesEXT.html">VkPhysicalDeviceMultiDrawFeaturesEXT</a>:<br>
 <em>multi_draw</em>: boolean,<br>
+-- EXTENSION <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDeviceDynamicRenderingFeaturesKHR.html">VkPhysicalDeviceDynamicRenderingFeaturesKHR</a>:<br>
+<em>dynamic_rendering</em>: boolean,<br>
+-- EXTENSION <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR.html">VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR</a>:<br>
+<em>shader_integer_dot_product</em>: boolean,<br>
+-- EXTENSION <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDeviceMaintenance4FeaturesKHR.html">VkPhysicalDeviceMaintenance4FeaturesKHR</a>:<br>
+<em>maintenance4</em>: boolean,<br>
+-- EXTENSION <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDeviceRGBA10X6FormatsFeaturesEXT.html">VkPhysicalDeviceRGBA10X6FormatsFeaturesEXT</a>:<br>
+<em>format_rgba10x6_without_ycbcr_sampler</em>: boolean,<br>
+-- EXTENSION <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDevicePrimitiveTopologyListRestartFeaturesEXT.html">VkPhysicalDevicePrimitiveTopologyListRestartFeaturesEXT</a>:<br>
+<em>primitive_topology_list_restart</em>: boolean,<br>
+<em>primitive_topology_patch_list_restart</em>: boolean,<br>
+-- EXTENSION <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDeviceBorderColorSwizzleFeaturesEXT.html">VkPhysicalDeviceBorderColorSwizzleFeaturesEXT</a>:<br>
+<em>border_color_swizzle</em>: boolean,<br>
+<em>border_color_swizzle_from_image</em>: boolean,<br>
+-- EXTENSION <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDevicePageableDeviceLocalMemoryFeaturesEXT.html">VkPhysicalDevicePageableDeviceLocalMemoryFeaturesEXT</a>:<br>
+<em>pageable_device_local_memory</em>: boolean,<br>
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDeviceFeatures2.html">VkPhysicalDeviceFeatures2</a>)</span></p>
 </li>
 <li>
@@ -7088,7 +7137,7 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/h
 </div>
 <div id="externalfencehandletypeflags" class="paragraph">
 <p><span class="small"><strong>externalfencehandletypeflags</strong>: vk.EXTERNAL_FENCE_HANDLE_TYPE_XXX_BIT<br>
-Values: '<em>opaque_fd</em>', '<em>opaque_win32</em>', '<em>opaque_win32_kmt</em>', '<em>sync_fd</em>'.<br>
+Values: '<em>opaque fd</em>', '<em>opaque win32</em>', '<em>opaque win32 kmt</em>', '<em>sync fd</em>'.<br>
 Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkExternalFenceHandleTypeFlagBits.html">VkExternalFenceHandleTypeFlagBits</a>.</span></p>
 </div>
 <div id="externalmemoryfeatureflags" class="paragraph">

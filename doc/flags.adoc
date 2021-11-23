@@ -169,7 +169,7 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkExt
 
 [[externalfencehandletypeflags]]
 [small]#*externalfencehandletypeflags*: vk.EXTERNAL_FENCE_HANDLE_TYPE_XXX_BIT +
-Values: '_opaque_fd_', '_opaque_win32_', '_opaque_win32_kmt_', '_sync_fd_'. +
+Values: '_opaque fd_', '_opaque win32_', '_opaque win32 kmt_', '_sync fd_'. +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkExternalFenceHandleTypeFlagBits.html[VkExternalFenceHandleTypeFlagBits].#
 
 [[externalmemoryfeatureflags]]
