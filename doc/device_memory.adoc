@@ -73,6 +73,18 @@ https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetImage
 [small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetImageSparseMemoryRequirements.html[vkGetImageSparseMemoryRequirements] -
 https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetImageSparseMemoryRequirements2.html[vkGetImageSparseMemoryRequirements2].#
 
+[[get_device_buffer_memory_requirements]]
+* <<memoryrequirements, _memoryrequirements_>> = *get_device_buffer_memory_requirements*(_device_, <<devicebuffermemoryrequirements, _devicebuffermemoryrequirements_>>) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetDeviceBufferMemoryRequirementsKHR.html[vkGetDeviceBufferMemoryRequirementsKHR].#
+
+[[get_device_image_memory_requirements]]
+* <<memoryrequirements, _memoryrequirements_>> = *get_device_image_memory_requirements*(_device_, <<deviceimagememoryrequirements, _deviceimagememoryrequirements_>>) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetDeviceImageMemoryRequirementsKHR.html[vkGetDeviceImageMemoryRequirementsKHR].#
+
+[[get_device_image_sparse_memory_requirements]]
+* {<<sparseimagememoryrequirements, _sparseimagememoryrequirements_>>} = *get_device_image_sparse_memory_requirements*(_device_, <<deviceimagememoryrequirements, _deviceimagememoryrequirements_>>) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetDeviceImageSparseMemoryRequirementsKHR.html[vkGetDeviceImageSparseMemoryRequirementsKHR].#
+
 '''
 
 [[bind_buffer_memory]]

@@ -1958,6 +1958,30 @@ Returns <em>data</em> as a binary string.</span></p>
 </li>
 </ul>
 </div>
+<div id="get_device_buffer_memory_requirements" class="ulist">
+<ul>
+<li>
+<p><a href="#memoryrequirements"><em>memoryrequirements</em></a> = <strong>get_device_buffer_memory_requirements</strong>(<em>device</em>, <a href="#devicebuffermemoryrequirements"><em>devicebuffermemoryrequirements</em></a>)<br>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetDeviceBufferMemoryRequirementsKHR.html">vkGetDeviceBufferMemoryRequirementsKHR</a>.</span></p>
+</li>
+</ul>
+</div>
+<div id="get_device_image_memory_requirements" class="ulist">
+<ul>
+<li>
+<p><a href="#memoryrequirements"><em>memoryrequirements</em></a> = <strong>get_device_image_memory_requirements</strong>(<em>device</em>, <a href="#deviceimagememoryrequirements"><em>deviceimagememoryrequirements</em></a>)<br>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetDeviceImageMemoryRequirementsKHR.html">vkGetDeviceImageMemoryRequirementsKHR</a>.</span></p>
+</li>
+</ul>
+</div>
+<div id="get_device_image_sparse_memory_requirements" class="ulist">
+<ul>
+<li>
+<p>{<a href="#sparseimagememoryrequirements"><em>sparseimagememoryrequirements</em></a>} = <strong>get_device_image_sparse_memory_requirements</strong>(<em>device</em>, <a href="#deviceimagememoryrequirements"><em>deviceimagememoryrequirements</em></a>)<br>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetDeviceImageSparseMemoryRequirementsKHR.html">vkGetDeviceImageSparseMemoryRequirementsKHR</a>.</span></p>
+</li>
+</ul>
+</div>
 <hr>
 <div id="bind_buffer_memory" class="ulist">
 <ul>
@@ -5370,6 +5394,19 @@ the <em>queue_family_index</em> of the <em>i-th</em> element in the table return
 -- for future use,<br>
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkImageSparseMemoryRequirementsInfo2.html">VkImageSparseMemoryRequirementsInfo2</a>)</span></p>
 </li>
+<li>
+<p><a id="devicebuffermemoryrequirements"></a>
+<span class="small"><strong>devicebuffermemoryrequirements</strong> = {<br>
+<em>create_info</em>: <a href="#buffercreateinfo">buffercreateinfo</a>,<br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkDeviceBufferMemoryRequirementsKHR.html">VkDeviceBufferMemoryRequirementsKHR</a>)</span></p>
+</li>
+<li>
+<p><a id="deviceimagememoryrequirements"></a>
+<span class="small"><strong>deviceimagememoryrequirements</strong> = {<br>
+<em>create_info</em>: <a href="#imagecreateinfo">imagecreateinfo</a>,<br>
+<em>plane_aspect</em>: <a href="#imageaspectflagbits">imageaspectflagbits</a>,<br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkDeviceImageMemoryRequirementsKHR.html">VkDeviceImageMemoryRequirementsKHR</a>)</span></p>
+</li>
 </ul>
 </div>
 <hr>
@@ -5394,7 +5431,7 @@ the <em>queue_family_index</em> of the <em>i-th</em> element in the table return
 <em>image_mip_tail_size</em>: integer,<br>
 <em>image_mip_tail_offset</em>: integer,<br>
 <em>image_mip_tail_stride</em>: integer,<br>
-} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkSparseImageMemoryRequirements.html">VkSparseImageMemoryRequirements</a>)</span></p>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkSparseImageMemoryRequirements2.html">VkSparseImageMemoryRequirements2</a>)</span></p>
 </li>
 <li>
 <p><a id="subresourcelayout"></a>

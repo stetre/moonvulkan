@@ -422,6 +422,8 @@ local TYPED = {
    { "VkPipelineColorWriteCreateInfoEXT", "PIPELINE_COLOR_WRITE_CREATE_INFO_EXT" },
    { "VkQueueFamilyGlobalPriorityPropertiesEXT", "QUEUE_FAMILY_GLOBAL_PRIORITY_PROPERTIES_EXT" },
    { "VkSamplerBorderColorComponentMappingCreateInfoEXT", "SAMPLER_BORDER_COLOR_COMPONENT_MAPPING_CREATE_INFO_EXT" },
+   { "VkDeviceBufferMemoryRequirementsKHR", "DEVICE_BUFFER_MEMORY_REQUIREMENTS_KHR" },
+   { "VkDeviceImageMemoryRequirementsKHR", "DEVICE_IMAGE_MEMORY_REQUIREMENTS_KHR" },
 }
 
 local TYPED_WIN32 = {

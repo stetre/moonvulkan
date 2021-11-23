@@ -4427,6 +4427,40 @@ int zinitVkSamplerBorderColorComponentMappingCreateInfoEXT(lua_State *L, VkSampl
 #define zpushVkSamplerBorderColorComponentMappingCreateInfoEXT moonvulkan_zpushVkSamplerBorderColorComponentMappingCreateInfoEXT
 int zpushVkSamplerBorderColorComponentMappingCreateInfoEXT(lua_State *L, const VkSamplerBorderColorComponentMappingCreateInfoEXT *p);
 
+#define znewVkDeviceBufferMemoryRequirementsKHR(L, err) (VkDeviceBufferMemoryRequirementsKHR*)znew((L), VK_STRUCTURE_TYPE_DEVICE_BUFFER_MEMORY_REQUIREMENTS_KHR, sizeof(VkDeviceBufferMemoryRequirementsKHR), (err))
+#define znewarrayVkDeviceBufferMemoryRequirementsKHR(L, count, err) (VkDeviceBufferMemoryRequirementsKHR*)znewarray((L), VK_STRUCTURE_TYPE_DEVICE_BUFFER_MEMORY_REQUIREMENTS_KHR, sizeof(VkDeviceBufferMemoryRequirementsKHR), (count), (err))
+#define znewchainVkDeviceBufferMemoryRequirementsKHR moonvulkan_znewchainVkDeviceBufferMemoryRequirementsKHR
+VkDeviceBufferMemoryRequirementsKHR* znewchainVkDeviceBufferMemoryRequirementsKHR(lua_State *L, int *err);
+#define znewchainarrayVkDeviceBufferMemoryRequirementsKHR moonvulkan_znewchainarrayVkDeviceBufferMemoryRequirementsKHR
+VkDeviceBufferMemoryRequirementsKHR* znewchainarrayVkDeviceBufferMemoryRequirementsKHR(lua_State *L, uint32_t count, int *err);
+#define zcheckVkDeviceBufferMemoryRequirementsKHR moonvulkan_zcheckVkDeviceBufferMemoryRequirementsKHR
+VkDeviceBufferMemoryRequirementsKHR* zcheckVkDeviceBufferMemoryRequirementsKHR(lua_State *L, int arg, int *err);
+#define zcheckarrayVkDeviceBufferMemoryRequirementsKHR moonvulkan_zcheckarrayVkDeviceBufferMemoryRequirementsKHR
+VkDeviceBufferMemoryRequirementsKHR* zcheckarrayVkDeviceBufferMemoryRequirementsKHR(lua_State *L, int arg, uint32_t *count, int *err);
+#define zinitVkDeviceBufferMemoryRequirementsKHR moonvulkan_zinitVkDeviceBufferMemoryRequirementsKHR
+int zinitVkDeviceBufferMemoryRequirementsKHR(lua_State *L, VkDeviceBufferMemoryRequirementsKHR* p, int *err);
+#define zfreeVkDeviceBufferMemoryRequirementsKHR(L, p, base) zfree((L), (p), (base))
+#define zfreearrayVkDeviceBufferMemoryRequirementsKHR(L, p, count, base) zfreearray((L), (p), sizeof(VkDeviceBufferMemoryRequirementsKHR), (count), (base))
+#define zpushVkDeviceBufferMemoryRequirementsKHR moonvulkan_zpushVkDeviceBufferMemoryRequirementsKHR
+int zpushVkDeviceBufferMemoryRequirementsKHR(lua_State *L, const VkDeviceBufferMemoryRequirementsKHR *p);
+
+#define znewVkDeviceImageMemoryRequirementsKHR(L, err) (VkDeviceImageMemoryRequirementsKHR*)znew((L), VK_STRUCTURE_TYPE_DEVICE_IMAGE_MEMORY_REQUIREMENTS_KHR, sizeof(VkDeviceImageMemoryRequirementsKHR), (err))
+#define znewarrayVkDeviceImageMemoryRequirementsKHR(L, count, err) (VkDeviceImageMemoryRequirementsKHR*)znewarray((L), VK_STRUCTURE_TYPE_DEVICE_IMAGE_MEMORY_REQUIREMENTS_KHR, sizeof(VkDeviceImageMemoryRequirementsKHR), (count), (err))
+#define znewchainVkDeviceImageMemoryRequirementsKHR moonvulkan_znewchainVkDeviceImageMemoryRequirementsKHR
+VkDeviceImageMemoryRequirementsKHR* znewchainVkDeviceImageMemoryRequirementsKHR(lua_State *L, int *err);
+#define znewchainarrayVkDeviceImageMemoryRequirementsKHR moonvulkan_znewchainarrayVkDeviceImageMemoryRequirementsKHR
+VkDeviceImageMemoryRequirementsKHR* znewchainarrayVkDeviceImageMemoryRequirementsKHR(lua_State *L, uint32_t count, int *err);
+#define zcheckVkDeviceImageMemoryRequirementsKHR moonvulkan_zcheckVkDeviceImageMemoryRequirementsKHR
+VkDeviceImageMemoryRequirementsKHR* zcheckVkDeviceImageMemoryRequirementsKHR(lua_State *L, int arg, int *err);
+#define zcheckarrayVkDeviceImageMemoryRequirementsKHR moonvulkan_zcheckarrayVkDeviceImageMemoryRequirementsKHR
+VkDeviceImageMemoryRequirementsKHR* zcheckarrayVkDeviceImageMemoryRequirementsKHR(lua_State *L, int arg, uint32_t *count, int *err);
+#define zinitVkDeviceImageMemoryRequirementsKHR moonvulkan_zinitVkDeviceImageMemoryRequirementsKHR
+int zinitVkDeviceImageMemoryRequirementsKHR(lua_State *L, VkDeviceImageMemoryRequirementsKHR* p, int *err);
+#define zfreeVkDeviceImageMemoryRequirementsKHR(L, p, base) zfree((L), (p), (base))
+#define zfreearrayVkDeviceImageMemoryRequirementsKHR(L, p, count, base) zfreearray((L), (p), sizeof(VkDeviceImageMemoryRequirementsKHR), (count), (base))
+#define zpushVkDeviceImageMemoryRequirementsKHR moonvulkan_zpushVkDeviceImageMemoryRequirementsKHR
+int zpushVkDeviceImageMemoryRequirementsKHR(lua_State *L, const VkDeviceImageMemoryRequirementsKHR *p);
+
 
 #ifdef VK_USE_PLATFORM_WIN32_KHR
 

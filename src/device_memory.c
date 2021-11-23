@@ -280,7 +280,6 @@ static int GetImageMemoryRequirements2(lua_State *L, VkImage image, ud_t *ud)
     VkMemoryRequirements2* req = NULL;
     VkImageMemoryRequirementsInfo2* info = NULL;
     VkDevice device = ud->device;
-
 #define CLEANUP do {                                        \
     zfreeVkImageMemoryRequirementsInfo2KHR(L, info, 1);     \
     zfreeVkMemoryRequirements2(L, req, 1);                  \
@@ -296,10 +295,8 @@ static int GetImageMemoryRequirements2(lua_State *L, VkImage image, ud_t *ud)
         if(err) { CLEANUP; return lua_error(L); }
         }
     info->image = image;
-
     req = znewchainVkMemoryRequirements2(L, &err);
     if(err) { CLEANUP; return lua_error(L); }
-
     ud->ddt->GetImageMemoryRequirements2(device, info, req);
     zpushVkMemoryRequirements2(L, req);
     CLEANUP;
@@ -315,7 +312,6 @@ static int GetImageMemoryRequirements(lua_State *L)
     VkMemoryRequirements req;
     if(ud->ddt->GetImageMemoryRequirements2)
         return GetImageMemoryRequirements2(L, image, ud);
-
     ud->ddt->GetImageMemoryRequirements(device, image, &req);
     zpushVkMemoryRequirements(L, &req);
     return 1;
@@ -329,7 +325,6 @@ static int GetImageSparseMemoryRequirements2(lua_State *L, VkImage image, ud_t *
     VkSparseImageMemoryRequirements2 *req=NULL;
     VkImageSparseMemoryRequirementsInfo2KHR* info=NULL;
     VkDevice device = ud->device;
-
 #define CLEANUP do {                                            \
     zfreeVkImageSparseMemoryRequirementsInfo2KHR(L, info, 1);   \
     zfreearrayVkSparseImageMemoryRequirements2(L, req, count, 1);   \
@@ -345,16 +340,12 @@ static int GetImageSparseMemoryRequirements2(lua_State *L, VkImage image, ud_t *
         if(err) { CLEANUP; return lua_error(L); }
         }
     info->image = image;
-
     lua_newtable(L);
     ud->ddt->GetImageSparseMemoryRequirements2(device, info, &count, NULL);
     if(count == 0) { CLEANUP; return 1; }
-
     req = znewchainarrayVkSparseImageMemoryRequirements2(L, count, &err);
     if(err) { CLEANUP; return lua_error(L); }
-
     ud->ddt->GetImageSparseMemoryRequirements2(device, info, &count, req);
-
     for(i = 0; i <count; i++)
         {
         zpushVkSparseImageMemoryRequirements2(L, &req[i]);
@@ -372,29 +363,99 @@ static int GetImageSparseMemoryRequirements(lua_State *L)
     ud_t *ud;
     VkImage image = checkimage(L, 1, &ud);
     VkDevice device = ud->device;
-
     if(ud->ddt->GetImageSparseMemoryRequirements2)
         return GetImageSparseMemoryRequirements2(L, image, ud);
-
     lua_newtable(L);
     ud->ddt->GetImageSparseMemoryRequirements(device, image, &count, NULL);
-
     if(count == 0)
         return 1;
-
     req = (VkSparseImageMemoryRequirements*)Malloc(L, sizeof(VkSparseImageMemoryRequirements)*count);
-
     ud->ddt->GetImageSparseMemoryRequirements(device, image, &count, req);
     for(i = 0; i <count; i++)
         {
         zpushVkSparseImageMemoryRequirements(L, &req[i]);
         lua_rawseti(L, -2, i+1);
         }
-
     Free(L, req);
     return 1;
     }
 
+/*--------------------------------------------------------------------------------*/
+
+static int GetDeviceBufferMemoryRequirements(lua_State *L)
+    {
+    int err;
+    ud_t *ud;
+    VkDeviceBufferMemoryRequirementsKHR *info = NULL;
+    VkMemoryRequirements2 *req = NULL;
+    VkDevice device = checkdevice(L, 1, &ud);
+    CheckDevicePfn(L, ud, GetDeviceBufferMemoryRequirementsKHR);
+#define CLEANUP do {                                            \
+    zfreeVkDeviceBufferMemoryRequirementsKHR(L, info, 1);       \
+    zfreeVkMemoryRequirements2(L, req, 1);                      \
+} while(0)
+    info = zcheckVkDeviceBufferMemoryRequirementsKHR(L, 2, &err);
+    if(err) { CLEANUP; return argerror(L, 2); }
+    req = znewchainVkMemoryRequirements2(L, &err);
+    if(err) { CLEANUP; return lua_error(L); }
+    ud->ddt->GetDeviceBufferMemoryRequirementsKHR(device, info, req);
+    zpushVkMemoryRequirements2(L, req);
+#undef CLEANUP
+    return 1;
+    }
+
+static int GetDeviceImageMemoryRequirements(lua_State *L)
+    {
+    int err;
+    ud_t *ud;
+    VkDeviceImageMemoryRequirementsKHR *info = NULL;
+    VkMemoryRequirements2 *req = NULL;
+    VkDevice device = checkdevice(L, 1, &ud);
+    CheckDevicePfn(L, ud, GetDeviceImageMemoryRequirementsKHR);
+#define CLEANUP do {                                            \
+    zfreeVkDeviceImageMemoryRequirementsKHR(L, info, 1);        \
+    zfreeVkMemoryRequirements2(L, req, 1);                      \
+} while(0)
+    info = zcheckVkDeviceImageMemoryRequirementsKHR(L, 2, &err);
+    if(err) { CLEANUP; return argerror(L, 2); }
+    req = znewchainVkMemoryRequirements2(L, &err);
+    if(err) { CLEANUP; return lua_error(L); }
+    ud->ddt->GetDeviceImageMemoryRequirementsKHR(device, info, req);
+    zpushVkMemoryRequirements2(L, req);
+#undef CLEANUP
+    return 1;
+    }
+
+static int GetDeviceImageSparseMemoryRequirements(lua_State *L)
+    {
+    int err;
+    uint32_t count, i;
+    ud_t *ud;
+    VkDeviceImageMemoryRequirementsKHR *info = NULL;
+    VkSparseImageMemoryRequirements2 *req = NULL;
+    VkDevice device = checkdevice(L, 1, &ud);
+    CheckDevicePfn(L, ud, GetDeviceImageSparseMemoryRequirementsKHR);
+#define CLEANUP do {                                                \
+    zfreeVkDeviceImageMemoryRequirementsKHR(L, info, 1);            \
+    zfreearrayVkSparseImageMemoryRequirements2(L, req, count, 1);   \
+} while(0)
+    info = zcheckVkDeviceImageMemoryRequirementsKHR(L, 2, &err);
+    if(err) { CLEANUP; return argerror(L, 2); }
+    lua_newtable(L);
+    ud->ddt->GetDeviceImageSparseMemoryRequirementsKHR(device, info, &count, NULL);
+    if(count == 0) { CLEANUP; return 1; }
+    req = znewchainarrayVkSparseImageMemoryRequirements2(L, count, &err);
+    if(err) { CLEANUP; return lua_error(L); }
+    ud->ddt->GetDeviceImageSparseMemoryRequirementsKHR(device, info, &count, req);
+    for(i = 0; i <count; i++)
+        {
+        zpushVkSparseImageMemoryRequirements2(L, &req[i]);
+        lua_rawseti(L, -2, i+1);
+        }
+    CLEANUP;
+#undef CLEANUP
+    return 1;
+    }
 
 /*--------------------------------------------------------------------------------*/
 
@@ -641,6 +702,9 @@ static const struct luaL_Reg Functions[] =
         { "get_buffer_memory_requirements", GetBufferMemoryRequirements },
         { "get_image_memory_requirements", GetImageMemoryRequirements },
         { "get_image_sparse_memory_requirements", GetImageSparseMemoryRequirements },
+        { "get_device_buffer_memory_requirements", GetDeviceBufferMemoryRequirements },
+        { "get_device_image_memory_requirements", GetDeviceImageMemoryRequirements },
+        { "get_device_image_sparse_memory_requirements", GetDeviceImageSparseMemoryRequirements },
         { "bind_image_memory", BindImageMemory },
         { "bind_buffer_memory", BindBufferMemory },
         { "get_memory_fd", GetMemoryFd },

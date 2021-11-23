@@ -1472,6 +1472,17 @@ _plane_aspect_: <<imageaspectflags, imageaspectflags>>, +
 pass:[--] for future use, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkImageSparseMemoryRequirementsInfo2.html[VkImageSparseMemoryRequirementsInfo2])#
 
+* [[devicebuffermemoryrequirements]]
+[small]#*devicebuffermemoryrequirements* = { +
+_create_info_: <<buffercreateinfo, buffercreateinfo>>, +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkDeviceBufferMemoryRequirementsKHR.html[VkDeviceBufferMemoryRequirementsKHR])#
+
+* [[deviceimagememoryrequirements]]
+[small]#*deviceimagememoryrequirements* = { +
+_create_info_: <<imagecreateinfo, imagecreateinfo>>, +
+_plane_aspect_: <<imageaspectflagbits, imageaspectflagbits>>, +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkDeviceImageMemoryRequirementsKHR.html[VkDeviceImageMemoryRequirementsKHR])#
+
 '''
 
 * [[memoryrequirements]]
@@ -1492,7 +1503,7 @@ _image_mip_tail_first_lod_: integer, +
 _image_mip_tail_size_: integer, +
 _image_mip_tail_offset_: integer, +
 _image_mip_tail_stride_: integer, +
-} (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkSparseImageMemoryRequirements.html[VkSparseImageMemoryRequirements])#
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkSparseImageMemoryRequirements2.html[VkSparseImageMemoryRequirements2])#
 
 * [[subresourcelayout]]
 [small]#*subresourcelayout* = { +

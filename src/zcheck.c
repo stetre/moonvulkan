@@ -2096,7 +2096,7 @@ LOCALCHECK_BEGIN(PHYSICAL_DEVICE_PAGEABLE_DEVICE_LOCAL_MEMORY_FEATURES_EXT, VkPh
     GetBoolean(pageableDeviceLocalMemory, "pageable_device_local_memory");
 LOCALCHECK_END
 
-#if 0 //££ 9yy scaffolding
+#if 0 // 9yy scaffolding
 LOCALCHECK_BEGIN(, )
     GetBoolean(, "");
 LOCALCHECK_END
@@ -4240,6 +4240,15 @@ ZCHECK_BEGIN(VkBufferCreateInfo)
     EXTENSIONS_END
 ZCHECK_END
 
+static ZCLEAR_BEGIN(VkDeviceBufferMemoryRequirementsKHR)
+    FreeStructp(pCreateInfo, VkBufferCreateInfo);
+ZCLEAR_END
+ZCHECK_BEGIN(VkDeviceBufferMemoryRequirementsKHR)
+    checktable(arg);
+    newstruct(VkDeviceBufferMemoryRequirementsKHR);
+    GetStructp(pCreateInfo, VkBufferCreateInfo, "create_info");
+ZCHECK_END
+
 /*------------------------------------------------------------------------------*
  | Buffer View                                                                  |
  *------------------------------------------------------------------------------*/
@@ -4309,6 +4318,16 @@ ZCHECK_BEGIN(VkImageCreateInfo)
     if(ispresent("stencil_usage"))
         ADD_EXTENSION_INLINE(VkImageStencilUsageCreateInfo);
     EXTENSIONS_END
+ZCHECK_END
+
+static ZCLEAR_BEGIN(VkDeviceImageMemoryRequirementsKHR)
+    FreeStructp(pCreateInfo, VkImageCreateInfo);
+ZCLEAR_END
+ZCHECK_BEGIN(VkDeviceImageMemoryRequirementsKHR)
+    checktable(arg);
+    newstruct(VkDeviceImageMemoryRequirementsKHR);
+    GetStructp(pCreateInfo, VkImageCreateInfo, "create_info");
+    GetFlags(planeAspect, "plane_aspect");
 ZCHECK_END
 
 /*------------------------------------------------------------------------------*
@@ -6542,6 +6561,8 @@ static void zfreeaux(lua_State *L, void *pp)
         CASE(VALIDATION_FEATURES_EXT, VkValidationFeaturesEXT);
         CASE(PRESENT_ID_KHR, VkPresentIdKHR);
         CASE(PIPELINE_COLOR_WRITE_CREATE_INFO_EXT, VkPipelineColorWriteCreateInfoEXT);
+        CASE(DEVICE_BUFFER_MEMORY_REQUIREMENTS_KHR, VkDeviceBufferMemoryRequirementsKHR);
+        CASE(DEVICE_IMAGE_MEMORY_REQUIREMENTS_KHR, VkDeviceImageMemoryRequirementsKHR);
 #undef CASE
         default: 
             return;
