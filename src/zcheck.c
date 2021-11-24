@@ -1440,6 +1440,16 @@ ZCHECK_BEGIN(VkVertexInputBindingDescription)
 ZCHECK_END
 ZCHECKARRAY(VkVertexInputBindingDescription)
 
+ZCHECK_BEGIN(VkVertexInputBindingDescription2EXT)
+    checktable(arg);
+    newstruct(VkVertexInputBindingDescription2EXT);
+    GetInteger(binding, "binding");
+    GetInteger(stride, "stride");
+    GetVertexInputRate(inputRate, "input_rate");
+    GetInteger(divisor, "divisor");
+ZCHECK_END
+ZCHECKARRAY(VkVertexInputBindingDescription2EXT)
+
 ZCHECK_BEGIN(VkVertexInputAttributeDescription)
     checktable(arg);
     newstruct(VkVertexInputAttributeDescription);
@@ -1449,6 +1459,16 @@ ZCHECK_BEGIN(VkVertexInputAttributeDescription)
     GetInteger(offset, "offset");
 ZCHECK_END
 ZCHECKARRAY(VkVertexInputAttributeDescription)
+
+ZCHECK_BEGIN(VkVertexInputAttributeDescription2EXT)
+    checktable(arg);
+    newstruct(VkVertexInputAttributeDescription2EXT);
+    GetInteger(location, "location");
+    GetInteger(binding, "binding");
+    GetFormat(format, "format");
+    GetInteger(offset, "offset");
+ZCHECK_END
+ZCHECKARRAY(VkVertexInputAttributeDescription2EXT)
 
 ZCHECK_BEGIN(VkStencilOpState)
     checktable(arg);
@@ -1698,6 +1718,23 @@ ZCHECK_BEGIN(VkPipelineCreationFeedbackEXT)
     GetInteger(duration, "duration");
 ZCHECK_END
 ZCHECKARRAY(VkPipelineCreationFeedbackEXT)
+
+ZCHECK_BEGIN(VkMultiDrawInfoEXT)
+    checktable(arg);
+    newstruct(VkMultiDrawInfoEXT);
+    GetInteger(firstVertex, "first_vertex");
+    GetInteger(vertexCount, "vertex_count");
+ZCHECK_END
+ZCHECKARRAY(VkMultiDrawInfoEXT)
+
+ZCHECK_BEGIN(VkMultiDrawIndexedInfoEXT)
+    checktable(arg);
+    newstruct(VkMultiDrawIndexedInfoEXT);
+    GetInteger(firstIndex, "first_index");
+    GetInteger(indexCount, "index_count");
+    GetInteger(vertexOffset, "vertex_offset");
+ZCHECK_END
+ZCHECKARRAY(VkMultiDrawIndexedInfoEXT)
 
 /********************************************************************************
  * Typed structs                                                                *

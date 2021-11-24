@@ -1438,6 +1438,79 @@ static int CmdSetPrimitiveRestartEnable(lua_State *L)
     return 0;
     }
 
+static int CmdSetVertexInput(lua_State *L)
+    {
+    int err;
+    ud_t *ud;
+    uint32_t bcount, acount;
+    const VkVertexInputBindingDescription2EXT *bdescr = NULL;
+    const VkVertexInputAttributeDescription2EXT *adescr = NULL;
+    VkCommandBuffer cb = checkcommand_buffer(L, 1, &ud);
+    CheckDevicePfn(L, ud, CmdSetVertexInputEXT);
+#define CLEANUP do {                                                                    \
+    if(bdescr) zfreearrayVkVertexInputBindingDescription2EXT(L, bdescr, bcount, 1);     \
+    if(adescr) zfreearrayVkVertexInputAttributeDescription2EXT(L, adescr, acount, 1);   \
+} while(0)
+    bdescr = zcheckarrayVkVertexInputBindingDescription2EXT(L, 2, &bcount, &err);
+    if(err < 0 && err != ERR_EMPTY) { CLEANUP; return argerror(L, 2); }
+    adescr = zcheckarrayVkVertexInputAttributeDescription2EXT(L, 3, &acount, &err);
+    if(err < 0 && err != ERR_EMPTY) { CLEANUP; return argerror(L, 3); }
+    ud->ddt->CmdSetVertexInputEXT(cb, bcount, bdescr, acount, adescr);
+    CLEANUP;
+#undef CLEANUP
+    return 0;
+    }
+
+static int CmdDrawMulti(lua_State *L)
+    {
+    int err;
+    uint32_t count;
+    ud_t *ud;
+    VkMultiDrawInfoEXT *info = NULL;
+    VkCommandBuffer cb = checkcommand_buffer(L, 1, &ud);
+    uint32_t instanceCount = luaL_checkinteger(L, 3);
+    uint32_t firstInstance = luaL_checkinteger(L, 4);
+    uint32_t stride = luaL_checkinteger(L, 5);
+    CheckDevicePfn(L, ud, CmdDrawMultiEXT);
+#define CLEANUP do {                                            \
+    if(info) zfreearrayVkMultiDrawInfoEXT(L, info, count, 1);   \
+} while(0)
+    info = zcheckarrayVkMultiDrawInfoEXT(L, 2, &count, &err);
+    if(err < 0 && err != ERR_EMPTY) { CLEANUP; return argerror(L, 2); }
+    ud->ddt->CmdDrawMultiEXT(cb, count, info, instanceCount, firstInstance, stride);
+    CLEANUP;
+#undef CLEANUP
+    return 0;
+    }
+
+static int CmdDrawMultiIndexed(lua_State *L)
+    {
+    int err;
+    uint32_t count;
+    ud_t *ud;
+    int32_t *pVertexOffset = NULL;
+    int32_t vertex_offset;
+    VkMultiDrawIndexedInfoEXT *info = NULL;
+    VkCommandBuffer cb = checkcommand_buffer(L, 1, &ud);
+    uint32_t instanceCount = luaL_checkinteger(L, 3);
+    uint32_t firstInstance = luaL_checkinteger(L, 4);
+    uint32_t stride = luaL_checkinteger(L, 5);
+    if(!lua_isnoneornil(L, 6))
+        {
+        vertex_offset = luaL_checkinteger(L, 6);
+        pVertexOffset = &vertex_offset;
+        }
+    CheckDevicePfn(L, ud, CmdDrawMultiIndexedEXT);
+#define CLEANUP do {                                                    \
+    if(info) zfreearrayVkMultiDrawIndexedInfoEXT(L, info, count, 1);    \
+} while(0)
+    info = zcheckarrayVkMultiDrawIndexedInfoEXT(L, 2, &count, &err);
+    if(err < 0 && err != ERR_EMPTY) { CLEANUP; return argerror(L, 2); }
+    ud->ddt->CmdDrawMultiIndexedEXT(cb, count, info, instanceCount, firstInstance, stride, pVertexOffset);
+    CLEANUP;
+#undef CLEANUP
+    return 0;
+    }
 
 #if 0 // 10yy
         { "",  },
@@ -1540,6 +1613,9 @@ static const struct luaL_Reg Functions[] =
         { "cmd_set_depth_bias_enable", CmdSetDepthBiasEnable },
         { "cmd_set_logic_op", CmdSetLogicOp },
         { "cmd_set_primitive_restart_enable", CmdSetPrimitiveRestartEnable },
+        { "cmd_set_vertex_input", CmdSetVertexInput },
+        { "cmd_draw_multi", CmdDrawMulti },
+        { "cmd_draw_multi_indexed", CmdDrawMultiIndexed },
         { NULL, NULL } /* sentinel */
     };
 

@@ -205,6 +205,11 @@ https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdDrawI
 [small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdDrawIndirectCount.html[vkCmdDrawIndirectCount],
 https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdDrawIndexedIndirectCount.html[vkCmdDrawIndexedIndirectCount],.#
 
+[[cmd_draw_multi]]
+* *cmd_draw_multi*(_cb_, [{<<multidrawinfo, _multidrawinfo_>>}], _instance_count_, _first_instance_, _stride_) +
+*cmd_draw_multi_indexed*(_cb_, [{<<multidrawindexedinfo, _multidrawindexedinfo_>>}], _instance_count_, _first_instance_, _stride_, [_vertex_offset_]) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdDrawMultiEXT.html[vkCmdDrawMultiEXT], https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdDrawMultiIndexedEXT.html[vkCmdDrawMultiIndexedEXT].#
+
 [[cmd_execute_commands]]
 * *cmd_execute_commands*(_cb_, {<<command_buffer, _command_buffer_>>}) +
 [small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdExecuteCommands.html[vkCmdExecuteCommands].#
@@ -385,6 +390,10 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmd
 [small]#_face_mask_: <<stencilfaceflags, stencilfaceflags>> +
 _write_mask_: integer +
 Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetStencilWriteMask.html[vkCmdSetStencilWriteMask].#
+
+[[cmd_set_vertex_input]]
+* *cmd_set_vertex_input*(_cb_, [{<<vertexinputbindingdescription2, _vertexinputbindingdescription2_>>}], [{<<vertexinputattributedescription2, _vertexinputattributedescription2_>>}]) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetVertexInputEXT.html[vkCmdSetVertexInputEXT].#
 
 [[cmd_set_viewport]]
 * *cmd_set_viewport*(_cb_, _first_, {<<viewport, _viewport_>>}) +

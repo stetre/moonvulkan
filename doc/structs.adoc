@@ -1759,6 +1759,14 @@ _stride_: integer, +
 _input_rate_: <<vertexinputrate, vertexinputrate>>, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkVertexInputBindingDescription.html[VkVertexInputBindingDescription])#
 
+* [[vertexinputbindingdescription2]]
+[small]#*vertexinputbindingdescription2* = { +
+_binding_: integer, +
+_stride_: integer, +
+_input_rate_: <<vertexinputrate, vertexinputrate>>, +
+_divisor_: integer, +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkVertexInputBindingDescription2EXT.html[VkVertexInputBindingDescription2EXT])#
+
 * [[vertexinputattributedescription]]
 [small]#*vertexinputattributedescription* = { +
 _binding_: integer, +
@@ -1766,6 +1774,14 @@ _location_: integer, +
 _format_: <<format, format>>, +
 _offset_: integer, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkVertexInputAttributeDescription.html[VkVertexInputAttributeDescription])#
+
+* [[vertexinputattributedescription2]]
+[small]#*vertexinputattributedescription2* = { +
+_binding_: integer, +
+_location_: integer, +
+_format_: <<format, format>>, +
+_offset_: integer, +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkVertexInputAttributeDescription2EXT.html[VkVertexInputAttributeDescription2EXT])#
 
 * [[vertexinputbindingdivisordescription]]
 [small]#*vertexinputbindingdivisordescription* = { +
@@ -2326,6 +2342,20 @@ _max_frame_average_light_level_: float, +
 * [[xycolor]]
 [small]#*xycolor* = { _x_, _y_: float, } +
 (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkXYColorEXT.html[VkXYColorEXT])#
+
+'''
+* [[multidrawinfo]]
+[small]#*multidrawinfo* = { +
+_first_vertex_: integer, +
+_vertex_count_: integer, +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkMultiDrawInfoEXT.html[VkMultiDrawInfoEXT])#
+
+* [[multidrawindexedinfo]]
+[small]#*multidrawindexedinfo* = { +
+_first_index_: integer, +
+_index_count_: integer, +
+_vertex_offset_: integer, +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkMultiDrawIndexedInfoEXT.html[VkMultiDrawIndexedInfoEXT])#
 
 '''
 

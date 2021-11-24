@@ -2647,6 +2647,15 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/h
 </li>
 </ul>
 </div>
+<div id="cmd_draw_multi" class="ulist">
+<ul>
+<li>
+<p><strong>cmd_draw_multi</strong>(<em>cb</em>, [{<a href="#multidrawinfo"><em>multidrawinfo</em></a>}], <em>instance_count</em>, <em>first_instance</em>, <em>stride</em>)<br>
+<strong>cmd_draw_multi_indexed</strong>(<em>cb</em>, [{<a href="#multidrawindexedinfo"><em>multidrawindexedinfo</em></a>}], <em>instance_count</em>, <em>first_instance</em>, <em>stride</em>, [<em>vertex_offset</em>])<br>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdDrawMultiEXT.html">vkCmdDrawMultiEXT</a>, <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdDrawMultiIndexedEXT.html">vkCmdDrawMultiIndexedEXT</a>.</span></p>
+</li>
+</ul>
+</div>
 <div id="cmd_execute_commands" class="ulist">
 <ul>
 <li>
@@ -2965,6 +2974,14 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/h
 <span class="small"><em>face_mask</em>: <a href="#stencilfaceflags">stencilfaceflags</a><br>
 <em>write_mask</em>: integer<br>
 Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetStencilWriteMask.html">vkCmdSetStencilWriteMask</a>.</span></p>
+</li>
+</ul>
+</div>
+<div id="cmd_set_vertex_input" class="ulist">
+<ul>
+<li>
+<p><strong>cmd_set_vertex_input</strong>(<em>cb</em>, [{<a href="#vertexinputbindingdescription2"><em>vertexinputbindingdescription2</em></a>}], [{<a href="#vertexinputattributedescription2"><em>vertexinputattributedescription2</em></a>}])<br>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetVertexInputEXT.html">vkCmdSetVertexInputEXT</a>.</span></p>
 </li>
 </ul>
 </div>
@@ -5732,6 +5749,15 @@ the <em>queue_family_index</em> of the <em>i-th</em> element in the table return
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkVertexInputBindingDescription.html">VkVertexInputBindingDescription</a>)</span></p>
 </li>
 <li>
+<p><a id="vertexinputbindingdescription2"></a>
+<span class="small"><strong>vertexinputbindingdescription2</strong> = {<br>
+<em>binding</em>: integer,<br>
+<em>stride</em>: integer,<br>
+<em>input_rate</em>: <a href="#vertexinputrate">vertexinputrate</a>,<br>
+<em>divisor</em>: integer,<br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkVertexInputBindingDescription2EXT.html">VkVertexInputBindingDescription2EXT</a>)</span></p>
+</li>
+<li>
 <p><a id="vertexinputattributedescription"></a>
 <span class="small"><strong>vertexinputattributedescription</strong> = {<br>
 <em>binding</em>: integer,<br>
@@ -5739,6 +5765,15 @@ the <em>queue_family_index</em> of the <em>i-th</em> element in the table return
 <em>format</em>: <a href="#format">format</a>,<br>
 <em>offset</em>: integer,<br>
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkVertexInputAttributeDescription.html">VkVertexInputAttributeDescription</a>)</span></p>
+</li>
+<li>
+<p><a id="vertexinputattributedescription2"></a>
+<span class="small"><strong>vertexinputattributedescription2</strong> = {<br>
+<em>binding</em>: integer,<br>
+<em>location</em>: integer,<br>
+<em>format</em>: <a href="#format">format</a>,<br>
+<em>offset</em>: integer,<br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkVertexInputAttributeDescription2EXT.html">VkVertexInputAttributeDescription2EXT</a>)</span></p>
 </li>
 <li>
 <p><a id="vertexinputbindingdivisordescription"></a>
@@ -6370,6 +6405,26 @@ Note1: The <em>current_extent</em> field is <em>nil</em> when <em>width</em> and
 <p><a id="xycolor"></a>
 <span class="small"><strong>xycolor</strong> = { <em>x</em>, <em>y</em>: float, }<br>
 (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkXYColorEXT.html">VkXYColorEXT</a>)</span></p>
+</li>
+</ul>
+</div>
+<hr>
+<div class="ulist">
+<ul>
+<li>
+<p><a id="multidrawinfo"></a>
+<span class="small"><strong>multidrawinfo</strong> = {<br>
+<em>first_vertex</em>: integer,<br>
+<em>vertex_count</em>: integer,<br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkMultiDrawInfoEXT.html">VkMultiDrawInfoEXT</a>)</span></p>
+</li>
+<li>
+<p><a id="multidrawindexedinfo"></a>
+<span class="small"><strong>multidrawindexedinfo</strong> = {<br>
+<em>first_index</em>: integer,<br>
+<em>index_count</em>: integer,<br>
+<em>vertex_offset</em>: integer,<br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkMultiDrawIndexedInfoEXT.html">VkMultiDrawIndexedInfoEXT</a>)</span></p>
 </li>
 </ul>
 </div>
