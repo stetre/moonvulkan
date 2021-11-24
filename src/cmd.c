@@ -1512,6 +1512,26 @@ static int CmdDrawMultiIndexed(lua_State *L)
     return 0;
     }
 
+static int CmdSetFragmentShadingRate(lua_State *L)
+    {
+    int err;
+    ud_t *ud;
+    VkExtent2D* size = NULL;
+    VkFragmentShadingRateCombinerOpKHR ops[2];
+    VkCommandBuffer cb = checkcommand_buffer(L, 1, &ud);
+    CheckDevicePfn(L, ud, CmdSetFragmentShadingRateKHR);
+    ops[0] = checkfragmentshadingratecombinerop(L, 3);
+    ops[1] = checkfragmentshadingratecombinerop(L, 4);
+#define CLEANUP do { if(size) zfree(L, size, 1); } while(0)
+    size = zcheckVkExtent2D(L, 2, &err);
+    if(err) { CLEANUP; return argerror(L, 2); }
+    ud->ddt->CmdSetFragmentShadingRateKHR(cb, size, ops);
+    CLEANUP;
+#undef CLEANUP
+    return 0;
+    }
+
+
 #if 0 // 10yy
         { "",  },
 static int (lua_State *L) //@@ scaffolding
@@ -1616,6 +1636,7 @@ static const struct luaL_Reg Functions[] =
         { "cmd_set_vertex_input", CmdSetVertexInput },
         { "cmd_draw_multi", CmdDrawMulti },
         { "cmd_draw_multi_indexed", CmdDrawMultiIndexed },
+        { "cmd_set_fragment_shading_rate", CmdSetFragmentShadingRate },
         { NULL, NULL } /* sentinel */
     };
 

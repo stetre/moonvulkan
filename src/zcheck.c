@@ -433,6 +433,42 @@ static lua_Integer GetInteger_(lua_State *L, int arg, const char *sname, lua_Int
 #define GetIntegerArray(name_, sname_, n_) GetNumArray_(name_, sname_, n_, lua_tointegerx)
 #define GetNumberArray(name_, sname_, n_) GetNumArray_(name_, sname_, n_, lua_tonumberx)
 
+#define GetEnumArray(name_, sname_, n_, testfunc_) do {                     \
+/* get a fixed-length n_ array of enums */                                  \
+    int arg1_, arg2_, t_, i_;                                               \
+    *err = 0;                                                               \
+    arg1_ = pushfield(L, arg, sname_);                                      \
+    t_ = lua_type(L, arg1_);                                                \
+    if(t_ != LUA_TTABLE)                                                    \
+        {                                                                   \
+        popfield(L, arg1_);                                                 \
+        if(t_ == LUA_TNIL || t_ == LUA_TNONE) { *err = ERR_NOTPRESENT; }    \
+        else { *err=ERR_TABLE; pushfielderror(sname_); return p; }          \
+        }                                                                   \
+    else {                                                                  \
+        for(i_=0; i_ <(n_); i_++)                                           \
+            {                                                               \
+            lua_rawgeti(L, arg1_, i_+1);                                    \
+            arg2_ = lua_gettop(L);                                          \
+            p->name_[i_] = testfunc_(L, arg2_, err);                        \
+            popfield(L, arg2_);                                             \
+            if(*err) break;                                                 \
+            }                                                               \
+        popfield(L, arg1_);                                                 \
+        if(*err < 0)                                                        \
+            {                                                               \
+            switch(*err)                                                    \
+                {                                                           \
+                case ERR_TABLE:                                             \
+                case ERR_MEMORY:                                            \
+                case ERR_EMPTY: pushfielderror(sname_); return p;           \
+                default:        prependfield(sname_); return p;             \
+                }                                                           \
+            }                                                               \
+        }                                                                   \
+} while(0)
+
+
 /* Booleans ------------------------------------------------------------------*/
 
 static int GetBoolean_(lua_State *L, int arg, const char *sname, int *err)
@@ -3348,6 +3384,23 @@ int zpushVkPhysicalDeviceGroupPropertiesKHR(lua_State *L, const VkPhysicalDevice
     //XPUSH_END
 ZPUSH_END
 
+/*------------------------------------------------------------------------------*
+ | Other physical device properties (for standalone get functions)              |
+ *------------------------------------------------------------------------------*/
+
+ZINIT_BEGIN(VkPhysicalDeviceFragmentShadingRateKHR)
+    //EXTENSIONS_BEGIN
+    //  ADDX(XXX, Xxx);
+    //EXTENSIONS_END
+ZINIT_END
+
+ZPUSH_BEGIN(VkPhysicalDeviceFragmentShadingRateKHR)
+    lua_newtable(L);
+    SetFlags(sampleCounts, "sample_counts");
+    SetStruct(fragmentSize, "fragment_size", VkExtent2D);
+    //XPUSH_BEGIN
+    //XPUSH_END
+ZPUSH_END
 
 /*------------------------------------------------------------------------------*
  | Format Properties                                                            |
@@ -3525,7 +3578,6 @@ ZPUSH_BEGIN(VkSparseImageFormatProperties2)
     //XPUSH_BEGIN
     //XPUSH_END
 ZPUSH_END
-
 
 /*------------------------------------------------------------------------------*
  | External Buffer/Fence/Semaphore Properties                                   |
@@ -4611,6 +4663,15 @@ ZCHECK_BEGIN(VkSubpassDescriptionDepthStencilResolve)
     GetStructp(pDepthStencilResolveAttachment, VkAttachmentReference2, "depth_stencil_resolve_attachment");
 ZCHECK_END
 
+static ZCLEAR_BEGIN(VkFragmentShadingRateAttachmentInfoKHR)
+    FreeStructp(pFragmentShadingRateAttachment, VkAttachmentReference2);
+ZCLEAR_END
+ZCHECK_BEGIN(VkFragmentShadingRateAttachmentInfoKHR)
+    newstruct(VkFragmentShadingRateAttachmentInfoKHR);
+    GetStructp(pFragmentShadingRateAttachment, VkAttachmentReference2, "fragment_shading_rate_attachment");
+    GetStruct(shadingRateAttachmentTexelSize, "shading_rate_attachment_texel_size", VkExtent2D);
+ZCHECK_END
+
 static ZCLEAR_BEGIN(VkSubpassDescription2)
     FreeList(pInputAttachments, inputAttachmentCount, VkAttachmentReference2);
     FreeList(pColorAttachments, colorAttachmentCount, VkAttachmentReference2);
@@ -4643,6 +4704,8 @@ ZCHECK_BEGIN(VkSubpassDescription2)
     EXTENSIONS_BEGIN
     if(ispresent("depth_resolve_mode") || ispresent("stencil_resolve_mode") || ispresent("depth_stencil_resolve_attachment"))
         ADD_EXTENSION_INLINE(VkSubpassDescriptionDepthStencilResolve);
+    if(ispresent("fragment_shading_rate_attachment") || ispresent("shading_rate_attachment_texel_size"))
+        ADD_EXTENSION_INLINE(VkFragmentShadingRateAttachmentInfoKHR);
     EXTENSIONS_END
 ZCHECK_END
 ZCHECKARRAY(VkSubpassDescription2)
@@ -6384,6 +6447,13 @@ ZCHECK_BEGIN(VkPipelineCreationFeedbackCreateInfoEXT)
     GetList(pPipelineStageCreationFeedbacks, pipelineStageCreationFeedbackCount, VkPipelineCreationFeedbackEXT, "pipeline_stage_creation_feedbacks");
 ZCHECK_END
 
+ZCHECK_BEGIN(VkPipelineFragmentShadingRateStateCreateInfoKHR)
+    checktable(arg);
+    newstruct(VkPipelineFragmentShadingRateStateCreateInfoKHR);
+    GetStruct(fragmentSize, "fragment_size", VkExtent2D);
+    GetEnumArray(combinerOps, "combiner_ops", 2, testfragmentshadingratecombinerop);
+ZCHECK_END
+
 /*-------------------------------------------------------------------------------------*/
 
 static ZCLEAR_BEGIN(VkGraphicsPipelineCreateInfo)
@@ -6428,6 +6498,7 @@ ZCHECK_BEGIN(VkGraphicsPipelineCreateInfo)
     EXTENSIONS_BEGIN
         ADD_EXTENSION_STRUCT("discard_rectangle_state", VkPipelineDiscardRectangleStateCreateInfoEXT);
         ADD_EXTENSION_STRUCT("creation_feedback_state", VkPipelineCreationFeedbackCreateInfoEXT);
+        ADD_EXTENSION_STRUCT("fragment_shading_rate_state", VkPipelineFragmentShadingRateStateCreateInfoKHR);
     EXTENSIONS_END
 ZCHECK_END
 ZCHECKARRAY(VkGraphicsPipelineCreateInfo)
@@ -6582,6 +6653,7 @@ static void zfreeaux(lua_State *L, void *pp)
         CASE(BIND_BUFFER_MEMORY_DEVICE_GROUP_INFO_KHR, VkBindBufferMemoryDeviceGroupInfoKHR);
         CASE(DEVICE_GROUP_PRESENT_INFO_KHR, VkDeviceGroupPresentInfoKHR);
         CASE(SUBPASS_DESCRIPTION_DEPTH_STENCIL_RESOLVE, VkSubpassDescriptionDepthStencilResolve);
+        CASE(FRAGMENT_SHADING_RATE_ATTACHMENT_INFO_KHR, VkFragmentShadingRateAttachmentInfoKHR);
         CASE(FRAMEBUFFER_ATTACHMENTS_CREATE_INFO, VkFramebufferAttachmentsCreateInfo);
         CASE(FRAMEBUFFER_ATTACHMENT_IMAGE_INFO, VkFramebufferAttachmentImageInfo);
         CASE(RENDER_PASS_ATTACHMENT_BEGIN_INFO, VkRenderPassAttachmentBeginInfo);

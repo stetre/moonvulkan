@@ -1304,6 +1304,14 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/h
 </li>
 </ul>
 </div>
+<div id="get_physical_device_fragment_shading_rates" class="ulist">
+<ul>
+<li>
+<p>{<a href="#physicaldevicefragmentshadingrate"><em>physicaldevicefragmentshadingrate</em></a>} = <strong>get_physical_device_fragment_shading_rates</strong>(<em>physdev</em>)<br>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceFragmentShadingRatesKHR.html">vkGetPhysicalDeviceFragmentShadingRatesKHR</a>.</span></p>
+</li>
+</ul>
+</div>
 </div>
 <div class="sect3">
 <h4 id="device">device</h4>
@@ -2845,6 +2853,16 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/h
 </li>
 </ul>
 </div>
+<div id="cmd_set_fragment_shading_rate" class="ulist">
+<ul>
+<li>
+<p><strong>cmd_set_fragment_shading_rate</strong>(<em>cb</em>, <em>fragment_size</em>, <em>combiner_op<sub>1</sub></em>, <em>combiner_op<sub>2</sub></em>)<br>
+<em>fragment_size</em>: <a href="#extent2d">extent2d</a>,<br>
+<em>combiner_op<sub>1</sub></em>, <em>combiner_op<sub>2</sub></em>: <a href="#fragmentshadingratecombinerop">fragmentshadingratecombinerop</a>,<br>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetFragmentShadingRateKHR.html">vkCmdSetFragmentShadingRateKHR</a>.</span></p>
+</li>
+</ul>
+</div>
 <div id="cmd_set_front_face" class="ulist">
 <ul>
 <li>
@@ -4337,6 +4355,13 @@ the <em>queue_family_index</em> of the <em>i-th</em> element in the table return
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDeviceSparseProperties.html">VkPhysicalDeviceSparseProperties</a>)</span></p>
 </li>
 <li>
+<p><a id="physicaldevicefragmentshadingrate"></a>
+<span class="small"><strong>physicaldevicefragmentshadingrate</strong> = {<br>
+<em>sample_counts</em>: <a href="#samplecountflags">samplecountflags</a>,<br>
+<em>fragment_size</em>: <a href="#extent2d">extent2d</a>,<br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDeviceFragmentShadingRateKHR.html">VkPhysicalDeviceFragmentShadingRateKHR</a>)</span></p>
+</li>
+<li>
 <p><a id="physicaldevicefeatures"></a>
 <span class="small"><strong>physicaldevicefeatures</strong> = {<br>
 <em>robust_buffer_access</em>: boolean,<br>
@@ -5106,6 +5131,9 @@ the <em>queue_family_index</em> of the <em>i-th</em> element in the table return
 <em>depth_resolve_mode</em>: <a href="#resolvemodeflags">resolvemodeflags</a>,<br>
 <em>stencil_resolve_mode</em>: <a href="#resolvemodeflags">resolvemodeflags</a>,<br>
 <em>depth_stencil_resolve_attachment</em>: <a href="#attachmentreference">attachmentreference</a>,<br>
+-- EXTENSION <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkFragmentShadingRateAttachmentInfoKHR.html">VkFragmentShadingRateAttachmentInfoKHR</a>:<br>
+<em>fragment_shading_rate_attachment</em>: <a href="#attachmentreference">attachmentreference</a>,<br>
+<em>shading_rate_attachment_texel_size</em>: <a href="#extent2d">extent2d</a>,<br>
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkSubpassDescription.html">VkSubpassDescription</a>, <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkSubpassDescription2.html">VkSubpassDescription2</a>)</span></p>
 </li>
 <li>
@@ -5689,6 +5717,7 @@ the <em>queue_family_index</em> of the <em>i-th</em> element in the table return
 -- EXTENSIONS:<br>
 <em>discard_rectangle_state</em> <a href="#pipelinediscardrectanglestatecreateinfo">pipelinediscardrectanglestatecreateinfo</a>,<br>
 <em>creation_feedback_state</em> <a href="#pipelinecreationfeedbackcreateinfo">pipelinecreationfeedbackcreateinfo</a>,<br>
+<em>fragment_shading_rate_state</em>: <a href="#pipelinefragmentshadingratestatecreateinfo">pipelinefragmentshadingratestatecreateinfo</a>,<br>
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkGraphicsPipelineCreateInfo.html">VkGraphicsPipelineCreateInfo</a>).</span></p>
 </li>
 <li>
@@ -5941,6 +5970,13 @@ the <em>queue_family_index</em> of the <em>i-th</em> element in the table return
 <em>flags</em>: <a href="#pipelinecreationfeedbackflags">pipelinecreationfeedbackflags</a>,<br>
 <em>duration</em>: integer,<br>
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPipelineCreationFeedbackEXT.html">VkPipelineCreationFeedbackEXT</a>)</span></p>
+</li>
+<li>
+<p><a id="pipelinefragmentshadingratestatecreateinfo"></a>
+<span class="small"><strong>pipelinefragmentshadingratestatecreateinfo</strong> = {<br>
+<em>fragment_size</em>: <a href="#extent2d">extent2d</a>,<br>
+<em>combiner_ops</em>: {<a href="#fragmentshadingratecombinerop">fragmentshadingratecombinerop</a>}[2],<br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPipelineFragmentShadingRateStateCreateInfoKHR.html">VkPipelineFragmentShadingRateStateCreateInfoKHR</a>)</span></p>
 </li>
 </ul>
 </div>

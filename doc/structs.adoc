@@ -507,6 +507,12 @@ _residency_aligned_mip_size_: boolean, +
 _residency_non_resident_strict_: boolean, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDeviceSparseProperties.html[VkPhysicalDeviceSparseProperties])#
 
+* [[physicaldevicefragmentshadingrate]]
+[small]#*physicaldevicefragmentshadingrate* = { +
+_sample_counts_: <<samplecountflags, samplecountflags>>, +
+_fragment_size_: <<extent2d, extent2d>>, +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDeviceFragmentShadingRateKHR.html[VkPhysicalDeviceFragmentShadingRateKHR])#
+
 * [[physicaldevicefeatures]]
 [small]#*physicaldevicefeatures* = { +
 _robust_buffer_access_: boolean, +
@@ -1215,6 +1221,9 @@ pass:[--] EXTENSION https://www.khronos.org/registry/vulkan/specs/1.2-extensions
 _depth_resolve_mode_: <<resolvemodeflags, resolvemodeflags>>, +
 _stencil_resolve_mode_: <<resolvemodeflags, resolvemodeflags>>, +
 _depth_stencil_resolve_attachment_: <<attachmentreference, attachmentreference>>, +
+pass:[--] EXTENSION https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkFragmentShadingRateAttachmentInfoKHR.html[VkFragmentShadingRateAttachmentInfoKHR]: +
+_fragment_shading_rate_attachment_: <<attachmentreference, attachmentreference>>, +
+_shading_rate_attachment_texel_size_: <<extent2d, extent2d>>, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkSubpassDescription.html[VkSubpassDescription], https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkSubpassDescription2.html[VkSubpassDescription2])#
 
 * [[attachmentreference]]
@@ -1706,6 +1715,7 @@ _base_pipeline_index_: <<index, index>>, +
 pass:[--] EXTENSIONS: +
 _discard_rectangle_state_ <<pipelinediscardrectanglestatecreateinfo, pipelinediscardrectanglestatecreateinfo>>, +
 _creation_feedback_state_ <<pipelinecreationfeedbackcreateinfo, pipelinecreationfeedbackcreateinfo>>, +
+_fragment_shading_rate_state_: <<pipelinefragmentshadingratestatecreateinfo, pipelinefragmentshadingratestatecreateinfo>>, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkGraphicsPipelineCreateInfo.html[VkGraphicsPipelineCreateInfo]).#
 
 * [[computepipelinecreateinfo]]
@@ -1941,6 +1951,13 @@ _pipeline_stage_creation_feedbacks_: {<<pipelinecreationfeedback, pipelinecreati
 _flags_: <<pipelinecreationfeedbackflags, pipelinecreationfeedbackflags>>, +
 _duration_: integer, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPipelineCreationFeedbackEXT.html[VkPipelineCreationFeedbackEXT])#
+
+* [[pipelinefragmentshadingratestatecreateinfo]]
+[small]#*pipelinefragmentshadingratestatecreateinfo* = { +
+_fragment_size_: <<extent2d, extent2d>>, +
+_combiner_ops_: {<<fragmentshadingratecombinerop, fragmentshadingratecombinerop>>}[2], +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPipelineFragmentShadingRateStateCreateInfoKHR.html[VkPipelineFragmentShadingRateStateCreateInfoKHR])#
+
 
 '''
 

@@ -452,6 +452,34 @@ static int GetPhysicalDeviceCalibrateableTimeDomains(lua_State *L)
 
 /*-----------------------------------------------------------------------------*/
 
+static int GetPhysicalDeviceFragmentShadingRates(lua_State *L)
+    {
+    int err;
+    VkResult ec;
+    uint32_t i, count = 0;
+    ud_t *ud;
+    VkPhysicalDeviceFragmentShadingRateKHR *rates = NULL;
+    VkPhysicalDevice physical_device = checkphysical_device(L, 1, &ud);
+    CheckInstancePfn(L, ud, GetPhysicalDeviceFragmentShadingRatesKHR);
+    ec = ud->idt->GetPhysicalDeviceFragmentShadingRatesKHR(physical_device, &count, NULL);
+    if(ec) { CheckError(L, ec); return 0; }
+    lua_newtable(L);
+    if(count == 0) return 1;
+#define CLEANUP zfreearrayVkPhysicalDeviceFragmentShadingRateKHR(L, rates, count, 1)
+    rates = znewchainarrayVkPhysicalDeviceFragmentShadingRateKHR(L, count, &err);
+    if(err) { CLEANUP; return lua_error(L); }
+    ec = ud->idt->GetPhysicalDeviceFragmentShadingRatesKHR(physical_device, &count, rates);
+    if(ec) { CLEANUP; CheckError(L, ec); return 0; }
+    for(i=0; i<count; i++)
+        {
+        zpushVkPhysicalDeviceFragmentShadingRateKHR(L, &rates[i]);
+        lua_rawseti(L, -2, i+1);
+        }
+    CLEANUP;
+#undef CLEANUP
+    return 1;
+    }
+
 RAW_FUNC_DISPATCHABLE(physical_device)
 TYPE_FUNC(physical_device)
 INSTANCE_FUNC(physical_device)
@@ -490,6 +518,7 @@ static const struct luaL_Reg Functions[] =
         { "get_physical_device_external_semaphore_properties", GetPhysicalDeviceExternalSemaphoreProperties },
         { "get_physical_device_multisample_properties", GetPhysicalDeviceMultisampleProperties },
         { "get_physical_device_calibrateable_time_domains", GetPhysicalDeviceCalibrateableTimeDomains },
+        { "get_physical_device_fragment_shading_rates", GetPhysicalDeviceFragmentShadingRates },
         { NULL, NULL } /* sentinel */
     };
 

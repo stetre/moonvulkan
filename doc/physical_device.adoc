@@ -66,3 +66,7 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGet
 * {<<timedomain, _timedomain_>>} = *get_physical_device_calibrateable_time_domains*(_physdev_) +
 [small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceCalibrateableTimeDomainsEXT.html[vkGetPhysicalDeviceCalibrateableTimeDomainsEXT].#
 
+[[get_physical_device_fragment_shading_rates]]
+* {<<physicaldevicefragmentshadingrate, _physicaldevicefragmentshadingrate_>>} = *get_physical_device_fragment_shading_rates*(_physdev_) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceFragmentShadingRatesKHR.html[vkGetPhysicalDeviceFragmentShadingRatesKHR].#
+

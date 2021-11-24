@@ -319,6 +319,12 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmd
 * *cmd_set_event*(_cb_, <<event, _event_>>, <<pipelinestageflags, _pipelinestageflags_>>) +
 [small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetEvent.html[vkCmdSetEvent].#
 
+[[cmd_set_fragment_shading_rate]]
+* *cmd_set_fragment_shading_rate*(_cb_, _fragment_size_, _combiner_op~1~_, _combiner_op~2~_) +
+_fragment_size_: <<extent2d, extent2d>>, +
+_combiner_op~1~_, _combiner_op~2~_: <<fragmentshadingratecombinerop, fragmentshadingratecombinerop>>, +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetFragmentShadingRateKHR.html[vkCmdSetFragmentShadingRateKHR].#
+
 [[cmd_set_front_face]]
 * *cmd_set_front_face*(_cb_, <<frontface, _frontface_>>) +
 [small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetFrontFaceEXT.html[vkCmdSetFrontFaceEXT].#
