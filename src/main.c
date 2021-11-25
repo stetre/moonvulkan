@@ -25,7 +25,7 @@
 
 #include "internal.h"
 
-static lua_State *moonvulkan_L = NULL;
+lua_State *moonvulkan_L = NULL;
 
 static void AtExit(void)
     {

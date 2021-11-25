@@ -130,8 +130,8 @@ static int pushfield(lua_State *L, int arg, const char *sname)
 
 /* ZCHECK - Must be implemented for structs that have to be passed from Lua to C */
 #define ZCHECK_BEGIN(VkXxx) \
-    VkXxx* zcheck##VkXxx(lua_State *L, int arg, int *err) { VkXxx *p; int arg1; (void)arg1;
-#define ZCHECK_END *err=0; return p; }
+    VkXxx* zcheck##VkXxx(lua_State *L, int arg, int *err) { VkXxx *p; int arg1;
+#define ZCHECK_END  (void)arg1; *err=0; return p; }
 
 /* ZPUSH - Must be implemented for structs that have to be passed from C to Lua */
 #define ZPUSH_BEGIN(VkXxx) int zpush##VkXxx(lua_State *L, const VkXxx *p) {
@@ -3402,6 +3402,26 @@ ZPUSH_BEGIN(VkPhysicalDeviceFragmentShadingRateKHR)
     //XPUSH_END
 ZPUSH_END
 
+/*------------------------------------------------------------------------------*/
+
+
+ZINIT_BEGIN(VkPhysicalDeviceToolPropertiesEXT)
+    //EXTENSIONS_BEGIN
+    //  ADDX(XXX, Xxx);
+    //EXTENSIONS_END
+ZINIT_END
+
+ZPUSH_BEGIN(VkPhysicalDeviceToolPropertiesEXT)
+    lua_newtable(L);
+    SetString(name, "name");
+    SetString(version, "version");
+    SetFlags(purposes, "purposes");
+    SetString(description, "description");
+    SetString(layer, "layer");
+    //XPUSH_BEGIN
+    //XPUSH_END
+ZPUSH_END
+
 /*------------------------------------------------------------------------------*
  | Format Properties                                                            |
  *------------------------------------------------------------------------------*/
@@ -4195,7 +4215,7 @@ ZCHECK_BEGIN(VkDeviceGroupCommandBufferBeginInfoKHR)
     GetInteger(deviceMask, "device_mask");
 ZCHECK_END
  
-ZCLEAR_BEGIN(VkCommandBufferBeginInfo)
+static ZCLEAR_BEGIN(VkCommandBufferBeginInfo)
     FreeStructp(pInheritanceInfo, VkCommandBufferInheritanceInfo);
 ZCLEAR_END
 ZCHECK_BEGIN(VkCommandBufferBeginInfo)

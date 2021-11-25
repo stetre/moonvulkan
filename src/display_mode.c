@@ -226,7 +226,7 @@ static int GetDisplayPlaneCapabilities2(lua_State *L, VkDisplayModeKHR display_m
         info->planeIndex = index;
         }
     info->mode = display_mode;
-    capabilities = znewVkDisplayPlaneCapabilities2KHR(L, &err);
+    capabilities = znewchainVkDisplayPlaneCapabilities2KHR(L, &err);
     if(err) { CLEANUP; return lua_error(L); }
     ec = ud->idt->GetDisplayPlaneCapabilities2KHR(physical_device, info, capabilities);
     if(ec) { CLEANUP; CheckError(L, ec); }

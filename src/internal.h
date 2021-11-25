@@ -180,6 +180,7 @@ const char* errstring(int err);
 extern int trace_objects;
 
 /* main.c */
+extern lua_State *moonvulkan_L;
 int luaopen_moonvulkan(lua_State *L);
 void moonvulkan_utils_init(lua_State *L);
 int moonvulkan_open_getproc(lua_State *L);
@@ -228,6 +229,21 @@ void moonvulkan_open_datahandling(lua_State *L);
 #define argerrorc(L, arg, err_code) luaL_argerror((L), (arg), errstring(err_code))
 
 #define badvalue(L,s)   lua_pushfstring((L), "invalid value '%s'", (s))
+
+/* Reference/unreference variables on the Lua registry */
+#define Unreference(L, ref) do {                        \
+    if((ref)!= LUA_NOREF)                               \
+        {                                               \
+        luaL_unref((L), LUA_REGISTRYINDEX, (ref));      \
+        (ref) = LUA_NOREF;                              \
+        }                                               \
+} while(0)
+
+#define Reference(L, arg, ref)  do {                    \
+    Unreference((L), (ref));                            \
+    lua_pushvalue(L, (arg));                            \
+    (ref) = luaL_ref(L, LUA_REGISTRYINDEX);             \
+} while(0)
 
 /* DEBUG -------------------------------------------------------- */
 #if defined(DEBUG)

@@ -25,22 +25,14 @@
 
 #include "internal.h"
 
-typedef struct {
-    lua_State *lua_state;
-    int ref;
-    ud_t *ud; /* ud for debug_report_callback */
-} ud_info_t;
+typedef struct { ud_t *ud; } ud_info_t;
 
 static int freedebug_report_callback(lua_State *L, ud_t *ud)
     {
     VkDebugReportCallbackEXT debug_report_callback = (VkDebugReportCallbackEXT)ud->handle;
     const VkAllocationCallbacks *allocator = ud->allocator;
     VkInstance instance = ud->instance;
-
-    if(!freeuserdata(L, ud))
-        return 0; /* double call */
-
-    luaL_unref(L, LUA_REGISTRYINDEX, ((ud_info_t*)ud->info)->ref);
+    if(!freeuserdata(L, ud)) return 0; /* double call */
     TRACE_DELETE(debug_report_callback, "debug_report_callback");
     UD(instance)->idt->DestroyDebugReportCallbackEXT(instance, debug_report_callback, allocator);
     return 0;
@@ -54,15 +46,14 @@ static VkBool32 Callback(VkDebugReportFlagsEXT flags,
     const char* pMessage,
     void* pUserData)
     {
-#define info ((ud_info_t*)pUserData)
-#define L info->lua_state
+#define ud ((ud_info_t*)pUserData)->ud
+#define L moonvulkan_L
     int top = lua_gettop(L);
     /* retrieve and push the callback */
-    if(lua_rawgeti(L, LUA_REGISTRYINDEX, info->ref) != LUA_TFUNCTION)
+    if(lua_rawgeti(L, LUA_REGISTRYINDEX, ud->ref1) != LUA_TFUNCTION)
         return unexpected(L);
-
     /* push args */
-    pushinstance(L, info->ud->instance);
+    pushinstance(L, ud->instance);
     pushflags(L, flags);
     pushdebugreportobjecttype(L, objectType);
     lua_pushinteger(L, object);
@@ -70,65 +61,52 @@ static VkBool32 Callback(VkDebugReportFlagsEXT flags,
     lua_pushinteger(L, messageCode);
     if(pLayerPrefix) lua_pushstring(L, pLayerPrefix);
     if(pMessage) lua_pushstring(L, pMessage);
-    
     /* execute the callback */
     if(lua_pcall(L, 8, 0, 0) != LUA_OK)
         { lua_error(L); return 0; }
-
     lua_settop(L, top);
     return 0;
 #undef L
-#undef info
+#undef ud
     }
 
 static int Create(lua_State *L)
     {
-    ud_t *ud, *instance_ud;
     ud_info_t *ud_info;
+    ud_t *ud, *instance_ud;
     VkResult ec;
     VkDebugReportCallbackEXT debug_report_callback;
     VkDebugReportCallbackCreateInfoEXT info;
     int ref;
-
     VkInstance instance = checkinstance(L, 1, &instance_ud);
     const VkAllocationCallbacks *allocator = optallocator(L, 4);
     CheckInstancePfn(L, instance_ud, CreateDebugReportCallbackEXT);
+    if(!lua_isfunction(L, 3)) return argerrorc(L, 3, ERR_TYPE);
 
     info.sType = VK_STRUCTURE_TYPE_DEBUG_REPORT_CALLBACK_CREATE_INFO_EXT;
     info.pNext = NULL;
     info.flags = checkflags(L, 2);
     info.pfnCallback = (PFN_vkDebugReportCallbackEXT)Callback;
 
-    /* get the Lua function, arg 3 and anchor it in the Lua registry */
-    if(!lua_isfunction(L, 3))
-        return argerrorc(L, 3, ERR_TYPE);
-    lua_pushvalue(L, 3);
-    ref = luaL_ref(L, LUA_REGISTRYINDEX);
-
     ud_info = (ud_info_t*)MallocNoErr(L, sizeof(ud_info_t));
-    if(!ud_info)
-        { 
-        luaL_unref(L, LUA_REGISTRYINDEX, ref); 
-        return errmemory(L);
-        }
-    ud_info->lua_state = L;
-    ud_info->ref = ref;
-/*  ud_info->ud later */
+    if(!ud_info) return errmemory(L);
     info.pUserData = ud_info;
-
     ec = instance_ud->idt->CreateDebugReportCallbackEXT(instance, &info, allocator, 
                             &debug_report_callback);
     if(ec)
         {
-        luaL_unref(L, LUA_REGISTRYINDEX, ref);
         Free(L, ud_info);
         CheckError(L, ec);
         return 0;
         }
+    lua_pushvalue(L, 3);
+    ref = luaL_ref(L, LUA_REGISTRYINDEX);
     TRACE_CREATE(debug_report_callback, "debug_report_callback");
     ud = newuserdata_nondispatchable(L, debug_report_callback, DEBUG_REPORT_CALLBACK_MT);
+    ud->ref1 = ref;
     ud->info = ud_info;
     ud_info->ud = ud;
+    ud->ref1 = ref;
     ud->parent_ud = instance_ud;
     ud->instance = instance;
     ud->allocator = allocator;
@@ -136,7 +114,6 @@ static int Create(lua_State *L)
     ud->idt = instance_ud->idt;
     return 1;
     }
-
 
 static int DebugReportMessage(lua_State *L)
     {

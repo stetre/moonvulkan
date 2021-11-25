@@ -70,3 +70,7 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGet
 * {<<physicaldevicefragmentshadingrate, _physicaldevicefragmentshadingrate_>>} = *get_physical_device_fragment_shading_rates*(_physdev_) +
 [small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceFragmentShadingRatesKHR.html[vkGetPhysicalDeviceFragmentShadingRatesKHR].#
 
+[[get_physical_device_tool_properties]]
+* {<<physicaldevicetoolproperties, _physicaldevicetoolproperties_>>} = *get_physical_device_tool_properties*(_physdev_) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceToolPropertiesEXT.html[vkGetPhysicalDeviceToolPropertiesEXT].#
+

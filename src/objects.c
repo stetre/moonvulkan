@@ -39,6 +39,7 @@ ud_t *newuserdata(lua_State *L, uint64_t handle, const char *mt, int dispatchabl
     memset(ud, 0, sizeof(ud_t));
     ud->handle = handle;
     MarkValid(ud);
+    ud->ref1 = ud->ref2 = ud->ref3 = ud->ref4 = LUA_NOREF;
     if(dispatchable) MarkDispatchable(ud);
     return ud;
     }
@@ -51,6 +52,10 @@ int freeuserdata(lua_State *L, ud_t *ud)
      * by the script, or implicitly destroyed because child of a destroyed object). */
     if(!IsValid(ud)) return 0;
     CancelValid(ud);
+    Unreference(L, ud->ref1);
+    Unreference(L, ud->ref2);
+    Unreference(L, ud->ref3);
+    Unreference(L, ud->ref4);
     if(ud->info) 
         Free(L, ud->info);
     if(IsDispatchable(ud))

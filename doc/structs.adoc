@@ -513,6 +513,16 @@ _sample_counts_: <<samplecountflags, samplecountflags>>, +
 _fragment_size_: <<extent2d, extent2d>>, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDeviceFragmentShadingRateKHR.html[VkPhysicalDeviceFragmentShadingRateKHR])#
 
+* [[physicaldevicetoolproperties]]
+[small]#*physicaldevicetoolproperties* = { +
+_name_: string, +
+_version_: string, +
+_purposes_: <<toolpurposeflags, toolpurposeflags>>, +
+_description_: string, +
+_layer_: string, +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDeviceToolPropertiesEXT.html[VkPhysicalDeviceToolPropertiesEXT])#
+
+
 * [[physicaldevicefeatures]]
 [small]#*physicaldevicefeatures* = { +
 _robust_buffer_access_: boolean, +

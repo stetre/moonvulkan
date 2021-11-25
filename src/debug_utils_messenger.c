@@ -25,22 +25,14 @@
 
 #include "internal.h"
 
-typedef struct {
-    lua_State *lua_state;
-    int ref;
-    ud_t *ud; /* ud for debug_utils_messenger */
-} ud_info_t;
+typedef struct { ud_t *ud; } ud_info_t;
 
 static int freedebug_utils_messenger(lua_State *L, ud_t *ud)
     {
     VkDebugUtilsMessengerEXT debug_utils_messenger = (VkDebugUtilsMessengerEXT)ud->handle;
     const VkAllocationCallbacks *allocator = ud->allocator;
     VkInstance instance = ud->instance;
-
-    if(!freeuserdata(L, ud))
-        return 0; /* double call */
-
-    luaL_unref(L, LUA_REGISTRYINDEX, ((ud_info_t*)ud->info)->ref);
+    if(!freeuserdata(L, ud)) return 0; /* double call */
     TRACE_DELETE(debug_utils_messenger, "debug_utils_messenger");
     UD(instance)->idt->DestroyDebugUtilsMessengerEXT(instance, debug_utils_messenger, allocator);
     return 0;
@@ -52,27 +44,24 @@ static VkBool32 Callback(
         const VkDebugUtilsMessengerCallbackDataEXT* pCallbackData, 
         void* pUserData)
     {
-#define info ((ud_info_t*)pUserData)
-#define L info->lua_state
+#define ud ((ud_info_t*)pUserData)->ud
+#define L moonvulkan_L
     int top = lua_gettop(L);
     /* retrieve and push the callback */
-    if(lua_rawgeti(L, LUA_REGISTRYINDEX, info->ref) != LUA_TFUNCTION)
+    if(lua_rawgeti(L, LUA_REGISTRYINDEX, ud->ref1) != LUA_TFUNCTION)
         return unexpected(L);
-
     /* push args */
-    pushinstance(L, info->ud->instance);
+    pushinstance(L, ud->instance);
     pushflags(L, messageSeverity);
     pushflags(L, messageType);
     if(pCallbackData) zpushVkDebugUtilsMessengerCallbackDataEXT(L, pCallbackData);
-    
     /* execute the callback */
     if(lua_pcall(L, 4, 0, 0) != LUA_OK)
         { lua_error(L); return 0; }
-
     lua_settop(L, top);
     return 0;
 #undef L
-#undef info
+#undef ud
     }
 
 static int Create(lua_State *L)
@@ -83,46 +72,31 @@ static int Create(lua_State *L)
     VkResult ec;
     VkDebugUtilsMessengerEXT debug_utils_messenger;
     VkDebugUtilsMessengerCreateInfoEXT* info;
-
     VkInstance instance = checkinstance(L, 1, &instance_ud);
     const VkAllocationCallbacks *allocator = optallocator(L, 4);
     CheckInstancePfn(L, instance_ud, CreateDebugUtilsMessengerEXT);
-
+    if(!lua_isfunction(L, 3)) return argerrorc(L, 3, ERR_TYPE);
 #define CLEANUP zfreeVkDebugUtilsMessengerCreateInfoEXT(L, info, 1)
     info = zcheckVkDebugUtilsMessengerCreateInfoEXT(L, 2, &err);
     if(err) { CLEANUP; return argerror(L, 2); }
     info->pfnUserCallback = /*(PFN_vkDebugUtilsMessengerEXT)*/Callback;
-
-    /* get the Lua function, arg 3 and anchor it in the Lua registry */
-    if(!lua_isfunction(L, 3))
-        { CLEANUP; return argerrorc(L, 3, ERR_TYPE); }
-    lua_pushvalue(L, 3);
-    ref = luaL_ref(L, LUA_REGISTRYINDEX);
-
     ud_info = (ud_info_t*)MallocNoErr(L, sizeof(ud_info_t));
-    if(!ud_info)
-        {
-        CLEANUP;
-        luaL_unref(L, LUA_REGISTRYINDEX, ref); 
-        return errmemory(L);
-        }
-    ud_info->lua_state = L;
-    ud_info->ref = ref;
-/*  ud_info->ud later */
+    if(!ud_info) { CLEANUP; return errmemory(L); }
     info->pUserData = ud_info;
-
     ec = instance_ud->idt->CreateDebugUtilsMessengerEXT(instance,info,allocator,&debug_utils_messenger);
     CLEANUP;
 #undef CLEANUP
     if(ec)
         {
-        luaL_unref(L, LUA_REGISTRYINDEX, ref);
         Free(L, ud_info);
         CheckError(L, ec);
         return 0;
         }
+    lua_pushvalue(L, 3);
+    ref = luaL_ref(L, LUA_REGISTRYINDEX);
     TRACE_CREATE(debug_utils_messenger, "debug_utils_messenger");
     ud = newuserdata_nondispatchable(L, debug_utils_messenger, DEBUG_UTILS_MESSENGER_MT);
+    ud->ref1 = ref;
     ud->info = ud_info;
     ud_info->ud = ud;
     ud->parent_ud = instance_ud;

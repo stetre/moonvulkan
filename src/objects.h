@@ -77,6 +77,7 @@ struct moonvulkan_ud_s {
     VkInstance instance; /* the instance it belongs to */
     VkDevice device; /* the device it belongs to */
     uint32_t marks;
+    int ref1, ref2, ref3, ref4; /* references for callbacks, automatically unreference at deletion */
     const VkAllocationCallbacks* allocator; /* optional allocator */
     instance_dt_t *idt; /* instance dispatch table */
     device_dt_t *ddt; /* device dispatch table */
