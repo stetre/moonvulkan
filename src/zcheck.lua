@@ -424,6 +424,14 @@ local TYPED = {
    { "VkSamplerBorderColorComponentMappingCreateInfoEXT", "SAMPLER_BORDER_COLOR_COMPONENT_MAPPING_CREATE_INFO_EXT" },
    { "VkDeviceBufferMemoryRequirementsKHR", "DEVICE_BUFFER_MEMORY_REQUIREMENTS_KHR" },
    { "VkDeviceImageMemoryRequirementsKHR", "DEVICE_IMAGE_MEMORY_REQUIREMENTS_KHR" },
+   { "VkDrmFormatModifierProperties2EXT", "DRM_FORMAT_MODIFIER_PROPERTIES_2_EXT" },
+   { "VkDrmFormatModifierPropertiesList2EXT", "DRM_FORMAT_MODIFIER_PROPERTIES_LIST_2_EXT" },
+   { "VkRenderingAttachmentInfoKHR", "RENDERING_ATTACHMENT_INFO_KHR" },
+   { "VkRenderingInfoKHR", "RENDERING_INFO_KHR" },
+   { "VkPipelineRenderingCreateInfoKHR", "PIPELINE_RENDERING_CREATE_INFO_KHR" },
+   { "VkCommandBufferInheritanceRenderingInfoKHR", "COMMAND_BUFFER_INHERITANCE_RENDERING_INFO_KHR" },
+   { "VkRenderingFragmentShadingRateAttachmentInfoKHR", "RENDERING_FRAGMENT_SHADING_RATE_ATTACHMENT_INFO_KHR" },
+   { "VkRenderingFragmentDensityMapAttachmentInfoEXT", "RENDERING_FRAGMENT_DENSITY_MAP_ATTACHMENT_INFO_EXT" },
 }
 
 local TYPED_WIN32 = {

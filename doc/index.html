@@ -2399,25 +2399,20 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/h
 <li>
 <p><strong>cmd_begin_render_pass</strong>(<em>cb</em>, <a href="#renderpassbegininfo"><em>renderpassbegininfo</em></a>, <a href="#subpasscontents"><em>subpasscontents</em></a>)<br>
 <strong>cmd_begin_render_pass</strong>(<em>cb</em>, <a href="#renderpassbegininfo"><em>renderpassbegininfo</em></a>, <a href="#subpassbegininfo"><em>subpassbegininfo</em></a>) (2KHR)<br>
-<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdBeginRenderPass.html">vkCmdBeginRenderPass</a>, <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdBeginRenderPass2.html">vkCmdBeginRenderPass2</a>.</span></p>
-</li>
-</ul>
-</div>
-<div id="cmd_next_subpass" class="ulist">
-<ul>
-<li>
-<p><strong>cmd_next_subpass</strong>(<em>cb</em>, <a href="#subpasscontents"><em>subpasscontents</em></a>)<br>
+<strong>cmd_next_subpass</strong>(<em>cb</em>, <a href="#subpasscontents"><em>subpasscontents</em></a>)<br>
 <strong>cmd_next_subpass</strong>(<em>cb</em>, <a href="#subpassbegininfo"><em>subpassbegininfo</em></a>, <a href="#subpassendinfo"><em>subpassendinfo</em></a>) (2KHR)<br>
-<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdNextSubpass.html">vkCmdNextSubpass</a>, <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdNextSubpass2.html">vkCmdNextSubpass2</a>.</span></p>
+<strong>cmd_end_render_pass</strong>(<em>cb</em>)<br>
+<strong>cmd_end_render_pass</strong>(<em>cb</em>, <a href="#subpassendinfo"><em>subpassendinfo</em></a>) (2KHR)<br>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdBeginRenderPass.html">vkCmdBeginRenderPass</a>, <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdBeginRenderPass2.html">vkCmdBeginRenderPass2</a>, <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdNextSubpass.html">vkCmdNextSubpass</a>, <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdNextSubpass2.html">vkCmdNextSubpass2</a>, <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdEndRenderPass.html">vkCmdEndRenderPass</a>, <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdEndRenderPass2.html">vkCmdEndRenderPass2</a>.</span></p>
 </li>
 </ul>
 </div>
-<div id="cmd_end_render_pass" class="ulist">
+<div id="cmd_begin_rendering" class="ulist">
 <ul>
 <li>
-<p><strong>cmd_end_render_pass</strong>(<em>cb</em>)<br>
-<strong>cmd_end_render_pass</strong>(<em>cb</em>, <a href="#subpassendinfo"><em>subpassendinfo</em></a>) (2KHR)<br>
-<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdEndRenderPass.html">vkCmdEndRenderPass</a>, <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdEndRenderPass2.html">vkCmdEndRenderPass2</a>.</span></p>
+<p><strong>cmd_begin_rendering</strong>(<em>cb</em>, <a href="#renderinginfo"><em>renderinginfo</em></a>)<br>
+<strong>cmd_end_rendering</strong>(<em>cb</em>)<br>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdBeginRenderingKHR.html">vkCmdBeginRenderingKHR</a>, <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdEndRenderingKHR.html">vkCmdEndRenderingKHR</a>.</span></p>
 </li>
 </ul>
 </div>
@@ -4986,7 +4981,20 @@ the <em>queue_family_index</em> of the <em>i-th</em> element in the table return
 <em>pipeline_statistics</em>: <a href="#querypipelinestatisticflags">querypipelinestatisticflags</a>,<br>
 -- EXTENSION <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkCommandBufferInheritanceConditionalRenderingInfoEXT.html">VkCommandBufferInheritanceConditionalRenderingInfoEXT</a>:<br>
 <em>conditional_rendering_enable</em>: boolean,<br>
+-- EXTENSIONS:<br>
+<em>rendering_info</em>: <a href="#commandbufferinheritancerenderinginfo">commandbufferinheritancerenderinginfo</a>,<br>
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkCommandBufferInheritanceInfo.html">VkCommandBufferInheritanceInfo</a>)</span></p>
+</li>
+<li>
+<p><a id="commandbufferinheritancerenderinginfo"></a>
+<span class="small"><strong>commandbufferinheritancerenderinginfo</strong> = {<br>
+<em>flags</em>: <a href="#renderingflags">renderingflags</a>,<br>
+<em>view_mask</em>: integer,<br>
+<em>color_attachment_formats</em>: {<a href="#format">format</a>},<br>
+<em>depth_attachment_format</em>: <a href="#format">format</a>,<br>
+<em>stencil_attachment_format</em>: <a href="#format">format</a>,<br>
+<em>rasterization_samples</em>: <a href="#samplecountflags">samplecountflags</a>,<br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkCommandBufferInheritanceRenderingInfoKHR.html">VkCommandBufferInheritanceRenderingInfoKHR</a>)</span></p>
 </li>
 </ul>
 </div>
@@ -5736,6 +5744,7 @@ the <em>queue_family_index</em> of the <em>i-th</em> element in the table return
 <em>discard_rectangle_state</em> <a href="#pipelinediscardrectanglestatecreateinfo">pipelinediscardrectanglestatecreateinfo</a>,<br>
 <em>creation_feedback_state</em> <a href="#pipelinecreationfeedbackcreateinfo">pipelinecreationfeedbackcreateinfo</a>,<br>
 <em>fragment_shading_rate_state</em>: <a href="#pipelinefragmentshadingratestatecreateinfo">pipelinefragmentshadingratestatecreateinfo</a>,<br>
+<em>rendering_state</em>: <a href="#pipelinerenderingcreateinfo">pipelinerenderingcreateinfo</a>,<br>
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkGraphicsPipelineCreateInfo.html">VkGraphicsPipelineCreateInfo</a>).</span></p>
 </li>
 <li>
@@ -5995,6 +6004,15 @@ the <em>queue_family_index</em> of the <em>i-th</em> element in the table return
 <em>fragment_size</em>: <a href="#extent2d">extent2d</a>,<br>
 <em>combiner_ops</em>: {<a href="#fragmentshadingratecombinerop">fragmentshadingratecombinerop</a>}[2],<br>
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPipelineFragmentShadingRateStateCreateInfoKHR.html">VkPipelineFragmentShadingRateStateCreateInfoKHR</a>)</span></p>
+</li>
+<li>
+<p><a id="pipelinerenderingcreateinfo"></a>
+<span class="small"><strong>pipelinerenderingcreateinfo</strong> = {<br>
+<em>view_mask</em>: integer,<br>
+<em>color_attachments</em>: {<a href="#renderingattachmentinfo">renderingattachmentinfo</a>},<br>
+<em>depth_attachment</em>: <a href="#renderingattachmentinfo">renderingattachmentinfo</a>,<br>
+<em>stencil_attachment</em>: <a href="#renderingattachmentinfo">renderingattachmentinfo</a>,<br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPipelineRenderingCreateInfoKHR.html">VkPipelineRenderingCreateInfoKHR</a>)</span></p>
 </li>
 </ul>
 </div>
@@ -6332,6 +6350,54 @@ See also the <a href="#clearcolor_snippet">example</a> in the code snippets sect
 <em>sample_location_grid_size</em>: <a href="#extent2d">extent2d</a> <strong>[R]</strong>,<br>
 <em>sample_locations</em>: {<a href="#samplelocation">samplelocation</a>} <strong>[R]</strong>,<br>
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkSampleLocationsInfoEXT.html">VkSampleLocationsInfoEXT</a>)</span></p>
+</li>
+</ul>
+</div>
+<hr>
+<div class="ulist">
+<ul>
+<li>
+<p><a id="renderinginfo"></a>
+<span class="small"><strong>renderinginfo</strong> = {<br>
+<em>flags</em>: <a href="#renderingflags">renderingflags</a>,<br>
+<em>render_area</em>: <a href="#rect2d">rect2d</a>,<br>
+<em>layer_count</em>: integer,<br>
+<em>view_mask</em>: integer,<br>
+<em>color_attachments</em>: {<a href="#renderingattachmentinfo">renderingattachmentinfo</a>},<br>
+<em>depth_attachment</em>: <a href="#renderingattachmentinfo">renderingattachmentinfo</a>,<br>
+<em>stencil_attachment</em>: <a href="#renderingattachmentinfo">renderingattachmentinfo</a>,<br>
+-- EXTENSIONS:<br>
+<em>fragment_shading_rate</em>: <a href="#renderingfragmentshadingrateattachmentinfo">renderingfragmentshadingrateattachmentinfo</a>,<br>
+<em>fragment_density_map</em>: <a href="#renderingfragmentdensitymapattachmentinfo">renderingfragmentdensitymapattachmentinfo</a>,<br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkRenderingInfoKHR.html">VkRenderingInfoKHR</a>)</span></p>
+</li>
+<li>
+<p><a id="renderingattachmentinfo"></a>
+<span class="small"><strong>renderingattachmentinfo</strong> = {<br>
+<em>image_view</em>: <a href="#image_view">image_view</a>,<br>
+<em>image_layout</em>: <a href="#imagelayout">imagelayout</a>,<br>
+<em>resolve_mode</em>: <a href="#resolvemodeflags">resolvemodeflags</a>,<br>
+<em>resolve_image_view</em>: <a href="#image_view">image_view</a>,<br>
+<em>resolve_image_layout</em>: <a href="#imagelayout">imagelayout</a>,<br>
+<em>load_op</em>: <a href="#attachmentloadop">attachmentloadop</a>,<br>
+<em>store_op</em>: <a href="#attachmentstoreop">attachmentstoreop</a>,<br>
+<em>clear_value</em>: <a href="#clearvalue">clearvalue</a>,<br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkRenderingAttachmentInfoKHR.html">VkRenderingAttachmentInfoKHR</a>)</span></p>
+</li>
+<li>
+<p><a id="renderingfragmentshadingrateattachmentinfo"></a>
+<span class="small"><strong>renderingfragmentshadingrateattachmentinfo</strong> = {<br>
+<em>image_view</em>: <a href="#image_view">image_view</a>,<br>
+<em>image_layout</em>: <a href="#imagelayout">imagelayout</a>,<br>
+<em>texel_size</em>: <a href="#extent2d">extent2d</a>,<br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkRenderingFragmentShadingRateAttachmentInfoKHR.html">VkRenderingFragmentShadingRateAttachmentInfoKHR</a>)</span></p>
+</li>
+<li>
+<p><a id="renderingfragmentdensitymapattachmentinfo"></a>
+<span class="small"><strong>renderingfragmentdensitymapattachmentinfo</strong> = {<br>
+<em>image_view</em>: <a href="#image_view">image_view</a>,<br>
+<em>image_layout</em>: <a href="#imagelayout">imagelayout</a>,<br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkRenderingFragmentDensityMapAttachmentInfoEXT.html">VkRenderingFragmentDensityMapAttachmentInfoEXT</a>)</span></p>
 </li>
 </ul>
 </div>
@@ -7448,6 +7514,12 @@ Rfr. <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/h
 Values:
 '<em>graphics</em>', '<em>compute</em>', '<em>transfer</em>', '<em>sparse binding</em>', '<em>protected</em>'.<br>
 Rfr. <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkQueueFlagBits.html">VkQueueFlagBits</a>.</span></p>
+</div>
+<div id="renderingflags" class="paragraph">
+<p><span class="small"><strong>renderingflags</strong>: vk.RENDERING_XXX_BIT<br>
+Values:
+'<em>contents secondary command buffers</em>', '<em>suspending</em>', '<em>resuming</em>'.<br>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkRenderingFlagBitsKHR.html">VkRenderingFlagBitsKHR</a>.</span></p>
 </div>
 <div id="resolvemodeflags" class="paragraph">
 <p><span class="small"><strong>resolvemodeflags</strong>: vk.RESOLVE_MODE_XXX_BIT<br>

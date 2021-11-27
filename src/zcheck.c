@@ -760,6 +760,7 @@ static const char *GetString_(lua_State *L, int arg, const char *sname, const ch
 #define GetSwapchainOpt(name_, sname_) GetObjectOpt(name_, sname_, VkSwapchainKHR, swapchain)
 #define GetSampler(name_, sname_) GetObject(name_, sname_, VkSampler, sampler)
 #define GetImageView(name_, sname_) GetObject(name_, sname_, VkImageView, image_view)
+#define GetImageViewOpt(name_, sname_) GetObject(name_, sname_, VkImageView, image_view)
 #define GetDescriptorSet(name_, sname_) GetObject(name_, sname_, VkDescriptorSet, descriptor_set)
 #define GetDescriptorSetLayoutOpt(name_, sname_) GetObject(name_, sname_, VkDescriptorSetLayout, descriptor_set_layout)
 #define GetValidationCache(name_, sname_) GetObject(name_, sname_, VkValidationCacheEXT, validation_cache)
@@ -4194,6 +4195,20 @@ ZCHECK_BEGIN(VkCommandBufferInheritanceConditionalRenderingInfoEXT)
     GetBoolean(conditionalRenderingEnable, "conditional_rendering_enable");
 ZCHECK_END
 
+static ZCLEAR_BEGIN(VkCommandBufferInheritanceRenderingInfoKHR)
+    FreeEnumList(pColorAttachmentFormats, format);
+ZCLEAR_END
+ZCHECK_BEGIN(VkCommandBufferInheritanceRenderingInfoKHR)
+    checktable(arg);
+    newstruct(VkCommandBufferInheritanceRenderingInfoKHR);
+    GetFlags(flags, "flags");
+    GetIntegerOpt(viewMask, "view_mask", 0);
+    GetEnumList(pColorAttachmentFormats, colorAttachmentCount, format, "color_attachment_formats");
+    GetFormat(depthAttachmentFormat, "depth_attachment_format");
+    GetFormat(stencilAttachmentFormat, "stencil_attachment_format");
+    GetFlags(rasterizationSamples, "rasterization_samples");
+ZCHECK_END
+
 ZCHECK_BEGIN(VkCommandBufferInheritanceInfo)
     checktable(arg);
     newstruct(VkCommandBufferInheritanceInfo);
@@ -4206,6 +4221,7 @@ ZCHECK_BEGIN(VkCommandBufferInheritanceInfo)
     EXTENSIONS_BEGIN
     if(ispresent("conditional_rendering_enable"))
         ADD_EXTENSION_INLINE(VkCommandBufferInheritanceConditionalRenderingInfoEXT);
+    ADD_EXTENSION_STRUCT("rendering_info", VkCommandBufferInheritanceRenderingInfoKHR);
     EXTENSIONS_END
 ZCHECK_END
 
@@ -6475,6 +6491,71 @@ ZCHECK_BEGIN(VkPipelineFragmentShadingRateStateCreateInfoKHR)
 ZCHECK_END
 
 /*-------------------------------------------------------------------------------------*/
+ZCHECK_BEGIN(VkRenderingAttachmentInfoKHR)
+    checktable(arg);
+    newstruct(VkRenderingAttachmentInfoKHR);
+    GetImageViewOpt(imageView, "image_view");
+    GetImageLayout(imageLayout, "image_layout");
+    GetFlags(resolveMode, "resolve_mode");
+    GetImageViewOpt(resolveImageView, "resolve_image_view");
+    GetImageLayout(resolveImageLayout, "resolve_image_layout");
+    GetAttachmentLoadOp(loadOp, "load_op");
+    GetAttachmentStoreOp(storeOp, "store_op");
+    GetStruct(clearValue, "clear_value", VkClearValue);
+ZCHECK_END
+ZCHECKARRAY(VkRenderingAttachmentInfoKHR)
+
+ZCHECK_BEGIN(VkRenderingFragmentShadingRateAttachmentInfoKHR)
+    checktable(arg);
+    newstruct(VkRenderingFragmentShadingRateAttachmentInfoKHR);
+    GetImageViewOpt(imageView, "image_view");
+    GetImageLayout(imageLayout, "image_layout");
+    GetStructOpt(shadingRateAttachmentTexelSize, "texel_size", VkExtent2D);
+ZCHECK_END
+
+ZCHECK_BEGIN(VkRenderingFragmentDensityMapAttachmentInfoEXT)
+    checktable(arg);
+    newstruct(VkRenderingFragmentDensityMapAttachmentInfoEXT);
+    GetImageViewOpt(imageView, "image_view");
+    GetImageLayout(imageLayout, "image_layout");
+ZCHECK_END
+
+static ZCLEAR_BEGIN(VkRenderingInfoKHR)
+    FreeList(pColorAttachments, colorAttachmentCount, VkRenderingAttachmentInfoKHR);
+    FreeStructp(pDepthAttachment, VkRenderingAttachmentInfoKHR);
+    FreeStructp(pStencilAttachment, VkRenderingAttachmentInfoKHR);
+ZCLEAR_END
+ZCHECK_BEGIN(VkRenderingInfoKHR)
+    checktable(arg);
+    newstruct(VkRenderingInfoKHR);
+    GetFlags(flags, "flags");
+    GetStructOpt(renderArea, "render_area", VkRect2D);
+    GetIntegerOpt(layerCount, "layer_count", 0);
+    GetIntegerOpt(viewMask, "view_mask", 0);
+    GetList(pColorAttachments, colorAttachmentCount, VkRenderingAttachmentInfoKHR, "color_attachments");
+    GetStructp(pDepthAttachment, VkRenderingAttachmentInfoKHR, "depth_attachment");
+    GetStructp(pStencilAttachment, VkRenderingAttachmentInfoKHR, "stencil_attachment");
+    EXTENSIONS_BEGIN
+        ADD_EXTENSION_STRUCT("fragment_shading_rate", VkRenderingFragmentShadingRateAttachmentInfoKHR);
+        ADD_EXTENSION_STRUCT("fragment_density_map", VkRenderingFragmentDensityMapAttachmentInfoEXT);
+    EXTENSIONS_END
+ZCHECK_END
+
+/*-------------------------------------------------------------------------------------*/
+
+static ZCLEAR_BEGIN(VkPipelineRenderingCreateInfoKHR)
+    FreeEnumList(pColorAttachmentFormats, format);
+ZCLEAR_END
+ZCHECK_BEGIN(VkPipelineRenderingCreateInfoKHR)
+    checktable(arg);
+    newstruct(VkPipelineRenderingCreateInfoKHR);
+    GetIntegerOpt(viewMask, "view_mask", 0);
+    GetEnumList(pColorAttachmentFormats, colorAttachmentCount, format, "color_attachment_formats");
+    GetFormat(depthAttachmentFormat, "depth_attachment_format");
+    GetFormat(stencilAttachmentFormat, "stencil_attachment_format");
+ZCHECK_END
+
+/*-------------------------------------------------------------------------------------*/
 
 static ZCLEAR_BEGIN(VkGraphicsPipelineCreateInfo)
     FreeList(pStages, stageCount, VkPipelineShaderStageCreateInfo);
@@ -6519,6 +6600,7 @@ ZCHECK_BEGIN(VkGraphicsPipelineCreateInfo)
         ADD_EXTENSION_STRUCT("discard_rectangle_state", VkPipelineDiscardRectangleStateCreateInfoEXT);
         ADD_EXTENSION_STRUCT("creation_feedback_state", VkPipelineCreationFeedbackCreateInfoEXT);
         ADD_EXTENSION_STRUCT("fragment_shading_rate_state", VkPipelineFragmentShadingRateStateCreateInfoKHR);
+        ADD_EXTENSION_STRUCT("rendering_state", VkPipelineRenderingCreateInfoKHR);
     EXTENSIONS_END
 ZCHECK_END
 ZCHECKARRAY(VkGraphicsPipelineCreateInfo)
@@ -6692,6 +6774,9 @@ static void zfreeaux(lua_State *L, void *pp)
         CASE(PIPELINE_COLOR_WRITE_CREATE_INFO_EXT, VkPipelineColorWriteCreateInfoEXT);
         CASE(DEVICE_BUFFER_MEMORY_REQUIREMENTS_KHR, VkDeviceBufferMemoryRequirementsKHR);
         CASE(DEVICE_IMAGE_MEMORY_REQUIREMENTS_KHR, VkDeviceImageMemoryRequirementsKHR);
+        CASE(RENDERING_INFO_KHR, VkRenderingInfoKHR);
+        CASE(PIPELINE_RENDERING_CREATE_INFO_KHR, VkPipelineRenderingCreateInfoKHR);
+        CASE(COMMAND_BUFFER_INHERITANCE_RENDERING_INFO_KHR, VkCommandBufferInheritanceRenderingInfoKHR);
 #undef CASE
         default: 
             return;

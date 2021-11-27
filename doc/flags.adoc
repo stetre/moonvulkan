@@ -324,6 +324,12 @@ Values:
 '_graphics_', '_compute_', '_transfer_', '_sparse binding_', '_protected_'. +
 Rfr. https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkQueueFlagBits.html[VkQueueFlagBits].#
 
+[[renderingflags]]
+[small]#*renderingflags*: vk.RENDERING_XXX_BIT +
+Values:
+'_contents secondary command buffers_', '_suspending_', '_resuming_'. +
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkRenderingFlagBitsKHR.html[VkRenderingFlagBitsKHR].#
+
 [[resolvemodeflags]]
 [small]#*resolvemodeflags*: vk.RESOLVE_MODE_XXX_BIT +
 Values: '_none_', '_sample zero_', '_average_', '_min_', '_max_'. +

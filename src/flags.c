@@ -4072,6 +4072,57 @@ static int AccelerationStructureCreateFlagsKHR(lua_State *L)
 #define Add_AccelerationStructureCreateFlagsKHR(L) \
     ADD(ACCELERATION_STRUCTURE_CREATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT);\
 
+/*----------------------------------------------------------------------*
+ | VkRenderingFlagsKHR
+ *----------------------------------------------------------------------*/
+
+static VkFlags checkrenderingflags(lua_State *L, int arg)
+    {
+    const char *s;
+    VkFlags flags = 0;
+
+    while(lua_isstring(L, arg))
+        {
+        s = lua_tostring(L, arg++);
+#define CASE(CODE,str) if((strcmp(s, str)==0)) do { flags |= CODE; goto done; } while(0)
+    CASE(VK_RENDERING_CONTENTS_SECONDARY_COMMAND_BUFFERS_BIT, "contents secondary command buffers");
+    CASE(VK_RENDERING_SUSPENDING_BIT, "suspending");
+    CASE(VK_RENDERING_RESUMING_BIT, "resuming");
+#undef CASE
+        return (VkFlags)luaL_argerror(L, --arg, badvalue(L,s));
+        done: ;
+        }
+
+    return flags;
+    }
+
+static int pushrenderingflags(lua_State *L, VkFlags flags)
+    {
+    int n = 0;
+
+#define CASE(CODE,str) do { if( flags & CODE) { lua_pushstring(L, str); n++; } } while(0)
+    CASE(VK_RENDERING_CONTENTS_SECONDARY_COMMAND_BUFFERS_BIT, "contents secondary command buffers");
+    CASE(VK_RENDERING_SUSPENDING_BIT, "suspending");
+    CASE(VK_RENDERING_RESUMING_BIT, "resuming");
+#undef CASE
+
+    return n;
+    }
+
+static int RenderingFlagsKHR(lua_State *L)
+    {
+    if(lua_type(L, 1) == LUA_TNUMBER)
+        return pushrenderingflags(L, luaL_checkinteger(L, 1));
+    lua_pushinteger(L, checkrenderingflags(L, 1));
+    return 1;
+    }
+
+#define Add_RenderingFlagsKHR(L) \
+    ADD(RENDERING_CONTENTS_SECONDARY_COMMAND_BUFFERS_BIT);\
+    ADD(RENDERING_SUSPENDING_BIT);\
+    ADD(RENDERING_RESUMING_BIT);\
+
+
 /*------------------------------------------------------------------------------*
  | Additional utilities                                                         |
  *------------------------------------------------------------------------------*/
@@ -4129,7 +4180,6 @@ static int AddConstants(lua_State *L) /* vk.XXX constants for VK_XXX values */
     Add_BuildAccelerationStructureFlagsKHR(L);
     Add_ToolPurposeFlagsEXT(L);
     Add_AccelerationStructureCreateFlagsKHR(L);
-    /* extensions */
     Add_SurfaceTransformFlagsKHR(L);
     Add_CompositeAlphaFlagKHR(L);
     Add_DisplayPlaneAlphaFlagsKHR(L);
@@ -4149,6 +4199,7 @@ static int AddConstants(lua_State *L) /* vk.XXX constants for VK_XXX values */
     Add_SwapchainCreateFlags(L);
     Add_DescriptorBindingFlags(L);
     Add_ConditionalRenderingFlags(L);
+    Add_RenderingFlagsKHR(L);
     return 0;
     }
 
@@ -4224,6 +4275,7 @@ static const struct luaL_Reg Functions[] =
         { "descriptorbindingflags", DescriptorBindingFlags },
         { "conditionalrenderingflags", ConditionalRenderingFlags },
         { "accelerationstructurecreateflags", AccelerationStructureCreateFlagsKHR },
+        { "renderingflags", RenderingFlagsKHR },
         /* Reserved flags */
         { "instancecreateflags", ReservedFlags },
         { "devicecreateflags", ReservedFlags },

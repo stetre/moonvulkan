@@ -1522,7 +1522,7 @@ static int CmdSetFragmentShadingRate(lua_State *L)
     CheckDevicePfn(L, ud, CmdSetFragmentShadingRateKHR);
     ops[0] = checkfragmentshadingratecombinerop(L, 3);
     ops[1] = checkfragmentshadingratecombinerop(L, 4);
-#define CLEANUP do { if(size) zfree(L, size, 1); } while(0)
+#define CLEANUP do { if(size) zfreeVkExtent2D(L, size, 1); } while(0)
     size = zcheckVkExtent2D(L, 2, &err);
     if(err) { CLEANUP; return argerror(L, 2); }
     ud->ddt->CmdSetFragmentShadingRateKHR(cb, size, ops);
@@ -1530,6 +1530,32 @@ static int CmdSetFragmentShadingRate(lua_State *L)
 #undef CLEANUP
     return 0;
     }
+
+static int CmdBeginRendering(lua_State *L)
+    {
+    int err;
+    ud_t *ud;
+    VkRenderingInfoKHR *info;
+    VkCommandBuffer cb = checkcommand_buffer(L, 1, &ud);
+    CheckDevicePfn(L, ud, CmdBeginRenderingKHR);
+#define CLEANUP do { if(info) zfreeVkRenderingInfoKHR(L, info, 1); } while(0)
+    info = zcheckVkRenderingInfoKHR(L, 2, &err);
+    if(err) { CLEANUP; return argerror(L, 2); }
+    ud->ddt->CmdBeginRenderingKHR(cb, info);
+    CLEANUP;
+#undef CLEANUP
+    return 0;
+    }
+
+static int CmdEndRendering(lua_State *L)
+    {
+    ud_t *ud;
+    VkCommandBuffer cb = checkcommand_buffer(L, 1, &ud);
+    CheckDevicePfn(L, ud, CmdEndRenderingKHR);
+    ud->ddt->CmdEndRenderingKHR(cb);
+    return 0;
+    }
+
 
 
 #if 0 // 10yy
@@ -1637,6 +1663,8 @@ static const struct luaL_Reg Functions[] =
         { "cmd_draw_multi", CmdDrawMulti },
         { "cmd_draw_multi_indexed", CmdDrawMultiIndexed },
         { "cmd_set_fragment_shading_rate", CmdSetFragmentShadingRate },
+        { "cmd_begin_rendering", CmdBeginRendering },
+        { "cmd_end_rendering", CmdEndRendering },
         { NULL, NULL } /* sentinel */
     };
 

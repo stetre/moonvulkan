@@ -4461,6 +4461,142 @@ int zinitVkDeviceImageMemoryRequirementsKHR(lua_State *L, VkDeviceImageMemoryReq
 #define zpushVkDeviceImageMemoryRequirementsKHR moonvulkan_zpushVkDeviceImageMemoryRequirementsKHR
 int zpushVkDeviceImageMemoryRequirementsKHR(lua_State *L, const VkDeviceImageMemoryRequirementsKHR *p);
 
+#define znewVkDrmFormatModifierProperties2EXT(L, err) (VkDrmFormatModifierProperties2EXT*)znew((L), VK_STRUCTURE_TYPE_DRM_FORMAT_MODIFIER_PROPERTIES_2_EXT, sizeof(VkDrmFormatModifierProperties2EXT), (err))
+#define znewarrayVkDrmFormatModifierProperties2EXT(L, count, err) (VkDrmFormatModifierProperties2EXT*)znewarray((L), VK_STRUCTURE_TYPE_DRM_FORMAT_MODIFIER_PROPERTIES_2_EXT, sizeof(VkDrmFormatModifierProperties2EXT), (count), (err))
+#define znewchainVkDrmFormatModifierProperties2EXT moonvulkan_znewchainVkDrmFormatModifierProperties2EXT
+VkDrmFormatModifierProperties2EXT* znewchainVkDrmFormatModifierProperties2EXT(lua_State *L, int *err);
+#define znewchainarrayVkDrmFormatModifierProperties2EXT moonvulkan_znewchainarrayVkDrmFormatModifierProperties2EXT
+VkDrmFormatModifierProperties2EXT* znewchainarrayVkDrmFormatModifierProperties2EXT(lua_State *L, uint32_t count, int *err);
+#define zcheckVkDrmFormatModifierProperties2EXT moonvulkan_zcheckVkDrmFormatModifierProperties2EXT
+VkDrmFormatModifierProperties2EXT* zcheckVkDrmFormatModifierProperties2EXT(lua_State *L, int arg, int *err);
+#define zcheckarrayVkDrmFormatModifierProperties2EXT moonvulkan_zcheckarrayVkDrmFormatModifierProperties2EXT
+VkDrmFormatModifierProperties2EXT* zcheckarrayVkDrmFormatModifierProperties2EXT(lua_State *L, int arg, uint32_t *count, int *err);
+#define zinitVkDrmFormatModifierProperties2EXT moonvulkan_zinitVkDrmFormatModifierProperties2EXT
+int zinitVkDrmFormatModifierProperties2EXT(lua_State *L, VkDrmFormatModifierProperties2EXT* p, int *err);
+#define zfreeVkDrmFormatModifierProperties2EXT(L, p, base) zfree((L), (p), (base))
+#define zfreearrayVkDrmFormatModifierProperties2EXT(L, p, count, base) zfreearray((L), (p), sizeof(VkDrmFormatModifierProperties2EXT), (count), (base))
+#define zpushVkDrmFormatModifierProperties2EXT moonvulkan_zpushVkDrmFormatModifierProperties2EXT
+int zpushVkDrmFormatModifierProperties2EXT(lua_State *L, const VkDrmFormatModifierProperties2EXT *p);
+
+#define znewVkDrmFormatModifierPropertiesList2EXT(L, err) (VkDrmFormatModifierPropertiesList2EXT*)znew((L), VK_STRUCTURE_TYPE_DRM_FORMAT_MODIFIER_PROPERTIES_LIST_2_EXT, sizeof(VkDrmFormatModifierPropertiesList2EXT), (err))
+#define znewarrayVkDrmFormatModifierPropertiesList2EXT(L, count, err) (VkDrmFormatModifierPropertiesList2EXT*)znewarray((L), VK_STRUCTURE_TYPE_DRM_FORMAT_MODIFIER_PROPERTIES_LIST_2_EXT, sizeof(VkDrmFormatModifierPropertiesList2EXT), (count), (err))
+#define znewchainVkDrmFormatModifierPropertiesList2EXT moonvulkan_znewchainVkDrmFormatModifierPropertiesList2EXT
+VkDrmFormatModifierPropertiesList2EXT* znewchainVkDrmFormatModifierPropertiesList2EXT(lua_State *L, int *err);
+#define znewchainarrayVkDrmFormatModifierPropertiesList2EXT moonvulkan_znewchainarrayVkDrmFormatModifierPropertiesList2EXT
+VkDrmFormatModifierPropertiesList2EXT* znewchainarrayVkDrmFormatModifierPropertiesList2EXT(lua_State *L, uint32_t count, int *err);
+#define zcheckVkDrmFormatModifierPropertiesList2EXT moonvulkan_zcheckVkDrmFormatModifierPropertiesList2EXT
+VkDrmFormatModifierPropertiesList2EXT* zcheckVkDrmFormatModifierPropertiesList2EXT(lua_State *L, int arg, int *err);
+#define zcheckarrayVkDrmFormatModifierPropertiesList2EXT moonvulkan_zcheckarrayVkDrmFormatModifierPropertiesList2EXT
+VkDrmFormatModifierPropertiesList2EXT* zcheckarrayVkDrmFormatModifierPropertiesList2EXT(lua_State *L, int arg, uint32_t *count, int *err);
+#define zinitVkDrmFormatModifierPropertiesList2EXT moonvulkan_zinitVkDrmFormatModifierPropertiesList2EXT
+int zinitVkDrmFormatModifierPropertiesList2EXT(lua_State *L, VkDrmFormatModifierPropertiesList2EXT* p, int *err);
+#define zfreeVkDrmFormatModifierPropertiesList2EXT(L, p, base) zfree((L), (p), (base))
+#define zfreearrayVkDrmFormatModifierPropertiesList2EXT(L, p, count, base) zfreearray((L), (p), sizeof(VkDrmFormatModifierPropertiesList2EXT), (count), (base))
+#define zpushVkDrmFormatModifierPropertiesList2EXT moonvulkan_zpushVkDrmFormatModifierPropertiesList2EXT
+int zpushVkDrmFormatModifierPropertiesList2EXT(lua_State *L, const VkDrmFormatModifierPropertiesList2EXT *p);
+
+#define znewVkRenderingAttachmentInfoKHR(L, err) (VkRenderingAttachmentInfoKHR*)znew((L), VK_STRUCTURE_TYPE_RENDERING_ATTACHMENT_INFO_KHR, sizeof(VkRenderingAttachmentInfoKHR), (err))
+#define znewarrayVkRenderingAttachmentInfoKHR(L, count, err) (VkRenderingAttachmentInfoKHR*)znewarray((L), VK_STRUCTURE_TYPE_RENDERING_ATTACHMENT_INFO_KHR, sizeof(VkRenderingAttachmentInfoKHR), (count), (err))
+#define znewchainVkRenderingAttachmentInfoKHR moonvulkan_znewchainVkRenderingAttachmentInfoKHR
+VkRenderingAttachmentInfoKHR* znewchainVkRenderingAttachmentInfoKHR(lua_State *L, int *err);
+#define znewchainarrayVkRenderingAttachmentInfoKHR moonvulkan_znewchainarrayVkRenderingAttachmentInfoKHR
+VkRenderingAttachmentInfoKHR* znewchainarrayVkRenderingAttachmentInfoKHR(lua_State *L, uint32_t count, int *err);
+#define zcheckVkRenderingAttachmentInfoKHR moonvulkan_zcheckVkRenderingAttachmentInfoKHR
+VkRenderingAttachmentInfoKHR* zcheckVkRenderingAttachmentInfoKHR(lua_State *L, int arg, int *err);
+#define zcheckarrayVkRenderingAttachmentInfoKHR moonvulkan_zcheckarrayVkRenderingAttachmentInfoKHR
+VkRenderingAttachmentInfoKHR* zcheckarrayVkRenderingAttachmentInfoKHR(lua_State *L, int arg, uint32_t *count, int *err);
+#define zinitVkRenderingAttachmentInfoKHR moonvulkan_zinitVkRenderingAttachmentInfoKHR
+int zinitVkRenderingAttachmentInfoKHR(lua_State *L, VkRenderingAttachmentInfoKHR* p, int *err);
+#define zfreeVkRenderingAttachmentInfoKHR(L, p, base) zfree((L), (p), (base))
+#define zfreearrayVkRenderingAttachmentInfoKHR(L, p, count, base) zfreearray((L), (p), sizeof(VkRenderingAttachmentInfoKHR), (count), (base))
+#define zpushVkRenderingAttachmentInfoKHR moonvulkan_zpushVkRenderingAttachmentInfoKHR
+int zpushVkRenderingAttachmentInfoKHR(lua_State *L, const VkRenderingAttachmentInfoKHR *p);
+
+#define znewVkRenderingInfoKHR(L, err) (VkRenderingInfoKHR*)znew((L), VK_STRUCTURE_TYPE_RENDERING_INFO_KHR, sizeof(VkRenderingInfoKHR), (err))
+#define znewarrayVkRenderingInfoKHR(L, count, err) (VkRenderingInfoKHR*)znewarray((L), VK_STRUCTURE_TYPE_RENDERING_INFO_KHR, sizeof(VkRenderingInfoKHR), (count), (err))
+#define znewchainVkRenderingInfoKHR moonvulkan_znewchainVkRenderingInfoKHR
+VkRenderingInfoKHR* znewchainVkRenderingInfoKHR(lua_State *L, int *err);
+#define znewchainarrayVkRenderingInfoKHR moonvulkan_znewchainarrayVkRenderingInfoKHR
+VkRenderingInfoKHR* znewchainarrayVkRenderingInfoKHR(lua_State *L, uint32_t count, int *err);
+#define zcheckVkRenderingInfoKHR moonvulkan_zcheckVkRenderingInfoKHR
+VkRenderingInfoKHR* zcheckVkRenderingInfoKHR(lua_State *L, int arg, int *err);
+#define zcheckarrayVkRenderingInfoKHR moonvulkan_zcheckarrayVkRenderingInfoKHR
+VkRenderingInfoKHR* zcheckarrayVkRenderingInfoKHR(lua_State *L, int arg, uint32_t *count, int *err);
+#define zinitVkRenderingInfoKHR moonvulkan_zinitVkRenderingInfoKHR
+int zinitVkRenderingInfoKHR(lua_State *L, VkRenderingInfoKHR* p, int *err);
+#define zfreeVkRenderingInfoKHR(L, p, base) zfree((L), (p), (base))
+#define zfreearrayVkRenderingInfoKHR(L, p, count, base) zfreearray((L), (p), sizeof(VkRenderingInfoKHR), (count), (base))
+#define zpushVkRenderingInfoKHR moonvulkan_zpushVkRenderingInfoKHR
+int zpushVkRenderingInfoKHR(lua_State *L, const VkRenderingInfoKHR *p);
+
+#define znewVkPipelineRenderingCreateInfoKHR(L, err) (VkPipelineRenderingCreateInfoKHR*)znew((L), VK_STRUCTURE_TYPE_PIPELINE_RENDERING_CREATE_INFO_KHR, sizeof(VkPipelineRenderingCreateInfoKHR), (err))
+#define znewarrayVkPipelineRenderingCreateInfoKHR(L, count, err) (VkPipelineRenderingCreateInfoKHR*)znewarray((L), VK_STRUCTURE_TYPE_PIPELINE_RENDERING_CREATE_INFO_KHR, sizeof(VkPipelineRenderingCreateInfoKHR), (count), (err))
+#define znewchainVkPipelineRenderingCreateInfoKHR moonvulkan_znewchainVkPipelineRenderingCreateInfoKHR
+VkPipelineRenderingCreateInfoKHR* znewchainVkPipelineRenderingCreateInfoKHR(lua_State *L, int *err);
+#define znewchainarrayVkPipelineRenderingCreateInfoKHR moonvulkan_znewchainarrayVkPipelineRenderingCreateInfoKHR
+VkPipelineRenderingCreateInfoKHR* znewchainarrayVkPipelineRenderingCreateInfoKHR(lua_State *L, uint32_t count, int *err);
+#define zcheckVkPipelineRenderingCreateInfoKHR moonvulkan_zcheckVkPipelineRenderingCreateInfoKHR
+VkPipelineRenderingCreateInfoKHR* zcheckVkPipelineRenderingCreateInfoKHR(lua_State *L, int arg, int *err);
+#define zcheckarrayVkPipelineRenderingCreateInfoKHR moonvulkan_zcheckarrayVkPipelineRenderingCreateInfoKHR
+VkPipelineRenderingCreateInfoKHR* zcheckarrayVkPipelineRenderingCreateInfoKHR(lua_State *L, int arg, uint32_t *count, int *err);
+#define zinitVkPipelineRenderingCreateInfoKHR moonvulkan_zinitVkPipelineRenderingCreateInfoKHR
+int zinitVkPipelineRenderingCreateInfoKHR(lua_State *L, VkPipelineRenderingCreateInfoKHR* p, int *err);
+#define zfreeVkPipelineRenderingCreateInfoKHR(L, p, base) zfree((L), (p), (base))
+#define zfreearrayVkPipelineRenderingCreateInfoKHR(L, p, count, base) zfreearray((L), (p), sizeof(VkPipelineRenderingCreateInfoKHR), (count), (base))
+#define zpushVkPipelineRenderingCreateInfoKHR moonvulkan_zpushVkPipelineRenderingCreateInfoKHR
+int zpushVkPipelineRenderingCreateInfoKHR(lua_State *L, const VkPipelineRenderingCreateInfoKHR *p);
+
+#define znewVkCommandBufferInheritanceRenderingInfoKHR(L, err) (VkCommandBufferInheritanceRenderingInfoKHR*)znew((L), VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_RENDERING_INFO_KHR, sizeof(VkCommandBufferInheritanceRenderingInfoKHR), (err))
+#define znewarrayVkCommandBufferInheritanceRenderingInfoKHR(L, count, err) (VkCommandBufferInheritanceRenderingInfoKHR*)znewarray((L), VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_RENDERING_INFO_KHR, sizeof(VkCommandBufferInheritanceRenderingInfoKHR), (count), (err))
+#define znewchainVkCommandBufferInheritanceRenderingInfoKHR moonvulkan_znewchainVkCommandBufferInheritanceRenderingInfoKHR
+VkCommandBufferInheritanceRenderingInfoKHR* znewchainVkCommandBufferInheritanceRenderingInfoKHR(lua_State *L, int *err);
+#define znewchainarrayVkCommandBufferInheritanceRenderingInfoKHR moonvulkan_znewchainarrayVkCommandBufferInheritanceRenderingInfoKHR
+VkCommandBufferInheritanceRenderingInfoKHR* znewchainarrayVkCommandBufferInheritanceRenderingInfoKHR(lua_State *L, uint32_t count, int *err);
+#define zcheckVkCommandBufferInheritanceRenderingInfoKHR moonvulkan_zcheckVkCommandBufferInheritanceRenderingInfoKHR
+VkCommandBufferInheritanceRenderingInfoKHR* zcheckVkCommandBufferInheritanceRenderingInfoKHR(lua_State *L, int arg, int *err);
+#define zcheckarrayVkCommandBufferInheritanceRenderingInfoKHR moonvulkan_zcheckarrayVkCommandBufferInheritanceRenderingInfoKHR
+VkCommandBufferInheritanceRenderingInfoKHR* zcheckarrayVkCommandBufferInheritanceRenderingInfoKHR(lua_State *L, int arg, uint32_t *count, int *err);
+#define zinitVkCommandBufferInheritanceRenderingInfoKHR moonvulkan_zinitVkCommandBufferInheritanceRenderingInfoKHR
+int zinitVkCommandBufferInheritanceRenderingInfoKHR(lua_State *L, VkCommandBufferInheritanceRenderingInfoKHR* p, int *err);
+#define zfreeVkCommandBufferInheritanceRenderingInfoKHR(L, p, base) zfree((L), (p), (base))
+#define zfreearrayVkCommandBufferInheritanceRenderingInfoKHR(L, p, count, base) zfreearray((L), (p), sizeof(VkCommandBufferInheritanceRenderingInfoKHR), (count), (base))
+#define zpushVkCommandBufferInheritanceRenderingInfoKHR moonvulkan_zpushVkCommandBufferInheritanceRenderingInfoKHR
+int zpushVkCommandBufferInheritanceRenderingInfoKHR(lua_State *L, const VkCommandBufferInheritanceRenderingInfoKHR *p);
+
+#define znewVkRenderingFragmentShadingRateAttachmentInfoKHR(L, err) (VkRenderingFragmentShadingRateAttachmentInfoKHR*)znew((L), VK_STRUCTURE_TYPE_RENDERING_FRAGMENT_SHADING_RATE_ATTACHMENT_INFO_KHR, sizeof(VkRenderingFragmentShadingRateAttachmentInfoKHR), (err))
+#define znewarrayVkRenderingFragmentShadingRateAttachmentInfoKHR(L, count, err) (VkRenderingFragmentShadingRateAttachmentInfoKHR*)znewarray((L), VK_STRUCTURE_TYPE_RENDERING_FRAGMENT_SHADING_RATE_ATTACHMENT_INFO_KHR, sizeof(VkRenderingFragmentShadingRateAttachmentInfoKHR), (count), (err))
+#define znewchainVkRenderingFragmentShadingRateAttachmentInfoKHR moonvulkan_znewchainVkRenderingFragmentShadingRateAttachmentInfoKHR
+VkRenderingFragmentShadingRateAttachmentInfoKHR* znewchainVkRenderingFragmentShadingRateAttachmentInfoKHR(lua_State *L, int *err);
+#define znewchainarrayVkRenderingFragmentShadingRateAttachmentInfoKHR moonvulkan_znewchainarrayVkRenderingFragmentShadingRateAttachmentInfoKHR
+VkRenderingFragmentShadingRateAttachmentInfoKHR* znewchainarrayVkRenderingFragmentShadingRateAttachmentInfoKHR(lua_State *L, uint32_t count, int *err);
+#define zcheckVkRenderingFragmentShadingRateAttachmentInfoKHR moonvulkan_zcheckVkRenderingFragmentShadingRateAttachmentInfoKHR
+VkRenderingFragmentShadingRateAttachmentInfoKHR* zcheckVkRenderingFragmentShadingRateAttachmentInfoKHR(lua_State *L, int arg, int *err);
+#define zcheckarrayVkRenderingFragmentShadingRateAttachmentInfoKHR moonvulkan_zcheckarrayVkRenderingFragmentShadingRateAttachmentInfoKHR
+VkRenderingFragmentShadingRateAttachmentInfoKHR* zcheckarrayVkRenderingFragmentShadingRateAttachmentInfoKHR(lua_State *L, int arg, uint32_t *count, int *err);
+#define zinitVkRenderingFragmentShadingRateAttachmentInfoKHR moonvulkan_zinitVkRenderingFragmentShadingRateAttachmentInfoKHR
+int zinitVkRenderingFragmentShadingRateAttachmentInfoKHR(lua_State *L, VkRenderingFragmentShadingRateAttachmentInfoKHR* p, int *err);
+#define zfreeVkRenderingFragmentShadingRateAttachmentInfoKHR(L, p, base) zfree((L), (p), (base))
+#define zfreearrayVkRenderingFragmentShadingRateAttachmentInfoKHR(L, p, count, base) zfreearray((L), (p), sizeof(VkRenderingFragmentShadingRateAttachmentInfoKHR), (count), (base))
+#define zpushVkRenderingFragmentShadingRateAttachmentInfoKHR moonvulkan_zpushVkRenderingFragmentShadingRateAttachmentInfoKHR
+int zpushVkRenderingFragmentShadingRateAttachmentInfoKHR(lua_State *L, const VkRenderingFragmentShadingRateAttachmentInfoKHR *p);
+
+#define znewVkRenderingFragmentDensityMapAttachmentInfoEXT(L, err) (VkRenderingFragmentDensityMapAttachmentInfoEXT*)znew((L), VK_STRUCTURE_TYPE_RENDERING_FRAGMENT_DENSITY_MAP_ATTACHMENT_INFO_EXT, sizeof(VkRenderingFragmentDensityMapAttachmentInfoEXT), (err))
+#define znewarrayVkRenderingFragmentDensityMapAttachmentInfoEXT(L, count, err) (VkRenderingFragmentDensityMapAttachmentInfoEXT*)znewarray((L), VK_STRUCTURE_TYPE_RENDERING_FRAGMENT_DENSITY_MAP_ATTACHMENT_INFO_EXT, sizeof(VkRenderingFragmentDensityMapAttachmentInfoEXT), (count), (err))
+#define znewchainVkRenderingFragmentDensityMapAttachmentInfoEXT moonvulkan_znewchainVkRenderingFragmentDensityMapAttachmentInfoEXT
+VkRenderingFragmentDensityMapAttachmentInfoEXT* znewchainVkRenderingFragmentDensityMapAttachmentInfoEXT(lua_State *L, int *err);
+#define znewchainarrayVkRenderingFragmentDensityMapAttachmentInfoEXT moonvulkan_znewchainarrayVkRenderingFragmentDensityMapAttachmentInfoEXT
+VkRenderingFragmentDensityMapAttachmentInfoEXT* znewchainarrayVkRenderingFragmentDensityMapAttachmentInfoEXT(lua_State *L, uint32_t count, int *err);
+#define zcheckVkRenderingFragmentDensityMapAttachmentInfoEXT moonvulkan_zcheckVkRenderingFragmentDensityMapAttachmentInfoEXT
+VkRenderingFragmentDensityMapAttachmentInfoEXT* zcheckVkRenderingFragmentDensityMapAttachmentInfoEXT(lua_State *L, int arg, int *err);
+#define zcheckarrayVkRenderingFragmentDensityMapAttachmentInfoEXT moonvulkan_zcheckarrayVkRenderingFragmentDensityMapAttachmentInfoEXT
+VkRenderingFragmentDensityMapAttachmentInfoEXT* zcheckarrayVkRenderingFragmentDensityMapAttachmentInfoEXT(lua_State *L, int arg, uint32_t *count, int *err);
+#define zinitVkRenderingFragmentDensityMapAttachmentInfoEXT moonvulkan_zinitVkRenderingFragmentDensityMapAttachmentInfoEXT
+int zinitVkRenderingFragmentDensityMapAttachmentInfoEXT(lua_State *L, VkRenderingFragmentDensityMapAttachmentInfoEXT* p, int *err);
+#define zfreeVkRenderingFragmentDensityMapAttachmentInfoEXT(L, p, base) zfree((L), (p), (base))
+#define zfreearrayVkRenderingFragmentDensityMapAttachmentInfoEXT(L, p, count, base) zfreearray((L), (p), sizeof(VkRenderingFragmentDensityMapAttachmentInfoEXT), (count), (base))
+#define zpushVkRenderingFragmentDensityMapAttachmentInfoEXT moonvulkan_zpushVkRenderingFragmentDensityMapAttachmentInfoEXT
+int zpushVkRenderingFragmentDensityMapAttachmentInfoEXT(lua_State *L, const VkRenderingFragmentDensityMapAttachmentInfoEXT *p);
+
 
 #ifdef VK_USE_PLATFORM_WIN32_KHR
 

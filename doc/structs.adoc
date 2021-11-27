@@ -1094,7 +1094,20 @@ _query_flags_: <<querycontrolflags, querycontrolflags>>, +
 _pipeline_statistics_: <<querypipelinestatisticflags, querypipelinestatisticflags>>, +
 pass:[--] EXTENSION https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkCommandBufferInheritanceConditionalRenderingInfoEXT.html[VkCommandBufferInheritanceConditionalRenderingInfoEXT]: +
 _conditional_rendering_enable_: boolean, +
+pass:[--] EXTENSIONS: +
+_rendering_info_: <<commandbufferinheritancerenderinginfo, commandbufferinheritancerenderinginfo>>, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkCommandBufferInheritanceInfo.html[VkCommandBufferInheritanceInfo])#
+
+* [[commandbufferinheritancerenderinginfo]]
+[small]#*commandbufferinheritancerenderinginfo* = { +
+_flags_: <<renderingflags, renderingflags>>, +
+_view_mask_: integer, +
+_color_attachment_formats_: {<<format, format>>}, +
+_depth_attachment_format_: <<format, format>>, +
+_stencil_attachment_format_: <<format, format>>, +
+_rasterization_samples_: <<samplecountflags, samplecountflags>>, +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkCommandBufferInheritanceRenderingInfoKHR.html[VkCommandBufferInheritanceRenderingInfoKHR])#
+
 
 '''
 
@@ -1726,7 +1739,9 @@ pass:[--] EXTENSIONS: +
 _discard_rectangle_state_ <<pipelinediscardrectanglestatecreateinfo, pipelinediscardrectanglestatecreateinfo>>, +
 _creation_feedback_state_ <<pipelinecreationfeedbackcreateinfo, pipelinecreationfeedbackcreateinfo>>, +
 _fragment_shading_rate_state_: <<pipelinefragmentshadingratestatecreateinfo, pipelinefragmentshadingratestatecreateinfo>>, +
+_rendering_state_: <<pipelinerenderingcreateinfo, pipelinerenderingcreateinfo>>, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkGraphicsPipelineCreateInfo.html[VkGraphicsPipelineCreateInfo]).#
+
 
 * [[computepipelinecreateinfo]]
 [small]#*computepipelinecreateinfo* = { +
@@ -1968,6 +1983,13 @@ _fragment_size_: <<extent2d, extent2d>>, +
 _combiner_ops_: {<<fragmentshadingratecombinerop, fragmentshadingratecombinerop>>}[2], +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPipelineFragmentShadingRateStateCreateInfoKHR.html[VkPipelineFragmentShadingRateStateCreateInfoKHR])#
 
+* [[pipelinerenderingcreateinfo]]
+[small]#*pipelinerenderingcreateinfo* = { +
+_view_mask_: integer, +
+_color_attachments_: {<<renderingattachmentinfo, renderingattachmentinfo>>}, +
+_depth_attachment_: <<renderingattachmentinfo, renderingattachmentinfo>>, +
+_stencil_attachment_: <<renderingattachmentinfo, renderingattachmentinfo>>, +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPipelineRenderingCreateInfoKHR.html[VkPipelineRenderingCreateInfoKHR])#
 
 '''
 
@@ -2258,6 +2280,48 @@ _sample_locations_per_pixel_: <<samplecountflags, samplecountflags>>, +
 _sample_location_grid_size_: <<extent2d, extent2d>> *[R]*, +
 _sample_locations_: {<<samplelocation, samplelocation>>} *[R]*, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkSampleLocationsInfoEXT.html[VkSampleLocationsInfoEXT])#
+
+'''
+
+* [[renderinginfo]]
+[small]#*renderinginfo* = { +
+_flags_: <<renderingflags, renderingflags>>, +
+_render_area_: <<rect2d, rect2d>>, +
+_layer_count_: integer, +
+_view_mask_: integer, +
+_color_attachments_: {<<renderingattachmentinfo, renderingattachmentinfo>>}, +
+_depth_attachment_: <<renderingattachmentinfo, renderingattachmentinfo>>, +
+_stencil_attachment_: <<renderingattachmentinfo, renderingattachmentinfo>>, +
+pass:[--] EXTENSIONS: +
+_fragment_shading_rate_: <<renderingfragmentshadingrateattachmentinfo, renderingfragmentshadingrateattachmentinfo>>, +
+_fragment_density_map_: <<renderingfragmentdensitymapattachmentinfo, renderingfragmentdensitymapattachmentinfo>>, +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkRenderingInfoKHR.html[VkRenderingInfoKHR])#
+
+* [[renderingattachmentinfo]]
+[small]#*renderingattachmentinfo* = { +
+_image_view_: <<image_view, image_view>>, +
+_image_layout_: <<imagelayout, imagelayout>>, +
+_resolve_mode_: <<resolvemodeflags, resolvemodeflags>>, +
+_resolve_image_view_: <<image_view, image_view>>, +
+_resolve_image_layout_: <<imagelayout, imagelayout>>, +
+_load_op_: <<attachmentloadop, attachmentloadop>>, +
+_store_op_: <<attachmentstoreop, attachmentstoreop>>, +
+_clear_value_: <<clearvalue, clearvalue>>, +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkRenderingAttachmentInfoKHR.html[VkRenderingAttachmentInfoKHR])#
+
+* [[renderingfragmentshadingrateattachmentinfo]]
+[small]#*renderingfragmentshadingrateattachmentinfo* = { +
+_image_view_: <<image_view, image_view>>, +
+_image_layout_: <<imagelayout, imagelayout>>, +
+_texel_size_: <<extent2d, extent2d>>, +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkRenderingFragmentShadingRateAttachmentInfoKHR.html[VkRenderingFragmentShadingRateAttachmentInfoKHR])#
+
+* [[renderingfragmentdensitymapattachmentinfo]]
+[small]#*renderingfragmentdensitymapattachmentinfo* = { +
+_image_view_: <<image_view, image_view>>, +
+_image_layout_: <<imagelayout, imagelayout>>, +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkRenderingFragmentDensityMapAttachmentInfoEXT.html[VkRenderingFragmentDensityMapAttachmentInfoEXT])#
+
 
 '''
 
