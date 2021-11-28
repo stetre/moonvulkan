@@ -1363,7 +1363,8 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/h
 <ul>
 <li>
 <p><strong>queue_submit</strong>(<em>queue</em>, {<a href="#submitinfo"><em>submitinfo</em></a>}, [<a href="#fence"><em>fence</em></a>])<br>
-<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkQueueSubmit.html">vkQueueSubmit</a>.</span></p>
+<strong>queue_submit2</strong>(<em>queue</em>, {<a href="#submitinfo2"><em>submitinfo2</em></a>}, [<a href="#fence"><em>fence</em></a>])<br>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkQueueSubmit.html">vkQueueSubmit</a>, <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkQueueSubmit2KHR.html">vkQueueSubmit2KHR</a>.</span></p>
 </li>
 </ul>
 </div>
@@ -2691,13 +2692,14 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/h
 <ul>
 <li>
 <p><strong>cmd_pipeline_barrier</strong>(<em>cb</em>, <em>src_stage_mask</em>, <em>&#8230;&#8203;</em>)<br>
+<strong>cmd_pipeline_barrier</strong>(<em>cb</em>, <a href="#dependencyinfo"><em>dependencyinfo</em></a>)<br>
 <span class="small">arg2 - <em>src_stage_mask</em>: <a href="#pipelinestageflags">pipelinestageflags</a><br>
 arg3 - <em>dst_stage_mask</em>: <a href="#pipelinestageflags">pipelinestageflags</a><br>
 arg4 - <em>dependency_flags</em>: <a href="#dependencyflags">dependencyflags</a><br>
 arg5 - [<em>memory_barriers</em>]: {<a href="#memorybarrier">memorybarrier</a>}<br>
 arg6 - [<em>buffer_memory_barriers</em>]: {<a href="#buffermemorybarrier">buffermemorybarrier</a>}<br>
 arg7 - [<em>image_memory_barriers</em>]: {<a href="#imagememorybarrier">imagememorybarrier</a>}<br>
-Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdPipelineBarrier.html">vkCmdPipelineBarrier</a>.</span></p>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdPipelineBarrier.html">vkCmdPipelineBarrier</a>, <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdPipelineBarrier2KHR.html">vkCmdPipelineBarrier2KHR</a>.</span></p>
 </li>
 </ul>
 </div>
@@ -2740,7 +2742,7 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/h
 <ul>
 <li>
 <p><strong>cmd_reset_event</strong>(<em>cb</em>, <a href="#event"><em>event</em></a>, <a href="#pipelinestageflags"><em>pipelinestageflags</em></a>)<br>
-<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdResetEvent.html">vkCmdResetEvent</a>.</span></p>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdResetEvent.html">vkCmdResetEvent</a>, <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdResetEvent2KHR.html">vkCmdResetEvent2KHR</a>.</span></p>
 </li>
 </ul>
 </div>
@@ -2852,7 +2854,8 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/h
 <ul>
 <li>
 <p><strong>cmd_set_event</strong>(<em>cb</em>, <a href="#event"><em>event</em></a>, <a href="#pipelinestageflags"><em>pipelinestageflags</em></a>)<br>
-<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetEvent.html">vkCmdSetEvent</a>.</span></p>
+<strong>cmd_set_event</strong>(<em>cb</em>, <a href="#event"><em>event</em></a>, {<a href="#dependencyinfo"><em>dependencyinfo</em></a>})<br>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetEvent.html">vkCmdSetEvent</a>, <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetEvent2KHR.html">vkCmdSetEvent2KHR</a>.</span></p>
 </li>
 </ul>
 </div>
@@ -3030,13 +3033,14 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/h
 <ul>
 <li>
 <p><strong>cmd_wait_events</strong>(<em>cb</em>, <em>src_stage_mask</em>, <em>&#8230;&#8203;</em>)<br>
+<strong>cmd_wait_events</strong>(<em>cb</em>, {<a href="#event"><em>event</em></a>}, <a href="#dependencyinfo"><em>dependencyinfo</em></a>)<br>
 <span class="small">arg2 - <em>src_stage_mask</em>: <a href="#pipelinestageflags">pipelinestageflags</a><br>
 arg3 - <em>dst_stage_mask</em>: <a href="#pipelinestageflags">pipelinestageflags</a><br>
 arg4 - <em>events</em>: {<a href="#event">event</a>}<br>
 arg5 - [<em>memory_barriers</em>]: {<a href="#memorybarrier">memorybarrier</a>}<br>
 arg6 - [<em>buffer_memory_barriers</em>]: {<a href="#buffermemorybarrier">buffermemorybarrier</a>}<br>
 arg7 - [<em>image_memory_barriers</em>]: {<a href="#imagememorybarrier">imagememorybarrier</a>}<br>
-Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdWaitEvents.html">vkCmdWaitEvents</a>.</span></p>
+Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdWaitEvents.html">vkCmdWaitEvents</a>, <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdWaitEvents2KHR.html">vkCmdWaitEvents2KHR</a>.</span></p>
 </li>
 </ul>
 </div>
@@ -3044,7 +3048,7 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/h
 <ul>
 <li>
 <p><strong>cmd_write_timestamp</strong>(<em>cb</em>, <a href="#pipelinestageflags"><em>pipelinestageflags</em></a>, <a href="#query_pool"><em>query_pool</em></a>, <em>query</em>)<br>
-<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdWriteTimestamp.html">vkCmdWriteTimestamp</a>.</span></p>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdWriteTimestamp.html">vkCmdWriteTimestamp</a>, <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdWriteTimestamp2KHR.html">vkCmdWriteTimestamp2KHR</a>.</span></p>
 </li>
 </ul>
 </div>
@@ -4885,6 +4889,36 @@ the <em>queue_family_index</em> of the <em>i-th</em> element in the table return
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkSubmitInfo.html">VkSubmitInfo</a>)</span></p>
 </li>
 <li>
+<p><a id="submitinfo2"></a>
+<span class="small"><strong>submitinfo2</strong> = {<br>
+<em>flags</em>: <a href="#submitflags">submitflags</a>,<br>
+<em>wait_semaphore_infos</em>: {<a href="#semaphoresubmitinfo">semaphoresubmitinfo</a>},<br>
+<em>command_buffer_infos</em>: {<a href="#commandbuffersubmitinfo">commandbuffersubmitinfo</a>},<br>
+<em>signal_semaphore_infos</em>: {<a href="#semaphoresubmitinfo">semaphoresubmitinfo</a>},<br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkSubmitInfo2KHR.html">VkSubmitInfo2KHR</a>)</span></p>
+</li>
+<li>
+<p><a id="semaphoresubmitinfo"></a>
+<span class="small"><strong>semaphoresubmitinfo</strong> = {<br>
+<em>semaphore</em>: <a href="#semaphore">semaphore</a>,<br>
+<em>value</em>: integer,<br>
+<em>stage_mask</em>: <a href="#pipelinestageflags">pipelinestageflags</a>,<br>
+<em>device_index</em>: integer,<br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkSemaphoreSubmitInfoKHR.html">VkSemaphoreSubmitInfoKHR</a>)</span></p>
+</li>
+<li>
+<p><a id="commandbuffersubmitinfo"></a>
+<span class="small"><strong>commandbuffersubmitinfo</strong> = {<br>
+<em>command_buffer</em>: <a href="#command_buffer">command_buffer</a>,<br>
+<em>device_mask</em>: integer,<br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkCommandBufferSubmitInfoKHR.html">VkCommandBufferSubmitInfoKHR</a>)</span></p>
+</li>
+</ul>
+</div>
+<hr>
+<div class="ulist">
+<ul>
+<li>
 <p><a id="bindsparseinfo"></a>
 <span class="small"><strong>bindsparseinfo</strong> = {<br>
 <em>wait_semaphores</em>: {<a href="#semaphore">semaphore</a>},<br>
@@ -5183,6 +5217,8 @@ the <em>queue_family_index</em> of the <em>i-th</em> element in the table return
 <em>dst_access_mask</em>: <a href="#accessflags">accessflags</a>,<br>
 <em>dependency_flags</em>: <a href="#dependencyflags">dependencyflags</a>,<br>
 <em>view_offset</em>: integer (2KHR only),<br>
+-- EXTENSION <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkMemoryBarrier2KHR.html">VkMemoryBarrier2KHR</a>:<br>
+<em>memory_barrier2</em>: <a href="#memorybarrier2">memorybarrier2</a>,<br>
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkSubpassDependency.html">VkSubpassDependency</a>, <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkSubpassDependency2.html">VkSubpassDependency2</a>)</span></p>
 </li>
 <li>
@@ -6184,11 +6220,29 @@ the <em>queue_family_index</em> of the <em>i-th</em> element in the table return
 <div class="ulist">
 <ul>
 <li>
+<p><a id="dependencyinfo"></a>
+<span class="small"><strong>dependencyinfo</strong> = {<br>
+<em>dependency_flags</em>: <a href="#dependencyflags">dependencyflags</a>,<br>
+<em>memory_barriers</em>: {<a href="#memorybarrier2">memorybarrier2</a>},<br>
+<em>buffer_memory_barriers</em>: {<a href="#buffermemorybarrier2">buffermemorybarrier2</a>},<br>
+<em>image_memory_barriers</em>: {<a href="#imagememorybarrier2">imagememorybarrier2</a>},<br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkDependencyInfoKHR.html">VkDependencyInfoKHR</a>)</span></p>
+</li>
+<li>
 <p><a id="memorybarrier"></a>
 <span class="small"><strong>memorybarrier</strong> = {<br>
 <em>src_access_mask</em>: <a href="#accessflags">accessflags</a>,<br>
 <em>dst_access_mask</em>: <a href="#accessflags">accessflags</a>,<br>
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkMemoryBarrier.html">VkMemoryBarrier</a>)</span></p>
+</li>
+<li>
+<p><a id="memorybarrier2"></a>
+<span class="small"><strong>memorybarrier2</strong> = {<br>
+<em>src_stage_mask</em>: <a href="#pipelinestageflags">pipelinestageflags</a>,<br>
+<em>dst_stage_mask</em>: <a href="#pipelinestageflags">pipelinestageflags</a>,<br>
+<em>src_access_mask</em>: <a href="#accessflags">accessflags</a>,<br>
+<em>dst_access_mask</em>: <a href="#accessflags">accessflags</a>,<br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkMemoryBarrier2KHR.html">VkMemoryBarrier2KHR</a>)</span></p>
 </li>
 <li>
 <p><a id="buffermemorybarrier"></a>
@@ -6203,6 +6257,20 @@ the <em>queue_family_index</em> of the <em>i-th</em> element in the table return
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkBufferMemoryBarrier.html">VkBufferMemoryBarrier</a>)</span></p>
 </li>
 <li>
+<p><a id="buffermemorybarrier2"></a>
+<span class="small"><strong>buffermemorybarrier2</strong> = {<br>
+<em>src_stage_mask</em>: <a href="#pipelinestageflags">pipelinestageflags</a>,<br>
+<em>dst_stage_mask</em>: <a href="#pipelinestageflags">pipelinestageflags</a>,<br>
+<em>src_access_mask</em>: <a href="#accessflags">accessflags</a>,<br>
+<em>dst_access_mask</em>: <a href="#accessflags">accessflags</a>,<br>
+<em>src_queue_family_index</em>: <a href="#index">index</a> (default: ignored),<br>
+<em>dst_queue_family_index</em>: <a href="#index">index</a> (default: ignored),<br>
+<em>buffer</em>: <a href="#buffer">buffer</a> <strong>[R]</strong>,<br>
+<em>offset</em>: integer,<br>
+<em>size</em>: integer,<br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkBufferMemoryBarrier2KHR.html">VkBufferMemoryBarrier2KHR</a>)</span></p>
+</li>
+<li>
 <p><a id="imagememorybarrier"></a>
 <span class="small"><strong>imagememorybarrier</strong> = {<br>
 <em>src_access_mask</em>: <a href="#accessflags">accessflags</a>,<br>
@@ -6214,6 +6282,21 @@ the <em>queue_family_index</em> of the <em>i-th</em> element in the table return
 <em>image</em>: <a href="#image">image</a>,<br>
 <em>subresource_range</em>: <a href="#imagesubresourcerange">imagesubresourcerange</a>,<br>
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkImageMemoryBarrier.html">VkImageMemoryBarrier</a>)</span></p>
+</li>
+<li>
+<p><a id="imagememorybarrier2"></a>
+<span class="small"><strong>imagememorybarrier2</strong> = {<br>
+<em>src_stage_mask</em>: <a href="#pipelinestageflags">pipelinestageflags</a>,<br>
+<em>dst_stage_mask</em>: <a href="#pipelinestageflags">pipelinestageflags</a>,<br>
+<em>src_access_mask</em>: <a href="#accessflags">accessflags</a>,<br>
+<em>dst_access_mask</em>: <a href="#accessflags">accessflags</a>,<br>
+<em>src_queue_family_index</em>: <a href="#index">index</a> (default: ignored),<br>
+<em>dst_queue_family_index</em>: <a href="#index">index</a> (default: ignored),<br>
+<em>old_layout</em>: <a href="#imagelayout">imagelayout</a>,<br>
+<em>new_layout</em>: <a href="#imagelayout">imagelayout</a>,<br>
+<em>image</em>: <a href="#image">image</a>,<br>
+<em>subresource_range</em>: <a href="#imagesubresourcerange">imagesubresourcerange</a>,<br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkImageMemoryBarrier2KHR.html">VkImageMemoryBarrier2KHR</a>)</span></p>
 </li>
 </ul>
 </div>

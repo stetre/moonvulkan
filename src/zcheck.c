@@ -769,6 +769,7 @@ static const char *GetString_(lua_State *L, int arg, const char *sname, const ch
 #define GetSemaphoreOpt(name_, sname_) GetObjectOpt(name_, sname_, VkSemaphore, semaphore)
 #define GetFence(name_, sname_) GetObject(name_, sname_, VkFence, fence)
 #define GetFenceOpt(name_, sname_) GetObjectOpt(name_, sname_, VkFence, fence)
+#define GetCommandBuffer(name_, sname_) GetObject(name_, sname_, VkCommandBuffer, command_buffer)
 
 /* Integers with special values ----------------------------------------------*/
 
@@ -4757,6 +4758,9 @@ ZCHECK_BEGIN(VkSubpassDependency2)
     GetFlags(dstAccessMask, "dst_access_mask");
     GetFlags(dependencyFlags, "dependency_flags");
     GetInteger(viewOffset, "view_offset");
+    EXTENSIONS_BEGIN
+        ADD_EXTENSION_STRUCT("memory_barrier2", VkMemoryBarrier2KHR);
+    EXTENSIONS_END
 ZCHECK_END
 ZCHECKARRAY(VkSubpassDependency2)
 
@@ -5109,7 +5113,7 @@ ZCHECK_BEGIN(VkSemaphoreSignalInfo)
 ZCHECK_END
 
 /*------------------------------------------------------------------------------*
- | Memory Barrier                                                               |
+ | Memory Barriers                                                              |
  *------------------------------------------------------------------------------*/
 
 ZCHECK_BEGIN(VkMemoryBarrier)
@@ -5120,9 +5124,15 @@ ZCHECK_BEGIN(VkMemoryBarrier)
 ZCHECK_END
 ZCHECKARRAY(VkMemoryBarrier)
 
-/*------------------------------------------------------------------------------*
- | Buffer Memory Barrier                                                        |
- *------------------------------------------------------------------------------*/
+ZCHECK_BEGIN(VkMemoryBarrier2KHR)
+    checktable(arg);
+    newstruct(VkMemoryBarrier2KHR);
+    GetFlags(srcStageMask, "src_stage_mask");
+    GetFlags(dstStageMask, "dst_stage_mask");
+    GetFlags(srcAccessMask, "src_access_mask");
+    GetFlags(dstAccessMask, "dst_access_mask");
+ZCHECK_END
+ZCHECKARRAY(VkMemoryBarrier2KHR)
 
 ZCHECK_BEGIN(VkBufferMemoryBarrier)
     checktable(arg);
@@ -5137,10 +5147,6 @@ ZCHECK_BEGIN(VkBufferMemoryBarrier)
 ZCHECK_END
 ZCHECKARRAY(VkBufferMemoryBarrier)
 
-/*------------------------------------------------------------------------------*
- | Image Memory Barrier                                                         |
- *------------------------------------------------------------------------------*/
-
 ZCHECK_BEGIN(VkImageMemoryBarrier)
     checktable(arg);
     newstruct(VkImageMemoryBarrier);
@@ -5154,6 +5160,51 @@ ZCHECK_BEGIN(VkImageMemoryBarrier)
     GetStructOpt(subresourceRange, "subresource_range", VkImageSubresourceRange);
 ZCHECK_END
 ZCHECKARRAY(VkImageMemoryBarrier)
+
+ZCHECK_BEGIN(VkBufferMemoryBarrier2KHR)
+    checktable(arg);
+    newstruct(VkBufferMemoryBarrier2KHR);
+    GetFlags(srcStageMask, "src_stage_mask");
+    GetFlags(srcAccessMask, "src_access_mask");
+    GetFlags(dstStageMask, "dst_stage_mask");
+    GetFlags(dstAccessMask, "dst_access_mask");
+    GetIntegerOpt(srcQueueFamilyIndex, "src_queue_family_index", VK_QUEUE_FAMILY_IGNORED);
+    GetIntegerOpt(dstQueueFamilyIndex, "dst_queue_family_index", VK_QUEUE_FAMILY_IGNORED);
+    GetBuffer(buffer, "buffer");
+    GetInteger(offset, "offset");
+    GetInteger(size, "size");
+ZCHECK_END
+ZCHECKARRAY(VkBufferMemoryBarrier2KHR)
+
+ZCHECK_BEGIN(VkImageMemoryBarrier2KHR)
+    checktable(arg);
+    newstruct(VkImageMemoryBarrier2KHR);
+    GetFlags(srcStageMask, "src_stage_mask");
+    GetFlags(srcAccessMask, "src_access_mask");
+    GetFlags(dstStageMask, "dst_stage_mask");
+    GetFlags(dstAccessMask, "dst_access_mask");
+    GetImageLayout(oldLayout, "old_layout");
+    GetImageLayout(newLayout, "new_layout");
+    GetIntegerOpt(srcQueueFamilyIndex, "src_queue_family_index", VK_QUEUE_FAMILY_IGNORED);
+    GetIntegerOpt(dstQueueFamilyIndex, "dst_queue_family_index", VK_QUEUE_FAMILY_IGNORED);
+    GetImage(image, "image");
+    GetStructOpt(subresourceRange, "subresource_range", VkImageSubresourceRange);
+ZCHECK_END
+ZCHECKARRAY(VkImageMemoryBarrier2KHR)
+
+static ZCLEAR_BEGIN(VkDependencyInfoKHR)
+    FreeList(pMemoryBarriers, memoryBarrierCount, VkMemoryBarrier2KHR);
+    FreeList(pBufferMemoryBarriers, bufferMemoryBarrierCount, VkBufferMemoryBarrier2KHR);
+    FreeList(pImageMemoryBarriers, imageMemoryBarrierCount, VkImageMemoryBarrier2KHR);
+ZCLEAR_END
+ZCHECK_BEGIN(VkDependencyInfoKHR)
+    checktable(arg);
+    newstruct(VkDependencyInfoKHR);
+    GetFlags(dependencyFlags, "dependency_flags");
+    GetList(pMemoryBarriers, memoryBarrierCount, VkMemoryBarrier2KHR, "memory_barriers");
+    GetList(pBufferMemoryBarriers, bufferMemoryBarrierCount, VkBufferMemoryBarrier2KHR, "buffer_memory_barriers");
+    GetList(pImageMemoryBarriers, imageMemoryBarrierCount, VkImageMemoryBarrier2KHR, "image_memory_barriers");
+ZCHECK_END
 
 /*------------------------------------------------------------------------------*
  | Headless Surface                                                             |
@@ -5274,6 +5325,39 @@ ZCHECK_BEGIN(VkSubmitInfo)
     EXTENSIONS_END
 ZCHECK_END
 ZCHECKARRAY(VkSubmitInfo)
+
+ZCHECK_BEGIN(VkSemaphoreSubmitInfoKHR)
+    checktable(arg);
+    newstruct(VkSemaphoreSubmitInfoKHR);
+    GetSemaphore(semaphore, "semaphore");
+    GetInteger(value, "value");
+    GetFlags(stageMask, "stage_mask");
+    GetInteger(deviceIndex, "device_index");
+ZCHECK_END
+ZCHECKARRAY(VkSemaphoreSubmitInfoKHR)
+
+ZCHECK_BEGIN(VkCommandBufferSubmitInfoKHR)
+    checktable(arg);
+    newstruct(VkCommandBufferSubmitInfoKHR);
+    GetCommandBuffer(commandBuffer, "command_buffer");
+    GetIntegerOpt(deviceMask, "device_mask", 0);
+ZCHECK_END
+ZCHECKARRAY(VkCommandBufferSubmitInfoKHR)
+
+static ZCLEAR_BEGIN(VkSubmitInfo2KHR)
+    FreeList(pWaitSemaphoreInfos, waitSemaphoreInfoCount, VkSemaphoreSubmitInfoKHR);
+    FreeList(pCommandBufferInfos, commandBufferInfoCount, VkCommandBufferSubmitInfoKHR);
+    FreeList(pSignalSemaphoreInfos, signalSemaphoreInfoCount, VkSemaphoreSubmitInfoKHR);
+ZCLEAR_END
+ZCHECK_BEGIN(VkSubmitInfo2KHR)
+    checktable(arg);
+    newstruct(VkSubmitInfo2KHR);
+    GetFlags(flags, "flags");
+    GetList(pWaitSemaphoreInfos, waitSemaphoreInfoCount, VkSemaphoreSubmitInfoKHR, "wait_semaphore_infos");
+    GetList(pCommandBufferInfos, commandBufferInfoCount, VkCommandBufferSubmitInfoKHR, "command_buffer_infos");
+    GetList(pSignalSemaphoreInfos, signalSemaphoreInfoCount, VkSemaphoreSubmitInfoKHR, "signal_semaphore_infos");
+ZCHECK_END
+ZCHECKARRAY(VkSubmitInfo2KHR)
 
 /*------------------------------------------------------------------------------*
  | Present Info                                                                 |
@@ -6777,6 +6861,8 @@ static void zfreeaux(lua_State *L, void *pp)
         CASE(RENDERING_INFO_KHR, VkRenderingInfoKHR);
         CASE(PIPELINE_RENDERING_CREATE_INFO_KHR, VkPipelineRenderingCreateInfoKHR);
         CASE(COMMAND_BUFFER_INHERITANCE_RENDERING_INFO_KHR, VkCommandBufferInheritanceRenderingInfoKHR);
+        CASE(DEPENDENCY_INFO_KHR, VkDependencyInfoKHR);
+        CASE(SUBMIT_INFO_2_KHR, VkSubmitInfo2KHR);
 #undef CASE
         default: 
             return;

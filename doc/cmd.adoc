@@ -223,13 +223,14 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmd
 
 [[cmd_pipeline_barrier]]
 * *cmd_pipeline_barrier*(_cb_, _src_stage_mask_, _..._) +
+*cmd_pipeline_barrier*(_cb_, <<dependencyinfo, _dependencyinfo_>>) +
 [small]#arg2 - _src_stage_mask_: <<pipelinestageflags, pipelinestageflags>> +
 arg3 - _dst_stage_mask_: <<pipelinestageflags, pipelinestageflags>> +
 arg4 - _dependency_flags_: <<dependencyflags, dependencyflags>> +
 arg5 - [_memory_barriers_]: {<<memorybarrier, memorybarrier>>} +
 arg6 - [_buffer_memory_barriers_]: {<<buffermemorybarrier, buffermemorybarrier>>} +
 arg7 - [_image_memory_barriers_]: {<<imagememorybarrier, imagememorybarrier>>} +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdPipelineBarrier.html[vkCmdPipelineBarrier].#
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdPipelineBarrier.html[vkCmdPipelineBarrier], https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdPipelineBarrier2KHR.html[vkCmdPipelineBarrier2KHR].#
 
 [[cmd_push_descriptor_set]]
 * *cmd_push_descriptor_set*(_cb_, _bind_point_, _..._) +
@@ -256,7 +257,7 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmd
 
 [[cmd_reset_event]]
 * *cmd_reset_event*(_cb_, <<event, _event_>>, <<pipelinestageflags, _pipelinestageflags_>>) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdResetEvent.html[vkCmdResetEvent].#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdResetEvent.html[vkCmdResetEvent], https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdResetEvent2KHR.html[vkCmdResetEvent2KHR].#
 
 [[cmd_reset_query_pool]]
 * *cmd_reset_query_pool*(_cb_, <<query_pool, _query_pool_>>, _first_query_, _query_count_) +
@@ -316,7 +317,8 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmd
 
 [[cmd_set_event]]
 * *cmd_set_event*(_cb_, <<event, _event_>>, <<pipelinestageflags, _pipelinestageflags_>>) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetEvent.html[vkCmdSetEvent].#
+*cmd_set_event*(_cb_, <<event, _event_>>, {<<dependencyinfo, _dependencyinfo_>>}) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetEvent.html[vkCmdSetEvent], https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetEvent2KHR.html[vkCmdSetEvent2KHR].#
 
 [[cmd_set_fragment_shading_rate]]
 * *cmd_set_fragment_shading_rate*(_cb_, _fragment_size_, _combiner_op~1~_, _combiner_op~2~_) +
@@ -414,15 +416,16 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmd
 
 [[cmd_wait_events]]
 * *cmd_wait_events*(_cb_, _src_stage_mask_, _..._) +
+*cmd_wait_events*(_cb_, {<<event, _event_>>}, <<dependencyinfo, _dependencyinfo_>>) +
 [small]#arg2 - _src_stage_mask_: <<pipelinestageflags, pipelinestageflags>> +
 arg3 - _dst_stage_mask_: <<pipelinestageflags, pipelinestageflags>> +
 arg4 - _events_: {<<event, event>>} +
 arg5 - [_memory_barriers_]: {<<memorybarrier, memorybarrier>>} +
 arg6 - [_buffer_memory_barriers_]: {<<buffermemorybarrier, buffermemorybarrier>>} +
 arg7 - [_image_memory_barriers_]: {<<imagememorybarrier, imagememorybarrier>>} +
-Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdWaitEvents.html[vkCmdWaitEvents].#
+Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdWaitEvents.html[vkCmdWaitEvents], https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdWaitEvents2KHR.html[vkCmdWaitEvents2KHR].#
 
 [[cmd_write_timestamp]]
 * *cmd_write_timestamp*(_cb_, <<pipelinestageflags, _pipelinestageflags_>>, <<query_pool, _query_pool_>>, _query_) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdWriteTimestamp.html[vkCmdWriteTimestamp].#
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdWriteTimestamp.html[vkCmdWriteTimestamp], https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdWriteTimestamp2KHR.html[vkCmdWriteTimestamp2KHR].#
 

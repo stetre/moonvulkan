@@ -10,7 +10,8 @@ _queue_ = *get_device_queue*(<<device, _device_>>, <<devicequeueinfo, _deviceque
 
 [[queue_submit]]
 * *queue_submit*(_queue_, {<<submitinfo, _submitinfo_>>}, [<<fence, _fence_>>]) +
-[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkQueueSubmit.html[vkQueueSubmit].#
+*queue_submit2*(_queue_, {<<submitinfo2, _submitinfo2_>>}, [<<fence, _fence_>>]) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkQueueSubmit.html[vkQueueSubmit], https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkQueueSubmit2KHR.html[vkQueueSubmit2KHR].#
 
 [[queue_bind_sparse]]
 * *queue_bind_sparse*(_queue_, {<<bindsparseinfo, _bindsparseinfo_>>}, [<<fence, _fence_>>]) +

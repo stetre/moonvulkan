@@ -1008,6 +1008,30 @@ _wait_semaphore_values_: {integer}, +
 _signal_semaphore_values_: {integer}, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkSubmitInfo.html[VkSubmitInfo])#
 
+* [[submitinfo2]]
+[small]#*submitinfo2* = { +
+_flags_: <<submitflags, submitflags>>, +
+_wait_semaphore_infos_: {<<semaphoresubmitinfo, semaphoresubmitinfo>>}, +
+_command_buffer_infos_: {<<commandbuffersubmitinfo, commandbuffersubmitinfo>>}, +
+_signal_semaphore_infos_: {<<semaphoresubmitinfo, semaphoresubmitinfo>>}, +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkSubmitInfo2KHR.html[VkSubmitInfo2KHR])#
+
+* [[semaphoresubmitinfo]]
+[small]#*semaphoresubmitinfo* = { +
+_semaphore_: <<semaphore, semaphore>>, +
+_value_: integer, +
+_stage_mask_: <<pipelinestageflags, pipelinestageflags>>, +
+_device_index_: integer, +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkSemaphoreSubmitInfoKHR.html[VkSemaphoreSubmitInfoKHR])#
+
+* [[commandbuffersubmitinfo]]
+[small]#*commandbuffersubmitinfo* = { +
+_command_buffer_: <<command_buffer, command_buffer>>, +
+_device_mask_: integer, +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkCommandBufferSubmitInfoKHR.html[VkCommandBufferSubmitInfoKHR])#
+
+'''
+
 * [[bindsparseinfo]]
 [small]#*bindsparseinfo* = { +
 _wait_semaphores_: {<<semaphore, semaphore>>}, +
@@ -1268,6 +1292,8 @@ _src_access_mask_: <<accessflags, accessflags>>, +
 _dst_access_mask_: <<accessflags, accessflags>>, +
 _dependency_flags_: <<dependencyflags, dependencyflags>>, +
 _view_offset_: integer (2KHR only), +
+pass:[--] EXTENSION https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkMemoryBarrier2KHR.html[VkMemoryBarrier2KHR]: +
+_memory_barrier2_: <<memorybarrier2, memorybarrier2>>, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkSubpassDependency.html[VkSubpassDependency], https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkSubpassDependency2.html[VkSubpassDependency2])#
 
 * [[inputattachmentaspectreference]]
@@ -2135,11 +2161,28 @@ _extent_: <<extent3d, extent3d>>, +
 
 '''
 
+* [[dependencyinfo]]
+[small]#*dependencyinfo* = { +
+_dependency_flags_: <<dependencyflags, dependencyflags>>, +
+_memory_barriers_: {<<memorybarrier2, memorybarrier2>>}, +
+_buffer_memory_barriers_: {<<buffermemorybarrier2, buffermemorybarrier2>>}, +
+_image_memory_barriers_: {<<imagememorybarrier2, imagememorybarrier2>>}, +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkDependencyInfoKHR.html[VkDependencyInfoKHR])#
+
+
 * [[memorybarrier]]
 [small]#*memorybarrier* = { +
 _src_access_mask_: <<accessflags, accessflags>>, +
 _dst_access_mask_: <<accessflags, accessflags>>, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkMemoryBarrier.html[VkMemoryBarrier])#
+
+* [[memorybarrier2]]
+[small]#*memorybarrier2* = { +
+_src_stage_mask_: <<pipelinestageflags, pipelinestageflags>>, +
+_dst_stage_mask_: <<pipelinestageflags, pipelinestageflags>>, +
+_src_access_mask_: <<accessflags, accessflags>>, +
+_dst_access_mask_: <<accessflags, accessflags>>, +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkMemoryBarrier2KHR.html[VkMemoryBarrier2KHR])#
 
 * [[buffermemorybarrier]]
 [small]#*buffermemorybarrier* = { +
@@ -2152,6 +2195,19 @@ _offset_: integer, +
 _size_: integer, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkBufferMemoryBarrier.html[VkBufferMemoryBarrier])#
 
+* [[buffermemorybarrier2]]
+[small]#*buffermemorybarrier2* = { +
+_src_stage_mask_: <<pipelinestageflags, pipelinestageflags>>, +
+_dst_stage_mask_: <<pipelinestageflags, pipelinestageflags>>, +
+_src_access_mask_: <<accessflags, accessflags>>, +
+_dst_access_mask_: <<accessflags, accessflags>>, +
+_src_queue_family_index_: <<index, index>> (default: ignored), +
+_dst_queue_family_index_: <<index, index>> (default: ignored), +
+_buffer_: <<buffer, buffer>> *[R]*, +
+_offset_: integer, +
+_size_: integer, +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkBufferMemoryBarrier2KHR.html[VkBufferMemoryBarrier2KHR])#
+
 * [[imagememorybarrier]]
 [small]#*imagememorybarrier* = { +
 _src_access_mask_: <<accessflags, accessflags>>, +
@@ -2163,6 +2219,20 @@ _new_layout_: <<imagelayout, imagelayout>>, +
 _image_: <<image, image>>, +
 _subresource_range_: <<imagesubresourcerange, imagesubresourcerange>>, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkImageMemoryBarrier.html[VkImageMemoryBarrier])#
+
+* [[imagememorybarrier2]]
+[small]#*imagememorybarrier2* = { +
+_src_stage_mask_: <<pipelinestageflags, pipelinestageflags>>, +
+_dst_stage_mask_: <<pipelinestageflags, pipelinestageflags>>, +
+_src_access_mask_: <<accessflags, accessflags>>, +
+_dst_access_mask_: <<accessflags, accessflags>>, +
+_src_queue_family_index_: <<index, index>> (default: ignored), +
+_dst_queue_family_index_: <<index, index>> (default: ignored), +
+_old_layout_: <<imagelayout, imagelayout>>, +
+_new_layout_: <<imagelayout, imagelayout>>, +
+_image_: <<image, image>>, +
+_subresource_range_: <<imagesubresourcerange, imagesubresourcerange>>, +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkImageMemoryBarrier2KHR.html[VkImageMemoryBarrier2KHR])#
 
 '''
 

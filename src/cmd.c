@@ -580,8 +580,21 @@ static int CmdSetEvent(lua_State *L)
     ud_t *ud;
     VkCommandBuffer cb = checkcommand_buffer(L, 1, &ud);
     VkEvent event = checkevent(L, 2, NULL);
-    VkPipelineStageFlags stageMask = checkflags(L, 3);
-    ud->ddt->CmdSetEvent(cb, event, stageMask);
+    if(ud->ddt->CmdSetEvent2KHR && lua_type(L, 3)==LUA_TTABLE)
+        {
+        int err;
+        VkDependencyInfoKHR *info = zcheckVkDependencyInfoKHR(L, 2, &err);
+#define CLEANUP zfreeVkDependencyInfoKHR(L, info, 1)
+        if(err) { CLEANUP; return argerror(L, 2); }
+        ud->ddt->CmdSetEvent2KHR(cb, event, info);
+        CLEANUP;
+#undef CLEANUP
+        }
+    else
+        {
+        VkPipelineStageFlags stageMask = checkflags(L, 3);
+        ud->ddt->CmdSetEvent(cb, event, stageMask);
+        }
     return 0;
     }
 
@@ -590,12 +603,21 @@ static int CmdResetEvent(lua_State *L)
     ud_t *ud;
     VkCommandBuffer cb = checkcommand_buffer(L, 1, &ud);
     VkEvent event = checkevent(L, 2, NULL);
-    VkPipelineStageFlags stageMask = checkflags(L, 3);
-    ud->ddt->CmdResetEvent(cb, event, stageMask);
+    if(ud->ddt->CmdResetEvent2KHR)
+        {
+        VkPipelineStageFlags2KHR stageMask = checkflags(L, 3);
+        ud->ddt->CmdResetEvent2KHR(cb, event, stageMask);
+        }
+    else
+        {
+        VkPipelineStageFlags stageMask = checkflags(L, 3);
+        ud->ddt->CmdResetEvent(cb, event, stageMask);
+        }
     return 0;
     }
 
-static int CmdWaitEvents(lua_State *L)
+
+static int CmdWaitEvents1(lua_State *L)
     {
     int err;
     ud_t *ud;
@@ -636,7 +658,39 @@ static int CmdWaitEvents(lua_State *L)
     return 0;
     }
 
-static int CmdPipelineBarrier(lua_State *L)
+static int CmdWaitEvents2(lua_State *L)
+    {
+    int err;
+    uint32_t count;
+    ud_t *ud;
+    VkEvent *events = NULL;
+    VkDependencyInfoKHR *info = NULL;
+    VkCommandBuffer cb = checkcommand_buffer(L, 1, &ud);
+    CheckDevicePfn(L, ud, CmdWaitEvents2KHR);
+#define CLEANUP do {                                    \
+    if(events) Free(L, events);                         \
+    if(info) zfreeVkDependencyInfoKHR(L, info, 1);      \
+} while(0)
+    events = checkeventlist(L, 2, &count, &err, NULL);
+    if(err) { CLEANUP; return argerrorc(L, 2, err); }
+    info = zcheckVkDependencyInfoKHR (L, 3, &err);
+    if(err) { CLEANUP; return argerrorc(L, 3, err); }
+    ud->ddt->CmdWaitEvents2KHR(cb, count, events, info);
+    CLEANUP;
+#undef CLEANUP
+    return 0;
+    }
+
+static int CmdWaitEvents(lua_State *L)
+    {
+    if(lua_type(L, 2) == LUA_TTABLE)
+        return CmdWaitEvents2(L);
+    return CmdWaitEvents1(L);
+    return 0;
+    }
+
+
+static int CmdPipelineBarrier1(lua_State *L)
     {
     int err;
     ud_t *ud;
@@ -672,6 +726,34 @@ static int CmdPipelineBarrier(lua_State *L)
 #undef CLEANUP
     return 0;
     }
+
+static int CmdPipelineBarrier2(lua_State *L)
+    {
+    int err;
+    ud_t *ud;
+    VkDependencyInfoKHR *info = NULL;
+    VkCommandBuffer cb = checkcommand_buffer(L, 1, &ud);
+    CheckDevicePfn(L, ud, CmdPipelineBarrier2KHR);
+#define CLEANUP do {                                    \
+    if(info) zfreeVkDependencyInfoKHR(L, info, 1);      \
+} while(0)
+    info = zcheckVkDependencyInfoKHR (L, 2, &err);
+    if(err) { CLEANUP; return argerrorc(L, 2, err); }
+    ud->ddt->CmdPipelineBarrier2KHR(cb, info);
+    CLEANUP;
+#undef CLEANUP
+    return 0;
+    }
+
+static int CmdPipelineBarrier(lua_State *L)
+    {
+    if(lua_type(L, 2) == LUA_TTABLE)
+        return CmdPipelineBarrier2(L);
+    return CmdPipelineBarrier1(L);
+    return 0;
+    }
+
+
 
 static int CmdBeginQuery(lua_State *L)
     {
@@ -709,10 +791,18 @@ static int CmdWriteTimestamp(lua_State *L)
     {
     ud_t *ud;
     VkCommandBuffer cb = checkcommand_buffer(L, 1, &ud);
-    VkPipelineStageFlagBits pipelineStage = (VkPipelineStageFlagBits)checkflags(L, 2);
     VkQueryPool queryPool = checkquery_pool(L, 3, NULL);
     uint32_t query = luaL_checkinteger(L, 4);
-    ud->ddt->CmdWriteTimestamp(cb, pipelineStage, queryPool, query);
+    if(ud->ddt->CmdWriteTimestamp2KHR)
+        {
+        VkPipelineStageFlags2KHR pipelineStage = checkflags(L, 2);
+        ud->ddt->CmdWriteTimestamp2KHR(cb, pipelineStage, queryPool, query);
+        }
+    else
+        {
+        VkPipelineStageFlagBits pipelineStage = (VkPipelineStageFlagBits)checkflags(L, 2);
+        ud->ddt->CmdWriteTimestamp(cb, pipelineStage, queryPool, query);
+        }
     return 0;
     }
 

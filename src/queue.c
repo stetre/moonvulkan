@@ -71,6 +71,26 @@ static int QueueSubmit(lua_State *L)
     return 0;
     }
 
+static int QueueSubmit2(lua_State *L)
+    {
+    int err;
+    uint32_t count;
+    VkResult ec;
+    ud_t *ud;
+    VkSubmitInfo2KHR* submits;
+    VkQueue queue = checkqueue(L, 1, &ud);
+    VkFence fence = testfence(L, 3, NULL);
+    CheckDevicePfn(L, ud, QueueSubmit2KHR);
+#define CLEANUP zfreearrayVkSubmitInfo2KHR(L, submits, count, 1)
+    submits = zcheckarrayVkSubmitInfo2KHR(L, 2, &count, &err);
+    if(err) { CLEANUP; return argerror(L, 2); }
+    ec = ud->ddt->QueueSubmit2KHR(queue, count, submits, fence);
+    CLEANUP;
+    CheckError(L, ec);
+#undef CLEANUP
+    return 0;
+    }
+
 static int QueueBindSparse(lua_State *L)
     {
     int err;
@@ -126,6 +146,7 @@ static const struct luaL_Reg Functions[] =
     {
         { "queue_wait_idle", QueueWaitIdle },
         { "queue_submit", QueueSubmit },
+        { "queue_submit2", QueueSubmit2 },
         { "queue_bind_sparse", QueueBindSparse },
         { NULL, NULL } /* sentinel */
     };
