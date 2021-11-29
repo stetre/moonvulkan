@@ -3406,7 +3406,6 @@ ZPUSH_END
 
 /*------------------------------------------------------------------------------*/
 
-
 ZINIT_BEGIN(VkPhysicalDeviceToolPropertiesEXT)
     //EXTENSIONS_BEGIN
     //  ADDX(XXX, Xxx);
@@ -3423,6 +3422,43 @@ ZPUSH_BEGIN(VkPhysicalDeviceToolPropertiesEXT)
     //XPUSH_BEGIN
     //XPUSH_END
 ZPUSH_END
+
+/*-------------------------------------------------------------------------------------*/
+
+ZINIT_BEGIN(VkPerformanceCounterKHR)
+    //EXTENSIONS_BEGIN
+    //  ADDX(XXX, Xxx);
+    //EXTENSIONS_END
+ZINIT_END
+
+ZPUSH_BEGIN(VkPerformanceCounterKHR)
+    lua_newtable(L);
+    SetEnum(unit, "unit", pushperformancecounterunit);
+    SetEnum(scope, "scope", pushperformancecounterscope);
+    SetEnum(storage, "storage", pushperformancecounterstorage);
+    SetUUID(uuid, "uuid", VK_UUID_SIZE);
+    //XPUSH_BEGIN
+    //XPUSH_END
+ZPUSH_END
+
+/*-------------------------------------------------------------------------------------*/
+
+ZINIT_BEGIN(VkPerformanceCounterDescriptionKHR)
+    //EXTENSIONS_BEGIN
+    //  ADDX(XXX, Xxx);
+    //EXTENSIONS_END
+ZINIT_END
+
+ZPUSH_BEGIN(VkPerformanceCounterDescriptionKHR)
+    lua_newtable(L);
+    SetFlags(flags, "flags");
+    SetString(name, "name");
+    SetString(category, "category");
+    SetString(description, "description");
+    //XPUSH_BEGIN
+    //XPUSH_END
+ZPUSH_END
+
 
 /*------------------------------------------------------------------------------*
  | Format Properties                                                            |
@@ -4583,6 +4619,16 @@ ZCHECK_END
  | Query Pool                                                                   |
  *------------------------------------------------------------------------------*/
 
+static ZCLEAR_BEGIN(VkQueryPoolPerformanceCreateInfoKHR)
+    FreeUint32List(pCounterIndices);
+ZCLEAR_END
+ZCHECK_BEGIN(VkQueryPoolPerformanceCreateInfoKHR)
+    checktable(arg);
+    newstruct(VkQueryPoolPerformanceCreateInfoKHR);
+    GetInteger(queueFamilyIndex, "queue_family_index");
+    GetUint32List(pCounterIndices, counterIndexCount, "counter_indices");
+ZCHECK_END
+
 ZCHECK_BEGIN(VkQueryPoolCreateInfo)
     checktable(arg);
     newstruct(VkQueryPoolCreateInfo);
@@ -4590,6 +4636,9 @@ ZCHECK_BEGIN(VkQueryPoolCreateInfo)
     GetQueryType(queryType, "query_type");
     GetInteger(queryCount, "query_count");
     GetFlags(pipelineStatistics, "pipeline_statistics");
+    EXTENSIONS_BEGIN
+        ADD_EXTENSION_STRUCT("query_pool_performance_info", VkQueryPoolPerformanceCreateInfoKHR);
+    EXTENSIONS_END
 ZCHECK_END
 
 /*------------------------------------------------------------------------------*
@@ -5297,6 +5346,11 @@ ZCHECK_BEGIN(VkTimelineSemaphoreSubmitInfo)
     GetUint64List(pSignalSemaphoreValues, signalSemaphoreValueCount, "signal_semaphore_values");
 ZCHECK_END
 
+ZCHECK_BEGIN(VkPerformanceQuerySubmitInfoKHR)
+    newstruct(VkPerformanceQuerySubmitInfoKHR);
+    GetInteger(counterPassIndex, "counter_pass_index");
+ZCHECK_END
+
 static ZCLEAR_BEGIN(VkSubmitInfo)
     FreeObjectList(pWaitSemaphores);
     FreeFlagsList(pWaitDstStageMask);
@@ -5322,6 +5376,8 @@ ZCHECK_BEGIN(VkSubmitInfo)
         ADD_EXTENSION_INLINE(VkDeviceGroupSubmitInfoKHR);
     if(ispresent("wait_semaphore_values") || ispresent("signal_semaphore_values"))
         ADD_EXTENSION_INLINE(VkTimelineSemaphoreSubmitInfo);
+    if(ispresent("counter_pass_index"))
+        ADD_EXTENSION_INLINE(VkPerformanceQuerySubmitInfoKHR);
     EXTENSIONS_END
 ZCHECK_END
 ZCHECKARRAY(VkSubmitInfo)
@@ -5356,6 +5412,10 @@ ZCHECK_BEGIN(VkSubmitInfo2KHR)
     GetList(pWaitSemaphoreInfos, waitSemaphoreInfoCount, VkSemaphoreSubmitInfoKHR, "wait_semaphore_infos");
     GetList(pCommandBufferInfos, commandBufferInfoCount, VkCommandBufferSubmitInfoKHR, "command_buffer_infos");
     GetList(pSignalSemaphoreInfos, signalSemaphoreInfoCount, VkSemaphoreSubmitInfoKHR, "signal_semaphore_infos");
+    EXTENSIONS_BEGIN
+    if(ispresent("counter_pass_index"))
+        ADD_EXTENSION_INLINE(VkPerformanceQuerySubmitInfoKHR);
+    EXTENSIONS_END
 ZCHECK_END
 ZCHECKARRAY(VkSubmitInfo2KHR)
 
@@ -6189,6 +6249,15 @@ ZCHECK_BEGIN(VkAcquireNextImageInfoKHR)
     GetInteger(deviceMask, "device_mask");
 ZCHECK_END
 
+/*------------------------------------------------------------------------------*/
+
+ZCHECK_BEGIN(VkAcquireProfilingLockInfoKHR)
+    checktable(arg);
+    newstruct(VkAcquireProfilingLockInfoKHR);
+    GetFlags(flags, "flags");
+    GetTimeout(timeout, "timeout");
+ZCHECK_END
+
 /*------------------------------------------------------------------------------*
  | Win32                                                                        |
  *------------------------------------------------------------------------------*/
@@ -6689,7 +6758,6 @@ ZCHECK_BEGIN(VkGraphicsPipelineCreateInfo)
 ZCHECK_END
 ZCHECKARRAY(VkGraphicsPipelineCreateInfo)
 
-
 /********************************************************************************
  * znew and zfree                                                               *
  ********************************************************************************/
@@ -6863,6 +6931,7 @@ static void zfreeaux(lua_State *L, void *pp)
         CASE(COMMAND_BUFFER_INHERITANCE_RENDERING_INFO_KHR, VkCommandBufferInheritanceRenderingInfoKHR);
         CASE(DEPENDENCY_INFO_KHR, VkDependencyInfoKHR);
         CASE(SUBMIT_INFO_2_KHR, VkSubmitInfo2KHR);
+        CASE(QUERY_POOL_PERFORMANCE_CREATE_INFO_KHR, VkQueryPoolPerformanceCreateInfoKHR);
 #undef CASE
         default: 
             return;

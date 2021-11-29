@@ -180,6 +180,33 @@ static int GetCalibratedTimestamps(lua_State *L)
     }
 
 
+static int AcquireProfilingLock(lua_State *L)
+    {
+    int err;
+    ud_t *ud;
+    VkResult ec;
+    VkAcquireProfilingLockInfoKHR *info = NULL;
+    VkDevice device = checkdevice(L, 1, &ud);
+    CheckDevicePfn(L, ud, AcquireProfilingLockKHR);
+#define CLEANUP zfreeVkAcquireProfilingLockInfoKHR(L, info, 1)
+    info = zcheckVkAcquireProfilingLockInfoKHR(L, 2, &err);
+    if(err) { CLEANUP; return argerror(L, 2); }
+    ec = ud->ddt->AcquireProfilingLockKHR(device, info);
+    CLEANUP;
+    CheckError(L, ec);
+#undef CLEANUP
+    return 0;
+    }
+
+static int ReleaseProfilingLock(lua_State *L)
+    {
+    ud_t *ud;
+    VkDevice device = checkdevice(L, 1, &ud);
+    CheckDevicePfn(L, ud, ReleaseProfilingLockKHR);
+    ud->ddt->ReleaseProfilingLockKHR(device);
+    return 0;
+    }
+
 
 RAW_FUNC_DISPATCHABLE(device)
 TYPE_FUNC(device)
@@ -212,6 +239,8 @@ static const struct luaL_Reg Functions[] =
         { "get_device_queue", GetDeviceQueue },
         { "device_wait_idle", DeviceWaitIdle },
         { "get_calibrated_timestamps", GetCalibratedTimestamps },
+        { "acquire_profiling_lock", AcquireProfilingLock },
+        { "release_profiling_lock", ReleaseProfilingLock },
         { NULL, NULL } /* sentinel */
     };
 

@@ -74,3 +74,10 @@ Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGet
 * {<<physicaldevicetoolproperties, _physicaldevicetoolproperties_>>} = *get_physical_device_tool_properties*(_physdev_) +
 [small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceToolPropertiesEXT.html[vkGetPhysicalDeviceToolPropertiesEXT].#
 
+[[enumerate_physical_device_queue_family_performance_query_counters]]
+* {<<performancecounter, _performancecounter_>>}, {<<performancecounterdescription, _performancecounterdescription_>>} = *enumerate_physical_device_queue_family_performance_query_counters*(_physdev_, _queue_family_index_) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkEnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR.html[vkEnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR].#
+
+[[get_physical_device_queue_family_performance_query_passes]]
+* _num_passes_ = *get_physical_device_queue_family_performance_query_passes*(_physdev_, <<querypoolperformancecreateinfo, _querypoolperformancecreateinfo_>>) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR.html[vkGetPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR].#

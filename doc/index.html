@@ -1320,6 +1320,22 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/h
 </li>
 </ul>
 </div>
+<div id="enumerate_physical_device_queue_family_performance_query_counters" class="ulist">
+<ul>
+<li>
+<p>{<a href="#performancecounter"><em>performancecounter</em></a>}, {<a href="#performancecounterdescription"><em>performancecounterdescription</em></a>} = <strong>enumerate_physical_device_queue_family_performance_query_counters</strong>(<em>physdev</em>, <em>queue_family_index</em>)<br>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkEnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR.html">vkEnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR</a>.</span></p>
+</li>
+</ul>
+</div>
+<div id="get_physical_device_queue_family_performance_query_passes" class="ulist">
+<ul>
+<li>
+<p><em>num_passes</em> = <strong>get_physical_device_queue_family_performance_query_passes</strong>(<em>physdev</em>, <a href="#querypoolperformancecreateinfo"><em>querypoolperformancecreateinfo</em></a>)<br>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR.html">vkGetPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR</a>.</span></p>
+</li>
+</ul>
+</div>
 </div>
 <div class="sect3">
 <h4 id="device">device</h4>
@@ -1344,6 +1360,15 @@ Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/h
 <li>
 <p><strong>device_wait_idle</strong>(<em>device</em>)<br>
 <span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkDeviceWaitIdle.html">vkDeviceWaitIdle</a>.</span></p>
+</li>
+</ul>
+</div>
+<div id="acquire_profiling_lock" class="ulist">
+<ul>
+<li>
+<p><strong>acquire_profiling_lock</strong>(<em>device</em>, <a href="#acquireprofilinglockinfo"><em>acquireprofilinglockinfo</em></a>)<br>
+<strong>release_profiling_lock</strong>(<em>device</em>)<br>
+<span class="small">Rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkAcquireProfilingLockKHR.html">vkAcquireProfilingLockKHR</a>, <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkReleaseProfilingLockKHR.html">vkReleaseProfilingLockKHR</a>.</span></p>
 </li>
 </ul>
 </div>
@@ -4886,6 +4911,8 @@ the <em>queue_family_index</em> of the <em>i-th</em> element in the table return
 -- EXTENSION <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkTimelineSemaphoreSubmitInfo.html">VkTimelineSemaphoreSubmitInfo</a>:<br>
 <em>wait_semaphore_values</em>: {integer},<br>
 <em>signal_semaphore_values</em>: {integer},<br>
+-- EXTENSION <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPerformanceQuerySubmitInfoKHR.html">VkPerformanceQuerySubmitInfoKHR</a>:<br>
+<em>counter_pass_index</em>: integer,<br>
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkSubmitInfo.html">VkSubmitInfo</a>)</span></p>
 </li>
 <li>
@@ -4895,6 +4922,8 @@ the <em>queue_family_index</em> of the <em>i-th</em> element in the table return
 <em>wait_semaphore_infos</em>: {<a href="#semaphoresubmitinfo">semaphoresubmitinfo</a>},<br>
 <em>command_buffer_infos</em>: {<a href="#commandbuffersubmitinfo">commandbuffersubmitinfo</a>},<br>
 <em>signal_semaphore_infos</em>: {<a href="#semaphoresubmitinfo">semaphoresubmitinfo</a>},<br>
+-- EXTENSION <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPerformanceQuerySubmitInfoKHR.html">VkPerformanceQuerySubmitInfoKHR</a>:<br>
+<em>counter_pass_index</em>: integer,<br>
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkSubmitInfo2KHR.html">VkSubmitInfo2KHR</a>)</span></p>
 </li>
 <li>
@@ -5750,7 +5779,41 @@ the <em>queue_family_index</em> of the <em>i-th</em> element in the table return
 <em>query_type</em>: <a href="#querytype">querytype</a> <strong>[R]</strong>,<br>
 <em>query_count</em>: integer,<br>
 <em>pipeline_statistics</em>: <a href="#querypipelinestatisticflags">querypipelinestatisticflags</a>,<br>
+-- EXTENSIONS:<br>
+<em>query_pool_performance_info</em>: <a href="#querypoolperformancecreateinfo">querypoolperformancecreateinfo</a>,<br>
 } (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkQueryPoolCreateInfo.html">VkQueryPoolCreateInfo</a>)</span></p>
+</li>
+<li>
+<p><a id="querypoolperformancecreateinfo"></a>
+<span class="small"><strong>querypoolperformancecreateinfo</strong> = {<br>
+<em>queue_family_index</em>: integer,<br>
+<em>counter_indices</em>: {integer},<br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkQueryPoolPerformanceCreateInfoKHR.html">VkQueryPoolPerformanceCreateInfoKHR</a>)</span></p>
+</li>
+<li>
+<p><a id="performancecounter"></a>
+<span class="small"><strong>performancecounter</strong> = {<br>
+<em>unit</em>: <a href="#performancecounterunit">performancecounterunit</a>,<br>
+<em>scope</em>: <a href="#performancecounterscope">performancecounterscope</a>,<br>
+<em>storage</em>: <a href="#performancecounterstorage">performancecounterstorage</a>,<br>
+<em>uuid</em>: binary string,<br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPerformanceCounterKHR.html">VkPerformanceCounterKHR</a>)</span></p>
+</li>
+<li>
+<p><a id="performancecounterdescription"></a>
+<span class="small"><strong>performancecounterdescription</strong> = {<br>
+<em>flags</em>: <a href="#performancecounterdescriptionflags">performancecounterdescriptionflags</a>,<br>
+<em>name</em>: string,<br>
+<em>category</em>: string,<br>
+<em>description</em>: string,<br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPerformanceCounterDescriptionKHR.html">VkPerformanceCounterDescriptionKHR</a>)</span></p>
+</li>
+<li>
+<p><a id="acquireprofilinglockinfo"></a>
+<span class="small"><strong>acquireprofilinglockinfo</strong> = {<br>
+<em>flags</em>: <a href="#acquireprofilinglockflags">acquireprofilinglockflags</a>,<br>
+<em>timeout</em>: integer,<br>
+} (rfr: <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkAcquireProfilingLockInfoKHR.html">VkAcquireProfilingLockInfoKHR</a>)</span></p>
 </li>
 </ul>
 </div>

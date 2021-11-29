@@ -15,4 +15,9 @@
 * *device_wait_idle*(_device_) +
 [small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkDeviceWaitIdle.html[vkDeviceWaitIdle].#
 
+[[acquire_profiling_lock]]
+* *acquire_profiling_lock*(_device_, <<acquireprofilinglockinfo, _acquireprofilinglockinfo_>>) +
+*release_profiling_lock*(_device_) +
+[small]#Rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkAcquireProfilingLockKHR.html[vkAcquireProfilingLockKHR], https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkReleaseProfilingLockKHR.html[vkReleaseProfilingLockKHR].#
+
 

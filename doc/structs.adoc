@@ -1006,6 +1006,8 @@ _signal_semaphore_device_indices_: {integer}, +
 pass:[--] EXTENSION https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkTimelineSemaphoreSubmitInfo.html[VkTimelineSemaphoreSubmitInfo]: +
 _wait_semaphore_values_: {integer}, +
 _signal_semaphore_values_: {integer}, +
+pass:[--] EXTENSION https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPerformanceQuerySubmitInfoKHR.html[VkPerformanceQuerySubmitInfoKHR]: +
+_counter_pass_index_: integer, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkSubmitInfo.html[VkSubmitInfo])#
 
 * [[submitinfo2]]
@@ -1014,6 +1016,8 @@ _flags_: <<submitflags, submitflags>>, +
 _wait_semaphore_infos_: {<<semaphoresubmitinfo, semaphoresubmitinfo>>}, +
 _command_buffer_infos_: {<<commandbuffersubmitinfo, commandbuffersubmitinfo>>}, +
 _signal_semaphore_infos_: {<<semaphoresubmitinfo, semaphoresubmitinfo>>}, +
+pass:[--] EXTENSION https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPerformanceQuerySubmitInfoKHR.html[VkPerformanceQuerySubmitInfoKHR]: +
+_counter_pass_index_: integer, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkSubmitInfo2KHR.html[VkSubmitInfo2KHR])#
 
 * [[semaphoresubmitinfo]]
@@ -1733,13 +1737,44 @@ _descriptor_count_: integer, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkCopyDescriptorSet.html[VkCopyDescriptorSet])#
 
 '''
+
 * [[querypoolcreateinfo]]
 [small]#*querypoolcreateinfo* = { +
 _flags_: <<querypoolcreateflags, querypoolcreateflags>>, +
 _query_type_: <<querytype, querytype>> *[R]*, +
 _query_count_: integer, +
 _pipeline_statistics_: <<querypipelinestatisticflags, querypipelinestatisticflags>>, +
+pass:[--] EXTENSIONS: +
+_query_pool_performance_info_: <<querypoolperformancecreateinfo, querypoolperformancecreateinfo>>, +
 } (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkQueryPoolCreateInfo.html[VkQueryPoolCreateInfo])#
+
+* [[querypoolperformancecreateinfo]]
+[small]#*querypoolperformancecreateinfo* = { +
+_queue_family_index_: integer, +
+_counter_indices_: {integer}, +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkQueryPoolPerformanceCreateInfoKHR.html[VkQueryPoolPerformanceCreateInfoKHR])#
+
+* [[performancecounter]]
+[small]#*performancecounter* = { +
+_unit_: <<performancecounterunit, performancecounterunit>>, +
+_scope_: <<performancecounterscope, performancecounterscope>>, +
+_storage_: <<performancecounterstorage, performancecounterstorage>>, +
+_uuid_: binary string, +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPerformanceCounterKHR.html[VkPerformanceCounterKHR])#
+
+* [[performancecounterdescription]]
+[small]#*performancecounterdescription* = { +
+_flags_: <<performancecounterdescriptionflags, performancecounterdescriptionflags>>, +
+_name_: string, +
+_category_: string, +
+_description_: string, +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPerformanceCounterDescriptionKHR.html[VkPerformanceCounterDescriptionKHR])#
+
+* [[acquireprofilinglockinfo]]
+[small]#*acquireprofilinglockinfo* = { +
+_flags_: <<acquireprofilinglockflags, acquireprofilinglockflags>>, +
+_timeout_: integer, +
+} (rfr: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkAcquireProfilingLockInfoKHR.html[VkAcquireProfilingLockInfoKHR])#
 
 '''
 

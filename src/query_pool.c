@@ -68,6 +68,7 @@ static int Create(lua_State *L)
 
 static int GetQueryPoolResults(lua_State *L)
     {
+// @@ TODO: specialization for performance counters results (see VK_KHR_performance_query).
     VkResult ec;
     ud_t * ud;
     VkQueryPool query_pool  = checkquery_pool(L, 1, &ud);

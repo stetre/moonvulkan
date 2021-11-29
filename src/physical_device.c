@@ -509,6 +509,72 @@ static int GetPhysicalDeviceToolProperties(lua_State *L)
     return 1;
     }
 
+#define N 32
+static int EnumeratePhysicalDeviceQueueFamilyPerformanceQueryCounters(lua_State *L)
+    {
+    int err;
+    ud_t *ud;
+    uint32_t count, remaining, tot, i;
+    VkResult ec;
+    VkPerformanceCounterKHR *counters = NULL;
+    VkPerformanceCounterDescriptionKHR *descriptions = NULL;
+    VkPhysicalDevice physical_device = checkphysical_device(L, 1, &ud);
+    uint32_t queue_family_index = luaL_checkinteger(L, 2);
+    CheckInstancePfn(L, ud, EnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR);
+#define CLEANUP do { \
+    if(counters) zfreearrayVkPerformanceCounterKHR(L, counters, N, 1);                          \
+    if(descriptions) zfreearrayVkPerformanceCounterDescriptionKHR(L, descriptions, N, 1);       \
+} while(0)
+    counters = znewchainarrayVkPerformanceCounterKHR(L, N, &err);
+    if(err) { CLEANUP; return lua_error(L); }
+    descriptions = znewchainarrayVkPerformanceCounterDescriptionKHR(L, N, &err);
+    if(err) { CLEANUP; return lua_error(L); }
+    lua_newtable(L);
+    lua_newtable(L);
+    ec = ud->idt->EnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR(physical_device,
+            queue_family_index, &remaining, NULL, NULL);
+    if(ec) { CLEANUP; CheckError(L, ec); }
+    if(remaining == 0) { CLEANUP; return 2; }
+    tot = 0;
+    do {
+        if(remaining > N)
+            { count = N; remaining -= N; }
+        else
+            { count = remaining; remaining = 0; }
+        ec = ud->idt->EnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR(physical_device,
+            queue_family_index, &remaining, counters, descriptions);
+        if(ec && ec != VK_INCOMPLETE) { CLEANUP; CheckError(L, ec); }
+        for(i=0; i<count; i++)
+            {
+            zpushVkPerformanceCounterKHR(L, &counters[i]);
+            lua_rawseti(L, -3, ++tot);
+            zpushVkPerformanceCounterDescriptionKHR(L, &descriptions[i]);
+            lua_rawseti(L, -2, ++tot);
+            }
+    } while(remaining > 0);
+    CLEANUP;
+#undef CLEANUP
+    return 2;
+    }
+
+static int GetPhysicalDeviceQueueFamilyPerformanceQueryPasses(lua_State *L)
+    {
+    int err;
+    uint32_t num_passes;
+    ud_t *ud;
+    VkQueryPoolPerformanceCreateInfoKHR *info = NULL;
+    VkPhysicalDevice physical_device = checkphysical_device(L, 1, &ud);
+    CheckInstancePfn(L, ud, GetPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR);
+#define CLEANUP zfreeVkQueryPoolPerformanceCreateInfoKHR (L, info, 1)
+    info = zcheckVkQueryPoolPerformanceCreateInfoKHR (L, 2, &err);
+    if(err) { CLEANUP; return lua_error(L); }
+    ud->idt->GetPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR(physical_device, info, &num_passes);
+    CLEANUP;
+#undef CLEANUP
+    lua_pushinteger(L, num_passes);
+    return 1;
+    }
+
 
 RAW_FUNC_DISPATCHABLE(physical_device)
 TYPE_FUNC(physical_device)
@@ -550,6 +616,8 @@ static const struct luaL_Reg Functions[] =
         { "get_physical_device_calibrateable_time_domains", GetPhysicalDeviceCalibrateableTimeDomains },
         { "get_physical_device_fragment_shading_rates", GetPhysicalDeviceFragmentShadingRates },
         { "get_physical_device_tool_properties", GetPhysicalDeviceToolProperties },
+        { "enumerate_physical_device_queue_family_performance_query_counters", EnumeratePhysicalDeviceQueueFamilyPerformanceQueryCounters },
+        { "get_physical_device_queue_family_performance_query_passes", GetPhysicalDeviceQueueFamilyPerformanceQueryPasses },
         { NULL, NULL } /* sentinel */
     };
 
